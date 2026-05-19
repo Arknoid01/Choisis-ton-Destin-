@@ -582,6 +582,10 @@ html,body { height:100%; overflow:hidden; font-family:'Syne',sans-serif; backgro
       <input type="checkbox" id="kids-check" onchange="project.kids=this.checked">
       <span class="kids-icon">🧒</span>
     </label>
+    <label class="kids-toggle" title="Demander le nom du joueur" style="margin-left:4px">
+      <input type="checkbox" id="player-name-check" onchange="project.askPlayerName=this.checked">
+      <span class="kids-icon">👤</span>
+    </label>
     <div class="spacer"></div>
     <button class="topbtn" onclick="openStatsModal()">⚙ Stats</button>
     <button class="topbtn" onclick="openThemePanel()">🎨 Thème</button>
@@ -1585,6 +1589,7 @@ function autoLayout() {
 function exportJSON() {
   project.theme = { ...currentTheme };
   project.kids = document.getElementById('kids-check').checked;
+  project.askPlayerName = document.getElementById('player-name-check').checked;
   // Shuffle choices in export
   const exportData = JSON.parse(JSON.stringify(project));
   Object.values(exportData.scenes).forEach(scene => {
@@ -1679,6 +1684,7 @@ function handleImport(e) {
       project.name = project.name || 'Histoire importée';
       document.getElementById('project-name').value = project.name;
       document.getElementById('kids-check').checked = !!project.kids;
+      document.getElementById('player-name-check').checked = !!project.askPlayerName;
       if (project.theme) { currentTheme = { ...project.theme }; applyTheme(currentTheme); }
       selectedId = null;
       pan = {x:60,y:60}; zoom = 1;

@@ -429,7 +429,56 @@ body {
   to   { opacity:1; transform:translateY(0); }
 }
 
-/* ── LOADING ── */
+/* ── PLAYER NAME POPUP ── */
+#name-overlay {
+  position:fixed; inset:0; z-index:400;
+  background:rgba(0,0,0,0.85);
+  display:flex; align-items:center; justify-content:center;
+  backdrop-filter:blur(8px);
+  transition:opacity .3s;
+}
+#name-overlay.hide { opacity:0; pointer-events:none; }
+#name-box {
+  width:100%; max-width:340px; margin:24px;
+  background:var(--bg2); border:1px solid var(--border);
+  border-radius:16px; padding:32px 28px;
+  text-align:center;
+}
+#name-box .name-icon { font-size:32px; margin-bottom:12px; }
+#name-box .name-title {
+  font-family:'Cinzel',serif; font-size:16px;
+  font-weight:600; color:var(--text);
+  letter-spacing:2px; margin-bottom:6px;
+}
+#name-box .name-sub {
+  font-size:13px; color:var(--text2);
+  font-style:italic; margin-bottom:20px;
+}
+#name-input {
+  width:100%; background:var(--bg3);
+  border:1px solid var(--border); border-radius:8px;
+  color:var(--text); font-family:'Cormorant Garamond',serif;
+  font-size:18px; padding:12px 16px; outline:none;
+  text-align:center; letter-spacing:1px;
+  transition:border-color .2s; margin-bottom:16px;
+}
+#name-input:focus { border-color:var(--accent); }
+#name-confirm {
+  width:100%; padding:13px;
+  border:1px solid var(--accent);
+  background:color-mix(in srgb, var(--accent) 15%, transparent);
+  color:var(--accent); font-family:'Cinzel',serif;
+  font-size:12px; font-weight:600; letter-spacing:3px;
+  border-radius:8px; cursor:pointer; transition:all .2s;
+}
+#name-confirm:hover { background:var(--accent); color:var(--bg); }
+#name-skip {
+  background:none; border:none; color:var(--text3);
+  font-family:'Lato',sans-serif; font-size:11px;
+  letter-spacing:1px; cursor:pointer; margin-top:10px;
+  display:block; width:100%; transition:color .2s;
+}
+#name-skip:hover { color:var(--text2); }
 #loading {
   position: fixed; inset: 0;
   background: var(--bg);
@@ -553,6 +602,20 @@ body {
 <canvas id="bg-canvas"></canvas>
 <div id="fx-overlay"></div>
 
+<!-- PLAYER NAME POPUP -->
+<div id="name-overlay" style="display:none">
+  <div id="name-box">
+    <div class="name-icon">✦</div>
+    <div class="name-title" id="name-title">Qui êtes-vous ?</div>
+    <div class="name-sub" id="name-sub">Entrez votre nom pour personnaliser l'aventure</div>
+    <input type="text" id="name-input" maxlength="20"
+      placeholder="Votre prénom..."
+      onkeydown="if(event.key==='Enter')confirmName()">
+    <button id="name-confirm" onclick="confirmName()">COMMENCER</button>
+    <button id="name-skip" onclick="confirmName(true)">Passer</button>
+  </div>
+</div>
+
 <!-- LOADING -->
 <div id="loading">
   <div class="loading-dots">
@@ -614,10 +677,11 @@ body {
 // ══════════════════════════════════════════════
 // STATE
 // ══════════════════════════════════════════════
-let story      = null;   // full JSON
-let stats      = {};     // current stat values
-let history    = [];     // visited scenes
+let story      = null;
+let stats      = {};
+let history    = [];
 let currentId  = null;
+let playerName = localStorage.getItem('sf_player_name') || '';
 
 // ══════════════════════════════════════════════
 // THEME — apply from story.theme
@@ -684,8 +748,45 @@ async function loadStory() {
   // Hide loading
   hideLoading();
 
-  // Go to start
-  goToScene(startScene.id);
+  // Demander le nom si l'histoire le requiert
+  if (story.askPlayerName && !playerName) {
+    showNamePopup();
+  } else {
+    goToScene(startScene.id);
+  }
+}
+
+function showNamePopup() {
+  const overlay = document.getElementById('name-overlay');
+  overlay.style.display = 'flex';
+  setTimeout(() => document.getElementById('name-input').focus(), 300);
+
+  // Adapter le texte selon la langue
+  const lang = localStorage.getItem('sf_lang') || 'fr';
+  const texts = {
+    fr: { title:'Qui êtes-vous ?',     sub:'Entrez votre nom pour personnaliser l\'aventure', btn:'COMMENCER', skip:'Passer' },
+    en: { title:'Who are you?',        sub:'Enter your name to personalise the adventure',    btn:'START',     skip:'Skip'  },
+    es: { title:'¿Quién eres?',        sub:'Escribe tu nombre para personalizar la aventura', btn:'EMPEZAR',   skip:'Omitir'}
+  };
+  const t = texts[lang] || texts.fr;
+  document.getElementById('name-title').textContent   = t.title;
+  document.getElementById('name-sub').textContent     = t.sub;
+  document.getElementById('name-confirm').textContent = t.btn;
+  document.getElementById('name-skip').textContent    = t.skip;
+}
+
+function confirmName(skip = false) {
+  const input = document.getElementById('name-input');
+  if (!skip && input.value.trim()) {
+    playerName = input.value.trim();
+    localStorage.setItem('sf_player_name', playerName);
+  }
+  const overlay = document.getElementById('name-overlay');
+  overlay.classList.add('hide');
+  setTimeout(() => overlay.style.display = 'none', 350);
+
+  const startScene = Object.values(story.scenes).find(s => s.isStart);
+  if (startScene) goToScene(startScene.id);
 }
 
 // ══════════════════════════════════════════════
@@ -1087,8 +1188,11 @@ function shuffleArray(arr) {
 }
 
 function formatText(text) {
-  // Support basic markdown-like: **bold** → accent2, *italic* → accent
+  if (!text) return '';
+  // Remplacer {{player}} par le nom du joueur
+  const name = playerName || '?';
   return escHtml(text)
+    .replace(/\{\{player\}\}/g, `<em>${escHtml(name)}</em>`)
     .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
     .replace(/\*(.+?)\*/g,     '<em>$1</em>')
     .replace(/\n/g, '<br>');
