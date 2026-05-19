@@ -196,9 +196,35 @@ body {
   to   { opacity:1; transform:translateY(0); }
 }
 
+/* ── TYPEWRITER ── */
+.cursor {
+  display:inline-block;
+  width:2px; height:1em;
+  background:var(--accent);
+  margin-left:2px;
+  vertical-align:text-bottom;
+  animation:cur-blink .7s step-end infinite;
+  border-radius:1px; opacity:0.8;
+}
+@keyframes cur-blink {
+  0%,100% { opacity:0.8; }
+  50%      { opacity:0; }
+}
+
 /* ── CHOICES ── */
 #choices-area {
   display: flex; flex-direction: column; gap: 10px;
+}
+#choices-area.hidden {
+  visibility:hidden; opacity:0; pointer-events:none;
+}
+#choices-area.reveal {
+  visibility:visible;
+  animation:choices-in .5s ease forwards;
+}
+@keyframes choices-in {
+  from { opacity:0; transform:translateY(12px); }
+  to   { opacity:1; transform:translateY(0); }
 }
 
 .choice-btn {
@@ -407,115 +433,10 @@ body {
   box-shadow: 0 0 6px var(--accent);
   width: 0%;
 }
-
-
-/* ── Immersion presets ── */
-.choice-btn.fx-pulse:active { transform: scale(.985); box-shadow:0 0 26px var(--accent); }
-.choice-btn.fx-shake:active { animation: fx-shake .22s linear; }
-.choice-btn.fx-glitch:active { text-shadow:2px 0 var(--accent2), -2px 0 var(--accent); }
-.choice-btn.fx-flash:active { filter:brightness(1.45); }
-@keyframes fx-shake { 0%,100%{transform:translateX(0)} 25%{transform:translateX(-3px)} 50%{transform:translateX(3px)} 75%{transform:translateX(-2px)} }
-#fx-overlay { position:fixed; inset:0; pointer-events:none; z-index:9999; opacity:0; }
-#fx-overlay.flash { animation:fx-flash .32s ease; background:var(--accent); }
-#fx-overlay.glitch { animation:fx-glitch .38s steps(2,end); background:linear-gradient(90deg, transparent, color-mix(in srgb,var(--accent) 25%, transparent), transparent); }
-@keyframes fx-flash { 0%{opacity:0} 20%{opacity:.22} 100%{opacity:0} }
-@keyframes fx-glitch { 0%{opacity:0; transform:translateX(0)} 20%{opacity:.25; transform:translateX(-8px)} 45%{opacity:.12; transform:translateX(8px)} 70%{opacity:.2; transform:translateX(-4px)} 100%{opacity:0; transform:translateX(0)} }
-.scene-in.transition-fade { animation: scene-in .55s ease; }
-.scene-in.transition-glitch { animation: scene-in .25s ease, fx-shake .32s linear; }
-.scene-in.transition-scanline::before { content:''; position:fixed; inset:0; pointer-events:none; background:repeating-linear-gradient(to bottom, transparent 0 4px, rgba(255,255,255,.035) 5px); animation:fx-flash .55s ease; }
-.scene-in.transition-flash { animation: scene-in .25s ease, fx-flash .35s ease; }
-
-
-/* ── Scene media: backgrounds, portraits, stronger visual immersion ── */
-#scene-bg {
-  position: fixed;
-  inset: 0;
-  z-index: 0;
-  pointer-events: none;
-  opacity: 0;
-  background-size: cover;
-  background-position: center;
-  transition: opacity .7s ease, filter .7s ease, transform 1.2s ease;
-  filter: saturate(1.1) contrast(1.05) brightness(.72);
-  transform: scale(1.02);
-}
-#scene-bg.visible { opacity: .48; transform: scale(1); }
-#scene-bg::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background:
-    radial-gradient(circle at 50% 10%, transparent, var(--bg) 78%),
-    linear-gradient(to bottom, transparent, var(--bg) 95%);
-}
-#scene-bg.preset-neon_street,
-#scene-bg.preset-apartment_red_alert,
-#scene-bg.preset-city_sunrise,
-#scene-bg.preset-dark_room,
-#scene-bg.preset-metro_hideout,
-#scene-bg.preset-helix_tower,
-#scene-bg.preset-rooftops,
-#scene-bg.preset-prison,
-#scene-bg.preset-orbital_station,
-#scene-bg.preset-wasteland,
-#scene-bg.preset-lab,
-#scene-bg.preset-warehouse {
-  background-image: var(--scene-gradient);
-}
-#scene-bg.preset-neon_street { --scene-gradient: linear-gradient(135deg, #070817 0%, #151047 35%, #52003c 68%, #051d24 100%); }
-#scene-bg.preset-apartment_red_alert { --scene-gradient: radial-gradient(circle at 30% 20%, rgba(255,0,86,.75), transparent 32%), linear-gradient(135deg,#08040b,#26030d 48%,#090912); }
-#scene-bg.preset-dark_room { --scene-gradient: radial-gradient(circle at 65% 30%, rgba(0,247,255,.22), transparent 34%), linear-gradient(135deg,#02030a,#151526); }
-#scene-bg.preset-metro_hideout { --scene-gradient: linear-gradient(135deg,#050607,#102018 45%,#22200b); }
-#scene-bg.preset-helix_tower { --scene-gradient: linear-gradient(135deg,#020411,#111a44 35%,#320033 80%); }
-#scene-bg.preset-rooftops { --scene-gradient: linear-gradient(135deg,#050816,#14285c 50%,#27002f); }
-#scene-bg.preset-city_sunrise { --scene-gradient: linear-gradient(135deg,#16051f,#fd5e53 55%,#ffd166 100%); }
-#scene-bg.preset-prison { --scene-gradient: linear-gradient(135deg,#020204,#101019 55%,#2d2d44); }
-#scene-bg.preset-orbital_station { --scene-gradient: radial-gradient(circle at 70% 20%, rgba(255,255,255,.18), transparent 18%), linear-gradient(135deg,#03030a,#15143b 52%,#070714); }
-#scene-bg.preset-wasteland { --scene-gradient: linear-gradient(135deg,#100d08,#4d2a15 58%,#15100b); }
-#scene-bg.preset-lab { --scene-gradient: linear-gradient(135deg,#061018,#0e3a45 45%,#111122); }
-#scene-bg.preset-warehouse { --scene-gradient: linear-gradient(135deg,#090907,#2b1a10 50%,#08080e); }
-
-.scene-layout { display:grid; grid-template-columns: minmax(0,1fr); gap:16px; }
-.scene-portrait {
-  display:none;
-  align-items:center;
-  gap:12px;
-  padding:12px;
-  border:1px solid color-mix(in srgb, var(--accent) 32%, var(--border));
-  background: color-mix(in srgb, var(--bg2) 76%, transparent);
-  border-radius:18px;
-  box-shadow:0 0 24px color-mix(in srgb, var(--accent) 12%, transparent);
-  margin-bottom:14px;
-}
-.scene-portrait.visible { display:flex; animation: scene-in .5s ease; }
-.scene-portrait img {
-  width:76px; height:76px; object-fit:cover; border-radius:16px;
-  border:1px solid var(--border);
-}
-.portrait-fallback {
-  width:76px; height:76px; border-radius:16px;
-  display:grid; place-items:center;
-  background:linear-gradient(135deg, var(--accent2), var(--accent));
-  color:var(--bg); font-size:34px; font-weight:900;
-}
-.portrait-name { font-family:'DM Mono', monospace; color:var(--accent); font-size:12px; letter-spacing:2px; text-transform:uppercase; }
-.portrait-desc { color:var(--text2); font-size:13px; margin-top:4px; }
-
-#content.choice-shake { animation: fx-shake .26s linear; }
-#content.choice-pulse { animation: choice-pulse .28s ease; }
-#content.choice-glitch { animation: fx-shake .22s linear; filter: hue-rotate(18deg); }
-@keyframes choice-pulse { 0%{transform:scale(1)} 45%{transform:scale(.992)} 100%{transform:scale(1)} }
-
-@media (min-width: 760px) {
-  .scene-layout.with-portrait { grid-template-columns: 150px minmax(0,1fr); align-items:start; }
-  .scene-layout.with-portrait .scene-portrait { flex-direction:column; text-align:center; position:sticky; top:120px; }
-}
-
 </style>
 </head>
 <body>
 
-<div id="scene-bg"></div>
 <div class="bg-gradient"></div>
 <canvas id="bg-canvas"></canvas>
 
@@ -576,8 +497,6 @@ body {
   </div>
 </div>
 
-<div id="fx-overlay"></div>
-
 <script>
 // ══════════════════════════════════════════════
 // STATE
@@ -586,20 +505,6 @@ let story      = null;   // full JSON
 let stats      = {};     // current stat values
 let history    = [];     // visited scenes
 let currentId  = null;
-let currentChoices = [];     // choices shown after shuffle
-
-// Variables utilisables dans les histoires : {{player}}, {{Player}}, {{PLAYER}}
-function getPlayerName() {
-  return localStorage.getItem('sf_player_name') || 'Joueur';
-}
-
-function applyVariables(text) {
-  const name = getPlayerName();
-  return String(text || '')
-    .replaceAll('{{player}}', name)
-    .replaceAll('{{Player}}', name)
-    .replaceAll('{{PLAYER}}', name.toUpperCase());
-}
 
 // ══════════════════════════════════════════════
 // THEME — apply from story.theme
@@ -651,7 +556,7 @@ async function loadStory() {
   (story.stats || []).forEach(s => { stats[s.id] = s.start || 0; });
 
   // Set title
-  const title = applyVariables(story.name || 'Histoire');
+  const title = story.name || 'Histoire';
   document.getElementById('game-title').textContent = title;
   document.getElementById('drawer-game-title').textContent = title;
   document.title = title;
@@ -696,7 +601,7 @@ function updateStatsBar() {
     const color = s.color || 'var(--accent)';
     const display = s.id === 'credits' ? val + '¥' : val;
     return `<div class="stat-chip" style="--color:${color};--pct:${pct}%">
-      <span class="stat-label">${escHtml(applyVariables(s.label))}</span>
+      <span class="stat-label">${s.label}</span>
       <span class="stat-value">${display}</span>
     </div>`;
   }).join('');
@@ -706,10 +611,11 @@ function updateStatsBar() {
 // SCENE ENGINE
 // ══════════════════════════════════════════════
 function goToScene(id, choiceText) {
+  // Annuler toute animation de frappe en cours
+  if (typewriterTimeout) { clearTimeout(typewriterTimeout); typewriterTimeout = null; }
+
   const scene = story.scenes[id];
   if (!scene) { showError('Scène introuvable : ' + id); return; }
-
-  applySceneMedia(scene);
 
   // Log history
   if (currentId) history.push({ id: currentId, choice: choiceText || '' });
@@ -734,167 +640,124 @@ function goToScene(id, choiceText) {
   document.getElementById('scroll-area').scrollTo({ top: 0, behavior: 'smooth' });
 }
 
-
-// ══════════════════════════════════════════════
-// IMMERSION EFFECTS — optional JSON fields
-// scene.transition: fade | glitch | scanline | flash
-// choice.clickEffect: pulse | shake | glitch | flash | vibrate
-// choice.sound / scene.sound: click_neon | glitch | success | error
-// ══════════════════════════════════════════════
-function triggerOverlay(effect) {
-  if (!effect || effect === 'none') return;
-  const overlay = document.getElementById('fx-overlay');
-  if (!overlay) return;
-  overlay.className = '';
-  void overlay.offsetWidth;
-  overlay.className = effect === 'glitch' ? 'glitch' : 'flash';
-  setTimeout(() => { overlay.className = ''; }, 450);
-}
-
-function playPresetSound(name) {
-  if (!name || name === 'none') return;
-  try {
-    const AC = window.AudioContext || window.webkitAudioContext;
-    if (!AC) return;
-    const ctx = playPresetSound.ctx || (playPresetSound.ctx = new AC());
-    const osc = ctx.createOscillator();
-    const gain = ctx.createGain();
-    const presets = {
-      click_neon: [740, 0.035, 'square', 0.025],
-      confirm:    [900, 0.060, 'sine', 0.030],
-      success:    [880, 0.090, 'sine', 0.030],
-      error:      [180, 0.120, 'triangle', 0.035],
-      glitch:     [120, 0.075, 'sawtooth', 0.020],
-      hack:       [1320,0.050, 'square', 0.020],
-      door_open:  [260, 0.080, 'triangle', 0.025],
-      glass_break:[980, 0.070, 'sawtooth', 0.018],
-      weapon_draw:[420, 0.055, 'sawtooth', 0.020],
-      combat_start:[160,0.100, 'square', 0.026],
-      steal:      [610, 0.060, 'triangle', 0.022],
-      footstep:   [110, 0.045, 'sine', 0.020]
-    };
-    const [freq, dur, type, vol] = presets[name] || presets.click_neon;
-    osc.type = type;
-    osc.frequency.setValueAtTime(freq, ctx.currentTime);
-    if (name === 'hack' || name === 'glitch') {
-      osc.frequency.exponentialRampToValueAtTime(Math.max(40, freq / 3), ctx.currentTime + dur);
-    }
-    gain.gain.setValueAtTime(vol, ctx.currentTime);
-    gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + dur);
-    osc.connect(gain).connect(ctx.destination);
-    osc.start();
-    osc.stop(ctx.currentTime + dur);
-  } catch(e) {}
-}
-
-function tryPlayFileSound(name, folder = 'assets/sounds', ext = 'mp3') {
-  if (!name || name === 'none') return;
-  const audio = new Audio(`${folder}/${name}.${ext}`);
-  audio.volume = 0.45;
-  audio.play().catch(() => playPresetSound(name));
-}
-
-let bgMusic = null;
-function playSceneMusic(name) {
-  if (!name || name === 'none') return;
-  const src = `assets/music/${name}.mp3`;
-  if (!bgMusic) {
-    bgMusic = new Audio();
-    bgMusic.loop = true;
-    bgMusic.volume = 0.28;
-  }
-  if (bgMusic.dataset.current === name) return;
-  bgMusic.pause();
-  bgMusic.src = src;
-  bgMusic.dataset.current = name;
-  bgMusic.play().catch(() => {
-    // Le navigateur peut bloquer la musique avant le premier clic : normal.
-  });
-}
-
-function sceneBgPresetClass(name) {
-  return name ? `preset-${String(name).replace(/[^a-zA-Z0-9_-]/g, '')}` : '';
-}
-
-function applySceneMedia(scene) {
-  const bg = document.getElementById('scene-bg');
-  if (bg) {
-    bg.className = '';
-    bg.style.backgroundImage = '';
-    if (scene.background) {
-      const jpg = `assets/backgrounds/${scene.background}.jpg`;
-      bg.style.backgroundImage = `url('${jpg}')`;
-      bg.classList.add(sceneBgPresetClass(scene.background), 'visible');
-    } else {
-      bg.classList.remove('visible');
-    }
-  }
-  if (scene.music) playSceneMusic(scene.music);
-  if (scene.sound) playPresetSound(scene.sound);
-}
-
-function portraitHTML(scene) {
-  if (!scene.portrait) return '';
-  const label = String(scene.portrait).replace(/[_-]/g, ' ');
-  const img = `assets/portraits/${scene.portrait}.png`;
-  return `<div class="scene-portrait visible">
-    <img src="${img}" alt="${escHtml(label)}" onerror="this.replaceWith(Object.assign(document.createElement('div'),{className:'portrait-fallback',textContent:'◈'}))">
-    <div>
-      <div class="portrait-name">${escHtml(label)}</div>
-      <div class="portrait-desc">Signal visuel détecté</div>
-    </div>
-  </div>`;
-}
-
-function playChoiceFeedback(choice) {
-  const fx = choice?.clickEffect || 'pulse';
-  const content = document.getElementById('content');
-  if (navigator.vibrate) navigator.vibrate(fx === 'shake' ? 45 : 22);
-  if (fx === 'flash' || fx === 'glitch') triggerOverlay(fx);
-  if (content) {
-    content.classList.remove('choice-shake','choice-pulse','choice-glitch');
-    void content.offsetWidth;
-    if (['shake','pulse','glitch'].includes(fx)) content.classList.add('choice-' + fx);
-    setTimeout(() => content.classList.remove('choice-shake','choice-pulse','choice-glitch'), 350);
-  }
-  tryPlayFileSound(choice?.sound || 'click_neon');
-}
-
-function sceneTransitionClass(scene) {
-  const t = scene?.transition || 'fade';
-  return ['fade','glitch','scanline','flash'].includes(t) ? `transition-${t}` : 'transition-fade';
-}
-
 function renderScene(scene) {
   // Shuffle choices
-  currentChoices = shuffleArray([...(scene.choices || [])]);
-  // Check locked choices (stat requirements)
-  const choicesHTML = currentChoices.map((c, i) => {
+  const shuffled = shuffleArray([...(scene.choices || [])]);
+
+  const choicesHTML = shuffled.map((c, i) => {
     const locked = isChoiceLocked(c);
-    return `<button class="choice-btn${locked ? ' locked' : ''} fx-${c.clickEffect || 'pulse'}"
+    return `<button class="choice-btn${locked ? ' locked' : ''}"
       style="${locked ? 'opacity:0.35;cursor:not-allowed' : ''}"
-      onclick="${locked ? '' : `pickChoice(${i})`}"
+      onclick="${locked ? '' : `pickChoice('${c.vers}', ${JSON.stringify(c).replace(/'/g,"\\'")} )`}"
       ${locked ? 'disabled' : ''}>
       <span class="choice-index">— ${String(i+1).padStart(2,'0')}</span>
-      ${escHtml(applyVariables(c.text))}
+      ${escHtml(c.text)}
       ${locked ? `<span style="display:block;font-size:11px;color:var(--text3);margin-top:4px;font-family:'DM Mono',monospace">
         ${getLockedReason(c)}</span>` : ''}
     </button>`;
   }).join('');
 
   document.getElementById('content').innerHTML = `
-    <div class="scene-in ${sceneTransitionClass(scene)}">
-      <div class="scene-layout ${scene.portrait ? 'with-portrait' : ''}">
-        ${portraitHTML(scene)}
-        <div>
-          ${scene.location
-            ? `<div class="location-pill">${escHtml(applyVariables(scene.location))}</div>`
-            : ''}
-          <div class="scene-text">${formatText(scene.text || '')}</div>
-          <div id="choices-area">${choicesHTML}</div>
-        </div>
-      </div>
+    <div class="scene-in">
+      ${scene.location
+        ? `<div class="location-pill">${escHtml(scene.location)}</div>`
+        : ''}
+      <div class="scene-text" id="typewriter-text"></div>
+      <div id="choices-area" class="hidden">${choicesHTML}</div>
     </div>`;
+
+  // Lance l'effet machine à écrire
+  typewrite(formatText(scene.text || ''), document.getElementById('typewriter-text'), () => {
+    const ca = document.getElementById('choices-area');
+    if (ca) { ca.classList.remove('hidden'); ca.classList.add('reveal'); }
+  });
+}
+
+// ══════════════════════════════════════════════
+// TYPEWRITER ENGINE
+// ══════════════════════════════════════════════
+let typewriterTimeout = null;
+
+function getTypeSpeed() {
+  const opts = JSON.parse(localStorage.getItem('sf_options') || '{}');
+  switch(opts.textspeed) {
+    case 'fast':   return 12;
+    case 'slow':   return 45;
+    default:       return 25; // normal
+  }
+}
+
+function typewrite(html, container, onDone) {
+  // Annuler toute animation en cours
+  if (typewriterTimeout) { clearTimeout(typewriterTimeout); typewriterTimeout = null; }
+
+  // Extraire le texte brut depuis le HTML formaté
+  // On va insérer le HTML caractère par caractère en gérant les balises
+  const speed = getTypeSpeed();
+  let i = 0;
+  let displayed = '';
+  let skipped = false;
+
+  // Skip au tap/clic
+  const skipHandler = () => {
+    skipped = true;
+    container.innerHTML = html;
+    if (onDone) onDone();
+    document.getElementById('scroll-area')?.removeEventListener('click', skipHandler);
+  };
+  document.getElementById('scroll-area')?.addEventListener('click', skipHandler, { once: true });
+
+  function tick() {
+    if (skipped) return;
+    if (i >= html.length) {
+      // Fin — retirer le curseur
+      container.innerHTML = html;
+      document.getElementById('scroll-area')?.removeEventListener('click', skipHandler);
+      if (onDone) onDone();
+      return;
+    }
+
+    // Sauter les balises HTML entières d'un coup
+    if (html[i] === '<') {
+      const end = html.indexOf('>', i);
+      if (end !== -1) {
+        displayed += html.slice(i, end + 1);
+        i = end + 1;
+      } else {
+        displayed += html[i++];
+      }
+      container.innerHTML = displayed + '<span class="cursor"></span>';
+      typewriterTimeout = setTimeout(tick, 0);
+      return;
+    }
+
+    // Sauter les entités HTML (&amp; &lt; etc.)
+    if (html[i] === '&') {
+      const end = html.indexOf(';', i);
+      if (end !== -1 && end - i < 8) {
+        displayed += html.slice(i, end + 1);
+        i = end + 1;
+        container.innerHTML = displayed + '<span class="cursor"></span>';
+        typewriterTimeout = setTimeout(tick, 0);
+        return;
+      }
+    }
+
+    // Caractère normal
+    displayed += html[i++];
+    container.innerHTML = displayed + '<span class="cursor"></span>';
+
+    // Pause plus longue sur ponctuation
+    const ch = displayed[displayed.length - 1];
+    let delay = speed;
+    if (['.', '!', '?'].includes(ch)) delay = speed * 8;
+    else if ([',', ';', ':'].includes(ch)) delay = speed * 3;
+    else if (ch === '\n') delay = speed * 4;
+
+    typewriterTimeout = setTimeout(tick, delay);
+  }
+
+  tick();
 }
 
 function renderEndScene(scene) {
@@ -903,17 +766,16 @@ function renderEndScene(scene) {
   const statsRows = (story.stats || []).map(s => {
     const val = stats[s.id] ?? s.start ?? 0;
     return `<div class="end-stat-row">
-      <span class="end-stat-label">${escHtml(applyVariables(s.label))}</span>
+      <span class="end-stat-label">${s.label}</span>
       <span class="end-stat-val" style="color:${s.color || 'var(--accent)'}">${val}</span>
     </div>`;
   }).join('');
 
   document.getElementById('content').innerHTML = `
-    <div id="end-screen" class="scene-in ${sceneTransitionClass(scene)}">
-      ${portraitHTML(scene)}
-      <div class="end-title">✦ ${escHtml(applyVariables(scene.title || 'Fin'))} ✦</div>
+    <div id="end-screen">
+      <div class="end-title">✦ ${escHtml(scene.title || 'Fin')} ✦</div>
       ${scene.location
-        ? `<div class="location-pill" style="justify-content:center;margin-bottom:16px">${escHtml(applyVariables(scene.location))}</div>`
+        ? `<div class="location-pill" style="justify-content:center;margin-bottom:16px">${escHtml(scene.location)}</div>`
         : ''}
       <div class="scene-text">${formatText(scene.text || '')}</div>
       ${statsRows ? `<div class="end-stats">${statsRows}</div>` : ''}
@@ -924,21 +786,18 @@ function renderEndScene(scene) {
     </div>`;
 }
 
-function pickChoice(index) {
-  const choice = currentChoices[index];
-  if (!choice || !choice.vers) return;
-
-  playChoiceFeedback(choice);
+function pickChoice(targetId, choice) {
+  if (!targetId) return;
 
   // Apply stat effects
   let notifParts = [];
-  if (choice.effects) {
+  if (choice && choice.effects) {
     choice.effects.forEach(eff => {
       if (stats[eff.stat] !== undefined) {
         stats[eff.stat] = Math.max(0, stats[eff.stat] + (eff.val || 0));
         const sign = eff.val > 0 ? '+' : '';
         const statDef = story.stats.find(s => s.id === eff.stat);
-        notifParts.push(`${statDef ? applyVariables(statDef.label) : eff.stat} ${sign}${eff.val}`);
+        notifParts.push(`${statDef ? statDef.label : eff.stat} ${sign}${eff.val}`);
       }
     });
     updateStatsBar();
@@ -953,7 +812,7 @@ function pickChoice(index) {
     setTimeout(() => notif.remove(), 2500);
   }
 
-  setTimeout(() => goToScene(choice.vers, choice.text || ''), 120);
+  goToScene(targetId, choice?.text || '');
 }
 
 // ══════════════════════════════════════════════
@@ -1030,7 +889,7 @@ function shuffleArray(arr) {
 
 function formatText(text) {
   // Support basic markdown-like: **bold** → accent2, *italic* → accent
-  return escHtml(applyVariables(text))
+  return escHtml(text)
     .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
     .replace(/\*(.+?)\*/g,     '<em>$1</em>')
     .replace(/\n/g, '<br>');
