@@ -429,6 +429,57 @@ body {
   text-transform:uppercase; opacity:0.6;
 }
 
+/* ── NAME POPUP ── */
+#idx-name-overlay {
+  position:fixed; inset:0; z-index:500;
+  background:rgba(10,8,5,0);
+  display:flex; align-items:center; justify-content:center;
+  pointer-events:none; transition:background .3s;
+}
+#idx-name-overlay.open {
+  background:rgba(10,8,5,0.92);
+  pointer-events:all; backdrop-filter:blur(10px);
+}
+#idx-name-box {
+  width:100%; max-width:340px; margin:24px;
+  background:var(--bg2); border:1px solid var(--border);
+  border-radius:16px; padding:32px 28px; text-align:center;
+  transform:scale(0.95) translateY(12px); opacity:0;
+  transition:all .3s cubic-bezier(.4,0,.2,1);
+}
+#idx-name-overlay.open #idx-name-box { transform:scale(1) translateY(0); opacity:1; }
+#idx-name-title {
+  font-family:'Cinzel',serif; font-size:16px; font-weight:600;
+  color:var(--cream); letter-spacing:2px; margin-bottom:6px;
+}
+#idx-name-sub {
+  font-size:13px; color:var(--dim);
+  font-style:italic; margin-bottom:20px;
+}
+#idx-name-input {
+  width:100%; background:var(--bg3); border:1px solid var(--border);
+  border-radius:8px; color:var(--cream);
+  font-family:'Cormorant Garamond',serif; font-size:18px;
+  padding:12px 16px; outline:none; text-align:center;
+  letter-spacing:1px; transition:border-color .2s; margin-bottom:16px;
+}
+#idx-name-input:focus { border-color:var(--gold); }
+#idx-name-confirm {
+  width:100%; padding:13px; border:1px solid var(--gold3);
+  background:linear-gradient(135deg,rgba(200,169,110,0.12),rgba(138,106,48,0.06));
+  color:var(--gold2); font-family:'Cinzel',serif;
+  font-size:12px; font-weight:600; letter-spacing:3px;
+  border-radius:8px; cursor:pointer; transition:all .2s;
+}
+#idx-name-confirm:hover { border-color:var(--gold); box-shadow:0 0 20px rgba(200,169,110,0.15); }
+#idx-name-skip {
+  background:none; border:none; color:var(--dimmer);
+  font-family:'Lato',sans-serif; font-size:11px;
+  letter-spacing:1px; cursor:pointer; margin-top:10px;
+  display:block; width:100%; transition:color .2s;
+}
+#idx-name-skip:hover { color:var(--dim); }
+
 /* ── SUBMIT POPUP ── */
 #submit-overlay {
   position:fixed; inset:0; z-index:300;
@@ -595,6 +646,20 @@ body {
   <span>PegasusCorp</span>
 </div>
 
+<!-- ── NAME POPUP ── -->
+<div id="idx-name-overlay">
+  <div id="idx-name-box">
+    <div style="font-size:32px;margin-bottom:12px">✦</div>
+    <div id="idx-name-title">Qui êtes-vous ?</div>
+    <div id="idx-name-sub">Entrez votre prénom pour personnaliser l'aventure</div>
+    <input type="text" id="idx-name-input" maxlength="20"
+      placeholder="Votre prénom..."
+      onkeydown="if(event.key==='Enter')confirmNameIndex(false)">
+    <button id="idx-name-confirm" onclick="confirmNameIndex(false)">COMMENCER</button>
+    <button id="idx-name-skip" onclick="confirmNameIndex(true)">Passer</button>
+  </div>
+</div>
+
 <!-- ── SUBMIT POPUP ── -->
 <div id="submit-overlay" onclick="handleSubmitClick(event)">
   <div id="submit-box">
@@ -743,6 +808,10 @@ const LANG = {
     closeOptions:   'Fermer',
     kidsBadge:      '🧒 Mode enfant actif',
     docTitle:       'Choisis ton Destin',
+    nameTitle:      'Qui êtes-vous ?',
+    nameSub:        'Entrez votre prénom pour personnaliser l\'aventure',
+    nameConfirm:    'COMMENCER',
+    nameSkip:       'Passer',
     submitTitle:    'Soumettre une histoire',
     submitSubtitle: 'Devenez auteur de Choisis ton Destin',
     submitBody:     'Vous avez une idée d\'aventure ? Écrivez votre scénario dans l\'éditeur et envoyez-le nous. Les meilleures histoires seront publiées dans l\'application.',
@@ -780,6 +849,10 @@ const LANG = {
     closeOptions:   'Close',
     kidsBadge:      '🧒 Kids mode on',
     docTitle:       'Choose Your Fate',
+    nameTitle:      'Who are you?',
+    nameSub:        'Enter your name to personalise the adventure',
+    nameConfirm:    'START',
+    nameSkip:       'Skip',
     submitTitle:    'Submit a Story',
     submitSubtitle: 'Become an author of Choose Your Fate',
     submitBody:     'Got a story idea? Write your scenario in the editor and send it to us. The best stories will be published in the app.',
@@ -817,6 +890,10 @@ const LANG = {
     closeOptions:   'Cerrar',
     kidsBadge:      '🧒 Modo infantil activo',
     docTitle:       'Elige tu Destino',
+    nameTitle:      '¿Quién eres?',
+    nameSub:        'Escribe tu nombre para personalizar la aventura',
+    nameConfirm:    'EMPEZAR',
+    nameSkip:       'Omitir',
     submitTitle:    'Enviar una historia',
     submitSubtitle: 'Conviértete en autor de Elige tu Destino',
     submitBody:     '¿Tienes una idea de aventura? Escribe tu guión en el editor y envíanoslo. Las mejores historias se publicarán en la aplicación.',
@@ -972,7 +1049,38 @@ function renderGameList() {
 
 function launchGame(file) {
   localStorage.setItem('sf_game_file', file);
-  window.location.href = 'game.html?story=' + encodeURIComponent(file);
+  // Demander le nom si pas encore saisi
+  const savedName = localStorage.getItem('sf_player_name');
+  if (!savedName) {
+    showNamePopupIndex(file);
+  } else {
+    window.location.href = 'game.html?story=' + encodeURIComponent(file);
+  }
+}
+
+function showNamePopupIndex(file) {
+  const t = LANG[currentLang];
+  document.getElementById('idx-name-title').textContent   = t.nameTitle   || 'Qui êtes-vous ?';
+  document.getElementById('idx-name-sub').textContent     = t.nameSub     || 'Entrez votre nom pour personnaliser l\'aventure';
+  document.getElementById('idx-name-confirm').textContent = t.nameConfirm || 'COMMENCER';
+  document.getElementById('idx-name-skip').textContent    = t.nameSkip    || 'Passer';
+  document.getElementById('idx-name-overlay').classList.add('open');
+  setTimeout(() => document.getElementById('idx-name-input').focus(), 350);
+  // Stocker le fichier à lancer
+  document.getElementById('idx-name-overlay').dataset.file = file;
+}
+
+function confirmNameIndex(skip) {
+  const input = document.getElementById('idx-name-input');
+  if (!skip && input.value.trim()) {
+    localStorage.setItem('sf_player_name', input.value.trim());
+  }
+  const overlay = document.getElementById('idx-name-overlay');
+  overlay.classList.remove('open');
+  const file = overlay.dataset.file;
+  setTimeout(() => {
+    window.location.href = 'game.html?story=' + encodeURIComponent(file);
+  }, 300);
 }
 
 // ══════════════════════════════════════════════
