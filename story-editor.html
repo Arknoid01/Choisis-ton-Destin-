@@ -474,8 +474,8 @@ html,body { height:100%; overflow:hidden; font-family:'Syne',sans-serif; backgro
   content:''; position:absolute; top:0; left:20%; right:20%;
   height:2px; background:var(--accent); border-radius:0 0 4px 4px;
 }
-.bnav-icon { font-size:20px; line-height:1; }
-.bnav-label { font-size:9px; font-weight:700; letter-spacing:1px; text-transform:uppercase; }
+.bnav-icon { font-size:18px; line-height:1; }
+.bnav-label { font-size:8px; font-weight:700; letter-spacing:0.5px; text-transform:uppercase; }
 
 /* ── MOBILE BOTTOM SHEET ── */
 #mobile-sheet {
@@ -556,10 +556,12 @@ html,body { height:100%; overflow:hidden; font-family:'Syne',sans-serif; backgro
 
   #main { flex-direction:column; padding-bottom:60px; }
   #editor-panel { display:none; }
-  #tree-panel { flex:1; }
+  #tree-panel { flex:1; overflow:hidden; }
   #tree-controls { bottom:76px; right:12px; }
   #add-node-btn { display:none; }
   #theme-panel { width:100%; top:0; height:100vh; }
+  /* Zoom initial plus petit sur mobile pour voir tout l'arbre */
+  #zoom-indicator { display:block; }
 }
 </style>
 </head>
@@ -1488,12 +1490,19 @@ function showZoomIndicator() {
   zoomHideTimer = setTimeout(() => el.classList.remove('visible'), 1200);
 }
 
-// ── PINCH ZOOM (mobile) ──
-let pinchDist = null;
-let pinchZoomStart = null;
+// ── TOUCH PAN (1 doigt) ──
+let touchPanStart = null;
+let touchPanOrigin = null;
 
 panel.addEventListener('touchstart', e => {
+  if (e.touches.length === 1) {
+    // Vérifier qu'on ne touche pas un node
+    if (e.target.closest('.node')) return;
+    touchPanStart = { x: e.touches[0].clientX, y: e.touches[0].clientY };
+    touchPanOrigin = { x: pan.x, y: pan.y };
+  }
   if (e.touches.length === 2) {
+    touchPanStart = null;
     pinchDist = Math.hypot(
       e.touches[0].clientX - e.touches[1].clientX,
       e.touches[0].clientY - e.touches[1].clientY
@@ -1504,6 +1513,15 @@ panel.addEventListener('touchstart', e => {
 }, { passive: false });
 
 panel.addEventListener('touchmove', e => {
+  if (e.touches.length === 1 && touchPanStart) {
+    const dx = e.touches[0].clientX - touchPanStart.x;
+    const dy = e.touches[0].clientY - touchPanStart.y;
+    pan.x = touchPanOrigin.x + dx;
+    pan.y = touchPanOrigin.y + dy;
+    document.getElementById('tree-viewport').style.transform = `translate(${pan.x}px,${pan.y}px) scale(${zoom})`;
+    drawConnections();
+    e.preventDefault();
+  }
   if (e.touches.length === 2 && pinchDist !== null) {
     const dist = Math.hypot(
       e.touches[0].clientX - e.touches[1].clientX,
@@ -1519,6 +1537,7 @@ panel.addEventListener('touchmove', e => {
 
 panel.addEventListener('touchend', e => {
   if (e.touches.length < 2) pinchDist = null;
+  if (e.touches.length === 0) touchPanStart = null;
 });
 
 // AUTO LAYOUT
@@ -1959,6 +1978,7 @@ selectScene = function(id) {
       choices:[], x:120, y:360 }
   };
   applyEditorLanguage();
+  if (window.innerWidth <= 700) { zoom = 0.6; pan = { x: 10, y: 10 }; }
   render();
 })();
 </script>
