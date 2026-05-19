@@ -4,17 +4,22 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Choisis ton Destin</title>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Cinzel:wght@400;600;700&family=Lato:wght@300;400&display=swap" rel="stylesheet">
+<!-- Preconnect pour accélérer Google Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<!-- Chargement non-bloquant des polices -->
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Cinzel:wght@400;600;700&family=Lato:wght@300;400&display=swap" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Cinzel:wght@400;600;700&family=Lato:wght@300;400&display=swap"></noscript>
 <style>
 /* ── RESET ── */
 *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
-html { height:100%; }
+html { height:100%; overflow:hidden; }
 body {
-  min-height:100%;
+  min-height:100%; height:100%;
   font-family:'Cormorant Garamond', serif;
   background:#0d0d0f;
   color:#e8e0d0;
-  overflow-x:hidden;
+  overflow:hidden;
 }
 
 /* ── CSS VARS ── */
@@ -65,10 +70,11 @@ body {
 /* ── LAYOUT ── */
 #shell {
   position:relative; z-index:10;
-  min-height:100vh;
+  height:100vh;
   display:flex; flex-direction:column;
   align-items:center; justify-content:center;
   padding:40px 20px 80px;
+  overflow:hidden;
 }
 
 /* ── LANG SWITCH ── */
@@ -96,8 +102,8 @@ body {
 /* ── ORNAMENT ── */
 .ornament {
   text-align:center; margin-bottom:8px;
-  opacity:0; animation:fade-up .8s ease forwards;
-  animation-delay:.2s;
+  opacity:0; animation:fade-up .4s ease forwards;
+  animation-delay:.0s;
 }
 .ornament svg { width:120px; height:20px; opacity:0.4; }
 
@@ -107,8 +113,8 @@ body {
   font-weight:300; letter-spacing:5px;
   text-transform:uppercase; color:var(--gold);
   text-align:center; margin-bottom:24px;
-  opacity:0; animation:fade-up .8s ease forwards;
-  animation-delay:.3s;
+  opacity:0; animation:fade-up .4s ease forwards;
+  animation-delay:.05s;
 }
 
 /* ── MAIN TITLE ── */
@@ -120,8 +126,8 @@ body {
   line-height:1.1;
   text-shadow:0 0 60px rgba(200,169,110,0.2), 0 2px 4px rgba(0,0,0,0.8);
   margin-bottom:10px;
-  opacity:0; animation:fade-up .8s ease forwards;
-  animation-delay:.5s;
+  opacity:0; animation:fade-up .4s ease forwards;
+  animation-delay:.1s;
 }
 .main-title em {
   font-style:italic; color:var(--gold);
@@ -135,16 +141,16 @@ body {
   font-weight:300; font-style:italic;
   color:var(--dim); text-align:center;
   margin-bottom:60px; letter-spacing:1px;
-  opacity:0; animation:fade-up .8s ease forwards;
-  animation-delay:.7s;
+  opacity:0; animation:fade-up .4s ease forwards;
+  animation-delay:.15s;
 }
 
 /* ── DIVIDER ── */
 .divider {
   display:flex; align-items:center; gap:16px;
   margin-bottom:48px; width:100%; max-width:340px;
-  opacity:0; animation:fade-up .8s ease forwards;
-  animation-delay:.9s;
+  opacity:0; animation:fade-up .4s ease forwards;
+  animation-delay:.2s;
 }
 .divider::before, .divider::after {
   content:''; flex:1; height:1px;
@@ -160,8 +166,8 @@ body {
   display:flex; flex-direction:column;
   align-items:center; gap:14px;
   width:100%; max-width:320px;
-  opacity:0; animation:fade-up .8s ease forwards;
-  animation-delay:1s;
+  opacity:0; animation:fade-up .4s ease forwards;
+  animation-delay:.25s;
 }
 
 .btn-main {
@@ -391,20 +397,22 @@ body {
 
 /* ── BOTTOM FOOTER ── */
 .footer {
-  position:fixed; bottom:24px; left:0; right:0;
+  position:fixed; bottom:20px; left:0; right:0;
   text-align:center; z-index:10;
-  opacity:0; animation:fade-up .8s ease forwards;
-  animation-delay:1.4s;
+  opacity:0; animation:fade-up .4s ease forwards;
+  animation-delay:.35s;
+  pointer-events:none;
 }
 .footer-text {
   font-family:'Lato',sans-serif; font-size:10px;
   letter-spacing:3px; color:var(--dimmer);
   text-transform:uppercase;
+  padding:0 120px; /* espace pour logo gauche et version droite */
 }
 
 /* ── VERSION BADGE ── */
 .version {
-  position:fixed; bottom:24px; right:20px; z-index:10;
+  position:fixed; bottom:20px; right:16px; z-index:10;
   font-family:'Lato',sans-serif; font-size:10px;
   color:var(--dimmer); letter-spacing:1px;
 }
@@ -412,19 +420,19 @@ body {
 /* ── LOGO PEGASUS ── */
 #pegasus-logo {
   position:fixed; bottom:20px; left:20px; z-index:10;
-  opacity:0; animation:fade-up .8s ease forwards;
-  animation-delay:1.6s;
-  display:flex; align-items:center; gap:8px;
+  opacity:0; animation:fade-up .4s ease forwards;
+  animation-delay:.4s;
+  display:flex; align-items:center; gap:6px;
 }
 #pegasus-logo img {
-  width:28px; height:28px;
+  width:20px; height:20px;
   filter:brightness(0) invert(1);
-  opacity:0.25;
+  opacity:0.2;
 }
 #pegasus-logo span {
-  font-family:'Lato',sans-serif; font-size:10px;
+  font-family:'Lato',sans-serif; font-size:9px;
   letter-spacing:2px; color:var(--dimmer);
-  text-transform:uppercase;
+  text-transform:uppercase; opacity:0.6;
 }
 
 /* ── SUBMIT POPUP ── */
@@ -1091,7 +1099,7 @@ setTimeout(() => {
       el.style.transition = 'opacity .5s ease, transform .5s ease';
     }
   });
-}, 1500);
+}, 600);
 (async function init() {
   loadOptions();
   setLang(currentLang);
