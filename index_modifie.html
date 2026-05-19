@@ -1,0 +1,1121 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Choisis ton Destin</title>
+<!-- Preconnect pour accélérer Google Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<!-- Chargement non-bloquant des polices -->
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Cinzel:wght@400;600;700&family=Lato:wght@300;400&display=swap" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Cinzel:wght@400;600;700&family=Lato:wght@300;400&display=swap"></noscript>
+<style>
+/* ── RESET ── */
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+html { height:100%; overflow:hidden; }
+body {
+  min-height:100%; height:100%;
+  font-family:'Cormorant Garamond', serif;
+  background:#0d0d0f;
+  color:#e8e0d0;
+  overflow:hidden;
+}
+
+/* ── CSS VARS ── */
+:root {
+  --gold:    #c8a96e;
+  --gold2:   #e8d4a0;
+  --gold3:   #8a6a30;
+  --cream:   #e8e0d0;
+  --dim:     #9a8a70;
+  --dimmer:  #5a5040;
+  --bg:      #0d0d0f;
+  --bg2:     #13110e;
+  --bg3:     #1a1710;
+  --border:  #2a2418;
+  --glow:    rgba(200,169,110,0.15);
+}
+
+/* ── BACKGROUND ── */
+#bg-canvas {
+  position:fixed; inset:0; z-index:0;
+  pointer-events:none;
+}
+
+.bg-gradient {
+  position:fixed; inset:0; z-index:0;
+  background:
+    radial-gradient(ellipse 80% 60% at 50% 0%, rgba(200,169,110,0.06) 0%, transparent 70%),
+    radial-gradient(ellipse 60% 40% at 20% 100%, rgba(100,80,40,0.08) 0%, transparent 60%),
+    radial-gradient(ellipse 50% 30% at 80% 80%, rgba(60,40,20,0.06) 0%, transparent 50%),
+    linear-gradient(180deg, #0d0d0f 0%, #13110e 50%, #0d0d0f 100%);
+}
+
+/* ── PARTICLES ── */
+.particle {
+  position:fixed; border-radius:50%;
+  background:var(--gold);
+  pointer-events:none; z-index:1;
+  animation: float-up linear infinite;
+  opacity:0;
+}
+@keyframes float-up {
+  0%   { transform:translateY(0) translateX(0) scale(1); opacity:0; }
+  10%  { opacity:0.6; }
+  90%  { opacity:0.2; }
+  100% { transform:translateY(-100vh) translateX(var(--drift)) scale(0.3); opacity:0; }
+}
+
+/* ── LAYOUT ── */
+#shell {
+  position:relative; z-index:10;
+  height:100vh;
+  display:flex; flex-direction:column;
+  align-items:center; justify-content:center;
+  padding:0 20px;
+  overflow:hidden;
+}
+#content-block {
+  display:flex; flex-direction:column;
+  align-items:center;
+  transform:translateY(-20%);
+  width:100%; max-width:380px;
+}
+
+/* ── LANG SWITCH ── */
+#lang-switch {
+  position:fixed; top:20px; right:20px; z-index:100;
+  display:flex; gap:2px;
+  background:rgba(13,13,15,0.8);
+  border:1px solid var(--border);
+  border-radius:30px; padding:3px;
+  backdrop-filter:blur(12px);
+}
+.lang-btn {
+  padding:5px 14px; border-radius:24px; border:none;
+  background:none; color:var(--dim);
+  font-family:'Lato',sans-serif; font-size:12px;
+  font-weight:400; letter-spacing:1px; cursor:pointer;
+  transition:all .25s;
+}
+.lang-btn.active {
+  background:var(--gold3);
+  color:var(--gold2);
+}
+.lang-btn:hover:not(.active) { color:var(--cream); }
+
+/* ── ORNAMENT ── */
+.ornament {
+  text-align:center; margin-bottom:8px;
+  opacity:0; animation:fade-up .4s ease forwards;
+  animation-delay:.0s;
+}
+.ornament svg { width:120px; height:20px; opacity:0.4; }
+
+/* ── EYEBROW ── */
+.eyebrow {
+  font-family:'Lato',sans-serif; font-size:11px;
+  font-weight:300; letter-spacing:5px;
+  text-transform:uppercase; color:var(--gold);
+  text-align:center; margin-bottom:12px;
+  opacity:0; animation:fade-up .4s ease forwards;
+  animation-delay:.05s;
+}
+
+/* ── MAIN TITLE ── */
+.main-title {
+  font-family:'Cinzel', serif;
+  font-size:clamp(32px, 9vw, 72px);
+  font-weight:700; text-align:center;
+  color:var(--cream); letter-spacing:3px;
+  line-height:1.1;
+  text-shadow:0 0 60px rgba(200,169,110,0.2), 0 2px 4px rgba(0,0,0,0.8);
+  margin-bottom:6px;
+  opacity:0; animation:fade-up .4s ease forwards;
+  animation-delay:.1s;
+}
+.main-title em {
+  font-style:italic; color:var(--gold);
+  font-weight:400;
+}
+
+/* ── SUBTITLE ── */
+.subtitle {
+  font-family:'Cormorant Garamond', serif;
+  font-size:clamp(15px, 3vw, 20px);
+  font-weight:300; font-style:italic;
+  color:var(--dim); text-align:center;
+  margin-bottom:24px; letter-spacing:1px;
+  opacity:0; animation:fade-up .4s ease forwards;
+  animation-delay:.15s;
+}
+
+/* ── DIVIDER ── */
+.divider {
+  display:flex; align-items:center; gap:16px;
+  margin-bottom:24px; width:100%; max-width:340px;
+  opacity:0; animation:fade-up .4s ease forwards;
+  animation-delay:.2s;
+}
+.divider::before, .divider::after {
+  content:''; flex:1; height:1px;
+  background:linear-gradient(90deg, transparent, var(--border), transparent);
+}
+.divider-gem {
+  width:6px; height:6px; background:var(--gold3);
+  transform:rotate(45deg); flex-shrink:0;
+}
+
+/* ── MAIN BUTTONS ── */
+.btn-group {
+  display:flex; flex-direction:column;
+  align-items:center; gap:14px;
+  width:100%; max-width:320px;
+  opacity:0; animation:fade-up .4s ease forwards;
+  animation-delay:.25s;
+}
+
+.btn-main {
+  width:100%; padding:16px 32px;
+  border-radius:4px; border:1px solid var(--gold3);
+  background:transparent;
+  color:var(--gold2); font-family:'Cinzel',serif;
+  font-size:13px; font-weight:600; letter-spacing:3px;
+  text-transform:uppercase; cursor:pointer;
+  position:relative; overflow:hidden;
+  transition:all .3s cubic-bezier(.4,0,.2,1);
+}
+.btn-main::before {
+  content:''; position:absolute; inset:0;
+  background:linear-gradient(135deg, rgba(200,169,110,0.1), transparent);
+  opacity:0; transition:opacity .3s;
+}
+.btn-main::after {
+  content:''; position:absolute;
+  bottom:0; left:50%; right:50%;
+  height:1px; background:var(--gold);
+  transition:all .3s cubic-bezier(.4,0,.2,1);
+  box-shadow:0 0 8px var(--gold);
+}
+.btn-main:hover {
+  border-color:var(--gold);
+  color:var(--gold2);
+  box-shadow:0 0 30px rgba(200,169,110,0.1), inset 0 0 30px rgba(200,169,110,0.05);
+  transform:translateY(-1px);
+}
+.btn-main:hover::before { opacity:1; }
+.btn-main:hover::after { left:10%; right:10%; }
+.btn-main:active { transform:translateY(0); }
+
+.btn-main.primary {
+  background:linear-gradient(135deg, rgba(200,169,110,0.15), rgba(138,106,48,0.1));
+  border-color:var(--gold);
+  box-shadow:0 0 20px rgba(200,169,110,0.08);
+}
+.btn-main.primary:hover {
+  box-shadow:0 0 40px rgba(200,169,110,0.2), inset 0 0 40px rgba(200,169,110,0.08);
+}
+
+.btn-small {
+  background:none; border:none;
+  color:var(--dimmer); font-family:'Lato',sans-serif;
+  font-size:11px; letter-spacing:2px; text-transform:uppercase;
+  cursor:pointer; padding:8px 16px;
+  transition:color .2s; text-decoration:none;
+  display:inline-block;
+}
+.btn-small:hover { color:var(--dim); }
+
+/* ── GAME SELECTOR PANEL ── */
+#game-panel {
+  position:fixed; inset:0; z-index:200;
+  display:flex; align-items:flex-end;
+  background:rgba(10,8,5,0); pointer-events:none;
+  transition:background .35s;
+}
+#game-panel.open {
+  background:rgba(10,8,5,0.85);
+  pointer-events:all;
+  backdrop-filter:blur(6px);
+}
+#game-sheet {
+  width:100%; max-width:500px; margin:0 auto;
+  background:var(--bg2);
+  border:1px solid var(--border);
+  border-bottom:none;
+  border-radius:20px 20px 0 0;
+  padding:0 0 40px;
+  transform:translateY(100%);
+  transition:transform .4s cubic-bezier(.4,0,.2,1);
+  max-height:80vh; overflow:hidden;
+  display:flex; flex-direction:column;
+}
+#game-panel.open #game-sheet { transform:translateY(0); }
+
+.sheet-handle {
+  width:40px; height:4px; border-radius:2px;
+  background:var(--border); margin:14px auto 0;
+  flex-shrink:0;
+}
+.sheet-header {
+  padding:16px 24px 14px;
+  border-bottom:1px solid var(--border);
+  flex-shrink:0;
+}
+.sheet-title {
+  font-family:'Cinzel',serif; font-size:15px;
+  font-weight:600; color:var(--cream); letter-spacing:2px;
+}
+.sheet-subtitle {
+  font-size:13px; color:var(--dim);
+  font-style:italic; margin-top:3px;
+}
+.sheet-body { flex:1; overflow-y:auto; padding:16px 20px; }
+.sheet-body::-webkit-scrollbar { width:3px; }
+.sheet-body::-webkit-scrollbar-thumb { background:var(--border); border-radius:4px; }
+
+/* GAME CARDS */
+.game-card {
+  display:flex; align-items:center; gap:16px;
+  padding:14px 16px; border-radius:10px;
+  border:1px solid var(--border);
+  background:var(--bg3); margin-bottom:6px;
+  cursor:pointer; transition:all .2s;
+  text-decoration:none;
+}
+.game-card:hover {
+  border-color:var(--gold3);
+  background:rgba(200,169,110,0.04);
+  transform:translateX(4px);
+}
+.game-card-icon {
+  font-size:28px; width:44px; height:44px;
+  display:flex; align-items:center; justify-content:center;
+  background:var(--bg2); border-radius:10px;
+  flex-shrink:0; border:1px solid var(--border);
+}
+.game-card-info { flex:1; min-width:0; }
+.game-card-title {
+  font-family:'Cinzel',serif; font-size:14px;
+  font-weight:600; color:var(--cream); margin-bottom:3px;
+  white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
+}
+.game-card-desc {
+  font-size:12px; color:var(--dim);
+  font-style:italic; white-space:nowrap;
+  overflow:hidden; text-overflow:ellipsis;
+}
+.game-card-lang {
+  font-family:'Lato',sans-serif; font-size:10px;
+  letter-spacing:1px; color:var(--dimmer);
+  background:var(--bg); border:1px solid var(--border);
+  border-radius:20px; padding:3px 8px; flex-shrink:0;
+}
+.game-card-arrow {
+  color:var(--gold3); font-size:16px; flex-shrink:0;
+}
+
+.no-games {
+  text-align:center; padding:32px 20px;
+  color:var(--dimmer); font-style:italic; font-size:14px;
+}
+
+/* ── OPTIONS PANEL ── */
+#options-panel {
+  position:fixed; inset:0; z-index:200;
+  display:flex; align-items:center; justify-content:center;
+  background:rgba(10,8,5,0); pointer-events:none;
+  transition:background .35s;
+}
+#options-panel.open {
+  background:rgba(10,8,5,0.9);
+  pointer-events:all;
+  backdrop-filter:blur(8px);
+}
+#options-box {
+  width:100%; max-width:420px; margin:20px;
+  background:var(--bg2); border:1px solid var(--border);
+  border-radius:16px; padding:32px;
+  transform:scale(0.95) translateY(10px);
+  opacity:0;
+  transition:all .3s cubic-bezier(.4,0,.2,1);
+}
+#options-panel.open #options-box { transform:scale(1) translateY(0); opacity:1; }
+
+.options-title {
+  font-family:'Cinzel',serif; font-size:16px;
+  font-weight:600; color:var(--cream); letter-spacing:3px;
+  text-align:center; margin-bottom:28px;
+}
+
+.option-row {
+  display:flex; align-items:center; justify-content:space-between;
+  padding:14px 0; border-bottom:1px solid var(--border);
+  gap:16px;
+}
+.option-row:last-of-type { border-bottom:none; }
+.option-label {
+  font-size:14px; color:var(--cream); font-weight:400;
+}
+.option-desc {
+  font-size:12px; color:var(--dim); font-style:italic; margin-top:2px;
+}
+
+/* TOGGLE */
+.toggle {
+  position:relative; width:44px; height:24px; flex-shrink:0;
+}
+.toggle input { opacity:0; width:0; height:0; }
+.toggle-track {
+  position:absolute; inset:0; border-radius:12px;
+  background:var(--bg3); border:1px solid var(--border);
+  cursor:pointer; transition:background .2s;
+}
+.toggle input:checked + .toggle-track { background:var(--gold3); border-color:var(--gold3); }
+.toggle-track::after {
+  content:''; position:absolute;
+  top:3px; left:3px; width:16px; height:16px;
+  border-radius:50%; background:var(--dim);
+  transition:transform .2s, background .2s;
+}
+.toggle input:checked + .toggle-track::after {
+  transform:translateX(20px); background:var(--gold2);
+}
+
+/* SELECT */
+.opt-select {
+  background:var(--bg3); border:1px solid var(--border);
+  color:var(--cream); font-family:'Cormorant Garamond',serif;
+  font-size:14px; padding:6px 12px; border-radius:6px;
+  outline:none; cursor:pointer;
+}
+.opt-select:focus { border-color:var(--gold3); }
+
+.options-close {
+  margin-top:24px; width:100%; padding:12px;
+  border:1px solid var(--border); border-radius:6px;
+  background:none; color:var(--dim);
+  font-family:'Cinzel',serif; font-size:12px;
+  letter-spacing:2px; cursor:pointer; transition:all .2s;
+}
+.options-close:hover { border-color:var(--gold3); color:var(--cream); }
+
+/* ── BOTTOM FOOTER ── */
+.footer {
+  position:fixed; bottom:20px; left:0; right:0;
+  text-align:center; z-index:10;
+  opacity:0; animation:fade-up .4s ease forwards;
+  animation-delay:.35s;
+  pointer-events:none;
+}
+.footer-text {
+  font-family:'Lato',sans-serif; font-size:10px;
+  letter-spacing:3px; color:var(--dimmer);
+  text-transform:uppercase;
+  padding:0 120px; /* espace pour logo gauche et version droite */
+}
+
+/* ── VERSION BADGE ── */
+.version {
+  position:fixed; bottom:20px; right:16px; z-index:10;
+  font-family:'Lato',sans-serif; font-size:10px;
+  color:var(--dimmer); letter-spacing:1px;
+}
+
+/* ── LOGO PEGASUS ── */
+#pegasus-logo {
+  position:fixed; bottom:20px; left:20px; z-index:10;
+  opacity:0; animation:fade-up .4s ease forwards;
+  animation-delay:.4s;
+  display:flex; align-items:center; gap:6px;
+}
+#pegasus-logo img {
+  width:20px; height:20px;
+  filter:brightness(0) invert(1);
+  opacity:0.2;
+}
+#pegasus-logo span {
+  font-family:'Lato',sans-serif; font-size:9px;
+  letter-spacing:2px; color:var(--dimmer);
+  text-transform:uppercase; opacity:0.6;
+}
+
+/* ── SUBMIT POPUP ── */
+#submit-overlay {
+  position:fixed; inset:0; z-index:300;
+  background:rgba(10,8,5,0);
+  display:flex; align-items:center; justify-content:center;
+  pointer-events:none;
+  transition:background .35s;
+}
+#submit-overlay.open {
+  background:rgba(10,8,5,0.92);
+  pointer-events:all;
+  backdrop-filter:blur(10px);
+}
+#submit-box {
+  width:100%; max-width:460px; margin:20px;
+  background:var(--bg2);
+  border:1px solid var(--border);
+  border-radius:20px; padding:36px 32px;
+  transform:scale(0.95) translateY(12px); opacity:0;
+  transition:all .35s cubic-bezier(.4,0,.2,1);
+  position:relative;
+}
+#submit-overlay.open #submit-box {
+  transform:scale(1) translateY(0); opacity:1;
+}
+.submit-close {
+  position:absolute; top:16px; right:16px;
+  width:30px; height:30px; border-radius:8px;
+  background:none; border:1px solid var(--border);
+  color:var(--dimmer); cursor:pointer; font-size:16px;
+  display:flex; align-items:center; justify-content:center;
+  transition:all .15s;
+}
+.submit-close:hover { border-color:var(--gold3); color:var(--cream); }
+
+.submit-icon {
+  font-size:36px; text-align:center; margin-bottom:16px;
+}
+.submit-title {
+  font-family:'Cinzel',serif; font-size:18px; font-weight:600;
+  color:var(--cream); letter-spacing:2px;
+  text-align:center; margin-bottom:8px;
+}
+.submit-subtitle {
+  font-family:'Cormorant Garamond',serif; font-size:15px;
+  color:var(--gold); font-style:italic;
+  text-align:center; margin-bottom:20px;
+}
+.submit-body {
+  font-size:14px; color:var(--dim); line-height:1.75;
+  margin-bottom:20px; text-align:center;
+}
+.submit-perks {
+  background:var(--bg3); border:1px solid var(--border);
+  border-radius:12px; padding:16px 18px; margin-bottom:12px;
+  display:flex; flex-direction:column; gap:10px;
+}
+.submit-perk {
+  display:flex; align-items:flex-start; gap:10px;
+  font-size:13px; color:var(--cream); line-height:1.5;
+}
+.submit-perk-icon { font-size:16px; flex-shrink:0; margin-top:1px; }
+.submit-perk-text { color:var(--dim); }
+.submit-perk-text strong { color:var(--cream); }
+
+.submit-actions {
+  display:flex; flex-direction:column; gap:10px;
+}
+.submit-btn {
+  width:100%; padding:14px 24px; border-radius:8px;
+  border:1px solid var(--gold3);
+  background:linear-gradient(135deg, rgba(200,169,110,0.12), rgba(138,106,48,0.06));
+  color:var(--gold2); font-family:'Cinzel',serif;
+  font-size:12px; font-weight:600; letter-spacing:3px;
+  cursor:pointer; transition:all .2s; text-transform:uppercase;
+}
+.submit-btn:hover {
+  border-color:var(--gold); box-shadow:0 0 20px rgba(200,169,110,0.15);
+  transform:translateY(-1px);
+}
+.submit-btn.secondary {
+  background:none; border-color:var(--border);
+  color:var(--dim); letter-spacing:2px;
+}
+.submit-btn.secondary:hover {
+  border-color:var(--gold3); color:var(--cream);
+  box-shadow:none;
+}
+.submit-note {
+  font-family:'Lato',sans-serif; font-size:11px;
+  color:var(--dimmer); text-align:center; margin-top:12px;
+  letter-spacing:.5px; line-height:1.5;
+}
+  from { opacity:0; transform:translateY(16px); }
+  to   { opacity:1; transform:translateY(0); }
+}
+
+/* ── MOBILE ── */
+@media (max-width:480px) {
+  #content-block { transform:translateY(-18%); }
+  .main-title { letter-spacing:1px; }
+  .btn-main { font-size:12px; padding:15px 24px; letter-spacing:2px; }
+  #options-box { margin:12px; padding:24px; }
+}
+</style>
+</head>
+<body>
+
+<div class="bg-gradient"></div>
+<canvas id="bg-canvas"></canvas>
+
+<!-- MAIN SHELL -->
+<div id="shell">
+<div id="content-block">
+
+  <!-- Ornament SVG -->
+  <div class="ornament">
+    <svg viewBox="0 0 120 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <line x1="0" y1="10" x2="48" y2="10" stroke="#c8a96e" stroke-width="0.5"/>
+      <polygon points="52,10 56,6 60,10 56,14" fill="#c8a96e" opacity="0.6"/>
+      <polygon points="60,10 64,6 68,10 64,14" fill="#c8a96e" opacity="0.3"/>
+      <line x1="72" y1="10" x2="120" y2="10" stroke="#c8a96e" stroke-width="0.5"/>
+    </svg>
+  </div>
+
+  <p class="eyebrow" id="txt-eyebrow">Une aventure vous attend</p>
+
+  <h1 class="main-title" id="txt-title">
+    Choisis<br><em>ton Destin</em>
+  </h1>
+
+  <p class="subtitle" id="txt-subtitle">Chaque choix façonne votre histoire</p>
+
+  <div class="divider">
+    <div class="divider-gem"></div>
+    <div class="divider-gem" style="opacity:0.4;transform:rotate(45deg) scale(0.6)"></div>
+    <div class="divider-gem"></div>
+  </div>
+
+  <div class="btn-group">
+    <button class="btn-main primary" id="btn-start" onclick="openGamePanel()">
+      ✦ <span id="txt-btn-start">Le début de votre aventure</span>
+    </button>
+    <button class="btn-main" id="btn-options" onclick="openOptions()">
+      <span id="txt-btn-options">Options</span>
+    </button>
+    <button class="btn-main" id="btn-submit" onclick="openSubmitPopup()">
+      <span id="txt-btn-submit">✍ Soumettre une histoire</span>
+    </button>
+  </div>
+
+</div>
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+  <p class="footer-text" id="txt-footer">StoryForge • Romans interactifs</p>
+</div>
+<div class="version">v0.1</div>
+
+<!-- PEGASUS LOGO -->
+<div id="pegasus-logo">
+  <img src="Logo.png" alt="PegasusCorp" onerror="this.parentElement.style.display='none'">
+  <span>PegasusCorp</span>
+</div>
+
+<!-- ── SUBMIT POPUP ── -->
+<div id="submit-overlay" onclick="handleSubmitClick(event)">
+  <div id="submit-box">
+    <button class="submit-close" onclick="closeSubmitPopup()">✕</button>
+    <div class="submit-icon">✍</div>
+    <div class="submit-title" id="txt-submit-title">Soumettre une histoire</div>
+    <div class="submit-subtitle" id="txt-submit-subtitle">Devenez auteur de Choisis ton Destin</div>
+    <div class="submit-body" id="txt-submit-body">
+      Vous avez une idée d'aventure ? Écrivez votre scénario dans l'éditeur et envoyez-le nous. Les meilleures histoires seront publiées dans l'application.
+    </div>
+    <div class="submit-perks">
+      <div class="submit-perk">
+        <span class="submit-perk-icon">🏆</span>
+        <div class="submit-perk-text" id="txt-perk-1"><strong>Publication officielle</strong> — Votre histoire jouée par des milliers de joueurs</div>
+      </div>
+      <div class="submit-perk">
+        <span class="submit-perk-icon">🎁</span>
+        <div class="submit-perk-text" id="txt-perk-2"><strong>Avantages exclusifs</strong> — Accès à du contenu premium et crédits auteur</div>
+      </div>
+      <div class="submit-perk">
+        <span class="submit-perk-icon">✦</span>
+        <div class="submit-perk-text" id="txt-perk-3"><strong>Badge Auteur</strong> — Votre nom associé à votre création dans l'app</div>
+      </div>
+    </div>
+    <div class="submit-actions">
+      <button class="submit-btn" onclick="goToEditor()">
+        <span id="txt-submit-editor">Ouvrir l'éditeur</span>
+      </button>
+      <button class="submit-btn secondary" onclick="closeSubmitPopup()">
+        <span id="txt-submit-cancel">Annuler</span>
+      </button>
+    </div>
+    <p class="submit-note" id="txt-submit-note">
+      Une fois votre histoire écrite, exportez le JSON et envoyez-le directement depuis l'éditeur.
+    </p>
+  </div>
+</div>
+
+<!-- ── GAME SELECTOR PANEL ── -->
+<div id="game-panel" onclick="handlePanelClick(event)">
+  <div id="game-sheet">
+    <div class="sheet-handle"></div>
+    <div class="sheet-header">
+      <div class="sheet-title" id="txt-sheet-title">Vos aventures</div>
+      <div class="sheet-subtitle" id="txt-sheet-sub">Choisissez une histoire à vivre</div>
+    </div>
+    <div class="sheet-body" id="game-list">
+      <!-- filled by JS -->
+    </div>
+  </div>
+</div>
+
+<!-- ── OPTIONS PANEL ── -->
+<div id="options-panel" onclick="handleOptionsClick(event)">
+  <div id="options-box">
+    <div class="options-title" id="txt-options-title">OPTIONS</div>
+
+    <div class="option-row">
+      <div>
+        <div class="option-label" id="txt-opt-kids">Mode enfant</div>
+        <div class="option-desc" id="txt-opt-kids-desc">Histoires adaptées aux enfants uniquement</div>
+      </div>
+      <label class="toggle">
+        <input type="checkbox" id="opt-kids" onchange="saveOptions();renderGameList()">
+        <div class="toggle-track"></div>
+      </label>
+    </div>
+
+    <div class="option-row">
+      <div>
+        <div class="option-label" id="txt-opt-sound">Musique d'ambiance</div>
+        <div class="option-desc" id="txt-opt-sound-desc">Sons atmosphériques</div>
+      </div>
+      <label class="toggle">
+        <input type="checkbox" id="opt-sound" onchange="saveOptions()">
+        <div class="toggle-track"></div>
+      </label>
+    </div>
+
+    <div class="option-row">
+      <div>
+        <div class="option-label" id="txt-opt-anim">Animations</div>
+        <div class="option-desc" id="txt-opt-anim-desc">Effets visuels</div>
+      </div>
+      <label class="toggle">
+        <input type="checkbox" id="opt-anim" checked onchange="saveOptions()">
+        <div class="toggle-track"></div>
+      </label>
+    </div>
+
+    <div class="option-row">
+      <div>
+        <div class="option-label" id="txt-opt-textspeed">Vitesse du texte</div>
+      </div>
+      <select class="opt-select" id="opt-textspeed" onchange="saveOptions()">
+        <option value="fast" id="txt-speed-fast">Rapide</option>
+        <option value="normal" selected id="txt-speed-normal">Normal</option>
+        <option value="slow" id="txt-speed-slow">Lent</option>
+      </select>
+    </div>
+
+    <div class="option-row">
+      <div>
+        <div class="option-label" id="txt-opt-lang">Langue</div>
+      </div>
+      <select class="opt-select" id="opt-lang" onchange="setLang(this.value)">
+        <option value="fr">Français</option>
+        <option value="en">English</option>
+        <option value="es">Español</option>
+      </select>
+    </div>
+
+    <button class="options-close" onclick="closeOptions()" id="txt-close-options">Fermer</button>
+  </div>
+</div>
+
+<script>
+// ══════════════════════════════════════════════
+// TRANSLATIONS
+// ══════════════════════════════════════════════
+const LANG = {
+  fr: {
+    eyebrow:        'Une aventure vous attend',
+    title:          'Choisis<br><em>ton Destin</em>',
+    subtitle:       'Chaque choix façonne votre histoire',
+    btnStart:       'Le début de votre aventure',
+    btnOptions:     'Options',
+    btnSubmit:      '✍ Soumettre une histoire',
+    footer:         'StoryForge • Romans interactifs',
+    sheetTitle:     'Vos aventures',
+    sheetSub:       'Choisissez une histoire à vivre',
+    noGames:        'Aucune aventure disponible dans cette langue.',
+    noGamesHint:    'Ajoutez des fichiers JSON dans stories/fr/',
+    optionsTitle:   'OPTIONS',
+    optKids:        'Mode enfant',
+    optKidsDesc:    'Histoires adaptées aux enfants uniquement',
+    optSound:       'Musique d\'ambiance',
+    optSoundDesc:   'Sons atmosphériques',
+    optAnim:        'Animations',
+    optAnimDesc:    'Effets visuels',
+    optTextspeed:   'Vitesse du texte',
+    optLang:        'Langue',
+    speedFast:      'Rapide',
+    speedNormal:    'Normal',
+    speedSlow:      'Lent',
+    closeOptions:   'Fermer',
+    kidsBadge:      '🧒 Mode enfant actif',
+    docTitle:       'Choisis ton Destin',
+    submitTitle:    'Soumettre une histoire',
+    submitSubtitle: 'Devenez auteur de Choisis ton Destin',
+    submitBody:     'Vous avez une idée d\'aventure ? Écrivez votre scénario dans l\'éditeur et envoyez-le nous. Les meilleures histoires seront publiées dans l\'application.',
+    perk1:          '<strong>Publication officielle</strong> — Votre histoire jouée par des milliers de joueurs',
+    perk2:          '<strong>Avantages exclusifs</strong> — Accès à du contenu premium et crédits auteur',
+    perk3:          '<strong>Badge Auteur</strong> — Votre nom associé à votre création dans l\'app',
+    submitEditor:   'Ouvrir l\'éditeur',
+    submitCancel:   'Annuler',
+    submitNote:     'Une fois votre histoire écrite, exportez le JSON et envoyez-le directement depuis l\'éditeur.',
+  },
+  en: {
+    eyebrow:        'An adventure awaits',
+    title:          'Choose<br><em>Your Fate</em>',
+    subtitle:       'Every choice shapes your story',
+    btnStart:       'Begin your adventure',
+    btnOptions:     'Options',
+    btnSubmit:      '✍ Submit a story',
+    footer:         'StoryForge • Interactive Fiction',
+    sheetTitle:     'Your Adventures',
+    sheetSub:       'Choose a story to experience',
+    noGames:        'No adventures available in this language.',
+    noGamesHint:    'Add JSON files to stories/en/',
+    optionsTitle:   'OPTIONS',
+    optKids:        'Kids Mode',
+    optKidsDesc:    'Only show stories suitable for children',
+    optSound:       'Ambient Music',
+    optSoundDesc:   'Atmospheric sounds',
+    optAnim:        'Animations',
+    optAnimDesc:    'Visual effects',
+    optTextspeed:   'Text Speed',
+    optLang:        'Language',
+    speedFast:      'Fast',
+    speedNormal:    'Normal',
+    speedSlow:      'Slow',
+    closeOptions:   'Close',
+    kidsBadge:      '🧒 Kids mode on',
+    docTitle:       'Choose Your Fate',
+    submitTitle:    'Submit a Story',
+    submitSubtitle: 'Become an author of Choose Your Fate',
+    submitBody:     'Got a story idea? Write your scenario in the editor and send it to us. The best stories will be published in the app.',
+    perk1:          '<strong>Official publication</strong> — Your story played by thousands of players',
+    perk2:          '<strong>Exclusive perks</strong> — Access to premium content and author credits',
+    perk3:          '<strong>Author Badge</strong> — Your name linked to your creation in the app',
+    submitEditor:   'Open the editor',
+    submitCancel:   'Cancel',
+    submitNote:     'Once your story is written, export the JSON and send it directly from the editor.',
+  },
+  es: {
+    eyebrow:        'Una aventura te espera',
+    title:          'Elige<br><em>tu Destino</em>',
+    subtitle:       'Cada elección da forma a tu historia',
+    btnStart:       'El comienzo de tu aventura',
+    btnOptions:     'Opciones',
+    btnSubmit:      '✍ Enviar una historia',
+    footer:         'StoryForge • Ficción interactiva',
+    sheetTitle:     'Tus aventuras',
+    sheetSub:       'Elige una historia para vivir',
+    noGames:        'No hay aventuras disponibles en este idioma.',
+    noGamesHint:    'Añade archivos JSON en stories/es/',
+    optionsTitle:   'OPCIONES',
+    optKids:        'Modo infantil',
+    optKidsDesc:    'Solo historias aptas para niños',
+    optSound:       'Música ambiental',
+    optSoundDesc:   'Sonidos atmosféricos',
+    optAnim:        'Animaciones',
+    optAnimDesc:    'Efectos visuales',
+    optTextspeed:   'Velocidad del texto',
+    optLang:        'Idioma',
+    speedFast:      'Rápido',
+    speedNormal:    'Normal',
+    speedSlow:      'Lento',
+    closeOptions:   'Cerrar',
+    kidsBadge:      '🧒 Modo infantil activo',
+    docTitle:       'Elige tu Destino',
+    submitTitle:    'Enviar una historia',
+    submitSubtitle: 'Conviértete en autor de Elige tu Destino',
+    submitBody:     '¿Tienes una idea de aventura? Escribe tu guión en el editor y envíanoslo. Las mejores historias se publicarán en la aplicación.',
+    perk1:          '<strong>Publicación oficial</strong> — Tu historia jugada por miles de jugadores',
+    perk2:          '<strong>Ventajas exclusivas</strong> — Acceso a contenido premium y créditos de autor',
+    perk3:          '<strong>Insignia de Autor</strong> — Tu nombre vinculado a tu creación en la app',
+    submitEditor:   'Abrir el editor',
+    submitCancel:   'Cancelar',
+    submitNote:     'Una vez escrita tu historia, exporta el JSON y envíalo directamente desde el editor.',
+  }
+};
+
+let currentLang = localStorage.getItem('sf_lang') || 'fr';
+
+function setLang(lang) {
+  currentLang = lang;
+  localStorage.setItem('sf_lang', lang);
+  applyLang();
+  document.getElementById('opt-lang').value = lang;
+  if (document.getElementById('game-panel').classList.contains('open')) renderGameList();
+}
+
+function applyLang() {
+  const t = LANG[currentLang];
+  const set = (id, val, html=false) => {
+    const el = document.getElementById(id);
+    if (!el) return;
+    if (html) el.innerHTML = val; else el.textContent = val;
+  };
+  set('txt-eyebrow',        t.eyebrow);
+  set('txt-title',          t.title, true);
+  set('txt-subtitle',       t.subtitle);
+  set('txt-btn-start',      t.btnStart);
+  set('txt-btn-options',    t.btnOptions);
+  set('txt-btn-submit',     t.btnSubmit);
+  set('txt-footer',         t.footer);
+  set('txt-sheet-title',    t.sheetTitle);
+  set('txt-sheet-sub',      t.sheetSub);
+  set('txt-options-title',  t.optionsTitle);
+  set('txt-opt-kids',       t.optKids);
+  set('txt-opt-kids-desc',  t.optKidsDesc);
+  set('txt-opt-sound',      t.optSound);
+  set('txt-opt-sound-desc', t.optSoundDesc);
+  set('txt-opt-anim',       t.optAnim);
+  set('txt-opt-anim-desc',  t.optAnimDesc);
+  set('txt-opt-textspeed',  t.optTextspeed);
+  set('txt-opt-lang',       t.optLang);
+  set('txt-speed-fast',     t.speedFast);
+  set('txt-speed-normal',   t.speedNormal);
+  set('txt-speed-slow',     t.speedSlow);
+  set('txt-close-options',  t.closeOptions);
+  set('txt-submit-title',    t.submitTitle);
+  set('txt-submit-subtitle', t.submitSubtitle);
+  set('txt-submit-body',     t.submitBody);
+  set('txt-perk-1',          t.perk1, true);
+  set('txt-perk-2',          t.perk2, true);
+  set('txt-perk-3',          t.perk3, true);
+  set('txt-submit-editor',   t.submitEditor);
+  set('txt-submit-cancel',   t.submitCancel);
+  set('txt-submit-note',     t.submitNote);
+  document.title = t.docTitle;
+  document.documentElement.lang = currentLang;
+}
+
+// ── SUBMIT POPUP ──
+function openSubmitPopup() {
+  document.getElementById('submit-overlay').classList.add('open');
+}
+function closeSubmitPopup() {
+  document.getElementById('submit-overlay').classList.remove('open');
+}
+function handleSubmitClick(e) {
+  if (e.target === document.getElementById('submit-overlay')) closeSubmitPopup();
+}
+function goToEditor() {
+  closeSubmitPopup();
+  window.location.href = 'story-editor.html';
+}
+
+// ══════════════════════════════════════════════
+// GAMES REGISTRY
+// Convention : games.json list à la racine, ou fallback démo
+// games.json format:
+// [
+//   { "file":"neon_ghost_fr.json", "title":"Neon Ghost", "desc":"Cyberpunk", "icon":"⚡", "lang":"fr" },
+//   { "file":"neon_ghost_en.json", "title":"Neon Ghost", "desc":"Cyberpunk", "icon":"⚡", "lang":"en" }
+// ]
+// ══════════════════════════════════════════════
+// Structure des fichiers :
+// stories/fr/nom_histoire.json
+// stories/en/nom_histoire.json
+// stories/es/nom_histoire.json
+// games.json à la racine liste tout
+
+const DEMO_GAMES = [
+  { file:'stories/fr/neon_ghost.json',   title:'Neon Ghost',       desc:'Dystopie cyberpunk',       icon:'⚡', lang:'fr' },
+  { file:'stories/fr/pirates.json',      title:'Les Pirates',      desc:'Haute mer et aventure',    icon:'⚓', lang:'fr', kids:true },
+  { file:'stories/fr/fantasy.json',      title:'Le Royaume Perdu', desc:'Épopée fantastique',       icon:'⚔️', lang:'fr' },
+  { file:'stories/en/neon_ghost.json',   title:'Neon Ghost',       desc:'Cyberpunk dystopia',       icon:'⚡', lang:'en' },
+  { file:'stories/en/pirates.json',      title:'The Pirates',      desc:'High seas adventure',      icon:'⚓', lang:'en', kids:true },
+  { file:'stories/en/fantasy.json',      title:'The Lost Kingdom', desc:'Epic fantasy quest',       icon:'⚔️', lang:'en' },
+  { file:'stories/es/neon_ghost.json',   title:'Neon Ghost',       desc:'Distopía cyberpunk',       icon:'⚡', lang:'es' },
+  { file:'stories/es/piratas.json',      title:'Los Piratas',      desc:'Aventura en alta mar',     icon:'⚓', lang:'es', kids:true },
+  { file:'stories/es/fantasia.json',     title:'El Reino Perdido', desc:'Épica de fantasía',        icon:'⚔️', lang:'es' },
+];
+
+let allGames = [];
+
+async function loadGameRegistry() {
+  try {
+    const r = await fetch('games.json');
+    if (r.ok) { allGames = await r.json(); return; }
+  } catch(e) {}
+  // fallback to demo list
+  allGames = DEMO_GAMES;
+}
+
+function renderGameList() {
+  const t = LANG[currentLang];
+  const kidsMode = document.getElementById('opt-kids')?.checked;
+  const container = document.getElementById('game-list');
+  let filtered = allGames.filter(g => g.lang === currentLang);
+  if (kidsMode) filtered = filtered.filter(g => g.kids === true);
+
+  // Kids badge in sheet subtitle
+  const sub = document.getElementById('txt-sheet-sub');
+  if (kidsMode) {
+    sub.innerHTML = `${t.sheetSub} <span style="display:inline-block;background:#ffd70022;border:1px solid #ffd70044;border-radius:20px;padding:1px 8px;font-size:11px;color:#ffd700;margin-left:6px">${t.kidsBadge}</span>`;
+  } else {
+    sub.textContent = t.sheetSub;
+  }
+
+  if (!filtered.length) {
+    container.innerHTML = `<div class="no-games">
+      <p>${t.noGames}</p>
+      <p style="font-size:11px;margin-top:8px;opacity:0.6">${t.noGamesHint}</p>
+    </div>`;
+    return;
+  }
+
+  container.innerHTML = filtered.map(g => `
+    <div class="game-card" onclick="launchGame('${g.file}')">
+      <div class="game-card-icon">${g.kids ? '🧒' : (g.icon || '📖')}</div>
+      <div class="game-card-info">
+        <div class="game-card-title">${g.title}</div>
+        <div class="game-card-desc">${g.desc || ''}</div>
+      </div>
+      <div class="game-card-lang">${g.lang.toUpperCase()}</div>
+      <div class="game-card-arrow">›</div>
+    </div>
+  `).join('');
+}
+
+function launchGame(file) {
+  localStorage.setItem('sf_game_file', file);
+  window.location.href = 'game.html?story=' + encodeURIComponent(file);
+}
+
+// ══════════════════════════════════════════════
+// PANELS
+// ══════════════════════════════════════════════
+function openGamePanel() {
+  renderGameList();
+  document.getElementById('game-panel').classList.add('open');
+}
+function closeGamePanel() {
+  document.getElementById('game-panel').classList.remove('open');
+}
+function handlePanelClick(e) {
+  if (e.target === document.getElementById('game-panel')) closeGamePanel();
+}
+
+function openOptions() {
+  document.getElementById('options-panel').classList.add('open');
+}
+function closeOptions() {
+  document.getElementById('options-panel').classList.remove('open');
+}
+function handleOptionsClick(e) {
+  if (e.target === document.getElementById('options-panel')) closeOptions();
+}
+
+// ══════════════════════════════════════════════
+// OPTIONS PERSISTENCE
+// ══════════════════════════════════════════════
+function saveOptions() {
+  const opts = {
+    sound:     document.getElementById('opt-sound').checked,
+    anim:      document.getElementById('opt-anim').checked,
+    textspeed: document.getElementById('opt-textspeed').value,
+    kids:      document.getElementById('opt-kids').checked,
+  };
+  localStorage.setItem('sf_options', JSON.stringify(opts));
+}
+function loadOptions() {
+  try {
+    const opts = JSON.parse(localStorage.getItem('sf_options') || '{}');
+    if (opts.sound     !== undefined) document.getElementById('opt-sound').checked = opts.sound;
+    if (opts.anim      !== undefined) document.getElementById('opt-anim').checked  = opts.anim;
+    if (opts.textspeed !== undefined) document.getElementById('opt-textspeed').value = opts.textspeed;
+    if (opts.kids      !== undefined) document.getElementById('opt-kids').checked  = opts.kids;
+  } catch(e) {}
+}
+
+// ══════════════════════════════════════════════
+// PARTICLES
+// ══════════════════════════════════════════════
+function createParticles() {
+  const count = window.innerWidth < 480 ? 12 : 20;
+  for (let i = 0; i < count; i++) {
+    const p = document.createElement('div');
+    p.className = 'particle';
+    const size = Math.random() * 2 + 1;
+    const delay = Math.random() * 12;
+    const duration = 10 + Math.random() * 15;
+    const left = Math.random() * 100;
+    const drift = (Math.random() - 0.5) * 80;
+    p.style.cssText = `
+      width:${size}px; height:${size}px;
+      left:${left}vw; bottom:-10px;
+      --drift:${drift}px;
+      animation-duration:${duration}s;
+      animation-delay:${delay}s;
+      opacity:0;
+    `;
+    document.body.appendChild(p);
+  }
+}
+
+// ══════════════════════════════════════════════
+// CANVAS — subtle star field
+// ══════════════════════════════════════════════
+function initCanvas() {
+  const canvas = document.getElementById('bg-canvas');
+  const ctx = canvas.getContext('2d');
+  canvas.width  = window.innerWidth;
+  canvas.height = window.innerHeight;
+
+  const stars = Array.from({length:80}, () => ({
+    x: Math.random() * canvas.width,
+    y: Math.random() * canvas.height,
+    r: Math.random() * 1.2,
+    a: Math.random() * 0.3 + 0.05,
+    speed: Math.random() * 0.3 + 0.1,
+    phase: Math.random() * Math.PI * 2
+  }));
+
+  let frame = 0;
+  function draw() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    stars.forEach(s => {
+      const twinkle = s.a * (0.6 + 0.4 * Math.sin(frame * s.speed * 0.05 + s.phase));
+      ctx.beginPath();
+      ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(200,169,110,${twinkle})`;
+      ctx.fill();
+    });
+    frame++;
+    requestAnimationFrame(draw);
+  }
+  draw();
+
+  window.addEventListener('resize', () => {
+    canvas.width  = window.innerWidth;
+    canvas.height = window.innerHeight;
+  });
+}
+
+// ── ANIMATION FALLBACK ──
+// Si les animations CSS ne se déclenchent pas (navigateur, polices lentes)
+// on force l'affichage après 1.5s
+setTimeout(() => {
+  document.querySelectorAll('.ornament,.eyebrow,.main-title,.subtitle,.divider,.btn-group,.footer,#pegasus-logo,#content-block').forEach(el => {
+    if (getComputedStyle(el).opacity === '0') {
+      el.style.opacity = '1';
+      el.style.transform = 'translateY(0)';
+      el.style.transition = 'opacity .5s ease, transform .5s ease';
+    }
+  });
+}, 600);
+(async function init() {
+  loadOptions();
+  setLang(currentLang);
+  initCanvas();
+  createParticles();
+  await loadGameRegistry();
+})();
+</script>
+</body>
+</html>
