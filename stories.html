@@ -52,17 +52,7 @@ html,body { height:100%; background:#0d0d0f; color:#e8e0d0; font-family:'Cormora
   color:var(--cream); letter-spacing:2px; flex:1;
 }
 
-/* LANG FILTER */
-#lang-filter {
-  display:flex; gap:2px; background:var(--bg3);
-  border:1px solid var(--border); border-radius:20px; padding:3px;
-}
-.lang-pill {
-  padding:4px 10px; border-radius:16px; border:none;
-  background:none; color:var(--dimmer); font-family:'Lato',sans-serif;
-  font-size:11px; letter-spacing:1px; cursor:pointer; transition:all .15s;
-}
-.lang-pill.active { background:var(--gold3); color:var(--gold2); }
+
 
 /* ── SCROLL AREA ── */
 #scroll {
@@ -230,11 +220,6 @@ html,body { height:100%; background:#0d0d0f; color:#e8e0d0; font-family:'Cormora
 <div id="topbar">
   <a href="index.html" id="btn-back">←</a>
   <div class="topbar-title" id="txt-library">Bibliothèque</div>
-  <div id="lang-filter">
-    <button class="lang-pill active" onclick="setLang('fr')">FR</button>
-    <button class="lang-pill" onclick="setLang('en')">EN</button>
-    <button class="lang-pill" onclick="setLang('es')">ES</button>
-  </div>
 </div>
 
 <!-- SCROLL AREA -->
@@ -309,18 +294,6 @@ function getUnlockedPacks() {
 
 let currentLang = localStorage.getItem('sf_lang') || 'fr';
 let allGames = [];
-
-// ══════════════════════════════════════════════
-// LANG
-// ══════════════════════════════════════════════
-function setLang(lang) {
-  currentLang = lang;
-  localStorage.setItem('sf_lang', lang);
-  document.querySelectorAll('.lang-pill').forEach(p =>
-    p.classList.toggle('active', p.textContent === lang.toUpperCase())
-  );
-  renderLibrary();
-}
 
 // ══════════════════════════════════════════════
 // LOAD
@@ -504,10 +477,7 @@ function showNamePopup(file) {
 // ══════════════════════════════════════════════
 // INIT
 // ══════════════════════════════════════════════
-// Sync lang pills
-document.querySelectorAll('.lang-pill').forEach(p =>
-  p.classList.toggle('active', p.textContent === currentLang.toUpperCase())
-);
+
 loadGames();
 </script>
 </body>
