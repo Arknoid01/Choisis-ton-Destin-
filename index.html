@@ -73,8 +73,14 @@ body {
   height:100vh;
   display:flex; flex-direction:column;
   align-items:center; justify-content:center;
-  padding:0 20px 120px;
+  padding:0 20px;
   overflow:hidden;
+}
+#content-block {
+  display:flex; flex-direction:column;
+  align-items:center;
+  transform:translateY(-12%);
+  width:100%; max-width:380px;
 }
 
 /* ── LANG SWITCH ── */
@@ -547,6 +553,7 @@ body {
 
 <!-- MAIN SHELL -->
 <div id="shell">
+<div id="content-block">
 
   <!-- Ornament SVG -->
   <div class="ornament">
@@ -584,6 +591,7 @@ body {
     </button>
   </div>
 
+</div>
 </div>
 
 <!-- FOOTER -->
@@ -1092,7 +1100,7 @@ function initCanvas() {
 // Si les animations CSS ne se déclenchent pas (navigateur, polices lentes)
 // on force l'affichage après 1.5s
 setTimeout(() => {
-  document.querySelectorAll('.ornament,.eyebrow,.main-title,.subtitle,.divider,.btn-group,.footer,#pegasus-logo').forEach(el => {
+  document.querySelectorAll('.ornament,.eyebrow,.main-title,.subtitle,.divider,.btn-group,.footer,#pegasus-logo,#content-block').forEach(el => {
     if (getComputedStyle(el).opacity === '0') {
       el.style.opacity = '1';
       el.style.transform = 'translateY(0)';
