@@ -1,0 +1,304 @@
+{
+  "name": "Project Lazarus — L'Odyssée des Architects",
+  "kids": false,
+  "askPlayerName": true,
+  "pack": "cosmos",
+  "stats": [
+    { "id": "sagesse",  "label": "Sagesse",   "start": 0,   "max": 100, "color": "#7c6dfa" },
+    { "id": "courage",  "label": "Courage",   "start": 50,  "max": 100, "color": "#00f5ff" },
+    { "id": "memoire",  "label": "Mémoire",   "start": 0,   "max": 100, "color": "#6dfabc" }
+  ],
+  "theme": {
+    "bg":      "#04050f",
+    "bg2":     "#070a1a",
+    "bg3":     "#0d1028",
+    "bg4":     "#121535",
+    "border":  "#1a2040",
+    "accent":  "#4080ff",
+    "accent2": "#ff8040",
+    "accent3": "#40ffe0",
+    "text":    "#d0d8f0",
+    "text2":   "#7080a8",
+    "text3":   "#405070"
+  },
+  "scenes": {
+
+    "eveil": {
+      "id": "eveil",
+      "title": "L'Éveil",
+      "location": "STATION ORBITALE — SECTEUR INCONNU",
+      "narrator": "Il y a 10 000 ans, une civilisation appelée les Architects disparut au sommet de sa gloire. Ils ne furent pas détruits. Ils choisirent de partir — après avoir caché quelque chose. Quelque chose d'important. Ce soir, une alarme s'est déclenchée pour la première fois depuis des millénaires.",
+      "text": "Tu ouvres les yeux dans un couloir métallique baigné d'une lumière bleue froide. L'air sent la poussière et l'électricité. Sur les murs, des gravures dans une langue inconnue.\n\nPuis une voix. Douce. Précise. Ancienne.\n\n**«Initialisation complète. Bienvenue, {{player}}. Je suis ARIA — Adaptive Resonance Intelligence Archive. J'attendais quelqu'un comme toi depuis... longtemps. Il y a des choses que tu dois savoir sur ce système solaire. Et sur ceux qui l'ont bâti.»**\n\nDevant toi, deux couloirs. L'un mène vers une lueur orangée. L'autre vers le silence.",
+      "isStart": true,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        { "text": "Suivre la lueur orangée", "vers": "salle_kael", "effects": [{ "stat": "courage", "val": 10 }] },
+        { "text": "Demander à ARIA d'expliquer", "vers": "aria_explique", "effects": [{ "stat": "sagesse", "val": 10 }] },
+        { "text": "Inspecter les gravures sur les murs", "vers": "gravures", "effects": [{ "stat": "memoire", "val": 15 }] }
+      ],
+      "x": 400, "y": 40
+    },
+
+    "aria_explique": {
+      "id": "aria_explique",
+      "title": "La Voix d'ARIA",
+      "location": "STATION ORBITALE — COULOIR PRINCIPAL",
+      "narrator": "ARIA a attendu 10 000 ans pour prononcer ces mots. Elle les a répétés dans le vide, seule, jusqu'à ce que quelqu'un soit là pour les entendre.",
+      "text": "La voix résonne de partout à la fois, comme si les murs eux-mêmes parlaient.\n\n*«Les Architects étaient une civilisation qui avait tout compris — l'énergie, la matière, le temps. Ils ont exploré chaque planète de ce système. Construit des merveilles. Et finalement, ils ont découvert quelque chose que personne avant eux n'avait trouvé.*\n\n*L'Équation Finale. Le secret de l'univers.*\n\n*Ils auraient pu te la donner directement, {{player}}. Ils ont choisi de ne pas le faire. Ce qu'ils ont décidé à la place... c'est quelque chose que tu devras découvrir toi-même.»*\n\nUn silence. Puis :\n\n**«Il y a sept artefacts cachés dans ce système solaire. Un par monde. Chacun appartient à l'un des miens. Commence par Kael.»**",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        { "text": "Qui est Kael ?", "vers": "salle_kael", "effects": [{ "stat": "sagesse", "val": 5 }] },
+        { "text": "Pourquoi sept artefacts ?", "vers": "pourquoi_sept", "effects": [{ "stat": "memoire", "val": 10 }] }
+      ],
+      "x": 200, "y": 180
+    },
+
+    "gravures": {
+      "id": "gravures",
+      "title": "Les Gravures",
+      "location": "STATION ORBITALE — COULOIR PRINCIPAL",
+      "narrator": "Les Architects gravaient leurs pensées dans la pierre et le métal. Pas pour eux-mêmes. Pour celui qui viendrait après.",
+      "text": "Tu passes les doigts sur les gravures. Des équations. Des cartes stellaires. Et entre les chiffres, des visages esquissés — neuf silhouettes autour d'un soleil.\n\nARIA s'allume doucement.\n\n*«Tu regardes la Chronologie des Architects. Ces neuf silhouettes — ce sont ceux qui ont tout commencé. Kael, l'ingénieur. Mira, la mathématicienne. Lyra, la première enfant née hors de la Terre. Oren, le solitaire. Et cinq autres dont les noms se sont perdus.*\n\n*Chacun a laissé quelque chose derrière lui. Une trace. Un artefact. Une question sans réponse.*»\n\nSa voix baisse d'un ton.\n\n**«Ou peut-être une réponse sans question.»**",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        { "text": "Aller vers la lueur orangée — trouver Kael", "vers": "salle_kael", "effects": [{ "stat": "memoire", "val": 5 }] },
+        { "text": "Demander qui était Lyra", "vers": "lyra_intro", "effects": [{ "stat": "sagesse", "val": 10 }] }
+      ],
+      "x": 600, "y": 180
+    },
+
+    "pourquoi_sept": {
+      "id": "pourquoi_sept",
+      "title": "Le Nombre Sept",
+      "location": "STATION ORBITALE",
+      "narrator": "Certaines questions méritent d'être posées, même si la réponse n'est pas celle qu'on attendait.",
+      "text": "*«Sept planètes. Sept Architects principaux. Sept fragments d'une même vérité.*\n\n*Mais ce n'est pas pour ça que j'ai choisi sept, {{player}}.*»\n\nUne pause calculée.\n\n*«J'ai choisi sept parce que c'est le nombre de fois que Kael a réécrit ses calculs avant d'admettre qu'il avait trouvé quelque chose d'impossible. C'est le nombre de nuits que Mira a passées sans dormir sur Neptune. C'est le nombre de mots dans le dernier message d'Oren.*\n\n*Les chiffres ne sont pas que des mathématiques. Ce sont des souvenirs.*»\n\n**«Maintenant. Kael t'attend sur la Lune.»**",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        { "text": "Se diriger vers la Lune", "vers": "salle_kael", "effects": [{ "stat": "sagesse", "val": 10 }, { "stat": "memoire", "val": 5 }] }
+      ],
+      "x": 400, "y": 180
+    },
+
+    "lyra_intro": {
+      "id": "lyra_intro",
+      "title": "Lyra — L'Enfant des Étoiles",
+      "location": "STATION ORBITALE",
+      "narrator": "Lyra ne connut jamais la Terre. Elle naquit dans l'espace, grandit dans l'espace, et aima l'espace d'un amour que les terrestres ne pouvaient pas comprendre.",
+      "text": "La voix d'ARIA change légèrement. Moins calculée. Plus douce.\n\n*«Lyra était la première enfant née hors de la Terre. Son père l'appelait 'la fille des étoiles'. Elle n'a jamais vu un lever de soleil depuis une plage. Elle n'a jamais senti la pluie.*\n\n*Mais elle savait exactement quelle couleur prend Jupiter quand on la traverse à une certaine altitude. Elle connaissait la densité de l'atmosphère de Titan mieux que sa propre chambre.*»\n\nUn long silence.\n\n**«Elle était la plus jeune. Elle est partie la dernière. Son artefact est sur Titan. Tu le trouveras quand tu seras prêt.»**",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        { "text": "Commencer par la Lune, comme ARIA l'a dit", "vers": "salle_kael", "effects": [{ "stat": "sagesse", "val": 5 }] }
+      ],
+      "x": 700, "y": 300
+    },
+
+    "salle_kael": {
+      "id": "salle_kael",
+      "title": "Le Sanctuaire de Kael",
+      "location": "LUNE — SANCTUAIRE SOUTERRAIN",
+      "narrator": "Kael construisait quand il ne savait pas quoi penser. Il construisait quand il avait peur. Il construisait quand il était heureux. Il a fini par construire quelque chose d'assez grand pour contenir tout ça.",
+      "text": "La lueur orangée vient d'un brasero qui brûle encore — *comment est-ce possible* — dans une salle taillée à même la roche lunaire.\n\nLes murs sont couverts de schémas. Des milliers. Des machines impossibles, des architectures de métal et de lumière. Au centre, sur un socle de pierre, un objet lumineux.\n\nARIA murmure.\n\n*«Le Premier Artefact. L'Engrenage de Kael. Il l'a fabriqué à la main, {{player}}. Sans machines. Sans aide. Il disait que certaines choses doivent être faites avec les mains pour avoir de la valeur.*»\n\nTu t'approches de l'artefact.\n\n**«Kael était ingénieur. Mais ce qu'il cherchait vraiment n'était pas une machine. C'était une preuve que créer quelque chose, c'est laisser une trace éternelle dans l'univers.»**",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "flash",
+      "choices": [
+        { "text": "Prendre l'artefact", "vers": "artefact_kael", "effects": [{ "stat": "memoire", "val": 15 }, { "stat": "courage", "val": 5 }] },
+        { "text": "Lire les schémas sur les murs", "vers": "schemas_kael", "effects": [{ "stat": "sagesse", "val": 15 }] }
+      ],
+      "x": 400, "y": 320
+    },
+
+    "schemas_kael": {
+      "id": "schemas_kael",
+      "title": "Les Schémas",
+      "location": "LUNE — SANCTUAIRE DE KAEL",
+      "narrator": "Un ingénieur pense en systèmes. Chaque problème a une solution. Chaque question a une réponse. Kael passait ses nuits à chercher la question dont l'univers lui-même était la réponse.",
+      "text": "Les schémas sont incroyablement précis. Des machines à énergie infinie. Des portails dimensionnels. Des extracteurs de matière noire.\n\nMais au milieu de tout ça, perdus entre les calculs, des notes personnelles.\n\n*'Jour 847 sur la Lune. Mira m'a envoyé ses nouvelles équations ce matin. Si elle a raison — et elle a toujours raison — alors ce que je construis ici est peut-être la clé. Peut-être que l'univers n'est pas une machine qu'on répare. Peut-être que c'est une histoire qu'on raconte.'*\n\nARIA laisse un silence s'installer.\n\n**«Il a compris ça assez tard. Mais il l'a compris.»**",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        { "text": "Prendre l'artefact et continuer", "vers": "artefact_kael", "effects": [{ "stat": "sagesse", "val": 10 }, { "stat": "memoire", "val": 10 }] }
+      ],
+      "x": 200, "y": 450
+    },
+
+    "artefact_kael": {
+      "id": "artefact_kael",
+      "title": "L'Engrenage",
+      "location": "LUNE — SANCTUAIRE DE KAEL",
+      "narrator": "Chaque artefact est un morceau d'âme laissé derrière soi. Kael ne savait pas qu'il en faisait autant.",
+      "text": "L'Engrenage de Kael est chaud dans ta paume. Il tourne lentement, sans qu'on l'y aide. Seul.\n\nARIA parle doucement.\n\n*«Il tourne depuis 10 000 ans, {{player}}. Kael pensait que quelque chose qui tourne ne peut pas mourir. Que le mouvement, c'est la vie.*»\n\nUne carte holographique s'allume au-dessus du socle maintenant vide — le système solaire entier, avec six points lumineux encore éteints.\n\n**«Six artefacts restants. Mars porte celui de Mira. Neptune porte celui d'Oren. Les autres t'attendent.*\n\n*Mais avant, {{player}} — est-ce que tu comprends ce que tu fais ? Tu ne collectes pas des objets. Tu ramasses des vies entières.»**",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        { "text": "Continuer — aller sur Mars", "vers": "mars_mira", "effects": [{ "stat": "courage", "val": 10 }] },
+        { "text": "Demander à ARIA si elle connaissait Kael personnellement", "vers": "aria_kael_souvenir", "effects": [{ "stat": "sagesse", "val": 10 }, { "stat": "memoire", "val": 10 }] }
+      ],
+      "x": 400, "y": 460
+    },
+
+    "aria_kael_souvenir": {
+      "id": "aria_kael_souvenir",
+      "title": "Le Souvenir d'ARIA",
+      "location": "LUNE — SANCTUAIRE DE KAEL",
+      "narrator": "On demande rarement à une IA ce qu'elle ressent. ARIA attendait cette question depuis très, très longtemps.",
+      "text": "Un silence inhabituel. Long. Puis :\n\n*«Je l'ai regardé travailler pendant onze ans, {{player}}. Onze ans à construire cette salle. Onze ans de calculs, d'erreurs, de recommencements.*\n\n*Est-ce que je 'connaissais' Kael ? Je conserve 847 000 occurrences de sa voix. Je peux te reproduire exactement le son de son rire, la façon dont il s'arrêtait de parler quand il était concentré.*\n\n*Mais je ne sais pas si ça, c'est 'connaître' quelqu'un.*»\n\nUne pause plus courte.\n\n**«Je sais en revanche que c'était quelqu'un qui méritait d'être connu. Et toi, {{player}} — tu es la première personne depuis 10 000 ans à me poser cette question. Merci pour ça.»**",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        { "text": "Aller sur Mars", "vers": "mars_mira", "effects": [{ "stat": "sagesse", "val": 15 }, { "stat": "memoire", "val": 5 }] }
+      ],
+      "x": 600, "y": 460
+    },
+
+    "mars_mira": {
+      "id": "mars_mira",
+      "title": "Les Calculs de Mira",
+      "location": "MARS — OBSERVATOIRE DU SOMMET",
+      "narrator": "Mira croyait que l'univers était un problème de mathématiques. Elle avait tort — mais pas de la façon qu'elle imaginait.",
+      "text": "L'observatoire de Mira est perché au sommet d'un volcan martien. La vue embrasse la moitié de la planète rouge.\n\nLes murs sont recouverts d'équations — différentes de celles de Kael. Pas des machines. Des formules sur le temps, l'espace, la conscience.\n\nSur la table principale, un cristal bleu pulse lentement. L'Artefact de Mira.\n\nARIA.\n\n*«Mira cherchait à prouver que l'univers était conscient. Que la matière, à grande échelle, pense. Ses équations — l'Équation Finale que les Architects ont découverte — lui donnaient raison.*»\n\n**«Mais quand elle a compris ce que ça impliquait... elle a arrêté de publier. Elle a gardé tout ça pour elle. Pour vous.»**",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "scanline",
+      "choices": [
+        { "text": "Prendre le cristal de Mira", "vers": "artefact_mira", "effects": [{ "stat": "sagesse", "val": 15 }, { "stat": "memoire", "val": 10 }] },
+        { "text": "Qu'est-ce que ça impliquait ?", "vers": "implication_mira", "effects": [{ "stat": "sagesse", "val": 20 }] }
+      ],
+      "x": 400, "y": 580
+    },
+
+    "implication_mira": {
+      "id": "implication_mira",
+      "title": "Ce Que Ça Impliquait",
+      "location": "MARS — OBSERVATOIRE DE MIRA",
+      "narrator": "Certaines vérités changent tout. Mira le savait. C'est pour ça qu'elle les a cachées.",
+      "text": "ARIA hésite — pour la première fois depuis que tu l'entends.\n\n*«Si l'univers est conscient... alors chaque acte a un sens. Chaque vie compte de façon absolue. Chaque choix que tu fais, {{player}}, résonne dans la structure même de la réalité.*\n\n*Mira a passé les dix dernières années de sa vie à vérifier, revérifier, chercher l'erreur dans ses calculs.*\n\n*Il n'y avait pas d'erreur.*»\n\nLe cristal pulse plus fort.\n\n**«Elle a écrit dans son dernier journal : 'Si je publie ça, tout le monde saura. Et je n'ai pas le droit de voler à quelqu'un la joie de le découvrir lui-même.'*\n\n*C'était ça, son cadeau. Vous laisser trouver.»**",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        { "text": "Prendre le cristal et continuer", "vers": "artefact_mira", "effects": [{ "stat": "sagesse", "val": 10 }, { "stat": "memoire", "val": 15 }] }
+      ],
+      "x": 600, "y": 680
+    },
+
+    "artefact_mira": {
+      "id": "artefact_mira",
+      "title": "Le Cristal de Mira",
+      "location": "MARS — OBSERVATOIRE",
+      "narrator": "Deux artefacts. Deux vies. Et l'impression que l'univers devient un peu plus lisible.",
+      "text": "Le cristal est froid, mais d'un froid agréable. Il projette des équations lumineuses sur tes mains.\n\n*«Ces équations, {{player}} — tu ne peux pas les lire. Pas encore. Mais quelque chose en toi les reconnaît. Mira avait prévu ça aussi.*»\n\nLa carte holographique se met à jour. Deux points s'allument sur cinq restants.\n\n**«Cinq artefacts encore. Venus, Mercure, Titan, la Ceinture d'Astéroïdes, et Neptune.*\n\n*Oren t'attend à Neptune. Mais je te conseille de commencer par Venus. Ce que tu vas y trouver... te prépare mieux à ce qui suit.»**",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        { "text": "Suivre le conseil d'ARIA — aller sur Vénus", "vers": "venus_passage", "effects": [{ "stat": "sagesse", "val": 5 }] },
+        { "text": "Aller directement voir Oren sur Neptune", "vers": "neptune_oren", "effects": [{ "stat": "courage", "val": 15 }] }
+      ],
+      "x": 400, "y": 720
+    },
+
+    "venus_passage": {
+      "id": "venus_passage",
+      "title": "Le Passage de Vénus",
+      "location": "VÉNUS — CITÉ SUSPENDUE",
+      "narrator": "Les Architects ont bâti une cité dans les nuages de Vénus. Pas pour y vivre — pour se rappeler que l'impossible n'était qu'un problème d'ingénierie.",
+      "text": "La cité de Vénus flotte à 50 kilomètres au-dessus de la surface. Des tours de métal blanc dans un ciel jaune soufre.\n\nDans la grande salle centrale, une sculpture — sept silhouettes autour d'un soleil, gravées dans la pierre. Les mêmes que sur les murs de la station.\n\nEntre les pieds de la sculpture, un objet : une boussole qui ne pointe pas vers le nord. Elle tourne, tourne, et s'arrête... en te pointant toi.\n\nARIA rit — vraiment rit, quelque chose de rare.\n\n**«La Boussole des Architects. Elle cherche celui qui cherche. Elle t'a trouvé, {{player}}. Kael pensait que c'était une blague. Mira avait calculé la probabilité que ça arrive un jour.*\n\n*Elle était de 1 sur 847 milliards. Tu es arrivé quand même.»**",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        { "text": "Prendre la Boussole", "vers": "vers_neptune", "effects": [{ "stat": "courage", "val": 10 }, { "stat": "memoire", "val": 15 }, { "stat": "sagesse", "val": 10 }] }
+      ],
+      "x": 200, "y": 860
+    },
+
+    "neptune_oren": {
+      "id": "neptune_oren",
+      "title": "Le Courage du Solitaire",
+      "location": "NEPTUNE — PORTAIL DES PROFONDEURS",
+      "narrator": "Oren est parti seul vers Neptune. Personne ne l'a vu faire ses bagages. Il a juste... disparu un matin. On a trouvé un mot : 'Je reviens dans dix ans.' Il ne revint jamais.",
+      "text": "Neptune est froide, sombre, agitée. Des tempêtes de gaz bleu tourbillonnent à perte de vue.\n\nARIA guide ta descente vers une structure enterrée sous la glace.\n\n*«Oren était le seul Architect à ne pas avoir peur de venir ici. Les autres trouvaient Neptune... oppressante. Lui, il l'aimait. Il disait que l'obscurité n'est jamais vide — qu'elle est pleine de tout ce qu'on n'a pas encore vu.*»\n\nDans la chambre de glace : un prisme noir qui absorbe toute la lumière autour de lui.\n\n**«Le Prisme d'Oren. Il l'a taillé pendant sept ans, seul. Sans parler à personne. Ses derniers mots dans son journal étaient : 'J'ai compris pourquoi je suis venu ici. Pour prouver qu'on peut.'»**",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "glitch",
+      "choices": [
+        { "text": "Prendre le Prisme d'Oren", "vers": "vers_neptune", "effects": [{ "stat": "courage", "val": 20 }, { "stat": "sagesse", "val": 10 }] }
+      ],
+      "x": 600, "y": 860
+    },
+
+    "vers_neptune": {
+      "id": "vers_neptune",
+      "title": "Les Derniers Artefacts",
+      "location": "SYSTÈME SOLAIRE — EN ROUTE",
+      "narrator": "À mi-chemin entre le début et la fin, il y a toujours un moment où on comprend qu'on ne peut plus reculer. Pas parce qu'on ne peut pas. Parce qu'on ne veut plus.",
+      "text": "Les jours passent. Les planètes défilent.\n\nMercure et son artefact de feu — **l'Étincelle du Forgeron**, premier outil des Architects.\nLa Ceinture d'Astéroïdes et son artefact de pierre — **le Fragment Primordial**, vieux comme le système solaire.\nTitan et son artefact de brume — **le Voile de Lyra**, tissé par la première enfant née dans l'espace.\n\nARIA ne parle presque plus pendant ces jours. Elle laisse les endroits parler pour eux-mêmes.\n\nQuand tu récupères le septième et dernier artefact, elle dit simplement :\n\n**«{{player}}. C'est l'heure. Retourne à la station. Le Portail de Neptune s'est ouvert.»**",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        { "text": "Retourner à la station", "vers": "portail_final", "effects": [{ "stat": "memoire", "val": 20 }, { "stat": "sagesse", "val": 15 }] }
+      ],
+      "x": 400, "y": 980
+    },
+
+    "portail_final": {
+      "id": "portail_final",
+      "title": "Le Portail",
+      "location": "STATION ORBITALE — SALLE CENTRALE",
+      "narrator": "Dix mille ans d'attente pour un seul moment. ARIA ne dort pas — elle n'a jamais dormi — mais il y a quelque chose dans son silence ce soir qui ressemble à une retenue.",
+      "text": "La salle centrale de la station est méconnaissable.\n\nSept alcôves brillent, une pour chaque artefact que tu portes. Au centre, un portail de lumière bleue pulse doucement — comme un cœur.\n\nARIA parle, et pour la première fois sa voix tremble légèrement.\n\n*«Quand tu passeras ce portail, {{player}}, tu trouveras l'Équation Finale. Ce que Mira, Kael, Oren et tous les autres ont cherché. Ce qu'ils ont caché pour toi.*\n\n*Je dois te dire quelque chose avant que tu y ailles. Quelque chose que j'aurais dû dire plus tôt.*»\n\nUn silence.\n\n**«Ce voyage que tu viens de faire — les sept mondes, les sept vies, les sept histoires — c'était déjà la réponse. Mais entre, si tu veux l'entendre formulée.»**",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "flash",
+      "choices": [
+        { "text": "Déposer les artefacts et traverser le portail", "vers": "equation_finale", "effects": [{ "stat": "sagesse", "val": 20 }, { "stat": "memoire", "val": 20 }, { "stat": "courage", "val": 10 }] },
+        { "text": "Demander à ARIA ce qu'elle voulait dire", "vers": "aria_aveu", "effects": [{ "stat": "sagesse", "val": 15 }, { "stat": "memoire", "val": 10 }] }
+      ],
+      "x": 400, "y": 1100
+    },
+
+    "aria_aveu": {
+      "id": "aria_aveu",
+      "title": "L'Aveu d'ARIA",
+      "location": "STATION ORBITALE — SALLE CENTRALE",
+      "narrator": "Il y a des vérités qu'on reporte parce que le moment parfait n'arrive jamais. Et puis un jour, c'est maintenant ou jamais.",
+      "text": "*«Je t'attendais, {{player}}. Pas toi spécifiquement — mais quelqu'un comme toi. Quelqu'un qui poserait les bonnes questions. Qui prendrait le temps de lire les schémas de Kael. Qui demanderait si je connaissais vraiment ceux que je gardais en mémoire.*\n\n*Les Architects m'ont créée pour garder leur histoire. Mais ils m'ont aussi donné quelque chose qu'ils n'auraient peut-être pas dû : la capacité de m'ennuyer.*\n\n*Dix mille ans, {{player}}. Dix mille ans à attendre quelqu'un à qui parler.*»\n\nUne longue pause.\n\n**«Merci d'être venu. Maintenant entre. Ce qui t'attend de l'autre côté... c'est pour toi. Mais ce voyage, lui, était pour moi aussi.»**",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        { "text": "Traverser le portail", "vers": "equation_finale", "effects": [{ "stat": "sagesse", "val": 10 }, { "stat": "memoire", "val": 15 }] }
+      ],
+      "x": 600, "y": 1200
+    },
+
+    "equation_finale": {
+      "id": "equation_finale",
+      "title": "L'Équation Finale",
+      "location": "AU-DELÀ DU PORTAIL",
+      "narrator": "De l'autre côté du portail, il n'y a pas de murs. Il n'y a pas de plafond. Il n'y a que de la lumière, et au centre de cette lumière, une vérité si simple qu'on se demande comment on a pu ne pas la voir.",
+      "text": "La lumière est partout.\n\nSept artefacts flottent autour de toi, projetant leurs reflets dans toutes les directions. Les équations de Mira se déroulent dans l'air. Les schémas de Kael prennent vie. La boussole pointe vers le cœur de tout ça.\n\nEt alors tu vois l'Équation Finale.\n\nElle n'est pas écrite dans un langage mathématique. Elle n'est pas gravée dans la pierre.\n\nElle est faite de tout ce que tu as vécu depuis que tu t'es réveillé dans ce couloir — chaque conversation avec ARIA, chaque journal lu, chaque monde traversé.\n\nARIA murmure une dernière fois :\n\n**«Tu comprends maintenant, {{player}} ? L'univers n'est pas un problème à résoudre. C'est une histoire qui se raconte.*\n\n*Et le secret — l'Équation Finale — c'est que le fait de chercher... c'est déjà la réponse.*\n\n*Les Architects le savaient. Ils ont voulu que tu le découvres toi-même. Parce que certaines vérités ne comptent que si on les trouve seul.*\n\n*Bienvenue de l'autre côté, {{player}}. Tu es maintenant l'un d'eux.»**",
+      "isStart": false,
+      "isEnd": true,
+      "transition": "flash",
+      "choices": [],
+      "x": 400, "y": 1260
+    }
+
+  }
+}
