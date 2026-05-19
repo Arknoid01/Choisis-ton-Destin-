@@ -1149,6 +1149,12 @@ function renderEditor(id) {
       <input class="form-input" id="f-location" value="${esc(scene.location)}" oninput="updateField('location',this.value)" placeholder="${et('locationPh')}">
     </div>
     <div class="form-group">
+      <label class="form-label">✒ Narrateur <span style="font-size:10px;color:var(--text3);font-weight:400">— s'affiche en italique avant le texte</span></label>
+      <textarea class="form-textarea" style="min-height:60px;font-style:italic" id="f-narrator"
+        oninput="updateField('narrator',this.value)"
+        placeholder="Ex: Trois jours ont passé depuis la chute de Neo-Lyon...">${esc(scene.narrator||'')}</textarea>
+    </div>
+    <div class="form-group">
       <label class="form-label">${et('narrative')}</label>
       <textarea class="form-textarea" style="min-height:120px" id="f-text" oninput="updateField('text',this.value)" placeholder="${et('narrativePh')}">${esc(scene.text)}</textarea>
       <div class="var-help">${et('varHelp')}</div>
@@ -1894,6 +1900,12 @@ function renderEditorInto(id, container) {
     <div class="form-group">
       <label class="form-label">${et('location')}</label>
       <input class="form-input" value="${esc(scene.location)}" oninput="updateField('location',this.value)" placeholder="${et('locationPh')}">
+    </div>
+    <div class="form-group">
+      <label class="form-label">✒ Narrateur</label>
+      <textarea class="form-textarea" style="min-height:60px;font-style:italic"
+        oninput="updateField('narrator',this.value)"
+        placeholder="Ex: Trois jours ont passé...">${esc(scene.narrator||'')}</textarea>
     </div>
     <div class="form-group">
       <label class="form-label">${et('narrative')}</label>

@@ -168,7 +168,17 @@ body {
 }
 @keyframes loc-pulse { 0%,100%{opacity:1} 50%{opacity:0.3} }
 
-/* ── SCENE TEXT ── */
+/* ── NARRATOR ── */
+.narrator-text {
+  font-family:'Cormorant Garamond', serif;
+  font-size:15px; font-style:italic;
+  color:var(--text2); line-height:1.8;
+  margin-bottom:20px; padding:12px 16px;
+  border-left:2px solid var(--accent);
+  background:color-mix(in srgb, var(--accent) 5%, transparent);
+  border-radius:0 8px 8px 0;
+  opacity:0.85;
+}
 .scene-text {
   font-size: 17px; line-height: 1.85;
   color: var(--text); margin-bottom: 32px;
@@ -774,15 +784,31 @@ function renderScene(scene) {
           alt=""
           onerror="this.parentElement.style.display='none'">
       </div>` : ''}
+      ${scene.narrator ? `<div class="narrator-text" id="narrator-text"></div>` : ''}
       <div class="scene-text" id="typewriter-text"></div>
       <div id="choices-area" class="hidden">${choicesHTML}</div>
     </div>`;
 
-  // Lance l'effet machine à écrire
-  typewrite(formatText(scene.text || ''), document.getElementById('typewriter-text'), () => {
+  const showChoices = () => {
     const ca = document.getElementById('choices-area');
     if (ca) { ca.classList.remove('hidden'); ca.classList.add('reveal'); }
-  });
+  };
+
+  const showMainText = () => {
+    typewrite(formatText(scene.text || ''), document.getElementById('typewriter-text'), showChoices);
+  };
+
+  // Si narrateur : l'écrire d'abord (plus lent) puis enchaîner le texte principal
+  if (scene.narrator) {
+    typewrite(
+      formatText(scene.narrator),
+      document.getElementById('narrator-text'),
+      () => setTimeout(showMainText, 400),
+      true // mode narrateur = plus lent
+    );
+  } else {
+    showMainText();
+  }
 }
 
 // ══════════════════════════════════════════════
@@ -790,22 +816,23 @@ function renderScene(scene) {
 // ══════════════════════════════════════════════
 let typewriterTimeout = null;
 
-function getTypeSpeed() {
+function getTypeSpeed(narratorMode = false) {
   const opts = JSON.parse(localStorage.getItem('sf_options') || '{}');
+  const base = narratorMode ? 1.6 : 1; // narrateur plus lent
   switch(opts.textspeed) {
-    case 'fast':   return 12;
-    case 'slow':   return 45;
-    default:       return 25; // normal
+    case 'fast':   return Math.round(12 * base);
+    case 'slow':   return Math.round(45 * base);
+    default:       return Math.round(25 * base);
   }
 }
 
-function typewrite(html, container, onDone) {
+function typewrite(html, container, onDone, narratorMode = false) {
   // Annuler toute animation en cours
   if (typewriterTimeout) { clearTimeout(typewriterTimeout); typewriterTimeout = null; }
 
   // Extraire le texte brut depuis le HTML formaté
   // On va insérer le HTML caractère par caractère en gérant les balises
-  const speed = getTypeSpeed();
+  const speed = getTypeSpeed(narratorMode);
   let i = 0;
   let displayed = '';
   let skipped = false;
