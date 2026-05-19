@@ -402,36 +402,24 @@ body {
 .options-close:hover { border-color:var(--gold3); color:var(--cream); }
 
 /* ── BOTTOM FOOTER ── */
-.footer {
-  position:fixed; bottom:20px; left:0; right:0;
-  text-align:center; z-index:10;
-  opacity:0; animation:fade-up .4s ease forwards;
-  animation-delay:.35s;
-  pointer-events:none;
-}
-.footer-text {
-  font-family:'Lato',sans-serif; font-size:10px;
-  letter-spacing:3px; color:var(--dimmer);
-  text-transform:uppercase;
-  padding:0 90px; white-space:nowrap; font-size:9px;
-}
+.footer { display:none; }
 
 /* ── VERSION BADGE ── */
 .version {
-  position:fixed; bottom:20px; right:16px; z-index:10;
+  position:fixed; bottom:16px; right:16px; z-index:10;
   font-family:'Lato',sans-serif; font-size:10px;
   color:var(--dimmer); letter-spacing:1px;
 }
 
 /* ── LOGO PEGASUS ── */
 #pegasus-logo {
-  position:fixed; bottom:20px; left:20px; z-index:10;
+  position:fixed; bottom:12px; left:16px; z-index:10;
   opacity:0; animation:fade-up .4s ease forwards;
   animation-delay:.4s;
   display:flex; align-items:center; gap:6px;
 }
 #pegasus-logo img {
-  width:20px; height:20px;
+  width:18px; height:18px;
   filter:brightness(0) invert(1);
   opacity:0.2;
 }
