@@ -730,11 +730,14 @@ function renderScene(scene) {
   // Shuffle choices
   const shuffled = shuffleArray([...(scene.choices || [])]);
 
+  // Stocker les choix dans une variable globale pour les onclick
+  window._currentChoices = shuffled;
+
   const choicesHTML = shuffled.map((c, i) => {
     const locked = isChoiceLocked(c);
     return `<button class="choice-btn${locked ? ' locked' : ''}"
       style="${locked ? 'opacity:0.35;cursor:not-allowed' : ''}"
-      onclick="${locked ? '' : `pickChoice('${c.vers}', ${JSON.stringify(c).replace(/'/g,"\\'")} , this)`}"
+      onclick="${locked ? '' : `pickChoice('${c.vers}', ${i}, this)`}"
       ${locked ? 'disabled' : ''}>
       <span class="choice-index">— ${String(i+1).padStart(2,'0')}</span>
       ${escHtml(c.text)}
@@ -872,8 +875,11 @@ function renderEndScene(scene) {
     </div>`;
 }
 
-function pickChoice(targetId, choice, btnEl) {
+function pickChoice(targetId, choiceIndex, btnEl) {
   if (!targetId) return;
+
+  // Récupérer l'objet choice depuis le tableau stocké
+  const choice = window._currentChoices?.[choiceIndex] || {};
 
   // Effet au clic sur le bouton
   if (btnEl && choice?.clickEffect) {
