@@ -586,7 +586,7 @@ body {
 
 <!-- PEGASUS LOGO -->
 <div id="pegasus-logo">
-  <img src="logo.png" alt="PegasusCorp">
+  <img src="Logo.png" alt="PegasusCorp" onerror="this.parentElement.style.display='none'">
   <span>PegasusCorp</span>
 </div>
 
@@ -836,38 +836,42 @@ function setLang(lang) {
 
 function applyLang() {
   const t = LANG[currentLang];
-  document.getElementById('txt-eyebrow').textContent      = t.eyebrow;
-  document.getElementById('txt-title').innerHTML          = t.title;
-  document.getElementById('txt-subtitle').textContent     = t.subtitle;
-  document.getElementById('txt-btn-start').textContent    = t.btnStart;
-  document.getElementById('txt-btn-options').textContent  = t.btnOptions;
-  document.getElementById('txt-btn-submit').textContent   = t.btnSubmit;
-  document.getElementById('txt-footer').textContent       = t.footer;
-  document.getElementById('txt-sheet-title').textContent  = t.sheetTitle;
-  document.getElementById('txt-sheet-sub').textContent    = t.sheetSub;
-  document.getElementById('txt-options-title').textContent = t.optionsTitle;
-  document.getElementById('txt-opt-kids').textContent      = t.optKids;
-  document.getElementById('txt-opt-kids-desc').textContent = t.optKidsDesc;
-  document.getElementById('txt-opt-sound').textContent     = t.optSound;
-  document.getElementById('txt-opt-sound-desc').textContent = t.optSoundDesc;
-  document.getElementById('txt-opt-anim').textContent      = t.optAnim;
-  document.getElementById('txt-opt-anim-desc').textContent = t.optAnimDesc;
-  document.getElementById('txt-opt-textspeed').textContent = t.optTextspeed;
-  document.getElementById('txt-opt-lang').textContent      = t.optLang;
-  document.getElementById('txt-speed-fast').textContent    = t.speedFast;
-  document.getElementById('txt-speed-normal').textContent  = t.speedNormal;
-  document.getElementById('txt-speed-slow').textContent    = t.speedSlow;
-  document.getElementById('txt-close-options').textContent = t.closeOptions;
-  // Submit popup
-  document.getElementById('txt-submit-title').textContent    = t.submitTitle;
-  document.getElementById('txt-submit-subtitle').textContent = t.submitSubtitle;
-  document.getElementById('txt-submit-body').textContent     = t.submitBody;
-  document.getElementById('txt-perk-1').innerHTML            = t.perk1;
-  document.getElementById('txt-perk-2').innerHTML            = t.perk2;
-  document.getElementById('txt-perk-3').innerHTML            = t.perk3;
-  document.getElementById('txt-submit-editor').textContent   = t.submitEditor;
-  document.getElementById('txt-submit-cancel').textContent   = t.submitCancel;
-  document.getElementById('txt-submit-note').textContent     = t.submitNote;
+  const set = (id, val, html=false) => {
+    const el = document.getElementById(id);
+    if (!el) return;
+    if (html) el.innerHTML = val; else el.textContent = val;
+  };
+  set('txt-eyebrow',        t.eyebrow);
+  set('txt-title',          t.title, true);
+  set('txt-subtitle',       t.subtitle);
+  set('txt-btn-start',      t.btnStart);
+  set('txt-btn-options',    t.btnOptions);
+  set('txt-btn-submit',     t.btnSubmit);
+  set('txt-footer',         t.footer);
+  set('txt-sheet-title',    t.sheetTitle);
+  set('txt-sheet-sub',      t.sheetSub);
+  set('txt-options-title',  t.optionsTitle);
+  set('txt-opt-kids',       t.optKids);
+  set('txt-opt-kids-desc',  t.optKidsDesc);
+  set('txt-opt-sound',      t.optSound);
+  set('txt-opt-sound-desc', t.optSoundDesc);
+  set('txt-opt-anim',       t.optAnim);
+  set('txt-opt-anim-desc',  t.optAnimDesc);
+  set('txt-opt-textspeed',  t.optTextspeed);
+  set('txt-opt-lang',       t.optLang);
+  set('txt-speed-fast',     t.speedFast);
+  set('txt-speed-normal',   t.speedNormal);
+  set('txt-speed-slow',     t.speedSlow);
+  set('txt-close-options',  t.closeOptions);
+  set('txt-submit-title',    t.submitTitle);
+  set('txt-submit-subtitle', t.submitSubtitle);
+  set('txt-submit-body',     t.submitBody);
+  set('txt-perk-1',          t.perk1, true);
+  set('txt-perk-2',          t.perk2, true);
+  set('txt-perk-3',          t.perk3, true);
+  set('txt-submit-editor',   t.submitEditor);
+  set('txt-submit-cancel',   t.submitCancel);
+  set('txt-submit-note',     t.submitNote);
   document.title = t.docTitle;
   document.documentElement.lang = currentLang;
 }
