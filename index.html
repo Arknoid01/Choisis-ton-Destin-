@@ -108,7 +108,7 @@ body {
   text-transform:uppercase; color:var(--gold);
   text-align:center; margin-bottom:24px;
   opacity:0; animation:fade-up .8s ease forwards;
-  animation-delay:.4s;
+  animation-delay:.3s;
 }
 
 /* ── MAIN TITLE ── */
@@ -121,7 +121,7 @@ body {
   text-shadow:0 0 60px rgba(200,169,110,0.2), 0 2px 4px rgba(0,0,0,0.8);
   margin-bottom:10px;
   opacity:0; animation:fade-up .8s ease forwards;
-  animation-delay:.6s;
+  animation-delay:.5s;
 }
 .main-title em {
   font-style:italic; color:var(--gold);
@@ -136,7 +136,7 @@ body {
   color:var(--dim); text-align:center;
   margin-bottom:60px; letter-spacing:1px;
   opacity:0; animation:fade-up .8s ease forwards;
-  animation-delay:.8s;
+  animation-delay:.7s;
 }
 
 /* ── DIVIDER ── */
@@ -144,7 +144,7 @@ body {
   display:flex; align-items:center; gap:16px;
   margin-bottom:48px; width:100%; max-width:340px;
   opacity:0; animation:fade-up .8s ease forwards;
-  animation-delay:1s;
+  animation-delay:.9s;
 }
 .divider::before, .divider::after {
   content:''; flex:1; height:1px;
@@ -161,7 +161,7 @@ body {
   align-items:center; gap:14px;
   width:100%; max-width:320px;
   opacity:0; animation:fade-up .8s ease forwards;
-  animation-delay:1.1s;
+  animation-delay:1s;
 }
 
 .btn-main {
@@ -1080,9 +1080,18 @@ function initCanvas() {
   });
 }
 
-// ══════════════════════════════════════════════
-// INIT
-// ══════════════════════════════════════════════
+// ── ANIMATION FALLBACK ──
+// Si les animations CSS ne se déclenchent pas (navigateur, polices lentes)
+// on force l'affichage après 1.5s
+setTimeout(() => {
+  document.querySelectorAll('.ornament,.eyebrow,.main-title,.subtitle,.divider,.btn-group,.footer,#pegasus-logo').forEach(el => {
+    if (getComputedStyle(el).opacity === '0') {
+      el.style.opacity = '1';
+      el.style.transform = 'translateY(0)';
+      el.style.transition = 'opacity .5s ease, transform .5s ease';
+    }
+  });
+}, 1500);
 (async function init() {
   loadOptions();
   setLang(currentLang);
