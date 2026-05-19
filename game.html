@@ -310,7 +310,92 @@ body {
 }
 .end-btn.primary:hover { opacity: 0.9; }
 
-/* ── SCENE ANIMATION ── */
+/* ── TRANSITIONS D'ARRIVÉE ── */
+@keyframes fx-fade {
+  from { opacity:0; } to { opacity:1; }
+}
+@keyframes fx-flash {
+  0%   { background:rgba(255,255,255,0.25); }
+  100% { background:transparent; }
+}
+@keyframes fx-glitch {
+  0%   { transform:translate(0); filter:none; }
+  15%  { transform:translate(-4px,2px); filter:hue-rotate(90deg) brightness(1.4); }
+  30%  { transform:translate(4px,-2px); filter:hue-rotate(-90deg); }
+  45%  { transform:translate(-2px,0); filter:brightness(0.6); }
+  60%  { transform:translate(2px,2px); filter:hue-rotate(45deg); }
+  75%  { transform:translate(0,-1px); filter:none; }
+  100% { transform:translate(0); filter:none; }
+}
+@keyframes fx-scanline {
+  0%   { background-position: 0 -100vh; opacity:0.6; }
+  100% { background-position: 0 100vh; opacity:0; }
+}
+
+.fx-fade    { animation: fx-fade .5s ease forwards; }
+.fx-flash   { animation: fx-flash .3s ease forwards; }
+.fx-glitch  { animation: fx-glitch .4s ease forwards; }
+
+/* overlay scanlines */
+#fx-overlay {
+  position:fixed; inset:0; z-index:50;
+  pointer-events:none; opacity:0;
+}
+#fx-overlay.flash {
+  background:white;
+  animation:fx-flash .25s ease forwards;
+}
+#fx-overlay.glitch-flicker {
+  animation:fx-glitch-overlay .35s ease forwards;
+}
+@keyframes fx-glitch-overlay {
+  0%,100% { opacity:0; }
+  10%  { opacity:1; background:rgba(0,245,255,0.15); transform:translateX(-3px); }
+  20%  { opacity:1; background:rgba(255,0,170,0.15); transform:translateX(3px); }
+  35%  { opacity:0.5; background:rgba(0,245,255,0.08); transform:translateX(-1px); }
+  50%  { opacity:0; }
+}
+#fx-overlay.scanlines {
+  background:repeating-linear-gradient(
+    0deg,
+    transparent, transparent 2px,
+    rgba(255,255,255,0.04) 2px, rgba(255,255,255,0.04) 4px
+  );
+  animation:fx-scanline-pass .5s ease forwards;
+}
+@keyframes fx-scanline-pass {
+  0%   { opacity:1; transform:translateY(-100%); }
+  100% { opacity:0; transform:translateY(100%); }
+}
+
+/* ── EFFETS AU CLIC ── */
+@keyframes btn-pulse {
+  0%   { box-shadow:0 0 0 0 var(--accent); }
+  50%  { box-shadow:0 0 0 10px rgba(124,109,250,0); transform:scale(1.02); }
+  100% { box-shadow:0 0 0 0 rgba(124,109,250,0); transform:scale(1); }
+}
+@keyframes btn-shake {
+  0%,100% { transform:translateX(0); }
+  20%  { transform:translateX(-6px); }
+  40%  { transform:translateX(6px); }
+  60%  { transform:translateX(-4px); }
+  80%  { transform:translateX(4px); }
+}
+@keyframes btn-flash {
+  0%   { background:var(--accent); color:var(--bg); }
+  100% { background:var(--bg3); color:var(--text); }
+}
+@keyframes btn-glitch {
+  0%,100% { transform:translate(0); filter:none; }
+  25% { transform:translate(-3px,1px); filter:hue-rotate(90deg); }
+  50% { transform:translate(3px,-1px); filter:hue-rotate(-90deg); }
+  75% { transform:translate(-1px,0); filter:brightness(1.5); }
+}
+
+.btn-fx-pulse   { animation:btn-pulse .4s ease forwards; }
+.btn-fx-shake   { animation:btn-shake .35s ease forwards; }
+.btn-fx-flash   { animation:btn-flash .3s ease forwards; }
+.btn-fx-glitch  { animation:btn-glitch .3s ease forwards; }
 .scene-in { animation: scene-in .45s ease; }
 @keyframes scene-in {
   from { opacity:0; transform:translateY(12px); }
@@ -439,6 +524,7 @@ body {
 
 <div class="bg-gradient"></div>
 <canvas id="bg-canvas"></canvas>
+<div id="fx-overlay"></div>
 
 <!-- LOADING -->
 <div id="loading">
@@ -631,9 +717,9 @@ function goToScene(id, choiceText) {
     history.length + ' scène' + (history.length > 1 ? 's' : '') + ' visitée' + (history.length > 1 ? 's' : '');
 
   if (scene.isEnd) {
-    renderEndScene(scene);
+    playTransition(scene.transition || 'fade', () => renderEndScene(scene));
   } else {
-    renderScene(scene);
+    playTransition(scene.transition || 'fade', () => renderScene(scene));
   }
 
   // Scroll to top
@@ -648,7 +734,7 @@ function renderScene(scene) {
     const locked = isChoiceLocked(c);
     return `<button class="choice-btn${locked ? ' locked' : ''}"
       style="${locked ? 'opacity:0.35;cursor:not-allowed' : ''}"
-      onclick="${locked ? '' : `pickChoice('${c.vers}', ${JSON.stringify(c).replace(/'/g,"\\'")} )`}"
+      onclick="${locked ? '' : `pickChoice('${c.vers}', ${JSON.stringify(c).replace(/'/g,"\\'")} , this)`}"
       ${locked ? 'disabled' : ''}>
       <span class="choice-index">— ${String(i+1).padStart(2,'0')}</span>
       ${escHtml(c.text)}
@@ -786,8 +872,13 @@ function renderEndScene(scene) {
     </div>`;
 }
 
-function pickChoice(targetId, choice) {
+function pickChoice(targetId, choice, btnEl) {
   if (!targetId) return;
+
+  // Effet au clic sur le bouton
+  if (btnEl && choice?.clickEffect) {
+    playClickEffect(btnEl, choice.clickEffect);
+  }
 
   // Apply stat effects
   let notifParts = [];
@@ -812,12 +903,64 @@ function pickChoice(targetId, choice) {
     setTimeout(() => notif.remove(), 2500);
   }
 
-  goToScene(targetId, choice?.text || '');
+  // Délai léger pour laisser l'effet au clic se jouer
+  const delay = (choice?.clickEffect && choice.clickEffect !== 'none') ? 320 : 0;
+  setTimeout(() => goToScene(targetId, choice?.text || ''), delay);
 }
 
 // ══════════════════════════════════════════════
-// LOCKED CHOICES
+// TRANSITIONS & CLICK EFFECTS
 // ══════════════════════════════════════════════
+function playTransition(type, callback) {
+  const overlay = document.getElementById('fx-overlay');
+  overlay.className = '';
+
+  switch(type) {
+    case 'flash':
+      overlay.classList.add('flash');
+      setTimeout(callback, 250);
+      break;
+    case 'glitch':
+      overlay.classList.add('glitch-flicker');
+      setTimeout(callback, 200);
+      break;
+    case 'scanline':
+      overlay.classList.add('scanlines');
+      setTimeout(callback, 300);
+      break;
+    case 'fade':
+      // Fondu via le content
+      const content = document.getElementById('content');
+      content.style.transition = 'opacity .25s ease';
+      content.style.opacity = '0';
+      setTimeout(() => {
+        callback();
+        content.style.opacity = '1';
+      }, 260);
+      return;
+    default:
+      callback();
+      return;
+  }
+  setTimeout(() => overlay.className = '', 600);
+}
+
+function playClickEffect(btn, type) {
+  if (!btn || !type || type === 'none') return;
+  const classMap = {
+    pulse:   'btn-fx-pulse',
+    shake:   'btn-fx-shake',
+    flash:   'btn-fx-flash',
+    glitch:  'btn-fx-glitch',
+    vibrate: 'btn-fx-pulse' // vibration → pulse visuel sur mobile
+  };
+  const cls = classMap[type];
+  if (!cls) return;
+  btn.classList.add(cls);
+  setTimeout(() => btn.classList.remove(cls), 400);
+}
+
+
 function isChoiceLocked(choice) {
   if (!choice.requires) return false;
   return Object.entries(choice.requires).some(([k, v]) => (stats[k] ?? 0) < v);
