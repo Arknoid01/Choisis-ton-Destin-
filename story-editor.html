@@ -240,7 +240,28 @@ html,body { height:100%; overflow:hidden; font-family:'Syne',sans-serif; backgro
 }
 .pill-remove:hover { color:#fa6d6d; }
 
-.add-effect-btn, .add-choice-btn {
+/* QUICK LINK BUTTON */
+.quick-link-btn {
+  width:36px; height:36px; flex-shrink:0;
+  border-radius:8px; border:1px solid var(--accent);
+  background:color-mix(in srgb, var(--accent) 12%, transparent);
+  color:var(--accent); font-size:13px; font-weight:700;
+  cursor:pointer; transition:all .15s;
+  display:flex; align-items:center; justify-content:center;
+}
+.quick-link-btn:hover { background:var(--accent); color:var(--bg); }
+.quick-link-btn.unlink-btn {
+  border-color:var(--border); color:var(--text3);
+  background:none;
+}
+.quick-link-btn.unlink-btn:hover { border-color:#fa6d6d; color:#fa6d6d; background:#fa6d6d18; }
+
+.link-hint-inline {
+  font-family:'DM Mono',monospace; font-size:10px;
+  color:var(--text3); margin-top:5px; letter-spacing:.5px;
+}
+.link-hint-inline.linked { color:var(--accent3); }
+.link-hint-inline.linked strong { color:var(--accent); }
   background:none; border:1px dashed var(--border);
   color:var(--text3); border-radius:6px; padding:6px 12px;
   font-size:11px; cursor:pointer; font-family:'Syne',sans-serif;
@@ -1184,10 +1205,14 @@ function renderChoices(id) {
       </div>
       <div class="form-group" style="margin-bottom:10px">
         <label class="form-label" style="font-size:10px">${et('leadsTo')}</label>
-        <select class="form-select" onchange="updateChoice(${ci},'vers',this.value)">
-          <option value="">${et('noDestination')}</option>
-          ${sceneOptions}
-        </select>
+        <div style="display:flex;gap:6px;align-items:center">
+          <select class="form-select" style="flex:1" onchange="updateChoice(${ci},'vers',this.value)">
+            <option value="">${et('noDestination')}</option>
+            ${sceneOptions}
+          </select>
+          ${!choice.vers ? `<button class="quick-link-btn" title="Créer une scène suite" onclick="quickCreateLinked('${id}',${ci})">＋→</button>` : `<button class="quick-link-btn unlink-btn" title="Délier" onclick="updateChoice(${ci},'vers','');renderChoices('${id}')">✕</button>`}
+        </div>
+        ${!choice.vers ? `<div class="link-hint-inline">Aucune destination — crée une suite avec ＋→</div>` : `<div class="link-hint-inline linked">→ Lié à : <strong>${esc(project.scenes[choice.vers]?.title || choice.vers)}</strong></div>`}
       </div>
       <div class="form-group" style="margin-bottom:10px">
         <label class="form-label" style="font-size:10px">${et('clickEffect')}</label>
@@ -1262,6 +1287,45 @@ function addChoice(id) {
   renderChoices(id);
   drawConnections();
 }
+
+// Crée une nouvelle scène et la lie directement au choix ci de la scène id
+function quickCreateLinked(id, ci) {
+  const sourceScene = project.scenes[id];
+  if (!sourceScene) return;
+
+  // Créer la nouvelle scène positionnée en dessous de la source
+  const newId = 'scene_' + Math.random().toString(36).slice(2,8);
+  const count = Object.keys(project.scenes).length;
+  project.scenes[newId] = {
+    id: newId,
+    title: 'Suite de ' + (sourceScene.title || id),
+    location: sourceScene.location || '',
+    text: '',
+    isStart: false,
+    isEnd: false,
+    choices: [],
+    x: sourceScene.x + (ci * 60) - 30,
+    y: sourceScene.y + 160
+  };
+
+  // Lier le choix vers la nouvelle scène
+  project.scenes[id].choices[ci].vers = newId;
+
+  // Rafraîchir
+  render();
+  if (isMobile()) {
+    renderMobileChoices(id);
+  } else {
+    renderChoices(id);
+  }
+  drawConnections();
+  toast('Scène suite créée et liée ✦');
+
+  // Sélectionner la nouvelle scène pour l'éditer tout de suite
+  setTimeout(() => selectScene(newId), 150);
+}
+
+
 
 function removeChoice(ci) {
   project.scenes[selectedId].choices.splice(ci, 1);
@@ -1795,9 +1859,13 @@ function renderMobileChoices(id) {
       </div>
       <div class="form-group" style="margin-bottom:8px">
         <label class="form-label" style="font-size:10px">${et('leadsTo')}</label>
-        <select class="form-select" onchange="updateChoice(${ci},'vers',this.value);drawConnections()">
-          <option value="">${et('noDestination')}</option>${opts}
-        </select>
+        <div style="display:flex;gap:6px;align-items:center">
+          <select class="form-select" style="flex:1" onchange="updateChoice(${ci},'vers',this.value);drawConnections();renderMobileChoices('${id}')">
+            <option value="">${et('noDestination')}</option>${opts}
+          </select>
+          ${!choice.vers ? `<button class="quick-link-btn" title="Créer une scène suite" onclick="quickCreateLinked('${id}',${ci})">＋→</button>` : `<button class="quick-link-btn unlink-btn" title="Délier" onclick="updateChoice(${ci},'vers','');renderMobileChoices('${id}');drawConnections()">✕</button>`}
+        </div>
+        ${!choice.vers ? `<div class="link-hint-inline">Aucune destination — crée une suite avec ＋→</div>` : `<div class="link-hint-inline linked">→ Lié à : <strong>${esc(project.scenes[choice.vers]?.title || choice.vers)}</strong></div>`}
       </div>
       <div class="form-group" style="margin-bottom:8px">
         <label class="form-label" style="font-size:10px">${et('clickEffect')}</label>
