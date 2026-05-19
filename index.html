@@ -389,48 +389,6 @@ body {
 }
 .options-close:hover { border-color:var(--gold3); color:var(--cream); }
 
-
-/* ── PLAYER NAME MODAL ── */
-#player-panel {
-  position:fixed; inset:0; z-index:300; display:flex;
-  align-items:center; justify-content:center;
-  background:rgba(5,5,8,0.72); backdrop-filter:blur(10px);
-  opacity:0; pointer-events:none; transition:opacity .25s;
-}
-#player-panel.open { opacity:1; pointer-events:auto; }
-#player-box {
-  width:min(420px, calc(100vw - 32px)); padding:32px 28px;
-  background:linear-gradient(180deg, rgba(26,23,16,0.96), rgba(13,13,15,0.98));
-  border:1px solid var(--border); border-radius:18px;
-  box-shadow:0 24px 80px rgba(0,0,0,0.5), 0 0 40px var(--glow);
-  text-align:center; transform:translateY(12px) scale(.98);
-  transition:transform .25s;
-}
-#player-panel.open #player-box { transform:translateY(0) scale(1); }
-.player-title {
-  font-family:'Cinzel',serif; color:var(--gold2); font-size:20px;
-  letter-spacing:2px; margin-bottom:10px; text-transform:uppercase;
-}
-.player-desc { color:var(--dim); font-size:16px; line-height:1.5; margin-bottom:22px; }
-.player-input {
-  width:100%; padding:14px 16px; border-radius:10px;
-  background:rgba(13,13,15,0.72); border:1px solid var(--border);
-  color:var(--cream); font-family:'Cormorant Garamond',serif;
-  font-size:22px; text-align:center; outline:none;
-}
-.player-input:focus { border-color:var(--gold3); box-shadow:0 0 0 3px rgba(200,169,110,.08); }
-.player-actions { display:flex; gap:10px; margin-top:18px; }
-.player-actions button { flex:1; }
-.player-card {
-  margin-top:18px; color:var(--dim); font-family:'Lato',sans-serif; font-size:11px;
-  letter-spacing:2px; text-transform:uppercase; opacity:0;
-  animation:fade-up .8s ease forwards; animation-delay:1.28s;
-}
-.player-card button {
-  margin-left:8px; border:none; background:none; color:var(--gold);
-  font-family:'Lato',sans-serif; font-size:11px; cursor:pointer; text-decoration:underline;
-}
-
 /* ── BOTTOM FOOTER ── */
 .footer {
   position:fixed; bottom:24px; left:0; right:0;
@@ -451,8 +409,117 @@ body {
   color:var(--dimmer); letter-spacing:1px;
 }
 
-/* ── ANIMATIONS ── */
-@keyframes fade-up {
+/* ── LOGO PEGASUS ── */
+#pegasus-logo {
+  position:fixed; bottom:20px; left:20px; z-index:10;
+  opacity:0; animation:fade-up .8s ease forwards;
+  animation-delay:1.6s;
+  display:flex; align-items:center; gap:8px;
+}
+#pegasus-logo img {
+  width:28px; height:28px;
+  filter:brightness(0) invert(1);
+  opacity:0.25;
+}
+#pegasus-logo span {
+  font-family:'Lato',sans-serif; font-size:10px;
+  letter-spacing:2px; color:var(--dimmer);
+  text-transform:uppercase;
+}
+
+/* ── SUBMIT POPUP ── */
+#submit-overlay {
+  position:fixed; inset:0; z-index:300;
+  background:rgba(10,8,5,0);
+  display:flex; align-items:center; justify-content:center;
+  pointer-events:none;
+  transition:background .35s;
+}
+#submit-overlay.open {
+  background:rgba(10,8,5,0.92);
+  pointer-events:all;
+  backdrop-filter:blur(10px);
+}
+#submit-box {
+  width:100%; max-width:460px; margin:20px;
+  background:var(--bg2);
+  border:1px solid var(--border);
+  border-radius:20px; padding:36px 32px;
+  transform:scale(0.95) translateY(12px); opacity:0;
+  transition:all .35s cubic-bezier(.4,0,.2,1);
+  position:relative;
+}
+#submit-overlay.open #submit-box {
+  transform:scale(1) translateY(0); opacity:1;
+}
+.submit-close {
+  position:absolute; top:16px; right:16px;
+  width:30px; height:30px; border-radius:8px;
+  background:none; border:1px solid var(--border);
+  color:var(--dimmer); cursor:pointer; font-size:16px;
+  display:flex; align-items:center; justify-content:center;
+  transition:all .15s;
+}
+.submit-close:hover { border-color:var(--gold3); color:var(--cream); }
+
+.submit-icon {
+  font-size:36px; text-align:center; margin-bottom:16px;
+}
+.submit-title {
+  font-family:'Cinzel',serif; font-size:18px; font-weight:600;
+  color:var(--cream); letter-spacing:2px;
+  text-align:center; margin-bottom:8px;
+}
+.submit-subtitle {
+  font-family:'Cormorant Garamond',serif; font-size:15px;
+  color:var(--gold); font-style:italic;
+  text-align:center; margin-bottom:20px;
+}
+.submit-body {
+  font-size:14px; color:var(--dim); line-height:1.75;
+  margin-bottom:20px; text-align:center;
+}
+.submit-perks {
+  background:var(--bg3); border:1px solid var(--border);
+  border-radius:12px; padding:16px 18px; margin-bottom:24px;
+  display:flex; flex-direction:column; gap:10px;
+}
+.submit-perk {
+  display:flex; align-items:flex-start; gap:10px;
+  font-size:13px; color:var(--cream); line-height:1.5;
+}
+.submit-perk-icon { font-size:16px; flex-shrink:0; margin-top:1px; }
+.submit-perk-text { color:var(--dim); }
+.submit-perk-text strong { color:var(--cream); }
+
+.submit-actions {
+  display:flex; flex-direction:column; gap:10px;
+}
+.submit-btn {
+  width:100%; padding:14px 24px; border-radius:8px;
+  border:1px solid var(--gold3);
+  background:linear-gradient(135deg, rgba(200,169,110,0.12), rgba(138,106,48,0.06));
+  color:var(--gold2); font-family:'Cinzel',serif;
+  font-size:12px; font-weight:600; letter-spacing:3px;
+  cursor:pointer; transition:all .2s; text-transform:uppercase;
+}
+.submit-btn:hover {
+  border-color:var(--gold); box-shadow:0 0 20px rgba(200,169,110,0.15);
+  transform:translateY(-1px);
+}
+.submit-btn.secondary {
+  background:none; border-color:var(--border);
+  color:var(--dim); letter-spacing:2px;
+}
+.submit-btn.secondary:hover {
+  border-color:var(--gold3); color:var(--cream);
+  box-shadow:none;
+}
+.submit-note {
+  font-family:'Lato',sans-serif; font-size:11px;
+  color:var(--dimmer); text-align:center; margin-top:12px;
+  letter-spacing:.5px; line-height:1.5;
+}
   from { opacity:0; transform:translateY(16px); }
   to   { opacity:1; transform:translateY(0); }
 }
@@ -504,12 +571,9 @@ body {
     <button class="btn-main" id="btn-options" onclick="openOptions()">
       <span id="txt-btn-options">Options</span>
     </button>
-
-  </div>
-
-  <div class="player-card" id="player-card">
-    Hero: <span id="player-name-display">Player</span>
-    <button onclick="openPlayerPanel(false)">edit</button>
+    <button class="btn-main" id="btn-submit" onclick="openSubmitPopup()">
+      <span id="txt-btn-submit">✍ Soumettre une histoire</span>
+    </button>
   </div>
 
 </div>
@@ -519,6 +583,50 @@ body {
   <p class="footer-text" id="txt-footer">StoryForge • Romans interactifs</p>
 </div>
 <div class="version">v0.1</div>
+
+<!-- PEGASUS LOGO -->
+<div id="pegasus-logo">
+  <img src="logo.png" alt="PegasusCorp">
+  <span>PegasusCorp</span>
+</div>
+
+<!-- ── SUBMIT POPUP ── -->
+<div id="submit-overlay" onclick="handleSubmitClick(event)">
+  <div id="submit-box">
+    <button class="submit-close" onclick="closeSubmitPopup()">✕</button>
+    <div class="submit-icon">✍</div>
+    <div class="submit-title" id="txt-submit-title">Soumettre une histoire</div>
+    <div class="submit-subtitle" id="txt-submit-subtitle">Devenez auteur de Choisis ton Destin</div>
+    <div class="submit-body" id="txt-submit-body">
+      Vous avez une idée d'aventure ? Écrivez votre scénario dans l'éditeur et envoyez-le nous. Les meilleures histoires seront publiées dans l'application.
+    </div>
+    <div class="submit-perks">
+      <div class="submit-perk">
+        <span class="submit-perk-icon">🏆</span>
+        <div class="submit-perk-text" id="txt-perk-1"><strong>Publication officielle</strong> — Votre histoire jouée par des milliers de joueurs</div>
+      </div>
+      <div class="submit-perk">
+        <span class="submit-perk-icon">🎁</span>
+        <div class="submit-perk-text" id="txt-perk-2"><strong>Avantages exclusifs</strong> — Accès à du contenu premium et crédits auteur</div>
+      </div>
+      <div class="submit-perk">
+        <span class="submit-perk-icon">✦</span>
+        <div class="submit-perk-text" id="txt-perk-3"><strong>Badge Auteur</strong> — Votre nom associé à votre création dans l'app</div>
+      </div>
+    </div>
+    <div class="submit-actions">
+      <button class="submit-btn" onclick="goToEditor()">
+        <span id="txt-submit-editor">Ouvrir l'éditeur</span>
+      </button>
+      <button class="submit-btn secondary" onclick="closeSubmitPopup()">
+        <span id="txt-submit-cancel">Annuler</span>
+      </button>
+    </div>
+    <p class="submit-note" id="txt-submit-note">
+      Une fois votre histoire écrite, exportez le JSON et envoyez-le directement depuis l'éditeur.
+    </p>
+  </div>
+</div>
 
 <!-- ── GAME SELECTOR PANEL ── -->
 <div id="game-panel" onclick="handlePanelClick(event)">
@@ -598,20 +706,6 @@ body {
   </div>
 </div>
 
-
-<!-- ── PLAYER NAME PANEL ── -->
-<div id="player-panel" onclick="handlePlayerClick(event)">
-  <div id="player-box">
-    <div class="player-title">What is your name?</div>
-    <p class="player-desc">This name can appear in stories with the variable <strong>{{player}}</strong>.</p>
-    <input id="player-name-input" class="player-input" maxlength="24" placeholder="Ex: Alex" autocomplete="off" onkeydown="if(event.key==='Enter') savePlayerName()">
-    <div class="player-actions">
-      <button class="btn-main primary" onclick="savePlayerName()">Confirm</button>
-      <button class="btn-main" id="player-later-btn" onclick="closePlayerPanel()">Later</button>
-    </div>
-  </div>
-</div>
-
 <script>
 // ══════════════════════════════════════════════
 // TRANSLATIONS
@@ -623,6 +717,7 @@ const LANG = {
     subtitle:       'Chaque choix façonne votre histoire',
     btnStart:       'Le début de votre aventure',
     btnOptions:     'Options',
+    btnSubmit:      '✍ Soumettre une histoire',
     footer:         'StoryForge • Romans interactifs',
     sheetTitle:     'Vos aventures',
     sheetSub:       'Choisissez une histoire à vivre',
@@ -643,6 +738,15 @@ const LANG = {
     closeOptions:   'Fermer',
     kidsBadge:      '🧒 Mode enfant actif',
     docTitle:       'Choisis ton Destin',
+    submitTitle:    'Soumettre une histoire',
+    submitSubtitle: 'Devenez auteur de Choisis ton Destin',
+    submitBody:     'Vous avez une idée d\'aventure ? Écrivez votre scénario dans l\'éditeur et envoyez-le nous. Les meilleures histoires seront publiées dans l\'application.',
+    perk1:          '<strong>Publication officielle</strong> — Votre histoire jouée par des milliers de joueurs',
+    perk2:          '<strong>Avantages exclusifs</strong> — Accès à du contenu premium et crédits auteur',
+    perk3:          '<strong>Badge Auteur</strong> — Votre nom associé à votre création dans l\'app',
+    submitEditor:   'Ouvrir l\'éditeur',
+    submitCancel:   'Annuler',
+    submitNote:     'Une fois votre histoire écrite, exportez le JSON et envoyez-le directement depuis l\'éditeur.',
   },
   en: {
     eyebrow:        'An adventure awaits',
@@ -650,6 +754,7 @@ const LANG = {
     subtitle:       'Every choice shapes your story',
     btnStart:       'Begin your adventure',
     btnOptions:     'Options',
+    btnSubmit:      '✍ Submit a story',
     footer:         'StoryForge • Interactive Fiction',
     sheetTitle:     'Your Adventures',
     sheetSub:       'Choose a story to experience',
@@ -670,6 +775,15 @@ const LANG = {
     closeOptions:   'Close',
     kidsBadge:      '🧒 Kids mode on',
     docTitle:       'Choose Your Fate',
+    submitTitle:    'Submit a Story',
+    submitSubtitle: 'Become an author of Choose Your Fate',
+    submitBody:     'Got a story idea? Write your scenario in the editor and send it to us. The best stories will be published in the app.',
+    perk1:          '<strong>Official publication</strong> — Your story played by thousands of players',
+    perk2:          '<strong>Exclusive perks</strong> — Access to premium content and author credits',
+    perk3:          '<strong>Author Badge</strong> — Your name linked to your creation in the app',
+    submitEditor:   'Open the editor',
+    submitCancel:   'Cancel',
+    submitNote:     'Once your story is written, export the JSON and send it directly from the editor.',
   },
   es: {
     eyebrow:        'Una aventura te espera',
@@ -677,6 +791,7 @@ const LANG = {
     subtitle:       'Cada elección da forma a tu historia',
     btnStart:       'El comienzo de tu aventura',
     btnOptions:     'Opciones',
+    btnSubmit:      '✍ Enviar una historia',
     footer:         'StoryForge • Ficción interactiva',
     sheetTitle:     'Tus aventuras',
     sheetSub:       'Elige una historia para vivir',
@@ -697,6 +812,15 @@ const LANG = {
     closeOptions:   'Cerrar',
     kidsBadge:      '🧒 Modo infantil activo',
     docTitle:       'Elige tu Destino',
+    submitTitle:    'Enviar una historia',
+    submitSubtitle: 'Conviértete en autor de Elige tu Destino',
+    submitBody:     '¿Tienes una idea de aventura? Escribe tu guión en el editor y envíanoslo. Las mejores historias se publicarán en la aplicación.',
+    perk1:          '<strong>Publicación oficial</strong> — Tu historia jugada por miles de jugadores',
+    perk2:          '<strong>Ventajas exclusivas</strong> — Acceso a contenido premium y créditos de autor',
+    perk3:          '<strong>Insignia de Autor</strong> — Tu nombre vinculado a tu creación en la app',
+    submitEditor:   'Abrir el editor',
+    submitCancel:   'Cancelar',
+    submitNote:     'Una vez escrita tu historia, exporta el JSON y envíalo directamente desde el editor.',
   }
 };
 
@@ -717,6 +841,7 @@ function applyLang() {
   document.getElementById('txt-subtitle').textContent     = t.subtitle;
   document.getElementById('txt-btn-start').textContent    = t.btnStart;
   document.getElementById('txt-btn-options').textContent  = t.btnOptions;
+  document.getElementById('txt-btn-submit').textContent   = t.btnSubmit;
   document.getElementById('txt-footer').textContent       = t.footer;
   document.getElementById('txt-sheet-title').textContent  = t.sheetTitle;
   document.getElementById('txt-sheet-sub').textContent    = t.sheetSub;
@@ -733,53 +858,33 @@ function applyLang() {
   document.getElementById('txt-speed-normal').textContent  = t.speedNormal;
   document.getElementById('txt-speed-slow').textContent    = t.speedSlow;
   document.getElementById('txt-close-options').textContent = t.closeOptions;
+  // Submit popup
+  document.getElementById('txt-submit-title').textContent    = t.submitTitle;
+  document.getElementById('txt-submit-subtitle').textContent = t.submitSubtitle;
+  document.getElementById('txt-submit-body').textContent     = t.submitBody;
+  document.getElementById('txt-perk-1').innerHTML            = t.perk1;
+  document.getElementById('txt-perk-2').innerHTML            = t.perk2;
+  document.getElementById('txt-perk-3').innerHTML            = t.perk3;
+  document.getElementById('txt-submit-editor').textContent   = t.submitEditor;
+  document.getElementById('txt-submit-cancel').textContent   = t.submitCancel;
+  document.getElementById('txt-submit-note').textContent     = t.submitNote;
   document.title = t.docTitle;
   document.documentElement.lang = currentLang;
 }
 
-
-// ══════════════════════════════════════════════
-// PLAYER NAME
-// ══════════════════════════════════════════════
-function getPlayerName() {
-  return localStorage.getItem('sf_player_name') || 'Player';
+// ── SUBMIT POPUP ──
+function openSubmitPopup() {
+  document.getElementById('submit-overlay').classList.add('open');
 }
-
-function refreshPlayerName() {
-  const el = document.getElementById('player-name-display');
-  if (el) el.textContent = getPlayerName();
+function closeSubmitPopup() {
+  document.getElementById('submit-overlay').classList.remove('open');
 }
-
-function openPlayerPanel(firstTime = false) {
-  const panel = document.getElementById('player-panel');
-  const input = document.getElementById('player-name-input');
-  const later = document.getElementById('player-later-btn');
-  if (input) input.value = localStorage.getItem('sf_player_name') || '';
-  if (later) later.style.display = firstTime ? 'none' : '';
-  panel.classList.add('open');
-  setTimeout(() => input?.focus(), 80);
+function handleSubmitClick(e) {
+  if (e.target === document.getElementById('submit-overlay')) closeSubmitPopup();
 }
-
-function closePlayerPanel() {
-  document.getElementById('player-panel').classList.remove('open');
-}
-
-function handlePlayerClick(e) {
-  if (e.target === document.getElementById('player-panel')) closePlayerPanel();
-}
-
-function savePlayerName() {
-  const input = document.getElementById('player-name-input');
-  const clean = (input.value || '').trim().replace(/[<>]/g, '').slice(0, 24);
-  if (!clean) { input.focus(); return; }
-  localStorage.setItem('sf_player_name', clean);
-  refreshPlayerName();
-  closePlayerPanel();
-}
-
-function ensurePlayerName() {
-  refreshPlayerName();
-  if (!localStorage.getItem('sf_player_name')) openPlayerPanel(true);
+function goToEditor() {
+  closeSubmitPopup();
+  window.location.href = 'story-editor.html';
 }
 
 // ══════════════════════════════════════════════
@@ -979,7 +1084,6 @@ function initCanvas() {
   setLang(currentLang);
   initCanvas();
   createParticles();
-  ensurePlayerName();
   await loadGameRegistry();
 })();
 </script>

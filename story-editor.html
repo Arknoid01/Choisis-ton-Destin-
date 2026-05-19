@@ -336,7 +336,14 @@ html,body { height:100%; overflow:hidden; font-family:'Syne',sans-serif; backgro
 .tab.active { background:var(--bg3); border-color:var(--border); color:var(--text); }
 .tab:hover:not(.active) { color:var(--text2); }
 
-/* KIDS TOGGLE */
+.topbtn.send-btn {
+  background: color-mix(in srgb, var(--accent2) 15%, transparent);
+  border-color: var(--accent2);
+  color: var(--accent2);
+}
+.topbtn.send-btn:hover {
+  background: var(--accent2); color: var(--bg);
+}
 .kids-toggle {
   display:flex; align-items:center; cursor:pointer;
   padding:4px 6px; border-radius:6px; border:1px solid var(--border);
@@ -575,7 +582,8 @@ html,body { height:100%; overflow:hidden; font-family:'Syne',sans-serif; backgro
     <div class="sep"></div>
     <button class="topbtn" onclick="importJSON()">↑ Importer</button>
     <button class="topbtn" onclick="exportTXT()">✎ Export TXT</button>
-    <button class="topbtn primary" onclick="exportJSON()">↓ Export JSON</button>
+    <button class="topbtn" onclick="exportJSON()">↓ Export JSON</button>
+    <button class="topbtn send-btn" onclick="sendStory()">✉ Envoyer</button>
   </div>
 
   <!-- MAIN -->
@@ -772,6 +780,9 @@ html,body { height:100%; overflow:hidden; font-family:'Syne',sans-serif; backgro
   </button>
   <button class="mmenu-item" onclick="closeMobileMenu();exportJSON()">
     <span class="mmenu-icon">↓</span> Exporter JSON
+  </button>
+  <button class="mmenu-item" onclick="closeMobileMenu();sendStory()" style="color:var(--accent2)">
+    <span class="mmenu-icon">✉</span> Envoyer mon histoire
   </button>
 </div>
 
@@ -1575,7 +1586,41 @@ function exportTXT() {
   toast('TXT traduction exporté ✓');
 }
 
-function importJSON() { document.getElementById('import-input').click(); }
+function sendStory() {
+  // 1. Télécharger le JSON automatiquement
+  project.theme = { ...currentTheme };
+  project.kids = document.getElementById('kids-check').checked;
+  const exportData = JSON.parse(JSON.stringify(project));
+  Object.values(exportData.scenes).forEach(scene => {
+    scene.choices = shuffleArray(scene.choices);
+  });
+  const filename = (project.name || 'histoire').replace(/\s+/g,'_').toLowerCase() + '.json';
+  const blob = new Blob([JSON.stringify(exportData, null, 2)], {type:'application/json'});
+  download(blob, filename);
+
+  // 2. Ouvrir l'app mail pré-remplie
+  const to      = 'team.pegasuscorp@gmail.com';
+  const subject = encodeURIComponent('[StoryForge] Soumission — ' + (project.name || 'Mon Histoire'));
+  const body    = encodeURIComponent(
+`Bonjour l'équipe PegasusCorp,
+
+Je vous soumets mon histoire "${project.name || 'Mon Histoire'}" créée avec StoryForge.
+
+Vous trouverez le fichier JSON en pièce jointe (${filename}).
+
+Merci de prendre le temps de la lire !
+
+Cordialement,
+[Votre nom]`
+  );
+
+  // Petit délai pour laisser le téléchargement démarrer
+  setTimeout(() => {
+    window.location.href = `mailto:${to}?subject=${subject}&body=${body}`;
+    toast('📎 JSON téléchargé — ajoutez-le en pièce jointe !');
+  }, 400);
+}
+
 
 function handleImport(e) {
   const file = e.target.files[0];
