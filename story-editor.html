@@ -345,7 +345,126 @@ html,body { height:100%; overflow:hidden; font-family:'Syne',sans-serif; backgro
   background: var(--accent2); color: var(--bg);
 }
 
-/* ── TOOLTIPS ── */
+/* ── HEALTH BADGE ── */
+#health-badge {
+  display:flex; align-items:center; gap:5px;
+  padding:4px 10px; border-radius:20px;
+  font-family:'DM Mono',monospace; font-size:11px;
+  cursor:pointer; transition:all .2s; flex-shrink:0;
+  border:1px solid var(--border);
+}
+#health-badge.ok    { background:rgba(109,250,188,0.1); border-color:rgba(109,250,188,0.4); color:#6dfabc; }
+#health-badge.warn  { background:rgba(255,230,0,0.1);   border-color:rgba(255,230,0,0.4);   color:#ffe600; }
+#health-badge.error { background:rgba(250,109,143,0.1); border-color:rgba(250,109,143,0.4); color:#fa6d8f; }
+
+/* HEALTH PANEL */
+#health-panel {
+  position:fixed; top:58px; right:16px; z-index:200;
+  background:var(--bg2); border:1px solid var(--border);
+  border-radius:10px; padding:14px; width:260px;
+  box-shadow:0 8px 24px #00000066;
+  display:none;
+}
+#health-panel.open { display:block; animation:fade-up .2s ease; }
+.health-item {
+  display:flex; align-items:flex-start; gap:8px;
+  padding:6px 0; border-bottom:1px solid var(--border);
+  font-size:12px; color:var(--text2); cursor:pointer;
+  transition:color .15s;
+}
+.health-item:last-child { border-bottom:none; }
+.health-item:hover { color:var(--text); }
+.health-item-icon { font-size:13px; flex-shrink:0; margin-top:1px; }
+.health-ok   { color:var(--accent3); }
+.health-warn { color:#ffe600; }
+.health-err  { color:var(--accent2); }
+
+/* ── SEARCH ── */
+#search-wrap {
+  position:absolute; top:12px; left:12px; z-index:20;
+  display:flex; align-items:center; gap:6px;
+}
+#search-input {
+  background:var(--bg2); border:1px solid var(--border);
+  border-radius:8px; color:var(--text); font-family:'DM Mono',monospace;
+  font-size:12px; padding:5px 10px; outline:none; width:0;
+  transition:all .3s; opacity:0; pointer-events:none;
+}
+#search-input.open { width:160px; opacity:1; pointer-events:all; border-color:var(--accent); }
+#search-btn {
+  width:30px; height:30px; border-radius:8px;
+  border:1px solid var(--border); background:var(--bg2);
+  color:var(--text2); cursor:pointer; font-size:14px;
+  display:flex; align-items:center; justify-content:center;
+  transition:all .15s; z-index:21;
+}
+#search-btn:hover { border-color:var(--accent); color:var(--accent); }
+#search-results {
+  position:absolute; top:36px; left:0;
+  background:var(--bg2); border:1px solid var(--border);
+  border-radius:8px; width:200px; max-height:200px;
+  overflow-y:auto; display:none; box-shadow:0 4px 16px #00000066;
+}
+#search-results.open { display:block; }
+.search-result {
+  padding:8px 12px; font-size:12px; color:var(--text2);
+  cursor:pointer; border-bottom:1px solid var(--border);
+  transition:background .1s;
+}
+.search-result:last-child { border-bottom:none; }
+.search-result:hover { background:var(--bg3); color:var(--text); }
+.search-result mark { background:none; color:var(--accent); font-weight:700; }
+
+/* ── UNDO/REDO ── */
+#undo-redo {
+  display:flex; gap:4px; position:absolute;
+  bottom:20px; left:12px; z-index:20;
+}
+.undo-btn {
+  width:32px; height:32px; border-radius:8px;
+  border:1px solid var(--border); background:var(--bg2);
+  color:var(--text3); font-size:14px; cursor:pointer;
+  display:flex; align-items:center; justify-content:center;
+  transition:all .15s;
+}
+.undo-btn:hover:not(:disabled) { border-color:var(--accent); color:var(--accent); }
+.undo-btn:disabled { opacity:0.3; cursor:not-allowed; }
+
+/* ── MINIMAP ── */
+#minimap {
+  position:absolute; bottom:20px; left:52px; z-index:20;
+  width:120px; height:80px;
+  background:var(--bg2); border:1px solid var(--border);
+  border-radius:8px; overflow:hidden; cursor:pointer;
+  opacity:0.85; transition:opacity .2s;
+}
+#minimap:hover { opacity:1; }
+#minimap canvas { width:100%; height:100%; display:block; }
+#minimap-viewport {
+  position:absolute; border:1px solid var(--accent);
+  border-radius:2px; pointer-events:none;
+  background:rgba(124,109,250,0.08);
+  transition:all .1s;
+}
+
+/* ── SCENE COLOR PICKER ── */
+.node-color-dot {
+  position:absolute; top:6px; right:6px;
+  width:8px; height:8px; border-radius:50%;
+  border:1px solid rgba(255,255,255,0.2);
+  cursor:pointer; flex-shrink:0;
+}
+.color-picker-row {
+  display:flex; gap:6px; flex-wrap:wrap; margin-top:6px;
+}
+.color-swatch {
+  width:20px; height:20px; border-radius:50%;
+  cursor:pointer; border:2px solid transparent;
+  transition:all .15s; flex-shrink:0;
+}
+.color-swatch:hover, .color-swatch.active {
+  border-color:#fff; transform:scale(1.2);
+}
 .tip {
   display:inline-flex; align-items:center; justify-content:center;
   width:16px; height:16px; border-radius:50%;
@@ -597,8 +716,11 @@ html,body { height:100%; overflow:hidden; font-family:'Syne',sans-serif; backgro
   #tree-controls { bottom:76px; right:12px; }
   #add-node-btn { display:none; }
   #theme-panel { width:100%; top:0; height:100vh; }
-  /* Zoom initial plus petit sur mobile pour voir tout l'arbre */
   #zoom-indicator { display:block; }
+  #minimap { display:none; }
+  #undo-redo { display:none; }
+  #search-wrap { top:8px; left:8px; }
+  #search-input.open { width:140px; }
 }
 </style>
 </head>
@@ -619,6 +741,7 @@ html,body { height:100%; overflow:hidden; font-family:'Syne',sans-serif; backgro
       <span class="kids-icon">👤</span>
     </label>
     <div class="spacer"></div>
+    <div id="health-badge" class="ok" onclick="toggleHealthPanel()" title="Santé de l'histoire">✓ Prête</div>
     <button class="topbtn" onclick="openStatsModal()">⚙ Stats</button>
     <button class="topbtn" onclick="openThemePanel()">🎨 Thème</button>
     <button class="topbtn" onclick="autoLayout()">⊞ Ordonner</button>
@@ -639,6 +762,28 @@ html,body { height:100%; overflow:hidden; font-family:'Syne',sans-serif; backgro
       <div id="tree-viewport"></div>
       <button id="add-node-btn" onclick="openAddSceneModal()" title="Nouvelle scène">+</button>
       <div id="zoom-indicator">100%</div>
+
+      <!-- SEARCH -->
+      <div id="search-wrap">
+        <button id="search-btn" onclick="toggleSearch()" title="Rechercher">🔍</button>
+        <input id="search-input" placeholder="Chercher une scène..."
+          oninput="doSearch(this.value)"
+          onkeydown="if(event.key==='Escape')closeSearch()">
+        <div id="search-results"></div>
+      </div>
+
+      <!-- UNDO/REDO -->
+      <div id="undo-redo">
+        <button class="undo-btn" id="btn-undo" onclick="undo()" title="Annuler (Ctrl+Z)" disabled>↩</button>
+        <button class="undo-btn" id="btn-redo" onclick="redo()" title="Rétablir (Ctrl+Y)" disabled>↪</button>
+      </div>
+
+      <!-- MINIMAP -->
+      <div id="minimap" onclick="minimapClick(event)" title="Vue d'ensemble">
+        <canvas id="minimap-canvas"></canvas>
+        <div id="minimap-viewport"></div>
+      </div>
+
       <div id="tree-controls">
         <button class="tree-ctrl" onclick="zoomIn()" title="Zoom +">+</button>
         <button class="tree-ctrl" onclick="zoomOut()" title="Zoom −">−</button>
@@ -679,6 +824,9 @@ html,body { height:100%; overflow:hidden; font-family:'Syne',sans-serif; backgro
 
 <!-- TOOLTIP BUBBLE -->
 <div id="tip-bubble"></div>
+
+<!-- HEALTH PANEL -->
+<div id="health-panel"></div>
 
 <!-- IMPORT INPUT -->
 <input type="file" id="import-input" accept=".json" style="display:none" onchange="handleImport(event)">
@@ -994,6 +1142,7 @@ function genId() {
 }
 
 function addScene(linkFromId = '', linkChoiceIndex = 'new', linkChoiceText = '') {
+  pushUndo();
   const id = genId();
   const count = Object.keys(project.scenes).length;
   const source = linkFromId && project.scenes[linkFromId] ? project.scenes[linkFromId] : null;
@@ -1093,6 +1242,7 @@ function createLinkedScene() {
 function deleteScene() {
   if (!selectedId) return;
   if (Object.keys(project.scenes).length <= 1) { toast(et('needOneScene')); return; }
+  pushUndo();
   // remove links pointing to this scene
   Object.values(project.scenes).forEach(s => {
     s.choices.forEach(c => { if (c.vers === selectedId) c.vers = ''; });
@@ -1116,6 +1266,8 @@ function selectScene(id) {
 function render() {
   renderTree();
   drawConnections();
+  checkHealth();
+  drawMinimap();
 }
 
 function renderTree() {
@@ -1141,6 +1293,14 @@ function renderTree() {
     el.classList.toggle('selected', scene.id === selectedId);
     el.classList.toggle('start-node', !!scene.isStart);
     el.classList.toggle('end-node', !!scene.isEnd);
+    // Couleur personnalisée
+    if (scene.nodeColor) {
+      el.style.borderColor = scene.nodeColor;
+      el.style.boxShadow = `0 0 8px ${scene.nodeColor}44`;
+    } else {
+      el.style.borderColor = '';
+      el.style.boxShadow = '';
+    }
 
     el.innerHTML = `
       ${scene.isStart ? '<div class="node-badge">START</div>' : ''}
@@ -1284,12 +1444,23 @@ function renderEditor(id) {
     <div class="form-group" style="display:flex;gap:16px">
       <label class="form-check">
         <input type="checkbox" ${scene.isStart?'checked':''} onchange="updateFlag('isStart',this.checked)">
-        <span>${et('startScene')}</span>
+        <span>${et('startScene')} <span class="tip" data-tip="${et('tipStart')}">?</span></span>
       </label>
       <label class="form-check">
         <input type="checkbox" ${scene.isEnd?'checked':''} onchange="updateFlag('isEnd',this.checked)">
-        <span>${et('endScene')}</span>
+        <span>${et('endScene')} <span class="tip" data-tip="${et('tipEnd')}">?</span></span>
       </label>
+    </div>
+    <div class="form-group">
+      <label class="form-label">🎨 Couleur du nœud</label>
+      <div class="color-picker-row">
+        ${['','#7c6dfa','#fa6d8f','#6dfabc','#ffe600','#ff8040','#40b8ff','#ff4444','#ffffff'].map(c =>
+          `<div class="color-swatch ${scene.nodeColor===c?'active':''}"
+            style="background:${c||'var(--bg4)'};border-color:${c?'transparent':'var(--border)'}"
+            onclick="updateField('nodeColor','${c}');renderEditor('${id}')"
+            title="${c||'Par défaut'}"></div>`
+        ).join('')}
+      </div>
     </div>
 
     <div class="section-divider">${et('choices')}</div>
@@ -1395,6 +1566,7 @@ function insertChoiceVariable(index, variable) {
 
 function updateField(key, val) {
   if (!selectedId) return;
+  pushUndo();
   project.scenes[selectedId][key] = val;
   if (key === 'title') {
     document.getElementById('editor-title').textContent = val || 'Sans titre';
@@ -1924,6 +2096,184 @@ function liveColor(key, val) {
   // update color preview dot
   const prev = document.getElementById('prev-' + key);
   if (prev) prev.style.background = val;
+}
+
+// ══════════════════════════════════════════════
+// 1. HEALTH CHECK
+// ══════════════════════════════════════════════
+function checkHealth() {
+  const scenes = Object.values(project.scenes);
+  const issues = [];
+  const starts = scenes.filter(s => s.isStart);
+  if (starts.length === 0) issues.push({ type:'error', msg:'Aucune scène de départ définie', sceneId:null });
+  if (starts.length > 1)  issues.push({ type:'warn', msg:`${starts.length} scènes de départ`, sceneId:null });
+  scenes.forEach(s => {
+    if (!s.text?.trim() && !s.isEnd) issues.push({ type:'warn', msg:`"${s.title||s.id}" — texte vide`, sceneId:s.id });
+    s.choices?.forEach((c, i) => {
+      if (!c.vers) issues.push({ type:'error', msg:`"${s.title||s.id}" — choix ${i+1} sans destination`, sceneId:s.id });
+      if (c.vers && !project.scenes[c.vers]) issues.push({ type:'error', msg:`"${s.title||s.id}" — destination supprimée`, sceneId:s.id });
+    });
+    if (!s.isEnd && (!s.choices || !s.choices.length)) issues.push({ type:'warn', msg:`"${s.title||s.id}" — sans choix, non finale`, sceneId:s.id });
+  });
+  const errors = issues.filter(i => i.type==='error').length;
+  const warns  = issues.filter(i => i.type==='warn').length;
+  const badge  = document.getElementById('health-badge');
+  if (!badge) return;
+  if (errors > 0) { badge.className='error'; badge.textContent=`✕ ${errors} erreur${errors>1?'s':''}`; }
+  else if (warns > 0) { badge.className='warn'; badge.textContent=`⚠ ${warns} avert.`; }
+  else { badge.className='ok'; badge.textContent='✓ Prête'; }
+  badge._issues = issues;
+}
+
+function toggleHealthPanel() {
+  const panel = document.getElementById('health-panel');
+  panel.classList.toggle('open');
+  if (!panel.classList.contains('open')) return;
+  const issues = document.getElementById('health-badge')._issues || [];
+  if (!issues.length) { panel.innerHTML = '<div class="health-item health-ok"><span class="health-item-icon">✓</span> Aucun problème détecté</div>'; return; }
+  panel.innerHTML = issues.map(issue => `
+    <div class="health-item ${issue.type==='error'?'health-err':'health-warn'}"
+      onclick="${issue.sceneId?`selectScene('${issue.sceneId}');document.getElementById('health-panel').classList.remove('open')`:''}">
+      <span class="health-item-icon">${issue.type==='error'?'✕':'⚠'}</span>
+      <span>${issue.msg}</span>
+    </div>`).join('');
+}
+
+document.addEventListener('click', e => {
+  const panel = document.getElementById('health-panel');
+  const badge = document.getElementById('health-badge');
+  if (panel?.classList.contains('open') && !panel.contains(e.target) && !badge?.contains(e.target)) panel.classList.remove('open');
+});
+
+// ══════════════════════════════════════════════
+// 2. SEARCH
+// ══════════════════════════════════════════════
+function toggleSearch() {
+  const input = document.getElementById('search-input');
+  input.classList.toggle('open');
+  if (input.classList.contains('open')) input.focus();
+  else closeSearch();
+}
+function closeSearch() {
+  document.getElementById('search-input').classList.remove('open');
+  document.getElementById('search-input').value = '';
+  document.getElementById('search-results').classList.remove('open');
+}
+function doSearch(query) {
+  const results = document.getElementById('search-results');
+  if (!query.trim()) { results.classList.remove('open'); return; }
+  const q = query.toLowerCase();
+  const matches = Object.values(project.scenes).filter(s =>
+    (s.title||'').toLowerCase().includes(q) || (s.text||'').toLowerCase().includes(q) || (s.location||'').toLowerCase().includes(q)
+  ).slice(0, 8);
+  results.innerHTML = matches.length
+    ? matches.map(s => `<div class="search-result" onclick="selectScene('${s.id}');closeSearch()">${(s.title||s.id).replace(new RegExp(query,'gi'), m => `<mark>${m}</mark>`)}</div>`).join('')
+    : '<div class="search-result" style="color:var(--text3)">Aucun résultat</div>';
+  results.classList.add('open');
+}
+
+// ══════════════════════════════════════════════
+// 3. UNDO / REDO
+// ══════════════════════════════════════════════
+const HISTORY_MAX = 30;
+let undoStack = [], redoStack = [], _undoLocked = false;
+
+function pushUndo() {
+  if (_undoLocked) return;
+  undoStack.push(JSON.stringify(project.scenes));
+  if (undoStack.length > HISTORY_MAX) undoStack.shift();
+  redoStack = [];
+  updateUndoButtons();
+}
+function undo() {
+  if (!undoStack.length) return;
+  redoStack.push(JSON.stringify(project.scenes));
+  _undoLocked = true; project.scenes = JSON.parse(undoStack.pop()); _undoLocked = false;
+  render();
+  if (selectedId && project.scenes[selectedId]) renderEditor(selectedId); else showEmptyEditor();
+  updateUndoButtons(); toast('↩ Annulé');
+}
+function redo() {
+  if (!redoStack.length) return;
+  undoStack.push(JSON.stringify(project.scenes));
+  _undoLocked = true; project.scenes = JSON.parse(redoStack.pop()); _undoLocked = false;
+  render();
+  if (selectedId && project.scenes[selectedId]) renderEditor(selectedId); else showEmptyEditor();
+  updateUndoButtons(); toast('↪ Rétabli');
+}
+function updateUndoButtons() {
+  const u = document.getElementById('btn-undo'); const r = document.getElementById('btn-redo');
+  if (u) u.disabled = !undoStack.length;
+  if (r) r.disabled = !redoStack.length;
+}
+document.addEventListener('keydown', e => {
+  if ((e.ctrlKey||e.metaKey) && e.key==='z' && !e.shiftKey) { e.preventDefault(); undo(); }
+  if ((e.ctrlKey||e.metaKey) && (e.key==='y'||(e.key==='z'&&e.shiftKey))) { e.preventDefault(); redo(); }
+  if (e.key==='Escape') closeSearch();
+});
+
+// ══════════════════════════════════════════════
+// 4. MINIMAP
+// ══════════════════════════════════════════════
+function drawMinimap() {
+  const canvas = document.getElementById('minimap-canvas');
+  const mm = document.getElementById('minimap');
+  if (!canvas || !mm) return;
+  const ctx = canvas.getContext('2d');
+  const W = mm.offsetWidth, H = mm.offsetHeight;
+  canvas.width = W; canvas.height = H;
+  ctx.clearRect(0, 0, W, H);
+  const scenes = Object.values(project.scenes);
+  if (!scenes.length) return;
+  const NW = 160, NH = 60;
+  const xs = scenes.map(s => s.x), ys = scenes.map(s => s.y);
+  const minX = Math.min(...xs), maxX = Math.max(...xs)+NW;
+  const minY = Math.min(...ys), maxY = Math.max(...ys)+NH;
+  const scale = Math.min(W/(maxX-minX+40), H/(maxY-minY+40));
+  const tx = s => (s.x-minX+20)*scale, ty = s => (s.y-minY+20)*scale;
+  // Connections
+  ctx.strokeStyle='#3a3a50'; ctx.lineWidth=0.5;
+  scenes.forEach(scene => scene.choices?.forEach(c => {
+    const t = project.scenes[c.vers]; if (!t) return;
+    ctx.beginPath(); ctx.moveTo(tx(scene)+NW*scale/2, ty(scene)+NH*scale);
+    ctx.lineTo(tx(t)+NW*scale/2, ty(t)); ctx.stroke();
+  }));
+  // Nodes
+  scenes.forEach(scene => {
+    ctx.fillStyle = scene.nodeColor||(scene.isStart?'#6dfabc22':scene.isEnd?'#fa6d8f22':'#1c1c24');
+    ctx.strokeStyle = scene.nodeColor||(scene.isStart?'#6dfabc':scene.isEnd?'#fa6d8f':(scene.id===selectedId?'#7c6dfa':'#2e2e3a'));
+    ctx.lineWidth = scene.id===selectedId?1.5:0.5;
+    ctx.beginPath();
+    if (ctx.roundRect) ctx.roundRect(tx(scene), ty(scene), Math.max(NW*scale,4), Math.max(NH*scale,3), 2);
+    else ctx.rect(tx(scene), ty(scene), Math.max(NW*scale,4), Math.max(NH*scale,3));
+    ctx.fill(); ctx.stroke();
+  });
+  // Viewport
+  const panel = document.getElementById('tree-panel');
+  const vp = document.getElementById('minimap-viewport');
+  if (!panel||!vp) return;
+  vp.style.left   = Math.max(0, (-pan.x/zoom-minX+20)*scale)+'px';
+  vp.style.top    = Math.max(0, (-pan.y/zoom-minY+20)*scale)+'px';
+  vp.style.width  = Math.min((panel.offsetWidth/zoom)*scale, W)+'px';
+  vp.style.height = Math.min((panel.offsetHeight/zoom)*scale, H)+'px';
+}
+
+function minimapClick(e) {
+  const mm = document.getElementById('minimap');
+  const rect = mm.getBoundingClientRect();
+  const scenes = Object.values(project.scenes); if (!scenes.length) return;
+  const NW=160, NH=60;
+  const xs=scenes.map(s=>s.x), ys=scenes.map(s=>s.y);
+  const minX=Math.min(...xs), maxX=Math.max(...xs)+NW;
+  const minY=Math.min(...ys), maxY=Math.max(...ys)+NH;
+  const W=mm.offsetWidth, H=mm.offsetHeight;
+  const scale=Math.min(W/(maxX-minX+40), H/(maxY-minY+40));
+  const cx=(e.clientX-rect.left)/scale+minX-20;
+  const cy=(e.clientY-rect.top)/scale+minY-20;
+  const panel=document.getElementById('tree-panel');
+  pan.x=-(cx*zoom)+panel.offsetWidth/2;
+  pan.y=-(cy*zoom)+panel.offsetHeight/2;
+  applyTransform();
 }
 
 function applyTheme(t) {
