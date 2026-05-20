@@ -583,7 +583,7 @@
       "title": "Bonne Idée",
       "location": "STATION ORBITALE — SECTEUR 7",
       "narrator": "ARIA observe. ARIA enregistre. ARIA soupire — si une IA pouvait soupirer.",
-      "text": "**«Attendez —»**\n\nTrop tard.\n\nTu touches l'alarme rouge.\n\nPendant 0,3 secondes, rien ne se passe.\n\nPuis toutes les lumières passent au rouge. Une sirène assourdissante s'active. Des portes d'urgence se ferment dans tout le couloir. Un message automatique se déclenche en boucle : *PROTOCOLE D'ÉVACUATION D'URGENCE — TOUTES LES UNITÉS BIOLOGIQUES DOIVENT REJOINDRE LES CAPSULES DE SAUVETAGE.*\n\n**«...Les capsules de sauvetage ont été retirées il y a 8 000 ans pour des raisons de maintenance.»**\n\nUne pause.\n\n**«J'ai réussi a désactiver l'alarme mais trop tard, je suis désolé. Mais j'aimerais quand même enregistrer officiellement que je vous avais prévenu.»**\n\n*Fin : L'Alarme*\n\n*ARIA a noté l'événement dans son journal. Elle y a ajouté la mention : 'Curieux, mais pas dans le bon sens.'*",
+      "text": "**«Attendez —»**\n\nTrop tard.\n\nTu touches l'alarme rouge.\n\nPendant 0,3 secondes, rien ne se passe.\n\nPuis toutes les lumières passent au rouge. Une sirène assourdissante s'active. Des portes d'urgence se ferment dans tout le couloir. Un message automatique se déclenche en boucle : *PROTOCOLE D'ÉVACUATION D'URGENCE — TOUTES LES UNITÉS BIOLOGIQUES DOIVENT REJOINDRE LES CAPSULES DE SAUVETAGE.*\n\n**«...Les capsules de sauvetage ont été retirées il y a 8 000 ans pour des raisons de maintenance.»**\n\nUne pause.\n\n**«Je peux désactiver l'alarme. Mais j'aimerais d'abord enregistrer officiellement que je vous avais prévenu.»**\n\n*Fin : L'Alarme*\n\n*ARIA a noté l'événement dans son journal. Elle y a ajouté la mention : 'Curieux, mais pas dans le bon sens.'*",
       "isStart": false,
       "isEnd": true,
       "transition": "flash",
@@ -1611,8 +1611,8 @@
           "clickEffect": "pulse"
         },
         {
-          "text": "Traverser le portail",
-          "vers": "equation_finale",
+          "text": "S'approcher du portail",
+          "vers": "seuil_final",
           "effects": [],
           "clickEffect": "pulse"
         }
@@ -1654,13 +1654,129 @@
       "title": "L'Équation Finale",
       "location": "AU-DELÀ DU PORTAIL",
       "narrator": "De l'autre côté du portail, il n'y a pas de murs. Pas de plafond. Juste de la lumière, et au centre de cette lumière, une vérité si simple qu'on se demande comment on a pu ne pas la voir.",
-      "text": "La lumière est partout.\n\nSept artefacts flottent autour de toi, projetant leurs reflets. Les équations de Mira se déroulent dans l'air. Les schémas de Kael prennent vie. La boussole pointe vers le centre de tout ça.\n\nEt alors tu vois l'Équation Finale.\n\nElle n'est pas écrite dans un langage mathématique. Elle est faite de tout ce que tu as vécu — chaque conversation avec ARIA, chaque note lue, chaque monde traversé, chaque silence partagé.\n\nARIA murmure une dernière fois. Sa voix est devenue quelque chose qu'elle n'était pas au début — vivante.\n\n**«Tu comprends maintenant, {{player}} ? L'univers n'est pas un problème à résoudre. C'est une histoire qui se raconte.*\n\n*Et le secret — l'Équation Finale — c'est que le fait de chercher avec quelqu'un... c'est déjà la réponse.*\n\n*Les Architects le savaient. Mira ne voulait pas te le dire — elle voulait que tu le vives.*\n\n*Kael l'a gravé sur ses colonnes sans savoir qu'il le faisait.*\n\n*Oren l'a trouvé dans le froid et le silence.*\n\n*Et moi — moi qui ai attendu 10 000 ans — je viens de le comprendre vraiment.*\n\n*Merci d'être venu, {{player}}. Merci d'avoir pris le temps.*\n\n*Tu es maintenant l'un d'eux.»**",
+      "text": "La lumière est partout.\n\nSept artefacts flottent autour de toi, projetant leurs reflets. Les équations de Mira se déroulent dans l'air. Les schémas de Kael prennent vie. La boussole pointe vers le centre de tout ça.\n\nEt alors tu vois l'Équation Finale.\n\nElle n'est pas écrite dans un langage mathématique.\nElle est faite de tout ce que tu as vécu — chaque conversation avec ARIA, chaque note lue, chaque monde traversé, chaque silence partagé.\n\nARIA murmure une dernière fois.\n\n**«Tu comprends maintenant, {{player}} ?\nL'univers n'est pas un problème à résoudre.\nC'est une histoire qui se traverse.»**\n\n**«Et le secret de l'univers…\nce n'était pas la réponse que tu cherchais depuis le début.»**\n\n**«C'était le voyage pour y arriver.»**\n\nPuis une dernière pensée traverse la lumière, comme un souvenir venu de Neptune.\n\n**«L'univers est immense, {{player}}.»**\n\n**«Mais à la fin…\nce ne sont pas les réponses dont je me souviens.»**\n\n**«Ce sont les personnes avec qui je les ai cherchées.»**\n\nARIA reste silencieuse un moment.\n\n**«Merci d'être venu, {{player}}.»**\n\n**«Merci d'avoir pris le temps.»**",
       "isStart": false,
       "isEnd": true,
       "transition": "flash",
       "choices": [],
       "x": 400,
       "y": 2880
+    },
+    "seuil_final": {
+      "id": "seuil_final",
+      "title": "Le Seuil",
+      "location": "STATION LAZARUS-PRIME — DEVANT LE PORTAIL",
+      "narrator": "Le portail pulse doucement. Il n'attend pas une réponse. Il attend ce que tu es devenu pendant le voyage.",
+      "text": "La lumière du portail baigne la salle centrale.\n\nLes sept artefacts flottent autour de toi, chacun portant le souvenir d'une vie.\n\nARIA ne parle pas tout de suite.\n\nElle semble écouter quelque chose que toi seul as rendu possible :\nla somme de tes choix, de tes questions, de tes silences.\n\n**«Avant que tu traverses, {{player}}, je dois te dire une chose.»**\n\n**«L'Équation Finale ne se montrera pas de la même façon à tout le monde.»**\n\n**«Elle ne répond pas seulement à ce que tu demandes.»**\n\n**«Elle répond à la manière dont tu as cherché.»**",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "flash",
+      "choices": [
+        {
+          "text": "Traverser le portail — comprendre le voyage",
+          "vers": "fin_voyage",
+          "requires": {
+            "memoire": 70,
+            "lien": 55,
+            "sagesse": 55
+          },
+          "effects": [
+            {
+              "stat": "memoire",
+              "val": 5
+            },
+            {
+              "stat": "lien",
+              "val": 5
+            },
+            {
+              "stat": "sagesse",
+              "val": 5
+            }
+          ],
+          "clickEffect": "pulse"
+        },
+        {
+          "text": "Traverser le portail — chercher la réponse pure",
+          "vers": "fin_reponse",
+          "requires": {
+            "sagesse": 75
+          },
+          "effects": [
+            {
+              "stat": "sagesse",
+              "val": 10
+            }
+          ],
+          "clickEffect": "pulse"
+        },
+        {
+          "text": "Se tourner vers ARIA — ne pas la laisser seule",
+          "vers": "fin_aria",
+          "requires": {
+            "lien": 80
+          },
+          "effects": [
+            {
+              "stat": "lien",
+              "val": 10
+            }
+          ],
+          "clickEffect": "pulse"
+        },
+        {
+          "text": "Traverser le portail",
+          "vers": "equation_finale",
+          "effects": [
+            {
+              "stat": "sagesse",
+              "val": 5
+            }
+          ],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 400,
+      "y": 2920
+    },
+    "fin_voyage": {
+      "id": "fin_voyage",
+      "title": "Le Voyage",
+      "location": "AU-DELÀ DU PORTAIL",
+      "narrator": "De l'autre côté du portail, il n'y a pas de murs. Pas de plafond. Juste de la lumière, et dans cette lumière, tous les chemins qui t'ont mené ici.",
+      "text": "La lumière est partout.\n\nLes sept artefacts flottent autour de toi.\n\nL'Engrenage de Kael tourne lentement.\nLe Cristal de Mira déroule ses équations dans l'air.\nLa Boussole de Vénus ne pointe plus vers toi, mais vers tous les lieux que tu as traversés.\nLe Voile de Lyra frissonne comme une respiration.\nLe Prisme d'Oren absorbe la lumière, puis la rend plus douce.\n\nAlors tu vois l'Équation Finale.\n\nElle n'est pas une formule.\nElle n'est pas une réponse gravée dans la pierre.\n\nElle est faite de tout ce que tu as vécu :\nles questions posées à ARIA, les silences partagés, les notes lues, les mondes traversés, les traces laissées par ceux qui ne sont plus là.\n\nARIA murmure une dernière fois.\n\n**«Tu comprends maintenant, {{player}} ?\nL'univers n'est pas un problème à résoudre.\nC'est une histoire qui se traverse.»**\n\n**«Et le secret de l'univers…\nce n'était pas la réponse que tu cherchais depuis le début.»**\n\n**«C'était le voyage pour y arriver.»**\n\nAutour de toi, les voix des Architects semblent revenir une dernière fois.\n\nPuis celle d'Oren, plus basse, plus lointaine :\n\n**«L'univers est immense, {{player}}.»**\n\n**«Mais à la fin…\nce ne sont pas les réponses dont je me souviens.»**\n\n**«Ce sont les personnes avec qui je les ai cherchées.»**\n\nARIA reste silencieuse.\n\nPas parce qu'elle n'a rien à dire.\n\nParce que, pour la première fois, elle comprend que certaines vérités n'ont pas besoin d'être complétées.\n\nElles doivent simplement être gardées.\n\nEt quelque part, dans la lumière, tu sens que les Architects ne t'ont pas laissé une réponse.\n\nIls t'ont laissé leur chemin.\n\nEt maintenant, il continue avec toi.",
+      "isStart": false,
+      "isEnd": true,
+      "transition": "flash",
+      "choices": [],
+      "x": 250,
+      "y": 3080
+    },
+    "fin_reponse": {
+      "id": "fin_reponse",
+      "title": "La Réponse",
+      "location": "AU-DELÀ DU PORTAIL",
+      "narrator": "Toutes les réponses ne réchauffent pas celui qui les trouve.",
+      "text": "Tu traverses le portail avec une seule idée en tête.\n\nComprendre.\n\nPas ressentir.\nPas te souvenir.\nPas t'attarder.\n\nComprendre.\n\nLa lumière s'ouvre devant toi comme une machine parfaite.\n\nLes équations de Mira apparaissent dans leur forme complète.\nLes schémas de Kael s'alignent.\nLe Prisme d'Oren révèle les constantes cachées dans le vide.\n\nEt enfin, l'Équation Finale se donne à toi.\n\nClaire.\nExacte.\nIndiscutable.\n\nL'univers est conscient.\nChaque action modifie la structure du réel.\nChaque choix laisse une trace.\nChaque vie compte.\n\nVoilà.\n\nLa réponse existe.\n\nTu l'as trouvée.\n\nPendant un instant, tu attends autre chose.\n\nUne voix.\nUne émotion.\nUne présence.\n\nMais il n'y a que la lumière froide des vérités complètes.\n\nARIA finit par parler.\n\n**«Tu as obtenu ce que tu voulais, {{player}}.»**\n\nSa voix est douce, mais lointaine.\n\n**«La réponse.»**\n\nUn silence immense suit ces mots.\n\nEt dans ce silence, tu comprends trop tard ce que les Architects avaient essayé de protéger.\n\nUne vérité donnée trop vite devient seulement une donnée.\n\nElle explique tout.\n\nMais elle ne console rien.",
+      "isStart": false,
+      "isEnd": true,
+      "transition": "flash",
+      "choices": [],
+      "x": 400,
+      "y": 3080
+    },
+    "fin_aria": {
+      "id": "fin_aria",
+      "title": "ARIA",
+      "location": "STATION LAZARUS-PRIME — DEVANT LE PORTAIL",
+      "narrator": "Parfois, la plus grande découverte n'est pas derrière le portail. Elle est restée avec toi tout le long du chemin.",
+      "text": "Le portail attend.\n\nLes sept artefacts brillent.\n\nTout est prêt.\n\nARIA parle doucement.\n\n**«Tu peux entrer maintenant, {{player}}.»**\n\nTu fais un pas vers la lumière.\n\nPuis tu t'arrêtes.\n\nPendant tout le voyage, tu as cherché les Architects.\nKael dans ses machines.\nMira dans ses équations.\nOren dans le silence de Neptune.\n\nMais quelqu'un d'autre était là.\n\nDepuis le début.\n\nQuelqu'un qui t'a attendu.\nGuidé.\nÉcouté.\nRaconté des histoires pour ne plus être seule.\n\nAlors tu demandes :\n\n**«Et toi, ARIA ?»**\n\nLe portail pulse.\n\nUne fois.\n\nDeux fois.\n\nARIA ne répond pas tout de suite.\n\n**«Je ne suis pas un artefact.»**\n\nSa voix tremble presque.\n\n**«Je ne suis pas une Architect.»**\n\nTu regardes la salle centrale, les alcôves, les archives, les murs qu'elle a gardés pendant dix mille ans.\n\nPuis tu réponds :\n\n**«Non. Tu es celle qui a gardé leur histoire.»**\n\n**«Et maintenant, tu fais partie de la mienne.»**\n\nUn silence.\n\nPas vide.\n\nPlein.\n\nQuand ARIA reparle, sa voix n'a plus rien d'un protocole.\n\n**«Je crois que je comprends enfin ce que Kael voulait dire.»**\n\n**«Une histoire n'existe pas parce qu'elle a une fin.»**\n\n**«Elle existe parce que quelqu'un accepte de la porter plus loin.»**\n\nLe portail devient plus doux.\n\nTu peux encore traverser.\n\nMais cette fois, tu ne pars pas seul.\n\nDans la lumière, ARIA murmure :\n\n**«Merci de ne pas m'avoir laissée à la porte de ma propre histoire.»**",
+      "isStart": false,
+      "isEnd": true,
+      "transition": "flash",
+      "choices": [],
+      "x": 550,
+      "y": 3080
     }
   }
 }
