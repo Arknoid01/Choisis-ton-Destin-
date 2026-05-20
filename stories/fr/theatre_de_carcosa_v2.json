@@ -1,0 +1,310 @@
+{
+  "name": "Le Théâtre de Carcosa",
+  "kids": false,
+  "askPlayerName": true,
+  "pack": "horror",
+  "stats": [
+    {
+      "id": "lucidite",
+      "label": "Lucidité",
+      "start": 50,
+      "max": 100,
+      "color": "#8be9fd"
+    },
+    {
+      "id": "obsession",
+      "label": "Obsession",
+      "start": 0,
+      "max": 100,
+      "color": "#f1c40f"
+    },
+    {
+      "id": "memoire",
+      "label": "Mémoire",
+      "start": 0,
+      "max": 100,
+      "color": "#bd93f9"
+    }
+  ],
+  "scenes": {
+    "prologue": {
+      "id": "prologue",
+      "title": "Dernière Représentation",
+      "location": "VALMIRE — 23H17",
+      "narrator": "La pluie tombe sur Valmire depuis si longtemps que personne ne se souvient du soleil.",
+      "text": "Tu arrives devant un vieux théâtre sous une pluie froide. Une invitation jaune porte ton nom.\n\nPuis une voix murmure derrière toi :\n\n« Vous êtes en retard cette fois. »",
+      "isStart": true,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Entrer dans le théâtre",
+          "vers": "theatre",
+          "effects": [
+            {
+              "stat": "obsession",
+              "val": 5
+            }
+          ]
+        },
+        {
+          "text": "Explorer la ville",
+          "vers": "ville",
+          "effects": [
+            {
+              "stat": "memoire",
+              "val": 5
+            }
+          ]
+        }
+      ]
+    },
+    "ville": {
+      "id": "ville",
+      "title": "Les Rues de Valmire",
+      "location": "CENTRE-VILLE",
+      "narrator": "Les rues semblent attendre quelque chose.",
+      "text": "Les habitants parlent à voix basse. Une vieille femme te regarde.\n\n« Ne regardez jamais le deuxième acte. »",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Demander ce qu'est le deuxième acte",
+          "vers": "dossiers",
+          "effects": [
+            {
+              "stat": "lucidite",
+              "val": 10
+            }
+          ]
+        },
+        {
+          "text": "Retourner au théâtre",
+          "vers": "theatre",
+          "effects": [
+            {
+              "stat": "obsession",
+              "val": 5
+            }
+          ]
+        }
+      ]
+    },
+    "dossiers": {
+      "id": "dossiers",
+      "title": "Les Dossiers Médicaux",
+      "location": "CLINIQUE ABANDONNÉE",
+      "narrator": "Les explications rationnelles rassurent toujours au début.",
+      "text": "Des dossiers parlent d'une psychose collective.\n\nTous les patients disent vivre des boucles.\n\nTon nom apparaît dans les archives.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "glitch",
+      "choices": [
+        {
+          "text": "Continuer vers le théâtre",
+          "vers": "theatre",
+          "effects": [
+            {
+              "stat": "memoire",
+              "val": 10
+            }
+          ]
+        }
+      ]
+    },
+    "theatre": {
+      "id": "theatre",
+      "title": "Le Théâtre",
+      "location": "PLACE CENTRALE",
+      "narrator": "Le théâtre semble vivant.",
+      "text": "Une réceptionniste te sourit.\n\n« Bienvenue de nouveau. »\n\nTu n'es pourtant jamais venu ici.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Demander le manuscrit",
+          "vers": "manuscrit",
+          "effects": [
+            {
+              "stat": "obsession",
+              "val": 15
+            }
+          ]
+        },
+        {
+          "text": "Explorer les coulisses",
+          "vers": "coulisses",
+          "effects": [
+            {
+              "stat": "memoire",
+              "val": 10
+            }
+          ]
+        }
+      ]
+    },
+    "manuscrit": {
+      "id": "manuscrit",
+      "title": "Le Manuscrit",
+      "location": "ARCHIVES",
+      "narrator": "Le texte semble changer quand tu détournes le regard.",
+      "text": "Tu lis une phrase :\n\n« Le Roi attend derrière le soleil noir. »\n\nPuis elle disparaît.\n\nÀ sa place :\n\n« Tu as déjà lu ceci auparavant. »",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "glitch",
+      "choices": [
+        {
+          "text": "Continuer la lecture",
+          "vers": "porte_rouge",
+          "effects": [
+            {
+              "stat": "obsession",
+              "val": 20
+            }
+          ]
+        },
+        {
+          "text": "Refermer le manuscrit",
+          "vers": "coulisses",
+          "effects": [
+            {
+              "stat": "lucidite",
+              "val": 10
+            }
+          ]
+        }
+      ]
+    },
+    "coulisses": {
+      "id": "coulisses",
+      "title": "Les Coulisses",
+      "location": "ARRIÈRE-SCÈNE",
+      "narrator": "Les acteurs répètent sans produire le moindre son.",
+      "text": "Tu découvres une porte rouge et un tableau représentant la ville.\n\nDans le tableau, quelqu'un te ressemble.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Observer le tableau",
+          "vers": "tableau",
+          "effects": [
+            {
+              "stat": "memoire",
+              "val": 15
+            }
+          ]
+        },
+        {
+          "text": "Ouvrir la porte rouge",
+          "vers": "porte_rouge",
+          "effects": [
+            {
+              "stat": "obsession",
+              "val": 15
+            }
+          ]
+        }
+      ]
+    },
+    "tableau": {
+      "id": "tableau",
+      "title": "Le Tableau",
+      "location": "COULISSES",
+      "narrator": "Les boucles laissent des traces.",
+      "text": "Le personnage du tableau tourne lentement la tête vers toi.\n\nLe narrateur murmure :\n\n« Cette conversation s'est déjà mieux terminée. »",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "glitch",
+      "choices": [
+        {
+          "text": "Fuir Valmire",
+          "vers": "fin_oubli",
+          "effects": [
+            {
+              "stat": "lucidite",
+              "val": 15
+            }
+          ]
+        },
+        {
+          "text": "Entrer dans la porte rouge",
+          "vers": "porte_rouge",
+          "effects": [
+            {
+              "stat": "obsession",
+              "val": 10
+            }
+          ]
+        }
+      ]
+    },
+    "porte_rouge": {
+      "id": "porte_rouge",
+      "title": "Le Deuxième Acte",
+      "location": "SALLE INTERDITE",
+      "narrator": "Le deuxième acte n'est pas une pièce. C'est un miroir.",
+      "text": "Une salle vide.\n\nUne seule chaise.\n\nLa tienne.\n\nLe narrateur parle directement :\n\n« Tu voulais comprendre. »",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "flash",
+      "choices": [
+        {
+          "text": "Brûler le théâtre",
+          "vers": "fin_silence",
+          "effects": [
+            {
+              "stat": "lucidite",
+              "val": 20
+            }
+          ]
+        },
+        {
+          "text": "Terminer la pièce",
+          "vers": "fin_roi",
+          "effects": [
+            {
+              "stat": "obsession",
+              "val": 25
+            }
+          ]
+        }
+      ]
+    },
+    "fin_silence": {
+      "id": "fin_silence",
+      "title": "Le Silence",
+      "location": "VALMIRE",
+      "narrator": "Certaines histoires doivent mourir.",
+      "text": "Le théâtre brûle.\n\nLes habitants disparaissent dans la lumière.\n\n« Enfin… le silence. »",
+      "isStart": false,
+      "isEnd": true,
+      "transition": "flash",
+      "choices": []
+    },
+    "fin_roi": {
+      "id": "fin_roi",
+      "title": "Le Roi en Jaune",
+      "location": "SUR LA SCÈNE",
+      "narrator": "Les histoires ont besoin d'un acteur.",
+      "text": "Tu prends place sur scène.\n\nQuelqu'un entre dans le théâtre.\n\nEt tu dis :\n\n« Vous êtes en retard cette fois. »",
+      "isStart": false,
+      "isEnd": true,
+      "transition": "flash",
+      "choices": []
+    },
+    "fin_oubli": {
+      "id": "fin_oubli",
+      "title": "L'Oubli",
+      "location": "EN DEHORS DE VALMIRE",
+      "narrator": "On peut quitter une ville. Pas toujours ce qu'on y a vu.",
+      "text": "Des semaines plus tard, tu aperçois une nouvelle affiche jaune.\n\nTon nom est écrit dessus.",
+      "isStart": false,
+      "isEnd": true,
+      "transition": "fade",
+      "choices": []
+    }
+  }
+}
