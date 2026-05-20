@@ -480,30 +480,76 @@ body {
 #name-skip:hover { color:var(--text2); }
 #loading {
   position: fixed; inset: 0;
-  background: var(--bg);
+  background: #000;
   display: flex; flex-direction: column;
   align-items: center; justify-content: center;
-  gap: 16px; z-index: 500;
-  transition: opacity .4s;
+  gap: 0; z-index: 500;
+  transition: opacity .8s ease;
 }
 #loading.fade { opacity: 0; pointer-events: none; }
+
+/* Studio line */
+.intro-studio {
+  font-family:'DM Mono',monospace; font-size:10px;
+  letter-spacing:5px; text-transform:uppercase;
+  color:rgba(255,255,255,0.25);
+  opacity:0; animation:intro-rise .6s ease forwards;
+  animation-delay:.4s;
+}
+/* Divider */
+.intro-divider {
+  width:0; height:1px; background:rgba(255,255,255,0.15);
+  margin:16px 0; animation:intro-expand .6s ease forwards;
+  animation-delay:.8s;
+}
+@keyframes intro-expand { from{width:0;} to{width:120px;} }
+
+/* Story title */
+.intro-title {
+  font-family:'Cinzel',serif;
+  font-size:clamp(18px, 5.5vw, 34px);
+  font-weight:600; letter-spacing:3px;
+  color:rgba(255,255,255,0);
+  text-align:center; padding:0 28px;
+  opacity:0; animation:intro-title-in .9s ease forwards;
+  animation-delay:1.1s;
+}
+@keyframes intro-title-in {
+  0%   { opacity:0; color:rgba(255,255,255,0); transform:translateY(8px); }
+  50%  { opacity:1; color:rgba(255,255,255,0.9); transform:translateY(0); }
+  100% { opacity:1; color:rgba(255,255,255,0.85); }
+}
+/* Pegasus */
+.intro-pegasus {
+  font-family:'Cinzel',serif; font-size:9px;
+  letter-spacing:4px; text-transform:uppercase;
+  color:rgba(255,255,255,0.2); margin-top:22px;
+  opacity:0; animation:intro-rise .5s ease forwards;
+  animation-delay:1.8s;
+}
+@keyframes intro-rise {
+  from { opacity:0; transform:translateY(4px); }
+  to   { opacity:1; transform:translateY(0); }
+}
+/* Loading dots */
 .loading-dots {
-  display: flex; gap: 6px;
+  position:absolute; bottom:44px;
+  display:flex; gap:6px;
+  opacity:0; animation:intro-rise .4s ease forwards;
+  animation-delay:2s;
 }
 .loading-dot {
-  width: 6px; height: 6px; border-radius: 50%;
-  background: var(--accent); animation: dot-pulse 1.2s ease infinite;
+  width:4px; height:4px; border-radius:50%;
+  background:rgba(255,255,255,0.3);
+  animation:dot-pulse .8s ease-in-out infinite;
 }
-.loading-dot:nth-child(2) { animation-delay: .2s; }
-.loading-dot:nth-child(3) { animation-delay: .4s; }
+.loading-dot:nth-child(2) { animation-delay:.15s; }
+.loading-dot:nth-child(3) { animation-delay:.3s; }
 @keyframes dot-pulse {
-  0%,100% { opacity:.2; transform:scale(0.8); }
-  50%     { opacity:1;  transform:scale(1.2); }
+  0%,100% { opacity:.3; transform:scale(1); }
+  50%     { opacity:1;  transform:scale(1.3); }
 }
-.loading-label {
-  font-family: 'DM Mono', monospace; font-size: 12px;
-  color: var(--text3); letter-spacing: 3px;
-}
+.loading-label { display:none; }
 
 /* ── ERROR ── */
 #error-screen {
@@ -674,6 +720,10 @@ body {
 
 <!-- LOADING -->
 <div id="loading">
+  <div class="intro-studio" id="intro-studio">Une production</div>
+  <div class="intro-divider"></div>
+  <div class="intro-title" id="intro-title">…</div>
+  <div class="intro-pegasus" id="intro-pegasus">PegasusCorp</div>
   <div class="loading-dots">
     <div class="loading-dot"></div>
     <div class="loading-dot"></div>
@@ -856,21 +906,26 @@ async function loadStory() {
   const startScene = Object.values(story.scenes).find(s => s.isStart);
   if (!startScene) { showError('Aucune scène de départ définie.'); return; }
 
-  // Hide loading
-  hideLoading();
+  // ── INTRO CINÉMA ──
+  const lang = localStorage.getItem('sf_lang') || 'fr';
+  const introTitle  = document.getElementById('intro-title');
+  const introStudio = document.getElementById('intro-studio');
+  if (introTitle)  introTitle.textContent  = story.name || '';
+  if (introStudio) introStudio.textContent = {fr:'Une production',en:'A production',es:'Una producción'}[lang]||'Une production';
 
-  // Apply UI translations
-  applyGameUI();
-
-  // Vérifier si une sauvegarde existe
-  const savedData = JSON.parse(localStorage.getItem(getSaveKey()) || 'null');
-  if (savedData && savedData.sceneId && story.scenes[savedData.sceneId]) {
-    showResumePrompt(savedData, startScene.id);
-  } else if (story.askPlayerName && !playerName) {
-    showNamePopup();
-  } else {
-    trackStats("story_start"); goToScene(startScene.id);
-  }
+  // Attendre 2.8s pour laisser l'animation se jouer, puis fondu
+  setTimeout(() => {
+    hideLoading();
+    applyGameUI();
+    const savedData = JSON.parse(localStorage.getItem(getSaveKey()) || 'null');
+    if (savedData && savedData.sceneId && story.scenes[savedData.sceneId]) {
+      showResumePrompt(savedData, startScene.id);
+    } else if (story.askPlayerName && !playerName) {
+      showNamePopup();
+    } else {
+      trackStats("story_start"); goToScene(startScene.id);
+    }
+  }, 2800);
 }
 
 function showResumePrompt(savedData, startSceneId) {
@@ -1638,8 +1693,9 @@ function escHtml(s) {
 
 function hideLoading() {
   const el = document.getElementById('loading');
+  if (!el) return;
   el.classList.add('fade');
-  setTimeout(() => el.style.display = 'none', 450);
+  setTimeout(() => { el.style.display = 'none'; }, 900);
 }
 
 function showError(msg) {
@@ -1745,7 +1801,7 @@ const _loadingTimeout = setTimeout(() => {
   if (loading && loading.style.display !== 'none') {
     showError('Chargement trop long. Vérifiez votre connexion ou revenez en arrière.');
   }
-}, 8000);
+}, 12000);
 
 // Annuler le timeout quand le jeu démarre
 const _origHideLoading = hideLoading;
