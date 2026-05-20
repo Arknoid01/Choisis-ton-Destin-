@@ -1091,6 +1091,10 @@ function typewrite(html, container, onDone, narratorMode = false) {
     displayed += html[i++];
     container.innerHTML = displayed + '<span class="cursor"></span>';
 
+    // Auto-scroll pour suivre le texte
+    const scrollArea = document.getElementById('scroll-area');
+    if (scrollArea) scrollArea.scrollTop = scrollArea.scrollHeight;
+
     // Pause plus longue sur ponctuation
     const ch = displayed[displayed.length - 1];
     let delay = speed;
