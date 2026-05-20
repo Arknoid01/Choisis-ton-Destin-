@@ -844,12 +844,20 @@ function showResumePrompt(savedData, startSceneId) {
       <div style="font-size:28px;margin-bottom:12px">🔖</div>
       <div style="font-family:'Cinzel',serif;font-size:15px;color:var(--text);letter-spacing:2px;margin-bottom:8px">${t.title}</div>
       <div style="font-size:12px;color:var(--text2);font-style:italic;margin-bottom:20px">${t.sub}</div>
-      <button style="width:100%;padding:12px;border:1px solid var(--accent);background:color-mix(in srgb,var(--accent) 15%,transparent);color:var(--accent);font-family:'Cinzel',serif;font-size:12px;letter-spacing:2px;border-radius:8px;cursor:pointer;margin-bottom:10px"
-        onclick="this.closest('div[style]').remove();loadSavedProgress()">${t.resume}</button>
-      <button style="width:100%;padding:10px;border:1px solid var(--border);background:none;color:var(--text2);font-family:'Cinzel',serif;font-size:11px;letter-spacing:2px;border-radius:8px;cursor:pointer"
-        onclick="this.closest('div[style]').remove();${story.askPlayerName && !playerName ? 'showNamePopup()' : `goToScene('${startSceneId}')`}">${t.restart}</button>
+      <button id="resume-btn" style="width:100%;padding:12px;border:1px solid var(--accent);background:rgba(64,128,255,0.15);color:var(--accent);font-family:'Cinzel',serif;font-size:12px;letter-spacing:2px;border-radius:8px;cursor:pointer;margin-bottom:10px">${t.resume}</button>
+      <button id="restart-btn" style="width:100%;padding:10px;border:1px solid var(--border);background:none;color:var(--text2);font-family:'Cinzel',serif;font-size:11px;letter-spacing:2px;border-radius:8px;cursor:pointer">${t.restart}</button>
     </div>`;
   document.body.appendChild(overlay);
+
+  document.getElementById('resume-btn').onclick = () => {
+    overlay.remove();
+    loadSavedProgress();
+  };
+  document.getElementById('restart-btn').onclick = () => {
+    overlay.remove();
+    if (story.askPlayerName && !playerName) showNamePopup();
+    else goToScene(startSceneId);
+  };
 }
 
 
@@ -1274,9 +1282,11 @@ document.addEventListener('click', e => {
 });
 
 function getSaveKey() {
-  const params = new URLSearchParams(window.location.search);
-  const file = params.get('story') || localStorage.getItem('sf_game_file') || 'unknown';
-  return 'sf_save_' + file.replace(/[^a-z0-9]/gi, '_');
+  try {
+    const params = new URLSearchParams(window.location.search);
+    const file = params.get('story') || localStorage.getItem('sf_game_file') || 'unknown';
+    return 'sf_save_' + file.replace(/[^a-z0-9]/gi, '_');
+  } catch(e) { return 'sf_save_unknown'; }
 }
 
 function buildSaveData(isBookmark = false) {
