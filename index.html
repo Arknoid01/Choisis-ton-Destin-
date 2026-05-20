@@ -766,6 +766,17 @@ body {
 
     <div class="option-row">
       <div>
+        <div class="option-label" id="txt-opt-locked">Choix conditionnels</div>
+        <div class="option-desc" id="txt-opt-locked-desc">Choix nécessitant certaines stats</div>
+      </div>
+      <select class="opt-select" id="opt-locked" onchange="saveOptions()">
+        <option value="hidden"  id="txt-locked-hidden">Masqués</option>
+        <option value="grayed"  id="txt-locked-grayed">Grisés</option>
+      </select>
+    </div>
+
+    <div class="option-row">
+      <div>
         <div class="option-label" id="txt-opt-lang">Langue</div>
       </div>
       <select class="opt-select" id="opt-lang" onchange="setLang(this.value)">
@@ -804,6 +815,10 @@ const LANG = {
     optAnim:        'Animations',
     optAnimDesc:    'Effets visuels',
     optTextspeed:   'Vitesse du texte',
+    optLocked:      'Choix conditionnels',
+    optLockedDesc:  'Choix nécessitant certaines stats',
+    optLockedHidden:'Masqués',
+    optLockedGrayed:'Grisés',
     optLang:        'Langue',
     speedFast:      'Rapide',
     speedNormal:    'Normal',
@@ -886,6 +901,10 @@ const LANG = {
     optAnim:        'Animaciones',
     optAnimDesc:    'Efectos visuales',
     optTextspeed:   'Velocidad del texto',
+    optLocked:      'Elecciones condicionales',
+    optLockedDesc:  'Elecciones que requieren ciertas stats',
+    optLockedHidden:'Ocultas',
+    optLockedGrayed:'Atenuadas',
     optLang:        'Idioma',
     speedFast:      'Rápido',
     speedNormal:    'Normal',
@@ -940,8 +959,12 @@ function applyLang() {
   set('txt-opt-kids-desc',  t.optKidsDesc);
   set('txt-opt-sound',      t.optSound);
   set('txt-opt-sound-desc', t.optSoundDesc);
-  set('txt-opt-anim',       t.optAnim);
-  set('txt-opt-anim-desc',  t.optAnimDesc);
+  set('txt-opt-anim',         t.optAnim);
+  set('txt-opt-anim-desc',    t.optAnimDesc);
+  set('txt-opt-locked',       t.optLocked);
+  set('txt-opt-locked-desc',  t.optLockedDesc);
+  set('txt-locked-hidden',    t.optLockedHidden);
+  set('txt-locked-grayed',    t.optLockedGrayed);
   set('txt-opt-textspeed',  t.optTextspeed);
   set('txt-opt-lang',       t.optLang);
   set('txt-speed-fast',     t.speedFast);
@@ -1119,16 +1142,18 @@ function saveOptions() {
     anim:      document.getElementById('opt-anim').checked,
     textspeed: document.getElementById('opt-textspeed').value,
     kids:      document.getElementById('opt-kids').checked,
+    locked:    document.getElementById('opt-locked').value,
   };
   localStorage.setItem('sf_options', JSON.stringify(opts));
 }
 function loadOptions() {
   try {
     const opts = JSON.parse(localStorage.getItem('sf_options') || '{}');
-    if (opts.sound     !== undefined) document.getElementById('opt-sound').checked = opts.sound;
-    if (opts.anim      !== undefined) document.getElementById('opt-anim').checked  = opts.anim;
-    if (opts.textspeed !== undefined) document.getElementById('opt-textspeed').value = opts.textspeed;
-    if (opts.kids      !== undefined) document.getElementById('opt-kids').checked  = opts.kids;
+    if (opts.sound     !== undefined) document.getElementById('opt-sound').checked     = opts.sound;
+    if (opts.anim      !== undefined) document.getElementById('opt-anim').checked      = opts.anim;
+    if (opts.textspeed !== undefined) document.getElementById('opt-textspeed').value   = opts.textspeed;
+    if (opts.kids      !== undefined) document.getElementById('opt-kids').checked      = opts.kids;
+    if (opts.locked    !== undefined) document.getElementById('opt-locked').value      = opts.locked;
   } catch(e) {}
 }
 

@@ -1124,14 +1124,37 @@ function renderScene(scene) {
   // Stocker les choix dans une variable globale pour les onclick
   window._currentChoices = shuffled;
 
+  // Lire le mode d'affichage des choix verrouillés
+  const opts = JSON.parse(localStorage.getItem('sf_options') || '{}');
+  const lockedMode = opts.locked || 'hidden'; // 'hidden' ou 'grayed'
+
   const choicesHTML = shuffled.map((c, i) => {
     const locked = isChoiceLocked(c);
-    return `<button class="choice-btn${locked ? ' locked' : ''}"
-      style="${locked ? 'opacity:0.35;cursor:not-allowed' : ''}"
-      onclick="${locked ? '' : `pickChoice('${c.vers}', ${i}, this)`}"
-      ${locked ? 'disabled' : ''}>
+    // Vérifier les conditions de stats
+    const req = c.requires;
+    let statLocked = false;
+    let statReason = '';
+    if (req && req.stat && stats[req.stat] !== undefined) {
+      if (req.min !== undefined && stats[req.stat] < req.min) {
+        statLocked = true;
+        statReason = `${req.stat} ${stats[req.stat]}/${req.min}`;
+      }
+      if (req.max !== undefined && stats[req.stat] > req.max) {
+        statLocked = true;
+        statReason = `${req.stat} ${stats[req.stat]}/${req.max}`;
+      }
+    }
+    // Si masqué ET stat insuffisante → ne pas afficher du tout
+    if (statLocked && lockedMode === 'hidden') return '';
+
+    return `<button class="choice-btn${locked || statLocked ? ' locked' : ''}"
+      style="${locked || statLocked ? 'opacity:0.35;cursor:not-allowed' : ''}"
+      onclick="${locked || statLocked ? '' : `pickChoice('${c.vers}', ${i}, this)`}"
+      ${locked || statLocked ? 'disabled' : ''}>
       <span class="choice-index">— ${String(i+1).padStart(2,'0')}</span>
       ${escHtml(c.text)}
+      ${statLocked ? `<span style="display:block;font-size:11px;color:var(--text3);margin-top:4px;font-family:'DM Mono',monospace">
+        🔒 ${statReason}</span>` : ''}
       ${locked ? `<span style="display:block;font-size:11px;color:var(--text3);margin-top:4px;font-family:'DM Mono',monospace">
         ${getLockedReason(c)}</span>` : ''}
     </button>`;

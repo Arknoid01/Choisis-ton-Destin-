@@ -1539,6 +1539,29 @@ function renderChoices(id) {
         <div class="choice-effects" id="effects-${ci}">${effects}</div>
         <button class="add-effect-btn" onclick="addEffect(${ci})">${et('effect')}</button>
       </div>
+      <div class="form-group" style="margin-bottom:6px">
+        <label class="form-label" style="font-size:10px">🔒 Condition d'affichage <span class="tip tip-down" data-tip="Ce choix n'apparaît que si la stat dépasse le seuil minimum">?</span></label>
+        ${project.stats.length ? `
+        <div style="display:flex;gap:6px;align-items:center;flex-wrap:wrap">
+          <select class="form-select" style="flex:1;min-width:100px"
+            onchange="updateChoiceRequires(${ci},'stat',this.value)">
+            <option value="">— Aucune condition —</option>
+            ${project.stats.map(s =>
+              `<option value="${s.id}" ${choice.requires?.stat===s.id?'selected':''}>${s.label}</option>`
+            ).join('')}
+          </select>
+          ${choice.requires?.stat ? `
+          <span style="font-size:11px;color:var(--text3)">≥</span>
+          <input type="number" class="form-input" style="width:60px"
+            value="${choice.requires?.min||0}" min="0" max="999"
+            onchange="updateChoiceRequires(${ci},'min',parseInt(this.value))">
+          ` : ''}
+        </div>
+        ${choice.requires?.stat ? `<div style="font-size:10px;color:var(--accent3);margin-top:4px;font-family:'DM Mono',monospace">
+          Visible si ${choice.requires.stat} ≥ ${choice.requires.min||0}
+        </div>` : ''}
+        ` : `<div style="font-size:10px;color:var(--text3);font-style:italic">Définis d'abord des stats dans ⚙ Stats</div>`}
+      </div>
     </div>`;
   }).join('');
 }
@@ -1664,9 +1687,28 @@ function removeEffect(ci, ei) {
   renderChoices(selectedId);
 }
 
-function updateEffect(ci, ei, key, val) {
-  project.scenes[selectedId].choices[ci].effects[ei][key] = val;
+function updateChoiceRequires(ci, key, val) {
+  if (!selectedId) return;
+  pushUndo();
+  const choice = project.scenes[selectedId].choices[ci];
+  if (!val && key === 'stat') {
+    // Supprimer la condition
+    delete choice.requires;
+  } else {
+    if (!choice.requires) choice.requires = { stat: '', min: 0 };
+    choice.requires[key] = val;
+  }
+  renderChoices(selectedId);
+  checkHealth();
 }
+
+
+function updateEffect(ci, ei, key, val) {
+  if (!selectedId) return;
+  project.scenes[selectedId].choices[ci].effects[ei][key] = val;
+  render();
+}
+
 
 // ══════════════════════════════════════════════
 // STATS MODAL
