@@ -1415,7 +1415,9 @@ function hideLoading() {
 }
 
 function showError(msg) {
-  document.getElementById('loading').style.display = 'none';
+  // Cacher le loading dans tous les cas
+  const loading = document.getElementById('loading');
+  if (loading) loading.style.display = 'none';
   document.getElementById('error-msg').innerHTML = msg;
   document.getElementById('error-screen').classList.add('show');
 }
@@ -1509,6 +1511,18 @@ function createParticles() {
 // ══════════════════════════════════════════════
 // INIT
 // ══════════════════════════════════════════════
+// Timeout de sécurité — si loading bloque plus de 8s
+const _loadingTimeout = setTimeout(() => {
+  const loading = document.getElementById('loading');
+  if (loading && loading.style.display !== 'none') {
+    showError('Chargement trop long. Vérifiez votre connexion ou revenez en arrière.');
+  }
+}, 8000);
+
+// Annuler le timeout quand le jeu démarre
+const _origHideLoading = hideLoading;
+hideLoading = function() { clearTimeout(_loadingTimeout); _origHideLoading(); };
+
 loadStory();
 </script>
 </body>
