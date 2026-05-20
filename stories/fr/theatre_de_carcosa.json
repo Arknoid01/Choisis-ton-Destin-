@@ -1,0 +1,1007 @@
+{
+  "name": "Le Théâtre de Carcosa",
+  "kids": false,
+  "askPlayerName": true,
+  "pack": "ombres",
+  "stats": [
+    {
+      "id": "lucidite",
+      "label": "Lucidité",
+      "start": 0,
+      "max": 100,
+      "color": "#f6d365"
+    },
+    {
+      "id": "obsession",
+      "label": "Obsession",
+      "start": 0,
+      "max": 100,
+      "color": "#d6a300"
+    },
+    {
+      "id": "memoire",
+      "label": "Mémoire",
+      "start": 0,
+      "max": 100,
+      "color": "#b8e1ff"
+    }
+  ],
+  "theme": {
+    "bg": "#080706",
+    "bg2": "#100d09",
+    "bg3": "#171207",
+    "bg4": "#211909",
+    "border": "#3a2b10",
+    "accent": "#d6a300",
+    "accent2": "#8b1e1e",
+    "accent3": "#f6d365",
+    "text": "#f2e6c9",
+    "text2": "#b8a77d",
+    "text3": "#6f6040"
+  },
+  "scenes": {
+    "prologue": {
+      "id": "prologue",
+      "title": "Prologue",
+      "location": "ROUTE DE VALMIRE — 23H17",
+      "narrator": "Certaines histoires ne commencent pas quand on les ouvre. Elles commencent quand elles décident que vous êtes prêt à les lire.",
+      "text": "La pluie tombe en lignes fines sur le pare-brise du bus. Il n'y a plus personne à bord depuis le dernier village. Seulement toi, {{player}}, ton reflet dans la vitre noire, et une enveloppe jaunie posée sur tes genoux.\n\nElle est arrivée ce matin sans timbre, sans adresse d'expéditeur. À l'intérieur : une invitation.\n\n**Dernière représentation. Théâtre de Valmire. Minuit. Nous vous attendons.**\n\nAu dos, ton nom. Écrit à la main.\n\nLe bus ralentit devant un panneau rongé par la rouille : **VALMIRE — 1 KM**.\n\nLe chauffeur ne te regarde pas. Il murmure seulement :\n\n*« Vous êtes en retard cette fois. »*",
+      "isStart": true,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Descendre du bus",
+          "vers": "arrivee_valmire",
+          "effects": [
+            {
+              "stat": "memoire",
+              "val": 5
+            }
+          ]
+        }
+      ],
+      "x": 400,
+      "y": -100
+    },
+    "arrivee_valmire": {
+      "id": "arrivee_valmire",
+      "title": "La Ville Jaune",
+      "location": "VALMIRE — PLACE CENTRALE",
+      "narrator": "Valmire n'apparaît sur aucune carte récente. Les anciens plans la placent parfois au bord de la mer, parfois dans les terres. Les cartes les plus vieilles ne la nomment pas. Elles dessinent seulement un cercle jaune.",
+      "text": "La ville est presque silencieuse. Des lampadaires diffusent une lumière jaune trop chaude, qui transforme les flaques en miroirs d'or sale.\n\nAux fenêtres, les rideaux bougent sans vent. Les façades sont propres, mais les rues semblent abandonnées depuis des années.\n\nPartout, la même affiche :\n\n**LE ROI EN JAUNE — DERNIÈRE REPRÉSENTATION**\n\nSur l'affiche, un théâtre. Devant le théâtre, une silhouette couronnée. Le visage a été gratté.\n\nUne femme âgée traverse la place avec un parapluie noir. Elle s'arrête près de toi.\n\n*« Bienvenue à Valmire. Ne manquez pas le premier acte. Tout le monde aime le premier acte. »*",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Lui demander ce qu'est le deuxième acte",
+          "vers": "vieille_femme",
+          "effects": [
+            {
+              "stat": "obsession",
+              "val": 10
+            }
+          ]
+        },
+        {
+          "text": "Aller directement au théâtre",
+          "vers": "theatre_exterieur",
+          "effects": [
+            {
+              "stat": "lucidite",
+              "val": 5
+            }
+          ]
+        },
+        {
+          "text": "Observer les affiches",
+          "vers": "affiches",
+          "effects": [
+            {
+              "stat": "memoire",
+              "val": 10
+            }
+          ]
+        }
+      ],
+      "x": 400,
+      "y": 60
+    },
+    "vieille_femme": {
+      "id": "vieille_femme",
+      "title": "La Femme au Parapluie",
+      "location": "VALMIRE — PLACE CENTRALE",
+      "narrator": "Il existe des silences qui ne signifient pas qu'on ignore la réponse. Ils signifient qu'on la connaît trop bien.",
+      "text": "La vieille femme ferme les yeux. Pendant une seconde, la pluie semble s'arrêter autour d'elle.\n\n*« Le deuxième acte ne se raconte pas. Il se reconnaît. »*\n\nElle rouvre les yeux. Ils sont d'un gris presque blanc.\n\n*« Vous posiez déjà cette question hier. Ou demain. Je ne sais plus. »*\n\nElle te tend un petit ticket de théâtre. La date imprimée dessus est impossible : **32 octobre**.\n\nAu verso, quelqu'un a écrit :\n\n**Ne regarde pas le balcon.**",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Garder le ticket et aller au théâtre",
+          "vers": "theatre_exterieur",
+          "effects": [
+            {
+              "stat": "memoire",
+              "val": 10
+            },
+            {
+              "stat": "obsession",
+              "val": 5
+            }
+          ]
+        },
+        {
+          "text": "Lui demander pourquoi elle se souvient",
+          "vers": "souvenir_femme",
+          "effects": [
+            {
+              "stat": "lucidite",
+              "val": 10
+            }
+          ]
+        }
+      ],
+      "x": 180,
+      "y": 220
+    },
+    "souvenir_femme": {
+      "id": "souvenir_femme",
+      "title": "Ceux Qui Se Souviennent",
+      "location": "VALMIRE — PLACE CENTRALE",
+      "narrator": "La mémoire n'est pas toujours une bénédiction. Parfois, c'est simplement la preuve qu'une prison a des fenêtres.",
+      "text": "La femme serre le manche de son parapluie.\n\n*« On ne se souvient pas tous de la même chose. Le boulanger se souvient de la pluie. Le maire se souvient des applaudissements. Moi, je me souviens du moment où le rideau n'est jamais retombé. »*\n\nElle te regarde enfin vraiment.\n\n*« Si tu veux partir, pars avant minuit. Si tu veux comprendre, entre. Mais ne confonds jamais comprendre et survivre. »*",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Entrer dans le théâtre",
+          "vers": "theatre_exterieur",
+          "effects": [
+            {
+              "stat": "lucidite",
+              "val": 10
+            },
+            {
+              "stat": "memoire",
+              "val": 5
+            }
+          ]
+        }
+      ],
+      "x": 120,
+      "y": 380
+    },
+    "affiches": {
+      "id": "affiches",
+      "title": "Les Affiches",
+      "location": "VALMIRE — RUELLE DES LAMPES",
+      "narrator": "Les affiches sont récentes. La colle est fraîche. Pourtant le papier tombe en poussière sous tes doigts.",
+      "text": "Tu arraches un coin d'affiche. Derrière, une autre affiche identique. Puis une autre. Puis encore une.\n\nSous la dernière couche, le mur porte une inscription gravée dans la pierre :\n\n**LA PIÈCE A COMMENCÉ AVANT LA VILLE.**\n\nUne fenêtre claque au-dessus de toi. Quand tu lèves les yeux, tu aperçois une silhouette derrière un rideau jaune.\n\nElle lève la main.\n\nCe n'est pas un salut.\n\nC'est un avertissement.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "scanline",
+      "choices": [
+        {
+          "text": "Suivre la silhouette dans l'immeuble",
+          "vers": "immeuble_silhouette",
+          "effects": [
+            {
+              "stat": "obsession",
+              "val": 10
+            },
+            {
+              "stat": "memoire",
+              "val": 10
+            }
+          ]
+        },
+        {
+          "text": "Ignorer l'avertissement et aller au théâtre",
+          "vers": "theatre_exterieur",
+          "effects": []
+        }
+      ],
+      "x": 620,
+      "y": 220
+    },
+    "immeuble_silhouette": {
+      "id": "immeuble_silhouette",
+      "title": "La Chambre Vide",
+      "location": "VALMIRE — IMMEUBLE SANS NOM",
+      "narrator": "Certains lieux ne sont pas abandonnés. Ils attendent simplement le bon témoin.",
+      "text": "L'escalier grince sous tes pas. Au troisième étage, une porte est entrouverte.\n\nLa chambre est vide, sauf pour un miroir couvert d'un drap jaune et un carnet posé sur le rebord de la fenêtre.\n\nLe carnet contient une seule phrase, répétée sur toutes les pages :\n\n**Si tu lis ceci, tu as déjà choisi d'oublier.**\n\nDans la marge de la dernière page, ton nom apparaît. L'encre est encore humide.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Soulever le drap du miroir",
+          "vers": "miroir",
+          "effects": [
+            {
+              "stat": "obsession",
+              "val": 15
+            }
+          ]
+        },
+        {
+          "text": "Prendre le carnet et partir",
+          "vers": "theatre_exterieur",
+          "effects": [
+            {
+              "stat": "memoire",
+              "val": 15
+            },
+            {
+              "stat": "lucidite",
+              "val": 5
+            }
+          ]
+        }
+      ],
+      "x": 700,
+      "y": 380
+    },
+    "miroir": {
+      "id": "miroir",
+      "title": "Le Reflet en Retard",
+      "location": "VALMIRE — CHAMBRE VIDE",
+      "narrator": "Un miroir honnête montre ce qui est devant lui. Celui-ci montre ce qui a renoncé à partir.",
+      "text": "Tu retires le drap.\n\nTon reflet n'est pas là. Pas tout de suite.\n\nIl arrive avec quelques secondes de retard, comme s'il venait d'ailleurs. Il porte les mêmes vêtements que toi, mais ses yeux sont fatigués. Beaucoup plus fatigués.\n\nIl pose une main contre la surface du miroir et articule sans son :\n\n**Ne termine pas la phrase.**\n\nDerrière ton reflet, dans la chambre qui n'existe pas, un rideau de théâtre se lève lentement.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "glitch",
+      "choices": [
+        {
+          "text": "Fuir vers le théâtre",
+          "vers": "theatre_exterieur",
+          "effects": [
+            {
+              "stat": "lucidite",
+              "val": 10
+            },
+            {
+              "stat": "obsession",
+              "val": 10
+            }
+          ]
+        }
+      ],
+      "x": 760,
+      "y": 540
+    },
+    "theatre_exterieur": {
+      "id": "theatre_exterieur",
+      "title": "Le Théâtre",
+      "location": "VALMIRE — THÉÂTRE MUNICIPAL",
+      "narrator": "Le théâtre de Valmire n'est pas grand. Pourtant, en levant les yeux vers sa façade, tu as l'impression qu'il contient plus d'espace que la ville entière.",
+      "text": "Le bâtiment t'attend au bout d'une avenue bordée d'arbres morts. Ses portes sont ouvertes. À l'intérieur, une lumière dorée respire comme une chose vivante.\n\nAu-dessus de l'entrée, gravé dans la pierre :\n\n**ON N'ÉCHAPPE PAS AUX HISTOIRES QU'ON A BESOIN DE COMPRENDRE.**\n\nUn réceptionniste en costume jaune pâle te sourit depuis le guichet.\n\n*« Ah. {{player}}. Votre place est prête. Elle l'a toujours été. »*",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Demander depuis combien de temps il connaît ton nom",
+          "vers": "guichet",
+          "effects": [
+            {
+              "stat": "lucidite",
+              "val": 10
+            }
+          ]
+        },
+        {
+          "text": "Entrer sans parler",
+          "vers": "salle_premier_acte",
+          "effects": [
+            {
+              "stat": "obsession",
+              "val": 5
+            }
+          ]
+        },
+        {
+          "text": "Regarder le balcon malgré l'avertissement",
+          "vers": "balcon",
+          "effects": [
+            {
+              "stat": "obsession",
+              "val": 15
+            }
+          ]
+        }
+      ],
+      "x": 400,
+      "y": 540
+    },
+    "guichet": {
+      "id": "guichet",
+      "title": "Le Réceptionniste",
+      "location": "THÉÂTRE DE VALMIRE — GUICHET",
+      "narrator": "Le mensonge le plus élégant est celui qui ressemble à une politesse.",
+      "text": "Le réceptionniste incline la tête.\n\n*« Depuis votre première visite. »*\n\nTu lui réponds que tu n'es jamais venu.\n\nSon sourire ne change pas.\n\n*« C'est ce que vous dites toujours. »*\n\nIl pousse un billet vers toi. Rang C, siège 17. Sur le billet, une tache d'encre dessine presque une couronne.\n\n*« Le premier acte va commencer. Le deuxième vous trouvera, que vous le cherchiez ou non. »*",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Prendre le billet",
+          "vers": "salle_premier_acte",
+          "effects": [
+            {
+              "stat": "memoire",
+              "val": 10
+            }
+          ]
+        }
+      ],
+      "x": 240,
+      "y": 700
+    },
+    "balcon": {
+      "id": "balcon",
+      "title": "Le Balcon",
+      "location": "THÉÂTRE DE VALMIRE — HALL",
+      "narrator": "Certains avertissements sont des portes déguisées. Certains désobéissent parce qu'ils sont courageux. D'autres parce qu'ils sont déjà perdus.",
+      "text": "Tu lèves les yeux vers le balcon.\n\nIl n'y a personne. Puis il y a quelqu'un. Puis il y a trop de monde.\n\nDes silhouettes assises côte à côte, immobiles, toutes tournées vers toi. Leurs visages sont couverts de masques blancs. Au centre, une place vide. Sur le dossier du siège, ton nom est gravé.\n\nUne voix descend du balcon, douce et immense :\n\n*« Pas encore. »*\n\nLes lumières s'éteignent.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "flash",
+      "choices": [
+        {
+          "text": "Rejoindre la salle",
+          "vers": "salle_premier_acte",
+          "effects": [
+            {
+              "stat": "obsession",
+              "val": 15
+            },
+            {
+              "stat": "memoire",
+              "val": 5
+            }
+          ]
+        }
+      ],
+      "x": 600,
+      "y": 700
+    },
+    "salle_premier_acte": {
+      "id": "salle_premier_acte",
+      "title": "Premier Acte",
+      "location": "THÉÂTRE DE VALMIRE — SALLE PRINCIPALE",
+      "narrator": "Le premier acte est toujours beau. C'est pour cela qu'on accepte de rester jusqu'au second.",
+      "text": "La salle est pleine. Pourtant, tu n'as vu personne entrer.\n\nSur scène, une ville peinte en décor : Valmire, mais plus ancienne, plus lumineuse. Des acteurs sans visage jouent l'arrivée d'un voyageur sous la pluie.\n\nLe voyageur tient une enveloppe jaunie.\n\nLe public rit doucement.\n\nPuis l'acteur qui joue le voyageur se tourne vers toi. Malgré son masque, tu sais qu'il te regarde.\n\n*« Je suis venu comprendre pourquoi je revenais toujours. »*\n\nÀ cet instant, toutes les horloges de la ville sonnent minuit.\n\nLe rideau tombe.\n\nQuand il se relève, tu es de nouveau dehors, sous la pluie.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "flash",
+      "choices": [
+        {
+          "text": "Recommencer",
+          "vers": "boucle_deux",
+          "effects": [
+            {
+              "stat": "memoire",
+              "val": 20
+            },
+            {
+              "stat": "obsession",
+              "val": 10
+            }
+          ]
+        }
+      ],
+      "x": 400,
+      "y": 860
+    },
+    "boucle_deux": {
+      "id": "boucle_deux",
+      "title": "Deuxième Matin",
+      "location": "ROUTE DE VALMIRE — 23H17",
+      "narrator": "La première fois, on appelle cela un rêve. La deuxième, une coïncidence. La troisième, on commence à chercher des règles.",
+      "text": "La pluie tombe en lignes fines sur le pare-brise du bus.\n\nTu es assis à la même place. L'enveloppe jaunie est sur tes genoux. Ton cœur sait avant ton esprit.\n\nLe chauffeur ralentit devant le panneau : **VALMIRE — 1 KM**.\n\nCette fois, il te regarde dans le rétroviseur.\n\n*« Vous avez regardé le premier acte. C'est toujours comme ça que ça commence. »*\n\nSur la vitre embuée, quelqu'un a écrit de l'intérieur :\n\n**TROUVE L'AUTEUR.**",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "glitch",
+      "choices": [
+        {
+          "text": "Chercher l'auteur de la pièce",
+          "vers": "archives",
+          "effects": [
+            {
+              "stat": "lucidite",
+              "val": 15
+            },
+            {
+              "stat": "memoire",
+              "val": 10
+            }
+          ]
+        },
+        {
+          "text": "Retourner au théâtre plus vite",
+          "vers": "theatre_boucle",
+          "effects": [
+            {
+              "stat": "obsession",
+              "val": 15
+            }
+          ]
+        },
+        {
+          "text": "Tenter de quitter Valmire",
+          "vers": "route_sortie",
+          "effects": [
+            {
+              "stat": "lucidite",
+              "val": 10
+            }
+          ]
+        }
+      ],
+      "x": 400,
+      "y": 1020
+    },
+    "route_sortie": {
+      "id": "route_sortie",
+      "title": "La Route Qui Revient",
+      "location": "SORTIE DE VALMIRE",
+      "narrator": "Il y a des prisons avec des murs. Et il y a des prisons qui vous laissent marcher jusqu'à l'épuisement.",
+      "text": "Tu marches pendant une heure sous la pluie. La route quitte la ville, traverse une forêt noire, puis descend vers une vallée noyée de brume.\n\nAu bout de la route : Valmire.\n\nLa même place. Les mêmes lampadaires. Les mêmes affiches.\n\nLa vieille femme au parapluie t'attend.\n\n*« Personne ne quitte une histoire en sautant des pages. »*",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Accepter de chercher l'auteur",
+          "vers": "archives",
+          "effects": [
+            {
+              "stat": "lucidite",
+              "val": 10
+            },
+            {
+              "stat": "memoire",
+              "val": 5
+            }
+          ]
+        },
+        {
+          "text": "Forcer le destin et partir encore",
+          "vers": "fin_oubli",
+          "effects": [
+            {
+              "stat": "lucidite",
+              "val": 5
+            }
+          ]
+        }
+      ],
+      "x": 160,
+      "y": 1180
+    },
+    "archives": {
+      "id": "archives",
+      "title": "Les Archives Municipales",
+      "location": "VALMIRE — SOUS-SOL DE LA MAIRIE",
+      "narrator": "Les villes gardent leurs secrets dans les caves, car les caves ressemblent assez à des tombes pour que les secrets s'y sentent chez eux.",
+      "text": "Les archives sentent le papier humide. Des dossiers sont empilés jusqu'au plafond.\n\nTu trouves enfin un registre consacré au théâtre. La première représentation du **Roi en Jaune** aurait eu lieu il y a soixante-douze ans.\n\nTous les habitants étaient présents.\n\nAucune sortie n'a été enregistrée après l'entracte.\n\nDans la marge, une note manuscrite :\n\n**L'auteur n'est pas celui qui écrit. L'auteur est celui qui regarde jusqu'au bout.**\n\nDerrière toi, une voix d'enfant murmure :\n\n*« Ma mère disait que les histoires ont faim. »*",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Parler à l'enfant",
+          "vers": "enfant_archives",
+          "effects": [
+            {
+              "stat": "memoire",
+              "val": 15
+            }
+          ]
+        },
+        {
+          "text": "Chercher le manuscrit original",
+          "vers": "manuscrit",
+          "effects": [
+            {
+              "stat": "lucidite",
+              "val": 15
+            },
+            {
+              "stat": "obsession",
+              "val": 10
+            }
+          ]
+        }
+      ],
+      "x": 400,
+      "y": 1180
+    },
+    "enfant_archives": {
+      "id": "enfant_archives",
+      "title": "L'Enfant Sans Âge",
+      "location": "VALMIRE — ARCHIVES",
+      "narrator": "Il y a dans toutes les histoires un enfant qui sait trop tôt ce que les adultes refusent trop longtemps.",
+      "text": "L'enfant est assis entre deux rayonnages. Il tient un masque blanc sur ses genoux.\n\n*« Je ne grandis plus depuis la représentation. Personne ne grandit ici. On change seulement de rôle. »*\n\nIl te tend le masque. À l'intérieur, ton nom est écrit. Pas imprimé. Gravé.\n\n*« Si tu veux sauver quelqu'un, ne termine pas la pièce. Si tu veux comprendre, trouve le manuscrit. Si tu veux être libre... ne crois pas que ces deux choses soient compatibles. »*",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Prendre le masque",
+          "vers": "masque",
+          "effects": [
+            {
+              "stat": "memoire",
+              "val": 15
+            },
+            {
+              "stat": "obsession",
+              "val": 5
+            }
+          ]
+        },
+        {
+          "text": "Refuser le masque et chercher le manuscrit",
+          "vers": "manuscrit",
+          "effects": [
+            {
+              "stat": "lucidite",
+              "val": 10
+            }
+          ]
+        }
+      ],
+      "x": 220,
+      "y": 1340
+    },
+    "masque": {
+      "id": "masque",
+      "title": "Le Masque Blanc",
+      "location": "VALMIRE — ARCHIVES",
+      "narrator": "On croit porter un masque pour cacher son visage. Mais parfois, c'est le masque qui révèle à l'histoire quelle place nous attendait.",
+      "text": "Le masque est froid. Dès que tu le touches, des souvenirs qui ne sont pas les tiens traversent ton esprit.\n\nUne salle pleine. Des applaudissements. Une femme qui pleure. Un homme qui rit trop fort. Un enfant qui demande pourquoi le ciel devient jaune.\n\nPuis une phrase, répétée par toute la salle :\n\n**Nous avons vu le deuxième acte. Nous avons mérité le troisième.**\n\nQuand la vision cesse, le masque a disparu. Mais tu sens encore son poids sur ton visage.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "flash",
+      "choices": [
+        {
+          "text": "Chercher le manuscrit",
+          "vers": "manuscrit",
+          "effects": [
+            {
+              "stat": "memoire",
+              "val": 20
+            },
+            {
+              "stat": "obsession",
+              "val": 10
+            }
+          ]
+        }
+      ],
+      "x": 160,
+      "y": 1500
+    },
+    "manuscrit": {
+      "id": "manuscrit",
+      "title": "Le Manuscrit Jaune",
+      "location": "VALMIRE — ARCHIVES INTERDITES",
+      "narrator": "Un livre dangereux ne contient pas forcément des secrets. Parfois, il contient simplement une phrase qu'on ne peut plus désentendre.",
+      "text": "Derrière une armoire verrouillée, tu trouves une boîte de métal. Dedans : un manuscrit relié de tissu jaune.\n\nLa couverture ne porte aucun titre. Seulement une couronne dessinée en fil noir.\n\nTu ouvres la première page. Les mots changent pendant que tu les lis.\n\n**Acte I : Un voyageur arrive.**\n**Acte II : Le voyageur comprend.**\n**Acte III : Le voyageur choisit qui doit continuer à souffrir.**\n\nPlus bas, une phrase semble t'attendre :\n\n**{{player}}, lève les yeux.**\n\nQuand tu obéis, tu n'es plus dans les archives. Tu es sur scène.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "glitch",
+      "choices": [
+        {
+          "text": "Faire face à la salle",
+          "vers": "scene_deuxieme_acte",
+          "effects": [
+            {
+              "stat": "obsession",
+              "val": 20
+            },
+            {
+              "stat": "memoire",
+              "val": 15
+            }
+          ]
+        }
+      ],
+      "x": 420,
+      "y": 1500
+    },
+    "theatre_boucle": {
+      "id": "theatre_boucle",
+      "title": "Retour au Théâtre",
+      "location": "THÉÂTRE DE VALMIRE — HALL",
+      "narrator": "Revenir volontairement dans un cauchemar est une forme de courage. Ou le début d'une dépendance.",
+      "text": "Le réceptionniste t'accueille avec le même sourire. Cette fois, il ne te donne pas de billet.\n\n*« Vous connaissez votre place. »*\n\nDans le hall, les affiches ont changé. Elles ne montrent plus le Roi. Elles te montrent toi, de dos, devant un rideau jaune.\n\nSous l'image :\n\n**CE SOIR : LE VOYAGEUR SE SOUVIENT.**",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Entrer dans la salle",
+          "vers": "scene_deuxieme_acte",
+          "effects": [
+            {
+              "stat": "obsession",
+              "val": 20
+            }
+          ]
+        },
+        {
+          "text": "Partir chercher des réponses d'abord",
+          "vers": "archives",
+          "effects": [
+            {
+              "stat": "lucidite",
+              "val": 10
+            }
+          ]
+        }
+      ],
+      "x": 640,
+      "y": 1180
+    },
+    "scene_deuxieme_acte": {
+      "id": "scene_deuxieme_acte",
+      "title": "Deuxième Acte",
+      "location": "THÉÂTRE DE VALMIRE — SUR SCÈNE",
+      "narrator": "Le deuxième acte ne commence pas quand le rideau se lève. Il commence quand le spectateur comprend qu'il n'était pas assis dans la salle.",
+      "text": "Tu es sur scène. La salle est pleine de silhouettes masquées.\n\nAu premier rang : la vieille femme. L'enfant des archives. Le chauffeur du bus. Le réceptionniste. Tous te regardent avec une fatigue ancienne.\n\nDerrière eux, les sièges montent plus haut que le plafond. Ils disparaissent dans un ciel jaune où brillent deux soleils pâles.\n\nUne voix venue du balcon parle enfin :\n\n*« Valmire n'est pas une ville. C'est le moment exact où un public a préféré connaître la fin plutôt que sauver les vivants. Depuis, la pièce recommence pour leur offrir une autre chance. »*\n\nLe rideau derrière toi frémit.\n\n*« Mais une histoire ne peut pas se libérer elle-même. Elle a besoin d'un lecteur. Elle t'a choisi. »*",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "flash",
+      "choices": [
+        {
+          "text": "Demander qui parle",
+          "vers": "voix_balcon",
+          "effects": [
+            {
+              "stat": "lucidite",
+              "val": 15
+            }
+          ]
+        },
+        {
+          "text": "Ouvrir le rideau jaune",
+          "vers": "troisieme_acte",
+          "effects": [
+            {
+              "stat": "obsession",
+              "val": 25
+            }
+          ]
+        },
+        {
+          "text": "Refuser et chercher une sortie pour les habitants",
+          "vers": "sauver_habitants",
+          "effects": [
+            {
+              "stat": "memoire",
+              "val": 10
+            },
+            {
+              "stat": "lucidite",
+              "val": 10
+            }
+          ]
+        }
+      ],
+      "x": 400,
+      "y": 1660
+    },
+    "voix_balcon": {
+      "id": "voix_balcon",
+      "title": "La Voix du Balcon",
+      "location": "THÉÂTRE DE VALMIRE — SOUS LE CIEL JAUNE",
+      "narrator": "Les dieux anciens n'ont pas toujours des temples. Parfois, ils ont des sièges réservés.",
+      "text": "La voix rit doucement. Ce rire ne ressemble pas à de la cruauté. Plutôt à une tristesse qui aurait vécu trop longtemps.\n\n*« Je suis ce que vous appelez le Roi, quand vous avez besoin d'un coupable. Je suis Carcosa, quand vous avez besoin d'un lieu. Je suis le rideau, quand vous avez peur de la scène. »*\n\nLes masques du public se tournent vers toi d'un seul mouvement.\n\n*« Mais je ne suis pas venu. Vous m'avez écrit. Chaque fois qu'un esprit préfère une vérité insupportable à une paix ordinaire, il ajoute une ligne à ma couronne. »*",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Ouvrir le rideau jaune",
+          "vers": "troisieme_acte",
+          "effects": [
+            {
+              "stat": "obsession",
+              "val": 20
+            },
+            {
+              "stat": "memoire",
+              "val": 10
+            }
+          ]
+        },
+        {
+          "text": "Brûler le manuscrit",
+          "vers": "bruler_theatre",
+          "effects": [
+            {
+              "stat": "lucidite",
+              "val": 20
+            }
+          ]
+        },
+        {
+          "text": "Demander à prendre leur place",
+          "vers": "prendre_place",
+          "effects": [
+            {
+              "stat": "memoire",
+              "val": 20
+            },
+            {
+              "stat": "obsession",
+              "val": 10
+            }
+          ]
+        }
+      ],
+      "x": 620,
+      "y": 1820
+    },
+    "sauver_habitants": {
+      "id": "sauver_habitants",
+      "title": "Les Sorties Fermées",
+      "location": "THÉÂTRE DE VALMIRE — COULISSES",
+      "narrator": "Sauver quelqu'un d'une histoire est difficile. D'abord parce qu'il faut lui faire admettre qu'il y est prisonnier.",
+      "text": "Tu cours vers les coulisses. Les habitants ne bougent pas. Certains pleurent sans bruit.\n\nDerrière la scène, tu trouves une porte marquée **SORTIE**. Elle donne sur la salle principale. Une autre porte marquée **SORTIE** donne sur la salle principale. Toutes les sorties ramènent au public.\n\nL'enfant des archives apparaît près de toi.\n\n*« Il n'y a qu'une seule sortie. Quelqu'un doit rester pour tenir le rideau fermé. Sinon, la pièce recommence pour tout le monde. »*",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Rester à leur place",
+          "vers": "fin_gardien",
+          "effects": [
+            {
+              "stat": "memoire",
+              "val": 25
+            },
+            {
+              "stat": "lucidite",
+              "val": 15
+            }
+          ]
+        },
+        {
+          "text": "Refuser le sacrifice et brûler le théâtre",
+          "vers": "bruler_theatre",
+          "effects": [
+            {
+              "stat": "lucidite",
+              "val": 10
+            },
+            {
+              "stat": "obsession",
+              "val": 5
+            }
+          ]
+        }
+      ],
+      "x": 160,
+      "y": 1820
+    },
+    "bruler_theatre": {
+      "id": "bruler_theatre",
+      "title": "Le Feu",
+      "location": "THÉÂTRE DE VALMIRE — SCÈNE",
+      "narrator": "Le feu est une réponse brutale. Il ne comprend pas ce qu'il détruit. C'est parfois pour cela qu'il réussit.",
+      "text": "Tu prends une lampe à huile dans les coulisses et la jettes contre le rideau.\n\nLe tissu jaune s'embrase immédiatement, comme s'il attendait ce contact depuis des décennies.\n\nLa salle ne panique pas. Les habitants regardent les flammes avec une reconnaissance muette.\n\nLe théâtre brûle sans chaleur. Les masques tombent. Les visages reviennent.\n\nLa vieille femme sourit.\n\n*« Enfin... le silence. »*\n\nQuand le toit s'effondre, tu aperçois le ciel noir au-dessus de Valmire. Un vrai ciel. Sans jaune.\n\nPuis tout disparaît.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "flash",
+      "choices": [
+        {
+          "text": "Fin — Le Rideau",
+          "vers": "fin_rideau",
+          "effects": []
+        }
+      ],
+      "x": 420,
+      "y": 1980
+    },
+    "troisieme_acte": {
+      "id": "troisieme_acte",
+      "title": "Troisième Acte",
+      "location": "CARCOSA — OU CE QUI LUI RESSEMBLE",
+      "narrator": "On imagine toujours la vérité comme une lumière. C'est oublier que certaines lumières rendent aveugle.",
+      "text": "Tu ouvres le rideau jaune.\n\nDerrière, il n'y a pas de coulisses. Il y a un lac noir sous deux soleils pâles. Des tours impossibles se reflètent dans l'eau sans y toucher. Au loin, une ville silencieuse attend d'être nommée.\n\nCarcosa.\n\nTu comprends alors que le Roi en Jaune n'est pas une personne. C'est le regard posé sur une histoire quand plus personne ne peut l'arrêter.\n\nLa voix murmure :\n\n*« Tu voulais comprendre. Maintenant choisis ce que ta compréhension va coûter. »*",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "flash",
+      "choices": [
+        {
+          "text": "Prendre la couronne",
+          "vers": "prendre_couronne",
+          "effects": [
+            {
+              "stat": "obsession",
+              "val": 30
+            }
+          ]
+        },
+        {
+          "text": "Refermer le rideau de l'intérieur",
+          "vers": "fin_gardien",
+          "effects": [
+            {
+              "stat": "lucidite",
+              "val": 25
+            },
+            {
+              "stat": "memoire",
+              "val": 20
+            }
+          ]
+        },
+        {
+          "text": "Écrire une nouvelle fin",
+          "vers": "ecrire_nouvelle_fin",
+          "effects": [
+            {
+              "stat": "memoire",
+              "val": 25
+            },
+            {
+              "stat": "lucidite",
+              "val": 15
+            }
+          ]
+        }
+      ],
+      "x": 640,
+      "y": 1980
+    },
+    "prendre_place": {
+      "id": "prendre_place",
+      "title": "La Place Vide",
+      "location": "THÉÂTRE DE VALMIRE — BALCON",
+      "narrator": "Il y a des sacrifices nobles. Et il y a des sacrifices qui ressemblent trop à de l'orgueil pour qu'on sache les nommer.",
+      "text": "Tu montes au balcon. La place vide t'attend.\n\nLorsque tu t'assois, le théâtre soupire. Pas les murs. Pas le public. L'histoire elle-même.\n\nTu vois toutes les boucles à la fois : les arrivées, les refus, les cris, les silences, les joueurs qui ont cru pouvoir comprendre sans être changés.\n\nLa couronne apparaît sur tes genoux. Elle est légère. Beaucoup trop légère pour ce qu'elle exige.\n\nLa voix demande :\n\n*« Veux-tu regarder pour qu'ils n'aient plus à le faire ? »*",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Accepter",
+          "vers": "fin_roi",
+          "effects": [
+            {
+              "stat": "obsession",
+              "val": 20
+            },
+            {
+              "stat": "memoire",
+              "val": 20
+            }
+          ]
+        },
+        {
+          "text": "Refuser au dernier moment et brûler le théâtre",
+          "vers": "bruler_theatre",
+          "effects": [
+            {
+              "stat": "lucidite",
+              "val": 20
+            }
+          ]
+        }
+      ],
+      "x": 820,
+      "y": 1980
+    },
+    "prendre_couronne": {
+      "id": "prendre_couronne",
+      "title": "La Couronne",
+      "location": "CARCOSA — LAC DE HALI",
+      "narrator": "La couronne ne rend pas puissant. Elle rend responsable de ce que les autres refusent de voir.",
+      "text": "Tu prends la couronne. Elle ne touche pas ta tête. Elle touche tes pensées.\n\nTout devient clair : Valmire, la pièce, les boucles, les habitants, l'invitation.\n\nTu comprends que chaque lecteur croit être libre jusqu'au moment où une histoire lui montre les rails qu'il suivait depuis le début.\n\nDerrière toi, un nouveau bus approche sous la pluie. Un nouveau voyageur tient une enveloppe jaunie.\n\nTu connais déjà son nom.\n\nTu souris malgré toi.\n\n*« Bienvenue à Valmire. »*",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "flash",
+      "choices": [
+        {
+          "text": "Fin — Le Roi",
+          "vers": "fin_roi",
+          "effects": []
+        }
+      ],
+      "x": 760,
+      "y": 2140
+    },
+    "ecrire_nouvelle_fin": {
+      "id": "ecrire_nouvelle_fin",
+      "title": "L'Encre Noire",
+      "location": "CARCOSA — DEVANT LE RIDEAU",
+      "narrator": "Toutes les histoires veulent une fin. Les meilleures acceptent parfois d'être contredites.",
+      "text": "Le manuscrit apparaît entre tes mains. Les pages tremblent comme une chose vivante.\n\nTu pourrais écrire une fin qui libère tout le monde. Tu pourrais écrire une fin qui t'épargne. Tu pourrais écrire une fin heureuse.\n\nMais ta main hésite.\n\nParce qu'une fin heureuse imposée n'est qu'un autre mensonge.\n\nAlors tu écris une seule phrase :\n\n**Ils se souviendront assez pour choisir autrement.**\n\nLe théâtre se fissure. Les habitants se réveillent un par un. Aucun n'est sauvé. Pas encore.\n\nMais pour la première fois depuis soixante-douze ans, la prochaine boucle ne sera pas identique.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "flash",
+      "choices": [
+        {
+          "text": "Fin — La Nouvelle Page",
+          "vers": "fin_nouvelle_page",
+          "effects": []
+        }
+      ],
+      "x": 560,
+      "y": 2140
+    },
+    "fin_rideau": {
+      "id": "fin_rideau",
+      "title": "Fin — Le Rideau",
+      "location": "VALMIRE — AUBE",
+      "narrator": "Certaines libérations ressemblent à des pertes. Il faut du temps pour comprendre qu'un silence peut être une victoire.",
+      "text": "Tu te réveilles sur la route, au lever du jour.\n\nValmire n'est plus là. À sa place, un champ détrempé et les fondations noires d'un bâtiment brûlé.\n\nDans ta poche, le ticket de théâtre tombe en poussière.\n\nTu ne sais pas si tu as sauvé les habitants ou effacé ce qu'il restait d'eux.\n\nMais pendant une seconde, dans le vent du matin, tu entends des applaudissements très lointains.\n\nPuis plus rien.\n\nEt ce silence te paraît immense.",
+      "isStart": false,
+      "isEnd": true,
+      "transition": "fade",
+      "choices": [],
+      "x": 420,
+      "y": 2300
+    },
+    "fin_roi": {
+      "id": "fin_roi",
+      "title": "Fin — Le Roi",
+      "location": "THÉÂTRE DE VALMIRE — BALCON",
+      "narrator": "Celui qui comprend tout ne quitte pas toujours la pièce. Parfois, il devient celui qui attend le prochain spectateur.",
+      "text": "Tu es assis au balcon. La salle est vide, puis pleine, puis vide encore. Le temps n'a plus la politesse d'avancer dans un seul sens.\n\nEn bas, un voyageur entre. Il tient une enveloppe jaunie. Il tremble un peu. Il ressemble à quelqu'un qui croit encore pouvoir partir.\n\nTu pourrais le prévenir.\n\nTu pourrais mentir.\n\nTu pourrais te taire.\n\nLa couronne pèse dans ton esprit.\n\nAlors tu prononces les premiers mots de la boucle, d'une voix douce et presque triste :\n\n**« Vous êtes en retard cette fois. »**",
+      "isStart": false,
+      "isEnd": true,
+      "transition": "flash",
+      "choices": [],
+      "x": 760,
+      "y": 2300
+    },
+    "fin_gardien": {
+      "id": "fin_gardien",
+      "title": "Fin — Le Gardien du Rideau",
+      "location": "ENTRE VALMIRE ET CARCOSA",
+      "narrator": "Il y a des héros qui ouvrent les portes. Et il y a ceux dont personne ne chante le nom, parce qu'ils passent leur éternité à les maintenir fermées.",
+      "text": "Tu refermes le rideau jaune de l'intérieur.\n\nDe l'autre côté, tu entends la ville respirer pour la première fois. Des portes s'ouvrent. Des pas courent sous la pluie. Quelqu'un rit. Quelqu'un appelle un enfant par son nom.\n\nTu ne verras pas l'aube.\n\nMais tu sais qu'elle existe.\n\nDevant toi, Carcosa s'étend sous ses deux soleils pâles. Le rideau tremble contre tes mains. Quelque chose, derrière, veut qu'on regarde.\n\nTu tiens bon.\n\nEt pendant très longtemps, cela suffit.",
+      "isStart": false,
+      "isEnd": true,
+      "transition": "fade",
+      "choices": [],
+      "x": 160,
+      "y": 2300
+    },
+    "fin_oubli": {
+      "id": "fin_oubli",
+      "title": "Fin — L'Oubli",
+      "location": "ROUTE SANS NOM",
+      "narrator": "On peut fuir une ville. On ne fuit pas toujours ce qu'elle a réveillé.",
+      "text": "Tu marches sans te retourner. Cette fois, la route ne ramène pas à Valmire.\n\nAu matin, tu atteins une station-service abandonnée. Ton téléphone capte enfin du réseau. Le monde existe encore. C'est presque insultant.\n\nPendant des semaines, tu essaies d'oublier.\n\nPuis un soir, dans une ville qui n'a jamais entendu parler de Valmire, tu vois une affiche collée sur un mur propre.\n\nPapier jaune. Couronne noire.\n\n**DERNIÈRE REPRÉSENTATION.**\n\nAu dos, ton nom.\n\nÉcrit avec ton écriture.",
+      "isStart": false,
+      "isEnd": true,
+      "transition": "glitch",
+      "choices": [],
+      "x": 80,
+      "y": 1340
+    },
+    "fin_nouvelle_page": {
+      "id": "fin_nouvelle_page",
+      "title": "Fin — La Nouvelle Page",
+      "location": "VALMIRE — 23H17",
+      "narrator": "Changer une histoire ne signifie pas briser la boucle. Parfois, cela signifie offrir à ceux qui y vivent la possibilité de répondre autrement.",
+      "text": "La pluie tombe sur Valmire. Encore.\n\nLe bus ralentit devant le panneau rouillé. Un voyageur descend avec une enveloppe jaunie.\n\nMais cette fois, la vieille femme au parapluie ne répète pas sa phrase. Elle fronce les sourcils, comme si elle cherchait un souvenir derrière ses yeux.\n\nL'enfant des archives sort dans la rue avant minuit. Le réceptionniste ferme le guichet. Une fenêtre s'ouvre. Puis une autre.\n\nLa boucle existe encore.\n\nMais elle n'est plus seule à écrire.\n\nQuelque part entre les pages, ton nom demeure comme une rature lumineuse. Pas une victoire.\n\nUne chance.",
+      "isStart": false,
+      "isEnd": true,
+      "transition": "fade",
+      "choices": [],
+      "x": 560,
+      "y": 2300
+    }
+  }
+}
