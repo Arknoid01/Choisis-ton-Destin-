@@ -1476,12 +1476,43 @@ function playClickEffect(btn, type) {
 
 function isChoiceLocked(choice) {
   if (!choice.requires) return false;
-  return Object.entries(choice.requires).some(([k, v]) => (stats[k] ?? 0) < v);
+  const req = choice.requires;
+
+  // Nouveau format supporté :
+  // { "stat": "lucidite", "min": 65 }
+  // { "stat": "lucidite", "max": 64 }
+  // { "stat": "lucidite", "min": 20, "max": 80 }
+  if (req.stat) {
+    const currentVal = stats[req.stat] ?? 0;
+    if (req.min !== undefined && currentVal < req.min) return true;
+    if (req.max !== undefined && currentVal > req.max) return true;
+    return false;
+  }
+
+  // Ancien format supporté :
+  // { "lucidite": 65, "memoire": 30 }
+  return Object.entries(req).some(([k, v]) => (stats[k] ?? 0) < v);
 }
 
 function getLockedReason(choice) {
   if (!choice.requires) return '';
-  const parts = Object.entries(choice.requires)
+  const req = choice.requires;
+
+  if (req.stat) {
+    const currentVal = stats[req.stat] ?? 0;
+    const statDef = story.stats?.find(s => s.id === req.stat);
+    const statLabel = statDef?.label || req.stat;
+
+    if (req.min !== undefined && currentVal < req.min) {
+      return `${statLabel} insuffisant (${currentVal}/${req.min})`;
+    }
+    if (req.max !== undefined && currentVal > req.max) {
+      return `${statLabel} trop élevé (${currentVal}/${req.max})`;
+    }
+    return '';
+  }
+
+  const parts = Object.entries(req)
     .filter(([k, v]) => (stats[k] ?? 0) < v)
     .map(([k, v]) => {
       const s = story.stats?.find(s => s.id === k);
