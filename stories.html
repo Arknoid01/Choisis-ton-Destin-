@@ -313,13 +313,9 @@ function renderLibrary() {
   const unlocked = getUnlockedPacks();
   const filtered = allGames.filter(g => g.lang === currentLang);
 
-  // ── MARQUE-PAGES ──
+  // ── MARQUE-PAGES ── (toutes langues)
   const bookmarks = JSON.parse(localStorage.getItem('sf_bookmarks') || '[]')
-    .filter(b => {
-      // Trouver l'histoire correspondante
-      const game = allGames.find(g => g.file === b.storyFile);
-      return game && game.lang === currentLang;
-    });
+    .filter(b => allGames.find(g => g.file === b.storyFile));
 
   let html = '';
 
