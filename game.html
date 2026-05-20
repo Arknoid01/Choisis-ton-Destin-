@@ -721,11 +721,18 @@ body {
       <button class="drawer-item" onclick="toggleHistory()">
         <span class="drawer-item-icon">📜</span> Journal
       </button>
+      <button class="drawer-item" onclick="toggleBookmarkList()">
+        <span class="drawer-item-icon">🔖</span> Marque-pages
+      </button>
+      <button class="drawer-item" onclick="window.location.href='stories.html'">
+        <span class="drawer-item-icon">📚</span> Bibliothèque
+      </button>
       <button class="drawer-item" onclick="window.location.href='index.html'">
         <span class="drawer-item-icon">←</span> Quitter
       </button>
     </div>
     <div id="history-log"></div>
+    <div id="bookmark-list" style="display:none;border-top:1px solid var(--border);padding:12px;max-height:200px;overflow-y:auto"></div>
   </div>
 </div>
 
@@ -1245,12 +1252,47 @@ function getLockedReason(choice) {
 // ══════════════════════════════════════════════
 // HISTORY DRAWER
 // ══════════════════════════════════════════════
-let historyOpen = false;
+let bookmarkListOpen = false;
+function toggleBookmarkList() {
+  bookmarkListOpen = !bookmarkListOpen;
+  const el = document.getElementById('bookmark-list');
+  if (!bookmarkListOpen) { el.style.display = 'none'; return; }
+
+  const bookmarks = JSON.parse(localStorage.getItem('sf_bookmarks') || '[]');
+  if (!bookmarks.length) {
+    el.innerHTML = `<div style="font-family:'DM Mono',monospace;font-size:11px;color:var(--text3);text-align:center;padding:8px">Aucun marque-page</div>`;
+  } else {
+    el.innerHTML = bookmarks.map(bm => `
+      <div onclick="resumeBookmark('${bm.storyFile}')"
+        style="padding:8px 4px;border-bottom:1px solid var(--border);cursor:pointer;transition:background .15s"
+        onmouseover="this.style.background='var(--bg3)'" onmouseout="this.style.background=''">
+        <div style="font-family:'Cinzel',serif;font-size:12px;color:var(--text)">${bm.storyName}</div>
+        <div style="font-family:'DM Mono',monospace;font-size:10px;color:var(--text3);margin-top:2px">
+          📍 ${bm.sceneTitle} · ${new Date(bm.savedAt).toLocaleDateString()}
+        </div>
+      </div>`).join('');
+  }
+  el.style.display = 'block';
+  // Fermer l'historique si ouvert
+  historyOpen = false;
+  document.getElementById('history-log').classList.remove('open');
+}
+
+function resumeBookmark(file) {
+  closeMenu();
+  localStorage.setItem('sf_game_file', file);
+  window.location.href = 'game.html?story=' + encodeURIComponent(file);
+}
+
+
 function toggleHistory() {
   historyOpen = !historyOpen;
   const log = document.getElementById('history-log');
   log.classList.toggle('open', historyOpen);
+  // Fermer marque-pages si on ouvre l'historique
   if (historyOpen) {
+    bookmarkListOpen = false;
+    document.getElementById('bookmark-list').style.display = 'none';
     log.innerHTML = history.slice(-15).reverse().map(h => {
       const scene = story.scenes[h.id];
       return `<div class="history-entry">
