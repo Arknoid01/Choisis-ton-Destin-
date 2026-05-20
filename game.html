@@ -739,12 +739,12 @@ body {
 <!-- FAB MARQUE-PAGE -->
 <div id="fab-wrap">
   <div class="fab-action" id="fab-bookmark">
-    <span class="fab-label" id="fab-label-bookmark">Marque-page</span>
-    <button class="fab-btn" onclick="saveBookmark()" title="Marque-page">🔖</button>
+    <span class="fab-label" id="fab-label-bookmark"></span>
+    <button class="fab-btn" onclick="saveBookmark()" title="">🔖</button>
   </div>
   <div class="fab-action" id="fab-save">
-    <span class="fab-label" id="fab-label-save">Sauvegarder</span>
-    <button class="fab-btn" onclick="saveProgress()" title="Sauvegarder">💾</button>
+    <span class="fab-label" id="fab-label-save"></span>
+    <button class="fab-btn" onclick="saveProgress()" title="">💾</button>
   </div>
   <button id="fab-main" onclick="toggleFab()" title="Actions">＋</button>
 </div>
@@ -849,6 +849,9 @@ async function loadStory() {
 
   // Hide loading
   hideLoading();
+
+  // Apply UI translations
+  applyGameUI();
 
   // Vérifier si une sauvegarde existe
   const savedData = JSON.parse(localStorage.getItem(getSaveKey()) || 'null');
@@ -1049,8 +1052,73 @@ function renderScene(scene) {
 }
 
 // ══════════════════════════════════════════════
-// TYPEWRITER ENGINE
+// UI TRANSLATIONS
 // ══════════════════════════════════════════════
+const GAME_I18N = {
+  fr: {
+    bookmark:    'Marque-page',
+    save:        'Sauvegarder',
+    restart:     'Recommencer',
+    journal:     'Journal',
+    bookmarks:   'Marque-pages',
+    library:     'Bibliothèque',
+    quit:        'Quitter',
+    noBookmarks: '${gt('noBookmarks')}',
+    bmSaved:     '🔖 Marque-page posé !',
+    progressSaved: '💾 Progression sauvegardée',
+    visitedScene: 'scène visitée',
+    visitedScenes: 'scènes visitées',
+  },
+  en: {
+    bookmark:    'Bookmark',
+    save:        'Save',
+    restart:     'Restart',
+    journal:     'Journal',
+    bookmarks:   'Bookmarks',
+    library:     'Library',
+    quit:        'Quit',
+    noBookmarks: 'No bookmarks',
+    bmSaved:     '🔖 Bookmark saved!',
+    progressSaved: '💾 Progress saved',
+    visitedScene: 'scene visited',
+    visitedScenes: 'scenes visited',
+  },
+  es: {
+    bookmark:    'Marcador',
+    save:        'Guardar',
+    restart:     'Reiniciar',
+    journal:     'Diario',
+    bookmarks:   'Marcadores',
+    library:     'Biblioteca',
+    quit:        'Salir',
+    noBookmarks: 'Sin marcadores',
+    bmSaved:     '🔖 ¡Marcador guardado!',
+    progressSaved: '💾 Progreso guardado',
+    visitedScene: 'escena visitada',
+    visitedScenes: 'escenas visitadas',
+  }
+};
+
+function gt(key) {
+  const lang = localStorage.getItem('sf_lang') || 'fr';
+  return (GAME_I18N[lang] || GAME_I18N.fr)[key] || key;
+}
+
+function applyGameUI() {
+  const set = (id, val) => { const el = document.getElementById(id); if (el) el.textContent = val; };
+  set('fab-label-bookmark', gt('bookmark'));
+  set('fab-label-save',     gt('save'));
+  // Drawer items
+  const items = document.querySelectorAll('.drawer-item');
+  const labels = ['restart','journal','bookmarks','library','quit'];
+  items.forEach((el, i) => {
+    const icon = el.querySelector('.drawer-item-icon');
+    if (icon && labels[i]) {
+      el.childNodes[el.childNodes.length - 1].textContent = ' ' + gt(labels[i]);
+    }
+  });
+}
+
 let typewriterTimeout = null;
 
 function getTypeSpeed(narratorMode = false) {
@@ -1285,7 +1353,7 @@ function toggleBookmarkList() {
 
   const bookmarks = JSON.parse(localStorage.getItem('sf_bookmarks') || '[]');
   if (!bookmarks.length) {
-    el.innerHTML = `<div style="font-family:'DM Mono',monospace;font-size:11px;color:var(--text3);text-align:center;padding:8px">Aucun marque-page</div>`;
+    el.innerHTML = `<div style="font-family:'DM Mono',monospace;font-size:11px;color:var(--text3);text-align:center;padding:8px">${gt('noBookmarks')}</div>`;
   } else {
     el.innerHTML = bookmarks.map(bm => `
       <div onclick="resumeBookmark('${bm.storyFile}')"
@@ -1380,7 +1448,7 @@ function saveProgress() {
   const data = buildSaveData(false);
   localStorage.setItem(getSaveKey(), JSON.stringify(data));
   closeFab();
-  showBmToast('💾 Progression sauvegardée');
+  showBmToast(gt('progressSaved'));
 }
 
 function saveBookmark() {
@@ -1396,7 +1464,7 @@ function saveBookmark() {
   else bmList.unshift(data);
   localStorage.setItem('sf_bookmarks', JSON.stringify(bmList.slice(0, 10))); // max 10
   closeFab();
-  showBmToast('🔖 Marque-page posé !');
+  showBmToast(gt('bmSaved'));
 }
 
 function loadSavedProgress() {
