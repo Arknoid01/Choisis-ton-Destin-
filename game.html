@@ -783,20 +783,45 @@ function applyTheme(theme) {
 async function loadStory() {
   // Get file from URL param or localStorage
   const params = new URLSearchParams(window.location.search);
-  let file = params.get('story') || localStorage.getItem('sf_game_file');
 
-  if (!file) { showError('Aucune histoire spécifiée.'); return; }
-
-  try {
-    const r = await fetch(file);
-    if (!r.ok) throw new Error('HTTP ' + r.status);
-    story = await r.json();
-  } catch(e) {
-    showError(`Impossible de charger le fichier :<br><code style="font-size:11px">${file}</code>`);
-    return;
+  // ── MODE TEST depuis l'éditeur ──
+  if (params.get('test') === '1') {
+    const testData = sessionStorage.getItem('sf_test_story');
+    if (testData) {
+      try {
+        story = JSON.parse(testData);
+        // En mode test, on part de la scène _testSceneId
+        if (story._testMode && story._testSceneId) {
+          // Forcer cette scène comme isStart
+          Object.values(story.scenes).forEach(s => s.isStart = false);
+          story.scenes[story._testSceneId].isStart = true;
+        }
+        // Bannière test
+        const banner = document.createElement('div');
+        banner.style.cssText = 'position:fixed;top:0;left:0;right:0;z-index:999;background:#fa6d8f;color:#fff;font-family:monospace;font-size:11px;text-align:center;padding:3px;letter-spacing:1px';
+        banner.textContent = '▶ MODE TEST — ' + (story._testSceneId || 'départ');
+        document.body.appendChild(banner);
+        document.getElementById('topbar').style.marginTop = '20px';
+        document.getElementById('progress-bar').style.top = '72px';
+        document.getElementById('stats-bar').style.top = '72px';
+      } catch(e) { /* fallback normal */ }
+    }
   }
 
-  if (!story.scenes) { showError('Format JSON invalide.'); return; }
+  let file = params.get('story') || localStorage.getItem('sf_game_file');
+
+  if (!story) {
+    if (!file) { showError('Aucune histoire spécifiée.'); return; }
+    try {
+      const r = await fetch(file);
+      if (!r.ok) throw new Error('HTTP ' + r.status);
+      story = await r.json();
+    } catch(e) {
+      showError(`Impossible de charger le fichier :<br><code style="font-size:11px">${file}</code>`);
+      return;
+    }
+    if (!story.scenes) { showError('Format JSON invalide.'); return; }
+  }
 
   // Apply theme
   if (story.theme) applyTheme(story.theme);

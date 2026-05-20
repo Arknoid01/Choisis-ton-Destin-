@@ -344,6 +344,38 @@ html,body { height:100%; overflow:hidden; font-family:'Syne',sans-serif; backgro
 .topbtn.send-btn:hover {
   background: var(--accent2); color: var(--bg);
 }
+
+/* ── TOOLTIPS ── */
+.tip {
+  display:inline-flex; align-items:center; justify-content:center;
+  width:14px; height:14px; border-radius:50%;
+  background:var(--bg4); border:1px solid var(--border);
+  color:var(--text3); font-size:9px; font-weight:700;
+  cursor:help; margin-left:5px; flex-shrink:0;
+  position:relative; vertical-align:middle; transition:all .15s;
+}
+.tip:hover { border-color:var(--accent); color:var(--accent); }
+.tip::after {
+  content:attr(data-tip);
+  position:absolute; bottom:calc(100% + 6px); left:50%;
+  transform:translateX(-50%);
+  background:var(--bg4); border:1px solid var(--border);
+  border-radius:6px; padding:6px 10px;
+  font-size:11px; font-weight:400; color:var(--text2);
+  white-space:normal; max-width:200px; text-align:center;
+  line-height:1.4; pointer-events:none; opacity:0;
+  transition:opacity .2s; z-index:1000;
+  box-shadow:0 4px 12px #00000066;
+}
+.tip:hover::after { opacity:1; }
+.tip.tip-down::after { bottom:auto; top:calc(100% + 6px); }
+
+/* ── TEST BUTTON ── */
+.topbtn.test-btn {
+  background:var(--bg3); border-color:var(--accent3); color:var(--accent3);
+}
+.topbtn.test-btn:hover { background:var(--accent3); color:var(--bg); }
+
 .kids-toggle {
   display:flex; align-items:center; cursor:pointer;
   padding:4px 6px; border-radius:6px; border:1px solid var(--border);
@@ -592,6 +624,7 @@ html,body { height:100%; overflow:hidden; font-family:'Syne',sans-serif; backgro
     <button class="topbtn" onclick="autoLayout()">⊞ Ordonner</button>
     <div class="sep"></div>
     <button class="topbtn" onclick="importJSON()">↑ Importer</button>
+    <button class="topbtn test-btn" onclick="testStory()" id="btn-test">▶ Tester</button>
     <button class="topbtn" onclick="exportTXT()">✎ Export TXT</button>
     <button class="topbtn" onclick="exportJSON()">↓ Export JSON</button>
     <button class="topbtn send-btn" onclick="sendStory()">✉ Envoyer</button>
@@ -783,6 +816,9 @@ html,body { height:100%; overflow:hidden; font-family:'Syne',sans-serif; backgro
   <button class="mmenu-item" onclick="closeMobileMenu();autoLayout()">
     <span class="mmenu-icon">⊞</span> Ordonner l'arbre
   </button>
+  <button class="mmenu-item" onclick="closeMobileMenu();testStory()" style="color:var(--accent3)">
+    <span class="mmenu-icon">▶</span> Tester l'histoire
+  </button>
   <button class="mmenu-item" onclick="closeMobileMenu();importJSON()">
     <span class="mmenu-icon">↑</span> Importer JSON
   </button>
@@ -827,6 +863,19 @@ const EDITOR_I18N = {
     visualTheme:'🎨 Thème visuel', presets:'Thèmes prédéfinis', customColors:'Couleurs custom', mainBg:'Fond principal', panelBg:'Fond panneaux', elementBg:'Fond éléments', accentMain:'Accent principal', accentSecond:'Accent secondaire', accentThird:'Accent tertiaire', mainText:'Texte principal', borders:'Bordures', preview:'Aperçu', previewTitle:'Titre de la scène', previewText:'Le héros avance dans l\'obscurité. Chaque pas résonne dans le couloir de pierre...', previewBtn:'→ Continuer',
     tree:'Arbre', edit:'Éditer', more:'Plus', orderTree:'Ordonner l\'arbre', exportTxt:'Exporter TXT', exportJson:'Exporter JSON', scene:'Scène',
     id:'Identifiant', sceneTitle:'Titre de la scène', sceneTitlePh:'Ex: Le dock maudit', location:'Lieu / Contexte', locationPh:'Ex: SECTEUR 9 — NIVEAU INFÉRIEUR', narrative:'Texte narratif', narrativePh:'L\'histoire se déroule ici...', varHelp:'Variable disponible : <code>{{player}}</code> sera remplacé par le nom du joueur.', insertPlayer:'+ insérer {{player}}',
+    tipId:'Identifiant unique — généré automatiquement, ne pas modifier',
+    tipTitle:'Nom de la scène — affiché dans l\'arbre et dans le journal du joueur',
+    tipLocation:'Lieu affiché en haut de la scène — ex: SECTEUR 9, PORT DE TORTUGA',
+    tipNarrator:'Voix du narrateur — s\'affiche en italique AVANT le texte, plus lentement',
+    tipText:'Texte principal. Utilisez **gras** et *italique*. {{player}} = prénom du joueur',
+    tipTransition:'Animation à l\'arrivée — fade=fondu, flash=éclair, glitch=effet numérique, scanline=lignes',
+    tipImage:'Image ou GIF affiché au-dessus du texte. Format conseillé : 512×512. Dossier : assets/images/',
+    tipStart:'Scène où commence l\'histoire — une seule scène peut être le départ',
+    tipEnd:'Scène de fin — aucun choix n\'est nécessaire, les stats finales s\'affichent',
+    tipChoiceText:'Ce que le joueur lit et clique pour avancer dans l\'histoire',
+    tipLeadsTo:'Scène vers laquelle ce choix mène. Bouton ＋→ pour créer une suite directement',
+    tipEffect:'Modifie une stat quand le joueur choisit cette réponse — positif ou négatif',
+    tipClickFx:'Animation jouée sur le bouton quand le joueur tape dessus',
     sceneImmersion:'Immersion de la scène', arrivalTransition:'Transition d\'arrivée', arrivalSound:'Son d\'arrivée', startScene:'Scène de départ', endScene:'Scène finale', choices:'Choix', addChoice:'+ Ajouter un choix', choice:'Choix', choiceText:'Texte du choix', choiceTextPh:'Ex: Accepter le contrat', choiceVar:'Tu peux écrire <code>{{player}}</code> dans un choix.', leadsTo:'Mène vers', noDestination:'— Aucune destination —', clickEffect:'Effet au clic', clickSound:'Son au clic', statEffects:'Effets sur les stats', effect:'+ Effet', noTitle:'Sans titre', choicesCount:'choix', needOneScene:'Au moins une scène requise', defineStats:'Définis d\'abord des stats', invalidFormat:'Format invalide', addLinkedScene:'Créer une scène liée', addLinkedSceneDesc:'Choisis depuis quelle scène et quelle réponse le joueur arrivera sur la nouvelle tuile.', sourceScene:'Scène source', sourceHint:'La nouvelle scène sera reliée depuis cette scène.', sourceChoice:'Réponse source', createNewChoice:'Créer une nouvelle réponse', newChoiceText:'Texte de la nouvelle réponse', newChoiceTextDefault:'Continuer', newSceneName:'Titre de la nouvelle scène', cancel:'Annuler', createScene:'Créer la scène', sceneCreatedLinked:'Scène créée et reliée ✦', sceneCreated:'Scène créée ✦', deletedScene:'Scène supprimée',
     transitions:{fade:'Fondu doux', glitch:'Glitch numérique', scanline:'Scanlines', flash:'Flash rapide', none:'Aucune'}, clicks:{pulse:'Pulse néon', shake:'Secousse', glitch:'Glitch', flash:'Flash', vibrate:'Vibration mobile', none:'Aucun'}, sounds:{none:'Aucun', click_neon:'Clic néon', glitch:'Glitch court', success:'Succès', error:'Erreur'}
   },
@@ -837,6 +886,19 @@ const EDITOR_I18N = {
     visualTheme:'🎨 Visual theme', presets:'Preset themes', customColors:'Custom colors', mainBg:'Main background', panelBg:'Panel background', elementBg:'Element background', accentMain:'Main accent', accentSecond:'Secondary accent', accentThird:'Third accent', mainText:'Main text', borders:'Borders', preview:'Preview', previewTitle:'Scene title', previewText:'The hero moves forward in the dark. Every step echoes through the stone corridor...', previewBtn:'→ Continue',
     tree:'Tree', edit:'Edit', more:'More', orderTree:'Arrange tree', exportTxt:'Export TXT', exportJson:'Export JSON', scene:'Scene',
     id:'Identifier', sceneTitle:'Scene title', sceneTitlePh:'Ex: The cursed dock', location:'Location / Context', locationPh:'Ex: SECTOR 9 — LOWER LEVEL', narrative:'Narrative text', narrativePh:'The story begins here...', varHelp:'Available variable: <code>{{player}}</code> will be replaced by the player name.', insertPlayer:'+ insert {{player}}',
+    tipId:'Unique identifier — auto-generated, do not modify',
+    tipTitle:'Scene name — shown in the tree and in the player\'s journal',
+    tipLocation:'Location shown at the top of the scene — ex: SECTOR 9, PORT OF TORTUGA',
+    tipNarrator:'Narrator voice — shown in italic BEFORE the main text, at a slower pace',
+    tipText:'Main text. Use **bold** and *italic*. {{player}} = player\'s name',
+    tipTransition:'Animation on arrival — fade=soft, flash=bright, glitch=digital, scanline=lines',
+    tipImage:'Image or GIF shown above the text. Recommended: 512×512. Folder: assets/images/',
+    tipStart:'Scene where the story begins — only one scene can be the start',
+    tipEnd:'Ending scene — no choices needed, final stats are displayed',
+    tipChoiceText:'What the player reads and taps to move forward',
+    tipLeadsTo:'Scene this choice leads to. Use ＋→ to create a sequel scene directly',
+    tipEffect:'Modifies a stat when the player picks this choice — positive or negative',
+    tipClickFx:'Animation played on the button when the player taps it',
     sceneImmersion:'Scene immersion', arrivalTransition:'Arrival transition', arrivalSound:'Arrival sound', startScene:'Start scene', endScene:'Final scene', choices:'Choices', addChoice:'+ Add choice', choice:'Choice', choiceText:'Choice text', choiceTextPh:'Ex: Accept the contract', choiceVar:'You can write <code>{{player}}</code> in a choice.', leadsTo:'Leads to', noDestination:'— No destination —', clickEffect:'Click effect', clickSound:'Click sound', statEffects:'Stat effects', effect:'+ Effect', noTitle:'Untitled', choicesCount:'choices', needOneScene:'At least one scene is required', defineStats:'Define stats first', invalidFormat:'Invalid format', addLinkedScene:'Create linked scene', addLinkedSceneDesc:'Choose which scene and which answer will lead the player to the new tile.', sourceScene:'Source scene', sourceHint:'The new scene will be linked from this scene.', sourceChoice:'Source answer', createNewChoice:'Create a new answer', newChoiceText:'New answer text', newChoiceTextDefault:'Continue', newSceneName:'New scene title', cancel:'Cancel', createScene:'Create scene', sceneCreatedLinked:'Scene created and linked ✦', sceneCreated:'Scene created ✦', deletedScene:'Scene deleted',
     transitions:{fade:'Soft fade', glitch:'Digital glitch', scanline:'Scanlines', flash:'Quick flash', none:'None'}, clicks:{pulse:'Neon pulse', shake:'Shake', glitch:'Glitch', flash:'Flash', vibrate:'Mobile vibration', none:'None'}, sounds:{none:'None', click_neon:'Neon click', glitch:'Short glitch', success:'Success', error:'Error'}
   },
@@ -847,6 +909,19 @@ const EDITOR_I18N = {
     visualTheme:'🎨 Tema visual', presets:'Temas predefinidos', customColors:'Colores personalizados', mainBg:'Fondo principal', panelBg:'Fondo de paneles', elementBg:'Fondo de elementos', accentMain:'Acento principal', accentSecond:'Acento secundario', accentThird:'Acento terciario', mainText:'Texto principal', borders:'Bordes', preview:'Vista previa', previewTitle:'Título de la escena', previewText:'El héroe avanza en la oscuridad. Cada paso resuena en el pasillo de piedra...', previewBtn:'→ Continuar',
     tree:'Árbol', edit:'Editar', more:'Más', orderTree:'Ordenar el árbol', exportTxt:'Exportar TXT', exportJson:'Exportar JSON', scene:'Escena',
     id:'Identificador', sceneTitle:'Título de la escena', sceneTitlePh:'Ej: El muelle maldito', location:'Lugar / Contexto', locationPh:'Ej: SECTOR 9 — NIVEL INFERIOR', narrative:'Texto narrativo', narrativePh:'La historia empieza aquí...', varHelp:'Variable disponible: <code>{{player}}</code> será reemplazada por el nombre del jugador.', insertPlayer:'+ insertar {{player}}',
+    tipId:'Identificador único — generado automáticamente, no modificar',
+    tipTitle:'Nombre de la escena — mostrado en el árbol y en el diario del jugador',
+    tipLocation:'Lugar mostrado en la parte superior — ej: SECTOR 9, PUERTO DE TORTUGA',
+    tipNarrator:'Voz del narrador — aparece en cursiva ANTES del texto, más lentamente',
+    tipText:'Texto principal. Usa **negrita** y *cursiva*. {{player}} = nombre del jugador',
+    tipTransition:'Animación al llegar — fade=fundido, flash=destello, glitch=digital, scanline=líneas',
+    tipImage:'Imagen o GIF mostrado sobre el texto. Recomendado: 512×512. Carpeta: assets/images/',
+    tipStart:'Escena donde comienza la historia — solo una escena puede ser el inicio',
+    tipEnd:'Escena final — no se necesitan elecciones, se muestran las stats finales',
+    tipChoiceText:'Lo que el jugador lee y toca para avanzar en la historia',
+    tipLeadsTo:'Escena a la que lleva esta elección. Usa ＋→ para crear una escena de continuación',
+    tipEffect:'Modifica una stat cuando el jugador elige esta respuesta — positivo o negativo',
+    tipClickFx:'Animación en el botón cuando el jugador lo toca',
     sceneImmersion:'Inmersión de la escena', arrivalTransition:'Transición de llegada', arrivalSound:'Sonido de llegada', startScene:'Escena inicial', endScene:'Escena final', choices:'Elecciones', addChoice:'+ Añadir elección', choice:'Elección', choiceText:'Texto de la elección', choiceTextPh:'Ej: Aceptar el contrato', choiceVar:'Puedes escribir <code>{{player}}</code> en una elección.', leadsTo:'Lleva a', noDestination:'— Sin destino —', clickEffect:'Efecto al tocar', clickSound:'Sonido al tocar', statEffects:'Efectos en stats', effect:'+ Efecto', noTitle:'Sin título', choicesCount:'elecciones', needOneScene:'Se requiere al menos una escena', defineStats:'Define stats primero', invalidFormat:'Formato inválido', addLinkedScene:'Crear escena vinculada', addLinkedSceneDesc:'Elige desde qué escena y qué respuesta llevará al jugador a la nueva tarjeta.', sourceScene:'Escena de origen', sourceHint:'La nueva escena se vinculará desde esta escena.', sourceChoice:'Respuesta de origen', createNewChoice:'Crear una nueva respuesta', newChoiceText:'Texto de la nueva respuesta', newChoiceTextDefault:'Continuar', newSceneName:'Título de la nueva escena', cancel:'Cancelar', createScene:'Crear escena', sceneCreatedLinked:'Escena creada y vinculada ✦', sceneCreated:'Escena creada ✦', deletedScene:'Escena eliminada',
     transitions:{fade:'Fundido suave', glitch:'Glitch digital', scanline:'Scanlines', flash:'Flash rápido', none:'Ninguna'}, clicks:{pulse:'Pulso neón', shake:'Sacudida', glitch:'Glitch', flash:'Flash', vibrate:'Vibración móvil', none:'Ninguno'}, sounds:{none:'Ninguno', click_neon:'Clic neón', glitch:'Glitch corto', success:'Éxito', error:'Error'}
   }
@@ -1141,38 +1216,38 @@ function renderEditor(id) {
   const body = document.getElementById('editor-body');
   body.innerHTML = `
     <div class="form-group">
-      <label class="form-label">${et('id')}</label>
+      <label class="form-label">${et('id')} <span class="tip tip-down" data-tip="${et('tipId')}">?</span></label>
       <input class="form-input" style="font-family:'DM Mono',monospace;font-size:12px" value="${scene.id}" readonly>
     </div>
     <div class="form-group">
-      <label class="form-label">${et('sceneTitle')}</label>
+      <label class="form-label">${et('sceneTitle')} <span class="tip" data-tip="${et('tipTitle')}">?</span></label>
       <input class="form-input" id="f-title" value="${esc(scene.title)}" oninput="updateField('title',this.value)" placeholder="${et('sceneTitlePh')}">
     </div>
     <div class="form-group">
-      <label class="form-label">${et('location')}</label>
+      <label class="form-label">${et('location')} <span class="tip" data-tip="${et('tipLocation')}">?</span></label>
       <input class="form-input" id="f-location" value="${esc(scene.location)}" oninput="updateField('location',this.value)" placeholder="${et('locationPh')}">
     </div>
     <div class="form-group">
-      <label class="form-label">✒ Narrateur <span style="font-size:10px;color:var(--text3);font-weight:400">— s'affiche en italique avant le texte</span></label>
+      <label class="form-label">✒ Narrateur <span class="tip" data-tip="${et('tipNarrator')}">?</span></label>
       <textarea class="form-textarea" style="min-height:60px;font-style:italic" id="f-narrator"
         oninput="updateField('narrator',this.value)"
         placeholder="Ex: Trois jours ont passé depuis la chute de Neo-Lyon...">${esc(scene.narrator||'')}</textarea>
     </div>
     <div class="form-group">
-      <label class="form-label">${et('narrative')}</label>
+      <label class="form-label">${et('narrative')} <span class="tip" data-tip="${et('tipText')}">?</span></label>
       <textarea class="form-textarea" style="min-height:120px" id="f-text" oninput="updateField('text',this.value)" placeholder="${et('narrativePh')}">${esc(scene.text)}</textarea>
       <div class="var-help">${et('varHelp')}</div>
       <button type="button" class="var-btn" onclick="insertVariable('f-text','text','{{player}}')">${et('insertPlayer')}</button>
     </div>
     <div class="section-divider">${et('sceneImmersion')}</div>
     <div class="form-group">
-      <label class="form-label">${et('arrivalTransition')}</label>
+      <label class="form-label">${et('arrivalTransition')} <span class="tip" data-tip="${et('tipTransition')}">?</span></label>
       <select class="form-select" onchange="updateField('transition',this.value)">
         ${presetOptions(TRANSITION_PRESETS, scene.transition || 'fade', 'transitions')}
       </select>
     </div>
     <div class="form-group">
-      <label class="form-label">🖼 Illustration <span style="font-size:10px;color:var(--text3);font-family:'DM Mono',monospace">assets/images/</span></label>
+      <label class="form-label">🖼 Illustration <span class="tip" data-tip="${et('tipImage')}">?</span> <span style="font-size:10px;color:var(--text3);font-family:'DM Mono',monospace">assets/images/</span></label>
       <div style="display:flex;gap:8px;align-items:center">
         <input class="form-input" id="f-img" style="flex:1;font-family:'DM Mono',monospace;font-size:12px"
           value="${esc(scene.image||'')}"
@@ -1240,14 +1315,14 @@ function renderChoices(id) {
         <button class="icon-btn danger" onclick="removeChoice(${ci})" style="width:24px;height:24px;font-size:12px">✕</button>
       </div>
       <div class="form-group" style="margin-bottom:10px">
-        <label class="form-label" style="font-size:10px">${et('choiceText')}</label>
+        <label class="form-label" style="font-size:10px">${et('choiceText')} <span class="tip tip-down" data-tip="${et('tipChoiceText')}">?</span></label>
         <input class="form-input" id="choice-text-${ci}" value="${esc(choice.text)}"
           oninput="updateChoice(${ci},'text',this.value)" placeholder="${et('choiceTextPh')}">
         <div class="var-help">${et('choiceVar')}</div>
         <button type="button" class="var-btn" onclick="insertChoiceVariable(${ci},'{{player}}')">${et('insertPlayer')}</button>
       </div>
       <div class="form-group" style="margin-bottom:10px">
-        <label class="form-label" style="font-size:10px">${et('leadsTo')}</label>
+        <label class="form-label" style="font-size:10px">${et('leadsTo')} <span class="tip tip-down" data-tip="${et('tipLeadsTo')}">?</span></label>
         <div style="display:flex;gap:6px;align-items:center">
           <select class="form-select" style="flex:1" onchange="updateChoice(${ci},'vers',this.value)">
             <option value="">${et('noDestination')}</option>
@@ -1258,7 +1333,7 @@ function renderChoices(id) {
         ${!choice.vers ? `<div class="link-hint-inline">Aucune destination — crée une suite avec ＋→</div>` : `<div class="link-hint-inline linked">→ Lié à : <strong>${esc(project.scenes[choice.vers]?.title || choice.vers)}</strong></div>`}
       </div>
       <div class="form-group" style="margin-bottom:10px">
-        <label class="form-label" style="font-size:10px">${et('clickEffect')}</label>
+        <label class="form-label" style="font-size:10px">${et('clickEffect')} <span class="tip tip-down" data-tip="${et('tipClickFx')}">?</span></label>
         <select class="form-select" onchange="updateChoice(${ci},'clickEffect',this.value)">
           ${presetOptions(CLICK_EFFECT_PRESETS, choice.clickEffect || 'pulse', 'clicks')}
         </select>
@@ -1270,7 +1345,7 @@ function renderChoices(id) {
         </select>
       </div>
       <div class="form-group" style="margin-bottom:6px">
-        <label class="form-label" style="font-size:10px">${et('statEffects')}</label>
+        <label class="form-label" style="font-size:10px">${et('statEffects')} <span class="tip tip-down" data-tip="${et('tipEffect')}">?</span></label>
         <div class="choice-effects" id="effects-${ci}">${effects}</div>
         <button class="add-effect-btn" onclick="addEffect(${ci})">${et('effect')}</button>
       </div>
@@ -1741,8 +1816,36 @@ document.getElementById('project-name').addEventListener('input', function() {
 window.addEventListener('resize', () => { render(); });
 
 // ══════════════════════════════════════════════
-// THEME SYSTEM
+// TEST STORY
 // ══════════════════════════════════════════════
+function testStory() {
+  // Sauvegarder le projet en mémoire via sessionStorage
+  project.theme = { ...currentTheme };
+  project.kids  = document.getElementById('kids-check').checked;
+  project.askPlayerName = document.getElementById('player-name-check').checked;
+
+  // Trouver la scène de départ — si une scène est sélectionnée on part d'elle
+  // sinon on part de la scène isStart
+  const testSceneId = selectedId || Object.values(project.scenes).find(s => s.isStart)?.id;
+  if (!testSceneId) { toast('Aucune scène de départ définie'); return; }
+
+  // Créer une copie du projet avec la scène sélectionnée comme départ temporaire
+  const testProject = JSON.parse(JSON.stringify(project));
+  // Marquer la scène de test comme start temporaire
+  Object.values(testProject.scenes).forEach(s => s._testStart = false);
+  testProject.scenes[testSceneId]._testStart = true;
+  testProject._testMode = true;
+  testProject._testSceneId = testSceneId;
+
+  // Sauvegarder dans sessionStorage (disponible pour game.html dans le même onglet)
+  sessionStorage.setItem('sf_test_story', JSON.stringify(testProject));
+
+  // Ouvrir game.html en mode test
+  window.open('game.html?test=1', '_blank');
+  toast('▶ Ouverture du test...');
+}
+
+
 const PRESETS = [
   { name:'Sombre',    bg:'#0e0e12', bg2:'#14141a', bg3:'#1c1c24', bg4:'#24242e', border:'#2e2e3a', accent:'#7c6dfa', accent2:'#fa6d8f', accent3:'#6dfabc', text:'#e8e8f0', text2:'#9090a8', text3:'#5a5a72' },
   { name:'Cyberpunk', bg:'#050810', bg2:'#080d18', bg3:'#0d1525', bg4:'#121d30', border:'#1a2a44', accent:'#00f5ff', accent2:'#ff00aa', accent3:'#ffe600', text:'#c8d8e8', text2:'#6080a0', text3:'#304060' },
