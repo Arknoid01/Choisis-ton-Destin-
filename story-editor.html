@@ -860,7 +860,7 @@ let nodeDragOffset = null;
 
 const EDITOR_I18N = {
   fr: {
-    projectPlaceholder:'Nom du projet', kidsTitle:'Histoire pour enfants', statsBtn:'⚙ Stats', themeBtn:'🎨 Thème', layoutBtn:'⊞ Ordonner', importBtn:'↑ Importer', exportTxtBtn:'✎ Export TXT', exportJsonBtn:'↓ Export JSON',
+    projectPlaceholder:'Nom du projet', kidsTitle:'Histoire pour enfants', statsBtn:'⚙ Stats', themeBtn:'🎨 Thème', layoutBtn:'⊞ Ordonner', importBtn:'↑ Importer', exportTxtBtn:'✎ Export TXT', exportJsonBtn:'↓ Export JSON', testBtn:'Tester l\'aperçu', sendBtn:'Envoyer mon histoire',
     selectScene:'Sélectionne une scène', deleteTitle:'Supprimer', newSceneTitle:'Nouvelle scène', centerTitle:'Recentrer', empty:'Crée ou sélectionne une scène dans l\'arbre pour l\'éditer.', newScene:'+ Nouvelle scène',
     statsTitle:'Configuration des Stats', statsDesc:'Définis les attributs de ton personnage. Ils seront disponibles dans chaque choix.', addStat:'+ Ajouter une stat', close:'Fermer',
     visualTheme:'🎨 Thème visuel', presets:'Thèmes prédéfinis', customColors:'Couleurs custom', mainBg:'Fond principal', panelBg:'Fond panneaux', elementBg:'Fond éléments', accentMain:'Accent principal', accentSecond:'Accent secondaire', accentThird:'Accent tertiaire', mainText:'Texte principal', borders:'Bordures', preview:'Aperçu', previewTitle:'Titre de la scène', previewText:'Le héros avance dans l\'obscurité. Chaque pas résonne dans le couloir de pierre...', previewBtn:'→ Continuer',
@@ -883,7 +883,7 @@ const EDITOR_I18N = {
     transitions:{fade:'Fondu doux', glitch:'Glitch numérique', scanline:'Scanlines', flash:'Flash rapide', none:'Aucune'}, clicks:{pulse:'Pulse néon', shake:'Secousse', glitch:'Glitch', flash:'Flash', vibrate:'Vibration mobile', none:'Aucun'}, sounds:{none:'Aucun', click_neon:'Clic néon', glitch:'Glitch court', success:'Succès', error:'Erreur'}
   },
   en: {
-    projectPlaceholder:'Project name', kidsTitle:'Story for children', statsBtn:'⚙ Stats', themeBtn:'🎨 Theme', layoutBtn:'⊞ Arrange', importBtn:'↑ Import', exportTxtBtn:'✎ Export TXT', exportJsonBtn:'↓ Export JSON',
+    projectPlaceholder:'Project name', kidsTitle:'Story for children', statsBtn:'⚙ Stats', themeBtn:'🎨 Theme', layoutBtn:'⊞ Arrange', importBtn:'↑ Import', exportTxtBtn:'✎ Export TXT', exportJsonBtn:'↓ Export JSON', testBtn:'Preview test', sendBtn:'Send my story',
     selectScene:'Select a scene', deleteTitle:'Delete', newSceneTitle:'New scene', centerTitle:'Recenter', empty:'Create or select a scene in the tree to edit it.', newScene:'+ New scene',
     statsTitle:'Stats Configuration', statsDesc:'Define your character attributes. They will be available in every choice.', addStat:'+ Add stat', close:'Close',
     visualTheme:'🎨 Visual theme', presets:'Preset themes', customColors:'Custom colors', mainBg:'Main background', panelBg:'Panel background', elementBg:'Element background', accentMain:'Main accent', accentSecond:'Secondary accent', accentThird:'Third accent', mainText:'Main text', borders:'Borders', preview:'Preview', previewTitle:'Scene title', previewText:'The hero moves forward in the dark. Every step echoes through the stone corridor...', previewBtn:'→ Continue',
@@ -906,7 +906,7 @@ const EDITOR_I18N = {
     transitions:{fade:'Soft fade', glitch:'Digital glitch', scanline:'Scanlines', flash:'Quick flash', none:'None'}, clicks:{pulse:'Neon pulse', shake:'Shake', glitch:'Glitch', flash:'Flash', vibrate:'Mobile vibration', none:'None'}, sounds:{none:'None', click_neon:'Neon click', glitch:'Short glitch', success:'Success', error:'Error'}
   },
   es: {
-    projectPlaceholder:'Nombre del proyecto', kidsTitle:'Historia para niños', statsBtn:'⚙ Stats', themeBtn:'🎨 Tema', layoutBtn:'⊞ Ordenar', importBtn:'↑ Importar', exportTxtBtn:'✎ Exportar TXT', exportJsonBtn:'↓ Exportar JSON',
+    projectPlaceholder:'Nombre del proyecto', kidsTitle:'Historia para niños', statsBtn:'⚙ Stats', themeBtn:'🎨 Tema', layoutBtn:'⊞ Ordenar', importBtn:'↑ Importar', exportTxtBtn:'✎ Exportar TXT', exportJsonBtn:'↓ Exportar JSON', testBtn:'Vista previa', sendBtn:'Enviar mi historia',
     selectScene:'Selecciona una escena', deleteTitle:'Eliminar', newSceneTitle:'Nueva escena', centerTitle:'Recentrar', empty:'Crea o selecciona una escena en el árbol para editarla.', newScene:'+ Nueva escena',
     statsTitle:'Configuración de Stats', statsDesc:'Define los atributos de tu personaje. Estarán disponibles en cada elección.', addStat:'+ Añadir stat', close:'Cerrar',
     visualTheme:'🎨 Tema visual', presets:'Temas predefinidos', customColors:'Colores personalizados', mainBg:'Fondo principal', panelBg:'Fondo de paneles', elementBg:'Fondo de elementos', accentMain:'Acento principal', accentSecond:'Acento secundario', accentThird:'Acento terciario', mainText:'Texto principal', borders:'Bordes', preview:'Vista previa', previewTitle:'Título de la escena', previewText:'El héroe avanza en la oscuridad. Cada paso resuena en el pasillo de piedra...', previewBtn:'→ Continuar',
@@ -972,9 +972,11 @@ function applyEditorLanguage() {
   const mm = document.querySelectorAll('#mobile-menu .mmenu-item');
   if (mm[0]) mm[0].innerHTML = '<span class="mmenu-icon">🎨</span> ' + et('visualTheme');
   if (mm[1]) mm[1].innerHTML = '<span class="mmenu-icon">⊞</span> ' + et('orderTree');
-  if (mm[2]) mm[2].innerHTML = '<span class="mmenu-icon">↑</span> ' + et('importBtn').replace('↑ ','');
-  if (mm[3]) mm[3].innerHTML = '<span class="mmenu-icon">✎</span> ' + et('exportTxt');
-  if (mm[4]) mm[4].innerHTML = '<span class="mmenu-icon">↓</span> ' + et('exportJson');
+  if (mm[2]) mm[2].innerHTML = '<span class="mmenu-icon">▶</span> ' + et('testBtn');
+  if (mm[3]) mm[3].innerHTML = '<span class="mmenu-icon">↑</span> ' + et('importBtn').replace('↑ ','');
+  if (mm[4]) mm[4].innerHTML = '<span class="mmenu-icon">✎</span> ' + et('exportTxt');
+  if (mm[5]) mm[5].innerHTML = '<span class="mmenu-icon">↓</span> ' + et('exportJson');
+  if (mm[6]) mm[6].innerHTML = '<span class="mmenu-icon">✉</span> ' + et('sendBtn');
 }
 
 // ══════════════════════════════════════════════
