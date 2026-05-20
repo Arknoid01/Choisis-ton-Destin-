@@ -23,13 +23,28 @@
   },
   "scenes": {
 
+    "prologue": {
+      "id": "prologue",
+      "title": "Prologue",
+      "location": "QUELQUE PART DANS L'ESPACE — ANNO 12 847",
+      "narrator": "Il n'y a pas de hasard. Pas vraiment. Chaque événement est la conséquence d'un autre, dans une chaîne qui remonte jusqu'au premier instant de l'univers. Ce que tu t'apprêtes à vivre... a commencé il y a 10 000 ans.",
+      "text": "Tu ne sais pas comment tu es arrivé là.\n\nLes derniers souvenirs sont flous — une mission de reconnaissance, une anomalie de signal, une décision prise trop vite. Puis le vide.\n\nEt maintenant ça : un plafond métallique inconnu au-dessus de ta tête. Une lumière bleue froide qui pulse doucement. L'air sent quelque chose d'ancien — de la poussière et de l'ozone mêlés, comme si cette pièce n'avait pas été respirée depuis très, très longtemps.\n\nAu loin, quelque part dans les murs, une alarme muette clignote. Rouge. Régulière. Elle semble attendre quelque chose.\n\n*Elle semble attendre toi.*",
+      "isStart": true,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        { "text": "Se lever", "vers": "eveil", "effects": [] }
+      ],
+      "x": 400, "y": -120
+    },
+
     "eveil": {
       "id": "eveil",
       "title": "L'Éveil",
       "location": "STATION ORBITALE — SECTEUR INCONNU",
       "narrator": "Il y a 10 000 ans, une civilisation appelée les Architects disparut au sommet de sa gloire. Ils ne furent pas détruits. Ils choisirent de partir — après avoir caché quelque chose. Quelque chose d'important. Ce soir, une alarme s'est déclenchée pour la première fois depuis des millénaires.",
       "text": "Tu ouvres les yeux dans un couloir métallique baigné d'une lumière bleue froide. L'air sent la poussière et l'électricité. Sur les murs, des gravures dans une langue inconnue.\n\nPuis une voix. Douce. Précise. Ancienne.\n\n**«Initialisation complète. Bienvenue, {{player}}. Je suis ARIA — Adaptive Resonance Intelligence Archive. J'attendais quelqu'un comme toi depuis... longtemps. Il y a des choses que tu dois savoir sur ce système solaire. Et sur ceux qui l'ont bâti.»**\n\nDevant toi, deux couloirs. L'un mène vers une lueur orangée. L'autre vers le silence.",
-      "isStart": true,
+      "isStart": false,
       "isEnd": false,
       "transition": "fade",
       "choices": [
