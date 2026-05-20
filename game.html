@@ -101,6 +101,15 @@ body {
 }
 #btn-menu:hover { border-color: var(--accent); color: var(--text); }
 
+#btn-fullscreen {
+  width: 36px; height: 36px; border-radius: 8px;
+  border: 1px solid var(--border); background: none;
+  color: var(--text2); font-size: 16px; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  transition: all .15s; flex-shrink: 0;
+}
+#btn-fullscreen:hover { border-color: var(--accent); color: var(--text); }
+
 /* ── STATS BAR ── */
 #stats-bar {
   position: fixed; top: 52px; left: 0; right: 0;
@@ -774,6 +783,7 @@ body {
 <div id="topbar">
   <a href="index.html" id="btn-back" title="Retour">←</a>
   <div id="game-title">…</div>
+  <button id="btn-fullscreen" onclick="toggleFullscreen()" title="Plein écran">⛶</button>
   <button id="btn-menu" onclick="openMenu()" title="Menu">☰</button>
 </div>
 
@@ -1514,8 +1524,35 @@ function toggleHistory() {
 }
 
 // ══════════════════════════════════════════════
-// IMMERSIVE MODE
+// FULLSCREEN
 // ══════════════════════════════════════════════
+function toggleFullscreen() {
+  const btn = document.getElementById('btn-fullscreen');
+  if (!document.fullscreenElement) {
+    document.documentElement.requestFullscreen().then(() => {
+      if (btn) btn.textContent = '✕';
+      btn.title = 'Quitter le plein écran';
+    }).catch(() => {});
+  } else {
+    document.exitFullscreen().then(() => {
+      if (btn) btn.textContent = '⛶';
+      btn.title = 'Plein écran';
+    }).catch(() => {});
+  }
+}
+
+// Mettre à jour l'icône si le plein écran est quitté via Échap
+document.addEventListener('fullscreenchange', () => {
+  const btn = document.getElementById('btn-fullscreen');
+  if (!btn) return;
+  if (document.fullscreenElement) {
+    btn.textContent = '✕'; btn.title = 'Quitter le plein écran';
+  } else {
+    btn.textContent = '⛶'; btn.title = 'Plein écran';
+  }
+});
+
+
 let uiVisible = false;
 let uiHideTimer = null;
 
