@@ -583,10 +583,10 @@ html,body { height:100%; overflow:hidden; font-family:'Syne',sans-serif; backgro
 @media (max-width:700px) {
   #topbar .sep,
   #topbar button,
-  #topbar .spacer { display:none; }
+  #topbar .spacer,
+  #topbar .kids-toggle { display:none; }
   #topbar { gap:8px; padding:0 12px; }
   #topbar #project-name { width:auto; flex:1; font-size:15px; }
-  #topbar .kids-toggle { display:flex; }
 
   #bottom-nav { display:flex; }
   #mobile-fab { display:flex; }
@@ -819,6 +819,12 @@ html,body { height:100%; overflow:hidden; font-family:'Syne',sans-serif; backgro
   <button class="mmenu-item" onclick="closeMobileMenu();autoLayout()">
     <span class="mmenu-icon">⊞</span> Ordonner l'arbre
   </button>
+  <button class="mmenu-item" onclick="toggleKidsMobile()">
+    <span class="mmenu-icon">🧒</span> <span id="mm-kids-label">Histoire pour enfants</span>
+  </button>
+  <button class="mmenu-item" onclick="togglePlayerNameMobile()">
+    <span class="mmenu-icon">👤</span> <span id="mm-player-label">Demander le prénom</span>
+  </button>
   <button class="mmenu-item" onclick="closeMobileMenu();testStory()" style="color:var(--accent3)">
     <span class="mmenu-icon">▶</span> Tester l'histoire
   </button>
@@ -972,11 +978,12 @@ function applyEditorLanguage() {
   const mm = document.querySelectorAll('#mobile-menu .mmenu-item');
   if (mm[0]) mm[0].innerHTML = '<span class="mmenu-icon">🎨</span> ' + et('visualTheme');
   if (mm[1]) mm[1].innerHTML = '<span class="mmenu-icon">⊞</span> ' + et('orderTree');
-  if (mm[2]) mm[2].innerHTML = '<span class="mmenu-icon">▶</span> ' + et('testBtn');
-  if (mm[3]) mm[3].innerHTML = '<span class="mmenu-icon">↑</span> ' + et('importBtn').replace('↑ ','');
-  if (mm[4]) mm[4].innerHTML = '<span class="mmenu-icon">✎</span> ' + et('exportTxt');
-  if (mm[5]) mm[5].innerHTML = '<span class="mmenu-icon">↓</span> ' + et('exportJson');
-  if (mm[6]) mm[6].innerHTML = '<span class="mmenu-icon">✉</span> ' + et('sendBtn');
+  // mm[2] = kids toggle, mm[3] = player name toggle — gérés séparément
+  if (mm[4]) mm[4].innerHTML = '<span class="mmenu-icon">▶</span> ' + et('testBtn');
+  if (mm[5]) mm[5].innerHTML = '<span class="mmenu-icon">↑</span> ' + et('importBtn').replace('↑ ','');
+  if (mm[6]) mm[6].innerHTML = '<span class="mmenu-icon">✎</span> ' + et('exportTxt');
+  if (mm[7]) mm[7].innerHTML = '<span class="mmenu-icon">↓</span> ' + et('exportJson');
+  if (mm[8]) mm[8].innerHTML = '<span class="mmenu-icon">✉</span> ' + et('sendBtn');
 }
 
 // ══════════════════════════════════════════════
@@ -1959,7 +1966,25 @@ function updatePreview() {
 }
 
 
-// ── TOOLTIP SYSTEM ──
+function toggleKidsMobile() {
+  const check = document.getElementById('kids-check');
+  check.checked = !check.checked;
+  project.kids = check.checked;
+  const label = document.getElementById('mm-kids-label');
+  if (label) label.textContent = (check.checked ? '✓ ' : '') + 'Histoire pour enfants';
+  toast(check.checked ? '🧒 Mode enfant activé' : 'Mode enfant désactivé');
+}
+
+function togglePlayerNameMobile() {
+  const check = document.getElementById('player-name-check');
+  check.checked = !check.checked;
+  project.askPlayerName = check.checked;
+  const label = document.getElementById('mm-player-label');
+  if (label) label.textContent = (check.checked ? '✓ ' : '') + 'Demander le prénom';
+  toast(check.checked ? '👤 Prénom activé' : 'Prénom désactivé');
+}
+
+
 let tipTimer = null;
 const tipBubble = document.getElementById('tip-bubble');
 
