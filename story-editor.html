@@ -741,7 +741,7 @@ html,body { height:100%; overflow:hidden; font-family:'Syne',sans-serif; backgro
       <span class="kids-icon">👤</span>
     </label>
     <div class="spacer"></div>
-    <div id="health-badge" class="ok" onclick="toggleHealthPanel()" title="Santé de l'histoire">✓ Prête</div>
+    <div id="health-badge" class="ok" onclick="toggleHealthPanel()" title="${et('healthTitle')}"></div>
     <button class="topbtn" onclick="openStatsModal()">⚙ Stats</button>
     <button class="topbtn" onclick="openThemePanel()">🎨 Thème</button>
     <button class="topbtn" onclick="autoLayout()">⊞ Ordonner</button>
@@ -968,10 +968,10 @@ html,body { height:100%; overflow:hidden; font-family:'Syne',sans-serif; backgro
     <span class="mmenu-icon">⊞</span> Ordonner l'arbre
   </button>
   <button class="mmenu-item" onclick="toggleKidsMobile()">
-    <span class="mmenu-icon">🧒</span> <span id="mm-kids-label">Histoire pour enfants</span>
+    <span class="mmenu-icon">🧒</span> <span id="mm-kids-label">${et("kidsLabel")}</span>
   </button>
   <button class="mmenu-item" onclick="togglePlayerNameMobile()">
-    <span class="mmenu-icon">👤</span> <span id="mm-player-label">Demander le prénom</span>
+    <span class="mmenu-icon">👤</span> <span id="mm-player-label">${et("playerLabel")}</span>
   </button>
   <button class="mmenu-item" onclick="closeMobileMenu();testStory()" style="color:var(--accent3)">
     <span class="mmenu-icon">▶</span> Tester l'histoire
@@ -1034,7 +1034,8 @@ const EDITOR_I18N = {
     tipEffect:'Modifie une stat quand le joueur choisit cette réponse — positif ou négatif',
     tipClickFx:'Animation jouée sur le bouton quand le joueur tape dessus',
     sceneImmersion:'Immersion de la scène', arrivalTransition:'Transition d\'arrivée', arrivalSound:'Son d\'arrivée', startScene:'Scène de départ', endScene:'Scène finale', choices:'Choix', addChoice:'+ Ajouter un choix', choice:'Choix', choiceText:'Texte du choix', choiceTextPh:'Ex: Accepter le contrat', choiceVar:'Tu peux écrire <code>{{player}}</code> dans un choix.', leadsTo:'Mène vers', noDestination:'— Aucune destination —', clickEffect:'Effet au clic', clickSound:'Son au clic', statEffects:'Effets sur les stats', effect:'+ Effet', noTitle:'Sans titre', choicesCount:'choix', needOneScene:'Au moins une scène requise', defineStats:'Définis d\'abord des stats', invalidFormat:'Format invalide', addLinkedScene:'Créer une scène liée', addLinkedSceneDesc:'Choisis depuis quelle scène et quelle réponse le joueur arrivera sur la nouvelle tuile.', sourceScene:'Scène source', sourceHint:'La nouvelle scène sera reliée depuis cette scène.', sourceChoice:'Réponse source', createNewChoice:'Créer une nouvelle réponse', newChoiceText:'Texte de la nouvelle réponse', newChoiceTextDefault:'Continuer', newSceneName:'Titre de la nouvelle scène', cancel:'Annuler', createScene:'Créer la scène', sceneCreatedLinked:'Scène créée et reliée ✦', sceneCreated:'Scène créée ✦', deletedScene:'Scène supprimée',
-    transitions:{fade:'Fondu doux', glitch:'Glitch numérique', scanline:'Scanlines', flash:'Flash rapide', none:'Aucune'}, clicks:{pulse:'Pulse néon', shake:'Secousse', glitch:'Glitch', flash:'Flash', vibrate:'Vibration mobile', none:'Aucun'}, sounds:{none:'Aucun', click_neon:'Clic néon', glitch:'Glitch court', success:'Succès', error:'Erreur'}
+    transitions:{fade:'Fondu doux', glitch:'Glitch numérique', scanline:'Scanlines', flash:'Flash rapide', none:'Aucune'}, clicks:{pulse:'Pulse néon', shake:'Secousse', glitch:'Glitch', flash:'Flash', vibrate:'Vibration mobile', none:'Aucun'}, sounds:{none:'Aucun', click_neon:'Clic néon', glitch:'Glitch court', success:'Succès', error:'Erreur'},
+    healthReady:'✓ Prête', healthWarn:'⚠ {n} avert.', healthError:'✕ {n} erreur(s)', healthOk:'Aucun problème détecté', healthNoStart:'Aucune scène de départ définie', healthMultiStart:'{n} scènes de départ', healthEmptyText:'"{t}" — texte vide', healthNoLink:'"{t}" — choix {i} sans destination', healthDeadLink:'"{t}" — destination supprimée', healthNoChoice:'"{t}" — sans choix, non finale', searchNoResult:'Aucun résultat', undone:'↩ Annulé', redone:'↪ Rétabli', nodeColor:'🎨 Couleur du nœud', kidsOn:'🧒 Mode enfant activé', kidsOff:'Mode enfant désactivé', playerOn:'👤 Prénom activé', playerOff:'Prénom désactivé', kidsLabel:'Histoire pour enfants', playerLabel:'Demander le prénom', healthTitle:'Santé de l\'histoire'
   },
   en: {
     projectPlaceholder:'Project name', kidsTitle:'Story for children', statsBtn:'⚙ Stats', themeBtn:'🎨 Theme', layoutBtn:'⊞ Arrange', importBtn:'↑ Import', exportTxtBtn:'✎ Export TXT', exportJsonBtn:'↓ Export JSON', testBtn:'Preview test', sendBtn:'Send my story',
@@ -1057,7 +1058,8 @@ const EDITOR_I18N = {
     tipEffect:'Modifies a stat when the player picks this choice — positive or negative',
     tipClickFx:'Animation played on the button when the player taps it',
     sceneImmersion:'Scene immersion', arrivalTransition:'Arrival transition', arrivalSound:'Arrival sound', startScene:'Start scene', endScene:'Final scene', choices:'Choices', addChoice:'+ Add choice', choice:'Choice', choiceText:'Choice text', choiceTextPh:'Ex: Accept the contract', choiceVar:'You can write <code>{{player}}</code> in a choice.', leadsTo:'Leads to', noDestination:'— No destination —', clickEffect:'Click effect', clickSound:'Click sound', statEffects:'Stat effects', effect:'+ Effect', noTitle:'Untitled', choicesCount:'choices', needOneScene:'At least one scene is required', defineStats:'Define stats first', invalidFormat:'Invalid format', addLinkedScene:'Create linked scene', addLinkedSceneDesc:'Choose which scene and which answer will lead the player to the new tile.', sourceScene:'Source scene', sourceHint:'The new scene will be linked from this scene.', sourceChoice:'Source answer', createNewChoice:'Create a new answer', newChoiceText:'New answer text', newChoiceTextDefault:'Continue', newSceneName:'New scene title', cancel:'Cancel', createScene:'Create scene', sceneCreatedLinked:'Scene created and linked ✦', sceneCreated:'Scene created ✦', deletedScene:'Scene deleted',
-    transitions:{fade:'Soft fade', glitch:'Digital glitch', scanline:'Scanlines', flash:'Quick flash', none:'None'}, clicks:{pulse:'Neon pulse', shake:'Shake', glitch:'Glitch', flash:'Flash', vibrate:'Mobile vibration', none:'None'}, sounds:{none:'None', click_neon:'Neon click', glitch:'Short glitch', success:'Success', error:'Error'}
+    transitions:{fade:'Soft fade', glitch:'Digital glitch', scanline:'Scanlines', flash:'Quick flash', none:'None'}, clicks:{pulse:'Neon pulse', shake:'Shake', glitch:'Glitch', flash:'Flash', vibrate:'Mobile vibration', none:'None'}, sounds:{none:'None', click_neon:'Neon click', glitch:'Short glitch', success:'Success', error:'Error'},
+    healthReady:'✓ Ready', healthWarn:'⚠ {n} warn.', healthError:'✕ {n} error(s)', healthOk:'No issues detected', healthNoStart:'No start scene defined', healthMultiStart:'{n} start scenes', healthEmptyText:'"{t}" — empty text', healthNoLink:'"{t}" — choice {i} has no destination', healthDeadLink:'"{t}" — deleted destination', healthNoChoice:'"{t}" — no choices, not marked as end', searchNoResult:'No results', undone:'↩ Undone', redone:'↪ Redone', nodeColor:'🎨 Node color', kidsOn:'🧒 Kids mode on', kidsOff:'Kids mode off', playerOn:'👤 Name prompt on', playerOff:'Name prompt off', kidsLabel:'Kids story', playerLabel:'Ask for name', healthTitle:'Story health'
   },
   es: {
     projectPlaceholder:'Nombre del proyecto', kidsTitle:'Historia para niños', statsBtn:'⚙ Stats', themeBtn:'🎨 Tema', layoutBtn:'⊞ Ordenar', importBtn:'↑ Importar', exportTxtBtn:'✎ Exportar TXT', exportJsonBtn:'↓ Exportar JSON', testBtn:'Vista previa', sendBtn:'Enviar mi historia',
@@ -1080,7 +1082,8 @@ const EDITOR_I18N = {
     tipEffect:'Modifica una stat cuando el jugador elige esta respuesta — positivo o negativo',
     tipClickFx:'Animación en el botón cuando el jugador lo toca',
     sceneImmersion:'Inmersión de la escena', arrivalTransition:'Transición de llegada', arrivalSound:'Sonido de llegada', startScene:'Escena inicial', endScene:'Escena final', choices:'Elecciones', addChoice:'+ Añadir elección', choice:'Elección', choiceText:'Texto de la elección', choiceTextPh:'Ej: Aceptar el contrato', choiceVar:'Puedes escribir <code>{{player}}</code> en una elección.', leadsTo:'Lleva a', noDestination:'— Sin destino —', clickEffect:'Efecto al tocar', clickSound:'Sonido al tocar', statEffects:'Efectos en stats', effect:'+ Efecto', noTitle:'Sin título', choicesCount:'elecciones', needOneScene:'Se requiere al menos una escena', defineStats:'Define stats primero', invalidFormat:'Formato inválido', addLinkedScene:'Crear escena vinculada', addLinkedSceneDesc:'Elige desde qué escena y qué respuesta llevará al jugador a la nueva tarjeta.', sourceScene:'Escena de origen', sourceHint:'La nueva escena se vinculará desde esta escena.', sourceChoice:'Respuesta de origen', createNewChoice:'Crear una nueva respuesta', newChoiceText:'Texto de la nueva respuesta', newChoiceTextDefault:'Continuar', newSceneName:'Título de la nueva escena', cancel:'Cancelar', createScene:'Crear escena', sceneCreatedLinked:'Escena creada y vinculada ✦', sceneCreated:'Escena creada ✦', deletedScene:'Escena eliminada',
-    transitions:{fade:'Fundido suave', glitch:'Glitch digital', scanline:'Scanlines', flash:'Flash rápido', none:'Ninguna'}, clicks:{pulse:'Pulso neón', shake:'Sacudida', glitch:'Glitch', flash:'Flash', vibrate:'Vibración móvil', none:'Ninguno'}, sounds:{none:'Ninguno', click_neon:'Clic neón', glitch:'Glitch corto', success:'Éxito', error:'Error'}
+    transitions:{fade:'Fundido suave', glitch:'Glitch digital', scanline:'Scanlines', flash:'Flash rápido', none:'Ninguna'}, clicks:{pulse:'Pulso neón', shake:'Sacudida', glitch:'Glitch', flash:'Flash', vibrate:'Vibración móvil', none:'Ninguno'}, sounds:{none:'Ninguno', click_neon:'Clic neón', glitch:'Glitch corto', success:'Éxito', error:'Error'},
+    healthReady:'✓ Lista', healthWarn:'⚠ {n} advert.', healthError:'✕ {n} error(s)', healthOk:'Sin problemas detectados', healthNoStart:'Sin escena de inicio definida', healthMultiStart:'{n} escenas de inicio', healthEmptyText:'"{t}" — texto vacío', healthNoLink:'"{t}" — elección {i} sin destino', healthDeadLink:'"{t}" — destino eliminado', healthNoChoice:'"{t}" — sin elecciones, no es final', searchNoResult:'Sin resultados', undone:'↩ Deshecho', redone:'↪ Rehecho', nodeColor:'🎨 Color del nodo', kidsOn:'🧒 Modo infantil activado', kidsOff:'Modo infantil desactivado', playerOn:'👤 Nombre activado', playerOff:'Nombre desactivado', kidsLabel:'Historia para niños', playerLabel:'Pedir nombre', healthTitle:'Salud de la historia'
   }
 };
 let editorLang = ['fr','en','es'].includes(localStorage.getItem('sf_lang')) ? localStorage.getItem('sf_lang') : 'fr';
@@ -1118,6 +1121,8 @@ function applyEditorLanguage() {
 
   const byId = (id, text) => { const el = document.getElementById(id); if (el) el.textContent = text; };
   byId('empty-text', et('empty'));
+  const hb = document.getElementById('health-badge');
+  if (hb && hb.className === 'ok') hb.textContent = et('healthReady');
   byId('empty-btn',  et('newScene'));
   byId('stats-modal-title', et('statsTitle')); byId('stats-modal-desc', et('statsDesc')); byId('stats-add-btn', et('addStat')); byId('stats-close-btn', et('close'));
   byId('theme-title', et('visualTheme')); byId('theme-presets-title', et('presets')); byId('theme-custom-title', et('customColors'));
@@ -2105,23 +2110,23 @@ function checkHealth() {
   const scenes = Object.values(project.scenes);
   const issues = [];
   const starts = scenes.filter(s => s.isStart);
-  if (starts.length === 0) issues.push({ type:'error', msg:'Aucune scène de départ définie', sceneId:null });
-  if (starts.length > 1)  issues.push({ type:'warn', msg:`${starts.length} scènes de départ`, sceneId:null });
+  if (starts.length === 0) issues.push({ type:'error', msg:et('healthNoStart'), sceneId:null });
+  if (starts.length > 1)  issues.push({ type:'warn', msg:et('healthMultiStart').replace('{n}',starts.length), sceneId:null });
   scenes.forEach(s => {
-    if (!s.text?.trim() && !s.isEnd) issues.push({ type:'warn', msg:`"${s.title||s.id}" — texte vide`, sceneId:s.id });
+    if (!s.text?.trim() && !s.isEnd) issues.push({ type:'warn', msg:et('healthEmptyText').replace('{t}',s.title||s.id), sceneId:s.id });
     s.choices?.forEach((c, i) => {
-      if (!c.vers) issues.push({ type:'error', msg:`"${s.title||s.id}" — choix ${i+1} sans destination`, sceneId:s.id });
-      if (c.vers && !project.scenes[c.vers]) issues.push({ type:'error', msg:`"${s.title||s.id}" — destination supprimée`, sceneId:s.id });
+      if (!c.vers) issues.push({ type:'error', msg:et('healthNoLink').replace('{t}',s.title||s.id).replace('{i}',i+1), sceneId:s.id });
+      if (c.vers && !project.scenes[c.vers]) issues.push({ type:'error', msg:et('healthDeadLink').replace('{t}',s.title||s.id), sceneId:s.id });
     });
-    if (!s.isEnd && (!s.choices || !s.choices.length)) issues.push({ type:'warn', msg:`"${s.title||s.id}" — sans choix, non finale`, sceneId:s.id });
+    if (!s.isEnd && (!s.choices || !s.choices.length)) issues.push({ type:'warn', msg:et('healthNoChoice').replace('{t}',s.title||s.id), sceneId:s.id });
   });
   const errors = issues.filter(i => i.type==='error').length;
   const warns  = issues.filter(i => i.type==='warn').length;
   const badge  = document.getElementById('health-badge');
   if (!badge) return;
-  if (errors > 0) { badge.className='error'; badge.textContent=`✕ ${errors} erreur${errors>1?'s':''}`; }
-  else if (warns > 0) { badge.className='warn'; badge.textContent=`⚠ ${warns} avert.`; }
-  else { badge.className='ok'; badge.textContent='✓ Prête'; }
+  if (errors > 0) { badge.className='error'; badge.textContent=et('healthError').replace('{n}',errors); }
+  else if (warns > 0) { badge.className='warn'; badge.textContent=et('healthWarn').replace('{n}',warns); }
+  else { badge.className='ok'; badge.textContent=et('healthReady'); }
   badge._issues = issues;
 }
 
@@ -2168,7 +2173,7 @@ function doSearch(query) {
   ).slice(0, 8);
   results.innerHTML = matches.length
     ? matches.map(s => `<div class="search-result" onclick="selectScene('${s.id}');closeSearch()">${(s.title||s.id).replace(new RegExp(query,'gi'), m => `<mark>${m}</mark>`)}</div>`).join('')
-    : '<div class="search-result" style="color:var(--text3)">Aucun résultat</div>';
+    : `<div class="search-result" style="color:var(--text3)">${et('searchNoResult')}</div>`;
   results.classList.add('open');
 }
 
@@ -2191,7 +2196,7 @@ function undo() {
   _undoLocked = true; project.scenes = JSON.parse(undoStack.pop()); _undoLocked = false;
   render();
   if (selectedId && project.scenes[selectedId]) renderEditor(selectedId); else showEmptyEditor();
-  updateUndoButtons(); toast('↩ Annulé');
+  updateUndoButtons(); toast(et('undone'));
 }
 function redo() {
   if (!redoStack.length) return;
@@ -2199,7 +2204,7 @@ function redo() {
   _undoLocked = true; project.scenes = JSON.parse(redoStack.pop()); _undoLocked = false;
   render();
   if (selectedId && project.scenes[selectedId]) renderEditor(selectedId); else showEmptyEditor();
-  updateUndoButtons(); toast('↪ Rétabli');
+  updateUndoButtons(); toast(et('redone'));
 }
 function updateUndoButtons() {
   const u = document.getElementById('btn-undo'); const r = document.getElementById('btn-redo');
@@ -2321,8 +2326,8 @@ function toggleKidsMobile() {
   check.checked = !check.checked;
   project.kids = check.checked;
   const label = document.getElementById('mm-kids-label');
-  if (label) label.textContent = (check.checked ? '✓ ' : '') + 'Histoire pour enfants';
-  toast(check.checked ? '🧒 Mode enfant activé' : 'Mode enfant désactivé');
+  if (label) label.textContent = (check.checked ? '✓ ' : '') + et('kidsLabel');
+  toast(check.checked ? et('kidsOn') : et('kidsOff'));
 }
 
 function togglePlayerNameMobile() {
@@ -2330,8 +2335,8 @@ function togglePlayerNameMobile() {
   check.checked = !check.checked;
   project.askPlayerName = check.checked;
   const label = document.getElementById('mm-player-label');
-  if (label) label.textContent = (check.checked ? '✓ ' : '') + 'Demander le prénom';
-  toast(check.checked ? '👤 Prénom activé' : 'Prénom désactivé');
+  if (label) label.textContent = (check.checked ? '✓ ' : '') + et('playerLabel');
+  toast(check.checked ? et('playerOn') : et('playerOff'));
 }
 
 
