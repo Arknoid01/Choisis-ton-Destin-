@@ -1754,6 +1754,16 @@ Cordialement,
 }
 
 
+function importJSON() {
+  // Sur mobile, créer et déclencher un input file programmatiquement
+  // pour contourner les restrictions de certains navigateurs
+  const input = document.getElementById('import-input');
+  if (input) {
+    input.value = ''; // reset pour permettre reimport du même fichier
+    input.click();
+  }
+}
+
 function handleImport(e) {
   const file = e.target.files[0];
   if (!file) return;
