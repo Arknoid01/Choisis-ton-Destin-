@@ -869,7 +869,7 @@ async function loadStory() {
   } else if (story.askPlayerName && !playerName) {
     showNamePopup();
   } else {
-    goToScene(startScene.id);
+    trackStats("story_start"); goToScene(startScene.id);
   }
 }
 
@@ -983,6 +983,9 @@ function goToScene(id, choiceText) {
   if (currentId) history.push({ id: currentId, choice: choiceText || '' });
   currentId = id;
 
+  // Track scene read
+  trackStats('scene_read');
+
   // Update progress bar (rough estimate based on visited vs total)
   const total = Object.keys(story.scenes).length;
   const pct = Math.min(95, Math.round(history.length / total * 100));
@@ -993,6 +996,7 @@ function goToScene(id, choiceText) {
     history.length + ' scène' + (history.length > 1 ? 's' : '') + ' visitée' + (history.length > 1 ? 's' : '');
 
   if (scene.isEnd) {
+    trackStats('story_finish');
     playTransition(scene.transition || 'fade', () => renderEndScene(scene));
   } else {
     playTransition(scene.transition || 'fade', () => renderScene(scene));
@@ -1278,7 +1282,7 @@ function pickChoice(targetId, choiceIndex, btnEl) {
   }
 
   // Délai léger pour laisser l'effet au clic se jouer
-  const delay = (choice?.clickEffect && choice.clickEffect !== 'none') ? 320 : 0;
+  trackStats("choice_made"); const delay = (choice?.clickEffect && choice.clickEffect !== 'none') ? 320 : 0;
   setTimeout(() => goToScene(targetId, choice?.text || ''), delay);
 }
 
@@ -1406,8 +1410,54 @@ function toggleHistory() {
 }
 
 // ══════════════════════════════════════════════
-// FAB & BOOKMARK SYSTEM
+// PLAYER STATS TRACKING
 // ══════════════════════════════════════════════
+function trackStats(event, data = {}) {
+  try {
+    const s = JSON.parse(localStorage.getItem('sf_player_stats') || '{}');
+    if (!s.since) s.since = Date.now();
+    if (!s.storiesStarted) s.storiesStarted = 0;
+    if (!s.storiesFinished) s.storiesFinished = 0;
+    if (!s.scenesRead) s.scenesRead = 0;
+    if (!s.choicesMade) s.choicesMade = 0;
+    if (!s.endingsFound) s.endingsFound = 0;
+    if (!s.minutesSpent) s.minutesSpent = 0;
+    if (!s.langsPlayed) s.langsPlayed = [];
+    if (!s.unlockedBadges) s.unlockedBadges = [];
+    if (!s.activity) s.activity = {};
+
+    const today = new Date().toISOString().slice(0,10);
+    const hour = new Date().getHours();
+
+    switch(event) {
+      case 'story_start':
+        s.storiesStarted++;
+        const lng = localStorage.getItem('sf_lang') || 'fr';
+        if (!s.langsPlayed.includes(lng)) s.langsPlayed.push(lng);
+        s._storyStartTime = Date.now();
+        break;
+      case 'scene_read':
+        s.scenesRead++;
+        s.activity[today] = (s.activity[today] || 0) + 1;
+        if (hour >= 0 && hour < 5) s.playedAtNight = true;
+        break;
+      case 'choice_made':
+        s.choicesMade++;
+        break;
+      case 'story_finish':
+        s.storiesFinished++;
+        s.endingsFound++;
+        if (s._storyStartTime) {
+          const mins = Math.round((Date.now() - s._storyStartTime) / 60000);
+          s.minutesSpent += mins;
+          if (mins < 5) s.hadFastRun = true;
+        }
+        break;
+    }
+    localStorage.setItem('sf_player_stats', JSON.stringify(s));
+  } catch(e) {}
+}
+
 let fabOpen = false;
 
 function toggleFab() {

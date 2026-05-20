@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Progression</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300&family=Cinzel:wght@400;600;700&family=DM+Mono:wght@300;400&display=swap" onload="this.onload=null;this.rel='stylesheet'">
+
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+html,body{min-height:100%;background:#0d0d0f;color:#e8e0d0;font-family:'Cormorant Garamond',serif;overflow-x:hidden;}
+
+:root{
+  --gold:#c8a96e;--gold2:#e8d4a0;--gold3:#8a6a30;
+  --cream:#e8e0d0;--dim:#9a8a70;--dimmer:#5a5040;
+  --bg:#0d0d0f;--bg2:#13110e;--bg3:#1a1710;--bg4:#221e14;
+  --border:#2a2418;
+  --accent:#c8a96e;
+}
+
+/* ── BACKGROUND ── */
+.bg-gradient{position:fixed;inset:0;z-index:0;
+  background:radial-gradient(ellipse 70% 50% at 50% 0%,rgba(200,169,110,0.06) 0%,transparent 70%),
+  linear-gradient(180deg,#0d0d0f 0%,#13110e 100%);}
+canvas#bg-canvas{position:fixed;inset:0;z-index:0;pointer-events:none;}
+
+/* ── TOPBAR ── */
+#topbar{
+  position:fixed;top:0;left:0;right:0;height:54px;z-index:100;
+  background:rgba(13,13,15,0.9);border-bottom:1px solid var(--border);
+  backdrop-filter:blur(12px);
+  display:flex;align-items:center;gap:12px;padding:0 16px;
+}
+#btn-back{
+  width:36px;height:36px;border-radius:8px;
+  border:1px solid var(--border);background:none;
+  color:var(--dim);font-size:18px;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+  transition:all .15s;text-decoration:none;flex-shrink:0;
+}
+#btn-back:hover{border-color:var(--gold3);color:var(--cream);}
+.topbar-title{
+  font-family:'Cinzel',serif;font-size:14px;font-weight:600;
+  color:var(--cream);letter-spacing:2px;flex:1;
+}
+#edit-name-btn{
+  background:none;border:1px solid var(--border);border-radius:6px;
+  color:var(--dimmer);font-size:12px;padding:4px 10px;cursor:pointer;
+  font-family:'Cinzel',serif;letter-spacing:1px;transition:all .15s;
+}
+#edit-name-btn:hover{border-color:var(--gold3);color:var(--gold);}
+
+/* ── SCROLL ── */
+#scroll{padding-top:54px;}
+#content{max-width:520px;margin:0 auto;padding:20px 16px 60px;}
+
+/* ── HERO PROFILE ── */
+.profile-hero{
+  text-align:center;padding:28px 0 24px;
+  border-bottom:1px solid var(--border);margin-bottom:24px;
+}
+.profile-avatar{
+  width:72px;height:72px;border-radius:50%;margin:0 auto 14px;
+  background:var(--bg3);border:2px solid var(--gold3);
+  display:flex;align-items:center;justify-content:center;
+  font-size:30px;position:relative;overflow:hidden;
+}
+.profile-avatar::after{
+  content:'';position:absolute;inset:0;border-radius:50%;
+  background:radial-gradient(circle at 30% 30%,rgba(200,169,110,0.2),transparent);
+}
+.profile-name{
+  font-family:'Cinzel',serif;font-size:20px;font-weight:600;
+  color:var(--cream);letter-spacing:2px;margin-bottom:4px;
+}
+.profile-since{
+  font-family:'DM Mono',monospace;font-size:11px;
+  color:var(--dimmer);letter-spacing:1px;
+}
+.profile-rank{
+  display:inline-block;margin-top:10px;
+  padding:4px 14px;border-radius:20px;
+  font-family:'Cinzel',serif;font-size:11px;font-weight:600;
+  letter-spacing:2px;border:1px solid;
+}
+
+/* ── SECTION ── */
+.section{margin-bottom:28px;}
+.section-title{
+  font-family:'Cinzel',serif;font-size:11px;font-weight:600;
+  letter-spacing:4px;text-transform:uppercase;
+  color:var(--dimmer);margin-bottom:14px;
+  display:flex;align-items:center;gap:10px;
+}
+.section-title::after{content:'';flex:1;height:1px;background:var(--border);}
+
+/* ── STAT GRID ── */
+.stat-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+.stat-card{
+  background:var(--bg2);border:1px solid var(--border);
+  border-radius:12px;padding:14px 16px;
+  transition:border-color .2s;
+}
+.stat-card:hover{border-color:var(--gold3);}
+.stat-value{
+  font-family:'Cinzel',serif;font-size:22px;font-weight:700;
+  color:var(--gold);margin-bottom:3px;
+}
+.stat-label{
+  font-family:'DM Mono',monospace;font-size:10px;
+  color:var(--dimmer);letter-spacing:1px;text-transform:uppercase;
+}
+.stat-card.wide{grid-column:1/-1;}
+
+/* ── STORY CARDS ── */
+.story-progress-card{
+  background:var(--bg2);border:1px solid var(--border);
+  border-radius:12px;padding:14px 16px;margin-bottom:10px;
+  transition:all .2s;
+}
+.story-progress-card:hover{border-color:var(--gold3);}
+.spc-header{display:flex;align-items:center;gap:12px;margin-bottom:10px;}
+.spc-icon{font-size:22px;width:36px;text-align:center;flex-shrink:0;}
+.spc-title{font-family:'Cinzel',serif;font-size:13px;font-weight:600;color:var(--cream);}
+.spc-meta{font-family:'DM Mono',monospace;font-size:10px;color:var(--dimmer);margin-top:2px;}
+.spc-endings{
+  font-family:'DM Mono',monospace;font-size:11px;
+  color:var(--gold);margin-left:auto;flex-shrink:0;
+}
+.progress-bar-wrap{
+  height:4px;background:var(--bg3);border-radius:2px;overflow:hidden;
+}
+.progress-bar-fill{
+  height:100%;border-radius:2px;
+  background:linear-gradient(90deg,var(--gold3),var(--gold));
+  transition:width .6s ease;box-shadow:0 0 6px rgba(200,169,110,0.4);
+}
+.endings-row{
+  display:flex;gap:6px;margin-top:8px;flex-wrap:wrap;
+}
+.ending-dot{
+  width:10px;height:10px;border-radius:50%;
+  border:1px solid var(--border);background:var(--bg3);
+  transition:all .3s;
+}
+.ending-dot.unlocked{
+  background:var(--gold);border-color:var(--gold);
+  box-shadow:0 0 4px rgba(200,169,110,0.6);
+}
+
+/* ── BADGES ── */
+.badges-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;}
+@media(max-width:400px){.badges-grid{grid-template-columns:repeat(3,1fr);}}
+
+.badge-card{
+  background:var(--bg2);border:1px solid var(--border);
+  border-radius:12px;padding:12px 8px;text-align:center;
+  transition:all .3s;position:relative;overflow:hidden;
+}
+.badge-card.unlocked{border-color:rgba(200,169,110,0.4);background:rgba(200,169,110,0.05);}
+.badge-card.unlocked::before{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(circle at 50% 0%,rgba(200,169,110,0.1),transparent 70%);
+}
+.badge-card.locked{opacity:0.4;filter:grayscale(1);}
+.badge-icon{font-size:24px;margin-bottom:6px;display:block;}
+.badge-name{
+  font-family:'DM Mono',monospace;font-size:8px;
+  color:var(--dim);letter-spacing:0.5px;line-height:1.3;
+  text-transform:uppercase;
+}
+.badge-card.unlocked .badge-name{color:var(--gold);}
+.badge-new{
+  position:absolute;top:5px;right:5px;
+  width:8px;height:8px;border-radius:50%;
+  background:var(--gold);box-shadow:0 0 4px var(--gold);
+  animation:pulse-dot 1.5s infinite;
+}
+@keyframes pulse-dot{0%,100%{transform:scale(1);opacity:1;}50%{transform:scale(1.4);opacity:0.6;}}
+
+/* ── ACTIVITY CHART ── */
+#activity-chart{
+  background:var(--bg2);border:1px solid var(--border);
+  border-radius:12px;padding:16px;height:80px;
+  display:flex;align-items:flex-end;gap:4px;
+}
+.activity-bar{
+  flex:1;border-radius:2px 2px 0 0;min-height:2px;
+  background:var(--gold3);opacity:0.3;transition:all .3s;
+  cursor:pointer;
+}
+.activity-bar.active{opacity:1;background:var(--gold);}
+.activity-bar:hover{opacity:0.8;}
+
+/* ── EMPTY STATE ── */
+.empty-progress{
+  text-align:center;padding:40px 20px;
+  color:var(--dimmer);font-style:italic;
+}
+.empty-progress .ep-icon{font-size:36px;margin-bottom:12px;opacity:0.4;}
+
+/* ── RESET BTN ── */
+.danger-zone{
+  margin-top:32px;padding-top:20px;
+  border-top:1px solid var(--border);text-align:center;
+}
+.reset-btn{
+  background:none;border:1px solid rgba(250,109,143,0.3);
+  color:rgba(250,109,143,0.6);font-family:'DM Mono',monospace;
+  font-size:11px;letter-spacing:2px;padding:8px 16px;
+  border-radius:6px;cursor:pointer;transition:all .2s;
+}
+.reset-btn:hover{border-color:#fa6d8f;color:#fa6d8f;}
+
+/* ── ANIMATIONS ── */
+@keyframes fade-up{from{opacity:0;transform:translateY(10px);}to{opacity:1;transform:translateY(0);}}
+.fade-in{animation:fade-up .4s ease forwards;}
+</style>
+</head>
+<body>
+
+<div class="bg-gradient"></div>
+<canvas id="bg-canvas"></canvas>
+
+<div id="topbar">
+  <a href="index.html" id="btn-back">←</a>
+  <div class="topbar-title" id="txt-title">Progression</div>
+  <button id="edit-name-btn" onclick="editName()" id="txt-edit">✎ Nom</button>
+</div>
+
+<div id="scroll">
+  <div id="content">
+    <!-- filled by JS -->
+  </div>
+</div>
+
+<script>
+// ══════════════════════════════════════════════
+// TRANSLATIONS
+// ══════════════════════════════════════════════
+const T = {
+  fr:{
+    title:'Progression', edit:'✎ Nom',
+    profile:'Profil', since:'Aventurier depuis le',
+    ranks:['Novice','Lecteur','Explorateur','Voyageur','Érudit','Légende'],
+    globalStats:'Statistiques globales',
+    storiesStarted:'Histoires\ncommencées', storiesFinished:'Histoires\nterminées',
+    scenesRead:'Scènes\nlues', choicesMade:'Choix\neffectués',
+    endingsFound:'Fins\ntrouvées', timeSpent:'Temps\nestimé',
+    myStories:'Mes histoires',
+    noStories:'Aucune histoire commencée.\nLance-toi dans une aventure !',
+    endingsOf:'fins débloquées',
+    badges:'Badges',
+    activity:'Activité (7 derniers jours)',
+    dangerZone:'Réinitialiser ma progression',
+    confirmReset:'Effacer toute ta progression ? Cette action est irréversible.',
+    newName:'Ton prénom :',
+    minutes:'min',
+  },
+  en:{
+    title:'Progress', edit:'✎ Name',
+    profile:'Profile', since:'Adventurer since',
+    ranks:['Novice','Reader','Explorer','Traveler','Scholar','Legend'],
+    globalStats:'Global statistics',
+    storiesStarted:'Stories\nstarted', storiesFinished:'Stories\nfinished',
+    scenesRead:'Scenes\nread', choicesMade:'Choices\nmade',
+    endingsFound:'Endings\nfound', timeSpent:'Time\nestimated',
+    myStories:'My stories',
+    noStories:'No stories started yet.\nLaunch an adventure!',
+    endingsOf:'endings unlocked',
+    badges:'Badges',
+    activity:'Activity (last 7 days)',
+    dangerZone:'Reset my progress',
+    confirmReset:'Erase all your progress? This action cannot be undone.',
+    newName:'Your first name:',
+    minutes:'min',
+  },
+  es:{
+    title:'Progreso', edit:'✎ Nombre',
+    profile:'Perfil', since:'Aventurero desde el',
+    ranks:['Novato','Lector','Explorador','Viajero','Erudito','Leyenda'],
+    globalStats:'Estadísticas globales',
+    storiesStarted:'Historias\ncomenzadas', storiesFinished:'Historias\nterminadas',
+    scenesRead:'Escenas\nleídas', choicesMade:'Elecciones\nhechas',
+    endingsFound:'Finales\nencontrados', timeSpent:'Tiempo\nestimado',
+    myStories:'Mis historias',
+    noStories:'Ninguna historia comenzada.\n¡Lánzate a una aventura!',
+    endingsOf:'finales desbloqueados',
+    badges:'Insignias',
+    activity:'Actividad (últimos 7 días)',
+    dangerZone:'Reiniciar mi progreso',
+    confirmReset:'¿Borrar todo tu progreso? Esta acción es irreversible.',
+    newName:'Tu nombre:',
+    minutes:'min',
+  }
+};
+const lang = localStorage.getItem('sf_lang') || 'fr';
+const t = T[lang] || T.fr;
+
+// ══════════════════════════════════════════════
+// BADGES DEFINITION
+// ══════════════════════════════════════════════
+const BADGES = [
+  { id:'first_story',    icon:'📖', name:{fr:'Premier pas',    en:'First step',     es:'Primer paso'},     desc:{fr:'Terminer une histoire',en:'Finish a story',es:'Terminar una historia'} },
+  { id:'three_stories',  icon:'📚', name:{fr:'Bibliothécaire', en:'Bookworm',        es:'Bibliófilo'},      desc:{fr:'3 histoires terminées',en:'3 stories finished',es:'3 historias terminadas'} },
+  { id:'ten_stories',    icon:'🏛',  name:{fr:'Érudit',         en:'Scholar',         es:'Erudito'},         desc:{fr:'10 histoires terminées',en:'10 stories finished',es:'10 historias terminadas'} },
+  { id:'all_endings',    icon:'🔍', name:{fr:'Explorateur',    en:'Explorer',        es:'Explorador'},      desc:{fr:'Toutes les fins d\'une histoire',en:'All endings of one story',es:'Todos los finales de una historia'} },
+  { id:'bookmarks5',     icon:'🔖', name:{fr:'Prévoyant',      en:'Planner',         es:'Previsor'},        desc:{fr:'5 marque-pages posés',en:'5 bookmarks saved',es:'5 marcadores guardados'} },
+  { id:'three_langs',    icon:'🌍', name:{fr:'Polyglotte',     en:'Polyglot',        es:'Políglota'},       desc:{fr:'Joué dans 3 langues',en:'Played in 3 languages',es:'Jugado en 3 idiomas'} },
+  { id:'night_reader',   icon:'🌙', name:{fr:'Noctambule',     en:'Night owl',       es:'Noctámbulo'},      desc:{fr:'Joué après minuit',en:'Played after midnight',es:'Jugado después de medianoche'} },
+  { id:'fast_reader',    icon:'⚡', name:{fr:'Speedrunner',    en:'Speedrunner',     es:'Speedrunner'},     desc:{fr:'Histoire terminée < 5 min',en:'Story finished < 5 min',es:'Historia terminada < 5 min'} },
+  { id:'comeback',       icon:'↩', name:{fr:'Revenant',       en:'Comeback',        es:'De vuelta'},       desc:{fr:'Reprendre après 7 jours',en:'Resume after 7 days',es:'Retomar tras 7 días'} },
+  { id:'choices100',     icon:'🎯', name:{fr:'Décideur',       en:'Decisive',        es:'Decidido'},        desc:{fr:'100 choix effectués',en:'100 choices made',es:'100 elecciones hechas'} },
+  { id:'scenes500',      icon:'🌟', name:{fr:'Insatiable',     en:'Insatiable',      es:'Insaciable'},      desc:{fr:'500 scènes lues',en:'500 scenes read',es:'500 escenas leídas'} },
+  { id:'legend',         icon:'👑', name:{fr:'Légende',        en:'Legend',          es:'Leyenda'},         desc:{fr:'Tous les badges débloqués',en:'All badges unlocked',es:'Todas las insignias desbloqueadas'} },
+];
+
+// ══════════════════════════════════════════════
+// DATA
+// ══════════════════════════════════════════════
+function getStats() {
+  try { return JSON.parse(localStorage.getItem('sf_player_stats') || '{}'); } catch { return {}; }
+}
+function saveStats(s) { localStorage.setItem('sf_player_stats', JSON.stringify(s)); }
+
+function getProgress() {
+  // Aggregate data from all saves and bookmarks
+  const bookmarks = JSON.parse(localStorage.getItem('sf_bookmarks') || '[]');
+  const stats = getStats();
+
+  // Init stats if first time
+  if (!stats.since) {
+    stats.since = Date.now();
+    stats.storiesStarted = 0;
+    stats.storiesFinished = 0;
+    stats.scenesRead = 0;
+    stats.choicesMade = 0;
+    stats.endingsFound = 0;
+    stats.minutesSpent = 0;
+    stats.langsPlayed = [];
+    stats.unlockedBadges = [];
+    stats.badgeDates = {};
+    stats.activity = {}; // date -> count
+    saveStats(stats);
+  }
+  return stats;
+}
+
+// Called by game.html to record events
+// Usage: sf_player_stats events are updated externally
+// We also read from bookmarks/saves to reconstruct
+
+function getStoriesProgress() {
+  const saves = {};
+  // Scan all localStorage keys for saves
+  for (let i = 0; i < localStorage.length; i++) {
+    const key = localStorage.key(i);
+    if (key?.startsWith('sf_save_')) {
+      try {
+        const data = JSON.parse(localStorage.getItem(key));
+        if (data?.storyFile) saves[data.storyFile] = data;
+      } catch {}
+    }
+  }
+  return saves;
+}
+
+// ══════════════════════════════════════════════
+// BADGES CHECK
+// ══════════════════════════════════════════════
+function checkBadges(stats) {
+  const unlocked = new Set(stats.unlockedBadges || []);
+  const newBadges = [];
+
+  const check = (id, condition) => {
+    if (condition && !unlocked.has(id)) {
+      unlocked.add(id);
+      newBadges.push(id);
+      if (!stats.badgeDates) stats.badgeDates = {};
+      stats.badgeDates[id] = Date.now();
+    }
+  };
+
+  check('first_story',   (stats.storiesFinished || 0) >= 1);
+  check('three_stories', (stats.storiesFinished || 0) >= 3);
+  check('ten_stories',   (stats.storiesFinished || 0) >= 10);
+  check('bookmarks5',    (JSON.parse(localStorage.getItem('sf_bookmarks')||'[]')).length >= 5);
+  check('three_langs',   (stats.langsPlayed||[]).length >= 3);
+  check('choices100',    (stats.choicesMade || 0) >= 100);
+  check('scenes500',     (stats.scenesRead || 0) >= 500);
+  check('fast_reader',   (stats.hadFastRun || false));
+  check('night_reader',  (stats.playedAtNight || false));
+  check('comeback',      (stats.hadComeBack || false));
+  check('all_endings',   (stats.completedAllEndings || false));
+  check('legend',        unlocked.size >= BADGES.length - 1);
+
+  stats.unlockedBadges = [...unlocked];
+  stats.newBadges = newBadges;
+  saveStats(stats);
+  return stats;
+}
+
+// ══════════════════════════════════════════════
+// RANK
+// ══════════════════════════════════════════════
+function getRank(stats) {
+  const finished = stats.storiesFinished || 0;
+  const badges = (stats.unlockedBadges || []).length;
+  const score = finished * 2 + badges;
+  if (score >= 20) return 5;
+  if (score >= 10) return 4;
+  if (score >= 5)  return 3;
+  if (score >= 2)  return 2;
+  if (score >= 1)  return 1;
+  return 0;
+}
+
+const RANK_COLORS = ['#9090a8','#c8a96e','#6dfabc','#4080ff','#fa6d8f','#ffe600'];
+
+// ══════════════════════════════════════════════
+// RENDER
+// ══════════════════════════════════════════════
+function render() {
+  let stats = getProgress();
+  stats = checkBadges(stats);
+  const saves = getStoriesProgress();
+  const playerName = localStorage.getItem('sf_player_name') || '?';
+  const rankIdx = getRank(stats);
+  const rankName = t.ranks[rankIdx];
+  const rankColor = RANK_COLORS[rankIdx];
+
+  const sinceDate = stats.since
+    ? new Date(stats.since).toLocaleDateString(lang === 'fr' ? 'fr-FR' : lang === 'es' ? 'es-ES' : 'en-US')
+    : '—';
+
+  const minutesText = stats.minutesSpent >= 60
+    ? `${Math.floor(stats.minutesSpent/60)}h${stats.minutesSpent%60}min`
+    : `${stats.minutesSpent||0} ${t.minutes}`;
+
+  // Activity last 7 days
+  const activityBars = [];
+  for (let i = 6; i >= 0; i--) {
+    const d = new Date(); d.setDate(d.getDate() - i);
+    const key = d.toISOString().slice(0,10);
+    activityBars.push(stats.activity?.[key] || 0);
+  }
+  const maxActivity = Math.max(...activityBars, 1);
+
+  // Stories
+  const storyEntries = Object.entries(saves);
+
+  const content = document.getElementById('content');
+  content.innerHTML = `
+
+    <!-- PROFILE HERO -->
+    <div class="profile-hero fade-in">
+      <div class="profile-avatar">✦</div>
+      <div class="profile-name">${escHtml(playerName)}</div>
+      <div class="profile-since">${t.since} ${sinceDate}</div>
+      <div class="profile-rank" style="color:${rankColor};border-color:${rankColor}44;background:${rankColor}11">
+        ${rankName}
+      </div>
+    </div>
+
+    <!-- GLOBAL STATS -->
+    <div class="section fade-in">
+      <div class="section-title">${t.globalStats}</div>
+      <div class="stat-grid">
+        <div class="stat-card">
+          <div class="stat-value">${stats.storiesStarted||0}</div>
+          <div class="stat-label">${t.storiesStarted.replace('\n',' ')}</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value">${stats.storiesFinished||0}</div>
+          <div class="stat-label">${t.storiesFinished.replace('\n',' ')}</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value">${stats.scenesRead||0}</div>
+          <div class="stat-label">${t.scenesRead.replace('\n',' ')}</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value">${stats.choicesMade||0}</div>
+          <div class="stat-label">${t.choicesMade.replace('\n',' ')}</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value">${stats.endingsFound||0}</div>
+          <div class="stat-label">${t.endingsFound.replace('\n',' ')}</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value">${minutesText}</div>
+          <div class="stat-label">${t.timeSpent.replace('\n',' ')}</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ACTIVITY -->
+    <div class="section fade-in">
+      <div class="section-title">${t.activity}</div>
+      <div id="activity-chart">
+        ${activityBars.map((v,i) => {
+          const h = Math.max(4, Math.round((v/maxActivity)*52));
+          return `<div class="activity-bar ${v>0?'active':''}" style="height:${h}px" title="${v} scènes"></div>`;
+        }).join('')}
+      </div>
+    </div>
+
+    <!-- STORIES PROGRESS -->
+    <div class="section fade-in">
+      <div class="section-title">${t.myStories}</div>
+      ${storyEntries.length === 0
+        ? `<div class="empty-progress"><div class="ep-icon">📖</div><p>${t.noStories}</p></div>`
+        : storyEntries.map(([file, save]) => {
+            const bmList = JSON.parse(localStorage.getItem('sf_bookmarks')||'[]');
+            const bm = bmList.find(b => b.storyFile === file);
+            const totalScenes = Object.keys(save.history||{}).length + 1;
+            const pct = Math.min(100, Math.round((save.history?.length||0) / Math.max(totalScenes,1) * 100));
+            return `<div class="story-progress-card">
+              <div class="spc-header">
+                <div class="spc-icon">📖</div>
+                <div>
+                  <div class="spc-title">${escHtml(save.storyName||file)}</div>
+                  <div class="spc-meta">📍 ${escHtml(save.sceneTitle||'—')}</div>
+                </div>
+              </div>
+              <div class="progress-bar-wrap">
+                <div class="progress-bar-fill" style="width:${pct}%"></div>
+              </div>
+            </div>`;
+          }).join('')
+      }
+    </div>
+
+    <!-- BADGES -->
+    <div class="section fade-in">
+      <div class="section-title">${t.badges} — ${(stats.unlockedBadges||[]).length}/${BADGES.length}</div>
+      <div class="badges-grid">
+        ${BADGES.map(badge => {
+          const unlocked = (stats.unlockedBadges||[]).includes(badge.id);
+          const isNew = (stats.newBadges||[]).includes(badge.id);
+          return `<div class="badge-card ${unlocked?'unlocked':'locked'}" title="${badge.desc[lang]||badge.desc.fr}">
+            ${isNew ? '<div class="badge-new"></div>' : ''}
+            <span class="badge-icon">${badge.icon}</span>
+            <div class="badge-name">${badge.name[lang]||badge.name.fr}</div>
+          </div>`;
+        }).join('')}
+      </div>
+    </div>
+
+    <!-- DANGER ZONE -->
+    <div class="danger-zone fade-in">
+      <button class="reset-btn" onclick="resetProgress()">⚠ ${t.dangerZone}</button>
+    </div>
+  `;
+
+  // Clear new badges after display
+  if (stats.newBadges?.length) {
+    stats.newBadges = [];
+    saveStats(stats);
+  }
+}
+
+// ══════════════════════════════════════════════
+// ACTIONS
+// ══════════════════════════════════════════════
+function editName() {
+  const current = localStorage.getItem('sf_player_name') || '';
+  const newName = prompt(t.newName, current);
+  if (newName !== null && newName.trim()) {
+    localStorage.setItem('sf_player_name', newName.trim());
+    render();
+  }
+}
+
+function resetProgress() {
+  if (!confirm(t.confirmReset)) return;
+  localStorage.removeItem('sf_player_stats');
+  // Clear saves
+  const toRemove = [];
+  for (let i = 0; i < localStorage.length; i++) {
+    const key = localStorage.key(i);
+    if (key?.startsWith('sf_save_')) toRemove.push(key);
+  }
+  toRemove.forEach(k => localStorage.removeItem(k));
+  localStorage.removeItem('sf_bookmarks');
+  render();
+}
+
+function escHtml(s) {
+  if (!s) return '';
+  return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
+
+// ══════════════════════════════════════════════
+// BACKGROUND
+// ══════════════════════════════════════════════
+function initBg() {
+  const canvas = document.getElementById('bg-canvas');
+  const ctx = canvas.getContext('2d');
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+  const stars = Array.from({length:50}, () => ({
+    x:Math.random()*canvas.width, y:Math.random()*canvas.height,
+    r:Math.random()*1.2, a:Math.random()*0.2+0.03,
+    speed:Math.random()*0.3+0.08, phase:Math.random()*Math.PI*2
+  }));
+  let frame = 0;
+  function draw() {
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+    stars.forEach(s => {
+      const tw = s.a*(0.6+0.4*Math.sin(frame*s.speed*0.05+s.phase));
+      ctx.beginPath(); ctx.arc(s.x,s.y,s.r,0,Math.PI*2);
+      ctx.fillStyle=`rgba(200,169,110,${tw})`; ctx.fill();
+    });
+    frame++; requestAnimationFrame(draw);
+  }
+  draw();
+  window.addEventListener('resize', () => {
+    canvas.width=window.innerWidth; canvas.height=window.innerHeight;
+  });
+}
+
+// Apply translations
+document.getElementById('txt-title').textContent = t.title;
+document.getElementById('edit-name-btn').textContent = t.edit;
+
+// Init
+initBg();
+render();
+</script>
+</body>
+</html>
