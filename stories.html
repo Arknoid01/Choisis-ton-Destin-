@@ -313,6 +313,50 @@ function renderLibrary() {
   const unlocked = getUnlockedPacks();
   const filtered = allGames.filter(g => g.lang === currentLang);
 
+  // ── MARQUE-PAGES ──
+  const bookmarks = JSON.parse(localStorage.getItem('sf_bookmarks') || '[]')
+    .filter(b => {
+      // Trouver l'histoire correspondante
+      const game = allGames.find(g => g.file === b.storyFile);
+      return game && game.lang === currentLang;
+    });
+
+  let html = '';
+
+  if (bookmarks.length) {
+    const bmTitle = { fr:'Reprendre', en:'Continue', es:'Continuar' }[currentLang] || 'Reprendre';
+    html += `<div class="pack-section" style="--pack-color:rgba(100,220,150,0.6);margin-bottom:20px">
+      <div class="pack-header">
+        <div class="pack-icon">🔖</div>
+        <div class="pack-info">
+          <div class="pack-name">${bmTitle}</div>
+          <div class="pack-meta">${bookmarks.length} marque-page${bookmarks.length > 1 ? 's' : ''}</div>
+        </div>
+      </div>
+      <div class="stories-list">`;
+
+    bookmarks.forEach(bm => {
+      const game = allGames.find(g => g.file === bm.storyFile);
+      const statsStr = Object.entries(bm.stats || {})
+        .map(([k,v]) => `${k} ${v}`).join(' • ');
+      const date = new Date(bm.savedAt).toLocaleDateString();
+      html += `<div class="story-card" onclick="resumeStory('${bm.storyFile}')" style="--pack-color:rgba(100,220,150,0.6)">
+        <div class="story-icon">${game?.icon || '📖'}</div>
+        <div class="story-info">
+          <div class="story-title">${bm.storyName}</div>
+          <div class="story-desc">📍 ${bm.sceneTitle}</div>
+          <div class="story-meta">
+            <span class="story-tag" style="border-color:rgba(100,220,150,0.3);color:#64dc96">${date}</span>
+            ${statsStr ? `<span class="story-tag">${statsStr}</span>` : ''}
+          </div>
+        </div>
+        <div class="story-arrow" style="color:#64dc96">›</div>
+      </div>`;
+    });
+
+    html += `</div></div>`;
+  }
+
   // Grouper par pack
   const byPack = {};
   filtered.forEach(g => {
@@ -321,20 +365,17 @@ function renderLibrary() {
     byPack[packId].push(g);
   });
 
-  // Trier les packs par ordre défini
   const packIds = Object.keys(byPack).sort((a,b) => {
     const oa = PACK_CONFIG[a]?.order ?? 99;
     const ob = PACK_CONFIG[b]?.order ?? 99;
     return oa - ob;
   });
 
-  if (!packIds.length) {
+  if (!packIds.length && !bookmarks.length) {
     document.getElementById('content').innerHTML =
       `<div class="empty-state">Aucune histoire disponible en ${currentLang.toUpperCase()}</div>`;
     return;
   }
-
-  let html = '';
 
   packIds.forEach(packId => {
     const stories = byPack[packId];
@@ -418,6 +459,12 @@ function renderLibrary() {
 // ══════════════════════════════════════════════
 // ACTIONS
 // ══════════════════════════════════════════════
+function resumeStory(file) {
+  // La sauvegarde sera lue automatiquement dans game.html
+  localStorage.setItem('sf_game_file', file);
+  window.location.href = 'game.html?story=' + encodeURIComponent(file);
+}
+
 function launchStory(file) {
   const savedName = localStorage.getItem('sf_player_name');
   localStorage.setItem('sf_game_file', file);
