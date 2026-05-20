@@ -348,27 +348,27 @@ html,body { height:100%; overflow:hidden; font-family:'Syne',sans-serif; backgro
 /* ── TOOLTIPS ── */
 .tip {
   display:inline-flex; align-items:center; justify-content:center;
-  width:14px; height:14px; border-radius:50%;
+  width:16px; height:16px; border-radius:50%;
   background:var(--bg4); border:1px solid var(--border);
   color:var(--text3); font-size:9px; font-weight:700;
-  cursor:help; margin-left:5px; flex-shrink:0;
-  position:relative; vertical-align:middle; transition:all .15s;
+  cursor:pointer; margin-left:5px; flex-shrink:0;
+  vertical-align:middle; transition:all .15s;
+  -webkit-tap-highlight-color: transparent;
 }
-.tip:hover { border-color:var(--accent); color:var(--accent); }
-.tip::after {
-  content:attr(data-tip);
-  position:absolute; bottom:calc(100% + 6px); left:50%;
-  transform:translateX(-50%);
-  background:var(--bg4); border:1px solid var(--border);
-  border-radius:6px; padding:6px 10px;
-  font-size:11px; font-weight:400; color:var(--text2);
-  white-space:normal; max-width:200px; text-align:center;
-  line-height:1.4; pointer-events:none; opacity:0;
-  transition:opacity .2s; z-index:1000;
-  box-shadow:0 4px 12px #00000066;
+.tip:hover, .tip.active { border-color:var(--accent); color:var(--accent); }
+
+/* Tooltip bubble — créé par JS */
+#tip-bubble {
+  position:fixed; z-index:2000;
+  background:var(--bg4); border:1px solid var(--accent);
+  border-radius:8px; padding:8px 12px;
+  font-size:12px; font-weight:400; color:var(--text2);
+  max-width:220px; line-height:1.5; text-align:center;
+  box-shadow:0 4px 16px #00000088;
+  pointer-events:none; opacity:0;
+  transition:opacity .2s;
 }
-.tip:hover::after { opacity:1; }
-.tip.tip-down::after { bottom:auto; top:calc(100% + 6px); }
+#tip-bubble.show { opacity:1; }
 
 /* ── TEST BUTTON ── */
 .topbtn.test-btn {
@@ -655,8 +655,8 @@ html,body { height:100%; overflow:hidden; font-family:'Syne',sans-serif; backgro
       <div id="editor-body">
         <div id="empty-state">
           <div class="icon">✦</div>
-          <p>${et('empty')}</p>
-          <button class="topbtn primary" style="margin-top:8px" onclick="openAddSceneModal()">${et('newScene')}</button>
+          <p id="empty-text"></p>
+          <button class="topbtn primary" style="margin-top:8px" id="empty-btn" onclick="openAddSceneModal()"></button>
         </div>
       </div>
     </div>
@@ -676,6 +676,9 @@ html,body { height:100%; overflow:hidden; font-family:'Syne',sans-serif; backgro
     </div>
   </div>
 </div>
+
+<!-- TOOLTIP BUBBLE -->
+<div id="tip-bubble"></div>
 
 <!-- IMPORT INPUT -->
 <input type="file" id="import-input" accept=".json" style="display:none" onchange="handleImport(event)">
@@ -960,6 +963,8 @@ function applyEditorLanguage() {
   const ms = document.getElementById('mobile-sheet-title'); if (ms) ms.textContent = et('scene');
 
   const byId = (id, text) => { const el = document.getElementById(id); if (el) el.textContent = text; };
+  byId('empty-text', et('empty'));
+  byId('empty-btn',  et('newScene'));
   byId('stats-modal-title', et('statsTitle')); byId('stats-modal-desc', et('statsDesc')); byId('stats-add-btn', et('addStat')); byId('stats-close-btn', et('close'));
   byId('theme-title', et('visualTheme')); byId('theme-presets-title', et('presets')); byId('theme-custom-title', et('customColors'));
   byId('lbl-bg', et('mainBg')); byId('lbl-bg2', et('panelBg')); byId('lbl-bg3', et('elementBg')); byId('lbl-accent', et('accentMain')); byId('lbl-accent2', et('accentSecond')); byId('lbl-accent3', et('accentThird')); byId('lbl-text', et('mainText')); byId('lbl-border', et('borders'));
@@ -1837,8 +1842,8 @@ function testStory() {
   testProject._testMode = true;
   testProject._testSceneId = testSceneId;
 
-  // Sauvegarder dans sessionStorage (disponible pour game.html dans le même onglet)
-  sessionStorage.setItem('sf_test_story', JSON.stringify(testProject));
+  // Sauvegarder dans localStorage (compatible mobile multi-onglets)
+  localStorage.setItem('sf_test_story', JSON.stringify(testProject));
 
   // Ouvrir game.html en mode test
   window.open('game.html?test=1', '_blank');
@@ -1942,9 +1947,41 @@ function updatePreview() {
 }
 
 
-// ══════════════════════════════════════════════
-// MOBILE UI
-// ══════════════════════════════════════════════
+// ── TOOLTIP SYSTEM ──
+let tipTimer = null;
+const tipBubble = document.getElementById('tip-bubble');
+
+document.addEventListener('click', e => {
+  const tip = e.target.closest('.tip');
+  if (tip) {
+    e.stopPropagation();
+    const text = tip.getAttribute('data-tip');
+    if (!text) return;
+    // Position
+    const rect = tip.getBoundingClientRect();
+    tipBubble.textContent = text;
+    tipBubble.classList.add('show');
+    // Place above or below depending on space
+    const spaceAbove = rect.top;
+    const bubbleH = 80;
+    let top = spaceAbove > bubbleH + 10
+      ? rect.top - bubbleH - 8
+      : rect.bottom + 8;
+    let left = Math.max(10, Math.min(window.innerWidth - 240, rect.left - 90));
+    tipBubble.style.top  = top + 'px';
+    tipBubble.style.left = left + 'px';
+    tip.classList.add('active');
+    clearTimeout(tipTimer);
+    tipTimer = setTimeout(() => {
+      tipBubble.classList.remove('show');
+      tip.classList.remove('active');
+    }, 3000);
+  } else {
+    tipBubble.classList.remove('show');
+    document.querySelectorAll('.tip.active').forEach(t => t.classList.remove('active'));
+  }
+});
+
 const isMobile = () => window.innerWidth <= 700;
 
 function mobileTab(tab) {

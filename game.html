@@ -724,6 +724,9 @@ body {
       <button class="drawer-item" onclick="toggleBookmarkList()">
         <span class="drawer-item-icon">🔖</span> Marque-pages
       </button>
+      <button class="drawer-item" onclick="document.getElementById('game-import-input').click();closeMenu()">
+        <span class="drawer-item-icon">↑</span> Charger un JSON
+      </button>
       <button class="drawer-item" onclick="window.location.href='stories.html'">
         <span class="drawer-item-icon">📚</span> Bibliothèque
       </button>
@@ -749,6 +752,7 @@ body {
   <button id="fab-main" onclick="toggleFab()" title="Actions">＋</button>
 </div>
 <div id="bm-toast"></div>
+<input type="file" id="game-import-input" accept=".json" style="display:none" onchange="handleGameImport(event)">
 
 <script>
 // ══════════════════════════════════════════════
@@ -786,25 +790,30 @@ async function loadStory() {
 
   // ── MODE TEST depuis l'éditeur ──
   if (params.get('test') === '1') {
-    const testData = sessionStorage.getItem('sf_test_story');
+    // localStorage au lieu de sessionStorage (fonctionne entre onglets sur mobile)
+    const testData = localStorage.getItem('sf_test_story');
     if (testData) {
       try {
         story = JSON.parse(testData);
-        // En mode test, on part de la scène _testSceneId
+        localStorage.removeItem('sf_test_story'); // nettoyer après usage
         if (story._testMode && story._testSceneId) {
-          // Forcer cette scène comme isStart
           Object.values(story.scenes).forEach(s => s.isStart = false);
           story.scenes[story._testSceneId].isStart = true;
         }
-        // Bannière test
         const banner = document.createElement('div');
         banner.style.cssText = 'position:fixed;top:0;left:0;right:0;z-index:999;background:#fa6d8f;color:#fff;font-family:monospace;font-size:11px;text-align:center;padding:3px;letter-spacing:1px';
-        banner.textContent = '▶ MODE TEST — ' + (story._testSceneId || 'départ');
+        banner.textContent = '▶ MODE TEST — ' + (story.scenes[story._testSceneId]?.title || 'départ');
         document.body.appendChild(banner);
         document.getElementById('topbar').style.marginTop = '20px';
         document.getElementById('progress-bar').style.top = '72px';
         document.getElementById('stats-bar').style.top = '72px';
-      } catch(e) { /* fallback normal */ }
+      } catch(e) {
+        showError('Erreur mode test : ' + e.message);
+        return;
+      }
+    } else {
+      showError('Données de test introuvables.<br>Relance le test depuis l\'éditeur.');
+      return;
     }
   }
 
@@ -1491,6 +1500,40 @@ function showBmToast(msg) {
   bmToastTimer = setTimeout(() => el.classList.remove('show'), 2500);
 }
 
+
+// ══════════════════════════════════════════════
+// IMPORT JSON DIRECT
+// ══════════════════════════════════════════════
+function handleGameImport(e) {
+  const file = e.target.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = ev => {
+    try {
+      const data = JSON.parse(ev.target.result);
+      if (!data.scenes) throw new Error('Format invalide');
+      story = data;
+      stats = {}; history = []; currentId = null;
+      if (story.theme) applyTheme(story.theme);
+      (story.stats || []).forEach(s => { stats[s.id] = s.start || 0; });
+      const title = story.name || file.name;
+      document.getElementById('game-title').textContent = title;
+      document.getElementById('drawer-game-title').textContent = title;
+      document.title = title;
+      renderStatsBar();
+      applyGameUI();
+      document.getElementById('progress-fill').style.width = '0%';
+      const startScene = Object.values(story.scenes).find(s => s.isStart);
+      if (!startScene) { showBmToast('⚠ Aucune scène de départ'); return; }
+      goToScene(startScene.id);
+      showBmToast('✓ ' + title + ' chargé');
+    } catch(err) {
+      showBmToast('⚠ Fichier JSON invalide');
+    }
+  };
+  reader.readAsText(file);
+  e.target.value = '';
+}
 
 function openMenu() { document.getElementById('menu-overlay').classList.add('open'); }
 function closeMenu() { document.getElementById('menu-overlay').classList.remove('open'); }
