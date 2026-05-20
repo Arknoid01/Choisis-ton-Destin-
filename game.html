@@ -506,19 +506,19 @@ body {
 
 /* Studio line */
 .intro-studio {
-  font-family:'DM Mono',monospace; font-size:10px;
+  font-family:'Cinzel',serif; font-size:11px;
   letter-spacing:5px; text-transform:uppercase;
-  color:rgba(255,255,255,0.25);
+  color:rgba(255,255,255,0.55);
   opacity:0; animation:intro-rise .8s ease forwards;
-  animation-delay:.6s;
+  animation-delay:.5s;
 }
 /* Divider */
 .intro-divider {
-  width:0; height:1px; background:rgba(255,255,255,0.15);
-  margin:16px 0; animation:intro-expand .8s ease forwards;
-  animation-delay:1.2s;
+  width:0; height:1px; background:rgba(255,255,255,0.2);
+  margin:18px 0; animation:intro-expand .8s ease forwards;
+  animation-delay:1.0s;
 }
-@keyframes intro-expand { from{width:0;} to{width:120px;} }
+@keyframes intro-expand { from{width:0;} to{width:140px;} }
 
 /* Story title */
 .intro-title {
@@ -528,21 +528,15 @@ body {
   color:rgba(255,255,255,0);
   text-align:center; padding:0 28px;
   opacity:0; animation:intro-title-in 1.2s ease forwards;
-  animation-delay:1.8s;
+  animation-delay:1.5s;
 }
 @keyframes intro-title-in {
   0%   { opacity:0; color:rgba(255,255,255,0); transform:translateY(8px); }
   50%  { opacity:1; color:rgba(255,255,255,0.9); transform:translateY(0); }
   100% { opacity:1; color:rgba(255,255,255,0.85); }
 }
-/* Pegasus */
-.intro-pegasus {
-  font-family:'Cinzel',serif; font-size:9px;
-  letter-spacing:4px; text-transform:uppercase;
-  color:rgba(255,255,255,0.2); margin-top:22px;
-  opacity:0; animation:intro-rise .6s ease forwards;
-  animation-delay:2.8s;
-}
+/* Pegasus — masqué, intégré dans studio */
+.intro-pegasus { display:none; }
 @keyframes intro-rise {
   from { opacity:0; transform:translateY(4px); }
   to   { opacity:1; transform:translateY(0); }
@@ -757,10 +751,10 @@ body {
 
 <!-- LOADING -->
 <div id="loading">
-  <div class="intro-studio" id="intro-studio">Une production</div>
+  <div class="intro-studio" id="intro-studio">Une production PegasusCorp</div>
   <div class="intro-divider"></div>
   <div class="intro-title" id="intro-title">…</div>
-  <div class="intro-pegasus" id="intro-pegasus">PegasusCorp</div>
+  <div class="intro-pegasus" id="intro-pegasus" style="display:none"></div>
   <div class="loading-dots">
     <div class="loading-dot"></div>
     <div class="loading-dot"></div>
@@ -965,7 +959,7 @@ async function loadStory() {
   });
 
   if (introTitle)   introTitle.textContent  = story.name || '';
-  if (introStudio)  introStudio.textContent = {fr:'Une production',en:'A production',es:'Una producción'}[lang]||'Une production';
+  if (introStudio)  introStudio.textContent = {fr:'Une production PegasusCorp',en:'A PegasusCorp Production',es:'Una producción PegasusCorp'}[lang]||'Une production PegasusCorp';
   if (introPegasus) introPegasus.textContent = 'PegasusCorp';
 
   // Attendre 4.5s pour laisser l'animation se jouer, puis fondu
