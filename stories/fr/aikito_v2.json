@@ -1,0 +1,496 @@
+{
+  "name": "Le Temps Perdu avec Aikito",
+  "kids": true,
+  "askPlayerName": false,
+  "pack": "kids",
+  "stats": [
+    {
+      "id": "bonheur",
+      "label": "Bonheur",
+      "start": 30,
+      "max": 100,
+      "color": "#FFD700"
+    },
+    {
+      "id": "calme",
+      "label": "Calme",
+      "start": 20,
+      "max": 100,
+      "color": "#90EE90"
+    }
+  ],
+  "theme": {
+    "bg": "#0d0f1a",
+    "bg2": "#141828",
+    "bg3": "#1a2035",
+    "bg4": "#202540",
+    "border": "#2a3555",
+    "accent": "#FFD700",
+    "accent2": "#FF9B50",
+    "accent3": "#90EE90",
+    "text": "#f0e8d0",
+    "text2": "#a09070",
+    "text3": "#605040"
+  },
+  "scenes": {
+    "prologue": {
+      "id": "prologue",
+      "title": "Le Village de Brindille",
+      "location": "VILLAGE — MATIN",
+      "narrator": "Parfois, les journées vont si vite qu'on oublie de les vivre.",
+      "text": "Tu arrives dans le village de Brindille avec ton ami Aikito.\n\nAikito est un petit chien curieux qui adore jouer, courir après les feuilles et poser beaucoup trop de questions.\n\nMais aujourd'hui, quelque chose est étrange.\n\nLes habitants courent partout.\n\nTout le monde dit :\n\n« Vite ! »\n« Pas le temps ! »\n« Plus tard ! »\n\nMême les enfants ont arrêté de jouer.\n\nAu loin, un énorme tic-tac résonne sur la colline.\n\nAikito renifle l'air et fronce ses petits sourcils.\n\n*« Ça sent bizarre... comme quand on est en retard pour quelque chose qu'on n'a pas prévu. »*",
+      "isStart": true,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Suivre le bruit avec Aikito",
+          "vers": "chemin_colline",
+          "effects": [
+            {
+              "stat": "calme",
+              "val": 5
+            }
+          ],
+          "clickEffect": "pulse"
+        },
+        {
+          "text": "Rester jouer avec les enfants",
+          "vers": "jeu",
+          "effects": [
+            {
+              "stat": "bonheur",
+              "val": 15
+            }
+          ],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 400,
+      "y": 40
+    },
+    "jeu": {
+      "id": "jeu",
+      "title": "Encore Cinq Minutes",
+      "location": "PLACE DU VILLAGE",
+      "narrator": "Parfois, jouer est plus important qu'aller vite.",
+      "text": "Tu proposes une partie de ballon.\n\nAu début, personne n'ose.\n\nPuis Aikito attrape le ballon avec sa tête et tombe dans une flaque.\n\nTout le monde éclate de rire.\n\nMême les adultes s'arrêtent quelques secondes.\n\nLe tic-tac semble ralentir un peu.\n\nUne petite fille aux nattes rousses s'approche de toi.\n\n*« C'est quoi ton chien ? Il fait toujours des trucs comme ça ? »*\n\nAikito secoue la tête et envoie de l'eau partout. Tout le monde rit encore plus fort.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Jouer encore un peu avec la petite fille",
+          "vers": "nouvelle_amie",
+          "effects": [
+            {
+              "stat": "bonheur",
+              "val": 15
+            },
+            {
+              "stat": "calme",
+              "val": 10
+            }
+          ],
+          "clickEffect": "pulse"
+        },
+        {
+          "text": "Monter sur la colline avec Aikito",
+          "vers": "chemin_colline",
+          "effects": [],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 150,
+      "y": 180
+    },
+    "nouvelle_amie": {
+      "id": "nouvelle_amie",
+      "title": "Léonie",
+      "location": "PLACE DU VILLAGE",
+      "narrator": "Une nouvelle amitié commence souvent par un fou rire.",
+      "text": "Elle s'appelle Léonie. Elle habite Brindille depuis toujours.\n\n*« Avant, on jouait tout le temps ici,»* dit-elle. *«Et puis l'horloge s'est mise à aller trop vite. Maintenant tout le monde est pressé et personne n'a le temps de rien.»*\n\nAikito s'assoit devant elle et incline la tête.\n\n*« Même les papillons vont plus vite,»* dit-il gravement. *«J'ai essayé d'en attraper un ce matin. Il était déjà parti avant que j'aie fini de me lever.»*\n\nLéonie rit.\n\n*«Ton chien parle ?»*\n\n*«Seulement quand c'est important,»* tu réponds.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Demander à Léonie ce qu'il y a sur la colline",
+          "vers": "leonie_raconte",
+          "effects": [
+            {
+              "stat": "calme",
+              "val": 10
+            }
+          ],
+          "clickEffect": "pulse"
+        },
+        {
+          "text": "Monter sur la colline tous ensemble",
+          "vers": "chemin_colline_amis",
+          "effects": [
+            {
+              "stat": "bonheur",
+              "val": 10
+            }
+          ],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 50,
+      "y": 300
+    },
+    "leonie_raconte": {
+      "id": "leonie_raconte",
+      "title": "Ce Que Sait Léonie",
+      "location": "PLACE DU VILLAGE — BANC",
+      "narrator": "Les enfants remarquent souvent des choses que les adultes ont arrêté de voir.",
+      "text": "Léonie s'assoit sur un banc. Elle parle doucement.\n\n*«L'horloge est apparue il y a trois semaines. D'abord on l'entendait à peine. Et puis les gens ont commencé à regarder l'heure tout le temps. Et puis à courir. Et puis à oublier de manger, de rire, de regarder le ciel.*»\n\nElle regarde ses chaussures.\n\n*«Mon papa a arrêté de me raconter des histoires le soir. Il dit qu'il n'a plus le temps. Mais le soir... le temps est là. C'est juste qu'il ne le voit plus.*»\n\nAikito pose sa tête sur les genoux de Léonie.\n\n*«Ton papa a besoin qu'on lui rende son temps,»* dit-il.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Monter sur la colline avec Léonie et Aikito",
+          "vers": "chemin_colline_amis",
+          "effects": [
+            {
+              "stat": "bonheur",
+              "val": 10
+            },
+            {
+              "stat": "calme",
+              "val": 5
+            }
+          ],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 50,
+      "y": 420
+    },
+    "chemin_colline": {
+      "id": "chemin_colline",
+      "title": "Le Chemin de la Colline",
+      "location": "CHEMIN — ENTRE LE VILLAGE ET LA COLLINE",
+      "narrator": "Le chemin vers la colline est plein de choses à regarder, si on prend le temps.",
+      "text": "Le chemin monte doucement.\n\nAikito s'arrête toutes les deux minutes pour renifler quelque chose.\n\n*«Un escargot est passé là ce matin,»* dit-il. *«Il allait dans la mauvaise direction. Je ne lui ai pas dit. Je ne voulais pas le vexer.»*\n\nTu regardes le village en bas. Les gens courent encore. Un homme est tellement pressé qu'il oublie son chapeau. Il revient chercher son chapeau et oublie son panier. Il revient chercher son panier et...\n\n*«Ils oublient des choses parce qu'ils vont trop vite,»* dit Aikito. *«Si on va trop vite, on perd des bouts de soi en chemin.»*",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Continuer vers le sommet",
+          "vers": "colline",
+          "effects": [
+            {
+              "stat": "calme",
+              "val": 5
+            }
+          ],
+          "clickEffect": "pulse"
+        },
+        {
+          "text": "S'arrêter regarder un nuage avec Aikito",
+          "vers": "nuage",
+          "effects": [
+            {
+              "stat": "calme",
+              "val": 20
+            },
+            {
+              "stat": "bonheur",
+              "val": 10
+            }
+          ],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 400,
+      "y": 280
+    },
+    "chemin_colline_amis": {
+      "id": "chemin_colline_amis",
+      "title": "Le Chemin à Trois",
+      "location": "CHEMIN — ENTRE LE VILLAGE ET LA COLLINE",
+      "narrator": "Les chemins sont plus beaux à plusieurs.",
+      "text": "Léonie marche à côté de toi. Aikito court devant, revient, repart.\n\nIl ramasse une feuille et la pose solennellement aux pieds de Léonie.\n\n*«C'est pour toi,»* dit-il. *«Elle est tombée de l'arbre exactement au bon moment.»*\n\nLéonie rit et prend la feuille.\n\n*«Comment il sait que c'était le bon moment ?»*\n\n*«Je ne sais pas,»* dis-tu. *«Aikito dit beaucoup de choses qui ont l'air de n'avoir aucun sens et qui ont toujours un sens en fait.»*\n\nAikito hoche la tête avec dignité.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Continuer vers le sommet",
+          "vers": "colline",
+          "effects": [
+            {
+              "stat": "bonheur",
+              "val": 10
+            }
+          ],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 250,
+      "y": 380
+    },
+    "nuage": {
+      "id": "nuage",
+      "title": "Le Nuage en Forme de Chien",
+      "location": "CHEMIN — HERBE DOUCE",
+      "narrator": "Regarder les nuages est une des choses les plus importantes qu'on puisse faire.",
+      "text": "Vous vous allongez tous les deux dans l'herbe.\n\nAikito pointe son museau vers le ciel.\n\n*«Celui-là ressemble à un chien qui court après une balle,»* dit-il.\n\nTu regardes. Il a raison.\n\n*«Et celui-là ressemble à un chapeau qui a perdu son propriétaire,»* ajoutes-tu.\n\nVous restez là un moment. Le tic-tac de l'horloge est toujours là, mais de loin, ça ressemble presque à de la musique.\n\n*«Je me demande si l'horloge est triste,»* dit Aikito. *«D'aller si vite tout le temps. Moi je serais triste.»*\n\nTu n'y avais pas pensé comme ça.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Monter voir l'horloge de plus près",
+          "vers": "colline",
+          "effects": [
+            {
+              "stat": "calme",
+              "val": 10
+            },
+            {
+              "stat": "bonheur",
+              "val": 5
+            }
+          ],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 550,
+      "y": 380
+    },
+    "colline": {
+      "id": "colline",
+      "title": "L'Horloge Géante",
+      "location": "COLLINE DES MINUTES",
+      "narrator": "Certaines horloges donnent l'heure. D'autres décident du rythme du monde.",
+      "text": "Toi et Aikito arrivez au sommet de la colline.\n\nUne immense horloge tourne beaucoup trop vite.\n\nÀ chaque tic-tac :\n- les adultes courent plus vite,\n- les enfants rangent leurs jouets,\n- le soleil semble filer dans le ciel.\n\nAikito te regarde.\n\n*« Peut-être que les habitants ont oublié de prendre leur temps… »*\n\nDe près, l'horloge est couverte de petites gravures — des enfants qui jouent, des adultes qui rient, des familles qui mangent ensemble.\n\n*«Elle était belle avant,»* dit Aikito doucement. *«Je peux le sentir.»*",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "S'asseoir calmement avec Aikito",
+          "vers": "sasseoir",
+          "effects": [
+            {
+              "stat": "calme",
+              "val": 20
+            }
+          ],
+          "clickEffect": "pulse"
+        },
+        {
+          "text": "Essayer d'arrêter l'horloge",
+          "vers": "arreter_horloge",
+          "effects": [
+            {
+              "stat": "bonheur",
+              "val": 5
+            }
+          ],
+          "clickEffect": "pulse"
+        },
+        {
+          "text": "Regarder les gravures de plus près",
+          "vers": "gravures_horloge",
+          "effects": [
+            {
+              "stat": "calme",
+              "val": 10
+            },
+            {
+              "stat": "bonheur",
+              "val": 10
+            }
+          ],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 400,
+      "y": 480
+    },
+    "gravures_horloge": {
+      "id": "gravures_horloge",
+      "title": "Ce Que Raconte l'Horloge",
+      "location": "COLLINE DES MINUTES — PIED DE L'HORLOGE",
+      "narrator": "Les objets anciens gardent la mémoire de ce qu'ils ont vu.",
+      "text": "Tu t'approches et poses les doigts sur les gravures.\n\nDes enfants qui courent dans des prairies. Un vieux monsieur qui pêche. Une maman qui lit une histoire. Un papa qui regarde les étoiles avec sa fille.\n\n*«Elle s'en souvient,»* dit Aikito. *«L'horloge se souvient de quand le temps était doux.*»\n\nTu regardes les aiguilles qui tournent à toute vitesse. Elles semblent presque... essoufflées.\n\n*«Je crois que quelqu'un lui a dit d'aller plus vite un jour,»* dit Aikito. *«Et elle a obéi. Mais personne ne lui a jamais dit de s'arrêter.*»\n\nÇa te donne une idée.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Parler doucement à l'horloge",
+          "vers": "parler_horloge",
+          "effects": [
+            {
+              "stat": "calme",
+              "val": 15
+            },
+            {
+              "stat": "bonheur",
+              "val": 10
+            }
+          ],
+          "clickEffect": "pulse"
+        },
+        {
+          "text": "S'asseoir et montrer l'exemple",
+          "vers": "sasseoir",
+          "effects": [
+            {
+              "stat": "calme",
+              "val": 20
+            }
+          ],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 600,
+      "y": 600
+    },
+    "parler_horloge": {
+      "id": "parler_horloge",
+      "title": "Une Conversation avec le Temps",
+      "location": "COLLINE DES MINUTES",
+      "narrator": "On peut parler à n'importe quoi, si on y met du cœur.",
+      "text": "Tu poses la main sur le bois chaud de l'horloge.\n\n*«Tu peux ralentir,»* dis-tu doucement. *«Personne n'a besoin d'aller si vite. Les gens en bas ont oublié de regarder le ciel. Ils ont oublié de rire. Ils ont besoin de temps.»*\n\nAikito ajoute, très sérieusement :\n\n*«Et moi j'ai besoin de temps pour attraper des papillons.»*\n\nL'horloge ne répond pas. Mais quelque chose change — le tic-tac est un tout petit peu plus doux.\n\nPas encore assez. Mais un peu.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "S'asseoir avec Aikito et continuer d'être calme",
+          "vers": "fin_douce",
+          "effects": [
+            {
+              "stat": "calme",
+              "val": 15
+            },
+            {
+              "stat": "bonheur",
+              "val": 15
+            }
+          ],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 700,
+      "y": 700
+    },
+    "sasseoir": {
+      "id": "sasseoir",
+      "title": "S'Asseoir",
+      "location": "COLLINE DES MINUTES",
+      "narrator": "Parfois la chose la plus courageuse est de ne pas se presser.",
+      "text": "Vous vous asseyez tous les deux dans l'herbe, face à l'horloge.\n\nAikito bâille et pose sa tête sur tes genoux.\n\nLes aiguilles continuent de tourner vite.\n\nMais vous, vous ne bougez pas.\n\nUn oiseau se pose près de vous. Puis un autre. Même les oiseaux semblent intrigués par deux êtres qui refusent de se presser.\n\n*«Je crois que l'horloge nous regarde,»* chuchote Aikito.\n\nTu regardes les aiguilles. Il a peut-être raison.\n\nElles semblent... hésiter.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Rester encore un peu, sans rien faire",
+          "vers": "fin_douce",
+          "effects": [
+            {
+              "stat": "calme",
+              "val": 20
+            },
+            {
+              "stat": "bonheur",
+              "val": 10
+            }
+          ],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 200,
+      "y": 620
+    },
+    "arreter_horloge": {
+      "id": "arreter_horloge",
+      "title": "Le Plan d'Aikito",
+      "location": "COLLINE DES MINUTES",
+      "narrator": "Les grands projets commencent souvent par des petites idées.",
+      "text": "Tu t'approches de l'horloge. Elle est immense — ses rouages tournent en grondant.\n\nAikito réfléchit, les pattes croisées.\n\n*«Je pourrais mordre un rouage,»* propose-t-il.\n\n*«Non.»*\n\n*«Je pourrais m'asseoir dessus.»*\n\n*«Non.»*\n\n*«On pourrait chanter très fort jusqu'à ce qu'elle s'arrête par gêne ?»*\n\nTu regardes Aikito. Il est tout à fait sérieux.\n\n*«J'ai une meilleure idée,»* dis-tu.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Partager ton idée avec Aikito",
+          "vers": "idee_cle",
+          "effects": [
+            {
+              "stat": "bonheur",
+              "val": 15
+            }
+          ],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 600,
+      "y": 590
+    },
+    "idee_cle": {
+      "id": "idee_cle",
+      "title": "La Clé du Temps",
+      "location": "COLLINE DES MINUTES",
+      "narrator": "La bonne idée arrive toujours au bon moment.",
+      "text": "*«Et si on ne cherchait pas à l'arrêter ? Et si on lui montrait juste... à quoi ressemble le calme ?»*\n\nAikito penche la tête.\n\n*«Comme un exemple ?»*\n\n*«Comme un exemple.»*\n\nVous vous asseyez tous les deux dans l'herbe, face à l'immense horloge.\n\nAikito sort une balle de nulle part et la fait rebondir doucement. Une fois. Deux fois. Lentement.\n\nTu regardes le ciel.\n\nLes aiguilles hésitent.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Continuer à être calme ensemble",
+          "vers": "fin_douce",
+          "effects": [
+            {
+              "stat": "calme",
+              "val": 20
+            },
+            {
+              "stat": "bonheur",
+              "val": 10
+            }
+          ],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 700,
+      "y": 680
+    },
+    "fin_douce": {
+      "id": "fin_douce",
+      "title": "Le Temps de Jouer",
+      "location": "COLLINE — COUCHER DE SOLEIL",
+      "narrator": "Certaines choses ont besoin de temps pour devenir belles.",
+      "text": "Toi et Aikito regardez le soleil se coucher.\n\nL'horloge ralentit doucement.\n\nDans le village, les enfants recommencent à jouer.\n\nLes adultes arrêtent enfin de courir.\n\nAikito remue la queue puis dit doucement :\n\n*«Les grandes personnes oublient parfois de jouer.\nMoi, je ne veux pas oublier.»*\n\nTu regardes Brindille en bas — des rires montent jusqu'à vous, légers comme des bulles de savon.\n\nL'horloge continue de tourner. Mais maintenant, elle va au bon rythme. Ni trop vite. Ni trop lente.\n\nJuste... le temps qu'il faut.",
+      "isStart": false,
+      "isEnd": true,
+      "transition": "fade",
+      "choices": [],
+      "x": 350,
+      "y": 780
+    },
+    "fin_amis": {
+      "id": "fin_amis",
+      "title": "Le Soir à Brindille",
+      "location": "VILLAGE DE BRINDILLE — SOIR",
+      "narrator": "Les meilleures journées sont celles qu'on n'avait pas prévues.",
+      "text": "Le soleil descend sur Brindille.\n\nL'horloge a ralenti. Les rires sont revenus.\n\nLéonie court vers son père qui l'attend sur le pas de la porte.\n\nIl s'accroupit, ouvre les bras, et cette fois... il ne regarde pas l'heure.\n\nAikito te pousse du museau.\n\n*«Tu vois ? Il a retrouvé son temps.»*\n\nDans le ciel, les premières étoiles apparaissent.\n\n*«Il y a une étoile pour chaque moment qu'on prend le temps de vivre,»* dit Aikito.\n\n*«C'est vrai ?»*\n\n*«Je ne sais pas. Mais c'est joli à croire.»*",
+      "isStart": false,
+      "isEnd": true,
+      "transition": "fade",
+      "choices": [],
+      "x": 550,
+      "y": 780
+    }
+  }
+}
