@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Outil de Traduction — Fableris</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&family=DM+Mono:wght@300;400&display=swap" onload="this.onload=null;this.rel='stylesheet'">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+html,body{min-height:100%;background:#0a0a0e;color:#e0d8f0;font-family:'DM Mono',monospace;overflow-x:hidden;}
+
+:root{
+  --purple:#7c6dfa; --green:#6dfabc; --gold:#c8a96e;
+  --red:#fa6d8f; --orange:#ffaa00;
+  --bg:#0a0a0e; --bg2:#111118; --bg3:#18181f; --bg4:#202028;
+  --border:#26262e; --text:#e0d8f0; --dim:#7070a0; --dimmer:#404050;
+}
+
+#topbar{
+  position:fixed;top:0;left:0;right:0;height:52px;z-index:100;
+  background:rgba(10,10,14,0.92);border-bottom:1px solid var(--border);
+  backdrop-filter:blur(12px);
+  display:flex;align-items:center;gap:12px;padding:0 16px;
+}
+.back-btn{
+  width:36px;height:36px;border-radius:8px;
+  border:1px solid var(--border);background:none;
+  color:var(--dim);font-size:18px;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+  text-decoration:none;transition:all .15s;flex-shrink:0;
+}
+.back-btn:hover{border-color:var(--gold);color:var(--text);}
+.topbar-title{font-family:'Cinzel',serif;font-size:13px;font-weight:600;color:var(--text);letter-spacing:2px;}
+
+#scroll{padding-top:52px;}
+#content{max-width:600px;margin:0 auto;padding:24px 16px 80px;}
+
+.hero{text-align:center;padding:28px 0 24px;border-bottom:1px solid var(--border);margin-bottom:28px;}
+.hero-icon{font-size:36px;margin-bottom:12px;}
+.hero-title{font-family:'Cinzel',serif;font-size:20px;font-weight:600;color:var(--text);letter-spacing:2px;margin-bottom:8px;}
+.hero-sub{font-size:13px;color:var(--dim);line-height:1.6;max-width:420px;margin:0 auto;}
+
+.section{margin-bottom:28px;}
+.section-title{
+  font-family:'Cinzel',serif;font-size:10px;font-weight:600;
+  letter-spacing:4px;text-transform:uppercase;color:var(--dimmer);
+  margin-bottom:14px;display:flex;align-items:center;gap:10px;
+}
+.section-title::after{content:'';flex:1;height:1px;background:var(--border);}
+
+/* STEP CARD */
+.step-card{
+  background:var(--bg2);border:1px solid var(--border);
+  border-radius:10px;padding:14px 16px;margin-bottom:10px;
+  display:flex;gap:12px;align-items:flex-start;
+}
+.step-num{
+  width:26px;height:26px;border-radius:7px;flex-shrink:0;
+  background:rgba(124,109,250,0.12);border:1px solid rgba(124,109,250,0.25);
+  color:var(--purple);font-size:11px;font-weight:700;
+  display:flex;align-items:center;justify-content:center;
+}
+.step-body h3{font-family:'Cinzel',serif;font-size:13px;color:var(--text);margin-bottom:4px;}
+.step-body p{font-size:12px;color:var(--dim);line-height:1.6;}
+
+/* UPLOAD ZONE */
+.upload-zone{
+  border:2px dashed var(--border);border-radius:12px;
+  padding:32px 20px;text-align:center;cursor:pointer;
+  transition:all .2s;background:var(--bg2);margin-bottom:12px;
+}
+.upload-zone:hover,.upload-zone.drag{border-color:var(--purple);background:rgba(124,109,250,0.05);}
+.upload-zone.has-file{border-color:rgba(109,250,188,0.4);background:rgba(109,250,188,0.04);}
+.upload-icon{font-size:28px;margin-bottom:8px;}
+.upload-label{font-size:13px;color:var(--dim);}
+.upload-file-name{font-size:12px;color:var(--green);margin-top:6px;}
+input[type=file]{display:none;}
+
+/* LANG SELECT */
+.lang-row{display:flex;gap:10px;margin-bottom:16px;flex-wrap:wrap;}
+.lang-btn{
+  padding:8px 16px;border-radius:8px;cursor:pointer;
+  border:1px solid var(--border);background:var(--bg3);
+  color:var(--dim);font-family:'DM Mono',monospace;font-size:12px;
+  transition:all .2s;
+}
+.lang-btn.active{border-color:var(--purple);background:rgba(124,109,250,0.1);color:var(--purple);}
+.lang-btn:hover{border-color:var(--dimmer);color:var(--text);}
+
+/* ACTION BTN */
+.action-btn{
+  width:100%;padding:13px;border-radius:10px;cursor:pointer;
+  border:1px solid;font-family:'Cinzel',serif;font-size:12px;
+  letter-spacing:2px;transition:all .2s;margin-bottom:10px;
+}
+.action-btn.primary{
+  border-color:var(--purple);
+  background:rgba(124,109,250,0.1);color:var(--purple);
+}
+.action-btn.primary:hover{background:rgba(124,109,250,0.2);}
+.action-btn.primary:disabled{opacity:0.35;cursor:not-allowed;}
+.action-btn.success{
+  border-color:rgba(109,250,188,0.4);
+  background:rgba(109,250,188,0.06);color:var(--green);
+}
+.action-btn.success:hover{background:rgba(109,250,188,0.12);}
+.action-btn.success:disabled{opacity:0.35;cursor:not-allowed;}
+
+/* RESULT */
+#result-area{
+  background:var(--bg2);border:1px solid var(--border);
+  border-radius:10px;overflow:hidden;display:none;margin-top:16px;
+}
+.result-header{
+  background:var(--bg3);border-bottom:1px solid var(--border);
+  padding:10px 14px;display:flex;align-items:center;justify-content:space-between;
+}
+.result-label{font-size:10px;color:var(--dimmer);letter-spacing:2px;text-transform:uppercase;}
+.result-stats{font-size:11px;color:var(--green);}
+#result-preview{
+  padding:14px;font-size:10px;color:var(--dim);
+  line-height:1.8;max-height:200px;overflow-y:auto;
+  white-space:pre;
+}
+#result-preview::-webkit-scrollbar{width:3px;}
+#result-preview::-webkit-scrollbar-thumb{background:var(--border);border-radius:3px;}
+
+/* INFO */
+.info-box{
+  background:rgba(255,170,0,0.06);border:1px solid rgba(255,170,0,0.2);
+  border-radius:8px;padding:12px 14px;margin-bottom:14px;
+  font-size:12px;color:#d0a040;line-height:1.6;
+}
+.info-box strong{color:var(--orange);}
+
+/* SEPARATOR */
+.or-sep{
+  text-align:center;margin:20px 0;color:var(--dimmer);
+  font-size:11px;letter-spacing:2px;position:relative;
+}
+.or-sep::before,.or-sep::after{
+  content:'';position:absolute;top:50%;width:calc(50% - 30px);
+  height:1px;background:var(--border);
+}
+.or-sep::before{left:0;} .or-sep::after{right:0;}
+
+/* ERROR */
+.error-msg{
+  background:rgba(250,109,143,0.08);border:1px solid rgba(250,109,143,0.25);
+  border-radius:8px;padding:10px 14px;
+  font-size:12px;color:var(--red);margin-top:10px;display:none;
+}
+</style>
+</head>
+<body>
+
+<div id="topbar">
+  <a href="index.html" class="back-btn">←</a>
+  <div class="topbar-title">Outil de Traduction</div>
+</div>
+
+<div id="scroll">
+<div id="content">
+
+  <div class="hero">
+    <div class="hero-icon">🌍</div>
+    <div class="hero-title">Traduction d'histoires</div>
+    <p class="hero-sub">Extrait tous les textes de ton histoire en CSV, traduis avec ton outil préféré, réinjecte pour obtenir une nouvelle version dans la langue cible.</p>
+  </div>
+
+  <!-- ÉTAPE 1 — EXTRAIRE -->
+  <div class="section">
+    <div class="section-title">Étape 1 — Extraire les textes</div>
+
+    <div class="step-card">
+      <div class="step-num">A</div>
+      <div class="step-body">
+        <h3>Charger ton histoire</h3>
+        <p>Sélectionne le fichier JSON de l'histoire en français que tu veux traduire.</p>
+      </div>
+    </div>
+
+    <div class="upload-zone" id="upload-zone-1" onclick="document.getElementById('file-json').click()"
+      ondragover="handleDrag(event,'upload-zone-1')"
+      ondragleave="removeDrag('upload-zone-1')"
+      ondrop="handleDrop(event,'file-json','upload-zone-1')">
+      <div class="upload-icon">📖</div>
+      <div class="upload-label">Clique ou glisse ton fichier JSON ici</div>
+      <div class="upload-file-name" id="file-json-name"></div>
+    </div>
+    <input type="file" id="file-json" accept=".json" onchange="loadJson(event)">
+
+    <div class="step-card">
+      <div class="step-num">B</div>
+      <div class="step-body">
+        <h3>Langue cible</h3>
+        <p>Choisis la langue vers laquelle tu veux traduire.</p>
+      </div>
+    </div>
+
+    <div class="lang-row">
+      <button class="lang-btn" onclick="selectLang('en',this)">🇬🇧 Anglais</button>
+      <button class="lang-btn" onclick="selectLang('es',this)">🇪🇸 Espagnol</button>
+      <button class="lang-btn" onclick="selectLang('de',this)">🇩🇪 Allemand</button>
+      <button class="lang-btn" onclick="selectLang('it',this)">🇮🇹 Italien</button>
+      <button class="lang-btn" onclick="selectLang('pt',this)">🇵🇹 Portugais</button>
+    </div>
+
+    <button class="action-btn primary" id="btn-extract" onclick="extractTexts()" disabled>
+      ↓ Générer le fichier CSV
+    </button>
+
+    <div id="result-area">
+      <div class="result-header">
+        <span class="result-label">Aperçu CSV</span>
+        <span class="result-stats" id="result-stats"></span>
+      </div>
+      <div id="result-preview"></div>
+    </div>
+
+    <div class="error-msg" id="error-msg"></div>
+  </div>
+
+  <!-- INFO TRADUCTION -->
+  <div class="info-box">
+    <strong>Comment traduire ?</strong><br>
+    1. Télécharge le CSV<br>
+    2. Ouvre-le dans Excel, Google Sheets ou un éditeur de texte<br>
+    3. La colonne B contient le texte original — remplis la colonne C avec ta traduction<br>
+    4. Garde exactement les mêmes retours à la ligne (\n)<br>
+    5. Sauvegarde en CSV (séparateur point-virgule) et réimporte ci-dessous
+  </div>
+
+  <!-- ÉTAPE 2 — RÉINJECTER -->
+  <div class="section">
+    <div class="section-title">Étape 2 — Réinjecter la traduction</div>
+
+    <div class="step-card">
+      <div class="step-num">C</div>
+      <div class="step-body">
+        <h3>Charger le CSV traduit</h3>
+        <p>Sélectionne le CSV que tu as traduit. Il doit avoir le même format que celui exporté à l'étape 1.</p>
+      </div>
+    </div>
+
+    <div class="upload-zone" id="upload-zone-2" onclick="document.getElementById('file-csv').click()"
+      ondragover="handleDrag(event,'upload-zone-2')"
+      ondragleave="removeDrag('upload-zone-2')"
+      ondrop="handleDrop(event,'file-csv','upload-zone-2')">
+      <div class="upload-icon">📋</div>
+      <div class="upload-label">Clique ou glisse ton CSV traduit ici</div>
+      <div class="upload-file-name" id="file-csv-name"></div>
+    </div>
+    <input type="file" id="file-csv" accept=".csv,.txt" onchange="loadCsv(event)">
+
+    <button class="action-btn success" id="btn-inject" onclick="injectTranslation()" disabled>
+      ↑ Générer le JSON traduit
+    </button>
+  </div>
+
+</div>
+</div>
+
+<script>
+// ── STATE ──────────────────────────────────────────────────────
+let storyData = null;
+let csvData = null;
+let targetLang = null;
+let storyFileName = '';
+
+// ── FILE HANDLING ──────────────────────────────────────────────
+function handleDrag(e, zoneId) {
+  e.preventDefault();
+  document.getElementById(zoneId).classList.add('drag');
+}
+function removeDrag(zoneId) {
+  document.getElementById(zoneId).classList.remove('drag');
+}
+function handleDrop(e, inputId, zoneId) {
+  e.preventDefault();
+  removeDrag(zoneId);
+  const file = e.dataTransfer.files[0];
+  if (!file) return;
+  const input = document.getElementById(inputId);
+  const dt = new DataTransfer();
+  dt.items.add(file);
+  input.files = dt.files;
+  input.dispatchEvent(new Event('change'));
+}
+
+function loadJson(e) {
+  const file = e.target.files[0];
+  if (!file) return;
+  storyFileName = file.name.replace('.json','');
+  document.getElementById('file-json-name').textContent = '✓ ' + file.name;
+  document.getElementById('upload-zone-1').classList.add('has-file');
+
+  const reader = new FileReader();
+  reader.onload = ev => {
+    try {
+      storyData = JSON.parse(ev.target.result);
+      checkExtractReady();
+      hideError();
+    } catch(err) {
+      showError('Fichier JSON invalide : ' + err.message);
+      storyData = null;
+    }
+  };
+  reader.readAsText(file);
+}
+
+function loadCsv(e) {
+  const file = e.target.files[0];
+  if (!file) return;
+  document.getElementById('file-csv-name').textContent = '✓ ' + file.name;
+  document.getElementById('upload-zone-2').classList.add('has-file');
+
+  const reader = new FileReader();
+  reader.onload = ev => {
+    csvData = ev.target.result;
+    document.getElementById('btn-inject').disabled = false;
+  };
+  reader.readAsText(file, 'UTF-8');
+}
+
+function selectLang(lang, btn) {
+  targetLang = lang;
+  document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  checkExtractReady();
+}
+
+function checkExtractReady() {
+  document.getElementById('btn-extract').disabled = !(storyData && targetLang);
+}
+
+// ── EXTRACT ────────────────────────────────────────────────────
+const FIELDS = ['title','location','narrator','text'];
+
+function extractTexts() {
+  if (!storyData || !targetLang) return;
+  hideError();
+
+  try {
+    const rows = [];
+    // Header
+    rows.push(['cle', 'texte_fr', 'traduction_' + targetLang]);
+
+    const scenes = storyData.scenes || {};
+    for (const [sid, scene] of Object.entries(scenes)) {
+      // Champs texte
+      for (const field of FIELDS) {
+        const val = scene[field];
+        if (val && val.trim()) {
+          rows.push([`${sid}.${field}`, val, '']);
+        }
+      }
+      // Choix
+      const choices = scene.choices || [];
+      choices.forEach((c, ci) => {
+        if (c.text && c.text.trim()) {
+          rows.push([`${sid}.choice_${ci}`, c.text, '']);
+        }
+      });
+    }
+
+    // Nom de l'histoire
+    if (storyData.name) {
+      rows.unshift(['story.name', storyData.name, '']);
+      rows.unshift(['cle', 'texte_fr', 'traduction_' + targetLang]);
+      rows.shift(); // enlever le doublon header
+    }
+
+    const csv = rows.map(row =>
+      row.map(cell => {
+        const s = String(cell);
+        // Échapper guillemets et entourer si nécessaire
+        if (s.includes(';') || s.includes('"') || s.includes('\n')) {
+          return '"' + s.replace(/"/g, '""') + '"';
+        }
+        return s;
+      }).join(';')
+    ).join('\n');
+
+    // Aperçu
+    const preview = rows.slice(0, 8).map(r => r.map(c => c.substring(0,50)).join(' | ')).join('\n');
+    document.getElementById('result-preview').textContent = preview + '\n...\n(' + (rows.length-1) + ' textes à traduire)';
+    document.getElementById('result-stats').textContent = (rows.length-1) + ' textes';
+    document.getElementById('result-area').style.display = 'block';
+
+    // Télécharger
+    downloadFile(
+      csv,
+      `${storyFileName}_a_traduire_${targetLang}.csv`,
+      'text/csv;charset=utf-8'
+    );
+
+  } catch(err) {
+    showError('Erreur lors de l\'extraction : ' + err.message);
+  }
+}
+
+// ── INJECT ─────────────────────────────────────────────────────
+function injectTranslation() {
+  if (!storyData || !csvData) return;
+  hideError();
+
+  try {
+    // Parser le CSV
+    const translations = {};
+    const lines = csvData.split('\n');
+
+    for (let i = 1; i < lines.length; i++) { // Skip header
+      const line = lines[i].trim();
+      if (!line) continue;
+
+      // Parser ligne CSV (gérer les guillemets)
+      const cells = parseCsvLine(line);
+      if (cells.length < 3) continue;
+
+      const key = cells[0].trim();
+      const translated = cells[2].trim();
+      if (key && translated) {
+        translations[key] = translated;
+      }
+    }
+
+    // Créer une copie profonde
+    const newData = JSON.parse(JSON.stringify(storyData));
+
+    // Appliquer les traductions
+    let applied = 0;
+
+    // Nom de l'histoire
+    if (translations['story.name']) {
+      newData.name = translations['story.name'];
+      applied++;
+    }
+
+    // Langue
+    newData.lang = targetLang || 'en';
+
+    // Scènes
+    for (const [sid, scene] of Object.entries(newData.scenes || {})) {
+      for (const field of FIELDS) {
+        const key = `${sid}.${field}`;
+        if (translations[key] !== undefined) {
+          scene[field] = translations[key];
+          applied++;
+        }
+      }
+      // Choix
+      (scene.choices || []).forEach((c, ci) => {
+        const key = `${sid}.choice_${ci}`;
+        if (translations[key] !== undefined) {
+          c.text = translations[key];
+          applied++;
+        }
+      });
+    }
+
+    const total = Object.keys(translations).length;
+    const missing = total - applied;
+
+    // Télécharger le JSON traduit
+    const json = JSON.stringify(newData, null, 2);
+    const lang = targetLang || 'trad';
+    downloadFile(json, `${storyFileName}_${lang}.json`, 'application/json');
+
+    if (missing > 0) {
+      showError(`⚠ ${applied} textes injectés, ${missing} clés non trouvées dans le JSON source.`, 'warn');
+    } else {
+      showError(`✓ ${applied} textes injectés avec succès !`, 'ok');
+    }
+
+  } catch(err) {
+    showError('Erreur lors de l\'injection : ' + err.message);
+  }
+}
+
+// ── CSV PARSER ─────────────────────────────────────────────────
+function parseCsvLine(line) {
+  const cells = [];
+  let current = '';
+  let inQuotes = false;
+
+  for (let i = 0; i < line.length; i++) {
+    const ch = line[i];
+    if (ch === '"') {
+      if (inQuotes && line[i+1] === '"') { current += '"'; i++; }
+      else inQuotes = !inQuotes;
+    } else if (ch === ';' && !inQuotes) {
+      cells.push(current);
+      current = '';
+    } else {
+      current += ch;
+    }
+  }
+  cells.push(current);
+  return cells;
+}
+
+// ── UTILS ──────────────────────────────────────────────────────
+function downloadFile(content, filename, mimeType) {
+  const blob = new Blob(['\ufeff' + content], { type: mimeType }); // BOM pour Excel
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url; a.download = filename;
+  document.body.appendChild(a); a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+}
+
+function showError(msg, type = 'error') {
+  const el = document.getElementById('error-msg');
+  el.textContent = msg;
+  el.style.display = 'block';
+  el.style.color = type === 'ok' ? 'var(--green)' : type === 'warn' ? 'var(--orange)' : 'var(--red)';
+  el.style.borderColor = type === 'ok' ? 'rgba(109,250,188,0.25)' : type === 'warn' ? 'rgba(255,170,0,0.25)' : 'rgba(250,109,143,0.25)';
+  el.style.background = type === 'ok' ? 'rgba(109,250,188,0.06)' : type === 'warn' ? 'rgba(255,170,0,0.06)' : 'rgba(250,109,143,0.06)';
+}
+function hideError() {
+  document.getElementById('error-msg').style.display = 'none';
+}
+</script>
+</body>
+</html>
