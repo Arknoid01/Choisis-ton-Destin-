@@ -1,0 +1,1039 @@
+{
+  "name": "Le Boucher des Rêves — Fusion Longue",
+  "kids": false,
+  "askPlayerName": true,
+  "pack": "free",
+  "stats": [
+    {
+      "id": "chaleur",
+      "label": "Chaleur",
+      "start": 40,
+      "max": 100,
+      "color": "#f4a261"
+    },
+    {
+      "id": "lucidite",
+      "label": "Lucidité",
+      "start": 50,
+      "max": 100,
+      "color": "#8ecae6"
+    },
+    {
+      "id": "appetit",
+      "label": "Appétit",
+      "start": 20,
+      "max": 100,
+      "color": "#ffd166"
+    }
+  ],
+  "theme": {
+    "bg": "#120c08",
+    "bg2": "#1d130d",
+    "bg3": "#2a1a12",
+    "bg4": "#3a2418",
+    "border": "#6b3f2a",
+    "accent": "#f4a261",
+    "accent2": "#e76f51",
+    "accent3": "#ffd166",
+    "text": "#fff3df",
+    "text2": "#d8b894",
+    "text3": "#9d7657"
+  },
+  "scenes": {
+    "intro": {
+      "id": "intro",
+      "title": "Après la Fermeture",
+      "location": "BOUCHERIE — SOIR",
+      "narrator": "Certaines journées sentent la fatigue, le poivre et les choses qu'on n'a pas eu le temps de dire.",
+      "text": "Tu fermes enfin la boutique.\n\nLe néon au-dessus de la vitrine clignote une dernière fois.\n\nAujourd'hui encore :\n- des côtes de bœuf,\n- des saucissons ficelés,\n- des clients pressés,\n- des commandes oubliées,\n- des petits bonjours échangés entre deux tickets.\n\nTes mains sentent encore :\nle poivre,\nla fumée,\net le pain frais de la boulangerie voisine.\n\nTu nettoies le grand billot une dernière fois.\n\nPuis tu retournes la pancarte :\n\n> FERMÉ\n\nDehors, la rue est presque vide.\n\nTu rentres chez toi avec ton vieux sac de travail.\n\nDedans :\n- une petite marmite de blanquette,\n- un saucisson bien ficelé,\n- un poulet rôti encore tiède.\n\nRien d'extraordinaire.\n\nJuste de bonnes choses.\n\nTon appartement est calme.\n\nTu poses ton trousseau de clés.\nTu enlèves tes chaussures.\nTu allumes la petite lampe près du canapé.\n\nLe silence fait du bien.\n\nTu t'assois enfin.\n\nPour la première fois de la journée…\n\ntu ne fais rien.\n\nLe chat saute sur l'accoudoir du canapé.\n\nIl te regarde quelques secondes.\n\nPuis il se couche contre toi.\n\nTes yeux deviennent lourds.\n\nTrès lourds.\n\nEt pendant que la ville continue de courir dehors…",
+      "isStart": true,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Entrer dans le rêve",
+          "vers": "hub_start",
+          "effects": [
+            {
+              "stat": "lucidite",
+              "val": 5
+            }
+          ]
+        }
+      ]
+    },
+    "hub_start": {
+      "id": "hub_start",
+      "title": "Le Comptoir des Songes",
+      "location": "RÊVE — BOUCHERIE FLOTTANTE",
+      "narrator": "Dans les rêves, même les comptoirs peuvent dériver.",
+      "text": "Tu ouvres les yeux derrière ton comptoir.\n\nMais la boutique n'est plus tout à fait ta boutique.\n\nElle flotte dans un ciel couleur soupe chaude.\n\nLes crochets brillent comme des étoiles.\nLes tickets de caisse tombent lentement du plafond.\nLa cloche de la porte sonne toute seule.\n\nSur la caisse, le même chat dort paisiblement.\n\nIl ne semble pas surpris de te voir.\n\nIl ouvre un œil, pousse ton carnet de commandes avec sa patte, puis se rendort presque aussitôt.\n\nLe carnet s'ouvre tout seul.\n\nUne phrase apparaît :\n\n> Quand le monde devient trop froid, distribue quelque chose de bon.\n\nTrois portes apparaissent dans la boutique.\n\nLa première bat au rythme d'horloges pressées.\nLa deuxième est fermée par des rubans de papier administratif.\nLa troisième clignote faiblement, comme un néon encore éteint.\n\nLe chat saute sur le comptoir et te regarde.\n\nDerrière lui, trois portes. La boutique flotte en silence.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "flash",
+      "choices": [
+        {
+          "text": "Passer la porte des horloges avec la blanquette",
+          "vers": "ville_intro",
+          "effects": [
+            {
+              "stat": "chaleur",
+              "val": 10
+            },
+            {
+              "stat": "appetit",
+              "val": 10
+            }
+          ]
+        },
+        {
+          "text": "Observer le chat du rêve",
+          "vers": "chat_hub",
+          "effects": [
+            {
+              "stat": "chaleur",
+              "val": 5
+            }
+          ]
+        }
+      ]
+    },
+    "chat_hub": {
+      "id": "chat_hub",
+      "title": "Le Chat du Comptoir",
+      "location": "RÊVE — BOUCHERIE FLOTTANTE",
+      "narrator": "Certains guides préfèrent dormir sur les réponses.",
+      "text": "Le chat est couché sur la caisse.\n\nIl ouvre un œil quand tu t'approches.\n\nAutour de son cou pend une petite médaille en forme de clé.\n\nTu t'accroupis.\n\nIl pose une patte sur le carnet, sans se presser.\n\nUne nouvelle phrase apparaît :\n\n> Les mauvaises habitudes sont des rêves qui ont oublié de se réveiller.\n\nLe chat bâille.\n\nUn ticket de caisse glisse sous sa patte et retombe sur le comptoir.\n\nDessus, il est écrit :\n\n> Service compris : sourire, patience, chaleur humaine.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Le caresser avant de partir",
+          "vers": "hub_start",
+          "effects": [
+            {
+              "stat": "chaleur",
+              "val": 10
+            }
+          ]
+        },
+        {
+          "text": "Lui demander de te montrer le chemin",
+          "vers": "ville_intro",
+          "effects": [
+            {
+              "stat": "lucidite",
+              "val": 5
+            }
+          ]
+        }
+      ]
+    },
+    "ville_intro": {
+      "id": "ville_intro",
+      "title": "La Ville qui Court",
+      "location": "RÊVE — AVENUE DES HORLOGES",
+      "narrator": "Ici, les secondes ont des dents.",
+      "text": "Tu arrives dans une ville où tout le monde court.\n\nLes passants mangent en marchant.\nLes vélos dépassent les voitures.\nLes horloges crient l'heure au lieu de la donner.\n\nDes écrans géants répètent :\n\n**PLUS VITE.**\n\n**PLUS TÔT.**\n\n**PLUS LOIN.**\n\nPersonne ne se regarde.\nPersonne ne répond vraiment quand on lui parle.\n\nUne vieille dame est assise sur un banc, au milieu du trottoir.\n\nUn étudiant traverse la rue en tenant une pile de feuilles qui s'envolent derrière lui.\n\nUne femme parle au téléphone.\n\n**« Oui oui. Oui oui. Oui oui. »**\n\nElle le répète sans jamais écouter la réponse.\n\nDans tes mains, la blanquette fume doucement.\n\nElle sent le dimanche midi.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Aller parler à la vieille dame",
+          "vers": "vieille_dame",
+          "effects": [
+            {
+              "stat": "chaleur",
+              "val": 10
+            }
+          ]
+        },
+        {
+          "text": "Suivre l'étudiant stressé",
+          "vers": "etudiant_presse",
+          "effects": [
+            {
+              "stat": "lucidite",
+              "val": 5
+            }
+          ]
+        },
+        {
+          "text": "Entrer dans le métro sans arrêt",
+          "vers": "metro",
+          "effects": [
+            {
+              "stat": "lucidite",
+              "val": 5
+            }
+          ]
+        },
+        {
+          "text": "Essayer le restaurant express",
+          "vers": "restaurant_express",
+          "effects": [
+            {
+              "stat": "appetit",
+              "val": 5
+            }
+          ]
+        },
+        {
+          "text": "Installer une table et servir la blanquette",
+          "vers": "table_ville",
+          "effects": [
+            {
+              "stat": "chaleur",
+              "val": 20
+            },
+            {
+              "stat": "appetit",
+              "val": 10
+            }
+          ]
+        }
+      ]
+    },
+    "vieille_dame": {
+      "id": "vieille_dame",
+      "title": "La Dame du Banc",
+      "location": "AVENUE DES HORLOGES",
+      "narrator": "Parfois, quelqu'un attend moins une réponse qu'une présence.",
+      "text": "Tu t'assois près d'elle.\n\nElle ne semble pas surprise.\n\n**« Tout le monde passe ici, mais personne ne reste. »**\n\nElle regarde ton sac.\n\n**« Ça sent quelque chose que j'avais oublié. »**\n\nTu lui sers une assiette.\n\nElle mange lentement.\n\nAutour de vous, trois personnes ralentissent sans comprendre pourquoi.\n\nUne horloge cesse de crier.\n\nLa dame sourit.\n\n**« Vous savez, {{player}}, les gens croient perdre du temps quand ils s'arrêtent. Mais parfois, c'est là qu'ils le retrouvent. »**\n\nLe chat du rêve traverse la route lentement.\n\nTrès lentement.\n\nToute la ville est obligée de ralentir.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Inviter les passants à s'asseoir",
+          "vers": "table_ville",
+          "effects": [
+            {
+              "stat": "chaleur",
+              "val": 15
+            }
+          ]
+        },
+        {
+          "text": "Demander pourquoi personne ne reste",
+          "vers": "rue_sans_pause",
+          "effects": [
+            {
+              "stat": "lucidite",
+              "val": 10
+            }
+          ]
+        }
+      ]
+    },
+    "rue_sans_pause": {
+      "id": "rue_sans_pause",
+      "title": "La Rue Sans Pause",
+      "location": "AVENUE DES HORLOGES",
+      "narrator": "Une ville sans pause finit par oublier pourquoi elle avance.",
+      "text": "Tu observes les passants.\n\nIls courent tous dans la même direction.\n\nMais au bout de l'avenue, il n'y a rien.\n\nSeulement une autre avenue.\n\nPuis une autre.\n\nPuis une autre.\n\nUne mère tient la main de son enfant sans le regarder.\nUn homme avale un café sans sentir son goût.\nUn étudiant répète : **« Je suis presque en retard »**, encore et encore.\n\nLe chat s'assoit au milieu du passage piéton.\n\nLes klaxons deviennent des soupirs.\n\nTu remarques alors que tout le monde tient quelque chose :\n- une liste,\n- un téléphone,\n- un planning,\n- une peur d'être en retard.\n\nMais personne ne tient une assiette.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Installer la grande table au milieu de l'avenue",
+          "vers": "table_ville",
+          "effects": [
+            {
+              "stat": "chaleur",
+              "val": 20
+            },
+            {
+              "stat": "lucidite",
+              "val": 10
+            }
+          ]
+        },
+        {
+          "text": "Ignorer le chat et courir",
+          "vers": "fin_pas_le_temps",
+          "effects": [
+            {
+              "stat": "lucidite",
+              "val": -15
+            }
+          ]
+        }
+      ]
+    },
+    "etudiant_presse": {
+      "id": "etudiant_presse",
+      "title": "L'Étudiant Stressé",
+      "location": "AVENUE DES HORLOGES",
+      "narrator": "La réussite a parfois la forme d'une pile de feuilles qui s'envole.",
+      "text": "L'étudiant ramasse ses feuilles en tremblant.\n\n**« Je suis en retard. »**\n\nUne feuille s'envole.\n\nIl recommence :\n\n**« Je suis en retard. »**\n\nTu lui demandes où il doit aller.\n\nIl ouvre la bouche.\n\nAucune réponse ne sort.\n\nIl regarde ses feuilles.\n\nSur chacune, la même phrase est écrite :\n\n> ÊTRE PRÊT.\n\nIl n'y a aucune date.\n\nAucune adresse.\n\nJuste cette injonction.\n\nTon sac est entre vous deux.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Lui offrir une assiette",
+          "vers": "table_ville",
+          "effects": [
+            {
+              "stat": "chaleur",
+              "val": 15
+            }
+          ]
+        },
+        {
+          "text": "Courir avec lui",
+          "vers": "fin_retard",
+          "effects": [
+            {
+              "stat": "lucidite",
+              "val": -10
+            }
+          ]
+        }
+      ]
+    },
+    "metro": {
+      "id": "metro",
+      "title": "Le Métro Sans Arrêt",
+      "location": "RÊVE — LIGNE PLUS TARD",
+      "narrator": "Certains trains ne mènent nulle part, mais tout le monde y monte quand même.",
+      "text": "Le métro roule depuis très longtemps.\n\nLes gens regardent le sol.\n\nUn homme dort debout.\n\nUne voix annonce :\n\n> Prochain arrêt :\n> Plus tard.\n\nPersonne ne trouve ça étrange.\n\nUne affiche au mur dit :\n\n> Gagnez du temps pendant que vous perdez votre journée.\n\nLe chat est couché sur un siège réservé.\n\nPersonne n'ose lui demander de bouger.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Réveiller doucement l'homme debout",
+          "vers": "table_ville",
+          "effects": [
+            {
+              "stat": "chaleur",
+              "val": 10
+            }
+          ]
+        },
+        {
+          "text": "Rester dans le métro pour voir le prochain arrêt",
+          "vers": "fin_metro",
+          "effects": [
+            {
+              "stat": "lucidite",
+              "val": -5
+            }
+          ]
+        },
+        {
+          "text": "Sortir au prochain arrêt imaginaire",
+          "vers": "rue_sans_pause",
+          "effects": [
+            {
+              "stat": "lucidite",
+              "val": 5
+            }
+          ]
+        }
+      ]
+    },
+    "restaurant_express": {
+      "id": "restaurant_express",
+      "title": "Restaurant Express",
+      "location": "AVENUE DES HORLOGES",
+      "narrator": "Ici, les plats arrivent avant la faim.",
+      "text": "Tu entres dans un restaurant minuscule.\n\nLe serveur te tend l'addition avant même que tu sois assis.\n\nSur les tables, les clients mâchent vite.\n\nTrès vite.\n\nUn plat arrive devant toi.\n\nTu ne l'as pas commandé.\n\nLe serveur dit :\n\n**« C'est plus efficace comme ça. »**\n\nDans un coin, une femme regarde son assiette vide.\n\nElle murmure :\n\n**« Je crois que je n'ai pas senti le goût. »**",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Ouvrir ton sac et servir quelque chose de vrai",
+          "vers": "table_ville",
+          "effects": [
+            {
+              "stat": "chaleur",
+              "val": 15
+            },
+            {
+              "stat": "appetit",
+              "val": 10
+            }
+          ]
+        },
+        {
+          "text": "Payer avant d'avoir mangé",
+          "vers": "ville_intro",
+          "effects": [
+            {
+              "stat": "lucidite",
+              "val": -5
+            }
+          ]
+        }
+      ]
+    },
+    "table_ville": {
+      "id": "table_ville",
+      "title": "La Table du Ralentissement",
+      "location": "AVENUE DES HORLOGES APAISÉE",
+      "narrator": "Le premier acte de résistance est parfois de poser une nappe.",
+      "text": "Tu installes une petite table au milieu du trottoir.\n\nC'est absurde.\n\nAlors forcément, quelqu'un s'arrête.\n\nPuis deux.\n\nPuis dix.\n\nTu sers la blanquette dans des assiettes dépareillées.\n\nLes gens mangent d'abord vite.\n\nPuis moins vite.\n\nPuis ils commencent à parler.\n\nUn homme retire ses écouteurs.\nUne femme pose enfin son sac.\nLa vieille dame rit doucement.\nL'étudiant retrouve une feuille blanche et décide de ne rien écrire dessus.\n\nLes horloges baissent le ton.\n\nLa ville ne s'arrête pas.\n\nElle respire.\n\nSur le dernier écran géant, un nouveau message apparaît :\n\n> PRENEZ LE TEMPS DE GOÛTER.\n\nLa vieille dame sort quelque chose de son tablier.\n\nUne louche brillante. Elle ne dit rien. Elle la pose juste sur ta table.\n\n**« On ne sait jamais quand un monde aura encore besoin d'une pause. »**",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "flash",
+      "choices": [
+        {
+          "text": "Avancer avec la louche brillante",
+          "vers": "hub_admin",
+          "effects": [
+            {
+              "stat": "chaleur",
+              "val": 25
+            },
+            {
+              "stat": "lucidite",
+              "val": 10
+            }
+          ]
+        }
+      ]
+    },
+    "fin_pas_le_temps": {
+      "id": "fin_pas_le_temps",
+      "title": "Pas le Temps",
+      "location": "AVENUE DES HORLOGES",
+      "narrator": "À force d'arriver bientôt, on oublie parfois où l'on allait.",
+      "text": "Tu te mets à courir.\n\nAu début, c'est pour suivre les autres.\n\nPuis pour ne pas gêner.\n\nPuis parce que tout le monde court.\n\nTes pas accélèrent.\n\nLes horloges crient plus fort.\n\nTu passes devant la vieille dame du banc.\n\nElle lève la main.\n\nTu pourrais t'arrêter.\n\nMais tu n'as plus le temps.\n\nLa ville devient floue.\n\nUne voix annonce :\n\n**« Tu arriveras bientôt. »**\n\nPuis une autre ajoute :\n\n**« Mais tu ne sais plus où. »**",
+      "isStart": false,
+      "isEnd": true,
+      "transition": "glitch",
+      "choices": []
+    },
+    "fin_retard": {
+      "id": "fin_retard",
+      "title": "Retard",
+      "location": "AVENUE DES HORLOGES",
+      "narrator": "Le retard est une boucle avec des chaussures neuves.",
+      "text": "Tu cours avec l'étudiant.\n\nVous tournez à gauche.\n\nPuis à droite.\n\nPuis encore à gauche.\n\nLes rues se répètent.\n\nLes écrans se répètent.\n\nLes passants se répètent.\n\nAprès un temps impossible à mesurer, vous arrivez enfin.\n\nDevant vous :\n\nla même avenue.\n\nLe même banc.\n\nLa même vieille dame.\n\nLe même étudiant qui ramasse ses feuilles.\n\nIl te regarde.\n\n**« Je suis en retard. »**\n\nEt tu comprends que tu l'es aussi.",
+      "isStart": false,
+      "isEnd": true,
+      "transition": "glitch",
+      "choices": []
+    },
+    "fin_metro": {
+      "id": "fin_metro",
+      "title": "Le Dernier Arrêt",
+      "location": "LIGNE PLUS TARD",
+      "narrator": "Certains trajets ne sont longs que parce qu'on n'ose pas descendre.",
+      "text": "Le métro continue.\n\nLes lumières clignotent.\n\nLa voix annonce :\n\n> Prochain arrêt :\n> Votre retraite.\n\nPersonne ne bouge.\n\nL'homme debout dort toujours.\n\nLe chat descend à un arrêt qui n'existe pas.\n\nLes portes se referment.\n\nTu restes seul dans le wagon.\n\nLa voix reprend :\n\n> Prochain arrêt :\n> Vous auriez dû descendre.",
+      "isStart": false,
+      "isEnd": true,
+      "transition": "glitch",
+      "choices": []
+    },
+    "hub_admin": {
+      "id": "hub_admin",
+      "title": "La Deuxième Porte",
+      "location": "RÊVE — BOUCHERIE FLOTTANTE",
+      "narrator": "Le rêve ne te laisse pas partir avec une seule bonne action.",
+      "text": "Tu reviens derrière ton comptoir flottant.\n\nLa louche brillante repose près de la caisse.\n\nLa porte des horloges s'est refermée doucement.\n\nLa ville qui courait respire enfin.\n\nMais les deux autres portes restent là.\n\nLa porte du matin n'apparaît toujours pas.\n\nLe chat saute sur le comptoir, pousse le saucisson du bout de la patte, puis regarde la porte couverte de formulaires.\n\nSur le carnet, une nouvelle phrase s'écrit :\n\n> On ne peut pas se réveiller tant que les papiers rêvent encore.\n\nTu comprends.\n\nLe rêve n'est pas fini.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Passer la porte administrative avec le saucisson",
+          "vers": "admin_intro",
+          "effects": [
+            {
+              "stat": "lucidite",
+              "val": 10
+            },
+            {
+              "stat": "appetit",
+              "val": 5
+            }
+          ]
+        }
+      ]
+    },
+    "admin_intro": {
+      "id": "admin_intro",
+      "title": "Le Bureau des Formulaires",
+      "location": "RÊVE — ADMINISTRATION SANS FENÊTRES",
+      "narrator": "Ici, les couloirs sont droits, mais personne n'arrive jamais au bout.",
+      "text": "Tu arrives dans un bâtiment gris.\n\nDes montagnes de dossiers montent jusqu'au plafond.\n\nDes tampons géants frappent des papiers tout seuls.\n\nDerrière les guichets, des employés sans visage murmurent :\n\n**« Il manque une signature. »**\n\nPartout, des gens attendent avec des formulaires dans les mains.\n\nCertains ne se souviennent même plus de ce qu'ils demandaient.\n\nQuelque chose dans ton sac sent bon, même ici.\n\nUn panneau indique :\n\n> Pour toute demande de sortie, veuillez demander le formulaire de demande de sortie.\n\nPlus loin, tu reconnais l'étudiant de la ville pressée.\n\nCette fois, il tient un dossier intitulé :\n\n> AUTORISATION D'ÊTRE PRÊT.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "scanline",
+      "choices": [
+        {
+          "text": "Prendre un ticket",
+          "vers": "ticket_admin",
+          "effects": [
+            {
+              "stat": "lucidite",
+              "val": 5
+            }
+          ]
+        },
+        {
+          "text": "Chercher l'ascenseur administratif",
+          "vers": "ascenseur_admin",
+          "effects": [
+            {
+              "stat": "lucidite",
+              "val": 5
+            }
+          ]
+        },
+        {
+          "text": "Parler à l'homme aux trombones",
+          "vers": "trombones",
+          "effects": [
+            {
+              "stat": "chaleur",
+              "val": 5
+            }
+          ]
+        },
+        {
+          "text": "Organiser une pause déjeuner",
+          "vers": "pause_dej",
+          "effects": [
+            {
+              "stat": "chaleur",
+              "val": 15
+            },
+            {
+              "stat": "appetit",
+              "val": 10
+            }
+          ]
+        }
+      ]
+    },
+    "ticket_admin": {
+      "id": "ticket_admin",
+      "title": "Le Ticket A38",
+      "location": "ADMINISTRATION SANS FENÊTRES",
+      "narrator": "Attendre devient plus étrange quand personne ne sait pourquoi.",
+      "text": "Tu prends un ticket.\n\nIl affiche :\n\n> A38\n\nLe panneau lumineux affiche :\n\n> A2\n\nUne femme attend ici depuis si longtemps qu'elle a apporté une plante.\n\nLa plante a elle-même pris un ticket.\n\nTu regardes l'étudiant.\n\nIl remplit la même ligne depuis plusieurs minutes.\n\nNom :\nRaison du nom :\nJustificatif de la raison :\n\nSes mains tremblent.\n\nLe chat passe entre les chaises et dort sur le ticket A3.\n\nPlus personne ne sait si la file peut avancer.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Sortir quelque chose de ton sac et le partager",
+          "vers": "pause_dej",
+          "effects": [
+            {
+              "stat": "chaleur",
+              "val": 15
+            }
+          ]
+        },
+        {
+          "text": "Attendre ton tour normalement",
+          "vers": "fin_employe",
+          "effects": [
+            {
+              "stat": "lucidite",
+              "val": -10
+            }
+          ]
+        }
+      ]
+    },
+    "ascenseur_admin": {
+      "id": "ascenseur_admin",
+      "title": "L'Ascenseur Administratif",
+      "location": "ADMINISTRATION SANS FENÊTRES",
+      "narrator": "Même monter d'un étage demande parfois un dossier complet.",
+      "text": "L'ascenseur est au bout du couloir.\n\nUne voix métallique annonce :\n\n> Veuillez fournir un justificatif de montée.\n\nTu appuies sur le bouton.\n\nLa voix reprend :\n\n> Veuillez fournir une attestation prouvant que vous avez le droit d'appuyer.\n\nLe chat dort devant les boutons.\n\nIl ronronne.\n\nL'ascenseur n'ose plus rien demander.\n\nUne employée sans visage chuchote :\n\n**« Il bloque le système depuis ce matin. C'est la journée la plus calme qu'on ait eue depuis des années. »**",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Profiter du calme pour organiser une pause déjeuner",
+          "vers": "pause_dej",
+          "effects": [
+            {
+              "stat": "chaleur",
+              "val": 15
+            }
+          ]
+        },
+        {
+          "text": "Chercher les papiers demandés",
+          "vers": "fin_formulaire",
+          "effects": [
+            {
+              "stat": "lucidite",
+              "val": -10
+            }
+          ]
+        }
+      ]
+    },
+    "trombones": {
+      "id": "trombones",
+      "title": "L'Homme aux Trombones",
+      "location": "ADMINISTRATION SANS FENÊTRES",
+      "narrator": "Certaines tâches survivent longtemps après qu'on a oublié leur sens.",
+      "text": "Un homme classe des trombones par couleur.\n\nRouge.\nBleu.\nGris.\nUn gris un peu plus administratif.\n\nTu lui demandes pourquoi.\n\nIl réfléchit longtemps.\n\nTrès longtemps.\n\n**« Je ne sais plus. »**\n\nIl baisse les yeux.\n\n**« Mais si j'arrête, quelqu'un va peut-être me demander ce que je fais vraiment ici. »**\n\nTu poses quelque chose sur son bureau — quelque chose de simple et de réel.\n\nIl le regarde.\n\nPuis les trombones.\n\nPuis la tranche.\n\n**« Est-ce que... est-ce que ça se classe aussi ? »**",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Lui dire que certaines choses se partagent au lieu de se classer",
+          "vers": "pause_dej",
+          "effects": [
+            {
+              "stat": "chaleur",
+              "val": 15
+            },
+            {
+              "stat": "lucidite",
+              "val": 10
+            }
+          ]
+        },
+        {
+          "text": "L'aider à trier les trombones",
+          "vers": "admin_intro",
+          "effects": [
+            {
+              "stat": "lucidite",
+              "val": -5
+            }
+          ]
+        }
+      ]
+    },
+    "pause_dej": {
+      "id": "pause_dej",
+      "title": "Pain, Saucisson et Tampons",
+      "location": "ADMINISTRATION SANS FENÊTRES",
+      "narrator": "Un bureau devient moins terrible quand quelqu'un y casse du pain.",
+      "text": "Tu poses le pain et le saucisson sur le comptoir.\n\nUn tampon géant s'arrête en plein vol.\n\nUn employé sans visage tourne la tête.\n\n**« Ce formulaire n'est pas prévu. »**\n\nTu coupes une tranche.\n\nPuis une autre.\n\nQuelqu'un rit au fond de la file.\n\nLes dossiers tremblent.\n\nDes papiers tombent du plafond comme des confettis administratifs.\n\nPeu à peu, les employés retrouvent un visage.\n\nUne femme retrouve le souvenir de sa demande.\nUn homme réalise qu'il attendait au mauvais guichet depuis trois rêves.\nLe préposé aux tampons découvre qu'il aime la moutarde.\n\nL'étudiant ferme son dossier.\n\nSur la couverture, le titre change :\n\n> AUTORISATION DE RESPIRER.\n\nPuis il disparaît.\n\nÀ la place, il reste une serviette en papier.\n\nEt sur la porte de sortie, un panneau apparaît :\n\n> Merci de revenir seulement si c'est vraiment nécessaire.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "flash",
+      "choices": [
+        {
+          "text": "Ranger un tampon inutile dans ton sac",
+          "vers": "admin_resolution",
+          "effects": [
+            {
+              "stat": "lucidite",
+              "val": 25
+            },
+            {
+              "stat": "chaleur",
+              "val": 10
+            }
+          ]
+        }
+      ]
+    },
+    "admin_resolution": {
+      "id": "admin_resolution",
+      "title": "Le Tampon Inutile",
+      "location": "ADMINISTRATION SANS FENÊTRES",
+      "narrator": "Les meilleurs outils sont parfois ceux qu'on décide de ne plus utiliser.",
+      "text": "Tu prends un petit tampon sur le comptoir.\n\nIl porte une mention étrange :\n\n> PAS SI GRAVE.\n\nTu tamponnes le premier dossier.\n\nIl disparaît.\n\nTu tamponnes une pile entière.\n\nElle devient une pile de serviettes en papier.\n\nLes employés retrouvent leurs pauses.\n\nLes guichets s'ouvrent.\n\nLa porte de sortie s'illumine.\n\nLe chat du rêve dort sur le dossier le plus urgent.\n\nPersonne n'ose le déplacer.\n\nEt, étrangement, le monde continue très bien sans ce dossier.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "flash",
+      "choices": [
+        {
+          "text": "Avancer avec le tampon inutile",
+          "vers": "hub_market",
+          "effects": [
+            {
+              "stat": "lucidite",
+              "val": 25
+            },
+            {
+              "stat": "chaleur",
+              "val": 10
+            }
+          ]
+        }
+      ]
+    },
+    "fin_formulaire": {
+      "id": "fin_formulaire",
+      "title": "Le Formulaire Final",
+      "location": "ADMINISTRATION SANS FENÊTRES",
+      "narrator": "Certains pièges commencent par une case à cocher.",
+      "text": "Tu prends le formulaire.\n\nIl n'a qu'une page.\n\nPuis deux.\n\nPuis vingt.\n\nOn te demande ton nom, puis la raison de ton nom, puis une attestation prouvant que tu as bien une raison.\n\nTu t'assois pour remplir plus confortablement.\n\nQuand tu relèves les yeux, tu es derrière un bureau.\n\nDevant toi, quelqu'un attend.\n\nTu voudrais l'aider.\n\nMais une phrase sort de ta bouche avant que tu puisses l'arrêter :\n\n**« Il manque une signature. »**\n\nUn tampon apparaît dans ta main.\n\nEncore.\n\nEncore.\n\nEncore.",
+      "isStart": false,
+      "isEnd": true,
+      "transition": "scanline",
+      "choices": []
+    },
+    "fin_employe": {
+      "id": "fin_employe",
+      "title": "Employé du Mois",
+      "location": "ADMINISTRATION SANS FENÊTRES",
+      "narrator": "Certaines promotions ressemblent à des pièges avec une chaise ergonomique.",
+      "text": "Tu attends.\n\nLe panneau passe de A2 à A2 bis.\n\nPuis A2 complémentaire.\n\nPuis A2 version définitive.\n\nAu bout d'un moment, un employé te tend un badge.\n\n> EMPLOYÉ DU MOIS.\n\nTu essaies d'expliquer que tu n'es pas employé ici.\n\nIl te sourit.\n\n**« C'est ce que disent tous les nouveaux. »**\n\nTon bureau apparaît.\n\nTa chaise apparaît.\n\nTon formulaire d'installation apparaît.\n\nUne note est posée dessus :\n\n> Votre pause déjeuner est prévue dans 17 ans.",
+      "isStart": false,
+      "isEnd": true,
+      "transition": "scanline",
+      "choices": []
+    },
+    "hub_market": {
+      "id": "hub_market",
+      "title": "La Troisième Porte",
+      "location": "RÊVE — BOUCHERIE FLOTTANTE",
+      "narrator": "Une bonne chose en appelle parfois une autre.",
+      "text": "Tu reviens derrière ton comptoir flottant.\n\nLa louche brillante repose près de la caisse.\nLe tampon inutile sert maintenant de presse-papier.\n\nDeux portes se sont refermées.\n\nLa ville pressée ralentit.\nL'administration respire.\n\nMais le néon de la troisième porte clignote encore.\n\nLe chat monte sur le comptoir.\n\nIl renifle l'air, te regarde, puis regarde la porte des néons.\n\nSur le carnet, une phrase apparaît :\n\n> Certains se perdent en courant.\n> D'autres se perdent en achetant ce dont ils n'avaient pas besoin.\n\nLa porte du matin n'est toujours pas là.\n\nIl reste un monde à traverser.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Passer la porte des néons avec le poulet rôti",
+          "vers": "market_intro",
+          "effects": [
+            {
+              "stat": "chaleur",
+              "val": 5
+            },
+            {
+              "stat": "appetit",
+              "val": 15
+            }
+          ]
+        }
+      ]
+    },
+    "market_intro": {
+      "id": "market_intro",
+      "title": "Le Supermarché Infini",
+      "location": "RÊVE — RAYON 12",
+      "narrator": "Ici, tout est disponible. Sauf la sortie.",
+      "text": "Tu arrives dans un supermarché immense.\n\nLes néons bourdonnent.\n\nLes rayons se répètent à l'infini.\n\nPROMOTION.\nNOUVEAUTÉ.\nLOT FAMILIAL.\nDERNIÈRE CHANCE.\n\nLes clients poussent des chariots pleins sans regarder ce qu'ils prennent.\n\nPersonne ne semble avoir faim.\n\nTon sac est encore là.\n\nQuelque chose dedans est encore chaud et sent bon. Quelque chose traverse les rayons comme une petite rébellion.\n\nUne voix dans les haut-parleurs répète :\n\n**« N'oubliez pas d'acheter ce que vous n'étiez pas venus chercher. »**\n\nTu reconnais la vieille dame devant un rayon de conserves.\n\nTu reconnais l'étudiant devant les plats préparés.\n\nTu reconnais l'homme aux trombones devant un lot de 500 cintres.\n\nIls ont tous l'air de chercher quelque chose.\n\nOu d'avoir oublié quoi.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "glitch",
+      "choices": [
+        {
+          "text": "Parler à la cliente au chariot débordant",
+          "vers": "cliente_chariot",
+          "effects": [
+            {
+              "stat": "lucidite",
+              "val": 10
+            }
+          ]
+        },
+        {
+          "text": "Explorer le rayon des conserves",
+          "vers": "conserves",
+          "effects": [
+            {
+              "stat": "lucidite",
+              "val": 5
+            }
+          ]
+        },
+        {
+          "text": "Passer aux caisses automatiques",
+          "vers": "caisses_auto",
+          "effects": [
+            {
+              "stat": "lucidite",
+              "val": 5
+            }
+          ]
+        },
+        {
+          "text": "Installer une table au milieu du rayon",
+          "vers": "table_market",
+          "effects": [
+            {
+              "stat": "chaleur",
+              "val": 15
+            },
+            {
+              "stat": "appetit",
+              "val": 15
+            }
+          ]
+        }
+      ]
+    },
+    "cliente_chariot": {
+      "id": "cliente_chariot",
+      "title": "Le Chariot Trop Plein",
+      "location": "RAYON 12",
+      "narrator": "Certains paniers sont pleins de choses qu'on ne voulait pas vraiment.",
+      "text": "La cliente pousse un chariot gigantesque.\n\nIl déborde de boîtes identiques.\n\nTu lui demandes ce qu'elle cherche.\n\nElle regarde son chariot.\n\nPuis toi.\n\n**« Je ne sais plus. Il y avait une promotion. »**\n\nLe chat dort dans le siège enfant du chariot.\n\nIl semble parfaitement satisfait.\n\nTu lui tends une assiette de poulet rôti.\n\nElle respire l'odeur.\n\nSes yeux s'adoucissent.\n\n**« Ça me rappelle les dimanches où on ne se dépêchait pas. »**\n\nElle repose trois boîtes dans le rayon.\n\nLe chariot devient plus léger.\n\nElle aussi.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Partager le poulet avec les autres clients",
+          "vers": "table_market",
+          "effects": [
+            {
+              "stat": "chaleur",
+              "val": 15
+            }
+          ]
+        },
+        {
+          "text": "Suivre les promotions avec elle",
+          "vers": "fin_carte",
+          "effects": [
+            {
+              "stat": "lucidite",
+              "val": -10
+            }
+          ]
+        }
+      ]
+    },
+    "conserves": {
+      "id": "conserves",
+      "title": "Le Rayon des Conserves",
+      "location": "SUPERMARCHÉ INFINI",
+      "narrator": "Quand tout se conserve, même les hésitations deviennent longues.",
+      "text": "La vieille dame lit les ingrédients d'une boîte de petits pois.\n\nElle la repose.\n\nElle en prend une autre.\n\nElle lit.\n\nElle repose.\n\nTu lui demandes si elle cherche quelque chose.\n\n**« Je crois que je veux choisir correctement. »**\n\nElle regarde les rayons infinis.\n\n**« Mais plus il y a de choix, moins je sais ce que j'aime. »**\n\nL'étudiant arrive avec trois plats préparés identiques.\n\n**« Celui-là a l'air plus optimisé. »**\n\nLe chat fait tomber une boîte.\n\nElle roule jusqu'à tes pieds.\n\nDessus, quelqu'un a écrit :\n\n> À partager.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Ouvrir la conserve et servir avec le poulet",
+          "vers": "table_market",
+          "effects": [
+            {
+              "stat": "chaleur",
+              "val": 15
+            },
+            {
+              "stat": "appetit",
+              "val": 10
+            }
+          ]
+        },
+        {
+          "text": "Comparer toutes les boîtes une par une",
+          "vers": "fin_rayon_12",
+          "effects": [
+            {
+              "stat": "lucidite",
+              "val": -10
+            }
+          ]
+        }
+      ]
+    },
+    "caisses_auto": {
+      "id": "caisses_auto",
+      "title": "Les Caisses Automatiques",
+      "location": "SUPERMARCHÉ INFINI",
+      "narrator": "Certaines machines savent très bien dire non.",
+      "text": "La caisse automatique répète :\n\n> Article inattendu dans la zone d’emballage.\n\nTu regardes.\n\nIl n'y a rien dans la zone d'emballage.\n\nLa caisse reprend :\n\n> Article inattendu dans la zone d’emballage.\n\nLe chat saute sur le scanner.\n\nBIP.\n\n> Article inattendu dans la zone d’emballage.\n\nLe chat s'allonge.\n\nBIP.\n\n> Article inattendu dans la zone d’emballage.\n\nDerrière toi, une file entière attend sans protester.\n\nUn homme murmure :\n\n**« Elle fait ça depuis lundi. »**",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Débrancher la caisse et inviter la file à manger",
+          "vers": "table_market",
+          "effects": [
+            {
+              "stat": "lucidite",
+              "val": 15
+            },
+            {
+              "stat": "chaleur",
+              "val": 10
+            }
+          ]
+        },
+        {
+          "text": "Continuer à scanner jusqu'à comprendre",
+          "vers": "fin_bug",
+          "effects": [
+            {
+              "stat": "lucidite",
+              "val": -10
+            }
+          ]
+        }
+      ]
+    },
+    "table_market": {
+      "id": "table_market",
+      "title": "La Cuisine Trop Grande",
+      "location": "RAYON 12 APAISÉ",
+      "narrator": "Quand les gens se souviennent qu'ils ont faim, les rayons cessent d'être infinis.",
+      "text": "Tu poses le poulet rôti sur une petite table.\n\nPersonne ne sait d'où vient la table.\n\nMais tout le monde comprend à quoi elle sert.\n\nLes chariots ralentissent.\n\nLes annonces deviennent moins fortes.\n\nUne famille s'assoit.\nUn étudiant sourit timidement.\nUn homme repose trois objets dont il n'avait pas besoin.\nLa vieille dame choisit enfin une boîte, puis décide qu'elle n'en a pas besoin.\n\nBientôt, le rayon 12 ne ressemble plus à un piège.\n\nIl ressemble à une cuisine trop grande.\n\nLes promotions se transforment en recettes griffonnées.\n\nUne annonce passe dans les haut-parleurs :\n\n**« Le magasin fermera quand tout le monde aura retrouvé ce qu'il était venu chercher. »**\n\nLa cliente au chariot débordant te donne une petite lumière de néon.\n\n**« Pour les endroits trop froids. »**",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "flash",
+      "choices": [
+        {
+          "text": "Avancer avec la petite lumière de néon",
+          "vers": "final_hub",
+          "effects": [
+            {
+              "stat": "chaleur",
+              "val": 20
+            },
+            {
+              "stat": "lucidite",
+              "val": 20
+            },
+            {
+              "stat": "appetit",
+              "val": 10
+            }
+          ]
+        }
+      ]
+    },
+    "fin_carte": {
+      "id": "fin_carte",
+      "title": "Carte Fidélité",
+      "location": "SUPERMARCHÉ INFINI",
+      "narrator": "Certaines récompenses coûtent plus cher que les achats.",
+      "text": "Tu suis les promotions.\n\nUne carte de fidélité apparaît dans ta main.\n\nPuis une deuxième.\n\nPuis une troisième.\n\nChaque carte promet plus d'avantages que la précédente.\n\nUne voix annonce :\n\n> Félicitations, vous êtes maintenant client prioritaire.\n\nLes rayons s'ouvrent devant toi.\n\nTon chariot grossit.\n\nTes poches se remplissent de tickets.\n\nTu ne sais plus ce que tu voulais acheter.\n\nMais tu as gagné 3% sur quelque chose.\n\nPlus tard, beaucoup plus tard, tu dors dans le rayon literie.\n\nLa caisse te souhaite une bonne nuit.",
+      "isStart": false,
+      "isEnd": true,
+      "transition": "glitch",
+      "choices": []
+    },
+    "fin_bug": {
+      "id": "fin_bug",
+      "title": "Article Inattendu",
+      "location": "SUPERMARCHÉ INFINI",
+      "narrator": "Le bug était peut-être la seule chose encore sincère.",
+      "text": "Tu continues à scanner.\n\nBIP.\n\n> Article inattendu dans la zone d’emballage.\n\nBIP.\n\n> Article inattendu dans la zone d’emballage.\n\nBIP.\n\n> Article inattendu dans la zone d’emballage.\n\nLe monde tremble.\n\nLes néons clignotent.\n\nLes clients se figent.\n\nLe chat te regarde.\n\nIl semble presque déçu.\n\nLa caisse reprend :\n\n> Client inattendu dans la zone d’existence.\n\nPuis le monde entier freeze.",
+      "isStart": false,
+      "isEnd": true,
+      "transition": "glitch",
+      "choices": []
+    },
+    "fin_rayon_12": {
+      "id": "fin_rayon_12",
+      "title": "Rayon 12",
+      "location": "SUPERMARCHÉ INFINI",
+      "narrator": "Toutes les sorties ressemblent à des promotions quand on ne sait plus ce qu'on cherche.",
+      "text": "Tu compares les boîtes.\n\nPois extra fins.\nPois très fins.\nPois presque sincères.\nPois édition limitée.\nPois avec promesse de bonheur.\n\nLes rayons se répètent.\n\nTon panier devient plus lourd.\n\nTu ne te souviens pas avoir pris quoi que ce soit.\n\nUn jingle tourne dans les haut-parleurs.\n\n**« Offre exceptionnelle. Offre exceptionnelle. Offre exceptionnelle. »**\n\nTu passes devant le rayon 12.\n\nPuis encore.\n\nPuis encore.\n\nAu bout d'un moment, tu comprends.\n\nTu ne cherches plus la sortie.\n\nTu cherches seulement le prochain rayon.",
+      "isStart": false,
+      "isEnd": true,
+      "transition": "glitch",
+      "choices": []
+    },
+    "final_hub": {
+      "id": "final_hub",
+      "title": "Le Comptoir Apaisé",
+      "location": "RÊVE — BOUCHERIE FLOTTANTE",
+      "narrator": "Le rêve garde les traces de ce qu'on a réchauffé.",
+      "text": "Tu reviens derrière ton comptoir flottant.\n\nCette fois, tout est différent.\n\nLa louche brillante repose près de la caisse.\nLe tampon inutile sert de presse-papier.\nLa petite lumière de néon éclaire doucement le carnet.\n\nLes trois portes sont refermées.\n\nDerrière elles, les mondes ne crient plus.\n\nLa ville pressée respire.\nL'administration a retrouvé sa pause.\nLe supermarché infini ressemble presque à une cuisine trop grande.\n\nLe chat saute sur le comptoir.\n\nIl marche entre les trois objets, comme s'il vérifiait que tout était enfin à sa place.\n\nPuis il s'assoit devant une nouvelle porte.\n\nUne porte simple.\n\nUne porte de boutique.\n\nLe carnet s'ouvre à la dernière page.\n\n> Tu n'as pas nourri des clients.\n> Tu as rappelé aux gens qu'ils existaient ensemble.\n\nLa porte donne sur le matin.\n\nCette fois, tu peux te réveiller.\n\nMais derrière toi, une table immense commence à apparaître.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Préparer le banquet final",
+          "vers": "banquet",
+          "effects": [
+            {
+              "stat": "chaleur",
+              "val": 20
+            },
+            {
+              "stat": "appetit",
+              "val": 20
+            }
+          ],
+          "requires": {
+            "stat": "chaleur",
+            "min": 65
+          }
+        },
+        {
+          "text": "Ouvrir la porte du matin",
+          "vers": "reveil",
+          "effects": [
+            {
+              "stat": "lucidite",
+              "val": 20
+            }
+          ],
+          "requires": {
+            "stat": "lucidite",
+            "min": 65
+          }
+        },
+        {
+          "text": "Regarder le rêve s'effacer doucement",
+          "vers": "reveil",
+          "effects": [],
+          "clickEffect": "fade"
+        }
+      ]
+    },
+    "banquet": {
+      "id": "banquet",
+      "title": "Le Banquet des Mondes Ordinaires",
+      "location": "RÊVE — GRANDE TABLE ENTRE LES MONDES",
+      "narrator": "Les mondes les plus froids se réparent parfois autour d'une table trop grande.",
+      "text": "Tu sers la blanquette aux gens pressés.\n\nTu coupes le saucisson pour les employés des formulaires.\n\nTu partages le poulet rôti avec les clients du supermarché infini.\n\nPersonne ne sait exactement où il est.\n\nMais tout le monde sait quoi faire.\n\nS'asseoir.\n\nManger.\n\nParler.\n\nRire un peu.\n\nLes horloges posent leurs aiguilles sur la table.\nLes formulaires deviennent des nappes.\nLes tickets de promotion se changent en recettes.\n\nL'étudiant parle avec l'homme aux trombones.\nLa vieille dame rit avec la cliente du chariot.\nLa femme au téléphone a raccroché.\n\nLe chat saute sur la grande table.\n\nIl vole un petit morceau de poulet rôti.\n\nPersonne ne le chasse.\n\nPour une fois, personne n'est pressé.\n\nTu regardes tout ce monde.\n\nTu comprends alors que tu n'as pas vaincu les mauvaises habitudes.\n\nTu leur as rappelé qu'elles n'étaient pas obligées de diriger la vie.\n\nQuand tu ouvres enfin la porte du matin, la boutique réelle t'attend.\n\nEt cette fois, tu sais exactement pourquoi tu l'ouvres.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "flash",
+      "choices": [
+        {
+          "text": "Ouvrir la porte du matin",
+          "vers": "reveil",
+          "effects": [
+            {
+              "stat": "chaleur",
+              "val": 20
+            },
+            {
+              "stat": "lucidite",
+              "val": 20
+            }
+          ],
+          "requires": {
+            "stat": "chaleur",
+            "min": 75
+          }
+        },
+        {
+          "text": "Laisser le rêve se terminer",
+          "vers": "reveil",
+          "effects": [],
+          "clickEffect": "fade"
+        }
+      ]
+    },
+    "reveil": {
+      "id": "reveil",
+      "title": "Le Matin Ouvre",
+      "location": "BOUCHERIE — AUBE",
+      "narrator": "Certaines portes s'ouvrent avant même qu'on touche la poignée.",
+      "text": "Tu ouvres lentement les yeux.\n\nLa lumière du matin traverse la vitrine de la boutique.\n\nPendant quelques secondes…\n\ntu ne bouges pas.\n\nTu entends :\n\n- un camion au loin,\n- des oiseaux,\n- le vieux frigo qui bourdonne doucement.\n\nPuis quelque chose saute sur le comptoir.\n\nLe chat.\n\nIl te regarde.\n\nTrès calmement.\n\nPuis il pose une patte sur ton carnet de commandes.\n\nComme dans le rêve.\n\nTu restes silencieux.\n\nLe chat miaule une fois.\n\nPuis il s'installe en boule près de la caisse.\n\nQuelqu'un frappe à la porte.\n\nTu retournes la pancarte.\n\n> OUVERT\n\nLa cloche sonne.\n\nUn client entre.\n\n**« Bonjour, {{player}}. Comme d'habitude ? »**\n\nTu souris.\n\nEt pour la première fois depuis longtemps…\n\nla boutique semble vraiment vivante.",
+      "isStart": false,
+      "isEnd": true,
+      "transition": "fade",
+      "choices": []
+    }
+  }
+}
