@@ -1,0 +1,497 @@
+{
+  "name": "Tiempo perdido con Aikito",
+  "kids": true,
+  "askPlayerName": false,
+  "pack": "kids",
+  "stats": [
+    {
+      "id": "bonheur",
+      "label": "Felicidad",
+      "start": 30,
+      "max": 100,
+      "color": "#FFD700"
+    },
+    {
+      "id": "calme",
+      "label": "Calma",
+      "start": 20,
+      "max": 100,
+      "color": "#90EE90"
+    }
+  ],
+  "theme": {
+    "bg": "#0d0f1a",
+    "bg2": "#141828",
+    "bg3": "#1a2035",
+    "bg4": "#202540",
+    "border": "#2a3555",
+    "accent": "#FFD700",
+    "accent2": "#FF9B50",
+    "accent3": "#90EE90",
+    "text": "#f0e8d0",
+    "text2": "#a09070",
+    "text3": "#605040"
+  },
+  "scenes": {
+    "prologue": {
+      "id": "prologue",
+      "title": "El pueblo de Brindille",
+      "location": "VILLAGE — MATIN",
+      "narrator": "A veces los días van tan rápido que olvidamos vivirlos.",
+      "text": "Llegas al pueblo de Brindille con tu amigo Aikito.\n\nAikito es un pequeño perro curioso que ama jugar, correr después de las hojas y los coches, pero también hacer muchas preguntas.\n\nPero hoy algo es extraño.\n\nLa gente corre por todas partes.\n\nTodos dicen:\n\n\"¡Quick!\"\n\"¡No hay tiempo! »\n« Más tarde! »\n\nIncluso los niños dejaron de jugar.\n\nEn la distancia, una gran garrapata resona en la colina.\n\nAikito huele el aire y frunce sus pequeñas cejas.\n\nHuele raro... como cuando llegas tarde a algo que no has planeado.",
+      "isStart": true,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Siga el ruido con Aikito",
+          "vers": "chemin_colline",
+          "effects": [
+            {
+              "stat": "calme",
+              "val": 5
+            }
+          ],
+          "clickEffect": "pulse"
+        },
+        {
+          "text": "Mantenerse con los niños",
+          "vers": "jeu",
+          "effects": [
+            {
+              "stat": "bonheur",
+              "val": 15
+            }
+          ],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 400,
+      "y": 40
+    },
+    "jeu": {
+      "id": "jeu",
+      "title": "Cinco minutos más.",
+      "location": "PLACE OF VILLAGE",
+      "narrator": "A veces jugar es más importante que ir rápido.",
+      "text": "Estás ofreciendo un juego de pelota.\n\nAl principio, nadie se atreve.\n\nEntonces Aikito agarra la pelota con su cabeza y cae en un charco.\n\nTodos se ríen.\n\nIncluso los adultos se detienen por unos segundos.\n\nLa garrapata parece disminuir un poco.\n\nUna niña pelirroja se acerca a ti.\n\n¿Cuál es tu perro? ¿Siempre hace cosas así?\n\nAikito sacude su cabeza y envía agua por todas partes. Todos se ríen más fuerte.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Juega un poco más con la niña",
+          "vers": "nouvelle_amie",
+          "effects": [
+            {
+              "stat": "bonheur",
+              "val": 15
+            },
+            {
+              "stat": "calme",
+              "val": 10
+            }
+          ],
+          "clickEffect": "pulse"
+        },
+        {
+          "text": "Sube a la colina con Aikito",
+          "vers": "chemin_colline",
+          "effects": [],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 150,
+      "y": 180
+    },
+    "nouvelle_amie": {
+      "id": "nouvelle_amie",
+      "title": "Léonie",
+      "location": "PLACE OF VILLAGE",
+      "narrator": "Una nueva amistad a menudo comienza con una risa loca.",
+      "text": "Se llama Léonie. Ha estado viviendo en Brindille para siempre.\n\n\"Solíamos jugar aquí todo el tiempo\", dijo. Y entonces el reloj comenzó a ir demasiado rápido. Ahora todos tienen prisa y nadie tiene tiempo para nada.\"\n\nAikito se sienta frente a ella y se inclina la cabeza.\n\n\"Incluso las mariposas van más rápido\", dice en serio. \"Intenté coger uno esta mañana. Ya se había ido antes de que terminara de levantarme.\"\n\nLeonie se ríe.\n\n\"¿Tu perro habla?\"\n\n\"Sólo cuando es importante\", respondes.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Pregúntale a Léonie qué hay en la colina",
+          "vers": "leonie_raconte",
+          "effects": [
+            {
+              "stat": "calme",
+              "val": 10
+            }
+          ],
+          "clickEffect": "pulse"
+        },
+        {
+          "text": "Sube a la colina todos juntos",
+          "vers": "chemin_colline_amis",
+          "effects": [
+            {
+              "stat": "bonheur",
+              "val": 10
+            }
+          ],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 50,
+      "y": 300
+    },
+    "leonie_raconte": {
+      "id": "leonie_raconte",
+      "title": "Lo que Léonie sabe",
+      "location": "VILLAGE PLACE — BANK",
+      "narrator": "Los niños a menudo notan cosas que los adultos han dejado de ver.",
+      "text": "Léonie se sienta en un banco. Habla suavemente.\n\n\"El reloj apareció hace tres semanas. Primero apenas lo oímos. Y luego la gente empezó a mirarlo todo el tiempo. Y luego corriendo. Y luego olvídate de comer, reír, mirar el cielo.*»\n\nEstá mirando sus zapatos.\n\n\"Mi padre dejó de contarme historias por la noche. Dice que no tiene tiempo. Pero por la noche... el tiempo está aquí. No lo ve más. *\n\nAikito pone la cabeza sobre las rodillas de Leonie.\n\n\"Tu padre necesita su tiempo atrás\", dijo.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Sube a la colina con Léonie y Aikito",
+          "vers": "chemin_colline_amis",
+          "effects": [
+            {
+              "stat": "bonheur",
+              "val": 10
+            },
+            {
+              "stat": "calme",
+              "val": 5
+            }
+          ],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 50,
+      "y": 420
+    },
+    "chemin_colline": {
+      "id": "chemin_colline",
+      "title": "El camino de la colina",
+      "location": "CHEMIN — BETWEEN VILLAGE AND COLLINE",
+      "narrator": "El camino a la colina está lleno de cosas que ver, si tomas tiempo.",
+      "text": "El camino sube lentamente.\n\nAikito para cada dos minutos para oler algo.\n\n\"Un caracol pasó esta mañana\", dijo. \"Se fue en la dirección equivocada. No se lo dije. No quería ofenderlo.\"\n\nMira el pueblo. La gente sigue corriendo. Un hombre tiene tanta prisa que olvida su sombrero. Vuelve a buscar su sombrero y olvida su canasta. Vuelve por su canasta y...\n\n\"Olvidan las cosas porque van demasiado rápido\", dijo Aikito. * \"Si vas demasiado rápido, pierdes consejos en el camino.\" *",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Continuar a la parte superior",
+          "vers": "colline",
+          "effects": [
+            {
+              "stat": "calme",
+              "val": 5
+            }
+          ],
+          "clickEffect": "pulse"
+        },
+        {
+          "text": "Deja de mirar una nube con Aikito",
+          "vers": "nuage",
+          "effects": [
+            {
+              "stat": "calme",
+              "val": 20
+            },
+            {
+              "stat": "bonheur",
+              "val": 10
+            }
+          ],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 400,
+      "y": 280
+    },
+    "chemin_colline_amis": {
+      "id": "chemin_colline_amis",
+      "title": "El Tres Camino",
+      "location": "CHEMIN — BETWEEN VILLAGE AND COLLINE",
+      "narrator": "Los caminos son más hermosos para varios.",
+      "text": "Léonie camina junto a ti. Aikito corre por delante, vuelve, sale.\n\nRecogió una hoja y la puso solemnemente a los pies de Léonie.\n\n\"Es para ti\", dijo. *\"Se cayó del árbol exactamente en el momento adecuado.\" *\n\nLeonie se ríe y toma la hoja.\n\n* \"¿Cómo sabe que fue el momento adecuado?\" *\n\n\"No lo sé\", dices. *\"Aikito dice muchas cosas que parecen no tener sentido y que siempre tienen un significado de hecho.\" *\n\nAikito sacude su cabeza con dignidad.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Continuar a la parte superior",
+          "vers": "colline",
+          "effects": [
+            {
+              "stat": "bonheur",
+              "val": 10
+            }
+          ],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 250,
+      "y": 380
+    },
+    "nuage": {
+      "id": "nuage",
+      "title": "La nube en forma de perro",
+      "location": "CHEMIN — HERBE DOUCE",
+      "narrator": "Mirar las nubes es una de las cosas más importantes que podemos hacer.",
+      "text": "Ambos mienten en la hierba.\n\nAikito apunta su hocico hacia el cielo.\n\n\"Este parece un perro corriendo tras una bala\", dijo.\n\nEstás mirando. Tiene razón.\n\n\"Y este parece un sombrero que perdió a su dueño\", agrega.\n\nQuédate aquí por un tiempo. El reloj sigue ahí, pero por lejos, casi parece música.\n\n\"Me pregunto si el reloj es triste\", dijo Aikito. \"Para ir tan rápido todo el tiempo. Yo estaría triste.\"\n\nNo lo pensaste así.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Sube el reloj más cerca",
+          "vers": "colline",
+          "effects": [
+            {
+              "stat": "calme",
+              "val": 10
+            },
+            {
+              "stat": "bonheur",
+              "val": 5
+            }
+          ],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 550,
+      "y": 380
+    },
+    "colline": {
+      "id": "colline",
+      "title": "El reloj gigante",
+      "location": "MINUTES COLLINE",
+      "narrator": "Algunos relojes dan tiempo. Otros deciden el ritmo del mundo.",
+      "text": "Tú y Aikito llegan a la cima de la colina.\n\nUn reloj enorme corre muy rápido.\n\nEn cada garrapata:\n- Los adultos corren más rápido.\n- los niños dejaron sus juguetes,\n- el sol parece correr hacia el cielo.\n\nAikito te está mirando.\n\nTal vez los lugareños se olvidaron de tomar su tiempo...\n\nCasi el reloj está cubierto con pequeños grabados: niños jugando, adultos riéndose, familias comiendo juntos.\n\n\"Era hermosa antes,\" dijo Aikito suavemente. *\"Puedo sentirlo.\" *",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Siéntate tranquilamente con Aikito",
+          "vers": "sasseoir",
+          "effects": [
+            {
+              "stat": "calme",
+              "val": 20
+            }
+          ],
+          "clickEffect": "pulse"
+        },
+        {
+          "text": "Intenta detener el reloj",
+          "vers": "arreter_horloge",
+          "effects": [
+            {
+              "stat": "bonheur",
+              "val": 5
+            }
+          ],
+          "clickEffect": "pulse"
+        },
+        {
+          "text": "Cuidado con los grabados",
+          "vers": "gravures_horloge",
+          "effects": [
+            {
+              "stat": "calme",
+              "val": 10
+            },
+            {
+              "stat": "bonheur",
+              "val": 10
+            }
+          ],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 400,
+      "y": 480
+    },
+    "gravures_horloge": {
+      "id": "gravures_horloge",
+      "title": "¿Qué dice el reloj?",
+      "location": "MINUTES COLLINE — HORLOGY PIERE",
+      "narrator": "Los objetos antiguos guardan la memoria de lo que vieron.",
+      "text": "Te acercas y pones tus dedos en los grabados.\n\nNiños corriendo en prados. Un viejo pescando. Una madre leyendo una historia. Un padre mirando las estrellas con su hija.\n\n\"Ella lo recuerda\", dijo Aikito. \"El reloj recuerda cuando el clima era suave.\n\nMira las agujas corriendo rápido. Parecen casi sin aliento.\n\n\"Creo que alguien le dijo que fuera más rápido un día\", dijo Aikito. \"Y ella obedeció. Pero nadie le ha dicho que pare.\"\n\nTe da una idea.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Habla suavemente con el reloj",
+          "vers": "parler_horloge",
+          "effects": [
+            {
+              "stat": "calme",
+              "val": 15
+            },
+            {
+              "stat": "bonheur",
+              "val": 10
+            }
+          ],
+          "clickEffect": "pulse"
+        },
+        {
+          "text": "Siéntate y guía por ejemplo",
+          "vers": "sasseoir",
+          "effects": [
+            {
+              "stat": "calme",
+              "val": 20
+            }
+          ],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 600,
+      "y": 600
+    },
+    "parler_horloge": {
+      "id": "parler_horloge",
+      "title": "Una conversación con el tiempo",
+      "location": "MINUTES COLLINE",
+      "narrator": "Podemos hablar con cualquier cosa si ponemos un corazón en ella.",
+      "text": "Pusiste la mano en la madera caliente del reloj.\n\n\"Puedes reducir la velocidad\", dices lentamente. \"Nadie necesita ir tan rápido. La gente de abajo olvidó mirar el cielo. Se olvidaron de reír. Necesitan tiempo.\n\nAikito añade, muy seriamente:\n\nY necesito tiempo para atrapar mariposas.\n\nEl reloj no responde. Pero algo cambia — la garrapata es un poco más suave.\n\nTodavía no es suficiente. Pero un poco.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Siéntate con Aikito y calla",
+          "vers": "fin_douce",
+          "effects": [
+            {
+              "stat": "calme",
+              "val": 15
+            },
+            {
+              "stat": "bonheur",
+              "val": 15
+            }
+          ],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 700,
+      "y": 700
+    },
+    "sasseoir": {
+      "id": "sasseoir",
+      "title": "Siéntate.",
+      "location": "MINUTES COLLINE",
+      "narrator": "A veces lo más valiente es no apresurarse.",
+      "text": "Ambos se sientan en la hierba, frente al reloj.\n\nAikito bosteza y pone su cabeza sobre sus rodillas.\n\nLas agujas siguen girando rápido.\n\nPero no te muevas.\n\nUn pájaro está aterrizando cerca de ti. Luego otro. Incluso los pájaros parecen intrigados por dos seres que se niegan a darse prisa.\n\n\"Creo que el reloj nos mira\", susurra Aikito.\n\nMira las agujas. Quizá tenga razón.\n\nParecen dudar.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Quédate un poco más, sin hacer nada",
+          "vers": "fin_douce",
+          "effects": [
+            {
+              "stat": "calme",
+              "val": 20
+            },
+            {
+              "stat": "bonheur",
+              "val": 10
+            }
+          ],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 200,
+      "y": 620
+    },
+    "arreter_horloge": {
+      "id": "arreter_horloge",
+      "title": "Plan de Aikito",
+      "location": "MINUTES COLLINE",
+      "narrator": "Grandes proyectos a menudo comienzan con pequeñas ideas.",
+      "text": "Te acercas al reloj. Es enorme, sus engranajes se vuelven ruidosos.\n\nAikito piensa, sus piernas cruzadas.\n\n\"Podría morder una rueda\", sugiere.\n\n* \"No.\"*\n\n*\"Podría sentarme en él.\" *\n\n* \"No.\"*\n\n¿Podemos cantar muy fuerte hasta que se detenga de la incomodidad?\n\nEstás viendo Aikito. Es absolutamente serio.\n\n\"Tengo una idea mejor\", dice.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Comparte tu idea con Aikito",
+          "vers": "idee_cle",
+          "effects": [
+            {
+              "stat": "bonheur",
+              "val": 15
+            }
+          ],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 600,
+      "y": 590
+    },
+    "idee_cle": {
+      "id": "idee_cle",
+      "title": "La clave al tiempo",
+      "location": "MINUTES COLLINE",
+      "narrator": "La buena idea siempre viene en el momento adecuado.",
+      "text": "¿Y si no intentamos detenerlo? Y si le mostramos... ¿cómo luce la calma?\n\nAikito le apoya la cabeza.\n\n*\"Como ejemplo?\" *\n\n*\"Como ejemplo.\"*\n\nAmbos se sientan en la hierba, frente al enorme reloj.\n\nAikito saca una pelota de la nada y la hace rebotar suavemente. Una vez. Dos veces. Despacio.\n\nMiras el cielo.\n\nLas agujas dudan.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Mantengan silencio juntos",
+          "vers": "fin_douce",
+          "effects": [
+            {
+              "stat": "calme",
+              "val": 20
+            },
+            {
+              "stat": "bonheur",
+              "val": 10
+            }
+          ],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 700,
+      "y": 680
+    },
+    "fin_douce": {
+      "id": "fin_douce",
+      "title": "Hora de jugar",
+      "location": "COLLINE — SOLEIL CUT",
+      "narrator": "Algunas cosas necesitan tiempo para ser hermosas.",
+      "text": "Aikito y tú vigilan el sol.\n\nEl reloj disminuye lentamente.\n\nEn el pueblo, los niños comienzan a jugar de nuevo.\n\nLos adultos finalmente dejan de correr.\n\nAikito revuelve su cola y luego dice suavemente:\n\n*\"La gente grande a veces olvida jugar.\nNo quiero olvidar.\"\n\nUsted mira a Brindille abajo — risas suben a usted, luz como burbujas de jabón.\n\nEl reloj sigue girando. Pero ahora está a la derecha. No demasiado rápido. No demasiado lento.\n\nSólo... el tiempo que se necesita.",
+      "isStart": false,
+      "isEnd": true,
+      "transition": "fade",
+      "choices": [],
+      "x": 350,
+      "y": 780
+    },
+    "fin_amis": {
+      "id": "fin_amis",
+      "title": "La noche en Brindille",
+      "location": "BRIDGE VILLAGE — CARE",
+      "narrator": "Los mejores días son los que no planeamos.",
+      "text": "El sol se pone en Brindille.\n\nEl reloj se calmó. La risa volvió.\n\nLéonie corre con su padre que la espera en la puerta.\n\nSe asoma, abre los brazos, y esta vez... no mira el momento.\n\nAikito te empuja desde el hocico.\n\n¿Ves? Él ha recuperado su tiempo.\"\n\nEn el cielo aparecen las primeras estrellas.\n\n\"Hay una estrella por cada momento que tomas el tiempo para vivir\", dice Aikito.\n\n\"¿Es verdad?\"\n\n\"No lo sé. Pero es bueno creer.\"",
+      "isStart": false,
+      "isEnd": true,
+      "transition": "fade",
+      "choices": [],
+      "x": 550,
+      "y": 780
+    }
+  },
+  "lang": "es"
+}
