@@ -1,0 +1,724 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Créer avec l'IA — Fableris</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,300&family=Cinzel:wght@400;600&family=DM+Mono:wght@300;400&display=swap" onload="this.onload=null;this.rel='stylesheet'">
+<style>
+*,*::before,*::after { margin:0; padding:0; box-sizing:border-box; }
+html,body { min-height:100%; background:#0a0a0e; color:#e0d8f0; font-family:'Cormorant Garamond',serif; overflow-x:hidden; }
+
+:root {
+  --gold:#c8a96e; --gold2:#e8d4a0; --gold3:#8a6a30;
+  --purple:#7c6dfa; --green:#6dfabc;
+  --bg:#0a0a0e; --bg2:#111118; --bg3:#18181f; --bg4:#202028;
+  --border:#26262e; --text:#e0d8f0; --dim:#7070a0; --dimmer:#404050;
+}
+
+/* TOPBAR */
+#topbar {
+  position:fixed; top:0; left:0; right:0; height:52px; z-index:100;
+  background:rgba(10,10,14,0.92); border-bottom:1px solid var(--border);
+  backdrop-filter:blur(12px);
+  display:flex; align-items:center; gap:12px; padding:0 16px;
+}
+.back-btn {
+  width:36px; height:36px; border-radius:8px;
+  border:1px solid var(--border); background:none;
+  color:var(--dim); font-size:18px; cursor:pointer;
+  display:flex; align-items:center; justify-content:center;
+  text-decoration:none; transition:all .15s; flex-shrink:0;
+}
+.back-btn:hover { border-color:var(--gold3); color:var(--text); }
+.topbar-title {
+  font-family:'Cinzel',serif; font-size:13px; font-weight:600;
+  color:var(--text); letter-spacing:2px;
+}
+
+/* SCROLL */
+#scroll { padding-top:52px; }
+#content { max-width:600px; margin:0 auto; padding:28px 16px 80px; }
+
+/* HERO */
+.hero {
+  text-align:center; padding:32px 0 28px;
+  border-bottom:1px solid var(--border); margin-bottom:32px;
+}
+.hero-icon { font-size:40px; margin-bottom:16px; }
+.hero-title {
+  font-family:'Cinzel',serif; font-size:22px; font-weight:600;
+  color:var(--text); letter-spacing:2px; margin-bottom:8px;
+}
+.hero-sub {
+  font-size:15px; color:var(--dim); font-style:italic; line-height:1.6;
+  max-width:400px; margin:0 auto;
+}
+
+/* SECTION */
+.section { margin-bottom:32px; }
+.section-title {
+  font-family:'Cinzel',serif; font-size:11px; font-weight:600;
+  letter-spacing:4px; text-transform:uppercase; color:var(--dimmer);
+  margin-bottom:16px; display:flex; align-items:center; gap:10px;
+}
+.section-title::after { content:''; flex:1; height:1px; background:var(--border); }
+
+/* STEP CARD */
+.step-card {
+  background:var(--bg2); border:1px solid var(--border);
+  border-radius:12px; padding:16px; margin-bottom:12px;
+  display:flex; gap:14px; align-items:flex-start;
+}
+.step-num {
+  width:28px; height:28px; border-radius:8px; flex-shrink:0;
+  background:rgba(124,109,250,0.15); border:1px solid rgba(124,109,250,0.3);
+  color:var(--purple); font-family:'DM Mono',monospace; font-size:12px;
+  font-weight:700; display:flex; align-items:center; justify-content:center;
+}
+.step-body h3 {
+  font-family:'Cinzel',serif; font-size:14px; font-weight:600;
+  color:var(--text); margin-bottom:5px; letter-spacing:0.5px;
+}
+.step-body p {
+  font-size:13px; color:var(--dim); line-height:1.65;
+}
+
+/* INFO CARD */
+.info-card {
+  background:rgba(109,250,188,0.06); border:1px solid rgba(109,250,188,0.2);
+  border-radius:10px; padding:14px 16px; margin-bottom:12px;
+}
+.info-card p { font-size:13px; color:#90eec0; line-height:1.65; }
+.info-card strong { color:var(--green); }
+
+/* PROMPT BOX */
+.prompt-box {
+  background:var(--bg3); border:1px solid var(--border);
+  border-radius:10px; overflow:hidden; margin-bottom:16px;
+}
+.prompt-header {
+  background:var(--bg4); border-bottom:1px solid var(--border);
+  padding:10px 14px;
+  display:flex; align-items:center; justify-content:space-between;
+}
+.prompt-label {
+  font-family:'DM Mono',monospace; font-size:10px;
+  color:var(--dimmer); letter-spacing:2px; text-transform:uppercase;
+}
+.copy-btn {
+  background:rgba(124,109,250,0.1); border:1px solid rgba(124,109,250,0.3);
+  border-radius:6px; color:var(--purple);
+  font-family:'DM Mono',monospace; font-size:10px; letter-spacing:1px;
+  padding:4px 10px; cursor:pointer; transition:all .15s;
+}
+.copy-btn:hover { background:rgba(124,109,250,0.2); }
+.copy-btn.copied { color:var(--green); border-color:rgba(109,250,188,0.4); background:rgba(109,250,188,0.08); }
+.prompt-text {
+  padding:14px; font-family:'DM Mono',monospace; font-size:11px;
+  color:var(--dim); line-height:1.7; white-space:pre-wrap;
+  max-height:280px; overflow-y:auto;
+}
+.prompt-text::-webkit-scrollbar { width:3px; }
+.prompt-text::-webkit-scrollbar-thumb { background:var(--border); border-radius:3px; }
+
+/* AI TOOLS */
+.ai-tools { display:flex; flex-direction:column; gap:10px; }
+.ai-tool {
+  background:var(--bg2); border:1px solid var(--border);
+  border-radius:10px; padding:14px 16px;
+  display:flex; align-items:center; gap:12px;
+  text-decoration:none; transition:all .2s;
+}
+.ai-tool:hover { border-color:var(--gold3); }
+.ai-tool-icon { font-size:22px; flex-shrink:0; }
+.ai-tool-name {
+  font-family:'Cinzel',serif; font-size:13px; font-weight:600;
+  color:var(--text); margin-bottom:2px;
+}
+.ai-tool-desc { font-size:12px; color:var(--dim); }
+.ai-tool-arrow { margin-left:auto; color:var(--dimmer); font-size:16px; flex-shrink:0; }
+
+/* EXAMPLE JSON */
+.json-box {
+  background:var(--bg3); border:1px solid var(--border);
+  border-radius:10px; padding:14px;
+  font-family:'DM Mono',monospace; font-size:10px;
+  color:#7090c0; line-height:1.8; overflow-x:auto;
+  white-space:pre; margin-bottom:16px;
+}
+.json-box .key { color:#a070f0; }
+.json-box .str { color:#70c090; }
+.json-box .num { color:#f0a060; }
+
+/* CTA */
+.cta-section {
+  text-align:center; padding:24px;
+  background:var(--bg2); border:1px solid var(--border);
+  border-radius:12px; margin-top:24px;
+}
+.cta-title { font-family:'Cinzel',serif; font-size:15px; color:var(--text); margin-bottom:8px; }
+.cta-sub { font-size:13px; color:var(--dim); margin-bottom:18px; }
+.cta-btn {
+  display:inline-block; padding:12px 28px;
+  background:linear-gradient(135deg, rgba(200,169,110,0.15), rgba(200,169,110,0.05));
+  border:1px solid var(--gold3); border-radius:8px;
+  color:var(--gold); font-family:'Cinzel',serif; font-size:12px;
+  letter-spacing:2px; text-decoration:none; cursor:pointer;
+  transition:all .2s;
+}
+.cta-btn:hover { background:rgba(200,169,110,0.2); color:var(--gold2); }
+
+@keyframes fade-up { from{opacity:0;transform:translateY(10px);}to{opacity:1;transform:translateY(0);} }
+.fade-in { animation:fade-up .4s ease forwards; }
+</style>
+</head>
+<body>
+
+<div id="topbar">
+  <a href="index.html" class="back-btn">←</a>
+  <div class="topbar-title" id="txt-title">Créer avec l'IA</div>
+</div>
+
+<div id="scroll">
+<div id="content">
+
+  <!-- HERO -->
+  <div class="hero fade-in">
+    <div class="hero-icon">🤖✍️</div>
+    <div class="hero-title" id="txt-hero-title">Écrire avec l'Intelligence Artificielle</div>
+    <p class="hero-sub" id="txt-hero-sub">
+      Fableris est conçu pour être parfaitement compatible avec les IA narratives. 
+      Décris ton idée, laisse l'IA construire la structure, importe dans l'éditeur.
+    </p>
+  </div>
+
+  <!-- COMMENT ÇA MARCHE -->
+  <div class="section fade-in">
+    <div class="section-title" id="txt-how">Comment ça marche</div>
+
+    <div class="step-card">
+      <div class="step-num">01</div>
+      <div class="step-body">
+        <h3 id="txt-step1-title">Décris ton idée à l'IA</h3>
+        <p id="txt-step1-body">Ouvre ChatGPT, Claude ou Gemini. Décris l'univers de ton histoire, les personnages, l'ambiance, les choix que tu veux proposer. Pas besoin de connaître le format technique.</p>
+      </div>
+    </div>
+
+    <div class="step-card">
+      <div class="step-num">02</div>
+      <div class="step-body">
+        <h3 id="txt-step2-title">Utilise le prompt Fableris</h3>
+        <p id="txt-step2-body">Copie le prompt ci-dessous et colle-le dans ta conversation avec l'IA. Il explique exactement le format JSON attendu par le moteur Fableris.</p>
+      </div>
+    </div>
+
+    <div class="step-card">
+      <div class="step-num">03</div>
+      <div class="step-body">
+        <h3 id="txt-step3-title">Importe dans l'éditeur</h3>
+        <p id="txt-step3-body">L'IA génère un fichier JSON complet. Ouvre StoryForge, utilise "Importer JSON" dans le menu ⋯ et ta scène s'affiche directement dans l'arbre visuel.</p>
+      </div>
+    </div>
+
+    <div class="step-card">
+      <div class="step-num">04</div>
+      <div class="step-body">
+        <h3 id="txt-step4-title">Affine et envoie</h3>
+        <p id="txt-step4-body">Retouche les textes, ajuste les choix, teste l'aperçu. Quand tu es satisfait, exporte et envoie-nous ton histoire depuis l'éditeur.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- INFO -->
+  <div class="info-card fade-in">
+    <p id="txt-info"><strong>Conseil :</strong> Pour de meilleurs résultats, fournis d'abord un exemple de JSON existant à l'IA en lui demandant d'analyser la structure, puis demande-lui de créer une nouvelle histoire dans le même format. Tu peux télécharger un exemple depuis l'éditeur via "Exporter JSON".</p>
+  </div>
+
+  <!-- PROMPT -->
+  <div class="section fade-in">
+    <div class="section-title" id="txt-prompt-section">Le prompt Fableris</div>
+    <p style="font-size:13px;color:var(--dim);margin-bottom:14px;line-height:1.6" id="txt-prompt-intro">
+      Copie ce prompt et colle-le dans ta conversation avec l'IA, suivi de la description de ton histoire.
+    </p>
+
+    <div class="prompt-box">
+      <div class="prompt-header">
+        <span class="prompt-label">Prompt à copier</span>
+        <button class="copy-btn" id="copy-btn" onclick="copyPrompt()">Copier</button>
+      </div>
+      <div class="prompt-text" id="prompt-content">Analyse attentivement le JSON fourni.
+
+Tu dois comprendre précisément :
+- la structure des scènes,
+- le système de choix,
+- les transitions,
+- les fins,
+- les variables,
+- les effets,
+- les IDs,
+- le style d'écriture,
+- le format exact attendu.
+
+Ensuite, génère une NOUVELLE histoire complète parfaitement compatible avec cette structure JSON.
+
+IMPORTANT :
+- respecte exactement le même format,
+- ne casse aucun lien entre les scènes,
+- chaque choix doit pointer vers une scène existante,
+- garde des IDs cohérents et uniques,
+- conserve la compatibilité avec le moteur narratif,
+- ajoute des descriptions longues et immersives,
+- privilégie les ambiances fortes,
+- les personnages récurrents,
+- les chemins annexes,
+- les fins alternatives,
+- les scènes absurdes ou marquantes si le ton de l'histoire s'y prête.
+
+L'histoire doit être directement exploitable sans modification technique.
+
+Le style doit ressembler à une vraie histoire interactive moderne, avec :
+- narration immersive,
+- dialogues naturels,
+- scènes mémorables,
+- choix intéressants,
+- et une structure claire pour le joueur.
+
+Ne donne aucune explication.
+Retourne uniquement le JSON complet final.</div>
+    </div>
+  </div>
+
+  <!-- STRUCTURE RAPIDE -->
+  <div class="section fade-in">
+    <div class="section-title" id="txt-structure">Structure d'une scène</div>
+    <p style="font-size:13px;color:var(--dim);margin-bottom:14px;line-height:1.6" id="txt-structure-intro">
+      Pour aider l'IA à comprendre le format, voici la structure minimale d'une scène :
+    </p>
+    <div class="json-box"><span class="key">"ma_scene"</span>: {
+  <span class="key">"id"</span>: <span class="str">"ma_scene"</span>,
+  <span class="key">"title"</span>: <span class="str">"Titre de la scène"</span>,
+  <span class="key">"location"</span>: <span class="str">"LIEU — CONTEXTE"</span>,
+  <span class="key">"narrator"</span>: <span class="str">"Texte en italique avant la scène."</span>,
+  <span class="key">"text"</span>: <span class="str">"Le texte principal de la scène..."</span>,
+  <span class="key">"isStart"</span>: <span class="num">false</span>,
+  <span class="key">"isEnd"</span>: <span class="num">false</span>,
+  <span class="key">"transition"</span>: <span class="str">"fade"</span>,
+  <span class="key">"choices"</span>: [
+    {
+      <span class="key">"text"</span>: <span class="str">"Ce que le joueur peut choisir"</span>,
+      <span class="key">"vers"</span>: <span class="str">"id_scene_suivante"</span>,
+      <span class="key">"effects"</span>: [
+        { <span class="key">"stat"</span>: <span class="str">"courage"</span>, <span class="key">"val"</span>: <span class="num">10</span> }
+      ],
+      <span class="key">"clickEffect"</span>: <span class="str">"pulse"</span>
+    }
+  ]
+}</div>
+  </div>
+
+  <!-- OUTILS IA -->
+  <div class="section fade-in">
+    <div class="section-title" id="txt-tools">Outils recommandés</div>
+    <div class="ai-tools">
+      <a href="https://chat.openai.com" target="_blank" class="ai-tool">
+        <span class="ai-tool-icon">🟢</span>
+        <div>
+          <div class="ai-tool-name">ChatGPT</div>
+          <div class="ai-tool-desc" id="txt-tool-gpt">Excellent pour les histoires longues et les JSON structurés</div>
+        </div>
+        <span class="ai-tool-arrow">↗</span>
+      </a>
+      <a href="https://claude.ai" target="_blank" class="ai-tool">
+        <span class="ai-tool-icon">🔶</span>
+        <div>
+          <div class="ai-tool-name">Claude</div>
+          <div class="ai-tool-desc" id="txt-tool-claude">Très précis sur la structure et le style narratif</div>
+        </div>
+        <span class="ai-tool-arrow">↗</span>
+      </a>
+      <a href="https://gemini.google.com" target="_blank" class="ai-tool">
+        <span class="ai-tool-icon">🔵</span>
+        <div>
+          <div class="ai-tool-name">Gemini</div>
+          <div class="ai-tool-desc" id="txt-tool-gemini">Idéal pour les histoires créatives et les univers originaux</div>
+        </div>
+        <span class="ai-tool-arrow">↗</span>
+      </a>
+    </div>
+  </div>
+
+
+  <!-- JSON EXEMPLE -->
+  <div class="section fade-in">
+    <div class="section-title" id="txt-json-section">JSON d'exemple — Aikito</div>
+    <p style="font-size:13px;color:var(--dim);margin-bottom:14px;line-height:1.6" id="txt-json-intro">
+      Copie ce JSON et fournis-le à l'IA avec le prompt ci-dessus. Elle comprendra immédiatement le format attendu.
+    </p>
+    <div class="prompt-box">
+      <div class="prompt-header">
+        <span class="prompt-label">Le Temps Perdu avec Aikito — JSON complet</span>
+        <button class="copy-btn" id="copy-json-btn" onclick="copyJson()">Copier</button>
+      </div>
+      <div class="prompt-text" id="json-content" style="font-size:10px;max-height:200px">{
+  "name": "Le Temps Perdu avec Aikito",
+  "kids": true,
+  "askPlayerName": true,
+  "pack": "kids",
+  "companion": "Aikito",
+  "scenes": {
+    "prologue": {
+      "id": "prologue",
+      "title": "Le Village de Brindille",
+      "location": "VILLAGE — MATIN",
+      "narrator": "Parfois, les journées vont si vite qu'on oublie de les vivre.",
+      "text": "Tu arrives dans le village de Brindille avec ton ami Aikito.\n\nAikito est un petit chien curieux qui adore jouer, courir après les feuilles et poser beaucoup trop de questions.\n\nMais aujourd'hui, quelque chose est étrange.\n\nLes habitants courent partout.\n\nTout le monde dit :\n\n« Vite ! »\n« Pas le temps ! »\n« Plus tard ! »\n\nMême les enfants ont arrêté de jouer.\n\nAu loin, un énorme tic-tac résonne sur la colline.",
+      "isStart": true,
+      "isEnd": false,
+      "choices": [
+        {
+          "text": "Suivre le bruit avec Aikito",
+          "vers": "colline"
+        },
+        {
+          "text": "Rester jouer avec les enfants",
+          "vers": "jeu"
+        }
+      ]
+    },
+    "jeu": {
+      "id": "jeu",
+      "title": "Encore Cinq Minutes",
+      "location": "PLACE DU VILLAGE",
+      "narrator": "Parfois, jouer est plus important qu'aller vite.",
+      "text": "Tu proposes une partie de ballon.\n\nAu début, personne n'ose.\n\nPuis Aikito attrape le ballon avec sa tête et tombe dans une flaque.\n\nTout le monde éclate de rire.\n\nMême les adultes s'arrêtent quelques secondes.\n\nLe tic-tac semble ralentir un peu.",
+      "isStart": false,
+      "isEnd": false,
+      "choices": [
+        {
+          "text": "Monter sur la colline avec Aikito",
+          "vers": "colline"
+        }
+      ]
+    },
+    "colline": {
+      "id": "colline",
+      "title": "L'Horloge Géante",
+      "location": "COLLINE DES MINUTES",
+      "narrator": "Certaines horloges donnent l'heure. D'autres décident du rythme du monde.",
+      "text": "Toi et Aikito arrivez au sommet de la colline.\n\nUne immense horloge tourne beaucoup trop vite.\n\nÀ chaque tic-tac :\n- les adultes courent plus vite,\n- les enfants rangent leurs jouets,\n- le soleil semble filer dans le ciel.\n\nAikito te regarde.\n\n« Peut-être que les habitants ont oublié de prendre leur temps… »",
+      "isStart": false,
+      "isEnd": false,
+      "choices": [
+        {
+          "text": "S'asseoir calmement avec Aikito",
+          "vers": "fin"
+        },
+        {
+          "text": "Essayer d'arrêter l'horloge",
+          "vers": "fin"
+        }
+      ]
+    },
+    "fin": {
+      "id": "fin",
+      "title": "Le Temps de Jouer",
+      "location": "COLLINE — COUCHER DE SOLEIL",
+      "narrator": "Certaines choses ont besoin de temps pour devenir belles.",
+      "text": "Toi et Aikito regardez le soleil se coucher.\n\nL'horloge ralentit doucement.\n\nDans le village, les enfants recommencent à jouer.\n\nLes adultes arrêtent enfin de courir.\n\nAikito remue la queue puis dit doucement :\n\n« Les grandes personnes oublient parfois de jouer.\nMoi, je ne veux pas oublier. »",
+      "isStart": false,
+      "isEnd": true,
+      "choices": []
+    }
+  }
+}</div>
+    </div>
+  </div>
+
+  <!-- TUTO ÉDITEUR -->
+  <div class="section fade-in">
+    <div class="section-title" id="txt-tuto-section">Guide de l'éditeur StoryForge</div>
+    <p style="font-size:13px;color:var(--dim);margin-bottom:16px;line-height:1.6" id="txt-tuto-intro">
+      L'éditeur visuel permet de créer et modifier des histoires sans toucher au JSON.
+    </p>
+
+    <div class="step-card">
+      <div class="step-num" style="background:rgba(109,250,188,0.1);border-color:rgba(109,250,188,0.3);color:#6dfabc">🌳</div>
+      <div class="step-body">
+        <h3 id="txt-tuto1-title">L'arbre visuel</h3>
+        <p id="txt-tuto1-body">Chaque bulle est une scène. Les flèches montrent les chemins possibles. Les flèches orange pointillées avec 🔒 indiquent des choix conditionnels qui nécessitent un certain niveau de stat. Pince pour zoomer, glisse pour naviguer.</p>
+      </div>
+    </div>
+
+    <div class="step-card">
+      <div class="step-num" style="background:rgba(109,250,188,0.1);border-color:rgba(109,250,188,0.3);color:#6dfabc">✏</div>
+      <div class="step-body">
+        <h3 id="txt-tuto2-title">Éditer une scène</h3>
+        <p id="txt-tuto2-body">Tape sur une scène pour l'éditer. Tu peux modifier le titre, le lieu, le narrateur (texte en italique), le texte principal, la transition et l'illustration. Le bouton + en bas à droite crée une nouvelle scène.</p>
+      </div>
+    </div>
+
+    <div class="step-card">
+      <div class="step-num" style="background:rgba(109,250,188,0.1);border-color:rgba(109,250,188,0.3);color:#6dfabc">→</div>
+      <div class="step-body">
+        <h3 id="txt-tuto3-title">Les choix</h3>
+        <p id="txt-tuto3-body">Chaque scène peut avoir plusieurs choix. Un choix a un texte, une destination (vers quelle scène il mène) et des effets sur les stats. Tu peux ajouter une condition 🔒 — le choix n'apparaîtra que si le joueur a assez de points dans une stat.</p>
+      </div>
+    </div>
+
+    <div class="step-card">
+      <div class="step-num" style="background:rgba(109,250,188,0.1);border-color:rgba(109,250,188,0.3);color:#6dfabc">⚙</div>
+      <div class="step-body">
+        <h3 id="txt-tuto4-title">Les stats</h3>
+        <p id="txt-tuto4-body">Définis les stats de ton histoire dans ⚙ Stats — courage, lucidité, chaleur... Chaque choix peut modifier ces stats. Elles permettent de créer des fins différentes selon le profil du joueur.</p>
+      </div>
+    </div>
+
+    <div class="step-card">
+      <div class="step-num" style="background:rgba(109,250,188,0.1);border-color:rgba(109,250,188,0.3);color:#6dfabc">▶</div>
+      <div class="step-body">
+        <h3 id="txt-tuto5-title">Tester et exporter</h3>
+        <p id="txt-tuto5-body">Le bouton ▶ Tester l'aperçu dans le menu ⋯ ouvre ton histoire dans le moteur de jeu. Tu peux simuler différents niveaux de stats pour vérifier que tes fins conditionnelles fonctionnent. Exporte en JSON quand tu es satisfait.</p>
+      </div>
+    </div>
+
+    <div class="info-card" style="margin-top:4px">
+      <p id="txt-tuto-tip">💡 <strong>Astuce :</strong> Le badge santé ✓ en haut à droite de l'éditeur indique si ton histoire a des problèmes — scène sans destination, choix cassé, pas de scène de départ. Clique dessus pour voir la liste des problèmes.</p>
+    </div>
+  </div>
+
+  <!-- CTA -->
+  <div class="cta-section fade-in">
+    <div class="cta-title" id="txt-cta-title">Prêt à créer ?</div>
+    <p class="cta-sub" id="txt-cta-sub">Ouvre l'éditeur, importe ton JSON généré par l'IA et affine ton histoire.</p>
+    <a href="story-editor.html" class="cta-btn" id="txt-cta-btn">Ouvrir l'éditeur</a>
+  </div>
+
+</div>
+</div>
+
+<script>
+// ── COPY PROMPT ──
+function copyJson() {
+  const text = document.getElementById('json-content').textContent;
+  navigator.clipboard.writeText(text).then(() => {
+    const btn = document.getElementById('copy-json-btn');
+    const t = T[lang] || T.fr;
+    btn.textContent = t.copied;
+    btn.classList.add('copied');
+    setTimeout(() => { btn.textContent = t.copy; btn.classList.remove('copied'); }, 2000);
+  });
+}
+
+function copyPrompt() {
+  const text = document.getElementById('prompt-content').textContent;
+  navigator.clipboard.writeText(text).then(() => {
+    const btn = document.getElementById('copy-btn');
+    btn.textContent = '✓ Copié !';
+    btn.classList.add('copied');
+    setTimeout(() => {
+      btn.textContent = 'Copier';
+      btn.classList.remove('copied');
+    }, 2000);
+  });
+}
+
+// ── TRANSLATIONS ──
+const lang = localStorage.getItem('sf_lang') || 'fr';
+const T = {
+  fr: {
+    title: 'Créer avec l\'IA',
+    heroTitle: 'Écrire avec l\'Intelligence Artificielle',
+    heroSub: 'Fableris est conçu pour être parfaitement compatible avec les IA narratives. Décris ton idée, laisse l\'IA construire la structure, importe dans l\'éditeur.',
+    how: 'Comment ça marche',
+    step1Title: 'Décris ton idée à l\'IA',
+    step1Body: 'Ouvre ChatGPT, Claude ou Gemini. Décris l\'univers de ton histoire, les personnages, l\'ambiance, les choix que tu veux proposer. Pas besoin de connaître le format technique.',
+    step2Title: 'Utilise le prompt Fableris',
+    step2Body: 'Copie le prompt ci-dessous et colle-le dans ta conversation avec l\'IA. Il explique exactement le format JSON attendu par le moteur Fableris.',
+    step3Title: 'Importe dans l\'éditeur',
+    step3Body: 'L\'IA génère un fichier JSON complet. Ouvre StoryForge, utilise "Importer JSON" dans le menu ⋯ et ta scène s\'affiche directement dans l\'arbre visuel.',
+    step4Title: 'Affine et envoie',
+    step4Body: 'Retouche les textes, ajuste les choix, teste l\'aperçu. Quand tu es satisfait, exporte et envoie-nous ton histoire depuis l\'éditeur.',
+    info: '<strong>Conseil :</strong> Pour de meilleurs résultats, fournis d\'abord un exemple de JSON existant à l\'IA en lui demandant d\'analyser la structure, puis demande-lui de créer une nouvelle histoire dans le même format.',
+    promptSection: 'Le prompt Fableris',
+    promptIntro: 'Copie ce prompt et colle-le dans ta conversation avec l\'IA, suivi de la description de ton histoire.',
+    structure: 'Structure d\'une scène',
+    structureIntro: 'Pour aider l\'IA à comprendre le format, voici la structure minimale d\'une scène :',
+    tools: 'Outils recommandés',
+    toolGpt: 'Excellent pour les histoires longues et les JSON structurés',
+    toolClaude: 'Très précis sur la structure et le style narratif',
+    toolGemini: 'Idéal pour les histoires créatives et les univers originaux',
+    ctaTitle: 'Prêt à créer ?',
+    ctaSub: 'Ouvre l\'éditeur, importe ton JSON généré par l\'IA et affine ton histoire.',
+    ctaBtn: 'Ouvrir l\'éditeur',
+    copy: 'Copier',
+    copied: '✓ Copié !',
+    jsonSection: 'JSON d\'exemple — Aikito',
+    jsonIntro: 'Copie ce JSON et fournis-le à l\'IA avec le prompt ci-dessus. Elle comprendra immédiatement le format attendu.',
+    tutoSection: 'Guide de l\'éditeur StoryForge',
+    tutoIntro: 'L\'éditeur visuel permet de créer et modifier des histoires sans toucher au JSON.',
+    tuto1Title: 'L\'arbre visuel',
+    tuto1Body: 'Chaque bulle est une scène. Les flèches montrent les chemins possibles. Les flèches orange 🔒 indiquent des choix conditionnels. Pince pour zoomer, glisse pour naviguer.',
+    tuto2Title: 'Éditer une scène',
+    tuto2Body: 'Tape sur une scène pour l\'éditer — titre, lieu, narrateur, texte, transition, illustration. Le bouton + crée une nouvelle scène.',
+    tuto3Title: 'Les choix',
+    tuto3Body: 'Chaque scène peut avoir plusieurs choix avec texte, destination et effets sur les stats. Ajoute une condition 🔒 pour que le choix n\'apparaisse qu\'avec assez de points.',
+    tuto4Title: 'Les stats',
+    tuto4Body: 'Définis les stats dans ⚙ Stats — courage, lucidité... Chaque choix peut les modifier. Elles permettent des fins différentes selon le profil du joueur.',
+    tuto5Title: 'Tester et exporter',
+    tuto5Body: 'Le bouton ▶ Tester l\'aperçu ouvre ton histoire dans le moteur. Simule les stats pour vérifier les fins conditionnelles. Exporte en JSON quand tu es satisfait.',
+    tutoTip: '💡 <strong>Astuce :</strong> Le badge santé ✓ en haut de l\'éditeur indique les problèmes — scène sans destination, choix cassé. Clique pour voir la liste.',
+  },
+  en: {
+    title: 'Create with AI',
+    heroTitle: 'Write with Artificial Intelligence',
+    heroSub: 'Fableris is designed to be perfectly compatible with narrative AI. Describe your idea, let the AI build the structure, import into the editor.',
+    how: 'How it works',
+    step1Title: 'Describe your idea to the AI',
+    step1Body: 'Open ChatGPT, Claude or Gemini. Describe your story universe, characters, atmosphere, and the choices you want to offer. No need to know the technical format.',
+    step2Title: 'Use the Fableris prompt',
+    step2Body: 'Copy the prompt below and paste it into your AI conversation. It explains exactly the JSON format expected by the Fableris engine.',
+    step3Title: 'Import into the editor',
+    step3Body: 'The AI generates a complete JSON file. Open StoryForge, use "Import JSON" in the ⋯ menu and your scene appears directly in the visual tree.',
+    step4Title: 'Refine and submit',
+    step4Body: 'Edit the texts, adjust the choices, test the preview. When satisfied, export and send us your story from the editor.',
+    info: '<strong>Tip:</strong> For best results, first provide the AI with an existing JSON example asking it to analyze the structure, then ask it to create a new story in the same format.',
+    promptSection: 'The Fableris Prompt',
+    promptIntro: 'Copy this prompt and paste it into your AI conversation, followed by your story description.',
+    structure: 'Scene structure',
+    structureIntro: 'To help the AI understand the format, here is the minimal structure of a scene:',
+    tools: 'Recommended tools',
+    toolGpt: 'Excellent for long stories and structured JSON',
+    toolClaude: 'Very precise on structure and narrative style',
+    toolGemini: 'Ideal for creative stories and original universes',
+    ctaTitle: 'Ready to create?',
+    ctaSub: 'Open the editor, import your AI-generated JSON and refine your story.',
+    ctaBtn: 'Open editor',
+    copy: 'Copy',
+    copied: '✓ Copied!',
+    jsonSection: 'Example JSON — Aikito',
+    jsonIntro: 'Copy this JSON and provide it to the AI with the prompt above. It will immediately understand the expected format.',
+    tutoSection: 'StoryForge Editor Guide',
+    tutoIntro: 'The visual editor lets you create and edit stories without touching the JSON.',
+    tuto1Title: 'The visual tree',
+    tuto1Body: 'Each bubble is a scene. Arrows show possible paths. Orange 🔒 arrows indicate conditional choices. Pinch to zoom, drag to navigate.',
+    tuto2Title: 'Editing a scene',
+    tuto2Body: 'Tap a scene to edit it — title, location, narrator, text, transition, illustration. The + button creates a new scene.',
+    tuto3Title: 'Choices',
+    tuto3Body: 'Each scene can have multiple choices with text, destination and stat effects. Add a 🔒 condition so a choice only appears with enough stat points.',
+    tuto4Title: 'Stats',
+    tuto4Body: 'Define stats in ⚙ Stats — courage, lucidity... Each choice can modify them. They allow different endings based on the player\'s profile.',
+    tuto5Title: 'Test and export',
+    tuto5Body: 'The ▶ Test preview button opens your story in the engine. Simulate stats to check conditional endings. Export as JSON when satisfied.',
+    tutoTip: '💡 <strong>Tip:</strong> The health badge ✓ at the top of the editor shows problems — scene without destination, broken choice. Click to see the list.',
+  },
+  es: {
+    title: 'Crear con IA',
+    heroTitle: 'Escribir con Inteligencia Artificial',
+    heroSub: 'Fableris está diseñado para ser perfectamente compatible con las IA narrativas. Describe tu idea, deja que la IA construya la estructura, importa en el editor.',
+    how: 'Cómo funciona',
+    step1Title: 'Describe tu idea a la IA',
+    step1Body: 'Abre ChatGPT, Claude o Gemini. Describe el universo de tu historia, los personajes, el ambiente y las elecciones que quieres ofrecer.',
+    step2Title: 'Usa el prompt de Fableris',
+    step2Body: 'Copia el prompt a continuación y pégalo en tu conversación con la IA. Explica exactamente el formato JSON esperado por el motor de Fableris.',
+    step3Title: 'Importa en el editor',
+    step3Body: 'La IA genera un archivo JSON completo. Abre StoryForge, usa "Importar JSON" en el menú ⋯ y tu escena aparece directamente en el árbol visual.',
+    step4Title: 'Refina y envía',
+    step4Body: 'Edita los textos, ajusta las elecciones, prueba la vista previa. Cuando estés satisfecho, exporta y envíanos tu historia desde el editor.',
+    info: '<strong>Consejo:</strong> Para mejores resultados, primero proporciona a la IA un ejemplo de JSON existente pidiéndole que analice la estructura, luego pídele que cree una nueva historia en el mismo formato.',
+    promptSection: 'El prompt de Fableris',
+    promptIntro: 'Copia este prompt y pégalo en tu conversación con la IA, seguido de la descripción de tu historia.',
+    structure: 'Estructura de una escena',
+    structureIntro: 'Para ayudar a la IA a entender el formato, aquí está la estructura mínima de una escena:',
+    tools: 'Herramientas recomendadas',
+    toolGpt: 'Excelente para historias largas y JSON estructurado',
+    toolClaude: 'Muy preciso en la estructura y el estilo narrativo',
+    toolGemini: 'Ideal para historias creativas y universos originales',
+    ctaTitle: '¿Listo para crear?',
+    ctaSub: 'Abre el editor, importa tu JSON generado por IA y refina tu historia.',
+    ctaBtn: 'Abrir editor',
+    copy: 'Copiar',
+    copied: '✓ ¡Copiado!',
+    jsonSection: 'JSON de ejemplo — Aikito',
+    jsonIntro: 'Copia este JSON y proporciónalo a la IA con el prompt anterior. Entenderá inmediatamente el formato esperado.',
+    tutoSection: 'Guía del editor StoryForge',
+    tutoIntro: 'El editor visual permite crear y editar historias sin tocar el JSON.',
+    tuto1Title: 'El árbol visual',
+    tuto1Body: 'Cada burbuja es una escena. Las flechas muestran los caminos posibles. Las flechas naranjas 🔒 indican elecciones condicionales. Pellizca para hacer zoom, desliza para navegar.',
+    tuto2Title: 'Editar una escena',
+    tuto2Body: 'Toca una escena para editarla — título, lugar, narrador, texto, transición, ilustración. El botón + crea una nueva escena.',
+    tuto3Title: 'Las elecciones',
+    tuto3Body: 'Cada escena puede tener varias elecciones con texto, destino y efectos en las estadísticas. Añade una condición 🔒 para que la elección solo aparezca con suficientes puntos.',
+    tuto4Title: 'Las estadísticas',
+    tuto4Body: 'Define las estadísticas en ⚙ Stats — valor, lucidez... Cada elección puede modificarlas. Permiten finales diferentes según el perfil del jugador.',
+    tuto5Title: 'Probar y exportar',
+    tuto5Body: 'El botón ▶ Vista previa abre tu historia en el motor. Simula estadísticas para verificar los finales condicionales. Exporta en JSON cuando estés satisfecho.',
+    tutoTip: '💡 <strong>Consejo:</strong> El badge de salud ✓ en la parte superior del editor muestra problemas — escena sin destino, elección rota. Haz clic para ver la lista.',
+  }
+};
+
+function applyLang() {
+  const t = T[lang] || T.fr;
+  const set = (id, v) => { const el = document.getElementById(id); if(el) el.innerHTML = v; };
+  set('txt-title',          t.title);
+  set('txt-hero-title',     t.heroTitle);
+  set('txt-hero-sub',       t.heroSub);
+  set('txt-how',            t.how);
+  set('txt-step1-title',    t.step1Title);
+  set('txt-step1-body',     t.step1Body);
+  set('txt-step2-title',    t.step2Title);
+  set('txt-step2-body',     t.step2Body);
+  set('txt-step3-title',    t.step3Title);
+  set('txt-step3-body',     t.step3Body);
+  set('txt-step4-title',    t.step4Title);
+  set('txt-step4-body',     t.step4Body);
+  set('txt-info',           t.info);
+  set('txt-prompt-section', t.promptSection);
+  set('txt-prompt-intro',   t.promptIntro);
+  set('txt-structure',      t.structure);
+  set('txt-structure-intro',t.structureIntro);
+  set('txt-tools',          t.tools);
+  set('txt-tool-gpt',       t.toolGpt);
+  set('txt-tool-claude',    t.toolClaude);
+  set('txt-tool-gemini',    t.toolGemini);
+  set('txt-cta-title',      t.ctaTitle);
+  set('txt-cta-sub',        t.ctaSub);
+  set('txt-cta-btn',        t.ctaBtn);
+  set('txt-json-section',   t.jsonSection);
+  set('txt-json-intro',     t.jsonIntro);
+  set('txt-tuto-section',   t.tutoSection);
+  set('txt-tuto-intro',     t.tutoIntro);
+  set('txt-tuto1-title',    t.tuto1Title);
+  set('txt-tuto1-body',     t.tuto1Body);
+  set('txt-tuto2-title',    t.tuto2Title);
+  set('txt-tuto2-body',     t.tuto2Body);
+  set('txt-tuto3-title',    t.tuto3Title);
+  set('txt-tuto3-body',     t.tuto3Body);
+  set('txt-tuto4-title',    t.tuto4Title);
+  set('txt-tuto4-body',     t.tuto4Body);
+  set('txt-tuto5-title',    t.tuto5Title);
+  set('txt-tuto5-body',     t.tuto5Body);
+  set('txt-tuto-tip',       t.tutoTip);
+  document.getElementById('copy-btn').textContent = t.copy;
+  document.getElementById('copy-json-btn').textContent = t.copy;
+  document.title = t.title + ' — Fableris';
+  document.documentElement.lang = lang;
+
+  // Rewrite copyPrompt with correct copied text
+  window.copyPrompt = function() {
+    const text = document.getElementById('prompt-content').textContent;
+    navigator.clipboard.writeText(text).then(() => {
+      const btn = document.getElementById('copy-btn');
+      btn.textContent = t.copied;
+      btn.classList.add('copied');
+      setTimeout(() => { btn.textContent = t.copy; btn.classList.remove('copied'); }, 2000);
+    });
+  };
+}
+
+applyLang();
+</script>
+</body>
+</html>
