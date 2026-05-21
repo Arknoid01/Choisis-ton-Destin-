@@ -1,0 +1,2725 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>StoryForge — Éditeur</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0e0e12;
+  --bg2: #14141a;
+  --bg3: #1c1c24;
+  --bg4: #24242e;
+  --border: #2e2e3a;
+  --accent: #7c6dfa;
+  --accent2: #fa6d8f;
+  --accent3: #6dfabc;
+  --text: #e8e8f0;
+  --text2: #9090a8;
+  --text3: #5a5a72;
+  --node-w: 160px;
+  --node-h: 60px;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+html,body { height:100%; overflow:hidden; font-family:'Syne',sans-serif; background:var(--bg); color:var(--text); }
+
+/* ── LAYOUT ── */
+#shell { display:flex; flex-direction:column; height:100vh; }
+
+/* TOPBAR */
+#topbar {
+  display:flex; align-items:center; gap:12px;
+  padding:0 16px; height:52px; flex-shrink:0;
+  background:var(--bg2); border-bottom:1px solid var(--border);
+  z-index:100;
+}
+.logo { font-size:18px; font-weight:800; color:var(--accent); letter-spacing:-0.5px; flex-shrink:0; }
+.logo span { color:var(--accent2); }
+.sep { width:1px; height:24px; background:var(--border); flex-shrink:0; }
+#project-name {
+  background:none; border:none; color:var(--text); font-family:'Syne',sans-serif;
+  font-size:14px; font-weight:600; outline:none; width:200px;
+  border-bottom:1px dashed var(--border); padding-bottom:2px;
+}
+#project-name:focus { border-color:var(--accent); }
+.spacer { flex:1; }
+.topbtn {
+  display:flex; align-items:center; gap:6px;
+  padding:7px 14px; border-radius:6px; border:1px solid var(--border);
+  background:var(--bg3); color:var(--text2); font-family:'Syne',sans-serif;
+  font-size:12px; font-weight:600; cursor:pointer; transition:all .15s;
+  white-space:nowrap;
+}
+.topbtn:hover { background:var(--bg4); color:var(--text); border-color:var(--accent); }
+.topbtn.primary { background:var(--accent); color:#fff; border-color:var(--accent); }
+.topbtn.primary:hover { background:#6a5de8; }
+.topbtn.danger { border-color:#fa6d6d44; }
+.topbtn.danger:hover { background:#fa6d6d22; color:#fa6d6d; border-color:#fa6d6d; }
+
+/* MAIN AREA */
+#main { display:flex; flex:1; overflow:hidden; }
+
+/* LEFT PANEL — TREE */
+#tree-panel {
+  flex:1; position:relative; overflow:hidden;
+  background:var(--bg); cursor:grab;
+}
+#tree-panel.grabbing { cursor:grabbing; }
+#tree-canvas {
+  position:absolute; top:0; left:0;
+  width:100%; height:100%;
+  pointer-events:none;
+}
+#tree-viewport {
+  position:absolute; top:0; left:0;
+  transform-origin:0 0;
+}
+
+/* NODES */
+.node {
+  position:absolute;
+  width:var(--node-w); min-height:var(--node-h);
+  background:var(--bg3); border:1.5px solid var(--border);
+  border-radius:10px; padding:10px 12px;
+  cursor:pointer; user-select:none;
+  transition:border-color .15s, box-shadow .15s;
+  box-shadow:0 4px 12px #00000044;
+}
+.node:hover { border-color:var(--accent); }
+.node.selected { border-color:var(--accent); box-shadow:0 0 0 3px #7c6dfa33; }
+.node.start-node { border-color:var(--accent3); }
+.node.end-node { border-color:var(--accent2); }
+.node-id {
+  font-family:'DM Mono',monospace; font-size:9px; color:var(--text3);
+  margin-bottom:4px; letter-spacing:1px;
+}
+.node-title {
+  font-size:12px; font-weight:700; color:var(--text);
+  white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
+}
+.node-count {
+  font-size:10px; color:var(--text3); margin-top:4px;
+}
+.node-badge {
+  position:absolute; top:-7px; right:8px;
+  font-size:9px; font-weight:700; letter-spacing:1px;
+  padding:2px 6px; border-radius:20px; background:var(--accent3); color:#0e0e12;
+}
+.node-badge.end { background:var(--accent2); }
+
+/* ADD NODE BTN */
+#add-node-btn {
+  position:absolute; bottom:20px; left:20px; z-index:10;
+  width:44px; height:44px; border-radius:50%;
+  background:var(--accent); border:none; color:#fff;
+  font-size:22px; cursor:pointer;
+  box-shadow:0 4px 16px #7c6dfa66;
+  transition:transform .15s, box-shadow .15s;
+  display:flex; align-items:center; justify-content:center;
+}
+#add-node-btn:hover { transform:scale(1.1); box-shadow:0 6px 24px #7c6dfa88; }
+
+/* TREE CONTROLS */
+#tree-controls {
+  position:absolute; bottom:20px; right:20px; z-index:10;
+  display:flex; flex-direction:column; gap:6px;
+}
+.tree-ctrl {
+  width:36px; height:36px; border-radius:8px;
+  background:var(--bg3); border:1px solid var(--border);
+  color:var(--text2); font-size:16px; cursor:pointer;
+  display:flex; align-items:center; justify-content:center;
+  transition:all .15s;
+}
+.tree-ctrl:hover { background:var(--bg4); color:var(--text); }
+
+/* RIGHT PANEL — EDITOR */
+#editor-panel {
+  width:380px; flex-shrink:0;
+  background:var(--bg2); border-left:1px solid var(--border);
+  display:flex; flex-direction:column; overflow:hidden;
+}
+#editor-header {
+  padding:14px 16px; border-bottom:1px solid var(--border);
+  display:flex; align-items:center; gap:10px; flex-shrink:0;
+  background:var(--bg2);
+}
+#editor-header h2 {
+  font-size:13px; font-weight:700; flex:1;
+  font-family:'DM Mono',monospace; color:var(--text);
+  white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
+}
+.icon-btn {
+  width:30px; height:30px; border-radius:6px;
+  background:none; border:1px solid var(--border);
+  color:var(--text3); cursor:pointer; font-size:14px;
+  display:flex; align-items:center; justify-content:center;
+  transition:all .15s; flex-shrink:0;
+}
+.icon-btn:hover { background:var(--bg3); color:var(--text); }
+.icon-btn.danger:hover { background:#fa6d6d22; color:#fa6d6d; border-color:#fa6d6d44; }
+
+#editor-body { flex:1; overflow-y:auto; }
+#editor-body::-webkit-scrollbar { width:3px; }
+#editor-body::-webkit-scrollbar-track { background:transparent; }
+#editor-body::-webkit-scrollbar-thumb { background:var(--border); border-radius:4px; }
+
+/* EMPTY STATE */
+#empty-state {
+  display:flex; flex-direction:column; align-items:center; justify-content:center;
+  height:100%; color:var(--text3); text-align:center; gap:12px;
+}
+#empty-state .icon { font-size:40px; opacity:0.4; }
+#empty-state p { font-size:13px; line-height:1.6; max-width:220px; }
+
+/* SECTION REPLIABLE */
+.ed-section { border-bottom:1px solid var(--border); }
+.ed-section-header {
+  width:100%; padding:11px 16px;
+  display:flex; align-items:center; gap:10px;
+  background:none; border:none; cursor:pointer; text-align:left;
+  transition:background .1s;
+}
+.ed-section-header:hover { background:var(--bg3); }
+.ed-section-icon { font-size:13px; width:18px; text-align:center; flex-shrink:0; }
+.ed-section-title {
+  flex:1; font-family:'DM Mono',monospace; font-size:9px;
+  font-weight:700; color:var(--text3); letter-spacing:2px; text-transform:uppercase;
+}
+.ed-section-arrow {
+  color:var(--text3); font-size:12px; transition:transform .2s; flex-shrink:0;
+}
+.ed-section-arrow.open { transform:rotate(90deg); }
+.ed-section-body { padding:12px 16px 16px; }
+
+/* FORM ELEMENTS */
+.form-group { margin-bottom:12px; }
+.form-label {
+  display:block; font-size:9px; font-weight:700;
+  color:var(--text3); letter-spacing:1.5px; text-transform:uppercase;
+  margin-bottom:5px;
+}
+.form-input, .form-textarea, .form-select {
+  width:100%; background:var(--bg3); border:1px solid var(--border);
+  border-radius:7px; color:var(--text); font-family:'Syne',sans-serif;
+  font-size:13px; outline:none; transition:border-color .15s;
+}
+.form-input { padding:8px 11px; }
+.form-textarea { padding:9px 11px; resize:vertical; min-height:72px; line-height:1.6; }
+.var-help { margin-top:6px; font-size:10px; color:var(--text3); line-height:1.5; }
+.var-help code { color:var(--accent); background:var(--bg3); border:1px solid var(--border); border-radius:4px; padding:1px 5px; }
+.var-btn { margin-top:6px; border:1px solid var(--border); background:var(--bg3); color:var(--text2); border-radius:6px; padding:5px 9px; font-family:'DM Mono',monospace; font-size:10px; cursor:pointer; }
+.var-btn:hover { border-color:var(--accent); color:var(--text); }
+.form-select { padding:8px 11px; cursor:pointer; }
+.form-input:focus, .form-textarea:focus, .form-select:focus { border-color:var(--accent); }
+
+.form-check { display:flex; align-items:center; gap:8px; cursor:pointer; }
+.form-check input { accent-color:var(--accent); width:14px; height:14px; cursor:pointer; }
+.form-check span { font-size:12px; color:var(--text2); }
+
+/* CHOIX EN CARDS DÉPLIABLES */
+.choice-card {
+  background:var(--bg3); border:1px solid var(--border);
+  border-radius:9px; margin-bottom:7px; overflow:hidden;
+  transition:border-color .15s;
+}
+.choice-card.has-lock { border-color:rgba(255,170,0,0.35); }
+.choice-card-header {
+  width:100%; padding:9px 12px;
+  display:flex; align-items:center; gap:8px;
+  background:none; border:none; cursor:pointer; text-align:left;
+}
+.choice-num {
+  min-width:22px; height:22px; border-radius:5px;
+  background:var(--bg4); border:1px solid var(--border);
+  color:var(--text3);
+  font-family:'DM Mono',monospace; font-size:10px; font-weight:700;
+  display:flex; align-items:center; justify-content:center;
+  flex-shrink:0;
+}
+.choice-num.locked { background:rgba(255,170,0,0.1); border-color:rgba(255,170,0,0.4); color:#ffaa00; }
+.choice-card-preview {
+  flex:1; font-size:12px; color:var(--text2);
+  white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
+  font-family:'Syne',sans-serif;
+}
+.choice-card-dest {
+  font-family:'DM Mono',monospace; font-size:10px; color:var(--text3);
+  flex-shrink:0; max-width:80px; overflow:hidden; text-overflow:ellipsis;
+}
+.choice-card-arrow {
+  color:var(--text3); font-size:11px; flex-shrink:0; transition:transform .15s;
+}
+.choice-card-arrow.open { transform:rotate(90deg); }
+.choice-card-body { padding:0 12px 12px; border-top:1px solid var(--border); }
+
+.choice-effects {
+  display:flex; flex-wrap:wrap; gap:5px; margin-top:6px;
+}
+.effect-pill {
+  display:flex; align-items:center; gap:4px;
+  background:var(--bg4); border:1px solid var(--border);
+  border-radius:20px; padding:3px 8px; font-size:11px;
+}
+.effect-pill select, .effect-pill input {
+  background:none; border:none; color:var(--text); font-size:11px;
+  outline:none; font-family:'Syne',sans-serif;
+}
+.effect-pill select { cursor:pointer; }
+.effect-pill input[type=number] { width:50px; }
+.pill-remove {
+  color:var(--text3); cursor:pointer; font-size:12px; line-height:1;
+  background:none; border:none; padding:0;
+}
+.pill-remove:hover { color:#fa6d6d; }
+
+/* SECTION DIVIDER (legacy) */
+.section-divider {
+  display:flex; align-items:center; gap:10px;
+  margin:16px 0 12px; color:var(--text3); font-size:10px;
+  font-weight:700; letter-spacing:2px; text-transform:uppercase;
+}
+.section-divider::before, .section-divider::after {
+  content:''; flex:1; height:1px; background:var(--border);
+}
+
+/* QUICK LINK BUTTON */
+.quick-link-btn {
+  width:36px; height:36px; flex-shrink:0;
+  border-radius:8px; border:1px solid var(--accent);
+  background:color-mix(in srgb, var(--accent) 12%, transparent);
+  color:var(--accent); font-size:13px; font-weight:700;
+  cursor:pointer; transition:all .15s;
+  display:flex; align-items:center; justify-content:center;
+}
+.quick-link-btn:hover { background:var(--accent); color:var(--bg); }
+.quick-link-btn.unlink-btn {
+  border-color:var(--border); color:var(--text3);
+  background:none;
+}
+.quick-link-btn.unlink-btn:hover { border-color:#fa6d6d; color:#fa6d6d; background:#fa6d6d18; }
+
+.link-hint-inline {
+  font-family:'DM Mono',monospace; font-size:10px;
+  color:var(--text3); margin-top:5px; letter-spacing:.5px;
+}
+.link-hint-inline.linked { color:var(--accent3); }
+.link-hint-inline.linked strong { color:var(--accent); }
+  background:none; border:1px dashed var(--border);
+  color:var(--text3); border-radius:6px; padding:6px 12px;
+  font-size:11px; cursor:pointer; font-family:'Syne',sans-serif;
+  transition:all .15s; width:100%; margin-top:6px;
+}
+.add-effect-btn:hover, .add-choice-btn:hover {
+  border-color:var(--accent); color:var(--accent);
+}
+.add-choice-btn { margin-top:10px; padding:10px; font-size:12px; font-weight:600; }
+
+/* STATS CONFIG PANEL */
+#stats-config {
+  background:var(--bg3); border:1px solid var(--border);
+  border-radius:10px; padding:14px; margin-bottom:16px;
+}
+.stat-row {
+  display:flex; gap:8px; align-items:center; margin-bottom:8px;
+}
+.stat-color-dot {
+  width:10px; height:10px; border-radius:50%; flex-shrink:0;
+}
+.stat-row .form-input { flex:1; }
+.stat-row input[type=number] {
+  width:70px; background:var(--bg4); border:1px solid var(--border);
+  border-radius:6px; color:var(--text); font-family:'Syne',sans-serif;
+  font-size:13px; padding:6px 8px; outline:none;
+}
+.stat-row input[type=number]:focus { border-color:var(--accent); }
+.stat-row input[type=color] {
+  width:30px; height:30px; border:none; background:none;
+  cursor:pointer; border-radius:6px; padding:0;
+}
+
+/* MODAL */
+#modal-overlay, #link-modal-overlay {
+  position:fixed; inset:0; background:#00000088; z-index:1000;
+  display:none; align-items:center; justify-content:center;
+}
+#modal-overlay.show, #link-modal-overlay.show { display:flex; }
+#modal {
+  background:var(--bg2); border:1px solid var(--border);
+  border-radius:16px; padding:28px; width:460px; max-width:95vw;
+  max-height:85vh; overflow-y:auto;
+}
+#modal h3 { font-size:16px; font-weight:800; margin-bottom:4px; }
+#modal p { font-size:13px; color:var(--text2); margin-bottom:20px; }
+.modal-actions { display:flex; gap:10px; margin-top:20px; justify-content:flex-end; }
+.link-choice-list { display:flex; flex-direction:column; gap:8px; margin-top:8px; }
+.link-hint { font-size:12px; color:var(--text3); line-height:1.45; margin-top:6px; }
+#link-choice-text-wrap.hidden { display:none; }
+
+
+/* NOTIFICATIONS */
+#toast {
+  position:fixed; bottom:24px; left:50%; transform:translateX(-50%);
+  background:var(--bg3); border:1px solid var(--border);
+  border-radius:10px; padding:10px 20px;
+  font-size:13px; font-weight:600; color:var(--text);
+  z-index:2000; opacity:0; transition:opacity .3s;
+  pointer-events:none; white-space:nowrap;
+}
+#toast.show { opacity:1; }
+
+/* TABS */
+.tabs { display:flex; gap:2px; margin-bottom:16px; }
+.tab {
+  flex:1; padding:7px; border-radius:6px; border:1px solid transparent;
+  background:none; color:var(--text3); font-family:'Syne',sans-serif;
+  font-size:12px; font-weight:600; cursor:pointer; text-align:center;
+  transition:all .15s;
+}
+.tab.active { background:var(--bg3); border-color:var(--border); color:var(--text); }
+.tab:hover:not(.active) { color:var(--text2); }
+
+.topbtn.send-btn {
+  background: color-mix(in srgb, var(--accent2) 15%, transparent);
+  border-color: var(--accent2);
+  color: var(--accent2);
+}
+.topbtn.send-btn:hover {
+  background: var(--accent2); color: var(--bg);
+}
+
+/* ── HEALTH BADGE ── */
+#health-badge {
+  display:flex; align-items:center; gap:5px;
+  padding:4px 10px; border-radius:20px;
+  font-family:'DM Mono',monospace; font-size:11px;
+  cursor:pointer; transition:all .2s; flex-shrink:0;
+  border:1px solid var(--border);
+}
+#health-badge.ok    { background:rgba(109,250,188,0.1); border-color:rgba(109,250,188,0.4); color:#6dfabc; }
+#health-badge.warn  { background:rgba(255,230,0,0.1);   border-color:rgba(255,230,0,0.4);   color:#ffe600; }
+#health-badge.error { background:rgba(250,109,143,0.1); border-color:rgba(250,109,143,0.4); color:#fa6d8f; }
+
+/* HEALTH PANEL */
+#health-panel {
+  position:fixed; top:58px; right:16px; z-index:200;
+  background:var(--bg2); border:1px solid var(--border);
+  border-radius:10px; padding:14px; width:260px;
+  box-shadow:0 8px 24px #00000066;
+  display:none;
+}
+#health-panel.open { display:block; animation:fade-up .2s ease; }
+.health-item {
+  display:flex; align-items:flex-start; gap:8px;
+  padding:6px 0; border-bottom:1px solid var(--border);
+  font-size:12px; color:var(--text2); cursor:pointer;
+  transition:color .15s;
+}
+.health-item:last-child { border-bottom:none; }
+.health-item:hover { color:var(--text); }
+.health-item-icon { font-size:13px; flex-shrink:0; margin-top:1px; }
+.health-ok   { color:var(--accent3); }
+.health-warn { color:#ffe600; }
+.health-err  { color:var(--accent2); }
+
+/* ── SEARCH ── */
+#search-wrap {
+  position:absolute; top:12px; left:12px; z-index:20;
+  display:flex; align-items:center; gap:6px;
+}
+#search-input {
+  background:var(--bg2); border:1px solid var(--border);
+  border-radius:8px; color:var(--text); font-family:'DM Mono',monospace;
+  font-size:12px; padding:5px 10px; outline:none; width:0;
+  transition:all .3s; opacity:0; pointer-events:none;
+}
+#search-input.open { width:160px; opacity:1; pointer-events:all; border-color:var(--accent); }
+#search-btn {
+  width:30px; height:30px; border-radius:8px;
+  border:1px solid var(--border); background:var(--bg2);
+  color:var(--text2); cursor:pointer; font-size:14px;
+  display:flex; align-items:center; justify-content:center;
+  transition:all .15s; z-index:21;
+}
+#search-btn:hover { border-color:var(--accent); color:var(--accent); }
+#search-results {
+  position:absolute; top:36px; left:0;
+  background:var(--bg2); border:1px solid var(--border);
+  border-radius:8px; width:200px; max-height:200px;
+  overflow-y:auto; display:none; box-shadow:0 4px 16px #00000066;
+}
+#search-results.open { display:block; }
+.search-result {
+  padding:8px 12px; font-size:12px; color:var(--text2);
+  cursor:pointer; border-bottom:1px solid var(--border);
+  transition:background .1s;
+}
+.search-result:last-child { border-bottom:none; }
+.search-result:hover { background:var(--bg3); color:var(--text); }
+.search-result mark { background:none; color:var(--accent); font-weight:700; }
+
+/* ── UNDO/REDO ── */
+#undo-redo {
+  display:flex; gap:4px; position:absolute;
+  bottom:20px; left:12px; z-index:20;
+}
+.undo-btn {
+  width:32px; height:32px; border-radius:8px;
+  border:1px solid var(--border); background:var(--bg2);
+  color:var(--text3); font-size:14px; cursor:pointer;
+  display:flex; align-items:center; justify-content:center;
+  transition:all .15s;
+}
+.undo-btn:hover:not(:disabled) { border-color:var(--accent); color:var(--accent); }
+.undo-btn:disabled { opacity:0.3; cursor:not-allowed; }
+
+/* ── MINIMAP ── */
+#minimap {
+  position:absolute; bottom:20px; left:52px; z-index:20;
+  width:120px; height:80px;
+  background:var(--bg2); border:1px solid var(--border);
+  border-radius:8px; overflow:hidden; cursor:pointer;
+  opacity:0.85; transition:opacity .2s;
+}
+#minimap:hover { opacity:1; }
+#minimap canvas { width:100%; height:100%; display:block; }
+#minimap-viewport {
+  position:absolute; border:1px solid var(--accent);
+  border-radius:2px; pointer-events:none;
+  background:rgba(124,109,250,0.08);
+  transition:all .1s;
+}
+
+/* ── SCENE COLOR PICKER ── */
+.node-color-dot {
+  position:absolute; top:6px; right:6px;
+  width:8px; height:8px; border-radius:50%;
+  border:1px solid rgba(255,255,255,0.2);
+  cursor:pointer; flex-shrink:0;
+}
+.color-picker-row {
+  display:flex; gap:6px; flex-wrap:wrap; margin-top:6px;
+}
+.color-swatch {
+  width:20px; height:20px; border-radius:50%;
+  cursor:pointer; border:2px solid transparent;
+  transition:all .15s; flex-shrink:0;
+}
+.color-swatch:hover, .color-swatch.active {
+  border-color:#fff; transform:scale(1.2);
+}
+.tip {
+  display:inline-flex; align-items:center; justify-content:center;
+  width:16px; height:16px; border-radius:50%;
+  background:var(--bg4); border:1px solid var(--border);
+  color:var(--text3); font-size:9px; font-weight:700;
+  cursor:pointer; margin-left:5px; flex-shrink:0;
+  vertical-align:middle; transition:all .15s;
+  -webkit-tap-highlight-color: transparent;
+}
+.tip:hover, .tip.active { border-color:var(--accent); color:var(--accent); }
+
+/* Tooltip bubble — créé par JS */
+#tip-bubble {
+  position:fixed; z-index:2000;
+  background:var(--bg4); border:1px solid var(--accent);
+  border-radius:8px; padding:8px 12px;
+  font-size:12px; font-weight:400; color:var(--text2);
+  max-width:220px; line-height:1.5; text-align:center;
+  box-shadow:0 4px 16px #00000088;
+  pointer-events:none; opacity:0;
+  transition:opacity .2s;
+}
+#tip-bubble.show { opacity:1; }
+
+/* ── TEST BUTTON ── */
+.topbtn.test-btn {
+  background:var(--bg3); border-color:var(--accent3); color:var(--accent3);
+}
+.topbtn.test-btn:hover { background:var(--accent3); color:var(--bg); }
+
+.kids-toggle {
+  display:flex; align-items:center; cursor:pointer;
+  padding:4px 6px; border-radius:6px; border:1px solid var(--border);
+  background:var(--bg3); transition:all .15s; flex-shrink:0;
+}
+.kids-toggle:hover { border-color:var(--accent); }
+.kids-toggle input { display:none; }
+.kids-icon {
+  font-size:16px; opacity:0.35; transition:opacity .2s, transform .2s;
+  line-height:1;
+}
+.kids-toggle input:checked ~ .kids-icon {
+  opacity:1; transform:scale(1.2);
+  filter:drop-shadow(0 0 4px #ffd700);
+}
+
+/* ZOOM INDICATOR */
+#zoom-indicator {
+  position:absolute; top:12px; left:50%; transform:translateX(-50%);
+  background:var(--bg3); border:1px solid var(--border);
+  border-radius:20px; padding:3px 10px;
+  font-family:'DM Mono',monospace; font-size:11px; color:var(--text3);
+  pointer-events:none; z-index:10;
+  opacity:0; transition:opacity .3s;
+}
+#zoom-indicator.visible { opacity:1; }
+
+/* ── NODE WIDTH RESPONSIVE ── */
+@media (max-width:700px) {
+  :root { --node-w: 130px; --node-h: 54px; }
+  .node { padding:8px 10px; }
+  .node-title { font-size:11px; }
+  .node-id { display:none; }
+}
+
+/* THEME PANEL */
+#theme-panel {
+  position:fixed; top:52px; right:0; width:300px; height:calc(100vh - 52px);
+  background:var(--bg2); border-left:1px solid var(--border);
+  z-index:200; transform:translateX(100%);
+  transition:transform .25s cubic-bezier(.4,0,.2,1);
+  display:flex; flex-direction:column; overflow:hidden;
+}
+#theme-panel.open { transform:translateX(0); }
+#theme-panel-header {
+  padding:16px 20px; border-bottom:1px solid var(--border);
+  display:flex; align-items:center; justify-content:space-between; flex-shrink:0;
+}
+#theme-panel-header h3 { font-size:14px; font-weight:700; }
+#theme-panel-body { flex:1; overflow-y:auto; padding:16px 20px; }
+
+.theme-section { margin-bottom:22px; }
+.theme-section-title {
+  font-size:10px; font-weight:700; letter-spacing:2px;
+  text-transform:uppercase; color:var(--text3); margin-bottom:10px;
+}
+
+/* PRESET CHIPS */
+.preset-grid { display:grid; grid-template-columns:1fr 1fr; gap:8px; }
+.preset-chip {
+  border-radius:10px; border:2px solid transparent;
+  padding:10px 12px; cursor:pointer; transition:all .15s;
+  position:relative; overflow:hidden;
+}
+.preset-chip:hover { transform:translateY(-2px); box-shadow:0 6px 20px #00000066; }
+.preset-chip.active { border-color:#fff; }
+.preset-chip-swatches {
+  display:flex; gap:4px; margin-bottom:6px;
+}
+.swatch { width:14px; height:14px; border-radius:50%; flex-shrink:0; }
+.preset-chip-name { font-size:11px; font-weight:700; }
+
+/* CUSTOM COLORS */
+.color-row {
+  display:flex; align-items:center; gap:12px; margin-bottom:10px;
+}
+.color-row label { font-size:12px; color:var(--text2); flex:1; }
+.color-picker-wrap {
+  position:relative; width:36px; height:36px;
+  border-radius:8px; overflow:hidden; cursor:pointer;
+  border:2px solid var(--border); flex-shrink:0;
+  transition:border-color .15s;
+}
+.color-picker-wrap:hover { border-color:var(--accent); }
+.color-picker-wrap input[type=color] {
+  position:absolute; top:-4px; left:-4px;
+  width:calc(100%+8px); height:calc(100%+8px);
+  border:none; cursor:pointer; padding:0;
+}
+.color-preview {
+  width:100%; height:100%; pointer-events:none;
+  border-radius:6px;
+}
+
+/* PREVIEW MINI */
+#theme-preview {
+  border-radius:10px; padding:14px; margin-top:4px;
+  border:1px solid var(--border); transition:all .3s;
+}
+#theme-preview .prev-title {
+  font-size:13px; font-weight:700; margin-bottom:6px;
+}
+#theme-preview .prev-text {
+  font-size:11px; line-height:1.6; margin-bottom:10px; opacity:0.7;
+}
+#theme-preview .prev-btn {
+  font-size:11px; font-weight:700; padding:6px 12px;
+  border-radius:6px; display:inline-block; border:none; cursor:default;
+}
+
+/* ── BOTTOM NAV (mobile) ── */
+#bottom-nav {
+  display:none;
+  position:fixed; bottom:0; left:0; right:0; height:62px;
+  background:var(--bg2); border-top:1px solid var(--border);
+  z-index:300; padding:0;
+}
+.bnav-items { display:flex; height:100%; }
+.bnav-item {
+  flex:1; display:flex; flex-direction:column;
+  align-items:center; justify-content:center; gap:2px;
+  background:none; border:none; cursor:pointer;
+  color:var(--text3); font-family:'Syne',sans-serif;
+  transition:color .15s; padding:0 4px; position:relative;
+  min-width:0;
+}
+.bnav-item.active { color:var(--accent); }
+.bnav-item.active::before {
+  content:''; position:absolute; top:0; left:15%; right:15%;
+  height:2px; background:var(--accent); border-radius:0 0 4px 4px;
+}
+.bnav-icon { font-size:19px; line-height:1; flex-shrink:0; }
+.bnav-label {
+  font-size:7.5px; font-weight:700; letter-spacing:0;
+  text-transform:uppercase; white-space:nowrap;
+  overflow:hidden; text-overflow:ellipsis; max-width:100%;
+}
+
+/* ── MOBILE BOTTOM SHEET ── */
+#mobile-sheet {
+  display:none;
+  position:fixed; left:0; right:0; bottom:60px;
+  background:var(--bg2); border-top:1px solid var(--border);
+  border-radius:16px 16px 0 0;
+  z-index:250; flex-direction:column;
+  max-height:75vh;
+  transform:translateY(100%);
+  transition:transform .3s cubic-bezier(.4,0,.2,1);
+}
+#mobile-sheet.open { transform:translateY(0); }
+#mobile-sheet-handle {
+  width:36px; height:4px; border-radius:2px;
+  background:var(--border); margin:10px auto 0; flex-shrink:0;
+}
+#mobile-sheet-header {
+  display:flex; align-items:center; padding:12px 16px 8px;
+  border-bottom:1px solid var(--border); flex-shrink:0;
+}
+#mobile-sheet-title { font-size:14px; font-weight:700; flex:1; }
+#mobile-sheet-close {
+  width:28px; height:28px; border-radius:6px;
+  background:none; border:1px solid var(--border);
+  color:var(--text3); cursor:pointer; font-size:14px;
+  display:flex; align-items:center; justify-content:center;
+}
+#mobile-sheet-body { flex:1; overflow-y:auto; padding:12px 16px 16px; }
+
+/* ── MOBILE MENU ── */
+#mobile-menu {
+  display:none;
+  position:fixed; bottom:68px; right:12px;
+  background:var(--bg2); border:1px solid var(--border);
+  border-radius:12px; z-index:400; overflow:hidden;
+  box-shadow:0 -8px 32px #00000066;
+  transform:translateY(8px) scale(0.96); opacity:0;
+  transition:all .2s cubic-bezier(.4,0,.2,1);
+  pointer-events:none; min-width:200px;
+}
+#mobile-menu.open { transform:translateY(0) scale(1); opacity:1; pointer-events:all; }
+.mmenu-item {
+  display:flex; align-items:center; gap:12px;
+  padding:13px 18px; font-size:14px; font-weight:600;
+  color:var(--text2); cursor:pointer; border:none; background:none;
+  font-family:'Syne',sans-serif; width:100%; text-align:left;
+  border-bottom:1px solid var(--border); transition:background .1s;
+}
+.mmenu-item:last-child { border-bottom:none; }
+.mmenu-item:active { background:var(--bg3); }
+.mmenu-icon { font-size:16px; width:20px; text-align:center; }
+
+/* ── FAB (mobile add) ── */
+#mobile-fab {
+  display:none;
+  position:fixed; bottom:72px; right:16px;
+  width:52px; height:52px; border-radius:50%;
+  background:var(--accent); border:none; color:#fff;
+  font-size:26px; cursor:pointer; z-index:290;
+  box-shadow:0 4px 20px #7c6dfa66;
+  align-items:center; justify-content:center;
+  transition:transform .15s;
+}
+#mobile-fab:active { transform:scale(0.93); }
+
+/* ── RESPONSIVE ── */
+@media (max-width:700px) {
+  #topbar .sep,
+  #topbar button,
+  #topbar .spacer,
+  #topbar .kids-toggle { display:none; }
+  #topbar { gap:8px; padding:0 12px; }
+  #topbar #project-name { width:auto; flex:1; font-size:15px; }
+
+  #bottom-nav { display:flex; }
+  #mobile-fab { display:flex; }
+
+  #main { flex-direction:column; padding-bottom:60px; }
+  #editor-panel { display:none; }
+  #tree-panel { flex:1; overflow:hidden; }
+  #tree-controls { bottom:76px; right:12px; }
+  #add-node-btn { display:none; }
+  #theme-panel { width:100%; top:0; height:100vh; }
+  #zoom-indicator { display:block; }
+  #minimap { display:none; }
+  #undo-redo { display:none; }
+  #search-wrap { top:8px; left:8px; }
+  #search-input.open { width:140px; }
+}
+</style>
+</head>
+<body>
+<div id="shell">
+
+  <!-- TOPBAR -->
+  <div id="topbar">
+    <div class="logo">Story<span>Forge</span></div>
+    <div class="sep"></div>
+    <input type="text" id="project-name" value="Mon Histoire" placeholder="Nom du projet" oninput="project.name=this.value">
+    <label class="kids-toggle" title="Histoire pour enfants">
+      <input type="checkbox" id="kids-check" onchange="project.kids=this.checked">
+      <span class="kids-icon">🧒</span>
+    </label>
+    <label class="kids-toggle" title="Demander le nom du joueur" style="margin-left:4px">
+      <input type="checkbox" id="player-name-check" onchange="project.askPlayerName=this.checked">
+      <span class="kids-icon">👤</span>
+    </label>
+    <div class="spacer"></div>
+    <div id="health-badge" class="ok" onclick="toggleHealthPanel()" title="${et('healthTitle')}"></div>
+    <button class="topbtn" onclick="openStatsModal()">⚙ Stats</button>
+    <button class="topbtn" onclick="openThemePanel()">🎨 Thème</button>
+    <button class="topbtn" onclick="autoLayout()">⊞ Ordonner</button>
+    <div class="sep"></div>
+    <button class="topbtn" onclick="importJSON()">↑ Importer</button>
+    <button class="topbtn test-btn" onclick="testStory()" id="btn-test">▶ Tester</button>
+    <button class="topbtn" onclick="exportTXT()">✎ Export TXT</button>
+    <button class="topbtn" onclick="exportJSON()">↓ Export JSON</button>
+    <button class="topbtn send-btn" onclick="sendStory()">✉ Envoyer</button>
+  </div>
+
+  <!-- MAIN -->
+  <div id="main">
+
+    <!-- TREE PANEL -->
+    <div id="tree-panel">
+      <canvas id="tree-canvas"></canvas>
+      <div id="tree-viewport"></div>
+      <button id="add-node-btn" onclick="openAddSceneModal()" title="Nouvelle scène">+</button>
+      <div id="zoom-indicator">100%</div>
+
+      <!-- SEARCH -->
+      <div id="search-wrap">
+        <button id="search-btn" onclick="toggleSearch()" title="Rechercher">🔍</button>
+        <input id="search-input" placeholder="Chercher une scène..."
+          oninput="doSearch(this.value)"
+          onkeydown="if(event.key==='Escape')closeSearch()">
+        <div id="search-results"></div>
+      </div>
+
+      <!-- UNDO/REDO -->
+      <div id="undo-redo">
+        <button class="undo-btn" id="btn-undo" onclick="undo()" title="Annuler (Ctrl+Z)" disabled>↩</button>
+        <button class="undo-btn" id="btn-redo" onclick="redo()" title="Rétablir (Ctrl+Y)" disabled>↪</button>
+      </div>
+
+      <!-- MINIMAP -->
+      <div id="minimap" onclick="minimapClick(event)" title="Vue d'ensemble">
+        <canvas id="minimap-canvas"></canvas>
+        <div id="minimap-viewport"></div>
+      </div>
+
+      <div id="tree-controls">
+        <button class="tree-ctrl" onclick="zoomIn()" title="Zoom +">+</button>
+        <button class="tree-ctrl" onclick="zoomOut()" title="Zoom −">−</button>
+        <button class="tree-ctrl" onclick="resetView()" title="Recentrer">◎</button>
+      </div>
+    </div>
+
+    <!-- EDITOR PANEL -->
+    <div id="editor-panel">
+      <div id="editor-header">
+        <h2 id="editor-title">Sélectionne une scène</h2>
+        <button class="icon-btn danger" id="delete-btn" onclick="deleteScene()" title="Supprimer" style="display:none">✕</button>
+      </div>
+      <div id="editor-body">
+        <div id="empty-state">
+          <div class="icon">✦</div>
+          <p id="empty-text"></p>
+          <button class="topbtn primary" style="margin-top:8px" id="empty-btn" onclick="openAddSceneModal()"></button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- MODAL STATS -->
+<div id="modal-overlay">
+  <div id="modal">
+    <h3 id="stats-modal-title">Configuration des Stats</h3>
+    <p id="stats-modal-desc">Définis les attributs de ton personnage. Ils seront disponibles dans chaque choix.</p>
+    <div id="stats-list"></div>
+    <button class="add-choice-btn" id="stats-add-btn" onclick="addStat()">+ Ajouter une stat</button>
+    <div class="modal-actions">
+      <button class="topbtn" id="stats-close-btn" onclick="closeModal()">Fermer</button>
+    </div>
+  </div>
+</div>
+
+<!-- TOOLTIP BUBBLE -->
+<div id="tip-bubble"></div>
+
+<!-- HEALTH PANEL -->
+<div id="health-panel"></div>
+
+<!-- IMPORT INPUT -->
+<input type="file" id="import-input" accept=".json" style="display:none" onchange="handleImport(event)">
+
+<!-- THEME PANEL -->
+<div id="theme-panel">
+  <div id="theme-panel-header">
+    <h3 id="theme-title">🎨 Thème visuel</h3>
+    <button class="icon-btn" onclick="closeThemePanel()">✕</button>
+  </div>
+  <div id="theme-panel-body">
+
+    <div class="theme-section">
+      <div class="theme-section-title" id="theme-presets-title">Thèmes prédéfinis</div>
+      <div class="preset-grid" id="preset-grid"></div>
+    </div>
+
+    <div class="theme-section">
+      <div class="theme-section-title" id="theme-custom-title">Couleurs custom</div>
+      <div class="color-row">
+        <label id="lbl-bg">Fond principal</label>
+        <div class="color-picker-wrap"><div class="color-preview" id="prev-bg"></div><input type="color" id="cp-bg" oninput="liveColor('bg',this.value)"></div>
+      </div>
+      <div class="color-row">
+        <label id="lbl-bg2">Fond panneaux</label>
+        <div class="color-picker-wrap"><div class="color-preview" id="prev-bg2"></div><input type="color" id="cp-bg2" oninput="liveColor('bg2',this.value)"></div>
+      </div>
+      <div class="color-row">
+        <label id="lbl-bg3">Fond éléments</label>
+        <div class="color-picker-wrap"><div class="color-preview" id="prev-bg3"></div><input type="color" id="cp-bg3" oninput="liveColor('bg3',this.value)"></div>
+      </div>
+      <div class="color-row">
+        <label id="lbl-accent">Accent principal</label>
+        <div class="color-picker-wrap"><div class="color-preview" id="prev-accent"></div><input type="color" id="cp-accent" oninput="liveColor('accent',this.value)"></div>
+      </div>
+      <div class="color-row">
+        <label id="lbl-accent2">Accent secondaire</label>
+        <div class="color-picker-wrap"><div class="color-preview" id="prev-accent2"></div><input type="color" id="cp-accent2" oninput="liveColor('accent2',this.value)"></div>
+      </div>
+      <div class="color-row">
+        <label id="lbl-accent3">Accent tertiaire</label>
+        <div class="color-picker-wrap"><div class="color-preview" id="prev-accent3"></div><input type="color" id="cp-accent3" oninput="liveColor('accent3',this.value)"></div>
+      </div>
+      <div class="color-row">
+        <label id="lbl-text">Texte principal</label>
+        <div class="color-picker-wrap"><div class="color-preview" id="prev-text"></div><input type="color" id="cp-text" oninput="liveColor('text',this.value)"></div>
+      </div>
+      <div class="color-row">
+        <label id="lbl-border">Bordures</label>
+        <div class="color-picker-wrap"><div class="color-preview" id="prev-border"></div><input type="color" id="cp-border" oninput="liveColor('border',this.value)"></div>
+      </div>
+    </div>
+
+    <div class="theme-section">
+      <div class="theme-section-title" id="theme-preview-title">Aperçu</div>
+      <div id="theme-preview">
+        <div class="prev-title" id="pv-title">Titre de la scène</div>
+        <div class="prev-text" id="pv-text">Le héros avance dans l'obscurité. Chaque pas résonne dans le couloir de pierre...</div>
+        <div class="prev-btn" id="pv-btn">→ Continuer</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- MODAL ADD LINKED SCENE -->
+<div id="link-modal-overlay">
+  <div id="modal">
+    <h3 id="link-modal-title"></h3>
+    <p id="link-modal-desc"></p>
+    <div class="form-group">
+      <label class="form-label" id="link-source-label"></label>
+      <select class="form-select" id="link-source-scene" onchange="refreshLinkChoiceOptions()"></select>
+      <div class="link-hint" id="link-source-hint"></div>
+    </div>
+    <div class="form-group">
+      <label class="form-label" id="link-choice-label"></label>
+      <select class="form-select" id="link-source-choice" onchange="toggleNewChoiceText()"></select>
+    </div>
+    <div class="form-group" id="link-choice-text-wrap">
+      <label class="form-label" id="link-choice-text-label"></label>
+      <input class="form-input" id="link-choice-text" value="">
+    </div>
+    <div class="form-group">
+      <label class="form-label" id="link-title-label"></label>
+      <input class="form-input" id="link-new-title" value="">
+    </div>
+    <div class="modal-actions">
+      <button class="topbtn" onclick="closeLinkModal()" id="link-cancel-btn"></button>
+      <button class="topbtn primary" onclick="createLinkedScene()" id="link-create-btn"></button>
+    </div>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div id="toast"></div>
+
+<!-- MOBILE BOTTOM NAV -->
+<nav id="bottom-nav">
+  <div class="bnav-items">
+    <button class="bnav-item active" id="bnav-tree" onclick="mobileTab('tree')">
+      <span class="bnav-icon">⊞</span>
+      <span class="bnav-label">Arbre</span>
+    </button>
+    <button class="bnav-item" id="bnav-edit" onclick="mobileTab('edit')">
+      <span class="bnav-icon">✏️</span>
+      <span class="bnav-label">Éditer</span>
+    </button>
+    <button class="bnav-item" id="bnav-stats" onclick="openStatsModal()">
+      <span class="bnav-icon">⚙</span>
+      <span class="bnav-label">Stats</span>
+    </button>
+    <button class="bnav-item" id="bnav-more" onclick="toggleMobileMenu()">
+      <span class="bnav-icon">•••</span>
+      <span class="bnav-label">Plus</span>
+    </button>
+  </div>
+</nav>
+
+<!-- MOBILE FAB -->
+<button id="mobile-fab" onclick="openAddSceneModal()">+</button>
+
+<!-- MOBILE BOTTOM SHEET (editor) -->
+<div id="mobile-sheet">
+  <div id="mobile-sheet-handle"></div>
+  <div id="mobile-sheet-header">
+    <div id="mobile-sheet-title">Scène</div>
+    <button id="mobile-sheet-close" onclick="closeMobileSheet()">✕</button>
+  </div>
+  <div id="mobile-sheet-body"></div>
+</div>
+
+<!-- MOBILE MENU -->
+<div id="mobile-menu">
+  <button class="mmenu-item" onclick="closeMobileMenu();openThemePanel()">
+    <span class="mmenu-icon">🎨</span> Thème visuel
+  </button>
+  <button class="mmenu-item" onclick="closeMobileMenu();autoLayout()">
+    <span class="mmenu-icon">⊞</span> Ordonner l'arbre
+  </button>
+  <button class="mmenu-item" onclick="toggleKidsMobile()">
+    <span class="mmenu-icon">🧒</span> <span id="mm-kids-label">${et("kidsLabel")}</span>
+  </button>
+  <button class="mmenu-item" onclick="togglePlayerNameMobile()">
+    <span class="mmenu-icon">👤</span> <span id="mm-player-label">${et("playerLabel")}</span>
+  </button>
+  <button class="mmenu-item" onclick="closeMobileMenu();testStory()" style="color:var(--accent3)">
+    <span class="mmenu-icon">▶</span> Tester l'histoire
+  </button>
+  <button class="mmenu-item" onclick="closeMobileMenu();importJSON()">
+    <span class="mmenu-icon">↑</span> Importer JSON
+  </button>
+  <button class="mmenu-item" onclick="closeMobileMenu();exportTXT()">
+    <span class="mmenu-icon">✎</span> Exporter TXT
+  </button>
+  <button class="mmenu-item" onclick="closeMobileMenu();exportJSON()">
+    <span class="mmenu-icon">↓</span> Exporter JSON
+  </button>
+  <button class="mmenu-item" onclick="closeMobileMenu();sendStory()" style="color:var(--accent2)">
+    <span class="mmenu-icon">✉</span> Envoyer mon histoire
+  </button>
+</div>
+
+<script>
+// ══════════════════════════════════════════════
+// STATE
+// ══════════════════════════════════════════════
+let project = {
+  name: 'Mon Histoire',
+  stats: [
+    { id:'vie',     label:'Vie',     start:100, max:100, color:'#fa6d8f' },
+    { id:'credits', label:'Crédits', start:200, max:500, color:'#ffe600' },
+    { id:'repute',  label:'Répute',  start:40,  max:100, color:'#6dfabc' },
+  ],
+  scenes: {}
+};
+
+let selectedId = null;
+let pan = { x: 60, y: 60 };
+let zoom = 1;
+let dragging = false;
+let dragStart = null;
+let nodeBeingDragged = null;
+let nodeDragOffset = null;
+
+const EDITOR_I18N = {
+  fr: {
+    projectPlaceholder:'Nom du projet', kidsTitle:'Histoire pour enfants', statsBtn:'⚙ Stats', themeBtn:'🎨 Thème', layoutBtn:'⊞ Ordonner', importBtn:'↑ Importer', exportTxtBtn:'✎ Export TXT', exportJsonBtn:'↓ Export JSON', testBtn:'Tester l\'aperçu', sendBtn:'Envoyer mon histoire',
+    selectScene:'Sélectionne une scène', deleteTitle:'Supprimer', newSceneTitle:'Nouvelle scène', centerTitle:'Recentrer', empty:'Crée ou sélectionne une scène dans l\'arbre pour l\'éditer.', newScene:'+ Nouvelle scène',
+    statsTitle:'Configuration des Stats', statsDesc:'Définis les attributs de ton personnage. Ils seront disponibles dans chaque choix.', addStat:'+ Ajouter une stat', close:'Fermer',
+    visualTheme:'🎨 Thème visuel', presets:'Thèmes prédéfinis', customColors:'Couleurs custom', mainBg:'Fond principal', panelBg:'Fond panneaux', elementBg:'Fond éléments', accentMain:'Accent principal', accentSecond:'Accent secondaire', accentThird:'Accent tertiaire', mainText:'Texte principal', borders:'Bordures', preview:'Aperçu', previewTitle:'Titre de la scène', previewText:'Le héros avance dans l\'obscurité. Chaque pas résonne dans le couloir de pierre...', previewBtn:'→ Continuer',
+    tree:'Arbre', edit:'Éditer', more:'Plus', orderTree:'Ordonner l\'arbre', exportTxt:'Exporter TXT', exportJson:'Exporter JSON', scene:'Scène',
+    id:'Identifiant', sceneTitle:'Titre de la scène', sceneTitlePh:'Ex: Le dock maudit', location:'Lieu / Contexte', locationPh:'Ex: SECTEUR 9 — NIVEAU INFÉRIEUR', narrative:'Texte narratif', narrativePh:'L\'histoire se déroule ici...', varHelp:'Variable disponible : <code>{{player}}</code> sera remplacé par le nom du joueur.', insertPlayer:'+ insérer {{player}}',
+    tipId:'Identifiant unique — généré automatiquement, ne pas modifier',
+    tipTitle:'Nom de la scène — affiché dans l\'arbre et dans le journal du joueur',
+    tipLocation:'Lieu affiché en haut de la scène — ex: SECTEUR 9, PORT DE TORTUGA',
+    tipNarrator:'Voix du narrateur — s\'affiche en italique AVANT le texte, plus lentement',
+    tipText:'Texte principal. Utilisez **gras** et *italique*. {{player}} = prénom du joueur',
+    tipTransition:'Animation à l\'arrivée — fade=fondu, flash=éclair, glitch=effet numérique, scanline=lignes',
+    tipImage:'Image ou GIF affiché au-dessus du texte. Format conseillé : 512×512. Dossier : assets/images/',
+    tipStart:'Scène où commence l\'histoire — une seule scène peut être le départ',
+    tipEnd:'Scène de fin — aucun choix n\'est nécessaire, les stats finales s\'affichent',
+    tipChoiceText:'Ce que le joueur lit et clique pour avancer dans l\'histoire',
+    tipLeadsTo:'Scène vers laquelle ce choix mène. Bouton ＋→ pour créer une suite directement',
+    tipEffect:'Modifie une stat quand le joueur choisit cette réponse — positif ou négatif',
+    tipClickFx:'Animation jouée sur le bouton quand le joueur tape dessus',
+    sceneImmersion:'Immersion de la scène', arrivalTransition:'Transition d\'arrivée', arrivalSound:'Son d\'arrivée', startScene:'Scène de départ', endScene:'Scène finale', choices:'Choix', addChoice:'+ Ajouter un choix', choice:'Choix', choiceText:'Texte du choix', choiceTextPh:'Ex: Accepter le contrat', choiceVar:'Tu peux écrire <code>{{player}}</code> dans un choix.', leadsTo:'Mène vers', noDestination:'— Aucune destination —', clickEffect:'Effet au clic', clickSound:'Son au clic', statEffects:'Effets sur les stats', effect:'+ Effet', noTitle:'Sans titre', choicesCount:'choix', needOneScene:'Au moins une scène requise', defineStats:'Définis d\'abord des stats', invalidFormat:'Format invalide', addLinkedScene:'Créer une scène liée', addLinkedSceneDesc:'Choisis depuis quelle scène et quelle réponse le joueur arrivera sur la nouvelle tuile.', sourceScene:'Scène source', sourceHint:'La nouvelle scène sera reliée depuis cette scène.', sourceChoice:'Réponse source', createNewChoice:'Créer une nouvelle réponse', newChoiceText:'Texte de la nouvelle réponse', newChoiceTextDefault:'Continuer', newSceneName:'Titre de la nouvelle scène', cancel:'Annuler', createScene:'Créer la scène', sceneCreatedLinked:'Scène créée et reliée ✦', sceneCreated:'Scène créée ✦', deletedScene:'Scène supprimée',
+    transitions:{fade:'Fondu doux', glitch:'Glitch numérique', scanline:'Scanlines', flash:'Flash rapide', none:'Aucune'}, clicks:{pulse:'Pulse néon', shake:'Secousse', glitch:'Glitch', flash:'Flash', vibrate:'Vibration mobile', none:'Aucun'}, sounds:{none:'Aucun', click_neon:'Clic néon', glitch:'Glitch court', success:'Succès', error:'Erreur'},
+    healthReady:'✓ Prête', healthWarn:'⚠ {n} avert.', healthError:'✕ {n} erreur(s)', healthOk:'Aucun problème détecté', healthNoStart:'Aucune scène de départ définie', healthMultiStart:'{n} scènes de départ', healthEmptyText:'"{t}" — texte vide', healthNoLink:'"{t}" — choix {i} sans destination', healthDeadLink:'"{t}" — destination supprimée', healthNoChoice:'"{t}" — sans choix, non finale', searchNoResult:'Aucun résultat', undone:'↩ Annulé', redone:'↪ Rétabli', nodeColor:'🎨 Couleur du nœud', kidsOn:'🧒 Mode enfant activé', kidsOff:'Mode enfant désactivé', playerOn:'👤 Prénom activé', playerOff:'Prénom désactivé', kidsLabel:'Histoire pour enfants', playerLabel:'Demander le prénom', healthTitle:'Santé de l\'histoire'
+  },
+  en: {
+    projectPlaceholder:'Project name', kidsTitle:'Story for children', statsBtn:'⚙ Stats', themeBtn:'🎨 Theme', layoutBtn:'⊞ Arrange', importBtn:'↑ Import', exportTxtBtn:'✎ Export TXT', exportJsonBtn:'↓ Export JSON', testBtn:'Preview test', sendBtn:'Send my story',
+    selectScene:'Select a scene', deleteTitle:'Delete', newSceneTitle:'New scene', centerTitle:'Recenter', empty:'Create or select a scene in the tree to edit it.', newScene:'+ New scene',
+    statsTitle:'Stats Configuration', statsDesc:'Define your character attributes. They will be available in every choice.', addStat:'+ Add stat', close:'Close',
+    visualTheme:'🎨 Visual theme', presets:'Preset themes', customColors:'Custom colors', mainBg:'Main background', panelBg:'Panel background', elementBg:'Element background', accentMain:'Main accent', accentSecond:'Secondary accent', accentThird:'Third accent', mainText:'Main text', borders:'Borders', preview:'Preview', previewTitle:'Scene title', previewText:'The hero moves forward in the dark. Every step echoes through the stone corridor...', previewBtn:'→ Continue',
+    tree:'Tree', edit:'Edit', more:'More', orderTree:'Arrange tree', exportTxt:'Export TXT', exportJson:'Export JSON', scene:'Scene',
+    id:'Identifier', sceneTitle:'Scene title', sceneTitlePh:'Ex: The cursed dock', location:'Location / Context', locationPh:'Ex: SECTOR 9 — LOWER LEVEL', narrative:'Narrative text', narrativePh:'The story begins here...', varHelp:'Available variable: <code>{{player}}</code> will be replaced by the player name.', insertPlayer:'+ insert {{player}}',
+    tipId:'Unique identifier — auto-generated, do not modify',
+    tipTitle:'Scene name — shown in the tree and in the player\'s journal',
+    tipLocation:'Location shown at the top of the scene — ex: SECTOR 9, PORT OF TORTUGA',
+    tipNarrator:'Narrator voice — shown in italic BEFORE the main text, at a slower pace',
+    tipText:'Main text. Use **bold** and *italic*. {{player}} = player\'s name',
+    tipTransition:'Animation on arrival — fade=soft, flash=bright, glitch=digital, scanline=lines',
+    tipImage:'Image or GIF shown above the text. Recommended: 512×512. Folder: assets/images/',
+    tipStart:'Scene where the story begins — only one scene can be the start',
+    tipEnd:'Ending scene — no choices needed, final stats are displayed',
+    tipChoiceText:'What the player reads and taps to move forward',
+    tipLeadsTo:'Scene this choice leads to. Use ＋→ to create a sequel scene directly',
+    tipEffect:'Modifies a stat when the player picks this choice — positive or negative',
+    tipClickFx:'Animation played on the button when the player taps it',
+    sceneImmersion:'Scene immersion', arrivalTransition:'Arrival transition', arrivalSound:'Arrival sound', startScene:'Start scene', endScene:'Final scene', choices:'Choices', addChoice:'+ Add choice', choice:'Choice', choiceText:'Choice text', choiceTextPh:'Ex: Accept the contract', choiceVar:'You can write <code>{{player}}</code> in a choice.', leadsTo:'Leads to', noDestination:'— No destination —', clickEffect:'Click effect', clickSound:'Click sound', statEffects:'Stat effects', effect:'+ Effect', noTitle:'Untitled', choicesCount:'choices', needOneScene:'At least one scene is required', defineStats:'Define stats first', invalidFormat:'Invalid format', addLinkedScene:'Create linked scene', addLinkedSceneDesc:'Choose which scene and which answer will lead the player to the new tile.', sourceScene:'Source scene', sourceHint:'The new scene will be linked from this scene.', sourceChoice:'Source answer', createNewChoice:'Create a new answer', newChoiceText:'New answer text', newChoiceTextDefault:'Continue', newSceneName:'New scene title', cancel:'Cancel', createScene:'Create scene', sceneCreatedLinked:'Scene created and linked ✦', sceneCreated:'Scene created ✦', deletedScene:'Scene deleted',
+    transitions:{fade:'Soft fade', glitch:'Digital glitch', scanline:'Scanlines', flash:'Quick flash', none:'None'}, clicks:{pulse:'Neon pulse', shake:'Shake', glitch:'Glitch', flash:'Flash', vibrate:'Mobile vibration', none:'None'}, sounds:{none:'None', click_neon:'Neon click', glitch:'Short glitch', success:'Success', error:'Error'},
+    healthReady:'✓ Ready', healthWarn:'⚠ {n} warn.', healthError:'✕ {n} error(s)', healthOk:'No issues detected', healthNoStart:'No start scene defined', healthMultiStart:'{n} start scenes', healthEmptyText:'"{t}" — empty text', healthNoLink:'"{t}" — choice {i} has no destination', healthDeadLink:'"{t}" — deleted destination', healthNoChoice:'"{t}" — no choices, not marked as end', searchNoResult:'No results', undone:'↩ Undone', redone:'↪ Redone', nodeColor:'🎨 Node color', kidsOn:'🧒 Kids mode on', kidsOff:'Kids mode off', playerOn:'👤 Name prompt on', playerOff:'Name prompt off', kidsLabel:'Kids story', playerLabel:'Ask for name', healthTitle:'Story health'
+  },
+  es: {
+    projectPlaceholder:'Nombre del proyecto', kidsTitle:'Historia para niños', statsBtn:'⚙ Stats', themeBtn:'🎨 Tema', layoutBtn:'⊞ Ordenar', importBtn:'↑ Importar', exportTxtBtn:'✎ Exportar TXT', exportJsonBtn:'↓ Exportar JSON', testBtn:'Vista previa', sendBtn:'Enviar mi historia',
+    selectScene:'Selecciona una escena', deleteTitle:'Eliminar', newSceneTitle:'Nueva escena', centerTitle:'Recentrar', empty:'Crea o selecciona una escena en el árbol para editarla.', newScene:'+ Nueva escena',
+    statsTitle:'Configuración de Stats', statsDesc:'Define los atributos de tu personaje. Estarán disponibles en cada elección.', addStat:'+ Añadir stat', close:'Cerrar',
+    visualTheme:'🎨 Tema visual', presets:'Temas predefinidos', customColors:'Colores personalizados', mainBg:'Fondo principal', panelBg:'Fondo de paneles', elementBg:'Fondo de elementos', accentMain:'Acento principal', accentSecond:'Acento secundario', accentThird:'Acento terciario', mainText:'Texto principal', borders:'Bordes', preview:'Vista previa', previewTitle:'Título de la escena', previewText:'El héroe avanza en la oscuridad. Cada paso resuena en el pasillo de piedra...', previewBtn:'→ Continuar',
+    tree:'Árbol', edit:'Editar', more:'Más', orderTree:'Ordenar el árbol', exportTxt:'Exportar TXT', exportJson:'Exportar JSON', scene:'Escena',
+    id:'Identificador', sceneTitle:'Título de la escena', sceneTitlePh:'Ej: El muelle maldito', location:'Lugar / Contexto', locationPh:'Ej: SECTOR 9 — NIVEL INFERIOR', narrative:'Texto narrativo', narrativePh:'La historia empieza aquí...', varHelp:'Variable disponible: <code>{{player}}</code> será reemplazada por el nombre del jugador.', insertPlayer:'+ insertar {{player}}',
+    tipId:'Identificador único — generado automáticamente, no modificar',
+    tipTitle:'Nombre de la escena — mostrado en el árbol y en el diario del jugador',
+    tipLocation:'Lugar mostrado en la parte superior — ej: SECTOR 9, PUERTO DE TORTUGA',
+    tipNarrator:'Voz del narrador — aparece en cursiva ANTES del texto, más lentamente',
+    tipText:'Texto principal. Usa **negrita** y *cursiva*. {{player}} = nombre del jugador',
+    tipTransition:'Animación al llegar — fade=fundido, flash=destello, glitch=digital, scanline=líneas',
+    tipImage:'Imagen o GIF mostrado sobre el texto. Recomendado: 512×512. Carpeta: assets/images/',
+    tipStart:'Escena donde comienza la historia — solo una escena puede ser el inicio',
+    tipEnd:'Escena final — no se necesitan elecciones, se muestran las stats finales',
+    tipChoiceText:'Lo que el jugador lee y toca para avanzar en la historia',
+    tipLeadsTo:'Escena a la que lleva esta elección. Usa ＋→ para crear una escena de continuación',
+    tipEffect:'Modifica una stat cuando el jugador elige esta respuesta — positivo o negativo',
+    tipClickFx:'Animación en el botón cuando el jugador lo toca',
+    sceneImmersion:'Inmersión de la escena', arrivalTransition:'Transición de llegada', arrivalSound:'Sonido de llegada', startScene:'Escena inicial', endScene:'Escena final', choices:'Elecciones', addChoice:'+ Añadir elección', choice:'Elección', choiceText:'Texto de la elección', choiceTextPh:'Ej: Aceptar el contrato', choiceVar:'Puedes escribir <code>{{player}}</code> en una elección.', leadsTo:'Lleva a', noDestination:'— Sin destino —', clickEffect:'Efecto al tocar', clickSound:'Sonido al tocar', statEffects:'Efectos en stats', effect:'+ Efecto', noTitle:'Sin título', choicesCount:'elecciones', needOneScene:'Se requiere al menos una escena', defineStats:'Define stats primero', invalidFormat:'Formato inválido', addLinkedScene:'Crear escena vinculada', addLinkedSceneDesc:'Elige desde qué escena y qué respuesta llevará al jugador a la nueva tarjeta.', sourceScene:'Escena de origen', sourceHint:'La nueva escena se vinculará desde esta escena.', sourceChoice:'Respuesta de origen', createNewChoice:'Crear una nueva respuesta', newChoiceText:'Texto de la nueva respuesta', newChoiceTextDefault:'Continuar', newSceneName:'Título de la nueva escena', cancel:'Cancelar', createScene:'Crear escena', sceneCreatedLinked:'Escena creada y vinculada ✦', sceneCreated:'Escena creada ✦', deletedScene:'Escena eliminada',
+    transitions:{fade:'Fundido suave', glitch:'Glitch digital', scanline:'Scanlines', flash:'Flash rápido', none:'Ninguna'}, clicks:{pulse:'Pulso neón', shake:'Sacudida', glitch:'Glitch', flash:'Flash', vibrate:'Vibración móvil', none:'Ninguno'}, sounds:{none:'Ninguno', click_neon:'Clic neón', glitch:'Glitch corto', success:'Éxito', error:'Error'},
+    healthReady:'✓ Lista', healthWarn:'⚠ {n} advert.', healthError:'✕ {n} error(s)', healthOk:'Sin problemas detectados', healthNoStart:'Sin escena de inicio definida', healthMultiStart:'{n} escenas de inicio', healthEmptyText:'"{t}" — texto vacío', healthNoLink:'"{t}" — elección {i} sin destino', healthDeadLink:'"{t}" — destino eliminado', healthNoChoice:'"{t}" — sin elecciones, no es final', searchNoResult:'Sin resultados', undone:'↩ Deshecho', redone:'↪ Rehecho', nodeColor:'🎨 Color del nodo', kidsOn:'🧒 Modo infantil activado', kidsOff:'Modo infantil desactivado', playerOn:'👤 Nombre activado', playerOff:'Nombre desactivado', kidsLabel:'Historia para niños', playerLabel:'Pedir nombre', healthTitle:'Salud de la historia'
+  }
+};
+let editorLang = ['fr','en','es'].includes(localStorage.getItem('sf_lang')) ? localStorage.getItem('sf_lang') : 'fr';
+function et(key){ return (EDITOR_I18N[editorLang] && EDITOR_I18N[editorLang][key]) || EDITOR_I18N.fr[key] || key; }
+function emap(map, value){ return (EDITOR_I18N[editorLang] && EDITOR_I18N[editorLang][map] && EDITOR_I18N[editorLang][map][value]) || value; }
+
+const TRANSITION_PRESETS = ['fade','glitch','scanline','flash','none'];
+const CLICK_EFFECT_PRESETS = ['pulse','shake','glitch','flash','vibrate','none'];
+const SOUND_PRESETS = ['none','click_neon','glitch','success','error'];
+function presetOptions(list, selected, mapName) {
+  return list.map(value => `<option value="${value}" ${selected===value?'selected':''}>${emap(mapName, value)}</option>`).join('');
+}
+
+
+function applyEditorLanguage() {
+  document.documentElement.lang = editorLang;
+  document.title = 'StoryForge Editor';
+  const projectName = document.getElementById('project-name');
+  if (projectName) projectName.placeholder = et('projectPlaceholder');
+  const kids = document.querySelector('.kids-toggle'); if (kids) kids.title = et('kidsTitle');
+  const topButtons = document.querySelectorAll('#topbar .topbtn');
+  if (topButtons[0]) topButtons[0].textContent = et('statsBtn');
+  if (topButtons[1]) topButtons[1].textContent = et('themeBtn');
+  if (topButtons[2]) topButtons[2].textContent = et('layoutBtn');
+  if (topButtons[3]) topButtons[3].textContent = et('importBtn');
+  if (topButtons[4]) topButtons[4].textContent = et('exportTxtBtn');
+  if (topButtons[5]) topButtons[5].textContent = et('exportJsonBtn');
+  const add = document.getElementById('add-node-btn'); if (add) add.title = et('newSceneTitle');
+  const ctrls = document.querySelectorAll('.tree-ctrl'); if (ctrls[2]) ctrls[2].title = et('centerTitle');
+  const editorTitle = document.getElementById('editor-title'); if (editorTitle && !selectedId) editorTitle.textContent = et('selectScene');
+  const del = document.getElementById('delete-btn'); if (del) del.title = et('deleteTitle');
+  const bnav = document.querySelectorAll('.bnav-label');
+  if (bnav[0]) bnav[0].textContent = et('tree'); if (bnav[1]) bnav[1].textContent = et('edit'); if (bnav[2]) bnav[2].textContent = 'Stats'; if (bnav[3]) bnav[3].textContent = et('more');
+  const ms = document.getElementById('mobile-sheet-title'); if (ms) ms.textContent = et('scene');
+
+  const byId = (id, text) => { const el = document.getElementById(id); if (el) el.textContent = text; };
+  byId('empty-text', et('empty'));
+  const hb = document.getElementById('health-badge');
+  if (hb && hb.className === 'ok') hb.textContent = et('healthReady');
+  byId('empty-btn',  et('newScene'));
+  byId('stats-modal-title', et('statsTitle')); byId('stats-modal-desc', et('statsDesc')); byId('stats-add-btn', et('addStat')); byId('stats-close-btn', et('close'));
+  byId('theme-title', et('visualTheme')); byId('theme-presets-title', et('presets')); byId('theme-custom-title', et('customColors'));
+  byId('lbl-bg', et('mainBg')); byId('lbl-bg2', et('panelBg')); byId('lbl-bg3', et('elementBg')); byId('lbl-accent', et('accentMain')); byId('lbl-accent2', et('accentSecond')); byId('lbl-accent3', et('accentThird')); byId('lbl-text', et('mainText')); byId('lbl-border', et('borders'));
+  byId('theme-preview-title', et('preview')); byId('pv-title', et('previewTitle')); byId('pv-text', et('previewText')); byId('pv-btn', et('previewBtn'));
+  const mm = document.querySelectorAll('#mobile-menu .mmenu-item');
+  if (mm[0]) mm[0].innerHTML = '<span class="mmenu-icon">🎨</span> ' + et('visualTheme');
+  if (mm[1]) mm[1].innerHTML = '<span class="mmenu-icon">⊞</span> ' + et('orderTree');
+  // mm[2] = kids toggle, mm[3] = player name toggle — gérés séparément
+  if (mm[4]) mm[4].innerHTML = '<span class="mmenu-icon">▶</span> ' + et('testBtn');
+  if (mm[5]) mm[5].innerHTML = '<span class="mmenu-icon">↑</span> ' + et('importBtn').replace('↑ ','');
+  if (mm[6]) mm[6].innerHTML = '<span class="mmenu-icon">✎</span> ' + et('exportTxt');
+  if (mm[7]) mm[7].innerHTML = '<span class="mmenu-icon">↓</span> ' + et('exportJson');
+  if (mm[8]) mm[8].innerHTML = '<span class="mmenu-icon">✉</span> ' + et('sendBtn');
+}
+
+// ══════════════════════════════════════════════
+// SCENE MANAGEMENT
+// ══════════════════════════════════════════════
+function genId() {
+  return 'scene_' + Math.random().toString(36).slice(2,8);
+}
+
+function addScene(linkFromId = '', linkChoiceIndex = 'new', linkChoiceText = '') {
+  pushUndo();
+  const id = genId();
+  const count = Object.keys(project.scenes).length;
+  const source = linkFromId && project.scenes[linkFromId] ? project.scenes[linkFromId] : null;
+  project.scenes[id] = {
+    id,
+    title: et('newSceneTitle'),
+    location: '',
+    text: '',
+    isStart: count === 0,
+    isEnd: false,
+    choices: [],
+    x: source ? source.x + 240 : 200 + (count % 4) * 200,
+    y: source ? source.y + 160 : 100 + Math.floor(count / 4) * 140
+  };
+
+  if (source) {
+    const choice = {
+      text: linkChoiceText || et('newChoiceTextDefault'),
+      vers: id,
+      clickEffect: 'pulse',
+      sound: 'click_neon',
+      effects: []
+    };
+    if (linkChoiceIndex === 'new' || source.choices.length === 0) {
+      source.choices.push(choice);
+    } else {
+      const idx = parseInt(linkChoiceIndex, 10);
+      if (!Number.isNaN(idx) && source.choices[idx]) {
+        source.choices[idx].vers = id;
+      } else {
+        source.choices.push(choice);
+      }
+    }
+  }
+
+  render();
+  selectScene(id);
+  toast(source ? et('sceneCreatedLinked') : et('sceneCreated'));
+}
+
+function openAddSceneModal() {
+  const scenes = Object.values(project.scenes);
+  if (!scenes.length) { addScene(); return; }
+
+  document.getElementById('link-modal-title').textContent = et('addLinkedScene');
+  document.getElementById('link-modal-desc').textContent = et('addLinkedSceneDesc');
+  document.getElementById('link-source-label').textContent = et('sourceScene');
+  document.getElementById('link-source-hint').textContent = et('sourceHint');
+  document.getElementById('link-choice-label').textContent = et('sourceChoice');
+  document.getElementById('link-choice-text-label').textContent = et('newChoiceText');
+  document.getElementById('link-title-label').textContent = et('newSceneName');
+  document.getElementById('link-cancel-btn').textContent = et('cancel');
+  document.getElementById('link-create-btn').textContent = et('createScene');
+
+  const sourceSelect = document.getElementById('link-source-scene');
+  sourceSelect.innerHTML = scenes.map(s => `<option value="${s.id}" ${s.id===selectedId?'selected':''}>${esc(s.title || s.id)} (${s.id})</option>`).join('');
+  document.getElementById('link-choice-text').value = et('newChoiceTextDefault');
+  document.getElementById('link-new-title').value = et('newSceneTitle');
+  refreshLinkChoiceOptions();
+  document.getElementById('link-modal-overlay').classList.add('show');
+}
+
+function closeLinkModal() {
+  document.getElementById('link-modal-overlay').classList.remove('show');
+}
+
+function refreshLinkChoiceOptions() {
+  const sourceId = document.getElementById('link-source-scene').value;
+  const source = project.scenes[sourceId];
+  const choiceSelect = document.getElementById('link-source-choice');
+  const existing = (source?.choices || []).map((c, i) => {
+    const label = c.text ? c.text : `${et('choice')} ${i + 1}`;
+    const suffix = c.vers ? ` → ${c.vers}` : '';
+    return `<option value="${i}">${esc(label + suffix)}</option>`;
+  }).join('');
+  choiceSelect.innerHTML = `<option value="new">${et('createNewChoice')}</option>` + existing;
+  toggleNewChoiceText();
+}
+
+function toggleNewChoiceText() {
+  const isNew = document.getElementById('link-source-choice').value === 'new';
+  document.getElementById('link-choice-text-wrap').classList.toggle('hidden', !isNew);
+}
+
+function createLinkedScene() {
+  const sourceId = document.getElementById('link-source-scene').value;
+  const choiceIndex = document.getElementById('link-source-choice').value;
+  const choiceText = document.getElementById('link-choice-text').value.trim() || et('newChoiceTextDefault');
+  const title = document.getElementById('link-new-title').value.trim() || et('newSceneTitle');
+  closeLinkModal();
+  addScene(sourceId, choiceIndex, choiceText);
+  project.scenes[selectedId].title = title;
+  render();
+  selectScene(selectedId);
+}
+
+function deleteScene() {
+  if (!selectedId) return;
+  if (Object.keys(project.scenes).length <= 1) { toast(et('needOneScene')); return; }
+  pushUndo();
+  // remove links pointing to this scene
+  Object.values(project.scenes).forEach(s => {
+    s.choices.forEach(c => { if (c.vers === selectedId) c.vers = ''; });
+  });
+  delete project.scenes[selectedId];
+  selectedId = null;
+  render();
+  showEmptyEditor();
+  toast(et('deletedScene'));
+}
+
+function selectScene(id) {
+  selectedId = id;
+  document.querySelectorAll('.node').forEach(n => n.classList.toggle('selected', n.dataset.id === id));
+  renderEditor(id);
+}
+
+// ══════════════════════════════════════════════
+// TREE RENDERING
+// ══════════════════════════════════════════════
+function render() {
+  renderTree();
+  drawConnections();
+  checkHealth();
+  drawMinimap();
+}
+
+function renderTree() {
+  const vp = document.getElementById('tree-viewport');
+  vp.style.transform = `translate(${pan.x}px,${pan.y}px) scale(${zoom})`;
+
+  // Remove old nodes, keep only nodes
+  const existing = {};
+  vp.querySelectorAll('.node').forEach(n => existing[n.dataset.id] = n);
+
+  Object.values(project.scenes).forEach(scene => {
+    let el = existing[scene.id];
+    if (!el) {
+      el = document.createElement('div');
+      el.className = 'node';
+      el.dataset.id = scene.id;
+      el.addEventListener('mousedown', onNodeMouseDown);
+      el.addEventListener('click', e => { e.stopPropagation(); selectScene(scene.id); });
+      vp.appendChild(el);
+    }
+    el.style.left = scene.x + 'px';
+    el.style.top  = scene.y + 'px';
+    el.classList.toggle('selected', scene.id === selectedId);
+    el.classList.toggle('start-node', !!scene.isStart);
+    el.classList.toggle('end-node', !!scene.isEnd);
+    // Couleur personnalisée
+    if (scene.nodeColor) {
+      el.style.borderColor = scene.nodeColor;
+      el.style.boxShadow = `0 0 8px ${scene.nodeColor}44`;
+    } else {
+      el.style.borderColor = '';
+      el.style.boxShadow = '';
+    }
+
+    el.innerHTML = `
+      ${scene.isStart ? '<div class="node-badge">START</div>' : ''}
+      ${scene.isEnd ? '<div class="node-badge end">END</div>' : ''}
+      <div class="node-id">${scene.id}</div>
+      <div class="node-title">${scene.title || et('noTitle')}</div>
+      <div class="node-count">${scene.choices.length} ${et('choicesCount')}</div>
+    `;
+    delete existing[scene.id];
+  });
+
+  // Remove orphans
+  Object.values(existing).forEach(el => el.remove());
+}
+
+function drawConnections() {
+  const canvas = document.getElementById('tree-canvas');
+  const panel = document.getElementById('tree-panel');
+  canvas.width = panel.offsetWidth;
+  canvas.height = panel.offsetHeight;
+  const ctx = canvas.getContext('2d');
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+  const NW = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--node-w'));
+  const NH = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--node-h'));
+
+  Object.values(project.scenes).forEach(scene => {
+    scene.choices.forEach((choice, i) => {
+      const target = project.scenes[choice.vers];
+      if (!target) return;
+
+      const sx = (scene.x + NW/2) * zoom + pan.x;
+      const sy = (scene.y + NH) * zoom + pan.y;
+      const ex = (target.x + NW/2) * zoom + pan.x;
+      const ey = target.y * zoom + pan.y;
+
+      // Couleur selon condition
+      const isConditional = !!(choice.requires?.stat);
+      const isSelected = scene.id === selectedId;
+
+      let strokeColor;
+      if (isSelected) strokeColor = '#7c6dfa';
+      else if (isConditional) strokeColor = '#ffaa00'; // orange = conditionnel
+      else strokeColor = '#3a3a50';
+
+      ctx.beginPath();
+      ctx.strokeStyle = strokeColor;
+      ctx.lineWidth = isSelected ? 2 : 1.5;
+      ctx.setLineDash(isConditional ? [6,3] : (isSelected ? [] : [4,4]));
+
+      const cp1y = sy + 60 * zoom;
+      const cp2y = ey - 60 * zoom;
+      ctx.moveTo(sx, sy);
+      ctx.bezierCurveTo(sx, cp1y, ex, cp2y, ex, ey);
+      ctx.stroke();
+
+      // Arrow
+      ctx.setLineDash([]);
+      const angle = Math.atan2(ey - cp2y, ex - ex);
+      ctx.beginPath();
+      ctx.fillStyle = strokeColor;
+      ctx.translate(ex, ey);
+      ctx.rotate(angle);
+      ctx.moveTo(0, 0);
+      ctx.lineTo(-8, -5);
+      ctx.lineTo(-8, 5);
+      ctx.closePath();
+      ctx.fill();
+      ctx.setTransform(1,0,0,1,0,0);
+
+      // 🔒 Icône sur les connexions conditionnelles
+      if (isConditional && zoom > 0.4) {
+        const mx = (sx + ex) / 2;
+        const my = (sy + ey) / 2;
+        ctx.font = `${Math.round(12 * zoom)}px sans-serif`;
+        ctx.fillStyle = '#ffaa00';
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        ctx.fillText('🔒', mx, my);
+        // Afficher la condition
+        if (zoom > 0.6) {
+          const stat = project.stats.find(s => s.id === choice.requires.stat);
+          const label = stat ? stat.label : choice.requires.stat;
+          ctx.font = `${Math.round(9 * zoom)}px monospace`;
+          ctx.fillStyle = '#ffaa00';
+          ctx.fillText(`≥${choice.requires.min||0}`, mx, my + 14 * zoom);
+        }
+      }
+    });
+  });
+}
+
+// ══════════════════════════════════════════════
+// EDITOR PANEL
+// ══════════════════════════════════════════════
+function showEmptyEditor() {
+  document.getElementById('editor-title').textContent = 'Sélectionne une scène';
+  document.getElementById('delete-btn').style.display = 'none';
+  document.getElementById('editor-body').innerHTML = `
+    <div id="empty-state">
+      <div class="icon">✦</div>
+      <p>${et('empty')}</p>
+      <button class="topbtn primary" style="margin-top:8px" onclick="openAddSceneModal()">${et('newScene')}</button>
+    </div>`;
+}
+
+function edSection(id, icon, title, content, defaultOpen=false) {
+  const open = (_edSectionState[id] !== undefined) ? _edSectionState[id] : defaultOpen;
+  return `<div class="ed-section" id="eds-${id}">
+    <button class="ed-section-header" onclick="toggleEdSection('${id}')">
+      <span class="ed-section-icon">${icon}</span>
+      <span class="ed-section-title">${title}</span>
+      <span class="ed-section-arrow ${open?'open':''}">›</span>
+    </button>
+    ${open ? `<div class="ed-section-body">${content}</div>` : ''}
+  </div>`;
+}
+const _edSectionState = { identite:true, narration:true, immersion:false, flags:false, couleur:false, choix:true };
+
+function toggleEdSection(id) {
+  const section = document.getElementById(`eds-${id}`);
+  if (!section) return;
+  const isOpen = _edSectionState[id];
+  _edSectionState[id] = !isOpen;
+  const arrow = section.querySelector('.ed-section-arrow');
+  const body  = section.querySelector('.ed-section-body');
+  if (isOpen) {
+    if (body) body.remove();
+    arrow.classList.remove('open');
+  } else {
+    arrow.classList.add('open');
+    const div = document.createElement('div');
+    div.className = 'ed-section-body';
+    div.innerHTML = getEdSectionContent(id, selectedId);
+    section.appendChild(div);
+    initTooltips();
+  }
+}
+
+function getEdSectionContent(sectionId, id) {
+  const scene = project.scenes[id];
+  if (!scene) return '';
+  switch(sectionId) {
+    case 'identite': return `
+      <div class="form-group">
+        <label class="form-label">${et('id')}</label>
+        <input class="form-input" style="font-family:'DM Mono',monospace;font-size:11px;color:var(--text3)" value="${scene.id}" readonly>
+      </div>
+      <div class="form-group">
+        <label class="form-label">${et('sceneTitle')} <span class="tip" data-tip="${et('tipTitle')}">?</span></label>
+        <input class="form-input" id="f-title" value="${esc(scene.title)}" oninput="updateField('title',this.value)" placeholder="${et('sceneTitlePh')}">
+      </div>
+      <div class="form-group">
+        <label class="form-label">${et('location')} <span class="tip" data-tip="${et('tipLocation')}">?</span></label>
+        <input class="form-input" id="f-location" value="${esc(scene.location)}" oninput="updateField('location',this.value)" placeholder="${et('locationPh')}">
+      </div>`;
+
+    case 'narration': return `
+      <div class="form-group">
+        <label class="form-label">✒ Narrateur <span class="tip" data-tip="${et('tipNarrator')}">?</span></label>
+        <textarea class="form-textarea" style="min-height:60px;font-style:italic" id="f-narrator"
+          oninput="updateField('narrator',this.value)"
+          placeholder="Italique, s'affiche avant le texte...">${esc(scene.narrator||'')}</textarea>
+      </div>
+      <div class="form-group">
+        <label class="form-label">${et('narrative')} <span class="tip" data-tip="${et('tipText')}">?</span></label>
+        <textarea class="form-textarea" style="min-height:120px" id="f-text"
+          oninput="updateField('text',this.value)"
+          placeholder="${et('narrativePh')}">${esc(scene.text)}</textarea>
+        <div class="var-help">${et('varHelp')}</div>
+        <button type="button" class="var-btn" onclick="insertVariable('f-text','text','{{player}}')">${et('insertPlayer')}</button>
+      </div>`;
+
+    case 'immersion': return `
+      <div class="form-group">
+        <label class="form-label">${et('arrivalTransition')}</label>
+        <select class="form-select" onchange="updateField('transition',this.value)">
+          ${presetOptions(TRANSITION_PRESETS, scene.transition||'fade', 'transitions')}
+        </select>
+      </div>
+      <div class="form-group">
+        <label class="form-label">🖼 Illustration <span style="font-size:10px;color:var(--text3);font-family:'DM Mono',monospace;font-weight:400">assets/images/</span></label>
+        <div style="display:flex;gap:8px;align-items:center">
+          <input class="form-input" id="f-img" style="flex:1;font-family:'DM Mono',monospace;font-size:11px"
+            value="${esc(scene.image||'')}"
+            oninput="updateField('image',this.value);_edSectionState.immersion=true;renderEditor(selectedId)"
+            placeholder="ex: sanctuaire.gif">
+          ${scene.image ? `<button class="icon-btn" onclick="updateField('image','');_edSectionState.immersion=true;renderEditor(selectedId)" title="Effacer">✕</button>` : ''}
+        </div>
+        ${scene.image ? `
+        <div style="margin-top:8px;border-radius:8px;overflow:hidden;border:1px solid var(--border);max-height:130px;display:flex;align-items:center;justify-content:center;background:var(--bg)">
+          <img src="assets/images/${esc(scene.image)}" style="max-width:100%;max-height:130px;object-fit:contain"
+            onerror="this.parentElement.innerHTML='<span style=\\'font-size:11px;color:var(--accent2);padding:12px\\'>⚠ Introuvable</span>'">
+        </div>` : ''}
+      </div>
+      <div class="form-group">
+        <label class="form-label">${et('arrivalSound')}</label>
+        <select class="form-select" onchange="updateField('sound',this.value)">
+          ${presetOptions(SOUND_PRESETS, scene.sound||'none', 'sounds')}
+        </select>
+      </div>`;
+
+    case 'flags': return `
+      <div class="form-group" style="display:flex;gap:20px">
+        <label class="form-check">
+          <input type="checkbox" ${scene.isStart?'checked':''} onchange="updateFlag('isStart',this.checked)">
+          <span>${et('startScene')}</span>
+        </label>
+        <label class="form-check">
+          <input type="checkbox" ${scene.isEnd?'checked':''} onchange="updateFlag('isEnd',this.checked)">
+          <span>${et('endScene')}</span>
+        </label>
+      </div>`;
+
+    case 'couleur': return `
+      <div class="color-picker-row">
+        ${['','#7c6dfa','#fa6d8f','#6dfabc','#ffe600','#ff8040','#40b8ff','#ff4444','#ffffff'].map(c =>
+          `<div class="color-swatch ${scene.nodeColor===c?'active':''}"
+            style="background:${c||'var(--bg4)'};border-color:${c?'transparent':'var(--border)'}"
+            onclick="updateField('nodeColor','${c}');_edSectionState.couleur=true;renderEditor('${id}')"
+            title="${c||'Par défaut'}"></div>`
+        ).join('')}
+      </div>`;
+
+    case 'choix': return `
+      <div id="choices-list"></div>
+      <button class="add-choice-btn" onclick="addChoice('${id}')" style="margin-top:4px">${et('addChoice')}</button>`;
+
+    default: return '';
+  }
+}
+
+function renderEditor(id) {
+  const scene = project.scenes[id];
+  if (!scene) return showEmptyEditor();
+
+  document.getElementById('editor-title').textContent = scene.title || et('noTitle');
+  document.getElementById('delete-btn').style.display = 'flex';
+
+  const body = document.getElementById('editor-body');
+  body.innerHTML = [
+    edSection('identite',  '◈', et('id').replace('ID','Identité') || 'Identité',     getEdSectionContent('identite',  id), true),
+    edSection('narration', '✒', 'Narration',    getEdSectionContent('narration', id), true),
+    edSection('immersion', '✦', 'Immersion',    getEdSectionContent('immersion', id), false),
+    edSection('flags',     '⊙', 'Départ / Fin', getEdSectionContent('flags',     id), false),
+    edSection('couleur',   '●', et('nodeColor')||'Couleur nœud', getEdSectionContent('couleur', id), false),
+    edSection('choix',     '→', et('choices'),  getEdSectionContent('choix',     id), true),
+  ].join('');
+
+  renderChoices(id);
+  initTooltips();
+}
+
+function buildConditionField(ci, choice) {
+  if (!project.stats.length) {
+    return '<div style="font-size:10px;color:var(--text3);font-style:italic">Définis d\'abord des stats dans ⚙ Stats</div>';
+  }
+  const opts = project.stats.map(s =>
+    `<option value="${s.id}"${choice.requires?.stat===s.id?' selected':''}>${s.label}</option>`
+  ).join('');
+  let html = `<select class="form-select" onchange="updateChoiceRequires(${ci},'stat',this.value)">
+    <option value="">— Aucune —</option>${opts}</select>`;
+  if (choice.requires?.stat) {
+    html += `<div style="display:flex;align-items:center;gap:6px;margin-top:6px">
+      <span style="font-size:11px;color:var(--text3)">≥</span>
+      <input type="number" class="form-input" style="width:60px"
+        value="${choice.requires?.min||0}" min="0" max="999"
+        onchange="updateChoiceRequires(${ci},'min',parseInt(this.value))">
+    </div>
+    <div style="font-size:10px;color:#ffaa00;margin-top:5px;font-family:'DM Mono',monospace">
+      Visible si ${choice.requires.stat} ≥ ${choice.requires.min||0}
+    </div>`;
+  }
+  return html;
+}
+
+function renderChoices(id) {
+  const scene = project.scenes[id];
+  const container = document.getElementById('choices-list');
+  if (!container) return;
+
+  container.innerHTML = scene.choices.map((choice, ci) => {
+    const sceneOptions = Object.values(project.scenes)
+      .map(s => `<option value="${s.id}" ${choice.vers===s.id?'selected':''}>${s.title||s.id}</option>`)
+      .join('');
+    const hasLock = !!(choice.requires?.stat);
+    const destScene = project.scenes[choice.vers];
+    const destTitle = destScene?.title || choice.vers || '—';
+    const effects = (choice.effects||[]).map((eff, ei) => {
+      const statOpts = project.stats.map(s =>
+        `<option value="${s.id}" ${eff.stat===s.id?'selected':''}>${s.label}</option>`
+      ).join('');
+      return `<div class="effect-pill">
+        <select onchange="updateEffect(${ci},${ei},'stat',this.value)">${statOpts}</select>
+        <input type="number" value="${eff.val}" min="-999" max="999"
+          onchange="updateEffect(${ci},${ei},'val',parseInt(this.value))" style="width:50px">
+        <button class="pill-remove" onclick="removeEffect(${ci},${ei})">✕</button>
+      </div>`;
+    }).join('');
+
+    const isOpen = (_choiceOpenState[`${id}-${ci}`] === true);
+    const bodyHTML = isOpen ? `
+      <div class="choice-card-body" style="padding-top:10px">
+        <div class="form-group">
+          <label class="form-label">${et('choiceText')}</label>
+          <input class="form-input" value="${esc(choice.text)}"
+            oninput="updateChoice(${ci},'text',this.value)">
+        </div>
+        <div class="form-group">
+          <label class="form-label">${et('destination')}</label>
+          <div style="display:flex;gap:6px">
+            <select class="form-select" style="flex:1" onchange="updateChoice(${ci},'vers',this.value)">
+              <option value="">— ${et('noDestination')} —</option>
+              ${sceneOptions}
+            </select>
+            <button class="icon-btn" onclick="addSceneFromChoice(${ci})" title="${et('newScene')}">+</button>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">${et('clickEffect')}</label>
+          <select class="form-select" onchange="updateChoice(${ci},'clickEffect',this.value)">
+            ${presetOptions(CLICK_EFFECT_PRESETS, choice.clickEffect||'none', 'clickEffects')}
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label">${et('statEffects')}</label>
+          <div class="choice-effects" id="effects-${ci}">${effects}</div>
+          <button class="add-effect-btn" onclick="addEffect(${ci})">${et('effect')}</button>
+        </div>
+        <div class="form-group">
+          <label class="form-label">🔒 Condition</label>
+          <div id="cond-wrap-${ci}">${buildConditionField(ci, choice)}</div>
+        </div>
+        <button class="icon-btn danger" style="width:100%;border-radius:7px;height:32px;font-size:11px;font-family:'DM Mono',monospace;letter-spacing:1px"
+          onclick="removeChoice(${ci})">✕ Supprimer</button>
+      </div>` : '';
+
+    return `<div class="choice-card ${hasLock?'has-lock':''}" id="choice-${ci}">
+      <button class="choice-card-header" onclick="toggleChoiceCard('${id}',${ci})">
+        <div class="choice-num ${hasLock?'locked':''}">${hasLock?'🔒':String(ci+1).padStart(2,'0')}</div>
+        <div class="choice-card-preview">${esc(choice.text)||`<span style="color:var(--text3);font-style:italic">${et('choiceText')}...</span>`}</div>
+        <div class="choice-card-dest">→ ${esc(destTitle)}</div>
+        <span class="choice-card-arrow ${isOpen?'open':''}">›</span>
+      </button>
+      ${bodyHTML}
+    </div>`;
+  }).join('');
+}
+
+const _choiceOpenState = {};
+function toggleChoiceCard(sceneId, ci) {
+  const key = `${sceneId}-${ci}`;
+  _choiceOpenState[key] = !_choiceOpenState[key];
+  renderChoices(sceneId);
+}
+
+// ══════════════════════════════════════════════
+// DATA MUTATIONS
+// ══════════════════════════════════════════════
+function insertAtCursor(el, text) {
+  if (!el) return;
+  const start = el.selectionStart ?? el.value.length;
+  const end = el.selectionEnd ?? el.value.length;
+  el.value = el.value.slice(0, start) + text + el.value.slice(end);
+  const pos = start + text.length;
+  el.focus();
+  el.setSelectionRange?.(pos, pos);
+  el.dispatchEvent(new Event('input', { bubbles:true }));
+}
+
+function insertVariable(inputId, key, variable) {
+  const el = document.getElementById(inputId);
+  insertAtCursor(el, variable);
+  updateField(key, el.value);
+}
+
+function insertChoiceVariable(index, variable) {
+  const el = document.getElementById(`choice-text-${index}`);
+  insertAtCursor(el, variable);
+  updateChoice(index, 'text', el.value);
+}
+
+function updateField(key, val) {
+  if (!selectedId) return;
+  pushUndo();
+  project.scenes[selectedId][key] = val;
+  if (key === 'title') {
+    document.getElementById('editor-title').textContent = val || 'Sans titre';
+    const node = document.querySelector(`.node[data-id="${selectedId}"] .node-title`);
+    if (node) node.textContent = val || 'Sans titre';
+  }
+  drawConnections();
+}
+
+function updateFlag(key, val) {
+  if (!selectedId) return;
+  if (key === 'isStart' && val) {
+    // unset other starts
+    Object.values(project.scenes).forEach(s => s.isStart = false);
+  }
+  project.scenes[selectedId][key] = val;
+  render();
+}
+
+function addChoice(id) {
+  project.scenes[id].choices.push({ text:'', vers:'', clickEffect:'pulse', sound:'click_neon', effects:[] });
+  renderChoices(id);
+  drawConnections();
+}
+
+// Crée une nouvelle scène et la lie directement au choix ci de la scène id
+function quickCreateLinked(id, ci) {
+  const sourceScene = project.scenes[id];
+  if (!sourceScene) return;
+
+  // Créer la nouvelle scène positionnée en dessous de la source
+  const newId = 'scene_' + Math.random().toString(36).slice(2,8);
+  const count = Object.keys(project.scenes).length;
+  project.scenes[newId] = {
+    id: newId,
+    title: 'Suite de ' + (sourceScene.title || id),
+    location: sourceScene.location || '',
+    text: '',
+    isStart: false,
+    isEnd: false,
+    choices: [],
+    x: sourceScene.x + (ci * 60) - 30,
+    y: sourceScene.y + 160
+  };
+
+  // Lier le choix vers la nouvelle scène
+  project.scenes[id].choices[ci].vers = newId;
+
+  // Rafraîchir
+  render();
+  if (isMobile()) {
+    renderMobileChoices(id);
+  } else {
+    renderChoices(id);
+  }
+  drawConnections();
+  toast('Scène suite créée et liée ✦');
+
+  // Sélectionner la nouvelle scène pour l'éditer tout de suite
+  setTimeout(() => selectScene(newId), 150);
+}
+
+
+
+function removeChoice(ci) {
+  project.scenes[selectedId].choices.splice(ci, 1);
+  renderChoices(selectedId);
+  drawConnections();
+}
+
+function updateChoice(ci, key, val) {
+  project.scenes[selectedId].choices[ci][key] = val;
+  if (key === 'vers') {
+    drawConnections();
+    // refresh count badge
+    const node = document.querySelector(`.node[data-id="${selectedId}"] .node-count`);
+    if (node) node.textContent = project.scenes[selectedId].choices.length + ' ' + et('choicesCount');
+  }
+}
+
+function addEffect(ci) {
+  if (!project.stats.length) { toast(et('defineStats')); return; }
+  project.scenes[selectedId].choices[ci].effects = project.scenes[selectedId].choices[ci].effects || [];
+  project.scenes[selectedId].choices[ci].effects.push({ stat: project.stats[0].id, val: -10 });
+  renderChoices(selectedId);
+}
+
+function removeEffect(ci, ei) {
+  project.scenes[selectedId].choices[ci].effects.splice(ei, 1);
+  renderChoices(selectedId);
+}
+
+function updateChoiceRequires(ci, key, val) {
+  if (!selectedId) return;
+  pushUndo();
+  const choice = project.scenes[selectedId].choices[ci];
+  if (!val && key === 'stat') {
+    // Supprimer la condition
+    delete choice.requires;
+  } else {
+    if (!choice.requires) choice.requires = { stat: '', min: 0 };
+    choice.requires[key] = val;
+  }
+  renderChoices(selectedId);
+  checkHealth();
+}
+
+
+function updateEffect(ci, ei, key, val) {
+  if (!selectedId) return;
+  project.scenes[selectedId].choices[ci].effects[ei][key] = val;
+  render();
+}
+
+
+// ══════════════════════════════════════════════
+// STATS MODAL
+// ══════════════════════════════════════════════
+function openStatsModal() {
+  renderStatsList();
+  document.getElementById('modal-overlay').classList.add('show');
+}
+function closeModal() { document.getElementById('modal-overlay').classList.remove('show'); }
+
+function renderStatsList() {
+  const el = document.getElementById('stats-list');
+  el.innerHTML = project.stats.map((s, i) => `
+    <div class="stat-row">
+      <input type="color" value="${s.color}" onchange="updateStat(${i},'color',this.value)">
+      <input class="form-input" value="${esc(s.label)}" placeholder="Nom (ex: Vie)"
+        oninput="updateStat(${i},'label',this.value)" style="flex:1">
+      <input type="number" value="${s.start}" placeholder="Départ"
+        oninput="updateStat(${i},'start',parseInt(this.value)||0)">
+      <input type="number" value="${s.max}" placeholder="Max"
+        oninput="updateStat(${i},'max',parseInt(this.value)||100)">
+      <button class="icon-btn danger" onclick="removeStat(${i})" style="flex-shrink:0">✕</button>
+    </div>
+  `).join('') || '<p style="color:var(--text3);font-size:13px;margin-bottom:12px">Aucune stat définie.</p>';
+}
+
+function addStat() {
+  const colors = ['#7c6dfa','#fa6d8f','#6dfabc','#ffe600','#fa9b6d','#6db4fa'];
+  project.stats.push({ id:'stat_'+Date.now(), label:'Nouvelle stat', start:100, max:100, color: colors[project.stats.length % colors.length] });
+  renderStatsList();
+}
+function removeStat(i) { project.stats.splice(i,1); renderStatsList(); }
+function updateStat(i, key, val) {
+  project.stats[i][key] = val;
+  if (key === 'label') project.stats[i].id = val.toLowerCase().replace(/\s+/g,'_').replace(/[^a-z0-9_]/g,'');
+}
+
+// ══════════════════════════════════════════════
+// PAN / ZOOM / DRAG
+// ══════════════════════════════════════════════
+function onNodeMouseDown(e) {
+  e.stopPropagation();
+  const node = e.currentTarget;
+  nodeBeingDragged = node.dataset.id;
+  const scene = project.scenes[nodeBeingDragged];
+  nodeDragOffset = {
+    x: e.clientX / zoom - scene.x,
+    y: e.clientY / zoom - scene.y
+  };
+}
+
+const panel = document.getElementById('tree-panel');
+panel.addEventListener('mousedown', e => {
+  if (e.target === panel || e.target === document.getElementById('tree-canvas')) {
+    dragging = true;
+    dragStart = { x: e.clientX - pan.x, y: e.clientY - pan.y };
+    panel.classList.add('grabbing');
+  }
+});
+
+window.addEventListener('mousemove', e => {
+  if (nodeBeingDragged) {
+    const scene = project.scenes[nodeBeingDragged];
+    const rect = panel.getBoundingClientRect();
+    scene.x = (e.clientX - pan.x) / zoom - (nodeDragOffset.x - pan.x/zoom);
+    scene.y = (e.clientY - pan.y) / zoom - (nodeDragOffset.y - pan.y/zoom);
+    // simpler:
+    scene.x = Math.max(0, (e.clientX - rect.left - pan.x) / zoom);
+    scene.y = Math.max(0, (e.clientY - rect.top - pan.y) / zoom);
+    const node = document.querySelector(`.node[data-id="${nodeBeingDragged}"]`);
+    if (node) { node.style.left = scene.x+'px'; node.style.top = scene.y+'px'; }
+    drawConnections();
+    return;
+  }
+  if (dragging) {
+    pan.x = e.clientX - dragStart.x;
+    pan.y = e.clientY - dragStart.y;
+    document.getElementById('tree-viewport').style.transform = `translate(${pan.x}px,${pan.y}px) scale(${zoom})`;
+    drawConnections();
+  }
+});
+
+window.addEventListener('mouseup', () => {
+  dragging = false;
+  nodeBeingDragged = null;
+  panel.classList.remove('grabbing');
+});
+
+panel.addEventListener('wheel', e => {
+  e.preventDefault();
+  const delta = e.deltaY > 0 ? 0.9 : 1.1;
+  const rect = panel.getBoundingClientRect();
+  const mx = e.clientX - rect.left;
+  const my = e.clientY - rect.top;
+  pan.x = mx - (mx - pan.x) * delta;
+  pan.y = my - (my - pan.y) * delta;
+  zoom = Math.min(2, Math.max(0.3, zoom * delta));
+  document.getElementById('tree-viewport').style.transform = `translate(${pan.x}px,${pan.y}px) scale(${zoom})`;
+  drawConnections();
+}, { passive: false });
+
+function zoomIn()  { zoom = Math.min(2, zoom * 1.2); applyTransform(); }
+function zoomOut() { zoom = Math.max(0.3, zoom * 0.8); applyTransform(); }
+function resetView() { pan = {x:60,y:60}; zoom=1; applyTransform(); }
+function applyTransform() {
+  document.getElementById('tree-viewport').style.transform = `translate(${pan.x}px,${pan.y}px) scale(${zoom})`;
+  drawConnections();
+  showZoomIndicator();
+}
+
+let zoomHideTimer;
+function showZoomIndicator() {
+  const el = document.getElementById('zoom-indicator');
+  el.textContent = Math.round(zoom * 100) + '%';
+  el.classList.add('visible');
+  clearTimeout(zoomHideTimer);
+  zoomHideTimer = setTimeout(() => el.classList.remove('visible'), 1200);
+}
+
+// ── TOUCH PAN (1 doigt) ──
+let touchPanStart = null;
+let touchPanOrigin = null;
+
+panel.addEventListener('touchstart', e => {
+  if (e.touches.length === 1) {
+    // Vérifier qu'on ne touche pas un node
+    if (e.target.closest('.node')) return;
+    touchPanStart = { x: e.touches[0].clientX, y: e.touches[0].clientY };
+    touchPanOrigin = { x: pan.x, y: pan.y };
+  }
+  if (e.touches.length === 2) {
+    touchPanStart = null;
+    pinchDist = Math.hypot(
+      e.touches[0].clientX - e.touches[1].clientX,
+      e.touches[0].clientY - e.touches[1].clientY
+    );
+    pinchZoomStart = zoom;
+    e.preventDefault();
+  }
+}, { passive: false });
+
+panel.addEventListener('touchmove', e => {
+  if (e.touches.length === 1 && touchPanStart) {
+    const dx = e.touches[0].clientX - touchPanStart.x;
+    const dy = e.touches[0].clientY - touchPanStart.y;
+    pan.x = touchPanOrigin.x + dx;
+    pan.y = touchPanOrigin.y + dy;
+    document.getElementById('tree-viewport').style.transform = `translate(${pan.x}px,${pan.y}px) scale(${zoom})`;
+    drawConnections();
+    e.preventDefault();
+  }
+  if (e.touches.length === 2 && pinchDist !== null) {
+    const dist = Math.hypot(
+      e.touches[0].clientX - e.touches[1].clientX,
+      e.touches[0].clientY - e.touches[1].clientY
+    );
+    zoom = Math.min(2, Math.max(0.3, pinchZoomStart * (dist / pinchDist)));
+    document.getElementById('tree-viewport').style.transform = `translate(${pan.x}px,${pan.y}px) scale(${zoom})`;
+    drawConnections();
+    showZoomIndicator();
+    e.preventDefault();
+  }
+}, { passive: false });
+
+panel.addEventListener('touchend', e => {
+  if (e.touches.length < 2) pinchDist = null;
+  if (e.touches.length === 0) touchPanStart = null;
+});
+
+// AUTO LAYOUT
+function autoLayout() {
+  const scenes = Object.values(project.scenes);
+  const NW = 160, NH = 60, GAP_X = 60, GAP_Y = 80;
+  // Simple grid layout
+  scenes.forEach((s, i) => {
+    s.x = (i % 4) * (NW + GAP_X) + 40;
+    s.y = Math.floor(i / 4) * (NH + GAP_Y) + 40;
+  });
+  render();
+  toast('Arbre réorganisé');
+}
+
+// ══════════════════════════════════════════════
+// EXPORT / IMPORT
+// ══════════════════════════════════════════════
+function exportJSON() {
+  project.theme = { ...currentTheme };
+  project.kids = document.getElementById('kids-check').checked;
+  project.askPlayerName = document.getElementById('player-name-check').checked;
+  // Shuffle choices in export
+  const exportData = JSON.parse(JSON.stringify(project));
+  Object.values(exportData.scenes).forEach(scene => {
+    scene.choices = shuffleArray(scene.choices);
+  });
+  const blob = new Blob([JSON.stringify(exportData, null, 2)], {type:'application/json'});
+  download(blob, (project.name||'histoire') + '.json');
+  toast('JSON exporté ✓');
+}
+
+function exportTXT() {
+  let txt = `═══════════════════════════════════════\n`;
+  txt += `  ${project.name.toUpperCase()}\n`;
+  txt += `  Export traduction — StoryForge\n`;
+  txt += `═══════════════════════════════════════\n\n`;
+
+  txt += `── STATS DU PERSONNAGE ──\n`;
+  project.stats.forEach(s => {
+    txt += `  [STAT] ${s.label} | Départ: ${s.start} | Max: ${s.max}\n`;
+  });
+  txt += `\n`;
+
+  Object.values(project.scenes).forEach(scene => {
+    txt += `────────────────────────────────────────\n`;
+    txt += `[SCÈNE] ${scene.id}\n`;
+    txt += `[TITRE] ${scene.title}\n`;
+    if (scene.location) txt += `[LIEU]  ${scene.location}\n`;
+    txt += `[TEXTE]\n${scene.text}\n`;
+    if (scene.choices.length) {
+      txt += `\n[CHOIX]\n`;
+      scene.choices.forEach((c, i) => {
+        txt += `  ${i+1}. ${c.text}\n`;
+        if (c.vers) txt += `     → Vers: ${c.vers}\n`;
+        if (c.effects && c.effects.length) {
+          txt += `     Effets: ` + c.effects.map(e => `${e.stat} ${e.val>0?'+':''}${e.val}`).join(', ') + `\n`;
+        }
+      });
+    }
+    txt += `\n`;
+  });
+
+  const blob = new Blob([txt], {type:'text/plain;charset=utf-8'});
+  download(blob, (project.name||'histoire') + '_traduction.txt');
+  toast('TXT traduction exporté ✓');
+}
+
+function sendStory() {
+  // 1. Télécharger le JSON automatiquement
+  project.theme = { ...currentTheme };
+  project.kids = document.getElementById('kids-check').checked;
+  const exportData = JSON.parse(JSON.stringify(project));
+  Object.values(exportData.scenes).forEach(scene => {
+    scene.choices = shuffleArray(scene.choices);
+  });
+  const filename = (project.name || 'histoire').replace(/\s+/g,'_').toLowerCase() + '.json';
+  const blob = new Blob([JSON.stringify(exportData, null, 2)], {type:'application/json'});
+  download(blob, filename);
+
+  // 2. Ouvrir l'app mail pré-remplie
+  const to      = 'team.pegasuscorp@gmail.com';
+  const subject = encodeURIComponent('[StoryForge] Soumission — ' + (project.name || 'Mon Histoire'));
+  const body    = encodeURIComponent(
+`Bonjour l'équipe PegasusCorp,
+
+Je vous soumets mon histoire "${project.name || 'Mon Histoire'}" créée avec StoryForge.
+
+Vous trouverez le fichier JSON en pièce jointe (${filename}).
+
+Merci de prendre le temps de la lire !
+
+Cordialement,
+[Votre nom]`
+  );
+
+  // Petit délai pour laisser le téléchargement démarrer
+  setTimeout(() => {
+    window.location.href = `mailto:${to}?subject=${subject}&body=${body}`;
+    toast('📎 JSON téléchargé — ajoutez-le en pièce jointe !');
+  }, 400);
+}
+
+
+function importJSON() {
+  // Sur mobile, créer et déclencher un input file programmatiquement
+  // pour contourner les restrictions de certains navigateurs
+  const input = document.getElementById('import-input');
+  if (input) {
+    input.value = ''; // reset pour permettre reimport du même fichier
+    input.click();
+  }
+}
+
+function handleImport(e) {
+  const file = e.target.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = ev => {
+    try {
+      const data = JSON.parse(ev.target.result);
+      if (!data.scenes) throw new Error(et('invalidFormat'));
+      project = data;
+      project.name = project.name || 'Histoire importée';
+      document.getElementById('project-name').value = project.name;
+      document.getElementById('kids-check').checked = !!project.kids;
+      document.getElementById('player-name-check').checked = !!project.askPlayerName;
+      if (project.theme) { currentTheme = { ...project.theme }; applyTheme(currentTheme); }
+      selectedId = null;
+      pan = {x:60,y:60}; zoom = 1;
+      applyTransform();
+      render();
+      showEmptyEditor();
+      toast('Projet importé ✓');
+    } catch(err) { toast('Erreur : fichier invalide'); }
+  };
+  reader.readAsText(file);
+  e.target.value = '';
+}
+
+// ══════════════════════════════════════════════
+// UTILS
+// ══════════════════════════════════════════════
+function esc(s) {
+  if (!s) return '';
+  return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+function shuffleArray(arr) {
+  const a = [...arr];
+  for (let i = a.length-1; i>0; i--) {
+    const j = Math.floor(Math.random() * (i+1));
+    [a[i],a[j]] = [a[j],a[i]];
+  }
+  return a;
+}
+
+function download(blob, filename) {
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = filename;
+  a.click();
+  URL.revokeObjectURL(a.href);
+}
+
+let toastTimer;
+function toast(msg) {
+  const el = document.getElementById('toast');
+  el.textContent = msg;
+  el.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => el.classList.remove('show'), 2500);
+}
+
+// Project name sync
+document.getElementById('project-name').addEventListener('input', function() {
+  project.name = this.value;
+});
+
+// Window resize — redraw connections
+window.addEventListener('resize', () => { render(); });
+
+// ══════════════════════════════════════════════
+// TEST STORY
+// ══════════════════════════════════════════════
+function testStory() {
+  project.theme = { ...currentTheme };
+  project.kids  = document.getElementById('kids-check').checked;
+  project.askPlayerName = document.getElementById('player-name-check').checked;
+
+  // Si des stats existent, proposer de les simuler
+  if (project.stats && project.stats.length > 0) {
+    showStatsSimulator();
+  } else {
+    launchTest();
+  }
+}
+
+function showStatsSimulator() {
+  const overlay = document.createElement('div');
+  overlay.id = 'stats-sim-overlay';
+  overlay.style.cssText = 'position:fixed;inset:0;z-index:500;background:rgba(0,0,0,0.85);display:flex;align-items:center;justify-content:center;backdrop-filter:blur(8px)';
+
+  const statsHTML = project.stats.map(s => `
+    <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px">
+      <label style="font-size:12px;color:${s.color||'var(--accent3)'};width:80px;font-family:'DM Mono',monospace">${s.label}</label>
+      <input type="range" id="sim-${s.id}" min="0" max="${s.max||100}"
+        value="${s.start||0}" style="flex:1"
+        oninput="document.getElementById('sim-val-${s.id}').textContent=this.value">
+      <span id="sim-val-${s.id}" style="font-size:12px;color:var(--text2);width:30px;text-align:right;font-family:'DM Mono',monospace">${s.start||0}</span>
+    </div>`).join('');
+
+  overlay.innerHTML = `
+    <div style="width:100%;max-width:340px;margin:24px;background:var(--bg2);border:1px solid var(--border);border-radius:16px;padding:24px">
+      <div style="font-family:'Syne',sans-serif;font-size:14px;font-weight:700;color:var(--text);letter-spacing:1px;margin-bottom:6px">🎮 Simuler les stats</div>
+      <div style="font-size:11px;color:var(--text3);font-family:'DM Mono',monospace;margin-bottom:18px">Règle les valeurs pour tester les choix conditionnels</div>
+      ${statsHTML}
+      <div style="display:flex;gap:10px;margin-top:18px">
+        <button onclick="document.getElementById('stats-sim-overlay').remove()" 
+          style="flex:1;padding:10px;border:1px solid var(--border);background:none;color:var(--text2);border-radius:8px;cursor:pointer;font-family:'Syne',sans-serif">Annuler</button>
+        <button onclick="launchTestWithStats()" 
+          style="flex:1;padding:10px;border:1px solid var(--accent3);background:rgba(109,250,188,0.1);color:var(--accent3);border-radius:8px;cursor:pointer;font-family:'Syne',sans-serif;font-weight:700">▶ Tester</button>
+      </div>
+    </div>`;
+
+  document.body.appendChild(overlay);
+}
+
+function launchTestWithStats() {
+  // Récupérer les valeurs des sliders
+  const simStats = {};
+  project.stats.forEach(s => {
+    const el = document.getElementById(`sim-${s.id}`);
+    if (el) simStats[s.id] = parseInt(el.value);
+  });
+  document.getElementById('stats-sim-overlay')?.remove();
+  launchTest(simStats);
+}
+
+function launchTest(simStats = null) {
+  const testSceneId = selectedId || Object.values(project.scenes).find(s => s.isStart)?.id;
+  if (!testSceneId) { toast('Aucune scène de départ définie'); return; }
+
+  const testProject = JSON.parse(JSON.stringify(project));
+  Object.values(testProject.scenes).forEach(s => s.isStart = false);
+  testProject.scenes[testSceneId].isStart = true;
+  testProject._testMode = true;
+  testProject._testSceneId = testSceneId;
+
+  // Injecter les stats simulées
+  if (simStats) {
+    testProject._simStats = simStats;
+    // Modifier les valeurs de départ des stats
+    testProject.stats = testProject.stats.map(s => ({
+      ...s,
+      start: simStats[s.id] !== undefined ? simStats[s.id] : s.start
+    }));
+  }
+
+  localStorage.setItem('sf_test_story', JSON.stringify(testProject));
+  window.open('game.html?test=1', '_blank');
+  toast('▶ Ouverture du test...');
+}
+
+
+const PRESETS = [
+  { name:'Sombre',    bg:'#0e0e12', bg2:'#14141a', bg3:'#1c1c24', bg4:'#24242e', border:'#2e2e3a', accent:'#7c6dfa', accent2:'#fa6d8f', accent3:'#6dfabc', text:'#e8e8f0', text2:'#9090a8', text3:'#5a5a72' },
+  { name:'Cyberpunk', bg:'#050810', bg2:'#080d18', bg3:'#0d1525', bg4:'#121d30', border:'#1a2a44', accent:'#00f5ff', accent2:'#ff00aa', accent3:'#ffe600', text:'#c8d8e8', text2:'#6080a0', text3:'#304060' },
+  { name:'Pirate',    bg:'#100c08', bg2:'#18120c', bg3:'#221a10', bg4:'#2c2214', border:'#3a2e1e', accent:'#d4a020', accent2:'#c84820', accent3:'#60b850', text:'#e8d8b0', text2:'#a09060', text3:'#604830' },
+  { name:'Fantasy',   bg:'#080c14', bg2:'#0c1020', bg3:'#10182e', bg4:'#14203c', border:'#1e2e50', accent:'#a060f8', accent2:'#f8a040', accent3:'#40d8c8', text:'#d8d0f0', text2:'#8878b8', text3:'#484068' },
+  { name:'Espace',    bg:'#06060e', bg2:'#0a0a16', bg3:'#10101e', bg4:'#161628', border:'#202038', accent:'#4080ff', accent2:'#ff8040', accent3:'#40ffe0', text:'#d0d8f0', text2:'#7080a8', text3:'#405070' },
+  { name:'Nature',    bg:'#080e0a', bg2:'#0c1410', bg3:'#121e16', bg4:'#18281c', border:'#203428', accent:'#48c870', accent2:'#d8a040', accent3:'#68d8e8', text:'#d0e8d0', text2:'#80a878', text3:'#406048' },
+  { name:'Clair',     bg:'#f4f4f8', bg2:'#ececf2', bg3:'#e2e2ec', bg4:'#d8d8e6', border:'#c8c8dc', accent:'#6040e0', accent2:'#e04080', accent3:'#20c0a0', text:'#1a1a2e', text2:'#5a5a7a', text3:'#9a9ab8' },
+  { name:'Sépia',     bg:'#1a1408', bg2:'#221c0c', bg3:'#2c2410', bg4:'#362c14', border:'#483c20', accent:'#c89040', accent2:'#a04020', accent3:'#80a840', text:'#e8d8b0', text2:'#a89060', text3:'#685830' },
+];
+
+let currentTheme = { ...PRESETS[0] };
+
+function openThemePanel() {
+  buildPresetGrid();
+  syncColorPickers();
+  updatePreview();
+  document.getElementById('theme-panel').classList.add('open');
+}
+function closeThemePanel() { document.getElementById('theme-panel').classList.remove('open'); }
+
+function buildPresetGrid() {
+  const grid = document.getElementById('preset-grid');
+  grid.innerHTML = PRESETS.map((p, i) => `
+    <div class="preset-chip" style="background:${p.bg2};border-color:${p.border}"
+      onclick="applyPreset(${i})" id="preset-${i}">
+      <div class="preset-chip-swatches">
+        <div class="swatch" style="background:${p.accent}"></div>
+        <div class="swatch" style="background:${p.accent2}"></div>
+        <div class="swatch" style="background:${p.accent3}"></div>
+        <div class="swatch" style="background:${p.bg3}"></div>
+      </div>
+      <div class="preset-chip-name" style="color:${p.text}">${p.name}</div>
+    </div>
+  `).join('');
+}
+
+function applyPreset(i) {
+  currentTheme = { ...PRESETS[i] };
+  applyTheme(currentTheme);
+  syncColorPickers();
+  document.querySelectorAll('.preset-chip').forEach((el,j) => el.classList.toggle('active', j===i));
+  project.theme = currentTheme;
+  toast('Thème "' + PRESETS[i].name + '" appliqué');
+}
+
+function liveColor(key, val) {
+  currentTheme[key] = val;
+  applyTheme(currentTheme);
+  updatePreview();
+  project.theme = { ...currentTheme };
+  // update color preview dot
+  const prev = document.getElementById('prev-' + key);
+  if (prev) prev.style.background = val;
+}
+
+// ══════════════════════════════════════════════
+// 1. HEALTH CHECK
+// ══════════════════════════════════════════════
+function checkHealth() {
+  const scenes = Object.values(project.scenes);
+  const issues = [];
+  const starts = scenes.filter(s => s.isStart);
+  if (starts.length === 0) issues.push({ type:'error', msg:et('healthNoStart'), sceneId:null });
+  if (starts.length > 1)  issues.push({ type:'warn', msg:et('healthMultiStart').replace('{n}',starts.length), sceneId:null });
+  scenes.forEach(s => {
+    if (!s.text?.trim() && !s.isEnd) issues.push({ type:'warn', msg:et('healthEmptyText').replace('{t}',s.title||s.id), sceneId:s.id });
+    s.choices?.forEach((c, i) => {
+      if (!c.vers) issues.push({ type:'error', msg:et('healthNoLink').replace('{t}',s.title||s.id).replace('{i}',i+1), sceneId:s.id });
+      if (c.vers && !project.scenes[c.vers]) issues.push({ type:'error', msg:et('healthDeadLink').replace('{t}',s.title||s.id), sceneId:s.id });
+    });
+    if (!s.isEnd && (!s.choices || !s.choices.length)) issues.push({ type:'warn', msg:et('healthNoChoice').replace('{t}',s.title||s.id), sceneId:s.id });
+  });
+  const errors = issues.filter(i => i.type==='error').length;
+  const warns  = issues.filter(i => i.type==='warn').length;
+  const badge  = document.getElementById('health-badge');
+  if (!badge) return;
+  if (errors > 0) { badge.className='error'; badge.textContent=et('healthError').replace('{n}',errors); }
+  else if (warns > 0) { badge.className='warn'; badge.textContent=et('healthWarn').replace('{n}',warns); }
+  else { badge.className='ok'; badge.textContent=et('healthReady'); }
+  badge._issues = issues;
+}
+
+function toggleHealthPanel() {
+  const panel = document.getElementById('health-panel');
+  panel.classList.toggle('open');
+  if (!panel.classList.contains('open')) return;
+  const issues = document.getElementById('health-badge')._issues || [];
+  if (!issues.length) { panel.innerHTML = '<div class="health-item health-ok"><span class="health-item-icon">✓</span> Aucun problème détecté</div>'; return; }
+  panel.innerHTML = issues.map(issue => `
+    <div class="health-item ${issue.type==='error'?'health-err':'health-warn'}"
+      onclick="${issue.sceneId?`selectScene('${issue.sceneId}');document.getElementById('health-panel').classList.remove('open')`:''}">
+      <span class="health-item-icon">${issue.type==='error'?'✕':'⚠'}</span>
+      <span>${issue.msg}</span>
+    </div>`).join('');
+}
+
+document.addEventListener('click', e => {
+  const panel = document.getElementById('health-panel');
+  const badge = document.getElementById('health-badge');
+  if (panel?.classList.contains('open') && !panel.contains(e.target) && !badge?.contains(e.target)) panel.classList.remove('open');
+});
+
+// ══════════════════════════════════════════════
+// 2. SEARCH
+// ══════════════════════════════════════════════
+function toggleSearch() {
+  const input = document.getElementById('search-input');
+  input.classList.toggle('open');
+  if (input.classList.contains('open')) input.focus();
+  else closeSearch();
+}
+function closeSearch() {
+  document.getElementById('search-input').classList.remove('open');
+  document.getElementById('search-input').value = '';
+  document.getElementById('search-results').classList.remove('open');
+}
+function doSearch(query) {
+  const results = document.getElementById('search-results');
+  if (!query.trim()) { results.classList.remove('open'); return; }
+  const q = query.toLowerCase();
+  const matches = Object.values(project.scenes).filter(s =>
+    (s.title||'').toLowerCase().includes(q) || (s.text||'').toLowerCase().includes(q) || (s.location||'').toLowerCase().includes(q)
+  ).slice(0, 8);
+  results.innerHTML = matches.length
+    ? matches.map(s => `<div class="search-result" onclick="selectScene('${s.id}');closeSearch()">${(s.title||s.id).replace(new RegExp(query,'gi'), m => `<mark>${m}</mark>`)}</div>`).join('')
+    : `<div class="search-result" style="color:var(--text3)">${et('searchNoResult')}</div>`;
+  results.classList.add('open');
+}
+
+// ══════════════════════════════════════════════
+// 3. UNDO / REDO
+// ══════════════════════════════════════════════
+const HISTORY_MAX = 30;
+let undoStack = [], redoStack = [], _undoLocked = false;
+
+function pushUndo() {
+  if (_undoLocked) return;
+  undoStack.push(JSON.stringify(project.scenes));
+  if (undoStack.length > HISTORY_MAX) undoStack.shift();
+  redoStack = [];
+  updateUndoButtons();
+}
+function undo() {
+  if (!undoStack.length) return;
+  redoStack.push(JSON.stringify(project.scenes));
+  _undoLocked = true; project.scenes = JSON.parse(undoStack.pop()); _undoLocked = false;
+  render();
+  if (selectedId && project.scenes[selectedId]) renderEditor(selectedId); else showEmptyEditor();
+  updateUndoButtons(); toast(et('undone'));
+}
+function redo() {
+  if (!redoStack.length) return;
+  undoStack.push(JSON.stringify(project.scenes));
+  _undoLocked = true; project.scenes = JSON.parse(redoStack.pop()); _undoLocked = false;
+  render();
+  if (selectedId && project.scenes[selectedId]) renderEditor(selectedId); else showEmptyEditor();
+  updateUndoButtons(); toast(et('redone'));
+}
+function updateUndoButtons() {
+  const u = document.getElementById('btn-undo'); const r = document.getElementById('btn-redo');
+  if (u) u.disabled = !undoStack.length;
+  if (r) r.disabled = !redoStack.length;
+}
+document.addEventListener('keydown', e => {
+  if ((e.ctrlKey||e.metaKey) && e.key==='z' && !e.shiftKey) { e.preventDefault(); undo(); }
+  if ((e.ctrlKey||e.metaKey) && (e.key==='y'||(e.key==='z'&&e.shiftKey))) { e.preventDefault(); redo(); }
+  if (e.key==='Escape') closeSearch();
+});
+
+// ══════════════════════════════════════════════
+// 4. MINIMAP
+// ══════════════════════════════════════════════
+function drawMinimap() {
+  const canvas = document.getElementById('minimap-canvas');
+  const mm = document.getElementById('minimap');
+  if (!canvas || !mm) return;
+  const ctx = canvas.getContext('2d');
+  const W = mm.offsetWidth, H = mm.offsetHeight;
+  canvas.width = W; canvas.height = H;
+  ctx.clearRect(0, 0, W, H);
+  const scenes = Object.values(project.scenes);
+  if (!scenes.length) return;
+  const NW = 160, NH = 60;
+  const xs = scenes.map(s => s.x), ys = scenes.map(s => s.y);
+  const minX = Math.min(...xs), maxX = Math.max(...xs)+NW;
+  const minY = Math.min(...ys), maxY = Math.max(...ys)+NH;
+  const scale = Math.min(W/(maxX-minX+40), H/(maxY-minY+40));
+  const tx = s => (s.x-minX+20)*scale, ty = s => (s.y-minY+20)*scale;
+  // Connections
+  ctx.strokeStyle='#3a3a50'; ctx.lineWidth=0.5;
+  scenes.forEach(scene => scene.choices?.forEach(c => {
+    const t = project.scenes[c.vers]; if (!t) return;
+    ctx.beginPath(); ctx.moveTo(tx(scene)+NW*scale/2, ty(scene)+NH*scale);
+    ctx.lineTo(tx(t)+NW*scale/2, ty(t)); ctx.stroke();
+  }));
+  // Nodes
+  scenes.forEach(scene => {
+    ctx.fillStyle = scene.nodeColor||(scene.isStart?'#6dfabc22':scene.isEnd?'#fa6d8f22':'#1c1c24');
+    ctx.strokeStyle = scene.nodeColor||(scene.isStart?'#6dfabc':scene.isEnd?'#fa6d8f':(scene.id===selectedId?'#7c6dfa':'#2e2e3a'));
+    ctx.lineWidth = scene.id===selectedId?1.5:0.5;
+    ctx.beginPath();
+    if (ctx.roundRect) ctx.roundRect(tx(scene), ty(scene), Math.max(NW*scale,4), Math.max(NH*scale,3), 2);
+    else ctx.rect(tx(scene), ty(scene), Math.max(NW*scale,4), Math.max(NH*scale,3));
+    ctx.fill(); ctx.stroke();
+  });
+  // Viewport
+  const panel = document.getElementById('tree-panel');
+  const vp = document.getElementById('minimap-viewport');
+  if (!panel||!vp) return;
+  vp.style.left   = Math.max(0, (-pan.x/zoom-minX+20)*scale)+'px';
+  vp.style.top    = Math.max(0, (-pan.y/zoom-minY+20)*scale)+'px';
+  vp.style.width  = Math.min((panel.offsetWidth/zoom)*scale, W)+'px';
+  vp.style.height = Math.min((panel.offsetHeight/zoom)*scale, H)+'px';
+}
+
+function minimapClick(e) {
+  const mm = document.getElementById('minimap');
+  const rect = mm.getBoundingClientRect();
+  const scenes = Object.values(project.scenes); if (!scenes.length) return;
+  const NW=160, NH=60;
+  const xs=scenes.map(s=>s.x), ys=scenes.map(s=>s.y);
+  const minX=Math.min(...xs), maxX=Math.max(...xs)+NW;
+  const minY=Math.min(...ys), maxY=Math.max(...ys)+NH;
+  const W=mm.offsetWidth, H=mm.offsetHeight;
+  const scale=Math.min(W/(maxX-minX+40), H/(maxY-minY+40));
+  const cx=(e.clientX-rect.left)/scale+minX-20;
+  const cy=(e.clientY-rect.top)/scale+minY-20;
+  const panel=document.getElementById('tree-panel');
+  pan.x=-(cx*zoom)+panel.offsetWidth/2;
+  pan.y=-(cy*zoom)+panel.offsetHeight/2;
+  applyTransform();
+}
+
+function applyTheme(t) {
+  const root = document.documentElement;
+  const map = {
+    bg:'--bg', bg2:'--bg2', bg3:'--bg3', bg4:'--bg4',
+    border:'--border', accent:'--accent', accent2:'--accent2', accent3:'--accent3',
+    text:'--text', text2:'--text2', text3:'--text3'
+  };
+  Object.entries(map).forEach(([k,v]) => { if (t[k]) root.style.setProperty(v, t[k]); });
+  drawConnections();
+  updatePreview();
+}
+
+function syncColorPickers() {
+  const keys = ['bg','bg2','bg3','accent','accent2','accent3','text','border'];
+  keys.forEach(k => {
+    const cp = document.getElementById('cp-' + k);
+    const prev = document.getElementById('prev-' + k);
+    if (cp && currentTheme[k]) { cp.value = currentTheme[k]; }
+    if (prev && currentTheme[k]) { prev.style.background = currentTheme[k]; }
+  });
+}
+
+function updatePreview() {
+  const p = document.getElementById('theme-preview');
+  const t = currentTheme;
+  if (!p) return;
+  p.style.background = t.bg3 || '';
+  p.style.borderColor = t.border || '';
+  const title = document.getElementById('pv-title');
+  const text  = document.getElementById('pv-text');
+  const btn   = document.getElementById('pv-btn');
+  if (title) title.style.color = t.text || '';
+  if (text)  text.style.color  = t.text2 || '';
+  if (btn) {
+    btn.style.background = t.accent || '';
+    btn.style.color = t.bg || '';
+  }
+}
+
+
+function toggleKidsMobile() {
+  const check = document.getElementById('kids-check');
+  check.checked = !check.checked;
+  project.kids = check.checked;
+  const label = document.getElementById('mm-kids-label');
+  if (label) label.textContent = (check.checked ? '✓ ' : '') + et('kidsLabel');
+  toast(check.checked ? et('kidsOn') : et('kidsOff'));
+}
+
+function togglePlayerNameMobile() {
+  const check = document.getElementById('player-name-check');
+  check.checked = !check.checked;
+  project.askPlayerName = check.checked;
+  const label = document.getElementById('mm-player-label');
+  if (label) label.textContent = (check.checked ? '✓ ' : '') + et('playerLabel');
+  toast(check.checked ? et('playerOn') : et('playerOff'));
+}
+
+
+let tipTimer = null;
+const tipBubble = document.getElementById('tip-bubble');
+
+document.addEventListener('click', e => {
+  const tip = e.target.closest('.tip');
+  if (tip) {
+    e.stopPropagation();
+    const text = tip.getAttribute('data-tip');
+    if (!text) return;
+    // Position
+    const rect = tip.getBoundingClientRect();
+    tipBubble.textContent = text;
+    tipBubble.classList.add('show');
+    // Place above or below depending on space
+    const spaceAbove = rect.top;
+    const bubbleH = 80;
+    let top = spaceAbove > bubbleH + 10
+      ? rect.top - bubbleH - 8
+      : rect.bottom + 8;
+    let left = Math.max(10, Math.min(window.innerWidth - 240, rect.left - 90));
+    tipBubble.style.top  = top + 'px';
+    tipBubble.style.left = left + 'px';
+    tip.classList.add('active');
+    clearTimeout(tipTimer);
+    tipTimer = setTimeout(() => {
+      tipBubble.classList.remove('show');
+      tip.classList.remove('active');
+    }, 3000);
+  } else {
+    tipBubble.classList.remove('show');
+    document.querySelectorAll('.tip.active').forEach(t => t.classList.remove('active'));
+  }
+});
+
+const isMobile = () => window.innerWidth <= 700;
+
+function mobileTab(tab) {
+  document.querySelectorAll('.bnav-item').forEach(el => el.classList.remove('active'));
+  if (tab === 'tree') {
+    document.getElementById('bnav-tree').classList.add('active');
+    closeMobileSheet();
+  } else if (tab === 'edit') {
+    document.getElementById('bnav-edit').classList.add('active');
+    if (selectedId) openMobileSheet(selectedId);
+    else { toast(et('selectScene')); mobileTab('tree'); }
+  }
+}
+
+function openMobileSheet(id) {
+  if (!isMobile()) return;
+  const scene = project.scenes[id];
+  if (!scene) return;
+  const sheet = document.getElementById('mobile-sheet');
+  document.getElementById('mobile-sheet-title').textContent = scene.title || et('noTitle');
+  renderEditorInto(id, document.getElementById('mobile-sheet-body'));
+  sheet.style.display = 'flex';
+  requestAnimationFrame(() => sheet.classList.add('open'));
+  document.getElementById('bnav-edit').classList.add('active');
+  document.getElementById('bnav-tree').classList.remove('active');
+}
+
+function closeMobileSheet() {
+  const sheet = document.getElementById('mobile-sheet');
+  sheet.classList.remove('open');
+  setTimeout(() => { if (!sheet.classList.contains('open')) sheet.style.display = 'none'; }, 320);
+  document.getElementById('bnav-tree').classList.add('active');
+  document.getElementById('bnav-edit').classList.remove('active');
+}
+
+function toggleMobileMenu() {
+  const menu = document.getElementById('mobile-menu');
+  const isOpen = menu.classList.contains('open');
+  if (!isOpen) { menu.style.display = 'block'; requestAnimationFrame(() => menu.classList.add('open')); }
+  else closeMobileMenu();
+  document.getElementById('bnav-more').classList.toggle('active', !isOpen);
+}
+function closeMobileMenu() {
+  const menu = document.getElementById('mobile-menu');
+  menu.classList.remove('open');
+  document.getElementById('bnav-more').classList.remove('active');
+  setTimeout(() => { if (!menu.classList.contains('open')) menu.style.display = 'none'; }, 220);
+}
+document.addEventListener('click', e => {
+  const menu = document.getElementById('mobile-menu');
+  if (menu.classList.contains('open') && !menu.contains(e.target) && !e.target.closest('#bnav-more')) closeMobileMenu();
+});
+
+function renderEditorInto(id, container) {
+  const scene = project.scenes[id];
+  if (!scene) return;
+  container.innerHTML = [
+    edSection('identite',  '◈', et('id').replace('ID','Identité')||'Identité',  getEdSectionContent('identite',  id), true),
+    edSection('narration', '✒', 'Narration',    getEdSectionContent('narration', id), true),
+    edSection('immersion', '✦', 'Immersion',    getEdSectionContent('immersion', id), false),
+    edSection('flags',     '⊙', et('startScene').replace(' ▶','')||'Départ / Fin', getEdSectionContent('flags', id), false),
+    edSection('couleur',   '●', et('nodeColor')||'Couleur', getEdSectionContent('couleur', id), false),
+    edSection('choix',     '→', et('choices'),  getEdSectionContent('choix',     id), true),
+    `<div style="padding:16px">
+      <button class="topbtn danger" style="width:100%;justify-content:center;border-radius:8px;height:36px"
+        onclick="deleteScene();closeMobileSheet()">✕ ${et('deleteTitle')}</button>
+    </div>`,
+  ].join('');
+  renderChoicesInto(id);
+  initTooltips();
+}
+
+function renderChoicesInto(id) {
+  // Utilise le même renderChoices mais dans le contexte mobile
+  const container = document.getElementById('choices-list');
+  if (!container) return;
+  renderChoices(id);
+}
+
+function addChoiceMobile(id) {
+  pushUndo();
+  project.scenes[id].choices.push({ text:'', vers:'', clickEffect:'pulse', effects:[] });
+  renderEditorInto(id, document.getElementById('mobile-sheet-body'));
+  drawConnections(); checkHealth();
+}
+
+// Patch selectScene to also open sheet on mobile
+const _origSelect = selectScene;
+selectScene = function(id) {
+  _origSelect(id);
+  if (isMobile()) openMobileSheet(id);
+};
+
+(function init() {
+  const s1 = genId(), s2 = genId(), s3 = genId(), s4 = genId();
+  project.scenes = {
+    [s1]: { id:s1, title:'Scène de départ', location:'Le port', text:'Tu arrives au port sous la pluie...', isStart:true, isEnd:false,
+      choices:[
+        { text:'Entrer dans la taverne', vers:s2, effects:[{stat:'vie',val:-5}] },
+        { text:'Inspecter les quais', vers:s3, effects:[] }
+      ], x:320, y:40 },
+    [s2]: { id:s2, title:'La Taverne', location:'Taverne du Crabe Noir', text:'La salle est bruyante et enfumée...', isStart:false, isEnd:false,
+      choices:[{ text:'Parler au barman', vers:s4, effects:[] }], x:120, y:200 },
+    [s3]: { id:s3, title:'Les Quais', location:'Quai Est', text:'Les bateaux se balancent dans la tempête...', isStart:false, isEnd:false,
+      choices:[{ text:'Retourner au port', vers:s1, effects:[] }], x:520, y:200 },
+    [s4]: { id:s4, title:'Fin — Le départ', location:'Port', text:'Le barman te donne une carte. Une aventure commence.', isStart:false, isEnd:true,
+      choices:[], x:120, y:360 }
+  };
+  applyEditorLanguage();
+  if (window.innerWidth <= 700) { zoom = 0.6; pan = { x: 10, y: 10 }; }
+  render();
+})();
+</script>
+</body>
+</html>
