@@ -1,0 +1,2460 @@
+{
+  "name": "Les Dernières Minutes",
+  "kids": false,
+  "askPlayerName": true,
+  "pack": "free",
+  "stats": [
+    {
+      "id": "confiance",
+      "label": "Confiance",
+      "start": 40,
+      "max": 100,
+      "color": "#8ecae6"
+    },
+    {
+      "id": "humanite",
+      "label": "Humanité",
+      "start": 50,
+      "max": 100,
+      "color": "#ffd166"
+    },
+    {
+      "id": "urgence",
+      "label": "Urgence",
+      "start": 0,
+      "max": 100,
+      "color": "#ef476f"
+    }
+  ],
+  "theme": {
+    "bg": "#08090d",
+    "bg2": "#11131a",
+    "bg3": "#1b1d29",
+    "bg4": "#292535",
+    "border": "#4a3b4f",
+    "accent": "#ffb703",
+    "accent2": "#fb5607",
+    "accent3": "#8ecae6",
+    "text": "#f4efe6",
+    "text2": "#b8a99a",
+    "text3": "#75685f"
+  },
+  "scenes": {
+    "prologue": {
+      "id": "prologue",
+      "title": "Un Matin Normal",
+      "location": "SAINT-ORIEL — APPARTEMENT",
+      "narrator": "Les fins du monde commencent rarement par un grand bruit. Parfois, elles commencent par une tasse de café.",
+      "text": "Tu te réveilles avec la lumière pâle du matin sur le mur.\n\nLa ville dehors vit déjà sa petite vie ordinaire.\n\nTon téléphone vibre.\n\nMessage de Nora :\n\n> Café dans vingt minutes ?\n> Je paie si tu promets de ne pas encore me parler de tes plantes mortes.\n\nNora.\n\nTon amie depuis assez longtemps pour connaître tes silences.\nTrop proche pour mentir correctement.\nTrop têtue pour admettre quand elle a peur.\n\nÀ la radio, une voix parle de tensions internationales.\n\nTu n'écoutes qu'à moitié.\n\nComme tout le monde.",
+      "isStart": true,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Allumer vraiment la radio",
+          "vers": "radio_matin",
+          "effects": [
+            {
+              "stat": "urgence",
+              "val": 5
+            }
+          ]
+        },
+        {
+          "text": "Lui dire que tu arrives",
+          "vers": "tramway_matin",
+          "effects": [
+            {
+              "stat": "confiance",
+              "val": 5
+            }
+          ]
+        },
+        {
+          "text": "Répondre à Nora avec une blague",
+          "vers": "tramway_matin",
+          "effects": [
+            {
+              "stat": "confiance",
+              "val": 10
+            },
+            {
+              "stat": "humanite",
+              "val": 5
+            }
+          ]
+        }
+      ],
+      "x": 400,
+      "y": 0
+    },
+    "radio_matin": {
+      "id": "radio_matin",
+      "title": "La Radio du Matin",
+      "location": "APPARTEMENT",
+      "narrator": "Les mauvaises nouvelles ont souvent l'air moins graves quand elles sont lues calmement.",
+      "text": "Tu montes le son.\n\n> Les autorités appellent au calme.\n> Aucun risque immédiat n'est signalé.\n> Les exercices de défense civile prévus aujourd'hui sont maintenus.\n\nPuis une publicité pour des céréales coupe l'émission.\n\nTon téléphone vibre encore.\n\nNora :\n\n> Tu t'es rendormi ?\n> Si oui je garde ton croissant.\n\nTu prends tes clés.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Sortir rejoindre Nora",
+          "vers": "tramway_matin",
+          "effects": [
+            {
+              "stat": "urgence",
+              "val": 5
+            }
+          ]
+        }
+      ],
+      "x": 640,
+      "y": 140
+    },
+    "cafe_blague": {
+      "id": "cafe_blague",
+      "title": "Le Café des Petites Habitudes",
+      "location": "CAFÉ L'ORBITAL",
+      "narrator": "Ce sont souvent les habitudes minuscules qui donnent au monde l'impression d'être solide.",
+      "text": "En chemin, tu envoies un message à Nora.\n\n> Mes plantes ne sont pas mortes.\n> Elles font semblant pour attirer l'attention.\n\nElle répond en trois secondes :\n\n> Comme toi.\n\nQuand tu arrives au café, elle est déjà là.\n\nCheveux attachés n'importe comment.\nVeste militaire trop grande.\nSourire de quelqu'un qui a décidé de se moquer du monde avant que le monde ne se moque d'elle.\n\nElle lève ton croissant.\n\n**« J'ai failli le manger. J'ai été héroïque. »**\n\nPendant quelques minutes, tout est simple.\n\nLe café chaud.\nLa pluie fine.\nNora qui râle contre la cuillère trop petite.\n\nÀ la télévision, des responsables politiques serrent des mâchoires.\n\nPersonne ne regarde vraiment.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Proposer de passer par le marché couvert",
+          "vers": "marche_couverte",
+          "effects": [
+            {
+              "stat": "confiance",
+              "val": 5
+            },
+            {
+              "stat": "humanite",
+              "val": 5
+            }
+          ]
+        },
+        {
+          "text": "Parler de choses banales",
+          "vers": "journee_normale",
+          "effects": [
+            {
+              "stat": "humanite",
+              "val": 10
+            }
+          ]
+        },
+        {
+          "text": "Regarder la télévision",
+          "vers": "tv_cafe",
+          "effects": [
+            {
+              "stat": "urgence",
+              "val": 5
+            }
+          ]
+        },
+        {
+          "text": "Demander à Nora si elle a l'air fatiguée",
+          "vers": "nora_fatigue",
+          "effects": [
+            {
+              "stat": "confiance",
+              "val": 10
+            }
+          ]
+        }
+      ],
+      "x": 220,
+      "y": 180
+    },
+    "cafe_simple": {
+      "id": "cafe_simple",
+      "title": "Le Café, Ce Matin-Là",
+      "location": "CAFÉ L'ORBITAL",
+      "narrator": "Ce sont souvent les habitudes minuscules qui donnent au monde l'impression d'être solide.",
+      "text": "Quand tu arrives au café, Nora est déjà là.\n\nElle a commandé pour toi.\n\n**« J'ai pris le même que d'habitude. Si tu as changé de goût pendant la nuit, tant pis pour toi. »**\n\nLa pluie dessine des lignes sur la vitre.\n\nÀ la télévision, une bannière rouge glisse en bas de l'écran.\n\n> TENSIONS MAJEURES — LES AUTORITÉS APPELLENT AU CALME\n\nNora suit ton regard.\n\nPendant une seconde, son sourire se fissure.\n\nPuis elle hausse les épaules.\n\n**« Ils appellent toujours au calme quand ils ne savent plus quoi dire. »**",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Changer de sujet",
+          "vers": "journee_normale",
+          "effects": [
+            {
+              "stat": "humanite",
+              "val": 10
+            }
+          ]
+        },
+        {
+          "text": "Lui demander ce qu'elle sait",
+          "vers": "nora_fatigue",
+          "effects": [
+            {
+              "stat": "confiance",
+              "val": 5
+            },
+            {
+              "stat": "urgence",
+              "val": 5
+            }
+          ]
+        },
+        {
+          "text": "Proposer une petite marche avant de rentrer",
+          "vers": "marche_couverte",
+          "effects": [
+            {
+              "stat": "humanite",
+              "val": 5
+            }
+          ]
+        },
+        {
+          "text": "Regarder la télévision",
+          "vers": "tv_cafe",
+          "effects": [
+            {
+              "stat": "urgence",
+              "val": 10
+            }
+          ]
+        }
+      ],
+      "x": 400,
+      "y": 180
+    },
+    "nora_fatigue": {
+      "id": "nora_fatigue",
+      "title": "Les Cernes de Nora",
+      "location": "CAFÉ L'ORBITAL",
+      "narrator": "Certaines personnes cachent mieux les secrets que la fatigue.",
+      "text": "Tu remarques ses cernes.\n\nPas juste une mauvaise nuit.\n\nPlusieurs.\n\nNora tourne sa tasse entre ses mains.\n\n**« J'ai bossé tard. »**\n\nTu sais qu'elle travaille dans un centre de recherche près de l'ancien hôpital militaire.\n\nSur son poignet, un petit pansement dépasse de sa manche.\n\nQuand elle voit ton regard, elle rabat le tissu.\n\nTrop vite.\n\n**« Ne fais pas cette tête. C'est rien. Des tests médicaux du boulot. »**\n\nPuis elle sourit.\n\nPas son vrai sourire.\n\n**« Tu veux marcher un peu ? J'ai besoin d'air. »**",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Lui demander comment va sa famille",
+          "vers": "famille_nora",
+          "effects": [
+            {
+              "stat": "confiance",
+              "val": 15
+            },
+            {
+              "stat": "humanite",
+              "val": 5
+            }
+          ]
+        },
+        {
+          "text": "Insister doucement",
+          "vers": "indice_pansement",
+          "effects": [
+            {
+              "stat": "confiance",
+              "val": 5
+            },
+            {
+              "stat": "urgence",
+              "val": 5
+            }
+          ]
+        },
+        {
+          "text": "Respecter son silence",
+          "vers": "journee_normale",
+          "effects": [
+            {
+              "stat": "confiance",
+              "val": 10
+            },
+            {
+              "stat": "humanite",
+              "val": 5
+            }
+          ]
+        }
+      ],
+      "x": 220,
+      "y": 360
+    },
+    "indice_pansement": {
+      "id": "indice_pansement",
+      "title": "Le Pansement",
+      "location": "CAFÉ L'ORBITAL",
+      "narrator": "Les indices importants savent se déguiser en détails ordinaires.",
+      "text": "Tu lui demandes si tout va bien.\n\nNora baisse les yeux sur son poignet.\n\n**« Ils m'ont demandé de refaire des analyses. Rien de dramatique. »**\n\nElle essaie de rire.\n\n**« Apparemment, je suis compatible avec beaucoup trop de machines. »**\n\nLa phrase est étrange.\n\nElle semble regretter de l'avoir dite.\n\nAvant que tu puisses demander ce qu'elle veut dire, les lumières du café clignotent.\n\nUne seconde.\n\nPuis tout revient.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Sortir prendre l'air avec Nora",
+          "vers": "journee_normale",
+          "effects": [
+            {
+              "stat": "confiance",
+              "val": 5
+            },
+            {
+              "stat": "urgence",
+              "val": 5
+            }
+          ]
+        }
+      ],
+      "x": 120,
+      "y": 520
+    },
+    "tv_cafe": {
+      "id": "tv_cafe",
+      "title": "La Télévision Muette",
+      "location": "CAFÉ L'ORBITAL",
+      "narrator": "Les écrans annoncent parfois la fin du monde avant que le monde accepte de l'entendre.",
+      "text": "Tu regardes la télévision.\n\nLe son est coupé, mais les images suffisent.\n\nDes cartes.\nDes flèches.\nDes visages fermés.\nUn présentateur qui touche son oreillette comme si quelqu'un venait de lui dire de ne pas paniquer.\n\nNora regarde aussi.\n\nElle murmure :\n\n**« Pas aujourd'hui... »**\n\nTu te tournes vers elle.\n\nElle fait semblant de ne pas avoir parlé.\n\nAu même moment, toutes les personnes du café reçoivent une notification.\n\nUn son bref.\n\nIdentique.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Lire la notification",
+          "vers": "alerte",
+          "effects": [
+            {
+              "stat": "urgence",
+              "val": 15
+            }
+          ]
+        },
+        {
+          "text": "Regarder Nora d'abord",
+          "vers": "nora_sait",
+          "effects": [
+            {
+              "stat": "confiance",
+              "val": 10
+            },
+            {
+              "stat": "urgence",
+              "val": 10
+            }
+          ]
+        }
+      ],
+      "x": 520,
+      "y": 360
+    },
+    "journee_normale": {
+      "id": "journee_normale",
+      "title": "La Ville Avant",
+      "location": "SAINT-ORIEL — RUES",
+      "narrator": "Avant la panique, il y a toujours un dernier moment où tout aurait pu rester normal.",
+      "text": "Vous marchez sous la pluie fine.\n\nNora parle de choses inutiles.\n\nDu nouveau propriétaire du café.\nD'un chien qui aboie toujours à 7h12.\nDu fait que les distributeurs vendent maintenant des sandwichs triangulaires beaucoup trop confiants.\n\nTu ris.\n\nElle aussi.\n\nPuis elle s'arrête devant une librairie.\n\nDans la vitrine, un livre pour enfants montre une fusée.\n\nNora pose la main sur la vitre.\n\n**« Quand j'étais petite, je croyais que les abris antiatomiques étaient des fusées à l'envers. On descendait sous terre pour partir ailleurs. »**\n\nElle retire sa main.\n\n**« C'est idiot. »**\n\nMais sa voix n'a rien d'idiot.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Passer par l'ancienne fête foraine",
+          "vers": "fete_foraine",
+          "effects": [
+            {
+              "stat": "confiance",
+              "val": 10
+            }
+          ]
+        },
+        {
+          "text": "Entrer dans la librairie",
+          "vers": "librairie",
+          "effects": [
+            {
+              "stat": "humanite",
+              "val": 10
+            }
+          ]
+        },
+        {
+          "text": "Lui demander pourquoi elle pense aux abris",
+          "vers": "nora_sait",
+          "effects": [
+            {
+              "stat": "confiance",
+              "val": 10
+            },
+            {
+              "stat": "urgence",
+              "val": 5
+            }
+          ]
+        }
+      ],
+      "x": 400,
+      "y": 520
+    },
+    "librairie": {
+      "id": "librairie",
+      "title": "La Librairie",
+      "location": "SAINT-ORIEL — LIBRAIRIE DES PLUIES",
+      "narrator": "Certains lieux ont l'air construits pour survivre aux catastrophes, même quand ils ne le peuvent pas.",
+      "text": "La librairie sent le papier, la poussière et le chauffage trop vieux.\n\nUn vieil homme classe des livres par taille.\n\nNora prend un recueil de poésie.\n\n**« Si le monde finit, j'espère qu'il aura la politesse de me laisser finir cette page. »**\n\nLe libraire sourit.\n\n**« Le monde n'a jamais été très poli. »**\n\nLa radio du magasin grésille.\n\nLa musique s'interrompt.\n\nUn bip grave retentit.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Regarder Nora",
+          "vers": "nora_sait",
+          "effects": [
+            {
+              "stat": "confiance",
+              "val": 10
+            }
+          ]
+        },
+        {
+          "text": "Écouter la radio",
+          "vers": "alerte",
+          "effects": [
+            {
+              "stat": "urgence",
+              "val": 15
+            }
+          ]
+        }
+      ],
+      "x": 620,
+      "y": 640
+    },
+    "nora_sait": {
+      "id": "nora_sait",
+      "title": "Ce Que Nora Ne Dit Pas",
+      "location": "SAINT-ORIEL — RUE",
+      "narrator": "Le silence de quelqu'un qu'on connaît peut faire plus de bruit qu'une sirène.",
+      "text": "Tu demandes ce qu'elle sait.\n\nNora ouvre la bouche.\n\nLa referme.\n\nSon téléphone vibre.\n\nElle lit.\n\nSon visage change.\n\nPas de surprise.\n\nDe la peur.\n\nMais pas de surprise.\n\n**« On doit partir. Maintenant. »**\n\nÀ cet instant, les sirènes commencent.\n\nElles ne ressemblent pas aux tests.\n\nElles sont plus longues.\n\nPlus basses.\n\nPlus anciennes.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "flash",
+      "choices": [
+        {
+          "text": "Exiger une explication",
+          "vers": "explication_interrompue",
+          "effects": [
+            {
+              "stat": "confiance",
+              "val": -5
+            },
+            {
+              "stat": "urgence",
+              "val": 20
+            }
+          ]
+        },
+        {
+          "text": "La suivre sans discuter",
+          "vers": "rue_panique",
+          "effects": [
+            {
+              "stat": "confiance",
+              "val": 15
+            },
+            {
+              "stat": "urgence",
+              "val": 20
+            }
+          ]
+        }
+      ],
+      "x": 280,
+      "y": 700,
+      "timer": {
+        "duration": 12,
+        "auto": "rue_panique"
+      }
+    },
+    "alerte": {
+      "id": "alerte",
+      "title": "L'Alerte",
+      "location": "SAINT-ORIEL",
+      "narrator": "Certains sons divisent une vie en deux : avant, et après.",
+      "text": "Tous les téléphones hurlent en même temps.\n\n> URGENCE NATIONALE\n> IMPACTS STRATÉGIQUES PROBABLES\n> REJOIGNEZ IMMÉDIATEMENT UN ABRI\n> TEMPS ESTIMÉ : 18 MINUTES\n\nLe café devient silencieux.\n\nPuis quelqu'un rit.\n\nUn rire court, incrédule.\n\nPuis une tasse tombe.\n\nPuis la ville explose en mouvements.\n\nNora attrape ton bras.\n\n**« On n'a pas dix-huit minutes. Ils mentent toujours large pour éviter les émeutes. »**",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "glitch",
+      "choices": [
+        {
+          "text": "Courir avec Nora",
+          "vers": "rue_panique",
+          "effects": [
+            {
+              "stat": "confiance",
+              "val": 10
+            },
+            {
+              "stat": "urgence",
+              "val": 20
+            }
+          ]
+        },
+        {
+          "text": "Appeler quelqu'un",
+          "vers": "appel",
+          "effects": [
+            {
+              "stat": "humanite",
+              "val": 10
+            },
+            {
+              "stat": "urgence",
+              "val": 20
+            }
+          ]
+        },
+        {
+          "text": "Aider les gens autour de toi",
+          "vers": "aider_cafe",
+          "effects": [
+            {
+              "stat": "humanite",
+              "val": 15
+            },
+            {
+              "stat": "urgence",
+              "val": 25
+            }
+          ]
+        }
+      ],
+      "x": 500,
+      "y": 780,
+      "timer": {
+        "duration": 10,
+        "auto": "rue_panique"
+      }
+    },
+    "explication_interrompue": {
+      "id": "explication_interrompue",
+      "title": "Pas Maintenant",
+      "location": "SAINT-ORIEL — RUE",
+      "narrator": "Il y a des questions que le monde refuse d'attendre.",
+      "text": "Tu retiens Nora.\n\n**« Qu'est-ce que tu sais ? »**\n\nElle serre les dents.\n\n**« Pas maintenant. »**\n\n**« Nora. »**\n\nElle te regarde.\n\n**« Si je t'explique, tu vas vouloir faire ce qu'ils attendent de toi. Et je ne peux pas te laisser faire ça. »**\n\nAvant que tu puisses comprendre, une explosion lointaine fait trembler les vitrines.\n\nNora te tire par la manche.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "flash",
+      "choices": [
+        {
+          "text": "La suivre",
+          "vers": "rue_panique",
+          "effects": [
+            {
+              "stat": "confiance",
+              "val": 5
+            },
+            {
+              "stat": "urgence",
+              "val": 20
+            }
+          ]
+        },
+        {
+          "text": "Refuser de bouger sans réponse",
+          "vers": "fin_trop_tard",
+          "effects": [
+            {
+              "stat": "urgence",
+              "val": 40
+            }
+          ]
+        }
+      ],
+      "x": 180,
+      "y": 860,
+      "timer": {
+        "duration": 8,
+        "auto": "rue_panique"
+      }
+    },
+    "aider_cafe": {
+      "id": "aider_cafe",
+      "title": "Les Premières Secondes",
+      "location": "CAFÉ L'ORBITAL",
+      "narrator": "L'humanité commence parfois par ramasser quelqu'un qui est tombé.",
+      "text": "Une serveuse s'est coupée avec une tasse brisée.\n\nUn homme reste figé devant la télévision.\n\nTu aides la serveuse à se relever.\n\nNora veut partir.\n\nTu vois sa colère.\n\nPuis son visage change.\n\nElle attrape des serviettes.\n\nElle sait faire.\n\nTrop bien.\n\nLa serveuse murmure merci.\n\nNora regarde seulement le temps sur son téléphone.\n\n14 minutes.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Continuer à aider les blessés",
+          "vers": "aider_cafe_suite",
+          "effects": [
+            {
+              "stat": "humanite",
+              "val": 25
+            },
+            {
+              "stat": "urgence",
+              "val": 35
+            },
+            {
+              "stat": "confiance",
+              "val": -5
+            }
+          ]
+        },
+        {
+          "text": "Partir avec Nora",
+          "vers": "rue_panique",
+          "effects": [
+            {
+              "stat": "humanite",
+              "val": 10
+            },
+            {
+              "stat": "confiance",
+              "val": 5
+            }
+          ]
+        }
+      ],
+      "x": 620,
+      "y": 940,
+      "timer": {
+        "duration": 9,
+        "auto": "rue_panique"
+      }
+    },
+    "appel": {
+      "id": "appel",
+      "title": "L'Appel",
+      "location": "SAINT-ORIEL — TROTTOIR",
+      "narrator": "Dans les catastrophes, les téléphones deviennent des ponts trop fragiles.",
+      "text": "Tu appelles.\n\nLa ligne sonne.\n\nUne fois.\n\nDeux fois.\n\nNora te tire par la manche.\n\n**« On doit y aller. »**\n\nLa ligne décroche.\n\nUne voix familière dit ton nom.\n\nMais derrière elle, tu entends les sirènes.\n\nLe même son.\n\nTu n'as pas assez de mots pour tout dire.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Rester au téléphone",
+          "vers": "fin_trop_tard",
+          "effects": [
+            {
+              "stat": "humanite",
+              "val": 20
+            },
+            {
+              "stat": "urgence",
+              "val": 50
+            }
+          ]
+        },
+        {
+          "text": "Dire seulement que tu les aimes",
+          "vers": "rue_panique",
+          "effects": [
+            {
+              "stat": "humanite",
+              "val": 20
+            },
+            {
+              "stat": "urgence",
+              "val": 20
+            }
+          ]
+        },
+        {
+          "text": "Essayer d'expliquer quoi faire",
+          "vers": "rue_panique",
+          "effects": [
+            {
+              "stat": "humanite",
+              "val": 10
+            },
+            {
+              "stat": "urgence",
+              "val": 25
+            }
+          ]
+        }
+      ],
+      "x": 800,
+      "y": 860,
+      "timer": {
+        "duration": 8,
+        "auto": "rue_panique"
+      }
+    },
+    "rue_panique": {
+      "id": "rue_panique",
+      "title": "La Ville Qui Court",
+      "location": "SAINT-ORIEL — CENTRE-VILLE",
+      "narrator": "Quand tout le monde fuit en même temps, la ville devient un organisme blessé.",
+      "text": "Les rues sont pleines.\n\nVoitures bloquées.\nKlaxons continus.\nGens qui courent avec des sacs trop lourds.\nParents qui portent des enfants en pyjama.\n\nUn écran publicitaire continue de vendre des vacances à la mer.\n\nNora connaît un passage par les anciennes galeries de service sous l'hôpital.\n\n**« Il y a un abri militaire sous le complexe. S'ils l'ont ouvert, on peut entrer. »**\n\nUn enfant pleure près d'une voiture renversée.\n\nPlus loin, un soldat hurle que le pont est fermé.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "glitch",
+      "choices": [
+        {
+          "text": "Demander de l'aide au soldat",
+          "vers": "soldat",
+          "effects": [
+            {
+              "stat": "urgence",
+              "val": 10
+            }
+          ]
+        },
+        {
+          "text": "Aider l'enfant",
+          "vers": "enfant_voiture",
+          "effects": [
+            {
+              "stat": "humanite",
+              "val": 15
+            },
+            {
+              "stat": "urgence",
+              "val": 10
+            }
+          ]
+        },
+        {
+          "text": "Traverser la station de métro",
+          "vers": "station_metro",
+          "effects": [
+            {
+              "stat": "urgence",
+              "val": 10
+            }
+          ]
+        }
+      ],
+      "x": 440,
+      "y": 1040,
+      "timer": {
+        "duration": 12,
+        "auto": "galeries"
+      }
+    },
+    "enfant_voiture": {
+      "id": "enfant_voiture",
+      "title": "La Voiture Renversée",
+      "location": "SAINT-ORIEL — AVENUE NORD",
+      "narrator": "Sauver quelqu'un prend parfois exactement le temps qu'on n'a pas.",
+      "text": "L'enfant est coincé à l'arrière.\n\nSa mère essaie d'ouvrir la portière.\n\nNora jure, puis t'aide à tirer.\n\nLa portière résiste.\n\nUn avion passe.\n\nCette fois, plus bas.\n\nTu tires encore.\n\nLa portière cède enfin.\n\nLa mère serre son enfant contre elle.\n\nMais tu as perdu du temps.\n\nBeaucoup trop.\n\nDans la rue, les gens qui couraient vers les galeries ont déjà disparu.\n\nNora regarde au loin.\n\nPuis elle te regarde comme si tu venais de lui faire mal.\n\n**« C'est pour ça que je ne peux pas te laisser choisir. »**\n\nSa voix tremble.\n\n**« Parce que tu choisiras toujours les autres avant toi. »**\n\nUne nouvelle secousse traverse les immeubles.\n\nCette fois, les vitres explosent au bout de l'avenue.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Continuer malgré tout vers les galeries",
+          "vers": "retard_enfant",
+          "effects": [
+            {
+              "stat": "humanite",
+              "val": 20
+            },
+            {
+              "stat": "urgence",
+              "val": 25
+            },
+            {
+              "stat": "confiance",
+              "val": -5
+            }
+          ]
+        },
+        {
+          "text": "Dire à Nora que l'enfant devait vivre",
+          "vers": "retard_enfant",
+          "effects": [
+            {
+              "stat": "humanite",
+              "val": 25
+            },
+            {
+              "stat": "urgence",
+              "val": 30
+            }
+          ]
+        }
+      ],
+      "x": 220,
+      "y": 1220,
+      "timer": {
+        "duration": 7,
+        "auto": "retard_enfant"
+      }
+    },
+    "soldat": {
+      "id": "soldat",
+      "title": "Le Barrage",
+      "location": "SAINT-ORIEL — PONT FERMÉ",
+      "narrator": "L'ordre tient parfois debout seulement parce que personne n'a encore crié assez fort.",
+      "text": "Le soldat est jeune.\n\nTrop jeune.\n\nIl répète :\n\n**« Le pont est fermé. Rejoignez les abris désignés. »**\n\nNora garde la tête basse.\n\nLe soldat te regarde.\n\nPuis il regarde Nora.\n\nSon expression change.\n\nReconnaissance.\n\nPas de Nora.\n\nDe toi.\n\nIl porte la main à sa radio.\n\nNora le voit.\n\nElle te pousse dans la foule.\n\n**« Maintenant. »**",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Fuir avec Nora",
+          "vers": "galeries",
+          "effects": [
+            {
+              "stat": "urgence",
+              "val": 15
+            },
+            {
+              "stat": "confiance",
+              "val": 5
+            }
+          ]
+        },
+        {
+          "text": "Demander pourquoi il t'a reconnu",
+          "vers": "arrestation",
+          "effects": [
+            {
+              "stat": "urgence",
+              "val": 30
+            }
+          ]
+        }
+      ],
+      "x": 660,
+      "y": 1220,
+      "timer": {
+        "duration": 6,
+        "auto": "galeries"
+      }
+    },
+    "nora_fissure": {
+      "id": "nora_fissure",
+      "title": "La Fissure",
+      "location": "SAINT-ORIEL — AVENUE NORD",
+      "narrator": "Sous la panique, certains secrets commencent à respirer.",
+      "text": "Tu demandes ce qu'elle veut dire.\n\nNora serre les poings.\n\n**« Tu aides toujours. Même quand ça te détruit. »**\n\n**« C'est censé être un défaut ? »**\n\nElle rit sans joie.\n\n**« Aujourd'hui, oui. »**\n\nUne annonce militaire grésille :\n\n> Tous les citoyens doivent rejoindre les abris.\n> Priorité médicale aux sujets compatibles.\n\nNora devient blanche.\n\nSujet compatible.\n\nDeux mots qui n'auraient pas dû compter.\n\nMais ils comptent.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Lui demander si tu es concerné",
+          "vers": "galeries",
+          "effects": [
+            {
+              "stat": "confiance",
+              "val": 5
+            },
+            {
+              "stat": "urgence",
+              "val": 15
+            }
+          ]
+        },
+        {
+          "text": "Courir sans poser de questions",
+          "vers": "galeries",
+          "effects": [
+            {
+              "stat": "urgence",
+              "val": 10
+            }
+          ]
+        }
+      ],
+      "x": 220,
+      "y": 1400,
+      "timer": {
+        "duration": 7,
+        "auto": "galeries"
+      }
+    },
+    "arrestation": {
+      "id": "arrestation",
+      "title": "Le Mauvais Regard",
+      "location": "SAINT-ORIEL — BARRAGE",
+      "narrator": "Être important est rarement une bonne nouvelle quand les soldats courent vers vous.",
+      "text": "Tu restes une seconde de trop.\n\nLe soldat parle dans sa radio.\n\n**« Je crois que je l'ai trouvé. »**\n\nNora attrape ton bras, mais deux militaires se retournent déjà.\n\nIls ne crient pas ton nom.\n\nIls disent un code.\n\n**« Sujet S-12 visible. »**\n\nNora frappe le soldat avec une violence qui te choque.\n\nPas une héroïne.\n\nQuelqu'un qui refuse de perdre.\n\nElle te tire dans la foule.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "glitch",
+      "choices": [
+        {
+          "text": "Courir vers les galeries",
+          "vers": "galeries",
+          "effects": [
+            {
+              "stat": "urgence",
+              "val": 20
+            },
+            {
+              "stat": "confiance",
+              "val": -5
+            }
+          ]
+        }
+      ],
+      "x": 840,
+      "y": 1400,
+      "timer": {
+        "duration": 5,
+        "auto": "galeries"
+      }
+    },
+    "galeries": {
+      "id": "galeries",
+      "title": "Les Galeries de Service",
+      "location": "SOUS L'HÔPITAL MILITAIRE",
+      "narrator": "Sous les villes, les secrets ont souvent des néons fatigués.",
+      "text": "Nora ouvre une porte métallique derrière l'ancien hôpital.\n\nTu ne lui demandes pas comment elle connaît le code.\n\nElle le tape trop vite.\n\nLes galeries sentent la poussière, le désinfectant et l'électricité chaude.\n\nAu mur, des flèches indiquent :\n\n> ABRI B-7\n> LABORATOIRE HÉMATOLOGIE\n> ACCÈS RÉSERVÉ\n\nTu t'arrêtes sur le mot hématologie.\n\nNora te pousse doucement.\n\n**« Pas par là. »**\n\nMais sa voix dit l'inverse.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Suivre Nora vers l'abri",
+          "vers": "abri_entree",
+          "effects": [
+            {
+              "stat": "confiance",
+              "val": 10
+            }
+          ]
+        },
+        {
+          "text": "Demander pourquoi elle connaît le code",
+          "vers": "question_code",
+          "effects": [
+            {
+              "stat": "confiance",
+              "val": 5
+            }
+          ]
+        },
+        {
+          "text": "Regarder le couloir du laboratoire",
+          "vers": "laboratoire_indice",
+          "effects": [
+            {
+              "stat": "urgence",
+              "val": 10
+            },
+            {
+              "stat": "confiance",
+              "val": -5
+            }
+          ]
+        }
+      ],
+      "x": 480,
+      "y": 1580,
+      "timer": {
+        "duration": 12,
+        "auto": "abri_entree"
+      }
+    },
+    "question_code": {
+      "id": "question_code",
+      "title": "Le Code",
+      "location": "GALERIES DE SERVICE",
+      "narrator": "Les mensonges les plus fragiles sont ceux qu'on donne trop vite.",
+      "text": "**« Pourquoi tu connais le code ? »**\n\nNora continue de marcher.\n\n**« J'ai travaillé ici. »**\n\n**« Tu m'avais dit près d'ici. Pas ici. »**\n\nElle ne répond pas tout de suite.\n\n**« Il y a beaucoup de choses que je t'ai dites de travers. »**\n\n**« Et c'est quoi, ce qui compte ? »**\n\nElle s'arrête.\n\nLes sirènes vibrent jusque dans les murs.\n\n**« Que tu restes vivant. »**",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "La croire",
+          "vers": "abri_entree",
+          "effects": [
+            {
+              "stat": "confiance",
+              "val": 15
+            }
+          ]
+        },
+        {
+          "text": "Continuer à douter",
+          "vers": "laboratoire_indice",
+          "effects": [
+            {
+              "stat": "confiance",
+              "val": -5
+            },
+            {
+              "stat": "urgence",
+              "val": 10
+            }
+          ]
+        }
+      ],
+      "x": 640,
+      "y": 1740,
+      "timer": {
+        "duration": 8,
+        "auto": "abri_entree"
+      }
+    },
+    "laboratoire_indice": {
+      "id": "laboratoire_indice",
+      "title": "Le Couloir Interdit",
+      "location": "LABORATOIRE HÉMATOLOGIE",
+      "narrator": "Un mot sur une porte peut contenir une vie entière.",
+      "text": "Des dossiers ont été abandonnés sur un chariot.\n\nNora dit ton nom.\n\nPas fort.\n\nMais avec une peur immense.\n\nTu attrapes le premier dossier.\n\nTon nom est dessus.\n\nOu plutôt :\n\n> Sujet S-12\n> Réponse sérique exceptionnelle\n> Compatibilité post-radiologique : 98,7 %\n\nTon sang.\n\nLe monde vacille.\n\nNora arrache le dossier de tes mains.\n\n**« Pas comme ça. Tu ne devais pas l'apprendre comme ça. »**\n\nUne explosion lointaine coupe les lumières.\n\nElles reviennent en rouge.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "flash",
+      "choices": [
+        {
+          "text": "Exiger la vérité",
+          "vers": "premiere_verite",
+          "effects": [
+            {
+              "stat": "confiance",
+              "val": -10
+            },
+            {
+              "stat": "urgence",
+              "val": 20
+            }
+          ]
+        },
+        {
+          "text": "Remettre ça à plus tard et courir",
+          "vers": "abri_entree",
+          "effects": [
+            {
+              "stat": "urgence",
+              "val": 15
+            }
+          ]
+        }
+      ],
+      "x": 240,
+      "y": 1740,
+      "timer": {
+        "duration": 8,
+        "auto": "abri_entree"
+      }
+    },
+    "premiere_verite": {
+      "id": "premiere_verite",
+      "title": "Ce Que Tu Es",
+      "location": "GALERIES ROUGES",
+      "narrator": "Certaines vérités ne sauvent personne quand elles arrivent trop tard.",
+      "text": "Nora ferme les yeux.\n\n**« Ton sang résiste. »**\n\nElle parle vite.\n\n**« Aux particules. Aux radiations. À ce qui vient après. Ils ont découvert ça après l'accident de l'hiver dernier, quand tu as donné ton sang. Ils m'ont mise sur le projet parce que je te connaissais. »**\n\n**« Avec assez de prélèvements, ils peuvent fabriquer un sérum. Pas pour tout le monde. Pas immédiatement. Mais assez pour reconstruire quelque chose. »**\n\nTu sens le froid arriver avant même la suite.\n\n**« Et les prélèvements ? »**\n\nNora te regarde.\n\n**« Ils te tueraient. »**",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Courir vers l'abri pour comprendre",
+          "vers": "abri_entree",
+          "effects": [
+            {
+              "stat": "urgence",
+              "val": 15
+            }
+          ]
+        },
+        {
+          "text": "Demander pourquoi elle t'a menti",
+          "vers": "nora_aveu_partiel",
+          "effects": [
+            {
+              "stat": "confiance",
+              "val": -5
+            }
+          ]
+        }
+      ],
+      "x": 220,
+      "y": 1920,
+      "timer": {
+        "duration": 12,
+        "auto": "abri_entree"
+      }
+    },
+    "nora_aveu_partiel": {
+      "id": "nora_aveu_partiel",
+      "title": "Le Mensonge",
+      "location": "GALERIES ROUGES",
+      "narrator": "Un mensonge peut être une prison construite avec de l'amour.",
+      "text": "**« Pourquoi tu ne m'as rien dit ? »**\n\nNora tremble.\n\n**« Parce que je savais ce que tu ferais. »**\n\n**« Tu aurais accepté. Peut-être pas tout de suite. Mais tu aurais fini par accepter. Parce qu'il y aurait eu des enfants, des malades, des gens qui pleurent à la télévision. Et toi... toi tu aurais dit oui. »**\n\nElle essuie ses yeux avec colère.\n\n**« Alors j'ai volé les données. J'ai retardé le protocole. J'ai saboté leur accès. »**\n\nPuis, plus bas :\n\n**« J'ai peut-être condamné des milliers de personnes avant même les bombes. Mais tu respirais encore. »**",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "La suivre vers l'abri",
+          "vers": "abri_entree",
+          "effects": [
+            {
+              "stat": "confiance",
+              "val": 5
+            },
+            {
+              "stat": "urgence",
+              "val": 20
+            }
+          ]
+        }
+      ],
+      "x": 120,
+      "y": 2100,
+      "timer": {
+        "duration": 10,
+        "auto": "abri_entree"
+      }
+    },
+    "abri_entree": {
+      "id": "abri_entree",
+      "title": "L'Abri B-7",
+      "location": "SOUS-SOL — PORTE BLINDÉE",
+      "narrator": "La survie a parfois la forme d'une porte qui ne s'ouvre pas pour tout le monde.",
+      "text": "La porte de l'abri B-7 est immense.\n\nDes dizaines de personnes attendent devant.\n\nUn système répète :\n\n> CAPACITÉ LIMITÉE\n> PRIORITÉ AUX PERSONNELS ESSENTIELS\n> PRIORITÉ AUX PROFILS MÉDICAUX\n\nLa foule hurle.\n\nUn médecin militaire tente de maintenir l'ordre.\n\nQuand il te voit, son visage se fige.\n\nIl murmure :\n\n**« C'est lui. »**\n\nNora se place devant toi.\n\n**« Non. »**\n\nUn grondement traverse la ville au-dessus.\n\nLe premier impact a eu lieu.\n\nPas ici.\n\nPas encore.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "glitch",
+      "choices": [
+        {
+          "text": "Aider à faire entrer les civils",
+          "vers": "triage",
+          "effects": [
+            {
+              "stat": "humanite",
+              "val": 20
+            },
+            {
+              "stat": "urgence",
+              "val": 20
+            }
+          ]
+        },
+        {
+          "text": "Écouter le médecin",
+          "vers": "medecin_revele",
+          "effects": [
+            {
+              "stat": "urgence",
+              "val": 20
+            }
+          ]
+        },
+        {
+          "text": "Faire confiance à Nora",
+          "vers": "nora_fuite",
+          "effects": [
+            {
+              "stat": "confiance",
+              "val": 15
+            },
+            {
+              "stat": "urgence",
+              "val": 15
+            }
+          ]
+        }
+      ],
+      "x": 480,
+      "y": 2120,
+      "timer": {
+        "duration": 10,
+        "auto": "nora_fuite"
+      }
+    },
+    "medecin_revele": {
+      "id": "medecin_revele",
+      "title": "Le Protocole S-12",
+      "location": "ABRI B-7",
+      "narrator": "Les gens qui veulent sauver le monde parlent rarement comme des monstres.",
+      "text": "Le médecin lève les mains.\n\nIl n'a pas l'air cruel.\n\nSeulement épuisé.\n\n**« Votre sang contient une réponse immunitaire que nous ne savons pas reproduire. Le sérum peut sauver les personnes exposées aux retombées. Pas toutes. Mais assez. »**\n\nNora crie :\n\n**« Ne l'écoutez pas. »**\n\nLe médecin continue.\n\n**« L'extraction complète est nécessaire. Elle sera létale. »**\n\nLa foule entend assez.\n\nDes visages se tournent vers toi.\n\nPas de haine.\n\nPire.\n\nDe l'espoir.\n\nNora recule vers une porte latérale.\n\n**« Viens avec moi. Maintenant. »**",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "flash",
+      "choices": [
+        {
+          "text": "Rester avec le médecin",
+          "vers": "salle_extraction",
+          "effects": [
+            {
+              "stat": "humanite",
+              "val": 20
+            },
+            {
+              "stat": "confiance",
+              "val": -20
+            }
+          ]
+        },
+        {
+          "text": "Suivre Nora",
+          "vers": "nora_fuite",
+          "effects": [
+            {
+              "stat": "confiance",
+              "val": 10
+            },
+            {
+              "stat": "urgence",
+              "val": 20
+            }
+          ]
+        },
+        {
+          "text": "Demander combien de vies",
+          "vers": "combien",
+          "effects": [
+            {
+              "stat": "humanite",
+              "val": 10
+            },
+            {
+              "stat": "urgence",
+              "val": 20
+            }
+          ]
+        }
+      ],
+      "x": 480,
+      "y": 2300,
+      "timer": {
+        "duration": 10,
+        "auto": "nora_fuite"
+      }
+    },
+    "combien": {
+      "id": "combien",
+      "title": "Combien de Vies ?",
+      "location": "ABRI B-7",
+      "narrator": "Les chiffres sont parfois plus insupportables que les cris.",
+      "text": "Tu demandes combien.\n\nLe médecin ne détourne pas les yeux.\n\n**« Dans cet abri ? Trois cent douze. Dans les autres secteurs si nous transmettons la formule à temps : plusieurs milliers. Peut-être plus. »**\n\nNora murmure :\n\n**« Il dit peut-être. »**\n\nLe médecin répond doucement :\n\n**« Oui. Peut-être. C'est tout ce qui reste au monde. »**\n\nNora te regarde.\n\n**« Et moi je te dis certainement. Toi, tu meurs certainement. »**\n\nLe plafond tremble.\n\nDe la poussière tombe comme une neige grise.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Suivre Nora",
+          "vers": "nora_fuite",
+          "effects": [
+            {
+              "stat": "confiance",
+              "val": 10
+            }
+          ]
+        },
+        {
+          "text": "Aller vers la salle d'extraction",
+          "vers": "salle_extraction",
+          "effects": [
+            {
+              "stat": "humanite",
+              "val": 25
+            },
+            {
+              "stat": "confiance",
+              "val": -25
+            }
+          ]
+        }
+      ],
+      "x": 680,
+      "y": 2480,
+      "timer": {
+        "duration": 8,
+        "auto": "nora_fuite"
+      }
+    },
+    "triage": {
+      "id": "triage",
+      "title": "Le Triage",
+      "location": "ABRI B-7",
+      "narrator": "Aider tout le monde est parfois une manière de ne pas choisir encore.",
+      "text": "Tu aides à faire entrer les civils.\n\nUne vieille femme.\nDeux enfants.\nUn homme blessé.\nLa serveuse du café, encore pâle.\n\nNora t'aide malgré elle.\n\nElle sait organiser une évacuation.\n\nTrop bien.\n\nLe médecin te regarde depuis la porte intérieure.\n\nIl ne te presse pas.\n\nC'est pire.\n\nIl attend que tu comprennes.\n\nNora pose une main sur ton épaule.\n\n**« On a assez aidé. Maintenant je te sauve. »**",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Parler au médecin",
+          "vers": "medecin_revele",
+          "effects": [
+            {
+              "stat": "urgence",
+              "val": 15
+            }
+          ]
+        },
+        {
+          "text": "La suivre",
+          "vers": "nora_fuite",
+          "effects": [
+            {
+              "stat": "confiance",
+              "val": 10
+            },
+            {
+              "stat": "humanite",
+              "val": 10
+            }
+          ]
+        },
+        {
+          "text": "Continuer le triage jusqu'au dernier civil",
+          "vers": "triage_retard",
+          "effects": [
+            {
+              "stat": "humanite",
+              "val": 30
+            },
+            {
+              "stat": "urgence",
+              "val": 30
+            },
+            {
+              "stat": "confiance",
+              "val": -10
+            }
+          ]
+        }
+      ],
+      "x": 300,
+      "y": 2480,
+      "timer": {
+        "duration": 9,
+        "auto": "nora_fuite"
+      }
+    },
+    "nora_fuite": {
+      "id": "nora_fuite",
+      "title": "La Porte Latérale",
+      "location": "ABRI B-7 — ACCÈS TECHNIQUE",
+      "narrator": "Quand quelqu'un vous aime trop fort, cela peut ressembler à une fuite.",
+      "text": "Nora te tire par une porte latérale.\n\nDerrière vous, les voix montent.\n\nLe médecin crie ton nom.\n\nLa porte se referme.\n\nNora verrouille manuellement.\n\n**« Il y a une ancienne navette de maintenance. Elle mène aux tunnels sud. Si on part maintenant, on peut sortir avant le souffle secondaire. »**\n\n**« Et les autres ? »**\n\nElle ferme les yeux.\n\n**« Les autres ne sont pas toi. »**\n\nLa phrase tombe entre vous.\n\nMonstrueuse.\n\nSincère.\n\nImpossible à oublier.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "glitch",
+      "choices": [
+        {
+          "text": "Rester silencieux",
+          "vers": "tunnel_final",
+          "effects": [
+            {
+              "stat": "urgence",
+              "val": 10
+            }
+          ]
+        },
+        {
+          "text": "La suivre encore",
+          "vers": "tunnel_final",
+          "effects": [
+            {
+              "stat": "confiance",
+              "val": 10
+            },
+            {
+              "stat": "humanite",
+              "val": -10
+            }
+          ]
+        },
+        {
+          "text": "Lui dire que tu ne peux pas faire ça",
+          "vers": "confrontation",
+          "effects": [
+            {
+              "stat": "humanite",
+              "val": 20
+            },
+            {
+              "stat": "confiance",
+              "val": -10
+            }
+          ]
+        }
+      ],
+      "x": 480,
+      "y": 2660,
+      "timer": {
+        "duration": 8,
+        "auto": "tunnel_final"
+      }
+    },
+    "confrontation": {
+      "id": "confrontation",
+      "title": "Ce Que Vaut Le Monde",
+      "location": "ACCÈS TECHNIQUE",
+      "narrator": "Il n'existe pas de phrase assez propre pour mesurer une vie contre toutes les autres.",
+      "text": "**« Je ne peux pas laisser ces gens mourir. »**\n\nNora te regarde comme si tu venais de lui confirmer une vieille peur.\n\n**« Je sais. »**\n\nElle rit sans joie.\n\n**« C'est exactement pour ça que j'ai menti. »**\n\n**« Tu n'avais pas le droit. »**\n\n**« Non. »**\n\nElle ne se défend pas.\n\n**« Mais je l'ai fait quand même. »**\n\nUne voix automatique annonce :\n\n> IMPACT PRINCIPAL ESTIMÉ : 04 MINUTES\n> ABRI B-7 — SCELLAGE FINAL IMMINENT\n\nNora pose son front contre le tien.\n\n**« Je ne veux pas être pardonnée. Je veux que tu vives. »**",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "flash",
+      "choices": [
+        {
+          "text": "Retourner vers la salle d'extraction",
+          "vers": "salle_extraction",
+          "effects": [
+            {
+              "stat": "humanite",
+              "val": 25
+            },
+            {
+              "stat": "confiance",
+              "val": -25
+            }
+          ]
+        },
+        {
+          "text": "Partir avec Nora",
+          "vers": "tunnel_final",
+          "effects": [
+            {
+              "stat": "confiance",
+              "val": 15
+            },
+            {
+              "stat": "humanite",
+              "val": -15
+            }
+          ]
+        }
+      ],
+      "x": 300,
+      "y": 2840,
+      "timer": {
+        "duration": 7,
+        "auto": "tunnel_final"
+      }
+    },
+    "salle_extraction": {
+      "id": "salle_extraction",
+      "title": "La Salle Blanche",
+      "location": "ABRI B-7 — LABORATOIRE",
+      "narrator": "Sauver le monde peut être une pièce trop propre avec une chaise au milieu.",
+      "text": "La salle d'extraction est blanche.\n\nTrop blanche.\n\nUne chaise médicale t'attend.\n\nDes câbles.\nDes poches stériles.\nDes machines déjà prêtes.\n\nLe médecin parle doucement.\n\n**« Nous pouvons lancer le protocole. Vous perdrez conscience rapidement. Vous ne souffrirez pas longtemps. »**\n\nNora arrive derrière toi.\n\nSon visage est ravagé.\n\n**« Non. »**\n\nLe médecin ne la regarde pas.\n\n**« Il doit choisir. »**\n\nLa voix automatique annonce :\n\n> IMPACT PRINCIPAL ESTIMÉ : 03 MINUTES\n\nTout se réduit à toi.\n\nÀ Nora.\n\nÀ la chaise.\n\nAux vies qu'on ne voit pas.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "glitch",
+      "choices": [
+        {
+          "text": "Refuser et partir avec Nora",
+          "vers": "choix_nora",
+          "effects": [
+            {
+              "stat": "confiance",
+              "val": 30
+            },
+            {
+              "stat": "humanite",
+              "val": -30
+            }
+          ]
+        },
+        {
+          "text": "Accepter le protocole",
+          "vers": "choix_sacrifice",
+          "effects": [
+            {
+              "stat": "humanite",
+              "val": 40
+            },
+            {
+              "stat": "confiance",
+              "val": -30
+            }
+          ]
+        },
+        {
+          "text": "Chercher une troisième voie",
+          "vers": "troisieme_voie",
+          "effects": [
+            {
+              "stat": "urgence",
+              "val": 20
+            }
+          ]
+        }
+      ],
+      "x": 560,
+      "y": 2860,
+      "timer": {
+        "duration": 10,
+        "auto": "choix_nora"
+      }
+    },
+    "tunnel_final": {
+      "id": "tunnel_final",
+      "title": "Les Tunnels Sud",
+      "location": "SOUS LA VILLE",
+      "narrator": "Fuir n'est pas toujours de la lâcheté. Parfois, c'est juste choisir qui l'on refuse de perdre.",
+      "text": "Vous courez dans les tunnels sud.\n\nLa ville tremble au-dessus.\n\nNora connaît chaque embranchement.\n\nElle a préparé ça.\n\nTu le comprends maintenant.\n\nPas depuis ce matin.\n\nDepuis des semaines.\n\nElle avait prévu un chemin pour t'éloigner du laboratoire.\n\nUn chemin pour te garder vivant.\n\nMême si le monde avait besoin de toi.\n\nAu bout du tunnel, une porte donne vers l'extérieur.\n\nDerrière vous, les haut-parleurs répètent :\n\n> PROTOCOLE S-12 NON LANCÉ\n> PERTES ESTIMÉES : CRITIQUES\n\nNora ne se retourne pas.\n\n**« Déteste-moi après. Vis maintenant. »**",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "glitch",
+      "choices": [
+        {
+          "text": "Faire demi-tour",
+          "vers": "salle_extraction",
+          "effects": [
+            {
+              "stat": "humanite",
+              "val": 30
+            },
+            {
+              "stat": "confiance",
+              "val": -20
+            }
+          ]
+        },
+        {
+          "text": "Continuer avec elle",
+          "vers": "choix_nora",
+          "effects": [
+            {
+              "stat": "confiance",
+              "val": 20
+            },
+            {
+              "stat": "humanite",
+              "val": -20
+            }
+          ]
+        }
+      ],
+      "x": 260,
+      "y": 3040,
+      "timer": {
+        "duration": 6,
+        "auto": "choix_nora"
+      }
+    },
+    "troisieme_voie": {
+      "id": "troisieme_voie",
+      "title": "La Troisième Voie",
+      "location": "SALLE BLANCHE",
+      "narrator": "L'espoir est parfois le dernier mensonge qu'on se raconte avant de choisir.",
+      "text": "Tu demandes une autre solution.\n\nLe médecin parle vite.\n\n**« Un prélèvement partiel ne suffira pas. »**\n\nNora s'accroche à cette phrase.\n\n**« Mais ça peut aider ? »**\n\n**« Trop peu. Trop tard. Peut-être quelques dizaines. Peut-être personne. »**\n\nLa voix annonce :\n\n> IMPACT PRINCIPAL ESTIMÉ : 02 MINUTES\n\nLe monde ne te donne pas une troisième voie.\n\nSeulement une manière plus lente de refuser de choisir.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "flash",
+      "choices": [
+        {
+          "text": "Accepter le protocole complet",
+          "vers": "choix_sacrifice",
+          "effects": [
+            {
+              "stat": "humanite",
+              "val": 30
+            }
+          ]
+        },
+        {
+          "text": "Tenter le prélèvement partiel",
+          "vers": "fin_partielle",
+          "effects": [
+            {
+              "stat": "humanite",
+              "val": 10
+            },
+            {
+              "stat": "confiance",
+              "val": -10
+            }
+          ]
+        },
+        {
+          "text": "Refuser et choisir Nora",
+          "vers": "choix_nora",
+          "effects": [
+            {
+              "stat": "confiance",
+              "val": 20
+            }
+          ]
+        }
+      ],
+      "x": 760,
+      "y": 3040,
+      "timer": {
+        "duration": 6,
+        "auto": "choix_nora"
+      }
+    },
+    "choix_sacrifice": {
+      "id": "choix_sacrifice",
+      "title": "Le Monde",
+      "location": "SALLE BLANCHE",
+      "narrator": "Certains choix sauvent des vies et détruisent celle qui vous regardait.",
+      "text": "Tu t'assois sur la chaise.\n\nNora cesse presque de respirer.\n\n**« Non. »**\n\nTu voudrais lui dire quelque chose de parfait.\n\nMais il n'y a rien.\n\nAlors tu dis seulement :\n\n**« Je suis désolé. »**\n\nElle secoue la tête.\n\nDes larmes tombent, silencieuses.\n\n**« Moi aussi. »**\n\nLe médecin lance le protocole.\n\nDerrière la vitre, les gens ne crient plus.\n\nLe premier prélèvement se remplit d'un rouge presque lumineux.\n\nNora pose sa main contre la vitre.\n\nTu poses la tienne en face.\n\nLa lumière dehors devient blanche.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Fermer les yeux",
+          "vers": "fin_sacrifice",
+          "effects": [],
+          "requires": {
+            "stat": "humanite",
+            "min": 110
+          }
+        },
+        {
+          "text": "Renoncer et partir avec Nora",
+          "vers": "fin_partielle",
+          "effects": [],
+          "clickEffect": "fade"
+        }
+      ],
+      "x": 520,
+      "y": 3260,
+      "timer": {
+        "duration": 8,
+        "auto": "fin_sacrifice"
+      }
+    },
+    "choix_nora": {
+      "id": "choix_nora",
+      "title": "Nora",
+      "location": "SORTIE DES TUNNELS",
+      "narrator": "Sauver une personne peut parfois signifier abandonner le monde à son silence.",
+      "text": "Tu choisis Nora.\n\nOu peut-être qu'elle choisit pour toi.\n\nPeut-être qu'il n'y a plus de différence.\n\nVous atteignez la sortie des tunnels.\n\nLa ville est derrière vous.\n\nLes sirènes sont devenues lointaines.\n\nLe ciel s'ouvre dans un éclair blanc au-dessus de Saint-Oriel.\n\nNora te plaque contre elle.\n\nPas pour te protéger.\n\nElle sait qu'elle ne peut pas.\n\nJuste pour que tu ne sois pas seul.\n\nLe souffle arrive plus tard que prévu.\n\nAssez tard pour qu'elle te dise :\n\n**« Je sais que tu ne me pardonneras peut-être jamais. Mais tu es vivant. »**",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Regarder la lumière",
+          "vers": "fin_nora",
+          "effects": [],
+          "requires": {
+            "stat": "confiance",
+            "min": 180
+          }
+        },
+        {
+          "text": "Ne pas choisir",
+          "vers": "fin_partielle",
+          "effects": [],
+          "clickEffect": "fade"
+        }
+      ],
+      "x": 260,
+      "y": 3260,
+      "timer": {
+        "duration": 8,
+        "auto": "fin_nora"
+      }
+    },
+    "fin_partielle": {
+      "id": "fin_partielle",
+      "title": "Quelques Vies",
+      "location": "ABRI B-7",
+      "narrator": "Les compromis ont parfois le goût du sang et de l'insuffisant.",
+      "text": "Tu refuses le protocole complet.\n\nMais tu acceptes le prélèvement partiel.\n\nLe médecin sait que ce n'est pas assez.\n\nNora sait que c'est trop.\n\nLa machine prend ton sang.\n\nPas tout.\n\nAssez pour te faire vaciller.\n\nPas assez pour sauver le monde.\n\nPlus tard, on dira que le sérum partiel a sauvé vingt-sept personnes.\n\nOu trente.\n\nOu douze.\n\nLes chiffres changeront selon ceux qui racontent.\n\nNora reste près de toi.\n\nTu survives.\n\nElle aussi.\n\nMais entre vous, il y aura toujours cette question :\n\ncombien de vies vaut une moitié de courage ?",
+      "isStart": false,
+      "isEnd": true,
+      "transition": "fade",
+      "choices": [],
+      "x": 820,
+      "y": 3260
+    },
+    "fin_sacrifice": {
+      "id": "fin_sacrifice",
+      "title": "Fin — Le Sérum",
+      "location": "APRÈS",
+      "narrator": "Le monde ne se souvient pas toujours correctement de ceux qui le sauvent.",
+      "text": "Les premières doses sortent avant l'aube.\n\nPuis d'autres.\n\nLe protocole S-12 ne sauve pas tout le monde.\n\nAucune histoire honnête ne finit comme ça.\n\nMais il sauve assez de vies pour que des enfants respirent dans des abris.\nAssez pour que des médecins continuent.\nAssez pour que quelqu'un parle encore d'avenir.\n\nNora survit.\n\nElle refuse les cérémonies.\n\nElle garde seulement une photo de vous deux au café.\n\nAu dos, elle écrit :\n\n> Tu aurais détesté qu'on appelle ça un miracle.\n\nDes années plus tard, quand les premières fleurs repoussent sur les toits de Saint-Oriel, certains disent que le monde a été sauvé par un sérum.\n\nNora, elle, sait que le monde a été sauvé par quelqu'un qui n'a pas eu assez de temps pour dire adieu.",
+      "isStart": false,
+      "isEnd": true,
+      "transition": "fade",
+      "choices": [],
+      "x": 520,
+      "y": 3440
+    },
+    "fin_nora": {
+      "id": "fin_nora",
+      "title": "Fin — Deux Survivants",
+      "location": "APRÈS",
+      "narrator": "Il y a des mondes qu'on ne sauve pas, seulement des personnes qu'on refuse de perdre.",
+      "text": "Vous survivez.\n\nPas facilement.\n\nPas proprement.\n\nLe monde ne finit pas en une seule lumière.\n\nIl continue, blessé.\n\nDes villes tombent.\nDes abris s'éteignent.\nDes messages radio appellent à l'aide pendant des semaines.\n\nNora ne dort presque plus.\n\nToi non plus.\n\nParfois, elle te regarde comme si elle vérifiait encore que son crime respire.\n\nTu voudrais la haïr.\n\nCertains jours, tu y arrives.\n\nD'autres, tu te souviens de sa main dans la tienne.\n\nUn soir, loin de Saint-Oriel, elle te demande :\n\n**« Si c'était à refaire... tu me laisserais encore te sauver ? »**\n\nTu n'as pas de réponse assez grande.\n\nSeulement le silence.\n\nEt elle reste quand même.",
+      "isStart": false,
+      "isEnd": true,
+      "transition": "fade",
+      "choices": [],
+      "x": 260,
+      "y": 3440
+    },
+    "fin_trop_tard": {
+      "id": "fin_trop_tard",
+      "title": "Fin — Ne Pas Choisir",
+      "location": "SAINT-ORIEL",
+      "narrator": "Parfois, ne pas choisir est encore un choix. Mais ce n'est pas toujours le plus humain.",
+      "text": "Tu restes.\n\nUne seconde.\n\nPuis une autre.\n\nIl y avait sûrement une bonne raison.\n\nComprendre mieux.\nDire les bons mots.\nNe pas abandonner quelqu'un.\nNe pas te tromper.\n\nMais cette fois, ton hésitation ne sauve personne.\n\nPas l'enfant.\nPas Nora.\nPas les gens dans l'abri.\nPas toi.\n\nLa lumière arrive sans bruit.\n\nPendant un instant, tout devient blanc.\n\nPuis il n'y a plus de sirènes.\n\nPlus de questions.\n\nPlus de choix.\n\nSeulement le temps que tu pensais encore avoir.",
+      "isStart": false,
+      "isEnd": true,
+      "transition": "flash",
+      "choices": [],
+      "x": 840,
+      "y": 1220
+    },
+    "retard_enfant": {
+      "id": "retard_enfant",
+      "title": "Le Temps Perdu",
+      "location": "SAINT-ORIEL — AVENUE NORD",
+      "narrator": "Sauver quelqu'un prend parfois exactement le temps qu'on n'avait pas.",
+      "text": "Vous courez vers l'ancien hôpital.\n\nMais la rue n'est plus la même.\n\nLes militaires ont fermé le passage.\n\nLa foule s'écrase contre les barrières.\n\nNora cherche une autre route.\n\nSon regard saute d'une ruelle à l'autre.\n\nElle calcule.\n\nElle panique.\n\n**« Non... non, non, non... »**\n\nAu loin, la porte métallique des galeries se referme.\n\nLe son est minuscule.\n\nPresque rien.\n\nMais tu comprends tout de suite.\n\nVous êtes trop tard.\n\nLa mère que tu as aidée disparaît dans la foule avec son enfant vivant dans les bras.\n\nTu devrais ressentir du soulagement.\n\nTu en ressens.\n\nMais pas seulement.\n\nNora attrape ta main.\n\n**« Il reste peut-être un accès par les caves. »**\n\nElle ment.\n\nTu le sais.\n\nElle le sait aussi.\n\nMais elle refuse encore de lâcher.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "glitch",
+      "timer": {
+        "duration": 8,
+        "auto": "fin_humaine"
+      },
+      "choices": [
+        {
+          "text": "Lui dire d'arrêter de courir",
+          "vers": "fin_humaine_douce",
+          "effects": [
+            {
+              "stat": "humanite",
+              "val": 15
+            }
+          ],
+          "requires": {
+            "stat": "confiance",
+            "min": 130
+          }
+        },
+        {
+          "text": "Chercher quand même une issue avec Nora",
+          "vers": "fin_humaine",
+          "effects": [
+            {
+              "stat": "confiance",
+              "val": 10
+            },
+            {
+              "stat": "humanite",
+              "val": 10
+            }
+          ],
+          "requires": {
+            "stat": "humanite",
+            "min": 80
+          }
+        },
+        {
+          "text": "Continuer sans s'arrêter",
+          "vers": "fin_partielle",
+          "effects": [],
+          "clickEffect": "fade"
+        }
+      ],
+      "x": 180,
+      "y": 1400
+    },
+    "fin_humaine": {
+      "id": "fin_humaine",
+      "title": "Fin — Une Vie Sauvée",
+      "location": "SAINT-ORIEL",
+      "narrator": "Il y a des défaites qui ressemblent étrangement à de la lumière.",
+      "text": "Vous ne trouvez pas d'autre entrée.\n\nNora frappe contre une porte verrouillée jusqu'à s'ouvrir les mains.\n\n**« Ouvrez ! »**\n\nPersonne ne répond.\n\nLa ville tremble.\n\nLes sirènes se tordent dans l'air.\n\nTu penses à l'enfant.\n\nÀ ses bras autour du cou de sa mère.\n\nÀ cette vie minuscule qui continue quelque part parce que tu as perdu quelques minutes.\n\nNora s'effondre contre toi.\n\n**« Tu vois ? »** murmure-t-elle. **« Tu vois pourquoi je voulais choisir à ta place ? »**\n\nTu ne réponds pas.\n\nIl n'y a rien à répondre.\n\nLa lumière arrive au bout de la rue.\n\nBlanche.\n\nImmense.\n\nNora serre ta main.\n\nCette fois, elle ne te tire pas.\n\nElle reste.\n\nEt dans les dernières secondes, tu comprends quelque chose d'horrible et de doux :\n\ntu n'as pas sauvé le monde.\n\nTu n'as pas survécu.\n\nMais quelque part, un enfant respire encore.",
+      "isStart": false,
+      "isEnd": true,
+      "transition": "flash",
+      "choices": [],
+      "x": 120,
+      "y": 1600
+    },
+    "fin_humaine_douce": {
+      "id": "fin_humaine_douce",
+      "title": "Fin — Ne Plus Courir",
+      "location": "SAINT-ORIEL — RUE VIDE",
+      "narrator": "Parfois, la dernière liberté est de ne plus fuir.",
+      "text": "Tu prends la main de Nora.\n\n**« Arrête. »**\n\nElle secoue la tête.\n\n**« Non. Il doit y avoir une autre route. Il y a toujours une autre route. »**\n\n**« Nora. »**\n\nTon calme la brise plus sûrement qu'un cri.\n\nElle comprend.\n\nLa porte est fermée.\n\nL'abri est trop loin.\n\nLe monde n'attendra plus.\n\nElle pose son front contre ton épaule.\n\n**« J'ai essayé. »**\n\n**« Je sais. »**\n\nAutour de vous, la ville semble presque silencieuse.\n\nAu loin, une mère court avec son enfant dans les bras.\n\nTu ne sais pas s'ils atteindront un abri.\n\nMais ils courent.\n\nIls ont une chance.\n\nNora suit ton regard.\n\nElle pleure.\n\nPas seulement parce qu'elle te perd.\n\nParce qu'elle comprend enfin pourquoi tu aurais choisi le monde.\n\nLa lumière arrive.\n\nTu fermes les yeux.\n\nSa main reste dans la tienne.",
+      "isStart": false,
+      "isEnd": true,
+      "transition": "fade",
+      "choices": [],
+      "x": 300,
+      "y": 1600
+    },
+    "aider_cafe_suite": {
+      "id": "aider_cafe_suite",
+      "title": "Ceux Qui Restent",
+      "location": "CAFÉ L'ORBITAL",
+      "narrator": "Quand le monde s'effondre, certains gestes deviennent plus grands que ceux qui les font.",
+      "text": "Tu restes.\n\nLa serveuse tremble encore.\n\nLe vieil homme de la librairie ne comprend pas comment rejoindre l'abri.\n\nUn enfant cherche sa mère entre les tables renversées.\n\nNora te regarde.\n\n**« On doit partir. »**\n\nTu sais qu'elle a raison.\n\nMais tu vois les mains qui tremblent.\n\nLes visages vides.\n\nLes gens qui n'ont pas compris assez vite.\n\nAlors tu aides.\n\nTu donnes des directions.\nTu déplaces une armoire tombée devant la sortie.\nTu portes le libraire jusqu'au trottoir.\n\nNora finit par aider aussi.\n\nPas parce qu'elle veut.\n\nParce qu'elle t'aime assez pour détester ce que tu es en train de faire.\n\nQuand vous sortez enfin, la rue a changé.\n\nLe chemin vers l'hôpital est coupé.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "flash",
+      "timer": {
+        "duration": 8,
+        "auto": "fin_cafe"
+      },
+      "choices": [
+        {
+          "text": "Essayer encore de rejoindre l'abri",
+          "vers": "fin_cafe",
+          "effects": [
+            {
+              "stat": "urgence",
+              "val": 20
+            }
+          ],
+          "requires": {
+            "stat": "humanite",
+            "min": 50
+          }
+        },
+        {
+          "text": "Aider les derniers à descendre dans une cave",
+          "vers": "fin_cave",
+          "effects": [
+            {
+              "stat": "humanite",
+              "val": 20
+            }
+          ],
+          "requires": {
+            "stat": "humanite",
+            "min": 50
+          }
+        },
+        {
+          "text": "Rester sans savoir quoi faire",
+          "vers": "fin_partielle",
+          "effects": [],
+          "clickEffect": "fade"
+        }
+      ],
+      "x": 740,
+      "y": 1100
+    },
+    "fin_cafe": {
+      "id": "fin_cafe",
+      "title": "Fin — Le Café des Dernières Secondes",
+      "location": "CAFÉ L'ORBITAL",
+      "narrator": "Tous les refuges ne sont pas assez profonds pour sauver un corps. Certains sauvent seulement ce qu'il reste d'humain.",
+      "text": "L'abri est trop loin.\n\nNora le sait avant toi.\n\nElle regarde la rue.\n\nPuis le café.\n\nPuis toi.\n\n**« Tu as donné notre temps. »**\n\nCe n'est pas un reproche.\n\nPas complètement.\n\nÀ l'intérieur, la serveuse respire encore.\n\nLe libraire serre son vieux poste de radio contre lui.\n\nL'enfant a retrouvé sa mère.\n\nTu n'as pas sauvé la ville.\n\nTu n'as pas atteint l'abri.\n\nMais autour de toi, plusieurs personnes sont vivantes quelques minutes de plus parce que tu n'as pas su partir.\n\nLa radio grésille.\n\nUne chanson ancienne passe entre deux messages d'urgence.\n\nNora s'assoit près de toi, derrière le comptoir renversé.\n\n**« J'aurais voulu être assez égoïste pour te sauver. »**\n\nTu lui réponds :\n\n**« Tu l'étais. »**\n\nElle sourit à travers ses larmes.\n\nDehors, la lumière monte.",
+      "isStart": false,
+      "isEnd": true,
+      "transition": "fade",
+      "choices": [],
+      "x": 700,
+      "y": 1300
+    },
+    "fin_cave": {
+      "id": "fin_cave",
+      "title": "Fin — La Cave",
+      "location": "SOUS LE CAFÉ",
+      "narrator": "On ne choisit pas toujours de survivre. Parfois, on choisit seulement où attendre la fin.",
+      "text": "Vous aidez les derniers à descendre dans la cave du café.\n\nCe n'est pas un vrai abri.\n\nJuste des murs épais.\nDes bouteilles poussiéreuses.\nUne ampoule qui clignote.\n\nNora ferme la porte derrière vous.\n\nElle ne dit plus qu'il reste une chance.\n\nTu apprécies qu'elle arrête de mentir.\n\nLa serveuse serre l'enfant contre elle.\n\nLe libraire ouvre son livre de poésie.\n\nSa voix tremble, mais il lit quand même.\n\nPersonne ne comprend vraiment les vers.\n\nCe n'est pas grave.\n\nPendant quelques secondes, il y a une pièce pleine de gens qui écoutent ensemble.\n\nNora prend ta main dans le noir.\n\n**« C'est pour ça que je voulais te garder vivant. »**\n\n**« Pour quoi ? »**\n\n**« Pour que le monde garde quelqu'un comme toi. »**\n\nLa cave tremble.\n\nLa lumière s'éteint.",
+      "isStart": false,
+      "isEnd": true,
+      "transition": "fade",
+      "choices": [],
+      "x": 880,
+      "y": 1300
+    },
+    "triage_retard": {
+      "id": "triage_retard",
+      "title": "Le Dernier Civil",
+      "location": "ABRI B-7",
+      "narrator": "À force de vouloir que personne ne reste dehors, on peut finir par rester soi-même du mauvais côté.",
+      "text": "Tu continues.\n\nEncore une personne.\n\nPuis une autre.\n\nNora t'appelle.\n\nLe médecin aussi.\n\nMais une adolescente blessée n'arrive pas à marcher.\n\nTu la portes jusqu'à la porte.\n\nElle passe.\n\nLa porte commence à se refermer.\n\nNora hurle ton nom.\n\nTu cours.\n\nTrop tard.\n\nLa porte blindée se scelle entre vous.\n\nDe l'autre côté, Nora frappe.\n\nEncore.\n\nEncore.\n\nLe médecin crie quelque chose que tu n'entends pas.\n\nLe protocole S-12 ne sera pas lancé.\n\nTu es du mauvais côté.\n\nMais l'adolescente est dedans.\n\nEt plusieurs autres avec elle.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "glitch",
+      "timer": {
+        "duration": 6,
+        "auto": "fin_derriere_porte"
+      },
+      "choices": [
+        {
+          "text": "Poser la main sur la porte",
+          "vers": "fin_derriere_porte",
+          "effects": [],
+          "requires": {
+            "stat": "confiance",
+            "min": 80
+          }
+        },
+        {
+          "text": "Laisser le temps décider",
+          "vers": "fin_partielle",
+          "effects": [],
+          "clickEffect": "fade"
+        }
+      ],
+      "x": 360,
+      "y": 2660
+    },
+    "fin_derriere_porte": {
+      "id": "fin_derriere_porte",
+      "title": "Fin — Derrière la Porte",
+      "location": "ABRI B-7 — EXTÉRIEUR",
+      "narrator": "Une porte fermée peut sauver des vies des deux côtés, mais pas de la même manière.",
+      "text": "Tu poses la main sur la porte blindée.\n\nDe l'autre côté, Nora pose sûrement la sienne.\n\nTu ne peux pas la voir.\n\nTu ne peux pas l'entendre.\n\nMais tu la connais.\n\nTu imagines sa rage.\nSa peur.\nSa façon de refuser encore la réalité.\n\nLa voix automatique annonce le scellage complet.\n\nPuis le silence.\n\nLe protocole S-12 ne sauvera pas le monde.\n\nMais les civils que tu as fait entrer vivront peut-être.\n\nL'adolescente.\nLa serveuse.\nLes enfants.\nLe vieil homme.\n\nQuelques vies.\n\nPas assez pour les livres d'histoire.\n\nAssez pour que ton choix ne soit pas vide.\n\nQuand la lumière arrive, tu gardes la main contre la porte.\n\nPour que Nora sache, de l'autre côté, que tu étais encore là.",
+      "isStart": false,
+      "isEnd": true,
+      "transition": "fade",
+      "choices": [],
+      "x": 360,
+      "y": 2840
+    },
+    "tramway_matin": {
+      "id": "tramway_matin",
+      "title": "Le Tramway du Matin",
+      "location": "SAINT-ORIEL — LIGNE T3",
+      "narrator": "Les journées normales sont pleines de détails qu'on croit éternels.",
+      "text": "Le tramway grince dans les virages.\n\nUne femme dort contre la vitre.\nUn étudiant révise sans vraiment lire.\nQuelqu'un écoute de la musique trop fort.\n\nTon téléphone vibre encore.\n\nNora :\n\n> Si tu es encore en retard je mange aussi ton café.\n\nUne vieille publicité passe sur les écrans du wagon.\n\n> VISITEZ LES ABRIS HISTORIQUES DE SAINT-ORIEL\n\nPersonne ne lève les yeux.\n\nLe conducteur annonce un ralentissement inhabituel près du quartier militaire.\n\nPuis la routine reprend.\n\nComme si le monde hésitait encore.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Observer les gens autour de toi",
+          "vers": "souvenir_nora",
+          "effects": [
+            {
+              "stat": "humanite",
+              "val": 5
+            }
+          ]
+        },
+        {
+          "text": "Répondre à Nora immédiatement",
+          "vers": "souvenir_nora",
+          "effects": [
+            {
+              "stat": "confiance",
+              "val": 5
+            }
+          ]
+        }
+      ],
+      "x": 420,
+      "y": 80
+    },
+    "souvenir_nora": {
+      "id": "souvenir_nora",
+      "title": "Le Banc Bleu",
+      "location": "PARC DE SAINT-ORIEL",
+      "narrator": "On s'attache aux gens longtemps avant de comprendre qu'on les aime.",
+      "text": "En descendant du tramway, tu passes devant un vieux banc bleu.\n\nNora l'appelle toujours « le banc dépressif » parce qu'il regarde directement un parking.\n\nTu repenses à un soir d'hiver.\n\nElle t'avait attendu ici pendant deux heures après ton accident de voiture.\n\nQuand tu lui avais demandé pourquoi elle était restée dans le froid, elle avait répondu :\n\n**« Parce que quelqu'un devait être là quand tu te réveillerais. »**\n\nTu avais ri.\n\nElle non.\n\nAujourd'hui encore, tu ne sais pas vraiment si cette phrase était une blague.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Continuer vers le café",
+          "vers": "cafe_simple",
+          "effects": [
+            {
+              "stat": "confiance",
+              "val": 10
+            }
+          ]
+        },
+        {
+          "text": "Envoyer à Nora une photo du banc",
+          "vers": "message_banc",
+          "effects": [
+            {
+              "stat": "confiance",
+              "val": 15
+            },
+            {
+              "stat": "humanite",
+              "val": 5
+            }
+          ]
+        }
+      ],
+      "x": 420,
+      "y": 240
+    },
+    "fete_foraine": {
+      "id": "fete_foraine",
+      "title": "La Fête Foraine Fermée",
+      "location": "QUAIS DE SAINT-ORIEL",
+      "narrator": "Les lieux abandonnés ressemblent parfois à des souvenirs qui refusent de mourir.",
+      "text": "La vieille fête foraine est fermée depuis des années.\n\nPourtant, Nora insiste toujours pour passer devant.\n\nLa grande roue grince avec le vent.\n\nDes lumières mortes pendent encore sous les stands.\n\nNora pointe un jeu de tir rouillé.\n\n**« Tu te souviens quand tu avais essayé de gagner cette peluche horrible ? »**\n\nTu te souviens surtout qu'elle avait gardé la peluche.\n\nElle remarque ton regard.\n\n**« Elle est toujours chez moi. »**\n\nPuis elle ajoute, plus doucement :\n\n**« Je garde beaucoup de choses inutiles. »**",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Lui demander pourquoi elle l'a gardée",
+          "vers": "confidence_legere",
+          "effects": [
+            {
+              "stat": "confiance",
+              "val": 15
+            }
+          ]
+        },
+        {
+          "text": "Se moquer gentiment d'elle",
+          "vers": "confidence_legere",
+          "effects": [
+            {
+              "stat": "humanite",
+              "val": 10
+            }
+          ]
+        }
+      ],
+      "x": 760,
+      "y": 620
+    },
+    "confidence_legere": {
+      "id": "confidence_legere",
+      "title": "Les Choses Inutiles",
+      "location": "QUAIS DE SAINT-ORIEL",
+      "narrator": "Les gens parlent rarement directement de l'amour. Ils parlent des objets qu'ils n'ont jamais jetés.",
+      "text": "Nora hausse les épaules.\n\n**« Je sais pas. J'aime bien garder les trucs qui me rappellent que certaines journées ont existé. »**\n\nElle regarde la rivière.\n\nLe vent soulève ses cheveux.\n\nPendant une seconde, elle semble fatiguée.\n\nPas physiquement.\n\nComme quelqu'un qui sait déjà que quelque chose va lui être repris.\n\nPuis elle retrouve son sourire.\n\n**« Bon. Si le monde finit aujourd'hui, au moins la peluche survivra peut-être. »**\n\nTu ris.\n\nAu loin, une sirène très discrète retentit.\n\nTrop loin pour inquiéter qui que ce soit.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Lui demander pourquoi elle dit ça",
+          "vers": "nora_sait",
+          "effects": [
+            {
+              "stat": "urgence",
+              "val": 5
+            },
+            {
+              "stat": "confiance",
+              "val": 10
+            }
+          ]
+        },
+        {
+          "text": "Continuer à marcher avec elle",
+          "vers": "journee_normale",
+          "effects": [
+            {
+              "stat": "humanite",
+              "val": 5
+            }
+          ]
+        }
+      ],
+      "x": 760,
+      "y": 820
+    },
+    "station_metro": {
+      "id": "station_metro",
+      "title": "La Station Inondée",
+      "location": "MÉTRO CENTRAL",
+      "narrator": "Les foules paniquées ressemblent à des vagues qui auraient oublié où aller.",
+      "text": "La station de métro déborde de monde.\n\nDes familles descendent les escaliers en courant.\n\nUn agent essaie encore de donner des indications dans un haut-parleur saturé.\n\nNora avance vite.\n\nTrop vite.\n\nComme quelqu'un qui connaît déjà les temps exacts.\n\nSur un quai, un musicien continue de jouer du violon.\n\nPersonne ne l'écoute.\n\nPuis le courant saute une seconde.\n\nLe noir avale tout.\n\nQuand les lumières reviennent, plusieurs personnes pleurent déjà.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "glitch",
+      "choices": [
+        {
+          "text": "Aider une vieille femme tombée",
+          "vers": "metro_aide",
+          "effects": [
+            {
+              "stat": "humanite",
+              "val": 15
+            },
+            {
+              "stat": "urgence",
+              "val": 10
+            }
+          ]
+        },
+        {
+          "text": "Suivre Nora immédiatement",
+          "vers": "galeries",
+          "effects": [
+            {
+              "stat": "confiance",
+              "val": 10
+            }
+          ]
+        },
+        {
+          "text": "Traverser la rue commerçante",
+          "vers": "pharmacie",
+          "effects": [
+            {
+              "stat": "urgence",
+              "val": 10
+            }
+          ]
+        }
+      ],
+      "x": 520,
+      "y": 1220,
+      "timer": {
+        "duration": 10,
+        "auto": "galeries"
+      }
+    },
+    "metro_aide": {
+      "id": "metro_aide",
+      "title": "Sous les Néons",
+      "location": "MÉTRO CENTRAL",
+      "narrator": "Même au bord de la fin, certains s'arrêtent encore pour tendre la main.",
+      "text": "Tu aides la vieille femme à se relever.\n\nElle serre ta manche comme si tu étais la dernière chose stable dans le monde.\n\nNora revient vers toi malgré la foule.\n\nElle paraît furieuse.\n\nPuis elle voit la femme trembler.\n\nAlors elle l'aide aussi.\n\nEncore cette contradiction.\n\nCette manière qu'elle a de vouloir sauver tout le monde sauf quand il s'agit de toi.\n\nAu loin, un grondement fait vibrer les rails.\n\nPas un train.\n\nQuelque chose de beaucoup plus loin.\n\nEt beaucoup plus grand.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Continuer vers les galeries",
+          "vers": "galeries",
+          "effects": [
+            {
+              "stat": "humanite",
+              "val": 10
+            },
+            {
+              "stat": "urgence",
+              "val": 15
+            }
+          ]
+        }
+      ],
+      "x": 520,
+      "y": 1420,
+      "timer": {
+        "duration": 7,
+        "auto": "galeries"
+      }
+    },
+    "message_banc": {
+      "id": "message_banc",
+      "title": "Le Message",
+      "location": "RUE DES TILLEULS",
+      "narrator": "Certaines conversations ressemblent déjà à des souvenirs avant même d'être terminées.",
+      "text": "Tu envoies la photo du banc.\n\nTrois petits points apparaissent presque immédiatement.\n\nNora :\n\n> Oh non.\n> Le banc dépressif.\n> Tu essaies de me rendre nostalgique dès le matin ?\n\nTu continues de marcher.\n\nNora envoie une seconde photo.\n\nLa vieille peluche de la fête foraine.\n\nToujours posée sur une étagère chez elle.\n\n> Je t'avais dit que je gardais les choses inutiles.\n\nPuis :\n\n> Dépêche-toi quand même.\n> Le café refroidit.\n\nPendant quelques secondes, le monde ressemble encore exactement à ce qu'il était hier.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Rejoindre Nora au café",
+          "vers": "cafe_blague",
+          "effects": [
+            {
+              "stat": "confiance",
+              "val": 5
+            }
+          ]
+        }
+      ],
+      "x": 620,
+      "y": 320
+    },
+    "marche_couverte": {
+      "id": "marche_couverte",
+      "title": "Le Marché Couvert",
+      "location": "MARCHÉ CENTRAL",
+      "narrator": "Les endroits les plus ordinaires deviennent sacrés une fois disparus.",
+      "text": "En traversant le marché couvert, Nora s'arrête devant un vendeur de fruits.\n\nElle hésite longuement avant d'acheter une pêche.\n\n**« C'est ridicule le prix que ça coûte maintenant. »**\n\nPuis elle la coupe en deux avec le petit couteau de sa poche.\n\nElle t'en tend la moitié.\n\nLe goût est incroyablement normal.\n\nAutour de vous, les gens parlent météo, travail, football.\n\nUn écran suspendu diffuse des débats politiques sans le son.\n\nNora regarde les images.\n\nPuis détourne les yeux immédiatement.\n\nComme quelqu'un qui essaie d'oublier quelque chose qu'elle connaît déjà.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Profiter simplement du moment",
+          "vers": "journee_normale",
+          "effects": [
+            {
+              "stat": "humanite",
+              "val": 10
+            }
+          ]
+        },
+        {
+          "text": "Lui demander si quelque chose la tracasse",
+          "vers": "nora_fatigue",
+          "effects": [
+            {
+              "stat": "confiance",
+              "val": 10
+            }
+          ]
+        },
+        {
+          "text": "Passer par le vieux disquaire",
+          "vers": "disquaire",
+          "effects": [
+            {
+              "stat": "confiance",
+              "val": 5
+            }
+          ]
+        }
+      ],
+      "x": 860,
+      "y": 300
+    },
+    "pharmacie": {
+      "id": "pharmacie",
+      "title": "La Pharmacie",
+      "location": "RUE SAINT-LAZARE",
+      "narrator": "Les gens deviennent eux-mêmes très vite quand ils pensent manquer de temps.",
+      "text": "Une pharmacie est prise d'assaut.\n\nDes gens hurlent.\n\nCertains essaient de prendre des médicaments.\nD'autres cherchent simplement de l'eau.\n\nUne femme supplie pour de l'insuline.\n\nNora ralentit.\n\nTu vois immédiatement le conflit dans son regard.\n\nPartir.\nOu aider encore.\n\nLe pharmacien finit par jeter des boîtes par-dessus le comptoir pour calmer la foule.\n\nQuelqu'un pleure derrière toi.\n\nQuelqu'un rit nerveusement.\n\nLe monde commence déjà à se fissurer en morceaux incompatibles.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "glitch",
+      "choices": [
+        {
+          "text": "Forcer Nora à continuer",
+          "vers": "galeries",
+          "effects": [
+            {
+              "stat": "confiance",
+              "val": 5
+            },
+            {
+              "stat": "humanite",
+              "val": -5
+            }
+          ]
+        },
+        {
+          "text": "Aider la femme à récupérer ses médicaments",
+          "vers": "galeries",
+          "effects": [
+            {
+              "stat": "humanite",
+              "val": 15
+            },
+            {
+              "stat": "urgence",
+              "val": 15
+            }
+          ]
+        }
+      ],
+      "x": 740,
+      "y": 1380,
+      "timer": {
+        "duration": 8,
+        "auto": "galeries"
+      }
+    },
+    "famille_nora": {
+      "id": "famille_nora",
+      "title": "La Famille de Nora",
+      "location": "CAFÉ L'ORBITAL",
+      "narrator": "Les gens parlent rarement de leur famille quand ils ont peur de la perdre.",
+      "text": "Nora reste silencieuse quelques secondes.\n\nPuis elle soupire.\n\n**« Ma mère croit encore que je vais finir prof d'histoire. »**\n\nElle sourit faiblement.\n\n**« Elle déteste mon boulot actuel. Elle dit que les laboratoires gouvernementaux sentent les secrets et les migraines. »**\n\nTu ris.\n\nNora regarde la pluie derrière la vitre.\n\n**« Mon père collectionnait les radios anciennes. Quand j'étais petite, il me réveillait parfois la nuit juste pour écouter des fréquences bizarres venues de l'autre côté du monde. »**\n\nElle baisse les yeux.\n\n**« Je crois que c'est là que j'ai commencé à avoir peur des sirènes. »**\n\nPendant une seconde, elle semble sur le point d'ajouter quelque chose.\n\nPuis elle se ravise.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Changer doucement de sujet",
+          "vers": "journee_normale",
+          "effects": [
+            {
+              "stat": "humanite",
+              "val": 5
+            }
+          ]
+        },
+        {
+          "text": "L'écouter continuer",
+          "vers": "radio_enfance",
+          "effects": [
+            {
+              "stat": "confiance",
+              "val": 10
+            }
+          ]
+        }
+      ],
+      "x": 40,
+      "y": 520
+    },
+    "radio_enfance": {
+      "id": "radio_enfance",
+      "title": "Les Radios du Père de Nora",
+      "location": "CAFÉ L'ORBITAL",
+      "narrator": "Les souvenirs d'enfance deviennent parfois des avertissements qu'on comprend trop tard.",
+      "text": "Nora tourne sa cuillère lentement.\n\n**« Mon père disait toujours que les gens pensent que la fin du monde ferait un énorme bruit. »**\n\nElle sourit tristement.\n\n**« Mais selon lui, le pire moment serait juste avant. Quand tout continue normalement alors que quelqu'un, quelque part, sait déjà. »**\n\nTu lui demandes si elle pense souvent à ça.\n\nElle hésite.\n\n**« Depuis quelques semaines ? Oui. »**\n\nLe silence tombe.\n\nDans le café, quelqu'un fait tomber des pièces.\n\nUn couple rit près de la fenêtre.\n\nLa machine à café gronde.\n\nLe monde continue.\n\nEncore un peu.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Lui demander ce qu'elle veut dire",
+          "vers": "nora_fissure_avant",
+          "effects": [
+            {
+              "stat": "confiance",
+              "val": 10
+            },
+            {
+              "stat": "urgence",
+              "val": 5
+            }
+          ]
+        },
+        {
+          "text": "Prendre simplement sa main",
+          "vers": "journee_normale",
+          "effects": [
+            {
+              "stat": "confiance",
+              "val": 15
+            }
+          ]
+        }
+      ],
+      "x": 40,
+      "y": 700
+    },
+    "nora_fissure_avant": {
+      "id": "nora_fissure_avant",
+      "title": "Presque Un Aveu",
+      "location": "CAFÉ L'ORBITAL",
+      "narrator": "Certains secrets commencent par une phrase interrompue.",
+      "text": "Nora ouvre la bouche.\n\n**« Si quelque chose arrivait vraiment... »**\n\nElle s'arrête.\n\nTu attends.\n\nSon téléphone vibre.\n\nElle le regarde.\n\nSon visage pâlit une fraction de seconde.\n\nPuis elle verrouille immédiatement l'écran.\n\n**« Rien. Oublie. »**\n\nMais maintenant, tu remarques qu'elle regarde l'heure toutes les trente secondes.\n\nComme quelqu'un qui attend un impact invisible.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Insister",
+          "vers": "indice_pansement",
+          "effects": [
+            {
+              "stat": "confiance",
+              "val": 5
+            },
+            {
+              "stat": "urgence",
+              "val": 5
+            }
+          ]
+        },
+        {
+          "text": "Faire semblant de ne rien remarquer",
+          "vers": "journee_normale",
+          "effects": [
+            {
+              "stat": "humanite",
+              "val": 5
+            }
+          ]
+        }
+      ],
+      "x": 40,
+      "y": 880
+    },
+    "disquaire": {
+      "id": "disquaire",
+      "title": "Le Disquaire",
+      "location": "RUE DES HALLES",
+      "narrator": "Les chansons restent souvent plus longtemps que les villes.",
+      "text": "Nora s'arrête devant un vieux disquaire.\n\nLa boutique diffuse une chanson ancienne dans la rue.\n\nElle sourit immédiatement.\n\n**« Mon frère adorait ce groupe. »**\n\nTu ne l'as jamais entendue parler de son frère.\n\nElle remarque ton expression.\n\n**« Il est parti vivre au nord il y a des années. On s'appelle presque jamais. »**\n\nPuis elle ajoute :\n\n**« On croit toujours qu'on aura le temps plus tard. »**\n\nLe vendeur change de disque.\n\nLa chanson se coupe brutalement.\n\nLe silence paraît soudain étrange.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Lui demander si elle regrette",
+          "vers": "regrets_nora",
+          "effects": [
+            {
+              "stat": "confiance",
+              "val": 10
+            }
+          ]
+        },
+        {
+          "text": "Continuer à marcher",
+          "vers": "journee_normale",
+          "effects": [
+            {
+              "stat": "humanite",
+              "val": 5
+            }
+          ]
+        }
+      ],
+      "x": 900,
+      "y": 520
+    },
+    "regrets_nora": {
+      "id": "regrets_nora",
+      "title": "Les Choses Remises à Plus Tard",
+      "location": "RUE DES HALLES",
+      "narrator": "Le regret ressemble souvent à une conversation qu'on pensait avoir demain.",
+      "text": "Nora garde les yeux sur la vitrine.\n\n**« Oui. »**\n\nPas de blague cette fois.\n\n**« J'ai passé tellement de temps à croire que les gens resteraient là. Ma famille. Mes amis. Toi. »**\n\nElle rit nerveusement.\n\n**« C'est idiot, hein ? Comme si le monde nous devait du temps. »**\n\nUne ambulance passe au loin.\n\nTrop vite.\n\nTrop tôt dans la journée.\n\nNora la suit du regard jusqu'à sa disparition.\n\nPuis elle murmure :\n\n**« Si quelque chose arrivait aujourd'hui, je crois que je regretterais surtout tout ce que je n'ai jamais dit. »**",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Lui demander ce qu'elle n'a jamais dit",
+          "vers": "presque_amour",
+          "effects": [
+            {
+              "stat": "confiance",
+              "val": 15
+            }
+          ]
+        },
+        {
+          "text": "Lui dire que vous avez encore du temps",
+          "vers": "journee_normale",
+          "effects": [
+            {
+              "stat": "humanite",
+              "val": 10
+            }
+          ]
+        }
+      ],
+      "x": 1040,
+      "y": 700
+    },
+    "presque_amour": {
+      "id": "presque_amour",
+      "title": "Quelque Chose d'Important",
+      "location": "RUE DES HALLES",
+      "narrator": "Les mots importants arrivent rarement jusqu'au bout.",
+      "text": "Nora te regarde.\n\nVraiment.\n\nComme si elle essayait de mémoriser ton visage.\n\n**« Je crois que j'aurais dû te dire... »**\n\nUne sirène retentit au loin.\n\nPas encore l'alerte.\n\nJuste une ambulance.\n\nMais cela suffit à la faire s'arrêter.\n\nElle détourne les yeux.\n\n**« Rien. »**\n\nPuis elle recommence à marcher plus vite.\n\nComme quelqu'un qui fuit une phrase.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "La suivre",
+          "vers": "journee_normale",
+          "effects": [
+            {
+              "stat": "confiance",
+              "val": 10
+            }
+          ]
+        }
+      ],
+      "x": 1040,
+      "y": 880
+    }
+  }
+}
