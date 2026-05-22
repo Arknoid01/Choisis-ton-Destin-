@@ -2562,6 +2562,23 @@ function renderEditorInto(id, container) {
         ${presetOptions(SOUND_PRESETS, scene.sound || 'none', 'sounds')}
       </select>
     </div>
+    <div class="form-group">
+      <label class="form-label">⏱ Timer de choix <span class="tip" data-tip="Barre qui se réduit — si 0 un choix est sélectionné automatiquement">?</span></label>
+      <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
+        <input type="number" class="form-input" style="width:65px" min="0" max="120"
+          value="${scene.timer?.duration||0}"
+          onchange="updateTimerField('duration',parseInt(this.value)||0)"
+          placeholder="0">
+        <span style="font-size:12px;color:var(--text3)">sec</span>
+        <select class="form-select" style="flex:1"
+          onchange="updateTimerField('auto',this.value)">
+          <option value="random" ${(scene.timer?.auto||'random')==='random'?'selected':''}>Aléatoire</option>
+          <option value="first"  ${scene.timer?.auto==='first'?'selected':''}>Premier</option>
+          <option value="last"   ${scene.timer?.auto==='last'?'selected':''}>Dernier</option>
+        </select>
+      </div>
+      ${scene.timer?.duration ? `<div style="font-size:10px;color:var(--accent2);margin-top:5px;font-family:'DM Mono',monospace">⏱ ${scene.timer.duration}s → ${scene.timer.auto||'aléatoire'}</div>` : ''}
+    </div>
     <div class="form-group" style="display:flex;gap:20px">
       <label class="form-check"><input type="checkbox" ${scene.isStart?'checked':''} onchange="updateFlag('isStart',this.checked)"><span>${et('startScene')}</span></label>
       <label class="form-check"><input type="checkbox" ${scene.isEnd?'checked':''} onchange="updateFlag('isEnd',this.checked)"><span>${et('endScene')}</span></label>
