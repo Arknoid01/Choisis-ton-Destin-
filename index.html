@@ -321,7 +321,81 @@ body {
   color:var(--dimmer); font-style:italic; font-size:14px;
 }
 
-/* ── OPTIONS PANEL ── */
+/* ── LANGUE POPUP ── */
+#lang-overlay {
+  position:fixed; inset:0; z-index:600;
+  background:rgba(0,0,0,0.85);
+  display:flex; align-items:center; justify-content:center;
+  backdrop-filter:blur(8px);
+  animation:fade-in .4s ease;
+}
+#lang-box {
+  background:#13110e; border:1px solid var(--gold3);
+  border-radius:20px; padding:36px 28px;
+  max-width:340px; width:90%; text-align:center;
+  animation:scale-in .4s ease;
+}
+@keyframes scale-in {
+  from { transform:scale(0.9); opacity:0; }
+  to   { transform:scale(1);   opacity:1; }
+}
+@keyframes fade-out {
+  from { opacity:1; }
+  to   { opacity:0; }
+}
+.lang-box-icon { font-size:36px; margin-bottom:16px; }
+.lang-box-title {
+  font-family:'Cinzel',serif; font-size:18px; font-weight:600;
+  color:var(--cream); letter-spacing:2px; margin-bottom:8px;
+}
+.lang-box-sub {
+  font-size:13px; color:var(--dim); font-style:italic;
+  margin-bottom:28px; line-height:1.6;
+}
+.lang-choices {
+  display:flex; flex-direction:column; gap:10px;
+}
+.lang-choice-btn {
+  display:flex; align-items:center; gap:14px;
+  padding:14px 18px; border-radius:12px;
+  border:1px solid var(--border2); background:var(--bg2);
+  cursor:pointer; transition:all .2s; text-align:left;
+  width:100%;
+}
+.lang-choice-btn:hover {
+  border-color:var(--gold3);
+  background:rgba(200,169,110,0.06);
+}
+.lang-choice-btn.selected {
+  border-color:var(--gold);
+  background:rgba(200,169,110,0.1);
+}
+.lang-flag { font-size:26px; flex-shrink:0; }
+.lang-info { flex:1; }
+.lang-name {
+  font-family:'Cinzel',serif; font-size:14px; font-weight:600;
+  color:var(--cream); display:block;
+}
+.lang-native { font-size:12px; color:var(--dim); }
+.lang-check {
+  width:20px; height:20px; border-radius:50%;
+  border:2px solid var(--border2); flex-shrink:0;
+  display:flex; align-items:center; justify-content:center;
+  font-size:11px; transition:all .2s;
+}
+.lang-choice-btn.selected .lang-check {
+  background:var(--gold); border-color:var(--gold); color:#000;
+}
+.lang-confirm-btn {
+  margin-top:20px; width:100%;
+  padding:13px; border-radius:10px;
+  border:1px solid var(--gold3);
+  background:linear-gradient(135deg,rgba(200,169,110,0.15),rgba(200,169,110,0.05));
+  color:var(--gold); font-family:'Cinzel',serif;
+  font-size:12px; letter-spacing:2px; cursor:pointer;
+  transition:all .2s;
+}
+.lang-confirm-btn:hover { background:rgba(200,169,110,0.2); }
 #options-panel {
   position:fixed; inset:0; z-index:200;
   display:flex; align-items:center; justify-content:center;
@@ -597,6 +671,42 @@ body {
 </style>
 </head>
 <body>
+
+<!-- LANGUE POPUP — premier lancement -->
+<div id="lang-overlay" style="display:none">
+  <div id="lang-box">
+    <div class="lang-box-icon">✦</div>
+    <div class="lang-box-title">Choisissez votre langue</div>
+    <p class="lang-box-sub">Choose your language · Elige tu idioma</p>
+    <div class="lang-choices">
+      <button class="lang-choice-btn selected" id="lp-fr" onclick="selectLangPopup('fr',this)">
+        <span class="lang-flag">🇫🇷</span>
+        <div class="lang-info">
+          <span class="lang-name">Français</span>
+          <span class="lang-native">French</span>
+        </div>
+        <div class="lang-check">✓</div>
+      </button>
+      <button class="lang-choice-btn" id="lp-en" onclick="selectLangPopup('en',this)">
+        <span class="lang-flag">🇬🇧</span>
+        <div class="lang-info">
+          <span class="lang-name">English</span>
+          <span class="lang-native">Anglais</span>
+        </div>
+        <div class="lang-check"></div>
+      </button>
+      <button class="lang-choice-btn" id="lp-es" onclick="selectLangPopup('es',this)">
+        <span class="lang-flag">🇪🇸</span>
+        <div class="lang-info">
+          <span class="lang-name">Español</span>
+          <span class="lang-native">Espagnol</span>
+        </div>
+        <div class="lang-check"></div>
+      </button>
+    </div>
+    <button class="lang-confirm-btn" onclick="confirmLang()">CONTINUER</button>
+  </div>
+</div>
 
 <div class="bg-gradient"></div>
 <canvas id="bg-canvas"></canvas>
@@ -1246,12 +1356,57 @@ setTimeout(() => {
     }
   });
 }, 600);
+// ── LANGUE POPUP ────────────────────────────────────────────
+let _pendingLang = localStorage.getItem('sf_lang') || 'fr';
+
+function selectLangPopup(lang, btn) {
+  _pendingLang = lang;
+  document.querySelectorAll('.lang-choice-btn').forEach(b => {
+    b.classList.remove('selected');
+    b.querySelector('.lang-check').textContent = '';
+  });
+  btn.classList.add('selected');
+  btn.querySelector('.lang-check').textContent = '✓';
+}
+
+function confirmLang() {
+  localStorage.setItem('sf_lang', _pendingLang);
+  localStorage.setItem('sf_lang_chosen', '1');
+  currentLang = _pendingLang;
+  setLang(currentLang);
+  const overlay = document.getElementById('lang-overlay');
+  overlay.style.animation = 'fade-out .3s ease forwards';
+  setTimeout(() => overlay.style.display = 'none', 300);
+}
+
+function showLangPopupIfNeeded() {
+  if (!localStorage.getItem('sf_lang_chosen')) {
+    const overlay = document.getElementById('lang-overlay');
+    overlay.style.display = 'flex';
+    // Pré-sélectionner la langue détectée du navigateur
+    const browserLang = (navigator.language || 'fr').substring(0,2).toLowerCase();
+    const supported = ['fr','en','es'];
+    const detected = supported.includes(browserLang) ? browserLang : 'fr';
+    const btn = document.getElementById(`lp-${detected}`);
+    if (btn) {
+      document.querySelectorAll('.lang-choice-btn').forEach(b => {
+        b.classList.remove('selected');
+        b.querySelector('.lang-check').textContent = '';
+      });
+      btn.classList.add('selected');
+      btn.querySelector('.lang-check').textContent = '✓';
+      _pendingLang = detected;
+    }
+  }
+}
+
 (async function init() {
   loadOptions();
   setLang(currentLang);
   initCanvas();
   createParticles();
   await loadGameRegistry();
+  showLangPopupIfNeeded();
 })();
 </script>
 </body>
