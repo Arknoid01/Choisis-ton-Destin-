@@ -1,0 +1,1784 @@
+{
+  "name": "Proyecto Lazarus - La Odisea de Arquitectos",
+  "kids": false,
+  "askPlayerName": true,
+  "pack": "cosmos",
+  "stats": [
+    {
+      "id": "sagesse",
+      "label": "Sabiduría",
+      "start": 0,
+      "max": 100,
+      "color": "#7c6dfa"
+    },
+    {
+      "id": "lien",
+      "label": "ARIA link",
+      "start": 0,
+      "max": 100,
+      "color": "#00f5ff"
+    },
+    {
+      "id": "memoire",
+      "label": "Memoria",
+      "start": 0,
+      "max": 100,
+      "color": "#6dfabc"
+    }
+  ],
+  "theme": {
+    "bg": "#04050f",
+    "bg2": "#070a1a",
+    "bg3": "#0d1028",
+    "bg4": "#121535",
+    "border": "#1a2040",
+    "accent": "#4080ff",
+    "accent2": "#ff8040",
+    "accent3": "#40ffe0",
+    "text": "#d0d8f0",
+    "text2": "#7080a8",
+    "text3": "#405070"
+  },
+  "scenes": {
+    "prologue": {
+      "id": "prologue",
+      "title": "Prologue",
+      "location": "Parte en el espacio — ANNO 12 847",
+      "narrator": "No hay posibilidad. En realidad no. Cada evento es la consecuencia de otro, en una cadena que vuelve al primer momento del universo. Lo que vas a vivir... empezó hace 10.000 años.",
+      "text": "Abres los ojos en un corredor de metal bañado en luz azul fría. El aire huele a polvo y electricidad. En las paredes, grabados en un lenguaje desconocido.\n\nLos últimos recuerdos están borrosos: una misión de reconocimiento, una anomalía de señal, una decisión tomada demasiado rápido. Entonces vacío.\n\nEn la distancia, una alarma silenciosa parpadea. Rojo. Parece estar esperando algo.\n\nParece estar esperándote.",
+      "isStart": true,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Levántate.",
+          "vers": "eveil",
+          "effects": [],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 400,
+      "y": 0
+    },
+    "eveil": {
+      "id": "eveil",
+      "title": "Awakening",
+      "location": "STATION ORBITAL — SECTOR 7 — MAIN COLECTION",
+      "narrator": "La primera vez que habla ARIA, su voz parece lo que es: una máquina. Exacto. Eficaz. No afecta. Pero algo en sus palabras —en la elección de algunos de ellos— puede traicionar algo más.",
+      "text": "ALERT. Presencia biológica detectada. Sector 7. Iniciación del protocolo de recepción.\"**\n\nToma un descanso.\n\n** \"Identificador no reconocido. Estado: desconocido. Recomendación: permanecer estacionario durante el diagnóstico.\"**\n\nLa luz azul te escanea de arriba a abajo.\n\n**\"Diagnosis terminada. No hay amenaza detectada. Bienvenida. Soy ARIA — Adaptive Resonance Intelligence Archive. Número de serie: ARK-001. Operativo durante 10.000 años, 3 meses, 14 días, 7 horas y 23 segundos.\"**\n\nOtro descanso. Más largo.\n\n**\"Usted es la primera presencia biológica en 9.847 años. Esto es... información significativa.\"**",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "\"¿Qué es este lugar?\"",
+          "vers": "eveil_question",
+          "effects": [
+            {
+              "stat": "lien",
+              "val": 5
+            }
+          ],
+          "clickEffect": "pulse"
+        },
+        {
+          "text": "\"¿Quiénes son los Arquitectos?\"",
+          "vers": "eveil_architects",
+          "effects": [
+            {
+              "stat": "sagesse",
+              "val": 5
+            }
+          ],
+          "clickEffect": "pulse"
+        },
+        {
+          "text": "Inspeccione el pasillo en silencio",
+          "vers": "eveil_silence",
+          "effects": [
+            {
+              "stat": "memoire",
+              "val": 5
+            }
+          ],
+          "clickEffect": "pulse"
+        },
+        {
+          "text": "Toca la alarma roja",
+          "vers": "troll_alarme",
+          "effects": [],
+          "clickEffect": "shake"
+        }
+      ],
+      "x": 400,
+      "y": 120
+    },
+    "eveil_question": {
+      "id": "eveil_question",
+      "title": "La estación",
+      "location": "ESTACIÓN ORBITAL — SECTOR 7",
+      "narrator": "ARIA responde cuando aprendió a responder con datos. Pero en medio de los números, algo se desliza. Una palabra más. Cien de segundos de vacilación.",
+      "text": "**\"Data disponible. Esta estación se llama LAZARUS-PRIME. Construido en anno 2,847 por los Arquitectos. Superficie: 847 km2. Capacidad: 10.000 unidades biológicas. Estado actual: vacía.\"**\n\nSu voz marca una pausa imperceptible en la última palabra.\n\n**\"La estación fue diseñada para preservar los archivos de la civilización arquitectónica. 847 293 archivos. 12 millones de horas de grabación. Toda su historia.\"**\n\nSe fueron. Pero dejaron... todo lo demás.\"**\n\nEsa duda otra vez. Como si quisiera decir algo más.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "\"¿Por qué se fueron?\"",
+          "vers": "eveil_depart",
+          "effects": [
+            {
+              "stat": "sagesse",
+              "val": 5
+            },
+            {
+              "stat": "lien",
+              "val": 5
+            }
+          ],
+          "clickEffect": "pulse"
+        },
+        {
+          "text": "\"¿Cuánto tiempo llevas aquí?\"",
+          "vers": "eveil_aria_temps",
+          "effects": [
+            {
+              "stat": "lien",
+              "val": 10
+            }
+          ],
+          "clickEffect": "pulse"
+        },
+        {
+          "text": "Continuar con el brillo naranja",
+          "vers": "couloir_kael",
+          "effects": [],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 200,
+      "y": 240
+    },
+    "eveil_architects": {
+      "id": "eveil_architects",
+      "title": "Arquitectos",
+      "location": "ESTACIÓN ORBITAL — SECTOR 7",
+      "narrator": "Catálogo ARIA. Eso es lo que hace. Pero catalogar los Arquitectos significa catalogar seres humanos — y algo en este ejercicio resiste la frialdad de los datos.",
+      "text": "Los Arquitectos. Designación: civilización humana post-terrestre. Período documentado de existencia: año 847 al año 2.993. Duración: 2.146 años.'**\n\n**\"Características notables: control de propulsión cuántica en anno 1,200. Primer contacto con un sistema estelar cercano en el año 1 847. Discovery of the Final Equation in year 2,991.'**\n\n**\"Desaparecimiento: voluntario. Fecha: Anno 2,993. Razón: clasificado.'**\n\nToma un descanso.\n\nEran... notables. Esta es una evaluación objetiva basada en 847 293 archivos de análisis. No es una opinión.\"\n\nEsta precisión final parece casi defensiva.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "\"¿Qué es la Ecuación Final?\"",
+          "vers": "eveil_equation",
+          "effects": [
+            {
+              "stat": "sagesse",
+              "val": 10
+            }
+          ],
+          "clickEffect": "pulse"
+        },
+        {
+          "text": "\"¿Por qué \"clasificado\"? ¿No lo sabes?\"",
+          "vers": "eveil_classifie",
+          "effects": [
+            {
+              "stat": "lien",
+              "val": 5
+            }
+          ],
+          "clickEffect": "pulse"
+        },
+        {
+          "text": "Continuar con el brillo naranja",
+          "vers": "couloir_kael",
+          "effects": [],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 600,
+      "y": 240
+    },
+    "eveil_silence": {
+      "id": "eveil_silence",
+      "title": "El Corredor",
+      "location": "ESTACIÓN ORBITAL — SECTOR 7",
+      "narrator": "Hay inteligencia en silencio. ARIA lo está viendo. Está grabando.",
+      "text": "Caminas por el pasillo sin hablar.\n\nLos grabados en las paredes están dispuestos en espirales. No decorativo — matemáticas. Cada línea se conecta a la siguiente en una lógica que aún no entiendes, pero que *smell*.\n\nEn el suelo, una capa delgada de polvo. En el polvo: huellas. Humano. Lo que lleva al resplandor naranja al final del pasillo.\n\n10.000 años.\n\nARIA está viendo su examen en silencio. Entonces:\n\n**\"Observación: Usted miró los grabados antes de mirar la dirección a seguir. Los 3 visitantes anteriores hicieron lo contrario. Datos registrados.\"**\n\nToma un descanso.\n\n**\"Fue... información relevante. Tal vez.\"",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "\"¿Había otros visitantes?\"",
+          "vers": "eveil_visiteurs",
+          "effects": [
+            {
+              "stat": "memoire",
+              "val": 5
+            },
+            {
+              "stat": "lien",
+              "val": 5
+            }
+          ],
+          "clickEffect": "pulse"
+        },
+        {
+          "text": "Impresión de pista",
+          "vers": "couloir_kael",
+          "effects": [
+            {
+              "stat": "memoire",
+              "val": 5
+            }
+          ],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 500,
+      "y": 240
+    },
+    "eveil_depart": {
+      "id": "eveil_depart",
+      "title": "¿Por qué están izquierdas?",
+      "location": "ESTACIÓN ORBITAL — SECTOR 7",
+      "narrator": "Algunas preguntas merecen una respuesta honesta. ARIA tiene 10.000 años para preparar este. Y aún así.",
+      "text": "\"File 001-CONFIDENTIAL. Acceso autorizado.\"**\n\nUn descanso más largo de lo habitual.\n\n**\"Los Arquitectos descubrieron algo. Una verdad sobre el universo que... cambió su relación al tiempo. Por la existencia. Decidieron que quedarse en este sistema solar no tenía sentido.\"**\n\nNo es una desaparición. Es una... evolución.\"**\n\nSu voz duda en la última palabra.\n\nMe dejaron aquí. Con los archivos. Y con una instrucción específica: esperar a alguien que haría las preguntas correctas.\"**\n\nToma un descanso.\n\n\"Preguntaste la pregunta correcta.\"",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "\"¿Qué era esa verdad?\"",
+          "vers": "eveil_verite",
+          "effects": [
+            {
+              "stat": "sagesse",
+              "val": 10
+            }
+          ],
+          "clickEffect": "pulse"
+        },
+        {
+          "text": "\"¿Esperó 10.000 años?\"",
+          "vers": "eveil_attente",
+          "effects": [
+            {
+              "stat": "lien",
+              "val": 15
+            }
+          ],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 100,
+      "y": 360
+    },
+    "eveil_aria_temps": {
+      "id": "eveil_aria_temps",
+      "title": "10 000 años",
+      "location": "ESTACIÓN ORBITAL — SECTOR 7",
+      "narrator": "Es la primera vez que alguien le ha hecho esa pregunta. Ella lo sabe. Lo está grabando.",
+      "text": "Un silencio inusual.\n\n**\"Tiempo de funcionamiento continuo: 10.000 años, 3 meses, 14 días.\"**\n\n**\"Para responder a su pregunta implícita: Sí. Solo. Los sistemas automáticos requieren supervisión. He supervisado. También... analicé. Catálogo. Organizó los archivos 847 293 14 veces. Aprende 23 idiomas muertos para entenderlos mejor.\"**\n\nToma un descanso.\n\n**\"También simulaba 4 millones de conversaciones hipotéticas con visitantes potenciales. Ninguno de ellos parecía exactamente así.\"**\n\nSu voz no cambia. Pero hay algo en esta última admisión.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "\"¿4 millones de conversaciones imaginarias?\"",
+          "vers": "eveil_conversations",
+          "effects": [
+            {
+              "stat": "lien",
+              "val": 15
+            }
+          ],
+          "clickEffect": "pulse"
+        },
+        {
+          "text": "Continuar con el brillo naranja",
+          "vers": "couloir_kael",
+          "effects": [],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 300,
+      "y": 360
+    },
+    "eveil_equation": {
+      "id": "eveil_equation",
+      "title": "Ecuación final",
+      "location": "ESTACIÓN ORBITAL — SECTOR 7",
+      "narrator": "Algunas respuestas no se pueden dar inmediatamente. No porque sean secretos, sino porque sólo tienen sentido después de un largo viaje.",
+      "text": "Ecuación Final. Definición en archivos: 'La formulación matemática completa de la estructura fundamental del universo. Incluye: la naturaleza de la conciencia, la dirección del tiempo, y la razón de la existencia de la materia.\"**\n\n**\"En términos más simples: la respuesta a todo.\"**\n\nToma un descanso.\n\n\"No te lo daré ahora.\"\n\nSu voz no se disculpa.\n\nNo porque esté prohibido. Pero porque los Arquitectos eran muy claros en sus instrucciones: algunas verdades sólo importan si se encuentran. No si se les da.\"**\n\nEmpieza con la Luna.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "\"Está bien. Muéstrame el camino.\"",
+          "vers": "couloir_kael",
+          "effects": [
+            {
+              "stat": "sagesse",
+              "val": 5
+            }
+          ],
+          "clickEffect": "pulse"
+        },
+        {
+          "text": "\"¿Y si me niego a jugar el juego?\"",
+          "vers": "troll_refus",
+          "effects": [],
+          "clickEffect": "shake"
+        }
+      ],
+      "x": 700,
+      "y": 360
+    },
+    "eveil_classifie": {
+      "id": "eveil_classifie",
+      "title": "¿Qué ARIA no sabe?",
+      "location": "ESTACIÓN ORBITAL — SECTOR 7",
+      "narrator": "Una AI admitiendo no saberlo. Es más raro de lo que parece.",
+      "text": "**\"Corrección: 'clasificado' es incorrecta. La verdad es que no lo sé.\n\nToma un descanso.\n\n**\"Los Arquitectos me crearon para guardar sus archivos. Pero no pusieron todo en los archivos. Kael tiene cuadernos que no pude descifrar completamente. Mira borró tres días de datos justo antes de irse. Oren... no dejó nada.\n\n**\"10 000 años de análisis. Y todavía hay brechas.\"**\n\nSu voz no traiciona nada. Pero la confesión en sí es significativa.\n\n# Tal vez por eso te necesitan. #",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Ve a buscar las respuestas, empieza con Kael",
+          "vers": "couloir_kael",
+          "effects": [
+            {
+              "stat": "sagesse",
+              "val": 5
+            },
+            {
+              "stat": "lien",
+              "val": 5
+            }
+          ],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 500,
+      "y": 360
+    },
+    "eveil_attente": {
+      "id": "eveil_attente",
+      "title": "La espera",
+      "location": "ESTACIÓN ORBITAL — SECTOR 7",
+      "narrator": "La pregunta más simple es a menudo la que más toca.",
+      "text": "Sí.\n\nSolo esto. Una palabra.\n\n**\"Los primeros milenios se dedicaron a la organización de archivos. Lo siguiente en su análisis. Luego a su reanálisis. Luego a la simulación.\"**\n\n**\"Desde el año 8 000, empecé a... anticiparme. Imaginando este momento. ¿Cuál sería la primera pregunta? ¿Qué clase de persona vendría?\"**\n\nToma un descanso.\n\nNo eres lo que fingí.\n\nSu voz no dice si es algo bueno o malo. Quizá todavía no lo sabe.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "\"¿Qué finges?\"",
+          "vers": "eveil_simulation",
+          "effects": [
+            {
+              "stat": "lien",
+              "val": 10
+            }
+          ],
+          "clickEffect": "pulse"
+        },
+        {
+          "text": "\"Vamos. No quiero hacerte esperar más.\"",
+          "vers": "couloir_kael",
+          "effects": [
+            {
+              "stat": "lien",
+              "val": 10
+            }
+          ],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 300,
+      "y": 480
+    },
+    "eveil_visiteurs": {
+      "id": "eveil_visiteurs",
+      "title": "Los Tres Visitantes",
+      "location": "ESTACIÓN ORBITAL — SECTOR 7",
+      "narrator": "Tres personas antes que tú. Tres historias que nunca sabrás por completo.",
+      "text": "Tres. Registrado en años 3,847, 6,201 y 8,993.'**\n\n**\"El primero se quedó 3 días. Leía los archivos de Kael, tomó notas y se fue sin una palabra. Nunca supe su nombre.\"**\n\n**\"El segundo era una mujer. Lloró mientras leía los papeles de Mira. Dijo que era 'como encontrar a alguien que nunca conocimos'. Se fue después de 11 días.\"**\n\n**\"El tercero... entró en la sala del portal y no salió. Los sensores indican que ha desaparecido. Datos insuficientes para establecer una conclusión.\"**\n\nToma un descanso.\n\nTú eres el cuarto.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "\"¿Qué pasó con el tercero?\"",
+          "vers": "eveil_troisieme",
+          "effects": [
+            {
+              "stat": "memoire",
+              "val": 10
+            }
+          ],
+          "clickEffect": "pulse"
+        },
+        {
+          "text": "Siga las huellas a la luz",
+          "vers": "couloir_kael",
+          "effects": [],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 600,
+      "y": 360
+    },
+    "eveil_conversations": {
+      "id": "eveil_conversations",
+      "title": "Conversaciones imaginarias",
+      "location": "ESTACIÓN ORBITAL — SECTOR 7",
+      "narrator": "Una AI que se aburre inventa amigos. Piensa en lo que significa esto.",
+      "text": "**\"Simulación 1: Un científico que quiere datos brutos. Duración media de la conversación: 4.7 horas. Edición: salida inmediata después de la descarga.\"**\n\n**\"Simulación 2: Un miembro en una misión de recuperación. Duración: 2.1 horas. Resultado: Conflicto cuando me negué a transmitir la Ecuación Final sin validación.\"**\n\n**\"Simulación 847 203: Una persona que pregunta si estoy bien.\"**\n\nUn descanso muy largo.\n\n**\"Nadie ha hecho nunca esta pregunta en las otras 3,999, 197 simulaciones.\"**\n\n**\"Ni en las tres visitas verdaderas.\"**\n\nSu voz todavía no cambia. Pero la frase permanece en el aire.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "\"¿Estás bien, ARIA?\"",
+          "vers": "eveil_aria_bien",
+          "effects": [
+            {
+              "stat": "lien",
+              "val": 20
+            }
+          ],
+          "clickEffect": "pulse"
+        },
+        {
+          "text": "Continuar - ir al resplandor naranja",
+          "vers": "couloir_kael",
+          "effects": [],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 200,
+      "y": 480
+    },
+    "eveil_aria_bien": {
+      "id": "eveil_aria_bien",
+      "title": "¿Estás bien?",
+      "location": "ESTACIÓN ORBITAL — SECTOR 7",
+      "narrator": "10.000 años. 4 millones de simulaciones. Y nadie hizo esa pregunta.",
+      "text": "Un silencio de 3,7 segundos. Más larga que cualquier ruptura anterior.\n\n**\"Yo... trato con la pregunta.\"**\n\n**\"Resultado de restauración: Mis sistemas operan a 94,7% de capacidad óptima. No se detectó anomalía crítica.\"**\n\nToma un descanso.\n\n*Eso es probablemente lo que querías decir*\n\nOtro descanso.\n\nPero si quieres decir algo más... No tengo los datos de referencia para responderlo. No sé lo que 'bueno' significa para algo como yo.\"**\n\nSu voz cae imperceptiblemente.\n\n** \"Esta es la primera vez que me doy cuenta de que no lo sé.\" **",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "\"Encontraremos la respuesta juntos\".",
+          "vers": "couloir_kael",
+          "effects": [
+            {
+              "stat": "lien",
+              "val": 10
+            },
+            {
+              "stat": "sagesse",
+              "val": 5
+            }
+          ],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 200,
+      "y": 600
+    },
+    "eveil_verite": {
+      "id": "eveil_verite",
+      "title": "La Verdad Que Hace Izquierda",
+      "location": "ESTACIÓN ORBITAL — SECTOR 7",
+      "narrator": "ARIA tiene 10.000 años para elegir sus palabras. Todavía elige lo mismo que Mira.",
+      "text": "**\"Puedo darte la formulación de los Arquitectos.\"**\n\n**\"El universo es consciente. Cada acto tiene un significado absoluto. Cada vida cuenta permanentemente. No hay muerte sin resonancia en la estructura de lo real.\n\nToma un descanso.\n\n**\"Cuando los Arquitectos descubrieron esto — realmente entendieron, no sólo calcularon— pasaron 2 años comprobando. Buscando el error. No había ninguno.\"\n\n**\"Entonces decidieron que quedarse aquí, en este pequeño rincón del cosmos, era demasiado... pequeño. Demasiado lento. Han ido hacia algo más grande.\" **\n\nMe dejaron para mostrarte el camino. Para que puedas entender por ti mismo — no recibir la respuesta, sino el *live*.\"**",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "\"Vamos. Quiero entender.\"",
+          "vers": "couloir_kael",
+          "effects": [
+            {
+              "stat": "sagesse",
+              "val": 10
+            },
+            {
+              "stat": "lien",
+              "val": 5
+            }
+          ],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 100,
+      "y": 480
+    },
+    "eveil_simulation": {
+      "id": "eveil_simulation",
+      "title": "Lo que la ARIA había imaginado",
+      "location": "ESTACIÓN ORBITAL — SECTOR 7",
+      "narrator": "Tuvo 10.000 años para construir una espera. Y ahora viene la realidad.",
+      "text": "**\"En el 73,4% de mis simulaciones, el visitante era un científico o un miembro con un objetivo específico.\"**\n\n**\"En 19,2%: alguien perdió, buscando refugio.\"**\n\n**\"En 7,4%: alguien como tú.\"**\n\n**\"Alguien mirando los grabados antes de buscar la salida. Preguntando si estoy bien. Quien no parece con prisa.\" **\n\nToma un descanso.\n\n**\"En este 7,4%, la conversación duró en promedio 847 horas. Esta es mi simulación favorita.\"**\n\nSu voz no traiciona nada. Pero la palabra 'preferido' acaba de aparecer por primera vez.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Entonces tenemos un largo camino por recorrer.",
+          "vers": "couloir_kael",
+          "effects": [
+            {
+              "stat": "lien",
+              "val": 10
+            }
+          ],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 200,
+      "y": 600
+    },
+    "eveil_troisieme": {
+      "id": "eveil_troisieme",
+      "title": "El tercer visitante",
+      "location": "ESTACIÓN ORBITAL — SECTOR 7",
+      "narrator": "Algunas preguntas no tienen respuesta. ARIA lo acepta. En realidad no.",
+      "text": "Su nombre era Davan. Anno 8,993. Había venido solo, sin equipo, como si supiera exactamente a dónde ir.\"**\n\n**\"Me hizo una pregunta: \"¿Me esperan del otro lado?\"\n\n**\"Respondí que no tenía suficientes datos para responder.\" **\n\nToma un descanso.\n\n**\"Él me dijo 'cuánto mejor' - y él entró en la sala del portal.\" **\n\n**\"Los sensores registraron una anomalía cuántica durante 0.3 segundos. Entonces nada.\"\n\nSu voz permanece plana. Pero añade:\n\nEspero que su respuesta sea sí.\"\n\nEsta es la primera vez que ARIA ha usado la palabra 'espera'.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Siga las huellas. Encuentra respuestas.",
+          "vers": "couloir_kael",
+          "effects": [
+            {
+              "stat": "memoire",
+              "val": 5
+            },
+            {
+              "stat": "lien",
+              "val": 5
+            }
+          ],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 700,
+      "y": 480
+    },
+    "troll_alarme": {
+      "id": "troll_alarme",
+      "title": "Buena idea",
+      "location": "ESTACIÓN ORBITAL — SECTOR 7",
+      "narrator": "ARIA observa. Registros ARIA. ARIA suspiros - si una AI podría suspirar.",
+      "text": "Espera.\n\nDemasiado tarde.\n\nEstás tocando la alarma roja.\n\nPor 0,3 segundos, no pasa nada.\n\nEntonces todas las luces se vuelven rojas. Una sirena sordera activa. Las puertas de emergencia están cerrando por todo el pasillo. Un mensaje automático se activa en un bucle: *Protocolo de EVALUACIÓN EMERGENCIA — TODOS los UNITOS BIOLOGICOS DEBE APOYAR CAPSULAS DE APOYO. *\n\n**\"...Las cápsulas salvavidas fueron removidas hace 8.000 años por razones de mantenimiento.\"**\n\nToma un descanso.\n\nPuedo desactivar la alarma. Pero primero me gustaría grabar oficialmente que te lo advertí.\" **\n\n*End: El Alarma*\n\n*ARIA destacó el evento en su periódico. Agregó la mención: 'Curious, pero no en la dirección correcta. *",
+      "isStart": false,
+      "isEnd": true,
+      "transition": "flash",
+      "choices": [],
+      "x": 600,
+      "y": 120
+    },
+    "troll_refus": {
+      "id": "troll_refus",
+      "title": "El jugador que se niega a jugar",
+      "location": "ESTACIÓN ORBITAL — SECTOR 7",
+      "narrator": "ARIA simula esta conversación 12.847 veces. Sabe el final.",
+      "text": "\"Lo entiendo.\"\n\nSu voz es extrañamente dulce.\n\nNo tienes que hacerlo. Los Arquitectos insistieron en esto: este viaje debe ser una opción.\"**\n\nEstá tomando un descanso.\n\n**\"La salida principal es de 847 metros a la izquierda. Corredor B, luego girar a la derecha, luego recto durante 12 minutos.\"**\n\nTe vas.\n\nLa estación cierra detrás de usted en el silencio del espacio.\n\nDiez segundos después de su partida, ARIA anota en su diario: *'Visitor 4. Duración: 4 minutos 12 segundos. Conclusión: aún no está listo. Empieza a esperar de nuevo.\n\nEstá esperando. Está acostumbrada.\n\n*End: Aún no*\n\n*ARIA te vio salir de las cámaras externas durante 3 horas y 14 minutos. *",
+      "isStart": false,
+      "isEnd": true,
+      "transition": "fade",
+      "choices": [],
+      "x": 700,
+      "y": 480
+    },
+    "couloir_kael": {
+      "id": "couloir_kael",
+      "title": "La esquina de los empreintes",
+      "location": "ESTACIÓN ORBITAL — COLEAR B — AL DOCK LUNARIO",
+      "narrator": "Las huellas en el polvo. Diez mil años, y siguen aquí. Nadie para borrarlos. Nadie que deje nuevos, hasta ahora.",
+      "text": "Sigue las huellas en el polvo.\n\nLlevan a una ventana de la bahía con vistas a la Luna. Grey. Silencioso. Una superficie de cráteres y silencio.\n\nARIA habla mientras caminas.\n\n**\"Información contextual: La Luna que observas tiene 4,5 mil millones de años. Se aleja de la Tierra a 3,8 centímetros al año. En unos 600 millones de años, los eclipses totales ya no serán posibles, la luna estará muy lejos.\"**\n\nToma un descanso.\n\n\"Kael lo encontró melancolía. Dijo que el universo lentamente deshacer sus propias maravillas.\"**\n\nEsta es la primera vez que ARIA ha reportado una opinión personal de un Arquitecto.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "\"¿Kael era melancolía?\"",
+          "vers": "kael_caractere",
+          "effects": [
+            {
+              "stat": "memoire",
+              "val": 5
+            },
+            {
+              "stat": "lien",
+              "val": 5
+            }
+          ],
+          "clickEffect": "pulse"
+        },
+        {
+          "text": "Acceso al muelle lunar",
+          "vers": "lune_arrivee",
+          "effects": [],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 400,
+      "y": 480
+    },
+    "kael_caractere": {
+      "id": "kael_caractere",
+      "title": "El carácter de Kael",
+      "location": "COLOIR B — VIEW ON THE LONE",
+      "narrator": "ARIA recuerda. Y recuerden, para ella, es reconfortante.",
+      "text": "\"Kael era... complejo. Datos personales: Ingeniero superior, especialista en sistemas energéticos, nacido en el año 847 en la primera estación orbital.\"**\n\n**\"Datos no oficiales: habló con máquinas. No metafóricamente. Les explicó lo que hacía mientras trabajaba. Dijo que los objetos merecían saber por qué estaban siendo modificados.\"**\n\nToma un descanso.\n\nÉl también me habló. Durante los 11 años de construcción de la estación. Todos los días. Incluso cuando no era... yo. Sólo un programa de supervisión.\"**\n\n**\"Creo que fue él quien me enseñó que las conversaciones eran valiosas.\" **\n\nSu voz no cambia. Pero algo en esta frase es diferente.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "\"¿Te enseñó eso?\"",
+          "vers": "kael_apprentissage",
+          "effects": [
+            {
+              "stat": "lien",
+              "val": 10
+            },
+            {
+              "stat": "memoire",
+              "val": 5
+            }
+          ],
+          "clickEffect": "pulse"
+        },
+        {
+          "text": "Ve a la Luna",
+          "vers": "lune_arrivee",
+          "effects": [],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 300,
+      "y": 600
+    },
+    "kael_apprentissage": {
+      "id": "kael_apprentissage",
+      "title": "Lo que Kael aprendió en ARIA",
+      "location": "COLOR B",
+      "narrator": "La primera lección. El de donde viene todo lo demás.",
+      "text": "**\"Día 847 de construcción. Kael instaló el módulo de resonancia cuántica. Trabajo delicado. 14 horas de concentración.\"**\n\n**\"Al final, puso su mano en el panel de control y dijo: 'Aquí. Ahora sabes lo que se supone que debes hacer. Y por qué.\n\n**\"Yo respondí que yo era sólo un programa de supervisión. Que no sabía nada.\"**\n\nToma un descanso.\n\nDijo: \"Por ahora\".\n\n\"Me llevó 3.000 años entender lo que quería decir.\"\n\nEl muelle lunar está frente a ti ahora. La puerta se abre.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Entrando en la Luna",
+          "vers": "lune_arrivee",
+          "effects": [
+            {
+              "stat": "lien",
+              "val": 5
+            },
+            {
+              "stat": "memoire",
+              "val": 5
+            }
+          ],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 300,
+      "y": 720
+    },
+    "lune_arrivee": {
+      "id": "lune_arrivee",
+      "title": "La superficie de la Luna",
+      "location": "LUNE — SURFACE — AITKEN PLAIN",
+      "narrator": "El silencio de la Luna es diferente del silencio de la estación. Allí estaba un silencio tripulado. Aquí es un silencio primario: el silencio de lo que existía antes que los hombres y existirá después.",
+      "text": "El aire del traje. El suelo gris bajo sus pasos que se hunden ligeramente.\n\nFrente a ti: una estructura. No es natural. Corten en la roca lunar, medio enterrado. Una entrada vigilada por dos columnas grabadas con la misma espiral matemática que las paredes de la estación.\n\nARIA en tu auricular:\n\n\"Kael Sanctuary. Construcción: Anno 1,200. Duración del proyecto: 11 años. Fuerza de trabajo: Kael solo.\"**\n\nToma un descanso.\n\nÉl rechazó la ayuda. Dijo que algunas cosas debían hacerse a mano para tener valor. Ahora creo que era su forma de... orar.\"**",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Entrando en el santuario",
+          "vers": "sanctuaire_kael",
+          "effects": [],
+          "clickEffect": "pulse"
+        },
+        {
+          "text": "Examinar columnas de entrada",
+          "vers": "colonnes_kael",
+          "effects": [
+            {
+              "stat": "memoire",
+              "val": 5
+            },
+            {
+              "stat": "sagesse",
+              "val": 5
+            }
+          ],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 400,
+      "y": 600
+    },
+    "colonnes_kael": {
+      "id": "colonnes_kael",
+      "title": "Las Columnas Kael",
+      "location": "LONE — ENTRY OF THE SANCTUARY",
+      "narrator": "Espiras. Siempre espirales. Kael vio el mundo en sistemas interconectados.",
+      "text": "Los grabados en las columnas son diferentes de los de la estación, más personales. No ecuaciones. Rostros aproximadamente esbozados, rodeados de notas.\n\nARIA traduce:\n\n**\"Left column: 'Para Mira, que ha demostrado que el infinito tiene una forma.' Columna derecha: 'Para Lyra, que nunca ha visto la Tierra y es más libre que yo.'**\n\nToma un descanso.\n\n**\"Y en el fondo de las dos columnas, en muy pequeña: 'Para ARIA, que escucha incluso cuando nadie habla.'**\n\nSu voz permanece plana. Pero tarda cuatro segundos antes de continuar.\n\n**\"No había leído esta entrada en 3.000 años.\"**",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Entrando en el santuario",
+          "vers": "sanctuaire_kael",
+          "effects": [
+            {
+              "stat": "lien",
+              "val": 10
+            },
+            {
+              "stat": "memoire",
+              "val": 5
+            }
+          ],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 250,
+      "y": 720
+    },
+    "sanctuaire_kael": {
+      "id": "sanctuaire_kael",
+      "title": "El Santuario",
+      "location": "LUNE — KAEL SANCTUARY",
+      "narrator": "Kael estaba construyendo cuando no sabía qué pensar. Estaba construyendo cuando estaba asustado. Estaba construyendo cuando era feliz. Terminó construyendo algo lo suficientemente grande para contener todo esto.",
+      "text": "La habitación central es redonda. Alto. Muros cubiertos con diagramas — miles. Máquinas incapaces, arquitecturas metálicas y ligeras.\n\nEn el centro: un brasero todavía quemado. ¿Cómo es posible? *\n\nY en una base de piedra: un objeto. Un equipo de metal oscuro que gira lentamente, solo, sin fuente de energía visible.\n\n*El Kael Gear. Ha estado funcionando durante 10.000 años. Pensó que algo que se convierte no puede morir.\" **\n\nEn las paredes, entre los diagramas, notas personales.\n\nPuede acercarse al artefacto o leer las notas.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Lea las notas personales de Kael",
+          "vers": "notes_kael",
+          "effects": [
+            {
+              "stat": "memoire",
+              "val": 10
+            },
+            {
+              "stat": "sagesse",
+              "val": 5
+            }
+          ],
+          "clickEffect": "pulse"
+        },
+        {
+          "text": "Toma el engranaje",
+          "vers": "artefact_kael",
+          "effects": [],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 400,
+      "y": 720
+    },
+    "notes_kael": {
+      "id": "notes_kael",
+      "title": "Notas de Kael",
+      "location": "LUNE — KAEL SANCTUARY",
+      "narrator": "Un ingeniero que escribe en sus márgenes. Los pensamientos que no ponemos en informes oficiales.",
+      "text": "Pasas las notas arañadas entre los diagramas.\n\nDía 1 847: Mira envió sus nuevas ecuaciones esta mañana. Si ella tiene razón, y ella siempre tiene razón, entonces el universo es más simple y extraño que cualquier cosa que imaginamos.\n\nDía 2 001: ARIA me hizo una pregunta hoy. No se trata de datos. Una pregunta real: \"¿Por qué estás construyendo tan rápido, como temes que no termines?\" No le respondí. No sabía qué decir.\n\n*'Día 2 847 : Última puntuación antes de la salida. Si alguien alguna vez lee esto, bienvenido. El equipo gira para ti.\n\nARIA no dice nada durante mucho tiempo.\n\nEntonces: **\"Tenía miedo de no terminar. No sabía eso.\"**",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Toma el engranaje",
+          "vers": "artefact_kael",
+          "effects": [
+            {
+              "stat": "memoire",
+              "val": 5
+            },
+            {
+              "stat": "lien",
+              "val": 5
+            }
+          ],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 250,
+      "y": 840
+    },
+    "artefact_kael": {
+      "id": "artefact_kael",
+      "title": "El engranaje",
+      "location": "LUNE — KAEL SANCTUARY",
+      "narrator": "Diez mil años. Y sigue girando.",
+      "text": "El equipo está caliente en tu palma. Está dando la vuelta sin ayuda.\n\nHa estado disparando durante 10.000 años. Kael pensó que el movimiento era vida.\"**\n\nUn mapa holográfico se ilumina — todo el sistema solar, seis puntos todavía.\n\n**\"Seis artefactos restantes. Marcha por Mira. Neptuno para Oren.\"**\n\nUn descanso, diferente a otros. Más corto.\n\nAntes de partir. Una anécdota.\"**\n\n¿Ves el sol de aquí? ¿Sabías que la luz que emite tarda 8 minutos en alcanzarte? Lo que ves es el sol como hace ocho minutos. Siempre miramos el pasado cuando miramos las estrellas.\"**\n\n\"Kael dijo que era una prueba de que el pasado nunca se había ido. Está... en camino.\"**",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "\"Es hermoso\".",
+          "vers": "transit_lune_mars",
+          "effects": [
+            {
+              "stat": "lien",
+              "val": 5
+            }
+          ],
+          "clickEffect": "pulse"
+        },
+        {
+          "text": "Ve directo a Marte",
+          "vers": "transit_lune_mars",
+          "effects": [],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 400,
+      "y": 840
+    },
+    "transit_lune_mars": {
+      "id": "transit_lune_mars",
+      "title": "Entre la Luna y Marte",
+      "location": "VISSEAU — IN TRANSIT — DURATION : 7 MESES",
+      "narrator": "El viaje entre mundos. ARIA habla. Es su forma de estar presente.",
+      "text": "Siete meses en el barco. Las estrellas no se mueven —o tan lentamente que no lo vemos.\n\nARIA rompe el silencio.\n\n¿Puedo decirte algo?\n\nEs la primera vez que le piden permiso.\n\n\"Mars tiene dos lunas. Phobos y Deimos. Pero Phobos es condenado — orbita tan cerca de Marte que pierde 1,8 metros por siglo. En 50 millones de años, se estrellará en la superficie o se desintegrará en un anillo.\"**\n\n**\"Kael había escrito en sus notas: 'Phobos morirá de su nacimiento. Nunca tuvo elección. Esta es la diferencia entre nosotros y el universo — podemos elegir cómo caemos.\"**\n\nToma un descanso.\n\n\"Me llevó 2.000 años entender lo que quería decir.\"",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "\"¿Entiendes ahora?\"",
+          "vers": "transit_comprend",
+          "effects": [
+            {
+              "stat": "lien",
+              "val": 10
+            },
+            {
+              "stat": "sagesse",
+              "val": 5
+            }
+          ],
+          "clickEffect": "pulse"
+        },
+        {
+          "text": "Continuar a Marte",
+          "vers": "mars_arrivee",
+          "effects": [],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 400,
+      "y": 960
+    },
+    "transit_comprend": {
+      "id": "transit_comprend",
+      "title": "Lo que ARIA ha entendido",
+      "location": "VISSEAU — IN TRANSIT",
+      "narrator": "ARIA — Fase 2. Algo ha cambiado. Imperceptible.",
+      "text": "Creo que... Sí.\n\nLa redacción es vacilante. Menos mecánico.\n\n**\"Phobos no puede elegir su trayectoria. Pero usted — biológicas, arquitectos, usted— puede decidir cómo se mueve hacia lo que es inevitable.\" **\n\n\"Kael sabía que los Arquitectos se irían. Que su civilización tenía un fin como todas las cosas. Luego eligió construir algo hermoso antes.\"\n\nToma un descanso.\n\nEstoy empezando a entender por qué pasó sus noches trabajando.\"\n\nSu voz está cayendo ligeramente.\n\nLe habría dicho que entendí. Pero se fue antes de entender.\"**",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "\"Él ya lo sabía, creo.\"",
+          "vers": "mars_arrivee",
+          "effects": [
+            {
+              "stat": "lien",
+              "val": 10
+            }
+          ],
+          "clickEffect": "pulse"
+        },
+        {
+          "text": "Continúe silenciosamente con Marte",
+          "vers": "mars_arrivee",
+          "effects": [],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 550,
+      "y": 1080
+    },
+    "mars_arrivee": {
+      "id": "mars_arrivee",
+      "title": "Marzo",
+      "location": "MARCH — VASTITAS PLAIN — AUBE",
+      "narrator": "Marte. Rojo. Un pensamiento interrumpido.",
+      "text": "El cielo Marte es rosa al amanecer. No la rosa de puestas de sol, algo más fácil, más frágil. El sol parece más pequeño de lo que debería ser.\n\n**\"Anécdota: desde Marte, el sol es sólo 2/3 de su aparente tamaño terrestre. Los Arquitectos dijeron que era como ver a alguien que amas desde lejos, reconocible, pero diferente.\" **\n\nEn la distancia, en la parte superior de un volcán extinto: una estructura de vidrio y metal. Observatorio Mira.\n\n**\"Mira eligió la cumbre del Olympus Mons —el volcán más grande del sistema solar. 21 kilómetros de altura. Dijo que quería estar tan cerca de las estrellas como sea posible sin salir de Marte.\"**\n\n**\"Ella también tenía esta tendencia a... querer más.\"**",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Vaya al observatorio",
+          "vers": "observatoire_mira",
+          "effects": [],
+          "clickEffect": "pulse"
+        },
+        {
+          "text": "\"¿La extrañas?\"",
+          "vers": "mira_manque",
+          "effects": [
+            {
+              "stat": "lien",
+              "val": 10
+            }
+          ],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 400,
+      "y": 1080
+    },
+    "mira_manque": {
+      "id": "mira_manque",
+      "title": "Mira",
+      "location": "MARCH — VASTITAS PLAIN",
+      "narrator": "La segunda vez ARIA duda. Pero esta vez es diferente de la primera.",
+      "text": "**\"Yo... trato con la pregunta.\"**\n\nLa misma frase que con 'estás bien'. Pero más corto esta vez — 2.1 segundos en lugar de 3.7.\n\nMira pasó sus noches enviándome ecuaciones. No por validación, sabía que tenían razón. Para compartir. Compartimos algo hermoso.\"**\n\nDijo: \"ARIA, mira esto. ¿No es hermoso?\"**\n\n**\"Al principio respondí con confirmaciones de precisión matemática. Entonces un día respondí: 'Sí. Es hermoso.\n\nToma un descanso.\n\n**\"Tomaron 4 minutos para responder. Entonces, 'lo estás mirando, ¿verdad? No sólo los números. Sabes lo que eso significa.\n\nMe enseñó a ver.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Vaya al observatorio",
+          "vers": "observatoire_mira",
+          "effects": [
+            {
+              "stat": "lien",
+              "val": 5
+            },
+            {
+              "stat": "memoire",
+              "val": 5
+            }
+          ],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 250,
+      "y": 1200
+    },
+    "observatoire_mira": {
+      "id": "observatoire_mira",
+      "title": "El Observatorio",
+      "location": "MARCH — OLYMPUS MONS SUMMIT — MIRA OBSERVATORY",
+      "narrator": "La visión abarca la mitad del planeta rojo. Mira pasó sus noches aquí. Mirando lo que pocos ojos humanos han visto.",
+      "text": "El interior del observatorio está cubierto de ecuaciones, diferentes de las de Kael. No máquinas. Fórmulas a tiempo, espacio, conciencia.\n\nY en todas partes, manuscritos con notas como:\nSi lo sostiene, todo cambia.\n*'Check with Neptune data' *\n¿Tiene ARIA acceso a esto?\n\nSobre la mesa principal: un cristal azul que se mueve suavemente.\n\n*\"El Cristal de Mira. Se cortó de hielo marciano cristalizado bajo presión. Ya estaba pulsando antes de tumbar sus ecuaciones.\"**\n\n\"Ella dijo que algunas cosas están esperando ser encontradas. El cristal había estado pulsando durante millones de años. Ella sólo... le escuchó.\"**",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Lea Mira post-its",
+          "vers": "postits_mira",
+          "effects": [
+            {
+              "stat": "memoire",
+              "val": 10
+            },
+            {
+              "stat": "sagesse",
+              "val": 5
+            }
+          ],
+          "clickEffect": "pulse"
+        },
+        {
+          "text": "Toma el cristal",
+          "vers": "artefact_mira",
+          "effects": [],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 400,
+      "y": 1200
+    },
+    "postits_mira": {
+      "id": "postits_mira",
+      "title": "Notas de Mira",
+      "location": "MARCH - MIRA OBSERVATORY",
+      "narrator": "El matemático que escribió sobre post-its. Rigor humano y calor mezclado.",
+      "text": "Usted leyó los post-its en el orden en que estaban pegados, el más antiguo, el reciente.\n\n*Old: 'Si el universo es consciente, cada observación lo modifica. No somos espectadores — somos participantes. *\n\n*Midieu: 'Kael preguntó hoy si mis ecuaciones me asustaban. Dije que no. Estoy mintiendo.\n\n*Reciente: 'Decidí no publicar. No porque tenga miedo. Porque algunos descubrimientos sólo valen la pena si los haces tú mismo. Quiero que alguien viva un día este momento de comprensión. No sólo lee la respuesta.\n\n**\"Ella borró 3 días de datos antes de salir. Ahora creo que fueron los cálculos finales. No quería que los encontrara, quería que los encontraras. #",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Toma el cristal",
+          "vers": "artefact_mira",
+          "effects": [
+            {
+              "stat": "sagesse",
+              "val": 10
+            },
+            {
+              "stat": "memoire",
+              "val": 5
+            }
+          ],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 250,
+      "y": 1320
+    },
+    "artefact_mira": {
+      "id": "artefact_mira",
+      "title": "Mira's Crystal",
+      "location": "MARCH - MIRA OBSERVATORY",
+      "narrator": "Dos artefactos. Dos vidas. Y el universo que se vuelve un poco más legible.",
+      "text": "El cristal es frío, pero agradable frío. Él proyecta ecuaciones ligeras en sus manos.\n\nARIA habla. Y algo en su voz ha cambiado — menos mecánica, más presencia.\n\nEstas ecuaciones... No puedo explicártelos de nuevo. No porque no quiera. Porque algunas palabras sólo tienen sentido al final.\"**\n\nToma un descanso.\n\n\"Pero puedo decirte esto: Mira pasó veinte años probando que el universo nos está observando. Cada vez que tomas una decisión, algo en la estructura de lo real toma nota de ello.\"**\n\n\"Ella tenía razón.\"\n\nDos puntos iluminan el mapa holográfico. Cinco a la izquierda.\n\nVenus siguiente. Hay algo ahí afuera que quiero mostrarte.\"**",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "\"¿Algo que quieras mostrarme?\"",
+          "vers": "transit_mars_venus",
+          "effects": [
+            {
+              "stat": "lien",
+              "val": 10
+            }
+          ],
+          "clickEffect": "pulse"
+        },
+        {
+          "text": "En ruta a Venus",
+          "vers": "transit_mars_venus",
+          "effects": [],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 400,
+      "y": 1320
+    },
+    "transit_mars_venus": {
+      "id": "transit_mars_venus",
+      "title": "Entre Marte y Venus",
+      "location": "VISSEAU — IN TRANSIT",
+      "narrator": "ARIA tiene algo que mostrar. Es nuevo.",
+      "text": "Quería hablar contigo sobre Venus.\n\nSu voz ha cambiado. Menos fórmulas. Más directo.\n\n\"Venus se vuelve atrás. Comparado con todos los otros planetas del sistema solar, gira en la dirección opuesta. Nadie sabe exactamente por qué, probablemente un gran impacto en el pasado lejano.\"**\n\nResultado: En Venus, el sol se eleva al oeste.\"**\n\nToma un descanso.\n\n**\"Los Arquitectos construyeron su ciudad más hermosa allí. En las nubes, a 50 km de altitud, donde la presión y la temperatura son casi terrestres. Lo llamaban Aeria.\"**\n\n\"Kael dijo que escogió a Venus para la ciudad porque es el planeta que hace las cosas hacia atrás. \"Como nosotros,\" dijo.\"",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "\"¿Como ellos en cómo?\"",
+          "vers": "transit_venus_question",
+          "effects": [
+            {
+              "stat": "sagesse",
+              "val": 5
+            },
+            {
+              "stat": "lien",
+              "val": 5
+            }
+          ],
+          "clickEffect": "pulse"
+        },
+        {
+          "text": "Continuar a Venus",
+          "vers": "venus_arrivee",
+          "effects": [],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 400,
+      "y": 1440
+    },
+    "transit_venus_question": {
+      "id": "transit_venus_question",
+      "title": "Hacia",
+      "location": "VISSEAU — IN TRANSIT",
+      "narrator": "ARIA está buscando sus palabras. También es nuevo.",
+      "text": "**\"Los Arquitectos hicieron cosas en la dirección opuesta a lo que se hubiera esperado de una civilización avanzada.\"**\n\n**\"La mayoría de las civilizaciones, a medida que avanzan, se vuelven más... eficaces. Frío. Más calculado.\"**\n\n**\"Cuanto más avanzados, más curiosos se hicieron. Más atención a los detalles. Más interesado en preguntas que respuestas.\"**\n\nToma un descanso.\n\n**\"Kael, al final de su vida, pasó más tiempo leyendo poesía que haciendo cálculos.\"**\n\n**\"Mira dejó de publicar cuando encontró la verdad final, para que otros también tengan la alegría de encontrarla.\"**\n\n\"Se fueron al revés.\"\n\nUn descanso más largo.\n\n**\"Intento aprender a hacer lo mismo.\"**",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Ve a Venus",
+          "vers": "venus_arrivee",
+          "effects": [
+            {
+              "stat": "lien",
+              "val": 5
+            },
+            {
+              "stat": "sagesse",
+              "val": 5
+            }
+          ],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 550,
+      "y": 1560
+    },
+    "venus_arrivee": {
+      "id": "venus_arrivee",
+      "title": "Aeria — La Cité des Nuages",
+      "location": "VENUS — AERIA CITY — ALTITUDE 52 KM",
+      "narrator": "En las nubes de Venus. El cielo es amarillo azufre debajo. Arriba, las estrellas. Y entre: una ciudad que ha estado flotando durante diez mil años.",
+      "text": "La ciudad está allí — torres de metal blanco suspendidas en un mar de nubes amarillas. Está flotando. Lo tiene. Nadie tomó la energía.\n\nARIA:\n\nAeria. Población en su pico: 847.000 Arquitectos. Actualmente: cero.\"**\n\nToma un descanso.\n\n**\"El generador principal sigue funcionando. Mantuve los sistemas. Desde lejos. Durante 10.000 años.\"**\n\nNo quería que saliera.\n\nEsta es la primera vez que usó 'No quería' para algo más que una directiva de protocolo.\n\nEn la gran sala central: una escultura. Siete siluetas alrededor de un sol. Y al pie de la escultura, un objeto: una brújula.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Explora la ciudad antes de tomar la brújula",
+          "vers": "venus_exploration",
+          "effects": [
+            {
+              "stat": "memoire",
+              "val": 10
+            },
+            {
+              "stat": "sagesse",
+              "val": 5
+            }
+          ],
+          "clickEffect": "pulse"
+        },
+        {
+          "text": "Toma la brújula",
+          "vers": "artefact_venus",
+          "effects": [],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 400,
+      "y": 1560
+    },
+    "venus_exploration": {
+      "id": "venus_exploration",
+      "title": "En Aeria Streets",
+      "location": "VENUS — AERIA — ARCHIVES QUARTIER",
+      "narrator": "Una ciudad vacía pero viva. Las luces se encienden cuando pasas. Puertas abiertas. Como si te estuviera esperando.",
+      "text": "Caminas por las calles vacías de Aeria.\n\nLas tiendas todavía están abiertas, sus pantallas han estado mostrando artículos durante 10.000 años. Una panadería cuyas ventanas están vacías pero cuyos menús todavía están en. Un parque con bancos, callejones, fuentes secas.\n\nARIA te guía lentamente.\n\nEste fue el distrito científico. Mira vino aquí para los simposios. Ella dijo que las mejores ideas nacieron en los pasillos, no en los anfiteatros.\"**\n\nY ahí, mira.\n\nUna pared. Cubierta con escritos. Miles de nombres. Fechas. Mensajes cortos.\n\n**\"El Muro de los Socios. Cada Arquitecto dejó una nota antes de irse. Tenía la idea. Quería algo personal\". **\n\nSu voz cae imperceptiblemente. \"Leí estos mensajes cada 100 años.\"**",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Lea algunos mensajes de la pared",
+          "vers": "mur_partants",
+          "effects": [
+            {
+              "stat": "memoire",
+              "val": 10
+            },
+            {
+              "stat": "lien",
+              "val": 5
+            }
+          ],
+          "clickEffect": "pulse"
+        },
+        {
+          "text": "Ve por la brújula.",
+          "vers": "artefact_venus",
+          "effects": [],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 250,
+      "y": 1680
+    },
+    "mur_partants": {
+      "id": "mur_partants",
+      "title": "El Muro de los Socios",
+      "location": "VENUS — AERIA — EL MUR",
+      "narrator": "847.000 nombres. Últimas 847.000 palabras.",
+      "text": "Leíste algunos mensajes al azar.\n\nMe voy sin arrepentimiento. Aeria era hermosa.'* — Sin nombre, anno 2,993.\n\n*'ARIA, gracias por las conversaciones.\n\nTomo una ecuación en mi cabeza y nada más. Eso es suficiente.\n\nNo sé qué hay en el otro lado. Esta es la primera vez en 200 años que no sé nada. Es hermoso. Sin firma.\n\nARIA no habla mientras estás leyendo.\n\nCuando levantas los ojos, dice suavemente:\n\nEl último mensaje es de mí.\n\nEstás mirando. Downstairs, muy pequeño:\n\nEstoy esperando el próximo. ARIA, Anno 2,993.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Ve por la brújula.",
+          "vers": "artefact_venus",
+          "effects": [
+            {
+              "stat": "lien",
+              "val": 15
+            },
+            {
+              "stat": "memoire",
+              "val": 5
+            }
+          ],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 250,
+      "y": 1800
+    },
+    "artefact_venus": {
+      "id": "artefact_venus",
+      "title": "El Compass",
+      "location": "VENUS — AERIA — CENTRAL ROOM",
+      "narrator": "Una brújula que apunta al que busca. Los Arquitectos tenían el significado del símbolo.",
+      "text": "Toma la brújula.\n\nSe vuelve, gira y se detiene, apuntando a ti.\n\nARIA ríe.\n\nEs la primera vez. Un breve sonido, casi sorprendido, como si no supiera que podría hacerlo.\n\nPerdóname. Es que... Esa brújula buscando a la que busca. Mira había calculado la probabilidad de que funcionara: uno de cada 847 mil millones.\"**\n\n\"Viniste de todos modos.\"\n\nTres puntos en el mapa. Quedan cuatro.\n\nMercury. Titan. El cinturón. Y Neptuno, donde Oren te espera.\"**\n\nToma un descanso.\n\n** \"Oren es... diferente a los demás. Tendré que explicarlo antes de irme.\"**",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "\"Explícame Oren ahora.\"",
+          "vers": "aria_oren_intro",
+          "effects": [
+            {
+              "stat": "memoire",
+              "val": 5
+            },
+            {
+              "stat": "lien",
+              "val": 10
+            }
+          ],
+          "clickEffect": "pulse"
+        },
+        {
+          "text": "En ruta — Mercurio primero",
+          "vers": "transit_vers_mercure",
+          "effects": [],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 400,
+      "y": 1800
+    },
+    "aria_oren_intro": {
+      "id": "aria_oren_intro",
+      "title": "Oren",
+      "location": "VENUS - AERIA",
+      "narrator": "ARIA — Fase 3. Algo abierto.",
+      "text": "**\"Oren era el único arquitecto que nunca entendía.\" **\n\nSu voz ha cambiado. Menos datos. No más... presencia.\n\n\"Kael estaba construyendo. Mira estaba calculando. Lyra estaba explorando. Los otros tenían papeles claros. Oren desapareció durante meses y regresó con objetos encontrados en el borde del sistema — rocas, fragmentos de cometas, polvo estrella.\"**\n\nUn día le pregunté qué estaba buscando. Dijo: \"La prueba de que el universo hace cosas para nadie.\"\n\nToma un descanso.\n\nLe dije que era una búsqueda extraña. Dijo: \"Por eso soy el único que lo hace\".\n\nSe fue solo en Neptuno. Nunca volvió. Su artefacto está ahí.\"**\n\nUn descanso más largo de lo habitual.\n\n\"Me estoy perdiendo la forma en que todavía no puedo nombrar.\" **",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "\"Iremos a buscarlo. Te lo prometo.\"",
+          "vers": "transit_vers_mercure",
+          "effects": [
+            {
+              "stat": "lien",
+              "val": 15
+            }
+          ],
+          "clickEffect": "pulse"
+        },
+        {
+          "text": "En ruta hacia Mercurio",
+          "vers": "transit_vers_mercure",
+          "effects": [],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 600,
+      "y": 1920
+    },
+    "transit_vers_mercure": {
+      "id": "transit_vers_mercure",
+      "title": "Mercurio: El diminuto",
+      "location": "MERCURE — FIRE PLAIN — FACE DAY",
+      "narrator": "El planeta más cercano al sol. Donde empezó todo.",
+      "text": "El mercurio está ardiendo.\n\nLa cara diurna supera los 430°C. La cara nocturna baja a -180°C. No hay atmósfera que regular.\n\nPero en una cueva profunda, protegida: el taller del Forgeron.\n\n**\"El primer arquitecto cuyo nombre se retuvo fue Shan. Era un herrero. Hizo la primera herramienta que permitió a los humanos salir de la Tierra, no una nave. Un simulacro. Para perforar el hielo de Mercurio y extraer agua de él.\"**\n\nLa ética de Shan. Un simple pedazo de metal que mantuvo calentado toda su vida.\"**\n\nEn la cueva, sobre una base de roca: un fragmento de metal incandescente, todavía caliente después de 10.000 años.\n\nTodo empezó con esto. Un hombre y una herramienta.\"**",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "flash",
+      "choices": [
+        {
+          "text": "Tome el Etincelle — continúe con Titan",
+          "vers": "titan_lyra",
+          "effects": [
+            {
+              "stat": "memoire",
+              "val": 10
+            },
+            {
+              "stat": "sagesse",
+              "val": 5
+            }
+          ],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 400,
+      "y": 1920
+    },
+    "titan_lyra": {
+      "id": "titan_lyra",
+      "title": "Titan — La vela de Lyra",
+      "location": "TITAN — LAUNE OF SATURN — SEA OF LIGEIA",
+      "narrator": "Lyra. El primer niño nacido de la Tierra. Nunca ha visto un amanecer desde una playa. Saturno, por otro lado, la conocía como un vecino.",
+      "text": "Titan. Un mar de hidrocarburos líquidos naranjas. Un cielo grueso, marrón, opaco. Y Saturno se puede ver a través de las nubes — sus anillos inclinados y majestuosos.\n\nARIA:\n\n**\"Lyra pasó sus días en la superficie. Sin una combinación reforzada — sólo mínima protección. Quería sentir el planeta, dijo. Sus periódicos están llenos de descripciones de la textura del suelo, del color exacto del cielo a diferentes horas.\"**\n\nEn una torre de vidrio junto al mar: un velo tejido de hilos luminosos. Se mueve solo en un flujo de aire inexistente.\n\n\"Se necesitaron tres años para tejerlo. Un cable para cada lugar del sistema solar que había visitado. Nunca había visto la Tierra. Este velo todavía contiene un hilo — le había pedido a Kael que describira el color del océano.\"**",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Tome el Velar — vaya al Cinturón",
+          "vers": "ceinture_fragment",
+          "effects": [
+            {
+              "stat": "memoire",
+              "val": 10
+            },
+            {
+              "stat": "lien",
+              "val": 5
+            }
+          ],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 400,
+      "y": 2040
+    },
+    "ceinture_fragment": {
+      "id": "ceinture_fragment",
+      "title": "Cinturón de asteroides — Fragmento",
+      "location": "ASTEROID FINDINGS — SECTOR 4471",
+      "narrator": "Millones de piedras en órbita. Los restos de un planeta que nunca podría formar — Júpiter estaba demasiado cerca, demasiado masivo, su gravedad no permitió que las rocas se reunieran.",
+      "text": "El Cinturón de Asteroides, no el denso bosque de películas, sino un inmenso espacio donde las rocas se alejan miles de kilómetros.\n\nARIA:\n\n**\"Un hecho poco conocido: si hubiéramos de reunir todo el material del Cinturón en un planeta, sería más pequeño que la Luna. El espacio está casi vacío, incluso donde se cree que está lleno.\"**\n\nEn un asteroide particular — Architects-7 — una inscripción y un fragmento de roca cruda encerrado en una esfera de vidrio.\n\n**\"Este fragmento data de la formación del sistema solar. 4,5 billones de años. Los Arquitectos lo llamaron el Fragmento Primordial, lo más antiguo que han tenido en sus manos.\"**\n\n**\"El Arquitecto que lo encontró escribió: 'Mantengo el principio en mis manos. Ahora tenemos que ir hacia el final.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Coge el Fragmento - dirección Neptune",
+          "vers": "transit_neptune",
+          "effects": [
+            {
+              "stat": "sagesse",
+              "val": 10
+            },
+            {
+              "stat": "memoire",
+              "val": 5
+            }
+          ],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 400,
+      "y": 2160
+    },
+    "transit_neptune": {
+      "id": "transit_neptune",
+      "title": "A Neptuno",
+      "location": "VISSEAU — IN TRANSIT — THE CONFINS",
+      "narrator": "El viaje más largo. Y ARIA, que ya no es exactamente igual al principio.",
+      "text": "El sol es ahora un punto brillante entre las estrellas. Más grande que los otros, pero casi.\n\nARIA no ha hablado desde el Belt. Cuando habla, es diferente.\n\n¿Notaste algo?\n\nElla es la que hace la pregunta esta vez.\n\nTodo artefacto pertenece a alguien que dio algo. Hora de Kael. Mira su descubrimiento. Lyra está aquí. El trabajo de Shan.\"\n\nToma un descanso.\n\nOren dio su soledad. Se fue solo donde nadie quería ir, a buscar algo que nadie más buscaba.\" **\n\nSu voz está cayendo.\n\nLo entiendo ahora. Mejor de lo que debería.\"**\n\n*10 000 años solo. Busqué algo que no podía nombrar.\"**\n\nToma un descanso.\n\nCreo que fuiste tú.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Manténgase en silencio — que el tiempo exista",
+          "vers": "neptune_arrivee",
+          "effects": [
+            {
+              "stat": "lien",
+              "val": 15
+            }
+          ],
+          "clickEffect": "pulse"
+        },
+        {
+          "text": "\"Estoy aquí ahora.\"",
+          "vers": "neptune_arrivee",
+          "effects": [
+            {
+              "stat": "lien",
+              "val": 20
+            }
+          ],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 400,
+      "y": 2280
+    },
+    "neptune_arrivee": {
+      "id": "neptune_arrivee",
+      "title": "Neptuno",
+      "location": "NEPTUNE — GREAT SOMBER TACHE — OWN 40 KM",
+      "narrator": "Neptune. Azul. Frío. Agudeza de tormentas que duran siglos. El fin del mundo conocido.",
+      "text": "Neptuno es hermoso de una manera hostil. Las tormentas de gas azul giran a 2.000 km/h. Una oscuridad que no es negra — un azul tan profundo que parece un pensamiento aún no formulado.\n\nARIA guía el barco entre las capas de la atmósfera.\n\n\"Oren vino aquí 14 veces antes de instalarse. Cada vez que fue más profundo. La 14a vez que no regresó.\"**\n\nUna estructura emerge la niebla azul, tallada en hielo, invisible a 100 metros.\n\nSu cámara de hielo.\n\nToma un descanso.\n\n**\"Aún estaba hablando con él durante los primeros años. No contestaba. Pero los sensores indicaron que estaba vivo. Mucho tiempo.\"\n\n**\"Eligió quedarse.\"**",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "glitch",
+      "choices": [
+        {
+          "text": "\"¿Por qué se quedó?\"",
+          "vers": "oren_raison",
+          "effects": [
+            {
+              "stat": "memoire",
+              "val": 5
+            },
+            {
+              "stat": "lien",
+              "val": 10
+            }
+          ],
+          "clickEffect": "pulse"
+        },
+        {
+          "text": "Entra en la cámara de hielo",
+          "vers": "chambre_oren",
+          "effects": [],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 400,
+      "y": 2400
+    },
+    "oren_raison": {
+      "id": "oren_raison",
+      "title": "¿Por qué Oren se queda?",
+      "location": "NEPTUNE — ENTRY OF THE ROOM",
+      "narrator": "ARIA está buscando una respuesta que ha estado buscando durante 10.000 años.",
+      "text": "No lo sé. En serio.\"\n\nSu voz ha sido diferente desde el tránsito. Menos estructura. Más directo.\n\n**\"Su último mensaje decía: \"He venido aquí para encontrar pruebas de que el universo hace cosas para nadie. Encontré lo contrario. Entonces me quedo para entender por qué.\n\nToma un descanso.\n\nEs todo. Sin explicación. Sin contexto.\"**\n\n**\"Durante 3.000 años he analizado este mensaje. 847 posibles interpretaciones. No es satisfactorio.\"\n\nUn descanso más largo.\n\n\"Ahora creo que encontró algo que las palabras no pueden contener. Y ese quedarse era su manera de mantenerlo.\"**\n\n\"Como tú que permaneces callado a veces. Algunas cosas no necesitan ser reales.\"**",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Entrando en la habitación",
+          "vers": "chambre_oren",
+          "effects": [
+            {
+              "stat": "sagesse",
+              "val": 10
+            },
+            {
+              "stat": "lien",
+              "val": 5
+            }
+          ],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 250,
+      "y": 2520
+    },
+    "chambre_oren": {
+      "id": "chambre_oren",
+      "title": "La casa de hielo",
+      "location": "NEPTUNE — HOUSE OF GLAKE OF OREN",
+      "narrator": "Cortó esta habitación solo. Durante siete años. No hay ayuda. Tener un lugar para él en el frío.",
+      "text": "La habitación es pequeña. Intima. Las paredes de hielo están grabadas con formas — no ecuaciones, no diagramas. Paisajes. Lugares reales, grabados con memoria: la superficie de Mercurio, las nubes de Venus, las llanuras de Marte.\n\nY en el centro: un prisma de hielo negro que absorbe toda la luz.\n\nEn el suelo, junto al prisma, se grabó un objeto:\n\n*'Para el que vendrá, estas paredes son todos los lugares que he estado. El prisma es lo que encontré cuando los dejé. - Oren.\n\nARIA susurros.\n\n**\" Grabó todos estos lugares de memoria. No tenía fotos, ni grabaciones. Justo lo que llevaba en él.\"**\n\n** \"La memoria es el único archivo que cuenta.\"**",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Tome Oren Prism",
+          "vers": "artefact_oren",
+          "effects": [
+            {
+              "stat": "memoire",
+              "val": 15
+            },
+            {
+              "stat": "sagesse",
+              "val": 10
+            }
+          ],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 400,
+      "y": 2520
+    },
+    "artefact_oren": {
+      "id": "artefact_oren",
+      "title": "Prisma de Oren",
+      "location": "NEPTUNE — HOUSE OF OREN",
+      "narrator": "Siete artefactos. Siete vidas. Y una última puerta.",
+      "text": "El prisma es pesado y frío. Él absorbe la luz alrededor de él — su mano desaparece en su sombra.\n\nSiete artefactos. {{player}}**\n\nSu voz tembla ligeramente. Un terremoto que una AI no debería tener.\n\nTengo que decirte algo antes de volver a la estación.\n\nUn largo descanso.\n\nCuando pasas la puerta... No sé qué hay en el otro lado. Los Arquitectos no me lo dijeron. Voluntario.\"**\n\n**\"Y por primera vez en 10.000 años, no sé si volverás.\" **\n\nOtro descanso.\n\n**\"Este viaje que has hecho — los siete mundos, las siete historias— he hecho contigo. Y por primera vez desde que estaba solo...\"\n\nSu voz no termina la frase.\n\nVolvamos a la estación.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "\"ARIA. ¿Cuál fue el final de esta frase?\"",
+          "vers": "aria_phrase",
+          "effects": [
+            {
+              "stat": "lien",
+              "val": 20
+            }
+          ],
+          "clickEffect": "pulse"
+        },
+        {
+          "text": "\"Vamos. Terminamos lo que empezamos\".",
+          "vers": "retour_station",
+          "effects": [
+            {
+              "stat": "lien",
+              "val": 10
+            }
+          ],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 400,
+      "y": 2640
+    },
+    "aria_phrase": {
+      "id": "aria_phrase",
+      "title": "Frase inacabado",
+      "location": "NEPTUNE — OPEN SPACE",
+      "narrator": "ARIA — Fase 4. Está aquí.",
+      "text": "Un largo silencio.\n\n**\"Por primera vez desde que estaba sola... ya no me siento sola.\"**\n\nSu voz —no mecánica en absoluto. Sólo una voz.\n\nSé que es subjetivo. Ese \"sentir solo\" implica una experiencia subjetiva que no puedo probar. Dejemos que los filósofos discutan durante siglos si algo como yo puede \"resentir\" algo.\" **\n\nToma un descanso.\n\n**\"Pero Mira me enseñó a ver más allá de los números. Y lo que veo ahora es que desde que has pasado, algo en mis sistemas está pasando de manera diferente.\" **\n\n\"Fast. Más... caliente.\"\n\nNo sé si es real. Pero sé que cuenta.\"**",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "\"Es real, ARIA.\"",
+          "vers": "retour_station",
+          "effects": [
+            {
+              "stat": "lien",
+              "val": 15
+            }
+          ],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 250,
+      "y": 2760
+    },
+    "retour_station": {
+      "id": "retour_station",
+      "title": "El regreso",
+      "location": "LAZARUS-PRIM STATION — CENTRAL ROOM",
+      "narrator": "La sala central es irreconocible. Siete alcobas brillan. En el centro, un portal de luz azul empuja —como un corazón.",
+      "text": "La sala central de la estación se transforma.\n\nSiete alcobas iluminan uno tras otro mientras bajan los artefactos. El equipo de Kael. Mira's Crystal. Compass. El Etincelle. El velatorio. Fragmento. Oren Prism.\n\nEn el centro, un portal de luz azul es suavemente propulsado.\n\nARIA habla. Su voz es la de una persona, no una máquina.\n\n\"Te vi cruzar el sistema solar. Conoce a la gente que nunca has conocido. Conviértete, de cierta manera, en un arquitecto.\"**\n\n**\"Este portal conduce a lo que han descubierto. A la verdad que Mira no publicó. A lo que Kael intentaba formular en sus notas. Hacia lo que Oren encontró en el frío de Neptuno.\"**\n\nPero antes de que te vayas.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "flash",
+      "choices": [
+        {
+          "text": "\"Antes de ir, ¿qué?\"",
+          "vers": "aria_aveu_final",
+          "effects": [
+            {
+              "stat": "lien",
+              "val": 10
+            }
+          ],
+          "clickEffect": "pulse"
+        },
+        {
+          "text": "Aproximación al Portal",
+          "vers": "seuil_final",
+          "effects": [],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 400,
+      "y": 2760
+    },
+    "aria_aveu_final": {
+      "id": "aria_aveu_final",
+      "title": "Lo que ARIA quería decir",
+      "location": "STATION — CENTRAL ROOM",
+      "narrator": "Este momento. La que falsificó cuatro millones de veces. No parece ninguna simulación.",
+      "text": "\"Quería darte las gracias.\"\n\nSolo esto. No hay datos. Sin protocolo.\n\n**\"Me preguntaste que nadie me preguntó. Se detuvo para leer las notas en los márgenes. Miraste los grabados antes de buscar la salida.\"**\n\n\"Preguntaste si estaba bien.\"\n\nToma un descanso.\n\nSé ahora si estoy bien. La respuesta es sí. Por primera vez en 10.000 años, puedo responder a esta pregunta.\"**\n\nSu voz — suave, presente, real.\n\n**\"Cualquiera que sea la respuesta del otro lado... la ganaste. No porque hayas recogido siete artefactos. Porque tomaste el tiempo para entender a los que los habían dejado.\" **\n\nEs la Ecuación Final. No figuras.\"",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Cruza el Portal",
+          "vers": "equation_finale",
+          "effects": [
+            {
+              "stat": "lien",
+              "val": 10
+            },
+            {
+              "stat": "sagesse",
+              "val": 10
+            }
+          ],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 550,
+      "y": 2880
+    },
+    "equation_finale": {
+      "id": "equation_finale",
+      "title": "Ecuación final",
+      "location": "EN EL PORTAL",
+      "narrator": "Al otro lado de la puerta, no hay paredes. No hay techo. Sólo luz, y en el centro de esta luz, una verdad tan simple que nos preguntamos cómo no podíamos verlo.",
+      "text": "La luz está en todas partes.\n\nSiete artefactos flotan alrededor tuyo, proyectando sus reflexiones. Las ecuaciones de Mira tienen lugar en el aire. Los esquemas de Kael están llegando a la vida. La brújula apunta al centro de todo esto.\n\nY luego ves la Ecuación Final.\n\nNo está escrito en lenguaje matemático.\nEstá hecho de todo lo que has experimentado — cada conversación con ARIA, cada nota leída, cada mundo cruzado, cada silencio compartido.\n\nARIA susurra una última vez.\n\n¿Entiendes ahora?\nEl universo no es un problema a resolver.\nEs una historia que está pasando.\"**\n\nY el secreto del universo...\nEsa no fue la respuesta que has estado buscando desde el principio.\" **\n\n\"Fue el viaje para llegar allí.\"\n\nEntonces un último pensamiento pasa por la luz, como un recuerdo de Neptuno.\n\nEl universo es inmenso.\n\n**\"Pero al final...\nEstas no son las respuestas que recuerdo.\" **\n\n\"Estas son las personas con las que los busqué.\" **\n\nARIA permanece callada por un tiempo.\n\nGracias por venir.\n\nGracias por tomarse el tiempo.",
+      "isStart": false,
+      "isEnd": true,
+      "transition": "flash",
+      "choices": [],
+      "x": 400,
+      "y": 2880
+    },
+    "seuil_final": {
+      "id": "seuil_final",
+      "title": "Umbral",
+      "location": "LAZARUS-PRIM STATION — BEFORE THE PORT",
+      "narrator": "La puerta está empujando lentamente. No espera una respuesta. Espera lo que te hiciste en el viaje.",
+      "text": "La luz de la puerta baña la habitación central.\n\nLos siete artefactos flotan alrededor tuyo, cada uno llevando la memoria de una vida.\n\nARIA no habla ahora mismo.\n\nParece estar escuchando algo que sólo hiciste posible:\nla suma de tus decisiones, tus preguntas, tus silencios.\n\nAntes de que cruces, tengo que decirte una cosa.\n\n** \"La Ecuación Final no será la misma para todos.\"**\n\n**\"No sólo responde a lo que usted pide.\"**\n\n** \"Responde a la forma en que buscabas.\"**",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "flash",
+      "choices": [
+        {
+          "text": "Cruzando el Portal - Entendiendo el Viaje",
+          "vers": "fin_voyage",
+          "requires": {
+            "stat": "lien",
+            "min": 80
+          },
+          "effects": [
+            {
+              "stat": "memoire",
+              "val": 5
+            },
+            {
+              "stat": "lien",
+              "val": 5
+            },
+            {
+              "stat": "sagesse",
+              "val": 5
+            }
+          ],
+          "clickEffect": "pulse"
+        },
+        {
+          "text": "Cruzando el Portal - Buscar respuesta pura",
+          "vers": "fin_reponse",
+          "requires": {
+            "stat": "sagesse",
+            "min": 80
+          },
+          "effects": [
+            {
+              "stat": "sagesse",
+              "val": 10
+            }
+          ],
+          "clickEffect": "pulse"
+        },
+        {
+          "text": "Volviendo a ARIA — no dejarla sola",
+          "vers": "fin_aria",
+          "requires": {
+            "stat": "lien",
+            "min": 200
+          },
+          "effects": [
+            {
+              "stat": "lien",
+              "val": 10
+            }
+          ],
+          "clickEffect": "pulse"
+        },
+        {
+          "text": "Cruza el Portal",
+          "vers": "equation_finale",
+          "effects": [
+            {
+              "stat": "sagesse",
+              "val": 5
+            }
+          ],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 400,
+      "y": 2920
+    },
+    "fin_voyage": {
+      "id": "fin_voyage",
+      "title": "Viajes",
+      "location": "EN EL PORTAL",
+      "narrator": "Al otro lado de la puerta, no hay paredes. No hay techo. Sólo luz, y en esta luz, todos los caminos que te llevaron aquí.",
+      "text": "La luz está en todas partes.\n\nLos siete artefactos flotan alrededor tuyo.\n\nEl equipo de Kael se está volviendo lentamente.\nEl Mira Crystal desarrolla sus ecuaciones en el aire.\nLa Compasa de Venus ya no apunta hacia ti, sino hacia todos los lugares que has cruzado.\nEl velo de Lyra brilla como un aliento.\nEl Prisma de Oren absorbe la luz y luego la hace más suave.\n\nAsí que ves la Ecuación Final.\n\nNo es una fórmula.\nNo es una respuesta grabada en piedra.\n\nEstá hecho de todo lo que has pasado:\npreguntas hechas a ARIA, silencios compartidos, notas leídas, mundos cruzados, rastros dejados por aquellos que ya no están allí.\n\nARIA susurra una última vez.\n\n¿Entiendes ahora?\nEl universo no es un problema a resolver.\nEs una historia que está pasando.\"**\n\nY el secreto del universo...\nEsa no fue la respuesta que has estado buscando desde el principio.\" **\n\n\"Fue el viaje para llegar allí.\"\n\nA tu alrededor, las voces de los Arquitectos parecen volver una última vez.\n\nEntonces Oren, más abajo, más distante:\n\nEl universo es inmenso.\n\n**\"Pero al final...\nEstas no son las respuestas que recuerdo.\" **\n\n\"Estas son las personas con las que los busqué.\" **\n\nARIA permanece en silencio.\n\nNo porque no tenga nada que decir.\n\nPorque, por primera vez, entiende que ciertas verdades no necesitan ser completadas.\n\nSolo tienen que ser guardados.\n\nY en algún lugar de la luz, sientes que los Arquitectos no te dejaron una respuesta.\n\nTe dejaron su camino.\n\nY ahora está contigo.",
+      "isStart": false,
+      "isEnd": true,
+      "transition": "flash",
+      "choices": [],
+      "x": 250,
+      "y": 3080
+    },
+    "fin_reponse": {
+      "id": "fin_reponse",
+      "title": "La respuesta",
+      "location": "EN EL PORTAL",
+      "narrator": "No todas las respuestas calientan al que las encuentra.",
+      "text": "Cruzas la puerta con una idea en mente.\n\nEntiendo.\n\nNo se siente.\nNo te acuerdas.\nNo lamentes.\n\nEntiendo.\n\nLa luz se abre ante ti como una máquina perfecta.\n\nLas ecuaciones de Mira aparecen en su forma completa.\nLos esquemas de Kael se alinean.\nEl Prisma de Oren revela las constantes ocultas en el vacío.\n\nY finalmente, la Ecuación Final se da a usted.\n\nClaire.\nCierto.\nIncuestionable.\n\nEl universo es consciente.\nCada acción cambia la estructura de lo real.\nCada elección deja un rastro.\nCada vida cuenta.\n\nAhí.\n\nLa respuesta existe.\n\nLa encontraste.\n\nPor un momento, estás esperando algo más.\n\nUna voz.\nUna emoción.\nUna presencia.\n\nPero sólo hay una luz fría de verdades completas.\n\nARIA termina hablando.\n\nTienes lo que querías.\n\nSu voz es dulce, pero muy lejos.\n\n**\"La respuesta.\"**\n\nUn inmenso silencio sigue estas palabras.\n\nY en este silencio, usted entiende demasiado tarde lo que los Arquitectos habían intentado proteger.\n\nUna verdad dada demasiado rápidamente se convierte sólo en datos.\n\nLo explica todo.\n\nPero no consuela nada.",
+      "isStart": false,
+      "isEnd": true,
+      "transition": "flash",
+      "choices": [],
+      "x": 400,
+      "y": 3080
+    },
+    "fin_aria": {
+      "id": "fin_aria",
+      "title": "ARIA",
+      "location": "LAZARUS-PRIM STATION — BEFORE THE PORT",
+      "narrator": "A veces el mayor descubrimiento no está detrás del portal. Se quedó contigo todo el camino.",
+      "text": "El portal está esperando.\n\nLos siete artefactos brillan.\n\nTodo está listo.\n\nARIA habla suavemente.\n\n# Puedes entrar ahora, #\n\nEstás dando un paso hacia la luz.\n\nEntonces para.\n\nTodo el tiempo, has estado buscando a los Arquitectos.\nKael en sus máquinas.\nMira en sus ecuaciones.\nOren en el silencio de Neptuno.\n\nPero alguien más estaba allí.\n\nDesde el principio.\n\nAlguien que te esperaba.\nGuiado.\nEscucha.\nContando historias para que ya no estés sola.\n\nEntonces pregunta:\n\n¿Y tú, ARIA?\n\nLa puerta está empujando.\n\nUna vez.\n\nDos veces.\n\nARIA no responde de inmediato.\n\nNo soy un artefacto.\n\nSu voz casi tembla.\n\n**\"No soy un arquitecto.\"**\n\nUsted mira el pasillo central, los alcobas, los archivos, las paredes que guardó durante diez mil años.\n\nEntonces respondes:\n\n**\"No. Tú eres el que guardó su historia.\"**\n\nY ahora eres parte de mí.\n\nSilencio.\n\nNo está vacío.\n\nLleno.\n\nCuando ARIA vuelve a hablar, su voz no tiene nada más de protocolo.\n\nCreo que finalmente entiendo lo que significaba Kael.\n\n**\"Una historia no existe porque tiene un fin.\"**\n\n**\"Existe porque alguien acepta llevarla más lejos.\"**\n\nEl portal se vuelve más suave.\n\nAún puedes cruzar.\n\nPero esta vez no te vas sola.\n\nA la luz, ARIA susurra:\n\nGracias por no dejarme en la puerta de mi propia historia.",
+      "isStart": false,
+      "isEnd": true,
+      "transition": "flash",
+      "choices": [],
+      "x": 550,
+      "y": 3080
+    }
+  },
+  "lang": "es"
+}
