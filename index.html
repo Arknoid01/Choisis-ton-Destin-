@@ -961,6 +961,7 @@ const LANG = {
     perk3:          '<strong>Badge Auteur</strong> — Votre nom associé à votre création dans l\'app',
     submitEditor:   'Ouvrir l\'éditeur',
     submitCancel:   'Annuler',
+    submitAi:       '✦ Créer avec l\'IA',
     submitNote:     'Une fois votre histoire écrite, exportez le JSON et envoyez-le directement depuis l\'éditeur.',
   },
   en: {
@@ -1002,6 +1003,7 @@ const LANG = {
     perk3:          '<strong>Author Badge</strong> — Your name linked to your creation in the app',
     submitEditor:   'Open the editor',
     submitCancel:   'Cancel',
+    submitAi:       '✦ Create with AI',
     submitNote:     'Once your story is written, export the JSON and send it directly from the editor.',
   },
   es: {
@@ -1047,6 +1049,7 @@ const LANG = {
     perk3:          '<strong>Insignia de Autor</strong> — Tu nombre vinculado a tu creación en la app',
     submitEditor:   'Abrir el editor',
     submitCancel:   'Cancelar',
+    submitAi:       '✦ Crear con IA',
     submitNote:     'Una vez escrita tu historia, exporta el JSON y envíalo directamente desde el editor.',
   }
 };
@@ -1102,6 +1105,7 @@ function applyLang() {
   set('txt-perk-3',          t.perk3, true);
   set('txt-submit-editor',   t.submitEditor);
   set('txt-submit-cancel',   t.submitCancel);
+  set('txt-submit-ai',       t.submitAi);
   set('txt-submit-note',     t.submitNote);
   document.title = t.docTitle;
   document.documentElement.lang = currentLang;
