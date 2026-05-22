@@ -1,0 +1,2216 @@
+{
+  "name": "The Carcosa Theatre",
+  "kids": false,
+  "askPlayerName": true,
+  "pack": "horror",
+  "stats": [
+    {
+      "id": "lucidite",
+      "label": "Lucidity",
+      "start": 50,
+      "max": 100,
+      "color": "#8be9fd"
+    },
+    {
+      "id": "obsession",
+      "label": "Obsession",
+      "start": 0,
+      "max": 100,
+      "color": "#f1c40f"
+    },
+    {
+      "id": "memoire",
+      "label": "Memory",
+      "start": 0,
+      "max": 100,
+      "color": "#bd93f9"
+    }
+  ],
+  "theme": {
+    "bg": "#0d0b0b",
+    "bg2": "#171212",
+    "bg3": "#211919",
+    "bg4": "#2d2424",
+    "border": "#3b3030",
+    "accent": "#d4af37",
+    "accent2": "#8e44ad",
+    "accent3": "#c0392b",
+    "text": "#f5f0e6",
+    "text2": "#b9aa92",
+    "text3": "#7d6f61"
+  },
+  "scenes": {
+    "prologue": {
+      "id": "prologue",
+      "title": "Latest Representation",
+      "location": "VALMIRE GARE — 23:17",
+      "narrator": "The rain has fallen on Valmire for so long that even the return looks like an arrival.",
+      "text": "The train stops slowly in the rain.\n\nYou're going down to the dock alone.\n\nThe station seems normal.\n\nOld.\n\nTired.\n\nBut normal.\n\nSome travellers are still waiting under the yellow lamps.\n\nNone of them really look at you.\n\nA strange feeling goes through you.\n\nLike you've arrived somewhere where nobody really expected you.\n\nAlone.\n\nLost.\n\nYou're watching the invitation in your hand.\n\n> \"The Théâtre de Valmire invites you to the last performance. »\n\nYour name is written on the back.\n\nYou don't recognize writing.\n\nIn the distance, slow music resonates in the city.\n\nFor a second, you feel strange that you've heard this rain before.",
+      "isStart": true,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Go to the city center",
+          "vers": "rue_principale",
+          "effects": [
+            {
+              "stat": "memoire",
+              "val": 5
+            }
+          ]
+        },
+        {
+          "text": "Watching travelers",
+          "vers": "voyageurs",
+          "effects": [
+            {
+              "stat": "lucidite",
+              "val": 5
+            }
+          ]
+        },
+        {
+          "text": "Read the invitation",
+          "vers": "invitation",
+          "effects": [
+            {
+              "stat": "obsession",
+              "val": 5
+            }
+          ]
+        },
+        {
+          "text": "Return to train",
+          "vers": "train",
+          "effects": [
+            {
+              "stat": "lucidite",
+              "val": 5
+            }
+          ]
+        }
+      ]
+    },
+    "voyageurs": {
+      "id": "voyageurs",
+      "title": "Travellers",
+      "location": "QUAI DE GARE",
+      "narrator": "People sometimes avoid the eyes of those who arrive.",
+      "text": "The few travelers present seem nervous.\n\nA woman quickly folds her diary when you approach.\n\nA man constantly looks at the clock.\n\n23:17.\n\nYou notice that no one gets on the train that just arrived.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Talking to the woman",
+          "vers": "femme_journal",
+          "effects": [
+            {
+              "stat": "memoire",
+              "val": 5
+            }
+          ]
+        },
+        {
+          "text": "Watching the Clock",
+          "vers": "horloge",
+          "effects": [
+            {
+              "stat": "lucidite",
+              "val": 5
+            }
+          ]
+        },
+        {
+          "text": "Leave the station",
+          "vers": "rue_principale",
+          "effects": []
+        }
+      ]
+    },
+    "invitation": {
+      "id": "invitation",
+      "title": "Invitation",
+      "location": "GARE",
+      "narrator": "Some invitations are more like convocations.",
+      "text": "The paper is old.\n\nVery old.\n\nThe ink seems more recent.\n\nOn the back of the invitation, under your name, a half erased sentence appears:\n\n> \"Don't miss the last act. »",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Go to the city",
+          "vers": "rue_principale",
+          "effects": [
+            {
+              "stat": "obsession",
+              "val": 5
+            }
+          ]
+        },
+        {
+          "text": "Send invitation",
+          "vers": "rue_principale",
+          "effects": [
+            {
+              "stat": "lucidite",
+              "val": 5
+            }
+          ]
+        }
+      ]
+    },
+    "train": {
+      "id": "train",
+      "title": "The Train",
+      "location": "QUAI",
+      "narrator": "It is sometimes harder to leave than to arrive.",
+      "text": "You're heading towards the train.\n\nThe doors are closed.\n\nThe driver's gone.\n\nLights are slowly extinguishing car after car.\n\nThen the train goes back into the night.\n\nEmpty.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Waiting for the next train",
+          "vers": "attendre_train",
+          "effects": [
+            {
+              "stat": "lucidite",
+              "val": 10
+            }
+          ]
+        },
+        {
+          "text": "Leave the station",
+          "vers": "rue_principale",
+          "effects": [
+            {
+              "stat": "memoire",
+              "val": 5
+            }
+          ]
+        }
+      ]
+    },
+    "rue_principale": {
+      "id": "rue_principale",
+      "title": "The Rues de Valmire",
+      "location": "CENTRE-VILLE",
+      "narrator": "Valmire seems suspended between two epochs.",
+      "text": "The streets are quiet.\n\nToo quiet.\n\nYellow posters cover the walls.\n\nAll announce the same thing:\n\n> LAST REPRESENTATION\n\nThe inhabitants seem polite.\n\nBut tired.\n\nLike they haven't slept for a long time.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Entering coffee",
+          "vers": "cafe",
+          "effects": [
+            {
+              "stat": "memoire",
+              "val": 5
+            }
+          ]
+        },
+        {
+          "text": "Visit the hotel",
+          "vers": "hotel",
+          "effects": [
+            {
+              "stat": "lucidite",
+              "val": 5
+            }
+          ]
+        },
+        {
+          "text": "Follow the music to the theatre",
+          "vers": "theatre",
+          "effects": [
+            {
+              "stat": "obsession",
+              "val": 10
+            }
+          ]
+        },
+        {
+          "text": "Explore the abandoned clinic",
+          "vers": "clinique",
+          "effects": [
+            {
+              "stat": "lucidite",
+              "val": 10
+            }
+          ]
+        },
+        {
+          "text": "Avoid theatre and walk at random",
+          "vers": "errer_ville",
+          "effects": [
+            {
+              "stat": "lucidite",
+              "val": 5
+            }
+          ]
+        }
+      ]
+    },
+    "cafe": {
+      "id": "cafe",
+      "title": "The Café des Voyageurs",
+      "location": "CENTRAL PLACE",
+      "narrator": "Some cities hide their secrets behind music.",
+      "text": "The coffee is warm.\n\nA pianist plays a slow melody.\n\nClients speak in a low voice.\n\nYou notice several watches stopped at the same time.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Talking to the pianist",
+          "vers": "pianiste",
+          "effects": [
+            {
+              "stat": "memoire",
+              "val": 10
+            }
+          ]
+        },
+        {
+          "text": "Read the local newspaper",
+          "vers": "journal",
+          "effects": [
+            {
+              "stat": "lucidite",
+              "val": 5
+            }
+          ]
+        },
+        {
+          "text": "Observing clients",
+          "vers": "clients",
+          "effects": [
+            {
+              "stat": "memoire",
+              "val": 5
+            }
+          ]
+        },
+        {
+          "text": "Leave Coffee",
+          "vers": "rue_principale",
+          "effects": []
+        },
+        {
+          "text": "Stay at the cafe and ignore the theater",
+          "vers": "rester_cafe",
+          "effects": [
+            {
+              "stat": "lucidite",
+              "val": 10
+            }
+          ]
+        }
+      ]
+    },
+    "pianiste": {
+      "id": "pianiste",
+      "title": "The Pianist",
+      "location": "CAFE",
+      "narrator": "Artists sometimes notice what others don't know.",
+      "text": "The pianist continues to play without raising his eyes.\n\n> \"This city loves sad stories. »\n\nThen:\n\n> \"People come here to forget certain things. »\n\nHe stops for a second.\n\n> \"Or to remember it. »",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Ask what he means",
+          "vers": "pianiste_suite",
+          "effects": [
+            {
+              "stat": "obsession",
+              "val": 5
+            }
+          ]
+        },
+        {
+          "text": "Return to the city centre",
+          "vers": "rue_principale",
+          "effects": []
+        }
+      ]
+    },
+    "hotel": {
+      "id": "hotel",
+      "title": "Hotel Valmire",
+      "location": "MAIN LEAFLET",
+      "narrator": "Hotels keep track of travellers.",
+      "text": "The receptionist smiled at you immediately.\n\nLike he's waiting for you.\n\n> \"Are you staying for the performance? »",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Yes",
+          "vers": "hotel_suite",
+          "effects": [
+            {
+              "stat": "obsession",
+              "val": 5
+            }
+          ]
+        },
+        {
+          "text": "What performance?",
+          "vers": "hotel_suite",
+          "effects": [
+            {
+              "stat": "memoire",
+              "val": 5
+            }
+          ]
+        },
+        {
+          "text": "I'm just passing by.",
+          "vers": "hotel_suite",
+          "effects": [
+            {
+              "stat": "lucidite",
+              "val": 5
+            }
+          ]
+        },
+        {
+          "text": "Why is everyone talking about the theater?",
+          "vers": "hotel_suite",
+          "effects": [
+            {
+              "stat": "obsession",
+              "val": 5
+            }
+          ]
+        }
+      ]
+    },
+    "hotel_suite": {
+      "id": "hotel_suite",
+      "title": "The Chamber",
+      "location": "HOTEL",
+      "narrator": "The nights in Valmire seem longer than elsewhere.",
+      "text": "Your room overlooks the theater.\n\nIn the night:\n- you hear applause,\n- steps in the hallway,\n- then silence.\n\nWhen you open the door:\n\nThe hallway is empty.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Track noise",
+          "vers": "couloir",
+          "effects": [
+            {
+              "stat": "memoire",
+              "val": 10
+            }
+          ]
+        },
+        {
+          "text": "Watch the theater from the window",
+          "vers": "fenetre",
+          "effects": [
+            {
+              "stat": "obsession",
+              "val": 10
+            }
+          ]
+        },
+        {
+          "text": "Trying to sleep",
+          "vers": "reve",
+          "effects": [
+            {
+              "stat": "lucidite",
+              "val": 5
+            }
+          ]
+        }
+      ]
+    },
+    "clinique": {
+      "id": "clinique",
+      "title": "The Abandoned Clinic",
+      "location": "NORTH QUARTIER",
+      "narrator": "Rational explanations are reassuring.",
+      "text": "The clinic seems to have been abandoned for a long time.\n\nMedical records are still in the offices.\n\nAll talk:\n- insomnia,\n- obsessions,\n- memory loss,\n- and a room called The King in Yellow.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "glitch",
+      "choices": [
+        {
+          "text": "Read the testimonials",
+          "vers": "temoignages",
+          "effects": [
+            {
+              "stat": "lucidite",
+              "val": 10
+            }
+          ]
+        },
+        {
+          "text": "Find the name of the theatre",
+          "vers": "archives_theatre",
+          "effects": [
+            {
+              "stat": "memoire",
+              "val": 10
+            }
+          ]
+        },
+        {
+          "text": "Leave the clinic",
+          "vers": "rue_principale",
+          "effects": []
+        },
+        {
+          "text": "Search for treatment in cabinets",
+          "vers": "traitement_clinique",
+          "effects": [
+            {
+              "stat": "lucidite",
+              "val": 10
+            }
+          ]
+        }
+      ]
+    },
+    "theatre": {
+      "id": "theatre",
+      "title": "The Theatre of Valmire",
+      "location": "CENTRAL PLACE",
+      "narrator": "The theater looks alive.",
+      "text": "The building is beautiful.\n\nAlmost unreal in the rain.\n\nInside, a receptionist smiles softly.\n\n> « Welcome to Valmire. »",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Ask who wrote the play",
+          "vers": "receptionniste",
+          "effects": [
+            {
+              "stat": "memoire",
+              "val": 5
+            }
+          ]
+        },
+        {
+          "text": "Explore Behind the Scenes",
+          "vers": "coulisses",
+          "effects": [
+            {
+              "stat": "obsession",
+              "val": 10
+            }
+          ]
+        },
+        {
+          "text": "Ask to see the manuscript",
+          "vers": "manuscrit",
+          "effects": [
+            {
+              "stat": "obsession",
+              "val": 15
+            }
+          ]
+        },
+        {
+          "text": "Attend representation",
+          "vers": "representation",
+          "effects": [
+            {
+              "stat": "memoire",
+              "val": 10
+            }
+          ]
+        }
+      ]
+    },
+    "manuscrit": {
+      "id": "manuscrit",
+      "title": "The Manuscript",
+      "location": "THEATER ARCHIVES",
+      "narrator": "Some stories change according to who reads them.",
+      "text": "The manuscript is ancient.\n\nVery old.\n\nThe play tells a city that refuses to die.\n\nA sentence draws your attention:\n\n> \"The curtain never really falls. »",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Continue reading",
+          "vers": "lecture_suite",
+          "effects": [
+            {
+              "stat": "obsession",
+              "val": 15
+            }
+          ]
+        },
+        {
+          "text": "Referring the manuscript",
+          "vers": "coulisses",
+          "effects": [
+            {
+              "stat": "lucidite",
+              "val": 5
+            }
+          ]
+        },
+        {
+          "text": "Compare writing with invitation",
+          "vers": "ecriture",
+          "effects": [
+            {
+              "stat": "memoire",
+              "val": 15
+            }
+          ]
+        }
+      ]
+    },
+    "coulisses": {
+      "id": "coulisses",
+      "title": "Behind the scenes",
+      "location": "BACKGROUND",
+      "narrator": "Behind each representation is something hidden.",
+      "text": "The actors repeat in silence.\n\nTheir lips are moving.\n\nBut no sound comes out.\n\nBehind the scenes:\n- a red door,\n- a clock stopped,\n- a huge painting by Valmire.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Observe painting",
+          "vers": "tableau",
+          "effects": [
+            {
+              "stat": "memoire",
+              "val": 15
+            }
+          ]
+        },
+        {
+          "text": "Approach the red door",
+          "vers": "porte_intro",
+          "effects": [
+            {
+              "stat": "obsession",
+              "val": 15
+            }
+          ]
+        },
+        {
+          "text": "Talking to an actor",
+          "vers": "acteur",
+          "effects": [
+            {
+              "stat": "lucidite",
+              "val": 5
+            }
+          ]
+        },
+        {
+          "text": "Go back to the lobby",
+          "vers": "theatre",
+          "effects": []
+        }
+      ]
+    },
+    "tableau": {
+      "id": "tableau",
+      "title": "The Table",
+      "location": "COLISSES",
+      "narrator": "Details sometimes change without warning.",
+      "text": "The painting represents Valmire in the rain.\n\nSomething seems different.\n\nYou could swear a silhouette wasn't there a few seconds earlier.\n\nA silhouette that looks like you.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "glitch",
+      "choices": [
+        {
+          "text": "Continue to observe",
+          "vers": "tableau_suite",
+          "effects": [
+            {
+              "stat": "obsession",
+              "val": 10
+            }
+          ]
+        },
+        {
+          "text": "Leave behind the scenes",
+          "vers": "theatre",
+          "effects": [
+            {
+              "stat": "lucidite",
+              "val": 5
+            }
+          ]
+        }
+      ]
+    },
+    "porte_intro": {
+      "id": "porte_intro",
+      "title": "Red Gate",
+      "location": "COLISSES",
+      "narrator": "Some doors seem older than the surrounding walls.",
+      "text": "The red door is locked.\n\nYet you have the strange impression that it was open before.\n\nOr maybe it's just an impression.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Try to open the door",
+          "vers": "porte_verrouillee",
+          "effects": [
+            {
+              "stat": "obsession",
+              "val": 15
+            }
+          ]
+        },
+        {
+          "text": "Ask the receptionist",
+          "vers": "reception_porte",
+          "effects": [
+            {
+              "stat": "memoire",
+              "val": 10
+            }
+          ]
+        },
+        {
+          "text": "Ignore the door",
+          "vers": "theatre",
+          "effects": [
+            {
+              "stat": "lucidite",
+              "val": 10
+            }
+          ]
+        }
+      ]
+    },
+    "porte_rouge": {
+      "id": "porte_rouge",
+      "title": "The Second Act",
+      "location": "RED ROOM",
+      "narrator": "The second act is not intended for spectators.",
+      "text": "Behind the door:\n\nAn empty room.\n\nDozens of chairs.\n\nAll turned to a black scene.\n\nOn some chairs:\n\nPhotographs.\n\nSome show you.\n\nAt times you don't remember.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "flash",
+      "choices": [
+        {
+          "text": "Examine photographs",
+          "vers": "photos",
+          "effects": [
+            {
+              "stat": "memoire",
+              "val": 20
+            }
+          ]
+        },
+        {
+          "text": "Get on the stage",
+          "vers": "scene_finale",
+          "effects": [
+            {
+              "stat": "obsession",
+              "val": 25
+            }
+          ]
+        },
+        {
+          "text": "Run away",
+          "vers": "oubli",
+          "effects": [
+            {
+              "stat": "lucidite",
+              "val": 15
+            }
+          ]
+        }
+      ]
+    },
+    "scene_finale": {
+      "id": "scene_finale",
+      "title": "The Last Act",
+      "location": "ON THE SCENE",
+      "narrator": "Stories sometimes refuse to die.",
+      "text": "When you get on stage:\n\nThe lights are on.\n\nSeats are now occupied.\n\nBut all faces are blurred.\n\nThen the narrator speaks directly.\n\n> \"You wanted to understand. »",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "flash",
+      "choices": [
+        {
+          "text": "Burning the Theatre",
+          "vers": "fin_silence",
+          "effects": [
+            {
+              "stat": "lucidite",
+              "val": 20
+            }
+          ]
+        },
+        {
+          "text": "Accept Your Role",
+          "vers": "fin_roi",
+          "effects": [
+            {
+              "stat": "obsession",
+              "val": 30
+            }
+          ],
+          "requires": {
+            "stat": "memoire",
+            "min": 70
+          }
+        },
+        {
+          "text": "Refuse to continue",
+          "vers": "oubli",
+          "effects": [
+            {
+              "stat": "memoire",
+              "val": 10
+            }
+          ]
+        },
+        {
+          "text": "Watch the audience",
+          "vers": "spectateur",
+          "effects": [
+            {
+              "stat": "memoire",
+              "val": 25
+            }
+          ]
+        }
+      ]
+    },
+    "fin_silence": {
+      "id": "fin_silence",
+      "title": "Silence",
+      "location": "VALMIRE IN FLAMMES",
+      "narrator": "Some stories must end.",
+      "text": "Fire slowly devours the theater.\n\nThe rain finally stops.\n\nBefore everything goes away:\n\nYou hear applause.\n\nEven without a public.",
+      "isStart": false,
+      "isEnd": true,
+      "transition": "flash",
+      "choices": []
+    },
+    "fin_roi": {
+      "id": "fin_roi",
+      "title": "The King in Yellow",
+      "location": "ON THE SCENE",
+      "narrator": "Stories need actors.",
+      "text": "The yellow curtain falls slowly.\n\nThen the doors of the theatre open.\n\nA new person enters Valmire.\n\nLost.\n\nLike you at first.",
+      "isStart": false,
+      "isEnd": true,
+      "transition": "flash",
+      "choices": []
+    },
+    "oubli": {
+      "id": "oubli",
+      "title": "The Forget",
+      "location": "OUT OF VALMIRE",
+      "narrator": "We can leave a city. Not always what we saw.",
+      "text": "You're leaving Valmire before dawn.\n\nSeveral weeks go by.\n\nThen one night:\n\nYou find the manuscript at home.\n\nOpened to a page you don't remember reading.",
+      "isStart": false,
+      "isEnd": true,
+      "transition": "fade",
+      "choices": []
+    },
+    "femme_journal": {
+      "id": "femme_journal",
+      "title": "The Woman in the Journal",
+      "location": "QUAI DE GARE",
+      "narrator": "Some people hide secrets less than memories.",
+      "text": "The woman holds her diary against her.\n\nYou only see the title before she folds it:\n\n> THE THEASTER ROUNDS THIS SOIR\n\nWhen you ask her if she knows the play, she answers too quickly:\n\n**\"No one really knows this play. We only think we remember. *",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Ask why she's afraid",
+          "vers": "horloge",
+          "effects": [
+            {
+              "stat": "lucidite",
+              "val": 5
+            }
+          ]
+        },
+        {
+          "text": "Leave the station",
+          "vers": "rue_principale",
+          "effects": [
+            {
+              "stat": "memoire",
+              "val": 5
+            }
+          ]
+        },
+        {
+          "text": "Read the newspaper until you feel dizzy",
+          "vers": "retour_gare",
+          "effects": [
+            {
+              "stat": "memoire",
+              "val": 10
+            }
+          ]
+        }
+      ]
+    },
+    "horloge": {
+      "id": "horloge",
+      "title": "The Clock",
+      "location": "QUAI DE GARE",
+      "narrator": "Time is sometimes the first lie in a city.",
+      "text": "The clock says 23:17.\n\nThe second needle moves normally.\n\nYet the time does not change.\n\nA man next to you whispers:\n\n**\"She always ends up leaving. *\n\nThen he moves away before you can answer.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "glitch",
+      "choices": [
+        {
+          "text": "Follow Man",
+          "vers": "rue_principale",
+          "effects": [
+            {
+              "stat": "obsession",
+              "val": 5
+            }
+          ]
+        },
+        {
+          "text": "Leave the station",
+          "vers": "rue_principale",
+          "effects": [
+            {
+              "stat": "lucidite",
+              "val": 5
+            }
+          ]
+        },
+        {
+          "text": "Remain to fix the clock until the station seems to change",
+          "vers": "retour_gare",
+          "effects": [
+            {
+              "stat": "memoire",
+              "val": 10
+            },
+            {
+              "stat": "obsession",
+              "val": 5
+            }
+          ]
+        }
+      ]
+    },
+    "journal": {
+      "id": "journal",
+      "title": "The Local Journal",
+      "location": "CARE OF TRAVEL",
+      "narrator": "The newspapers tell what cities agree to admit.",
+      "text": "The newspaper talks about an old fire in the theater.\n\nThe date is partially erased.\n\nThese include:\n- missing actors,\n- a performance interrupted,\n- from a director never found.\n\nNo name is legible.\n\nExcept for a word, printed at the bottom of the page:\n\n**CARCOSA**",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Ask the pianist what Carcosa is",
+          "vers": "pianiste",
+          "effects": [
+            {
+              "stat": "obsession",
+              "val": 10
+            }
+          ]
+        },
+        {
+          "text": "Leave Coffee",
+          "vers": "rue_principale",
+          "effects": [
+            {
+              "stat": "memoire",
+              "val": 5
+            }
+          ]
+        },
+        {
+          "text": "Read the article from the beginning",
+          "vers": "retour_gare",
+          "effects": [
+            {
+              "stat": "obsession",
+              "val": 5
+            },
+            {
+              "stat": "memoire",
+              "val": 5
+            }
+          ]
+        }
+      ]
+    },
+    "clients": {
+      "id": "clients",
+      "title": "Customers",
+      "location": "CARE OF TRAVEL",
+      "narrator": "A shared silence can become heavier than a confession.",
+      "text": "Clients don't talk much.\n\nThey all have a cup in front of them.\n\nNone smoke.\n\nA young man scratches something on a towel.\n\nWhen he gets up, you read:\n\n> Don't go tonight.\n\nThen the ink spreads under a drop of water falling from the ceiling.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Keep the towel",
+          "vers": "rue_principale",
+          "effects": [
+            {
+              "stat": "memoire",
+              "val": 10
+            }
+          ]
+        },
+        {
+          "text": "Talking to the pianist",
+          "vers": "pianiste",
+          "effects": [
+            {
+              "stat": "obsession",
+              "val": 5
+            }
+          ]
+        },
+        {
+          "text": "Fix the towel until the ink disappears",
+          "vers": "retour_gare",
+          "effects": [
+            {
+              "stat": "memoire",
+              "val": 10
+            }
+          ]
+        }
+      ]
+    },
+    "pianiste_suite": {
+      "id": "pianiste_suite",
+      "title": "Melody",
+      "location": "CAFE",
+      "narrator": "Some music is not in the ears. They stay somewhere else.",
+      "text": "The pianist smiles without joy.\n\n**\"This song is not mine. Nobody here knows who wrote it. *\n\nHe plays three notes.\n\nYou recognize them.\n\nImpossible.\n\nYou're sure you heard them in your dream the night before.\n\nBut you haven't slept in Valmire yet.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "glitch",
+      "choices": [
+        {
+          "text": "Ask the name of the song",
+          "vers": "theatre",
+          "effects": [
+            {
+              "stat": "obsession",
+              "val": 10
+            }
+          ]
+        },
+        {
+          "text": "Leave Coffee",
+          "vers": "rue_principale",
+          "effects": [
+            {
+              "stat": "lucidite",
+              "val": 5
+            }
+          ]
+        },
+        {
+          "text": "Listen to the melody until you forget where you are",
+          "vers": "retour_gare",
+          "effects": [
+            {
+              "stat": "obsession",
+              "val": 10
+            }
+          ]
+        }
+      ]
+    },
+    "couloir": {
+      "id": "couloir",
+      "title": "The Corridor",
+      "location": "HOTEL",
+      "narrator": "Hotels always have too many doors.",
+      "text": "The hallway is empty.\n\nYet you hear steps behind every door.\n\nIn the back, a room is closed.\n\nOn the handle hangs a sign:\n\n> Do not disturb.\n\nYour name is written in pencil underneath.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Entering the room",
+          "vers": "reve",
+          "effects": [
+            {
+              "stat": "obsession",
+              "val": 10
+            }
+          ]
+        },
+        {
+          "text": "Go back to your room",
+          "vers": "fenetre",
+          "effects": [
+            {
+              "stat": "lucidite",
+              "val": 5
+            }
+          ]
+        }
+      ]
+    },
+    "fenetre": {
+      "id": "fenetre",
+      "title": "The Window",
+      "location": "HOTEL ROOM",
+      "narrator": "From some windows, we see less the world than a possible version of the world.",
+      "text": "The theater shines in the rain.\n\nA line of spectators slowly enters.\n\nThen you blink.\n\nThe place is empty.\n\nThe theater doors are closed.\n\nThe music continues.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "glitch",
+      "choices": [
+        {
+          "text": "Go to the theater",
+          "vers": "theatre",
+          "effects": [
+            {
+              "stat": "obsession",
+              "val": 10
+            }
+          ]
+        },
+        {
+          "text": "Trying to sleep",
+          "vers": "reve",
+          "effects": [
+            {
+              "stat": "lucidite",
+              "val": 5
+            }
+          ]
+        },
+        {
+          "text": "Watch the theater until the rain becomes silent",
+          "vers": "retour_gare",
+          "effects": [
+            {
+              "stat": "memoire",
+              "val": 10
+            }
+          ]
+        }
+      ]
+    },
+    "reve": {
+      "id": "reve",
+      "title": "The Yellow Dream",
+      "location": "HOTEL ROOM",
+      "narrator": "Dreams are sometimes the general repetitions of things that have not yet taken place.",
+      "text": "You dream of an empty scene.\n\nA yellow curtain falls slowly.\n\nSomeone's cheering.\n\nOnly one person.\n\nWhen you wake up, your hands smell like theater dust.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Get down in the lobby",
+          "vers": "hotel",
+          "effects": [
+            {
+              "stat": "memoire",
+              "val": 5
+            }
+          ]
+        },
+        {
+          "text": "Go to the theater",
+          "vers": "theatre",
+          "effects": [
+            {
+              "stat": "obsession",
+              "val": 10
+            }
+          ]
+        },
+        {
+          "text": "Close your eyes and follow the dream to the end",
+          "vers": "retour_gare",
+          "effects": [
+            {
+              "stat": "obsession",
+              "val": 10
+            },
+            {
+              "stat": "memoire",
+              "val": 5
+            }
+          ]
+        }
+      ]
+    },
+    "temoignages": {
+      "id": "temoignages",
+      "title": "Testimonials",
+      "location": "CLINICAL",
+      "narrator": "Patients often use the same words when no one has spoken to them.",
+      "text": "The testimonies describe contradictory symptoms.\n\nSome talk about dreams.\nOthers from a cult.\nOthers from memory disease.\n\nOnly one detail always comes back:\n\n> the music starts before the performance.\n\nA handwritten note adds:\n\n> Maybe the problem isn't the play.\n> Maybe it prevents something else from going out.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Search the theatre archives",
+          "vers": "archives_theatre",
+          "effects": [
+            {
+              "stat": "memoire",
+              "val": 10
+            }
+          ]
+        },
+        {
+          "text": "Go back to town",
+          "vers": "rue_principale",
+          "effects": [
+            {
+              "stat": "lucidite",
+              "val": 5
+            }
+          ]
+        }
+      ]
+    },
+    "archives_theatre": {
+      "id": "archives_theatre",
+      "title": "Archives du Théâtre",
+      "location": "CLINICAL",
+      "narrator": "Administrations sometimes classify inexplicable as ordinary cases.",
+      "text": "You find a dossier dedicated to the Valmire Theatre.\n\nHe mentions a fire.\n\nBut the dates don't match.\n\n1921.\n1947.\n1973.\n2009.\n\nEach document speaks of the same fire.\n\nAs if it had happened several times.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "glitch",
+      "choices": [
+        {
+          "text": "Go to the theater",
+          "vers": "theatre",
+          "effects": [
+            {
+              "stat": "obsession",
+              "val": 10
+            }
+          ]
+        },
+        {
+          "text": "Back to the streets of Valmire",
+          "vers": "rue_principale",
+          "effects": [
+            {
+              "stat": "lucidite",
+              "val": 5
+            }
+          ]
+        },
+        {
+          "text": "Compare all dates until they merge",
+          "vers": "retour_gare",
+          "effects": [
+            {
+              "stat": "lucidite",
+              "val": 5
+            },
+            {
+              "stat": "memoire",
+              "val": 10
+            }
+          ]
+        }
+      ]
+    },
+    "receptionniste": {
+      "id": "receptionniste",
+      "title": "Receptionist",
+      "location": "THEATER HALL",
+      "narrator": "Sadness is sometimes a form of politeness.",
+      "text": "The receptionist thought before answering.\n\n**\"No one really knows who wrote the play. *\n\nThen she adds:\n\n**\"Some say it was found. Others she wrote herself. I think she was just waiting for her audience. *",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Ask why this is the last representation",
+          "vers": "representation",
+          "effects": [
+            {
+              "stat": "memoire",
+              "val": 10
+            }
+          ]
+        },
+        {
+          "text": "Request manuscript",
+          "vers": "manuscrit",
+          "effects": [
+            {
+              "stat": "obsession",
+              "val": 10
+            }
+          ]
+        },
+        {
+          "text": "Explore Behind the Scenes",
+          "vers": "coulisses",
+          "effects": [
+            {
+              "stat": "lucidite",
+              "val": 5
+            }
+          ]
+        }
+      ]
+    },
+    "representation": {
+      "id": "representation",
+      "title": "Representation",
+      "location": "MAIN ROOM",
+      "narrator": "The curtain always rises too slowly.",
+      "text": "The room is almost full.\n\nYet nobody talks.\n\nOn stage, actors start a common scene:\n\nA traveller arrives in a city in the rain.\n\nYou smile nervously.\n\nThen the lead actor pronounces your name.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "flash",
+      "choices": [
+        {
+          "text": "Sit until intermission",
+          "vers": "lecture_suite",
+          "effects": [
+            {
+              "stat": "obsession",
+              "val": 15
+            }
+          ]
+        },
+        {
+          "text": "Leave the room discreetly",
+          "vers": "coulisses",
+          "effects": [
+            {
+              "stat": "lucidite",
+              "val": 10
+            }
+          ]
+        },
+        {
+          "text": "Follow the actors after the stage",
+          "vers": "apres_representation",
+          "effects": [
+            {
+              "stat": "memoire",
+              "val": 15
+            }
+          ]
+        },
+        {
+          "text": "Do nothing and look to the end",
+          "vers": "fin_spectateur_immobile",
+          "effects": [
+            {
+              "stat": "memoire",
+              "val": 15
+            }
+          ]
+        }
+      ]
+    },
+    "lecture_suite": {
+      "id": "lecture_suite",
+      "title": "The Next Page",
+      "location": "THEATER ARCHIVES",
+      "narrator": "You never read the same story twice.",
+      "text": "The following page describes a city in the rain.\n\nA train station.\nCoffee.\nA hotel.\nA clinic.\n\nEverything seems familiar.\n\nBut no passage clearly states what happens next.\n\nOnly this sentence:\n\n> The spectator will choose the form of his prison.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "glitch",
+      "choices": [
+        {
+          "text": "Compare with the invitation",
+          "vers": "ecriture",
+          "effects": [
+            {
+              "stat": "memoire",
+              "val": 10
+            }
+          ]
+        },
+        {
+          "text": "Referring the manuscript and returning to the lobby",
+          "vers": "theatre",
+          "effects": [
+            {
+              "stat": "lucidite",
+              "val": 5
+            }
+          ]
+        },
+        {
+          "text": "Search for other archives",
+          "vers": "archives_theatre",
+          "effects": [
+            {
+              "stat": "memoire",
+              "val": 10
+            }
+          ]
+        },
+        {
+          "text": "Read the first line of the manuscript",
+          "vers": "retour_gare",
+          "effects": [
+            {
+              "stat": "obsession",
+              "val": 10
+            },
+            {
+              "stat": "memoire",
+              "val": 10
+            }
+          ]
+        }
+      ]
+    },
+    "ecriture": {
+      "id": "ecriture",
+      "title": "Same Hand",
+      "location": "ARCHIVES",
+      "narrator": "Recognising writing can be more worrying than recognizing a face.",
+      "text": "You compare the handwriting of the manuscript with that of the invitation.\n\nThe letters are similar.\n\nNot identical.\n\nAs if the same hand had written both texts years apart.\n\nOr as if someone was imitating a writing he knew too well.\n\nYours.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "glitch",
+      "choices": [
+        {
+          "text": "Go back to the lobby",
+          "vers": "theatre",
+          "effects": [
+            {
+              "stat": "lucidite",
+              "val": 5
+            }
+          ]
+        },
+        {
+          "text": "Keep the invitation and leave the archives",
+          "vers": "coulisses",
+          "effects": [
+            {
+              "stat": "memoire",
+              "val": 10
+            }
+          ]
+        },
+        {
+          "text": "Try to reproduce the writing",
+          "vers": "retour_gare",
+          "effects": [
+            {
+              "stat": "memoire",
+              "val": 10
+            },
+            {
+              "stat": "obsession",
+              "val": 5
+            }
+          ]
+        }
+      ]
+    },
+    "acteur": {
+      "id": "acteur",
+      "title": "The Muet Actor",
+      "location": "COLISSES",
+      "narrator": "Actors sometimes know their role without knowing the play.",
+      "text": "The actor is watching you.\n\nHe opens his mouth.\n\nNo sound comes out.\n\nThen he quickly wrote on his sleeve with black makeup:\n\n> Do not end the scene.\n\nBefore you can react, he erases the message.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Ask her what scene",
+          "vers": "acteur_question",
+          "effects": [
+            {
+              "stat": "memoire",
+              "val": 10
+            }
+          ]
+        },
+        {
+          "text": "Back to hall",
+          "vers": "theatre",
+          "effects": [
+            {
+              "stat": "lucidite",
+              "val": 5
+            }
+          ]
+        },
+        {
+          "text": "Observing other actors",
+          "vers": "coulisses",
+          "effects": [
+            {
+              "stat": "memoire",
+              "val": 5
+            }
+          ]
+        }
+      ]
+    },
+    "tableau_suite": {
+      "id": "tableau_suite",
+      "title": "The Silhouette",
+      "location": "COLISSES",
+      "narrator": "An image shouldn't wait till we look at it.",
+      "text": "The silhouette in the painting moves one step forward.\n\nThe painted street looks deeper than before.\n\nAt the bottom, you distinguish the station.\n\nThen the coffee.\n\nThen you, in front of the painting.\n\nThe painting now represents the room where you stand.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "glitch",
+      "choices": [
+        {
+          "text": "Touch Painting",
+          "vers": "tableau_contact",
+          "effects": [
+            {
+              "stat": "obsession",
+              "val": 15
+            }
+          ]
+        },
+        {
+          "text": "Backstage",
+          "vers": "coulisses",
+          "effects": [
+            {
+              "stat": "memoire",
+              "val": 10
+            }
+          ]
+        },
+        {
+          "text": "Leave behind the scenes",
+          "vers": "theatre",
+          "effects": [
+            {
+              "stat": "lucidite",
+              "val": 5
+            }
+          ]
+        }
+      ]
+    },
+    "reception_porte": {
+      "id": "reception_porte",
+      "title": "The Forbidden Question",
+      "location": "THEATER HALL",
+      "narrator": "Some questions close faces faster than doors.",
+      "text": "When you mention the red door, the receptionist stops smiling.\n\n**\" It is only open when someone insists long enough. *\n\nShe then added, almost to regret:\n\n**\"Most people confuse response with deliverance. *",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Ask why she refuses to talk about it",
+          "vers": "reception_secret",
+          "effects": [
+            {
+              "stat": "memoire",
+              "val": 10
+            }
+          ]
+        },
+        {
+          "text": "Request manuscript",
+          "vers": "manuscrit",
+          "effects": [
+            {
+              "stat": "memoire",
+              "val": 5
+            }
+          ]
+        },
+        {
+          "text": "Leave the theater",
+          "vers": "rue_principale",
+          "effects": [
+            {
+              "stat": "lucidite",
+              "val": 10
+            }
+          ]
+        }
+      ]
+    },
+    "photos": {
+      "id": "photos",
+      "title": "Photographs",
+      "location": "RED ROOM",
+      "narrator": "Evidence doesn't explain anything. It only makes doubt more precise.",
+      "text": "The photographs show you in Valmire.\n\nIn front of the station.\nCoffee.\nIn the hotel.\nBehind the scenes.\n\nOn one of them, you wear different clothes.\n\nOn another, you're much older.\n\nOn the back of the last photo:\n\n> Again.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "flash",
+      "choices": [
+        {
+          "text": "Get on Stage",
+          "vers": "scene_finale",
+          "effects": [
+            {
+              "stat": "obsession",
+              "val": 25
+            }
+          ]
+        },
+        {
+          "text": "Run with the photos",
+          "vers": "oubli",
+          "effects": [
+            {
+              "stat": "memoire",
+              "val": 15
+            }
+          ]
+        },
+        {
+          "text": "Look under the chairs",
+          "vers": "spectateur",
+          "effects": [
+            {
+              "stat": "lucidite",
+              "val": 15
+            }
+          ]
+        }
+      ]
+    },
+    "spectateur": {
+      "id": "spectateur",
+      "title": "The Spectator",
+      "location": "BALCONY OF THEATRE",
+      "narrator": "Stories die only when nobody looks at them anymore.",
+      "text": "You're watching the audience.\n\nFaces get sharp.\n\nOne by one.\n\nAll yours.\n\nDifferent versions.\nDifferent ages.\nDifferent choices.\n\nSo you understand one thing without being able to formulate it:\n\nValmire wasn't expecting an actor.\n\nShe was waiting for someone to leave the room before the end.\n\nThe theater becomes silent.\n\nVery slowly, the lights go out.\n\nThen you notice something.\n\nOver the hall.\n\nA balcony.\n\nYou don't remember going there.\n\nYet you are there now.\n\nBelow you:\n\n- the scene is empty,\n- the seats too,\n- as if the performance had just ended.\n\nThen, far away...\n\nA train.\n\nThe metal noise resonates at night.\n\nYou're approaching the balcony.\n\nThrough the rain, you see Valmire station.\n\nThe train just arrived.\n\nA silhouette slowly descends from the car.\n\nAlone.\n\nLost.\n\nFor a second...\n\nShe seems familiar.\n\nThen the lights of the theatre are completely extinguished.\n\nAnd the music starts again.",
+      "isStart": false,
+      "isEnd": true,
+      "transition": "flash",
+      "choices": []
+    },
+    "retour_gare": {
+      "id": "retour_gare",
+      "title": "Back to the station",
+      "location": "VALMIRE GARE — 23:17",
+      "narrator": "Some paths don't go back. They're taking the same place.",
+      "text": "You're blinking.\n\nThe music goes out.\n\nRain's coming back.\n\nWhen you open your eyes, you're back on the dock.\n\nThe train just arrived.\n\nIn your hand:\n\nthe yellow invitation.\n\nIt's dry.\n\nUnlike you.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "glitch",
+      "choices": [
+        {
+          "text": "Start again from the station",
+          "vers": "prologue",
+          "effects": [
+            {
+              "stat": "memoire",
+              "val": 10
+            }
+          ]
+        },
+        {
+          "text": "Go straight to the city",
+          "vers": "rue_principale",
+          "effects": [
+            {
+              "stat": "obsession",
+              "val": 5
+            }
+          ]
+        }
+      ]
+    },
+    "acteur_question": {
+      "id": "acteur_question",
+      "title": "The Muette Scene",
+      "location": "COLISSES",
+      "narrator": "The silent answers are sometimes the clearest.",
+      "text": "The actor trembles slightly.\n\nHe looks towards the stage, then towards the red door at the bottom of the corridor.\n\nHe's not moving.\n\nHe only writes a word on his sleeve:\n\n> Later.\n\nThen he regains his place among the other actors, as if nothing had happened.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Backstage",
+          "vers": "coulisses",
+          "effects": [
+            {
+              "stat": "memoire",
+              "val": 5
+            }
+          ]
+        },
+        {
+          "text": "Back in the lobby",
+          "vers": "theatre",
+          "effects": [
+            {
+              "stat": "lucidite",
+              "val": 5
+            }
+          ]
+        },
+        {
+          "text": "Attend representation",
+          "vers": "representation",
+          "effects": [
+            {
+              "stat": "obsession",
+              "val": 10
+            }
+          ]
+        },
+        {
+          "text": "Follow the actors despite the malaise",
+          "vers": "suivre_acteurs",
+          "effects": [
+            {
+              "stat": "obsession",
+              "val": 15
+            }
+          ]
+        }
+      ]
+    },
+    "tableau_contact": {
+      "id": "tableau_contact",
+      "title": "Cold Painting",
+      "location": "COLISSES",
+      "narrator": "An image should not have a temperature.",
+      "text": "Your fingers touch the paint.\n\nIt's cold.\n\nNot like a canvas.\n\nLike a window overlooking a rain night.\n\nFor a second, you hear the station.\n\nThen everything becomes quiet again.\n\nThe figure in the painting has disappeared.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "glitch",
+      "choices": [
+        {
+          "text": "Backstage",
+          "vers": "coulisses",
+          "effects": [
+            {
+              "stat": "memoire",
+              "val": 10
+            }
+          ]
+        },
+        {
+          "text": "Back in the lobby",
+          "vers": "theatre",
+          "effects": [
+            {
+              "stat": "lucidite",
+              "val": 5
+            }
+          ]
+        },
+        {
+          "text": "Let the vertigo take you back to the station",
+          "vers": "retour_gare",
+          "effects": [
+            {
+              "stat": "obsession",
+              "val": 10
+            },
+            {
+              "stat": "memoire",
+              "val": 10
+            }
+          ]
+        }
+      ]
+    },
+    "reception_secret": {
+      "id": "reception_secret",
+      "title": "What she doesn't say",
+      "location": "THEATER HALL",
+      "narrator": "Some secrets are not kept out of loyalty, but out of fear of what they would do once released.",
+      "text": "The receptionist shakes her hands in front of her.\n\n**\"I do not refuse to talk about it. I refuse to send you there. *\n\nShe looks at the doors of the main hall.\n\n**\"Start with the play. Understand the actors. Listen to the music. After only... You will know if this door deserves to be opened. *",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Attend representation",
+          "vers": "representation",
+          "effects": [
+            {
+              "stat": "memoire",
+              "val": 10
+            }
+          ]
+        },
+        {
+          "text": "Request manuscript",
+          "vers": "manuscrit",
+          "effects": [
+            {
+              "stat": "obsession",
+              "val": 10
+            }
+          ]
+        },
+        {
+          "text": "Go back to town",
+          "vers": "rue_principale",
+          "effects": [
+            {
+              "stat": "lucidite",
+              "val": 5
+            }
+          ]
+        }
+      ]
+    },
+    "porte_verrouillee": {
+      "id": "porte_verrouillee",
+      "title": "Locked",
+      "location": "COLISSES",
+      "narrator": "Not all important doors open to the first act.",
+      "text": "You shoot the handle.\n\nThe door won't move.\n\nA copper plate is attached to it.\n\n> Access reserved after the performance.\n\nWhen you raise your eyes, the plaque disappeared.\n\nOr maybe you didn't see her well.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "glitch",
+      "choices": [
+        {
+          "text": "Backstage",
+          "vers": "coulisses",
+          "effects": [
+            {
+              "stat": "memoire",
+              "val": 5
+            }
+          ]
+        },
+        {
+          "text": "Attend representation",
+          "vers": "representation",
+          "effects": [
+            {
+              "stat": "obsession",
+              "val": 10
+            }
+          ]
+        },
+        {
+          "text": "Ask the receptionist",
+          "vers": "reception_porte",
+          "effects": [
+            {
+              "stat": "lucidite",
+              "val": 5
+            }
+          ]
+        }
+      ]
+    },
+    "apres_representation": {
+      "id": "apres_representation",
+      "title": "After the Intermission",
+      "location": "COLISSES",
+      "narrator": "It is often between two acts that real things move.",
+      "text": "The actors leave the scene in silence.\n\nNobody seems to be breathing.\n\nAt the bottom of the corridor, the red door is now closed.\n\nThis time, nobody's keeping you close.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Enter the red room",
+          "vers": "porte_rouge",
+          "effects": [
+            {
+              "stat": "obsession",
+              "val": 20
+            }
+          ],
+          "requires": {
+            "stat": "lucidite",
+            "min": 65
+          }
+        },
+        {
+          "text": "Go back to the lobby",
+          "vers": "theatre",
+          "effects": [
+            {
+              "stat": "lucidite",
+              "val": 10
+            }
+          ]
+        },
+        {
+          "text": "Talking to the silent actor",
+          "vers": "acteur",
+          "effects": [
+            {
+              "stat": "memoire",
+              "val": 10
+            }
+          ]
+        },
+        {
+          "text": "Follow the actors in the lodges",
+          "vers": "suivre_acteurs",
+          "effects": [
+            {
+              "stat": "obsession",
+              "val": 15
+            }
+          ]
+        },
+        {
+          "text": "The door seems to be waiting for you. But something's holding you back.",
+          "vers": "boucle_lucidite",
+          "effects": [
+            {
+              "stat": "obsession",
+              "val": 5
+            }
+          ],
+          "clickEffect": "glitch",
+          "requires": {
+            "stat": "lucidite",
+            "max": 64
+          }
+        }
+      ]
+    },
+    "fin_dernier_train": {
+      "id": "fin_dernier_train",
+      "title": "The Last Train",
+      "location": "NIGHT TRAIN",
+      "narrator": "Some outings don't lead outside.",
+      "text": "You refuse Valmire before you even enter.\n\nYou go back to the dock and wait for the next train.\n\nHe's finally coming.\n\nEmpty.\n\nThe doors open without noise.\n\nYou're going up.\n\nThe train leaves at night.\n\nThe hours pass.\n\nNo station appears.\n\nThrough the window, in the rain, you see a yellow poster stuck inside the car.\n\n> LAST REPRESENTATION\n\nYour reflection smiles before you.",
+      "isStart": false,
+      "isEnd": true,
+      "transition": "fade",
+      "choices": []
+    },
+    "fin_oubli_heureux": {
+      "id": "fin_oubli_heureux",
+      "title": "The Happy Bliss",
+      "location": "CARE OF TRAVEL",
+      "narrator": "Not all prisons look like cages.",
+      "text": "You decide not to go to the theater.\n\nThe coffee is hot.\n\nThe music is soft.\n\nThe locals are gradually ceasing to seem strange to you.\n\nYou have a drink.\n\nThen another.\n\nYou laugh with people you don't know their name.\n\nFor several years, you never think of Valmire again.\n\nThen, one night, in a city you don't recognize, someone plays three piano notes.\n\nAnd it all comes back.",
+      "isStart": false,
+      "isEnd": true,
+      "transition": "fade",
+      "choices": []
+    },
+    "fin_patient": {
+      "id": "fin_patient",
+      "title": "The Patient",
+      "location": "BLANCH ROOM",
+      "narrator": "Reason can also become a form of surrender.",
+      "text": "You stay at the clinic.\n\nYou read the files over and over again.\n\nEverything becomes clear.\n\nTheatre is only a symbol.\n\nMusic, trauma.\n\nPosters, hallucinations.\n\nYou accept the treatment found in the old firm.\n\nWhen you open your eyes, you're tied to a white bed.\n\nA voice behind the door whispers:\n\n**\"The patient always refuses representation. *\n\nIn the distance, you hear applause.",
+      "isStart": false,
+      "isEnd": true,
+      "transition": "glitch",
+      "choices": []
+    },
+    "fin_acteur": {
+      "id": "fin_acteur",
+      "title": "The Actor",
+      "location": "COLISSES",
+      "narrator": "By following the roles of others, we end up receiving his.",
+      "text": "You stay with the actors.\n\nYou observe their actions.\n\nTheir silence.\n\nTheir way of breathing all at the same pace.\n\nSomeone's giving you a suit.\n\nYou want to refuse.\n\nBut your hands accept it before you.\n\nWe make up your face.\n\nWe'll put you in front of the curtain.\n\nWhen the light lights up, you already know your text.\n\nYou open your mouth.\n\nNo sound comes out.\n\nThe audience applauds.",
+      "isStart": false,
+      "isEnd": true,
+      "transition": "flash",
+      "choices": []
+    },
+    "fin_ville_vide": {
+      "id": "fin_ville_vide",
+      "title": "The Empty City",
+      "location": "VALMIRE",
+      "narrator": "A place can survive its inhabitants. Not always to his story.",
+      "text": "You don't want the theater.\n\nYou're walking in Valmire for hours.\n\nCoffee closes.\n\nThe hotel's gone.\n\nThe silhouettes disappear from the windows.\n\nEven the rain ends.\n\nThe city becomes perfectly silent.\n\nThen you understand.\n\nThere was nobody watching you.\n\nThere was only the city itself.\n\nIn the distance, in the closed theatre, music begins again.",
+      "isStart": false,
+      "isEnd": true,
+      "transition": "fade",
+      "choices": []
+    },
+    "fin_spectateur_immobile": {
+      "id": "fin_spectateur_immobile",
+      "title": "The Still Spectator",
+      "location": "MAIN ROOM",
+      "narrator": "Sometimes the most dangerous choice is not to do anything.",
+      "text": "You sit down.\n\nYou're not leaving your seat.\n\nYou're not talking.\n\nYou're not looking for an explanation.\n\nThe play continues.\n\nThen the actors disappear.\n\nThe scenery is fading.\n\nThe room's getting dark.\n\nIt's just you.\n\nAnd a voice, very close:\n\n**\"At last. Someone who agrees to look to the end. *",
+      "isStart": false,
+      "isEnd": true,
+      "transition": "flash",
+      "choices": []
+    },
+    "fin_fausse_sortie": {
+      "id": "fin_fausse_sortie",
+      "title": "The False Exit",
+      "location": "ROAD OUT OF VALMIRE",
+      "narrator": "We can take the right road and get to the wrong place.",
+      "text": "You're leaving Valmire on foot.\n\nThe road goes down between the black trees.\n\nFor a long time, you can't hear the music.\n\nThat's almost reassuring.\n\nThen the trees drift away.\n\nIn front of you:\n\nThe station.\n\nThe same yellow lamp.\n\nSame rain.\n\nSame train coming.\n\nIn your pocket, the invitation came back.",
+      "isStart": false,
+      "isEnd": true,
+      "transition": "glitch",
+      "choices": []
+    },
+    "attendre_train": {
+      "id": "attendre_train",
+      "title": "Waiting for Departure",
+      "location": "VALMIRE GAR",
+      "narrator": "Denying an invitation is still a way to respond.",
+      "text": "You stay on the dock.\n\nTravelers leave one by one.\n\nThe music of the city becomes more distant.\n\nAn hour passes.\n\nOr maybe just a few minutes.\n\nAt the end of the rails, a light is approaching.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Get on the train",
+          "vers": "fin_dernier_train",
+          "effects": [
+            {
+              "stat": "lucidite",
+              "val": 10
+            }
+          ]
+        },
+        {
+          "text": "Change your mind and join the city",
+          "vers": "rue_principale",
+          "effects": [
+            {
+              "stat": "memoire",
+              "val": 5
+            }
+          ]
+        }
+      ]
+    },
+    "rester_cafe": {
+      "id": "rester_cafe",
+      "title": "Stay at the Café",
+      "location": "CARE OF TRAVEL",
+      "narrator": "It is easy to confuse heat and safety.",
+      "text": "You stay at the cafe.\n\nThe pianist always plays.\n\nClients stop looking at you.\n\nFor a moment, Valmire seems almost welcoming.\n\nThe performance can start without you.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Stay here until closing",
+          "vers": "fin_oubli_heureux",
+          "effects": [
+            {
+              "stat": "lucidite",
+              "val": 10
+            }
+          ]
+        },
+        {
+          "text": "Get out before it's too late.",
+          "vers": "rue_principale",
+          "effects": [
+            {
+              "stat": "memoire",
+              "val": 5
+            }
+          ]
+        }
+      ]
+    },
+    "traitement_clinique": {
+      "id": "traitement_clinique",
+      "title": "Treatment",
+      "location": "ABANDONED CLINICS",
+      "narrator": "An explanation can be a door. Or a trap.",
+      "text": "In a metal cabinet, you find a box of tablets.\n\nThe label is almost erased.\n\n> Dissociative disorders.\n> Perceptive repetitions.\n> Theatrical obsessions.\n\nA treatment protocol is set aside.\n\nIt is signed by a doctor whose name has been scratched.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Follow protocol",
+          "vers": "fin_patient",
+          "effects": [
+            {
+              "stat": "lucidite",
+              "val": 20
+            }
+          ]
+        },
+        {
+          "text": "Refuse and leave the clinic",
+          "vers": "rue_principale",
+          "effects": [
+            {
+              "stat": "memoire",
+              "val": 10
+            }
+          ]
+        }
+      ]
+    },
+    "suivre_acteurs": {
+      "id": "suivre_acteurs",
+      "title": "Follow Actors",
+      "location": "COLISSES",
+      "narrator": "Some paths become roles when you follow them too long.",
+      "text": "You follow the actors in a narrow corridor.\n\nNobody's stopping you.\n\nNobody seems surprised.\n\nAn open dressing room awaits you.\n\nInside, a suit is placed on a chair.\n\nIt's exactly your size.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Put on the costume",
+          "vers": "fin_acteur",
+          "effects": [
+            {
+              "stat": "obsession",
+              "val": 20
+            }
+          ]
+        },
+        {
+          "text": "Back and forth",
+          "vers": "coulisses",
+          "effects": [
+            {
+              "stat": "lucidite",
+              "val": 10
+            }
+          ]
+        }
+      ]
+    },
+    "errer_ville": {
+      "id": "errer_ville",
+      "title": "Error in Valmire",
+      "location": "RULES OF VALMIRE",
+      "narrator": "Some cities don't cross. They're getting deeper.",
+      "text": "You walk without following the music.\n\nYou're avoiding the theater.\n\nYou walk past closed houses, dusty windows, alleyways where the rain seems to fall slower.\n\nThe more you get away from the central square, the more Valmire seems empty.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Continue wandering away from the theatre",
+          "vers": "fin_ville_vide",
+          "effects": [
+            {
+              "stat": "lucidite",
+              "val": 15
+            }
+          ]
+        },
+        {
+          "text": "Back to the central square",
+          "vers": "rue_principale",
+          "effects": [
+            {
+              "stat": "memoire",
+              "val": 5
+            }
+          ]
+        },
+        {
+          "text": "Search for a road out of town",
+          "vers": "route_sortie",
+          "effects": [
+            {
+              "stat": "lucidite",
+              "val": 10
+            }
+          ]
+        }
+      ]
+    },
+    "route_sortie": {
+      "id": "route_sortie",
+      "title": "The Exit Road",
+      "location": "LIMIT OF VALMIRE",
+      "narrator": "The boundaries of a city are rarely the ones on the maps.",
+      "text": "You finally find a road that leaves Valmire.\n\nNo sign.\n\nNo car.\n\nOnly trees, rain and black gravel.\n\nBehind you, the music of the theatre becomes almost inaudible.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Follow the road to the end",
+          "vers": "fin_fausse_sortie",
+          "effects": [
+            {
+              "stat": "lucidite",
+              "val": 10
+            },
+            {
+              "stat": "memoire",
+              "val": 10
+            }
+          ]
+        },
+        {
+          "text": "Turn around",
+          "vers": "rue_principale",
+          "effects": [
+            {
+              "stat": "obsession",
+              "val": 5
+            }
+          ]
+        }
+      ]
+    },
+    "boucle_lucidite": {
+      "id": "boucle_lucidite",
+      "title": "Not yet",
+      "location": "THEATER COLIES — AFTER THE ENTRACTE",
+      "narrator": "You're not ready. Your mind knows before you even put your hand on the handle. Something is missing — a connection, a truth that you haven't entered somewhere in Valmire yet.",
+      "text": "The door opens.\n\nThe darkness on the other side is not an ordinary darkness. She thinks. She's watching you.\n\nAnd then — a dizziness. A white one in your memory. A suspended moment.\n\nWhen you come back to mind, you're in the hallway. The door is closed behind you. Like you never moved.\n\nValmire's still waiting for you. There are things you haven't really looked at.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "glitch",
+      "nodeColor": "#ffe600",
+      "choices": [
+        {
+          "text": "Back exploring the city",
+          "vers": "rue_principale",
+          "effects": [
+            {
+              "stat": "lucidite",
+              "val": 5
+            }
+          ],
+          "clickEffect": "glitch"
+        }
+      ],
+      "x": 720,
+      "y": 860
+    }
+  },
+  "lang": "en"
+}
