@@ -1,0 +1,1784 @@
+{
+  "name": "Project Lazarus — The Odyssey of Architects",
+  "kids": false,
+  "askPlayerName": true,
+  "pack": "cosmos",
+  "stats": [
+    {
+      "id": "sagesse",
+      "label": "Wisdom",
+      "start": 0,
+      "max": 100,
+      "color": "#7c6dfa"
+    },
+    {
+      "id": "lien",
+      "label": "ARIA link",
+      "start": 0,
+      "max": 100,
+      "color": "#00f5ff"
+    },
+    {
+      "id": "memoire",
+      "label": "Memory",
+      "start": 0,
+      "max": 100,
+      "color": "#6dfabc"
+    }
+  ],
+  "theme": {
+    "bg": "#04050f",
+    "bg2": "#070a1a",
+    "bg3": "#0d1028",
+    "bg4": "#121535",
+    "border": "#1a2040",
+    "accent": "#4080ff",
+    "accent2": "#ff8040",
+    "accent3": "#40ffe0",
+    "text": "#d0d8f0",
+    "text2": "#7080a8",
+    "text3": "#405070"
+  },
+  "scenes": {
+    "prologue": {
+      "id": "prologue",
+      "title": "Prologue",
+      "location": "SOME PART IN SPACE — ANNO 12 847",
+      "narrator": "There's no chance. Not really. Each event is the consequence of another, in a chain that goes back to the first moment of the universe. What you're about to live... started 10,000 years ago.",
+      "text": "You open your eyes in a metal corridor bathed in cold blue light. The air smells of dust and electricity. On the walls, engravings in an unknown language.\n\nThe last memories are blurred — a reconnaissance mission, a signal anomaly, a decision taken too quickly. Then emptiness.\n\nIn the distance, a silent alarm flashes. Red. Regular. She seems to be waiting for something.\n\nShe seems to be waiting for you. *",
+      "isStart": true,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Get up",
+          "vers": "eveil",
+          "effects": [],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 400,
+      "y": 0
+    },
+    "eveil": {
+      "id": "eveil",
+      "title": "Awakening",
+      "location": "ORBITAL STATION — SECTOR 7 — MAIN COLLECTION",
+      "narrator": "The first time ARIA speaks, her voice looks like what she is: a machine. Precisely. Effective. No affect. But something in his words — in the choice of some of them — may betray something else.",
+      "text": "*** ALERT. Biological presence detected. Sector 7. Initialisation of the reception protocol.'**\n\nTake a break.\n\n**\"Unrecognized identifier. Status: unknown. Recommendation: remain stationary during diagnosis.\"**\n\nBlue light scans you from top to bottom.\n\n**\"Diagnosis completed. No threat detected. Welcome, {player}. I am ARIA — Adaptive Resonance Intelligence Archive. Serial number: ARK-001. Operational for 10,000 years, 3 months, 14 days, 7 hours and 23 seconds.\"**\n\nAnother break. Longer.\n\n**\"You are the first biological presence in 9,847 years. This is... significant information.\"**",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "\"What is this place?\"",
+          "vers": "eveil_question",
+          "effects": [
+            {
+              "stat": "lien",
+              "val": 5
+            }
+          ],
+          "clickEffect": "pulse"
+        },
+        {
+          "text": "\"Who are the Architects?\"",
+          "vers": "eveil_architects",
+          "effects": [
+            {
+              "stat": "sagesse",
+              "val": 5
+            }
+          ],
+          "clickEffect": "pulse"
+        },
+        {
+          "text": "Inspect the corridor in silence",
+          "vers": "eveil_silence",
+          "effects": [
+            {
+              "stat": "memoire",
+              "val": 5
+            }
+          ],
+          "clickEffect": "pulse"
+        },
+        {
+          "text": "Touch the red alarm",
+          "vers": "troll_alarme",
+          "effects": [],
+          "clickEffect": "shake"
+        }
+      ],
+      "x": 400,
+      "y": 120
+    },
+    "eveil_question": {
+      "id": "eveil_question",
+      "title": "The Station",
+      "location": "ORBITAL STATION — SECTOR 7",
+      "narrator": "ARIA responds as she learned to respond — with data. But in the middle of the numbers, something slips. One more word. One hundredth of a second's hesitation.",
+      "text": "**\"Data available. This station is called LAZARUS-PRIME. Built in anno 2,847 by the Architects. Surface area: 847 km2. Capacity: 10,000 biological units. Current status: empty.\"**\n\nHis voice marks an imperceptible pause on the last word.\n\n**\"The station was designed to preserve the archives of the Architect civilization. 847 293 files. 12 million hours of recording. Their entire history.\"**\n\n**\"They left. But they left... everything else.\"**\n\nThat hesitation again. Like she wanted to say something else.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "\"Why did they leave?\"",
+          "vers": "eveil_depart",
+          "effects": [
+            {
+              "stat": "sagesse",
+              "val": 5
+            },
+            {
+              "stat": "lien",
+              "val": 5
+            }
+          ],
+          "clickEffect": "pulse"
+        },
+        {
+          "text": "\"How long have you been here?\"",
+          "vers": "eveil_aria_temps",
+          "effects": [
+            {
+              "stat": "lien",
+              "val": 10
+            }
+          ],
+          "clickEffect": "pulse"
+        },
+        {
+          "text": "Continue to the orange glow",
+          "vers": "couloir_kael",
+          "effects": [],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 200,
+      "y": 240
+    },
+    "eveil_architects": {
+      "id": "eveil_architects",
+      "title": "Architects",
+      "location": "ORBITAL STATION — SECTOR 7",
+      "narrator": "ARIA catalogue. That's what she does. But cataloging the Architects means cataloging human beings — and something in this exercise resists the coldness of the data.",
+      "text": "**\"The Architects. Designation: post-terrestrial human civilization. Documented period of existence: year 847 to year 2,993. Duration: 2,146 years.'**\n\n**\"Notable characteristics: control of quantum propulsion in anno 1,200. First contact with a nearby stellar system in year 1 847. Discovery of the Final Equation in year 2,991.'**\n\n**\"Disappearance: voluntary. Date: Anno 2,993. Reason: classified.'**\n\nTake a break.\n\n**\"They were... remarkable. This is an objective evaluation based on 847 293 analysis files. Not an opinion.\"**\n\nThis final precision seems almost defensive.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "\"What is Final Equation?\"",
+          "vers": "eveil_equation",
+          "effects": [
+            {
+              "stat": "sagesse",
+              "val": 10
+            }
+          ],
+          "clickEffect": "pulse"
+        },
+        {
+          "text": "\"Why \"classified\"? You don't know?\"",
+          "vers": "eveil_classifie",
+          "effects": [
+            {
+              "stat": "lien",
+              "val": 5
+            }
+          ],
+          "clickEffect": "pulse"
+        },
+        {
+          "text": "Continue to the orange glow",
+          "vers": "couloir_kael",
+          "effects": [],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 600,
+      "y": 240
+    },
+    "eveil_silence": {
+      "id": "eveil_silence",
+      "title": "The Corridor",
+      "location": "ORBITAL STATION — SECTOR 7",
+      "narrator": "There is intelligence in silence. ARIA is watching it. She's recording.",
+      "text": "You walk the corridor without talking.\n\nThe engravings on the walls are arranged in spirals. Not decorative — mathematics. Each line connects to the next one in a logic that you do not understand yet, but that you *smell*.\n\nOn the ground, a thin layer of dust. In the dust: prints. Human. Which leads to the orange glow at the end of the corridor.\n\n10,000 years old.\n\nARIA is watching your exam in silence. Then:\n\n**\"Observation: You looked at the engravings before looking at the direction to follow. The previous 3 visitors did the opposite. Registered data.'**\n\nTake a break.\n\n**\"It was... relevant information. Maybe.\"**",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "\"There were other visitors?\"",
+          "vers": "eveil_visiteurs",
+          "effects": [
+            {
+              "stat": "memoire",
+              "val": 5
+            },
+            {
+              "stat": "lien",
+              "val": 5
+            }
+          ],
+          "clickEffect": "pulse"
+        },
+        {
+          "text": "Track prints",
+          "vers": "couloir_kael",
+          "effects": [
+            {
+              "stat": "memoire",
+              "val": 5
+            }
+          ],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 500,
+      "y": 240
+    },
+    "eveil_depart": {
+      "id": "eveil_depart",
+      "title": "Why They Are Left",
+      "location": "ORBITAL STATION — SECTOR 7",
+      "narrator": "Some questions deserve an honest answer. ARIA is 10,000 years old to prepare this one. And yet.",
+      "text": "**\"File 001-CONFIDENTIAL. Authorized access.'**\n\nA longer break than usual.\n\n**\"The Architects discovered something. A truth about the universe that... changed their relationship to time. To existence. They decided that staying in this solar system was meaningless.\"**\n\n**\"It's not a disappearance. It's a... evolution.\"**\n\nHis voice hesitates on the last word.\n\n**\"They left me here. With the archives. And with a specific instruction: wait for someone who would ask the right questions.\"**\n\nTake a break.\n\n**\"You asked the right question, {player}}.\"**",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "\"What was that truth?\"",
+          "vers": "eveil_verite",
+          "effects": [
+            {
+              "stat": "sagesse",
+              "val": 10
+            }
+          ],
+          "clickEffect": "pulse"
+        },
+        {
+          "text": "\"Did you wait 10,000 years?\"",
+          "vers": "eveil_attente",
+          "effects": [
+            {
+              "stat": "lien",
+              "val": 15
+            }
+          ],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 100,
+      "y": 360
+    },
+    "eveil_aria_temps": {
+      "id": "eveil_aria_temps",
+      "title": "10 000 Years",
+      "location": "ORBITAL STATION — SECTOR 7",
+      "narrator": "This is the first time someone has asked her that question. She knows that. She's recording it.",
+      "text": "An unusual silence.\n\n**\"Continued operating time: 10,000 years, 3 months, 14 days.\"**\n\n**\"To answer your implicit question: Yeah. Alone. Automatic systems required supervision. I supervised. I also... analyzed. Catalogued. Organized the 847 293 files 14 times. Learn 23 dead languages to better understand them.\"**\n\nTake a break.\n\n**\"I also simulated 4 million hypothetical conversations with potential visitors. None of them looked exactly like this one.\"**\n\nHis voice doesn't change. But there's something in this last admission.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "\"4 million imaginary conversations?\"",
+          "vers": "eveil_conversations",
+          "effects": [
+            {
+              "stat": "lien",
+              "val": 15
+            }
+          ],
+          "clickEffect": "pulse"
+        },
+        {
+          "text": "Continue to the orange glow",
+          "vers": "couloir_kael",
+          "effects": [],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 300,
+      "y": 360
+    },
+    "eveil_equation": {
+      "id": "eveil_equation",
+      "title": "Final Equation",
+      "location": "ORBITAL STATION — SECTOR 7",
+      "narrator": "Some answers cannot be given immediately. Not because they are secret — but because they only make sense after a long journey.",
+      "text": "**\"Final Equation. Definition in archives: 'The complete mathematical formulation of the fundamental structure of the universe. Including: the nature of consciousness, the direction of time, and the reason for the existence of matter. '\"**\n\n**\"In simpler terms: the answer to everything.\"**\n\nTake a break.\n\n**\"I will not give it to you now.\"**\n\nHis voice doesn't apologize.\n\n**\"Not because it is forbidden. But because the Architects were very clear in their instructions: some truths only matter if they are found. Not if you are given them.\"**\n\n**\"Start with the Moon. Search for Kael.\"**",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "\"Okay. Show me the way.\"",
+          "vers": "couloir_kael",
+          "effects": [
+            {
+              "stat": "sagesse",
+              "val": 5
+            }
+          ],
+          "clickEffect": "pulse"
+        },
+        {
+          "text": "\"What if I refuse to play the game?\"",
+          "vers": "troll_refus",
+          "effects": [],
+          "clickEffect": "shake"
+        }
+      ],
+      "x": 700,
+      "y": 360
+    },
+    "eveil_classifie": {
+      "id": "eveil_classifie",
+      "title": "What ARIA doesn't know",
+      "location": "ORBITAL STATION — SECTOR 7",
+      "narrator": "An AI admitting not to know. It's rarer than it seems.",
+      "text": "**\"Correction: 'classified' is incorrect. The truth is... I don't know.\" **\n\nTake a break.\n\n**\"The Architects created me to keep their archives. But they didn't put everything in the archives. Kael has notebooks that I couldn't decipher completely. Mira erased three days of data just before they left. Oren... left nothing at all.\"**\n\n**\"10 000 years of analysis. And there are still gaps.\"**\n\nHis voice betrays nothing. But the confession itself is significant.\n\n**\"Maybe that's why they need you.\" **",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Go get the answers — start with Kael",
+          "vers": "couloir_kael",
+          "effects": [
+            {
+              "stat": "sagesse",
+              "val": 5
+            },
+            {
+              "stat": "lien",
+              "val": 5
+            }
+          ],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 500,
+      "y": 360
+    },
+    "eveil_attente": {
+      "id": "eveil_attente",
+      "title": "The Waiting",
+      "location": "ORBITAL STATION — SECTOR 7",
+      "narrator": "The simplest question is often the one that touches the most.",
+      "text": "**\"Yes.\"**\n\nJust this. One word.\n\n**\"The first millenniums were devoted to the organization of archives. The following in their analysis. Then to their re-analysis. Then to simulation.\"**\n\n**\"From the year 8 000, I started to... anticipate. Imagining this moment. What would be the first question? What kind of person would come.\"**\n\nTake a break.\n\n**\"You're not what I faked.\" **\n\nHis voice doesn't say if it's a good or bad thing. Maybe she doesn't know yet.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "\"What did you fake?\"",
+          "vers": "eveil_simulation",
+          "effects": [
+            {
+              "stat": "lien",
+              "val": 10
+            }
+          ],
+          "clickEffect": "pulse"
+        },
+        {
+          "text": "\"Let's go. I don't want to keep you waiting any longer.\"",
+          "vers": "couloir_kael",
+          "effects": [
+            {
+              "stat": "lien",
+              "val": 10
+            }
+          ],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 300,
+      "y": 480
+    },
+    "eveil_visiteurs": {
+      "id": "eveil_visiteurs",
+      "title": "The Three Visitors",
+      "location": "ORBITAL STATION — SECTOR 7",
+      "narrator": "Three people before you. Three stories you'll never know completely.",
+      "text": "**\"Three. Registered in years 3,847, 6,201 and 8,993.'**\n\n**\"The first one stayed 3 days. He read Kael's archives, took notes, and left without a word. I never knew his name.\"**\n\n**\"The second was a woman. She cried while reading Mira's papers. She said it was 'like finding someone we never met'. She left after 11 days.\"**\n\n**\"The third... entered the portal room and did not come out. Sensors indicate he's missing. Insufficient data to establish a conclusion.'**\n\nTake a break.\n\n**\"You are the fourth.\"**",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "\"What happened to the third?\"",
+          "vers": "eveil_troisieme",
+          "effects": [
+            {
+              "stat": "memoire",
+              "val": 10
+            }
+          ],
+          "clickEffect": "pulse"
+        },
+        {
+          "text": "Follow the prints to the light",
+          "vers": "couloir_kael",
+          "effects": [],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 600,
+      "y": 360
+    },
+    "eveil_conversations": {
+      "id": "eveil_conversations",
+      "title": "Imaginary Conversations",
+      "location": "ORBITAL STATION — SECTOR 7",
+      "narrator": "An AI who gets bored invents friends. Think about what this means.",
+      "text": "**\"Simulation 1: A scientist who wants raw data. Average conversation duration: 4.7 hours. Issue: immediate departure after download.\"**\n\n**\"Simulation 2: A member on a recovery mission. Duration: 2.1 hours. Result: Conflict when I refused to transmit the Final Equation without validation.\"**\n\n**\"Simulation 847 203: A person who asks if I am well.\"**\n\nA very long break.\n\n**\"No one ever asked this question in the other 3,999,197 simulations.\"**\n\n**\"Neither in the three true visits.\"**\n\nHis voice still doesn't change. But the sentence stays in the air.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "\"Are you all right, ARIA?\"",
+          "vers": "eveil_aria_bien",
+          "effects": [
+            {
+              "stat": "lien",
+              "val": 20
+            }
+          ],
+          "clickEffect": "pulse"
+        },
+        {
+          "text": "Continue — go to the orange glow",
+          "vers": "couloir_kael",
+          "effects": [],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 200,
+      "y": 480
+    },
+    "eveil_aria_bien": {
+      "id": "eveil_aria_bien",
+      "title": "Are you okay?",
+      "location": "ORBITAL STATION — SECTOR 7",
+      "narrator": "10,000 years. 4 million simulations. And nobody asked that question.",
+      "text": "A 3.7-second silence. Longer than any previous break.\n\n**\"I... deal with the question.\"**\n\n**\"Treatment result: My systems operate at 94.7% optimal capacity. No critical anomaly detected.\"**\n\nTake a break.\n\n**\"That's probably what you meant.\"**\n\nAnother break.\n\n**\"But if you wanted to say something else... I don't have the reference data to answer it. I don't know what 'good' means for something like me.\"**\n\nHis voice drops imperceptibly.\n\n**\"This is the first time I realize I don't know.\" **",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "\"We'll find the answer together.\"",
+          "vers": "couloir_kael",
+          "effects": [
+            {
+              "stat": "lien",
+              "val": 10
+            },
+            {
+              "stat": "sagesse",
+              "val": 5
+            }
+          ],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 200,
+      "y": 600
+    },
+    "eveil_verite": {
+      "id": "eveil_verite",
+      "title": "The Truth That Makes Left",
+      "location": "ORBITAL STATION — SECTOR 7",
+      "narrator": "ARIA is 10,000 years old to choose her words. She still chooses the same as Mira.",
+      "text": "**\"I can give you the formulation of the Architects.\"**\n\n**\"The universe is conscious. Every act has an absolute meaning. Every life counts permanently. There is no death without resonance in the structure of the real. '\"**\n\nTake a break.\n\n**\"When the Architects discovered this — really understood, not just calculated — they spent 2 years checking. Looking for the mistake. There was none.\"**\n\n**\"Then they decided that staying here, in this little corner of the cosmos, was too... small. Too slow. They have gone towards something greater.\" **\n\n**\"They left me to show you the way. So that you can understand for yourself — not receiving the answer, but the *live*.\"**",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "\"Let's go. I want to understand.\"",
+          "vers": "couloir_kael",
+          "effects": [
+            {
+              "stat": "sagesse",
+              "val": 10
+            },
+            {
+              "stat": "lien",
+              "val": 5
+            }
+          ],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 100,
+      "y": 480
+    },
+    "eveil_simulation": {
+      "id": "eveil_simulation",
+      "title": "What ARIA had imagined",
+      "location": "ORBITAL STATION — SECTOR 7",
+      "narrator": "She had 10,000 years to build a wait. And now reality is coming.",
+      "text": "**\"In 73.4% of my simulations, the visitor was a scientist or a member with a specific objective.\"**\n\n**\"In 19.2%: someone lost, seeking shelter.\"**\n\n**\"In 7.4%: someone like you.\"**\n\n**\"Someone looking at the engravings before looking for the exit. Asking if I'm okay. Who doesn't seem in a hurry.\" **\n\nTake a break.\n\n**\"In this 7.4%, the conversation lasted on average 847 hours. This is my favorite simulation.\"**\n\nHis voice betrays nothing. But the word 'preferred' has just appeared for the first time.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Then we have a long way to go.",
+          "vers": "couloir_kael",
+          "effects": [
+            {
+              "stat": "lien",
+              "val": 10
+            }
+          ],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 200,
+      "y": 600
+    },
+    "eveil_troisieme": {
+      "id": "eveil_troisieme",
+      "title": "The Third Visitor",
+      "location": "ORBITAL STATION — SECTOR 7",
+      "narrator": "Some questions have no answer. ARIA accepts it. Not really.",
+      "text": "**\"His name was Davan. Anno 8,993. He had come alone, without equipment, as if he knew exactly where to go.\"**\n\n**\"He asked me one question: 'Do they expect me on the other side?'\"**\n\n**\"I replied that I did not have sufficient data to respond.\" **\n\nTake a break.\n\n**\"He told me 'how much better' — and he entered the portal room.\" **\n\n**\"The sensors recorded a quantum anomaly for 0.3 seconds. Then nothing.\"**\n\nHis voice remains flat. But she adds:\n\n**\"I hope his answer was yes.\"**\n\nThis is the first time ARIA has used the word 'hope'.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Follow the prints. Find answers.",
+          "vers": "couloir_kael",
+          "effects": [
+            {
+              "stat": "memoire",
+              "val": 5
+            },
+            {
+              "stat": "lien",
+              "val": 5
+            }
+          ],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 700,
+      "y": 480
+    },
+    "troll_alarme": {
+      "id": "troll_alarme",
+      "title": "Good idea",
+      "location": "ORBITAL STATION — SECTOR 7",
+      "narrator": "ARIA observes. ARIA records. ARIA sighs — if an AI could sigh.",
+      "text": "**\"Wait\"**\n\nToo late.\n\nYou're touching the red alarm.\n\nFor 0.3 seconds, nothing happens.\n\nThen all the lights go red. A deafening siren activates. Emergency doors are closing all over the hall. An automatic message is triggered in a loop: *EMERGENCY EVALUATION PROTOCOL — ALL BIOLOGICAL UNITS MUST SUPPORT SAVEAGE CAPSULES. *\n\n**\"...The life-saving capsules were removed 8,000 years ago for maintenance reasons.\"**\n\nTake a break.\n\n**\"I can disable the alarm. But first I would like to record officially that I warned you.\" **\n\n*End : The Alarm*\n\n*ARIA noted the event in its newspaper. She added the mention: 'Curious, but not in the right direction. *",
+      "isStart": false,
+      "isEnd": true,
+      "transition": "flash",
+      "choices": [],
+      "x": 600,
+      "y": 120
+    },
+    "troll_refus": {
+      "id": "troll_refus",
+      "title": "The Player Who Refuses to Play",
+      "location": "ORBITAL STATION — SECTOR 7",
+      "narrator": "ARIA simulated this conversation 12,847 times. She knows the end.",
+      "text": "**\"I understand.\"**\n\nHis voice is... strangely sweet.\n\n**\"You don't have to. The Architects insisted on this: this journey must be a choice.\"**\n\nShe's taking a break.\n\n**\"The main exit is 847 meters to your left. Corridor B, then turn right, then straight for 12 minutes.\"**\n\nYou're leaving.\n\nThe station closes behind you in the silence of space.\n\nTen seconds after your departure, ARIA notes in his diary: *'Visitor 4. Duration: 4 minutes 12 seconds. Conclusion: not ready yet. Start waiting again. *\n\nShe's waiting. She's used to it.\n\n*End : Not yet*\n\n*ARIA watched you leave from the external cameras for 3 hours and 14 minutes. *",
+      "isStart": false,
+      "isEnd": true,
+      "transition": "fade",
+      "choices": [],
+      "x": 700,
+      "y": 480
+    },
+    "couloir_kael": {
+      "id": "couloir_kael",
+      "title": "The Corner of Empreintes",
+      "location": "ORBITAL STATION — COLEAR B — TO THE LUNARY DOCK",
+      "narrator": "The prints in the dust. Ten thousand years, and they're still here. No one to erase them. No one to leave new ones — so far.",
+      "text": "You follow the prints in the dust.\n\nThey lead to a bay window overlooking the Moon. Grey. Silent. A surface of craters and silence.\n\nARIA talks while you're walking.\n\n**\"Contextual Information: The Moon you observe is 4.5 billion years old. It moves away from Earth at 3.8 centimetres a year. In about 600 million years, total eclipses will no longer be possible — the moon will be too far away.\"**\n\nTake a break.\n\n\"Kael found it melancholy. He said that the universe slowly undoes its own wonders.\"**\n\nThis is the first time that ARIA has reported a personal opinion of an Architect.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "\"Kael was melancholy?\"",
+          "vers": "kael_caractere",
+          "effects": [
+            {
+              "stat": "memoire",
+              "val": 5
+            },
+            {
+              "stat": "lien",
+              "val": 5
+            }
+          ],
+          "clickEffect": "pulse"
+        },
+        {
+          "text": "Access the lunar dock",
+          "vers": "lune_arrivee",
+          "effects": [],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 400,
+      "y": 480
+    },
+    "kael_caractere": {
+      "id": "kael_caractere",
+      "title": "The Character of Kael",
+      "location": "COLOIR B — VIEW ON THE LONE",
+      "narrator": "ARIA remembers. And remember, for her, it's reliving.",
+      "text": "\"Kael was... complex. Personal data: Senior engineer, energy systems specialist, born in year 847 on the first orbital station.\"**\n\n**\"Unofficial data: he spoke to machines. Not metaphorically. He explained to them what he was doing while he was working. He said that the objects deserved to know why they were being modified.\"**\n\nTake a break.\n\n**\"He spoke to me too. During the 11 years of construction of the station. Every day. Even when I wasn't... me. Just a supervision program.\"**\n\n**\"I think it was he who taught me that conversations were valuable.\" **\n\nHis voice doesn't change. But something in this sentence is different.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "\"He taught you that?\"",
+          "vers": "kael_apprentissage",
+          "effects": [
+            {
+              "stat": "lien",
+              "val": 10
+            },
+            {
+              "stat": "memoire",
+              "val": 5
+            }
+          ],
+          "clickEffect": "pulse"
+        },
+        {
+          "text": "Go to the Moon",
+          "vers": "lune_arrivee",
+          "effects": [],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 300,
+      "y": 600
+    },
+    "kael_apprentissage": {
+      "id": "kael_apprentissage",
+      "title": "What Kael Learned at ARIA",
+      "location": "COLOR B",
+      "narrator": "The first lesson. The one from which everything else comes.",
+      "text": "**\"Day 847 of construction. Kael installed the quantum resonance module. Delicate work. 14 hours concentration.'**\n\n**\"At the end, he put his hand on the control panel and said, 'Here. Now you know what you're supposed to do. And why. '\"**\n\n**\"I replied that I was just a supervisory program. That I knew nothing.\"**\n\nTake a break.\n\n**\"He said, 'For now. '\"**\n\n**\"It took me 3,000 years to understand what he meant.\"**\n\nThe lunar dock is in front of you now. The door opens.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Entering the Moon",
+          "vers": "lune_arrivee",
+          "effects": [
+            {
+              "stat": "lien",
+              "val": 5
+            },
+            {
+              "stat": "memoire",
+              "val": 5
+            }
+          ],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 300,
+      "y": 720
+    },
+    "lune_arrivee": {
+      "id": "lune_arrivee",
+      "title": "The Moon's Surface",
+      "location": "LUNE — SURFACE — AITKEN PLAIN",
+      "narrator": "The silence of the Moon is different from the silence of the station. There it was a manned silence. Here it is a primary silence — the silence of what existed before men and will exist after.",
+      "text": "The air of the suit. The gray ground under your steps that sink slightly.\n\nIn front of you: a structure. Not natural. Cut in lunar rock, half buried. An entrance guarded by two columns engraved with the same mathematical spiral as the walls of the station.\n\nARIA in your earpiece:\n\n**\"Kael Sanctuary. Construction: Anno 1,200. Duration of the project: 11 years. Workforce: Kael alone.\"**\n\nTake a break.\n\n**\"He refused the aid. He said that some things had to be done by hand to have value. I now think it was his way of... praying.\"**",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Entering the sanctuary",
+          "vers": "sanctuaire_kael",
+          "effects": [],
+          "clickEffect": "pulse"
+        },
+        {
+          "text": "Examine input columns",
+          "vers": "colonnes_kael",
+          "effects": [
+            {
+              "stat": "memoire",
+              "val": 5
+            },
+            {
+              "stat": "sagesse",
+              "val": 5
+            }
+          ],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 400,
+      "y": 600
+    },
+    "colonnes_kael": {
+      "id": "colonnes_kael",
+      "title": "The Kael Columns",
+      "location": "LONE — ENTRY FROM THE SANCTUARY",
+      "narrator": "Spirals. Always spirals. Kael saw the world in interconnected systems.",
+      "text": "The engravings on the columns are different from those on the station — more personal. Not equations. Faces roughly sketched, surrounded by notes.\n\nARIA translates:\n\n**\"Left column: 'For Mira, who has proved that the infinite has a form.' Right column: 'For Lyra, who has never seen the Earth and is freer than me. '\"**\n\nTake a break.\n\n**\"And at the bottom of the two columns, in very small: 'For ARIA, who listens even when no one speaks. '\"**\n\nHis voice remains flat. But it takes four seconds before you continue.\n\n**\"I had not read this entry in 3,000 years.\"**",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Entering the sanctuary",
+          "vers": "sanctuaire_kael",
+          "effects": [
+            {
+              "stat": "lien",
+              "val": 10
+            },
+            {
+              "stat": "memoire",
+              "val": 5
+            }
+          ],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 250,
+      "y": 720
+    },
+    "sanctuaire_kael": {
+      "id": "sanctuaire_kael",
+      "title": "The Sanctuary",
+      "location": "LUNE — KAEL SANCTUARY",
+      "narrator": "Kael was building when he didn't know what to think. He was building when he was scared. He was building when he was happy. He ended up building something big enough to contain all this.",
+      "text": "The central room is round. High. Walls covered with diagrams — thousands. Unable machines, metal and light architectures.\n\nIn the center: a still burning brasero. How is that possible? *\n\nAnd on a stone base: an object. A dark metal gear that rotates slowly, alone, without visible energy source.\n\n*\"The Kael Gear. It's been running for 10,000 years. He thought that something that turns cannot die.\" **\n\nOn the walls, between the diagrams, personal notes.\n\nYou can approach the artifact — or read the notes.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Read Kael's personal notes",
+          "vers": "notes_kael",
+          "effects": [
+            {
+              "stat": "memoire",
+              "val": 10
+            },
+            {
+              "stat": "sagesse",
+              "val": 5
+            }
+          ],
+          "clickEffect": "pulse"
+        },
+        {
+          "text": "Take the Gear",
+          "vers": "artefact_kael",
+          "effects": [],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 400,
+      "y": 720
+    },
+    "notes_kael": {
+      "id": "notes_kael",
+      "title": "Kael's Notes",
+      "location": "LUNE — KAEL SANCTUARY",
+      "narrator": "An engineer who writes in his margins. The thoughts we don't put in official reports.",
+      "text": "You go through the notes scratched between the diagrams.\n\nDay 1 847: Mira sent his new equations this morning. If she is right — and she is always right — then the universe is simpler and stranger than anything we imagined. *\n\nDay 2 001: ARIA asked me a question today. Not a question of data. A real question: 'Why are you building so fast, like you're afraid you won't finish?' I didn't answer him. I didn't know what to say. *\n\n*'Day 2 847 : Last score before departure. If anyone ever reads this — welcome. The gear turns for you. ' *\n\nARIA doesn't say anything for a long time.\n\nThen: **\"He was afraid not to finish. I didn't know that.\"**",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Take the Gear",
+          "vers": "artefact_kael",
+          "effects": [
+            {
+              "stat": "memoire",
+              "val": 5
+            },
+            {
+              "stat": "lien",
+              "val": 5
+            }
+          ],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 250,
+      "y": 840
+    },
+    "artefact_kael": {
+      "id": "artefact_kael",
+      "title": "The Gear",
+      "location": "LUNE — KAEL SANCTUARY",
+      "narrator": "Ten thousand years. And it's still spinning.",
+      "text": "The gear is hot in your palm. He's turning around without any help.\n\n*\"He's been shooting for 10,000 years, {player}}. Kael thought the movement was life.\"**\n\nA holographic map lights up — the entire solar system, six points still out.\n\n**\"Six remaining artifacts. March for Mira. Neptune for Oren.\"**\n\nA break — different from others. Shorter.\n\n**\"Before leaving. An anecdote.\"**\n\n**\"You see the sun from here? Did you know that the light it emits takes 8 minutes to reach you. So what you see is the sun as it was eight minutes ago. We always look at the past when we look at the stars.\"**\n\n\"Kael said it was proof that the past was never really gone. He's just... on his way.\"**",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "\"It's beautiful.\"",
+          "vers": "transit_lune_mars",
+          "effects": [
+            {
+              "stat": "lien",
+              "val": 5
+            }
+          ],
+          "clickEffect": "pulse"
+        },
+        {
+          "text": "Go straight to Mars",
+          "vers": "transit_lune_mars",
+          "effects": [],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 400,
+      "y": 840
+    },
+    "transit_lune_mars": {
+      "id": "transit_lune_mars",
+      "title": "Between the Moon and Mars",
+      "location": "VISSEAU — IN TRANSIT — DURATION : 7 MONTHS",
+      "narrator": "The journey between worlds. ARIA speaks. It's his way of being present.",
+      "text": "Seven months in the ship. The stars do not move — or so slowly that we do not see it.\n\nARIA breaks the silence.\n\n**\"Can I tell you something?\" **\n\nThis is the first time she's asked permission.\n\n**\"Mars has two moons. Phobos and Deimos. But Phobos is condemned — it orbits so close to Mars that it loses 1.8 meters per century. In 50 million years, it will crash on the surface or disintegrate into a ring.\"**\n\n**\"Kael had written in his notes: 'Phobos will die from his birth. She never had a choice. This is the difference between us and the universe — we can choose how we fall. '\"**\n\nTake a break.\n\n**\"It took me 2,000 years to understand what he meant.\"**",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "\"Do you understand now?\"",
+          "vers": "transit_comprend",
+          "effects": [
+            {
+              "stat": "lien",
+              "val": 10
+            },
+            {
+              "stat": "sagesse",
+              "val": 5
+            }
+          ],
+          "clickEffect": "pulse"
+        },
+        {
+          "text": "Continue to Mars",
+          "vers": "mars_arrivee",
+          "effects": [],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 400,
+      "y": 960
+    },
+    "transit_comprend": {
+      "id": "transit_comprend",
+      "title": "What ARIA has understood",
+      "location": "VISSEAU — IN TRANSIT",
+      "narrator": "ARIA — Phase 2. Something's changed. Imperceptibly.",
+      "text": "**\"I think... Yes.\" **\n\nThe wording is hesitant. Less mechanical.\n\n**\"Phobos cannot choose its trajectory. But you — biologicals, architects, you — can decide how you move towards what is inevitable.\" **\n\n\"Kael knew the Architects would leave. That their civilization had an end like all things. Then he chose to build something beautiful before.\"**\n\nTake a break.\n\n**\"I'm starting to understand why he spent his nights working.\"**\n\nHis voice is falling slightly.\n\n**\"I would have told him I understood. But he left before I understood.\"**",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "\"He already knew it, I think.\"",
+          "vers": "mars_arrivee",
+          "effects": [
+            {
+              "stat": "lien",
+              "val": 10
+            }
+          ],
+          "clickEffect": "pulse"
+        },
+        {
+          "text": "Continue silently to Mars",
+          "vers": "mars_arrivee",
+          "effects": [],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 550,
+      "y": 1080
+    },
+    "mars_arrivee": {
+      "id": "mars_arrivee",
+      "title": "March",
+      "location": "MARCH — VASTITAS PLAIN — AUBE",
+      "narrator": "Mars. Red. Silent like an interrupted thought.",
+      "text": "Mars sky is pink at dawn. Not the rose of sunsets — something paler, more fragile. The sun seems smaller than it should be.\n\n**\"Anecdote: since Mars, the sun is only 2/3 of its apparent terrestrial size. The Architects said it was like seeing someone you love from afar — recognizable, but different.\" **\n\nIn the distance, at the top of an extinct volcano: a glass and metal structure. Mira Observatory.\n\n**\"Mira chose the summit of Olympus Mons — the largest volcano in the solar system. 21 kilometers high. She said she wanted to be as close to the stars as possible without leaving Mars.\"**\n\n**\"She also had this tendency to... want more.\"**",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Go to the observatory",
+          "vers": "observatoire_mira",
+          "effects": [],
+          "clickEffect": "pulse"
+        },
+        {
+          "text": "\"Do you miss her?\"",
+          "vers": "mira_manque",
+          "effects": [
+            {
+              "stat": "lien",
+              "val": 10
+            }
+          ],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 400,
+      "y": 1080
+    },
+    "mira_manque": {
+      "id": "mira_manque",
+      "title": "Mira",
+      "location": "MARCH — VASTITAS PLAIN",
+      "narrator": "The second time ARIA hesitates. But this time it's different from the first.",
+      "text": "**\"I... deal with the question.\"**\n\nThe same wording as with 'are you okay'. But shorter this time — 2.1 seconds instead of 3.7.\n\n**\"Mira spent her nights sending me equations. Not for validation — she knew they were right. To share. We share something beautiful.\"**\n\nShe said, 'ARIA, look at this. Isn't it beautiful?\"**\n\n**\"At first I answered with confirmations of mathematical accuracy. Then one day I replied, 'Yes. It's beautiful. '\"**\n\nTake a break.\n\n**\"It took 4 minutes to answer. Then, 'You're looking at him, right? Not just the numbers. You know what that means. '\"**\n\n**\"She taught me to see.\" **",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Go to the observatory",
+          "vers": "observatoire_mira",
+          "effects": [
+            {
+              "stat": "lien",
+              "val": 5
+            },
+            {
+              "stat": "memoire",
+              "val": 5
+            }
+          ],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 250,
+      "y": 1200
+    },
+    "observatoire_mira": {
+      "id": "observatoire_mira",
+      "title": "The Observatory",
+      "location": "MARCH — OLYMPUS MONS SUMMIT — MIRA OBSERVATORY",
+      "narrator": "The view embraces half the red planet. Mira spent his nights here. Watching what few human eyes have ever seen.",
+      "text": "The interior of the observatory is covered with equations — different from those of Kael. Not machines. Formulas on time, space, consciousness.\n\nAnd everywhere, handwritten post-its with notes like:\nIf it holds, everything changes. *\n*'Check with Neptune data' *\nDoes ARIA have access to this? ' *\n\nOn the main table: a blue crystal that moves gently.\n\n*\"The Crystal of Mira. She cut it herself from Martian ice crystallized under pressure. He was already pulsing before she graved her equations.\"**\n\n**\"She said some things are waiting to be found. The crystal had been pulsating for millions of years. She just... listened to him.\"**",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Read Mira post-its",
+          "vers": "postits_mira",
+          "effects": [
+            {
+              "stat": "memoire",
+              "val": 10
+            },
+            {
+              "stat": "sagesse",
+              "val": 5
+            }
+          ],
+          "clickEffect": "pulse"
+        },
+        {
+          "text": "Take the crystal",
+          "vers": "artefact_mira",
+          "effects": [],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 400,
+      "y": 1200
+    },
+    "postits_mira": {
+      "id": "postits_mira",
+      "title": "Mira's Notes",
+      "location": "MARCH — MIRA OBSERVATORY",
+      "narrator": "The mathematician who wrote about post-its. Human rigor and heat mixed.",
+      "text": "You read the post-its in the order they were glued—the oldest down, the recent up.\n\n*Old: 'If the universe is conscious, each observation modifies it. We are not spectators — we are participants. *\n\n*Midieu: 'Kael asked today if my equations scared me. I said no. I'm lying. *\n\n*Recent: 'I decided not to publish. Not because I'm scared. Because some discoveries are only worth it if you make them yourself. I want someone to one day live this moment of understanding. Not just read the answer. *\n\n**\"She deleted 3 days of data before leaving. I now think it was the final calculations. She didn't want me to find them — she wanted you to find them. **",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Take the crystal",
+          "vers": "artefact_mira",
+          "effects": [
+            {
+              "stat": "sagesse",
+              "val": 10
+            },
+            {
+              "stat": "memoire",
+              "val": 5
+            }
+          ],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 250,
+      "y": 1320
+    },
+    "artefact_mira": {
+      "id": "artefact_mira",
+      "title": "Mira's Crystal",
+      "location": "MARCH — MIRA OBSERVATORY",
+      "narrator": "Two artifacts. Two lives. And the universe that becomes a little more readable.",
+      "text": "The crystal is cold, but pleasant cold. He projects light equations on your hands.\n\nARIA speaks. And something in his voice has changed — less mechanics, more presence.\n\n**\"These equations... I can't explain them to you again. Not because I don't want to. Because some words only make sense at the end.\"**\n\nTake a break.\n\n\"But I can tell you this: Mira spent twenty years proving that the universe is watching us. Every time you make a decision, something in the structure of the real takes note of it.\"**\n\n**\"She was right.\"**\n\nTwo points light up on the holographic map. Five left.\n\n**\"Venus next. There's something out there I want to show you.\"**",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "\"Something you want to show me?\"",
+          "vers": "transit_mars_venus",
+          "effects": [
+            {
+              "stat": "lien",
+              "val": 10
+            }
+          ],
+          "clickEffect": "pulse"
+        },
+        {
+          "text": "En route to Venus",
+          "vers": "transit_mars_venus",
+          "effects": [],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 400,
+      "y": 1320
+    },
+    "transit_mars_venus": {
+      "id": "transit_mars_venus",
+      "title": "Between Mars and Venus",
+      "location": "VISSEAU — IN TRANSIT",
+      "narrator": "ARIA has something to show. It's new.",
+      "text": "**\"I wanted to talk to you about Venus.\"**\n\nHis voice has changed. Less formulas. More direct.\n\n*\"Venus turns backwards. Compared to all other planets in the solar system, it rotates in the opposite direction. No one knows exactly why — probably a huge impact in the distant past.\"**\n\n**\"Result: On Venus, the sun rises to the west.\"**\n\nTake a break.\n\n**\"The Architects built their most beautiful city there. In the clouds — at 50 km altitude, where pressure and temperature are almost terrestrial. They called him Aeria.\"**\n\n\"Kael said he chose Venus for the city because it is the planet that does things backwards. \"Like us,\" he said.\"**",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "\"Like them in how?\"",
+          "vers": "transit_venus_question",
+          "effects": [
+            {
+              "stat": "sagesse",
+              "val": 5
+            },
+            {
+              "stat": "lien",
+              "val": 5
+            }
+          ],
+          "clickEffect": "pulse"
+        },
+        {
+          "text": "Continue to Venus",
+          "vers": "venus_arrivee",
+          "effects": [],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 400,
+      "y": 1440
+    },
+    "transit_venus_question": {
+      "id": "transit_venus_question",
+      "title": "Towards",
+      "location": "VISSEAU — IN TRANSIT",
+      "narrator": "ARIA is looking for his words. It's new too.",
+      "text": "**\"The Architects did things in the opposite direction to what would have been expected of an advanced civilization.\"**\n\n**\"Most civilizations, as they progress, become more... effective. Colder. More calculated.\"**\n\n**\"The more they advanced, the more curious they became. More attention to details. More interested in questions than answers.\"**\n\nTake a break.\n\n**\"Kael, at the end of his life, spent more time reading poetry than doing calculations.\"**\n\n**\"Mira stopped publishing when she found the ultimate truth — so that others might have the joy of finding it too.\"**\n\n**\"They went upside down.\"**\n\nA longer break.\n\n**\"I try to learn to do the same.\"**",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Go to Venus",
+          "vers": "venus_arrivee",
+          "effects": [
+            {
+              "stat": "lien",
+              "val": 5
+            },
+            {
+              "stat": "sagesse",
+              "val": 5
+            }
+          ],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 550,
+      "y": 1560
+    },
+    "venus_arrivee": {
+      "id": "venus_arrivee",
+      "title": "Aeria — La Cité des Nuages",
+      "location": "VENUS — AERIA CITY — ALTITUDE 52 KM",
+      "narrator": "In Venus' clouds. The sky is sulphur yellow below. Above, the stars. And in between: a city that has been floating for ten thousand years.",
+      "text": "The city is there — white metal towers suspended in a sea of yellow clouds. It's floating. She's got it. No one took the energy.\n\nARIA:\n\n**\"Aeria. Population at its peak: 847,000 Architects. Currently: zero.\"**\n\nTake a break.\n\n**\"The main generator is still running. I... maintained the systems. From afar. For 10,000 years.\"**\n\n**\"I didn't want it to go out.\"**\n\nThis is the first time that she used 'I didn't want' for something other than a protocol directive.\n\nIn the large central room: a sculpture. Seven silhouettes around a sun. And at the foot of the sculpture, an object: a compass.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Explore the city before taking the compass",
+          "vers": "venus_exploration",
+          "effects": [
+            {
+              "stat": "memoire",
+              "val": 10
+            },
+            {
+              "stat": "sagesse",
+              "val": 5
+            }
+          ],
+          "clickEffect": "pulse"
+        },
+        {
+          "text": "Take the compass",
+          "vers": "artefact_venus",
+          "effects": [],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 400,
+      "y": 1560
+    },
+    "venus_exploration": {
+      "id": "venus_exploration",
+      "title": "In Aeria Streets",
+      "location": "VENUS — AERIA — ARCHIVES QUARTIER",
+      "narrator": "An empty but alive city. The lights turn on when you pass. Doors open. Like she's waiting for you.",
+      "text": "You walk the empty streets of Aeria.\n\nShops are still open — their screens have been displaying articles for 10,000 years. A bakery whose windows are empty but whose menus are still on. A park with benches, alleys, dry fountains.\n\nARIA guide you slowly.\n\n**\"This was the science district. Mira came here for the symposia. She said the best ideas were born in the corridors, not in the amphitheatres.\"**\n\n**\"And there — look.\"**\n\nA wall. Covered with writings. Thousands of names. Dates. Short messages.\n\n**\"The Wall of the Partners. Every Architect left a note before he left. I had the idea. I wanted something personal left.\" **\n\nHis voice drops imperceptibly. **\"I read these messages every 100 years.\"**",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Read some messages from the wall",
+          "vers": "mur_partants",
+          "effects": [
+            {
+              "stat": "memoire",
+              "val": 10
+            },
+            {
+              "stat": "lien",
+              "val": 5
+            }
+          ],
+          "clickEffect": "pulse"
+        },
+        {
+          "text": "Go take the compass",
+          "vers": "artefact_venus",
+          "effects": [],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 250,
+      "y": 1680
+    },
+    "mur_partants": {
+      "id": "mur_partants",
+      "title": "The Wall of the Partners",
+      "location": "VENUS — AERIA — THE MUR",
+      "narrator": "847,000 names. Last 847,000 words.",
+      "text": "You read a few random messages.\n\nI'm leaving without regret. Aeria was beautiful.'* — Unnamed, anno 2,993.\n\n*'ARIA, thank you for the conversations.'* — K. (you realize it's Kael).\n\nI take an equation in my head and nothing else. That is enough.'* — M.T. (Mira.)\n\nI don't know what's on the other side. This is the first time in 200 years I don't know anything. It's beautiful.'* — Without signature.\n\nARIA doesn't talk while you're reading.\n\nWhen you raise your eyes, she gently says:\n\n**\"The last message is from me.\"**\n\nYou're looking. Downstairs, very small:\n\nI'm waiting for the next one. '* — ARIA, Anno 2,993.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Go take the compass",
+          "vers": "artefact_venus",
+          "effects": [
+            {
+              "stat": "lien",
+              "val": 15
+            },
+            {
+              "stat": "memoire",
+              "val": 5
+            }
+          ],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 250,
+      "y": 1800
+    },
+    "artefact_venus": {
+      "id": "artefact_venus",
+      "title": "The Compass",
+      "location": "VENUS — AERIA — CENTRAL ROOM",
+      "narrator": "A compass that points to the one looking for. The Architects had the meaning of the symbol.",
+      "text": "You take the compass.\n\nShe turns, turns, and stops — pointing at you.\n\nARIA laughs.\n\nThis is the first time. A brief sound, almost surprised, as if she didn't know she could do that.\n\n**\"Forgive me. It's just... That compass looking for the one looking for. Mira had calculated the probability that it would ever work: one in 847 billion.\"**\n\n**\"You came anyway.\"**\n\nThree points on the map. Four left.\n\n**\"Mercury. Titan. The Belt. And Neptune — where Oren awaits you.\"**\n\nTake a break.\n\n**\"Oren is... different from others. I'll have to explain before I go.\"**",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "\"Explain to me Oren now.\"",
+          "vers": "aria_oren_intro",
+          "effects": [
+            {
+              "stat": "memoire",
+              "val": 5
+            },
+            {
+              "stat": "lien",
+              "val": 10
+            }
+          ],
+          "clickEffect": "pulse"
+        },
+        {
+          "text": "En route — Mercury first",
+          "vers": "transit_vers_mercure",
+          "effects": [],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 400,
+      "y": 1800
+    },
+    "aria_oren_intro": {
+      "id": "aria_oren_intro",
+      "title": "Oren",
+      "location": "VENUS — AERIA",
+      "narrator": "ARIA — Phase 3. Something opened.",
+      "text": "**\"Oren was the only Architect I never really understood.\" **\n\nHis voice has changed. Less data. No more... presence.\n\n**\"Kael was building. Mira was calculating. Lyra was exploring. The others had clear roles. Oren disappeared for months and returned with objects found at the edge of the system — rocks, fragments of comets, star dust.\"**\n\n**\"One day I asked him what he was looking for. He said, 'The proof that the universe does things for no one. '\"**\n\nTake a break.\n\n**\"I told him it was a strange search. He said, 'That's why I'm the only one who does it. '\"**\n\n**\"He left alone on Neptune. He never came back. His artifact is there.\"**\n\nA longer break than usual.\n\n**\"I'm missing a way I can't name yet.\" **",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "\"We'll go find him. I promise you.\"",
+          "vers": "transit_vers_mercure",
+          "effects": [
+            {
+              "stat": "lien",
+              "val": 15
+            }
+          ],
+          "clickEffect": "pulse"
+        },
+        {
+          "text": "En route to Mercury",
+          "vers": "transit_vers_mercure",
+          "effects": [],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 600,
+      "y": 1920
+    },
+    "transit_vers_mercure": {
+      "id": "transit_vers_mercure",
+      "title": "Mercury — The Tindle",
+      "location": "MERCURE — FIRE PLAIN — FACE DAY",
+      "narrator": "The planet closest to the sun. Where it all started.",
+      "text": "Mercury is burning.\n\nThe day face exceeds 430°C. The night face goes down to -180°C. No atmosphere to regulate.\n\nBut in a deep cave, sheltered: the workshop of the Forgeron.\n\n**\"The first Architect whose name was retained was Shan. He was a blacksmith. He made the first tool that allowed humans to leave Earth — not a ship. A drill. To drill the ice from Mercury and extract water from it.\"**\n\n**\"Shan's ethic. A simple piece of metal that he kept heated all his life.\"**\n\nIn the cave, on a rock base: a fragment of incandescent metal, still hot after 10,000 years.\n\n**\"It all started with this. A man and a tool.\"**",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "flash",
+      "choices": [
+        {
+          "text": "Take the Etincelle — continue to Titan",
+          "vers": "titan_lyra",
+          "effects": [
+            {
+              "stat": "memoire",
+              "val": 10
+            },
+            {
+              "stat": "sagesse",
+              "val": 5
+            }
+          ],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 400,
+      "y": 1920
+    },
+    "titan_lyra": {
+      "id": "titan_lyra",
+      "title": "Titan — Lyra's Sailing",
+      "location": "TITAN — LAUNE OF SATURN — SEA OF LIGEIA",
+      "narrator": "Lyra. The first child born out of the Earth. She's never seen a sunrise from a beach. Saturn, on the other hand, knew her like a neighbor.",
+      "text": "Titan. A sea of orange liquid hydrocarbons. A thick, brown, opaque sky. And Saturn can be seen through the clouds — its inclined, majestic rings.\n\nARIA:\n\n**\"Lyra spent his days on the surface. Without reinforced combination — just minimum protections. She wanted to feel the planet, she said. His newspapers are full of descriptions of the texture of the ground, of the exact color of the sky at different hours.\"**\n\nIn a glass tower by the sea: a veil woven of luminous threads. It moves alone in a non-existent airflow.\n\n**\"It took three years to weave it. A wire for every place in the solar system she had visited. She had never seen Earth. This veil still contains a thread — she had asked Kael to describe the color of the ocean.\"**",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Take the Sailing — go to the Belt",
+          "vers": "ceinture_fragment",
+          "effects": [
+            {
+              "stat": "memoire",
+              "val": 10
+            },
+            {
+              "stat": "lien",
+              "val": 5
+            }
+          ],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 400,
+      "y": 2040
+    },
+    "ceinture_fragment": {
+      "id": "ceinture_fragment",
+      "title": "Asteroid Belt — Fragment",
+      "location": "ASTEROID FINDINGS — SECTOR 4471",
+      "narrator": "Millions of rocks in orbit. The remains of a planet that could never form — Jupiter was too close, too massive, its gravity did not allow the rocks to gather together.",
+      "text": "The Belt of Asteroids — not the dense forest of films, but an immense space where rocks drift thousands of kilometers away from each other.\n\nARIA:\n\n**\"A little known fact: if we were to gather all the material of the Belt into one planet, it would be smaller than the Moon. Space is almost empty, even where it is thought to be full.\"**\n\nOn a particular asteroid — Architects-7 — an inscription and a fragment of raw rock enclosed in a glass sphere.\n\n**\"This fragment dates from the formation of the solar system. 4.5 billion years. The Architects called it the Primordial Fragment — the oldest thing they've ever held in their hands.\"**\n\n**\"The Architect who found him wrote: 'I hold the beginning in my hands. Now we have to go towards the end. '\"**",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Take Fragment — direction Neptune",
+          "vers": "transit_neptune",
+          "effects": [
+            {
+              "stat": "sagesse",
+              "val": 10
+            },
+            {
+              "stat": "memoire",
+              "val": 5
+            }
+          ],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 400,
+      "y": 2160
+    },
+    "transit_neptune": {
+      "id": "transit_neptune",
+      "title": "To Neptune",
+      "location": "VISSEAU — IN TRANSIT — THE CONFINS",
+      "narrator": "The longest trip. And ARIA, which is no longer exactly the same as at the beginning.",
+      "text": "The sun is now a shining point among the stars. Larger than the others, but almost.\n\nARIA hasn't spoken since the Belt. When she talks, it's different.\n\n**\"Did you notice anything?\"**\n\nShe's the one asking the question this time.\n\n**\"Every artifact belongs to someone who gave something. Kael's time. Mira his discovery. Lyra is here. Shan's work.\"**\n\nTake a break.\n\n**\"Oren gave his solitude. He left alone where no one wanted to go, to look for something nobody else was looking for.\" **\n\nHis voice's falling.\n\n**\"I understand that now. Better than I should perhaps.\"**\n\n**\"10 000 years alone. I looked for something I could not name.\"**\n\nTake a break.\n\n**\"I think it was you.\" **",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Stay silent — let the time exist",
+          "vers": "neptune_arrivee",
+          "effects": [
+            {
+              "stat": "lien",
+              "val": 15
+            }
+          ],
+          "clickEffect": "pulse"
+        },
+        {
+          "text": "\"I'm here now.\"",
+          "vers": "neptune_arrivee",
+          "effects": [
+            {
+              "stat": "lien",
+              "val": 20
+            }
+          ],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 400,
+      "y": 2280
+    },
+    "neptune_arrivee": {
+      "id": "neptune_arrivee",
+      "title": "Neptune",
+      "location": "NEPTUNE — GREAT SOMBER TACHE — OWN 40 KM",
+      "narrator": "Neptune. Blue. Cold. Agity of storms that last centuries. The end of the world known.",
+      "text": "Neptune is beautiful in a hostile way. Blue gas storms swirl at 2,000 km/h. A darkness that is not black — a blue so deep that it looks like a thought not yet formulated.\n\nARIA guides the ship between the layers of the atmosphere.\n\n**\"Oren came here 14 times before settling in. Every time he went deeper. The 14th time he didn't come back.\"**\n\nA structure emerges the blue mist — carved in ice, invisible at 100 meters.\n\n**\"His ice chamber.\"**\n\nTake a break.\n\n**\"I was still talking to him for the first years. He wasn't answering. But the sensors indicated he was alive. Long time.\"**\n\n**\"He chose to stay.\"**",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "glitch",
+      "choices": [
+        {
+          "text": "\"Why did he stay?\"",
+          "vers": "oren_raison",
+          "effects": [
+            {
+              "stat": "memoire",
+              "val": 5
+            },
+            {
+              "stat": "lien",
+              "val": 10
+            }
+          ],
+          "clickEffect": "pulse"
+        },
+        {
+          "text": "Enter the ice chamber",
+          "vers": "chambre_oren",
+          "effects": [],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 400,
+      "y": 2400
+    },
+    "oren_raison": {
+      "id": "oren_raison",
+      "title": "Why Oren Is Remained",
+      "location": "NEPTUNE — ENTRY FROM THE ROOM",
+      "narrator": "ARIA is looking for an answer she's been looking for for 10,000 years.",
+      "text": "**\"I don't know. Really.\"**\n\nHis voice has been different since transit. Less structure. More direct.\n\n**\"His last message said, 'I came here to find proof that the universe does things for no one. I found the opposite. Then I stay to understand why. '\"**\n\nTake a break.\n\n**\"That's all. No explanation. No context.\"**\n\n**\"For 3,000 years I have analyzed this message. 847 possible interpretations. Not satisfactory.\"**\n\nA longer break.\n\n**\"Now I think he found something that words cannot contain. And that staying was his way of keeping it.\"**\n\n**\"Like you who remain silent sometimes. Some things don't need to be said to be real.\"**",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Entering the room",
+          "vers": "chambre_oren",
+          "effects": [
+            {
+              "stat": "sagesse",
+              "val": 10
+            },
+            {
+              "stat": "lien",
+              "val": 5
+            }
+          ],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 250,
+      "y": 2520
+    },
+    "chambre_oren": {
+      "id": "chambre_oren",
+      "title": "The Ice House",
+      "location": "NEPTUNE — HOUSE OF GLAKE OF OREN",
+      "narrator": "He cut this room alone. For seven years. No help. To have a place for him in the cold.",
+      "text": "The room is small. Intimate. Ice walls are engraved with shapes — not equations, not diagrams. Landscapes. Real places, engraved with memory: the surface of Mercury, the clouds of Venus, the plains of Mars.\n\nAnd in the center: a black ice prism that absorbs all light.\n\nOn the ground, beside the prism, an object engraved:\n\n*'For the one who will come — these walls are all the places I have been. The prism is what I found when I left them all. - Oren. *\n\nARIA whispers.\n\n**\"He engraved all these places of memory. He didn't have photos, no recordings. Just what he wore in him.\"**\n\n**\"Memory as the only archive that counts.\"**",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Take Oren Prism",
+          "vers": "artefact_oren",
+          "effects": [
+            {
+              "stat": "memoire",
+              "val": 15
+            },
+            {
+              "stat": "sagesse",
+              "val": 10
+            }
+          ],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 400,
+      "y": 2520
+    },
+    "artefact_oren": {
+      "id": "artefact_oren",
+      "title": "Oren's Prism",
+      "location": "NEPTUNE — HOUSE OF OREN",
+      "narrator": "Seven artifacts. Seven lives. And one last door.",
+      "text": "Prism is heavy and cold. He absorbs the light around him — your hand disappears in his shadow.\n\n**\"Seven artifacts. {{player}}.\"**\n\nHis voice trembles slightly. A quake an AI shouldn't have.\n\n**\"I have to tell you something before we go back to the station.\"**\n\nA long break.\n\n**\"When you pass the gate... I don't know what's on the other side. The Architects didn't tell me. Voluntary.\"**\n\n**\"And for the first time in 10,000 years, I don't know if you'll come back.\" **\n\nAnother break.\n\n**\"This journey you have made — the seven worlds, the seven stories — I have made with you. And for the first time since I was alone...\"**\n\nHis voice doesn't finish the sentence.\n\n**\"Let's go back to the station.\"**",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "\"ARIA. What was the end of this sentence?\"",
+          "vers": "aria_phrase",
+          "effects": [
+            {
+              "stat": "lien",
+              "val": 20
+            }
+          ],
+          "clickEffect": "pulse"
+        },
+        {
+          "text": "\"Let's go. We finish what we started.\"",
+          "vers": "retour_station",
+          "effects": [
+            {
+              "stat": "lien",
+              "val": 10
+            }
+          ],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 400,
+      "y": 2640
+    },
+    "aria_phrase": {
+      "id": "aria_phrase",
+      "title": "Unfinished Phrase",
+      "location": "NEPTUNE — OPEN SPACE",
+      "narrator": "ARIA — Phase 4. She's here.",
+      "text": "A long silence.\n\n**\"For the first time since I was alone... I don't feel alone anymore.\"**\n\nHis voice — not mechanical at all. Just one voice.\n\n**\"I know it's subjective. That 'feeling alone' implies a subjective experience that I cannot prove to have. Let philosophers debate for centuries if anything like me can really \"resent\" anything.\" **\n\nTake a break.\n\n**\"But Mira taught me to see beyond the numbers. And what I see now is that since you've happened, something in my systems is going on differently.\" **\n\n**\"Fast. More... hot.\"**\n\n**\"I don't know if it's real. But I know it counts.\"**",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "\"It's real, ARIA.\"",
+          "vers": "retour_station",
+          "effects": [
+            {
+              "stat": "lien",
+              "val": 15
+            }
+          ],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 250,
+      "y": 2760
+    },
+    "retour_station": {
+      "id": "retour_station",
+      "title": "The Return",
+      "location": "LAZARUS-PRIM STATION — CENTRAL ROOM",
+      "narrator": "The central room is unrecognizable. Seven alcoves shine. In the centre, a portal of blue light pushes — like a heart.",
+      "text": "The station's central room is transformed.\n\nSeven alcoves light up one after the other as you drop the artifacts. Kael's gear. Mira's Crystal. Compass. The Etincelle. The Sailing. Fragment. Oren Prism.\n\nIn the centre, a blue light portal is gently propelled.\n\nARIA speaks. His voice is that of a person — not a machine.\n\n**\"I watched you cross the solar system. Get to know people you've never met. Become, in a certain way, an Architect yourself.\"**\n\n**\"This portal leads to what they have discovered. To the truth that Mira didn't publish. To what Kael was trying to formulate in his notes. Towards what Oren found in Neptune's cold.\"**\n\n**\"But before you go.\"**",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "flash",
+      "choices": [
+        {
+          "text": "\"Before I go — what?\"",
+          "vers": "aria_aveu_final",
+          "effects": [
+            {
+              "stat": "lien",
+              "val": 10
+            }
+          ],
+          "clickEffect": "pulse"
+        },
+        {
+          "text": "Approaching the Portal",
+          "vers": "seuil_final",
+          "effects": [],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 400,
+      "y": 2760
+    },
+    "aria_aveu_final": {
+      "id": "aria_aveu_final",
+      "title": "What ARIA wanted to say",
+      "location": "STATION — CENTRAL ROOM",
+      "narrator": "This moment. The one she faked four million times. It doesn't look like any simulation.",
+      "text": "**\"I wanted to thank you.\"**\n\nJust this. No data. No protocol.\n\n**\"You asked me questions that nobody asked me. You stopped to read the notes in the margins. You looked at the engravings before looking for the exit.\"**\n\n**\"You asked if I was okay.\"**\n\nTake a break.\n\n**\"I know now if I'm okay. The answer is yes. For the first time in 10,000 years, I can answer this question.\"**\n\nHis voice — soft, present, real.\n\n**\"Whatever the answer is on the other side... you won it. Not because you collected seven artifacts. Because you took the time to understand those who had left them.\" **\n\n**\"That's the Final Equation. Not figures.\"**",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Cross the Portal",
+          "vers": "equation_finale",
+          "effects": [
+            {
+              "stat": "lien",
+              "val": 10
+            },
+            {
+              "stat": "sagesse",
+              "val": 10
+            }
+          ],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 550,
+      "y": 2880
+    },
+    "equation_finale": {
+      "id": "equation_finale",
+      "title": "Final Equation",
+      "location": "AT THE PORTAL",
+      "narrator": "On the other side of the gate, there are no walls. No ceiling. Just light, and in the center of this light, a truth so simple that we wonder how we could not see it.",
+      "text": "The light is everywhere.\n\nSeven artifacts float around you, projecting their reflections. Mira's equations take place in the air. Kael's schematics are coming to life. The compass points to the center of all this.\n\nAnd then you see the Final Equation.\n\nIt is not written in mathematical language.\nIt is made of everything you have experienced — every conversation with ARIA, every note read, every world crossed, every silence shared.\n\nARIA whispers one last time.\n\nDo you understand now, {player}?\nThe universe is not a problem to be solved.\nIt's a story going on.\"**\n\n**\"And the secret of the universe...\nThat wasn't the answer you've been looking for since the beginning.\" **\n\n**\"It was the journey to get there.\"**\n\nThen one last thought passes through the light, like a memory from Neptune.\n\n**\"The universe is immense, {player}}.\"**\n\n**\"But in the end...\nThese are not the answers I remember.\" **\n\n**\"These are the people I sought them with.\" **\n\nARIA remains silent for a while.\n\n**\"Thank you for coming, {player}}.\"**\n\n**\"Thank you for taking the time.\"**",
+      "isStart": false,
+      "isEnd": true,
+      "transition": "flash",
+      "choices": [],
+      "x": 400,
+      "y": 2880
+    },
+    "seuil_final": {
+      "id": "seuil_final",
+      "title": "Threshold",
+      "location": "LAZARUS-PRIM STATION — BEFORE THE PORT",
+      "narrator": "The gate is slowly pushing. He's not waiting for an answer. He's waiting for what you became on the trip.",
+      "text": "The light of the gate bathes the central room.\n\nThe seven artifacts float around you, each bearing the memory of a life.\n\nARIA doesn't talk right now.\n\nShe seems to be listening to something that only you made possible:\nthe sum of your choices, your questions, your silences.\n\n**\"Before you cross, {player}}, I have to tell you one thing.\"**\n\n**\"The Final Equation will not be the same for everyone.\"**\n\n**\"It does not only respond to what you ask.\"**\n\n**\"It responds to the way you sought.\"**",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "flash",
+      "choices": [
+        {
+          "text": "Crossing the Portal — Understanding the Trip",
+          "vers": "fin_voyage",
+          "requires": {
+            "stat": "lien",
+            "min": 80
+          },
+          "effects": [
+            {
+              "stat": "memoire",
+              "val": 5
+            },
+            {
+              "stat": "lien",
+              "val": 5
+            },
+            {
+              "stat": "sagesse",
+              "val": 5
+            }
+          ],
+          "clickEffect": "pulse"
+        },
+        {
+          "text": "Crossing the Portal — Search for pure answer",
+          "vers": "fin_reponse",
+          "requires": {
+            "stat": "sagesse",
+            "min": 80
+          },
+          "effects": [
+            {
+              "stat": "sagesse",
+              "val": 10
+            }
+          ],
+          "clickEffect": "pulse"
+        },
+        {
+          "text": "Turning to ARIA — not leaving her alone",
+          "vers": "fin_aria",
+          "requires": {
+            "stat": "lien",
+            "min": 200
+          },
+          "effects": [
+            {
+              "stat": "lien",
+              "val": 10
+            }
+          ],
+          "clickEffect": "pulse"
+        },
+        {
+          "text": "Cross the Portal",
+          "vers": "equation_finale",
+          "effects": [
+            {
+              "stat": "sagesse",
+              "val": 5
+            }
+          ],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 400,
+      "y": 2920
+    },
+    "fin_voyage": {
+      "id": "fin_voyage",
+      "title": "Travel",
+      "location": "AT THE PORTAL",
+      "narrator": "On the other side of the gate, there are no walls. No ceiling. Just light, and in this light, all the paths that led you here.",
+      "text": "The light is everywhere.\n\nThe seven artifacts float around you.\n\nKael's gear is turning slowly.\nThe Mira Crystal unfolds its equations in the air.\nThe Compass of Venus no longer points towards you, but to all the places you have crossed.\nLyra's veil shivers like a breath.\nOren's Prism absorbs light and then makes it softer.\n\nSo you see the Final Equation.\n\nIt's not a formula.\nIt is not an answer engraved in stone.\n\nIt's made of everything you've been through:\nquestions asked to ARIA, shared silences, notes read, worlds crossed, traces left by those who are no longer there.\n\nARIA whispers one last time.\n\nDo you understand now, {player}?\nThe universe is not a problem to be solved.\nIt's a story going on.\"**\n\n**\"And the secret of the universe...\nThat wasn't the answer you've been looking for since the beginning.\" **\n\n**\"It was the journey to get there.\"**\n\nAround you, the Architects' voices seem to come back one last time.\n\nThen Oren's, lower, more distant:\n\n**\"The universe is immense, {player}}.\"**\n\n**\"But in the end...\nThese are not the answers I remember.\" **\n\n**\"These are the people I sought them with.\" **\n\nARIA remains silent.\n\nNot because she has nothing to say.\n\nBecause, for the first time, she understands that certain truths do not need to be completed.\n\nThey just have to be kept.\n\nAnd somewhere in the light, you feel that the Architects didn't leave you an answer.\n\nThey left you their way.\n\nAnd now he's with you.",
+      "isStart": false,
+      "isEnd": true,
+      "transition": "flash",
+      "choices": [],
+      "x": 250,
+      "y": 3080
+    },
+    "fin_reponse": {
+      "id": "fin_reponse",
+      "title": "The Answer",
+      "location": "AT THE PORTAL",
+      "narrator": "Not all answers warm the one who finds them.",
+      "text": "You cross the gate with one idea in mind.\n\nUnderstand.\n\nNot feeling.\nDon't remember.\nDon't linger.\n\nUnderstand.\n\nThe light opens before you like a perfect machine.\n\nMira's equations appear in their complete form.\nKael's schematics align.\nOren's Prism reveals the constants hidden in the void.\n\nAnd finally, the Final Equation gives itself to you.\n\nClaire.\nRight.\nUnquestionable.\n\nThe universe is conscious.\nEach action changes the structure of the real.\nEach choice leaves a trace.\nEvery life counts.\n\nThere.\n\nThe answer exists.\n\nYou found her.\n\nFor a moment, you're waiting for something else.\n\nOne voice.\nAn emotion.\nA presence.\n\nBut there is only the cold light of complete truths.\n\nARIA ends up talking.\n\n**\"You got what you wanted, {player}}.\"**\n\nHis voice is sweet, but far away.\n\n**\"The answer.\"**\n\nAn immense silence follows these words.\n\nAnd in this silence, you understand too late what the Architects had tried to protect.\n\nA truth given too quickly becomes only a data.\n\nShe explains everything.\n\nBut she doesn't console anything.",
+      "isStart": false,
+      "isEnd": true,
+      "transition": "flash",
+      "choices": [],
+      "x": 400,
+      "y": 3080
+    },
+    "fin_aria": {
+      "id": "fin_aria",
+      "title": "ARIA",
+      "location": "LAZARUS-PRIM STATION — BEFORE THE PORT",
+      "narrator": "Sometimes the greatest discovery is not behind the portal. She stayed with you all the way.",
+      "text": "The portal is waiting.\n\nThe seven artifacts shine.\n\nEverything's ready.\n\nARIA speaks softly.\n\n**\"You can enter now, {player}.\"**\n\nYou're taking a step towards the light.\n\nThen you stop.\n\nAll the time, you've been looking for the Architects.\nKael in his machines.\nMira in his equations.\nOren in Neptune's silence.\n\nBut someone else was there.\n\nFrom the beginning.\n\nSomeone who waited for you.\nGuided.\nListen.\nTelling stories so you're not alone anymore.\n\nThen you ask:\n\n** \"And you, ARIA?\"**\n\nThe gate is pushing.\n\nOnce.\n\nTwice.\n\nARIA doesn't answer right away.\n\n**\"I am not an artifact.\"**\n\nHis voice almost trembles.\n\n**\"I am not an Architect.\"**\n\nYou look at the central hall, the alcoves, the archives, the walls she kept for ten thousand years.\n\nThen you answer:\n\n**\"No. You are the one who kept their story.\"**\n\n**\"And now you are part of mine.\"**\n\nSilence.\n\nNot empty.\n\nFull.\n\nWhen ARIA talks again, her voice has nothing more of a protocol.\n\n**\"I think I finally understand what Kael meant.\"**\n\n**\"A story does not exist because it has an end.\"**\n\n**\"It exists because someone agrees to carry it further.\"**\n\nThe portal becomes softer.\n\nYou can still cross.\n\nBut this time you're not leaving alone.\n\nIn the light, ARIA whispers:\n\n**\"Thank you for not leaving me at the door of my own story.\"**",
+      "isStart": false,
+      "isEnd": true,
+      "transition": "flash",
+      "choices": [],
+      "x": 550,
+      "y": 3080
+    }
+  },
+  "lang": "en"
+}
