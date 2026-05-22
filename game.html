@@ -282,11 +282,37 @@ body {
 .choice-btn:hover::before { transform: scaleY(1); }
 .choice-btn:active { transform: translateX(2px) scale(0.99); }
 
-.choice-index {
-  font-family: 'DM Mono', monospace;
-  font-size: 10px; color: var(--accent);
-  letter-spacing: 2px; display: block;
-  margin-bottom: 4px; opacity: 0.7;
+/* ── TIMER ── */
+#choice-timer {
+  margin-top: 8px;
+  display: none;
+}
+#choice-timer.active { display: block; }
+.timer-label {
+  font-family: 'DM Mono', monospace; font-size: 10px;
+  color: var(--text3); letter-spacing: 2px;
+  margin-bottom: 5px;
+  display: flex; justify-content: space-between; align-items: center;
+}
+.timer-label span { color: var(--accent2); }
+.timer-track {
+  height: 3px; background: var(--bg3);
+  border-radius: 2px; overflow: hidden;
+}
+.timer-fill {
+  height: 100%; border-radius: 2px;
+  background: linear-gradient(90deg, var(--accent2), var(--accent));
+  transition: width linear;
+  box-shadow: 0 0 6px var(--accent);
+}
+.timer-fill.urgent {
+  background: linear-gradient(90deg, #fa6d8f, #ff4444);
+  box-shadow: 0 0 8px #fa6d8f;
+  animation: timer-pulse .4s ease infinite alternate;
+}
+@keyframes timer-pulse {
+  from { opacity: 1; }
+  to   { opacity: 0.6; }
 }
 
 /* ── END SCREEN ── */
@@ -1172,11 +1198,19 @@ function renderScene(scene) {
       ${scene.narrator ? `<div class="narrator-text" id="narrator-text"></div>` : ''}
       <div class="scene-text" id="typewriter-text"></div>
       <div id="choices-area" class="hidden">${choicesHTML}</div>
+      <div id="choice-timer">
+        <div class="timer-label">TEMPS RESTANT <span id="timer-count"></span></div>
+        <div class="timer-track"><div class="timer-fill" id="timer-fill"></div></div>
+      </div>
     </div>`;
 
   const showChoices = () => {
     const ca = document.getElementById('choices-area');
     if (ca) { ca.classList.remove('hidden'); ca.classList.add('reveal'); }
+    // Démarrer le timer si la scène en a un
+    if (scene.timer && scene.timer.duration > 0) {
+      startChoiceTimer(scene.timer.duration, scene.timer.auto || 'random');
+    }
   };
 
   const showMainText = () => {
@@ -1384,6 +1418,7 @@ function renderEndScene(scene) {
 
 function pickChoice(targetId, choiceIndex, btnEl) {
   if (!targetId) return;
+  stopChoiceTimer();
 
   // Récupérer l'objet choice depuis le tableau stocké
   const choice = window._currentChoices?.[choiceIndex] || {};
@@ -1607,6 +1642,70 @@ document.addEventListener('fullscreenchange', () => {
 
 let uiVisible = false;
 let uiHideTimer = null;
+
+// ══════════════════════════════════════════════
+// TIMER DE CHOIX
+// ══════════════════════════════════════════════
+let _choiceTimerInterval = null;
+
+function startChoiceTimer(duration, autoMode) {
+  stopChoiceTimer();
+  const timerEl = document.getElementById('choice-timer');
+  const fillEl  = document.getElementById('timer-fill');
+  const countEl = document.getElementById('timer-count');
+  if (!timerEl) return;
+
+  timerEl.classList.add('active');
+  fillEl.style.width = '100%';
+  fillEl.classList.remove('urgent');
+  countEl.textContent = duration + 's';
+
+  const endTime = Date.now() + duration * 1000;
+
+  _choiceTimerInterval = setInterval(() => {
+    const remaining = Math.max(0, endTime - Date.now());
+    const pct = (remaining / (duration * 1000)) * 100;
+    fillEl.style.width = pct + '%';
+    countEl.textContent = Math.ceil(remaining / 1000) + 's';
+    if (pct < 30) fillEl.classList.add('urgent');
+    if (remaining <= 0) { stopChoiceTimer(); autoPickChoice(autoMode); }
+  }, 100);
+}
+
+function stopChoiceTimer() {
+  if (_choiceTimerInterval) { clearInterval(_choiceTimerInterval); _choiceTimerInterval = null; }
+  const t = document.getElementById('choice-timer');
+  if (t) t.classList.remove('active');
+  const f = document.getElementById('timer-fill');
+  if (f) f.classList.remove('urgent');
+}
+
+function autoPickChoice(autoMode) {
+  const choices = window._currentChoices || [];
+  const opts = JSON.parse(localStorage.getItem('sf_options') || '{}');
+  const lockedMode = opts.locked || 'hidden';
+  const accessible = choices.filter(c => {
+    const req = c.requires;
+    if (!req?.stat) return true;
+    const val = stats[req.stat] || 0;
+    if (req.min !== undefined && val < req.min) return lockedMode !== 'hidden';
+    return true;
+  });
+  if (!accessible.length) return;
+  let chosen;
+  if (autoMode === 'first')      chosen = accessible[0];
+  else if (autoMode === 'last')  chosen = accessible[accessible.length - 1];
+  else                           chosen = accessible[Math.floor(Math.random() * accessible.length)];
+  const idx = choices.indexOf(chosen);
+  const btns = document.querySelectorAll('.choice-btn');
+  if (btns[idx]) {
+    btns[idx].style.borderColor = 'var(--accent2)';
+    btns[idx].style.background  = 'rgba(255,128,64,0.15)';
+    setTimeout(() => pickChoice(chosen.vers, idx, btns[idx]), 500);
+  } else {
+    pickChoice(chosen.vers, idx, null);
+  }
+}
 
 function hideUI() {
   uiVisible = false;
