@@ -1197,11 +1197,11 @@ function renderScene(scene) {
       </div>` : ''}
       ${scene.narrator ? `<div class="narrator-text" id="narrator-text"></div>` : ''}
       <div class="scene-text" id="typewriter-text"></div>
-      <div id="choices-area" class="hidden">${choicesHTML}</div>
       <div id="choice-timer">
         <div class="timer-label">TEMPS RESTANT <span id="timer-count"></span></div>
         <div class="timer-track"><div class="timer-fill" id="timer-fill"></div></div>
       </div>
+      <div id="choices-area" class="hidden">${choicesHTML}</div>
     </div>`;
 
   const showChoices = () => {
