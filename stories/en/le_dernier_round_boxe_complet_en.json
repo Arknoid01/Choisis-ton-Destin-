@@ -1,0 +1,4049 @@
+{
+  "name": "The Last Round",
+  "kids": false,
+  "askPlayerName": true,
+  "pack": "free",
+  "stats": [
+    {
+      "id": "vie",
+      "label": "Life",
+      "start": 100,
+      "max": 100,
+      "color": "#ef476f"
+    },
+    {
+      "id": "endurance",
+      "label": "Endure",
+      "start": 80,
+      "max": 100,
+      "color": "#06d6a0"
+    },
+    {
+      "id": "mental",
+      "label": "Mental",
+      "start": 60,
+      "max": 100,
+      "color": "#8ecae6"
+    },
+    {
+      "id": "technique",
+      "label": "Technical",
+      "start": 40,
+      "max": 100,
+      "color": "#ffd166"
+    },
+    {
+      "id": "popularite",
+      "label": "Popularity",
+      "start": 20,
+      "max": 100,
+      "color": "#c77dff"
+    },
+    {
+      "id": "classement",
+      "label": "Classification",
+      "start": 0,
+      "max": 100,
+      "color": "#f77f00"
+    },
+    {
+      "id": "discipline",
+      "label": "Discipline",
+      "start": 50,
+      "max": 100,
+      "color": "#90be6d"
+    },
+    {
+      "id": "violence",
+      "label": "Violence",
+      "start": 20,
+      "max": 100,
+      "color": "#f94144"
+    },
+    {
+      "id": "ringiq",
+      "label": "Ring IQ",
+      "start": 40,
+      "max": 100,
+      "color": "#577590"
+    }
+  ],
+  "theme": {
+    "bg": "#070708",
+    "bg2": "#111114",
+    "bg3": "#1c1c22",
+    "bg4": "#282832",
+    "border": "#3b3b48",
+    "accent": "#ffd166",
+    "accent2": "#ef476f",
+    "accent3": "#06d6a0",
+    "text": "#f4efe6",
+    "text2": "#b8b0a5",
+    "text3": "#756f68"
+  },
+  "scenes": {
+    "intro": {
+      "id": "intro",
+      "title": "Sub-Sol",
+      "location": "BOX ROOM — QUARTIER EST",
+      "narrator": "All champions start somewhere.",
+      "text": "The room smells of sweat, leather and tired neon.\n\nYour coach, Malik, put a file on the stool.\n\n**\"Tonight is your entry in the standings. If you win, contracts come in. If you lose, it's not over. But the road will be longer. *\n\nYou put your tapes on.\n\nFirst opponent: **Viktor Mendez**.",
+      "isStart": true,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Read Mendez analysis",
+          "vers": "analyse_mendez",
+          "effects": [
+            {
+              "stat": "technique",
+              "val": 5
+            }
+          ]
+        },
+        {
+          "text": "Enter without reading the folder",
+          "vers": "vestiaire_mendez",
+          "effects": [
+            {
+              "stat": "mental",
+              "val": 5
+            }
+          ]
+        }
+      ],
+      "x": 400,
+      "y": 0
+    },
+    "analyse_mendez": {
+      "id": "analyse_mendez",
+      "title": "Analysis — Viktor Mendez",
+      "location": "VESTIARY",
+      "narrator": "The victory starts before the first shot.",
+      "text": "Style:\n- constant pressure\n- jab then left hook\n- likes to catch up with the ropes\n\nWeaknesses:\n- Opens the liver after its hook\n- tired if we make him miss\n- hates body to body\n\nMalik hits the file.\n\n**\"Retain this: jab, crochet, opening to the body. *",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Remember its weak spot",
+          "vers": "vestiaire_mendez",
+          "effects": [
+            {
+              "stat": "technique",
+              "val": 10
+            },
+            {
+              "stat": "mental",
+              "val": 5
+            }
+          ]
+        }
+      ],
+      "x": 400,
+      "y": 160
+    },
+    "vestiaire_mendez": {
+      "id": "vestiaire_mendez",
+      "title": "First Combat",
+      "location": "VESTIARY",
+      "narrator": "The noise of the public always seems louder before entering.",
+      "text": "Your name resonates.\n\nMalik tightens your gloves.\n\n*\"Read his shoulders. Don't answer random. *\n\nThe ring light swallows you.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "flash",
+      "choices": [
+        {
+          "text": "Get on the ring",
+          "vers": "mendez_1",
+          "effects": [
+            {
+              "stat": "mental",
+              "val": 5
+            }
+          ]
+        }
+      ],
+      "x": 400,
+      "y": 320
+    },
+    "mendez_1": {
+      "id": "mendez_1",
+      "title": "Round 1 — Jab Crochet",
+      "location": "LOCAL RING",
+      "narrator": "Timer short: observe, answer.",
+      "text": "Mendez is moving forward.\n\nJab fast.\n\nHis left shoulder goes down.\n\nThe hook is coming.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "glitch",
+      "choices": [
+        {
+          "text": "Equive right then crochet liver",
+          "vers": "mendez_good_1",
+          "effects": [
+            {
+              "stat": "endurance",
+              "val": -8
+            },
+            {
+              "stat": "technique",
+              "val": 8
+            }
+          ]
+        },
+        {
+          "text": "Block top",
+          "vers": "mendez_block_1",
+          "effects": [
+            {
+              "stat": "vie",
+              "val": -8
+            },
+            {
+              "stat": "endurance",
+              "val": -5
+            }
+          ]
+        },
+        {
+          "text": "Follow straight line",
+          "vers": "mendez_bad_1",
+          "effects": [
+            {
+              "stat": "vie",
+              "val": -18
+            },
+            {
+              "stat": "mental",
+              "val": -5
+            }
+          ]
+        }
+      ],
+      "x": 200,
+      "y": 520,
+      "timer": {
+        "duration": 3,
+        "auto": "mendez_block_1"
+      }
+    },
+    "mendez_good_1": {
+      "id": "mendez_good_1",
+      "title": "Touched liver",
+      "location": "LOCAL RING",
+      "narrator": "The file was true.",
+      "text": "You slide to the right.\n\nHis hook's on.\n\nYour glove comes under his ribs.\n\nMendez grimace.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "flash",
+      "choices": [
+        {
+          "text": "Keep pressure on",
+          "vers": "mendez_2",
+          "effects": [
+            {
+              "stat": "popularite",
+              "val": 5
+            }
+          ]
+        },
+        {
+          "text": "Stay patient",
+          "vers": "mendez_2",
+          "effects": [
+            {
+              "stat": "mental",
+              "val": 5
+            }
+          ]
+        }
+      ],
+      "x": 80,
+      "y": 700,
+      "timer": {
+        "duration": 4,
+        "auto": "mendez_2"
+      }
+    },
+    "mendez_block_1": {
+      "id": "mendez_block_1",
+      "title": "High Guard",
+      "location": "LOCAL RING",
+      "narrator": "You survive, but he's gaining ground.",
+      "text": "The hook type your gloves.\n\nMendez pushes.\n\nThe ropes are behind you.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Clinch to break the rhythm",
+          "vers": "mendez_2",
+          "effects": [
+            {
+              "stat": "endurance",
+              "val": -4
+            },
+            {
+              "stat": "mental",
+              "val": 5
+            }
+          ]
+        },
+        {
+          "text": "Side exit",
+          "vers": "mendez_2",
+          "effects": [
+            {
+              "stat": "endurance",
+              "val": -8
+            },
+            {
+              "stat": "technique",
+              "val": 5
+            }
+          ]
+        }
+      ],
+      "x": 260,
+      "y": 700,
+      "timer": {
+        "duration": 3,
+        "auto": "mendez_2"
+      }
+    },
+    "mendez_bad_1": {
+      "id": "mendez_bad_1",
+      "title": "Net touch",
+      "location": "LOCAL RING",
+      "narrator": "The first warning comes soon.",
+      "text": "The hook is on your head.\n\nThe ring is rocking.\n\nMalik shouts:\n\n*\"Read it! *",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "glitch",
+      "choices": [
+        {
+          "text": "Beware",
+          "vers": "mendez_2",
+          "effects": [
+            {
+              "stat": "mental",
+              "val": -5
+            }
+          ]
+        }
+      ],
+      "x": 440,
+      "y": 700,
+      "timer": {
+        "duration": 3,
+        "auto": "mendez_2"
+      }
+    },
+    "mendez_2": {
+      "id": "mendez_2",
+      "title": "Round 1 — Body to Body",
+      "location": "LOCAL RING",
+      "narrator": "He doesn't like being hung.",
+      "text": "Mendez sticks his forehead to yours.\n\nHe wants to push you.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "glitch",
+      "choices": [
+        {
+          "text": "Clinch and weigh on him",
+          "vers": "mendez_good_2",
+          "effects": [
+            {
+              "stat": "endurance",
+              "val": -5
+            },
+            {
+              "stat": "mental",
+              "val": 5
+            }
+          ]
+        },
+        {
+          "text": "Large hook",
+          "vers": "mendez_bad_2",
+          "effects": [
+            {
+              "stat": "vie",
+              "val": -14
+            },
+            {
+              "stat": "endurance",
+              "val": -12
+            }
+          ]
+        },
+        {
+          "text": "Uppercut short",
+          "vers": "mendez_neutral_2",
+          "effects": [
+            {
+              "stat": "vie",
+              "val": -5
+            },
+            {
+              "stat": "technique",
+              "val": 4
+            }
+          ]
+        }
+      ],
+      "x": 260,
+      "y": 880,
+      "timer": {
+        "duration": 2,
+        "auto": "mendez_neutral_2"
+      }
+    },
+    "mendez_good_2": {
+      "id": "mendez_good_2",
+      "title": "You break his rhythm",
+      "location": "LOCAL RING",
+      "narrator": "The audience doesn't always like smart boxing.",
+      "text": "You hang it.\n\nYou make him wear your weight.\n\nHands breath.\n\nThe referee separates.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Back to the corner",
+          "vers": "coin_mendez",
+          "effects": [
+            {
+              "stat": "technique",
+              "val": 5
+            }
+          ]
+        }
+      ],
+      "x": 80,
+      "y": 1040
+    },
+    "mendez_neutral_2": {
+      "id": "mendez_neutral_2",
+      "title": "Exchange Court",
+      "location": "LOCAL RING",
+      "narrator": "Neither clean nor bad.",
+      "text": "Your uppercut touches.\n\nMendez answers the body.\n\nThe bell rings.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Back to the corner",
+          "vers": "coin_mendez",
+          "effects": [
+            {
+              "stat": "endurance",
+              "val": -5
+            }
+          ]
+        }
+      ],
+      "x": 260,
+      "y": 1040
+    },
+    "mendez_bad_2": {
+      "id": "mendez_bad_2",
+      "title": "Too wide",
+      "location": "LOCAL RING",
+      "narrator": "Big gestures are expensive.",
+      "text": "Your hook is too wide.\n\nMendez goes under.\n\nTwo shots to the body.\n\nThe bell saves you.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "glitch",
+      "choices": [
+        {
+          "text": "Back to the corner",
+          "vers": "coin_mendez",
+          "effects": [
+            {
+              "stat": "vie",
+              "val": -10
+            },
+            {
+              "stat": "mental",
+              "val": -10
+            }
+          ]
+        }
+      ],
+      "x": 440,
+      "y": 1040
+    },
+    "coin_mendez": {
+      "id": "coin_mendez",
+      "title": "The Corner — Malik",
+      "location": "BLUE COIN",
+      "narrator": "Between two rounds, the fight continues in the head.",
+      "text": "Malik pours water on your neck.\n\n**\"He always opens after crochet. But be careful: He knows now that you've seen him. He's gonna make a joke. *",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Round 2",
+          "vers": "mendez_3",
+          "effects": [
+            {
+              "stat": "mental",
+              "val": 8
+            },
+            {
+              "stat": "endurance",
+              "val": 5
+            }
+          ]
+        }
+      ],
+      "x": 260,
+      "y": 1220
+    },
+    "mendez_3": {
+      "id": "mendez_3",
+      "title": "Round 2 — The Feint",
+      "location": "LOCAL RING",
+      "narrator": "He knows you saw his hook.",
+      "text": "Mendez is moving forward.\n\nJab.\n\nLower left shoulder.\n\nBut his gaze goes down to your belly.\n\nFeint?",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "glitch",
+      "choices": [
+        {
+          "text": "Do not bite, compact guard",
+          "vers": "mendez_good_3",
+          "effects": [
+            {
+              "stat": "technique",
+              "val": 8
+            },
+            {
+              "stat": "mental",
+              "val": 5
+            }
+          ]
+        },
+        {
+          "text": "Automatic straight esquive",
+          "vers": "mendez_bad_3",
+          "effects": [
+            {
+              "stat": "vie",
+              "val": -18
+            },
+            {
+              "stat": "mental",
+              "val": -8
+            }
+          ]
+        },
+        {
+          "text": "Stop jam",
+          "vers": "mendez_neutral_3",
+          "effects": [
+            {
+              "stat": "endurance",
+              "val": -5
+            },
+            {
+              "stat": "technique",
+              "val": 4
+            }
+          ]
+        }
+      ],
+      "x": 260,
+      "y": 1400,
+      "timer": {
+        "duration": 2,
+        "auto": "mendez_neutral_3"
+      }
+    },
+    "mendez_good_3": {
+      "id": "mendez_good_3",
+      "title": "You read The Trap",
+      "location": "LOCAL RING",
+      "narrator": "This time, you see him.",
+      "text": "You keep your position.\n\nHis body hook is hitting your elbow.\n\nHe's too close.\n\nOpening.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "flash",
+      "choices": [
+        {
+          "text": "Short hook with chin",
+          "vers": "mendez_ko",
+          "effects": [
+            {
+              "stat": "classement",
+              "val": 20
+            },
+            {
+              "stat": "popularite",
+              "val": 15
+            }
+          ]
+        },
+        {
+          "text": "Take over the center",
+          "vers": "mendez_decision",
+          "effects": [
+            {
+              "stat": "classement",
+              "val": 12
+            },
+            {
+              "stat": "technique",
+              "val": 10
+            }
+          ]
+        }
+      ],
+      "x": 80,
+      "y": 1580,
+      "timer": {
+        "duration": 2,
+        "auto": "mendez_decision"
+      }
+    },
+    "mendez_neutral_3": {
+      "id": "mendez_neutral_3",
+      "title": "Jab d'Arrét",
+      "location": "LOCAL RING",
+      "narrator": "Simple. Useful.",
+      "text": "Your jab cuts his entrance.\n\nMendez slows down.\n\nYou win the round without shining.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Finish clean",
+          "vers": "mendez_decision",
+          "effects": [
+            {
+              "stat": "classement",
+              "val": 12
+            },
+            {
+              "stat": "technique",
+              "val": 8
+            }
+          ]
+        }
+      ],
+      "x": 260,
+      "y": 1580
+    },
+    "mendez_bad_3": {
+      "id": "mendez_bad_3",
+      "title": "You bite",
+      "location": "LOCAL RING",
+      "narrator": "He prepared you.",
+      "text": "You go right.\n\nHang on.\n\nHis direct cut you off.\n\nYou're laying a knee.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "glitch",
+      "choices": [
+        {
+          "text": "Get up",
+          "vers": "mendez_loss",
+          "effects": [
+            {
+              "stat": "vie",
+              "val": -20
+            },
+            {
+              "stat": "mental",
+              "val": -15
+            }
+          ]
+        }
+      ],
+      "x": 440,
+      "y": 1580,
+      "timer": {
+        "duration": 5,
+        "auto": "mendez_loss"
+      }
+    },
+    "mendez_ko": {
+      "id": "mendez_ko",
+      "title": "Mendez Tombe",
+      "location": "LOCAL RING",
+      "narrator": "The first big sound of your career.",
+      "text": "Your short hook touches.\n\nMendez sits down.\n\nHe's up to eight.\n\nBut he's gone.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "flash",
+      "choices": [
+        {
+          "text": "End the fight",
+          "vers": "mendez_ko_win",
+          "effects": [
+            {
+              "stat": "popularite",
+              "val": 20
+            },
+            {
+              "stat": "classement",
+              "val": 25
+            }
+          ]
+        }
+      ],
+      "x": 80,
+      "y": 1760
+    },
+    "mendez_ko_win": {
+      "id": "mendez_ko_win",
+      "title": "Victory by KO",
+      "location": "LOCAL RING",
+      "narrator": "Doors open faster when you make noise.",
+      "text": "The referee stops.\n\nVictory.\n\nA promoter in a suit is already waiting for you.\n\n**\"Bigger. More risky. Better paid. *",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Listen to the promoter",
+          "vers": "contrat_promoteur",
+          "effects": [
+            {
+              "stat": "popularite",
+              "val": 10
+            },
+            {
+              "stat": "classement",
+              "val": 10
+            }
+          ]
+        },
+        {
+          "text": "Stay with Malik",
+          "vers": "contrat_malik",
+          "effects": [
+            {
+              "stat": "mental",
+              "val": 10
+            },
+            {
+              "stat": "technique",
+              "val": 5
+            }
+          ]
+        }
+      ],
+      "x": 80,
+      "y": 1940
+    },
+    "mendez_decision": {
+      "id": "mendez_decision",
+      "title": "Win at Points",
+      "location": "LOCAL RING",
+      "narrator": "Less spectacular. Stronger.",
+      "text": "Unanimous decision.\n\nVictory.\n\nMalik's nodding.\n\n*\"You boxed with your head. *",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Accept the regional tournament",
+          "vers": "tournoi_regional",
+          "effects": [
+            {
+              "stat": "classement",
+              "val": 15
+            },
+            {
+              "stat": "technique",
+              "val": 10
+            }
+          ]
+        }
+      ],
+      "x": 260,
+      "y": 1940
+    },
+    "mendez_loss": {
+      "id": "mendez_loss",
+      "title": "First Defeat",
+      "location": "LOCAL RING",
+      "narrator": "Losing a fight is not losing a career.",
+      "text": "You end up.\n\nBut the decision is clear.\n\nDefeat.\n\nIn the locker room, Malik doesn't scream.\n\n**\"Now you know what it is. We're rebuilding. *",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Partition by small circuits",
+          "vers": "circuit_secondaire",
+          "effects": [
+            {
+              "stat": "mental",
+              "val": 10
+            },
+            {
+              "stat": "classement",
+              "val": 5
+            }
+          ]
+        },
+        {
+          "text": "Doubt you",
+          "vers": "doute",
+          "effects": [
+            {
+              "stat": "mental",
+              "val": -15
+            },
+            {
+              "stat": "popularite",
+              "val": -5
+            }
+          ]
+        }
+      ],
+      "x": 440,
+      "y": 1940
+    },
+    "contrat_promoteur": {
+      "id": "contrat_promoteur",
+      "title": "The Fast Deal",
+      "location": "COLOR",
+      "narrator": "Brilliant contracts often hide the hardest blows.",
+      "text": "The promoter's name is Sorel.\n\n**\"Fight in three weeks. Undefeated opponent. Local TV. *\n\nMalik doesn't like it.\n\n**\"Too early. *\n\nSorel smiles.\n\n**\"The champions are not waiting to be ready. *",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Sign with Sorel",
+          "vers": "analyse_drago",
+          "effects": [
+            {
+              "stat": "popularite",
+              "val": 15
+            },
+            {
+              "stat": "mental",
+              "val": -5
+            }
+          ]
+        },
+        {
+          "text": "Refuse and listen to Malik",
+          "vers": "tournoi_regional",
+          "effects": [
+            {
+              "stat": "technique",
+              "val": 10
+            },
+            {
+              "stat": "mental",
+              "val": 10
+            }
+          ]
+        }
+      ],
+      "x": 80,
+      "y": 2120
+    },
+    "contrat_malik": {
+      "id": "contrat_malik",
+      "title": "The Patient Road",
+      "location": "SIDE ROOM",
+      "narrator": "Some paths go up slowly, but less bones break.",
+      "text": "You refuse to rush.\n\nMalik smiles.\n\n**\"Regional tournament. Three fights. You win, you get into the top. You lose, you learn. *",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Prepare the tournament",
+          "vers": "tournoi_regional",
+          "effects": [
+            {
+              "stat": "technique",
+              "val": 10
+            },
+            {
+              "stat": "endurance",
+              "val": 10
+            }
+          ]
+        }
+      ],
+      "x": 220,
+      "y": 2120
+    },
+    "circuit_secondaire": {
+      "id": "circuit_secondaire",
+      "title": "The Small Circuits",
+      "location": "COMMUNITY ROOM",
+      "narrator": "Secondary roads still lead somewhere.",
+      "text": "You're going down.\n\nSmall rooms.\n\nUsed gloves.\n\nYou win a fight.\n\nThen another.\n\nMalik says:\n\n**\"An undefeated boxer doesn't know who he is yet. You start. *",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Back to the regional tournament",
+          "vers": "tournoi_regional",
+          "effects": [
+            {
+              "stat": "mental",
+              "val": 20
+            },
+            {
+              "stat": "endurance",
+              "val": 10
+            },
+            {
+              "stat": "popularite",
+              "val": 5
+            }
+          ]
+        }
+      ],
+      "x": 620,
+      "y": 2120
+    },
+    "doute": {
+      "id": "doute",
+      "title": "Night After",
+      "location": "APPARATUS",
+      "narrator": "Hits pass. The doubt remains.",
+      "text": "You see the hook again.\n\nAgain.\n\nMalik ends up calling.\n\n**\"Come tomorrow. Even if you don't want to. Especially if you don't want to. *",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Go back to the room",
+          "vers": "circuit_secondaire",
+          "effects": [
+            {
+              "stat": "mental",
+              "val": 15
+            }
+          ]
+        },
+        {
+          "text": "Drop",
+          "vers": "fin_abandon",
+          "effects": []
+        }
+      ],
+      "x": 780,
+      "y": 2120
+    },
+    "analyse_drago": {
+      "id": "analyse_drago",
+      "title": "Analysis — Ivan Drago",
+      "location": "PRIVATE ROOM",
+      "narrator": "The quick contract leads to a wall.",
+      "text": "Style:\n- huge power\n- little volume\n- every mistake is expensive\n\nWeaknesses:\n- slow start\n- bad at angles\n- get mad if we refuse the exchange\n\nMalik closes the file.\n\n**\"Never stand in front. Never. *",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Entering the dangerous fight",
+          "vers": "drago_1",
+          "effects": [
+            {
+              "stat": "popularite",
+              "val": 10
+            },
+            {
+              "stat": "mental",
+              "val": -5
+            }
+          ]
+        }
+      ],
+      "x": 80,
+      "y": 2300
+    },
+    "drago_1": {
+      "id": "drago_1",
+      "title": "Drago — The Mass",
+      "location": "TV PLATEAU",
+      "narrator": "Only one bad choice can stop it.",
+      "text": "Drago is moving slowly.\n\nNo jab.\n\nJust a heavy line getting ready.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "glitch",
+      "choices": [
+        {
+          "text": "Exit on left corner",
+          "vers": "drago_good",
+          "effects": [
+            {
+              "stat": "technique",
+              "val": 10
+            },
+            {
+              "stat": "endurance",
+              "val": -8
+            }
+          ]
+        },
+        {
+          "text": "Block top",
+          "vers": "drago_block",
+          "effects": [
+            {
+              "stat": "vie",
+              "val": -25
+            },
+            {
+              "stat": "endurance",
+              "val": -10
+            }
+          ]
+        },
+        {
+          "text": "Exchange with him",
+          "vers": "drago_ko_loss",
+          "effects": [
+            {
+              "stat": "vie",
+              "val": -80
+            },
+            {
+              "stat": "mental",
+              "val": -30
+            }
+          ]
+        }
+      ],
+      "x": 80,
+      "y": 2480,
+      "timer": {
+        "duration": 2,
+        "auto": "drago_block"
+      }
+    },
+    "drago_good": {
+      "id": "drago_good",
+      "title": "Angle Found",
+      "location": "TV PLATEAU",
+      "narrator": "The monster hits the void.",
+      "text": "You're out of the line.\n\nHis right goes through the air.\n\nYou touch the body twice.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "flash",
+      "choices": [
+        {
+          "text": "Refuse the exchange to the end",
+          "vers": "drago_win",
+          "effects": [
+            {
+              "stat": "classement",
+              "val": 30
+            },
+            {
+              "stat": "popularite",
+              "val": 25
+            }
+          ],
+          "requires": {
+            "stat": "endurance",
+            "min": 30
+          }
+        }
+      ],
+      "x": 80,
+      "y": 2660
+    },
+    "drago_block": {
+      "id": "drago_block",
+      "title": "Even blocked, it hurts.",
+      "location": "TV PLATEAU",
+      "narrator": "Power crosses the gloves.",
+      "text": "You're blocking.\n\nYour arm is getting heavy.\n\nYou understand that blocking is not a solution.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "glitch",
+      "choices": [
+        {
+          "text": "Turn Now",
+          "vers": "drago_survive_loss",
+          "effects": [
+            {
+              "stat": "endurance",
+              "val": -15
+            },
+            {
+              "stat": "mental",
+              "val": -5
+            }
+          ]
+        }
+      ],
+      "x": 260,
+      "y": 2660
+    },
+    "drago_ko_loss": {
+      "id": "drago_ko_loss",
+      "title": "KO Brutal",
+      "location": "TV PLATEAU",
+      "narrator": "Some lessons cut the light.",
+      "text": "You're trading.\n\nError.\n\nRight is coming.\n\nBlack.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "flash",
+      "choices": [
+        {
+          "text": "Wake up in the infirmary",
+          "vers": "apres_drago",
+          "effects": [
+            {
+              "stat": "vie",
+              "val": -30
+            },
+            {
+              "stat": "mental",
+              "val": -20
+            },
+            {
+              "stat": "popularite",
+              "val": 10
+            }
+          ]
+        }
+      ],
+      "x": 440,
+      "y": 2660
+    },
+    "drago_win": {
+      "id": "drago_win",
+      "title": "Upset",
+      "location": "TV PLATEAU",
+      "narrator": "A victory too fast creates a legend too soon.",
+      "text": "You make him miss.\n\nRound after round.\n\nSurprised decision.\n\nMalik isn't smiling.\n\n**\"Now they will want to burn you faster. *",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Aimer Ward",
+          "vers": "analyse_ward",
+          "effects": [
+            {
+              "stat": "classement",
+              "val": 25
+            },
+            {
+              "stat": "popularite",
+              "val": 20
+            }
+          ]
+        }
+      ],
+      "x": 80,
+      "y": 2840
+    },
+    "drago_survive_loss": {
+      "id": "drago_survive_loss",
+      "title": "Courageous Defeat",
+      "location": "TV PLATEAU",
+      "narrator": "You lose, but you stay up.",
+      "text": "Drago wins points.\n\nThe audience still applauds.\n\nYour name is circulating.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Back through the tournament",
+          "vers": "tournoi_regional",
+          "effects": [
+            {
+              "stat": "popularite",
+              "val": 15
+            },
+            {
+              "stat": "mental",
+              "val": 10
+            }
+          ]
+        }
+      ],
+      "x": 260,
+      "y": 2840
+    },
+    "apres_drago": {
+      "id": "apres_drago",
+      "title": "After Black",
+      "location": "INFIRMERIA",
+      "narrator": "The body forgets less quickly than the ego.",
+      "text": "You wake up.\n\nMalik is by the bed.\n\n**\"Awful contract. But not end of career. Unless you decide. *",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Rebuilding",
+          "vers": "circuit_secondaire",
+          "effects": [
+            {
+              "stat": "mental",
+              "val": 10
+            },
+            {
+              "stat": "endurance",
+              "val": 10
+            }
+          ]
+        },
+        {
+          "text": "Stop",
+          "vers": "fin_abandon",
+          "effects": []
+        }
+      ],
+      "x": 440,
+      "y": 2840
+    },
+    "tournoi_regional": {
+      "id": "tournoi_regional",
+      "title": "Regional tournament",
+      "location": "MUNICIPAL GYMNASE",
+      "narrator": "The real career begins when the fighting goes on.",
+      "text": "Next opponent: **Elias Reed**.\n\nStyle:\n- Counterfeit\n- wait for the mistakes\n- very good direct straight\n- weak when forced to lead\n\nMalik summarizes:\n\n**\"Don't throw yourself away. Move it forward. *",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Study Reed",
+          "vers": "reed_1",
+          "effects": [
+            {
+              "stat": "technique",
+              "val": 10
+            }
+          ]
+        },
+        {
+          "text": "Confident Enter",
+          "vers": "reed_1",
+          "effects": [
+            {
+              "stat": "mental",
+              "val": 10
+            }
+          ]
+        }
+      ],
+      "x": 260,
+      "y": 2300
+    },
+    "reed_1": {
+      "id": "reed_1",
+      "title": "Reed — The Counterer",
+      "location": "GYMNASE",
+      "narrator": "He's waiting for you to make the mistake.",
+      "text": "Reed doesn't move much.\n\nHigh guard.\n\nHe wants you in.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "glitch",
+      "choices": [
+        {
+          "text": "Feint of jab without moving",
+          "vers": "reed_good",
+          "effects": [
+            {
+              "stat": "technique",
+              "val": 8
+            },
+            {
+              "stat": "endurance",
+              "val": -3
+            }
+          ]
+        },
+        {
+          "text": "Shade with a direct",
+          "vers": "reed_bad",
+          "effects": [
+            {
+              "stat": "vie",
+              "val": -18
+            },
+            {
+              "stat": "mental",
+              "val": -8
+            }
+          ]
+        },
+        {
+          "text": "Turn around him",
+          "vers": "reed_neutral",
+          "effects": [
+            {
+              "stat": "endurance",
+              "val": -6
+            },
+            {
+              "stat": "technique",
+              "val": 4
+            }
+          ]
+        }
+      ],
+      "x": 260,
+      "y": 2480,
+      "timer": {
+        "duration": 3,
+        "auto": "reed_neutral"
+      }
+    },
+    "reed_good": {
+      "id": "reed_good",
+      "title": "You The Force to React",
+      "location": "GYMNASE",
+      "narrator": "The feint speaks.",
+      "text": "You're pretending.\n\nReed bit slightly.\n\nHis direct leaves in a vacuum.\n\nOpen flank.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "flash",
+      "choices": [
+        {
+          "text": "Touch the body then exit",
+          "vers": "reed_2",
+          "effects": [
+            {
+              "stat": "technique",
+              "val": 8
+            },
+            {
+              "stat": "classement",
+              "val": 8
+            }
+          ]
+        },
+        {
+          "text": "Find the KO",
+          "vers": "reed_bad2",
+          "effects": [
+            {
+              "stat": "vie",
+              "val": -16
+            },
+            {
+              "stat": "endurance",
+              "val": -10
+            }
+          ]
+        }
+      ],
+      "x": 120,
+      "y": 2660,
+      "timer": {
+        "duration": 2,
+        "auto": "reed_2"
+      }
+    },
+    "reed_neutral": {
+      "id": "reed_neutral",
+      "title": "Patience",
+      "location": "GYMNASE",
+      "narrator": "The public is bored. Good sign.",
+      "text": "You're spinning.\n\nReed's waiting.\n\nMalik shouts:\n\n**\"Make it start! *",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Leave him the center",
+          "vers": "reed_2",
+          "effects": [
+            {
+              "stat": "mental",
+              "val": 5
+            }
+          ]
+        },
+        {
+          "text": "Attack brutally",
+          "vers": "reed_bad",
+          "effects": [
+            {
+              "stat": "vie",
+              "val": -14
+            }
+          ]
+        }
+      ],
+      "x": 300,
+      "y": 2660,
+      "timer": {
+        "duration": 3,
+        "auto": "reed_2"
+      }
+    },
+    "reed_bad": {
+      "id": "reed_bad",
+      "title": "Against Full Axis",
+      "location": "GYMNASE",
+      "narrator": "You're entering his fight.",
+      "text": "You're moving too straight.\n\nReed picks you up with his direct.\n\nNet.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "glitch",
+      "choices": [
+        {
+          "text": "Take it easy",
+          "vers": "reed_2",
+          "effects": [
+            {
+              "stat": "mental",
+              "val": -8
+            }
+          ]
+        }
+      ],
+      "x": 480,
+      "y": 2660,
+      "timer": {
+        "duration": 3,
+        "auto": "reed_2"
+      }
+    },
+    "reed_bad2": {
+      "id": "reed_bad2",
+      "title": "Gourmet",
+      "location": "GYMNASE",
+      "narrator": "The KO is a temptation.",
+      "text": "You're charging.\n\nReed's waiting for you.\n\nDirect.\n\nCrochet.\n\nYou're standing.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "glitch",
+      "choices": [
+        {
+          "text": "Surviving to the corner",
+          "vers": "coin_reed",
+          "effects": [
+            {
+              "stat": "vie",
+              "val": -10
+            },
+            {
+              "stat": "mental",
+              "val": -5
+            }
+          ]
+        }
+      ],
+      "x": 120,
+      "y": 2840
+    },
+    "reed_2": {
+      "id": "reed_2",
+      "title": "Reed Forward Finally",
+      "location": "GYMNASE",
+      "narrator": "Now he has to lead.",
+      "text": "Reed's moving.\n\nHe doesn't like it.\n\nHis front foot is dragging.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "glitch",
+      "choices": [
+        {
+          "text": "Piping in the body",
+          "vers": "reed_win",
+          "effects": [
+            {
+              "stat": "technique",
+              "val": 8
+            },
+            {
+              "stat": "endurance",
+              "val": -5
+            }
+          ]
+        },
+        {
+          "text": "Go too far",
+          "vers": "reed_close",
+          "effects": [
+            {
+              "stat": "endurance",
+              "val": -5
+            }
+          ]
+        },
+        {
+          "text": "Exchange at the centre",
+          "vers": "reed_bad2",
+          "effects": [
+            {
+              "stat": "vie",
+              "val": -15
+            }
+          ]
+        }
+      ],
+      "x": 300,
+      "y": 2840,
+      "timer": {
+        "duration": 2,
+        "auto": "reed_close"
+      }
+    },
+    "coin_reed": {
+      "id": "coin_reed",
+      "title": "The Corner — Lucidity",
+      "location": "BLUE COIN",
+      "narrator": "Coach doesn't flatter.",
+      "text": "Malik shakes you.\n\n**\"Want to impress or win? Move it forward, sting, get out. Nothing else. *",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Apply the plan",
+          "vers": "reed_2",
+          "effects": [
+            {
+              "stat": "mental",
+              "val": 10
+            },
+            {
+              "stat": "technique",
+              "val": 5
+            }
+          ]
+        }
+      ],
+      "x": 520,
+      "y": 2840
+    },
+    "reed_win": {
+      "id": "reed_win",
+      "title": "Regional victory",
+      "location": "GYMNASE",
+      "narrator": "Smart victory changes your eyes.",
+      "text": "Unanimous decision.\n\nYou win.\n\nThe ranking is open.\n\nNext step: **Lena Ward**, interclub champion.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Accept the fight against Ward",
+          "vers": "analyse_ward",
+          "effects": [
+            {
+              "stat": "classement",
+              "val": 20
+            },
+            {
+              "stat": "popularite",
+              "val": 10
+            }
+          ]
+        }
+      ],
+      "x": 160,
+      "y": 3020
+    },
+    "reed_close": {
+      "id": "reed_close",
+      "title": "Locked Decision",
+      "location": "GYMNASE",
+      "narrator": "Winning ugly remains to win.",
+      "text": "Shared decision.\n\nYou don't win much.\n\nMalik says:\n\n**\"A career is also a bad win. *",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Continue Despite Criticism",
+          "vers": "analyse_ward",
+          "effects": [
+            {
+              "stat": "mental",
+              "val": 10
+            },
+            {
+              "stat": "classement",
+              "val": 12
+            }
+          ]
+        }
+      ],
+      "x": 340,
+      "y": 3020
+    },
+    "analyse_ward": {
+      "id": "analyse_ward",
+      "title": "Analysis — Lena Ward",
+      "location": "REGIONAL CENTRE",
+      "narrator": "At this level, weaknesses look like traps.",
+      "text": "Style:\n- change of pace\n- constant feints\n- excellent side exit\n- punishes foreseeable counters\n\nWeaknesses:\n- lower the guard after three jabs\n- doesn't like body attacks at the end of the round\n- becomes impatient if the public whistles\n\nMalik's looking at you.\n\n**\"The file is no longer sufficient. You must feel the moment. *",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Remember: three jabs then opening",
+          "vers": "ward_1",
+          "effects": [
+            {
+              "stat": "technique",
+              "val": 10
+            },
+            {
+              "stat": "mental",
+              "val": 5
+            }
+          ]
+        },
+        {
+          "text": "Do some side fights before Ward",
+          "vers": "hub_combats_annexes",
+          "effects": [
+            {
+              "stat": "discipline",
+              "val": 5
+            },
+            {
+              "stat": "popularite",
+              "val": 5
+            }
+          ]
+        }
+      ],
+      "x": 260,
+      "y": 3200
+    },
+    "ward_1": {
+      "id": "ward_1",
+      "title": "Ward — First Rhythm",
+      "location": "REGIONAL CENTRE",
+      "narrator": "She's testing you.",
+      "text": "Ward's turning.\n\nJab.\n\nBreak.\n\nJab.\n\nLonger break.\n\nThird jab?",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "glitch",
+      "choices": [
+        {
+          "text": "Wait for the third jab",
+          "vers": "ward_good",
+          "effects": [
+            {
+              "stat": "technique",
+              "val": 10
+            },
+            {
+              "stat": "mental",
+              "val": 5
+            }
+          ]
+        },
+        {
+          "text": "Counter now",
+          "vers": "ward_bad",
+          "effects": [
+            {
+              "stat": "vie",
+              "val": -18
+            },
+            {
+              "stat": "mental",
+              "val": -8
+            }
+          ]
+        },
+        {
+          "text": "Apply carefully",
+          "vers": "ward_neutral",
+          "effects": [
+            {
+              "stat": "endurance",
+              "val": -5
+            }
+          ]
+        }
+      ],
+      "x": 260,
+      "y": 3380,
+      "timer": {
+        "duration": 2,
+        "auto": "ward_neutral"
+      }
+    },
+    "ward_good": {
+      "id": "ward_good",
+      "title": "Third Jab",
+      "location": "REGIONAL CENTRE",
+      "narrator": "You just wait enough.",
+      "text": "The third jab leaves.\n\nHis guard is coming down.\n\nA fraction.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "flash",
+      "choices": [
+        {
+          "text": "Direct to the body",
+          "vers": "ward_2",
+          "effects": [
+            {
+              "stat": "technique",
+              "val": 8
+            },
+            {
+              "stat": "classement",
+              "val": 10
+            }
+          ]
+        },
+        {
+          "text": "Crochet wide at head",
+          "vers": "ward_bad",
+          "effects": [
+            {
+              "stat": "vie",
+              "val": -15
+            }
+          ]
+        }
+      ],
+      "x": 100,
+      "y": 3560,
+      "timer": {
+        "duration": 1,
+        "auto": "ward_2"
+      }
+    },
+    "ward_neutral": {
+      "id": "ward_neutral",
+      "title": "You survive the Rhythm",
+      "location": "REGIONAL CENTRE",
+      "narrator": "You don't score enough.",
+      "text": "You're back.\n\nWard smiles.\n\nIt imposes tempo.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Break your pace",
+          "vers": "ward_2",
+          "effects": [
+            {
+              "stat": "mental",
+              "val": 5
+            }
+          ]
+        }
+      ],
+      "x": 260,
+      "y": 3560
+    },
+    "ward_bad": {
+      "id": "ward_bad",
+      "title": "Punishment",
+      "location": "REGIONAL CENTRE",
+      "narrator": "She was waiting for your impatience.",
+      "text": "You're leaving too soon.\n\nWard's slipping.\n\nHis against touch clear.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "glitch",
+      "choices": [
+        {
+          "text": "Hold",
+          "vers": "ward_2",
+          "effects": [
+            {
+              "stat": "vie",
+              "val": -10
+            },
+            {
+              "stat": "mental",
+              "val": -5
+            }
+          ]
+        }
+      ],
+      "x": 420,
+      "y": 3560
+    },
+    "ward_2": {
+      "id": "ward_2",
+      "title": "End of Round",
+      "location": "REGIONAL CENTRE",
+      "narrator": "His body is open.",
+      "text": "Ward is accelerating.\n\nHigh guard.\n\nOpen body.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "glitch",
+      "choices": [
+        {
+          "text": "Double body attack",
+          "vers": "ward_good2",
+          "effects": [
+            {
+              "stat": "endurance",
+              "val": -10
+            },
+            {
+              "stat": "technique",
+              "val": 10
+            }
+          ]
+        },
+        {
+          "text": "Protect your advance",
+          "vers": "ward_neutral2",
+          "effects": [
+            {
+              "stat": "mental",
+              "val": 5
+            }
+          ]
+        },
+        {
+          "text": "Search for KO in the lead",
+          "vers": "ward_bad2",
+          "effects": [
+            {
+              "stat": "vie",
+              "val": -20
+            },
+            {
+              "stat": "endurance",
+              "val": -12
+            }
+          ]
+        }
+      ],
+      "x": 260,
+      "y": 3740,
+      "timer": {
+        "duration": 2,
+        "auto": "ward_neutral2"
+      }
+    },
+    "ward_good2": {
+      "id": "ward_good2",
+      "title": "She Folds",
+      "location": "REGIONAL CENTRE",
+      "narrator": "Ward's losing pace.",
+      "text": "First shot to the body.\n\nSecond.\n\nWard, step back.\n\nThe bell rings.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "flash",
+      "choices": [
+        {
+          "text": "Listen Malik",
+          "vers": "coin_ward",
+          "effects": [
+            {
+              "stat": "classement",
+              "val": 15
+            },
+            {
+              "stat": "popularite",
+              "val": 10
+            }
+          ]
+        }
+      ],
+      "x": 100,
+      "y": 3920
+    },
+    "ward_neutral2": {
+      "id": "ward_neutral2",
+      "title": "Round Locked",
+      "location": "REGIONAL CENTRE",
+      "narrator": "You're still breathing.",
+      "text": "You're protecting.\n\nWard scores a little.\n\nMalik tightens the jaw.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Listen Malik",
+          "vers": "coin_ward",
+          "effects": [
+            {
+              "stat": "mental",
+              "val": 5
+            }
+          ]
+        }
+      ],
+      "x": 260,
+      "y": 3920
+    },
+    "ward_bad2": {
+      "id": "ward_bad2",
+      "title": "Too high",
+      "location": "REGIONAL CENTRE",
+      "narrator": "You're forgetting the plan.",
+      "text": "You're looking for your head.\n\nWard disappears.\n\nHis hook cuts your legs.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "glitch",
+      "choices": [
+        {
+          "text": "Listen Malik",
+          "vers": "coin_ward",
+          "effects": [
+            {
+              "stat": "vie",
+              "val": -15
+            },
+            {
+              "stat": "mental",
+              "val": -10
+            }
+          ]
+        }
+      ],
+      "x": 420,
+      "y": 3920
+    },
+    "coin_ward": {
+      "id": "coin_ward",
+      "title": "Last Council",
+      "location": "BLUE COIN",
+      "narrator": "The last recovery picks the career.",
+      "text": "Malik's talking fast.\n\n**\"If you have your legs, cut off his exit. Otherwise, hang up and steal seconds. The champion is the one who makes the right tired decision. *",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Last round",
+          "vers": "ward_final",
+          "effects": [
+            {
+              "stat": "mental",
+              "val": 10
+            },
+            {
+              "stat": "endurance",
+              "val": 5
+            }
+          ]
+        }
+      ],
+      "x": 260,
+      "y": 4100
+    },
+    "ward_final": {
+      "id": "ward_final",
+      "title": "Last Round — Ward",
+      "location": "REGIONAL CENTRE",
+      "narrator": "Everything's fast now.",
+      "text": "Ward fake.\n\nJab.\n\nJab.\n\nShe's waiting for you.\n\nHis back foot slides.\n\nShe's preparing the side exit.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "glitch",
+      "choices": [
+        {
+          "text": "Cut the exit and hit the body",
+          "vers": "ward_win",
+          "effects": [
+            {
+              "stat": "classement",
+              "val": 40
+            },
+            {
+              "stat": "popularite",
+              "val": 25
+            }
+          ],
+          "requires": {
+            "stat": "endurance",
+            "min": 35
+          }
+        },
+        {
+          "text": "Clinch and survive",
+          "vers": "ward_top3",
+          "effects": [
+            {
+              "stat": "classement",
+              "val": 20
+            },
+            {
+              "stat": "mental",
+              "val": 10
+            }
+          ],
+          "requires": {
+            "stat": "mental",
+            "min": 40
+          }
+        },
+        {
+          "text": "Against reflex to head",
+          "vers": "ward_loss",
+          "effects": [
+            {
+              "stat": "vie",
+              "val": -25
+            },
+            {
+              "stat": "mental",
+              "val": -15
+            }
+          ]
+        }
+      ],
+      "x": 260,
+      "y": 4280,
+      "timer": {
+        "duration": 2,
+        "auto": "ward_loss"
+      }
+    },
+    "ward_win": {
+      "id": "ward_win",
+      "title": "Victory — Title Interclubs",
+      "location": "REGIONAL CENTRE",
+      "narrator": "You just became someone in this sport.",
+      "text": "You cut his way out.\n\nBody.\n\nStill body.\n\nDecision.\n\nVictory.\n\nYou're entering the top of the ranking.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "flash",
+      "choices": [
+        {
+          "text": "Watch the belt",
+          "vers": "fin_champion",
+          "effects": []
+        }
+      ],
+      "x": 100,
+      "y": 4460
+    },
+    "ward_top3": {
+      "id": "ward_top3",
+      "title": "Locked Decision",
+      "location": "REGIONAL CENTRE",
+      "narrator": "You didn't dominate. You survived intelligently.",
+      "text": "You hang up.\n\nYou steal seconds.\n\nShared decision.\n\nVictory.\n\nYou finish top three.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Accept Result",
+          "vers": "fin_top3",
+          "effects": []
+        }
+      ],
+      "x": 260,
+      "y": 4460
+    },
+    "ward_loss": {
+      "id": "ward_loss",
+      "title": "Defeats Ward",
+      "location": "REGIONAL CENTRE",
+      "narrator": "You were close. Not enough.",
+      "text": "You're on your way.\n\nWard read it.\n\nYou end up.\n\nBut the decision is clear.\n\nFourth this season.\n\nNot an end.\n\nA place to go.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Accept defeat",
+          "vers": "fin_quatrieme",
+          "effects": []
+        }
+      ],
+      "x": 420,
+      "y": 4460
+    },
+    "fin_champion": {
+      "id": "fin_champion",
+      "title": "End — Champion Promitter",
+      "location": "AFTER",
+      "narrator": "The summit is never the end.",
+      "text": "You're finishing the interclub champion season.\n\nContracts are coming.\n\nYou're not the best in the world yet.\n\nBut nobody laughs when you say you want to be.\n\nMalik hangs the belt on the wall.\n\n**\"Now the real work begins. *",
+      "isStart": false,
+      "isEnd": true,
+      "transition": "fade",
+      "choices": [],
+      "x": 100,
+      "y": 4660
+    },
+    "fin_top3": {
+      "id": "fin_top3",
+      "title": "End — Top 3",
+      "location": "AFTER",
+      "narrator": "Some become dangerous slowly.",
+      "text": "You end up in top three.\n\nNot undefeated.\n\nNot untouchable.\n\nBut respected.\n\nMalik says:\n\n**\" Spectacular, it burns fast. Smart, hard. *",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Become a technical consultant",
+          "vers": "fin_consultant",
+          "effects": [
+            {
+              "stat": "ringiq",
+              "val": 10
+            }
+          ],
+          "requires": {
+            "stat": "ringiq",
+            "min": 45
+          }
+        },
+        {
+          "text": "Trying a return for the title",
+          "vers": "fin_retour",
+          "effects": [
+            {
+              "stat": "mental",
+              "val": 10
+            }
+          ]
+        },
+        {
+          "text": "Staying the public boxer",
+          "vers": "fin_boxeur_peuple",
+          "effects": [
+            {
+              "stat": "popularite",
+              "val": 10
+            }
+          ]
+        }
+      ],
+      "x": 260,
+      "y": 4660
+    },
+    "fin_quatrieme": {
+      "id": "fin_quatrieme",
+      "title": "End — Fourth",
+      "location": "AFTER",
+      "narrator": "A career is also judged in the place that we refuse to give up.",
+      "text": "You finish fourth.\n\nNo title.\n\nBut in the rooms, boxers know your name.\n\nYou lost.\n\nYou learned.\n\nThe next season, nobody wants to fall against you in the first round.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Become a coach",
+          "vers": "fin_entraineur",
+          "effects": [
+            {
+              "stat": "discipline",
+              "val": 10
+            }
+          ],
+          "requires": {
+            "stat": "discipline",
+            "min": 45
+          }
+        },
+        {
+          "text": "Continue in small rooms",
+          "vers": "fin_boxeur_peuple",
+          "effects": [
+            {
+              "stat": "popularite",
+              "val": 10
+            }
+          ]
+        },
+        {
+          "text": "Trying a return",
+          "vers": "fin_retour",
+          "effects": [
+            {
+              "stat": "mental",
+              "val": 10
+            }
+          ],
+          "requires": {
+            "stat": "mental",
+            "min": 45
+          }
+        }
+      ],
+      "x": 420,
+      "y": 4660
+    },
+    "fin_abandon": {
+      "id": "fin_abandon",
+      "title": "End — Gloves Au Placard",
+      "location": "APPARATUS",
+      "narrator": "Sometimes survival means leaving the ring.",
+      "text": "You're not going back to the room.\n\nOne day you find your old gloves.\n\nThey still smell leather and fear.\n\nYou didn't become a champion.\n\nBut riding in a ring once already required courage.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Return as coach",
+          "vers": "fin_entraineur",
+          "effects": [
+            {
+              "stat": "discipline",
+              "val": 10
+            }
+          ]
+        },
+        {
+          "text": "Store gloves for good",
+          "vers": "fin_abandon_definitif",
+          "effects": []
+        }
+      ],
+      "x": 780,
+      "y": 2300
+    },
+    "hub_combats_annexes": {
+      "id": "hub_combats_annexes",
+      "title": "The Secondary Circuit",
+      "location": "BACKSTAGE",
+      "narrator": "Careers never go up straight.",
+      "text": "Sorel offers you several contracts.\n\nSmall rooms.\nLocal television.\nDangerous fights.\nStrange styles.\n\nMalik sighs.\n\n**\"Some fights will make you progress. Others will just ruin you. Choose well. *\n\nOn the table, eight files are opened.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Facing Luis Ortega — the mobile left-hander",
+          "vers": "ortega_intro",
+          "effects": [
+            {
+              "stat": "ringiq",
+              "val": 5
+            }
+          ]
+        },
+        {
+          "text": "Facing Pavel Kruger — the slow bumper",
+          "vers": "kruger_intro",
+          "effects": [
+            {
+              "stat": "mental",
+              "val": 5
+            }
+          ]
+        },
+        {
+          "text": "Confronting Jin Mori — the defensive technician",
+          "vers": "mori_intro",
+          "effects": [
+            {
+              "stat": "technique",
+              "val": 5
+            }
+          ]
+        },
+        {
+          "text": "Facing Hassan Vale — the dirty fighter",
+          "vers": "vale_intro",
+          "effects": [
+            {
+              "stat": "violence",
+              "val": 5
+            }
+          ]
+        },
+        {
+          "text": "Request other contracts",
+          "vers": "hub_combats_annexes_2",
+          "effects": [
+            {
+              "stat": "discipline",
+              "val": 3
+            }
+          ]
+        },
+        {
+          "text": "Back to prepare Ward",
+          "vers": "ward_1",
+          "effects": []
+        }
+      ],
+      "x": 620,
+      "y": 3200
+    },
+    "hub_combats_annexes_2": {
+      "id": "hub_combats_annexes_2",
+      "title": "Other Files",
+      "location": "BACKSTAGE",
+      "narrator": "The more you look at the names, the more the career looks like a maze.",
+      "text": "Malik is pushing four other files to you.\n\n**\"These are not necessarily stronger. But they're different. And different, in a ring, it often means dangerous. *",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Facing Alexei Petrov — the former Olympic",
+          "vers": "petrov_intro",
+          "effects": [
+            {
+              "stat": "ringiq",
+              "val": 5
+            }
+          ]
+        },
+        {
+          "text": "Confront Miguel Santos — the explosive puncher",
+          "vers": "santos_intro",
+          "effects": [
+            {
+              "stat": "mental",
+              "val": 5
+            }
+          ]
+        },
+        {
+          "text": "Facing Derek Hayes — the Patient Counterfeit",
+          "vers": "hayes_intro",
+          "effects": [
+            {
+              "stat": "technique",
+              "val": 5
+            }
+          ]
+        },
+        {
+          "text": "Facing Elio Nova — the Fast Showman",
+          "vers": "nova_intro",
+          "effects": [
+            {
+              "stat": "popularite",
+              "val": 5
+            }
+          ]
+        },
+        {
+          "text": "Return to first files",
+          "vers": "hub_combats_annexes",
+          "effects": []
+        }
+      ],
+      "x": 820,
+      "y": 3200
+    },
+    "ortega_intro": {
+      "id": "ortega_intro",
+      "title": "Analysis — Luis Ortega",
+      "location": "VESTIARY",
+      "narrator": "Every boxer has a fatal habit.",
+      "text": "File: **Luis Ortega**\n\nStyle:\n- left-hand mobile\n\nAnalysis:\n- He's always on the right after his jab. His liver remains open when he rotates.\n\nMalik summarizes:\n\n**\"You don't need to be perfect. You just need to recognize the moment. *",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Get on the ring",
+          "vers": "ortega_fight",
+          "effects": [
+            {
+              "stat": "ringiq",
+              "val": 5
+            }
+          ]
+        }
+      ],
+      "x": 1040,
+      "y": 3400
+    },
+    "ortega_fight": {
+      "id": "ortega_fight",
+      "title": "Luis Ortega — Key Exchange",
+      "location": "RING",
+      "narrator": "It's all in seconds.",
+      "text": "Ortega jabbe, turn right. His left elbow goes up.\n\nThe opening is short.\n\nVery short.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "glitch",
+      "choices": [
+        {
+          "text": "Crochet liver during pivot",
+          "vers": "ortega_win",
+          "effects": [
+            {
+              "stat": "classement",
+              "val": 10
+            },
+            {
+              "stat": "popularite",
+              "val": 5
+            },
+            {
+              "stat": "ringiq",
+              "val": 8
+            }
+          ],
+          "requires": {
+            "stat": "ringiq",
+            "min": 35
+          }
+        },
+        {
+          "text": "Follow its pivot with the low guard",
+          "vers": "ortega_loss",
+          "effects": [
+            {
+              "stat": "vie",
+              "val": -20
+            },
+            {
+              "stat": "violence",
+              "val": 10
+            },
+            {
+              "stat": "mental",
+              "val": -5
+            }
+          ]
+        },
+        {
+          "text": "Stay in the center",
+          "vers": "ortega_neutral",
+          "effects": [
+            {
+              "stat": "endurance",
+              "val": -5
+            },
+            {
+              "stat": "discipline",
+              "val": 4
+            }
+          ]
+        }
+      ],
+      "x": 1240,
+      "y": 3400,
+      "timer": {
+        "duration": 2,
+        "auto": "ortega_neutral"
+      }
+    },
+    "ortega_win": {
+      "id": "ortega_win",
+      "title": "Victory against Luis Ortega",
+      "location": "AFTER COMBAT",
+      "narrator": "Every win changes your career slightly.",
+      "text": "You read Luis Ortega perfectly.\n\nThe public reacts immediately.\n\nMalik seems almost proud.\n\n**\"There, you're really starting to understand the ring. *",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "flash",
+      "choices": [
+        {
+          "text": "Return to get another contract",
+          "vers": "hub_combats_annexes",
+          "effects": [
+            {
+              "stat": "discipline",
+              "val": 5
+            }
+          ]
+        },
+        {
+          "text": "Prepare Ward",
+          "vers": "ward_1",
+          "effects": [
+            {
+              "stat": "classement",
+              "val": 5
+            }
+          ]
+        }
+      ],
+      "x": 1440,
+      "y": 3400
+    },
+    "ortega_neutral": {
+      "id": "ortega_neutral",
+      "title": "Fight Squad",
+      "location": "RING",
+      "narrator": "Sometimes surviving is already a victory.",
+      "text": "The fight remains tight.\n\nYou got it.\n\nLuis Ortega too.\n\nThe decision could go any way.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Accept tight decision",
+          "vers": "hub_combats_annexes",
+          "effects": [
+            {
+              "stat": "classement",
+              "val": 3
+            },
+            {
+              "stat": "mental",
+              "val": 5
+            }
+          ]
+        },
+        {
+          "text": "Stop the risks and prepare Ward",
+          "vers": "ward_1",
+          "effects": [
+            {
+              "stat": "discipline",
+              "val": 5
+            }
+          ]
+        }
+      ],
+      "x": 1640,
+      "y": 3400
+    },
+    "ortega_loss": {
+      "id": "ortega_loss",
+      "title": "Defeat against Luis Ortega",
+      "location": "VESTIARY",
+      "narrator": "Defeats sometimes build more than victories.",
+      "text": "Luis Ortega wins.\n\nYou're kicking.\n\nA lot.\n\nBut Malik looks at you with curiosity.\n\n**\"Now we'll see what you're doing after suffering. *",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Continue Nevertheless",
+          "vers": "hub_combats_annexes",
+          "effects": [
+            {
+              "stat": "mental",
+              "val": 10
+            },
+            {
+              "stat": "popularite",
+              "val": 5
+            }
+          ]
+        },
+        {
+          "text": "Back to a safer road",
+          "vers": "tournoi_regional",
+          "effects": [
+            {
+              "stat": "discipline",
+              "val": 10
+            }
+          ]
+        }
+      ],
+      "x": 1840,
+      "y": 3400
+    },
+    "kruger_intro": {
+      "id": "kruger_intro",
+      "title": "Analysis — Pavel Kruger",
+      "location": "VESTIARY",
+      "narrator": "Every boxer has a fatal habit.",
+      "text": "File: **Pavel Kruger**\n\nStyle:\n- Slow striker\n\nAnalysis:\n- His swings are dangerous but long. If he misses twice, he breathes heavy.\n\nMalik summarizes:\n\n**\"You don't need to be perfect. You just need to recognize the moment. *",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Get on the ring",
+          "vers": "kruger_fight",
+          "effects": [
+            {
+              "stat": "ringiq",
+              "val": 5
+            }
+          ]
+        }
+      ],
+      "x": 1040,
+      "y": 3660
+    },
+    "kruger_fight": {
+      "id": "kruger_fight",
+      "title": "Pavel Kruger — Key Exchange",
+      "location": "RING",
+      "narrator": "It's all in seconds.",
+      "text": "Kruger's arming an immense right. All his weight goes ahead.\n\nThe opening is short.\n\nVery short.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "glitch",
+      "choices": [
+        {
+          "text": "No side then direct short",
+          "vers": "kruger_win",
+          "effects": [
+            {
+              "stat": "classement",
+              "val": 10
+            },
+            {
+              "stat": "popularite",
+              "val": 5
+            },
+            {
+              "stat": "ringiq",
+              "val": 8
+            }
+          ],
+          "requires": {
+            "stat": "endurance",
+            "min": 30
+          }
+        },
+        {
+          "text": "Power exchange",
+          "vers": "kruger_loss",
+          "effects": [
+            {
+              "stat": "vie",
+              "val": -20
+            },
+            {
+              "stat": "violence",
+              "val": 10
+            },
+            {
+              "stat": "mental",
+              "val": -5
+            }
+          ]
+        },
+        {
+          "text": "Block and back",
+          "vers": "kruger_neutral",
+          "effects": [
+            {
+              "stat": "endurance",
+              "val": -5
+            },
+            {
+              "stat": "discipline",
+              "val": 4
+            }
+          ]
+        }
+      ],
+      "x": 1240,
+      "y": 3660,
+      "timer": {
+        "duration": 2,
+        "auto": "kruger_neutral"
+      }
+    },
+    "kruger_win": {
+      "id": "kruger_win",
+      "title": "Victory over Pavel Kruger",
+      "location": "AFTER COMBAT",
+      "narrator": "Every win changes your career slightly.",
+      "text": "You read Pavel Kruger perfectly.\n\nThe public reacts immediately.\n\nMalik seems almost proud.\n\n**\"There, you're really starting to understand the ring. *",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "flash",
+      "choices": [
+        {
+          "text": "Return to get another contract",
+          "vers": "hub_combats_annexes",
+          "effects": [
+            {
+              "stat": "discipline",
+              "val": 5
+            }
+          ]
+        },
+        {
+          "text": "Prepare Ward",
+          "vers": "ward_1",
+          "effects": [
+            {
+              "stat": "classement",
+              "val": 5
+            }
+          ]
+        }
+      ],
+      "x": 1440,
+      "y": 3660
+    },
+    "kruger_neutral": {
+      "id": "kruger_neutral",
+      "title": "Fight Squad",
+      "location": "RING",
+      "narrator": "Sometimes surviving is already a victory.",
+      "text": "The fight remains tight.\n\nYou got it.\n\nPavel Kruger, too.\n\nThe decision could go any way.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Accept tight decision",
+          "vers": "hub_combats_annexes",
+          "effects": [
+            {
+              "stat": "classement",
+              "val": 3
+            },
+            {
+              "stat": "mental",
+              "val": 5
+            }
+          ]
+        },
+        {
+          "text": "Stop the risks and prepare Ward",
+          "vers": "ward_1",
+          "effects": [
+            {
+              "stat": "discipline",
+              "val": 5
+            }
+          ]
+        }
+      ],
+      "x": 1640,
+      "y": 3660
+    },
+    "kruger_loss": {
+      "id": "kruger_loss",
+      "title": "Defeat against Pavel Kruger",
+      "location": "VESTIARY",
+      "narrator": "Defeats sometimes build more than victories.",
+      "text": "Pavel Kruger wins.\n\nYou're kicking.\n\nA lot.\n\nBut Malik looks at you with curiosity.\n\n**\"Now we'll see what you're doing after suffering. *",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Continue Nevertheless",
+          "vers": "hub_combats_annexes",
+          "effects": [
+            {
+              "stat": "mental",
+              "val": 10
+            },
+            {
+              "stat": "popularite",
+              "val": 5
+            }
+          ]
+        },
+        {
+          "text": "Back to a safer road",
+          "vers": "tournoi_regional",
+          "effects": [
+            {
+              "stat": "discipline",
+              "val": 10
+            }
+          ]
+        }
+      ],
+      "x": 1840,
+      "y": 3660
+    },
+    "mori_intro": {
+      "id": "mori_intro",
+      "title": "Analysis — Jin Mori",
+      "location": "VESTIARY",
+      "narrator": "Every boxer has a fatal habit.",
+      "text": "File: **Jin Mori**\n\nStyle:\n- defensive technician\n\nAnalysis:\n- He's waiting for clean attacks. He hates dirty and short sequences.\n\nMalik summarizes:\n\n**\"You don't need to be perfect. You just need to recognize the moment. *",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Get on the ring",
+          "vers": "mori_fight",
+          "effects": [
+            {
+              "stat": "ringiq",
+              "val": 5
+            }
+          ]
+        }
+      ],
+      "x": 1040,
+      "y": 3920
+    },
+    "mori_fight": {
+      "id": "mori_fight",
+      "title": "Jin Mori — Key Exchange",
+      "location": "RING",
+      "narrator": "It's all in seconds.",
+      "text": "Mori stays still. He's waiting for your jab as if he already knew the rest.\n\nThe opening is short.\n\nVery short.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "glitch",
+      "choices": [
+        {
+          "text": "Feint and then hit the body",
+          "vers": "mori_win",
+          "effects": [
+            {
+              "stat": "classement",
+              "val": 10
+            },
+            {
+              "stat": "popularite",
+              "val": 5
+            },
+            {
+              "stat": "ringiq",
+              "val": 8
+            }
+          ],
+          "requires": {
+            "stat": "technique",
+            "min": 55
+          }
+        },
+        {
+          "text": "Jab direct classic",
+          "vers": "mori_loss",
+          "effects": [
+            {
+              "stat": "vie",
+              "val": -20
+            },
+            {
+              "stat": "violence",
+              "val": 10
+            },
+            {
+              "stat": "mental",
+              "val": -5
+            }
+          ]
+        },
+        {
+          "text": "Turn without attacking",
+          "vers": "mori_neutral",
+          "effects": [
+            {
+              "stat": "endurance",
+              "val": -5
+            },
+            {
+              "stat": "discipline",
+              "val": 4
+            }
+          ]
+        }
+      ],
+      "x": 1240,
+      "y": 3920,
+      "timer": {
+        "duration": 2,
+        "auto": "mori_neutral"
+      }
+    },
+    "mori_win": {
+      "id": "mori_win",
+      "title": "Win over Jin Mori",
+      "location": "AFTER COMBAT",
+      "narrator": "Every win changes your career slightly.",
+      "text": "You read Jin Mori perfectly.\n\nThe public reacts immediately.\n\nMalik seems almost proud.\n\n**\"There, you're really starting to understand the ring. *",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "flash",
+      "choices": [
+        {
+          "text": "Return to get another contract",
+          "vers": "hub_combats_annexes",
+          "effects": [
+            {
+              "stat": "discipline",
+              "val": 5
+            }
+          ]
+        },
+        {
+          "text": "Prepare Ward",
+          "vers": "ward_1",
+          "effects": [
+            {
+              "stat": "classement",
+              "val": 5
+            }
+          ]
+        }
+      ],
+      "x": 1440,
+      "y": 3920
+    },
+    "mori_neutral": {
+      "id": "mori_neutral",
+      "title": "Fight Squad",
+      "location": "RING",
+      "narrator": "Sometimes surviving is already a victory.",
+      "text": "The fight remains tight.\n\nYou got it.\n\nJin Mori, too.\n\nThe decision could go any way.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Accept tight decision",
+          "vers": "hub_combats_annexes",
+          "effects": [
+            {
+              "stat": "classement",
+              "val": 3
+            },
+            {
+              "stat": "mental",
+              "val": 5
+            }
+          ]
+        },
+        {
+          "text": "Stop the risks and prepare Ward",
+          "vers": "ward_1",
+          "effects": [
+            {
+              "stat": "discipline",
+              "val": 5
+            }
+          ]
+        }
+      ],
+      "x": 1640,
+      "y": 3920
+    },
+    "mori_loss": {
+      "id": "mori_loss",
+      "title": "Defeat against Jin Mori",
+      "location": "VESTIARY",
+      "narrator": "Defeats sometimes build more than victories.",
+      "text": "Jin Mori wins.\n\nYou're kicking.\n\nA lot.\n\nBut Malik looks at you with curiosity.\n\n**\"Now we'll see what you're doing after suffering. *",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Continue Nevertheless",
+          "vers": "hub_combats_annexes",
+          "effects": [
+            {
+              "stat": "mental",
+              "val": 10
+            },
+            {
+              "stat": "popularite",
+              "val": 5
+            }
+          ]
+        },
+        {
+          "text": "Back to a safer road",
+          "vers": "tournoi_regional",
+          "effects": [
+            {
+              "stat": "discipline",
+              "val": 10
+            }
+          ]
+        }
+      ],
+      "x": 1840,
+      "y": 3920
+    },
+    "vale_intro": {
+      "id": "vale_intro",
+      "title": "Analysis — Hassan Vale",
+      "location": "VESTIARY",
+      "narrator": "Every boxer has a fatal habit.",
+      "text": "File: **Hassan Vale**\n\nStyle:\n- dirty fighter\n\nAnalysis:\n- He hangs, pushes from the shoulder, knocks at the limit. After his clinches, his guard opens.\n\nMalik summarizes:\n\n**\"You don't need to be perfect. You just need to recognize the moment. *",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Get on the ring",
+          "vers": "vale_fight",
+          "effects": [
+            {
+              "stat": "ringiq",
+              "val": 5
+            }
+          ]
+        }
+      ],
+      "x": 1040,
+      "y": 4180
+    },
+    "vale_fight": {
+      "id": "vale_fight",
+      "title": "Hassan Vale — Key Exchange",
+      "location": "RING",
+      "narrator": "It's all in seconds.",
+      "text": "Vale, hang on. His shoulder pushes your chin. The referee sees almost nothing.\n\nThe opening is short.\n\nVery short.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "glitch",
+      "choices": [
+        {
+          "text": "Small uppercut short out of clinch",
+          "vers": "vale_win",
+          "effects": [
+            {
+              "stat": "classement",
+              "val": 10
+            },
+            {
+              "stat": "popularite",
+              "val": 5
+            },
+            {
+              "stat": "ringiq",
+              "val": 8
+            }
+          ],
+          "requires": {
+            "stat": "mental",
+            "min": 45
+          }
+        },
+        {
+          "text": "Reply dirty and lose your calm",
+          "vers": "vale_loss",
+          "effects": [
+            {
+              "stat": "vie",
+              "val": -20
+            },
+            {
+              "stat": "violence",
+              "val": 10
+            },
+            {
+              "stat": "mental",
+              "val": -5
+            }
+          ]
+        },
+        {
+          "text": "Call the arbitrator",
+          "vers": "vale_neutral",
+          "effects": [
+            {
+              "stat": "endurance",
+              "val": -5
+            },
+            {
+              "stat": "discipline",
+              "val": 4
+            }
+          ]
+        }
+      ],
+      "x": 1240,
+      "y": 4180,
+      "timer": {
+        "duration": 2,
+        "auto": "vale_neutral"
+      }
+    },
+    "vale_win": {
+      "id": "vale_win",
+      "title": "Victory against Hassan Vale",
+      "location": "AFTER COMBAT",
+      "narrator": "Every win changes your career slightly.",
+      "text": "You read Hassan Vale perfectly.\n\nThe public reacts immediately.\n\nMalik seems almost proud.\n\n**\"There, you're really starting to understand the ring. *",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "flash",
+      "choices": [
+        {
+          "text": "Return to get another contract",
+          "vers": "hub_combats_annexes",
+          "effects": [
+            {
+              "stat": "discipline",
+              "val": 5
+            }
+          ]
+        },
+        {
+          "text": "Prepare Ward",
+          "vers": "ward_1",
+          "effects": [
+            {
+              "stat": "classement",
+              "val": 5
+            }
+          ]
+        }
+      ],
+      "x": 1440,
+      "y": 4180
+    },
+    "vale_neutral": {
+      "id": "vale_neutral",
+      "title": "Fight Squad",
+      "location": "RING",
+      "narrator": "Sometimes surviving is already a victory.",
+      "text": "The fight remains tight.\n\nYou got it.\n\nHassan Vale, too.\n\nThe decision could go any way.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Accept tight decision",
+          "vers": "hub_combats_annexes",
+          "effects": [
+            {
+              "stat": "classement",
+              "val": 3
+            },
+            {
+              "stat": "mental",
+              "val": 5
+            }
+          ]
+        },
+        {
+          "text": "Stop the risks and prepare Ward",
+          "vers": "ward_1",
+          "effects": [
+            {
+              "stat": "discipline",
+              "val": 5
+            }
+          ]
+        }
+      ],
+      "x": 1640,
+      "y": 4180
+    },
+    "vale_loss": {
+      "id": "vale_loss",
+      "title": "Defeat against Hassan Vale",
+      "location": "VESTIARY",
+      "narrator": "Defeats sometimes build more than victories.",
+      "text": "Hassan Vale wins.\n\nYou're kicking.\n\nA lot.\n\nBut Malik looks at you with curiosity.\n\n**\"Now we'll see what you're doing after suffering. *",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Continue Nevertheless",
+          "vers": "hub_combats_annexes",
+          "effects": [
+            {
+              "stat": "mental",
+              "val": 10
+            },
+            {
+              "stat": "popularite",
+              "val": 5
+            }
+          ]
+        },
+        {
+          "text": "Back to a safer road",
+          "vers": "tournoi_regional",
+          "effects": [
+            {
+              "stat": "discipline",
+              "val": 10
+            }
+          ]
+        }
+      ],
+      "x": 1840,
+      "y": 4180
+    },
+    "petrov_intro": {
+      "id": "petrov_intro",
+      "title": "Analysis — Alexei Petrov",
+      "location": "VESTIARY",
+      "narrator": "Every boxer has a fatal habit.",
+      "text": "File: **Alexei Petrov**\n\nStyle:\n- former Olympic\n\nAnalysis:\n- Very clean, very predictable. Three jabs, left exit, center recovery.\n\nMalik summarizes:\n\n**\"You don't need to be perfect. You just need to recognize the moment. *",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Get on the ring",
+          "vers": "petrov_fight",
+          "effects": [
+            {
+              "stat": "ringiq",
+              "val": 5
+            }
+          ]
+        }
+      ],
+      "x": 1040,
+      "y": 4440
+    },
+    "petrov_fight": {
+      "id": "petrov_fight",
+      "title": "Alexei Petrov — Key Exchange",
+      "location": "RING",
+      "narrator": "It's all in seconds.",
+      "text": "Petrov launches his third jab. His left foot is already looking for the exit.\n\nThe opening is short.\n\nVery short.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "glitch",
+      "choices": [
+        {
+          "text": "Cut out with a short hook",
+          "vers": "petrov_win",
+          "effects": [
+            {
+              "stat": "classement",
+              "val": 10
+            },
+            {
+              "stat": "popularite",
+              "val": 5
+            },
+            {
+              "stat": "ringiq",
+              "val": 8
+            }
+          ],
+          "requires": {
+            "stat": "ringiq",
+            "min": 45
+          }
+        },
+        {
+          "text": "Waiting for him to finish his show",
+          "vers": "petrov_loss",
+          "effects": [
+            {
+              "stat": "vie",
+              "val": -20
+            },
+            {
+              "stat": "violence",
+              "val": 10
+            },
+            {
+              "stat": "mental",
+              "val": -5
+            }
+          ]
+        },
+        {
+          "text": "Block the series",
+          "vers": "petrov_neutral",
+          "effects": [
+            {
+              "stat": "endurance",
+              "val": -5
+            },
+            {
+              "stat": "discipline",
+              "val": 4
+            }
+          ]
+        }
+      ],
+      "x": 1240,
+      "y": 4440,
+      "timer": {
+        "duration": 2,
+        "auto": "petrov_neutral"
+      }
+    },
+    "petrov_win": {
+      "id": "petrov_win",
+      "title": "Victory against Alexei Petrov",
+      "location": "AFTER COMBAT",
+      "narrator": "Every win changes your career slightly.",
+      "text": "You read Alexei Petrov perfectly.\n\nThe public reacts immediately.\n\nMalik seems almost proud.\n\n**\"There, you're really starting to understand the ring. *",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "flash",
+      "choices": [
+        {
+          "text": "Return to get another contract",
+          "vers": "hub_combats_annexes",
+          "effects": [
+            {
+              "stat": "discipline",
+              "val": 5
+            }
+          ]
+        },
+        {
+          "text": "Prepare Ward",
+          "vers": "ward_1",
+          "effects": [
+            {
+              "stat": "classement",
+              "val": 5
+            }
+          ]
+        }
+      ],
+      "x": 1440,
+      "y": 4440
+    },
+    "petrov_neutral": {
+      "id": "petrov_neutral",
+      "title": "Fight Squad",
+      "location": "RING",
+      "narrator": "Sometimes surviving is already a victory.",
+      "text": "The fight remains tight.\n\nYou got it.\n\nAlexei Petrov, too.\n\nThe decision could go any way.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Accept tight decision",
+          "vers": "hub_combats_annexes",
+          "effects": [
+            {
+              "stat": "classement",
+              "val": 3
+            },
+            {
+              "stat": "mental",
+              "val": 5
+            }
+          ]
+        },
+        {
+          "text": "Stop the risks and prepare Ward",
+          "vers": "ward_1",
+          "effects": [
+            {
+              "stat": "discipline",
+              "val": 5
+            }
+          ]
+        }
+      ],
+      "x": 1640,
+      "y": 4440
+    },
+    "petrov_loss": {
+      "id": "petrov_loss",
+      "title": "Defeat against Alexei Petrov",
+      "location": "VESTIARY",
+      "narrator": "Defeats sometimes build more than victories.",
+      "text": "Alexei Petrov wins.\n\nYou're kicking.\n\nA lot.\n\nBut Malik looks at you with curiosity.\n\n**\"Now we'll see what you're doing after suffering. *",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Continue Nevertheless",
+          "vers": "hub_combats_annexes",
+          "effects": [
+            {
+              "stat": "mental",
+              "val": 10
+            },
+            {
+              "stat": "popularite",
+              "val": 5
+            }
+          ]
+        },
+        {
+          "text": "Back to a safer road",
+          "vers": "tournoi_regional",
+          "effects": [
+            {
+              "stat": "discipline",
+              "val": 10
+            }
+          ]
+        }
+      ],
+      "x": 1840,
+      "y": 4440
+    },
+    "santos_intro": {
+      "id": "santos_intro",
+      "title": "Analysis — Miguel Santos",
+      "location": "VESTIARY",
+      "narrator": "Every boxer has a fatal habit.",
+      "text": "File: **Miguel Santos**\n\nStyle:\n- explosive punch\n\nAnalysis:\n- Terrible first minute. But his mind breaks if he doesn't put you down fast.\n\nMalik summarizes:\n\n**\"You don't need to be perfect. You just need to recognize the moment. *",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Get on the ring",
+          "vers": "santos_fight",
+          "effects": [
+            {
+              "stat": "ringiq",
+              "val": 5
+            }
+          ]
+        }
+      ],
+      "x": 1040,
+      "y": 4700
+    },
+    "santos_fight": {
+      "id": "santos_fight",
+      "title": "Miguel Santos — Key Exchange",
+      "location": "RING",
+      "narrator": "It's all in seconds.",
+      "text": "Santos explodes from the bell. Three shots arrive without breathing.\n\nThe opening is short.\n\nVery short.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "glitch",
+      "choices": [
+        {
+          "text": "Immediate clinch to use it",
+          "vers": "santos_win",
+          "effects": [
+            {
+              "stat": "classement",
+              "val": 10
+            },
+            {
+              "stat": "popularite",
+              "val": 5
+            },
+            {
+              "stat": "ringiq",
+              "val": 8
+            }
+          ],
+          "requires": {
+            "stat": "mental",
+            "min": 50
+          }
+        },
+        {
+          "text": "Search the show in the center",
+          "vers": "santos_loss",
+          "effects": [
+            {
+              "stat": "vie",
+              "val": -20
+            },
+            {
+              "stat": "violence",
+              "val": 10
+            },
+            {
+              "stat": "mental",
+              "val": -5
+            }
+          ]
+        },
+        {
+          "text": "High guard and back",
+          "vers": "santos_neutral",
+          "effects": [
+            {
+              "stat": "endurance",
+              "val": -5
+            },
+            {
+              "stat": "discipline",
+              "val": 4
+            }
+          ]
+        }
+      ],
+      "x": 1240,
+      "y": 4700,
+      "timer": {
+        "duration": 2,
+        "auto": "santos_neutral"
+      }
+    },
+    "santos_win": {
+      "id": "santos_win",
+      "title": "Victory against Miguel Santos",
+      "location": "AFTER COMBAT",
+      "narrator": "Every win changes your career slightly.",
+      "text": "You read Miguel Santos perfectly.\n\nThe public reacts immediately.\n\nMalik seems almost proud.\n\n**\"There, you're really starting to understand the ring. *",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "flash",
+      "choices": [
+        {
+          "text": "Return to get another contract",
+          "vers": "hub_combats_annexes",
+          "effects": [
+            {
+              "stat": "discipline",
+              "val": 5
+            }
+          ]
+        },
+        {
+          "text": "Prepare Ward",
+          "vers": "ward_1",
+          "effects": [
+            {
+              "stat": "classement",
+              "val": 5
+            }
+          ]
+        }
+      ],
+      "x": 1440,
+      "y": 4700
+    },
+    "santos_neutral": {
+      "id": "santos_neutral",
+      "title": "Fight Squad",
+      "location": "RING",
+      "narrator": "Sometimes surviving is already a victory.",
+      "text": "The fight remains tight.\n\nYou got it.\n\nMiguel Santos too.\n\nThe decision could go any way.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Accept tight decision",
+          "vers": "hub_combats_annexes",
+          "effects": [
+            {
+              "stat": "classement",
+              "val": 3
+            },
+            {
+              "stat": "mental",
+              "val": 5
+            }
+          ]
+        },
+        {
+          "text": "Stop the risks and prepare Ward",
+          "vers": "ward_1",
+          "effects": [
+            {
+              "stat": "discipline",
+              "val": 5
+            }
+          ]
+        }
+      ],
+      "x": 1640,
+      "y": 4700
+    },
+    "santos_loss": {
+      "id": "santos_loss",
+      "title": "Defeat against Miguel Santos",
+      "location": "VESTIARY",
+      "narrator": "Defeats sometimes build more than victories.",
+      "text": "Miguel Santos wins.\n\nYou're kicking.\n\nA lot.\n\nBut Malik looks at you with curiosity.\n\n**\"Now we'll see what you're doing after suffering. *",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Continue Nevertheless",
+          "vers": "hub_combats_annexes",
+          "effects": [
+            {
+              "stat": "mental",
+              "val": 10
+            },
+            {
+              "stat": "popularite",
+              "val": 5
+            }
+          ]
+        },
+        {
+          "text": "Back to a safer road",
+          "vers": "tournoi_regional",
+          "effects": [
+            {
+              "stat": "discipline",
+              "val": 10
+            }
+          ]
+        }
+      ],
+      "x": 1840,
+      "y": 4700
+    },
+    "hayes_intro": {
+      "id": "hayes_intro",
+      "title": "Analysis — Derek Hayes",
+      "location": "VESTIARY",
+      "narrator": "Every boxer has a fatal habit.",
+      "text": "File: **Derek Hayes**\n\nStyle:\n- counter patient\n\nAnalysis:\n- It never starts. If you give him the center, he gets uncomfortable.\n\nMalik summarizes:\n\n**\"You don't need to be perfect. You just need to recognize the moment. *",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Get on the ring",
+          "vers": "hayes_fight",
+          "effects": [
+            {
+              "stat": "ringiq",
+              "val": 5
+            }
+          ]
+        }
+      ],
+      "x": 1040,
+      "y": 4960
+    },
+    "hayes_fight": {
+      "id": "hayes_fight",
+      "title": "Derek Hayes — Key Exchange",
+      "location": "RING",
+      "narrator": "It's all in seconds.",
+      "text": "Hayes is waiting. His gloves don't move. He wants your first move.\n\nThe opening is short.\n\nVery short.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "glitch",
+      "choices": [
+        {
+          "text": "Leave him the center and feel",
+          "vers": "hayes_win",
+          "effects": [
+            {
+              "stat": "classement",
+              "val": 10
+            },
+            {
+              "stat": "popularite",
+              "val": 5
+            },
+            {
+              "stat": "ringiq",
+              "val": 8
+            }
+          ],
+          "requires": {
+            "stat": "technique",
+            "min": 50
+          }
+        },
+        {
+          "text": "Shade with a direct",
+          "vers": "hayes_loss",
+          "effects": [
+            {
+              "stat": "vie",
+              "val": -20
+            },
+            {
+              "stat": "violence",
+              "val": 10
+            },
+            {
+              "stat": "mental",
+              "val": -5
+            }
+          ]
+        },
+        {
+          "text": "Jab to torso",
+          "vers": "hayes_neutral",
+          "effects": [
+            {
+              "stat": "endurance",
+              "val": -5
+            },
+            {
+              "stat": "discipline",
+              "val": 4
+            }
+          ]
+        }
+      ],
+      "x": 1240,
+      "y": 4960,
+      "timer": {
+        "duration": 2,
+        "auto": "hayes_neutral"
+      }
+    },
+    "hayes_win": {
+      "id": "hayes_win",
+      "title": "Victory against Derek Hayes",
+      "location": "AFTER COMBAT",
+      "narrator": "Every win changes your career slightly.",
+      "text": "You read Derek Hayes perfectly.\n\nThe public reacts immediately.\n\nMalik seems almost proud.\n\n**\"There, you're really starting to understand the ring. *",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "flash",
+      "choices": [
+        {
+          "text": "Return to get another contract",
+          "vers": "hub_combats_annexes",
+          "effects": [
+            {
+              "stat": "discipline",
+              "val": 5
+            }
+          ]
+        },
+        {
+          "text": "Prepare Ward",
+          "vers": "ward_1",
+          "effects": [
+            {
+              "stat": "classement",
+              "val": 5
+            }
+          ]
+        }
+      ],
+      "x": 1440,
+      "y": 4960
+    },
+    "hayes_neutral": {
+      "id": "hayes_neutral",
+      "title": "Fight Squad",
+      "location": "RING",
+      "narrator": "Sometimes surviving is already a victory.",
+      "text": "The fight remains tight.\n\nYou got it.\n\nDerek Hayes, too.\n\nThe decision could go any way.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Accept tight decision",
+          "vers": "hub_combats_annexes",
+          "effects": [
+            {
+              "stat": "classement",
+              "val": 3
+            },
+            {
+              "stat": "mental",
+              "val": 5
+            }
+          ]
+        },
+        {
+          "text": "Stop the risks and prepare Ward",
+          "vers": "ward_1",
+          "effects": [
+            {
+              "stat": "discipline",
+              "val": 5
+            }
+          ]
+        }
+      ],
+      "x": 1640,
+      "y": 4960
+    },
+    "hayes_loss": {
+      "id": "hayes_loss",
+      "title": "Defeat against Derek Hayes",
+      "location": "VESTIARY",
+      "narrator": "Defeats sometimes build more than victories.",
+      "text": "Derek Hayes wins.\n\nYou're kicking.\n\nA lot.\n\nBut Malik looks at you with curiosity.\n\n**\"Now we'll see what you're doing after suffering. *",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Continue Nevertheless",
+          "vers": "hub_combats_annexes",
+          "effects": [
+            {
+              "stat": "mental",
+              "val": 10
+            },
+            {
+              "stat": "popularite",
+              "val": 5
+            }
+          ]
+        },
+        {
+          "text": "Back to a safer road",
+          "vers": "tournoi_regional",
+          "effects": [
+            {
+              "stat": "discipline",
+              "val": 10
+            }
+          ]
+        }
+      ],
+      "x": 1840,
+      "y": 4960
+    },
+    "nova_intro": {
+      "id": "nova_intro",
+      "title": "Analysis — Elio Nova",
+      "location": "VESTIARY",
+      "narrator": "Every boxer has a fatal habit.",
+      "text": "File: **Elio Nova**\n\nStyle:\n- Quick showman\n\nAnalysis:\n- He's playing with the audience. When he smiles at the cameras, his chin stays high.\n\nMalik summarizes:\n\n**\"You don't need to be perfect. You just need to recognize the moment. *",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Get on the ring",
+          "vers": "nova_fight",
+          "effects": [
+            {
+              "stat": "ringiq",
+              "val": 5
+            }
+          ]
+        }
+      ],
+      "x": 1040,
+      "y": 5220
+    },
+    "nova_fight": {
+      "id": "nova_fight",
+      "title": "Elio Nova — Key Exchange",
+      "location": "RING",
+      "narrator": "It's all in seconds.",
+      "text": "Nova smiles in the front row. His arm drops a fraction of a second.\n\nThe opening is short.\n\nVery short.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "glitch",
+      "choices": [
+        {
+          "text": "Direct dry before it is replaced",
+          "vers": "nova_win",
+          "effects": [
+            {
+              "stat": "classement",
+              "val": 10
+            },
+            {
+              "stat": "popularite",
+              "val": 5
+            },
+            {
+              "stat": "ringiq",
+              "val": 8
+            }
+          ],
+          "requires": {
+            "stat": "popularite",
+            "min": 35
+          }
+        },
+        {
+          "text": "To provoke him in your turn",
+          "vers": "nova_loss",
+          "effects": [
+            {
+              "stat": "vie",
+              "val": -20
+            },
+            {
+              "stat": "violence",
+              "val": 10
+            },
+            {
+              "stat": "mental",
+              "val": -5
+            }
+          ]
+        },
+        {
+          "text": "Let him do his show",
+          "vers": "nova_neutral",
+          "effects": [
+            {
+              "stat": "endurance",
+              "val": -5
+            },
+            {
+              "stat": "discipline",
+              "val": 4
+            }
+          ]
+        }
+      ],
+      "x": 1240,
+      "y": 5220,
+      "timer": {
+        "duration": 2,
+        "auto": "nova_neutral"
+      }
+    },
+    "nova_win": {
+      "id": "nova_win",
+      "title": "Victory over Elio Nova",
+      "location": "AFTER COMBAT",
+      "narrator": "Every win changes your career slightly.",
+      "text": "You read Elio Nova perfectly.\n\nThe public reacts immediately.\n\nMalik seems almost proud.\n\n**\"There, you're really starting to understand the ring. *",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "flash",
+      "choices": [
+        {
+          "text": "Return to get another contract",
+          "vers": "hub_combats_annexes",
+          "effects": [
+            {
+              "stat": "discipline",
+              "val": 5
+            }
+          ]
+        },
+        {
+          "text": "Prepare Ward",
+          "vers": "ward_1",
+          "effects": [
+            {
+              "stat": "classement",
+              "val": 5
+            }
+          ]
+        }
+      ],
+      "x": 1440,
+      "y": 5220
+    },
+    "nova_neutral": {
+      "id": "nova_neutral",
+      "title": "Fight Squad",
+      "location": "RING",
+      "narrator": "Sometimes surviving is already a victory.",
+      "text": "The fight remains tight.\n\nYou got it.\n\nElio Nova, too.\n\nThe decision could go any way.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Accept tight decision",
+          "vers": "hub_combats_annexes",
+          "effects": [
+            {
+              "stat": "classement",
+              "val": 3
+            },
+            {
+              "stat": "mental",
+              "val": 5
+            }
+          ]
+        },
+        {
+          "text": "Stop the risks and prepare Ward",
+          "vers": "ward_1",
+          "effects": [
+            {
+              "stat": "discipline",
+              "val": 5
+            }
+          ]
+        }
+      ],
+      "x": 1640,
+      "y": 5220
+    },
+    "nova_loss": {
+      "id": "nova_loss",
+      "title": "Defeat against Elio Nova",
+      "location": "VESTIARY",
+      "narrator": "Defeats sometimes build more than victories.",
+      "text": "Elio Nova wins.\n\nYou're kicking.\n\nA lot.\n\nBut Malik looks at you with curiosity.\n\n**\"Now we'll see what you're doing after suffering. *",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Continue Nevertheless",
+          "vers": "hub_combats_annexes",
+          "effects": [
+            {
+              "stat": "mental",
+              "val": 10
+            },
+            {
+              "stat": "popularite",
+              "val": 5
+            }
+          ]
+        },
+        {
+          "text": "Back to a safer road",
+          "vers": "tournoi_regional",
+          "effects": [
+            {
+              "stat": "discipline",
+              "val": 10
+            }
+          ]
+        }
+      ],
+      "x": 1840,
+      "y": 5220
+    },
+    "fin_entraineur": {
+      "id": "fin_entraineur",
+      "title": "End — Coach",
+      "location": "AFTER",
+      "narrator": "A career is sometimes passed on better than it gets.",
+      "text": "You've never become the greatest.\n\nBut years later, in a small room that still smells of leather and sweat, a young boxer asks you:\n\n*\"Coach... How do we read a feint? *\n\nYou're smiling.\n\nAnd for a moment, you see Malik again.",
+      "isStart": false,
+      "isEnd": true,
+      "transition": "fade",
+      "choices": [],
+      "x": 200,
+      "y": 5600
+    },
+    "fin_consultant": {
+      "id": "fin_consultant",
+      "title": "End — TV consultant",
+      "location": "AFTER",
+      "narrator": "Understanding the ring is sometimes another form of victory.",
+      "text": "You're developing a reputation as a technician.\n\nSports channels are starting to invite you.\n\nYou analyze fighting better than many former champions.\n\nThe audience learns to listen to your eyes.",
+      "isStart": false,
+      "isEnd": true,
+      "transition": "fade",
+      "choices": [],
+      "x": 420,
+      "y": 5600
+    },
+    "fin_boxeur_peuple": {
+      "id": "fin_boxeur_peuple",
+      "title": "End — People's Boxer",
+      "location": "AFTER",
+      "narrator": "Some legends never wear a belt.",
+      "text": "You've never been a champion.\n\nBut people come for you.\n\nBecause they know you might fall.\n\nBut never without getting up.",
+      "isStart": false,
+      "isEnd": true,
+      "transition": "fade",
+      "choices": [],
+      "x": 640,
+      "y": 5600
+    },
+    "fin_retour": {
+      "id": "fin_retour",
+      "title": "End — The Return",
+      "location": "AFTER",
+      "narrator": "We're really done only when we agree to be done.",
+      "text": "We thought you were done.\n\nToo many defeats.\nToo many wounds.\n\nThen one night, you come back.\n\nAnd everyone gets up.",
+      "isStart": false,
+      "isEnd": true,
+      "transition": "fade",
+      "choices": [],
+      "x": 860,
+      "y": 5600
+    },
+    "fin_abandon_definitif": {
+      "id": "fin_abandon_definitif",
+      "title": "End — Gloves Au Placard",
+      "location": "APPARATUS",
+      "narrator": "Sometimes survival means leaving the ring.",
+      "text": "You're not going back to the room.\n\nOne day you find your old gloves.\n\nThey still smell leather and fear.\n\nYou didn't become a champion.\n\nBut riding in a ring once already required courage.",
+      "isStart": false,
+      "isEnd": true,
+      "transition": "fade",
+      "choices": [],
+      "x": 1080,
+      "y": 5600
+    }
+  },
+  "lang": "en"
+}
