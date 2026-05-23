@@ -680,8 +680,9 @@ body {
     padding:32px 24px;max-width:320px;width:90%;text-align:center">
     <div style="font-size:28px;margin-bottom:12px">✦</div>
     <div style="font-family:'Cinzel',serif;font-size:16px;color:var(--cream);
-      letter-spacing:2px;margin-bottom:6px">Code Créateur</div>
-    <p style="font-size:12px;color:var(--dim);margin-bottom:20px;line-height:1.6">
+      letter-spacing:2px;margin-bottom:6px" id="txt-code-title">Code Créateur</div>
+    <p style="font-size:12px;color:var(--dim);margin-bottom:20px;line-height:1.6"
+      id="txt-code-sub">
       Entre ton code pour débloquer du contenu ou des fonctionnalités
     </p>
     <input id="code-input" type="text" placeholder="EX: AUTEUR-XXXX"
@@ -695,16 +696,14 @@ body {
     <div style="display:flex;gap:10px;margin-top:16px">
       <button onclick="closeCodePopup()" style="flex:1;padding:10px;border-radius:8px;
         border:1px solid var(--border);background:none;color:var(--dim);
-        font-family:'Cinzel',serif;font-size:11px;letter-spacing:1px;cursor:pointer">
-        Annuler
-      </button>
+        font-family:'Cinzel',serif;font-size:11px;letter-spacing:1px;cursor:pointer"
+        id="txt-code-cancel">Annuler</button>
       <button onclick="submitCode()" style="flex:1;padding:10px;border-radius:8px;
         border:1px solid var(--gold3);
         background:linear-gradient(135deg,rgba(200,169,110,0.15),rgba(200,169,110,0.05));
         color:var(--gold);font-family:'Cinzel',serif;font-size:11px;
-        letter-spacing:1px;cursor:pointer">
-        Activer
-      </button>
+        letter-spacing:1px;cursor:pointer"
+        id="txt-code-submit">Activer</button>
     </div>
   </div>
 </div>
@@ -988,6 +987,15 @@ const LANG = {
     speedNormal:    'Normal',
     speedSlow:      'Lent',
     closeOptions:   'Fermer',
+    codeBtn:        '✦ Code créateur',
+    codeTitle:      'Code Créateur',
+    codeSub:        'Entre ton code pour débloquer du contenu ou des fonctionnalités',
+    codeCancel:     'Annuler',
+    codeSubmit:     'Activer',
+    codeInvalid:    'Code invalide ou expiré',
+    codeUsed:       'Code déjà utilisé',
+    codeEmpty:      'Code vide',
+    codeUnlocked:   'Débloqué : ',
     kidsBadge:      '🧒 Mode enfant actif',
     docTitle:       'Choisis ton Destin',
     nameTitle:      'Qui êtes-vous ?',
@@ -1030,6 +1038,15 @@ const LANG = {
     speedNormal:    'Normal',
     speedSlow:      'Slow',
     closeOptions:   'Close',
+    codeBtn:        '✦ Creator code',
+    codeTitle:      'Creator Code',
+    codeSub:        'Enter your code to unlock content or features',
+    codeCancel:     'Cancel',
+    codeSubmit:     'Activate',
+    codeInvalid:    'Invalid or expired code',
+    codeUsed:       'Code already used',
+    codeEmpty:      'Empty code',
+    codeUnlocked:   'Unlocked: ',
     kidsBadge:      '🧒 Kids mode on',
     docTitle:       'Choose Your Fate',
     nameTitle:      'Who are you?',
@@ -1076,6 +1093,15 @@ const LANG = {
     speedNormal:    'Normal',
     speedSlow:      'Lento',
     closeOptions:   'Cerrar',
+    codeBtn:        '✦ Código creador',
+    codeTitle:      'Código Creador',
+    codeSub:        'Introduce tu código para desbloquear contenido o funciones',
+    codeCancel:     'Cancelar',
+    codeSubmit:     'Activar',
+    codeInvalid:    'Código inválido o caducado',
+    codeUsed:       'Código ya utilizado',
+    codeEmpty:      'Código vacío',
+    codeUnlocked:   'Desbloqueado: ',
     kidsBadge:      '🧒 Modo infantil activo',
     docTitle:       'Elige tu Destino',
     nameTitle:      '¿Quién eres?',
@@ -1099,6 +1125,7 @@ let currentLang = localStorage.getItem('sf_lang') || 'fr';
 
 function setLang(lang) {
   currentLang = lang;
+  window._i18n = LANG; // alias pour redeemCode
   localStorage.setItem('sf_lang', lang);
   applyLang();
   document.getElementById('opt-lang').value = lang;
@@ -1138,6 +1165,13 @@ function applyLang() {
   set('txt-speed-normal',   t.speedNormal);
   set('txt-speed-slow',     t.speedSlow);
   set('txt-close-options',  t.closeOptions);
+  // Bouton code créateur
+  const codeBtn = document.querySelector('#options-panel button[onclick*="openCodePopup"]');
+  if (codeBtn) codeBtn.textContent = t.codeBtn;
+  set('txt-code-title',   t.codeTitle);
+  set('txt-code-sub',     t.codeSub);
+  set('txt-code-cancel',  t.codeCancel);
+  set('txt-code-submit',  t.codeSubmit);
   set('txt-submit-title',    t.submitTitle);
   set('txt-submit-subtitle', t.submitSubtitle);
   set('txt-submit-body',     t.submitBody);
@@ -1408,24 +1442,18 @@ const FABLERIS_CODES = {
 };
 
 function redeemCode(code) {
-  if (!code || !code.trim()) return { ok: false, msg: 'Code vide' };
-
+  const t = window._i18n?.[currentLang] || window._i18n?.fr || {};
+  if (!code || !code.trim()) return { ok: false, msg: t.codeEmpty || 'Code vide' };
   const cleaned = code.trim().toLowerCase().replace(/\s/g,'');
   const hash = sha256(cleaned);
-
   if (!FABLERIS_CODES[hash] || !FABLERIS_CODES[hash].unlocks) {
-    return { ok: false, msg: 'Code invalide ou expiré' };
+    return { ok: false, msg: t.codeInvalid || 'Code invalide ou expiré' };
   }
-
   const entry = FABLERIS_CODES[hash];
-
-  // Déjà utilisé ?
   const used = JSON.parse(localStorage.getItem('sf_used_codes') || '[]');
   if (used.includes(hash)) {
-    return { ok: false, msg: 'Code déjà utilisé' };
+    return { ok: false, msg: t.codeUsed || 'Code déjà utilisé' };
   }
-
-  // Appliquer les déblocages
   const unlocked = JSON.parse(localStorage.getItem('sf_unlocked_packs') || '["free","kids"]');
   entry.unlocks.forEach(u => {
     if (u === 'all') {
@@ -1436,12 +1464,10 @@ function redeemCode(code) {
       unlocked.push(u);
     }
   });
-
   localStorage.setItem('sf_unlocked_packs', JSON.stringify(unlocked));
   used.push(hash);
   localStorage.setItem('sf_used_codes', JSON.stringify(used));
-
-  return { ok: true, msg: entry.label, unlocks: entry.unlocks };
+  return { ok: true, msg: (t.codeUnlocked || 'Débloqué : ') + entry.label, unlocks: entry.unlocks };
 }
 
 // SHA256 simple en JS (sans dépendance)
