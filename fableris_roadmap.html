@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fableris — Roadmap 2025-2026</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=DM+Mono:wght@300;400&display=swap');
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { background:#0a0a0e; color:#e0d8f0; font-family:'DM Mono',monospace; min-height:100vh; padding:40px 20px 80px; }
+
+  .header { text-align:center; margin-bottom:60px; }
+  .header-logo { font-size:11px; letter-spacing:6px; color:#7070a0; margin-bottom:12px; text-transform:uppercase; }
+  .header-title { font-family:'Cinzel',serif; font-size:32px; font-weight:700; color:#c8a96e; letter-spacing:3px; margin-bottom:8px; }
+  .header-sub { font-size:11px; color:#7070a0; letter-spacing:2px; }
+
+  .timeline { max-width:720px; margin:0 auto; position:relative; }
+  .timeline::before { content:''; position:absolute; left:20px; top:0; bottom:0; width:1px; background:linear-gradient(to bottom, transparent, #26262e 10%, #26262e 90%, transparent); }
+
+  .phase { margin-bottom:48px; padding-left:56px; position:relative; }
+  .phase-dot { position:absolute; left:12px; top:4px; width:17px; height:17px; border-radius:50%; border:1px solid #c8a96e; background:#0a0a0e; display:flex; align-items:center; justify-content:center; }
+  .phase-dot::after { content:''; width:7px; height:7px; border-radius:50%; background:#c8a96e; }
+  .phase-dot.accent::after { background:#7c6dfa; } .phase-dot.accent { border-color:#7c6dfa; }
+  .phase-dot.green::after { background:#6dfabc; } .phase-dot.green { border-color:#6dfabc; }
+  .phase-dot.red::after { background:#fa6d8f; } .phase-dot.red { border-color:#fa6d8f; }
+  .phase-dot.dim::after { background:#404050; } .phase-dot.dim { border-color:#404050; }
+
+  .phase-date { font-size:9px; letter-spacing:3px; color:#7070a0; text-transform:uppercase; margin-bottom:6px; }
+  .phase-title { font-family:'Cinzel',serif; font-size:15px; color:#e0d8f0; margin-bottom:12px; font-weight:600; }
+
+  .items { display:flex; flex-direction:column; gap:6px; }
+  .item { background:#111118; border:1px solid #26262e; border-radius:8px; padding:9px 13px; display:flex; align-items:flex-start; gap:10px; font-size:11px; line-height:1.5; }
+  .item-icon { flex-shrink:0; font-size:13px; margin-top:1px; }
+  .item-text { color:#a090c0; flex:1; }
+  .item-text strong { color:#e0d8f0; font-weight:400; }
+  .item.gold { border-color:rgba(200,169,110,0.2); }
+  .item.gold .item-text { color:#c8a96e; }
+  .item.purple { border-color:rgba(124,109,250,0.2); }
+  .item.purple .item-text strong { color:#a090ff; }
+  .item.green { border-color:rgba(109,250,188,0.15); }
+  .item.green .item-text strong { color:#6dfabc; }
+  .item.red { border-color:rgba(250,109,143,0.2); }
+  .item.red .item-text { color:#fa6d8f; }
+  .item.dim { opacity:0.45; }
+
+  /* CHECKLIST */
+  .checklist { background:#0d0d12; border:1px solid #26262e; border-radius:12px; padding:16px; margin-bottom:48px; }
+  .checklist-title { font-family:'Cinzel',serif; font-size:12px; color:#c8a96e; letter-spacing:2px; margin-bottom:12px; display:flex; align-items:center; gap:8px; }
+  .check-item { display:flex; align-items:center; gap:10px; padding:7px 0; border-bottom:1px solid #1a1a22; font-size:11px; color:#a090c0; cursor:pointer; user-select:none; transition:color .15s; }
+  .check-item:last-child { border-bottom:none; }
+  .check-item:hover { color:#e0d8f0; }
+  .check-box { width:16px; height:16px; border-radius:4px; border:1px solid #404050; background:#0a0a0e; flex-shrink:0; display:flex; align-items:center; justify-content:center; font-size:10px; transition:all .15s; }
+  .check-item.done .check-box { background:#6dfabc22; border-color:#6dfabc; color:#6dfabc; }
+  .check-item.done .check-label { color:#6dfabc; text-decoration:line-through; opacity:0.6; }
+  .check-item.urgent .check-box { border-color:#fa6d8f; }
+  .check-item.urgent .check-label { color:#fa6d8f; }
+  .check-progress { display:flex; align-items:center; gap:8px; margin-top:10px; }
+  .check-bar { flex:1; height:3px; background:#26262e; border-radius:2px; overflow:hidden; }
+  .check-fill { height:100%; background:linear-gradient(90deg, #6dfabc, #7c6dfa); border-radius:2px; transition:width .3s; }
+  .check-count { font-size:9px; color:#7070a0; letter-spacing:1px; }
+
+  .tag { display:inline-block; font-size:8px; letter-spacing:2px; padding:2px 7px; border-radius:20px; margin-left:8px; text-transform:uppercase; vertical-align:middle; }
+  .tag-test { background:rgba(255,170,0,0.1); color:#ffaa00; border:1px solid rgba(255,170,0,0.3); }
+  .tag-live  { background:rgba(109,250,188,0.1); color:#6dfabc; border:1px solid rgba(109,250,188,0.3); }
+  .tag-dlc   { background:rgba(124,109,250,0.1); color:#a090ff; border:1px solid rgba(124,109,250,0.3); }
+  .tag-soon  { background:rgba(112,112,160,0.1); color:#7070a0; border:1px solid rgba(112,112,160,0.3); }
+  .tag-urgent{ background:rgba(250,109,143,0.1); color:#fa6d8f; border:1px solid rgba(250,109,143,0.3); }
+
+  .sep { text-align:center; margin:8px 0 16px; font-size:9px; letter-spacing:4px; color:#26262e; }
+  .footer { text-align:center; margin-top:60px; font-size:9px; color:#404050; letter-spacing:2px; }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-logo">PegasusCorp — Document interne</div>
+  <div class="header-title">Fableris</div>
+  <div class="header-sub">Roadmap 2025 — 2026 &nbsp;✦&nbsp; Version 1.1</div>
+</div>
+
+<div class="timeline">
+
+  <!-- CHECKLIST LANCEMENT -->
+  <div class="checklist" id="checklist">
+    <div class="checklist-title">
+      ⚡ Checklist avant lancement
+      <span class="tag tag-urgent">Urgent</span>
+    </div>
+
+    <div class="check-item done" onclick="toggle(this)">
+      <div class="check-box">✓</div>
+      <div class="check-label">Moteur de jeu (game.html) — complet</div>
+    </div>
+    <div class="check-item done" onclick="toggle(this)">
+      <div class="check-box">✓</div>
+      <div class="check-label">Éditeur StoryForge — complet</div>
+    </div>
+    <div class="check-item done" onclick="toggle(this)">
+      <div class="check-box">✓</div>
+      <div class="check-label">6 histoires gratuites finalisées</div>
+    </div>
+    <div class="check-item done" onclick="toggle(this)">
+      <div class="check-box">✓</div>
+      <div class="check-label">Icône app 512×512 — trouvée ✦</div>
+    </div>
+    <div class="check-item done" onclick="toggle(this)">
+      <div class="check-box">✓</div>
+      <div class="check-label">Système de codes créateur</div>
+    </div>
+    <div class="check-item done" onclick="toggle(this)">
+      <div class="check-box">✓</div>
+      <div class="check-label">Traduction FR / EN / ES (Argos)</div>
+    </div>
+    <div class="check-item" onclick="toggle(this)">
+      <div class="check-box"></div>
+      <div class="check-label">2-3 histoires enfants supplémentaires (Aikito + ?)</div>
+    </div>
+    <div class="check-item urgent" onclick="toggle(this)">
+      <div class="check-box"></div>
+      <div class="check-label">Politique de confidentialité — page publique obligatoire Play Store</div>
+    </div>
+    <div class="check-item urgent" onclick="toggle(this)">
+      <div class="check-box"></div>
+      <div class="check-label">Capacitor → build APK Android</div>
+    </div>
+    <div class="check-item urgent" onclick="toggle(this)">
+      <div class="check-box"></div>
+      <div class="check-label">Compte Google Play Developer (25$)</div>
+    </div>
+    <div class="check-item urgent" onclick="toggle(this)">
+      <div class="check-box"></div>
+      <div class="check-label">Relier moyen de paiement au Play Store (Google Pay / carte)</div>
+    </div>
+    <div class="check-item" onclick="toggle(this)">
+      <div class="check-box"></div>
+      <div class="check-label">8 captures d'écran Play Store (obligatoires)</div>
+    </div>
+    <div class="check-item" onclick="toggle(this)">
+      <div class="check-box"></div>
+      <div class="check-label">Description app FR + EN pour le store</div>
+    </div>
+    <div class="check-item" onclick="toggle(this)">
+      <div class="check-box"></div>
+      <div class="check-label">Adapter téléchargement JSON + envoi email → Share API Capacitor (APK)</div>
+    </div>
+    <div class="check-item" onclick="toggle(this)">
+      <div class="check-box"></div>
+      <div class="check-label">Tester les mailto: dans l'éditeur et fableris_tools.py sur APK</div>
+    </div>
+    <div class="check-item" onclick="toggle(this)">
+      <div class="check-box"></div>
+      <div class="check-label">Recruter 12 testeurs (14 jours obligatoires Play Store)</div>
+    </div>
+
+    <div class="check-progress">
+      <div class="check-bar"><div class="check-fill" id="fill"></div></div>
+      <div class="check-count" id="count">6 / 15</div>
+    </div>
+  </div>
+
+  <!-- PHASE 1 -->
+  <div class="phase">
+    <div class="phase-dot gold"></div>
+    <div class="phase-date">Juin 2025 — 14 jours</div>
+    <div class="phase-title">Phase 1 — Test fermé <span class="tag tag-test">Test</span></div>
+    <div class="items">
+      <div class="item gold">
+        <div class="item-icon">👥</div>
+        <div class="item-text"><strong>12 testeurs</strong> — profils variés (ados, adultes, parents)</div>
+      </div>
+      <div class="item">
+        <div class="item-icon">📖</div>
+        <div class="item-text"><strong>6 histoires gratuites</strong> — Lazarus, Carcosa, Boucher, Dernières Minutes, Dernier Round, Gare des Regrets</div>
+      </div>
+      <div class="item">
+        <div class="item-icon">🧒</div>
+        <div class="item-text"><strong>Pack enfants</strong> — Aikito + 2-3 nouvelles (Marchand de Nuages, Train des Fatigués...)</div>
+      </div>
+      <div class="item">
+        <div class="item-icon">🐛</div>
+        <div class="item-text">Collecte de feedback — bugs, traductions, équilibrage des fins</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PHASE 2 -->
+  <div class="phase">
+    <div class="phase-dot green"></div>
+    <div class="phase-date">Juillet 2025</div>
+    <div class="phase-title">Phase 2 — Publication officielle <span class="tag tag-live">Live</span></div>
+    <div class="items">
+      <div class="item green">
+        <div class="item-icon">🚀</div>
+        <div class="item-text"><strong>Lancement Play Store Android</strong> — APK Capacitor</div>
+      </div>
+      <div class="item">
+        <div class="item-icon">🌍</div>
+        <div class="item-text"><strong>3 langues</strong> dès le lancement — FR / EN / ES</div>
+      </div>
+      <div class="item">
+        <div class="item-icon">✦</div>
+        <div class="item-text"><strong>Système de codes créateur</strong> actif</div>
+      </div>
+      <div class="item">
+        <div class="item-icon">📊</div>
+        <div class="item-text">Page progression — badges, stats, activité 7 jours</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PHASE 3 -->
+  <div class="phase">
+    <div class="phase-dot accent"></div>
+    <div class="phase-date">Juillet — Août 2025</div>
+    <div class="phase-title">Phase 3 — Communication <span class="tag tag-live">Live</span></div>
+    <div class="items">
+      <div class="item purple">
+        <div class="item-icon">🥩</div>
+        <div class="item-text"><strong>Collab Boucherie Amiot × PegasusCorp</strong> — "Le Boucher des Rêves" histoire co-écrite</div>
+      </div>
+      <div class="item">
+        <div class="item-icon">📱</div>
+        <div class="item-text"><strong>Réseaux sociaux</strong> — comptes pro boucher + Fableris/PegasusCorp</div>
+      </div>
+      <div class="item">
+        <div class="item-icon">🏪</div>
+        <div class="item-text"><strong>Artisans locaux</strong> — boulanger, fromager, fleuriste... histoires de leur métier</div>
+      </div>
+      <div class="item">
+        <div class="item-icon">🎯</div>
+        <div class="item-text">Pack <strong>Artisans gratuit</strong> — ambassadeurs locaux naturels</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PHASE 4 -->
+  <div class="phase">
+    <div class="phase-dot accent"></div>
+    <div class="phase-date">Septembre — Octobre 2025</div>
+    <div class="phase-title">Phase 4 — Premier DLC <span class="tag tag-dlc">DLC</span></div>
+    <div class="items">
+      <div class="item purple">
+        <div class="item-icon">👻</div>
+        <div class="item-text"><strong>DLC Horreur</strong> — Le Cimetière Écossais, trilogie Halloween</div>
+      </div>
+      <div class="item">
+        <div class="item-icon">🔗</div>
+        <div class="item-text"><strong>Portails inter-histoires</strong> — première utilisation en production</div>
+      </div>
+      <div class="item">
+        <div class="item-icon">💰</div>
+        <div class="item-text">Prix cible : <strong>2,99€</strong> — débloque les portails pour toutes les histoires</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PHASE 5 -->
+  <div class="phase">
+    <div class="phase-dot accent"></div>
+    <div class="phase-date">Décembre 2025 — Janvier 2026</div>
+    <div class="phase-title">Phase 5 — DLC Boxe + Communauté <span class="tag tag-dlc">DLC</span></div>
+    <div class="items">
+      <div class="item purple">
+        <div class="item-icon">🥊</div>
+        <div class="item-text"><strong>DLC Le Dernier Round — Carrière complète</strong> — 8 adversaires, 5 routes</div>
+      </div>
+      <div class="item">
+        <div class="item-icon">✍️</div>
+        <div class="item-text"><strong>Premiers auteurs communauté</strong> publiés officiellement</div>
+      </div>
+      <div class="item">
+        <div class="item-icon">🏆</div>
+        <div class="item-text">Crédits auteurs dans les écrans de fin + badge Auteur</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PHASE 6 -->
+  <div class="phase">
+    <div class="phase-dot dim"></div>
+    <div class="phase-date">2026 — En continu</div>
+    <div class="phase-title">Phase 6 — Croissance <span class="tag tag-soon">À venir</span></div>
+    <div class="items">
+      <div class="item dim">
+        <div class="item-icon">💳</div>
+        <div class="item-text"><strong>Abonnement mensuel</strong> ~2,99€/mois — tous DLC + nouvelles histoires</div>
+      </div>
+      <div class="item dim">
+        <div class="item-icon">🌐</div>
+        <div class="item-text"><strong>20+ histoires gratuites</strong> — artisans, communauté, PegasusCorp</div>
+      </div>
+      <div class="item dim">
+        <div class="item-icon">🎭</div>
+        <div class="item-text"><strong>DLC tous les 2-3 mois</strong> — Lazarus étendu, arc Théo, collaborations</div>
+      </div>
+      <div class="item dim">
+        <div class="item-icon">🍎</div>
+        <div class="item-text"><strong>App Store iOS</strong> — si Android cartonne, investissement Mac Mini</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sep">✦ ✦ ✦</div>
+
+  <div class="phase">
+    <div class="phase-dot gold"></div>
+    <div class="phase-date">Vision — 10 ans</div>
+    <div class="phase-title">L'objectif</div>
+    <div class="items">
+      <div class="item gold">
+        <div class="item-icon">✦</div>
+        <div class="item-text"><strong>"Je suis boucher. Et j'écris des histoires interactives."</strong><br>Une deuxième entreprise construite patiemment — un produit honnête, bien fait, à prix juste.</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="footer">Fableris / PegasusCorp &nbsp;·&nbsp; Document confidentiel &nbsp;·&nbsp; 2025</div>
+
+<script>
+function toggle(el) {
+  el.classList.toggle('done');
+  updateProgress();
+}
+function updateProgress() {
+  const items = document.querySelectorAll('.check-item');
+  const done  = document.querySelectorAll('.check-item.done').length;
+  const total = items.length;
+  const pct   = Math.round(done / total * 100);
+  document.getElementById('fill').style.width  = pct + '%';
+  document.getElementById('count').textContent = done + ' / ' + total;
+}
+updateProgress();
+</script>
+</body>
+</html>
