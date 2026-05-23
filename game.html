@@ -1144,7 +1144,26 @@ function goToScene(id, choiceText, externalStory) {
   document.getElementById('scroll-area').scrollTo({ top: 0, behavior: 'smooth' });
 }
 
+function hasUnlock(feature) {
+  const unlocked = JSON.parse(localStorage.getItem('sf_unlocked_packs') || '["free","kids"]');
+  return unlocked.includes(feature) || unlocked.includes('creator') || unlocked.includes('all');
+}
+
 async function loadExternalStory(storyFile, startScene) {
+  // Vérifier si les portails sont débloqués
+  if (!hasUnlock('portals')) {
+    // Afficher un message premium
+    const notif = document.createElement('div');
+    notif.style.cssText = `position:fixed;bottom:80px;left:50%;transform:translateX(-50%);
+      background:#13110e;border:1px solid rgba(200,169,110,0.4);border-radius:10px;
+      padding:12px 20px;font-family:'DM Mono',monospace;font-size:11px;
+      color:var(--gold,#c8a96e);letter-spacing:1px;z-index:999;text-align:center;
+      animation:fade-in .3s ease`;
+    notif.innerHTML = '🔒 Portails inter-histoires<br><span style="opacity:0.6;font-size:10px">Fonctionnalité Premium — bientôt disponible</span>';
+    document.body.appendChild(notif);
+    setTimeout(() => notif.remove(), 3000);
+    return;
+  }
   // Écran de transition
   const overlay = document.createElement('div');
   overlay.style.cssText = `position:fixed;inset:0;background:#0a0a0e;z-index:9999;
@@ -1237,6 +1256,7 @@ function renderScene(scene) {
         : `pickChoice('${c.vers}', ${i}, this)`}"
       ${locked || statLocked ? 'disabled' : ''}>
       <span class="choice-index">— ${String(i+1).padStart(2,'0')}</span>
+      ${c.story ? `<span style="float:right;font-size:10px;opacity:0.5">🔗</span>` : ''}
       ${escHtml(c.text)}
       ${statLocked ? `<span style="display:block;font-size:10px;color:var(--text3);margin-top:5px;font-family:'DM Mono',monospace;letter-spacing:0.5px">
         🔒 min insuffisant (${statReason})</span>` : ''}

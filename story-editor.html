@@ -1513,8 +1513,27 @@ function renderEditor(id) {
         ).join('')}
       </div>
     </div>
-
-    <div class="section-divider">${et('choices')}</div>
+    <div class="form-group">
+      <label class="form-label" style="display:flex;align-items:center;gap:6px">
+        🔗 Portail vers une autre histoire
+        <span style="background:rgba(200,169,110,0.1);border:1px solid rgba(200,169,110,0.3);
+          border-radius:4px;padding:1px 6px;font-size:9px;color:var(--gold3);letter-spacing:1px">
+          PREMIUM
+        </span>
+      </label>
+      <div style="position:relative">
+        <input class="form-input" disabled
+          style="opacity:0.4;cursor:not-allowed;font-family:'DM Mono',monospace;font-size:11px"
+          placeholder="ex: stories/fr/aikito_train.json"
+          value="${scene.story||''}">
+        <div class="tip" data-tip="Redirige vers une autre histoire — fonctionnalité premium, bientôt disponible"
+          style="position:absolute;right:10px;top:50%;transform:translateY(-50%);
+          color:var(--gold3);font-size:13px;cursor:help">🔒</div>
+      </div>
+      <div style="font-size:10px;color:var(--text3);margin-top:4px;font-style:italic">
+        Sera débloqué avec un pack premium
+      </div>
+    </div>
     <div id="choices-list"></div>
     <button class="add-choice-btn" onclick="addChoice('${id}')">${et('addChoice')}</button>
   `;

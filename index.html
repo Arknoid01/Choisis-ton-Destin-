@@ -13,14 +13,13 @@
 <style>
 /* ── RESET ── */
 *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
-html { min-height:100%; overflow-x:hidden; overflow-y:auto; }
+html { height:100%; overflow:hidden; }
 body {
-  min-height:100dvh;
+  min-height:100%; height:100%;
   font-family:'Cormorant Garamond', serif;
   background:#0d0d0f;
   color:#e8e0d0;
-  overflow-x:hidden;
-  overflow-y:auto;
+  overflow:hidden;
 }
 
 /* ── CSS VARS ── */
@@ -71,16 +70,16 @@ body {
 /* ── LAYOUT ── */
 #shell {
   position:relative; z-index:10;
-  min-height:100dvh;
+  height:100vh;
   display:flex; flex-direction:column;
   align-items:center; justify-content:center;
-  padding:clamp(28px, 6vh, 72px) 20px;
-  overflow:visible;
+  padding:0 20px;
+  overflow:hidden;
 }
 #content-block {
   display:flex; flex-direction:column;
   align-items:center;
-  transform:translateY(clamp(-70px, -8vh, -20px));
+  transform:translateY(-35%);
   width:100%; max-width:380px;
 }
 
@@ -322,7 +321,81 @@ body {
   color:var(--dimmer); font-style:italic; font-size:14px;
 }
 
-/* ── OPTIONS PANEL ── */
+/* ── LANGUE POPUP ── */
+#lang-overlay {
+  position:fixed; inset:0; z-index:600;
+  background:rgba(0,0,0,0.85);
+  display:flex; align-items:center; justify-content:center;
+  backdrop-filter:blur(8px);
+  animation:fade-in .4s ease;
+}
+#lang-box {
+  background:#13110e; border:1px solid var(--gold3);
+  border-radius:20px; padding:36px 28px;
+  max-width:340px; width:90%; text-align:center;
+  animation:scale-in .4s ease;
+}
+@keyframes scale-in {
+  from { transform:scale(0.9); opacity:0; }
+  to   { transform:scale(1);   opacity:1; }
+}
+@keyframes fade-out {
+  from { opacity:1; }
+  to   { opacity:0; }
+}
+.lang-box-icon { font-size:36px; margin-bottom:16px; }
+.lang-box-title {
+  font-family:'Cinzel',serif; font-size:18px; font-weight:600;
+  color:var(--cream); letter-spacing:2px; margin-bottom:8px;
+}
+.lang-box-sub {
+  font-size:13px; color:var(--dim); font-style:italic;
+  margin-bottom:28px; line-height:1.6;
+}
+.lang-choices {
+  display:flex; flex-direction:column; gap:10px;
+}
+.lang-choice-btn {
+  display:flex; align-items:center; gap:14px;
+  padding:14px 18px; border-radius:12px;
+  border:1px solid var(--border2); background:var(--bg2);
+  cursor:pointer; transition:all .2s; text-align:left;
+  width:100%;
+}
+.lang-choice-btn:hover {
+  border-color:var(--gold3);
+  background:rgba(200,169,110,0.06);
+}
+.lang-choice-btn.selected {
+  border-color:var(--gold);
+  background:rgba(200,169,110,0.1);
+}
+.lang-flag { font-size:26px; flex-shrink:0; }
+.lang-info { flex:1; }
+.lang-name {
+  font-family:'Cinzel',serif; font-size:14px; font-weight:600;
+  color:var(--cream); display:block;
+}
+.lang-native { font-size:12px; color:var(--dim); }
+.lang-check {
+  width:20px; height:20px; border-radius:50%;
+  border:2px solid var(--border2); flex-shrink:0;
+  display:flex; align-items:center; justify-content:center;
+  font-size:11px; transition:all .2s;
+}
+.lang-choice-btn.selected .lang-check {
+  background:var(--gold); border-color:var(--gold); color:#000;
+}
+.lang-confirm-btn {
+  margin-top:20px; width:100%;
+  padding:13px; border-radius:10px;
+  border:1px solid var(--gold3);
+  background:linear-gradient(135deg,rgba(200,169,110,0.15),rgba(200,169,110,0.05));
+  color:var(--gold); font-family:'Cinzel',serif;
+  font-size:12px; letter-spacing:2px; cursor:pointer;
+  transition:all .2s;
+}
+.lang-confirm-btn:hover { background:rgba(200,169,110,0.2); }
 #options-panel {
   position:fixed; inset:0; z-index:200;
   display:flex; align-items:center; justify-content:center;
@@ -561,7 +634,17 @@ body {
   border-color:var(--gold); box-shadow:0 0 20px rgba(200,169,110,0.15);
   transform:translateY(-1px);
 }
-.submit-btn.secondary {
+.submit-btn.ai-btn {
+  background: linear-gradient(135deg, rgba(124,109,250,0.15), rgba(109,250,188,0.15));
+  border-color: rgba(124,109,250,0.5);
+  color: #a090ff;
+  letter-spacing: 2px;
+}
+.submit-btn.ai-btn:hover {
+  background: linear-gradient(135deg, rgba(124,109,250,0.3), rgba(109,250,188,0.2));
+  border-color: #7c6dfa;
+  color: #c0b0ff;
+}
   background:none; border-color:var(--border);
   color:var(--dim); letter-spacing:2px;
 }
@@ -580,24 +663,85 @@ body {
 
 /* ── MOBILE ── */
 @media (max-width:480px) {
-  #shell { padding:24px 20px; }
-  #content-block { transform:translateY(clamp(-55px, -7vh, -16px)); }
+  #content-block { transform:translateY(-32%); }
   .main-title { letter-spacing:1px; }
   .btn-main { font-size:12px; padding:15px 24px; letter-spacing:2px; }
   #options-box { margin:12px; padding:24px; }
 }
-
-/* Écrans larges mais peu hauts : évite que le titre soit coupé en haut */
-@media (min-width:700px) and (max-height:820px) {
-  #content-block { transform:none; }
-  .main-title { font-size:clamp(36px, 7vh, 58px); }
-  .subtitle, .divider { margin-bottom:18px; }
-  .btn-group { gap:12px; }
-  .btn-main { padding:14px 28px; }
-}
 </style>
 </head>
 <body>
+
+<!-- CODE CRÉATEUR POPUP -->
+<div id="code-overlay" style="display:none;position:fixed;inset:0;z-index:600;
+  background:rgba(0,0,0,0.85);display:none;align-items:center;justify-content:center;
+  backdrop-filter:blur(8px)">
+  <div style="background:#13110e;border:1px solid var(--gold3);border-radius:20px;
+    padding:32px 24px;max-width:320px;width:90%;text-align:center">
+    <div style="font-size:28px;margin-bottom:12px">✦</div>
+    <div style="font-family:'Cinzel',serif;font-size:16px;color:var(--cream);
+      letter-spacing:2px;margin-bottom:6px">Code Créateur</div>
+    <p style="font-size:12px;color:var(--dim);margin-bottom:20px;line-height:1.6">
+      Entre ton code pour débloquer du contenu ou des fonctionnalités
+    </p>
+    <input id="code-input" type="text" placeholder="EX: AUTEUR-XXXX"
+      onkeydown="if(event.key==='Enter')submitCode()"
+      style="width:100%;background:var(--bg2);border:1px solid var(--border);
+        border-radius:8px;color:var(--cream);font-family:'DM Mono',monospace;
+        font-size:13px;padding:10px 14px;outline:none;text-align:center;
+        letter-spacing:2px;text-transform:uppercase;box-sizing:border-box">
+    <div id="code-result" style="display:none;margin-top:10px;padding:8px 12px;
+      border-radius:8px;border:1px solid;font-size:12px;font-family:'DM Mono',monospace"></div>
+    <div style="display:flex;gap:10px;margin-top:16px">
+      <button onclick="closeCodePopup()" style="flex:1;padding:10px;border-radius:8px;
+        border:1px solid var(--border);background:none;color:var(--dim);
+        font-family:'Cinzel',serif;font-size:11px;letter-spacing:1px;cursor:pointer">
+        Annuler
+      </button>
+      <button onclick="submitCode()" style="flex:1;padding:10px;border-radius:8px;
+        border:1px solid var(--gold3);
+        background:linear-gradient(135deg,rgba(200,169,110,0.15),rgba(200,169,110,0.05));
+        color:var(--gold);font-family:'Cinzel',serif;font-size:11px;
+        letter-spacing:1px;cursor:pointer">
+        Activer
+      </button>
+    </div>
+  </div>
+</div>
+<div id="lang-overlay" style="display:none">
+  <div id="lang-box">
+    <div class="lang-box-icon">✦</div>
+    <div class="lang-box-title">Choisissez votre langue</div>
+    <p class="lang-box-sub">Choose your language · Elige tu idioma</p>
+    <div class="lang-choices">
+      <button class="lang-choice-btn selected" id="lp-fr" onclick="selectLangPopup('fr',this)">
+        <span class="lang-flag">🇫🇷</span>
+        <div class="lang-info">
+          <span class="lang-name">Français</span>
+          <span class="lang-native">French</span>
+        </div>
+        <div class="lang-check">✓</div>
+      </button>
+      <button class="lang-choice-btn" id="lp-en" onclick="selectLangPopup('en',this)">
+        <span class="lang-flag">🇬🇧</span>
+        <div class="lang-info">
+          <span class="lang-name">English</span>
+          <span class="lang-native">Anglais</span>
+        </div>
+        <div class="lang-check"></div>
+      </button>
+      <button class="lang-choice-btn" id="lp-es" onclick="selectLangPopup('es',this)">
+        <span class="lang-flag">🇪🇸</span>
+        <div class="lang-info">
+          <span class="lang-name">Español</span>
+          <span class="lang-native">Espagnol</span>
+        </div>
+        <div class="lang-check"></div>
+      </button>
+    </div>
+    <button class="lang-confirm-btn" onclick="confirmLang()">CONTINUER</button>
+  </div>
+</div>
 
 <div class="bg-gradient"></div>
 <canvas id="bg-canvas"></canvas>
@@ -702,6 +846,9 @@ body {
       <button class="submit-btn" onclick="goToEditor()">
         <span id="txt-submit-editor">Ouvrir l'éditeur</span>
       </button>
+      <button class="submit-btn ai-btn" onclick="window.open('ai-guide.html','_blank')">
+        <span id="txt-submit-ai">✦ Créer avec l'IA</span>
+      </button>
       <button class="submit-btn secondary" onclick="closeSubmitPopup()">
         <span id="txt-submit-cancel">Annuler</span>
       </button>
@@ -798,6 +945,12 @@ body {
     </div>
 
     <button class="options-close" onclick="closeOptions()" id="txt-close-options">Fermer</button>
+    <button onclick="closeOptions();openCodePopup()" style="
+      background:none;border:none;color:var(--dimmer);font-family:'DM Mono',monospace;
+      font-size:10px;letter-spacing:2px;cursor:pointer;padding:8px;
+      text-transform:uppercase;display:block;margin:4px auto 0">
+      ✦ Code créateur
+    </button>
   </div>
 </div>
 
@@ -849,6 +1002,7 @@ const LANG = {
     perk3:          '<strong>Badge Auteur</strong> — Votre nom associé à votre création dans l\'app',
     submitEditor:   'Ouvrir l\'éditeur',
     submitCancel:   'Annuler',
+    submitAi:       '✦ Créer avec l\'IA',
     submitNote:     'Une fois votre histoire écrite, exportez le JSON et envoyez-le directement depuis l\'éditeur.',
   },
   en: {
@@ -890,6 +1044,7 @@ const LANG = {
     perk3:          '<strong>Author Badge</strong> — Your name linked to your creation in the app',
     submitEditor:   'Open the editor',
     submitCancel:   'Cancel',
+    submitAi:       '✦ Create with AI',
     submitNote:     'Once your story is written, export the JSON and send it directly from the editor.',
   },
   es: {
@@ -935,6 +1090,7 @@ const LANG = {
     perk3:          '<strong>Insignia de Autor</strong> — Tu nombre vinculado a tu creación en la app',
     submitEditor:   'Abrir el editor',
     submitCancel:   'Cancelar',
+    submitAi:       '✦ Crear con IA',
     submitNote:     'Una vez escrita tu historia, exporta el JSON y envíalo directamente desde el editor.',
   }
 };
@@ -990,6 +1146,7 @@ function applyLang() {
   set('txt-perk-3',          t.perk3, true);
   set('txt-submit-editor',   t.submitEditor);
   set('txt-submit-cancel',   t.submitCancel);
+  set('txt-submit-ai',       t.submitAi);
   set('txt-submit-note',     t.submitNote);
   document.title = t.docTitle;
   document.documentElement.lang = currentLang;
@@ -1244,12 +1401,199 @@ setTimeout(() => {
     }
   });
 }, 600);
+// ── SYSTÈME DE CODES CRÉATEUR ───────────────────────────────
+// Généré par generate_codes.py — remplacer ce bloc après chaque génération
+const FABLERIS_CODES = {
+  // Codes par défaut — à remplacer par le fichier généré
+};
+
+function redeemCode(code) {
+  if (!code || !code.trim()) return { ok: false, msg: 'Code vide' };
+
+  const cleaned = code.trim().toLowerCase().replace(/\s/g,'');
+  const hash = sha256(cleaned);
+
+  if (!FABLERIS_CODES[hash] || !FABLERIS_CODES[hash].unlocks) {
+    return { ok: false, msg: 'Code invalide ou expiré' };
+  }
+
+  const entry = FABLERIS_CODES[hash];
+
+  // Déjà utilisé ?
+  const used = JSON.parse(localStorage.getItem('sf_used_codes') || '[]');
+  if (used.includes(hash)) {
+    return { ok: false, msg: 'Code déjà utilisé' };
+  }
+
+  // Appliquer les déblocages
+  const unlocked = JSON.parse(localStorage.getItem('sf_unlocked_packs') || '["free","kids"]');
+  entry.unlocks.forEach(u => {
+    if (u === 'all') {
+      ['portals','pack_boxe','pack_horreur','pack_kids','creator'].forEach(p => {
+        if (!unlocked.includes(p)) unlocked.push(p);
+      });
+    } else if (!unlocked.includes(u)) {
+      unlocked.push(u);
+    }
+  });
+
+  localStorage.setItem('sf_unlocked_packs', JSON.stringify(unlocked));
+  used.push(hash);
+  localStorage.setItem('sf_used_codes', JSON.stringify(used));
+
+  return { ok: true, msg: entry.label, unlocks: entry.unlocks };
+}
+
+// SHA256 simple en JS (sans dépendance)
+async function sha256Async(str) {
+  const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(str));
+  return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2,'0')).join('');
+}
+
+function sha256(str) {
+  // Version synchrone simplifiée pour la vérification
+  // On utilise un hash pré-calculé stocké
+  return _sha256sync(str);
+}
+
+// Implémentation SHA256 pure JS
+function _sha256sync(ascii) {
+  function rightRotate(value, amount) { return (value >>> amount) | (value << (32 - amount)); }
+  const mathPow = Math.pow;
+  const maxWord = mathPow(2, 32);
+  let result = '';
+  const words = [];
+  const asciiBitLength = ascii.length * 8;
+  let hash = [];
+  const k = [];
+  let primeCounter = 0;
+  const isComposite = {};
+  for (let candidate = 2; primeCounter < 64; candidate++) {
+    if (!isComposite[candidate]) {
+      for (let i = 0; i < 313; i += candidate) isComposite[i] = candidate;
+      hash[primeCounter] = (mathPow(candidate, .5) * maxWord) | 0;
+      k[primeCounter++] = (mathPow(candidate, 1/3) * maxWord) | 0;
+    }
+  }
+  ascii += '\x80';
+  while (ascii.length % 64 - 56) ascii += '\x00';
+  for (let i = 0; i < ascii.length; i++) {
+    const j = ascii.charCodeAt(i);
+    if (j >> 8) return '';
+    words[i >> 2] |= j << ((3 - i) % 4) * 8;
+  }
+  words[words.length] = ((asciiBitLength / maxWord) | 0);
+  words[words.length] = (asciiBitLength | 0);
+  for (let j = 0; j < words.length;) {
+    const w = words.slice(j, j += 16);
+    const oldHash = hash.slice(0);
+    for (let i = 0; i < 64; i++) {
+      const w15 = w[i - 15], w2 = w[i - 2];
+      const a = hash[0], e = hash[4];
+      const temp1 = hash[7] + (rightRotate(e,6) ^ rightRotate(e,11) ^ rightRotate(e,25))
+        + ((e & hash[5]) ^ (~e & hash[6])) + k[i]
+        + (w[i] = (i < 16) ? w[i] : (w[i-16] + (rightRotate(w15,7)^rightRotate(w15,18)^(w15>>>3))
+          + w[i-7] + (rightRotate(w2,17)^rightRotate(w2,19)^(w2>>>10))) | 0);
+      const temp2 = (rightRotate(a,2)^rightRotate(a,13)^rightRotate(a,22))
+        + ((a & hash[1]) ^ (a & hash[2]) ^ (hash[1] & hash[2]));
+      hash = [(temp1+temp2)|0].concat(hash);
+      hash[4] = (hash[4]+temp1)|0;
+      hash.length = 8;
+    }
+    hash = hash.map((x, i) => (x + oldHash[i]) | 0);
+  }
+  hash.forEach(x => { for (let j = 3; j + 1; j--) {
+    const hex = ((x >> (j*8)) & 255).toString(16);
+    result += (hex.length === 1 ? '0' : '') + hex;
+  }});
+  return result;
+}
+
+function hasUnlock(feature) {
+  const unlocked = JSON.parse(localStorage.getItem('sf_unlocked_packs') || '["free","kids"]');
+  return unlocked.includes(feature) || unlocked.includes('creator') || unlocked.includes('all');
+}
+
+// ── POPUP CODE CRÉATEUR ─────────────────────────────────────
+function openCodePopup() {
+  document.getElementById('code-overlay').style.display = 'flex';
+  setTimeout(() => document.getElementById('code-input').focus(), 100);
+}
+
+function closeCodePopup() {
+  document.getElementById('code-overlay').style.display = 'none';
+  document.getElementById('code-input').value = '';
+  document.getElementById('code-result').style.display = 'none';
+}
+
+async function submitCode() {
+  const input = document.getElementById('code-input').value.trim();
+  const result = redeemCode(input);
+  const resultEl = document.getElementById('code-result');
+  resultEl.style.display = 'block';
+  if (result.ok) {
+    resultEl.style.color = 'var(--accent3)';
+    resultEl.style.borderColor = 'rgba(109,250,188,0.3)';
+    resultEl.style.background = 'rgba(109,250,188,0.06)';
+    resultEl.textContent = '✓ Débloqué : ' + result.msg;
+    setTimeout(closeCodePopup, 2000);
+  } else {
+    resultEl.style.color = '#fa6d8f';
+    resultEl.style.borderColor = 'rgba(250,109,143,0.3)';
+    resultEl.style.background = 'rgba(250,109,143,0.06)';
+    resultEl.textContent = '✕ ' + result.msg;
+  }
+}
+let _pendingLang = localStorage.getItem('sf_lang') || 'fr';
+
+function selectLangPopup(lang, btn) {
+  _pendingLang = lang;
+  document.querySelectorAll('.lang-choice-btn').forEach(b => {
+    b.classList.remove('selected');
+    b.querySelector('.lang-check').textContent = '';
+  });
+  btn.classList.add('selected');
+  btn.querySelector('.lang-check').textContent = '✓';
+}
+
+function confirmLang() {
+  localStorage.setItem('sf_lang', _pendingLang);
+  localStorage.setItem('sf_lang_chosen', '1');
+  currentLang = _pendingLang;
+  setLang(currentLang);
+  const overlay = document.getElementById('lang-overlay');
+  overlay.style.animation = 'fade-out .3s ease forwards';
+  setTimeout(() => overlay.style.display = 'none', 300);
+}
+
+function showLangPopupIfNeeded() {
+  if (!localStorage.getItem('sf_lang_chosen')) {
+    const overlay = document.getElementById('lang-overlay');
+    overlay.style.display = 'flex';
+    // Pré-sélectionner la langue détectée du navigateur
+    const browserLang = (navigator.language || 'fr').substring(0,2).toLowerCase();
+    const supported = ['fr','en','es'];
+    const detected = supported.includes(browserLang) ? browserLang : 'fr';
+    const btn = document.getElementById(`lp-${detected}`);
+    if (btn) {
+      document.querySelectorAll('.lang-choice-btn').forEach(b => {
+        b.classList.remove('selected');
+        b.querySelector('.lang-check').textContent = '';
+      });
+      btn.classList.add('selected');
+      btn.querySelector('.lang-check').textContent = '✓';
+      _pendingLang = detected;
+    }
+  }
+}
+
 (async function init() {
   loadOptions();
   setLang(currentLang);
   initCanvas();
   createParticles();
   await loadGameRegistry();
+  showLangPopupIfNeeded();
 })();
 </script>
 </body>
