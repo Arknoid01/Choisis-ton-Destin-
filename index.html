@@ -94,6 +94,18 @@ body {
   .btn-main { max-width:460px; }
 }
 
+/* ── MODE PAYSAGE ── */
+@media (orientation:landscape) and (max-height:500px) {
+  #content-block { transform:translateY(0); padding:10px 0; }
+  #logo-title { font-size:clamp(28px,6vw,48px); margin-bottom:8px; }
+  #logo-sub { font-size:11px; margin-bottom:12px; }
+  .btn-main { padding:11px 24px; font-size:11px; margin-bottom:6px; }
+  #shell { justify-content:flex-start; padding-top:12px; overflow-y:auto; }
+}
+@media (orientation:landscape) and (min-height:500px) {
+  #content-block { transform:translateY(-15%); }
+}
+
 /* ── LANG SWITCH ── */
 #lang-switch {
   position:fixed; top:20px; right:20px; z-index:100;
