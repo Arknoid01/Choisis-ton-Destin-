@@ -83,8 +83,8 @@ body {
   width:100%; max-width:380px;
 }
 
-/* ── PAYSAGE TABLETTE (≥600px hauteur ≥400px) ── */
-@media (orientation:landscape) and (min-width:600px) and (min-height:400px) {
+/* ── PAYSAGE TABLETTE ET MOBILE ── */
+@media (orientation:landscape) and (min-height:400px) {
   #shell {
     flex-direction:row;
     align-items:center;
@@ -103,16 +103,9 @@ body {
     width:100%;
     max-width:800px;
   }
-  /* Logo à gauche */
-  #logo-block {
-    flex:1;
-    text-align:center;
-    flex-shrink:0;
-  }
+  #logo-block { flex:1; text-align:center; flex-shrink:0; }
   #logo-title { font-size:clamp(32px,5vw,56px); }
   #logo-sub   { font-size:11px; }
-
-  /* Boutons à droite en grille 2×2 */
   #buttons-block {
     flex:1;
     display:grid !important;
@@ -129,12 +122,44 @@ body {
   }
 }
 
-/* ── PAYSAGE MOBILE (petit écran) ── */
+/* ── PAYSAGE MOBILE PETIT (hauteur < 400px) ── */
 @media (orientation:landscape) and (max-height:399px) {
-  #shell { overflow-y:auto; justify-content:flex-start; padding-top:10px; }
-  #content-block { transform:translateY(0); padding-bottom:20px; }
-  #logo-title { font-size:28px; }
-  .btn-main { padding:9px 20px; font-size:11px; margin-bottom:5px; }
+  #shell {
+    flex-direction:row;
+    align-items:center;
+    justify-content:center;
+    gap:20px;
+    padding:0 20px;
+    overflow:hidden;
+  }
+  #content-block {
+    transform:none;
+    margin:0;
+    flex-direction:row;
+    align-items:center;
+    gap:20px;
+    width:100%;
+    max-width:700px;
+  }
+  #logo-block { flex:1; text-align:center; }
+  .ornament, .divider { display:none; }
+  .eyebrow { font-size:9px; margin-bottom:2px; }
+  #logo-title { font-size:clamp(20px,5vw,32px); margin-bottom:2px; }
+  #logo-sub   { font-size:9px; }
+  #buttons-block {
+    flex:1;
+    display:grid !important;
+    grid-template-columns:1fr 1fr;
+    gap:7px;
+    max-width:380px;
+  }
+  .btn-main {
+    margin-bottom:0 !important;
+    padding:10px 12px;
+    font-size:10px;
+    max-width:none;
+    width:100%;
+  }
 }
 
 /* ── LANG SWITCH ── */
@@ -941,16 +966,6 @@ body {
       </label>
     </div>
 
-    <div class="option-row">
-      <div>
-        <div class="option-label" id="txt-opt-sound">Musique d'ambiance</div>
-        <div class="option-desc" id="txt-opt-sound-desc">Sons atmosphériques</div>
-      </div>
-      <label class="toggle">
-        <input type="checkbox" id="opt-sound" onchange="saveOptions()">
-        <div class="toggle-track"></div>
-      </label>
-    </div>
 
     <div class="option-row">
       <div>
