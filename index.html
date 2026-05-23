@@ -83,6 +83,17 @@ body {
   width:100%; max-width:380px;
 }
 
+/* ── TABLETTE ── */
+@media (min-width:600px) {
+  #content-block { max-width:420px; transform:translateY(-20%); }
+  .btn-main { font-size:13px; padding:17px 32px; max-width:420px; }
+  #logo-title { font-size:clamp(48px,8vw,80px); }
+}
+@media (min-width:900px) {
+  #content-block { max-width:460px; transform:translateY(-15%); }
+  .btn-main { max-width:460px; }
+}
+
 /* ── LANG SWITCH ── */
 #lang-switch {
   position:fixed; top:20px; right:20px; z-index:100;
