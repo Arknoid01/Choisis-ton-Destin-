@@ -158,10 +158,19 @@ body {
   overflow-y: auto;
   scroll-behavior: smooth;
   z-index: 10;
+  transition: top .35s ease;
 }
 #scroll-area.has-stats { top: 92px; }
+#scroll-area.ui-hidden { top: 0; }
 #scroll-area::-webkit-scrollbar { width: 3px; }
 #scroll-area::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
+
+/* ── MODE PAYSAGE ── */
+@media (orientation:landscape) and (max-height:450px) {
+  #scroll-area { top: 52px; }
+  #scroll-area.ui-hidden { top: 0; }
+  #content { padding: 16px 20px 100px; max-width: 700px; }
+}
 
 /* ── MAIN CONTENT ── */
 #content {
@@ -1795,6 +1804,7 @@ function hideUI() {
   document.getElementById('fab-wrap')?.classList.add('ui-hidden');
   document.getElementById('progress-bar')?.classList.add('ui-hidden');
   document.getElementById('immersive-dot')?.classList.remove('ui-visible');
+  document.getElementById('scroll-area')?.classList.add('ui-hidden');
 }
 
 function showUI() {
@@ -1804,6 +1814,7 @@ function showUI() {
   document.getElementById('fab-wrap')?.classList.remove('ui-hidden');
   document.getElementById('progress-bar')?.classList.remove('ui-hidden');
   document.getElementById('immersive-dot')?.classList.add('ui-visible');
+  document.getElementById('scroll-area')?.classList.remove('ui-hidden');
   // Auto-hide after 4s
   clearTimeout(uiHideTimer);
   uiHideTimer = setTimeout(hideUI, 4000);
