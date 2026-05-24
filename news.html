@@ -267,21 +267,18 @@ function showError() {
 
 // ── FETCH ─────────────────────────────────────────────────
 async function loadNews() {
-  try {
-    // 1. Essayer news_{lang}.json sur Hostinger
-    let r = await fetch(NEWS_URL).catch(() => null);
-    // 2. Fallback local news_{lang}.json
-    if (!r || !r.ok) r = await fetch(NEWS_FALLBACK_URL).catch(() => null);
-    // 3. Fallback ultime news.json (FR)
-    if (!r || !r.ok) r = await fetch(NEWS_FR_FALLBACK).catch(() => null);
-
-    if (!r || !r.ok) { showError(); return; }
-    const data = await r.json();
-    renderNews(data);
-  } catch(e) {
-    console.error(e);
-    showError();
+  const base = 'https://raw.githubusercontent.com/Arknoid01/Choisis-ton-Destin-/main/';
+  const urls = [
+    base + `news_${lang}.json`,   // ex: news_en.json
+    base + 'news.json',           // fallback FR
+  ];
+  for (const url of urls) {
+    try {
+      const r = await fetch(url);
+      if (r.ok) { renderNews(await r.json()); return; }
+    } catch(e) { continue; }
   }
+  showError();
 }
 
 // ── INIT ──────────────────────────────────────────────────
