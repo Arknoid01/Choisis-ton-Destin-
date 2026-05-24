@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Actualités — Fableris</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,300&family=Cinzel:wght@400;600&family=DM+Mono:wght@300;400&display=swap" onload="this.onload=null;this.rel='stylesheet'">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+html,body{min-height:100%;background:#0a0a0e;color:#e0d8f0;font-family:'Cormorant Garamond',serif;overflow-x:hidden;}
+
+:root{
+  --gold:#c8a96e;--gold2:#e8d4a0;--gold3:#8a6a30;
+  --purple:#7c6dfa;--green:#6dfabc;--red:#fa6d8f;
+  --bg:#0a0a0e;--bg2:#111118;--bg3:#18181f;--bg4:#202028;
+  --border:#26262e;--text:#e0d8f0;--dim:#7070a0;--dimmer:#404050;
+}
+
+/* TOPBAR */
+#topbar{
+  position:fixed;top:0;left:0;right:0;height:52px;z-index:100;
+  background:rgba(10,10,14,0.92);border-bottom:1px solid var(--border);
+  backdrop-filter:blur(12px);
+  display:flex;align-items:center;gap:12px;padding:0 16px;
+}
+.back-btn{
+  width:36px;height:36px;border-radius:8px;
+  border:1px solid var(--border);background:none;
+  color:var(--dim);font-size:18px;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+  text-decoration:none;transition:all .15s;flex-shrink:0;
+}
+.back-btn:hover{border-color:var(--gold3);color:var(--text);}
+.topbar-title{font-family:'Cinzel',serif;font-size:13px;font-weight:600;color:var(--text);letter-spacing:2px;}
+.topbar-version{margin-left:auto;font-family:'DM Mono',monospace;font-size:10px;color:var(--dimmer);}
+
+/* CONTENT */
+#scroll{padding-top:52px;}
+#content{max-width:600px;margin:0 auto;padding:24px 16px 80px;}
+
+/* BANNER */
+.banner{
+  background:linear-gradient(135deg,rgba(109,250,188,0.08),rgba(124,109,250,0.08));
+  border:1px solid rgba(109,250,188,0.25);
+  border-radius:12px;padding:14px 16px;
+  display:flex;align-items:center;gap:12px;
+  margin-bottom:24px;
+  animation:fade-up .4s ease;
+}
+.banner-icon{font-size:20px;flex-shrink:0;}
+.banner-text{font-size:14px;color:var(--green);font-family:'Cinzel',serif;letter-spacing:0.5px;}
+
+/* SECTION */
+.section-title{
+  font-family:'Cinzel',serif;font-size:10px;font-weight:600;
+  letter-spacing:4px;text-transform:uppercase;color:var(--dimmer);
+  margin-bottom:14px;display:flex;align-items:center;gap:10px;
+}
+.section-title::after{content:'';flex:1;height:1px;background:var(--border);}
+
+/* NEWS CARD */
+.news-card{
+  background:var(--bg2);border:1px solid var(--border);
+  border-radius:12px;padding:16px;margin-bottom:12px;
+  transition:border-color .2s;
+  animation:fade-up .4s ease both;
+}
+.news-card:hover{border-color:var(--dimmer);}
+.news-card.upcoming{
+  opacity:0.7;
+  border-style:dashed;
+}
+.news-header{display:flex;align-items:flex-start;gap:12px;margin-bottom:10px;}
+.news-icon{
+  width:36px;height:36px;border-radius:9px;
+  background:var(--bg3);border:1px solid var(--border);
+  display:flex;align-items:center;justify-content:center;
+  font-size:16px;flex-shrink:0;
+}
+.news-meta{flex:1;}
+.news-title{
+  font-family:'Cinzel',serif;font-size:14px;font-weight:600;
+  color:var(--text);margin-bottom:4px;letter-spacing:0.5px;
+}
+.news-date-row{display:flex;align-items:center;gap:8px;flex-wrap:wrap;}
+.news-date{
+  font-family:'DM Mono',monospace;font-size:10px;color:var(--dimmer);
+}
+.news-tag{
+  font-family:'DM Mono',monospace;font-size:9px;letter-spacing:1.5px;
+  text-transform:uppercase;padding:2px 7px;border-radius:20px;
+  border:1px solid;
+}
+.news-text{font-size:14px;color:var(--dim);line-height:1.7;}
+.news-card.upcoming .news-title::after{
+  content:' — Bientôt';font-size:10px;color:var(--red);
+  font-family:'DM Mono',monospace;letter-spacing:1px;font-weight:400;
+}
+
+/* SKELETON */
+.skeleton{
+  background:var(--bg2);border:1px solid var(--border);
+  border-radius:12px;padding:16px;margin-bottom:12px;
+}
+.skel-line{
+  height:12px;border-radius:6px;background:var(--bg3);
+  margin-bottom:8px;animation:pulse 1.5s infinite;
+}
+@keyframes pulse{0%,100%{opacity:0.5;}50%{opacity:1;}}
+@keyframes fade-up{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:translateY(0);}}
+
+/* EMPTY / ERROR */
+.empty-state{
+  text-align:center;padding:40px 20px;
+  color:var(--dimmer);font-family:'DM Mono',monospace;font-size:12px;
+}
+
+/* FOOTER NOTE */
+.footer-note{
+  text-align:center;margin-top:24px;
+  font-family:'DM Mono',monospace;font-size:10px;
+  color:var(--dimmer);letter-spacing:1px;
+}
+</style>
+</head>
+<body>
+
+<div id="topbar">
+  <a href="index.html" class="back-btn">←</a>
+  <div class="topbar-title" id="txt-title">Actualités</div>
+  <div class="topbar-version" id="app-version"></div>
+</div>
+
+<div id="scroll">
+<div id="content">
+
+  <!-- BANNER -->
+  <div class="banner" id="banner" style="display:none">
+    <div class="banner-icon" id="banner-icon"></div>
+    <div class="banner-text" id="banner-text"></div>
+  </div>
+
+  <!-- ACTUALITÉS -->
+  <div class="section-title" id="txt-section">Dernières nouvelles</div>
+  <div id="news-list">
+    <!-- Skeletons pendant le chargement -->
+    <div class="skeleton"><div class="skel-line" style="width:60%"></div><div class="skel-line" style="width:100%"></div><div class="skel-line" style="width:80%"></div></div>
+    <div class="skeleton"><div class="skel-line" style="width:50%"></div><div class="skel-line" style="width:90%"></div></div>
+    <div class="skeleton"><div class="skel-line" style="width:70%"></div><div class="skel-line" style="width:100%"></div></div>
+  </div>
+
+  <div class="footer-note" id="footer-note"></div>
+
+</div>
+</div>
+
+<script>
+// ── CONFIG ────────────────────────────────────────────────
+const lang = localStorage.getItem('sf_lang') || 'fr';
+
+// URL du serveur Hostinger — remplace par ta vraie URL
+const BASE_URL = 'https://TON-SITE.hostinger.com/fableris/';
+const NEWS_URL          = BASE_URL + `news_${lang}.json`;
+const NEWS_FALLBACK_URL = `news_${lang}.json`;   // fichier local
+const NEWS_FR_FALLBACK  = 'news.json';            // FR comme ultime fallback
+
+// ── TRADUCTIONS ───────────────────────────────────────────
+const T = {
+  fr: {
+    title: 'Actualités',
+    section: 'Dernières nouvelles',
+    upcoming: 'À venir',
+    error: 'Impossible de charger les actualités.',
+    updated: 'Mis à jour le',
+    noNews: 'Aucune actualité pour le moment.',
+  },
+  en: {
+    title: 'News',
+    section: 'Latest news',
+    upcoming: 'Coming soon',
+    error: 'Unable to load news.',
+    updated: 'Updated on',
+    noNews: 'No news at the moment.',
+  },
+  es: {
+    title: 'Noticias',
+    section: 'Últimas noticias',
+    upcoming: 'Próximamente',
+    error: 'No se pueden cargar las noticias.',
+    updated: 'Actualizado el',
+    noNews: 'Sin noticias por el momento.',
+  }
+};
+
+function t(key) { return (T[lang] || T.fr)[key] || key; }
+
+function applyLang() {
+  document.getElementById('txt-title').textContent   = t('title');
+  document.getElementById('txt-section').textContent = t('section');
+  document.title = t('title') + ' — Fableris';
+  document.documentElement.lang = lang;
+}
+
+// ── DATE FORMAT ───────────────────────────────────────────
+function formatDate(dateStr) {
+  try {
+    const d = new Date(dateStr);
+    return d.toLocaleDateString(lang === 'en' ? 'en-GB' : lang === 'es' ? 'es-ES' : 'fr-FR', {
+      day: 'numeric', month: 'long', year: 'numeric'
+    });
+  } catch { return dateStr; }
+}
+
+// ── RENDER ────────────────────────────────────────────────
+function renderNews(data) {
+  // Banner
+  if (data.banner?.active && data.banner.text) {
+    document.getElementById('banner').style.display = 'flex';
+    document.getElementById('banner-icon').textContent = data.banner.icon || '✦';
+    document.getElementById('banner-text').textContent = data.banner.text;
+  }
+
+  // Version
+  if (data.app_version) {
+    document.getElementById('app-version').textContent = 'v' + data.app_version;
+  }
+
+  // News
+  const list = document.getElementById('news-list');
+  const news = data.news || [];
+
+  if (!news.length) {
+    list.innerHTML = `<div class="empty-state">${t('noNews')}</div>`;
+    return;
+  }
+
+  list.innerHTML = news.map((item, i) => `
+    <div class="news-card${item.upcoming ? ' upcoming' : ''}"
+      style="animation-delay:${i * 0.08}s">
+      <div class="news-header">
+        <div class="news-icon">${item.icon || '✦'}</div>
+        <div class="news-meta">
+          <div class="news-title">${item.title}</div>
+          <div class="news-date-row">
+            <span class="news-date">${formatDate(item.date)}</span>
+            ${item.tag ? `<span class="news-tag" style="color:${item.tag_color||'#c8a96e'};border-color:${item.tag_color||'#c8a96e'}44">${item.tag}</span>` : ''}
+          </div>
+        </div>
+      </div>
+      <div class="news-text">${item.text}</div>
+    </div>
+  `).join('');
+
+  // Footer
+  if (data.last_updated) {
+    document.getElementById('footer-note').textContent =
+      t('updated') + ' ' + formatDate(data.last_updated);
+  }
+}
+
+function showError() {
+  document.getElementById('news-list').innerHTML =
+    `<div class="empty-state">✕<br><br>${t('error')}</div>`;
+}
+
+// ── FETCH ─────────────────────────────────────────────────
+async function loadNews() {
+  try {
+    // 1. Essayer news_{lang}.json sur Hostinger
+    let r = await fetch(NEWS_URL).catch(() => null);
+    // 2. Fallback local news_{lang}.json
+    if (!r || !r.ok) r = await fetch(NEWS_FALLBACK_URL).catch(() => null);
+    // 3. Fallback ultime news.json (FR)
+    if (!r || !r.ok) r = await fetch(NEWS_FR_FALLBACK).catch(() => null);
+
+    if (!r || !r.ok) { showError(); return; }
+    const data = await r.json();
+    renderNews(data);
+  } catch(e) {
+    console.error(e);
+    showError();
+  }
+}
+
+// ── INIT ──────────────────────────────────────────────────
+applyLang();
+loadNews();
+</script>
+</body>
+</html>
