@@ -1025,6 +1025,35 @@ function hasUnlock(feature) {
   return unlocked.includes(feature) || unlocked.includes('creator') || unlocked.includes('all');
 }
 
+function portalFieldHTML(scene) {
+  const unlocked = hasUnlock('portals');
+  return `
+    <div class="form-group">
+      <label class="form-label" style="display:flex;align-items:center;gap:6px">
+        🔗 Portail vers une autre histoire
+        ${unlocked
+          ? `<span style="background:rgba(109,250,188,0.1);border:1px solid rgba(109,250,188,0.3);border-radius:4px;padding:1px 6px;font-size:9px;color:#6dfabc;letter-spacing:1px">DÉBLOQUÉ ✓</span>`
+          : `<span style="background:rgba(200,169,110,0.1);border:1px solid rgba(200,169,110,0.3);border-radius:4px;padding:1px 6px;font-size:9px;color:var(--gold3);letter-spacing:1px">PREMIUM</span>`
+        }
+      </label>
+      <div style="position:relative">
+        <input class="form-input"
+          ${unlocked ? '' : 'disabled'}
+          style="${unlocked ? '' : 'opacity:0.4;cursor:not-allowed;'}font-family:'DM Mono',monospace;font-size:11px"
+          placeholder="ex: stories/fr/aikito_train.json"
+          value="${scene.story||''}"
+          ${unlocked ? `onchange="updateField('story', this.value)"` : ''}>
+        <div style="position:absolute;right:10px;top:50%;transform:translateY(-50%);font-size:13px"
+          class="tip" data-tip="${unlocked ? 'Chemin vers le JSON de destination' : 'Entre un code créateur pour débloquer'}">
+          ${unlocked ? '🔗' : '🔒'}
+        </div>
+      </div>
+      <div style="font-size:10px;color:var(--text3);margin-top:4px;font-style:italic">
+        ${unlocked ? 'Chemin relatif depuis la racine du repo GitHub' : 'Sera débloqué avec un pack premium'}
+      </div>
+    </div>`;
+}
+
 // ══════════════════════════════════════════════
 // STATE
 // ══════════════════════════════════════════════
@@ -1500,6 +1529,7 @@ function renderEditor(id) {
       </div>
       ${scene.timer?.duration ? `<div style="font-size:10px;color:var(--accent2);margin-top:5px;font-family:'DM Mono',monospace">⏱ ${scene.timer.duration}s → ${scene.timer.auto||'aléatoire'}</div>` : ''}
     </div>
+    ${portalFieldHTML(scene)}
     <div class="form-group" style="display:flex;gap:16px">
       <label class="form-check">
         <input type="checkbox" ${scene.isStart?'checked':''} onchange="updateFlag('isStart',this.checked)">
@@ -1519,32 +1549,6 @@ function renderEditor(id) {
             onclick="updateField('nodeColor','${c}');renderEditor('${id}')"
             title="${c||'Par défaut'}"></div>`
         ).join('')}
-      </div>
-    </div>
-    <div class="form-group">
-      <label class="form-label" style="display:flex;align-items:center;gap:6px">
-        🔗 Portail vers une autre histoire
-        ${!hasUnlock('portals') ? `<span style="background:rgba(200,169,110,0.1);border:1px solid rgba(200,169,110,0.3);
-          border-radius:4px;padding:1px 6px;font-size:9px;color:var(--gold3);letter-spacing:1px">
-          PREMIUM
-        </span>` : `<span style="background:rgba(109,250,188,0.1);border:1px solid rgba(109,250,188,0.3);
-          border-radius:4px;padding:1px 6px;font-size:9px;color:#6dfabc;letter-spacing:1px">
-          DÉBLOQUÉ ✓
-        </span>`}
-      </label>
-      <div style="position:relative">
-        <input class="form-input"
-          ${!hasUnlock('portals') ? 'disabled style="opacity:0.4;cursor:not-allowed;font-family:\'DM Mono\',monospace;font-size:11px"' : 'style="font-family:\'DM Mono\',monospace;font-size:11px"'}
-          placeholder="ex: stories/fr/aikito_train.json"
-          value="${scene.story||''}"
-          onchange="updateField('story', this.value)">
-        <div style="position:absolute;right:10px;top:50%;transform:translateY(-50%);font-size:13px;cursor:help"
-          class="tip" data-tip="${hasUnlock('portals') ? 'Chemin vers le JSON de destination' : 'Fonctionnalité premium — entre un code créateur pour débloquer'}">
-          ${hasUnlock('portals') ? '🔗' : '🔒'}
-        </div>
-      </div>
-      <div style="font-size:10px;color:var(--text3);margin-top:4px;font-style:italic">
-        ${hasUnlock('portals') ? 'Chemin relatif depuis la racine du repo GitHub' : 'Sera débloqué avec un pack premium'}
       </div>
     </div>
     <div id="choices-list"></div>
@@ -2611,6 +2615,7 @@ function renderEditorInto(id, container) {
       </div>
       ${scene.timer?.duration ? `<div style="font-size:10px;color:var(--accent2);margin-top:5px;font-family:'DM Mono',monospace">⏱ ${scene.timer.duration}s → ${scene.timer.auto||'aléatoire'}</div>` : ''}
     </div>
+    ${portalFieldHTML(scene)}
     <div class="form-group" style="display:flex;gap:20px">
       <label class="form-check"><input type="checkbox" ${scene.isStart?'checked':''} onchange="updateFlag('isStart',this.checked)"><span>${et('startScene')}</span></label>
       <label class="form-check"><input type="checkbox" ${scene.isEnd?'checked':''} onchange="updateFlag('isEnd',this.checked)"><span>${et('endScene')}</span></label>
