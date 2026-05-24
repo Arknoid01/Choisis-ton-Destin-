@@ -861,6 +861,9 @@ body {
     <button class="btn-main" id="btn-progress" onclick="window.location.href='progress.html'">
       <span id="txt-btn-progress">✦ Ma progression</span>
     </button>
+    <button class="btn-main" id="btn-news" onclick="window.location.href='news.html'">
+      <span id="txt-btn-news">📰 Actualités</span>
+    </button>
     <button class="btn-main" id="btn-submit" onclick="openSubmitPopup()">
       <span id="txt-btn-submit">✍ Soumettre une histoire</span>
     </button>
@@ -1032,6 +1035,7 @@ const LANG = {
     subtitle:       'Chaque choix façonne votre histoire',
     btnStart:       'Le début de votre aventure',
     btnOptions:     'Options',
+    btnNews:        '📰 Actualités',
     btnSubmit:      '✍ Soumettre une histoire',
     footer:         'StoryForge • Romans interactifs',
     sheetTitle:     'Vos aventures',
@@ -1087,6 +1091,7 @@ const LANG = {
     subtitle:       'Every choice shapes your story',
     btnStart:       'Begin your adventure',
     btnOptions:     'Options',
+    btnNews:        '📰 News',
     btnSubmit:      '✍ Submit a story',
     footer:         'StoryForge • Interactive Fiction',
     sheetTitle:     'Your Adventures',
@@ -1138,6 +1143,7 @@ const LANG = {
     subtitle:       'Cada elección da forma a tu historia',
     btnStart:       'El comienzo de tu aventura',
     btnOptions:     'Opciones',
+    btnNews:        '📰 Noticias',
     btnSubmit:      '✍ Enviar una historia',
     footer:         'StoryForge • Ficción interactiva',
     sheetTitle:     'Tus aventuras',
@@ -1212,6 +1218,7 @@ function applyLang() {
   set('txt-subtitle',       t.subtitle);
   set('txt-btn-start',      t.btnStart);
   set('txt-btn-options',    t.btnOptions);
+  set('txt-btn-news',       t.btnNews);
   set('txt-btn-submit',     t.btnSubmit);
   set('txt-footer',         t.footer);
   set('txt-sheet-title',    t.sheetTitle);
