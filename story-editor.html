@@ -1018,6 +1018,14 @@ html,body { height:100%; overflow:hidden; font-family:'Syne',sans-serif; backgro
 
 <script>
 // ══════════════════════════════════════════════
+// UNLOCK SYSTEM
+// ══════════════════════════════════════════════
+function hasUnlock(feature) {
+  const unlocked = JSON.parse(localStorage.getItem('sf_unlocked_packs') || '["free","kids"]');
+  return unlocked.includes(feature) || unlocked.includes('creator') || unlocked.includes('all');
+}
+
+// ══════════════════════════════════════════════
 // STATE
 // ══════════════════════════════════════════════
 let project = {
@@ -1516,22 +1524,27 @@ function renderEditor(id) {
     <div class="form-group">
       <label class="form-label" style="display:flex;align-items:center;gap:6px">
         🔗 Portail vers une autre histoire
-        <span style="background:rgba(200,169,110,0.1);border:1px solid rgba(200,169,110,0.3);
+        ${!hasUnlock('portals') ? `<span style="background:rgba(200,169,110,0.1);border:1px solid rgba(200,169,110,0.3);
           border-radius:4px;padding:1px 6px;font-size:9px;color:var(--gold3);letter-spacing:1px">
           PREMIUM
-        </span>
+        </span>` : `<span style="background:rgba(109,250,188,0.1);border:1px solid rgba(109,250,188,0.3);
+          border-radius:4px;padding:1px 6px;font-size:9px;color:#6dfabc;letter-spacing:1px">
+          DÉBLOQUÉ ✓
+        </span>`}
       </label>
       <div style="position:relative">
-        <input class="form-input" disabled
-          style="opacity:0.4;cursor:not-allowed;font-family:'DM Mono',monospace;font-size:11px"
+        <input class="form-input"
+          ${!hasUnlock('portals') ? 'disabled style="opacity:0.4;cursor:not-allowed;font-family:\'DM Mono\',monospace;font-size:11px"' : 'style="font-family:\'DM Mono\',monospace;font-size:11px"'}
           placeholder="ex: stories/fr/aikito_train.json"
-          value="${scene.story||''}">
-        <div class="tip" data-tip="Redirige vers une autre histoire — fonctionnalité premium, bientôt disponible"
-          style="position:absolute;right:10px;top:50%;transform:translateY(-50%);
-          color:var(--gold3);font-size:13px;cursor:help">🔒</div>
+          value="${scene.story||''}"
+          onchange="updateField('story', this.value)">
+        <div style="position:absolute;right:10px;top:50%;transform:translateY(-50%);font-size:13px;cursor:help"
+          class="tip" data-tip="${hasUnlock('portals') ? 'Chemin vers le JSON de destination' : 'Fonctionnalité premium — entre un code créateur pour débloquer'}">
+          ${hasUnlock('portals') ? '🔗' : '🔒'}
+        </div>
       </div>
       <div style="font-size:10px;color:var(--text3);margin-top:4px;font-style:italic">
-        Sera débloqué avec un pack premium
+        ${hasUnlock('portals') ? 'Chemin relatif depuis la racine du repo GitHub' : 'Sera débloqué avec un pack premium'}
       </div>
     </div>
     <div id="choices-list"></div>
