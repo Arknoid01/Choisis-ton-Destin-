@@ -1,0 +1,1041 @@
+{
+  "name": "El reloj de sueño",
+  "kids": false,
+  "askPlayerName": true,
+  "pack": "free",
+  "stats": [
+    {
+      "id": "chaleur",
+      "label": "Calor",
+      "start": 40,
+      "max": 100,
+      "color": "#f4a261"
+    },
+    {
+      "id": "lucidite",
+      "label": "Lucidity",
+      "start": 50,
+      "max": 100,
+      "color": "#8ecae6"
+    },
+    {
+      "id": "appetit",
+      "label": "Appetite",
+      "start": 20,
+      "max": 100,
+      "color": "#ffd166"
+    }
+  ],
+  "theme": {
+    "bg": "#120c08",
+    "bg2": "#1d130d",
+    "bg3": "#2a1a12",
+    "bg4": "#3a2418",
+    "border": "#6b3f2a",
+    "accent": "#f4a261",
+    "accent2": "#e76f51",
+    "accent3": "#ffd166",
+    "text": "#fff3df",
+    "text2": "#d8b894",
+    "text3": "#9d7657"
+  },
+  "scenes": {
+    "intro": {
+      "id": "intro",
+      "title": "Después del cierre",
+      "location": "BOUCHERY — CARE",
+      "narrator": "Algunos días huelen cansancio, pimienta y cosas que no teníamos tiempo para decir.",
+      "text": "Estás cerrando la tienda.\n\nEl neón sobre la ventana parpadea por última vez.\n\n*Horlogerie Verneuil — Reparaciones &quot; Restorations*\n\nPusiste tus herramientas en su caja de terciopelo.\nPequeñas pinzas.\nLobos.\nManantiales gruesos como el pelo.\n\nFuera, la ciudad está corriendo.\nSigue corriendo.\n\nPasas la noche arreglando relojes que nadie mira más.\n\nA veces te preguntas si el tiempo realmente existe.\nO si la gente finge.\n\nEstás comiendo un blanquette caliente en la cocina.\n\nEs buena de todos modos.\n\nDuermes en el sofá.",
+      "isStart": true,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Entrando en el sueño",
+          "vers": "hub_start",
+          "effects": [
+            {
+              "stat": "lucidite",
+              "val": 5
+            }
+          ]
+        }
+      ]
+    },
+    "hub_start": {
+      "id": "hub_start",
+      "title": "El Establecimiento de Canciones",
+      "location": "REVE — FLOTING BATCHERY",
+      "narrator": "En sueños, incluso los contadores pueden derivar.",
+      "text": "Abre los ojos detrás de tu establecimiento.\n\nPero la tienda ya no es exactamente la misma.\n\nLos relojes en estantes giran hacia atrás.\nLas manos giran alrededor del dial en segundos.\nO en horas. Difícil de decir.\n\nUna capa aparece en el conjunto, brillante como una herramienta de precisión.\n\nTres puertas aparecen en la pared trasera.\n\nLa ciudad ruge detrás de cada uno.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "flash",
+      "choices": [
+        {
+          "text": "Pasa por la puerta del reloj con tu bolsa",
+          "vers": "ville_intro",
+          "effects": [
+            {
+              "stat": "chaleur",
+              "val": 10
+            },
+            {
+              "stat": "appetit",
+              "val": 10
+            }
+          ]
+        },
+        {
+          "text": "Observa el gato del sueño",
+          "vers": "chat_hub",
+          "effects": [
+            {
+              "stat": "chaleur",
+              "val": 5
+            }
+          ]
+        }
+      ]
+    },
+    "chat_hub": {
+      "id": "chat_hub",
+      "title": "El Chat du Comptoir",
+      "location": "REVE — FLOTING BATCHERY",
+      "narrator": "Algunos guías prefieren dormir en las respuestas.",
+      "text": "El gato está acostado en el establo.\n\nAbre un ojo cuando te acercas.\n\nAlrededor de él, relojes sin montar cuyas ruedas siguen corriendo por su cuenta.\n\n*\"Arregla el tiempo. *\n\nRealmente no habla.\nPero aún lo entiendes.\n\nEntonces deberías saber que éste está roto.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Cuidado antes de que te vayas",
+          "vers": "hub_start",
+          "effects": [
+            {
+              "stat": "chaleur",
+              "val": 10
+            }
+          ]
+        },
+        {
+          "text": "Dile que te muestre el camino.",
+          "vers": "ville_intro",
+          "effects": [
+            {
+              "stat": "lucidite",
+              "val": 5
+            }
+          ]
+        }
+      ]
+    },
+    "ville_intro": {
+      "id": "ville_intro",
+      "title": "La ciudad de la corte",
+      "location": "REVENIO - FUTURO DE HORLOGÍAS",
+      "narrator": "Aquí, los segundos tienen dientes.",
+      "text": "Vienes a un pueblo donde todos corren.\n\nLos transeúntes comen mientras caminan.\nLos niños hacen sus deberes en el metro.\nLa gente consulta su reloj pero no mire el tiempo — sólo el movimiento de las agujas.\n\nComo si comprobar fuera suficiente.\nComo el tiempo era mejor cuando lo observamos.\n\nEstás sacando tu lupa de reparación.\n\nLos relojes que ves están listos al mismo tiempo.\nNo la correcta.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Ve a hablar con la anciana",
+          "vers": "vieille_dame",
+          "effects": [
+            {
+              "stat": "chaleur",
+              "val": 10
+            }
+          ]
+        },
+        {
+          "text": "Siga al estudiante estresado",
+          "vers": "etudiant_presse",
+          "effects": [
+            {
+              "stat": "lucidite",
+              "val": 5
+            }
+          ]
+        },
+        {
+          "text": "Entra en el metro sin parar",
+          "vers": "metro",
+          "effects": [
+            {
+              "stat": "lucidite",
+              "val": 5
+            }
+          ]
+        },
+        {
+          "text": "Pruebe el restaurante Express",
+          "vers": "restaurant_express",
+          "effects": [
+            {
+              "stat": "appetit",
+              "val": 5
+            }
+          ]
+        },
+        {
+          "text": "sientes un delicioso olor saliendo de tu bolsa, puedes instalar una mesa y servir al blanquette",
+          "vers": "table_ville",
+          "effects": [
+            {
+              "stat": "chaleur",
+              "val": 20
+            },
+            {
+              "stat": "appetit",
+              "val": 10
+            }
+          ]
+        }
+      ]
+    },
+    "vieille_dame": {
+      "id": "vieille_dame",
+      "title": "La Señora del Bench",
+      "location": "FUTURO DE LAS HORLOGÍAS",
+      "narrator": "A veces alguien espera menos una respuesta que una presencia.",
+      "text": "Siéntate junto a ella.\n\nNo parece sorprendida.\n\nTodo el mundo está corriendo.\n\nLe has estado preguntando cuánto tiempo.\n\n**\"Desde que se decidió que el tiempo perdido era un error.\n\nElla saca un viejo reloj de su bolsillo.\nEl dial está roto.\nLas agujas se detienen.\n\n*\"Mi marido lo usó. Nunca corrió.\n\nPone el reloj en su bolsillo.\n\nElla paró el día que dejó de correr también.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Invita a los transeúntes a sentarse",
+          "vers": "table_ville",
+          "effects": [
+            {
+              "stat": "chaleur",
+              "val": 15
+            }
+          ]
+        },
+        {
+          "text": "Pregunta por qué nadie se queda",
+          "vers": "rue_sans_pause",
+          "effects": [
+            {
+              "stat": "lucidite",
+              "val": 10
+            }
+          ]
+        }
+      ]
+    },
+    "rue_sans_pause": {
+      "id": "rue_sans_pause",
+      "title": "Rue Sans Pause",
+      "location": "FUTURO DE LAS HORLOGÍAS",
+      "narrator": "Una ciudad sin descanso termina olvidando por qué avanza.",
+      "text": "Estás viendo a los transeúntes.\n\nTodos corren en la misma dirección.\n\nPero al final de la calle, hay una pared.\n\nGiran a la derecha.\nCorre otra vez.\nGire a la izquierda.\nCorre otra vez.\n\nUn circuito.\n\nMira su muñeca.\nCada reloj muestra un tiempo diferente.\nPero todos se mueven demasiado rápido.\n\n*Alguien sacó todos los manantiales demasiado duro. *\n\nSabes este problema.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Instala la mesa grande en medio de la avenida",
+          "vers": "table_ville",
+          "effects": [
+            {
+              "stat": "chaleur",
+              "val": 20
+            },
+            {
+              "stat": "lucidite",
+              "val": 10
+            }
+          ]
+        },
+        {
+          "text": "Ignora al gato y corre",
+          "vers": "fin_pas_le_temps",
+          "effects": [
+            {
+              "stat": "lucidite",
+              "val": -15
+            }
+          ]
+        }
+      ]
+    },
+    "etudiant_presse": {
+      "id": "etudiant_presse",
+      "title": "Student Stressed",
+      "location": "FUTURO DE LAS HORLOGÍAS",
+      "narrator": "El éxito a veces toma la forma de una pila de hojas que vuela.",
+      "text": "El estudiante recoge sus hojas temblando.\n\nEstoy retrasado.\n\nUna hoja vuela.\nLleva una cita de examen.\n\nPero la cita es mañana.\n\nNo llegas tarde.\n\nTe mira como si estuvieras hablando en un idioma extranjero.\n\nSi no corro, llego tarde.\n\nEstá regresando.\n\nEstás viendo tu reloj.\nEl suyo se mueve a la velocidad correcta.\n\nPor eso se ve rota a todos.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Dale un plato.",
+          "vers": "table_ville",
+          "effects": [
+            {
+              "stat": "chaleur",
+              "val": 15
+            }
+          ]
+        },
+        {
+          "text": "Corriendo con él",
+          "vers": "fin_retard",
+          "effects": [
+            {
+              "stat": "lucidite",
+              "val": -10
+            }
+          ]
+        }
+      ]
+    },
+    "metro": {
+      "id": "metro",
+      "title": "Metro Sans Stop",
+      "location": "REVE — LAST LINE",
+      "narrator": "Algunos trenes no conducen a ninguna parte, pero todos llegan allí de todos modos.",
+      "text": "El metro lleva mucho tiempo conduciendo.\n\nLa gente mira el suelo.\n\nUn hombre duerme, un maletín en su pecho.\nUna mujer responde a mensajes de aire ausente.\nUn adolescente escucha música con los ojos cerrados — él es el único que parece estar respirando.\n\nMira las señales.\n\nLas estaciones se desplazan demasiado rápido para ser leídas.\n\nEstás preguntando a alguien a qué hora viene la próxima parada.\n\nEstá mirando su reloj.\n\nEn el tiempo suficiente para no llegar tarde.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Gently despierta al hombre de pie",
+          "vers": "table_ville",
+          "effects": [
+            {
+              "stat": "chaleur",
+              "val": 10
+            }
+          ]
+        },
+        {
+          "text": "Quédate en el metro para ver la siguiente parada",
+          "vers": "fin_metro",
+          "effects": [
+            {
+              "stat": "lucidite",
+              "val": -5
+            }
+          ]
+        },
+        {
+          "text": "Salida en la siguiente parada imaginaria",
+          "vers": "rue_sans_pause",
+          "effects": [
+            {
+              "stat": "lucidite",
+              "val": 5
+            }
+          ]
+        }
+      ]
+    },
+    "restaurant_express": {
+      "id": "restaurant_express",
+      "title": "Express Restaurant",
+      "location": "FUTURO DE LAS HORLOGÍAS",
+      "narrator": "Aquí, los platos llegan antes del hambre.",
+      "text": "Entras en un pequeño restaurante.\n\nEl camarero te dará el cheque antes de sentarte.\n\nLos platos ya están sobre la mesa.\nYa medio comido.\nYa enfriado.\n\n**\"El servicio rápido es nuestra especialidad.\n\nPregunta si puede pedir un blanquette.\n\nTe está mirando.\n\n\"Lleva tres horas.\n\nComo un insulto.\n\nExactamente.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Abre tu bolsa y sirve algo real",
+          "vers": "table_ville",
+          "effects": [
+            {
+              "stat": "chaleur",
+              "val": 15
+            },
+            {
+              "stat": "appetit",
+              "val": 10
+            }
+          ]
+        },
+        {
+          "text": "Paga antes de comer",
+          "vers": "ville_intro",
+          "effects": [
+            {
+              "stat": "lucidite",
+              "val": -5
+            }
+          ]
+        }
+      ]
+    },
+    "table_ville": {
+      "id": "table_ville",
+      "title": "La tabla de soplar",
+      "location": "LA FUTURA DE LAS HORLOGÍAS",
+      "narrator": "El primer acto de resistencia es a veces poner un mantel.",
+      "text": "Usted estableció una pequeña mesa en el centro de la acera.\n\nEso es absurdo.\n\nAsí que, por supuesto, atrae algunos ojos.\n\nPusiste un blanquette que tenías en una caja.\nBebidas.\nPan.\n\nPasadores-por lento.\n\nSe detiene.\n\n¿Qué es?\n\nUna comida.\n\n¿Cuánto tarda?\n\nEl tiempo que se necesita.\n\nEstá sentado.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "flash",
+      "choices": [
+        {
+          "text": "Muévete hacia adelante con la vela brillante",
+          "vers": "hub_admin",
+          "effects": [
+            {
+              "stat": "chaleur",
+              "val": 25
+            },
+            {
+              "stat": "lucidite",
+              "val": 10
+            }
+          ]
+        }
+      ]
+    },
+    "fin_pas_le_temps": {
+      "id": "fin_pas_le_temps",
+      "title": "No es tiempo",
+      "location": "FUTURO DE LAS HORLOGÍAS",
+      "narrator": "Si llegamos pronto, a veces olvidamos adónde íbamos.",
+      "text": "Empiezas a correr.\n\nAl principio, es seguir a los demás.\nEntonces no te molestes.\nEntonces porque todo el mundo corre.\n\nTus pasos están acelerando.\n\nEl cucharón cae detrás de ti.\n\nNo paras de recogerlo.\n\nTu reloj se mueve más rápido y más rápido.\n\nLas agujas giran tan rápido que parecen inmóviles.\n\nEn algún lugar, una tienda cierra.\n\nEl neón sale.",
+      "isStart": false,
+      "isEnd": true,
+      "transition": "glitch",
+      "choices": []
+    },
+    "fin_retard": {
+      "id": "fin_retard",
+      "title": "Delay",
+      "location": "FUTURO DE LAS HORLOGÍAS",
+      "narrator": "El retraso es un bucle con zapatos nuevos.",
+      "text": "Corres con el estudiante.\n\nGire a la izquierda.\n\nEntonces bien.\n\nLuego se fue de nuevo.\n\nLas calles se repiten.\n\nLas pantallas se repiten.\n\nLos transeúntes se repiten.\n\nDespués de un tiempo imposible de medir, finalmente llegas.\n\nFrente a ti:\n\nla misma avenida.\n\nEl mismo banco.\n\nLa misma vieja.\n\nEl mismo estudiante que recoge sus hojas.\n\nTe está mirando.\n\nEstoy retrasado.\n\nY tú también entiendes que eres.",
+      "isStart": false,
+      "isEnd": true,
+      "transition": "glitch",
+      "choices": []
+    },
+    "fin_metro": {
+      "id": "fin_metro",
+      "title": "El Juicio Final",
+      "location": "LÍNEA",
+      "narrator": "Algunos viajes son solo largos porque no te atreves a bajar.",
+      "text": "El metro continúa.\n\nLas luces están parpadeando.\n\nLa voz anunció:\n\nSiguiente parada:\nTu jubilación.\n\nNadie se mueve.\n\nEl hombre de pie siempre duerme.\n\nSu reloj muestra el mismo tiempo desde dos estaciones.\n\nMira el tuyo.\n\nTambién se detuvo.\n\nNo te diste cuenta.",
+      "isStart": false,
+      "isEnd": true,
+      "transition": "glitch",
+      "choices": []
+    },
+    "hub_admin": {
+      "id": "hub_admin",
+      "title": "La segunda puerta",
+      "location": "REVE — FLOTING BATCHERY",
+      "narrator": "Los sueños no te dejan ir con una buena acción.",
+      "text": "Vuelve detrás de tu mostrador flotante.\n\nLa cucharilla brillante descansa cerca de la caja.\n\nLa puerta del reloj cerró lentamente.\n\nLa ciudad que huyó finalmente respira.\n\nPero las otras dos puertas se quedan aquí.\n\nLa puerta de la mañana todavía no aparece.\n\nEl gato salta en el mostrador, empuja la salchicha desde el extremo de la pierna, luego mira la puerta cubierta con formas.\n\nEn el cuaderno, una nueva frase dice:\n\nNo podemos despertar hasta que los papeles soñan.\n\nLo entiendes.\n\nEl sueño no ha terminado.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Pasa la puerta administrativa con tu bolsa",
+          "vers": "admin_intro",
+          "effects": [
+            {
+              "stat": "lucidite",
+              "val": 10
+            },
+            {
+              "stat": "appetit",
+              "val": 5
+            }
+          ]
+        }
+      ]
+    },
+    "admin_intro": {
+      "id": "admin_intro",
+      "title": "The Forms Office",
+      "location": "REVENUE — ADMINISTRACIÓN SIN FENES",
+      "narrator": "Aquí, los pasillos son rectos, pero nadie llega al final.",
+      "text": "Llegas a un edificio gris.\n\nMontañas de archivos suben al techo.\n\nRopa por todas partes.\nTodo en diferentes momentos.\nTodo falso.\n\nUn hombre te da una forma.\n\n¿Para qué?\n\n**\"Para poder solicitar la forma de la razón de su llegada. *\n\nMira los relojes.\n\nSe están moviendo hacia adelante.\nPero no en la dirección correcta.\n\nPodría arreglarlos, crees.\n\nNo es la pregunta aquí, entiendes.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "scanline",
+      "choices": [
+        {
+          "text": "Toma un billete",
+          "vers": "ticket_admin",
+          "effects": [
+            {
+              "stat": "lucidite",
+              "val": 5
+            }
+          ]
+        },
+        {
+          "text": "Buscar ascensor administrativo",
+          "vers": "ascenseur_admin",
+          "effects": [
+            {
+              "stat": "lucidite",
+              "val": 5
+            }
+          ]
+        },
+        {
+          "text": "Hablando con el hombre con los trombones",
+          "vers": "trombones",
+          "effects": [
+            {
+              "stat": "chaleur",
+              "val": 5
+            }
+          ]
+        },
+        {
+          "text": "Organizar un descanso para el almuerzo",
+          "vers": "pause_dej",
+          "effects": [
+            {
+              "stat": "chaleur",
+              "val": 15
+            },
+            {
+              "stat": "appetit",
+              "val": 10
+            }
+          ]
+        }
+      ]
+    },
+    "ticket_admin": {
+      "id": "ticket_admin",
+      "title": "Entrada A38",
+      "location": "ADMINISTRACIÓN SIN FENES",
+      "narrator": "Esperar se vuelve extraño cuando nadie sabe por qué.",
+      "text": "Estás tomando un boleto.\n\nMuestra:\n\n■ A38\n\nEl panel de luz muestra:\n\n■ A2\n\nUna mujer ha estado esperando aquí tanto tiempo que trajo una planta.\n\nLa planta misma tomó un boleto.\n\nMira al estudiante.\n\nHa estado llenando la misma línea durante varios minutos.\n\nNombre:\nRazón del nombre:\nJustificación:\n\nSus manos están temblando.\n\nEl gato pasa entre las sillas y duerme en el boleto A3.\n\nNadie sabe si la línea puede seguir adelante.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Saca algo de tu bolsa y compártela.",
+          "vers": "pause_dej",
+          "effects": [
+            {
+              "stat": "chaleur",
+              "val": 15
+            }
+          ]
+        },
+        {
+          "text": "Espera tu turno normalmente",
+          "vers": "fin_employe",
+          "effects": [
+            {
+              "stat": "lucidite",
+              "val": -10
+            }
+          ]
+        }
+      ]
+    },
+    "ascenseur_admin": {
+      "id": "ascenseur_admin",
+      "title": "El ascensor administrativo",
+      "location": "ADMINISTRACIÓN SIN FENES",
+      "narrator": "Incluso subir un piso a veces requiere una carpeta completa.",
+      "text": "El ascensor está al final del pasillo.\n\nUna voz metálica anuncia:\n\nPor favor, proporcione pruebas de escalada.\n\nPresiona el botón.\n\nSe reanuda la votación:\n\nPor favor, proporcione pruebas de que tiene derecho a apoyar.\n\nEl gato duerme frente a los botones.\n\nEstá frotando.\n\nEl ascensor ya no pedirá nada.\n\nUn empleado sin rostro susurra:\n\n**\"Ha estado bloqueando el sistema desde esta mañana. Es el día más tranquilo que hemos tenido en años.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Disfrute de la calma para organizar un descanso para el almuerzo",
+          "vers": "pause_dej",
+          "effects": [
+            {
+              "stat": "chaleur",
+              "val": 15
+            }
+          ]
+        },
+        {
+          "text": "Búsqueda de documentos solicitados",
+          "vers": "fin_formulaire",
+          "effects": [
+            {
+              "stat": "lucidite",
+              "val": -10
+            }
+          ]
+        }
+      ]
+    },
+    "trombones": {
+      "id": "trombones",
+      "title": "El Hombre Trombone",
+      "location": "ADMINISTRACIÓN SIN FENES",
+      "narrator": "Algunas tareas sobreviven mucho después de haber sido olvidadas.",
+      "text": "Un hombre clasifica los trombones por color.\n\nRojo.\nAzul.\nGrey.\nUn gris un poco más gris que el otro gris.\n\nPregúntale si es urgente.\n\nTe mira con los ojos de alguien que no ha oído la palabra \"urgente\" en tanto tiempo que ya no sabe lo que significa.\n\nEste es mi trabajo.\n\n¿Y antes?\n\nEstá empacando un trombón.\n\n\"Pagaría relojes.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Dile que algunas cosas se comparten en lugar de clasificarse.",
+          "vers": "pause_dej",
+          "effects": [
+            {
+              "stat": "chaleur",
+              "val": 15
+            },
+            {
+              "stat": "lucidite",
+              "val": 10
+            }
+          ]
+        },
+        {
+          "text": "Ayúdalo a ordenar los trombones",
+          "vers": "admin_intro",
+          "effects": [
+            {
+              "stat": "lucidite",
+              "val": -5
+            }
+          ]
+        }
+      ]
+    },
+    "pause_dej": {
+      "id": "pause_dej",
+      "title": "Ruedas, Pan y Tampons",
+      "location": "ADMINISTRACIÓN SIN FENES",
+      "narrator": "Una oficina se vuelve menos terrible cuando alguien rompe el pan.",
+      "text": "Pusiste el pan y la salchicha en el mostrador.\n\nUn buffer gigante para en medio del vuelo.\n\nLos empleados buscan.\n\n¿Cuánto tiempo no han comido algo real?\n\nUno de ellos sostiene su mano al pan.\n\nOtro duda.\n\nComo si tomar tiempo para comer fuera una forma sin mancha.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "flash",
+      "choices": [
+        {
+          "text": "Almacene un búfer innecesario en su bolsa",
+          "vers": "admin_resolution",
+          "effects": [
+            {
+              "stat": "lucidite",
+              "val": 25
+            },
+            {
+              "stat": "chaleur",
+              "val": 10
+            }
+          ]
+        }
+      ]
+    },
+    "admin_resolution": {
+      "id": "admin_resolution",
+      "title": "El sello sin necesidad",
+      "location": "ADMINISTRACIÓN SIN FENES",
+      "narrator": "A veces las mejores herramientas son las que usted decide no utilizar más.",
+      "text": "Tienes un poco de tampón en el mostrador.\n\nLleva una extraña mención:\n\n± PASS - Validado sobre una base excepcional\n\nLo pones en tu propia forma.\n\nNadie está protestando.\n\nTal vez porque nadie sabe exactamente qué sellos son oficiales.\n\nO tal vez porque pareces alguien que sabe lo que hace con pequeñas herramientas de precisión.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "flash",
+      "choices": [
+        {
+          "text": "Avance con el amortiguador innecesario",
+          "vers": "hub_market",
+          "effects": [
+            {
+              "stat": "lucidite",
+              "val": 25
+            },
+            {
+              "stat": "chaleur",
+              "val": 10
+            }
+          ]
+        }
+      ]
+    },
+    "fin_formulaire": {
+      "id": "fin_formulaire",
+      "title": "El formulario final",
+      "location": "ADMINISTRACIÓN SIN FENES",
+      "narrator": "Algunas trampas comienzan con una caja de verificación.",
+      "text": "Toma el formulario.\n\nSólo tiene una página.\n\nLuego dos.\n\nEntonces veinte.\n\nTe piden tu nombre, luego la razón de tu nombre, luego una confirmación de que tienes una razón.\n\nTe sientas para llenarte más cómodamente.\n\nCuando miras hacia arriba, estás detrás de un escritorio.\n\nEn frente de ti, alguien está esperando.\n\nQuieres ayudarlo.\n\nPero una frase sale de tu boca antes de que puedas detenerla:\n\nUna firma falta.\n\nUn tampón aparece en tu mano.\n\nOtra vez.\n\nOtra vez.\n\nOtra vez.",
+      "isStart": false,
+      "isEnd": true,
+      "transition": "scanline",
+      "choices": []
+    },
+    "fin_employe": {
+      "id": "fin_employe",
+      "title": "Empleado mensual",
+      "location": "ADMINISTRACIÓN SIN FENES",
+      "narrator": "Algunas promociones parecen trampas con silla ergonómica.",
+      "text": "Espera.\n\nEl panel cambia de A2 a A2 bis.\n\nLuego A2 adicional.\n\nLuego la versión final A2.\n\nDespués de un tiempo, un empleado te da una placa.\n\n- Month EMPLOYEE.\n\nEstás tratando de explicar que no estás empleado aquí.\n\nTe está sonriendo.\n\nEs lo que dicen todos los nuevos.\n\nSu oficina aparece.\n\nSu silla aparece.\n\nSu formulario de instalación aparece.\n\nUna nota se coloca en ella:\n\nTu descanso de almuerzo está programado en 17 años.",
+      "isStart": false,
+      "isEnd": true,
+      "transition": "scanline",
+      "choices": []
+    },
+    "hub_market": {
+      "id": "hub_market",
+      "title": "La tercera puerta",
+      "location": "REVE — FLOTING BATCHERY",
+      "narrator": "Una cosa buena a veces llama a otra.",
+      "text": "Vuelve detrás de tu mostrador flotante.\n\nLa cucharilla brillante descansa cerca de la caja.\nEl búfer inútil se utiliza ahora como un portapapeles.\n\nDos puertas cerradas.\n\nLa ciudad está disminuyendo.\nLa administración está respirando.\n\nPero el neón de la tercera puerta sigue brillando.\n\nEl gato se pone en el mostrador.\n\nOlfatea el aire, te mira, luego mira la puerta de neón.\n\nEn el cuaderno aparece una frase:\n\nAlgunos se pierden corriendo.\nOtros se pierden comprando lo que no necesitaban.\n\nLa puerta de la mañana todavía no está allí.\n\nTodavía hay un mundo por el que pasar.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Pasa por la puerta de neón con tu bolsa",
+          "vers": "market_intro",
+          "effects": [
+            {
+              "stat": "chaleur",
+              "val": 5
+            },
+            {
+              "stat": "appetit",
+              "val": 15
+            }
+          ]
+        }
+      ]
+    },
+    "market_intro": {
+      "id": "market_intro",
+      "title": "El supermercado Infinito",
+      "location": "REVE — RAYON 12",
+      "narrator": "Aquí está todo disponible. Excepto la salida.",
+      "text": "Vienes a un supermercado enorme.\n\nLos neones están zumbidos.\n\nLos rayos se repiten infinitamente en espejos.\nEl radio de relojes desechables hace siete callejones enteros.\n\n*A prueba de agua hasta 50 metros. *\n* Garantía no renovable de un año. *\n* Precisión: ± 5 minutos al mes. *\n\nEstás mirando a uno de ellos.\n\nYa está cuatro minutos tarde.\n\nAcaba de salir de la caja.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "glitch",
+      "choices": [
+        {
+          "text": "Hablando con el cliente con el carrito desbordante",
+          "vers": "cliente_chariot",
+          "effects": [
+            {
+              "stat": "lucidite",
+              "val": 10
+            }
+          ]
+        },
+        {
+          "text": "Explore el radio de canto",
+          "vers": "conserves",
+          "effects": [
+            {
+              "stat": "lucidite",
+              "val": 5
+            }
+          ]
+        },
+        {
+          "text": "Cambiar a cajas automáticas",
+          "vers": "caisses_auto",
+          "effects": [
+            {
+              "stat": "lucidite",
+              "val": 5
+            }
+          ]
+        },
+        {
+          "text": "Instalar una tabla en el centro del radio",
+          "vers": "table_market",
+          "effects": [
+            {
+              "stat": "chaleur",
+              "val": 15
+            },
+            {
+              "stat": "appetit",
+              "val": 15
+            }
+          ]
+        }
+      ]
+    },
+    "cliente_chariot": {
+      "id": "cliente_chariot",
+      "title": "El carrito está lleno.",
+      "location": "RAYON 12",
+      "narrator": "Algunas canastas están llenas de cosas que no queríamos.",
+      "text": "El cliente empuja un carrito enorme.\n\nDesborda con cajas idénticas.\n\nPregunta lo que compra.\n\n**\"Ahorro de tiempo. *\n\nElla muestra las cajas.\n\n* 12 minutos al día. *\n* Más eficaz. *\n* Formato familiar. *\n\n**\"Y con este tiempo salvado, ¿qué haces?\n\nSe detiene.\n\nRealmente piensa.\n\nEstoy buscando maneras de ganar más.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Compartir pollo con otros clientes",
+          "vers": "table_market",
+          "effects": [
+            {
+              "stat": "chaleur",
+              "val": 15
+            }
+          ]
+        },
+        {
+          "text": "Seguir promociones con ella",
+          "vers": "fin_carte",
+          "effects": [
+            {
+              "stat": "lucidite",
+              "val": -10
+            }
+          ]
+        }
+      ]
+    },
+    "conserves": {
+      "id": "conserves",
+      "title": "El Rayo de los conservantes",
+      "location": "INFINI SUERMARCHÉ",
+      "narrator": "Cuando todo se conserva, incluso las dudas se hacen largas.",
+      "text": "La anciana lee los ingredientes de una caja de guisantes.\n\nLa está descansando.\n\nToma otro.\n\nDescansa.\n\n¿Buscando algo específico?\n\nEstoy buscando guisantes que han crecido en algún lugar.\n\nElla muestra la etiqueta.\n\n*Origin: Producto en área optimizada. *\n\nAntes supe de dónde vengo.\n\nLo entiendes.\n\nAsí es como te sientes con los relojes de serie.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Abra la lata y sirva con el pollo",
+          "vers": "table_market",
+          "effects": [
+            {
+              "stat": "chaleur",
+              "val": 15
+            },
+            {
+              "stat": "appetit",
+              "val": 10
+            }
+          ]
+        },
+        {
+          "text": "Compare todas las cajas uno por uno",
+          "vers": "fin_rayon_12",
+          "effects": [
+            {
+              "stat": "lucidite",
+              "val": -10
+            }
+          ]
+        }
+      ]
+    },
+    "caisses_auto": {
+      "id": "caisses_auto",
+      "title": "Caisses automáticos",
+      "location": "INFINI SUERMARCHÉ",
+      "narrator": "Algunas máquinas saben muy bien cómo decir que no.",
+      "text": "El cuerpo automático repite:\n\n√ Artículo inesperado en el área de embalaje.\n\nPusiste un viejo reloj de bolsillo en la alfombra.\n\n√ Artículo inesperado en el área de embalaje.\n\nLo sé.\n\nTómalo de vuelta.\n\nLa máquina no sabe qué hacer con un objeto que dura.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Desplificar la caja e invitar a la línea para comer",
+          "vers": "table_market",
+          "effects": [
+            {
+              "stat": "lucidite",
+              "val": 15
+            },
+            {
+              "stat": "chaleur",
+              "val": 10
+            }
+          ]
+        },
+        {
+          "text": "Continuar escaneando hasta que entiendas",
+          "vers": "fin_bug",
+          "effects": [
+            {
+              "stat": "lucidite",
+              "val": -10
+            }
+          ]
+        }
+      ]
+    },
+    "table_market": {
+      "id": "table_market",
+      "title": "La cocina demasiado grande",
+      "location": "RAYON 12",
+      "narrator": "Cuando la gente recuerda que tienen hambre, los rayos dejan de ser infinitos.",
+      "text": "Pusiste el pollo asado en una mesa pequeña.\n\nNadie sabe de dónde viene la mesa.\n\nLos clientes se acercan.\nAlgunos olvidaron que podías comer sin una pantalla delante de ti.\n\nUn niño pregunta qué es.\n\nUna comida.\n\n¿Cuánto tarda?\n\nEl derecho.\n\nSe sienta en el suelo.\n\nEs un buen comienzo.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "flash",
+      "choices": [
+        {
+          "text": "Avanzando con la pequeña luz de neón",
+          "vers": "final_hub",
+          "effects": [
+            {
+              "stat": "chaleur",
+              "val": 20
+            },
+            {
+              "stat": "lucidite",
+              "val": 20
+            },
+            {
+              "stat": "appetit",
+              "val": 10
+            }
+          ]
+        }
+      ]
+    },
+    "fin_carte": {
+      "id": "fin_carte",
+      "title": "Tarjeta de lealtad",
+      "location": "INFINI SUERMARCHÉ",
+      "narrator": "Algunas recompensas cuestan más que las compras.",
+      "text": "Sigues promociones.\n\nUna tarjeta de lealtad aparece en tu mano.\n\nEntonces un segundo.\n\nLuego un tercio.\n\nCada tarjeta promete más beneficios que el anterior.\n\nUna voz anunció:\n\nFelicitaciones, ahora eres un cliente prioritario.\n\nLos rayos están abriendo frente a ti.\n\nTu carrito está creciendo.\n\nTus bolsillos llenan de entradas.\n\nYa no sabes lo que querías comprar.\n\nPero ganaste un 3% en algo.\n\nMás tarde, mucho más tarde, duermes en el departamento de ropa de cama.\n\nEl coche te desea una buena noche.",
+      "isStart": false,
+      "isEnd": true,
+      "transition": "glitch",
+      "choices": []
+    },
+    "fin_bug": {
+      "id": "fin_bug",
+      "title": "Artículo No previsto",
+      "location": "INFINI SUERMARCHÉ",
+      "narrator": "Tal vez el bicho era lo único que aún era sincero.",
+      "text": "Sigue escaneando.\n\nBIP.\n\n√ Artículo inesperado en el área de embalaje.\n\nBIP.\n\n√ Artículo inesperado en el área de embalaje.\n\nBIP.\n\n√ Artículo inesperado en el área de embalaje.\n\nEl mundo está temblando.\n\nNeon flashes.\n\nLos clientes se congelan.\n\nEl gato te está mirando.\n\nParece casi decepcionado.\n\nEl caisse se apodera de:\n\nUn cliente inesperado en la zona de existencia.\n\nEntonces todo el mundo se congeló.",
+      "isStart": false,
+      "isEnd": true,
+      "transition": "glitch",
+      "choices": []
+    },
+    "fin_rayon_12": {
+      "id": "fin_rayon_12",
+      "title": "Sección 12",
+      "location": "INFINI SUERMARCHÉ",
+      "narrator": "Todas las salidas parecen promociones cuando no sabes lo que estás buscando.",
+      "text": "Compara las cajas.\n\nPeas extra finas.\nBien hecho.\nCasi sincero.\nPeas de edición limitada.\nPeas con promesa de felicidad.\n\nLos rayos se repiten.\n\nTu canasta se está poniendo más pesada.\n\nNo recuerdas haber tomado nada.\n\nHay un jingle en los altavoces.\n\n**\"Oferta excepcional. Oferta excepcional. Oferta excepcional.\n\nEstás pasando el 12.\n\nEntonces otra vez.\n\nEntonces otra vez.\n\nDespués de un tiempo, lo entiendes.\n\nYa no estás buscando la salida.\n\nSólo estás buscando el siguiente rayo.",
+      "isStart": false,
+      "isEnd": true,
+      "transition": "glitch",
+      "choices": []
+    },
+    "final_hub": {
+      "id": "final_hub",
+      "title": "El contador calmado",
+      "location": "REVE — FLOTING BATCHERY",
+      "narrator": "El sueño sigue la pista de lo que calentamos.",
+      "text": "Vuelves detrás de tu establecimiento flotante.\n\nEsta vez, todo es diferente.\n\nLos relojes en los estantes giran a la velocidad correcta.\nNo demasiado rápido.\nNo demasiado lento.\n\nEl blanquette está caliente.\n\nAfuera, algunas personas se ralentizaron.\nNo mucho.\nLo suficiente para notar que el cielo existe.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Prepara el banquete final",
+          "vers": "banquet",
+          "effects": [
+            {
+              "stat": "chaleur",
+              "val": 20
+            },
+            {
+              "stat": "appetit",
+              "val": 20
+            }
+          ],
+          "requires": {
+            "stat": "chaleur",
+            "min": 65
+          }
+        },
+        {
+          "text": "Abre la puerta de la mañana.",
+          "vers": "reveil",
+          "effects": [
+            {
+              "stat": "lucidite",
+              "val": 20
+            }
+          ],
+          "requires": {
+            "stat": "lucidite",
+            "min": 65
+          }
+        },
+        {
+          "text": "Mira el sueño se desvanece suavemente",
+          "vers": "reveil",
+          "effects": [],
+          "clickEffect": "fade"
+        }
+      ]
+    },
+    "banquet": {
+      "id": "banquet",
+      "title": "El banquete de los mundos ordinarios",
+      "location": "REVE — Una gran mesa con los mundos",
+      "narrator": "Los mundos más fríos a veces se reparan alrededor de una mesa demasiado grande.",
+      "text": "Estás sirviendo a la gente con prisa.\n\nArregla un reloj para los empleados de espera.\nCortaste la salchicha para los supermercados.\nLe ofreces pan a la anciana en el banco.\n\nNadie corre durante esta comida.\n\nNo es mucho.\n\nSólo una comida.\nSólo unas cuantas personas sentadas.\nSólo un relojero que sabe que algunas cosas no pueden acelerarse.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "flash",
+      "choices": [
+        {
+          "text": "Abre la puerta de la mañana.",
+          "vers": "reveil",
+          "effects": [
+            {
+              "stat": "chaleur",
+              "val": 20
+            },
+            {
+              "stat": "lucidite",
+              "val": 20
+            }
+          ],
+          "requires": {
+            "stat": "chaleur",
+            "min": 75
+          }
+        },
+        {
+          "text": "Deja que el sueño termine",
+          "vers": "reveil",
+          "effects": [],
+          "clickEffect": "fade"
+        }
+      ]
+    },
+    "reveil": {
+      "id": "reveil",
+      "title": "Morning Opens",
+      "location": "BOUCHERIE — AUBE",
+      "narrator": "Algunas puertas abren antes de tocar el mango.",
+      "text": "Estás abriendo lentamente los ojos.\n\nLa luz de la mañana cruza la ventana de la tienda.\n\nPor unos segundos,\nNo te muevas.\n\nOíste:\n\n- El ruido de las agujas.\n- El ruido de la ciudad que empieza de nuevo.\n- El sonido de tu propia respiración.\n\nTe toca.\n\nPusiste una botella de vino en la nevera para esta noche.\n\nEl blanquette ha estado sumergir desde ayer.\n\nAbre la tienda.\n\n*Horlogerie Verneuil — Reparaciones &quot; Restorations*\n\nEl neón parpadea una vez.\n\nEntonces enciende.",
+      "isStart": false,
+      "isEnd": true,
+      "transition": "fade",
+      "choices": []
+    }
+  },
+  "icon": "⏱",
+  "lang": "es"
+}
