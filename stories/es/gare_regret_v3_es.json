@@ -1,0 +1,1801 @@
+{
+  "name": "La estación Regrets",
+  "kids": false,
+  "askPlayerName": true,
+  "pack": "free",
+  "stats": [
+    {
+      "id": "lucidite",
+      "label": "Lucidity",
+      "start": 30,
+      "max": 100,
+      "color": "#8ecae6"
+    },
+    {
+      "id": "regret",
+      "label": "Regret",
+      "start": 50,
+      "max": 100,
+      "color": "#ef476f"
+    },
+    {
+      "id": "acceptation",
+      "label": "Aceptación",
+      "start": 10,
+      "max": 100,
+      "color": "#06d6a0"
+    },
+    {
+      "id": "attachement",
+      "label": "Adjunción",
+      "start": 40,
+      "max": 100,
+      "color": "#ffd166"
+    },
+    {
+      "id": "mystere",
+      "label": "Misterio",
+      "start": 20,
+      "max": 100,
+      "color": "#c77dff"
+    }
+  ],
+  "theme": {
+    "bg": "#070912",
+    "bg2": "#101525",
+    "bg3": "#182033",
+    "bg4": "#242d44",
+    "border": "#39445e",
+    "accent": "#8ecae6",
+    "accent2": "#ffd166",
+    "accent3": "#ef476f",
+    "text": "#f5f0e8",
+    "text2": "#b9b2a6",
+    "text3": "#7d776f"
+  },
+  "scenes": {
+    "intro_train": {
+      "id": "intro_train",
+      "title": "El tren 22:47",
+      "location": "BALNIEU TRAIN",
+      "narrator": "Algunas notificaciones vienen en el momento equivocado. O quizás la correcta.",
+      "text": "El tren está casi lleno.\n\nCaras cansadas.\nMonos mojados.\nAuriculares atornillados en los oídos.\n\nFuera, la lluvia convierte las ventanas en espejos temblores.\n\nMiras tu reflejo sin verla.\n\nEl orador anuncia su parada en una voz demasiado suave.\n\nEntonces tu teléfono vibra.\n\nMensaje.\n\nUno.\n\nPero tu estómago se aprieta antes de que lo abras.",
+      "isStart": true,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Mensaje de diagnóstico",
+          "vers": "ignorer_message",
+          "effects": [
+            {
+              "stat": "lucidite",
+              "val": 5
+            }
+          ]
+        },
+        {
+          "text": "Texto",
+          "vers": "le_message",
+          "effects": [
+            {
+              "stat": "regret",
+              "val": 5
+            }
+          ]
+        }
+      ],
+      "x": 400,
+      "y": 0
+    },
+    "ignorer_message": {
+      "id": "ignorer_message",
+      "title": "No leas",
+      "location": "BALNIEU TRAIN",
+      "narrator": "Podemos repeler un mensaje. No siempre lo que contiene.",
+      "text": "Pusiste el teléfono delante de tu pierna.\n\nDurante tres segundos, intentas ser alguien que no mire.\n\nPensaste que había terminado.\nQue era mejor así.\n\nEntonces sigue vibrando.\n\nEl mismo remitente.\n\nEl mismo silencio a tu alrededor.\n\nYa viene tu parada.\n\nSabes que deberías levantarte.\n\nPero tu pulgar ya encendió la pantalla.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Lee finalmente",
+          "vers": "le_message",
+          "effects": [
+            {
+              "stat": "regret",
+              "val": 3
+            },
+            {
+              "stat": "lucidite",
+              "val": 3
+            }
+          ]
+        }
+      ],
+      "x": 620,
+      "y": 140
+    },
+    "le_message": {
+      "id": "le_message",
+      "title": "El mensaje",
+      "location": "BALNIEU TRAIN",
+      "narrator": "No creías que un simple mensaje pudiera darte la vuelta.",
+      "text": "El mensaje es corto.\n\nAntes de irme, quería decirte...\n\nLeíste la frase otra vez.\n\nUna vez.\n\nDos veces.\n\nTe fuiste hace tres semanas.\nO tal vez te fuiste.\nNo sabes quién decidió.\n\nEl mundo que te rodea se vuelve más borroso.\n\nNo sabes qué sentir: ira, tristeza, alivio, pánico.\n\nEl tren está disminuyendo.\n\nPuertas abiertas.\n\nUna voz anuncia una estación.\n\nNo la tuya.\n\nEstás buscando.\n\nTu parada ha terminado.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Date prisa.",
+          "vers": "descente_precipitee",
+          "effects": [
+            {
+              "stat": "regret",
+              "val": 10
+            }
+          ]
+        },
+        {
+          "text": "Quédate en el tren, congelado",
+          "vers": "train_rate",
+          "effects": [
+            {
+              "stat": "lucidite",
+              "val": 5
+            },
+            {
+              "stat": "regret",
+              "val": 5
+            }
+          ]
+        }
+      ],
+      "x": 400,
+      "y": 200
+    },
+    "train_rate": {
+      "id": "train_rate",
+      "title": "Qué pena.",
+      "location": "BALNIEU TRAIN",
+      "narrator": "Perder una parada es a veces una repetición general.",
+      "text": "Las puertas están empezando a cerrar.\n\nNo te mueves.\n\nEntonces tu cuerpo decide por ti.\n\nTe levantas demasiado rápido.\n\nAlguien se ríe.\n\nTu bolsa está golpeando un asiento.\n\nLa puerta que suena acelera tu corazón.\n\nVas al último minuto.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Saltar al muelle",
+          "vers": "descente_precipitee",
+          "effects": [
+            {
+              "stat": "regret",
+              "val": 5
+            }
+          ]
+        }
+      ],
+      "x": 220,
+      "y": 360,
+      "timer": {
+        "duration": 6,
+        "auto": "descente_precipitee"
+      }
+    },
+    "descente_precipitee": {
+      "id": "descente_precipitee",
+      "title": "El Pier",
+      "location": "SAINT-ORIAL GAR",
+      "narrator": "Hay segundos que contienen todo el peso de una vida.",
+      "text": "Estás bajando demasiado rápido.\n\nEl muelle está mojado.\n\nLa multitud te empuja en cada dirección.\n\nTu teléfono casi sale de tu mano.\n\nQuieres atraparlo.\n\nAlguien te está sacudiendo.\n\nTu pie está buscando el borde.\n\nNo lo encuentres.\n\nUn grito.\n\nEl ruido del metal.\n\nUna luz.\n\nEntonces nada.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "flash",
+      "choices": [
+        {
+          "text": "Abre los ojos.",
+          "vers": "sur_les_rails",
+          "effects": [
+            {
+              "stat": "mystere",
+              "val": 15
+            }
+          ]
+        }
+      ],
+      "x": 400,
+      "y": 420
+    },
+    "sur_les_rails": {
+      "id": "sur_les_rails",
+      "title": "Siempre en los velos",
+      "location": "??",
+      "narrator": "El silencio después de una caída nunca se parece al silencio antes.",
+      "text": "Abre los ojos.\n\nSigues en camino.\n\nPero la estación no es la misma.\n\nNo hay tren.\nSin gente.\nSin gritos.\n\nLos neones iluminan el muelle con luz fría.\nEscuchas la lluvia a distancia.\n\nTe estás levantando lentamente.\n\nEn todas las señales, al mismo tiempo:\n\n**22:47*\n\nPier 1. Pier 4. Pier 18. Pier 52.\n\nSiempre:\n\n**22:47*\n\nUn gato gris cruza las pistas delante de ti.\n\nSe detiene.\n\nMírate.\n\nEntonces sube tranquilamente en el muelle.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Sigue al gato",
+          "vers": "premier_quai",
+          "effects": [
+            {
+              "stat": "mystere",
+              "val": 10
+            }
+          ]
+        },
+        {
+          "text": "Pide ayuda",
+          "vers": "appel_gare",
+          "effects": [
+            {
+              "stat": "regret",
+              "val": 5
+            }
+          ]
+        }
+      ],
+      "x": 400,
+      "y": 620
+    },
+    "appel_gare": {
+      "id": "appel_gare",
+      "title": "Nadie contesta",
+      "location": "GREECE GARE",
+      "narrator": "En algunos lugares, el grito se utiliza principalmente para escuchar su propio miedo.",
+      "text": "Tú llamas.\n\nTu voz se pierde bajo las ventanas.\n\nNadie responde.\n\nEntonces el altavoz bromea:\n\nSe pide a los viajeros que lleguen por accidente que lleguen a su muelle interior.\n\nNo lo entiendes.\n\nEl gato de milla.\n\nO tal vez el sonido viene de los altavoces.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Únete al muelle",
+          "vers": "premier_quai",
+          "effects": [
+            {
+              "stat": "mystere",
+              "val": 5
+            }
+          ]
+        }
+      ],
+      "x": 620,
+      "y": 780
+    },
+    "premier_quai": {
+      "id": "premier_quai",
+      "title": "La estación Regrets",
+      "location": "HALL CENTRAL",
+      "narrator": "Todos los trenes salen al mismo tiempo. Todos prometen una dirección diferente.",
+      "text": "El pasillo central es enorme.\n\nLas líneas se extienden hasta donde se puede ver.\n\nCada panel muestra:\n\n** Salida: 22:47**\n\nPero los destinos no parecen ninguna ciudad.\n\nLínea 03 - La vida descansada\nLínea 11 - Vida exitosa\nLínea 18 - Niños Descansados\nLínea 27 - El muelle vacío\nLínea 34 - El tren fatiguo\nLínea 52 - Vida acelerada\nLínea 74 — Mensajes Nunca enviados\n\nUna mujer sentada en un banco te mira.\n\n¿Primera vez?",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Siga el gato directamente",
+          "vers": "ligne_chat_verrouillee",
+          "effects": [
+            {
+              "stat": "mystere",
+              "val": 10
+            }
+          ]
+        },
+        {
+          "text": "Elija una línea",
+          "vers": "hub_gare",
+          "effects": [
+            {
+              "stat": "acceptation",
+              "val": 5
+            }
+          ]
+        },
+        {
+          "text": "Habla con el viajero",
+          "vers": "voyageuse",
+          "effects": [
+            {
+              "stat": "lucidite",
+              "val": 5
+            }
+          ]
+        }
+      ],
+      "x": 400,
+      "y": 900
+    },
+    "voyageuse": {
+      "id": "voyageuse",
+      "title": "The Traveler Trempee",
+      "location": "HALL CENTRAL",
+      "narrator": "Algunos han estado esperando tanto tiempo que han olvidado lo que esperaban.",
+      "text": "La mujer mira las señales.\n\nAquí están todos buscando el tren adecuado.\n\nPregunta a dónde van.\n\nSe ríe lentamente.\n\nDonde podríamos haber sido felices. Eso es lo que pensamos al principio.\n\nTe muestra tu teléfono.\n\nLa pantalla es negra.\n\nEntonces se enciende.\n\nEl mensaje sigue ahí.\n\nPero una línea ha cambiado:\n\nCreo que deberíamos habernos elegido antes.\nO tal vez aprender a elegirse.\n\nEl viajero susurra:\n\n**\"A la estación le gusta corregir frases. *",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Pregunta cómo salir",
+          "vers": "comment_partir",
+          "effects": [
+            {
+              "stat": "lucidite",
+              "val": 10
+            }
+          ]
+        },
+        {
+          "text": "Ir a las líneas",
+          "vers": "hub_gare",
+          "effects": [
+            {
+              "stat": "mystere",
+              "val": 5
+            }
+          ]
+        }
+      ],
+      "x": 220,
+      "y": 1080
+    },
+    "comment_partir": {
+      "id": "comment_partir",
+      "title": "Cómo salir",
+      "location": "HALL CENTRAL",
+      "narrator": "La pregunta más simple es a menudo la que más asusta.",
+      "text": "¿Cómo salgo de aquí?\n\nEl viajero está levantando sus hombros.\n\nSiempre puedes subirte a un tren. El problema es si realmente queremos bajar.\n\nEstá viendo al gato.\n\nAlgunas personas permanecen en una vida. Otros vuelven aquí una y otra vez. Otros están esperando la última salida.\n\n¿Qué hay de ti?\n\nEstá sonriendo.\n\nEspero dejar de esperar.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Explorar líneas",
+          "vers": "hub_gare",
+          "effects": [
+            {
+              "stat": "acceptation",
+              "val": 5
+            }
+          ]
+        }
+      ],
+      "x": 220,
+      "y": 1260
+    },
+    "hub_gare": {
+      "id": "hub_gare",
+      "title": "Las líneas de 22:47",
+      "location": "HALL CENTRAL",
+      "narrator": "Cada destino parece una respuesta. Ninguno es realmente uno.",
+      "text": "Los paneles cambian lentamente.\n\nLas mismas líneas vuelven.\n\nEl gato se sienta frente a ti como si te estuviera esperando.\n\nPor teléfono, el mensaje permanece abierto.\n\nNo hay red.\n\nSin embargo, el tiempo siempre indica:\n\n**22:47*",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Línea 27 - El muelle vacío",
+          "vers": "ligne_27_intro",
+          "effects": [
+            {
+              "stat": "mystere",
+              "val": 10
+            }
+          ]
+        },
+        {
+          "text": "Sigue al gato",
+          "vers": "ligne_88_intro",
+          "effects": [
+            {
+              "stat": "mystere",
+              "val": 15
+            }
+          ],
+          "requires": {
+            "stat": "acceptation",
+            "min": 45
+          }
+        },
+        {
+          "text": "Otras líneas",
+          "vers": "hub_gare_2",
+          "effects": [
+            {
+              "stat": "lucidite",
+              "val": 3
+            }
+          ]
+        },
+        {
+          "text": "Línea 18 - Niños Descansados",
+          "vers": "ligne_18_intro",
+          "effects": [
+            {
+              "stat": "regret",
+              "val": 10
+            }
+          ]
+        },
+        {
+          "text": "Línea 11 - Vida exitosa",
+          "vers": "ligne_11_intro",
+          "effects": [
+            {
+              "stat": "attachement",
+              "val": -5
+            }
+          ]
+        },
+        {
+          "text": "Línea 03 - La vida descansada",
+          "vers": "ligne_03_intro",
+          "effects": [
+            {
+              "stat": "regret",
+              "val": 5
+            }
+          ]
+        }
+      ],
+      "x": 400,
+      "y": 1440
+    },
+    "hub_gare_2": {
+      "id": "hub_gare_2",
+      "title": "Otras líneas",
+      "location": "HALL CENTRAL",
+      "narrator": "Cuanto más exploras, más parecen conocerte los destinos.",
+      "text": "El panel gira en un ruido mecánico.\n\nEstán surgiendo nuevos destinos.\n\nLínea 34 - El tren fatiguo\nLínea 52 - Vida acelerada\nLínea 74 — Mensajes Nunca enviados\n\nTodo va a las 22:47.\n\nSiempre.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Encuentra la última salida",
+          "vers": "dernier_depart",
+          "effects": [
+            {
+              "stat": "acceptation",
+              "val": 10
+            }
+          ],
+          "requires": {
+            "stat": "acceptation",
+            "min": 65
+          }
+        },
+        {
+          "text": "Volver a las líneas delanteras",
+          "vers": "hub_gare",
+          "effects": []
+        },
+        {
+          "text": "Línea 74 — Mensajes Nunca enviados",
+          "vers": "ligne_74_intro",
+          "effects": [
+            {
+              "stat": "attachement",
+              "val": 5
+            }
+          ]
+        },
+        {
+          "text": "Línea 52 - Vida acelerada",
+          "vers": "ligne_52_intro",
+          "effects": [
+            {
+              "stat": "regret",
+              "val": 5
+            }
+          ]
+        },
+        {
+          "text": "Línea 34 - El tren fatiguo",
+          "vers": "ligne_34_intro",
+          "effects": [
+            {
+              "stat": "lucidite",
+              "val": 5
+            }
+          ]
+        }
+      ],
+      "x": 620,
+      "y": 1440
+    },
+    "retour_gare": {
+      "id": "retour_gare",
+      "title": "Volver a las 22:47",
+      "location": "HALL CENTRAL",
+      "narrator": "",
+      "text": "El tren está disminuyendo.\n\nPuertas abiertas.\n\nVas a bajar.\n\nEl pasillo central está aquí.\n\nComo lo dejaste.\n\nEl gato duerme en un panel de información.\n\nEl tiempo no se ha movido.\n\n**22:47*",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Elija otra línea",
+          "vers": "hub_gare",
+          "effects": [
+            {
+              "stat": "acceptation",
+              "val": 5
+            }
+          ]
+        },
+        {
+          "text": "Cuidado con el teléfono",
+          "vers": "telephone_change",
+          "effects": [
+            {
+              "stat": "lucidite",
+              "val": 5
+            }
+          ]
+        }
+      ],
+      "x": 400,
+      "y": 1640
+    },
+    "telephone_change": {
+      "id": "telephone_change",
+      "title": "El teléfono",
+      "location": "HALL CENTRAL",
+      "narrator": "Algunos mensajes nunca terminan.",
+      "text": "Su teléfono está encendido.\n\nEl mensaje ha sido completado.\n\nHabía una suite.\n\nAntes de irme, quería decirte...\nNo tenía nada que ver contigo.\nQuizás necesitaba desaparecer un poco.\nNo de ti. Solo yo.\nNo sé si lo entiendes.\n\nLeíste las palabras una a una.\n\nUn poco.\n\nLo que significaba.\nLo que eso podría significar.\n\nNo lo sabes.\n\nQuizás nunca sepas si fuera un final.\nO un descanso.\n\nEl gato abre un ojo.\n\nLuego el tablero de las líneas se tambalean.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Volver a las líneas",
+          "vers": "hub_gare",
+          "effects": [
+            {
+              "stat": "lucidite",
+              "val": 5
+            },
+            {
+              "stat": "acceptation",
+              "val": 5
+            }
+          ]
+        }
+      ],
+      "x": 620,
+      "y": 1640
+    },
+    "ligne_03_intro": {
+      "id": "ligne_03_intro",
+      "title": "Línea 03 - La vida descansada",
+      "location": "TRAIN 03",
+      "narrator": "Algunos trenes no van a ninguna parte, sino al lugar donde nunca nos hemos ido.",
+      "text": "Tren 03 olores de polvo y calefacción vieja.\n\nPor la ventana, ves tu ciudad natal.\n\nMás joven.\nMás silencioso.\nGoldier.\n\nLa voz anunció:\n\nSiguiente parada: la vida que habría tenido mientras permanecía.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Abajo",
+          "vers": "vie_restee_1",
+          "effects": [
+            {
+              "stat": "regret",
+              "val": 5
+            }
+          ]
+        }
+      ],
+      "x": 120,
+      "y": 1840
+    },
+    "vie_restee_1": {
+      "id": "vie_restee_1",
+      "title": "La ciudad de Natale",
+      "location": "NATAL CITY",
+      "narrator": "Hay ciudades que no podemos irnos. O que nunca nos molestamos en irnos.",
+      "text": "La calle principal apenas ha cambiado.\n\nLa panadería sigue abierta.\nLas películas viejas muestran películas que olvidaste.\nAlguien te llama por tu nombre desde una terraza.\n\nTuviste la oportunidad de irte.\nHace mucho tiempo.\nUn trabajo en otra ciudad.\nUna carta de aceptación que nunca envió.\n\nDijiste la próxima vez.\n\nNo había la próxima vez.\n\nY no es una tragedia.\nEso es lo que pasó.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Caminando solo en la ciudad",
+          "vers": "vie_restee_seule",
+          "effects": [
+            {
+              "stat": "lucidite",
+              "val": 5
+            }
+          ]
+        },
+        {
+          "text": "Ir al café con viejos amigos",
+          "vers": "vie_restee_2",
+          "effects": [
+            {
+              "stat": "attachement",
+              "val": 10
+            }
+          ]
+        }
+      ],
+      "x": 120,
+      "y": 2020
+    },
+    "vie_restee_2": {
+      "id": "vie_restee_2",
+      "title": "Como todos los jueves",
+      "location": "COFFEE OF THE CENTRE",
+      "narrator": "Los hábitos pueden parecer amor. O una jaula muy cómoda.",
+      "text": "El café está caliente.\n\nLas conversaciones son fáciles.\n\nEstamos hablando de tiempo, vecinos, trabajar en la plaza, gente que se fue.\n\nCuando mencionamos a los que se fueron, hay un silencio de un segundo.\nNadie lo comenta.\nTodos se dieron cuenta.\n\nMira tu taza.\n\nPodrías haber sido una de esas personas de las que estamos hablando con este silencio.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Permanecer en esta vida",
+          "vers": "fin_vie_restee",
+          "effects": [
+            {
+              "stat": "attachement",
+              "val": 15
+            }
+          ]
+        },
+        {
+          "text": "Volver a la estación",
+          "vers": "retour_gare",
+          "effects": [
+            {
+              "stat": "acceptation",
+              "val": 10
+            },
+            {
+              "stat": "regret",
+              "val": -5
+            }
+          ]
+        }
+      ],
+      "x": 120,
+      "y": 2200
+    },
+    "vie_restee_seule": {
+      "id": "vie_restee_seule",
+      "title": "Las calles demasiado conocidas",
+      "location": "NATAL CITY",
+      "narrator": "Puedes perderte en un lugar que conoces muy bien.",
+      "text": "Caminas solo.\n\nCada esquina, un recuerdo.\n\nLa primera mentira.\nLa primera vergüenza.\nEl primer deseo de salir.\n\nEsta ciudad no te destruyó.\n\nElla te mantuvo.\n\nEs diferente.\n\nEn la plataforma de la pequeña estación, un tren pasa sin parar.\n\nNo sabes si te arrepientes o lo quieres.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Quedarse quieto",
+          "vers": "fin_vie_restee",
+          "effects": [
+            {
+              "stat": "attachement",
+              "val": 10
+            }
+          ]
+        },
+        {
+          "text": "Volver a la Gare des Regrets",
+          "vers": "retour_gare",
+          "effects": [
+            {
+              "stat": "acceptation",
+              "val": 15
+            }
+          ]
+        }
+      ],
+      "x": 300,
+      "y": 2200
+    },
+    "fin_vie_restee": {
+      "id": "fin_vie_restee",
+      "title": "Fin — La vida descansada",
+      "location": "NATAL CITY",
+      "narrator": "Algunos arrepentimientos no hacen ruido.",
+      "text": "Quédate.\n\nEl tiempo sigue pasando.\n\nEl café del jueves continúa.\nLas calles guardan sus nombres.\nEnfrenta la edad a una velocidad razonable.\n\nUna noche, encuentras la carta de aceptación.\nNunca enviado.\nLa tinta sigue siendo legible.\n\nLo pusiste en un cajón.\n\nNo recordar.\nPara dejar de buscarla.",
+      "isStart": false,
+      "isEnd": true,
+      "transition": "fade",
+      "choices": [],
+      "x": 120,
+      "y": 2380
+    },
+    "ligne_11_intro": {
+      "id": "ligne_11_intro",
+      "title": "Línea 11 - Vida exitosa",
+      "location": "TRAIN 11",
+      "narrator": "Algunos trenes venden luces antes de hablar del precio.",
+      "text": "El tren 11 es moderno, brillante, casi silencioso.\n\nEn el cristal, tu reflejo cambia.\n\nMejor ropa.\nUna mirada más segura.\nTeléfono lleno de notificaciones.\n\nLa voz anunció:\n\nSiguiente parada: la vida que has tenido éxito.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Baja en la luz",
+          "vers": "reussie_1",
+          "effects": [
+            {
+              "stat": "regret",
+              "val": -5
+            },
+            {
+              "stat": "mystere",
+              "val": 5
+            }
+          ]
+        }
+      ],
+      "x": 420,
+      "y": 1840
+    },
+    "reussie_1": {
+      "id": "reussie_1",
+      "title": "El Escena",
+      "location": "COLISSES",
+      "narrator": "Hay una versión de ti que dijo que sí a todo lo que le pedimos.",
+      "text": "Escuchas tu nombre cantado por una multitud enorme.\n\nAlguien te está haciendo quedar bien.\nAlguien ajusta tu chaqueta.\nAlguien te dice que llegas tarde.\n\nUsted entiende, después de unos segundos, que esta es su vida.\n\nQue querías.\nPara eso, cancelaste la cena una noche.\nLuego dos.\nEntonces toda una relación.\n\nEsa persona dijo: \"No puedo seguir después de tu carrera\".\n\nDijiste: \"Lo entiendo\".\n\nMentiste.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Corre a los albergues",
+          "vers": "reussie_loges",
+          "effects": [
+            {
+              "stat": "lucidite",
+              "val": 10
+            }
+          ]
+        },
+        {
+          "text": "Sube a Stage",
+          "vers": "reussie_2",
+          "effects": [
+            {
+              "stat": "attachement",
+              "val": -5
+            }
+          ]
+        }
+      ],
+      "x": 420,
+      "y": 2020
+    },
+    "reussie_2": {
+      "id": "reussie_2",
+      "title": "El público",
+      "location": "SCENE",
+      "narrator": "La multitud puede llenar una habitación y dejar a alguien solo en el medio.",
+      "text": "El público grita.\n\nConoces las canciones casi por reflejo.\n\nTu cuerpo juega el papel perfectamente.\n\nCuando la canción termina, el aplauso pasa por ti sin llegar a ti.\n\nMás tarde, en el vestuario, algunos extraños te felicitan.\n\nSaben tu nombre.\n\nNo tus silencios.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Volver a la estación",
+          "vers": "retour_gare",
+          "effects": [
+            {
+              "stat": "acceptation",
+              "val": 10
+            },
+            {
+              "stat": "lucidite",
+              "val": 10
+            }
+          ]
+        },
+        {
+          "text": "Mantenerse en este éxito",
+          "vers": "fin_vie_reussie",
+          "effects": [
+            {
+              "stat": "regret",
+              "val": -10
+            }
+          ]
+        }
+      ],
+      "x": 420,
+      "y": 2200
+    },
+    "reussie_loges": {
+      "id": "reussie_loges",
+      "title": "The Silent Lodge",
+      "location": "LOGE",
+      "narrator": "La habitación está llena de regalos y flores. Sin embargo parece vacío.",
+      "text": "Te encerraste en el vestuario.\n\nLas paredes están cubiertas de flores.\nTarjetas.\nTrofeos.\n\nEn una mesa, un teléfono muestra cientos de mensajes.\n\nBuscas un nombre particular.\n\nNo está aquí.\n\nNo ha enviado un mensaje en tres años.\nNo desde la cena que cancelaste una última vez.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Volver a la estación",
+          "vers": "retour_gare",
+          "effects": [
+            {
+              "stat": "acceptation",
+              "val": 15
+            }
+          ]
+        },
+        {
+          "text": "Quédate aquí.",
+          "vers": "fin_vie_reussie",
+          "effects": [
+            {
+              "stat": "regret",
+              "val": -5
+            }
+          ]
+        }
+      ],
+      "x": 600,
+      "y": 2200
+    },
+    "fin_vie_reussie": {
+      "id": "fin_vie_reussie",
+      "title": "Final - Vida exitosa",
+      "location": "LOGE",
+      "narrator": "El éxito es una forma de soledad que nadie se queja.",
+      "text": "Quédate.\n\nLas habitaciones están llenas.\nLas luces están encendidas.\nLa gente canta tu nombre.\n\nAprendes a sonreír en el momento adecuado.\nPara responder rápidamente.\nPara agradecer sinceramente.\n\nAlgunas noches, miras al público por una cara que reconoces.\n\nNo es un fan.\nAlguien.\n\nNunca está aquí.\n\nPero la gente aplaude.\nY eso es algo.",
+      "isStart": false,
+      "isEnd": true,
+      "transition": "fade",
+      "choices": [],
+      "x": 420,
+      "y": 2380
+    },
+    "ligne_18_intro": {
+      "id": "ligne_18_intro",
+      "title": "Línea 18 - Niños Descansados",
+      "location": "TRAIN 18",
+      "narrator": "Nunca vuelves a la infancia. Sólo visitamos la memoria que guardamos.",
+      "text": "El tren 18 tiene asientos demasiado pequeños.\n\nLas ventanas están decoradas con pegatinas.\nUna bolsa vieja está colocada por la puerta.\n\nLa voz anunció:\n\nSiguiente parada: el tiempo cuando los sueños aún no estaban avergonzados.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Abajo",
+          "vers": "enfance_1",
+          "effects": [
+            {
+              "stat": "regret",
+              "val": 10
+            }
+          ]
+        }
+      ],
+      "x": 720,
+      "y": 1840
+    },
+    "enfance_1": {
+      "id": "enfance_1",
+      "title": "La Sala",
+      "location": "ANCIENNE MAISON",
+      "narrator": "En algún lugar, hay una versión de ti que nunca dejó de dibujar.",
+      "text": "Estás en tu guardería.\n\nLas paredes son inferiores.\nLos colores más brillantes.\nJuguetes exactamente para ellos.\n\nPero eres un adulto.\n\nEn el espejo, hoy tienes tu cara.\nEn el dormitorio, tienes tus manos antes.\n\nHay una cita en un cuaderno.\nEl año que paró.\n\nNo por un fracaso.\nNo por la crítica.\n\nTenías miedo de que no fuera suficiente.\nAsí que elegiste algo que definitivamente era suficiente.\n\nFue una decisión razonable.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Hablando con el niño",
+          "vers": "enfance_2",
+          "effects": [
+            {
+              "stat": "attachement",
+              "val": 10
+            }
+          ]
+        },
+        {
+          "text": "Mira el dibujo de la estación",
+          "vers": "enfance_dessin",
+          "effects": [
+            {
+              "stat": "mystere",
+              "val": 10
+            }
+          ]
+        }
+      ],
+      "x": 720,
+      "y": 2020
+    },
+    "enfance_2": {
+      "id": "enfance_2",
+      "title": "La pequeña versión",
+      "location": "CHILD ROOM",
+      "narrator": "Los niños hacen las preguntas que pasamos toda la vida evitando.",
+      "text": "El niño te mira en serio.\n\n¿Por qué paraste?\n\n¿Qué estás pidiendo?\n\nMuestra dibujos.\nLibros.\nIdeas de mundos imposibles que tenías pensado explorar.\n\nPodrías decir: \"Estaba asustado\".\nO necesitaba un salario estable.\nO: *Nadie me alentó en el momento adecuado*.\n\nLos tres son verdad.\nNinguno es suficiente.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Prométele que no se olvide",
+          "vers": "retour_gare",
+          "effects": [
+            {
+              "stat": "acceptation",
+              "val": 20
+            },
+            {
+              "stat": "regret",
+              "val": -10
+            }
+          ]
+        },
+        {
+          "text": "Mantenerse con el niño",
+          "vers": "fin_enfance",
+          "effects": [
+            {
+              "stat": "attachement",
+              "val": 15
+            }
+          ]
+        }
+      ],
+      "x": 720,
+      "y": 2200
+    },
+    "enfance_dessin": {
+      "id": "enfance_dessin",
+      "title": "Dibujo",
+      "location": "CHILD ROOM",
+      "narrator": "Algunas cosas estaban allí antes de entenderlas.",
+      "text": "El dibujo muestra una enorme estación.\n\nTodos los trenes muestran el mismo tiempo.\n\n**22:47*\n\nPregúntale al niño cómo lo imaginó.\n\nEstá levantando sus hombros.\n\nNo lo imaginaba. Lo recuerdo.\n\nEl gato gris se dibuja en un rincón de la hoja.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Volver a la estación con el dibujo en mente",
+          "vers": "retour_gare",
+          "effects": [
+            {
+              "stat": "mystere",
+              "val": 15
+            },
+            {
+              "stat": "acceptation",
+              "val": 10
+            }
+          ]
+        },
+        {
+          "text": "Quédate aquí.",
+          "vers": "fin_enfance",
+          "effects": [
+            {
+              "stat": "attachement",
+              "val": 10
+            }
+          ]
+        }
+      ],
+      "x": 900,
+      "y": 2200
+    },
+    "fin_enfance": {
+      "id": "fin_enfance",
+      "title": "End — Los niños descansados",
+      "location": "CHILD ROOM",
+      "narrator": "Algunas de las vidas que abandonamos continúan sin nosotros.",
+      "text": "Quédate.\n\nLos días se vuelven simples.\n\nDibujos.\nPruebe.\nLluvia contra ventanas.\nHistorias antes de dormir.\n\nNadie te pide tener éxito.\nNadie cuenta tus fracasos.\n\nPero a veces, por la noche, te preguntas cómo se habrían convertido estos mundos imposibles.\n\nSi alguien los hubiera atraído hasta el final.",
+      "isStart": false,
+      "isEnd": true,
+      "transition": "fade",
+      "choices": [],
+      "x": 720,
+      "y": 2380
+    },
+    "ligne_27_intro": {
+      "id": "ligne_27_intro",
+      "title": "Línea 27 - El muelle vacío",
+      "location": "TRAIN 27",
+      "narrator": "Algunos destinos no prometen nada. Eso es lo que los hace tentar.",
+      "text": "El tren 27 no tiene pasajeros.\n\nNi siquiera un conductor.\n\nLas puertas se abren sin ruido.\n\nLa voz anunció:\n\nSiguiente parada: el lugar donde nadie puede preguntarte más.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Monte",
+          "vers": "vide_1",
+          "effects": [
+            {
+              "stat": "mystere",
+              "val": 15
+            }
+          ]
+        }
+      ],
+      "x": 1020,
+      "y": 1840
+    },
+    "vide_1": {
+      "id": "vide_1",
+      "title": "La ciudad vacía",
+      "location": "CIUDAD SIN HABITANTES",
+      "narrator": "Hay personas que confunden silencio con libertad.",
+      "text": "La ciudad parece normal.\n\nExcepto que no hay nadie aquí.\n\nSin autos.\nSin voz.\nSin pájaros.\n\nLas tiendas están abiertas.\nLas luces rojas están funcionando.\n\nQuerías eso una vez.\nPor un momento difícil.\nPensaste, si todos desaparecieran.\n\nEstabas avergonzado de ese pensamiento inmediatamente.\n\nPero ella volvió.\nVarias veces.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Disfrutar del silencio",
+          "vers": "vide_2",
+          "effects": [
+            {
+              "stat": "regret",
+              "val": -5
+            },
+            {
+              "stat": "mystere",
+              "val": 5
+            }
+          ]
+        },
+        {
+          "text": "Buscando a alguien",
+          "vers": "vide_silhouette",
+          "effects": [
+            {
+              "stat": "attachement",
+              "val": 10
+            }
+          ]
+        }
+      ],
+      "x": 1020,
+      "y": 2020
+    },
+    "vide_2": {
+      "id": "vide_2",
+      "title": "No hay solicitud",
+      "location": "CIUDAD SIN HABITANTES",
+      "narrator": "Estar solo es dulce cuando sabes que puedes dejar de ser.",
+      "text": "Siéntate en un parque.\n\nEl viento mueve los árboles.\nUna fuente fluye.\nEl mundo no pide nada.\n\nPodrías quedarte aquí.\n\nNo hay decepción.\nNo hay malentendido.\nNo, espera.\n\nPero estás empezando a buscar a alguien a quien mostrar la fuente.\n\nY entiendes algo que ya sabías.\n\nEl silencio es sólo agradable cuando alguien puede romperlo.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Volver a la estación",
+          "vers": "retour_gare",
+          "effects": [
+            {
+              "stat": "acceptation",
+              "val": 15
+            },
+            {
+              "stat": "attachement",
+              "val": 5
+            }
+          ]
+        },
+        {
+          "text": "Quédate en silencio",
+          "vers": "fin_vide",
+          "effects": [
+            {
+              "stat": "regret",
+              "val": -10
+            }
+          ]
+        }
+      ],
+      "x": 1020,
+      "y": 2200
+    },
+    "vide_silhouette": {
+      "id": "vide_silhouette",
+      "title": "La Silhouette",
+      "location": "FUTURO",
+      "narrator": "En mundos vacíos, siempre te encuentras.",
+      "text": "Al final de la avenida, alguien camina.\n\nCorre.\n\nLa silueta se acelera sin dar la vuelta.\n\nCuanto más te acerques, más se parece a ti.\n\nLuego desaparece en la boca del metro.\n\nEn la señal:\n\n** Salida: 22:47**",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Síguela.",
+          "vers": "retour_gare",
+          "effects": [
+            {
+              "stat": "mystere",
+              "val": 15
+            }
+          ]
+        },
+        {
+          "text": "Mantenerse solo",
+          "vers": "fin_vide",
+          "effects": [
+            {
+              "stat": "regret",
+              "val": -5
+            }
+          ]
+        }
+      ],
+      "x": 1200,
+      "y": 2200
+    },
+    "fin_vide": {
+      "id": "fin_vide",
+      "title": "End — The Empty Pier",
+      "location": "CIUDAD SIN HABITANTES",
+      "narrator": "Podemos elegir la ausencia. No elegimos lo que toma.",
+      "text": "Quédate.\n\nLos días ya no tienen nombre.\n\nComes cuando quieras.\nDuermes cuando quieras.\nA veces gritas solo para escuchar algo.\n\nUna mañana, te das cuenta de que olvidaste cómo empezar una frase con alguien más.\n\nNo por falta de palabras.\n\nFalta de práctica.",
+      "isStart": false,
+      "isEnd": true,
+      "transition": "fade",
+      "choices": [],
+      "x": 1020,
+      "y": 2380
+    },
+    "ligne_34_intro": {
+      "id": "ligne_34_intro",
+      "title": "Línea 34 - El tren fatiguo",
+      "location": "TRAIN 34",
+      "narrator": "Algunos trenes no corren en carriles, sino en agotamiento.",
+      "text": "El tren está lleno. Pero nadie habla.\n\nNadie está hablando.\n\nTodo el mundo trabaja: en la computadora, por teléfono, en su cabeza.\n\nLos mismos anillos.\nTrajes rotos.\nSonrisas automáticas.\n\nLa voz anunció:\n\nSiguiente parada: la vida nunca se ralentizó.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Baja con el cansancio",
+          "vers": "fatigues_1",
+          "effects": [
+            {
+              "stat": "lucidite",
+              "val": 10
+            }
+          ]
+        }
+      ],
+      "x": 220,
+      "y": 2600
+    },
+    "fatigues_1": {
+      "id": "fatigues_1",
+      "title": "La ciudad que no duerme",
+      "location": "DISTRITO DE LA OFICINA",
+      "narrator": "Hay personas que han aprendido a confundir el agotamiento con el valor.",
+      "text": "La ciudad brilla toda la noche.\n\nLas oficinas están llenas.\nLos cafés sirven bebidas negras en tazas sin nombre.\nLa gente camina rápido, incluso los que no tienen a dónde ir.\n\nDijiste que al principio era temporal.\n\nEso es lo que todos piensan.\nEso es lo que todos creen varios años después.\n\nRecuerdas una noche que podrías haber rechazado.\nDemasiados proyectos.\nUn favor imposible.\n\nDijiste que sí porque decir que no parecía una forma de debilidad para ti.\n\nEsa noche, alguien te estaba esperando para cenar.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Rechazar a correr",
+          "vers": "fatigues_refus",
+          "effects": [
+            {
+              "stat": "acceptation",
+              "val": 10
+            }
+          ]
+        },
+        {
+          "text": "Síguelo al trabajo",
+          "vers": "fatigues_2",
+          "effects": [
+            {
+              "stat": "regret",
+              "val": -5
+            }
+          ]
+        }
+      ],
+      "x": 220,
+      "y": 2780
+    },
+    "fatigues_2": {
+      "id": "fatigues_2",
+      "title": "Ya tarde para mañana",
+      "location": "TOUR DE VERRE",
+      "narrator": "Cuando todo es urgente, nada realmente es más.",
+      "text": "Los pisos parecen iguales.\n\nReuniones.\nMensajes.\nObjetivos.\nGráficos.\n\nNadie grita.\n\nEs peor.\n\nTodo el mundo sonrió como si el agotamiento fuera una prueba de compromiso.\n\nOlvidaste la fecha de nacimiento de un amigo cercano.\nTe perdiste el cumpleaños de tu madre una vez.\nTe perdiste algo pequeño e irremplazable.\n\nNo recuerdas exactamente qué.\n\nTal vez eso es lo más terrible.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Mantenerse en esta vida productiva",
+          "vers": "fin_fatigues",
+          "effects": [
+            {
+              "stat": "regret",
+              "val": -5
+            }
+          ]
+        },
+        {
+          "text": "Volver a la estación",
+          "vers": "retour_gare",
+          "effects": [
+            {
+              "stat": "acceptation",
+              "val": 15
+            },
+            {
+              "stat": "lucidite",
+              "val": 10
+            }
+          ]
+        }
+      ],
+      "x": 220,
+      "y": 2960
+    },
+    "fatigues_refus": {
+      "id": "fatigues_refus",
+      "title": "Para.",
+      "location": "THREE",
+      "narrator": "En una multitud corriendo, parar parece una rebelión.",
+      "text": "Para.\n\nLa gente te rodea sin verte.\n\nUn hombre te está sacudiendo.\n\nAhora no.\n\nNo sabes si está hablando contigo o hablando con su propia vida.\n\nEl gato gris aparece en un dispensador de boletos.\n\nEstá bostezando.\n\nDetrás de él, un escalador baja a una estación donde todos los relojes muestran 22:47.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Siga al gato a la estación",
+          "vers": "retour_gare",
+          "effects": [
+            {
+              "stat": "acceptation",
+              "val": 20
+            }
+          ]
+        },
+        {
+          "text": "Resumiendo la carrera",
+          "vers": "fatigues_2",
+          "effects": [
+            {
+              "stat": "regret",
+              "val": 5
+            }
+          ]
+        }
+      ],
+      "x": 420,
+      "y": 2960
+    },
+    "fin_fatigues": {
+      "id": "fin_fatigues",
+      "title": "End — The Fatigued Train",
+      "location": "TOUR DE VERRE",
+      "narrator": "Terminamos como las horas que pasamos.",
+      "text": "Quédate.\n\nLos años pasan semanas.\nLas semanas se convierten en listas.\nLas listas se convierten en su manera de respirar.\n\nGanas dinero.\nHaces cosas.\n\nUna noche encontrarás una vieja foto.\nMira dentro.\n\nTe preguntas cuando dejaste de parecerte a esa persona.\n\nNo por un evento.\nDebido a la acumulación de todos los pequeños sís.",
+      "isStart": false,
+      "isEnd": true,
+      "transition": "fade",
+      "choices": [],
+      "x": 220,
+      "y": 3140
+    },
+    "ligne_52_intro": {
+      "id": "ligne_52_intro",
+      "title": "Línea 52 - Vida acelerada",
+      "location": "TRAIN 52",
+      "narrator": "Algunos trenes no van a ninguna otra parte. Se están moviendo demasiado rápido.",
+      "text": "El tren 52 tembla antes de salir.\n\nLos anuncios son rápidos.\nLas puertas están abofeteando.\nEl paisaje ya está rodando mientras sigues en el muelle.\n\nLa voz anunció:\n\nSiguiente parada: vida donde nunca has perdido tiempo.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Monte",
+          "vers": "acceleree_1",
+          "effects": [
+            {
+              "stat": "regret",
+              "val": 5
+            }
+          ]
+        }
+      ],
+      "x": 620,
+      "y": 2600
+    },
+    "acceleree_1": {
+      "id": "acceleree_1",
+      "title": "All Go Faster",
+      "location": "CITY ACCELERATED",
+      "narrator": "Hay personas que han aprendido a amar la velocidad para que no tengan que parar.",
+      "text": "La gente habla muy rápido.\n\nLos cafés se sirven antes de ser ordenados.\nLos niños crecen entre dos luces rojas.\nLas estaciones cambian mientras vemos su teléfono.\n\nConociste a alguien que estaba haciendo todo lentamente.\nEso tomó tiempo para terminar sus oraciones.\nOrdenó su café y lo dejó enfriar.\n\nPensaste que era extraño.\n\nEntonces molesto.\n\nEntonces te diste cuenta, demasiado tarde, de que era una forma de estar presente.\n\nYa has seguido adelante.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Trate de frenar",
+          "vers": "acceleree_lenteur",
+          "effects": [
+            {
+              "stat": "acceptation",
+              "val": 10
+            }
+          ]
+        },
+        {
+          "text": "Mantener el ritmo",
+          "vers": "acceleree_2",
+          "effects": [
+            {
+              "stat": "regret",
+              "val": -5
+            }
+          ]
+        }
+      ],
+      "x": 620,
+      "y": 2780
+    },
+    "acceleree_2": {
+      "id": "acceleree_2",
+      "title": "Vida optimizada",
+      "location": "CITY ACCELERATED",
+      "narrator": "Cada minuto ganado parece reclamar una hora entera más tarde.",
+      "text": "Aprendes a responder más rápido.\nComer más rápido.\nEscogiendo más rápido.\nOlvídalo más rápido.\n\nLos años pasan por fragmentos.\n\nUn cumpleaños.\nUn movimiento.\nUna ruptura.\nUn nuevo comienzo.\n\nTodo va tan rápido que nada tiene tiempo para dejar un rastro.\n\nUna mañana, no sabes en qué ciudad pasaste la Navidad el año pasado.\n\nNo es libertad.\nEs desgaste.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Permanecer en esta vida rápida",
+          "vers": "fin_acceleree",
+          "effects": [
+            {
+              "stat": "regret",
+              "val": -5
+            }
+          ]
+        },
+        {
+          "text": "Volver a la estación",
+          "vers": "retour_gare",
+          "effects": [
+            {
+              "stat": "acceptation",
+              "val": 15
+            },
+            {
+              "stat": "lucidite",
+              "val": 10
+            }
+          ]
+        }
+      ],
+      "x": 620,
+      "y": 2960
+    },
+    "acceleree_lenteur": {
+      "id": "acceleree_lenteur",
+      "title": "Minuto completo",
+      "location": "CENTRAL PLACE",
+      "narrator": "A veces es más aterrador que correr.",
+      "text": "Siéntate en un banco.\n\nNadie lo entiende.\n\nPassersby te mira como si dejaras de respirar.\n\nEspera un minuto.\n\nUna de verdad.\n\nLargo.\n\nImperfecto.\n\nCasi sientes que tu corazón se apodera de una forma humana.\n\nEntonces el gato salta cerca de ti.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Velocidad de reinicio",
+          "vers": "acceleree_2",
+          "effects": [
+            {
+              "stat": "regret",
+              "val": 5
+            }
+          ]
+        },
+        {
+          "text": "Quédate en el banco",
+          "vers": "retour_gare",
+          "effects": [
+            {
+              "stat": "acceptation",
+              "val": 20
+            }
+          ]
+        }
+      ],
+      "x": 820,
+      "y": 2960
+    },
+    "fin_acceleree": {
+      "id": "fin_acceleree",
+      "title": "La vida acelerada",
+      "location": "CITY ACCELERATED",
+      "narrator": "Algunas vidas parecen una buena carrera a ninguna parte.",
+      "text": "Quédate.\n\nTodo está avanzando.\n\nLo haces rápido.\nEstás cambiando rápido.\nAprendes rápido.\nPierdes rápido.\n\nUna mañana, mirando tu reflejo en una ventana del metro, no recuerdas el nombre de tu vecino del apartamento anterior.\n\nO la dirección.\nO el vecindario.\n\nQuedan algunos destinos.\nCasi no queda lugar para ti.",
+      "isStart": false,
+      "isEnd": true,
+      "transition": "fade",
+      "choices": [],
+      "x": 620,
+      "y": 3140
+    },
+    "ligne_74_intro": {
+      "id": "ligne_74_intro",
+      "title": "Línea 74 — Mensajes Nunca enviados",
+      "location": "TRAIN 74",
+      "narrator": "Algunos trenes llevan frases que nunca han encontrado un receptor.",
+      "text": "El tren 74 es tranquilo.\n\nEn los asientos, fuera de los teléfonos.\nSobres cerrados.\nLibros sin nombre.\n\nLa voz anunció:\n\nSiguiente parada: palabras guardadas demasiado tiempo.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Abajo",
+          "vers": "messages_1",
+          "effects": [
+            {
+              "stat": "attachement",
+              "val": 10
+            }
+          ]
+        }
+      ],
+      "x": 1020,
+      "y": 2600
+    },
+    "messages_1": {
+      "id": "messages_1",
+      "title": "La ciudad de los mensajes",
+      "location": "FUTURO DE LETTERS",
+      "narrator": "Las cosas que no hemos dicho siguen existiendo en alguna parte.",
+      "text": "Las calles están cubiertas de mensajes.\n\nSMS nunca enviado.\nCartas engatusadas.\nVocales suspendidos en el aire como burbujas.\n\nAlgunos mensajes son dulces.\nAlgunos son excusas.\nAlgunas son declaraciones que llegaron demasiado tarde.\n\nEstás buscando la tuya.\n\nEncuentra uno que empezaste una noche en la estación.\nAlguien que todavía podría estar aquí.\n\nLo borraste.\n\nPensaste que era demasiado tarde.\nNo cambiaría nada.\n\nQue era mejor no decir nada.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Busca el mensaje que te trajo aquí",
+          "vers": "messages_2",
+          "effects": [
+            {
+              "stat": "regret",
+              "val": 5
+            }
+          ]
+        },
+        {
+          "text": "Lea los mensajes de otros",
+          "vers": "messages_autres",
+          "effects": [
+            {
+              "stat": "lucidite",
+              "val": 10
+            }
+          ]
+        }
+      ],
+      "x": 1020,
+      "y": 2780
+    },
+    "messages_2": {
+      "id": "messages_2",
+      "title": "El mensaje original",
+      "location": "PLACE OF SCREEN",
+      "narrator": "Una frase puede cambiar dependiendo de quién la use.",
+      "text": "Encuentra el mensaje.\n\nFlota sobre una fuente negra.\n\nCreo que deberíamos habernos elegido antes.\n\nEntonces la frase se desarrolla.\n\nVersiones de este mensaje.\nEl que querías enviar.\nEl que tenía miedo de enviar.\nEl que podría haber cambiado algo.\n\nO nada.\n\nNunca lo sabrás.\n\nEse es el peso real de ese mensaje.\nNo es lo que dice.\nLo que no sabe.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Permanecer en este mundo de frases",
+          "vers": "fin_messages",
+          "effects": [
+            {
+              "stat": "attachement",
+              "val": 15
+            }
+          ]
+        },
+        {
+          "text": "Finalmente respuesta",
+          "vers": "messages_repondre",
+          "effects": [
+            {
+              "stat": "acceptation",
+              "val": 15
+            }
+          ]
+        }
+      ],
+      "x": 1020,
+      "y": 2960
+    },
+    "messages_autres": {
+      "id": "messages_autres",
+      "title": "Palabras de otros",
+      "location": "FUTURO DE LETTERS",
+      "narrator": "Crees que estás solo en tus remordimientos hasta que lees lo de los demás.",
+      "text": "Estás leyendo.\n\nMiles de vidas suspendidas en pequeñas oraciones.\n\nEstoy orgulloso de ti.\nVuelve.\nNo te culpo más.\nDebería haber llamado.\nNo sabía que te amaba.\n\nLloras sin darse cuenta.\n\nNo sólo para ti.\n\nPara todo lo que la gente mantiene en sus gargantas esperando tener mañana.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Volver a la estación",
+          "vers": "retour_gare",
+          "effects": [
+            {
+              "stat": "acceptation",
+              "val": 15
+            }
+          ]
+        },
+        {
+          "text": "Regrese a su mensaje",
+          "vers": "messages_2",
+          "effects": [
+            {
+              "stat": "attachement",
+              "val": 10
+            }
+          ]
+        }
+      ],
+      "x": 1220,
+      "y": 2960
+    },
+    "messages_repondre": {
+      "id": "messages_repondre",
+      "title": "Respuesta",
+      "location": "PLACE OF SCREEN",
+      "narrator": "Algunas respuestas no están destinadas a ser enviadas.",
+      "text": "Estás escribiendo.\n\nNo para la otra persona.\n\nEn realidad no.\n\nEscribes por el que estabas en el tren.\n\nPara el que miró hacia abajo en el momento equivocado.\n\nTal vez.\nPero estoy cansado de vivir en las vidas que no he elegido.\n\nEl mensaje desaparece.\n\nEn algún lugar, viene un tren.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Volver a la estación",
+          "vers": "retour_gare",
+          "effects": [
+            {
+              "stat": "acceptation",
+              "val": 25
+            },
+            {
+              "stat": "regret",
+              "val": -15
+            }
+          ]
+        }
+      ],
+      "x": 1020,
+      "y": 3140
+    },
+    "fin_messages": {
+      "id": "fin_messages",
+      "title": "Final — Mensajes Nunca enviados",
+      "location": "CITY of MESSAGEs",
+      "narrator": "Mantener las palabras de otros es una manera de no dejarlos desaparecer.",
+      "text": "Quédate.\n\nLo leíste todo.\n\nDisculpas.\nConfesiones.\nDemasiado tarde ternura.\n\nTe conviertes en guardián de frases que otros no han podido enviar.\n\nA veces alguien entra en la calle buscando su mensaje.\nEnséñale dónde está.\n\nEstá llorando o riéndose.\nRaramente ambos al mismo tiempo.\n\nTú guardas el tuyo para el final.\n\nPor el día que sabes qué hacer con él.",
+      "isStart": false,
+      "isEnd": true,
+      "transition": "fade",
+      "choices": [],
+      "x": 1020,
+      "y": 3320
+    },
+    "ligne_chat_verrouillee": {
+      "id": "ligne_chat_verrouillee",
+      "title": "El gato gris",
+      "location": "HALL CENTRAL",
+      "narrator": "Algunos guías no siguen al principio.",
+      "text": "Sigue al gato.\n\nEstá cruzando el pasillo.\n\nPasa las líneas.\nFrente a los viajeros.\nFrente a las señales.\n\nLuego se detiene frente a un muelle sin número.\n\nUn panel negro sólo muestra:\n\n**Line 88**\n\nEl gato te está mirando.\n\nEntonces el panel se apaga.\n\nAún no.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Volver a las líneas",
+          "vers": "hub_gare",
+          "effects": [
+            {
+              "stat": "mystere",
+              "val": 10
+            }
+          ]
+        }
+      ],
+      "x": 620,
+      "y": 1080
+    },
+    "ligne_88_intro": {
+      "id": "ligne_88_intro",
+      "title": "Línea 88 - El gato",
+      "location": "QUAI sin número",
+      "narrator": "Siempre hay una línea que no aparece en ningún avión.",
+      "text": "El gato pasa por un muelle que nunca habías visto antes.\n\nNo hay tren.\n\nSólo los carriles, la niebla, y un reloj se detuvo a las 22:47.\n\nLuego el gato salta en las pistas.\n\nQuieres gritar.\n\nPero no cae.\n\nEstá caminando sobre un vacío.\n\nBajo sus pies aparecen imágenes:\nla ciudad natal, el escenario, la habitación de los niños, la ciudad vacía, las oficinas, los mensajes.\n\nTodas las líneas.\nCada vida.\nTodas las ausencias.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Atrás",
+          "vers": "hub_gare",
+          "effects": [
+            {
+              "stat": "regret",
+              "val": 5
+            }
+          ]
+        },
+        {
+          "text": "Sigue al gato",
+          "vers": "coeur_gare",
+          "effects": [
+            {
+              "stat": "mystere",
+              "val": 20
+            },
+            {
+              "stat": "acceptation",
+              "val": 10
+            }
+          ]
+        }
+      ],
+      "x": 400,
+      "y": 3520
+    },
+    "coeur_gare": {
+      "id": "coeur_gare",
+      "title": "El corazón de la estación",
+      "location": "BETWEEN THE QUAIS",
+      "narrator": "Este lugar puede no estar aquí para responder. Tal vez sólo para mostrar.",
+      "text": "Caminas detrás del gato.\n\nLos carriles se convierten en un pasillo de imágenes.\n\nTe ves en cada vida.\n\nEl que se quedó.\nEl que lo hizo.\nEl que nunca creció.\nEl que eligió el silencio.\nEl que corrió demasiado rápido.\nEl que vivió entre los mensajes.\n\nNinguno es falso.\n\nNinguno es perfecto.\n\nEl gato para delante de una puerta de tren sin destino.\n\nEn la puerta:\n\n** Última salida: 22:47*",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Encuentra la última salida",
+          "vers": "dernier_depart",
+          "effects": [
+            {
+              "stat": "acceptation",
+              "val": 20
+            }
+          ]
+        },
+        {
+          "text": "Volver a Explorar",
+          "vers": "hub_gare",
+          "effects": [
+            {
+              "stat": "mystere",
+              "val": 5
+            }
+          ]
+        }
+      ],
+      "x": 400,
+      "y": 3700
+    },
+    "dernier_depart": {
+      "id": "dernier_depart",
+      "title": "La última salida",
+      "location": "QUAI FINAL",
+      "narrator": "Un día tienes que elegir sin saber lo que hay en el otro lado.",
+      "text": "El muelle final está vacío.\n\nNo hay destino.\nNo hay panel de línea.\n\nSólo un reloj.\n\n**22:47*\n\nEl tren llega sin ruido.\n\nSus ventanas están iluminadas con luz tibia.\n\nCasi real.\n\nEl gato se sienta frente a las puertas.\n\nEl viajero húmedo aparece en el otro lado del muelle.\n\nPuedes quedarte en una vida. Puedes seguir buscando. O puedes subir arriba.\n\nPregunta a dónde va este tren.\n\nEstá sonriendo.\n\nNadie vuelve con una respuesta clara.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Sube al último tren",
+          "vers": "final_train",
+          "effects": [
+            {
+              "stat": "acceptation",
+              "val": 20
+            }
+          ]
+        },
+        {
+          "text": "Volver a Explorar líneas",
+          "vers": "hub_gare",
+          "effects": [
+            {
+              "stat": "regret",
+              "val": 5
+            }
+          ]
+        },
+        {
+          "text": "Quédate en la estación.",
+          "vers": "fin_gare",
+          "effects": [
+            {
+              "stat": "mystere",
+              "val": 15
+            }
+          ]
+        }
+      ],
+      "x": 400,
+      "y": 3900
+    },
+    "final_train": {
+      "id": "final_train",
+      "title": "Tren sin Destino",
+      "location": "TRAIN FINAL",
+      "narrator": "Algunas puertas abren una respuesta. Otros en una pregunta más suave.",
+      "text": "Vas a subir.\n\nLas puertas están cerrando.\n\nEl tren comienza.\n\nPor un tiempo, sólo hay el sonido de los carriles.\n\nLuego aparecen otros sonidos.\n\nLejos.\n\nUna voz.\nTal vez tu nombre.\n\nUn pitido regular.\nTal vez una máquina.\n\nLlueve por un vaso.\nTal vez la estación.\n\nMiras tu reflejo.\n\nPor un segundo, crees que ves que te duele la cara.\n\nLuego la reflexión vuelve a ser normal.\n\nEl gato se sienta en el asiento opuesto.\n\nSe parpadea lentamente.\n\nEl tren está disminuyendo.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Esperando puertas para abrir",
+          "vers": "fin_ambigue",
+          "effects": [
+            {
+              "stat": "acceptation",
+              "val": 10
+            }
+          ]
+        }
+      ],
+      "x": 400,
+      "y": 4080
+    },
+    "fin_ambigue": {
+      "id": "fin_ambigue",
+      "title": "Final - Puertas abiertas",
+      "location": "??",
+      "narrator": "Algunos fines no dicen si regresamos. Sólo preguntan qué harían si lo hicieran.",
+      "text": "Alguien dice tu nombre.\n\nO tal vez puedas imaginarlo.\n\nPuertas abiertas.\n\nUna luz blanca entra en el coche.\n\nEstás dando un paso.\n\nEn tu mano, tu teléfono vibra una última vez.\n\nEn pantalla:\n\nEs 22:48.\n\nEstás buscando.\n\nY sigues adelante.",
+      "isStart": false,
+      "isEnd": true,
+      "transition": "fade",
+      "choices": [],
+      "x": 400,
+      "y": 4260
+    },
+    "fin_gare": {
+      "id": "fin_gare",
+      "title": "Fin – Permanecer a las 22:47",
+      "location": "GREECE GARE",
+      "narrator": "No elegir es también una forma de vivir, pero la estación no lo llama así.",
+      "text": "Quédate.\n\nLos trenes siguen saliendo.\n\nEl viajero húmedo desaparece un día.\nEntonces tal vez vuelva bajo otro abrigo.\n\nAprendes las líneas.\nLos anuncios.\nNewcomers.\n\nLe explicas a otros que pueden buscar la buena vida.\n\nSabes que ahora no existe.\n\nPero sigues mirando las señales.\n\nPorque mientras todos los trenes salgan a las 22:47, ninguna posibilidad se pierde.\n\nEso es reconfortante.\n\nEs una prisión.\n\nAmbos a la vez.",
+      "isStart": false,
+      "isEnd": true,
+      "transition": "fade",
+      "choices": [],
+      "x": 620,
+      "y": 4080
+    }
+  },
+  "lang": "es"
+}
