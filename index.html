@@ -1601,30 +1601,26 @@ function submitPin() {
   const input  = document.getElementById('pin-input').value.trim();
   const err    = document.getElementById('pin-error');
 
-  if (input.length < 4) {
-    err.textContent = '4 chiffres requis'; err.style.display = 'block'; return;
-  }
-
-  if (_pinMode === 'verify') {
-    if (_sha256sync(input) === getStoredPin()) {
-      document.getElementById('pin-overlay').style.display = 'none';
-      document.getElementById('opt-kids').checked = false;
-      saveOptions();
-      if (typeof renderGameList === 'function') renderGameList();
-    } else {
-      err.textContent = 'Code incorrect'; err.style.display = 'block';
-      document.getElementById('pin-input').value = '';
+  // Validation selon le mode
+  if (_pinMode === 'calc_verify') {
+    if (!input) {
+      err.textContent = 'Entre ta réponse'; err.style.display = 'block'; return;
     }
-  } else if (_pinMode === 'calc_verify') {
     if (parseInt(input) === _pinCalcAnswer) {
-      // Calcul correct → passer au nouveau PIN
       document.getElementById('pin-input').type = 'password';
       openPinPopup('change_new');
     } else {
       err.textContent = 'Réponse incorrecte'; err.style.display = 'block';
       document.getElementById('pin-input').value = '';
     }
-  } else if (_pinMode === 'change_old') {
+    return;
+  }
+
+  if (input.length < 4) {
+    err.textContent = '4 chiffres requis'; err.style.display = 'block'; return;
+  }
+
+  if (_pinMode === 'verify') {
     if (_sha256sync(input) === getStoredPin()) {
       openPinPopup('change_new');
     } else {
