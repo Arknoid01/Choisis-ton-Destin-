@@ -1615,6 +1615,15 @@ function submitPin() {
       err.textContent = 'Code incorrect'; err.style.display = 'block';
       document.getElementById('pin-input').value = '';
     }
+  } else if (_pinMode === 'calc_verify') {
+    if (parseInt(input) === _pinCalcAnswer) {
+      // Calcul correct → passer au nouveau PIN
+      document.getElementById('pin-input').type = 'password';
+      openPinPopup('change_new');
+    } else {
+      err.textContent = 'Réponse incorrecte'; err.style.display = 'block';
+      document.getElementById('pin-input').value = '';
+    }
   } else if (_pinMode === 'change_old') {
     if (_sha256sync(input) === getStoredPin()) {
       openPinPopup('change_new');
@@ -1636,7 +1645,35 @@ function submitPin() {
   }
 }
 
-function showChangePinMode() { openPinPopup('change_old'); }
+let _pinCalcAnswer = 0;
+
+function generateCalcQuestion() {
+  // Génère une question de calcul simple mais pas triviale
+  const types = [
+    () => { const a = 10+Math.floor(Math.random()*80), b = 10+Math.floor(Math.random()*80); return {q:`${a} + ${b}`, a:a+b}; },
+    () => { const a = 20+Math.floor(Math.random()*70), b = 10+Math.floor(Math.random()*20); return {q:`${a+b} - ${b}`, a:a}; },
+    () => { const a = 3+Math.floor(Math.random()*9),   b = 3+Math.floor(Math.random()*9);   return {q:`${a} × ${b}`, a:a*b}; },
+  ];
+  const type = types[Math.floor(Math.random()*types.length)]();
+  return type;
+}
+
+function showChangePinMode() {
+  // Générer une question de calcul au lieu de demander l'ancien PIN
+  const calc = generateCalcQuestion();
+  _pinCalcAnswer = calc.a;
+  _pinMode = 'calc_verify';
+
+  const overlay = document.getElementById('pin-overlay');
+  overlay.style.display = 'flex';
+  document.getElementById('pin-input').value = '';
+  document.getElementById('pin-input').type = 'number';
+  document.getElementById('pin-error').style.display = 'none';
+  document.getElementById('pin-title').textContent = 'Vérification Parentale';
+  document.getElementById('pin-question').textContent =
+    `Pour changer le code, réponds : combien font ${calc.q} ?`;
+  setTimeout(() => document.getElementById('pin-input').focus(), 100);
+}
 
 // ── SYSTÈME DE CODES CRÉATEUR ───────────────────────────────
 // Généré par generate_codes.py — remplacer ce bloc après chaque génération
