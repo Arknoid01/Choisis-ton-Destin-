@@ -1,0 +1,1801 @@
+{
+  "name": "The Regrets station",
+  "kids": false,
+  "askPlayerName": true,
+  "pack": "free",
+  "stats": [
+    {
+      "id": "lucidite",
+      "label": "Lucidity",
+      "start": 30,
+      "max": 100,
+      "color": "#8ecae6"
+    },
+    {
+      "id": "regret",
+      "label": "Regret",
+      "start": 50,
+      "max": 100,
+      "color": "#ef476f"
+    },
+    {
+      "id": "acceptation",
+      "label": "Acceptance",
+      "start": 10,
+      "max": 100,
+      "color": "#06d6a0"
+    },
+    {
+      "id": "attachement",
+      "label": "Attachment",
+      "start": 40,
+      "max": 100,
+      "color": "#ffd166"
+    },
+    {
+      "id": "mystere",
+      "label": "Mystery",
+      "start": 20,
+      "max": 100,
+      "color": "#c77dff"
+    }
+  ],
+  "theme": {
+    "bg": "#070912",
+    "bg2": "#101525",
+    "bg3": "#182033",
+    "bg4": "#242d44",
+    "border": "#39445e",
+    "accent": "#8ecae6",
+    "accent2": "#ffd166",
+    "accent3": "#ef476f",
+    "text": "#f5f0e8",
+    "text2": "#b9b2a6",
+    "text3": "#7d776f"
+  },
+  "scenes": {
+    "intro_train": {
+      "id": "intro_train",
+      "title": "The 22:47 Train",
+      "location": "BALNIEU TRAIN",
+      "narrator": "Some notifications come at the wrong time. Or maybe the right one.",
+      "text": "The train is almost full.\n\nWeary faces.\nWet coats.\nHeadphones screwed in the ears.\n\nOutside, the rain turns the windows into trembling mirrors.\n\nYou look at your reflection without really seeing it.\n\nThe speaker announces your stop in a voice too soft.\n\nThen your phone vibrates.\n\nMessage.\n\nOne.\n\nBut your stomach gets tight before you even open it.",
+      "isStart": true,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Ignore message",
+          "vers": "ignorer_message",
+          "effects": [
+            {
+              "stat": "lucidite",
+              "val": 5
+            }
+          ]
+        },
+        {
+          "text": "Read message",
+          "vers": "le_message",
+          "effects": [
+            {
+              "stat": "regret",
+              "val": 5
+            }
+          ]
+        }
+      ],
+      "x": 400,
+      "y": 0
+    },
+    "ignorer_message": {
+      "id": "ignorer_message",
+      "title": "Do not read",
+      "location": "BALNIEU TRAIN",
+      "narrator": "We can repel a message. Not always what it contains.",
+      "text": "You put the phone in front of your leg.\n\nFor three seconds, you're trying to be someone who doesn't look.\n\nYou thought it was over.\nThat it was better like that.\n\nThen he's still vibrating.\n\nSame sender.\n\nSame silence around you.\n\nYour stop is coming.\n\nYou know you should get up.\n\nBut your thumb already lit up the screen.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Read finally",
+          "vers": "le_message",
+          "effects": [
+            {
+              "stat": "regret",
+              "val": 3
+            },
+            {
+              "stat": "lucidite",
+              "val": 3
+            }
+          ]
+        }
+      ],
+      "x": 620,
+      "y": 140
+    },
+    "le_message": {
+      "id": "le_message",
+      "title": "The Message",
+      "location": "BALNIEU TRAIN",
+      "narrator": "You didn't think a simple message could turn you around so much.",
+      "text": "The message is short.\n\n> Before I left, I wanted to tell you...\n\nYou read the sentence again.\n\nOnce.\n\nTwice.\n\nYou left three weeks ago.\nOr maybe you left.\nYou don't really know who decided.\n\nThe world around you becomes more blurred.\n\nYou don't know what to feel: anger, sadness, relief, panic.\n\nThe train is slowing down.\n\nDoors open.\n\nA voice announces a station.\n\nNot yours.\n\nYou're looking up.\n\nYour stop is over.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Hurry down",
+          "vers": "descente_precipitee",
+          "effects": [
+            {
+              "stat": "regret",
+              "val": 10
+            }
+          ]
+        },
+        {
+          "text": "Stay on the train, frozen",
+          "vers": "train_rate",
+          "effects": [
+            {
+              "stat": "lucidite",
+              "val": 5
+            },
+            {
+              "stat": "regret",
+              "val": 5
+            }
+          ]
+        }
+      ],
+      "x": 400,
+      "y": 200
+    },
+    "train_rate": {
+      "id": "train_rate",
+      "title": "Too bad.",
+      "location": "BALNIEU TRAIN",
+      "narrator": "Missing a stop is sometimes a general repetition.",
+      "text": "Doors are starting to close.\n\nYou're not moving.\n\nThen your body decides for you.\n\nYou get up too fast.\n\nSomeone's laughing.\n\nYour bag is hitting a seat.\n\nThe door ringing speeds up your heart.\n\nYou're going to the last minute.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Jump to the dock",
+          "vers": "descente_precipitee",
+          "effects": [
+            {
+              "stat": "regret",
+              "val": 5
+            }
+          ]
+        }
+      ],
+      "x": 220,
+      "y": 360,
+      "timer": {
+        "duration": 6,
+        "auto": "descente_precipitee"
+      }
+    },
+    "descente_precipitee": {
+      "id": "descente_precipitee",
+      "title": "The Pier",
+      "location": "SAINT-ORIAL GAR",
+      "narrator": "There are seconds that contain all the weight of a life.",
+      "text": "You're coming down too fast.\n\nThe dock is wet.\n\nThe crowd is pushing you in every direction.\n\nYour phone almost slips out of your hand.\n\nYou want to catch him.\n\nSomeone's shaking you.\n\nYour foot is looking for the edge.\n\nDon't find him.\n\nA scream.\n\nMetal noise.\n\nA light.\n\nThen nothing.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "flash",
+      "choices": [
+        {
+          "text": "Open your eyes",
+          "vers": "sur_les_rails",
+          "effects": [
+            {
+              "stat": "mystere",
+              "val": 15
+            }
+          ]
+        }
+      ],
+      "x": 400,
+      "y": 420
+    },
+    "sur_les_rails": {
+      "id": "sur_les_rails",
+      "title": "Always on the Rails",
+      "location": "????",
+      "narrator": "Silence after a fall never resembles silence before.",
+      "text": "You open your eyes.\n\nYou're still on track.\n\nBut the station is not the same.\n\nNo train.\nNo crowd.\nNo screams.\n\nThe neons illuminate the dock with cold light.\nYou hear the rain in the distance.\n\nYou're getting up slowly.\n\nOn all signs, the same time:\n\n**22:47* *\n\nPier 1. Pier 4. Pier 18. Pier 52.\n\nAlways:\n\n**22:47* *\n\nA gray cat crosses the tracks in front of you.\n\nHe stops.\n\nLook at you.\n\nThen climb quietly on the dock.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Follow the cat",
+          "vers": "premier_quai",
+          "effects": [
+            {
+              "stat": "mystere",
+              "val": 10
+            }
+          ]
+        },
+        {
+          "text": "Call for help",
+          "vers": "appel_gare",
+          "effects": [
+            {
+              "stat": "regret",
+              "val": 5
+            }
+          ]
+        }
+      ],
+      "x": 400,
+      "y": 620
+    },
+    "appel_gare": {
+      "id": "appel_gare",
+      "title": "No one answers",
+      "location": "GREECE GARE",
+      "narrator": "In some places, shouting is mainly used to hear his own fear.",
+      "text": "You call.\n\nYour voice is lost under the windows.\n\nNobody answers.\n\nThen the loudspeaker sizzles:\n\n> Travellers arriving by accident are asked to reach their inner wharf.\n\nYou don't understand.\n\nThe mial cat.\n\nOr maybe the sound comes from the speakers.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Join the dock",
+          "vers": "premier_quai",
+          "effects": [
+            {
+              "stat": "mystere",
+              "val": 5
+            }
+          ]
+        }
+      ],
+      "x": 620,
+      "y": 780
+    },
+    "premier_quai": {
+      "id": "premier_quai",
+      "title": "The Regrets station",
+      "location": "HALL CENTRAL",
+      "narrator": "All trains depart at the same time. All promise a different direction.",
+      "text": "The central hall is huge.\n\nLines extend as far as you can see.\n\nEach panel displays:\n\n**Departure: 22:47**\n\nBut destinations don't look like any city.\n\nLine 03 — Life Rested\nLine 11 — Successful Life\nLine 18 — Children Rested\nLine 27 — The Empty Pier\nLine 34 — The Fatigued Train\nLine 52 — Accelerated Life\nLine 74 — Messages Never Sent\n\nA woman sitting on a bench looks up at you.\n\n**\"First time? *",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Follow the cat directly",
+          "vers": "ligne_chat_verrouillee",
+          "effects": [
+            {
+              "stat": "mystere",
+              "val": 10
+            }
+          ]
+        },
+        {
+          "text": "Choose a line",
+          "vers": "hub_gare",
+          "effects": [
+            {
+              "stat": "acceptation",
+              "val": 5
+            }
+          ]
+        },
+        {
+          "text": "Talk to the traveller",
+          "vers": "voyageuse",
+          "effects": [
+            {
+              "stat": "lucidite",
+              "val": 5
+            }
+          ]
+        }
+      ],
+      "x": 400,
+      "y": 900
+    },
+    "voyageuse": {
+      "id": "voyageuse",
+      "title": "The Traveler Trempee",
+      "location": "HALL CENTRAL",
+      "narrator": "Some have been waiting so long that they have forgotten what they hoped for.",
+      "text": "The woman looks at the signs.\n\n**\"Here everyone is looking for the right train. *\n\nYou ask where they're going.\n\nShe laughs slowly.\n\n**\"Where we could have been happy. That's what we think at first. *\n\nShe shows you your phone.\n\nThe screen is black.\n\nThen it lights itself.\n\nThe message is still there.\n\nBut one line has changed:\n\n> I think we should have chosen ourselves sooner.\n> Or maybe learn to choose yourself.\n\nThe traveller whispers:\n\n**\"The station likes to correct sentences. *",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Ask how to leave",
+          "vers": "comment_partir",
+          "effects": [
+            {
+              "stat": "lucidite",
+              "val": 10
+            }
+          ]
+        },
+        {
+          "text": "Go to lines",
+          "vers": "hub_gare",
+          "effects": [
+            {
+              "stat": "mystere",
+              "val": 5
+            }
+          ]
+        }
+      ],
+      "x": 220,
+      "y": 1080
+    },
+    "comment_partir": {
+      "id": "comment_partir",
+      "title": "How to Leave",
+      "location": "HALL CENTRAL",
+      "narrator": "The simplest question is often the one that scares the most.",
+      "text": "**\"How do I get out of here? *\n\nThe traveller is lifting her shoulders.\n\n**\"You can always get on a train. The problem is if we really want to get down. *\n\nShe's watching the cat.\n\n**\"Some people stay in a life. Others come back here again and again. Others are waiting for the last departure. *\n\n**\"What about you? *\n\nShe's smiling.\n\n**\"I wait to stop waiting. *",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Explore Lines",
+          "vers": "hub_gare",
+          "effects": [
+            {
+              "stat": "acceptation",
+              "val": 5
+            }
+          ]
+        }
+      ],
+      "x": 220,
+      "y": 1260
+    },
+    "hub_gare": {
+      "id": "hub_gare",
+      "title": "The Lines of 22:47",
+      "location": "HALL CENTRAL",
+      "narrator": "Each destination looks like an answer. None is really one.",
+      "text": "The panels change slowly.\n\nThe same lines come back.\n\nThe cat sits in front of you like he's waiting for you.\n\nOn your phone, the message remains open.\n\nThere's no network.\n\nYet the time always indicates:\n\n**22:47* *",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Line 27 — The Empty Pier",
+          "vers": "ligne_27_intro",
+          "effects": [
+            {
+              "stat": "mystere",
+              "val": 10
+            }
+          ]
+        },
+        {
+          "text": "Follow the cat",
+          "vers": "ligne_88_intro",
+          "effects": [
+            {
+              "stat": "mystere",
+              "val": 15
+            }
+          ],
+          "requires": {
+            "stat": "acceptation",
+            "min": 45
+          }
+        },
+        {
+          "text": "Other lines",
+          "vers": "hub_gare_2",
+          "effects": [
+            {
+              "stat": "lucidite",
+              "val": 3
+            }
+          ]
+        },
+        {
+          "text": "Line 18 — Children Rested",
+          "vers": "ligne_18_intro",
+          "effects": [
+            {
+              "stat": "regret",
+              "val": 10
+            }
+          ]
+        },
+        {
+          "text": "Line 11 — Successful Life",
+          "vers": "ligne_11_intro",
+          "effects": [
+            {
+              "stat": "attachement",
+              "val": -5
+            }
+          ]
+        },
+        {
+          "text": "Line 03 — Life Rested",
+          "vers": "ligne_03_intro",
+          "effects": [
+            {
+              "stat": "regret",
+              "val": 5
+            }
+          ]
+        }
+      ],
+      "x": 400,
+      "y": 1440
+    },
+    "hub_gare_2": {
+      "id": "hub_gare_2",
+      "title": "Other Lines",
+      "location": "HALL CENTRAL",
+      "narrator": "The more you explore, the more the destinations seem to know you.",
+      "text": "The panel rotates in a mechanical noise.\n\nNew destinations are emerging.\n\nLine 34 — The Fatigued Train\nLine 52 — Accelerated Life\nLine 74 — Messages Never Sent\n\nEverything goes at 22:47.\n\nAlways.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Find the last departure",
+          "vers": "dernier_depart",
+          "effects": [
+            {
+              "stat": "acceptation",
+              "val": 10
+            }
+          ],
+          "requires": {
+            "stat": "acceptation",
+            "min": 65
+          }
+        },
+        {
+          "text": "Back to the front lines",
+          "vers": "hub_gare",
+          "effects": []
+        },
+        {
+          "text": "Line 74 — Messages Never Sent",
+          "vers": "ligne_74_intro",
+          "effects": [
+            {
+              "stat": "attachement",
+              "val": 5
+            }
+          ]
+        },
+        {
+          "text": "Line 52 — Accelerated Life",
+          "vers": "ligne_52_intro",
+          "effects": [
+            {
+              "stat": "regret",
+              "val": 5
+            }
+          ]
+        },
+        {
+          "text": "Line 34 — The Fatigued Train",
+          "vers": "ligne_34_intro",
+          "effects": [
+            {
+              "stat": "lucidite",
+              "val": 5
+            }
+          ]
+        }
+      ],
+      "x": 620,
+      "y": 1440
+    },
+    "retour_gare": {
+      "id": "retour_gare",
+      "title": "Return to 22:47",
+      "location": "HALL CENTRAL",
+      "narrator": "",
+      "text": "The train is slowing down.\n\nDoors open.\n\nYou're coming down.\n\nThe central hall is here.\n\nJust like you left it.\n\nThe cat sleeps on an information panel.\n\nThe time has not moved.\n\n**22:47* *",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Choose another line",
+          "vers": "hub_gare",
+          "effects": [
+            {
+              "stat": "acceptation",
+              "val": 5
+            }
+          ]
+        },
+        {
+          "text": "Watch your phone",
+          "vers": "telephone_change",
+          "effects": [
+            {
+              "stat": "lucidite",
+              "val": 5
+            }
+          ]
+        }
+      ],
+      "x": 400,
+      "y": 1640
+    },
+    "telephone_change": {
+      "id": "telephone_change",
+      "title": "The Phone",
+      "location": "HALL CENTRAL",
+      "narrator": "Some messages never really end.",
+      "text": "Your phone's on.\n\nThe message has been completed.\n\nThere was a suite.\n\n> Before I left, I wanted to tell you...\n> that it had nothing to do with you.\n> Maybe I needed to disappear a little.\n> Not from you. Just myself.\n> I don't know if you understand.\n\nYou read the words one by one.\n\nA little bit. *\n\nWhat that meant.\nWhat that might still mean.\n\nYou don't know.\n\nYou might never know if it was an end.\nOr just a break.\n\nThe cat opens an eye.\n\nThen the board of the lines sizzles.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Return to lines",
+          "vers": "hub_gare",
+          "effects": [
+            {
+              "stat": "lucidite",
+              "val": 5
+            },
+            {
+              "stat": "acceptation",
+              "val": 5
+            }
+          ]
+        }
+      ],
+      "x": 620,
+      "y": 1640
+    },
+    "ligne_03_intro": {
+      "id": "ligne_03_intro",
+      "title": "Line 03 — Life Rested",
+      "location": "TRAIN 03",
+      "narrator": "Some trains do not go elsewhere, but to the place we have never left.",
+      "text": "Train 03 smells of dust and old heating.\n\nThrough the window, you see your hometown.\n\nYounger.\nQuieter.\nGoldier.\n\nThe voice announced:\n\n> Next stop: the life you would have had while remaining.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Down",
+          "vers": "vie_restee_1",
+          "effects": [
+            {
+              "stat": "regret",
+              "val": 5
+            }
+          ]
+        }
+      ],
+      "x": 120,
+      "y": 1840
+    },
+    "vie_restee_1": {
+      "id": "vie_restee_1",
+      "title": "The Natale City",
+      "location": "NATAL CITY",
+      "narrator": "There are cities we can't leave. Or that we never really bother to leave.",
+      "text": "The main street has hardly changed.\n\nThe bakery is still open.\nOld movies show movies you forgot.\nSomeone calls you by your first name from a terrace.\n\nYou had an opportunity to leave.\nA long time ago.\nA job in another city.\nA letter of acceptance you never sent.\n\nYou said next time.\n\nThere was no next time.\n\nAnd it's not a tragedy.\nThat's just what happened.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Walking alone in the city",
+          "vers": "vie_restee_seule",
+          "effects": [
+            {
+              "stat": "lucidite",
+              "val": 5
+            }
+          ]
+        },
+        {
+          "text": "Go to coffee with old friends",
+          "vers": "vie_restee_2",
+          "effects": [
+            {
+              "stat": "attachement",
+              "val": 10
+            }
+          ]
+        }
+      ],
+      "x": 120,
+      "y": 2020
+    },
+    "vie_restee_2": {
+      "id": "vie_restee_2",
+      "title": "Like all Thursdays",
+      "location": "COFFEE OF THE CENTRE",
+      "narrator": "Habits can look like love. Or a very comfortable cage.",
+      "text": "The coffee is hot.\n\nConversations are easy.\n\nWe're talking about time, neighbors, work on the square, people who left.\n\nWhen we mention those who left, there's a one-second silence.\nNobody's commenting on it.\nEveryone noticed.\n\nYou look at your cup.\n\nYou could have been one of those people we're talking about with this silence.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Staying in this life",
+          "vers": "fin_vie_restee",
+          "effects": [
+            {
+              "stat": "attachement",
+              "val": 15
+            }
+          ]
+        },
+        {
+          "text": "Return to the station",
+          "vers": "retour_gare",
+          "effects": [
+            {
+              "stat": "acceptation",
+              "val": 10
+            },
+            {
+              "stat": "regret",
+              "val": -5
+            }
+          ]
+        }
+      ],
+      "x": 120,
+      "y": 2200
+    },
+    "vie_restee_seule": {
+      "id": "vie_restee_seule",
+      "title": "Too Known Streets",
+      "location": "NATAL CITY",
+      "narrator": "You can get lost in a place you know too well.",
+      "text": "You walk alone.\n\nEvery corner, a souvenir.\n\nThe first lie.\nThe first shame.\nThe first desire to leave.\n\nThis city didn't destroy you.\n\nShe kept you.\n\nIt's different.\n\nOn the platform of the small station, a train passes without stopping.\n\nYou don't know if you regret it or want it.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Staying Still",
+          "vers": "fin_vie_restee",
+          "effects": [
+            {
+              "stat": "attachement",
+              "val": 10
+            }
+          ]
+        },
+        {
+          "text": "Return to the Gare des Regrets",
+          "vers": "retour_gare",
+          "effects": [
+            {
+              "stat": "acceptation",
+              "val": 15
+            }
+          ]
+        }
+      ],
+      "x": 300,
+      "y": 2200
+    },
+    "fin_vie_restee": {
+      "id": "fin_vie_restee",
+      "title": "End — Life Rested",
+      "location": "NATAL CITY",
+      "narrator": "Some regrets don't make any noise.",
+      "text": "You stay.\n\nTime continues to pass.\n\nThursday coffee continues.\nThe streets keep their names.\nFaces age at a reasonable speed.\n\nOne night, you find the acceptance letter.\nNever sent.\nThe ink is still legible.\n\nYou put it in a drawer.\n\nNot to remember.\nTo stop looking for her.",
+      "isStart": false,
+      "isEnd": true,
+      "transition": "fade",
+      "choices": [],
+      "x": 120,
+      "y": 2380
+    },
+    "ligne_11_intro": {
+      "id": "ligne_11_intro",
+      "title": "Line 11 — Successful Life",
+      "location": "TRAIN 11",
+      "narrator": "Some trains sell lights before talking about the price.",
+      "text": "Train 11 is modern, brilliant, almost silent.\n\nIn the glass, your reflection changes.\n\nBetter clothes.\nMore confident look.\nPhone filled with notifications.\n\nThe voice announced:\n\n> Next stop: the life you have succeeded in.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Get down in the light",
+          "vers": "reussie_1",
+          "effects": [
+            {
+              "stat": "regret",
+              "val": -5
+            },
+            {
+              "stat": "mystere",
+              "val": 5
+            }
+          ]
+        }
+      ],
+      "x": 420,
+      "y": 1840
+    },
+    "reussie_1": {
+      "id": "reussie_1",
+      "title": "The Scene",
+      "location": "COLISSES",
+      "narrator": "There's a version of you that said yes to everything we asked her.",
+      "text": "You hear your name chanted by a huge crowd.\n\nSomeone's making you look good.\nSomeone adjusts your jacket.\nSomeone tells you you're late.\n\nYou understand, after a few seconds, that this is your life.\n\nThat you wanted to.\nThat for that, you canceled dinner one night.\nThen two.\nThen a whole relationship.\n\nThat person said, \"I can't keep going after your career.\" *\n\nYou said, \"I understand.\" *\n\nYou lied.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Run to the lodges",
+          "vers": "reussie_loges",
+          "effects": [
+            {
+              "stat": "lucidite",
+              "val": 10
+            }
+          ]
+        },
+        {
+          "text": "Get on Stage",
+          "vers": "reussie_2",
+          "effects": [
+            {
+              "stat": "attachement",
+              "val": -5
+            }
+          ]
+        }
+      ],
+      "x": 420,
+      "y": 2020
+    },
+    "reussie_2": {
+      "id": "reussie_2",
+      "title": "The public",
+      "location": "SCENE",
+      "narrator": "The crowd can fill a room and leave someone alone in the middle.",
+      "text": "The audience is screaming.\n\nYou know the songs almost by reflex.\n\nYour body plays the role perfectly.\n\nWhen the song ends, the applause goes through you without really reaching you.\n\nLater, in the dressing room, some strangers congratulate you.\n\nThey know your name.\n\nNot your silences.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Return to the station",
+          "vers": "retour_gare",
+          "effects": [
+            {
+              "stat": "acceptation",
+              "val": 10
+            },
+            {
+              "stat": "lucidite",
+              "val": 10
+            }
+          ]
+        },
+        {
+          "text": "Staying in this success",
+          "vers": "fin_vie_reussie",
+          "effects": [
+            {
+              "stat": "regret",
+              "val": -10
+            }
+          ]
+        }
+      ],
+      "x": 420,
+      "y": 2200
+    },
+    "reussie_loges": {
+      "id": "reussie_loges",
+      "title": "The Silent Lodge",
+      "location": "LOGE",
+      "narrator": "The room is full of gifts and flowers. Yet it seems empty.",
+      "text": "You locked yourself in the dressing room.\n\nThe walls are covered with flowers.\nCards.\nTrophies.\n\nOn a table, a phone displays hundreds of messages.\n\nYou're looking for a particular name.\n\nHe's not here.\n\nHe hasn't sent a message in three years.\nNot since that dinner you canceled one last time.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Return to the station",
+          "vers": "retour_gare",
+          "effects": [
+            {
+              "stat": "acceptation",
+              "val": 15
+            }
+          ]
+        },
+        {
+          "text": "Stay here",
+          "vers": "fin_vie_reussie",
+          "effects": [
+            {
+              "stat": "regret",
+              "val": -5
+            }
+          ]
+        }
+      ],
+      "x": 600,
+      "y": 2200
+    },
+    "fin_vie_reussie": {
+      "id": "fin_vie_reussie",
+      "title": "End — Successful Life",
+      "location": "LOGE",
+      "narrator": "Success is a form of loneliness that no one complains.",
+      "text": "You stay.\n\nThe rooms are filling up.\nThe lights are on.\nPeople sing your name.\n\nYou learn to smile at the right time.\nTo respond quickly.\nTo thank sincerely.\n\nSome nights, you look in the audience for a face you recognize.\n\nNot a fan.\nSomeone.\n\nHe's never here.\n\nBut people applaud.\nAnd that's something.",
+      "isStart": false,
+      "isEnd": true,
+      "transition": "fade",
+      "choices": [],
+      "x": 420,
+      "y": 2380
+    },
+    "ligne_18_intro": {
+      "id": "ligne_18_intro",
+      "title": "Line 18 — Children Rested",
+      "location": "TRAIN 18",
+      "narrator": "You never really go back to childhood. We only visit the memory we kept.",
+      "text": "Train 18 has seats too small.\n\nThe windows are decorated with stickers.\nAn old bag is laid by the door.\n\nThe voice announced:\n\n> Next stop: the time when dreams were not yet ashamed.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Down",
+          "vers": "enfance_1",
+          "effects": [
+            {
+              "stat": "regret",
+              "val": 10
+            }
+          ]
+        }
+      ],
+      "x": 720,
+      "y": 1840
+    },
+    "enfance_1": {
+      "id": "enfance_1",
+      "title": "The Chamber",
+      "location": "ANCIENNE MAISON",
+      "narrator": "Somewhere, there's a version of you that never stopped drawing.",
+      "text": "You're in your nursery.\n\nThe walls are lower.\nThe brighter colors.\nToys exactly for them.\n\nBut you're an adult.\n\nIn the mirror, you have your face today.\nIn the bedroom, you have your hands before.\n\nThere's a date on a notebook.\nThe year you stopped.\n\nNot because of a failure.\nNot because of criticism.\n\nYou were afraid that wasn't enough.\nSo you chose something that was definitely enough.\n\nIt was a reasonable decision.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Talking to the child",
+          "vers": "enfance_2",
+          "effects": [
+            {
+              "stat": "attachement",
+              "val": 10
+            }
+          ]
+        },
+        {
+          "text": "Watch the station drawing",
+          "vers": "enfance_dessin",
+          "effects": [
+            {
+              "stat": "mystere",
+              "val": 10
+            }
+          ]
+        }
+      ],
+      "x": 720,
+      "y": 2020
+    },
+    "enfance_2": {
+      "id": "enfance_2",
+      "title": "The Little Version",
+      "location": "CHILD ROOM",
+      "narrator": "Children ask the questions we spend a lifetime avoiding.",
+      "text": "The child looks at you seriously.\n\n**\"Why did you stop? *\n\nWhat are you asking?\n\nShe shows drawings.\nBooks.\nIdeas of impossible worlds that you had intended to explore.\n\nYou could say, \"I was scared.\"\nOr I needed a stable salary.\nOr: *nobody encouraged me at the right time*.\n\nAll three are true.\nNone is enough.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Promise him not to forget",
+          "vers": "retour_gare",
+          "effects": [
+            {
+              "stat": "acceptation",
+              "val": 20
+            },
+            {
+              "stat": "regret",
+              "val": -10
+            }
+          ]
+        },
+        {
+          "text": "Staying with the child",
+          "vers": "fin_enfance",
+          "effects": [
+            {
+              "stat": "attachement",
+              "val": 15
+            }
+          ]
+        }
+      ],
+      "x": 720,
+      "y": 2200
+    },
+    "enfance_dessin": {
+      "id": "enfance_dessin",
+      "title": "Drawing",
+      "location": "CHILD ROOM",
+      "narrator": "Some things were there before we even understood them.",
+      "text": "The drawing shows a huge station.\n\nAll trains display the same time.\n\n**22:47* *\n\nYou ask the child how she imagined this.\n\nShe's lifting her shoulders.\n\n**\"I didn't imagine it. I remember. *\n\nThe grey cat is drawn in a corner of the leaf.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Return to the station with the drawing in mind",
+          "vers": "retour_gare",
+          "effects": [
+            {
+              "stat": "mystere",
+              "val": 15
+            },
+            {
+              "stat": "acceptation",
+              "val": 10
+            }
+          ]
+        },
+        {
+          "text": "Stay here",
+          "vers": "fin_enfance",
+          "effects": [
+            {
+              "stat": "attachement",
+              "val": 10
+            }
+          ]
+        }
+      ],
+      "x": 900,
+      "y": 2200
+    },
+    "fin_enfance": {
+      "id": "fin_enfance",
+      "title": "End — Children Rested",
+      "location": "CHILD ROOM",
+      "narrator": "Some of the lives we give up continue without us.",
+      "text": "You stay.\n\nDays become simple.\n\nDrawings.\nTaste.\nRain against windows.\nStories before you sleep.\n\nNobody asks you to succeed.\nNobody counts your failures.\n\nBut sometimes, at night, you wonder what these impossible worlds would have become.\n\nIf someone had drawn them to the end.",
+      "isStart": false,
+      "isEnd": true,
+      "transition": "fade",
+      "choices": [],
+      "x": 720,
+      "y": 2380
+    },
+    "ligne_27_intro": {
+      "id": "ligne_27_intro",
+      "title": "Line 27 — The Empty Pier",
+      "location": "TRAIN 27",
+      "narrator": "Some destinations promise nothing. That's what makes them tempting.",
+      "text": "Train 27 has no passengers.\n\nNot even a driver.\n\nThe doors open without noise.\n\nThe voice announced:\n\n> Next stop: the place where no one can ask you any more.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Mount",
+          "vers": "vide_1",
+          "effects": [
+            {
+              "stat": "mystere",
+              "val": 15
+            }
+          ]
+        }
+      ],
+      "x": 1020,
+      "y": 1840
+    },
+    "vide_1": {
+      "id": "vide_1",
+      "title": "The Empty City",
+      "location": "CITY WITHOUT HABITANTS",
+      "narrator": "There are people who confuse silence with freedom.",
+      "text": "The city looks normal.\n\nExcept there's no one here.\n\nNo cars.\nNo voice.\nNo birds.\n\nThe shops are open.\nThe red lights are working.\n\nYou wanted that once.\nFor a difficult time.\nYou thought, if only everyone would disappear.\n\nYou were ashamed of that thought immediately.\n\nBut she was back.\nSeveral times.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Enjoying silence",
+          "vers": "vide_2",
+          "effects": [
+            {
+              "stat": "regret",
+              "val": -5
+            },
+            {
+              "stat": "mystere",
+              "val": 5
+            }
+          ]
+        },
+        {
+          "text": "Looking for someone",
+          "vers": "vide_silhouette",
+          "effects": [
+            {
+              "stat": "attachement",
+              "val": 10
+            }
+          ]
+        }
+      ],
+      "x": 1020,
+      "y": 2020
+    },
+    "vide_2": {
+      "id": "vide_2",
+      "title": "No request",
+      "location": "CITY WITHOUT HABITANTS",
+      "narrator": "Being alone is sweet when you know that you can stop being.",
+      "text": "You sit in a park.\n\nThe wind moves the trees.\nA fountain flows.\nThe world is asking for nothing.\n\nYou could stay here.\n\nNo disappointment.\nNo misunderstanding.\nNo wait.\n\nBut you're starting to look for someone to show the fountain to.\n\nAnd you understand something you already knew.\n\nSilence is only pleasant when someone could break it.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Return to the station",
+          "vers": "retour_gare",
+          "effects": [
+            {
+              "stat": "acceptation",
+              "val": 15
+            },
+            {
+              "stat": "attachement",
+              "val": 5
+            }
+          ]
+        },
+        {
+          "text": "Stay in silence",
+          "vers": "fin_vide",
+          "effects": [
+            {
+              "stat": "regret",
+              "val": -10
+            }
+          ]
+        }
+      ],
+      "x": 1020,
+      "y": 2200
+    },
+    "vide_silhouette": {
+      "id": "vide_silhouette",
+      "title": "The Silhouette",
+      "location": "FUTURE",
+      "narrator": "In empty worlds, you always find yourself.",
+      "text": "At the end of the avenue, someone walks.\n\nYou run.\n\nThe silhouette accelerates without ever turning around.\n\nThe closer you get, the more she looks like you.\n\nThen she disappears in a subway mouth.\n\nOn the sign:\n\n**Departure: 22:47**",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Follow her",
+          "vers": "retour_gare",
+          "effects": [
+            {
+              "stat": "mystere",
+              "val": 15
+            }
+          ]
+        },
+        {
+          "text": "Staying alone",
+          "vers": "fin_vide",
+          "effects": [
+            {
+              "stat": "regret",
+              "val": -5
+            }
+          ]
+        }
+      ],
+      "x": 1200,
+      "y": 2200
+    },
+    "fin_vide": {
+      "id": "fin_vide",
+      "title": "End — The Empty Pier",
+      "location": "CITY WITHOUT HABITANTS",
+      "narrator": "We can choose absence. We don't choose what she takes.",
+      "text": "You stay.\n\nThe days don't really have a name anymore.\n\nYou eat anytime.\nYou sleep whenever you want.\nSometimes you scream just to hear something.\n\nOne morning, you realize you forgot how to start a sentence with someone else.\n\nNot for lack of words.\n\nLack of practice.",
+      "isStart": false,
+      "isEnd": true,
+      "transition": "fade",
+      "choices": [],
+      "x": 1020,
+      "y": 2380
+    },
+    "ligne_34_intro": {
+      "id": "ligne_34_intro",
+      "title": "Line 34 — The Fatigued Train",
+      "location": "TRAIN 34",
+      "narrator": "Some trains do not run on rails, but on exhaustion.",
+      "text": "The train is crowded. But nobody talks.\n\nNobody's talking.\n\nEveryone works: on computer, on phone, in his head.\n\nSame rings.\nBroken costumes.\nAutomatic smiles.\n\nThe voice announced:\n\n> Next stop: life you never slowed down.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Get down with the tired",
+          "vers": "fatigues_1",
+          "effects": [
+            {
+              "stat": "lucidite",
+              "val": 10
+            }
+          ]
+        }
+      ],
+      "x": 220,
+      "y": 2600
+    },
+    "fatigues_1": {
+      "id": "fatigues_1",
+      "title": "The city that does not sleep",
+      "location": "OFFICE DISTRICT",
+      "narrator": "There are people who have learned to confuse exhaustion with value.",
+      "text": "The city shines all night.\n\nThe offices are full.\nCoffees serve black drinks in nameless cups.\nPeople walk fast, even those who have nowhere to go.\n\nYou said, at first, it's temporary.\n\nThat's what everyone thinks.\nThat's what everyone believes several years later.\n\nYou remember one night you could have refused.\nOne too many projects.\nAn impossible favor.\n\nYou said yes because saying no seemed a form of weakness to you.\n\nThat night, someone was waiting for you for dinner.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Refuse to run",
+          "vers": "fatigues_refus",
+          "effects": [
+            {
+              "stat": "acceptation",
+              "val": 10
+            }
+          ]
+        },
+        {
+          "text": "Follow him to work",
+          "vers": "fatigues_2",
+          "effects": [
+            {
+              "stat": "regret",
+              "val": -5
+            }
+          ]
+        }
+      ],
+      "x": 220,
+      "y": 2780
+    },
+    "fatigues_2": {
+      "id": "fatigues_2",
+      "title": "Already Late For Tomorrow",
+      "location": "TOUR DE VERRE",
+      "narrator": "When everything is urgent, nothing really is anymore.",
+      "text": "The floors look alike.\n\nMeetings.\nMessages.\nObjectives.\nGraphs.\n\nNobody screams.\n\nIt's worse.\n\nEveryone smiled as if exhaustion was proof of commitment.\n\nYou forgot the date of birth of a close friend.\nYou missed your mother's birthday once.\nYou missed something small and irreplaceable.\n\nYou don't remember exactly what.\n\nMaybe that's the most terrible thing.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Staying in this productive life",
+          "vers": "fin_fatigues",
+          "effects": [
+            {
+              "stat": "regret",
+              "val": -5
+            }
+          ]
+        },
+        {
+          "text": "Return to the station",
+          "vers": "retour_gare",
+          "effects": [
+            {
+              "stat": "acceptation",
+              "val": 15
+            },
+            {
+              "stat": "lucidite",
+              "val": 10
+            }
+          ]
+        }
+      ],
+      "x": 220,
+      "y": 2960
+    },
+    "fatigues_refus": {
+      "id": "fatigues_refus",
+      "title": "Stop",
+      "location": "THREE",
+      "narrator": "In a crowd running, stopping looks like a rebellion.",
+      "text": "You stop.\n\nPeople go around you without seeing you.\n\nA man is shaking you.\n\n**\"Not now. *\n\nYou don't know if he's talking to you or talking to his own life.\n\nThe grey cat appears on a ticket dispenser.\n\nHe's yawning.\n\nBehind him, an escalator descends to a station where all the clocks display 22:47.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Follow the cat to the station",
+          "vers": "retour_gare",
+          "effects": [
+            {
+              "stat": "acceptation",
+              "val": 20
+            }
+          ]
+        },
+        {
+          "text": "Resuming the race",
+          "vers": "fatigues_2",
+          "effects": [
+            {
+              "stat": "regret",
+              "val": 5
+            }
+          ]
+        }
+      ],
+      "x": 420,
+      "y": 2960
+    },
+    "fin_fatigues": {
+      "id": "fin_fatigues",
+      "title": "End — The Fatigued Train",
+      "location": "TOUR DE VERRE",
+      "narrator": "We end up like the hours we spend.",
+      "text": "You stay.\n\nYears become weeks.\nWeeks become lists.\nLists become your way of breathing.\n\nYou make money.\nYou do things.\n\nOne night you find an old picture.\nYou look inside.\n\nYou wonder when you stopped looking like that person.\n\nNot because of an event.\nBecause of the accumulation of all the small yess.",
+      "isStart": false,
+      "isEnd": true,
+      "transition": "fade",
+      "choices": [],
+      "x": 220,
+      "y": 3140
+    },
+    "ligne_52_intro": {
+      "id": "ligne_52_intro",
+      "title": "Line 52 — Accelerated Life",
+      "location": "TRAIN 52",
+      "narrator": "Some trains don't go anywhere else. They're moving too fast.",
+      "text": "Train 52 trembles before leaving.\n\nThe ads are fast.\nDoors are slamming.\nThe scenery is already rolling out while you're still at dock.\n\nThe voice announced:\n\n> Next stop: life where you have never lost time.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Mount",
+          "vers": "acceleree_1",
+          "effects": [
+            {
+              "stat": "regret",
+              "val": 5
+            }
+          ]
+        }
+      ],
+      "x": 620,
+      "y": 2600
+    },
+    "acceleree_1": {
+      "id": "acceleree_1",
+      "title": "All Go Faster",
+      "location": "ACCELERATED CITY",
+      "narrator": "There are people who have learned to love speed so they don't have to stop.",
+      "text": "People talk too fast.\n\nCoffees are served before being ordered.\nChildren grow between two red lights.\nThe seasons change while we watch his phone.\n\nYou met someone who was doing everything slowly.\nThat took the time to finish his sentences.\nHe ordered his coffee and let it cool down.\n\nYou thought it was strange.\n\nThen annoying.\n\nThen you realized, too late, that it was a way of being present.\n\nYou've already moved on.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Try to slow down",
+          "vers": "acceleree_lenteur",
+          "effects": [
+            {
+              "stat": "acceptation",
+              "val": 10
+            }
+          ]
+        },
+        {
+          "text": "Keep pace",
+          "vers": "acceleree_2",
+          "effects": [
+            {
+              "stat": "regret",
+              "val": -5
+            }
+          ]
+        }
+      ],
+      "x": 620,
+      "y": 2780
+    },
+    "acceleree_2": {
+      "id": "acceleree_2",
+      "title": "Optimized Life",
+      "location": "ACCELERATED CITY",
+      "narrator": "Every minute won seems to claim an entire hour later.",
+      "text": "You learn to answer faster.\nEating faster.\nChoosing faster.\nForget it faster.\n\nYears go through fragments.\n\nA birthday.\nA move.\nA breakup.\nA fresh start.\n\nEverything goes so fast that nothing has time to leave a trace.\n\nOne morning, you don't know what city you spent Christmas in last year.\n\nIt's not freedom.\nIt's wear and tear.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Staying in this fast life",
+          "vers": "fin_acceleree",
+          "effects": [
+            {
+              "stat": "regret",
+              "val": -5
+            }
+          ]
+        },
+        {
+          "text": "Return to the station",
+          "vers": "retour_gare",
+          "effects": [
+            {
+              "stat": "acceptation",
+              "val": 15
+            },
+            {
+              "stat": "lucidite",
+              "val": 10
+            }
+          ]
+        }
+      ],
+      "x": 620,
+      "y": 2960
+    },
+    "acceleree_lenteur": {
+      "id": "acceleree_lenteur",
+      "title": "Full Minute",
+      "location": "CENTRAL PLACE",
+      "narrator": "Slowing down is sometimes more scary than running.",
+      "text": "You sit on a bench.\n\nNobody understands.\n\nPassersby look at you like you stopped breathing.\n\nWait a minute.\n\nA real one.\n\nLong.\n\nImperfect.\n\nYou almost feel your heart taking over a human form.\n\nThen the cat jumps near you.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Restart speed",
+          "vers": "acceleree_2",
+          "effects": [
+            {
+              "stat": "regret",
+              "val": 5
+            }
+          ]
+        },
+        {
+          "text": "Stay on the bench",
+          "vers": "retour_gare",
+          "effects": [
+            {
+              "stat": "acceptation",
+              "val": 20
+            }
+          ]
+        }
+      ],
+      "x": 820,
+      "y": 2960
+    },
+    "fin_acceleree": {
+      "id": "fin_acceleree",
+      "title": "End — Accelerated Life",
+      "location": "ACCELERATED CITY",
+      "narrator": "Some lives look like a nice race to nowhere.",
+      "text": "You stay.\n\nEverything's moving forward.\n\nYou do it fast.\nYou're changing fast.\nYou learn fast.\nYou lose fast.\n\nOne morning, looking at your reflection in a subway window, you don't remember your neighbor's name from the previous apartment.\n\nOr the address.\nOr the neighborhood.\n\nYou have some destinations left.\nThere's almost no place left for you.",
+      "isStart": false,
+      "isEnd": true,
+      "transition": "fade",
+      "choices": [],
+      "x": 620,
+      "y": 3140
+    },
+    "ligne_74_intro": {
+      "id": "ligne_74_intro",
+      "title": "Line 74 — Messages Never Sent",
+      "location": "TRAIN 74",
+      "narrator": "Some trains carry sentences that have never found a recipient.",
+      "text": "Train 74 is quiet.\n\nOn the seats, off phones.\nClosed envelopes.\nUnnamed books.\n\nThe voice announced:\n\n> Next stop: words kept too long.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Down",
+          "vers": "messages_1",
+          "effects": [
+            {
+              "stat": "attachement",
+              "val": 10
+            }
+          ]
+        }
+      ],
+      "x": 1020,
+      "y": 2600
+    },
+    "messages_1": {
+      "id": "messages_1",
+      "title": "The City of Messages",
+      "location": "FUTURE OF LETTERS",
+      "narrator": "Things we haven't said continue to exist somewhere.",
+      "text": "The streets are covered with messages.\n\nSMS never sent.\nChewed letters.\nVocals suspended in the air like bubbles.\n\nSome messages are sweet.\nSome are excuses.\nSome are declarations that arrived too late.\n\nYou're looking for yours.\n\nYou find one you started one night at the station.\nSomeone who might still be here.\n\nYou erased it.\n\nYou thought it was too late.\nIt wouldn't change anything.\n\nThat it was better not to say anything.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Search for the message that brought you here",
+          "vers": "messages_2",
+          "effects": [
+            {
+              "stat": "regret",
+              "val": 5
+            }
+          ]
+        },
+        {
+          "text": "Read messages from others",
+          "vers": "messages_autres",
+          "effects": [
+            {
+              "stat": "lucidite",
+              "val": 10
+            }
+          ]
+        }
+      ],
+      "x": 1020,
+      "y": 2780
+    },
+    "messages_2": {
+      "id": "messages_2",
+      "title": "The Original Message",
+      "location": "PLACE OF SCREEN",
+      "narrator": "A sentence can change depending on who wears it.",
+      "text": "You find the message.\n\nIt floats over a black fountain.\n\n> I think we should have chosen ourselves sooner.\n\nThen the sentence unfolds.\n\nVersions of this message.\nThe one you wanted to send.\nThe one you were afraid to send.\nThe one that might have changed something.\n\nOr nothing.\n\nYou'll never know.\n\nThat's the real weight of that message.\nNot what he says.\nWhat he doesn't know.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Stay in this world of phrases",
+          "vers": "fin_messages",
+          "effects": [
+            {
+              "stat": "attachement",
+              "val": 15
+            }
+          ]
+        },
+        {
+          "text": "Finally answer",
+          "vers": "messages_repondre",
+          "effects": [
+            {
+              "stat": "acceptation",
+              "val": 15
+            }
+          ]
+        }
+      ],
+      "x": 1020,
+      "y": 2960
+    },
+    "messages_autres": {
+      "id": "messages_autres",
+      "title": "Words of Others",
+      "location": "FUTURE OF LETTERS",
+      "narrator": "You think you're alone in your regrets until you read others'.",
+      "text": "You're reading.\n\nThousands of lives suspended in tiny sentences.\n\n> I am proud of you.\n> Come back.\n> I don't blame you anymore.\n> I should have called.\n> I didn't know I loved you.\n\nYou cry without realizing it.\n\nNot just for you.\n\nFor everything people keep in their throats hoping to have tomorrow.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Return to the station",
+          "vers": "retour_gare",
+          "effects": [
+            {
+              "stat": "acceptation",
+              "val": 15
+            }
+          ]
+        },
+        {
+          "text": "Return to your message",
+          "vers": "messages_2",
+          "effects": [
+            {
+              "stat": "attachement",
+              "val": 10
+            }
+          ]
+        }
+      ],
+      "x": 1220,
+      "y": 2960
+    },
+    "messages_repondre": {
+      "id": "messages_repondre",
+      "title": "Answer",
+      "location": "PLACE OF SCREEN",
+      "narrator": "Some answers are not meant to be sent.",
+      "text": "You're writing.\n\nNot for the other person.\n\nNot really.\n\nYou write for the one you were on the train.\n\nFor the one who looked down at the wrong time.\n\n> Maybe.\n> But I'm tired of living in the lives I haven't chosen.\n\nThe message disappears.\n\nSomewhere, a train is coming.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Return to the station",
+          "vers": "retour_gare",
+          "effects": [
+            {
+              "stat": "acceptation",
+              "val": 25
+            },
+            {
+              "stat": "regret",
+              "val": -15
+            }
+          ]
+        }
+      ],
+      "x": 1020,
+      "y": 3140
+    },
+    "fin_messages": {
+      "id": "fin_messages",
+      "title": "End — Messages Never Sent",
+      "location": "CITY OF MESSAGES",
+      "narrator": "Keeping others' words is a way of not letting them disappear.",
+      "text": "You stay.\n\nYou read everything.\n\nApologies.\nConfessions.\nToo late tenderness.\n\nYou become guardian of phrases that others have not been able to send.\n\nSometimes someone walks into the street looking for his message.\nYou show him where he is.\n\nHe's crying or laughing.\nRarely both at the same time.\n\nYou keep yours for the end.\n\nFor the day you know what to do with it.",
+      "isStart": false,
+      "isEnd": true,
+      "transition": "fade",
+      "choices": [],
+      "x": 1020,
+      "y": 3320
+    },
+    "ligne_chat_verrouillee": {
+      "id": "ligne_chat_verrouillee",
+      "title": "The Grey Cat",
+      "location": "HALL CENTRAL",
+      "narrator": "Some guides do not follow at first.",
+      "text": "You follow the cat.\n\nHe's crossing the hall.\n\nGet past the lines.\nIn front of the travelers.\nIn front of the signs.\n\nThen he stops in front of a dock without a number.\n\nA black panel only displays:\n\n**Line 88**\n\nThe cat is watching you.\n\nThen the panel goes off.\n\nNot yet.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Return to lines",
+          "vers": "hub_gare",
+          "effects": [
+            {
+              "stat": "mystere",
+              "val": 10
+            }
+          ]
+        }
+      ],
+      "x": 620,
+      "y": 1080
+    },
+    "ligne_88_intro": {
+      "id": "ligne_88_intro",
+      "title": "Line 88 — The Cat",
+      "location": "QUAI WITHOUT NUMBER",
+      "narrator": "There's always a line that doesn't appear on any plane.",
+      "text": "The cat walks through a dock you've never seen before.\n\nNo train.\n\nJust the rails, the fog, and a clock stopped at 22:47.\n\nThen the cat jumps on the tracks.\n\nYou want to scream.\n\nBut it doesn't fall.\n\nHe's walking on a vacuum.\n\nUnder his feet, images appear:\nthe hometown, the stage, the children's room, the empty town, the offices, the messages.\n\nAll lines.\nEvery life.\nAll absences.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Backward",
+          "vers": "hub_gare",
+          "effects": [
+            {
+              "stat": "regret",
+              "val": 5
+            }
+          ]
+        },
+        {
+          "text": "Follow the cat",
+          "vers": "coeur_gare",
+          "effects": [
+            {
+              "stat": "mystere",
+              "val": 20
+            },
+            {
+              "stat": "acceptation",
+              "val": 10
+            }
+          ]
+        }
+      ],
+      "x": 400,
+      "y": 3520
+    },
+    "coeur_gare": {
+      "id": "coeur_gare",
+      "title": "The Heart of the Station",
+      "location": "BETWEEN THE QUAIS",
+      "narrator": "This place may not be here to answer. Maybe just to show.",
+      "text": "You walk behind the cat.\n\nThe rails become a corridor of images.\n\nYou see yourself in every life.\n\nThe one that stayed.\nThe one that made it.\nThe one that never grew up.\nThe one who chose silence.\nThe one that ran too fast.\nThe one who lived among the messages.\n\nNone is false.\n\nNone is perfect.\n\nThe cat stops in front of a train door without destination.\n\nOn the door:\n\n**Last departure — 22:47* *",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Find the last departure",
+          "vers": "dernier_depart",
+          "effects": [
+            {
+              "stat": "acceptation",
+              "val": 20
+            }
+          ]
+        },
+        {
+          "text": "Back to Explore Again",
+          "vers": "hub_gare",
+          "effects": [
+            {
+              "stat": "mystere",
+              "val": 5
+            }
+          ]
+        }
+      ],
+      "x": 400,
+      "y": 3700
+    },
+    "dernier_depart": {
+      "id": "dernier_depart",
+      "title": "The Last Departure",
+      "location": "QUAI FINAL",
+      "narrator": "One day you have to choose without knowing what's on the other side.",
+      "text": "The final dock is empty.\n\nNo destination.\nNo line panel.\n\nJust a clock.\n\n**22:47* *\n\nThe train arrives without noise.\n\nIts windows are lit with warm light.\n\nAlmost real.\n\nThe cat sits in front of the doors.\n\nThe wet traveler appears on the other side of the dock.\n\n**\"You can stay in a life. You can keep looking. Or you can go upstairs. *\n\nYou ask where this train is going.\n\nShe's smiling.\n\n**\"No one comes back with a clear answer. *",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Get on the last train",
+          "vers": "final_train",
+          "effects": [
+            {
+              "stat": "acceptation",
+              "val": 20
+            }
+          ]
+        },
+        {
+          "text": "Back to Explore Lines",
+          "vers": "hub_gare",
+          "effects": [
+            {
+              "stat": "regret",
+              "val": 5
+            }
+          ]
+        },
+        {
+          "text": "Stay in the station",
+          "vers": "fin_gare",
+          "effects": [
+            {
+              "stat": "mystere",
+              "val": 15
+            }
+          ]
+        }
+      ],
+      "x": 400,
+      "y": 3900
+    },
+    "final_train": {
+      "id": "final_train",
+      "title": "Train Without Destination",
+      "location": "TRAIN FINAL",
+      "narrator": "Some doors open on an answer. Others on a softer question.",
+      "text": "You're going up.\n\nThe doors are closing.\n\nThe train starts.\n\nFor a while, there's only the sound of the rails.\n\nThen other sounds appear.\n\nFar away.\n\nOne voice.\nMaybe your name.\n\nA regular beep.\nMaybe a machine.\n\nRain for a glass.\nMaybe the station.\n\nYou look at your reflection.\n\nFor a second, you think you see your face hurt.\n\nThen the reflection becomes normal again.\n\nThe cat sits on the seat opposite.\n\nHe slowly blinks.\n\nThe train is slowing down.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Waiting for doors to open",
+          "vers": "fin_ambigue",
+          "effects": [
+            {
+              "stat": "acceptation",
+              "val": 10
+            }
+          ]
+        }
+      ],
+      "x": 400,
+      "y": 4080
+    },
+    "fin_ambigue": {
+      "id": "fin_ambigue",
+      "title": "End — Doors open",
+      "location": "????",
+      "narrator": "Some ends don't say if we come back. They only ask what they would do if they did.",
+      "text": "Someone says your name.\n\nOr maybe you can imagine it.\n\nDoors open.\n\nA white light enters the car.\n\nYou're taking a step.\n\nIn your hand, your phone vibrates one last time.\n\nOn screen:\n\n> It's 22:48.\n\nYou're looking up.\n\nAnd you move on.",
+      "isStart": false,
+      "isEnd": true,
+      "transition": "fade",
+      "choices": [],
+      "x": 400,
+      "y": 4260
+    },
+    "fin_gare": {
+      "id": "fin_gare",
+      "title": "End — Staying at 22:47",
+      "location": "GREECE GARE",
+      "narrator": "Not choosing is also a way of living, but the station does not call it that.",
+      "text": "You stay.\n\nThe trains continue to leave.\n\nThe wet traveler disappears one day.\nThen maybe come back under another coat.\n\nYou learn the lines.\nThe announcements.\nNewcomers.\n\nYou explain to others that they can look for the good life.\n\nYou know now she doesn't exist.\n\nBut you keep looking at the signs.\n\nBecause as long as all trains depart at 22:47, no possibility is really lost.\n\nThat's comforting.\n\nIt's a prison.\n\nBoth at once.",
+      "isStart": false,
+      "isEnd": true,
+      "transition": "fade",
+      "choices": [],
+      "x": 620,
+      "y": 4080
+    }
+  },
+  "lang": "en"
+}
