@@ -1,0 +1,354 @@
+{
+  "name": "Le Marchand de Nuages",
+  "kids": true,
+  "askPlayerName": true,
+  "pack": "kids",
+  "stats": [
+    {
+      "id": "curiosite",
+      "label": "Curiosité",
+      "start": 20,
+      "max": 100,
+      "color": "#90e0ef"
+    },
+    {
+      "id": "courage",
+      "label": "Courage",
+      "start": 10,
+      "max": 100,
+      "color": "#f94144"
+    },
+    {
+      "id": "bonheur",
+      "label": "Bonheur",
+      "start": 30,
+      "max": 100,
+      "color": "#90be6d"
+    }
+  ],
+  "theme": {},
+  "scenes": {
+    "ciel_bizarre": {
+      "id": "ciel_bizarre",
+      "title": "Un Ciel Bizarre",
+      "location": "Le village — Dehors",
+      "narrator": "",
+      "text": "Tu sors de chez toi ce matin.\n\nLe ciel est plein de nuages colorés.\n\nUn rose et rond qui danse doucement.\nUn bleu foncé qui gronde tout seul.\nUn jaune qui sautille comme un enfant.\n\nAikito est assis à côté de toi.\nIl lève le museau vers le ciel.\n\n**« Dans ce village, les émotions montent dans le ciel. »**\n**« Elles deviennent des nuages. »**\n\nTu regardes au-dessus de ta tête.\n\nUn tout petit nuage orange flotte là.\n\n**« C'est le tien. »** dit Aikito.\n**« La curiosité a une couleur orange. »**",
+      "isStart": true,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Toucher mon nuage orange.",
+          "vers": "exploration_nuages",
+          "effects": [
+            {
+              "stat": "curiosite",
+              "val": 10
+            },
+            {
+              "stat": "bonheur",
+              "val": 10
+            }
+          ]
+        },
+        {
+          "text": "Observer les nuages des autres.",
+          "vers": "exploration_nuages",
+          "effects": [
+            {
+              "stat": "curiosite",
+              "val": 15
+            }
+          ]
+        }
+      ],
+      "x": 60,
+      "y": 60
+    },
+    "marchand_arrive": {
+      "id": "marchand_arrive",
+      "title": "Monsieur Gris",
+      "location": "La place du village",
+      "narrator": "",
+      "text": "Sur la place, une carriole s'arrête.\n\n**☁️ NUAGES INDUSTRIELS**\n*Émotions bien rangées. Toutes pareilles.*\n\nUn homme en costume gris descend.\n\n**« Bonjour ! Vos nuages sont beaucoup trop... différents. »**\n**« J'apporte des nuages bien rangés à la place ! »**\n\nIl sort un grand filet.\n\nEt commence à attraper les nuages du village.\n\nLe rose résiste.\nLe bleu gronde plus fort.\nLe jaune sautille de plus en plus vite.\n\n**« Arrêtez ! »** tu cries.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Courir lui parler.",
+          "vers": "pourquoi_gris",
+          "effects": [
+            {
+              "stat": "courage",
+              "val": 15
+            }
+          ]
+        },
+        {
+          "text": "Demander à Aikito quoi faire.",
+          "vers": "aikito_conseil",
+          "effects": [
+            {
+              "stat": "curiosite",
+              "val": 10
+            }
+          ]
+        }
+      ],
+      "x": 60,
+      "y": 180
+    },
+    "aikito_conseil": {
+      "id": "aikito_conseil",
+      "title": "Le Conseil d'Aikito",
+      "location": "La place du village",
+      "narrator": "",
+      "text": "Aikito te regarde.\n\n**« Les chiens montrent leurs émotions directement. »**\n**« On n'a pas besoin de nuages. »**\n\nIl regarde Monsieur Gris.\n\n**« Mais lui, il a peur de quelque chose. »**\n**« Regarde son nuage. »**\n\nAu-dessus de Monsieur Gris flotte un tout petit nuage.\nGris.\nTout seul.\nTout triste.\n\n**« Va lui parler. »** dit Aikito.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Aller parler à Monsieur Gris.",
+          "vers": "pourquoi_gris",
+          "effects": [
+            {
+              "stat": "courage",
+              "val": 15
+            }
+          ]
+        }
+      ],
+      "x": 180,
+      "y": 180
+    },
+    "pourquoi_gris": {
+      "id": "pourquoi_gris",
+      "title": "Pourquoi ?",
+      "location": "La place du village",
+      "narrator": "",
+      "text": "Tu te plantes devant Monsieur Gris.\n\n**« Pourquoi vous prenez nos nuages ? »**\n\nIl s'arrête.\n\n**« Parce qu'ils sont trop différents. »**\n**« Ça fait désordre. »**\n**« Les gens voient vos émotions et ça les dérange. »**\n\nTu regardes son petit nuage gris au-dessus de lui.\n\n**« Et le vôtre ? »** tu demandes.\n\nIl regarde en l'air.\n\nSon sourire s'arrête une seconde.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "« Votre nuage est tout gris et tout seul. »",
+          "vers": "village_peur",
+          "effects": [
+            {
+              "stat": "courage",
+              "val": 10
+            },
+            {
+              "stat": "bonheur",
+              "val": 5
+            }
+          ]
+        },
+        {
+          "text": "« C'est quoi votre vraie couleur ? »",
+          "vers": "village_peur",
+          "effects": [
+            {
+              "stat": "curiosite",
+              "val": 15
+            }
+          ]
+        }
+      ],
+      "x": 60,
+      "y": 300
+    },
+    "secret_gris": {
+      "id": "secret_gris",
+      "title": "Le Secret",
+      "location": "La place du village",
+      "narrator": "",
+      "text": "Monsieur Gris regarde son nuage longtemps.\n\n**« Il était coloré avant. »**\n\nSa voix change.\nPlus douce.\n\n**« Mais les gens disaient que mes émotions étaient trop fortes. »**\n**« Trop visibles. »**\n**« Alors j'ai tout mis en gris. »**\n\nIl range son filet doucement.\n\n**« Et j'ai pensé que ce serait mieux pour tout le monde. »**\n\nAikito s'approche.\nIl pose sa patte sur le pied de Monsieur Gris.\n\n**« C'était pas une bonne idée. »** dit Aikito.\n**« Mais c'est pas trop tard. »**",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "« Montre-nous ta vraie couleur. »",
+          "vers": "fin_couleurs",
+          "effects": [
+            {
+              "stat": "bonheur",
+              "val": 20
+            }
+          ]
+        },
+        {
+          "text": "Lui sourire sans rien dire.",
+          "vers": "fin_couleurs",
+          "effects": [
+            {
+              "stat": "bonheur",
+              "val": 15
+            }
+          ]
+        },
+        {
+          "text": "Le laisser partir.",
+          "vers": "fin_gris_part"
+        }
+      ],
+      "x": 60,
+      "y": 420
+    },
+    "fin_couleurs": {
+      "id": "fin_couleurs",
+      "title": "Fin — Le Vrai Ciel",
+      "location": "",
+      "narrator": "",
+      "text": "Monsieur Gris ferme les yeux.\n\nSon petit nuage gris commence à changer.\n\nD'abord du violet.\nPuis du rouge.\nPuis du jaune vif.\n\nIl rouvre les yeux.\n\n**« Je... je ne savais plus. »**\n**« Ça fait longtemps. »**\n\nLe ciel au-dessus du village est plein de nuages colorés.\n\nTous différents.\nTous vrais.\n\nAikito lève le museau.\n\n**« C'est le plus beau ciel que j'ai jamais vu. »**\n\nEt pour une fois,\ntout le monde est d'accord.",
+      "isStart": false,
+      "isEnd": true,
+      "transition": "fade",
+      "choices": [],
+      "x": 60,
+      "y": 540
+    },
+    "fin_gris_part": {
+      "id": "fin_gris_part",
+      "title": "Fin — Le Nuage Qui Attend",
+      "location": "",
+      "narrator": "",
+      "text": "Monsieur Gris repart avec sa carriole vide.\n\nIl s'arrête au bord du village.\n\nIl regarde le ciel une dernière fois.\n\nSon petit nuage gris flotte au-dessus de lui.\n\nMais tu remarques quelque chose.\n\nTout petit.\nDans un coin.\n\nUn point rouge.\n\nComme une braise qui attend.\n\nAikito te regarde.\n\n**« Il reviendra peut-être. »**\n**« Quand il sera prêt. »**",
+      "isStart": false,
+      "isEnd": true,
+      "transition": "fade",
+      "choices": [],
+      "x": 180,
+      "y": 540
+    },
+    "exploration_nuages": {
+      "id": "exploration_nuages",
+      "title": "Les Nuages du Village",
+      "location": "Les rues du village",
+      "narrator": "",
+      "text": "Tu te promènes dans le village avec Aikito.\n\nAu-dessus de chaque maison, des nuages différents.\n\nLa boulangère a un nuage marron chaud.\n*De la fierté pour son pain du matin.*\n\nLe facteur a un nuage vert clair.\n*Du plaisir à marcher tous les jours.*\n\nUne petite fille a un nuage violet qui tourbillonne.\n*Elle rêve à quelque chose de beau.*\n\nTu regardes le tien.\nOrange. Curieux. Un peu impatient.\n\n**« Chaque nuage raconte une histoire. »** dit Aikito.\n**« C'est pour ça qu'ils sont tous différents. »**",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Demander à la petite fille ce qu'elle imagine.",
+          "vers": "petite_fille_nuage",
+          "effects": [
+            {
+              "stat": "bonheur",
+              "val": 10
+            }
+          ]
+        },
+        {
+          "text": "Continuer se promener.",
+          "vers": "marchand_arrive",
+          "effects": [
+            {
+              "stat": "curiosite",
+              "val": 10
+            }
+          ]
+        }
+      ],
+      "x": 60,
+      "y": 160
+    },
+    "petite_fille_nuage": {
+      "id": "petite_fille_nuage",
+      "title": "Le Rêve de Léa",
+      "location": "Devant une maison",
+      "narrator": "",
+      "text": "La petite fille te regarde.\n\n**« Je rêve que je vole. »** elle dit simplement.\n**« Tous les soirs. »**\n\nElle montre son nuage violet.\n\n**« Il apparaît quand j'y pense. »**\n\nElle sourit.\n\n**« J'aime mon nuage. »**\n**« Il ressemble à personne d'autre. »**\n\nAikito remue la queue.\n\n**« Exactement. »**\n\nC'est là que vous entendez la carriole arriver sur la place.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Courir voir ce qui se passe.",
+          "vers": "marchand_arrive",
+          "effects": [
+            {
+              "stat": "curiosite",
+              "val": 10
+            },
+            {
+              "stat": "courage",
+              "val": 5
+            }
+          ]
+        }
+      ],
+      "x": 180,
+      "y": 160
+    },
+    "village_peur": {
+      "id": "village_peur",
+      "title": "La Peur du Village",
+      "location": "La place du village",
+      "narrator": "",
+      "text": "Monsieur Gris t'écoute.\n\nMais les habitants du village baissent la tête.\n\nLa boulangère cache son nuage marron derrière son tablier.\nLe facteur regarde ses pieds.\n\n**« Peut-être qu'il a raison... »** murmure quelqu'un.\n**« Nos nuages sont un peu... trop visibles. »**\n\nTu regardes Aikito.\n\nIl grogne doucement.\n\n**« Ils ont honte de leurs émotions. »**\n**« C'est ça le vrai problème. »**",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "« Non ! Vos nuages sont beaux ! »",
+          "vers": "secret_gris",
+          "effects": [
+            {
+              "stat": "courage",
+              "val": 20
+            }
+          ]
+        },
+        {
+          "text": "Montrer ton nuage orange à tout le monde.",
+          "vers": "montrer_nuage",
+          "effects": [
+            {
+              "stat": "courage",
+              "val": 15
+            },
+            {
+              "stat": "bonheur",
+              "val": 10
+            }
+          ]
+        }
+      ],
+      "x": 60,
+      "y": 380
+    },
+    "montrer_nuage": {
+      "id": "montrer_nuage",
+      "title": "Mon Nuage",
+      "location": "La place du village",
+      "narrator": "",
+      "text": "Tu lèves les bras.\n\nTon nuage orange monte un peu plus haut.\n\n**« Le mien c'est de la curiosité. »**\n**« C'est pas parfait. »**\n**« Mais c'est moi. »**\n\nLa boulangère te regarde.\n\nElle hésite.\n\nPuis elle enlève son tablier.\n\nSon nuage marron chaud réapparaît.\n\n**« Le mien c'est de la fierté. »** elle dit doucement.\n\nUn par un, les autres font pareil.\n\nMonsieur Gris regarde autour de lui.\nPuis son petit nuage gris.\nPuis toi.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "« Et le vôtre, c'est quoi ? »",
+          "vers": "secret_gris",
+          "effects": [
+            {
+              "stat": "bonheur",
+              "val": 15
+            }
+          ]
+        }
+      ],
+      "x": 180,
+      "y": 380
+    }
+  }
+}
