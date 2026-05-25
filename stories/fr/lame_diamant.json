@@ -569,7 +569,7 @@
       "title": "La Salle des Lames",
       "location": "Temple — Salle des lames",
       "narrator": "",
-      "text": "Des centaines de couteaux recouvrent les murs.\n\nTous rouillés.\n\nTous détruits.\n\nSauf un emplacement vide au fond de la salle.",
+      "text": "Des centaines de couteaux recouvrent les murs.\n\nTous rouillés.\n\nTous détruits.\n\nSauf un emplacement vide au fond de la salle.\n\nDans un coin,\nderrière un pilier effondré,\ntu aperçois quelque chose de brillant.\n\nPas la lame.\n\nDe l'or.",
       "isStart": false,
       "isEnd": false,
       "transition": "fade",
@@ -597,6 +597,10 @@
         {
           "text": "Prendre un couteau ancien.",
           "vers": "fin_piege_declenche"
+        },
+        {
+          "text": "Prendre l'or en plus de la lame.",
+          "vers": "fin_cupidite"
         }
       ],
       "x": 720,
@@ -940,6 +944,16 @@
             {
               "stat": "audace",
               "val": 5
+            }
+          ]
+        },
+        {
+          "text": "Demander au capitaine de faire demi-tour.",
+          "vers": "fin_demi_tour",
+          "effects": [
+            {
+              "stat": "prudence",
+              "val": 10
             }
           ]
         }
