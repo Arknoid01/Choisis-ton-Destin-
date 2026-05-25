@@ -751,6 +751,48 @@ body {
 </head>
 <body>
 
+<!-- PIN POPUP — désactiver mode enfant -->
+<div id="pin-overlay" style="display:none;position:fixed;inset:0;z-index:700;
+  background:rgba(0,0,0,0.9);align-items:center;justify-content:center;
+  backdrop-filter:blur(8px)">
+  <div style="background:#13110e;border:1px solid var(--gold3);border-radius:20px;
+    padding:32px 24px;max-width:300px;width:90%;text-align:center">
+    <div style="font-size:28px;margin-bottom:12px">🔒</div>
+    <div style="font-family:'Cinzel',serif;font-size:15px;color:var(--cream);
+      letter-spacing:2px;margin-bottom:8px" id="pin-title">Code Parental</div>
+    <p style="font-size:12px;color:var(--dim);margin-bottom:20px;line-height:1.6"
+      id="pin-question"></p>
+    <input id="pin-input" type="password" inputmode="numeric" maxlength="4"
+      placeholder="••••"
+      style="width:100%;background:var(--bg2);border:1px solid var(--border);
+        border-radius:8px;color:var(--cream);font-family:'DM Mono',monospace;
+        font-size:24px;padding:12px;outline:none;text-align:center;
+        letter-spacing:8px;box-sizing:border-box"
+      onkeydown="if(event.key==='Enter')submitPin()">
+    <div id="pin-error" style="display:none;margin-top:8px;font-size:11px;
+      color:#fa6d8f;font-family:'DM Mono',monospace"></div>
+    <div style="display:flex;gap:10px;margin-top:16px">
+      <button onclick="cancelPin()" style="flex:1;padding:10px;border-radius:8px;
+        border:1px solid var(--border);background:none;color:var(--dim);
+        font-family:'Cinzel',serif;font-size:11px;letter-spacing:1px;cursor:pointer">
+        Annuler</button>
+      <button onclick="submitPin()" style="flex:1;padding:10px;border-radius:8px;
+        border:1px solid var(--gold3);
+        background:linear-gradient(135deg,rgba(200,169,110,0.15),rgba(200,169,110,0.05));
+        color:var(--gold);font-family:'Cinzel',serif;font-size:11px;
+        letter-spacing:1px;cursor:pointer">
+        Confirmer</button>
+    </div>
+    <div style="margin-top:14px;border-top:1px solid var(--border);padding-top:12px">
+      <button onclick="showChangePinMode()"
+        style="background:none;border:none;color:var(--dimmer);font-size:10px;
+        letter-spacing:1px;cursor:pointer;font-family:'DM Mono',monospace">
+        ✦ Changer le code
+      </button>
+    </div>
+  </div>
+</div>
+
 <!-- CODE CRÉATEUR POPUP -->
 <div id="code-overlay" style="display:none;position:fixed;inset:0;z-index:600;
   background:rgba(0,0,0,0.85);display:none;align-items:center;justify-content:center;
@@ -964,7 +1006,7 @@ body {
         <div class="option-desc" id="txt-opt-kids-desc">Histoires adaptées aux enfants uniquement</div>
       </div>
       <label class="toggle">
-        <input type="checkbox" id="opt-kids" onchange="saveOptions();renderGameList()">
+        <input type="checkbox" id="opt-kids" onchange="handleKidsToggle(this)">
         <div class="toggle-track"></div>
       </label>
     </div>
@@ -1508,6 +1550,94 @@ setTimeout(() => {
     }
   });
 }, 600);
+// ── SYSTÈME PIN PARENTAL ─────────────────────────────────────
+const PIN_DEFAULT = '1234';
+let _pinMode = 'verify';
+
+function getStoredPin() {
+  return localStorage.getItem('sf_parent_pin') || _sha256sync(PIN_DEFAULT);
+}
+
+function handleKidsToggle(checkbox) {
+  if (!checkbox.checked) {
+    // Tentative de désactiver → demander PIN
+    checkbox.checked = true; // remettre en attendant validation
+    openPinPopup('verify');
+  } else {
+    saveOptions();
+    if (typeof renderGameList === 'function') renderGameList();
+  }
+}
+
+function openPinPopup(mode) {
+  _pinMode = mode;
+  const overlay = document.getElementById('pin-overlay');
+  overlay.style.display = 'flex';
+  document.getElementById('pin-input').value = '';
+  document.getElementById('pin-error').style.display = 'none';
+  const titles = {
+    verify     : 'Code Parental',
+    change_old : 'Changer le code',
+    change_new : 'Nouveau code'
+  };
+  const questions = {
+    verify     : 'Entre le code à 4 chiffres pour désactiver le mode enfant.',
+    change_old : 'Entre ton code actuel.',
+    change_new : 'Choisis un nouveau code à 4 chiffres.'
+  };
+  document.getElementById('pin-title').textContent    = titles[mode];
+  document.getElementById('pin-question').textContent = questions[mode];
+  setTimeout(() => document.getElementById('pin-input').focus(), 100);
+}
+
+function cancelPin() {
+  document.getElementById('pin-overlay').style.display = 'none';
+  if (_pinMode === 'verify') {
+    document.getElementById('opt-kids').checked = true;
+  }
+}
+
+function submitPin() {
+  const input  = document.getElementById('pin-input').value.trim();
+  const err    = document.getElementById('pin-error');
+
+  if (input.length < 4) {
+    err.textContent = '4 chiffres requis'; err.style.display = 'block'; return;
+  }
+
+  if (_pinMode === 'verify') {
+    if (_sha256sync(input) === getStoredPin()) {
+      document.getElementById('pin-overlay').style.display = 'none';
+      document.getElementById('opt-kids').checked = false;
+      saveOptions();
+      if (typeof renderGameList === 'function') renderGameList();
+    } else {
+      err.textContent = 'Code incorrect'; err.style.display = 'block';
+      document.getElementById('pin-input').value = '';
+    }
+  } else if (_pinMode === 'change_old') {
+    if (_sha256sync(input) === getStoredPin()) {
+      openPinPopup('change_new');
+    } else {
+      err.textContent = 'Code actuel incorrect'; err.style.display = 'block';
+      document.getElementById('pin-input').value = '';
+    }
+  } else if (_pinMode === 'change_new') {
+    localStorage.setItem('sf_parent_pin', _sha256sync(input));
+    document.getElementById('pin-overlay').style.display = 'none';
+    const msg = document.createElement('div');
+    msg.style.cssText = `position:fixed;bottom:80px;left:50%;transform:translateX(-50%);
+      background:#13110e;border:1px solid rgba(109,250,188,0.4);border-radius:10px;
+      padding:10px 20px;font-family:'DM Mono',monospace;font-size:11px;
+      color:#6dfabc;z-index:999`;
+    msg.textContent = '✓ Code mis à jour !';
+    document.body.appendChild(msg);
+    setTimeout(() => msg.remove(), 2500);
+  }
+}
+
+function showChangePinMode() { openPinPopup('change_old'); }
+
 // ── SYSTÈME DE CODES CRÉATEUR ───────────────────────────────
 // Généré par generate_codes.py — remplacer ce bloc après chaque génération
 const FABLERIS_CODES = {
