@@ -330,11 +330,11 @@ function renderLibrary() {
   const unlocked = getUnlockedPacks();
   let opts = {};
   try { opts = JSON.parse(localStorage.getItem('sf_options') || '{}'); } catch(e) {}
-  const kidsOnly = opts.kids === true;
+  const kidsOnly = opts.kids === true || opts.kids === 'true';
 
   const filtered = allGames.filter(g => {
     if (g.lang !== currentLang) return false;
-    if (kidsOnly && g.kids !== true) return false;
+    if (kidsOnly && g.kids !== true && g.kids !== 'true') return false;
     return true;
   });
 

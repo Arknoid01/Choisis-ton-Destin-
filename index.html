@@ -1319,7 +1319,7 @@ function renderGameList() {
   const kidsMode = document.getElementById('opt-kids')?.checked;
   const container = document.getElementById('game-list');
   let filtered = allGames.filter(g => g.lang === currentLang);
-  if (kidsMode) filtered = filtered.filter(g => g.kids === true);
+  if (kidsMode) filtered = filtered.filter(g => g.kids === true || g.kids === 'true');
 
   // Kids badge in sheet subtitle
   const sub = document.getElementById('txt-sheet-sub');
@@ -1415,18 +1415,16 @@ function handleOptionsClick(e) {
 // ══════════════════════════════════════════════
 function saveOptions() {
   const opts = {
-    sound:     document.getElementById('opt-sound').checked,
-    anim:      document.getElementById('opt-anim').checked,
-    textspeed: document.getElementById('opt-textspeed').value,
-    kids:      document.getElementById('opt-kids').checked,
-    locked:    document.getElementById('opt-locked').value,
+    anim:      document.getElementById('opt-anim')?.checked ?? true,
+    textspeed: document.getElementById('opt-textspeed')?.value ?? 'normal',
+    kids:      document.getElementById('opt-kids')?.checked ?? false,
+    locked:    document.getElementById('opt-locked')?.value ?? 'hide',
   };
   localStorage.setItem('sf_options', JSON.stringify(opts));
 }
 function loadOptions() {
   try {
     const opts = JSON.parse(localStorage.getItem('sf_options') || '{}');
-    if (opts.sound     !== undefined) document.getElementById('opt-sound').checked     = opts.sound;
     if (opts.anim      !== undefined) document.getElementById('opt-anim').checked      = opts.anim;
     if (opts.textspeed !== undefined) document.getElementById('opt-textspeed').value   = opts.textspeed;
     if (opts.kids      !== undefined) document.getElementById('opt-kids').checked      = opts.kids;
