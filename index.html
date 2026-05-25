@@ -1622,6 +1622,16 @@ function submitPin() {
 
   if (_pinMode === 'verify') {
     if (_sha256sync(input) === getStoredPin()) {
+      document.getElementById('pin-overlay').style.display = 'none';
+      document.getElementById('opt-kids').checked = false;
+      saveOptions();
+      if (typeof renderGameList === 'function') renderGameList();
+    } else {
+      err.textContent = 'Code incorrect'; err.style.display = 'block';
+      document.getElementById('pin-input').value = '';
+    }
+  } else if (_pinMode === 'change_old') {
+    if (_sha256sync(input) === getStoredPin()) {
       openPinPopup('change_new');
     } else {
       err.textContent = 'Code actuel incorrect'; err.style.display = 'block';
