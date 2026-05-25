@@ -1,0 +1,1486 @@
+{
+  "name": "La Lame de Diamant",
+  "kids": false,
+  "askPlayerName": false,
+  "pack": "free",
+  "stats": [
+    {
+      "id": "audace",
+      "label": "Audace",
+      "start": 0,
+      "color": "#fa6d8f",
+      "max": 100
+    },
+    {
+      "id": "prudence",
+      "label": "Prudence",
+      "start": 0,
+      "color": "#6dfabc",
+      "max": 100
+    },
+    {
+      "id": "savoir",
+      "label": "Savoir",
+      "start": 0,
+      "color": "#c8a96e",
+      "max": 100
+    }
+  ],
+  "theme": {
+    "bg": "#070912",
+    "bg2": "#101525",
+    "bg3": "#182033",
+    "bg4": "#242d44",
+    "border": "#39445e",
+    "accent": "#8ecae6",
+    "accent2": "#ffd166",
+    "accent3": "#ef476f",
+    "text": "#f5f0e8",
+    "text2": "#b9b2a6",
+    "text3": "#7d776f"
+  },
+  "scenes": {
+    "intro_decoupe": {
+      "id": "intro_decoupe",
+      "title": "La Découpe",
+      "location": "Boucherie — Soir",
+      "narrator": "",
+      "text": "La boutique est presque vide.\n\nLa pluie frappe doucement les vitres.\n\nTu termines de découper une pièce de viande pendant que la radio grésille au fond du magasin.\n\nTon apprenti te regarde travailler.\n\n**« Tu pourrais faire ça les yeux fermés. »**",
+      "isStart": true,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "« Après vingt ans, heureusement. »",
+          "vers": "client_etrange",
+          "effects": [
+            {
+              "stat": "audace",
+              "val": 5
+            }
+          ]
+        },
+        {
+          "text": "Continuer sans répondre.",
+          "vers": "client_etrange",
+          "effects": [
+            {
+              "stat": "prudence",
+              "val": 5
+            }
+          ]
+        },
+        {
+          "text": "Lui montrer une technique.",
+          "vers": "technique_apprenti",
+          "effects": [
+            {
+              "stat": "savoir",
+              "val": 5
+            }
+          ]
+        }
+      ],
+      "x": 60,
+      "y": 60
+    },
+    "client_etrange": {
+      "id": "client_etrange",
+      "title": "Le Client Étrange",
+      "location": "Boucherie — Comptoir",
+      "narrator": "",
+      "text": "La clochette de la porte résonne.\n\nUn vieil homme entre lentement.\n\nIl pose un couteau ancien sur le comptoir.\n\nLe fil est détruit.\nLa lame couverte de rouille.\n\nMais la poignée porte un symbole étrange.\n\n**« Tu connais la Lame de Diamant ? »**",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "« Jamais entendu parler. »",
+          "vers": "legende",
+          "effects": [
+            {
+              "stat": "prudence",
+              "val": 5
+            }
+          ]
+        },
+        {
+          "text": "Examiner le symbole.",
+          "vers": "legende",
+          "effects": [
+            {
+              "stat": "savoir",
+              "val": 10
+            }
+          ]
+        },
+        {
+          "text": "« Combien vous voulez pour ce couteau ? »",
+          "vers": "legende",
+          "effects": [
+            {
+              "stat": "audace",
+              "val": 5
+            }
+          ]
+        }
+      ],
+      "x": 280,
+      "y": 60
+    },
+    "legende": {
+      "id": "legende",
+      "title": "La Légende",
+      "location": "Boucherie — Comptoir",
+      "narrator": "",
+      "text": "Le vieil homme sourit légèrement.\n\n**« Une lame qui ne perd jamais son fil. »**\n\nIl sort une vieille photo.\n\nOn y voit plusieurs hommes devant des ruines.\n\nTous portent le même symbole.\n\n**« Mon père l'a cherchée toute sa vie. »**",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Demander où se trouvent les ruines.",
+          "vers": "localisation_ruines",
+          "effects": [
+            {
+              "stat": "savoir",
+              "val": 10
+            }
+          ]
+        },
+        {
+          "text": "Dire que cette histoire est absurde.",
+          "vers": "vieillard_part",
+          "effects": [
+            {
+              "stat": "prudence",
+              "val": 5
+            }
+          ]
+        },
+        {
+          "text": "Observer la photo.",
+          "vers": "vieillard_part",
+          "effects": [
+            {
+              "stat": "savoir",
+              "val": 5
+            }
+          ]
+        }
+      ],
+      "x": 500,
+      "y": 60
+    },
+    "depart": {
+      "id": "depart",
+      "title": "Le Départ",
+      "location": "Boucherie — Fermeture",
+      "narrator": "",
+      "text": "La boutique est silencieuse.\n\nLa photo repose sur la table.\n\nTu devrais probablement oublier cette histoire.\n\nMais ton regard revient toujours vers le symbole.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Partir immédiatement.",
+          "vers": "preparation",
+          "effects": [
+            {
+              "stat": "audace",
+              "val": 15
+            }
+          ]
+        },
+        {
+          "text": "Faire des recherches avant.",
+          "vers": "recherches",
+          "effects": [
+            {
+              "stat": "savoir",
+              "val": 15
+            }
+          ]
+        },
+        {
+          "text": "Refuser et reprendre le travail.",
+          "vers": "fin_vie_normale"
+        }
+      ],
+      "x": 720,
+      "y": 60
+    },
+    "fin_vie_normale": {
+      "id": "fin_vie_normale",
+      "title": "Fin — Une Vie Normale",
+      "location": "",
+      "narrator": "",
+      "text": "Les années passent.\n\nLa boutique continue de tourner.\n\nParfois,\ntu repenses à cette lame.\n\nEt tu te demandes si elle existait vraiment.",
+      "isStart": false,
+      "isEnd": true,
+      "transition": "fade",
+      "choices": [],
+      "x": 940,
+      "y": 60
+    },
+    "port": {
+      "id": "port",
+      "title": "Le Port",
+      "location": "Port — Aube",
+      "narrator": "",
+      "text": "Le bateau tangue doucement.\n\nDes caisses sont empilées partout autour de toi.\n\nLe capitaine regarde la carte.\n\n**« Les ruines sont après la vallée.\nPersonne ne va là-bas. »**",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Payer davantage pour aller plus vite.",
+          "vers": "traversee",
+          "effects": [
+            {
+              "stat": "audace",
+              "val": 10
+            }
+          ]
+        },
+        {
+          "text": "Poser des questions sur les ruines.",
+          "vers": "traversee",
+          "effects": [
+            {
+              "stat": "savoir",
+              "val": 10
+            }
+          ]
+        },
+        {
+          "text": "Vérifier ton équipement.",
+          "vers": "traversee",
+          "effects": [
+            {
+              "stat": "prudence",
+              "val": 10
+            }
+          ]
+        }
+      ],
+      "x": 1160,
+      "y": 60
+    },
+    "danger_cable": {
+      "id": "danger_cable",
+      "title": "Premier Danger",
+      "location": "Bateau — Pont",
+      "narrator": "Pas le temps de réfléchir.",
+      "text": "Un câble du bateau lâche brusquement.\n\nUne caisse glisse vers toi.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Sauter sur le côté.",
+          "vers": "debarquement",
+          "effects": [
+            {
+              "stat": "audace",
+              "val": 10
+            }
+          ]
+        },
+        {
+          "text": "Bloquer la caisse.",
+          "vers": "debarquement",
+          "effects": [
+            {
+              "stat": "prudence",
+              "val": 10
+            }
+          ]
+        },
+        {
+          "text": "Attraper le câble.",
+          "vers": "fin_ecrase"
+        }
+      ],
+      "x": 60,
+      "y": 220,
+      "timer": {
+        "duration": 4,
+        "auto": "last"
+      }
+    },
+    "fin_ecrase": {
+      "id": "fin_ecrase",
+      "title": "Fin — Écrasé",
+      "location": "",
+      "narrator": "",
+      "text": "La caisse heurte le bastingage.\n\nTu n'as pas eu le temps.\n\nLe capitaine regarde sans rien dire.\n\nLa mer continue de bouger.",
+      "isStart": false,
+      "isEnd": true,
+      "transition": "fade",
+      "choices": [],
+      "x": 280,
+      "y": 220
+    },
+    "jungle": {
+      "id": "jungle",
+      "title": "La Jungle",
+      "location": "Jungle — Intérieur",
+      "narrator": "",
+      "text": "L'air est lourd.\n\nLes insectes couvrent presque le bruit de tes pas.\n\nTu retrouves une ancienne borne en pierre recouverte de mousse.\n\nLe même symbole.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Nettoyer la pierre.",
+          "vers": "campement",
+          "effects": [
+            {
+              "stat": "savoir",
+              "val": 10
+            }
+          ]
+        },
+        {
+          "text": "Continuer sans perdre de temps.",
+          "vers": "campement",
+          "effects": [
+            {
+              "stat": "audace",
+              "val": 5
+            }
+          ]
+        },
+        {
+          "text": "Prendre une photo.",
+          "vers": "campement",
+          "effects": [
+            {
+              "stat": "prudence",
+              "val": 5
+            }
+          ]
+        }
+      ],
+      "x": 500,
+      "y": 220
+    },
+    "entree_ruines": {
+      "id": "entree_ruines",
+      "title": "L'Entrée",
+      "location": "Ruines — Extérieur",
+      "narrator": "",
+      "text": "Les ruines apparaissent enfin entre les arbres.\n\nImmenses.\n\nSilencieuses.\n\nUne porte de pierre est entrouverte.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Entrer immédiatement.",
+          "vers": "bivouac",
+          "effects": [
+            {
+              "stat": "audace",
+              "val": 10
+            }
+          ]
+        },
+        {
+          "text": "Observer les alentours.",
+          "vers": "bivouac",
+          "effects": [
+            {
+              "stat": "prudence",
+              "val": 10
+            }
+          ]
+        },
+        {
+          "text": "Chercher un autre passage.",
+          "vers": "bivouac",
+          "effects": [
+            {
+              "stat": "savoir",
+              "val": 10
+            }
+          ]
+        }
+      ],
+      "x": 720,
+      "y": 220
+    },
+    "couloir": {
+      "id": "couloir",
+      "title": "Le Couloir",
+      "location": "Ruines — Couloir",
+      "narrator": "Le sol est couvert de dalles fissurées.\n\nCertaines semblent plus récentes que d'autres.",
+      "text": "Chaque pas résonne.\n\nTu sens quelque chose sous tes pieds.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Marcher lentement.",
+          "vers": "salle_puits",
+          "effects": [
+            {
+              "stat": "prudence",
+              "val": 15
+            }
+          ]
+        },
+        {
+          "text": "Longer le mur.",
+          "vers": "salle_puits",
+          "effects": [
+            {
+              "stat": "savoir",
+              "val": 10
+            }
+          ]
+        },
+        {
+          "text": "Courir.",
+          "vers": "fin_fleches"
+        }
+      ],
+      "x": 940,
+      "y": 220,
+      "timer": {
+        "duration": 5,
+        "auto": "last"
+      }
+    },
+    "fin_fleches": {
+      "id": "fin_fleches",
+      "title": "Fin — Flèches",
+      "location": "",
+      "narrator": "",
+      "text": "Un déclic résonne.\n\nPuis une douleur brutale traverse ton épaule.\n\nLes flèches continuent jusqu'au silence.",
+      "isStart": false,
+      "isEnd": true,
+      "transition": "fade",
+      "choices": [],
+      "x": 1160,
+      "y": 220
+    },
+    "salle_puits": {
+      "id": "salle_puits",
+      "title": "La Salle du Puits",
+      "location": "Ruines — Salle centrale",
+      "narrator": "",
+      "text": "Une immense salle s'ouvre devant toi.\n\nAu centre :\nun puits noir impossible à voir jusqu'au fond.\n\nUn vieux pont traverse la pièce.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Traverser le pont.",
+          "vers": "gardien",
+          "effects": [
+            {
+              "stat": "audace",
+              "val": 10
+            }
+          ]
+        },
+        {
+          "text": "Chercher un mécanisme.",
+          "vers": "gardien",
+          "effects": [
+            {
+              "stat": "savoir",
+              "val": 15
+            }
+          ]
+        },
+        {
+          "text": "Descendre dans le puits.",
+          "vers": "gardien",
+          "effects": [
+            {
+              "stat": "audace",
+              "val": 5
+            }
+          ]
+        }
+      ],
+      "x": 60,
+      "y": 380
+    },
+    "pont": {
+      "id": "pont",
+      "title": "Le Pont",
+      "location": "Ruines — Pont de bois",
+      "narrator": "Le bois craque sous tes pieds.\n\nPuis une corde lâche.",
+      "text": "Le pont s'incline brusquement.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Courir.",
+          "vers": "salle_lames",
+          "effects": [
+            {
+              "stat": "audace",
+              "val": 15
+            }
+          ]
+        },
+        {
+          "text": "Sauter.",
+          "vers": "salle_lames",
+          "effects": [
+            {
+              "stat": "audace",
+              "val": 10
+            }
+          ]
+        },
+        {
+          "text": "T'accrocher.",
+          "vers": "fin_chute"
+        }
+      ],
+      "x": 280,
+      "y": 380,
+      "timer": {
+        "duration": 3,
+        "auto": "last"
+      }
+    },
+    "fin_chute": {
+      "id": "fin_chute",
+      "title": "Fin — Chute",
+      "location": "",
+      "narrator": "",
+      "text": "Tes doigts glissent sur le bois humide.\n\nLe puits t'avale.\n\nTu n'entends plus rien très vite.",
+      "isStart": false,
+      "isEnd": true,
+      "transition": "fade",
+      "choices": [],
+      "x": 500,
+      "y": 380
+    },
+    "salle_lames": {
+      "id": "salle_lames",
+      "title": "La Salle des Lames",
+      "location": "Temple — Salle des lames",
+      "narrator": "",
+      "text": "Des centaines de couteaux recouvrent les murs.\n\nTous rouillés.\n\nTous détruits.\n\nSauf un emplacement vide au fond de la salle.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Examiner les anciennes lames.",
+          "vers": "autel",
+          "effects": [
+            {
+              "stat": "savoir",
+              "val": 15
+            }
+          ]
+        },
+        {
+          "text": "Continuer.",
+          "vers": "autel",
+          "effects": [
+            {
+              "stat": "audace",
+              "val": 5
+            }
+          ]
+        },
+        {
+          "text": "Prendre un couteau ancien.",
+          "vers": "fin_piege_declenche"
+        }
+      ],
+      "x": 720,
+      "y": 380
+    },
+    "fin_piege_declenche": {
+      "id": "fin_piege_declenche",
+      "title": "Fin — Piège Déclenché",
+      "location": "",
+      "narrator": "",
+      "text": "Un claquement sec résonne dans toute la salle.\n\nLes lames sur les murs bougent.\n\nTu comprends trop tard que certains couteaux n'étaient pas là pour être pris.",
+      "isStart": false,
+      "isEnd": true,
+      "transition": "fade",
+      "choices": [],
+      "x": 940,
+      "y": 380
+    },
+    "mecanisme": {
+      "id": "mecanisme",
+      "title": "Le Mécanisme",
+      "location": "Temple — Porte finale",
+      "narrator": "",
+      "text": "Une porte bloque le passage final.\n\nTrois symboles sont gravés dans la pierre.\n\nTu reconnais l'un d'eux.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Symbole du soleil.",
+          "vers": "fin_salle_scellee"
+        },
+        {
+          "text": "Symbole du serpent.",
+          "vers": "fin_salle_scellee"
+        },
+        {
+          "text": "Symbole de la lame.",
+          "vers": "verif_symbole"
+        }
+      ],
+      "x": 1160,
+      "y": 380
+    },
+    "fin_salle_scellee": {
+      "id": "fin_salle_scellee",
+      "title": "Fin — Salle Scellée",
+      "location": "",
+      "narrator": "",
+      "text": "Un grondement sourd traverse les murs.\n\nLa porte se referme derrière toi.\n\nLa salle se scelle.\n\nLes torches s'éteignent une à une.",
+      "isStart": false,
+      "isEnd": true,
+      "transition": "fade",
+      "choices": [],
+      "x": 60,
+      "y": 540
+    },
+    "salle_finale": {
+      "id": "salle_finale",
+      "title": "La Lame de Diamant",
+      "location": "Temple — Salle finale",
+      "narrator": "La salle est petite.\n\nÉtrangement propre.",
+      "text": "Au centre,\nsur un socle de pierre :\n\nla lame.\n\nMême après des siècles,\nelle semble neuve.\n\nLa lumière glisse sur le fil sans révéler la moindre imperfection.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Prendre la lame.",
+          "vers": "vieil_homme_apparait",
+          "effects": [
+            {
+              "stat": "audace",
+              "val": 10
+            }
+          ]
+        },
+        {
+          "text": "Observer la pièce.",
+          "vers": "vieil_homme_apparait",
+          "effects": [
+            {
+              "stat": "savoir",
+              "val": 10
+            }
+          ]
+        },
+        {
+          "text": "Vérifier le socle.",
+          "vers": "vieil_homme_apparait",
+          "effects": [
+            {
+              "stat": "prudence",
+              "val": 15
+            }
+          ]
+        }
+      ],
+      "x": 280,
+      "y": 540
+    },
+    "dernier_piege": {
+      "id": "dernier_piege",
+      "title": "Le Dernier Piège",
+      "location": "Temple — Effondrement",
+      "narrator": "Quand tu soulèves la lame,\nun grondement traverse le temple.",
+      "text": "Des pierres tombent du plafond.\n\nLa sortie est encore visible.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Courir vers la sortie.",
+          "vers": "fin_principale",
+          "effects": [
+            {
+              "stat": "audace",
+              "val": 10
+            }
+          ]
+        },
+        {
+          "text": "Protéger la lame.",
+          "vers": "fin_perdu"
+        },
+        {
+          "text": "Chercher un autre passage.",
+          "vers": "fin_englouti"
+        }
+      ],
+      "x": 500,
+      "y": 540,
+      "timer": {
+        "duration": 5,
+        "auto": "last"
+      }
+    },
+    "fin_principale": {
+      "id": "fin_principale",
+      "title": "Fin — Le Boucher",
+      "location": "",
+      "narrator": "Certaines lames valent plus que ce qu'elles coupent.",
+      "text": "La pluie tombe quand tu reviens enfin en ville.\n\nTu poses doucement la lame sur le comptoir de la boutique.\n\nTon apprenti reste figé.\n\n**« C'est elle… ? »**\n\nTu hoches simplement la tête.\n\nDerrière toi, la porte s'ouvre.\n\nLe vieil homme entre.\n\nIl regarde la lame longtemps.\n\nSes yeux sont différents maintenant.\nPas froids.\nJuste vieux.\n\n**« Mon père aurait voulu te voir faire ça. »**\n\nIl repart sans rien dire d'autre.\n\nTu prends un morceau de viande.\n\nPuis tu commences la découpe.\n\nLe couteau traverse la chair sans effort.\n\nParfait.",
+      "isStart": false,
+      "isEnd": true,
+      "transition": "fade",
+      "choices": [],
+      "x": 720,
+      "y": 540
+    },
+    "fin_englouti": {
+      "id": "fin_englouti",
+      "title": "Fin — Englouti",
+      "location": "",
+      "narrator": "",
+      "text": "Le temple s'effondre.\n\nLa lame dans une main,\ntu cherches une issue qui n'existe plus.\n\nLes pierres continuent de tomber.",
+      "isStart": false,
+      "isEnd": true,
+      "transition": "fade",
+      "choices": [],
+      "x": 940,
+      "y": 540
+    },
+    "fin_perdu": {
+      "id": "fin_perdu",
+      "title": "Fin — Perdu",
+      "location": "",
+      "narrator": "",
+      "text": "Tu trouves la lame.\n\nMais jamais la sortie.\n\nLes couloirs se ressemblent tous.\n\nLa lame brille dans le noir.",
+      "isStart": false,
+      "isEnd": true,
+      "transition": "fade",
+      "choices": [],
+      "x": 1160,
+      "y": 540
+    },
+    "fin_cupidite": {
+      "id": "fin_cupidite",
+      "title": "Fin — Cupidité",
+      "location": "",
+      "narrator": "",
+      "text": "Tu tentes d'emporter l'or de la salle.\n\nLe poids ralentit ta fuite.\n\nLe temple t'enterre avec ses trésors.",
+      "isStart": false,
+      "isEnd": true,
+      "transition": "fade",
+      "choices": [],
+      "x": 60,
+      "y": 700
+    },
+    "fin_demi_tour": {
+      "id": "fin_demi_tour",
+      "title": "Fin — Demi-Tour",
+      "location": "",
+      "narrator": "",
+      "text": "Tu abandonnes l'expédition avant les ruines.\n\nLe bateau te ramène.\n\nLa jungle reste derrière toi.\n\nEt la lame avec elle.",
+      "isStart": false,
+      "isEnd": true,
+      "transition": "fade",
+      "choices": [],
+      "x": 280,
+      "y": 700
+    },
+    "verif_symbole": {
+      "id": "verif_symbole",
+      "title": "Le Bon Symbole",
+      "location": "Temple — Porte finale",
+      "narrator": "",
+      "text": "Tu poses ta main sur le symbole.\n\nUn déclic résonne dans la pierre.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "La porte s'ouvre.",
+          "vers": "salle_finale",
+          "requires": {
+            "stat": "savoir",
+            "min": 30
+          }
+        },
+        {
+          "text": "Rien ne se passe.",
+          "vers": "fin_salle_scellee"
+        }
+      ],
+      "x": 500,
+      "y": 700
+    },
+    "recherches": {
+      "id": "recherches",
+      "title": "Les Recherches",
+      "location": "Bibliothèque — Nuit",
+      "narrator": "Certaines histoires qu'on cherche finissent par vous trouver.",
+      "text": "Tu passes la nuit à chercher.\n\nDes archives numérisées.\nDes forums de passionnés.\nUn vieux livre de cartographie coloniale.\n\nLe symbole apparaît trois fois.\n\nToujours près des mêmes coordonnées.\nToujours associé à la même mention :\n\n*Lame indestructible. Gardée par ceux qui savent attendre.*\n\nUne photo floue montre l'entrée d'un temple.\n\nLa végétation a tout mangé.\n\nMais la porte est encore là.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Réserver un bateau.",
+          "vers": "preparation",
+          "effects": [
+            {
+              "stat": "savoir",
+              "val": 15
+            }
+          ]
+        },
+        {
+          "text": "Contacter un guide local.",
+          "vers": "preparation",
+          "effects": [
+            {
+              "stat": "prudence",
+              "val": 15
+            }
+          ]
+        },
+        {
+          "text": "Partir sans attendre davantage.",
+          "vers": "preparation",
+          "effects": [
+            {
+              "stat": "audace",
+              "val": 10
+            }
+          ]
+        }
+      ],
+      "x": 500,
+      "y": 160
+    },
+    "preparation": {
+      "id": "preparation",
+      "title": "La Préparation",
+      "location": "Appartement — Matin",
+      "narrator": "Tu n'as jamais vraiment préparé un voyage comme celui-là.",
+      "text": "Tu passes la matinée à rassembler ce que tu peux.\n\nQuelques outils de boucher — les plus solides.\nUne lampe frontale.\nDes vêtements pour la chaleur et la pluie.\n\nSur la carte que le vieil homme t'a laissée,\ntu localises enfin les ruines.\n\nCôte ouest d'une île volcanique.\nÀ trois jours de bateau depuis Marseille.\n\nUne région que personne ne mentionne dans les guides.\n\nTu fermes la boutique pour une semaine.\nTu laisses un mot à ton apprenti.\n\n*Problème personnel. Je reviens.*",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Partir vers le port.",
+          "vers": "port",
+          "effects": [
+            {
+              "stat": "audace",
+              "val": 10
+            }
+          ]
+        },
+        {
+          "text": "Vérifier une dernière fois la carte.",
+          "vers": "port",
+          "effects": [
+            {
+              "stat": "savoir",
+              "val": 10
+            }
+          ]
+        }
+      ],
+      "x": 280,
+      "y": 240
+    },
+    "traversee": {
+      "id": "traversee",
+      "title": "La Traversée",
+      "location": "Bateau — Pleine Mer",
+      "narrator": "Trois jours de mer.",
+      "text": "Le premier jour, tu regardes la côte disparaître.\n\nLe deuxième jour, tu étudies les notes du vieil homme.\nIl y a des indications sur les pièges du temple.\nDes symboles à reconnaître.\nDes passages à éviter.\n\nLe troisième jour, une île apparaît à l'horizon.\n\nNoire.\nCouverte de végétation.\nPas un port visible.\nPas de lumières.\n\nLe capitaine ralentit.\n\n**« On s'approche au maximum. »**\n\nIl montre une petite embarcation à l'arrière du bateau.\n\n**« Le reste, c'est pour toi. »**",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Relire les notes du vieil homme.",
+          "vers": "danger_cable",
+          "effects": [
+            {
+              "stat": "savoir",
+              "val": 10
+            }
+          ]
+        },
+        {
+          "text": "Préparer ton équipement.",
+          "vers": "danger_cable",
+          "effects": [
+            {
+              "stat": "prudence",
+              "val": 10
+            }
+          ]
+        },
+        {
+          "text": "Observer l'île.",
+          "vers": "danger_cable",
+          "effects": [
+            {
+              "stat": "audace",
+              "val": 5
+            }
+          ]
+        }
+      ],
+      "x": 500,
+      "y": 320
+    },
+    "debarquement": {
+      "id": "debarquement",
+      "title": "Le Débarquement",
+      "location": "Île — Rivage",
+      "narrator": "",
+      "text": "La petite embarcation s'échoue sur une plage de sable noir.\n\nLe bateau a déjà disparu à l'horizon.\n\nTu es seul.\n\nL'île est silencieuse, sauf les insectes et le vent dans la végétation.\n\nDevant toi, une forêt dense commence à quelques mètres du rivage.\n\nSur la carte, les ruines sont à environ quatre heures de marche vers l'intérieur.\n\nTu ranges tes affaires.\n\nLa lame du vieil homme est dans ton sac.\n\nTu la regardes une dernière fois avant d'entrer dans la forêt.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Entrer dans la forêt.",
+          "vers": "jungle",
+          "effects": [
+            {
+              "stat": "audace",
+              "val": 5
+            }
+          ]
+        },
+        {
+          "text": "Vérifier la carte avant d'avancer.",
+          "vers": "jungle",
+          "effects": [
+            {
+              "stat": "savoir",
+              "val": 10
+            }
+          ]
+        },
+        {
+          "text": "Chercher un point de repère.",
+          "vers": "jungle",
+          "effects": [
+            {
+              "stat": "prudence",
+              "val": 10
+            }
+          ]
+        }
+      ],
+      "x": 720,
+      "y": 400
+    },
+    "campement": {
+      "id": "campement",
+      "title": "Le Campement Abandonné",
+      "location": "Jungle — Clairière",
+      "narrator": "Quelqu'un est passé ici avant toi.",
+      "text": "Tu trouves une clairière inattendue.\n\nLes restes d'un feu de camp.\nFroid depuis longtemps.\n\nDes boîtes de conserve rouillées.\nUn carnet dont les pages ont gonflé avec l'humidité.\n\nTu réussis à lire quelques lignes.\n\n*Jour 12. Les ruines sont plus proches que la carte ne l'indique.*\n*Les symboles sur la borne correspondent à ce que le vieux m'avait dit.*\n*Je ne sais pas si je dois continuer.*\n\nEt plus loin, une note ajoutée à la hâte :\n\n*Le bon symbole n'est pas naturel. Pas le soleil. Pas l'animal.*\n*C'est l'objet. Celui que l'homme a forgé. Celui qui sert.*\n\nLa dernière date remonte à plusieurs années.\n\nTu ne sais pas ce qu'il est devenu.\n\nMais le carnet est là.\nLui non.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Prendre le carnet.",
+          "vers": "borne_jungle",
+          "effects": [
+            {
+              "stat": "savoir",
+              "val": 15
+            }
+          ]
+        },
+        {
+          "text": "Continuer sans s'attarder.",
+          "vers": "borne_jungle",
+          "effects": [
+            {
+              "stat": "audace",
+              "val": 5
+            }
+          ]
+        },
+        {
+          "text": "Chercher d'autres indices autour.",
+          "vers": "borne_jungle",
+          "effects": [
+            {
+              "stat": "prudence",
+              "val": 10
+            }
+          ]
+        }
+      ],
+      "x": 800,
+      "y": 480
+    },
+    "borne_jungle": {
+      "id": "borne_jungle",
+      "title": "La Borne",
+      "location": "Jungle — Chemin",
+      "narrator": "",
+      "text": "Quelques centaines de mètres plus loin,\ntu retrouves la borne en pierre.\n\nLe même symbole que sur le couteau du vieil homme.\n\nElle est plus grande que tu ne l'imaginais.\nPresque deux mètres de haut.\n\nAutour d'elle, le sol est dégagé.\nComme si les plantes refusaient d'y pousser.\n\nTu poses la main sur la pierre.\n\nElle est légèrement chaude.\n\nPas à cause du soleil.\nIl n'y en a pas ici sous la canopée.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Relever les inscriptions.",
+          "vers": "entree_ruines",
+          "effects": [
+            {
+              "stat": "savoir",
+              "val": 10
+            }
+          ]
+        },
+        {
+          "text": "Continuer vers les ruines.",
+          "vers": "entree_ruines",
+          "effects": [
+            {
+              "stat": "audace",
+              "val": 5
+            }
+          ]
+        }
+      ],
+      "x": 900,
+      "y": 560
+    },
+    "bivouac": {
+      "id": "bivouac",
+      "title": "La Nuit Avant",
+      "location": "Ruines — Extérieur",
+      "narrator": "",
+      "text": "Le soleil disparaît rapidement.\n\nTu décides de ne pas entrer de nuit.\n\nTu t'installes contre un mur extérieur.\n\nLes ruines font des bruits étranges dans l'obscurité.\nPas des animaux.\nQuelque chose de plus régulier.\n\nComme une mécanique très ancienne.\nToujours en mouvement.\n\nTu manges ce qui reste dans ton sac.\n\nTu penses à la boutique.\nÀ l'apprenti.\nÀ la photo du vieil homme.\n\nTous ces gens qui ont cherché la lame.\n\nTu t'endors sans t'en rendre compte.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Entrer dès l'aube.",
+          "vers": "antichambre",
+          "effects": [
+            {
+              "stat": "prudence",
+              "val": 10
+            }
+          ]
+        },
+        {
+          "text": "Entrer maintenant — tu n'as pas sommeil.",
+          "vers": "antichambre",
+          "effects": [
+            {
+              "stat": "audace",
+              "val": 10
+            }
+          ]
+        }
+      ],
+      "x": 1000,
+      "y": 640
+    },
+    "antichambre": {
+      "id": "antichambre",
+      "title": "L'Antichambre",
+      "location": "Ruines — Première Salle",
+      "narrator": "",
+      "text": "La première salle est immense.\n\nLe plafond est si haut qu'il disparaît dans l'obscurité.\n\nLes murs sont couverts de bas-reliefs.\n\nDes hommes qui tiennent des couteaux.\nDes scènes de chasse.\nDes cérémonies autour d'un objet brillant.\n\nAu centre de la salle,\nune vasque en pierre contient encore de l'eau.\n\nL'air est frais.\nPresque agréable après la chaleur de la jungle.\n\nTu réalises que tu souriais sans t'en rendre compte.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Étudier les bas-reliefs.",
+          "vers": "bas_reliefs",
+          "effects": [
+            {
+              "stat": "savoir",
+              "val": 15
+            }
+          ]
+        },
+        {
+          "text": "Boire l'eau de la vasque.",
+          "vers": "couloir",
+          "effects": [
+            {
+              "stat": "audace",
+              "val": 5
+            }
+          ]
+        },
+        {
+          "text": "Avancer prudemment.",
+          "vers": "couloir",
+          "effects": [
+            {
+              "stat": "prudence",
+              "val": 10
+            }
+          ]
+        }
+      ],
+      "x": 1100,
+      "y": 720
+    },
+    "gardien": {
+      "id": "gardien",
+      "title": "Le Gardien",
+      "location": "Ruines — Salle du Puits",
+      "narrator": "",
+      "text": "Avant d'atteindre le pont,\ntu entends quelque chose.\n\nUn bruit de respiration.\n\nDans un coin de la salle,\nquelque chose bouge.\n\nUne silhouette.\n\nTrop grande pour être humaine.\nTrop régulière pour être un animal.\n\nElle ne t'a pas encore vu.\n\nOu elle fait semblant.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Passer en silence.",
+          "vers": "pont",
+          "effects": [
+            {
+              "stat": "prudence",
+              "val": 15
+            }
+          ]
+        },
+        {
+          "text": "Faire du bruit pour la distraire.",
+          "vers": "pont",
+          "effects": [
+            {
+              "stat": "audace",
+              "val": 10
+            }
+          ]
+        },
+        {
+          "text": "Rester immobile.",
+          "vers": "pont",
+          "effects": [
+            {
+              "stat": "savoir",
+              "val": 10
+            }
+          ]
+        }
+      ],
+      "x": 1200,
+      "y": 800,
+      "timer": {
+        "duration": 6,
+        "auto": "last"
+      }
+    },
+    "autel": {
+      "id": "autel",
+      "title": "L'Autel",
+      "location": "Temple — Salle des Lames",
+      "narrator": "",
+      "text": "Au fond de la salle,\njuste avant la porte finale,\nil y a un petit autel.\n\nDes offrandes séchées.\nDes os.\nUn crâne d'animal.\n\nEt une inscription en dessous.\n\nTu ne lis pas la langue.\nMais un des mots ressemble à quelque chose dans le carnet.\n\nTu l'ouvres.\n\n*\"Celui qui reconnaît la lame mérite la lame.\"*\n\nTu ranges le carnet.\n\nTu regardes la porte.\n\nTrois symboles t'attendent.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "S'approcher de la porte.",
+          "vers": "mecanisme",
+          "effects": [
+            {
+              "stat": "savoir",
+              "val": 5
+            }
+          ]
+        },
+        {
+          "text": "Relire le carnet une dernière fois.",
+          "vers": "mecanisme",
+          "effects": [
+            {
+              "stat": "savoir",
+              "val": 15
+            }
+          ]
+        }
+      ],
+      "x": 1400,
+      "y": 960
+    },
+    "bas_reliefs": {
+      "id": "bas_reliefs",
+      "title": "Les Bas-Reliefs",
+      "location": "Ruines — Antichambre",
+      "narrator": "Certaines images parlent sans avoir besoin de mots.",
+      "text": "Tu t'approches du mur de droite.\n\nLes sculptures sont étonnamment précises.\n\nUne scène attire ton attention.\n\nUn homme agenouillé.\nIl tend les mains vers quelque chose.\nAu-dessus de lui, trois symboles sont gravés côte à côte.\n\nLe premier montre un cercle avec des rayons.\n*Le soleil — donner de la lumière.*\n\nLe deuxième montre un serpent enroulé sur lui-même.\n*Le cycle — revenir toujours au même point.*\n\nLe troisième est différent.\n\nPas un objet naturel.\nPas un animal.\n\nUne ligne droite.\nUn angle.\nUne pointe.\n\n*Quelque chose de fait par des mains humaines.*\n*Quelque chose qui coupe.*\n\nDans la scène sculptée,\nl'homme tend les mains vers ce troisième symbole.\n\nPas vers le soleil.\nPas vers le serpent.\n\nVers celui-là.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Continuer vers le couloir.",
+          "vers": "couloir",
+          "effects": [
+            {
+              "stat": "savoir",
+              "val": 10
+            }
+          ]
+        }
+      ],
+      "x": 1050,
+      "y": 760
+    },
+    "technique_apprenti": {
+      "id": "technique_apprenti",
+      "title": "Le Geste Juste",
+      "location": "Boucherie — Plan de travail",
+      "narrator": "",
+      "text": "Tu repositionnes le couteau dans sa main.\n\n**« Pas comme ça. Laisse la lame faire le travail. »**\n\nIl recommence.\n\nMieux.\n\n**« Le secret c'est de ne jamais forcer. »**\n\nTu reprends ton morceau.\n\nTa lame glisse proprement à travers la viande.\n\nL'apprenti te regarde avec une expression qui ressemble à du respect.\n\nOu peut-être juste de la concentration.\n\nLa clochette de la porte résonne.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Aller accueillir le client.",
+          "vers": "client_etrange",
+          "effects": [
+            {
+              "stat": "savoir",
+              "val": 5
+            }
+          ]
+        }
+      ],
+      "x": 60,
+      "y": 240
+    },
+    "localisation_ruines": {
+      "id": "localisation_ruines",
+      "title": "Les Coordonnées",
+      "location": "Boucherie — Comptoir",
+      "narrator": "",
+      "text": "Le vieil homme hésite.\n\nPuis il sort un petit morceau de papier plié.\n\nDes coordonnées griffonnées à la main.\n\n**« Une île. Côte ouest. »**\n\nIl pose le papier sur le comptoir.\n\n**« Personne ne s'y rend plus depuis les années 80. »**\n\nIl range ses affaires lentement.\n\n**« Mon père y est allé deux fois. Il n'a jamais trouvé l'entrée. »**\n\nIl te regarde.\n\n**« Toi tu saurais reconnaître une lame parfaite. »**\n\nIl dit ça comme si c'était une évidence.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Prendre les coordonnées.",
+          "vers": "vieillard_part",
+          "effects": [
+            {
+              "stat": "savoir",
+              "val": 10
+            }
+          ]
+        },
+        {
+          "text": "Demander pourquoi il ne cherche pas lui-même.",
+          "vers": "vieillard_part",
+          "effects": [
+            {
+              "stat": "savoir",
+              "val": 5
+            }
+          ]
+        }
+      ],
+      "x": 280,
+      "y": 160
+    },
+    "vieillard_part": {
+      "id": "vieillard_part",
+      "title": "Le Départ du Vieillard",
+      "location": "Boucherie — Entrée",
+      "narrator": "",
+      "text": "Le vieil homme reprend son vieux couteau.\n\nIl se dirige vers la porte.\n\nPuis il s'arrête.\n\nIl rit doucement.\n\nPas méchamment.\nComme quelqu'un qui vient de faire une bonne blague\net attend que l'autre la comprenne.\n\n**« Bonne chance, boucher. »**\n\nLa clochette sonne.\n\nLa porte se referme.\n\nTu restes seul avec la photo sur le comptoir.\n\nEt quelque chose d'étrange dans la poitrine.\n\nPas de la peur.\n\nQuelque chose de plus ancien que ça.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Ramasser la photo.",
+          "vers": "depart",
+          "effects": [
+            {
+              "stat": "audace",
+              "val": 5
+            }
+          ]
+        },
+        {
+          "text": "Regarder par la vitrine.",
+          "vers": "depart",
+          "effects": [
+            {
+              "stat": "prudence",
+              "val": 5
+            }
+          ]
+        }
+      ],
+      "x": 380,
+      "y": 200
+    },
+    "vieil_homme_apparait": {
+      "id": "vieil_homme_apparait",
+      "title": "Une Voix Familière",
+      "location": "Temple — Salle Finale",
+      "narrator": "",
+      "text": "Tu tiens la lame.\n\nElle est plus légère que tu ne l'imaginais.\nParfaitement équilibrée.\n\nPuis tu entends quelque chose.\n\nDes pas.\n\nLents.\nAssurés.\n\nTu te retournes.\n\nLe vieil homme est là.\n\nIl n'a plus l'air vieux.\n\nIl se tient droit.\nSes yeux sont froids.\nSes mains ne tremblent plus.\n\n**« Je savais que tu trouverais le chemin. »**\n\nIl sourit.\n\n**« C'est pour ça que je suis venu te voir. »**",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Reculer vers la sortie.",
+          "vers": "confrontation",
+          "effects": [
+            {
+              "stat": "prudence",
+              "val": 10
+            }
+          ]
+        },
+        {
+          "text": "« Vous m'avez suivi. »",
+          "vers": "confrontation",
+          "effects": [
+            {
+              "stat": "savoir",
+              "val": 5
+            }
+          ]
+        },
+        {
+          "text": "Serrer la lame.",
+          "vers": "confrontation",
+          "effects": [
+            {
+              "stat": "audace",
+              "val": 10
+            }
+          ]
+        }
+      ],
+      "x": 1500,
+      "y": 1000
+    },
+    "confrontation": {
+      "id": "confrontation",
+      "title": "La Confrontation",
+      "location": "Temple — Salle Finale",
+      "narrator": "",
+      "text": "**« Donne-moi la lame. »**\n\nIl fait un pas vers toi.\n\n**« Mon père l'a cherchée. Son père avant lui. »**\n**« Elle nous appartient. »**\n\nUn grondement traverse le temple.\n\nDes pierres commencent à tomber du plafond.\n\nVous avez tous les deux le même réflexe.\n\nRegarder le plafond.\nRegarder la sortie.\nRegarder la lame.\n\nIl tend la main.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Lui donner la lame.",
+          "vers": "fin_trahison"
+        },
+        {
+          "text": "Courir vers la sortie avec la lame.",
+          "vers": "fuite_temple",
+          "effects": [
+            {
+              "stat": "audace",
+              "val": 10
+            }
+          ]
+        },
+        {
+          "text": "Proposer de sortir ensemble d'abord.",
+          "vers": "fuite_temple",
+          "effects": [
+            {
+              "stat": "savoir",
+              "val": 10
+            }
+          ]
+        }
+      ],
+      "x": 1600,
+      "y": 1000,
+      "timer": {
+        "duration": 6,
+        "auto": "first"
+      }
+    },
+    "fuite_temple": {
+      "id": "fuite_temple",
+      "title": "La Fuite",
+      "location": "Temple — Couloirs",
+      "narrator": "",
+      "text": "Vous courez tous les deux.\n\nLe temple s'effondre derrière vous.\n\nDans le couloir, le vieil homme trébuche.\n\nTu pourrais continuer.\n\nTu t'arrêtes.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "L'aider à se relever.",
+          "vers": "fin_principale",
+          "effects": [
+            {
+              "stat": "savoir",
+              "val": 10
+            }
+          ]
+        },
+        {
+          "text": "Continuer sans lui.",
+          "vers": "fin_principale",
+          "effects": [
+            {
+              "stat": "audace",
+              "val": 5
+            }
+          ]
+        }
+      ],
+      "x": 1650,
+      "y": 1080,
+      "timer": {
+        "duration": 4,
+        "auto": "last"
+      }
+    },
+    "fin_trahison": {
+      "id": "fin_trahison",
+      "title": "Fin — La Trahison",
+      "location": "",
+      "narrator": "",
+      "text": "Tu poses la lame dans sa main.\n\nIl ne dit pas merci.\n\nIl part en courant vers la sortie.\n\nTu le regardes disparaître dans le couloir.\n\nLe temple continue de s'effondrer autour de toi.\n\nTu cours aussi.\n\nMais les pierres tombent plus vite que toi.\n\nTu n'as pas la lame.\n\nTu n'as plus rien.",
+      "isStart": false,
+      "isEnd": true,
+      "transition": "fade",
+      "choices": [],
+      "x": 1700,
+      "y": 1100
+    }
+  }
+}
