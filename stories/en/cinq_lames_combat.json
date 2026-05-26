@@ -1,0 +1,997 @@
+{
+  "name": "The Five Blades — The Final Combat",
+  "kids": false,
+  "askPlayerName": true,
+  "pack": "cinq_lames",
+  "stats": [
+    {
+      "id": "chaos",
+      "label": "Chaos",
+      "start": 60,
+      "max": 100,
+      "color": "#9b5de5"
+    },
+    {
+      "id": "controle",
+      "label": "Monitoring",
+      "start": 20,
+      "max": 100,
+      "color": "#00bbf9"
+    },
+    {
+      "id": "ikar_vie",
+      "label": "Ikar",
+      "start": 1,
+      "max": 1,
+      "color": "#f94144"
+    },
+    {
+      "id": "aryn_vie",
+      "label": "Aryn",
+      "start": 1,
+      "max": 1,
+      "color": "#90e0ef"
+    },
+    {
+      "id": "taera_vie",
+      "label": "Taera",
+      "start": 1,
+      "max": 1,
+      "color": "#90be6d"
+    },
+    {
+      "id": "vael_vie",
+      "label": "Vael",
+      "start": 1,
+      "max": 1,
+      "color": "#c8a96e"
+    }
+  ],
+  "theme": {},
+  "scenes": {
+    "combat_intro": {
+      "id": "combat_intro",
+      "title": "The Volcano Route",
+      "location": "Volcanic Plain — Dawn",
+      "narrator": "The Chaos is growing. The road goes up.",
+      "text": "You feel the heat before you see the volcano.\n\nThe air changes.\nHeavier.\nMore loaded.\n\nLike before a storm.\n\nExcept there are no clouds.\n\nYour black blade is vibrating in her sheath.\n\nShe did it all night.\n\nYou didn't sleep.",
+      "isStart": true,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Continue.",
+          "vers": "pourquoi_volcan"
+        },
+        {
+          "text": "Look at the four before you leave.",
+          "vers": "regard_matin"
+        }
+      ],
+      "x": 60,
+      "y": 60
+    },
+    "regard_matin": {
+      "id": "regard_matin",
+      "title": "Morning",
+      "location": "Camp — Dawn",
+      "narrator": "",
+      "text": "They're preparing their business in silence.\n\nIkar checks his blade.\nAryn's packing her stuff carefully.\nTaera tightens the purse around her neck.\nVael doesn't whistle.\n\nThat silence.\n\nYou've known them a few weeks.\n\nThat's enough to know that this silence is different.\n\nThey're scared.\n\nNot from you.\n\nFor you.\n\nIt's different.\n\nAnd it's worse.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Continue.",
+          "vers": "pourquoi_volcan",
+          "effects": [
+            {
+              "stat": "controle",
+              "val": 10
+            }
+          ]
+        }
+      ],
+      "x": 180,
+      "y": 60
+    },
+    "pourquoi_volcan": {
+      "id": "pourquoi_volcan",
+      "title": "Why here",
+      "location": "Volcanic Plain",
+      "narrator": "",
+      "text": "Aryn's walking next to you.\n\n**\"The Chaos needs a point of liberation. *\n**\"A place powerful enough to absorb what will come out. *\n\n**\"What if it overflows? *\n\nShe looks at the volcano in the distance.\n\n**\"The volcano has been melting for centuries. *\n**\"He saw others. *\n\nVael is passing between you two.\n\n**\"A very reassuring way to present things. *\n\n**\"I know. \"** says Aryn.\n\nShe's not trying to correct it.\n\nThis is the first time.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Continue towards the volcano.",
+          "vers": "montee_debut"
+        },
+        {
+          "text": "Ask Aryn what she really thinks.",
+          "vers": "aryn_vrai_pense",
+          "effects": [
+            {
+              "stat": "controle",
+              "val": 5
+            }
+          ]
+        }
+      ],
+      "x": 60,
+      "y": 180
+    },
+    "aryn_vrai_pense": {
+      "id": "aryn_vrai_pense",
+      "title": "What She Really Thinks",
+      "location": "Volcanic Plain",
+      "narrator": "",
+      "text": "She's thinking a long time.\n\n**\"I think you'll make it. *\n\n**\"And you believe him? *\n\nQuiet.\n\n**\"I want to. *\n**\"Sufficiently strong to make it count. *\n\nShe's looking at you.\n\n**\"Caël had no one who wanted to. *\n**\"This is where everything has changed. *\n**\"Not in battle. *\n**\"Before. *\n\nShe's back on her walk.\n\n**\"We're here. *\n**\"This is what is different. *",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Continue.",
+          "vers": "montee_debut",
+          "effects": [
+            {
+              "stat": "controle",
+              "val": 10
+            }
+          ]
+        }
+      ],
+      "x": 180,
+      "y": 180
+    },
+    "montee_debut": {
+      "id": "montee_debut",
+      "title": "The Mount",
+      "location": "Volcano flank — Low",
+      "narrator": "The floor is warm under the feet.",
+      "text": "The path goes up.\n\nClose.\nFake.\nEvery step on black rock.\n\nThe old solidified lava forms walls on each side.\nFrozen rivers.\nFrozen in their movement.\n\nYour blade vibrates stronger every meter.\n\nLike she recognized the place.\n\nOr what's coming.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Talk to Taera.",
+          "vers": "montee_taera"
+        },
+        {
+          "text": "Talk to Vael.",
+          "vers": "montee_vael"
+        },
+        {
+          "text": "Walk in silence.",
+          "vers": "montee_silence",
+          "effects": [
+            {
+              "stat": "chaos",
+              "val": 5
+            }
+          ]
+        }
+      ],
+      "x": 60,
+      "y": 300
+    },
+    "montee_silence": {
+      "id": "montee_silence",
+      "title": "The Silence of the Mount",
+      "location": "Volcano flank",
+      "narrator": "",
+      "text": "You're walking.\n\nJust walk.\n\nHeat.\nThe noise of the volcano.\nThe cracking of the rock under the feet.\n\nIn your head — Cendral.\n\nMira's bakery.\nThe wall of the square.\nOld Marek and his sculpting knife.\n\nThe knife is still on your belt.\n\nYou touch him.\n\nHe's hot.\n\nIt's all hot here.\n\nBut that — it comes from elsewhere.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Continue.",
+          "vers": "montee_taera",
+          "effects": [
+            {
+              "stat": "controle",
+              "val": 5
+            }
+          ]
+        }
+      ],
+      "x": 300,
+      "y": 300
+    },
+    "montee_taera": {
+      "id": "montee_taera",
+      "title": "Taera",
+      "location": "Volcano flank — Mi-height",
+      "narrator": "",
+      "text": "Taera touches the rock while walking.\n\nHis fingers slide on the black surface.\n\n**\"The earth suffers here. *\n\n**\"For a long time? *\n\n**\"Always. *\n**\"It is his natural state. *\n\nShe takes her hand off.\n\n**\"Some places were born to burn. *\n**\"It makes them no less real. *\n\nShe's looking at you.\n\n**\"You were born to carry the Chaos. *\n**\"It makes you no less. *\n\nShe's back on her walk.\n\n**\"The earth knows. *\n**\"Even here. *",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Continue.",
+          "vers": "montee_vael",
+          "effects": [
+            {
+              "stat": "controle",
+              "val": 10
+            }
+          ]
+        }
+      ],
+      "x": 60,
+      "y": 420
+    },
+    "montee_vael": {
+      "id": "montee_vael",
+      "title": "Vael",
+      "location": "Volcano flank — Mi-height",
+      "narrator": "",
+      "text": "Vael walks next to you.\n\nHe's trying to whistle.\n\nThe hot air distorts the sound.\n\nHe stops.\n\n**\"Even my music doesn't work here. *\n\n**\"It's a bad sign. *\n\n**\"Probably. *\n\nHe looks down at the lava.\n\n**\"I've been looking for a joke for today. *\n**\"All night. *\n\n**\"And? *\n\n**\"Nothing. *\n\nHe smiles.\nDifferent than usual.\n\n**\"What proves it's serious. *\n**\"Because I always find a joke. *\n**\"Always. *\n\n**\"Except today. *",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Continue.",
+          "vers": "montee_ikar"
+        }
+      ],
+      "x": 60,
+      "y": 540
+    },
+    "montee_ikar": {
+      "id": "montee_ikar",
+      "title": "Ikar",
+      "location": "Volcano flank — High",
+      "narrator": "",
+      "text": "Ikar's in front.\n\nAlways.\n\nYou're speeding up.\n\nHe can hear you.\nHe's not slowing down.\nHe's not turning around.\n\n**\"Ikar. *\n\nNothing.\n\n**\"I know about tonight. *\n\nHe stops.\n\nLong silence.\n\n**\"I wanted you to know...\"**\n\n**\"No.\"** he says.\n\n**\"No? *\n\n**\"You don't have to tell me you understand. *\n**\"Or forgive. *\n**\"You don't owe anything. *\n\nHe turns around.\n\n**\"I have to be here. *\n**\"Today. *\n**\"That's all I can do. *\n\nHe's leaving again.\n\nSlower this time.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Continue to the top.",
+          "vers": "montee_aryn"
+        }
+      ],
+      "x": 60,
+      "y": 660
+    },
+    "montee_aryn": {
+      "id": "montee_aryn",
+      "title": "Aryn — The Last Word",
+      "location": "Volcano flank — Very high",
+      "narrator": "The sky becomes red.",
+      "text": "Aryn's walking at your pace.\n\nShe's not looking at the top.\n\nShe's looking at you.\n\n\"Do you remember what Lyra told me? *\n\n**\"No. *\n\n**\"That doubt is water. *\n**\"He's bypassing. *\n**\"He's waiting. *\n**\"He ends up finding his way. *\n\nShe's taking a break.\n\n**\"The Chaos also finds its way. *\n**\"The question is which one. *\n\n**\"What if I choose the wrong one? *\n\nShe's looking at you.\n\nLong time.\n\n**\"Then we were there anyway. *\n**\"And it will count. *\n**\"Even if you don't remember. *\n**\"We were there. *",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Get up.",
+          "vers": "avant_sommet",
+          "effects": [
+            {
+              "stat": "controle",
+              "val": 15
+            }
+          ]
+        }
+      ],
+      "x": 60,
+      "y": 780
+    },
+    "avant_sommet": {
+      "id": "avant_sommet",
+      "title": "Before the Summit",
+      "location": "Volcano flank — Crest",
+      "narrator": "",
+      "text": "Fifty meters.\n\nYou're stopping.\n\nThe lava is visible all around.\nThe sky of deep red.\nThe top that smokes.\n\nThe four are half a circle behind you.\n\nTaera squeezes his purse.\nVael closes his eyes for a second.\nAryn puts his hand on his sword — not to draw.\nJust to feel she's here.\n\nIkar.\n\nIkar's looking at you.\n\nYou're not Caël. * he says.\n\nJust this.\n\nYou're not Caël. *\n\nYou hate your head.\n\nYou're up.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Get to the top.",
+          "vers": "sommet_arrive"
+        }
+      ],
+      "x": 60,
+      "y": 900
+    },
+    "sommet_arrive": {
+      "id": "sommet_arrive",
+      "title": "The Summit",
+      "location": "Volcano summit",
+      "narrator": "The world is huge from here.",
+      "text": "The natural platform at the top.\n\nThe lava in a circle.\nThe red and black sky.\nThe burning wind.\n\nYou're stopping.\n\nYour blade.\n\nShe's not vibrating anymore.\n\nShe's rumbling.\n\nA sound you can't hear with your ears.\n\nWith the bones.\n\nThe Chaos recognizes the place.\n\nHe wants out.\n\n**\"Here. \"** says Aryn.\n**\"Just a little more. *\n\nHis voice breaks on the last word.\n\nToo late.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Continue.",
+          "vers": "chaos_explose",
+          "effects": [
+            {
+              "stat": "chaos",
+              "val": 15
+            }
+          ]
+        }
+      ],
+      "x": 60,
+      "y": 1020,
+      "timer": {
+        "duration": 6,
+        "auto": "last"
+      }
+    },
+    "chaos_explose": {
+      "id": "chaos_explose",
+      "title": "Explosion",
+      "location": "Volcano summit",
+      "narrator": "",
+      "text": "The black blade explodes.\n\nViolet light in all directions.\n\nThe floor cracks around you.\n\nAll four back.\n\nIkar raises her blade — it lights up.\nAryn invokes a shield of water between her and the Chaos.\nTaera plants his sword — a rock wall emerges.\nVael disappears in the air.\n\n**\" {{player}}!** Cree Taera.\n\nYou can't answer that.\n\nChaos speaks for you.\n\nAnd the four —\n\nThe four are faced with what they have spent their entire lives preparing for.\n\nThey didn't step back.\n\nNone of them.\n\nThe fight begins.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Continue.",
+          "vers": "combat_action1"
+        }
+      ],
+      "x": 60,
+      "y": 1140
+    },
+    "combat_action1": {
+      "id": "combat_action1",
+      "title": "Ikar",
+      "location": "Volcano summit",
+      "narrator": "The Chaos is crossing you. You're out of control.",
+      "text": "Ikar charges first.\n\nSure.\n\nIt's Ikar.\n\nIts burning blade traces an arc of fire in the warm air.\n\nDirect.\nNo way.\nAs always.\n\nThe Chaos in you sees him coming.\n\nA purple energy concentrates in your right hand.\n\nYou got a second.\n\nOne.\n\nHit.\nOr hold back.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Hit — let the Chaos decide.",
+          "vers": "ikar_frappe",
+          "effects": [
+            {
+              "stat": "chaos",
+              "val": 10
+            },
+            {
+              "stat": "ikar_vie",
+              "val": -1
+            }
+          ]
+        },
+        {
+          "text": "Retain — concentrate energy on lava.",
+          "vers": "ikar_retenu",
+          "effects": [
+            {
+              "stat": "controle",
+              "val": 10
+            }
+          ]
+        }
+      ],
+      "x": 60,
+      "y": 1260,
+      "timer": {
+        "duration": 8,
+        "auto": "first"
+      }
+    },
+    "ikar_frappe": {
+      "id": "ikar_frappe",
+      "title": "Ikar Touched",
+      "location": "Volcano summit",
+      "narrator": "",
+      "text": "The violet energy hits Ikar in the chest.\n\nHe's flying back.\n\nFive meters.\n\nHe hits the rock.\n\nThe blade goes off.\n\nQuiet.\n\nHe's not moving.\n\nJust a second.\n\nTwo.\n\nTaera shouts her name.\n\nIkar's getting up.\n\nSlowly.\nVery slowly.\n\nHe's watching his blade off.\n\nHe's holding the handle.\n\nIt's turning on again.\n\nKid.\nTremblant.\nBut now.\n\nHe's looking at you.\n\n**\" Again. *\n\nHis voice doesn't tremble.\n\nHis hands are.\n\nHe's still moving.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Continue.",
+          "vers": "entre_actions_1",
+          "effects": [
+            {
+              "stat": "chaos",
+              "val": 5
+            }
+          ]
+        }
+      ],
+      "x": 60,
+      "y": 1380
+    },
+    "ikar_retenu": {
+      "id": "ikar_retenu",
+      "title": "Deduction",
+      "location": "Volcano summit",
+      "narrator": "",
+      "text": "Energy goes to the lava.\n\nShe absorbs it with a whistle.\n\nThe lava rises a meter.\n\nFall back.\n\nIkar stops at a breath of you.\n\nHis burning blade between you.\n\nHe looks you in the eye.\n\n**\"You have retained. *\n\n**\"Yes. *\n\nSomething in his face.\n\nNot relief.\n\nThe resolution.\n\n**\"Once again.** he said.\n\nHe's stepping back.\n\nHe's waiting for the rest with you.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Continue.",
+          "vers": "entre_actions_1",
+          "effects": [
+            {
+              "stat": "controle",
+              "val": 10
+            }
+          ]
+        }
+      ],
+      "x": 180,
+      "y": 1380
+    },
+    "entre_actions_1": {
+      "id": "entre_actions_1",
+      "title": "Between the Waves",
+      "location": "Volcano summit",
+      "narrator": "",
+      "text": "The Chaos is pushing.\n\nLike a heart.\n\nEach beat sends a wave of energy.\n\nYou're in the center.\n\nYou see everything.\n\nAryn who keeps his water shield — the rising steam.\nTaera holding his rock wall — his arms tremble.\nVael somewhere in the air — you hear it without seeing it.\nIkar standing — his blade that refuses to extinguish.\n\nThey hold.\n\nAll four of you.\n\nFor you.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Continue.",
+          "vers": "combat_action2"
+        }
+      ],
+      "x": 60,
+      "y": 1500
+    },
+    "combat_action2": {
+      "id": "combat_action2",
+      "title": "Vael",
+      "location": "Volcano summit",
+      "narrator": "",
+      "text": "Vael reappears.\n\nBehind you.\n\nHe's trying to surround your arms.\n\nNot to hurt you.\n\nTo stabilize you.\n\nThe Chaos feels someone behind his back.\n\nHe's reacting.\n\nBefore you can decide.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Let it go — let it go.",
+          "vers": "vael_frappe",
+          "effects": [
+            {
+              "stat": "chaos",
+              "val": 10
+            },
+            {
+              "stat": "vael_vie",
+              "val": -1
+            }
+          ]
+        },
+        {
+          "text": "Resist — turn to the lava.",
+          "vers": "vael_retenu",
+          "effects": [
+            {
+              "stat": "controle",
+              "val": 10
+            }
+          ]
+        }
+      ],
+      "x": 60,
+      "y": 1620,
+      "timer": {
+        "duration": 6,
+        "auto": "first"
+      }
+    },
+    "vael_frappe": {
+      "id": "vael_frappe",
+      "title": "Vael Touched",
+      "location": "Volcano summit",
+      "narrator": "",
+      "text": "Energy explodes in circles.\n\nVael is projected.\n\nIt lands at the edge of the platform.\n\nExactly on the edge.\n\nHis hands grab the rock.\n\nIt's not falling.\n\nBut he's not up yet.\n\nHe's staying here.\nHands in the rock.\nHead down.\n\nTaera runs towards him.\n\nHe raises his hand.\n\nI'm here. *\n\nThen he turns to you.\n\nHis usual smile.\n\nBut his eyes —\n\nHis eyes don't smile.\n\n**\"I knew you weren't a monster. *\n\nJust this.\n\nHe's getting up.\n\nHe's back in position.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Continue.",
+          "vers": "entre_actions_2",
+          "effects": [
+            {
+              "stat": "chaos",
+              "val": 5
+            }
+          ]
+        }
+      ],
+      "x": 60,
+      "y": 1740
+    },
+    "vael_retenu": {
+      "id": "vael_retenu",
+      "title": "Stabilized",
+      "location": "Volcano summit",
+      "narrator": "",
+      "text": "Energy goes to the lava.\n\nVael's got you.\n\nHis hands on your arms.\n\nThe air around you is swirling.\n\n**\"Here. He said in your ear.\n**\"Like this. *\n\n**\"Do you have a joke now? *\n\n**\"I'm looking for one. *\n**\"Leave me another thirty seconds. *\n\nStill.\n\nDespite the volcano.\nThe lava.\nThe Chaos.\n\nYou're laughing.\n\nJust a second.\n\nThat's enough.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Continue.",
+          "vers": "entre_actions_2",
+          "effects": [
+            {
+              "stat": "controle",
+              "val": 10
+            }
+          ]
+        }
+      ],
+      "x": 180,
+      "y": 1740
+    },
+    "entre_actions_2": {
+      "id": "entre_actions_2",
+      "title": "The Volcano Answers",
+      "location": "Volcano summit",
+      "narrator": "",
+      "text": "The ground is shaking.\n\nThe volcano responds to the Chaos.\n\nThe lava rises on the edges of the platform.\n\nAryn is screaming something.\n\nYou don't hear the words.\n\nBut you see his face.\n\nNo fear.\n\nDetermination.\n\nShe tightens her shield around you.\n\nWater vapour against the heat of the lava.\n\nShe's got it.\n\nFor how long?",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Continue.",
+          "vers": "combat_action3"
+        }
+      ],
+      "x": 60,
+      "y": 1860
+    },
+    "combat_action3": {
+      "id": "combat_action3",
+      "title": "Aryn",
+      "location": "Volcano summit",
+      "narrator": "",
+      "text": "Aryn's moving into the Chaos.\n\nNot his blade.\n\nHis hands open.\n\nIt creates a corridor of water between you.\n\nCold.\nCalm down.\nImpossible here.\n\nBut real.\n\n**\"Look at me.** she says.\n\nThe Chaos pushes against the corridor.\n\nAryn step back.\n\nShe's got it.\n\n**\"Look at me. *",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Push — break the corridor.",
+          "vers": "aryn_frappe",
+          "effects": [
+            {
+              "stat": "chaos",
+              "val": 15
+            },
+            {
+              "stat": "aryn_vie",
+              "val": -1
+            }
+          ]
+        },
+        {
+          "text": "Watch it — hold it.",
+          "vers": "aryn_retenu",
+          "effects": [
+            {
+              "stat": "controle",
+              "val": 15
+            }
+          ]
+        }
+      ],
+      "x": 60,
+      "y": 1980,
+      "timer": {
+        "duration": 7,
+        "auto": "first"
+      }
+    },
+    "aryn_frappe": {
+      "id": "aryn_frappe",
+      "title": "Aryn Touched",
+      "location": "Volcano summit",
+      "narrator": "",
+      "text": "The Chaos breaks the corridor.\n\nThe water explodes in hot steam.\n\nAryn is projected back.\n\nShe's falling.\n\nIkar's here in two steps.\n\nHe's holding her before she touches the ground.\n\nHe's looking at her.\n\n**\"Aryn. *\n\n**\"I'm here.** she says.\n\nHis voice is normal.\n\nHis burnt hands are not.\n\nShe's back up.\n\nShe's looking at her palms.\n\n**\"Water doesn't scream. *\n\nShe's reshaping the hallway.\n\nSmaller.\n\nWith his hands shaking.\n\nBut she's reforming him.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Continue.",
+          "vers": "avant_taera",
+          "effects": [
+            {
+              "stat": "chaos",
+              "val": 10
+            }
+          ]
+        }
+      ],
+      "x": 60,
+      "y": 2100
+    },
+    "aryn_retenu": {
+      "id": "aryn_retenu",
+      "title": "In the Corridor",
+      "location": "Volcano summit",
+      "narrator": "",
+      "text": "You look at her.\n\nThe Chaos is back.\n\nNot much.\n\nBut enough.\n\nIn the cold water corridor —\n\nA moment out of the Chaos.\n\n**\"Do you remember Cendral? \"** says Aryn.\n\n**\"Yes. *\n\n**\"We do this for them. *\n**\"Not for prophecy. *\n**\"Not for the Order. *\n**\"For the people who live in the Ashendral of the world. *\n\nThe corridor is closing.\n\nThe Chaos is back.\n\nBut something remains.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Continue.",
+          "vers": "avant_taera",
+          "effects": [
+            {
+              "stat": "controle",
+              "val": 15
+            }
+          ]
+        }
+      ],
+      "x": 180,
+      "y": 2100
+    },
+    "avant_taera": {
+      "id": "avant_taera",
+      "title": "The Last Wall",
+      "location": "Volcano summit",
+      "narrator": "The lava is rising. The platform is shrinking.",
+      "text": "The platform cracks.\n\nThe lava moves on the edges.\n\nMaybe there's 10 meters of stable rock left.\n\nThe four are here.\n\nWounded.\nExhausted.\nGet up.\n\nThe Chaos keeps coming out.\n\nHe won't stop by himself.\n\nWe need something.\n\nOr someone.\n\nTaera puts his sword in the rock.\n\nShe takes something from her purse.\n\nThe seed she picked up the morning she left.\n\nShe squeezes it in her palm.\n\nThen she moves.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Continue.",
+          "vers": "moment_taera"
+        }
+      ],
+      "x": 60,
+      "y": 2220
+    },
+    "moment_taera": {
+      "id": "moment_taera",
+      "title": "Taera",
+      "location": "Volcano summit",
+      "narrator": "The world is reduced to this platform.",
+      "text": "She's moving into the Chaos.\n\nHis clothes burn on the edges.\n\nShe's not stopping.\n\nThe heat of the lava behind it.\nThe Chaos in front.\n\nShe's moving.\n\nHer hair burns slightly.\n\nShe's not stopping.\n\nHis hands bleed where the Chaos touches her.\n\nShe.\nDon't.\nStop.\nNot.\n\nIt's a meter away.\n\nHis eyes.\n\n**\" {{player}}. *\n\nYour name.\n\n**\"I'm here. *\n\nShe opens her hand.\n\nThe seed in his palm.\n\n**\"The earth says you can. *\n\nHis hand stretched out.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Take his hand.",
+          "vers": "taera_main_prise",
+          "effects": [
+            {
+              "stat": "controle",
+              "val": 30
+            }
+          ]
+        },
+        {
+          "text": "Back up.",
+          "vers": "taera_main_refusee",
+          "effects": [
+            {
+              "stat": "chaos",
+              "val": 20
+            }
+          ]
+        }
+      ],
+      "x": 60,
+      "y": 2340,
+      "timer": {
+        "duration": 12,
+        "auto": "last"
+      }
+    },
+    "taera_main_prise": {
+      "id": "taera_main_prise",
+      "title": "Hand",
+      "location": "Volcano summit",
+      "narrator": "",
+      "text": "You take his hand.\n\nThe seed between your two palms.\n\nLand against the Chaos.\n\nSomething's changing.\n\nViolet energy does not disappear.\n\nShe's focused.\n\nLike water that finds its bed.\nLike a fire that finds its home.\nLike air that finds its direction.\nLike earth that finds its root.\n\nTear your hand.\n\nIkar's coming to your left.\nHis burning blade on your shoulder.\nHot.\nReal.\n\nAryn to your right.\nHis shield of water that surrounds the five.\n\nVael back.\nThe whirling wind.\n\nFive.\n\nFor the first time really five.\n\n**\"Now. \"** says Aryn.\n\nThe Chaos is coming out.\n\nWhole.\n\nTo the volcano.\n\nThe lava rises 20 meters.\n\nThe violet light disappears in the lava.\n\nQuiet.\n\nTrue silence.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Continue.",
+          "vers": "apres_combat"
+        }
+      ],
+      "x": 60,
+      "y": 2460
+    },
+    "apres_combat": {
+      "id": "apres_combat",
+      "title": "After",
+      "location": "Volcano summit — Silence",
+      "narrator": "",
+      "text": "You look at your hands.\n\nThe black blade is here.\n\nShe's not vibrating anymore.\nShe's not absorbing anymore.\n\nShe's right here.\n\nCold.\n\nAs always.\n\nYou're looking up.\n\nAll four are standing.\n\nSome barely.\n\nBut standing.\n\nAll four of you.\n\nVael suddenly sits on the rock.\n\n**\"Good.** he said.\n**\"It's done. *\n\n**\"Is that all you have to say?** asks Ikar.\n\n**\"I found a joke. *\n**\"But the timing is bad. *\n**\"I keep it for later. *\n\nIkar's watching him.\n\nHe's shaking his head.\n\nBut something in his face.\n\nSomething like a smile.\n\nAlmost.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Look at the damage.",
+          "vers": "evaluer_degats"
+        }
+      ],
+      "x": 60,
+      "y": 2580
+    },
+    "evaluer_degats": {
+      "id": "evaluer_degats",
+      "title": "The Prize",
+      "location": "Volcano summit",
+      "narrator": "",
+      "text": "Ikar is sitting.\n\nHis hand on his chest where you touched him.\nOr not.\n\nVael's on his side.\nOr not.\n\nAryn treats his burnt hands.\nOr not.\n\nTaera is next to you.\nThe seed always in his palm.\n\nYou look at her.\n\nShe opens her hand.\n\nThe seed is intact.\n\n**\"I plant it where we will build. \"** she says.\n**\"Somewhere. *\n**\"Where something is needed that grows. *\n\nIkar looks up at you.\n\nHe's not saying anything.\n\nHe hits the rock twice with his fist.\n\nLike his father was banging on the avil.\n\nGood. *",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Get down together.",
+          "vers": "verite_conversations",
+          "requires": {
+            "stat": "ikar_vie",
+            "min": 1
+          }
+        },
+        {
+          "text": "Get down together.",
+          "vers": "verite_conversations"
+        }
+      ],
+      "x": 60,
+      "y": 2700
+    },
+    "fin_victoire_complete": {
+      "id": "fin_victoire_complete",
+      "title": "End — The Storm Past",
+      "location": "",
+      "narrator": "",
+      "text": "The sun rises on the volcano.\n\nRed first.\nThen orange.\nThen yellow.\n\nYou go down together.\n\nSlowly.\n\nNobody talks for a long time.\n\nThen Taera:\n\n**\"The earth suffers less here. *\n\n**\"Since when? *\n\n**\"Since that night. *\n\nYou touch the knife to your belt.\n\nMarek's.\n\nHot again.\n\nStill hot.\n\nVael finally whistles.\n\nIt works better downhill.\n\nIkar walks ahead.\nAs always.\n\nBut he's waiting at the turn.\n\nAryn's walking next to you.\n\n**\"What are you thinking? *\n\n**\"In Cendral. *\n**\"On the wall of the square. *\n*\"To Mira and his bread. *\n*\"To Luke and his broken wand. *\n\n**\"They will rebuild. *\n\n**\"I know. *\n\n**\"What about you? *\n\nYou look at the black blade.\n\nIt absorbs the morning light.\n\nCold.\n\n*\"Me too. *",
+      "isStart": false,
+      "isEnd": true,
+      "transition": "fade",
+      "choices": [],
+      "x": 60,
+      "y": 2820
+    },
+    "fin_victoire_blessures": {
+      "id": "fin_victoire_blessures",
+      "title": "End — Blood Price",
+      "location": "",
+      "narrator": "",
+      "text": "The descent is slow.\n\nSome are limping.\nSome people lean.\n\nYou look at their wounds.\n\nThe wounds you've done.\n\nVael sees you looking.\n\n**\"Stop that face. *\n\n**\"What? *\n\n**\"This face. *\n**\"We're up. *\n**\"All five. *\n**\"This is the result. *\n\nHe's trying to smile.\n\nIt hurts to see that he's trying.\n\nTaera walks next to you.\n\n**\"The scars remain.** she says.\n**\"It's normal. *\n**\"It means something real happened. *\n\nIkar doesn't say anything all along.\n\nAt the bottom of the volcano it stops.\n\nHe's looking at you.\n\nHe's laying his hand on your shoulder.\n\nJust a second.\n\nHe's taking it off.\n\nHe continues.\n\nThat's how he forgives.\n\nYou know that.\n\nNow you know.",
+      "isStart": false,
+      "isEnd": true,
+      "transition": "fade",
+      "choices": [],
+      "x": 180,
+      "y": 2820
+    },
+    "taera_main_refusee": {
+      "id": "taera_main_refusee",
+      "title": "Apply",
+      "location": "Volcano summit",
+      "narrator": "",
+      "text": "You're back.\n\nTaera is still moving forward.\n\n**\" {{player}}. *\n\nThe Chaos explodes.\n\nIt's projected.\n\nIkar shouts his name.\n\nHe's running.\n\nHe's holding her.\n\nHe holds her in his arms.\n\nHe's looking at you.\n\nNo anger.\n\nSomething worse.\n\nPain.\n\nAryn is screaming something.\nVael shouts something.\n\nThe Chaos no longer hears them.\n\nThe Chaos can't hear anything anymore.\n\nAnd you—\n\nYou look.\n\nTaera's hand.\n\nStill tense.\n\nEven down.\n\nShe's still reaching out.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Continue.",
+          "vers": "chaos_deborde",
+          "effects": [
+            {
+              "stat": "chaos",
+              "val": 30
+            },
+            {
+              "stat": "taera_vie",
+              "val": -1
+            }
+          ]
+        }
+      ],
+      "x": 180,
+      "y": 2460
+    },
+    "chaos_deborde": {
+      "id": "chaos_deborde",
+      "title": "Overflow",
+      "location": "Volcano summit",
+      "narrator": "",
+      "text": "The Chaos is coming out.\n\nThere's no more in there.\nNo more outside.\n\nJust the Chaos.\n\nThe four are here.\n\nIkar holding Taera.\nAryn in front of them.\nVael that materializes between you and others.\n\nA rampart.\n\nThe Chaos crosses them.\n\nNot to kill them.\n\nTo pass.\n\nBeyond the platform.\nBeyond the volcano.\nTo Aerith.\n\nTo everything.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Continue.",
+          "vers": "un_moment"
+        }
+      ],
+      "x": 60,
+      "y": 2580
+    },
+    "un_moment": {
+      "id": "un_moment",
+      "title": "A Moment",
+      "location": "Volcano summit — In Chaos",
+      "narrator": "",
+      "text": "A moment ago.\n\nOne.\n\nWhere you see their faces.\n\nIkar doesn't hit.\nWho can't.\nWho made that choice.\n\nAryn whose eyes say:\nI knew it wasn't your fault. *\n\nVael's still looking for a joke.\nTo give you a way out.\nA door.\nSomething.\n\nTaera whose hand is still stretched.\n\nAgain.\n\nEven now.\n\nThis moment lasts for a second.\n\nAn eternity.\n\nAnd then the Chaos goes back.\n\nAnd you with him.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Continue.",
+          "vers": "fin_chaos_regne"
+        }
+      ],
+      "x": 60,
+      "y": 2700
+    },
+    "fin_chaos_regne": {
+      "id": "fin_chaos_regne",
+      "title": "End — What We Leave",
+      "location": "",
+      "narrator": "",
+      "text": "Aerith wears the scars.\n\nCities are rebuilding.\nPeople remember.\nChildren learn the new legend.\n\nThere's a new statue in Aurenthal.\n\nNot from you.\n\nFour.\n\nIkar holding Taera.\nAryn in front of them.\nVael between them and the Chaos.\n\nThey held to the end. *\n\nThat's what we're burning on.\n\nNot their victories.\n\nTheir way of staying.\n\nSomewhere — we don't know where —\n\nA seed grows in the rock of a volcano.\n\nNobody understood how.\n\nShe's still here.",
+      "isStart": false,
+      "isEnd": true,
+      "transition": "fade",
+      "choices": [],
+      "x": 60,
+      "y": 2820
+    },
+    "verite_conversations": {
+      "id": "verite_conversations",
+      "title": "What they really said",
+      "location": "Volcano flank — Descent",
+      "narrator": "Now you can ask.",
+      "text": "You're going down slowly.\n\nYou stop.\n\n**\"I heard your conversations. *\n\nAll four of them stop.\n\n**\"From the beginning. *\n\nQuiet.\n\nAryn turns around.\n\n**\"We know. *\n\n**\"Then tell me what that meant. *",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "« Ready for anything — what was it? »",
+          "vers": "explication_pret_a_tout"
+        },
+        {
+          "text": "\"The same mistakes — which ones? »",
+          "vers": "explication_erreurs"
+        },
+        {
+          "text": "\"And if we are wrong — wrong of what? »",
+          "vers": "explication_tort"
+        }
+      ],
+      "x": 60,
+      "y": 2780
+    },
+    "explication_pret_a_tout": {
+      "id": "explication_pret_a_tout",
+      "title": "Loans to All",
+      "location": "Volcano flank — Descent",
+      "narrator": "",
+      "text": "Ikar's responding.\n\nWithout hesitation.\n\n**\"The spirits have told us that since we were ten years old. *\n**« Ready for anything. *\n\n**\"And I realized that it meant...\"**\n\n**\"...kill me if necessary. You're done.\n\n**\"Yes. *\n\nHe's looking at you.\n\n**\"For a long time I thought that was it. *\n**\"That was my role. *\n**\"The ultimate option. *\n\n**\"And at night in the camp...\"**\n\n**\"I had decided.** he said.\n**\"Even before you get to know yourself. *\n**\"I had decided that if the Chaos became too strong...\"**\n\nHe stops.\n\n**\"And then? *\n\n**\"Then I saw you. *\n**\"A kid who wanted to protect his village. *\n**\"Who had lost everything while trying. *\n\nHe looks at his hands.\n\n**\"It was more the same. *\n\nAryn puts his hand on his shoulder.\n\n**« Ready for all this didn't mean killing. \"** she says.\n**\"It meant being ready to give everything we have. *\n**\"Even our certainty that we were right. *\n\nIkar looks up.\n\n**\"I took time to understand. *",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "\"The same mistakes — which ones? »",
+          "vers": "explication_erreurs"
+        },
+        {
+          "text": "Continue.",
+          "vers": "explication_final"
+        }
+      ],
+      "x": 180,
+      "y": 2880
+    },
+    "explication_erreurs": {
+      "id": "explication_erreurs",
+      "title": "Same Errors",
+      "location": "Volcano flank — Descent",
+      "narrator": "",
+      "text": "Aryn answers this time.\n\n**\"The elders made a mistake with Caël. *\n\n**\"Which one? *\n\n**\"They tried to kill him first. *\n**\"Before reaching out. *\n**\"And when they finally reached out...\"**\nIt was too late for them. *\n**\"Caël stopped. *\n**\"But they died anyway. *\n**\"Because they waited too long. *\n\n**\"So the same mistakes were...\"**\n\n**\"Wait. \"** she says.\n**\"And treat Chaos as a threat above all else. *\n**\"Before treating him as a person. *\n\nIkar crosses arms.\n\n**\"I disagreed. *\n\n**\"I know. \"** says Aryn.\n**\"That's why we were fighting. *\n\n**\"You were fighting for me. *\n\n**\"For you. \"** says Taera.\n**\"Not on you. *\n**\"It's different. *",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "\"And if we are wrong — wrong of what? »",
+          "vers": "explication_tort"
+        },
+        {
+          "text": "Continue.",
+          "vers": "explication_final"
+        }
+      ],
+      "x": 300,
+      "y": 2880
+    },
+    "explication_tort": {
+      "id": "explication_tort",
+      "title": "And if We A Tort",
+      "location": "Volcano flank — Descent",
+      "narrator": "",
+      "text": "**\"What if we're wrong — what was that question? *\n\nIkar's responding.\n\n**\"Tort to trust you. *\n\n**\"You thought I was going to destroy everything. *\n\n**\"Yes. *\n\nHe's not trying to soften.\n\n**\"What about Aryn? *\n\n\"I thought we were wrong not to trust you. *\n**\"That the real mistake was to start again as with Caël. *\n**\"To treat Chaos as a threat. *\n**\"Before treating the person as a person. *\n\n**\"You disagreed. *\n\n**\"No.\"** says Aryn.\n**\"We rarely are. *\n\nVael raises his hand.\n\n**\"I had an opinion. *\n\n**\"What?** asks Ikar.\n\n**\"You were both right. *\n**\"And the real question was not wrong or not wrong. *\n**\"That was—we are here. *\n\nHe's lifting his shoulders.\n\n**\"We were there. *\n**\"Result. *",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Continue.",
+          "vers": "explication_final"
+        }
+      ],
+      "x": 420,
+      "y": 2880
+    },
+    "explication_final": {
+      "id": "explication_final",
+      "title": "Trust him",
+      "location": "Volcano flank — Low",
+      "narrator": "",
+      "text": "**\"One last thing. *\n\nThey're waiting.\n\n**\"Trust him.\" *\n**\"I heard that too. *\n\nAryn's smiling.\n\nNot much.\n\nBut really.\n\n**\"It was me. \"** she says.\n**\"Ikar asked what to do if it went wrong. *\n**\"If the Chaos took over completely. *\n\n**\"And you said you trusted him. *\n\n**\"Yes. *\n\n**\"Even in this case. *\n\n**\" Especially in this case. *\n\nLong silence.\n\nTaera is approaching.\n\nShe's taking your hand.\n\nThe same hand on the top.\n\n**\"See now? *\n\n**\"What you said. *\n\n**\"Yes. *\n\n**\"And what we meant. *\n\nYou look at the black blade.\n\nIt absorbs the evening light.\n\nCold.\n\nAs always.\n\n**\"Thank you. * you say.\n\nNot enough.\n\nBut it's a start.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Get down together.",
+          "vers": "fin_victoire_complete",
+          "requires": {
+            "stat": "ikar_vie",
+            "min": 1
+          }
+        },
+        {
+          "text": "Get down together.",
+          "vers": "fin_victoire_blessures"
+        }
+      ],
+      "x": 60,
+      "y": 2980
+    }
+  },
+  "lang": "en"
+}
