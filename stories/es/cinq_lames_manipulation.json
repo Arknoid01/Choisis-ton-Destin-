@@ -1,0 +1,1600 @@
+{
+  "name": "Las cinco espadas — Erevane",
+  "kids": false,
+  "askPlayerName": true,
+  "pack": "cinq_lames",
+  "stats": [
+    {
+      "id": "chaos",
+      "label": "Chaos",
+      "start": 55,
+      "max": 100,
+      "color": "#9b5de5"
+    },
+    {
+      "id": "controle",
+      "label": "Supervisión",
+      "start": 20,
+      "max": 100,
+      "color": "#00bbf9"
+    },
+    {
+      "id": "paranoia",
+      "label": "Paranoia",
+      "start": 55,
+      "max": 100,
+      "color": "#f15bb5"
+    }
+  ],
+  "theme": {},
+  "scenes": {
+    "manipulation_debut": {
+      "id": "manipulation_debut",
+      "title": "Erevane",
+      "location": "Aerith Road — Dawn",
+      "narrator": "Te vas antes de que los cuatro puedan responder.",
+      "text": "No estás corriendo.\n\nCorrer significa que tienes miedo.\n\nEstás caminando.\n\nLa hoja negra contra tu flanco.\nLa garganta aún marcada por el calor de la espada de Ikar.\n\nDetrás de ti, el campamento permanece en silencio.\n\nNadie grita tu nombre.\n\nAún no.\n\nEs casi peor.\n\nAryn podría haber hablado.\nTaera podría haberte seguido.\nVael podría haber aparecido delante de ti con una mala broma.\nIkar podría haberte bloqueado.\n\nNada.\n\nEntonces sigues adelante.\n\nEn algún lugar delante de ti, Erevane te está esperando.\n\nY por primera vez desde Cendral,\nSabes exactamente a dónde ir.",
+      "isStart": true,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "No te des la vuelta.",
+          "vers": "ne_pas_retourner",
+          "effects": [
+            {
+              "stat": "paranoia",
+              "val": 10
+            }
+          ]
+        },
+        {
+          "text": "Mira una última vez detrás de ti.",
+          "vers": "dernier_regard",
+          "effects": [
+            {
+              "stat": "controle",
+              "val": 5
+            }
+          ]
+        }
+      ],
+      "x": 60,
+      "y": 60
+    },
+    "dernier_regard": {
+      "id": "dernier_regard",
+      "title": "La última mirada",
+      "location": "Road — Lado del campamento",
+      "narrator": "",
+      "text": "Date la vuelta.\n\nEl campamento sigue aquí.\n\nNiño.\nGrey.\nFrágil bajo el amanecer.\n\nVes una silueta.\n\nAryn.\n\nEstá levantada.\n\nNo te está siguiendo.\n\nSólo te está mirando.\n\nIncluso desde lejos, sabes que entiende.\n\nNo es que ella acepte.\n\nDéjala entender.\n\nEs casi suficiente para recuperarte.\n\nEntonces piensas en la hoja bajo tu garganta.\n\nEn Ikar.\nA sus silencios.\nEn esa frase.\n\n* Listo para cualquier cosa. *\n\nDate la vuelta.\n\nEsta vez no estás mirando.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Continúa.",
+          "vers": "ne_pas_retourner",
+          "effects": [
+            {
+              "stat": "paranoia",
+              "val": 5
+            }
+          ]
+        }
+      ],
+      "x": 180,
+      "y": 60
+    },
+    "ne_pas_retourner": {
+      "id": "ne_pas_retourner",
+      "title": "Sin retorno",
+      "location": "Camino hacia el este",
+      "narrator": "",
+      "text": "El sol está subiendo.\n\nCaminas mucho tiempo.\n\nAl principio, cada ruido detrás de ti hace que tu corazón se late.\n\nUna rama.\nUn pájaro.\nEl viento en la hierba.\n\nEsperas que salgan los cuatro.\n\nPero nadie viene.\n\nLa soledad viene lentamente.\n\nEntonces completamente.\n\nY cuando está aquí,\nTe das cuenta de algo extraño.\n\nLa espada es más tranquila.\n\nMenos frío.\n\nComo si ella también estuviera respirando lejos de ellos.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Busca a Erevane.",
+          "vers": "retrouver_erevane",
+          "effects": [
+            {
+              "stat": "chaos",
+              "val": 5
+            }
+          ]
+        },
+        {
+          "text": "Camina solo por otro momento.",
+          "vers": "route_seul",
+          "effects": [
+            {
+              "stat": "controle",
+              "val": 5
+            }
+          ]
+        }
+      ],
+      "x": 60,
+      "y": 180
+    },
+    "route_seul": {
+      "id": "route_seul",
+      "title": "One Moment",
+      "location": "Bajo colinas",
+      "narrator": "",
+      "text": "Pasas el día en las colinas.\n\nSin voz.\nSin consejos.\nNo te preocupes.\n\nNadie te dice que respires.\nNadie te dice que bajes la espada.\nNadie te mira las manos.\n\nPensaste que el silencio asustaría.\n\nPero no.\n\nEl silencio no te juzga.\n\nPor la noche, enciendes un fuego.\n\nNo con madera.\n\nCon la espada.\n\nUna luz púrpura lame las piedras.\n\nNo está ardiendo.\n\nElla mantiene el calor.\n\nSonríes a pesar de ti mismo.\n\nTal vez estaban equivocados.\n\nQuizás solo, puedas aprender de otra manera.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Continúa a Erevane.",
+          "vers": "retrouver_erevane",
+          "effects": [
+            {
+              "stat": "chaos",
+              "val": 10
+            }
+          ]
+        }
+      ],
+      "x": 180,
+      "y": 180
+    },
+    "retrouver_erevane": {
+      "id": "retrouver_erevane",
+      "title": "El que espera",
+      "location": "Camino antiguo - Buenas noches",
+      "narrator": "",
+      "text": "Erevane está aquí.\n\nSentada cerca de un viejo terminal.\n\nComo si nunca dudara de que vendrías.\n\nNo está sonriendo demasiado rápido.\n\nNo se levanta demasiado rápido.\n\nTe dejará acercarte.\n\nTal vez eso es lo que te mantiene abajo.\n\nNo está pidiendo nada.\n\nTe fuiste.\n\nSí.\n\n¿\"Intentaron detenerte?\n\nPiensas en Aryn de pie por la mañana.\n\n**\"No.\n\nErevane está mirando abajo.\n\n**\"Entonces tuvieron miedo de lo que habrían hecho si lo hubieran intentado.\n\nLa frase te entra muy fácilmente.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "\"No confiaron en mí.\"",
+          "vers": "erevane_ecoute",
+          "effects": [
+            {
+              "stat": "paranoia",
+              "val": 10
+            }
+          ]
+        },
+        {
+          "text": "\"Ya no lo sé.\"",
+          "vers": "erevane_doute",
+          "effects": [
+            {
+              "stat": "controle",
+              "val": 5
+            }
+          ]
+        }
+      ],
+      "x": 60,
+      "y": 300
+    },
+    "erevane_doute": {
+      "id": "erevane_doute",
+      "title": "La duda",
+      "location": "Camino viejo",
+      "narrator": "",
+      "text": "No lo sé más.\n\nErevane asienta su cabeza.\n\nNo como alguien que gana.\n\nComo alguien que entiende.\n\nEs honesto.\n\nTe da un gourd.\n\nTú bebes.\n\nCuidado con las personas que nunca dudan.\n\nEstás pensando en Ikar.\n\nEntonces tú.\n\n¿Y la gente que duda demasiado?\n\nErevane finalmente sonrió.\n\nEsto es agotador.\n\nTe estás riendo.\n\nUna risa corta.\nRoto.\n\nPero una risa de todos modos.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Escúchalo.",
+          "vers": "erevane_ecoute",
+          "effects": [
+            {
+              "stat": "controle",
+              "val": 5
+            }
+          ]
+        }
+      ],
+      "x": 180,
+      "y": 300
+    },
+    "erevane_ecoute": {
+      "id": "erevane_ecoute",
+      "title": "Escuchando",
+      "location": "Camp Yerevane",
+      "narrator": "",
+      "text": "Erevane no habla mucho esa noche.\n\nEstá escuchando.\n\nDile a Cendral.\nMarek.\nLa espada.\nLos Cuatro.\nGarganta.\nMiedo.\n\nA veces te detienes, seguro que dijiste demasiado.\n\nPero nunca te mira como un desastre.\n\nNunca me gusta un arma.\n\nNunca me gusta una misión.\n\nTe mira como a alguien.\n\nY eso es exactamente lo que necesitabas.\n\nPor eso no ves la trampa.\n\nPorque una trampa que parece compasión\nNo hagas ruido cuando se cierre.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Pregunte qué es el Caos.",
+          "vers": "lecon_chaos",
+          "effects": [
+            {
+              "stat": "chaos",
+              "val": 5
+            }
+          ]
+        },
+        {
+          "text": "Pregunta por qué la Orden miente.",
+          "vers": "ordre_mensonge",
+          "effects": [
+            {
+              "stat": "paranoia",
+              "val": 10
+            }
+          ]
+        }
+      ],
+      "x": 60,
+      "y": 420
+    },
+    "ordre_mensonge": {
+      "id": "ordre_mensonge",
+      "title": "¡Qué orden!",
+      "location": "Camp Yerevane",
+      "narrator": "",
+      "text": "¿Por qué la Orden ocultaría esto?\n\nErevane mueve las brasas con un palo.\n\nPorque un mundo construido sobre el miedo debe proteger su miedo.\n\n¿Qué significa eso?\n\n\"Que si admiten que Caos puede ser algo más que una amenaza...\"\nEntonces deben admitir que estuvieron equivocados durante trescientos años.\n\nTe está mirando.\n\n** \"Las instituciones a veces prefieren sacrificar a una persona en lugar de una certeza.\n\nTe gustaría pensar que es una exageración.\n\nPero todavía sientes la espada de Ikar bajo tu garganta.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Créalo.",
+          "vers": "erevane_nuance",
+          "effects": [
+            {
+              "stat": "chaos",
+              "val": 5
+            }
+          ]
+        },
+        {
+          "text": "Es importante.",
+          "vers": "detail_cloche",
+          "effects": [
+            {
+              "stat": "controle",
+              "val": 10
+            }
+          ]
+        }
+      ],
+      "x": 180,
+      "y": 420
+    },
+    "erevane_nuance": {
+      "id": "erevane_nuance",
+      "title": "Nuance",
+      "location": "Camp Yerevane",
+      "narrator": "",
+      "text": "**Los Cuatro no son la Orden.\n\nErevane asienta su cabeza.\n\n**\"No.\n\nLa respuesta te sorprende.\n\nPuede que te quieran.\n\nLa palabra duele.\n\nEntonces, ¿por qué...?\n\nPorque el amor no siempre es suficiente para desobedecer un miedo aprendido desde la infancia.\n\nNo los insulta.\n\nNi siquiera los acusa.\n\nEs peor.\n\nHace su traición más triste.\n\nMás creíble.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Continúa la lección.",
+          "vers": "lecon_chaos",
+          "effects": [
+            {
+              "stat": "paranoia",
+              "val": 5
+            }
+          ]
+        }
+      ],
+      "x": 300,
+      "y": 420
+    },
+    "lecon_chaos": {
+      "id": "lecon_chaos",
+      "title": "La primera lección",
+      "location": "Luz negra",
+      "narrator": "",
+      "text": "Al día siguiente Erevane te lleva a una larga limpieza quemada.\n\nNingún árbol ha retrocedido.\n\n**El caos no es destruido.\n\nMiras la tierra muerta.\n\n**\" Ejemplo equivocado. *\n\nSonríe.\n\n**\"El caos es lo que queda cuando las formas impuestas rompen. *\n\nParece una destrucción.\n\n**\"Sólo para aquellos que les gustaba la forma antes.\n\nEstá poniendo una piedra delante de ti.\n\n# Cuéntalo. #\n\nTú dibujas.\n\nLa espada negra absorbe luz.\n\nEntonces canta.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Toca suavemente.",
+          "vers": "pierre_douce",
+          "effects": [
+            {
+              "stat": "controle",
+              "val": 10
+            }
+          ]
+        },
+        {
+          "text": "Deja que la espada elija.",
+          "vers": "pierre_choisit",
+          "effects": [
+            {
+              "stat": "chaos",
+              "val": 15
+            }
+          ]
+        }
+      ],
+      "x": 60,
+      "y": 540
+    },
+    "pierre_douce": {
+      "id": "pierre_douce",
+      "title": "La piedra",
+      "location": "Luz negra",
+      "narrator": "",
+      "text": "Golpeaste lentamente.\n\nLa espada entra en la piedra.\n\nSin shock.\nSin ruido.\n\nComo si la piedra hubiera olvidado que tenía que resistir.\n\nSe abre una línea púrpura.\n\nLa piedra se divide en dos.\n\nErevane observa.\n\n¿Ves?\n\nLo corté.\n\n**\"No.\n\nRecoge ambas piezas.\n\n\"Le recordaste que podría ser algo más que todo.\n\nEso es absurdo.\n\nY aún así.\n\nLa hoja en tu mano parece más ligera.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Empieza de nuevo.",
+          "vers": "progres",
+          "effects": [
+            {
+              "stat": "chaos",
+              "val": 5
+            },
+            {
+              "stat": "controle",
+              "val": 5
+            }
+          ]
+        }
+      ],
+      "x": 180,
+      "y": 540
+    },
+    "pierre_choisit": {
+      "id": "pierre_choisit",
+      "title": "The Blade Choisit",
+      "location": "Luz negra",
+      "narrator": "",
+      "text": "No lo estás ejecutando.\n\nDeja que la espada se mueva.\n\nEl mundo se vuelve púrpura.\n\nUn segundo.\n\nLa piedra desaparece.\n\nNo está roto.\n\nNo se reduce al polvo.\n\nAbsente.\n\nUn círculo de tierra se colapsa alrededor tuyo.\n\nErevane no retrocede.\n\nMira el vacío donde se puso la piedra.\n\nSus ojos brillan.\n\nUn segundo.\n\nLuego baja la cabeza.\n\n\"Magnificente\".\n\nLa palabra te asusta.\n\nY placer.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "No fue controlado.",
+          "vers": "progres",
+          "effects": [
+            {
+              "stat": "controle",
+              "val": 5
+            }
+          ]
+        },
+        {
+          "text": "\"Puedo hacerlo de nuevo.\"",
+          "vers": "progres",
+          "effects": [
+            {
+              "stat": "chaos",
+              "val": 10
+            }
+          ]
+        }
+      ],
+      "x": 300,
+      "y": 540
+    },
+    "progres": {
+      "id": "progres",
+      "title": "Progresos",
+      "location": "Caminos antiguos - Varios días",
+      "narrator": "Los días se convierten en lecciones.",
+      "text": "Aprendes rápido.\n\nDemasiado rápido.\n\nLa hoja negra ya no es sólo fría.\nEstá respondiendo.\n\nabsorbe los sonidos cuando necesitas silencio.\nCorta las sombras cuando la noche es demasiado pesada.\nAbre caminos en las rocas.\n\nErevane dice que no estás perdiendo el control.\n\nEstás renunciando a los malos gestos.\n\nLos que la Orden te habría enseñado.\n\nLos que los Cuatro te habrían impuesto.\n\nA veces piensas en ellos.\n\nMenos a menudo todos los días.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Continúa.",
+          "vers": "ils_te_cherchent"
+        },
+        {
+          "text": "Observe el cambio.",
+          "vers": "remarquer_changement",
+          "effects": [
+            {
+              "stat": "controle",
+              "val": 10
+            }
+          ]
+        }
+      ],
+      "x": 60,
+      "y": 660
+    },
+    "ils_te_cherchent": {
+      "id": "ils_te_cherchent",
+      "title": "Te están buscando.",
+      "location": "Ruinas de un relé",
+      "narrator": "",
+      "text": "¿Me están buscando?\n\nErevane cierra el libro que estaba leyendo.\n\nSí.\n\nTu corazón se está cerrando.\n\n¿Para traerme de vuelta?\n\nProbablemente.\n\n¿Para ayudarme?\n\nErevane no responde de inmediato.\n\nTe deja llenar el silencio.\n\nLo rellenas con todas las respuestas equivocadas.\n\nFinalmente, dice:\n\nProbablemente piensan que es lo que hacen.\n\nOdias tu cabeza.\n\nAhí.\n\nEso es exactamente.\n\nPiensan.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Continúa.",
+          "vers": "premiere_perte",
+          "effects": [
+            {
+              "stat": "paranoia",
+              "val": 10
+            }
+          ]
+        }
+      ],
+      "x": 180,
+      "y": 660
+    },
+    "premiere_perte": {
+      "id": "premiere_perte",
+      "title": "El Merchant",
+      "location": "Puente de piedra",
+      "narrator": "",
+      "text": "El primer accidente real llega a un puente.\n\nUn comerciante no te dejará pasar.\n\nNo está mal.\n\nReconoció la espada.\n\nSus manos temblan sobre las riendas.\n\n**« Date la vuelta.\n\nEstás tratando de hablar.\n\nEl caballo entra en pánico.\nEl carro voltea.\nUn niño grita en la espalda.\n\nEstás llegando.\n\nLa espada reacciona ante ti.\n\nEl Caos para el carro.\n\nPero el puente se rompe.\n\nUn arco entero colapsa en el río.\n\nNadie muere.\n\nEsta vez.\n\nEl comerciante te está mirando.\n\nNo con gratitud.\n\nHorrible.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Ayuda a reparar.",
+          "vers": "reparer_pont",
+          "effects": [
+            {
+              "stat": "controle",
+              "val": 10
+            }
+          ]
+        },
+        {
+          "text": "Ve antes de que llamen a alguien.",
+          "vers": "partir_pont",
+          "effects": [
+            {
+              "stat": "paranoia",
+              "val": 10
+            }
+          ]
+        }
+      ],
+      "x": 60,
+      "y": 780
+    },
+    "reparer_pont": {
+      "id": "reparer_pont",
+      "title": "Reparación",
+      "location": "Puente de piedra",
+      "narrator": "",
+      "text": "Estás tratando de arreglarlo.\n\nPones la mano en la piedra dividida.\n\nEstás pensando en Taera.\n\nLa forma en que tocó el suelo antes de actuar.\n\nLa piedra tembla.\n\nPor un momento, crees que puedes hacerlo.\n\nLuego una grieta violeta cruza el arco restante.\n\nEl comerciante ha vuelto.\n\nPara.\n\nSu voz es dulce.\n\nSustituto.\n\nPor favor.\n\nEntonces para.\n\nUsted entiende algo.\n\nIncluso cuando quieres arreglar,\nLa gente tiene miedo de lo que sus manos pueden hacer.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Vete.",
+          "vers": "erevane_console",
+          "effects": [
+            {
+              "stat": "paranoia",
+              "val": 5
+            }
+          ]
+        }
+      ],
+      "x": 180,
+      "y": 780
+    },
+    "partir_pont": {
+      "id": "partir_pont",
+      "title": "Vete.",
+      "location": "Puente de piedra",
+      "narrator": "",
+      "text": "Te vas.\n\nDetrás de ti, el comerciante llama al niño por su nombre.\n\nOtra vez.\nOtra vez.\n\nEl niño finalmente responde.\n\nEstás fuera.\n\nNo sabías que estabas respirando.\n\nErevane camina a tu lado.\n\nNo te culpa.\n\nEs casi agradable.\n\nEs casi peor.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Continúa.",
+          "vers": "erevane_console",
+          "effects": [
+            {
+              "stat": "chaos",
+              "val": 5
+            }
+          ]
+        }
+      ],
+      "x": 300,
+      "y": 780
+    },
+    "erevane_console": {
+      "id": "erevane_console",
+      "title": "Consolación",
+      "location": "Ruta forestal",
+      "narrator": "",
+      "text": "Dice Erevane.\n\nDestruí el puente.\n\nUn puente está reconstruido.\n\n¿Y si alguien estaba muerto?\n\nCamina mucho tiempo sin responder.\n\nEntonces:\n\n**\"Todas las autoridades tienen un costo. *\n\nEs fácil decir cuando no pagas.\n\nSe detiene.\n\nPor primera vez, parece herido.\n\n¿Crees que no pagué nada?\n\nNo sabes qué responder.\n\nLuego empieza a caminar de nuevo.\n\nY tú le sigues.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Continúa.",
+          "vers": "erevane_perte"
+        },
+        {
+          "text": "Algo en su voz.",
+          "vers": "voix_erevane",
+          "effects": [
+            {
+              "stat": "controle",
+              "val": 10
+            }
+          ]
+        }
+      ],
+      "x": 60,
+      "y": 900
+    },
+    "erevane_perte": {
+      "id": "erevane_perte",
+      "title": "Lo que perdió",
+      "location": "Ruta forestal",
+      "narrator": "",
+      "text": "¿Qué perdiste?\n\nErevane no da la vuelta.\n\nUn hermano.\n\nLa palabra cae entre ustedes.\n\nSimple.\nPesado.\n\n¿Por los Caos?\n\nPor los que afirmaban entenderlo.\n\nContinúa.\n\n\"Mi hermano creyó que Caël podría salvarse.\nÉl fue llamado hereje.\n**« Borrado de archivos.\n\nFinalmente se detiene.\n\n\"Hacemos desaparecer su voz.\n\nSus ojos son húmedos.\n\nTú le crees.\n\nPorque es verdad.\n\nEs incompleta.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Continúa.",
+          "vers": "lecon_memoire",
+          "effects": [
+            {
+              "stat": "paranoia",
+              "val": 10
+            }
+          ]
+        }
+      ],
+      "x": 180,
+      "y": 900
+    },
+    "lecon_memoire": {
+      "id": "lecon_memoire",
+      "title": "Memoria",
+      "location": "Arruinas antiguas",
+      "narrator": "",
+      "text": "Erevane te lleva a las ruinas cubiertas de espuma.\n\nLos nombres están grabados en las paredes.\n\nAlgunos borrados.\n\n**\"El caos guarda lo que el mundo rechaza.** dijo.\n\nPusiste tus dedos en una inscripción rota.\n\nUn dolor está pasando por ti.\n\nNo la tuya.\n\nAlguien mendigando.\nAlguien huyendo.\nAlguien que olvidamos voluntariamente.\n\nQuítate la mano.\n\n¿Qué fue eso?\n\nUn recuerdo.\n\n¿De quién es la memoria?\n\nDe todos los que hemos decidido no oír más.\n\nLa espada negra vibra.\n\nComo si reconociera los nombres borrados.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Escucha las memorias.",
+          "vers": "ecouter_memoires",
+          "effects": [
+            {
+              "stat": "chaos",
+              "val": 15
+            }
+          ]
+        },
+        {
+          "text": "Atrás.",
+          "vers": "ville_rouge",
+          "effects": [
+            {
+              "stat": "controle",
+              "val": 10
+            }
+          ]
+        }
+      ],
+      "x": 60,
+      "y": 1020
+    },
+    "ecouter_memoires": {
+      "id": "ecouter_memoires",
+      "title": "Voces",
+      "location": "Arruinas antiguas",
+      "narrator": "",
+      "text": "Estás escuchando.\n\nError.\n\nO milagro.\n\nLas voces están subiendo.\n\nDemasiados.\n\nNiños.\nGente vieja.\nSoldados.\nPorteros fallidos.\nGente quemada por una profecía antes de que actuaran.\n\nSus miedos entran en tu pecho.\n\nSu ira también.\n\nEstás de rodillas.\n\nErevane te puso una mano en el hombro.\n\nNo los empujes.\n\nMe duele.\n\nSí.\n\nSu voz tembla.\n\nPor fin alguien los escucha.\n\nEntonces sigues adelante.\n\n¿Porque cómo podemos rechazar a los muertos?",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Continúa.",
+          "vers": "ville_rouge",
+          "effects": [
+            {
+              "stat": "chaos",
+              "val": 20
+            },
+            {
+              "stat": "paranoia",
+              "val": 10
+            }
+          ]
+        }
+      ],
+      "x": 180,
+      "y": 1020
+    },
+    "ville_rouge": {
+      "id": "ville_rouge",
+      "title": "La Ciudad Roja",
+      "location": "Ciudad de Sorn",
+      "narrator": "Unos días después.",
+      "text": "Sorn es un pueblo rojo.\n\nladrillos rojos.\nTejados rojos.\nPolvo rojo en las calles.\n\nDeberías haberla pasado por alto.\n\nPero Erevane necesita tinta.\nComida.\nTarjetas.\n\nY necesitas probar que puedes cruzar una ciudad sin desastres.\n\nPor una hora, funciona.\n\nNadie te conoce.\n\nEntonces un niño ve la hoja bajo su abrigo.\n\nEstá apuntando.\n\nEl silencio vuelve.\n\nSigue igual.\n\nComo una vieja canción que odiamos\nPero lo sabemos de corazón.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Ignora tus ojos.",
+          "vers": "sorn_ignore",
+          "effects": [
+            {
+              "stat": "controle",
+              "val": 5
+            }
+          ]
+        },
+        {
+          "text": "Arréglalos.",
+          "vers": "sorn_fixe",
+          "effects": [
+            {
+              "stat": "paranoia",
+              "val": 10
+            }
+          ]
+        }
+      ],
+      "x": 60,
+      "y": 1140
+    },
+    "sorn_ignore": {
+      "id": "sorn_ignore",
+      "title": "Ignoro",
+      "location": "Sorn — Market Street",
+      "narrator": "",
+      "text": "Mira hacia abajo.\n\nTe estás moviendo.\n\nUn hombre susurra:\n\nEs él.\n\nSigue adelante.\n\nUna mujer respondió:\n\nLos Blades lo están buscando.\n\nPara.\n\nLos Blades.\n\nAsí que se acercan.\n\nErevane te puso una mano ligera en la espalda.\n\nAquí no.\n\nOdias tu cabeza.\n\nTiene razón.\n\nAquí no.\n\nNo delante de esta gente.\n\nAún no.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Vete de la ciudad.",
+          "vers": "auberge_sorn",
+          "effects": [
+            {
+              "stat": "controle",
+              "val": 5
+            }
+          ]
+        }
+      ],
+      "x": 180,
+      "y": 1140
+    },
+    "sorn_fixe": {
+      "id": "sorn_fixe",
+      "title": "Watch Back",
+      "location": "Sorn — Market Street",
+      "narrator": "",
+      "text": "Levanta la cabeza.\n\nLos murmullos mueren uno por uno.\n\nLa luz que te rodea se enfría.\n\nMás morado.\n\nUn relleno de fruta se marchita.\n\nUna ventana se divide.\n\nNadie se mueve.\n\nNo quería asustarlos.\n\nPero parte de ti está aliviado de que estén en silencio.\n\nEsta parte te disgusta.\n\nErevane te lleva suavemente por el brazo.\n\nVen.\n\nNo es una orden.\n\nUn rescate.\n\nSíguelo.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Sal de la calle.",
+          "vers": "auberge_sorn",
+          "effects": [
+            {
+              "stat": "chaos",
+              "val": 10
+            },
+            {
+              "stat": "paranoia",
+              "val": 5
+            }
+          ]
+        }
+      ],
+      "x": 300,
+      "y": 1140
+    },
+    "auberge_sorn": {
+      "id": "auberge_sorn",
+      "title": "The Inn",
+      "location": "Sorn — Auberge des Tuiles Rouges",
+      "narrator": "",
+      "text": "Tomas una habitación arriba.\n\nErevane cierra las persianas.\n\nNo para encerrarte.\n\nPara protegerte de los ojos.\n\nEso es lo que dice.\n\nSiéntate en la cama.\n\nLa hoja negra en las rodillas.\n\nVibra lentamente.\n\nDownstairs, las conversaciones retoman.\n\nBaja.\n\nMás rápido.\n\nEntonces un ruido afuera.\n\nSabots.\n\nUna voz que conoces.\n\nAryn.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Pregunta qué hacemos.",
+          "vers": "demander_erevane"
+        },
+        {
+          "text": "Observador Erevane.",
+          "vers": "observer_erevane_sorn",
+          "effects": [
+            {
+              "stat": "controle",
+              "val": 10
+            }
+          ]
+        }
+      ],
+      "x": 60,
+      "y": 1260
+    },
+    "demander_erevane": {
+      "id": "demander_erevane",
+      "title": "Qué hacer",
+      "location": "Albergue — Habitación",
+      "narrator": "",
+      "text": "¿Qué estoy haciendo?\n\nErevane mira la puerta.\n\nEntonces tú.\n\nLo que quieras.\n\nLa respuesta es molesta.\n\nEste no es el momento.\n\nEs el punto.\n\nSe acerca.\n\n**\"Toda tu vida, te diremos que este no es el momento de elegir.\nEres demasiado peligroso.\n\"Demasiado herido\".\n\"Demasiado inestable\".\n\nAhí abajo, una silla cae.\n\nEntonces elige ahora.\n\nTe toca.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Cuidado afuera.",
+          "vers": "les_quatre_arrivent",
+          "effects": [
+            {
+              "stat": "chaos",
+              "val": 5
+            }
+          ]
+        }
+      ],
+      "x": 180,
+      "y": 1260
+    },
+    "les_quatre_arrivent": {
+      "id": "les_quatre_arrivent",
+      "title": "Están aquí.",
+      "location": "Sorn – Calle frente a la posada",
+      "narrator": "",
+      "text": "Los Cuatro están en la calle.\n\nAryn en mente.\nTaera justo detrás.\nVael en el techo enfrente.\nIkar en medio de la carretera.\n\nParecen agotados.\n\nSucia.\nHerido.\n\nComo si no hubieran dormido en días.\n\nTu corazón se está cerrando a pesar de ti.\n\nEntonces Ikar mira la ventana.\n\nTe ve.\n\nUn segundo.\n\nAlivio.\n\nLuego ve a Erevane detrás de ti.\n\nTodo cambia.\n\nSu espada está ardiendo.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Abajo.",
+          "vers": "descendre_rue",
+          "effects": [
+            {
+              "stat": "controle",
+              "val": 5
+            }
+          ]
+        },
+        {
+          "text": "Quédate cerca de Yerevane.",
+          "vers": "rester_pres_erevane",
+          "effects": [
+            {
+              "stat": "paranoia",
+              "val": 10
+            }
+          ]
+        }
+      ],
+      "x": 60,
+      "y": 1380
+    },
+    "rester_pres_erevane": {
+      "id": "rester_pres_erevane",
+      "title": "Cerca de Yerevane",
+      "location": "Albergue — Habitación",
+      "narrator": "",
+      "text": "No vas a bajar.\n\nAún no.\n\nErevane, cálmate.\n\nDemasiado tranquilo.\n\nAbajo, Ikar grita:\n\n¡Aléjate de él!\n\nNo: *Vuelve. *\nTenemos que hablar.\n\nAléjate de él.\n\nComo si no pudieras elegir con quién quedarte.\n\nComo si aún pertenecieras a su decisión.\n\nErevane está mirando abajo.\n\nLo siento.\n\n¿De qué?\n\nNo contesta.\n\nEs peor que una respuesta.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Baja por la calle.",
+          "vers": "descendre_rue",
+          "effects": [
+            {
+              "stat": "paranoia",
+              "val": 10
+            }
+          ]
+        }
+      ],
+      "x": 180,
+      "y": 1380
+    },
+    "descendre_rue": {
+      "id": "descendre_rue",
+      "title": "Red Street",
+      "location": "Sorn – Frente al albergue",
+      "narrator": "",
+      "text": "Vas a bajar.\n\nLa calle está vacía.\n\nLas persianas están cerradas.\n\nLos lugareños siguen vigilando.\n\nSiempre.\n\nAryn está dando un paso hacia ti.\n\nNo vamos a volver a llevarte.\n\nQuieres creerla.\n\nEntonces Ikar señala su espada a Erevane.\n\nPor otro lado, él viene con nosotros.\n\nErevane no se mueva.\n\nNo se esconde detrás de ti.\n\nNo está suplicando.\n\nEstá esperando.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "¿Por qué?",
+          "vers": "pourquoi_erevane",
+          "effects": [
+            {
+              "stat": "controle",
+              "val": 5
+            }
+          ]
+        },
+        {
+          "text": "Ponlo delante de Erevane.",
+          "vers": "devant_erevane",
+          "effects": [
+            {
+              "stat": "paranoia",
+              "val": 15
+            }
+          ]
+        }
+      ],
+      "x": 60,
+      "y": 1500
+    },
+    "pourquoi_erevane": {
+      "id": "pourquoi_erevane",
+      "title": "¿Por qué él?",
+      "location": "Sorn — Red Street",
+      "narrator": "",
+      "text": "¿Por qué él?\n\nAryn responde muy rápido.\n\nPorque te manipula.\n\nLa palabra te golpea.\n\nManipule.\n\n¿Cómo lo sabes?\n\nPorque lo conocemos. Dice Aryn.\n** \"Erevane ha existido durante mucho tiempo.\nAdiós.\nÉl estaba allí en el tiempo de Cael también.\n\nEl suelo está desapareciendo.\n\n¿Qué?\n\nNo era viejo en ese momento.\nPero estaba allí.\nÉl le dijo lo mismo.\n**\"Otra profecía. *\nOtra manera.\n\"Aléjate de los cuatro sabios\".\n\nY Caël...\n\nDice Aryn.\nY lo destruyó todo.\nSolo.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Gire a Erevane.",
+          "vers": "devant_erevane",
+          "effects": [
+            {
+              "stat": "chaos",
+              "val": 10
+            }
+          ]
+        },
+        {
+          "text": "\"¿Es verdad? »",
+          "vers": "erevane_confirme",
+          "effects": [
+            {
+              "stat": "controle",
+              "val": 10
+            }
+          ]
+        }
+      ],
+      "x": 180,
+      "y": 1500
+    },
+    "devant_erevane": {
+      "id": "devant_erevane",
+      "title": "Antes de Él",
+      "location": "Sorn — Red Street",
+      "narrator": "",
+      "text": "Estás delante de Erevane.\n\nLa hoja negra en la mano.\n\nAryn se está desvaneciendo.\n\nNo hagas eso.\n\n*\"Yo? *\n\nTe estás riendo.\n\nNo porque sea gracioso.\n\n# Llegas en brazos. #\n\"Amenaces al único hombre que me dijo la verdad.\n¿Y yo hago algo?\n\nIkar endurece sus dientes.\n\nEstá mintiendo.\n\n¿Como tú?\n\nNadie responde lo suficientemente rápido.\n\nEs suficiente.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Continúa.",
+          "vers": "ikar_attaque",
+          "effects": [
+            {
+              "stat": "paranoia",
+              "val": 10
+            },
+            {
+              "stat": "chaos",
+              "val": 10
+            }
+          ]
+        }
+      ],
+      "x": 60,
+      "y": 1620
+    },
+    "ikar_attaque": {
+      "id": "ikar_attaque",
+      "title": "Error",
+      "location": "Sorn — Red Street",
+      "narrator": "El fuego se mueve antes de las palabras.",
+      "text": "Ataques de Ikar.\n\nTú no.\n\nErevane.\n\nCruza la calle como una llama lanzada.\n\nDemasiado rápido para que Aryn lo detenga.\nDemasiado rápido para que Taera grite.\nDemasiado rápido para que Vael salga del techo.\n\nErevane ni siquiera levanta sus manos.\n\nEl viejo se queda aquí.\n\nFragil.\nCierto.\nTriste.\n\nDijo: \"No\".\n\nNo en Ikar.\n\nTu turno.\n\nNo para mí.\n\nPero es demasiado tarde.\n\nSu espada negra sube.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Block Ikar.",
+          "vers": "bloquer_ikar",
+          "effects": [
+            {
+              "stat": "chaos",
+              "val": 15
+            },
+            {
+              "stat": "paranoia",
+              "val": 10
+            }
+          ]
+        },
+        {
+          "text": "Empuja a todos de vuelta.",
+          "vers": "repousser_tous",
+          "effects": [
+            {
+              "stat": "chaos",
+              "val": 25
+            }
+          ]
+        }
+      ],
+      "x": 60,
+      "y": 1740,
+      "timer": {
+        "duration": 10,
+        "auto": "first"
+      }
+    },
+    "bloquer_ikar": {
+      "id": "bloquer_ikar",
+      "title": "Bloqueo",
+      "location": "Sorn — Red Street",
+      "narrator": "",
+      "text": "Tu espada bloquea Ikar.\n\nFuego contra vacío.\n\nLa calle desaparece en un flash púrpura.\n\nLas ventanas explotan.\nLos pavimentos suben.\nUna pared se colapsa más.\n\nAlguien grita.\n\nIkar está dando tres pasos atrás.\n\nSus ojos no salen de Erevane.\n\nVete.\n\n**\"No.\n\nNo entiendes lo que hace.\n\nEntiendo exactamente.\n\nY ese es el problema.\n\nLo entiendes.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Carguen a los Cuatro.",
+          "vers": "accuser_quatre",
+          "effects": [
+            {
+              "stat": "paranoia",
+              "val": 10
+            }
+          ]
+        }
+      ],
+      "x": 180,
+      "y": 1740
+    },
+    "repousser_tous": {
+      "id": "repousser_tous",
+      "title": "La ola",
+      "location": "Sorn — Red Street",
+      "narrator": "",
+      "text": "No estás bloqueando.\n\nRechazas.\n\nTodo.\n\nUna ola púrpura viene de ti.\n\nIkar se proyecta contra una fuente.\nAryn se desliza sobre los pavimentos.\nTaera establece una pared de tierra que se rompe inmediatamente.\nVael desaparece justo antes de que lo golpeen.\n\nLas casas están temblando.\n\nUna chimenea cae.\n\nUna voz pide ayuda detrás de un obturador.\n\nMe oyes.\n\nPero no puedes parar lo suficientemente rápido.\n\nCuando el silencio regrese,\nLa ciudad roja tiene una cicatriz negra.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Carguen a los Cuatro.",
+          "vers": "accuser_quatre",
+          "effects": [
+            {
+              "stat": "chaos",
+              "val": 15
+            },
+            {
+              "stat": "paranoia",
+              "val": 10
+            }
+          ]
+        }
+      ],
+      "x": 300,
+      "y": 1740
+    },
+    "accuser_quatre": {
+      "id": "accuser_quatre",
+      "title": "Desde el principio",
+      "location": "Sorn — Red Street",
+      "narrator": "",
+      "text": "\"Desde el principio...\"\n\nTu voz está temblando.\n\nLa espada también.\n\n**\"Desde el principio estabas esperando una razón.\n\nAryn sacude su cabeza.\n\n**\"No.\n\nDemasiado débil.\n\nDemasiado tarde.\n\n\"Ikar tenía su espada bajo mi garganta.\nAhora quieres matar a Erevane.\n¿Y entonces?\n\nTaera está llorando.\n\nQueremos que regreses.\n\n**\"No.\n\nLa palabra sale como una fractura.\n\n*\"Quieres que sea alguien que puedas ver de nuevo. *",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Escucha a Aryn.",
+          "vers": "aryn_supplie",
+          "effects": [
+            {
+              "stat": "controle",
+              "val": 10
+            }
+          ]
+        },
+        {
+          "text": "No los escuches más.",
+          "vers": "erevane_parle",
+          "effects": [
+            {
+              "stat": "paranoia",
+              "val": 15
+            }
+          ]
+        }
+      ],
+      "x": 60,
+      "y": 1860
+    },
+    "aryn_supplie": {
+      "id": "aryn_supplie",
+      "title": "Aryn",
+      "location": "Sorn — Red Street",
+      "narrator": "",
+      "text": "Aryn está avanzando a pesar de la espada.\n\nA pesar de la luz.\n\nA pesar del miedo.\n\nTe lo ruego.\n\nSu voz se rompe.\n\nNunca la has oído así.\n\nÉl usa tu dolor.\nSé que te asustamos.\nSé que Ikar hizo algo imperdonable.\n\nIkar cierra los ojos.\n\n**\"Pero Erevane no quiere salvarte.\n\nErevane no contesta.\n\nNo lo necesita.\n\nPorque detrás de Aryn,\nIkar ya está levantando su espada.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Mira la espada de Ikar.",
+          "vers": "erevane_parle",
+          "effects": [
+            {
+              "stat": "paranoia",
+              "val": 15
+            }
+          ]
+        }
+      ],
+      "x": 180,
+      "y": 1860
+    },
+    "erevane_parle": {
+      "id": "erevane_parle",
+      "title": "La última palabra dulce",
+      "location": "Sorn — Red Street",
+      "narrator": "",
+      "text": "Erevane te puso una mano en el hombro.\n\nLuz.\n\nCasi nada.\n\nNo tienes que defenderme.\n\nLos Cuatro congelados.\n\nIncluso Vael.\n\nPorque oyen lo que aún no oyen.\n\nLa trampa perfecta.\n\nErevane continúa:\n\n**\"Ya no necesitas probar que mereces existir. *\n\nLa frase pasa por ti.\n\nEncuentra todas las heridas.\n\nTodos.\n\n**\"El mundo te pidió ser pequeño.\nPara estar tranquilo.\nSer perdonado.\n\nSu mano apenas se sacude.\n\nPuedes ser verdad.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Deja que el Caos responda.",
+          "vers": "chaos_repond",
+          "effects": [
+            {
+              "stat": "chaos",
+              "val": 25
+            }
+          ]
+        },
+        {
+          "text": "Resistir una última vez.",
+          "vers": "resister_dernier",
+          "effects": [
+            {
+              "stat": "controle",
+              "val": 15
+            }
+          ]
+        }
+      ],
+      "x": 60,
+      "y": 1980,
+      "timer": {
+        "duration": 12,
+        "auto": "first"
+      }
+    },
+    "resister_dernier": {
+      "id": "resister_dernier",
+      "title": "Resistencia",
+      "location": "Sorn — Red Street",
+      "narrator": "",
+      "text": "Te resistes.\n\nUn segundo.\n\nDos.\n\nEstás pensando en Aryn.\nA Taera.\nA Vael.\nIncluso en Ikar.\n\nPiensas en lo que eran antes del miedo.\n\nLas manos estiradas.\nComidas compartidas.\nMenos silencios fuertes.\n\nLa luz morada está cayendo.\n\nAryn lo ve.\n\nEstá llegando.\n\nY detrás de ella, un guardia de la ciudad dispara una flecha.\n\nNo contigo.\n\nEn Erevane.\n\nEl Caos huele así.\n\nTu miedo elige ante ti.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Demasiado tarde.",
+          "vers": "chaos_repond",
+          "effects": [
+            {
+              "stat": "chaos",
+              "val": 20
+            },
+            {
+              "stat": "paranoia",
+              "val": 10
+            }
+          ]
+        }
+      ],
+      "x": 180,
+      "y": 1980
+    },
+    "chaos_repond": {
+      "id": "chaos_repond",
+      "title": "Las respuestas del caos",
+      "location": "Sorn — Red Street",
+      "narrator": "",
+      "text": "El mundo está abriendo.\n\nNo como una herida.\n\nComo un ojo.\n\nLa luz violeta se traga la calle.\n\nEscuchas las voces de las ruinas.\nLos muertos borraron.\nLos nombres olvidados.\nAsendral.\nMarek.\nEl puente.\nSorn.\nTodo.\n\nQuerías que te oiéramos.\n\nAhora todo el mundo escucha.\n\nLos Cuatro han vuelto.\n\nNo por elección.\n\nPor la fuerza.\n\nErevane susurra detrás de ti:\n\nSí.\n\nUna palabra.\n\nDemasiado feliz.\n\nEs verdad.\n\nY por primera vez,\nLe tienes miedo.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Vuelve a Erevane.",
+          "vers": "revelation_erevane",
+          "effects": [
+            {
+              "stat": "controle",
+              "val": 5
+            }
+          ]
+        },
+        {
+          "text": "Continúa contra los Cuatro.",
+          "vers": "combat_contre_quatre",
+          "effects": [
+            {
+              "stat": "chaos",
+              "val": 15
+            }
+          ]
+        }
+      ],
+      "x": 60,
+      "y": 2100
+    },
+    "revelation_erevane": {
+      "id": "revelation_erevane",
+      "title": "Verdad",
+      "location": "Sorn — Calle rota",
+      "narrator": "",
+      "text": "Date la vuelta.\n\nErevane tiene ojos llenos de lágrimas.\n\nPero no son lágrimas de miedo.\n\nSon lágrimas de alguien.\nQuien finalmente ve lo que estaba esperando.\n\nLo siento.\n\nNo, no lo eres.\n\nEstá bajando la cabeza.\n\n**\"No.\n\nTu hermano.\n\nMurió por Caël.\n\"Y pasaste trescientos años...\"\n\n**\"Buscando otro portador. *\n¿Quién haría lo que Caël no terminó?\n\nLe levanta los ojos.\n\n**\"El caos no debe ser contenido. *\nDebe ser liberado.\nCompletamente.\nDe vez en cuando.\nPara que Aerith vuelva a la pista.\n**\"Desde el principio. *\nSin los errores del pasado.\n\nLa espada vibra.\n\nElla entiende ante ti.\n\nNo querías ayudarme.\nQuerías usar el Caos.\n\nSí.\n\nUna palabra.\n\nLo peor que te hemos dicho.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "\"Me mentiste.\"",
+          "vers": "mensonge_erevane",
+          "effects": [
+            {
+              "stat": "controle",
+              "val": 5
+            }
+          ]
+        }
+      ],
+      "x": 180,
+      "y": 2100
+    },
+    "mensonge_erevane": {
+      "id": "mensonge_erevane",
+      "title": "La mentira",
+      "location": "Sorn — Calle rota",
+      "narrator": "",
+      "text": "Me mentiste.\n\nErevane sacude su cabeza.\n\nNunca lo esencial.\n\nQuerías usarme.\n\nQuería liberar lo que llevabas puesto.\n\nNo soy el Caos.\n\nEsta vez, te mira con casi sincera tristeza.\n\n**\"No.\n\nDice eso como una bendición.\n\nEres lo que la mantuvo hasta ahora.\n\nLa frase te destruye.\n\nPorque lo entiendes.\n\nLos Cuatro querían salvarte.\n\nErevane quería salvar a los Caos.\n\nY escogiste al que podía hablar mejor.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Cuidado con los Cuatro.",
+          "vers": "combat_contre_quatre",
+          "effects": [
+            {
+              "stat": "chaos",
+              "val": 10
+            }
+          ]
+        }
+      ],
+      "x": 300,
+      "y": 2100
+    },
+    "combat_contre_quatre": {
+      "id": "combat_contre_quatre",
+      "title": "Cuatro contra uno",
+      "location": "Sorn — Calle rota",
+      "narrator": "",
+      "text": "Los Cuatro se reúnen.\n\nAryn limpia sangre en su cabeza.\nTaera tiene su brazo contra ella.\nVael no tiene más bromas en sus ojos.\nIkar está luchando para levantarse.\n\nEstán heridos.\n\nSe quedan.\n\nPorque obviamente se quedan.\n\nAryn grita tu nombre.\n\nTu verdadero nombre.\n\nNo el transportista de Caos.\n\nNo profetiza.\n\nTu nombre.\n\nPor un momento, lo oyes.\n\nEntonces las voces del mundo gritan más fuerte.\n\nLa espada negra está subiendo.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Lucha.",
+          "vers": "combat_aryn",
+          "effects": [
+            {
+              "stat": "chaos",
+              "val": 15
+            }
+          ]
+        }
+      ],
+      "x": 60,
+      "y": 2220
+    },
+    "combat_aryn": {
+      "id": "combat_aryn",
+      "title": "Agua",
+      "location": "Sorn — Calle rota",
+      "narrator": "",
+      "text": "Aryn viene primero.\n\nNo para golpear.\n\nPara frenar.\n\nSu agua rodea tu espada.\n\nEstá susurrando algo.\n\nNo lo entiendes.\n\nTal vez una oración.\nTal vez tu nombre.\n\nEstás retrocediendo.\n\nEl agua se vuelve negra por un segundo.\n\nAryn se proyecta contra los pavimentos.\n\nAún no está levantada.\n\nTaera grita.\n\nLa ciudad está temblando.\n\nQuieres parar.\n\nLos Caos no lo harán.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Continúa.",
+          "vers": "combat_taera",
+          "effects": [
+            {
+              "stat": "chaos",
+              "val": 10
+            }
+          ]
+        }
+      ],
+      "x": 180,
+      "y": 2220
+    },
+    "combat_taera": {
+      "id": "combat_taera",
+      "title": "La Tierra",
+      "location": "Sorn — Calle rota",
+      "narrator": "",
+      "text": "Taera establece paredes.\n\nNo a tu alrededor.\n\nAlrededor de los habitantes.\n\nSigue protegiendo.\n\nIncluso ahora.\n\nIncluso de ti.\n\nTú golpeaste.\n\nLa primera pared sostiene.\n\nEl segundo también.\n\nLa tercera división.\n\nTaera se cae de rodillas.\n\nSus manos sangraban sobre la piedra.\n\nTe está mirando.\n\nNo tengo miedo.\n\nCon pena.\n\nVuelve.\n\nUna palabra.\n\nCasi quieres obedecer.\n\nEntonces Erevane tos detrás de ti.\n\nHerido.\nFragil.\n\nLa ira vuelve.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Continúa.",
+          "vers": "combat_vael",
+          "effects": [
+            {
+              "stat": "paranoia",
+              "val": 10
+            },
+            {
+              "stat": "chaos",
+              "val": 10
+            }
+          ]
+        }
+      ],
+      "x": 300,
+      "y": 2220
+    },
+    "combat_vael": {
+      "id": "combat_vael",
+      "title": "Aire",
+      "location": "Sorn — Roofs colapsó",
+      "narrator": "",
+      "text": "Vael desaparece.\n\nVuelve detrás de ti.\n\nPor primera vez, no está bromeando.\n\nNo estás hablando aquí.\n\nTe estás riendo.\n\nEl sonido no suena como tu voz.\n\n¿Cuánto tiempo me conoces, Vael?\n\nÉl cobra la sentencia como un golpe.\n\n**\"Suficiente para saber que estás sufriendo.\n\n\"Todos sufren.\n\nSí.\n\nSonrió tristemente.\n\n**\"Pero no todos tienen una espada apocalíptica para malinterpretar esto.\n\nEso debería haberte hecho reír.\n\nPodría haberlo hecho.\n\nEn otra vida.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Repelerlo.",
+          "vers": "combat_ikar",
+          "effects": [
+            {
+              "stat": "chaos",
+              "val": 10
+            }
+          ]
+        }
+      ],
+      "x": 60,
+      "y": 2340
+    },
+    "combat_ikar": {
+      "id": "combat_ikar",
+      "title": "Fuego",
+      "location": "Sorn — Calle rota",
+      "narrator": "",
+      "text": "Ikar es el último.\n\nPor supuesto.\n\nFuego contra el Caos.\n\nSu cara está cubierta de polvo.\n\nUn corte por su mejilla.\n\nNo está mirando a Erevane.\n\nYa no.\n\nTe está mirando.\n\nEs mi culpa.\n\nLa frase te divide algo.\n\nSí.\n\nEstá asintiendo su cabeza.\n\nAcepta.\n\n**\"Pero no te dejaré desaparecer por mi culpa.\n\nEstá atacando.\n\nEsta vez, no para matar.\n\nPara retenerte.\n\nPero sosteniendo una tormenta con las manos desnudas\nsigue siendo una forma de morir.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Rompe su guardia.",
+          "vers": "les_quatre_tombent",
+          "effects": [
+            {
+              "stat": "chaos",
+              "val": 20
+            }
+          ]
+        }
+      ],
+      "x": 180,
+      "y": 2340
+    },
+    "les_quatre_tombent": {
+      "id": "les_quatre_tombent",
+      "title": "Caen.",
+      "location": "Sorn: silencio púrpura",
+      "narrator": "",
+      "text": "Uno a uno,\nSe están cayendo.\n\nNo está muerto.\n\nAún no.\n\nPero derrotado.\n\nAryn contra los pasos de la posada.\nTaera junto a la pared se puso para los habitantes.\nVael en un techo roto.\nIkar se arrodilla frente a ti.\n\nSigue intentando levantarse.\n\nClaro.\n\nTú apuntas la espada hacia él.\n\nNo mira hacia abajo.\n\n\"Vuelve.\n\nNo es una orden.\n\nUna petición.\n\nDemasiado tarde.\n\nDemasiado humano.\n\nEl caos se frota.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Salva a Ikar.",
+          "vers": "epargner_ikar",
+          "effects": [
+            {
+              "stat": "controle",
+              "val": 10
+            }
+          ]
+        },
+        {
+          "text": "Deja que el Caos decida.",
+          "vers": "chaos_gagne",
+          "effects": [
+            {
+              "stat": "chaos",
+              "val": 20
+            }
+          ]
+        }
+      ],
+      "x": 60,
+      "y": 2460,
+      "timer": {
+        "duration": 12,
+        "auto": "first"
+      }
+    },
+    "epargner_ikar": {
+      "id": "epargner_ikar",
+      "title": "Qué pena volver.",
+      "location": "Sorn: silencio púrpura",
+      "narrator": "",
+      "text": "Baja la espada.\n\nUn segundo.\n\nIkar lo ve.\n\nAryn, también.\n\nManos de Taera.\n\nIncluso Vael levanta la cabeza.\n\nTodavía hay algo.\n\nUn cable.\n\nMaldita sea.\nCasi invisible.\n\nEntonces Erevane habla detrás de ti:\n\nLo harán otra vez.\n\nLa frase corta el cable.\n\nCierra los ojos.\n\nCuando los reabris,\nLa luz púrpura ha invadido todo.\n\nSalvaste a Ikar.\n\nPero no regresaste.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Continúa.",
+          "vers": "chaos_gagne",
+          "effects": [
+            {
+              "stat": "paranoia",
+              "val": 10
+            },
+            {
+              "stat": "chaos",
+              "val": 10
+            }
+          ]
+        }
+      ],
+      "x": 180,
+      "y": 2460
+    },
+    "chaos_gagne": {
+      "id": "chaos_gagne",
+      "title": "El Caos Gana",
+      "location": "Sorn – Centro de descanso",
+      "narrator": "",
+      "text": "El cielo se dobla.\n\nEn realidad no.\n\nPero todo el que lo mira juraría que sí.\n\nLa luz violeta se eleva de la calle rota.\n\nLos Cuatro ya no pueden moverse.\n\nErevane te acompaña.\n\nDespacio.\n\nComo un sacerdote a un altar.\n\n¿Ves? Susurra.\n\nSu voz tembla.\n\nEsto no era el fin.\n\nMira alrededor.\n\nCiudad roja.\nLos habitantes ocultos.\nLos Cuatro en el suelo.\nErevane detrás de ti.\n\nY finalmente, lo entiendes.\n\nNo ganaste tu libertad.\n\nSólo cambiaste las jaulas.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Entiendo demasiado tarde.",
+          "vers": "trop_tard",
+          "effects": [
+            {
+              "stat": "controle",
+              "val": 5
+            }
+          ]
+        }
+      ],
+      "x": 60,
+      "y": 2580
+    },
+    "trop_tard": {
+      "id": "trop_tard",
+      "title": "Qué pena.",
+      "location": "Sorn — Calle rota",
+      "narrator": "",
+      "text": "Los Cuatro querían salvar al jugador.\n\nErevane quería salvar a los Caos.\n\nLa diferencia es enorme.\n\nLa ves ahora.\n\nAhora que Aryn no puede llegar.\nAhora que Taera ya no puede proteger la calle.\nAhora que Vael no puede decir nada.\nAhora que Ikar bajó su espada.\n\nAhora que no hay nadie entre ustedes\nY lo que llevas puesto.\n\nQuieres retroceder.\n\nQuieres decir sus nombres.\n\nTodavía quieres ser alguien que podamos traer de vuelta.\n\nPero el Caos no mira atrás.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Fin.",
+          "vers": "fin_catastrophe"
+        }
+      ],
+      "x": 180,
+      "y": 2580
+    },
+    "fin_catastrophe": {
+      "id": "fin_catastrophe",
+      "title": "El Sagrado Desastres",
+      "location": "Fronteras de Aerith — más tarde",
+      "narrator": "",
+      "text": "Después diremos que Sorn sobrevivió.\n\nTécnicamente.\n\nLas paredes todavía mantienen.\nLas calles aún existen.\n\nPero Sorn ya no es una ciudad.\n\nEs una cicatriz.\n\nLos Caos cruzaron Aerith como una idea\nNo podemos deshacerlo más.\n\nErevane tiene lo que quería.\n\nTrescientos años de espera.\n\nPor esto.\n\nLos Cuatro están vivos.\n\nEn algún lugar.\n\nAryn sigue buscando.\n\nReplantes de Taera.\n\nVael camina en lugares donde el aire es diferente.\n\nIkar no golpeó su espada.\n\nEstán buscando una manera de arreglarlo.\n\nNo está seguro de que exista.\n\nPero están mirando.\n\nPorque eso es lo que hacen.\n\nPorque eso es lo que siempre han hecho.\n\nY tú.\n\nEstás aquí.\n\nEn algún lugar de esto.\n\nLa fría hoja negra en tu mano.\n\nTe acuerdas de Yerevane diciendo,\nEl Caos no es una maldición. Es un regalo.\n\nRecuerdas la semilla de Taera.\n\nDos golpes en el mal.\n\nEl cuchillo de Marek.\n\nEstas cosas no han sido destruidas.\n\nTodavía existen.\n\nEn algún lugar.\n\nTal vez sea un comienzo.\n\nTal vez.",
+      "isStart": false,
+      "isEnd": true,
+      "transition": "fade",
+      "choices": [],
+      "x": 60,
+      "y": 2700
+    },
+    "detail_cloche": {
+      "id": "detail_cloche",
+      "title": "Algo",
+      "location": "Fuego de campamento - Noche",
+      "narrator": "",
+      "text": "Erevane sabe demasiado.\n\nSin generalidades.\n\nDetalles.\n\nEl nombre de Marek.\nEl color de la espada de Aryn.\nEn el momento exacto en que los Caos se despertaron.\n\n¿Cómo sabes todo esto?\n\nEstá sacudiendo las brasas.\n\nHe estado estudiando a Caos por mucho tiempo.\n\n¿Cuánto tiempo?\n\nToma un descanso.\n\nCorto.\n\n*\"Muy largo. *\n\nNo te mira diciendo eso.\n\nGuarda la observación.\n\nNo saber qué hacer con él.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Continúa.",
+          "vers": "erevane_nuance",
+          "effects": [
+            {
+              "stat": "controle",
+              "val": 5
+            }
+          ]
+        }
+      ],
+      "x": 300,
+      "y": 380
+    },
+    "remarquer_changement": {
+      "id": "remarquer_changement",
+      "title": "El espejo",
+      "location": "Clear — Morning",
+      "narrator": "",
+      "text": "Ves tu reflejo en un estanque.\n\nPara.\n\nTus ojos.\n\nTienen un tinte.\n\nViolet.\n\nLuz.\n\nComo si la hoja hubiera empezado a apagarse.\n\nEstás pensando en Taera.\n\n*La tierra sabe cuando alguien está vacío. *\n\nEstás pensando en Aryn.\n\nEl Caos está en ti pero eres más grande que el Caos.\n\nEstás pensando en Vael.\n\n*Las personas que llegan al momento adecuado con las respuestas correctas. *\n\nGuarda esos pensamientos.\n\nErevane te llama desde el claro.\n\nSigues.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Continúa.",
+          "vers": "ils_te_cherchent",
+          "effects": [
+            {
+              "stat": "controle",
+              "val": 5
+            }
+          ]
+        }
+      ],
+      "x": 300,
+      "y": 700
+    },
+    "voix_erevane": {
+      "id": "voix_erevane",
+      "title": "Su voz",
+      "location": "Fuego",
+      "narrator": "",
+      "text": "Un puente está reconstruido.\n\nDice que es muy fácil.\n\nComo alguien que dijo esa frase muchas veces.\n\nNo para consolarte.\n\nPara seguir adelante.\n\nLo importante es que aprendas.\n\nLo importante.\n\nNo el niño.\nNo el comerciante.\nNo el puente.\n\nLo importante es que aprendas.\n\nNo puedes decir si es sabiduría o algo así.\n\nEstás viendo a Erevane.\n\nYa está girando una página de su libro.\n\nYa ha seguido adelante.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Continúa.",
+          "vers": "erevane_perte",
+          "effects": [
+            {
+              "stat": "controle",
+              "val": 10
+            }
+          ]
+        }
+      ],
+      "x": 300,
+      "y": 960
+    },
+    "observer_erevane_sorn": {
+      "id": "observer_erevane_sorn",
+      "title": "The Observer",
+      "location": "Albergue — Sorn",
+      "narrator": "",
+      "text": "Erevane está tranquilo.\n\nDemasiado tranquilo.\n\nLa ciudad susurra su nombre fuera.\nLos Cuatro están en alguna parte en las calles.\n\nEstá leyendo.\n\nUn viejo libro.\nNo el que te mostró.\n\nOtro.\n\nLa cubierta es diferente.\n\nNo negro.\n\nRojo oscuro.\n\nLo cierra cuando te ve mirando.\n\n**\"Tratado antiguo.** dijo.\n\"Womany.\n\nSonríe.\n\nSu sonrisa habitual.\n\nPero sus ojos van a la puerta por un segundo.\n\nComo si estuviera esperando algo.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Continúa.",
+          "vers": "demander_erevane",
+          "effects": [
+            {
+              "stat": "controle",
+              "val": 10
+            }
+          ]
+        }
+      ],
+      "x": 300,
+      "y": 1400
+    },
+    "erevane_confirme": {
+      "id": "erevane_confirme",
+      "title": "Confirmación",
+      "location": "Red Street — Sorn",
+      "narrator": "",
+      "text": "Vuelve a Erevane.\n\n¿Es verdad?\n\nNo contesta ahora mismo.\n\nEse silencio.\n\nEste silencio lo dice todo.\n\n**\"Yo estaba allí.** finalmente dice.\n**\"Pero Caël había tomado sus propias decisiones.\n\nLe dijiste lo mismo que me dijiste.\n\n\"Le dije la verdad.\n\nTu verdad.\n\nNo lo niega.\n\nTampoco lo confirma.\n\nNo es lo mismo que mentir.\n\nPero esa tampoco es la verdad.\n\nY lo sabes ahora.\n\nLo sabes.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Continúa.",
+          "vers": "devant_erevane",
+          "effects": [
+            {
+              "stat": "chaos",
+              "val": 15
+            }
+          ]
+        }
+      ],
+      "x": 300,
+      "y": 1560
+    }
+  },
+  "lang": "es"
+}
