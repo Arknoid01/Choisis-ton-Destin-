@@ -1,0 +1,1077 @@
+{
+  "name": "Las cinco espadas — la memoria de Vael",
+  "kids": false,
+  "askPlayerName": false,
+  "pack": "cinq_lames",
+  "stats": [
+    {
+      "id": "legerete",
+      "label": "Luz",
+      "start": 50,
+      "max": 100,
+      "color": "#80edff"
+    },
+    {
+      "id": "lucidite",
+      "label": "Lucidity",
+      "start": 20,
+      "max": 100,
+      "color": "#577590"
+    }
+  ],
+  "theme": {},
+  "scenes": {
+    "vael_intro": {
+      "id": "vael_intro",
+      "title": "Aire",
+      "location": "Ciudad alta - Techos",
+      "narrator": "Vael. Transportista de aire. Lo que evita decir.",
+      "text": "El problema con el aire,\nEs que sólo notamos cuando está desaparecido.\n\nO cuando empuja a alguien a una fuente.\n\nVoy a declarar inmediatamente:\nLa fuente ya estaba allí.\n\nYo, técnicamente,\nSólo presenté dos elementos.\n\nAgua.\n\nY el comerciante grita demasiado alto.",
+      "isStart": true,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Continúa.",
+          "vers": "vael_enfance"
+        },
+        {
+          "text": "¿Por qué el aire?",
+          "vers": "vael_pourquoi_air"
+        }
+      ],
+      "x": 60,
+      "y": 60
+    },
+    "vael_pourquoi_air": {
+      "id": "vael_pourquoi_air",
+      "title": "Por qué Air",
+      "location": "Ciudad alta - Techos",
+      "narrator": "",
+      "text": "El aire no tiene nada.\n\nEstá pasando.\nEstá tocando.\nSe va de nuevo.\n\nEs conveniente.\n\nCuando te quedas demasiado tiempo en alguna parte,\nLa gente está empezando a hacer preguntas.\n\n¿De dónde vienes?\n¿Por qué sonríes así?\n¿Eres tú quien colgó la ropa interior de la fiesta en la torre de campana?\n\nSí.\n\nPero ese no es el punto.\n\nEl sujeto es que el aire puede entrar en todas partes\nsin pedir permiso.\n\nY sal antes de que le pidamos cuentas.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Parece una fuga.",
+          "vers": "vael_fuite",
+          "effects": [
+            {
+              "stat": "lucidite",
+              "val": 10
+            }
+          ]
+        },
+        {
+          "text": "Continúa.",
+          "vers": "vael_enfance"
+        }
+      ],
+      "x": 180,
+      "y": 60
+    },
+    "vael_fuite": {
+      "id": "vael_fuite",
+      "title": "Un vuelo muy elegante",
+      "location": "High Town",
+      "narrator": "",
+      "text": "Correr es una palabra difícil.\n\nPrefiero:\nReposición estratégica con plomería.\n\nPero sí.\n\nTal vez.\n\nCuando era niño,\nYa sabía cómo desaparecer de una habitación.\nAntes de que alguien se enoje.\n\n¿Qué fue útil?\ndesde que era a menudo la razón\nde esta ira.\n\nMi padre dijo:\n\nVael, un día tu humor te matará.\n\nDije:\n\n*Así que espero que lo haga rápidamente,\nPorque odio los discursos largos.\n\nNo se rió.\n\nMi madre sí.\n\nCon discreción.\n\nEs importante, victorias discretas.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "¿Qué fue eso exactamente?",
+          "vers": "vael_fuite_detail",
+          "effects": [
+            {
+              "stat": "lucidite",
+              "val": 10
+            }
+          ]
+        },
+        {
+          "text": "Continúa.",
+          "vers": "vael_enfance"
+        }
+      ],
+      "x": 300,
+      "y": 60
+    },
+    "vael_enfance": {
+      "id": "vael_enfance",
+      "title": "Los techos",
+      "location": "Ciudad Alta — Barrio de los Mensajeros",
+      "narrator": "",
+      "text": "Nací en una ciudad donde las calles subieron más de lo que iban.\n\nLas casas estaban apretadas.\nLos balcones demasiado cerca.\nLos techos casi pulidos por los niños corriendo sobre él.\n\nPor fin.\n\nPor mí.\n\nLos otros niños tenían más respeto por la gravedad.\n\nDebilidad de carácter.\n\nMi madre era un mensajero.\nMi padre reparó los girouettes, las campanas y las cosas pusieron demasiado alto\nPara gente razonable.\n\nDijo:\n\nSi te caes, grita antes de tocar el suelo.\n\nUn consejo extraño.\n\nMuy útil más tarde.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Háblame de tu madre.",
+          "vers": "vael_mere"
+        },
+        {
+          "text": "Continúa.",
+          "vers": "vael_premiere_chute"
+        }
+      ],
+      "x": 60,
+      "y": 180
+    },
+    "vael_mere": {
+      "id": "vael_mere",
+      "title": "El Mensajero",
+      "location": "Ciudad alta — Escaleras",
+      "narrator": "",
+      "text": "Mi madre conocía todo el pueblo.\n\nNo las calles.\n\nAtajos.\n\nLa diferencia es enorme.\n\nUna calle te lleva donde va todo el mundo.\nUn atajo te lleva donde nadie te espera.\n\nMe enseñó a escuchar las puertas,\nlos pasos,\nventanas mal cerradas,\nsilencios que duran un segundo demasiado tiempo.\n\n\"La gente habla incluso cuando se callan.\n\nEstaba escuchando.\n\nEntonces repetí en el momento equivocado.\n\nAsí aprendemos la diplomacia.\n\nO ser perseguido por un panadero.\n\nAmbos se parecen más de lo que pensamos.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "¿Te pareces a él?",
+          "vers": "vael_mere_ressemble",
+          "effects": [
+            {
+              "stat": "lucidite",
+              "val": 10
+            }
+          ]
+        },
+        {
+          "text": "Continúa.",
+          "vers": "vael_premiere_chute"
+        }
+      ],
+      "x": 180,
+      "y": 180
+    },
+    "vael_premiere_chute": {
+      "id": "vael_premiere_chute",
+      "title": "La primera caída",
+      "location": "Ciudad alta - Techo del antiguo molino",
+      "narrator": "",
+      "text": "Tenía siete años.\n\nEstaba corriendo en el techo del viejo molino.\n\nProhibido.\nPeligroso.\nMuy divertido.\n\nEstaba lloviendo un poco.\n\nNo es suficiente para parar.\nLo suficiente para hacer estúpido a un niño ya muy comprometido en esta dirección.\n\nMi pie se resbaló.\n\nMe di vuelta.\n\nEl mundo se ha convertido.\nEl cielo está debajo de mí.\nLa ciudad de arriba.\n\nGrité.\n\nNo por miedo.\n\nPorque mi padre me lo dijo.\n\nY el aire me atrapó.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "¿Qué quieres decir, atrapado?",
+          "vers": "vael_air_rattrape"
+        },
+        {
+          "text": "¿Te asustaste?",
+          "vers": "vael_peur_chute"
+        }
+      ],
+      "x": 60,
+      "y": 300
+    },
+    "vael_air_rattrape": {
+      "id": "vael_air_rattrape",
+      "title": "Atrapados",
+      "location": "Upper Town — Street",
+      "narrator": "",
+      "text": "No como los brazos.\n\nMás bien como una idea muy firme\ndecidir el terreno podría esperar.\n\nMe quedé suspendida.\n\nBaja la cabeza.\nArmas abiertas.\nUn zapato perdido.\n\nUna anciana me miró desde su ventana.\n\n¿Otra vez?\n\nDije:\n\n*\"Técnicamente, ya no estoy allí. *\n\nCerró sus persianas.\n\nEl aire me puso suavemente en un carro de lavandería.\n\nBlanco.\nLimpio.\n\nNo por mucho tiempo.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Continúa.",
+          "vers": "vael_reaction_parents",
+          "effects": [
+            {
+              "stat": "legerete",
+              "val": 10
+            }
+          ]
+        }
+      ],
+      "x": 180,
+      "y": 300
+    },
+    "vael_peur_chute": {
+      "id": "vael_peur_chute",
+      "title": "¿Miedo?",
+      "location": "Ciudad Alta - Entre cielo y tierra",
+      "narrator": "",
+      "text": "Sí.\n\nPor supuesto.\n\nSoy gracioso.\nNo inconsciente.\n\nPor fin.\n\nNo completamente.\n\nEl miedo vino primero a la barriga.\nEntonces en la garganta.\nEntonces en tus manos.\n\nY justo antes del suelo,\nSe ha convertido en otra cosa.\n\nUna apertura.\n\nComo si el mundo estuviera diciendo:\n\nPuedes caer.\n\nO puedes ir a otro lugar.\n\nElegí otro lugar.\n\nA menudo escojo otro lugar.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Continúa.",
+          "vers": "vael_reaction_parents",
+          "effects": [
+            {
+              "stat": "lucidite",
+              "val": 10
+            }
+          ]
+        }
+      ],
+      "x": 300,
+      "y": 300
+    },
+    "vael_reaction_parents": {
+      "id": "vael_reaction_parents",
+      "title": "Padres",
+      "location": "Upper Town — Family House",
+      "narrator": "",
+      "text": "Mi mamá se rió.\n\nAún no.\n\nPrimero miró mis brazos.\nMis piernas,\nMi cabeza.\n\nEspecialmente mi cabeza.\n\nAntes era así. \"** dijo mi padre.\n\nEntonces se rió.\n\nMi padre no se rió.\n\nMiró la ventana abierta.\nLas cortinas que se movieron sin viento.\nEstoy cubierto de lino húmedo.\n\n\"Llamaste.\n\nGrité.\n\nY algo respondió.\n\nFue la primera vez que vi a mi padre en serio.\nSin estar enfadado.\n\nNo me gustó.\n\nAsí que hice una broma.\n\nMala idea.\n\nComo a menudo.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "¿Qué chiste?",
+          "vers": "vael_mauvaise_blague"
+        },
+        {
+          "text": "Continúa.",
+          "vers": "vael_apprendre"
+        }
+      ],
+      "x": 60,
+      "y": 420
+    },
+    "vael_mauvaise_blague": {
+      "id": "vael_mauvaise_blague",
+      "title": "Mala idea",
+      "location": "Hogar familiar",
+      "narrator": "",
+      "text": "Dije:\n\nAl menos ahora sabemos que me caigo con talento.\n\nSilencio.\n\nLargo.\n\nMi padre cerró los ojos.\n\nMi madre miró el techo.\n\nCreo que estaba rezando.\n\nNo para mi supervivencia.\n\nPor su paciencia.\n\nEntonces mi padre dijo:\n\nNo debes mostrar esto.\n\nY ahí,\nLa habitación se ha vuelto más pequeña.\n\nLas ventanas también.\n\nIncluso el aire parecía reacio a entrar.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Continúa.",
+          "vers": "vael_apprendre",
+          "effects": [
+            {
+              "stat": "lucidite",
+              "val": 5
+            }
+          ]
+        }
+      ],
+      "x": 180,
+      "y": 420
+    },
+    "vael_apprendre": {
+      "id": "vael_apprendre",
+      "title": "Aprende a pasar",
+      "location": "Techos y callejones",
+      "narrator": "",
+      "text": "Aprendí solo.\n\nSolo con el aire.\n\nQue es una frase que la gente normal evita decir.\n\nPor la mañana tiré plumas de los techos.\nTrataba de hacerlas girar.\nEntonces sube.\nEntonces entra por una ventana abierta.\n\nUn día lo hice.\n\nEn sopa.\n\nA la provocación.\n\nNo voy a fingir que no fue voluntario.\nEso sería indigno de ambos.\n\nOí que el aire no fuerza.\n\nEstá saltando.\nSe levanta.\nEstá secuestrado.\nSólo crece lo suficiente para que las cosas elijan casi por sí mismas.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "¿Los límites?",
+          "vers": "vael_limites"
+        },
+        {
+          "text": "Continuar - reclutamiento.",
+          "vers": "vael_recrutement"
+        }
+      ],
+      "x": 60,
+      "y": 540
+    },
+    "vael_limites": {
+      "id": "vael_limites",
+      "title": "Limits",
+      "location": "Ciudad superior — Clocher",
+      "narrator": "",
+      "text": "El límite de aire,\nEs que no dura mucho tiempo.\n\nUna piedra.\nPodemos bajarlo.\n\nUna llama,\nPodemos alimentarla.\n\nAgua,\nPodemos recogerlo.\n\n¿El aire?\n\nEl aire está escapando.\n\nYo también.\n\nPodría frenar una caída.\nMueva una flecha.\nUse un susurro de habitación a habitación.\n\nPero si intento mantener algo demasiado largo,\nMis manos estaban temblando.\nMi aliento estaba cortando.\n\nComo si el mundo me recordara:\n\n*Lo que pasa no se hace para quedarse. *\n\nHermosa frase.\n\nMuy molesto cuando quieres mantener a alguien.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Continúa.",
+          "vers": "vael_recrutement",
+          "effects": [
+            {
+              "stat": "lucidite",
+              "val": 10
+            }
+          ]
+        }
+      ],
+      "x": 180,
+      "y": 540
+    },
+    "vael_recrutement": {
+      "id": "vael_recrutement",
+      "title": "El hombre que no estaba allí",
+      "location": "Ciudad alta - Techo de campana torre",
+      "narrator": "",
+      "text": "Vino en una noche.\n\nPor fin.\n\nLlegado.\n\nLo noté principalmente porque ya estaba sentado a mi lado.\nen el techo de la torre de campana.\n\nQue es grosero.\n\nLos techos tienen una etiqueta.\nNo subimos a los techos de la gente.\n\nLlevaba blanco y gris.\nSu cabello se movía cuando no había viento.\n\nFrozen.\n\n¿Me sentiste venir?\n\n**\"No.\n\nBien.\n\nMe parece cuestionable.\n\nSonrió.\n\nEres Vael.\n\nDepende de quién pregunte.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "¿Quién era?",
+          "vers": "vael_esprit_air"
+        },
+        {
+          "text": "Continúa.",
+          "vers": "vael_depart"
+        }
+      ],
+      "x": 60,
+      "y": 660
+    },
+    "vael_esprit_air": {
+      "id": "vael_esprit_air",
+      "title": "El Espíritu del Aire",
+      "location": "Tejado de campana",
+      "narrator": "",
+      "text": "Su nombre era Eolan.\n\nO dijo que se llamaba Eolan.\n\nCon el aire,\nSiempre tienes que mantener un pequeño margen de sospecha.\n\nMe explicó la Orden.\nLos Cinco Blades.\nEl Caos.\nProfecía.\nEspíritus.\n\nMucha información para un techo.\n\nLe pregunté:\n\n¿Y si me niego?\n\nMiró a la ciudad.\n\nEntonces te quedas.\n\n¿Eso es todo?\n\nSí.\n\nEstaba preocupada.\n\nGente que realmente te deja elegir\nson mucho más peligrosos que los que mandan.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "¿Y la gran frase?",
+          "vers": "vael_eolan_phrase",
+          "effects": [
+            {
+              "stat": "lucidite",
+              "val": 5
+            }
+          ]
+        },
+        {
+          "text": "Continúa.",
+          "vers": "vael_depart"
+        }
+      ],
+      "x": 180,
+      "y": 660
+    },
+    "vael_depart": {
+      "id": "vael_depart",
+      "title": "Salida",
+      "location": "Upper Town — Family House",
+      "narrator": "",
+      "text": "Mis padres escucharon.\n\nMi padre de pie.\nMi madre está sentada.\nYo al borde de la ventana,\nLo cual no ayudó al estado de ánimo.\n\n\"Baja ahí.\" Dijo mi padre.\n\n**«¿Simbólica o físicamente?\n\nVael.\n\nBajé.\n\nEolan habló suavemente.\n\nAl final,\nMi madre me dio su vieja bolsa de mensajeros.\n\n**« Los atajos son inútiles\nSi olvidas dónde querías ir.\n\nMi padre me dio un guru roto.\n\n# Para saber de dónde viene el viento. #\n\nDije:\n\n**¿Se supone que debo ser tocado o insultado?\n\nMe apretó contra él.\n\nTocado, entonces.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Continúa.",
+          "vers": "vael_aurenthal",
+          "effects": [
+            {
+              "stat": "legerete",
+              "val": 5
+            }
+          ]
+        }
+      ],
+      "x": 60,
+      "y": 780
+    },
+    "vael_aurenthal": {
+      "id": "vael_aurenthal",
+      "title": "Auenthal",
+      "location": "Auenthal — Templo de la Orden",
+      "narrator": "",
+      "text": "Aurenthal era enorme.\n\nQue es una forma educada de decir:\ndemasiado segura de ella.\n\nEl Templo también.\n\nColumnas altas.\nUn silencio solemne.\nEstatuas mirándote como si pagaran la entrada.\n\nTres niños estaban esperando.\n\nUna chica con pelo plateado.\nMuy tranquilo.\nDemasiado tranquilo.\nLa gente muy tranquila siempre esconde la gran sabiduría,\nO un deseo de golpear a alguien con silla.\n\nUn chico que parecía un argumento de pie.\n\nY una chica sonriendo como ella decidió que todos merecían una oportunidad.\n\nPensé,\n\nEs valiente.\n\nO mal informado.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Ikar al principio.",
+          "vers": "vael_ikar_debut"
+        },
+        {
+          "text": "Aryn al principio.",
+          "vers": "vael_aryn_debut"
+        },
+        {
+          "text": "Taera al principio.",
+          "vers": "vael_taera_debut"
+        },
+        {
+          "text": "Continúa.",
+          "vers": "vael_entrainement"
+        }
+      ],
+      "x": 60,
+      "y": 900
+    },
+    "vael_ikar_debut": {
+      "id": "vael_ikar_debut",
+      "title": "Ikar - El mal tiempo",
+      "location": "Templo de la Orden",
+      "narrator": "",
+      "text": "Ikar no me saludó.\n\nMe miró.\n\nMientras miras una puerta chillando.\n\nDije:\n\nEncantada también.\n\nNo respondió.\n\nEl tercer día,\nHice desaparecer su espada durante el entrenamiento.\n\nFalta poco.\nMuy temporal.\nCasi educativo.\n\nQuemó el suelo.\n\nMuy gracioso.\n\nQuería ver si te asustabas.\n\n¿Y?\n\nTú convertiste el patio en brindis.\n**\"Así que sí, pero con estilo.\n\nCasi sonrió.\n\nFailing.\n\nLo consideré una victoria militar.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Continúa.",
+          "vers": "vael_entrainement",
+          "effects": [
+            {
+              "stat": "legerete",
+              "val": 10
+            }
+          ]
+        }
+      ],
+      "x": 180,
+      "y": 900
+    },
+    "vael_aryn_debut": {
+      "id": "vael_aryn_debut",
+      "title": "Aryn — Too Calm",
+      "location": "Templo de la Orden — Cuenca",
+      "narrator": "",
+      "text": "Aryn no habló mucho.\n\nLo cual inmediatamente parecía sospechoso.\n\nNo porque estaba escondiendo algo.\n\nPorque estaba escuchando.\n\nLa gente que realmente escucha es terrible.\nEscuchan cosas que no dijimos.\n\nUna noche me preguntó:\n\n¿Siempre bromeas cuando tienes miedo?\n\nDije:\n\n**\"No. A veces bromeo cuando otros tienen miedo.\n\nMe miró.\n\nMucho tiempo.\n\n\"Así que sí.\"\n\nLo odiaba.\n\nLa respetaba mucho más tarde.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Continúa.",
+          "vers": "vael_entrainement",
+          "effects": [
+            {
+              "stat": "lucidite",
+              "val": 10
+            }
+          ]
+        }
+      ],
+      "x": 300,
+      "y": 900
+    },
+    "vael_entrainement": {
+      "id": "vael_entrainement",
+      "title": "Capacitación",
+      "location": "Templo de la Orden - Techos",
+      "narrator": "",
+      "text": "Eolan rara vez me entrenó en el suelo.\n\n**\"El suelo da malos hábitos.\n\nUna frase típica de alguien que nunca tuvo que limpiar sus zapatos.\n\nMe hizo correr en los techos del Templo.\nSalta entre torres.\nEscucha conversaciones a través de tres paredes.\nCoge una hoja antes de tocar el agua.\n\nEntonces desapareció.\n\nEn medio de una frase.\n\nLa primera vez que grité:\n\nEs muy grosero.\n\nSu voz me respondió:\n\nEs muy efectivo.\n\nMe gustaba.\n\nFue increíble.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "¿Te hablaba de los otros?",
+          "vers": "vael_eolan_autres"
+        },
+        {
+          "text": "Continúa.",
+          "vers": "vael_pret_a_tout"
+        }
+      ],
+      "x": 60,
+      "y": 1020
+    },
+    "vael_eolan_autres": {
+      "id": "vael_eolan_autres",
+      "title": "Eolan and Others",
+      "location": "Templo de la Orden — Corniche",
+      "narrator": "",
+      "text": "Eolan dijo que los otros eran fáciles de leer.\n\nLo cual estaba mal.\n\nPero él dijo muchas cosas mal\npara ver si los estaba corrigiendo.\n\nEl fuego se mueve hacia adelante.\n\nA la pared.\n\n\"Pagos de agua\".\n\nY termina en los zapatos.\n\n**\"La tierra permanece.\n\nNo respondí a eso.\n\nSonrió.\n\n¿Qué hay del aire?\n\nLevanté los hombros.\n\nEl aire pretende irse.\n\nEolan miró mucho por delante.\n\nSí.\n\nFue la primera vez que se veía triste.\n\nMuy brevemente.\n\nComo una corriente de aire que creemos que inventamos.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Continúa.",
+          "vers": "vael_pret_a_tout",
+          "effects": [
+            {
+              "stat": "lucidite",
+              "val": 10
+            }
+          ]
+        }
+      ],
+      "x": 180,
+      "y": 1020
+    },
+    "vael_pret_a_tout": {
+      "id": "vael_pret_a_tout",
+      "title": "Listo para todos",
+      "location": "Templo de la Orden — East Tower",
+      "narrator": "",
+      "text": "Tenía diez años cuando Eolan dijo la frase.\n\nEl grande.\nEl famoso.\nMuy práctico al tratar de traumatizar a los niños con elegancia.\n\nEl portador Caos vendrá.\n\n¿Podría advertir antes?\n\nVael.\n\nLo siento. Sigue. Interrumpo la profecía.\n\nNo se rió.\n\nMala señal.\n\n**\"Tendrás que estar listo para todo.\n\nMiré el vacío debajo de la torre.\n\nEl viento subía.\n\nTodo es una palabra muy amplia.\n\nSí.\n\n**\"Práctico para explicar nada.\n\nNo respondió.\n\nMe di cuenta de que tenía razón.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "¿Entiendes qué?",
+          "vers": "vael_compris_tout",
+          "effects": [
+            {
+              "stat": "lucidite",
+              "val": 15
+            }
+          ]
+        },
+        {
+          "text": "Has hecho una broma.",
+          "vers": "vael_blague_tout",
+          "effects": [
+            {
+              "stat": "legerete",
+              "val": 10
+            }
+          ]
+        }
+      ],
+      "x": 60,
+      "y": 1140
+    },
+    "vael_compris_tout": {
+      "id": "vael_compris_tout",
+      "title": "Lo que entendí",
+      "location": "Templo de la Orden — East Tower",
+      "narrator": "",
+      "text": "Me di cuenta de que nadie lo sabía.\n\nNo completamente.\n\nLos espíritus habían visto a Caël.\nHabían visto lo que el miedo le había hecho.\n\nY en lugar de darnos una respuesta,\nNos dieron una sentencia.\n\n* Listo para cualquier cosa. *\n\nIkar oyó:\nSi es necesario. *\n\nTaera oyó:\nNunca te rindas.\n\nAryn oyó:\nMira otra vez.\n\n¿Yo?\n\nOí el silencio sobre la palabra \"todos\".\n\nLo que no se dice es a veces más fuerte\nLo que gritamos.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Continúa.",
+          "vers": "vael_annees",
+          "effects": [
+            {
+              "stat": "lucidite",
+              "val": 10
+            }
+          ]
+        }
+      ],
+      "x": 180,
+      "y": 1140
+    },
+    "vael_blague_tout": {
+      "id": "vael_blague_tout",
+      "title": "El Blague",
+      "location": "Templo de la Orden — East Tower",
+      "narrator": "",
+      "text": "Dije:\n\n**«¿Listo para algo, incluso verduras hervidas del refectorio?\n\nEolan me miró.\n\n\"Prior a esto.\n\nMe reí.\n\nUna de verdad.\n\nLuego añadió:\n\nUn día bromearás frente a alguien que cree que te estás burlando de su dolor.\n\nMe detuve.\n\nNo hago eso.\n\nNo voluntariamente.\n\nEl viento se ha enfriado.\n\nYa no tenía hambre.\n\nNi siquiera para quejarse de verduras.\n\nEso es decir.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Continúa.",
+          "vers": "vael_annees",
+          "effects": [
+            {
+              "stat": "lucidite",
+              "val": 5
+            }
+          ]
+        }
+      ],
+      "x": 300,
+      "y": 1140
+    },
+    "vael_annees": {
+      "id": "vael_annees",
+      "title": "Años",
+      "location": "Templo de la Orden - En todas partes excepto donde me querían",
+      "narrator": "Diez años. Once, doce. Trece.",
+      "text": "Crecimos.\n\nAryn se estaba poniendo más callado,\nque parecía imposible y sin embargo.\n\nIkar estaba mejorando con una espada,\ny peor con conversaciones.\n\nTaera creció las cosas en cada esquina disponible.\nUn día se plantó menta cerca de mi ventana.\n\nPara que ole bien.\n\n¿Me sentí mal?\n\n**\"No.\n\nRompe.\n\nTu habitación, tal vez.\n\nTrahison.\n\nViajé mucho en el Templo.\nLos pasillos.\nLos techos.\nArchivos.\nLugares prohibidos.\n\nEspecialmente los lugares prohibidos.\n\nSiempre están mejor ventilados.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "¿Archivos?",
+          "vers": "vael_archives"
+        },
+        {
+          "text": "Continúa.",
+          "vers": "vael_quinze_ans"
+        }
+      ],
+      "x": 60,
+      "y": 1260
+    },
+    "vael_archives": {
+      "id": "vael_archives",
+      "title": "Los Archivos",
+      "location": "Templo de la Orden — Archivos prohibidos",
+      "narrator": "",
+      "text": "No estaba entrando en los archivos prohibidos.\n\nEs importante aclararlo.\n\nPasaba por aquí.\n\nLa diferencia es legal.\n\nUna noche encontré a Aryn allí.\nEstaba leyendo una vieja historia sobre Cael.\n\nNo deberías estar aquí.\n\nNi tú.\n\nEstoy buscando algo.\n\nYo también.\n\n¿Qué?\n\nMiré los estantes.\n\nUna salida, ahora me has visto.\n\nCasi sonrió.\n\nLuego me mostró el texto.\n\nLa antigua Taera había llegado a Caël.\n\nY por un segundo,\nFuncionó.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Continúa.",
+          "vers": "vael_quinze_ans",
+          "effects": [
+            {
+              "stat": "lucidite",
+              "val": 15
+            }
+          ]
+        }
+      ],
+      "x": 180,
+      "y": 1260
+    },
+    "vael_quinze_ans": {
+      "id": "vael_quinze_ans",
+      "title": "Quince años",
+      "location": "Templo de la Orden - Techos",
+      "narrator": "",
+      "text": "A las 15.\nYo era oficialmente insoportable.\n\nOficialmente también.\n\nPero fui útil.\n\nPodría escuchar una conversación en el otro extremo de una corte.\nSabía cómo soltar una espada con una mano sin tocar el brazo.\nSabía cómo desaparecer en un pasillo recto,\nque es una gran agitación para la gente metódica.\n\nIkar, entonces.\n\nPero sobre todo,\nSabía cuando alguien se estaba riendo.\n\nEso es muy específico.\n\nAryn rara vez mintió.\nNunca serás muy bueno.\nIkar estaba mintiendo como una puerta ardiente.\n\n¿Yo?\n\nYo era excelente.\n\nPor eso solía ser rápido.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "¿Encontrarte?",
+          "vers": "vael_mensonge"
+        },
+        {
+          "text": "Continúa.",
+          "vers": "vael_nuit_signal"
+        }
+      ],
+      "x": 60,
+      "y": 1380
+    },
+    "vael_mensonge": {
+      "id": "vael_mensonge",
+      "title": "La mentira",
+      "location": "Templo de la Orden - Techo Norte",
+      "narrator": "",
+      "text": "Estaba bromeando cuando tenía miedo.\n\nEstaba bromeando cuando otros sufrieron,\nNo negar su dolor,\npero dejarles un paseo donde poner un pie.\n\nUn pequeño paseo.\n\nA veces funcionó.\n\nA veces no.\n\nEl problema,\nEs porque empecé a usar este paseo para mí también.\n\nPor la fuerza,\nNo sabía si hacía reír a todos.\nO si cubriera el sonido de algo que caía dentro de mí.\n\nPodría haber hablado de ello.\n\nA Aryn.\nA Taera.\nIncluso en Ikar, si hubiera planeado una armadura.\n\nNo lo hice.\n\nHice una broma.\n\nClásico.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Continúa.",
+          "vers": "vael_nuit_signal",
+          "effects": [
+            {
+              "stat": "lucidite",
+              "val": 10
+            }
+          ]
+        }
+      ],
+      "x": 180,
+      "y": 1380
+    },
+    "vael_nuit_signal": {
+      "id": "vael_nuit_signal",
+      "title": "La señal",
+      "location": "Templo de la Orden — Techo del Templo",
+      "narrator": "",
+      "text": "La noche que el Caos se despertó,\nEl viento se detuvo.\n\nCompletamente.\n\n¿Sabes qué es peor que una tormenta?\n\nLa falta de viento.\n\nPorque aquí,\nIncluso el aire respira.\n\nEstaba en el techo del Templo.\nPor supuesto.\n\nMi espada desapareció de su vaina.\n\nLuego volvió.\n\nLuego desapareció de nuevo.\n\nMuy maduro.\n\nVolvió a mi mano.\n\nFrío.\nLuz.\nPreocupada.\n\nNo sabía que una espada podría estar preocupada.\n\nEl mío siempre tenía mucha personalidad.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "¿Qué sentiste?",
+          "vers": "vael_sentir_chaos"
+        },
+        {
+          "text": "Continúa.",
+          "vers": "vael_reveiller_autres"
+        }
+      ],
+      "x": 60,
+      "y": 1500
+    },
+    "vael_sentir_chaos": {
+      "id": "vael_sentir_chaos",
+      "title": "Lo que tengo",
+      "location": "Templo de la Orden - Techo",
+      "narrator": "",
+      "text": "No enojo.\n\nNo sólo.\n\nLos Caos hicieron ruido,\nPero en el medio había un vacío.\n\nComo alguien llamando\nNo sé qué nombre decir.\n\nPensé en Caël.\n\nA la profecía.\nA todo el pueblo que le tenía miedo\nantes de conocerlo.\n\nEntonces pensé:\n\nEstá solo.\n\nY inmediatamente después:\n\nLo sé.\n\nEl viento ha vuelto.\n\nLo suficiente para empujarme a las escaleras.\n\nMuy sutil.\n\nPara una patada invisible.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Este vacío, lo reconociste.",
+          "vers": "vael_reconnait_vide",
+          "effects": [
+            {
+              "stat": "lucidite",
+              "val": 15
+            }
+          ]
+        },
+        {
+          "text": "Continúa.",
+          "vers": "vael_reveiller_autres"
+        }
+      ],
+      "x": 180,
+      "y": 1500
+    },
+    "vael_reveiller_autres": {
+      "id": "vael_reveiller_autres",
+      "title": "Awakening Others",
+      "location": "Templo de la Orden — Corredores",
+      "narrator": "",
+      "text": "Fui a despertar a los otros.\n\nPor fin.\n\nPrueba.\n\nAryn ya estaba arriba.\nTaera también.\nIkar ya llevaba su armadura.\n\nMuy irritante.\n\nParecía que llegué tarde a mi propia alerta.\n\nHe preparado una entrada dramática.\n\n**\"Ahora no.** dijo Ikar.\n\nSiempre es para una entrada dramática.\n\nAryn me miró.\n\nEsa mirada significaba:\n*Vael. *\n\nNo es mi primer nombre.\n\nTodo el concepto.\n\nLevanté las manos.\n\nEstá bien. Mal momento.\n\nLuego añadí:\n\n**\"Pero excelente tensión narrativa. *\n\nTaera sonrió.\n\nUn poco.\n\nEso fue suficiente.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Mira a Ikar.",
+          "vers": "vael_ikar_nuit"
+        },
+        {
+          "text": "Continúa.",
+          "vers": "vael_depart_temple"
+        }
+      ],
+      "x": 60,
+      "y": 1620
+    },
+    "vael_ikar_nuit": {
+      "id": "vael_ikar_nuit",
+      "title": "Ikar esa noche",
+      "location": "Templo de la Orden — Corte",
+      "narrator": "",
+      "text": "Ikar tenía esta cara.\n\nLas personas que ya han decidido\nY que espera que alguien los detenga\nsin obligarlos a preguntar.\n\nLo vi enseguida.\n\nFingí que no vi nada.\n\nEse es mi talento.\n\nPero en el patio, antes de irnos,\nLo atrapé.\n\n\"Ikar\".\n\n¿Qué?\n\nNo tienes que usar esto solo.\n\nNo dijo nada.\n\n**\"Hay cuatro de nosotros.\"** Añadí.\n*\"Five soon. *\n**El peso está dividido. *\n\nMe miró.\n\nNo la mirada que suele mirarme.\nNo \"qué más quieres\".\n\nAlgo más.\n\nSe agitó la cabeza.\n\nLuego volvió a su caballo.\n\nSe desaceleró un poco.\n\nSólo un poco.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Continúa.",
+          "vers": "vael_depart_temple"
+        }
+      ],
+      "x": 180,
+      "y": 1620
+    },
+    "vael_depart_temple": {
+      "id": "vael_depart_temple",
+      "title": "Salida",
+      "location": "Templo de la Orden — Corte",
+      "narrator": "",
+      "text": "Cuatro siluetas en el patio.\n\nAryn calma.\nTaera sólida.\nIkar ardiendo, incluso cuando no estaba ardiendo.\n\nYo,\nIntentando no silbar.\n\nSostuve treinta segundos.\n\nEolan apareció por última vez.\n\nNo estaba aquí.\nEs importante aclararlo.\n\nPero no estaba allí de una manera muy presente.\n\nMe miró.\n\n\"Sabes qué hacer.\n\n**\"Sé especialmente lo que no debe hacerse.\n\nEs a menudo lo mismo.\n\nSe ha ido.\n\nHe batido un poco.\n\nNo a propósito.\n\nIkar suspiró.\n\nViajar bien.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Mira el Templo por última vez.",
+          "vers": "vael_dernier_regard",
+          "effects": [
+            {
+              "stat": "lucidite",
+              "val": 10
+            }
+          ]
+        },
+        {
+          "text": "Continúa.",
+          "vers": "vael_route"
+        }
+      ],
+      "x": 60,
+      "y": 1740
+    },
+    "vael_route": {
+      "id": "vael_route",
+      "title": "The Road",
+      "location": "Aerith Road — Dawn",
+      "narrator": "",
+      "text": "El camino fue largo.\n\nAsí que lloré.\n\nEl camino era inquietante.\n\nAsí que lloré mejor.\n\nIkar lo odiaba.\nLo que demostró que todavía tenía una influencia positiva en el mundo.\n\nMedio camino,\nLo atrapé.\n\nNo tienes que usar esto solo.\n\nDijo que no llevaba nada.\n\nPor supuesto.\n\nAryn no estaba hablando.\nTaera a veces tocó el suelo de su caballo.\n\nEstaba escuchando el viento.\n\nEra del este.\nDe Cendral.\n\nOlía la ceniza.\n\nY algo más.\n\nAlguien que acaba de perder su mundo entero\nY aún respirando.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Continúa.",
+          "vers": "vael_fumee"
+        },
+        {
+          "text": "Un pensamiento para el jugador.",
+          "vers": "vael_pensee_joueur",
+          "effects": [
+            {
+              "stat": "lucidite",
+              "val": 10
+            }
+          ]
+        }
+      ],
+      "x": 60,
+      "y": 1860
+    },
+    "vael_pensee_joueur": {
+      "id": "vael_pensee_joueur",
+      "title": "El jugador",
+      "location": "Aerith Road",
+      "narrator": "",
+      "text": "Aún no lo conocía.\n\nEl portador Caos.\n\nEl chico de la profecía.\nEl desastre de viaje.\nEl futuro fin del mundo según personas que probablemente estaban vendiendo amuletos anti-felicidad delante del Templo.\n\nNo lo conocía.\n\nPero ya sabía una cosa.\n\nTodos lo verían como una respuesta.\n\nUno sí.\nA no.\nUna amenaza.\nUn milagro.\nUn arma.\nUn error.\n\nA nadie le gusta ser reducido a una palabra.\n\nYo,\nA menudo me redujeron a una broma.\n\nEs más ligero.\n\nPero aún pesa.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Continúa.",
+          "vers": "vael_fumee",
+          "effects": [
+            {
+              "stat": "lucidite",
+              "val": 10
+            }
+          ]
+        }
+      ],
+      "x": 180,
+      "y": 1860
+    },
+    "vael_fumee": {
+      "id": "vael_fumee",
+      "title": "Humo",
+      "location": "Aerith Road — Crest",
+      "narrator": "",
+      "text": "Vimos el humo.\n\nNegro.\nLadrón.\nMuy dramático.\n\nSinceramente,\nSi la profecía hubiera contratado a un decorador,\nNo lo habría hecho mejor.\n\nNo dije eso.\n\nPorque, Vael de diecinueve años,\na veces lleva rastros de sabiduría accidental.\n\nMi espada se ha ido.\n\nLuego volvió a mi mano.\n\nAryn cerró los ojos.\n\nSigue aquí.\n\nTaera puso su mano en el suelo.\n\nEstá vivo.\n\nIkar miró el humo.\nMucho tiempo.\n\nNo dijo nada.\n\nAsí que por una vez,\nYo tampoco dije nada.\n\nEl viento vino de Cendral.\n\nEstaba temblando.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Una última idea.",
+          "vers": "vael_derniere_pensee"
+        },
+        {
+          "text": "Vuelve a la historia principal.",
+          "vers": "fin_memoire_vael"
+        }
+      ],
+      "x": 60,
+      "y": 1980
+    },
+    "vael_derniere_pensee": {
+      "id": "vael_derniere_pensee",
+      "title": "El último pensamiento",
+      "location": "Aerith Road",
+      "narrator": "",
+      "text": "Mi madre dijo que los atajos son inútiles.\nSi olvidamos dónde queríamos ir.\n\nMi padre dijo que tenías que gritar antes de golpear el suelo.\n\nEolan dijo muchas cosas,\nentonces desapareció antes de que pudiera pedirse aclaraciones.\n\nMuy práctico.\nMuy cobarde.\nMuy aireado.\n\nFrente al humo,\nEntendí una cosa simple.\n\nEl chico estaba cayendo.\n\nTodo el mundo iba a gritarle qué hacer.\n\nPara.\nControl.\nVuelve.\nNo destruyas.\nNo seas así.\nNo seas él.\n\nTal vez lo necesitaba.\npara escuchar a alguien gritando con él.\n\nJusto antes del suelo.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "¿A qué estás gritando?",
+          "vers": "vael_cri",
+          "effects": [
+            {
+              "stat": "legerete",
+              "val": 10
+            }
+          ]
+        },
+        {
+          "text": "Vuelve a la historia principal.",
+          "vers": "fin_memoire_vael"
+        }
+      ],
+      "x": 180,
+      "y": 1980
+    },
+    "fin_memoire_vael": {
+      "id": "fin_memoire_vael",
+      "title": "End — Memoria de Vael",
+      "location": "",
+      "narrator": "",
+      "text": "La memoria pasa.\n\nComo el aire, sin ruido, sin rastro visible.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Vuelve a la historia principal.",
+          "vers": "portail_vael",
+          "story": "stories/fr/cinq_lames_prologue.json"
+        }
+      ],
+      "x": 60,
+      "y": 2100
+    },
+    "vael_fuite_detail": {
+      "id": "vael_fuite_detail",
+      "title": "Lo que realmente era",
+      "location": "Aldea - Techos",
+      "narrator": "",
+      "text": "Eran varias cosas.\n\nPrimero las preguntas.\n\nLa gente del pueblo hizo muchas preguntas.\n¿Qué harás después?\n¿Te ves como tu padre o tu madre?\n¿Vas a quedarte aquí toda tu vida?\n\nNo tenía las respuestas.\n\nAsí que me iba.\n\nEn los techos.\nNadie hacía preguntas allá arriba.\n\nTampoco el aire demandaba nada.\n\nAcaba de estar aquí.\n\nEso fue suficiente.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Continúa.",
+          "vers": "vael_enfance",
+          "effects": [
+            {
+              "stat": "lucidite",
+              "val": 5
+            }
+          ]
+        }
+      ],
+      "x": 180,
+      "y": 120
+    },
+    "vael_mere_ressemble": {
+      "id": "vael_mere_ressemble",
+      "title": "Resemblance",
+      "location": "Village — House",
+      "narrator": "",
+      "text": "Todo el mundo lo dice.\n\nLa misma manera de mirar a un lado.\nLa misma manera de responder al lado.\nLa misma manera de desaparecer antes de descubrirlo.\n\nPensó que era gracioso.\n\n¿También serás un mensajero?\n\n*\"Yo entregaré el aire. *\n\nEl aire no fluye.\n\nExactamente.\n\nSe rió.\n\nMi madre se rió con todo su cuerpo.\n\nGente que se ríe con todos sus cuerpos\nNo tienen miedo de nada.\n\nO aprendieron a fingir\nMejor que todos los demás.\n\nNunca supe cuál.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Continúa.",
+          "vers": "vael_premiere_chute"
+        }
+      ],
+      "x": 180,
+      "y": 300
+    },
+    "vael_eolan_phrase": {
+      "id": "vael_eolan_phrase",
+      "title": "El Gran Frase",
+      "location": "Templo — Corredores",
+      "narrator": "",
+      "text": "Eolan dijo cosas como:\n\nEl aire está en todas partes y en ninguna parte.\n\n**\"Muy útil. Estaba respondiendo.\n\nEl aire lo ve todo sin ser visto.\n\nIncluso más útil.\n\n\"Air...\"\n\nEolan.\n\n¿Qué?\n\nSólo di lo que quieres decir.\n\nHabía estado callado.\n\nEntonces:\n\n**\"El aire entiende mejor a la gente que la gente se entiende.\nPorque los oye pensar.\n\nAquí.\nNo fue tan difícil.\n\nEstaba desaparecido.\n\nCreo que lo había molestado.\n\nNos estábamos llevando bien.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Continúa.",
+          "vers": "vael_depart"
+        }
+      ],
+      "x": 180,
+      "y": 780
+    },
+    "vael_taera_debut": {
+      "id": "vael_taera_debut",
+      "title": "Taera — El jardín",
+      "location": "Templo de la Orden",
+      "narrator": "",
+      "text": "Taera tenía un jardín.\n\nEn el patio interior.\n\nNo entendí por qué.\n\n¿Cuál es el uso?\n\n# Crece #\n\n¿Qué?\n\nMe miró.\n\n¿Alguna vez has visto crecer algo?\n\n**\"No.\n\nSiéntate.\n\nMe senté.\n\nMiramos.\n\nVeinte minutos.\n\nNada.\n\nNo crece rápido.\n\n**\"No.\n\n¿Es ese el punto?\n\nEste es uno de los intereses.\n\nNo entendí.\n\nRegresé al día siguiente.\n\nY al día siguiente.\n\nNo había nada que hacer.\nQuédate ahí.\n\nFue relajante.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Continúa.",
+          "vers": "vael_entrainement",
+          "effects": [
+            {
+              "stat": "lucidite",
+              "val": 10
+            }
+          ]
+        }
+      ],
+      "x": 300,
+      "y": 900
+    },
+    "vael_dernier_regard": {
+      "id": "vael_dernier_regard",
+      "title": "La última mirada",
+      "location": "Templo de la Orden — Corte",
+      "narrator": "",
+      "text": "No planeé hacerlo.\n\nPero cuando salí, miré.\n\nLas columnas altas.\nUn silencio solemne.\n\nDoce años.\n\nNo hay necesidad de contar recuerdos —\nVienen solos cuando te ves lo suficiente.\n\nEl primer día en el comedor.\nIkar cruzó sus brazos.\nAryn estaba mirando sus manos.\nTaera sonriendo a todos.\n\nSoy el que hizo desaparecer mi propio plato por accidente.\n\nTodos parecíamos sorprendidos.\n\nEse fue el comienzo de algo.\n\nMiré hacia abajo.\n\nDijo Aryn.\n\nEstaba mirando las nubes.\n\nSabía que mentía.\n\nNo dijo nada.\n\nPor eso nos llevamos bien.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Continúa.",
+          "vers": "vael_route"
+        }
+      ],
+      "x": 180,
+      "y": 1620
+    },
+    "vael_reconnait_vide": {
+      "id": "vael_reconnait_vide",
+      "title": "El Vacío Reconocimiento",
+      "location": "Templo — Noche",
+      "narrator": "",
+      "text": "Sí.\n\nPorque tenía el mismo.\n\nNo del mismo tamaño.\nNo del mismo tipo.\n\nPero este momento cuando estás mirando\nalgo para colgar\nY no encuentres nada.\n\nProfecía.\nEl Caos.\nDestino.\n\nGrandes palabras.\n\nPero debajo sólo había alguien\nque quería ayudar\nY eso lo rompió todo.\n\nSabía lo que era.\n\nNo el Caos.\n\nQué vergüenza.\n\nY vergüenza sin que nadie diga\nNo es tu culpa.\n\nSe está convirtiendo en algo más.\n\nAlgo mucho más peligroso.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Continúa.",
+          "vers": "vael_reveiller_autres",
+          "effects": [
+            {
+              "stat": "lucidite",
+              "val": 5
+            }
+          ]
+        }
+      ],
+      "x": 180,
+      "y": 1500
+    },
+    "vael_cri": {
+      "id": "vael_cri",
+      "title": "El Cree",
+      "location": "Aerith Road",
+      "narrator": "",
+      "text": "Aún no había gritado.\n\nAún no lo he encontrado.\n\nMi padre gritó.\n\nEra práctico pero no muy inspirado.\n\nMi madre gritó muy fuerte\nY el jarrón había cambiado de dirección.\n\nTodavía estaba mirando.\n\nAlgo útil.\nAlgo real.\nAlgo que parece lo que realmente quería decir.\n\nYa veremos.\n\nEl humo estaba allí.\n\nAún no había gritado.\n\nPero por primera vez en mucho tiempo —\n\nRealmente tuve algo que decir.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Vuelve a la historia principal.",
+          "vers": "fin_memoire_vael",
+          "effects": [
+            {
+              "stat": "lucidite",
+              "val": 10
+            }
+          ]
+        }
+      ],
+      "x": 180,
+      "y": 1860
+    }
+  },
+  "lang": "es"
+}
