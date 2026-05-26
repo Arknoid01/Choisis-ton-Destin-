@@ -26,6 +26,13 @@
   animation: float-up linear infinite;
   opacity:0;
 }
+@keyframes slide-up {
+  from { transform:translateY(100%); opacity:0; }
+  to   { transform:translateY(0);    opacity:1; }
+}
+@keyframes fade-in {
+  from { opacity:0; } to { opacity:1; }
+}
 @keyframes float-up {
   0%   { transform:translateY(0) translateX(0) scale(1); opacity:0; }
   10%  { opacity:0.5; }
@@ -1504,6 +1511,104 @@ function renderEndScene(scene) {
         <button class="end-btn" onclick="window.location.href='index.html'">← Menu principal</button>
       </div>
     </div>`;
+
+  // Popup de notation — seulement sur fins positives, jamais si déjà répondu
+  if (scene.askRate !== false && !scene.title?.toLowerCase().includes('mort')
+      && !scene.title?.toLowerCase().includes('chute')
+      && !scene.title?.toLowerCase().includes('écrasé')
+      && !scene.title?.toLowerCase().includes('perdu')
+      && !scene.title?.toLowerCase().includes('trahison')) {
+    setTimeout(() => maybeShowRatingPopup(), 2000);
+  }
+}
+
+// ── POPUP NOTATION PLAY STORE ────────────────────────────────
+const PLAY_STORE_URL = 'https://play.google.com/store/apps/details?id=com.pegasuscorp.fableris';
+const RATING_KEY     = 'sf_rating_done';
+const PLAYS_KEY      = 'sf_stories_finished';
+
+function maybeShowRatingPopup() {
+  // Ne jamais afficher si déjà noté ou refusé définitivement
+  if (localStorage.getItem(RATING_KEY) === 'done') return;
+
+  // Compter les histoires terminées
+  const plays = parseInt(localStorage.getItem(PLAYS_KEY) || '0') + 1;
+  localStorage.setItem(PLAYS_KEY, plays);
+
+  // Afficher seulement à partir de la 2ème histoire terminée
+  if (plays < 2) return;
+
+  // Afficher seulement 1 fois sur 3 (aléatoire) pour ne pas spammer
+  if (Math.random() > 0.33 && plays < 5) return;
+
+  showRatingPopup();
+}
+
+function showRatingPopup() {
+  const popup = document.createElement('div');
+  popup.id = 'rating-popup';
+  popup.style.cssText = `
+    position:fixed; inset:0; z-index:800;
+    background:rgba(0,0,0,0.85);
+    display:flex; align-items:flex-end; justify-content:center;
+    backdrop-filter:blur(4px);
+    animation:fade-in .3s ease;
+    padding-bottom:env(safe-area-inset-bottom,0)`;
+
+  popup.innerHTML = `
+    <div style="background:#13110e;border:1px solid rgba(200,169,110,0.3);
+      border-radius:20px 20px 0 0;padding:28px 24px 32px;width:100%;max-width:480px;
+      animation:slide-up .35s cubic-bezier(.4,0,.2,1)">
+      <div style="text-align:center;margin-bottom:20px">
+        <div style="font-size:32px;margin-bottom:10px">⭐</div>
+        <div style="font-family:'Cinzel',serif;font-size:16px;color:#e0d8f0;
+          letter-spacing:2px;margin-bottom:8px">Tu as aimé cette histoire ?</div>
+        <div style="font-size:12px;color:#7070a0;line-height:1.6">
+          Un petit avis sur le Play Store,<br>ça aide énormément à faire connaître Fableris.
+        </div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:10px">
+        <button onclick="ratingYes()" style="
+          padding:14px;border-radius:10px;
+          border:1px solid rgba(200,169,110,0.5);
+          background:linear-gradient(135deg,rgba(200,169,110,0.15),rgba(200,169,110,0.05));
+          color:#c8a96e;font-family:'Cinzel',serif;font-size:13px;
+          letter-spacing:2px;cursor:pointer">
+          ✦ Noter l'application
+        </button>
+        <button onclick="ratingLater()" style="
+          padding:12px;border-radius:10px;border:1px solid #26262e;
+          background:none;color:#7070a0;font-family:'DM Mono',monospace;
+          font-size:11px;letter-spacing:1px;cursor:pointer">
+          Pas maintenant
+        </button>
+        <button onclick="ratingNever()" style="
+          padding:8px;border:none;background:none;
+          color:#404050;font-family:'DM Mono',monospace;
+          font-size:10px;cursor:pointer;letter-spacing:1px">
+          Ne plus demander
+        </button>
+      </div>
+    </div>`;
+
+  document.body.appendChild(popup);
+}
+
+function ratingYes() {
+  localStorage.setItem(RATING_KEY, 'done');
+  document.getElementById('rating-popup')?.remove();
+  window.open(PLAY_STORE_URL, '_blank');
+}
+
+function ratingLater() {
+  // Réinitialiser le compteur pour redemander plus tard
+  localStorage.setItem(PLAYS_KEY, '0');
+  document.getElementById('rating-popup')?.remove();
+}
+
+function ratingNever() {
+  localStorage.setItem(RATING_KEY, 'done');
+  document.getElementById('rating-popup')?.remove();
 }
 
 function pickChoice(targetId, choiceIndex, btnEl, externalStory) {
