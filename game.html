@@ -1214,8 +1214,8 @@ async function loadExternalStory(storyFile, startScene) {
     const drawerTitle = document.getElementById('drawer-game-title');
     if (drawerTitle) drawerTitle.textContent = story.name || '';
 
-    // Réinitialiser les stats dans le drawer
-    renderStatBadges();
+    // Réinitialiser les stats
+    updateStatsBar();
 
     // Lancer depuis la scène demandée ou la scène de départ
     const targetId = startScene && story.scenes[startScene]
