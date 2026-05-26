@@ -1,0 +1,417 @@
+{
+  "name": "La Ville Sous l'Eau",
+  "kids": true,
+  "askPlayerName": true,
+  "pack": "kids",
+  "stats": [
+    {
+      "id": "memoire",
+      "label": "Mémoire",
+      "start": 30,
+      "max": 100,
+      "color": "#90e0ef"
+    },
+    {
+      "id": "courage",
+      "label": "Courage",
+      "start": 10,
+      "max": 100,
+      "color": "#f94144"
+    },
+    {
+      "id": "acceptance",
+      "label": "Acceptation",
+      "start": 10,
+      "max": 100,
+      "color": "#90be6d"
+    }
+  ],
+  "theme": {},
+  "scenes": {
+    "arrivee_lac": {
+      "id": "arrivee_lac",
+      "title": "Le Lac",
+      "location": "Au bord du lac",
+      "narrator": "",
+      "text": "Tu arrives au bord d'un grand lac.\n\nL'eau est calme et transparente.\n\nAikito est à côté de toi.\nIl porte un masque de plongée et un tuba.\nIl les avait dans son sac depuis le début.\n\n**« Comment tu savais ? »** tu demandes.\n\nIl hausse les épaules.\n\n**« J'avais une intuition. »**\n\nTu regardes dans l'eau.\n\nTout au fond,\ntu vois des toits.\nDes rues.\nDes jardins.\n\nTa vieille ville.",
+      "isStart": true,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Plonger tout de suite.",
+          "vers": "premiere_rue",
+          "effects": [
+            {
+              "stat": "courage",
+              "val": 15
+            }
+          ]
+        },
+        {
+          "text": "Regarder encore depuis la surface.",
+          "vers": "regarder_surface",
+          "effects": [
+            {
+              "stat": "memoire",
+              "val": 15
+            }
+          ]
+        }
+      ],
+      "x": 60,
+      "y": 60
+    },
+    "regarder_surface": {
+      "id": "regarder_surface",
+      "title": "Depuis la Surface",
+      "location": "Au bord du lac",
+      "narrator": "",
+      "text": "Tu t'allonges sur le ventre au bord du lac.\n\nTu regardes.\n\nTu reconnais la rue principale.\nLe clocher de l'église.\nLe grand arbre de la place.\n\nIls sont encore là.\nJuste... en bas.\n\nAikito s'allonge à côté de toi.\n\nSon tuba dépasse de l'eau.\n\n**« Tu veux y aller ? »**\n\nTu hoches la tête.\n\n**« Alors on y va. »**",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Plonger.",
+          "vers": "premiere_rue",
+          "effects": [
+            {
+              "stat": "memoire",
+              "val": 10
+            },
+            {
+              "stat": "courage",
+              "val": 10
+            }
+          ]
+        }
+      ],
+      "x": 180,
+      "y": 60
+    },
+    "premiere_rue": {
+      "id": "premiere_rue",
+      "title": "La Rue Principale",
+      "location": "Sous l'eau — Rue principale",
+      "narrator": "",
+      "text": "Sous l'eau, c'est étrange.\n\nTout est silencieux.\nMais pas vide.\n\nLa boulangère sort son pain du four.\nLes bulles montent vers le haut.\n\nLe facteur pédale sur son vélo.\nSes cheveux flottent dans tous les sens.\n\nDes enfants jouent à la marelle sur le trottoir.\nLeurs rires font des petits ronds dans l'eau.\n\nPersonne ne semble trouver ça bizarre.\n\nAikito nage à côté de toi.\n\n**« Ils ont continué. »** il dit.\n**« C'est tout. »**",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Aller voir la boulangère.",
+          "vers": "boulangere",
+          "effects": [
+            {
+              "stat": "memoire",
+              "val": 10
+            }
+          ]
+        },
+        {
+          "text": "Chercher ta vieille maison.",
+          "vers": "chercher_maison",
+          "effects": [
+            {
+              "stat": "memoire",
+              "val": 15
+            }
+          ]
+        },
+        {
+          "text": "Observer les enfants jouer.",
+          "vers": "enfants_marelle",
+          "effects": [
+            {
+              "stat": "acceptance",
+              "val": 10
+            }
+          ]
+        }
+      ],
+      "x": 60,
+      "y": 200
+    },
+    "boulangere": {
+      "id": "boulangere",
+      "title": "La Boulangère",
+      "location": "Sous l'eau — Boulangerie",
+      "narrator": "",
+      "text": "La boulangère te sourit.\n\nComme si tu étais parti hier.\n\nElle te tend un croissant.\n\nIl est mouillé.\nMais elle a l'air tellement fière.\n\n**« C'est long à faire sous l'eau. »** elle dit.\n**« La pâte flotte tout le temps. »**\n\nElle rit.\n\n**« Mais on s'est adaptés. »**\n\nTu regardes la vitrine.\nLes gâteaux flottent doucement derrière le verre.\n\n**« Tu te souviens de ma tarte aux pommes ? »** elle demande.\n\nTu hoches la tête.\n\nTu t'en souviens très bien.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "« Je me souviens de tout. »",
+          "vers": "chercher_maison",
+          "effects": [
+            {
+              "stat": "memoire",
+              "val": 15
+            },
+            {
+              "stat": "acceptance",
+              "val": 5
+            }
+          ]
+        },
+        {
+          "text": "Manger le croissant mouillé.",
+          "vers": "chercher_maison",
+          "effects": [
+            {
+              "stat": "acceptance",
+              "val": 15
+            }
+          ]
+        }
+      ],
+      "x": 60,
+      "y": 320
+    },
+    "enfants_marelle": {
+      "id": "enfants_marelle",
+      "title": "La Marelle",
+      "location": "Sous l'eau — Place",
+      "narrator": "",
+      "text": "Les enfants sautent à la marelle.\n\nÀ chaque saut, leurs pieds quittent le sol une seconde de trop.\n\nIls flottent un peu.\n\nPuis retombent doucement.\n\nL'un d'eux te voit.\n\n**« Tu joues ? »**\n\nTu regardes la marelle.\nLes cases sont les mêmes qu'avant.\n\nAikito est déjà assis sur la case 5.\nIl fait semblant de rien.\n\n**« Aikito... »**\n\n**« Quoi ? »**",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Jouer avec eux.",
+          "vers": "jouer_marelle",
+          "effects": [
+            {
+              "stat": "acceptance",
+              "val": 20
+            }
+          ]
+        },
+        {
+          "text": "Aller chercher ta maison.",
+          "vers": "chercher_maison",
+          "effects": [
+            {
+              "stat": "memoire",
+              "val": 10
+            }
+          ]
+        }
+      ],
+      "x": 180,
+      "y": 320
+    },
+    "jouer_marelle": {
+      "id": "jouer_marelle",
+      "title": "Le Saut",
+      "location": "Sous l'eau — Place",
+      "narrator": "",
+      "text": "Tu sautes.\n\nÀ la case 3, tes pieds quittent le sol.\n\nTu flottes une seconde.\n\nC'est bizarre.\nC'est doux.\n\nLes enfants rigolent.\n\n**« C'est mieux sous l'eau ! »** dit l'un d'eux.\n**« On saute plus haut. »**\n\nAikito te regarde depuis sa case 5.\n\n**« Tu vois. »** il dit.\n**« Différent. »**\n**« Pas pire. »**\n**« Juste différent. »**",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Aller chercher ta maison.",
+          "vers": "chercher_maison",
+          "effects": [
+            {
+              "stat": "acceptance",
+              "val": 10
+            },
+            {
+              "stat": "memoire",
+              "val": 10
+            }
+          ]
+        }
+      ],
+      "x": 300,
+      "y": 320
+    },
+    "chercher_maison": {
+      "id": "chercher_maison",
+      "title": "Ta Maison",
+      "location": "Sous l'eau — Rue du fond",
+      "narrator": "",
+      "text": "Tu trouves ta vieille maison au bout de la rue.\n\nElle est là.\n\nLa porte bleue.\nLe rosier contre le mur.\nLes volets verts.\n\nTout est là.\n\nMais quelqu'un d'autre y vit maintenant.\n\nUne famille.\nLes enfants ont accroché des dessins aux fenêtres.\nLes dessins flottent doucement.\n\nTu t'arrêtes devant la porte.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Frapper à la porte.",
+          "vers": "nouvelle_famille",
+          "effects": [
+            {
+              "stat": "courage",
+              "val": 15
+            }
+          ]
+        },
+        {
+          "text": "Rester devant sans frapper.",
+          "vers": "devant_maison",
+          "effects": [
+            {
+              "stat": "memoire",
+              "val": 15
+            }
+          ]
+        }
+      ],
+      "x": 60,
+      "y": 440
+    },
+    "devant_maison": {
+      "id": "devant_maison",
+      "title": "Devant la Porte",
+      "location": "Sous l'eau — Devant ta maison",
+      "narrator": "",
+      "text": "Tu restes là.\n\nTu regardes la porte bleue.\n\nElle a la même couleur.\nExactement la même.\n\nAikito s'assoit à côté de toi.\n\nIl ne dit rien.\n\nIl attend.\n\nAu bout d'un moment, tu dis :\n\n**« Elle est encore là. »**\n\n**« Oui. »** dit Aikito.\n\n**« Et moi aussi je m'en souviens. »**\n\n**« C'est ça qui compte. »** dit Aikito.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Frapper quand même.",
+          "vers": "nouvelle_famille",
+          "effects": [
+            {
+              "stat": "courage",
+              "val": 10
+            },
+            {
+              "stat": "acceptance",
+              "val": 10
+            }
+          ]
+        },
+        {
+          "text": "Remonter à la surface.",
+          "vers": "remonter",
+          "effects": [
+            {
+              "stat": "memoire",
+              "val": 10
+            }
+          ]
+        },
+        {
+          "text": "Dire au revoir à la maison.",
+          "vers": "fin_au_revoir",
+          "effects": [
+            {
+              "stat": "acceptance",
+              "val": 20
+            }
+          ]
+        }
+      ],
+      "x": 180,
+      "y": 440
+    },
+    "nouvelle_famille": {
+      "id": "nouvelle_famille",
+      "title": "La Nouvelle Famille",
+      "location": "Sous l'eau — Ta maison",
+      "narrator": "",
+      "text": "La porte s'ouvre.\n\nUne femme te sourit.\n\n**« Bonjour ! »**\n\n**« J'habitais ici avant. »** tu dis.\n\nElle ouvre la porte en grand.\n\n**« Entre ! »**\n\nÀ l'intérieur, c'est différent.\nD'autres meubles.\nD'autres couleurs.\nD'autres odeurs.\n\nMais la grande fenêtre du salon est au même endroit.\nAvec la même lumière qui entre.\n\n**« C'est une belle maison. »** dit la femme.\n\n**« Oui. »** tu réponds.\n\nEt tu le penses vraiment.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Remonter à la surface.",
+          "vers": "remonter",
+          "effects": [
+            {
+              "stat": "acceptance",
+              "val": 20
+            }
+          ]
+        }
+      ],
+      "x": 300,
+      "y": 440
+    },
+    "remonter": {
+      "id": "remonter",
+      "title": "Remonter",
+      "location": "Entre deux eaux",
+      "narrator": "",
+      "text": "Tu remontes lentement.\n\nLa ville s'éloigne en dessous de toi.\n\nTu vois les toits.\nLe clocher.\nLe grand arbre.\n\nLa boulangère sort sur le pas de sa porte.\nElle te fait signe.\n\nLes enfants de la marelle regardent en l'air.\nL'un d'eux agite la main.\n\nAikito nage à côté de toi.\n\n**« Tu reviendras ? »** tu demandes.\n\n**« Si tu veux. »** dit-il.\n**« Les souvenirs sont toujours là. »**\n**« Il suffit de plonger. »**",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Rejoindre la surface.",
+          "vers": "fin_surface",
+          "effects": [
+            {
+              "stat": "acceptance",
+              "val": 10
+            }
+          ]
+        },
+        {
+          "text": "Redescendre encore un peu.",
+          "vers": "fin_rester",
+          "effects": [
+            {
+              "stat": "memoire",
+              "val": 10
+            }
+          ]
+        }
+      ],
+      "x": 60,
+      "y": 560
+    },
+    "fin_surface": {
+      "id": "fin_surface",
+      "title": "Fin — La Surface",
+      "location": "",
+      "narrator": "",
+      "text": "Tu sors la tête de l'eau.\n\nLe soleil.\nL'air.\nLe bruit des oiseaux.\n\nTu t'allonges sur l'herbe au bord du lac.\n\nTu regardes le ciel.\n\nAikito enlève son masque.\nIl s'ébroue.\n\n**« Alors ? »**\n\nTu réfléchis.\n\n**« Elle est encore là. »** tu dis.\n**« Juste... en dessous. »**\n\nAikito s'allonge à côté de toi.\n\n**« Les endroits qu'on aime restent. »**\n**« Dans l'eau. »**\n**« Dans la tête. »**\n**« C'est pareil. »**\n\nTu regardes le lac.\n\nL'eau est calme.\nEt en dessous, la vie continue.",
+      "isStart": false,
+      "isEnd": true,
+      "transition": "fade",
+      "choices": [],
+      "x": 60,
+      "y": 680
+    },
+    "fin_rester": {
+      "id": "fin_rester",
+      "title": "Fin — Encore un Peu",
+      "location": "",
+      "narrator": "",
+      "text": "Tu redescends.\n\nLa boulangère t'attend avec un autre croissant.\nMouillé.\nMais chaud.\n\nLes enfants reprennent leur marelle.\n\nLa ville continue.\n\nTu t'assois sur le banc de la place.\nLe même banc qu'avant.\n\nAikito s'installe à côté de toi.\n\nVous regardez la ville bouger.\n\nLes bulles montent.\nLes volets s'ouvrent et se ferment.\nLe facteur passe.\n\n**« On peut rester encore un peu ? »** tu demandes.\n\n**« Autant qu'on veut. »** dit Aikito.\n\nLes souvenirs ont tout le temps du monde.",
+      "isStart": false,
+      "isEnd": true,
+      "transition": "fade",
+      "choices": [],
+      "x": 180,
+      "y": 680
+    },
+    "fin_au_revoir": {
+      "id": "fin_au_revoir",
+      "title": "Fin — Au Revoir",
+      "location": "",
+      "narrator": "",
+      "text": "Avant de remonter,\ntu retournes devant ta maison.\n\nTu poses la main sur la porte bleue.\n\nElle est froide.\nEt douce.\n\n**« Au revoir. »** tu dis tout bas.\n\nLa porte ne répond pas.\n\nMais quelque chose dans ta poitrine\nse dépose doucement.\n\nComme une pierre qu'on pose.\nPas qu'on jette.\nQu'on pose.\n\nAikito te regarde.\n\n**« Tu vas bien ? »**\n\n**« Oui. »** tu réponds.\n\nEt c'est vrai.",
+      "isStart": false,
+      "isEnd": true,
+      "transition": "fade",
+      "choices": [],
+      "x": 300,
+      "y": 680
+    }
+  }
+}
