@@ -1,0 +1,926 @@
+{
+  "name": "Les Cinq Lames — Mémoire d'Ikar",
+  "kids": false,
+  "askPlayerName": false,
+  "pack": "cinq_lames",
+  "stats": [
+    {
+      "id": "loyaute",
+      "label": "Loyauté",
+      "start": 50,
+      "max": 100,
+      "color": "#f94144"
+    },
+    {
+      "id": "doute",
+      "label": "Doute",
+      "start": 5,
+      "max": 100,
+      "color": "#f9c74f"
+    }
+  ],
+  "theme": {},
+  "scenes": {
+    "ikar_intro": {
+      "id": "ikar_intro",
+      "title": "Le Feu",
+      "location": "Village de forge — Nuit",
+      "narrator": "Ikar. Porteur du Feu. Ce qu'il ne dit jamais.",
+      "text": "Le feu ne ment pas.\n\nIl brûle ou il ne brûle pas.\n\nC'est la seule chose honnête que je connaisse.",
+      "isStart": true,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Continuer.",
+          "vers": "ikar_enfance_a"
+        },
+        {
+          "text": "Pourquoi le feu ?",
+          "vers": "ikar_pourquoi_feu"
+        }
+      ],
+      "x": 60,
+      "y": 60
+    },
+    "ikar_pourquoi_feu": {
+      "id": "ikar_pourquoi_feu",
+      "title": "Pourquoi le Feu",
+      "location": "Village de forge",
+      "narrator": "",
+      "text": "Les gens pensent que le feu c'est la colère.\n\nIls ont pas tort.\n\nMais c'est aussi autre chose.\n\nLa clarté.\n\nQuand tout brûle,\nil n'y a plus d'ombre.\nPlus d'endroit où se cacher.\n\nLa vérité ou les cendres.\n\nJ'ai toujours préféré ça aux nuances d'Aryn.\nÀ l'humour de Vael.\nÀ la douceur de Taera.\n\nEux ils naviguent dans les gris.\n\nMoi j'ai besoin de savoir exactement où je mets les pieds.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Le feu t'a toujours obéi.",
+          "vers": "ikar_feu_obeit",
+          "effects": [
+            {
+              "stat": "loyaute",
+              "val": 10
+            }
+          ]
+        },
+        {
+          "text": "Continuer.",
+          "vers": "ikar_enfance_a"
+        }
+      ],
+      "x": 180,
+      "y": 60
+    },
+    "ikar_enfance_a": {
+      "id": "ikar_enfance_a",
+      "title": "La Forge",
+      "location": "Village de forge — Jour",
+      "narrator": "",
+      "text": "Mon père était forgeron.\n\nSon père avant lui.\n\nJe devais l'être aussi.\n\nJ'aimais ça.\nLa chaleur.\nLe bruit.\nLe métal qui change sous les mains.\n\nÀ cinq ans j'étais déjà dans la forge.\nÀ sept j'actionnais le soufflet.\n\nMon père disait que j'avais les mains faites pour ça.\n\nIl avait raison sur les mains.\nTort sur le métier.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Comment c'est arrivé ?",
+          "vers": "ikar_accident"
+        },
+        {
+          "text": "Tu aimais ton père ?",
+          "vers": "ikar_pere"
+        }
+      ],
+      "x": 60,
+      "y": 180
+    },
+    "ikar_pere": {
+      "id": "ikar_pere",
+      "title": "Le Père",
+      "location": "Village de forge",
+      "narrator": "",
+      "text": "Oui.\n\nIl travaillait dur.\nIl ne parlait pas beaucoup.\n\nQuand il était content il tapait deux fois sur l'enclume.\n\nC'était son façon de dire bien.\n\nLa dernière fois que j'ai entendu ce son,\nj'avais sept ans.\n\nAprès.\n\nAprès il n'a plus tapé sur l'enclume.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Il te manque.",
+          "vers": "ikar_pere_manque",
+          "effects": [
+            {
+              "stat": "doute",
+              "val": 10
+            }
+          ]
+        },
+        {
+          "text": "Continuer.",
+          "vers": "ikar_accident"
+        }
+      ],
+      "x": 180,
+      "y": 180
+    },
+    "ikar_accident": {
+      "id": "ikar_accident",
+      "title": "L'Accident",
+      "location": "La Forge — Soir",
+      "narrator": "",
+      "text": "J'avais sept ans.\n\nUne étincelle de la forge.\n\nNormale.\n\nMais celle-là s'est posée sur ma main.\n\nEt elle n'a pas brûlé.\n\nElle a grossi.\n\nJ'ai regardé ma paume.\n\nUne flamme.\nPetite.\nQui dansait sur ma peau sans la consumer.\n\nMon père était derrière moi.\n\nIl a vu.\n\nIl n'a pas tapé sur l'enclume.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Qu'est-ce qu'il a fait ?",
+          "vers": "ikar_reaction_pere"
+        },
+        {
+          "text": "Continuer.",
+          "vers": "ikar_reaction_pere"
+        }
+      ],
+      "x": 60,
+      "y": 300
+    },
+    "ikar_reaction_pere": {
+      "id": "ikar_reaction_pere",
+      "title": "Le Silence",
+      "location": "La Forge — Soir",
+      "narrator": "",
+      "text": "Il a posé son marteau.\n\nDoucement.\n\nIl a regardé ma main.\n\nPuis il a regardé le mur.\n\nIl est resté comme ça une minute entière.\n\nPuis il a dit :\n\n**« Éteins ça. »**\n\n**« Je sais pas comment. »**\n\n**« Essaie. »**\n\nJ'ai essayé.\n\nÇa a mis trois heures.\n\nOn n'a pas dîné ce soir-là.\nOn n'a pas parlé non plus.\n\nLe lendemain matin il était reparti à la forge.\nComme si rien.\n\nSauf qu'il avait commencé à porter des gants.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Il avait peur de toi.",
+          "vers": "ikar_peur_pere",
+          "effects": [
+            {
+              "stat": "doute",
+              "val": 10
+            }
+          ]
+        },
+        {
+          "text": "Continuer.",
+          "vers": "ikar_controle_feu"
+        }
+      ],
+      "x": 60,
+      "y": 420
+    },
+    "ikar_peur_pere": {
+      "id": "ikar_peur_pere",
+      "title": "Les Gants",
+      "location": "La Forge",
+      "narrator": "",
+      "text": "Oui.\n\nJe l'ai compris plus tard.\n\nIl m'aimait.\nMais il avait peur.\n\nLes deux en même temps.\n\nJ'aurais voulu lui dire que moi aussi j'avais peur.\n\nMais on ne parlait pas beaucoup dans cette forge.\n\nLes gants sont restés.\n\nJusqu'au jour où l'Ordre est venu.\n\nAprès leur départ il les a retirés.\n\nJe ne sais pas ce que ça voulait dire.\n\nJ'y pense encore parfois.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Continuer.",
+          "vers": "ikar_controle_feu",
+          "effects": [
+            {
+              "stat": "doute",
+              "val": 5
+            }
+          ]
+        }
+      ],
+      "x": 180,
+      "y": 420
+    },
+    "ikar_controle_feu": {
+      "id": "ikar_controle_feu",
+      "title": "Apprendre à Brûler",
+      "location": "Champs derrière le village",
+      "narrator": "",
+      "text": "J'ai appris seul.\n\nPas le choix.\n\nMon père ne voulait pas que ça se sache.\nLe village n'était pas grand.\n\nTous les matins avant l'aube.\nDans les champs.\n\nLes premières semaines j'ai brûlé beaucoup d'herbe.\n\nPuis j'ai compris quelque chose.\n\nLe feu suit l'intention.\n\nSi je pense à détruire — il détruit.\nSi je pense à chauffer — il chauffe.\nSi je pense à rien — il s'emballe.\n\nLe feu n'aime pas le vide dans la tête.\n\nJ'ai appris à ne jamais penser à rien.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Ça t'a changé.",
+          "vers": "ikar_change",
+          "effects": [
+            {
+              "stat": "loyaute",
+              "val": 5
+            }
+          ]
+        },
+        {
+          "text": "Continuer — le recrutement.",
+          "vers": "ikar_recrutement"
+        }
+      ],
+      "x": 60,
+      "y": 540
+    },
+    "ikar_change": {
+      "id": "ikar_change",
+      "title": "Ce Que Ça Fait",
+      "location": "Champs derrière le village",
+      "narrator": "",
+      "text": "Avoir toujours quelque chose dans la tête.\n\nÇa fatigue.\n\nMais ça apprend aussi à décider vite.\n\nPas le temps d'hésiter.\nPas le temps de nuancer.\n\nLe feu ou pas le feu.\nOui ou non.\nAvancer ou reculer.\n\nAryn dit que je vois tout en noir et blanc.\n\nElle a raison.\n\nCe qu'elle comprend pas,\nc'est que le noir et blanc\nça évite beaucoup d'erreurs.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Ça isole aussi.",
+          "vers": "ikar_isole",
+          "effects": [
+            {
+              "stat": "doute",
+              "val": 10
+            }
+          ]
+        },
+        {
+          "text": "Continuer.",
+          "vers": "ikar_recrutement"
+        }
+      ],
+      "x": 180,
+      "y": 540
+    },
+    "ikar_recrutement": {
+      "id": "ikar_recrutement",
+      "title": "L'Homme en Rouge",
+      "location": "Village de forge — Place",
+      "narrator": "",
+      "text": "Il est arrivé un matin.\n\nUn homme.\nVieux.\nVêtu de rouge et d'orange.\n\nIl s'est arrêté devant la forge.\n\nIl m'a regardé travailler.\n\n**« Tu fais ça depuis combien de temps ? »**\n\n**« Apprendre à contrôler ? »**\n\n**« Oui. »**\n\n**« Trois mois. »**\n\nIl a hoché la tête.\n\n**« Viens avec moi. »**\n\n**« Pourquoi ? »**\n\n**« Parce que t'as appris en trois mois\nce que la plupart mettent trois ans à comprendre. »**\n\nC'était la première fois que quelqu'un me disait\nque j'étais bon à quelque chose\nque mon père ne savait pas faire.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Et ton père ?",
+          "vers": "ikar_depart_pere"
+        },
+        {
+          "text": "Tu as dit oui immédiatement.",
+          "vers": "ikar_oui_immediat"
+        }
+      ],
+      "x": 60,
+      "y": 660
+    },
+    "ikar_depart_pere": {
+      "id": "ikar_depart_pere",
+      "title": "Le Départ",
+      "location": "Village de forge",
+      "narrator": "",
+      "text": "Mon père était dans la forge.\n\nL'homme en rouge lui a parlé.\n\nMon père a écouté.\nIl n'a pas posé de questions.\n\nÀ la fin il m'a regardé.\n\n**« Tu veux y aller ? »**\n\n**« Oui. »**\n\nIl a hoché la tête.\n\nIl est retourné à son enclume.\n\nIl n'a pas tapé deux fois dessus.\n\nMais il n'a pas dit non plus.\n\nC'était son façon d'accord.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Continuer.",
+          "vers": "ikar_aurenthal"
+        }
+      ],
+      "x": 180,
+      "y": 660
+    },
+    "ikar_oui_immediat": {
+      "id": "ikar_oui_immediat",
+      "title": "Oui",
+      "location": "Village de forge",
+      "narrator": "",
+      "text": "Avant même qu'il finisse sa phrase.\n\nOui.\n\nL'homme en rouge a eu l'air surpris.\n\n**« Tu veux pas réfléchir ? »**\n\n**« Non. »**\n\nAryn dit toujours que je décide trop vite.\n\nPeut-être.\n\nMais cette décision-là était facile.\n\nRester dans une forge où mon père portait des gants.\n\nOu partir apprendre à être ce que j'étais.\n\nPas difficile.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Continuer.",
+          "vers": "ikar_aurenthal",
+          "effects": [
+            {
+              "stat": "loyaute",
+              "val": 10
+            }
+          ]
+        }
+      ],
+      "x": 300,
+      "y": 660
+    },
+    "ikar_aurenthal": {
+      "id": "ikar_aurenthal",
+      "title": "Aurenthal",
+      "location": "Aurenthal — Temple de l'Ordre",
+      "narrator": "",
+      "text": "Aurenthal m'impressionnait pas.\n\nTrop grand.\nTrop bruyant.\nTrop de gens qui se regardaient.\n\nLe Temple de l'Ordre c'était mieux.\n\nSimple.\nHaut.\nSilencieux.\n\nTrois autres enfants attendaient.\n\nUne fille avec des cheveux argentés.\nElle regardait ses mains.\n\nUne fille qui sentait la terre.\nElle souriait à tout le monde.\n\nUn garçon qui regardait partout en même temps.\nIl m'a fait un signe de la main.\n\nJe n'ai rien fait.\n\nLa fille aux cheveux argentés a levé les yeux.\n\n**« T'es en retard. »** j'ai dit.\n\n**« Je viens de la côte. »**\n\n**« Tout le monde vient de quelque part. »**\n\nMauvais départ.\n\nOn a fini par s'en remettre.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Comment c'était avec Aryn au début ?",
+          "vers": "ikar_aryn_debut"
+        },
+        {
+          "text": "Continuer.",
+          "vers": "ikar_entrainement"
+        }
+      ],
+      "x": 60,
+      "y": 780
+    },
+    "ikar_aryn_debut": {
+      "id": "ikar_aryn_debut",
+      "title": "Aryn — Les Premiers Temps",
+      "location": "Temple de l'Ordre",
+      "narrator": "",
+      "text": "On se disputait tout le temps.\n\nPas méchamment.\n\nElle pensait trop.\nMoi j'agissais trop vite.\n\nUn soir d'entraînement j'avais dit :\n\n**« Tu passes plus de temps à douter qu'à faire. »**\n\n**« Et toi tu passes plus de temps à faire qu'à penser. »**\n**« Résultat ? »**\n\n**« Je réussis. »**\n\n**« Et tu recommences les mêmes erreurs. »**\n\nJ'avais rien répondu.\n\nParce qu'elle avait raison.\n\nOn était complémentaires.\nÇa prenait du temps à admettre.\n\nMaintenant je l'admets sans problème.\n\nElle réfléchit pour moi.\nJe agis pour elle.\n\nC'est un bon équilibre.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Et Vael et Taera ?",
+          "vers": "ikar_vael_taera_debut"
+        },
+        {
+          "text": "Continuer.",
+          "vers": "ikar_entrainement"
+        }
+      ],
+      "x": 180,
+      "y": 780
+    },
+    "ikar_entrainement": {
+      "id": "ikar_entrainement",
+      "title": "L'Entraînement",
+      "location": "Temple de l'Ordre — Salle de feu",
+      "narrator": "",
+      "text": "L'esprit du Feu s'appelait Kael.\n\nPas Caël avec l'accent.\nKael. Différent.\n\nIl était là depuis la fondation de l'Ordre.\n\nIl aimait pas les questions.\nMoi non plus.\n\nOn s'entendait bien.\n\n**« Le feu ne pardonne pas la faiblesse. »** il disait.\n**« Une flamme qui hésite s'éteint. »**\n**« Un porteur qui hésite échoue. »**\n\nSimple.\nDirect.\n\nJ'aimais ça.\n\nKael ne disait jamais *peut-être.*\nIl ne disait jamais *ça dépend.*\n\nLe feu ou pas le feu.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Et les autres esprits ?",
+          "vers": "ikar_autres_esprits"
+        },
+        {
+          "text": "Continuer.",
+          "vers": "ikar_pret_a_tout"
+        }
+      ],
+      "x": 60,
+      "y": 900
+    },
+    "ikar_autres_esprits": {
+      "id": "ikar_autres_esprits",
+      "title": "Les Autres Esprits",
+      "location": "Temple de l'Ordre",
+      "narrator": "",
+      "text": "L'esprit de l'Eau parlait en métaphores.\n\nLyra.\nElle disait des choses comme :\n*\"L'eau trouve toujours son chemin.\"*\n\nJ'entendais ça et je pensais :\n*et alors ?*\n\nL'esprit de la Terre était doux.\nTrop doux pour moi.\n\nL'esprit de l'Air était déconcertant.\n\nIl disparaissait en plein milieu d'une phrase.\nEt revenait ailleurs.\n\nVael adorait ça.\n\nMoi ça m'énervait.\n\nKael était différent.\n\nIl disait ce qu'il pensait.\nIl attendait qu'on fasse pareil.\n\nOn se comprenait.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Kael te parlait d'eux ?",
+          "vers": "ikar_kael_autres"
+        },
+        {
+          "text": "Continuer.",
+          "vers": "ikar_pret_a_tout"
+        }
+      ],
+      "x": 180,
+      "y": 900
+    },
+    "ikar_pret_a_tout": {
+      "id": "ikar_pret_a_tout",
+      "title": "Prêt à Tout",
+      "location": "Temple de l'Ordre — Nuit",
+      "narrator": "",
+      "text": "J'avais dix ans.\n\nKael m'avait gardé après l'entraînement.\n\nIl regardait ma lame.\n\n**« Le porteur du Chaos viendra. »**\n\n**« Je sais. »**\n\n**« Et quand il viendra... »**\n\nIl m'a regardé.\n\n**« ...tu devras être prêt à tout. »**\n\n**« Tout comme dans— »**\n\n**« Tout. »**\n\nJ'ai pas hésité.\n\n**« D'accord. »**\n\nKael a hoché la tête.\n\nIl a disparu.\n\nLa nuit suivante j'ai mal dormi.\n\nPas parce que j'avais peur.\n\nParce que j'avais dit oui trop vite.\nEt que même moi je savais que c'était trop vite.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Tu savais ce que ça voulait dire.",
+          "vers": "ikar_comprend_tout",
+          "effects": [
+            {
+              "stat": "doute",
+              "val": 15
+            }
+          ]
+        },
+        {
+          "text": "Tu as refusé d'y penser.",
+          "vers": "ikar_refuse_penser",
+          "effects": [
+            {
+              "stat": "loyaute",
+              "val": 10
+            }
+          ]
+        }
+      ],
+      "x": 60,
+      "y": 1020
+    },
+    "ikar_comprend_tout": {
+      "id": "ikar_comprend_tout",
+      "title": "Ce Que Ça Voulait Dire",
+      "location": "Temple de l'Ordre — Chambre",
+      "narrator": "",
+      "text": "Oui.\n\nLe feu ne ment pas.\n\n*Tout* voulait dire tout.\n\nSi le Chaos ne pouvait pas être maîtrisé —\nl'arrêter.\n\nMême si ça coûtait tout.\n\nJ'avais dix ans.\nJ'avais dit oui à tuer quelqu'un si nécessaire.\n\nCette pensée est restée.\n\nElle ne m'a jamais quitté.\n\nDes années après,\nquand j'entendais Taera dire\n*\"il y a toujours une autre voie\"*\nje pensais :\n*peut-être.*\n\n*Mais si il n'y en a pas ?*",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Continuer.",
+          "vers": "ikar_annees",
+          "effects": [
+            {
+              "stat": "doute",
+              "val": 5
+            }
+          ]
+        }
+      ],
+      "x": 180,
+      "y": 1020
+    },
+    "ikar_refuse_penser": {
+      "id": "ikar_refuse_penser",
+      "title": "Ne Pas Y Penser",
+      "location": "Temple de l'Ordre — Chambre",
+      "narrator": "",
+      "text": "Le feu n'aime pas le vide dans la tête.\n\nAlors je l'ai rempli.\n\nEntraînement.\nCombat.\nTechnique.\nMaîtrise.\n\nJe suis devenu meilleur que tout le monde avec une lame.\n\nAryn dit que je m'entraîne pour fuir quelque chose.\n\n**« Je m'entraîne pour être prêt. »**\n\n**« Prêt à quoi exactement ? »**\n\nJe n'ai pas répondu.\n\nElle savait déjà.\n\nOn savait tous les deux.\n\nOn en a jamais vraiment parlé.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Continuer.",
+          "vers": "ikar_annees",
+          "effects": [
+            {
+              "stat": "loyaute",
+              "val": 5
+            }
+          ]
+        }
+      ],
+      "x": 300,
+      "y": 1020
+    },
+    "ikar_annees": {
+      "id": "ikar_annees",
+      "title": "Les Années",
+      "location": "Temple de l'Ordre — Différentes saisons",
+      "narrator": "Dix ans. Onze. Douze. Treize.",
+      "text": "On grandissait.\n\nJ'étais le meilleur au combat.\n\nTaera le savait. Elle combattait différemment — défense, protection.\nAryn le savait. Elle esquivait mieux qu'elle n'attaquait.\nVael le savait. Il disparaissait plutôt que tenir tête.\n\nMoi j'attaquais.\n\nKael disait :\n\n**« Le feu avance. »**\n**« Il ne recule jamais. »**\n\nJ'avançais.\n\nUne fois Taera m'a arrêté après l'entraînement.\n\n**« T'entraînes pour tuer. »**\n\n**« Je m'entraîne pour gagner. »**\n\n**« C'est pareil. »**\n\n**« Non. »**\n\nElle est partie sans répondre.\n\nJ'ai pensé à ça longtemps.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Elle avait raison ?",
+          "vers": "ikar_taera_raison",
+          "effects": [
+            {
+              "stat": "doute",
+              "val": 10
+            }
+          ]
+        },
+        {
+          "text": "Continuer.",
+          "vers": "ikar_nuit_doute"
+        }
+      ],
+      "x": 60,
+      "y": 1140
+    },
+    "ikar_taera_raison": {
+      "id": "ikar_taera_raison",
+      "title": "Taera et le Combat",
+      "location": "Temple de l'Ordre",
+      "narrator": "",
+      "text": "Peut-être.\n\nLe feu qui avance détruit tout sur son passage.\n\nMême ce qu'il voulait pas détruire.\n\nJ'ai essayé de lui dire plus tard.\n\n**« T'avais peut-être raison. »**\n\nElle m'a regardé.\n\n**« \"Peut-être\" c'est un grand mot venant de toi. »**\n\n**« Ferme-la. »**\n\nElle a ri.\n\nC'était rare que je lui dise qu'elle avait raison.\n\nElle savourait.\n\nAprès ça on a commencé à s'entraîner différemment.\nElle m'apprenait à protéger.\nMoi je lui apprenais à frapper quand il le fallait.\n\nMeilleure décision qu'on ait prise.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Continuer.",
+          "vers": "ikar_nuit_doute",
+          "effects": [
+            {
+              "stat": "doute",
+              "val": 5
+            }
+          ]
+        }
+      ],
+      "x": 180,
+      "y": 1140
+    },
+    "ikar_nuit_doute": {
+      "id": "ikar_nuit_doute",
+      "title": "La Nuit du Doute",
+      "location": "Temple de l'Ordre — Sa chambre",
+      "narrator": "",
+      "text": "J'avais quinze ans.\n\nUne nuit, Kael est revenu.\n\nSans prévenir.\nComme ils font.\n\nIl m'a regardé.\n\n**« Tu doutes. »**\n\n**« Non. »**\n\n**« Mens pas au feu. »**\n\nLong silence.\n\n**« Et si on peut le sauver ? »** j'ai dit.\n**« Et si Aryn a raison ? »**\n**« Et si il y a une autre voie ? »**\n\nKael n'a rien dit.\n\n**« Réponds-moi. »**\n\n**« Le feu qui hésite s'éteint. »**\n\n**« C'est pas une réponse. »**\n\nIl a disparu.\n\nC'était la dernière fois qu'il m'a parlé directement.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Il ne t'a plus jamais parlé ?",
+          "vers": "ikar_silence_kael",
+          "effects": [
+            {
+              "stat": "doute",
+              "val": 10
+            }
+          ]
+        },
+        {
+          "text": "Continuer.",
+          "vers": "ikar_veille"
+        }
+      ],
+      "x": 60,
+      "y": 1260
+    },
+    "ikar_silence_kael": {
+      "id": "ikar_silence_kael",
+      "title": "Le Silence de Kael",
+      "location": "Temple de l'Ordre",
+      "narrator": "",
+      "text": "Quatre ans de silence.\n\nIl était là.\nJe le sentais.\n\nMais plus de mots.\n\nJ'ai compris plus tard que c'était sa réponse.\n\n*Si tu te poses la question — tu connais déjà la réponse.*\n\nKael ne parlait qu'à ceux qui avaient besoin d'entendre.\n\nMoi j'avais besoin de trouver seul.\n\nQuatre ans à chercher.\n\nJe n'ai pas trouvé.\n\nMais j'ai appris à vivre avec l'incertitude.\n\nC'était peut-être ça la vraie leçon.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Continuer.",
+          "vers": "ikar_veille",
+          "effects": [
+            {
+              "stat": "doute",
+              "val": 5
+            }
+          ]
+        }
+      ],
+      "x": 180,
+      "y": 1260
+    },
+    "ikar_veille": {
+      "id": "ikar_veille",
+      "title": "Le Signal",
+      "location": "Temple de l'Ordre — Chambre d'Ikar",
+      "narrator": "",
+      "text": "J'ai senti le Chaos avant tout le monde.\n\nPas parce que j'étais plus fort.\n\nParce que le feu reconnaît la destruction.\n\nMa lame s'est allumée toute seule.\n\nPremière fois depuis des années.\n\nJe l'avais posée sur la table.\nElle brûlait sans raison.\n\nJ'ai regardé la flamme.\n\nLongtemps.\n\nPuis je me suis levé.\nJ'ai mis mon armure.\n\nJ'ai frappé à la porte d'Aryn.\n\nElle était déjà debout.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Qu'est-ce que tu pensais à ce moment ?",
+          "vers": "ikar_pensee_veille"
+        },
+        {
+          "text": "Continuer.",
+          "vers": "ikar_depart"
+        }
+      ],
+      "x": 60,
+      "y": 1380
+    },
+    "ikar_pensee_veille": {
+      "id": "ikar_pensee_veille",
+      "title": "Ce Qu'Il Pensait",
+      "location": "Temple de l'Ordre — Nuit",
+      "narrator": "",
+      "text": "La même chose que depuis dix ans.\n\n*Prêt à tout.*\n\nEt pour la première fois depuis dix ans\nj'espérais que ça n'irait pas jusque-là.\n\nPas pour moi.\n\nPour eux.\n\nAryn qui cherchait une autre voie depuis toujours.\nTaera qui refusait d'admettre qu'il n'y en avait peut-être pas.\nVael qui faisait semblant de pas y penser.\n\nSi j'étais le seul à avoir raison —\n\nÇa voulait dire que j'allais devoir faire quelque chose\nqu'aucun d'eux ne pourrait faire.\n\nSeul.\n\nJ'espérais avoir tort.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Continuer.",
+          "vers": "ikar_depart",
+          "effects": [
+            {
+              "stat": "doute",
+              "val": 10
+            }
+          ]
+        }
+      ],
+      "x": 180,
+      "y": 1380
+    },
+    "ikar_depart": {
+      "id": "ikar_depart",
+      "title": "Le Départ",
+      "location": "Temple de l'Ordre — Cour",
+      "narrator": "",
+      "text": "On était quatre dans la cour.\n\nVael sifflotait.\n\n**« Arrête. »** j'ai dit.\n\n**« Pourquoi ? »**\n\n**« Parce que. »**\n\n**« Argument solide. »**\n\nIl a quand même arrêté.\n\nTaera serrait son épée.\n\nAryn regardait l'ouest.\n\nKael est apparu une dernière fois.\n\nJuste là.\nDans l'air.\n\nIl n'a rien dit.\n\nMais il a regardé ma lame.\n\nElle brûlait.\n\nIl a hoché la tête.\n\nPuis disparu.\n\n**« On y va. »** j'ai dit.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Regarder Aryn.",
+          "vers": "ikar_depart_aryn"
+        },
+        {
+          "text": "Regarder Taera.",
+          "vers": "ikar_depart_taera"
+        },
+        {
+          "text": "Continuer.",
+          "vers": "ikar_route"
+        }
+      ],
+      "x": 60,
+      "y": 1500
+    },
+    "ikar_route": {
+      "id": "ikar_route",
+      "title": "La Route",
+      "location": "Route d'Aerith — Aube",
+      "narrator": "",
+      "text": "J'allais vite.\n\nLes autres suivaient.\n\nAryn ne disait rien.\nElle savait ce que je pensais.\n\nTaera avait demandé à mi-chemin :\n\n**« Tu vas faire quoi quand on arrivera ? »**\n\n**« Ce qu'il faut. »**\n\n**« Ikar. »**\n\n**« Ce qu'il faut. »**\n\nElle n'a pas insisté.\n\nVael m'avait rattrapé plus loin.\n\nIl avait arrêté de siffloter.\n\n**« T'as pas besoin de porter ça seul. »**\n\n**« Je porte rien. »**\n\n**« Ikar. »**\n\n**« Quoi. »**\n\n**« T'as pas besoin de porter ça seul. »**\n\nIl est retourné à l'arrière.\n\nJ'ai pas répondu.\n\nMais j'ai ralenti un peu.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "La promesse à Aryn.",
+          "vers": "ikar_route_promesse",
+          "effects": [
+            {
+              "stat": "doute",
+              "val": 10
+            }
+          ]
+        },
+        {
+          "text": "Continuer.",
+          "vers": "ikar_fumee"
+        }
+      ],
+      "x": 60,
+      "y": 1620
+    },
+    "ikar_fumee": {
+      "id": "ikar_fumee",
+      "title": "La Fumée",
+      "location": "Route d'Aerith — Crête",
+      "narrator": "",
+      "text": "On a vu la fumée depuis une crête.\n\nNoire.\nÉpaisse.\n\nMa lame s'est rallumée.\n\nAryn a fermé les yeux.\n\n**« Il est encore là. »** elle a dit.\n\n**« Vivant ? »**\n\n**« Vivant. »**\n\nTaera a murmuré quelque chose.\nUne prière peut-être.\n\nVael a cessé de siffloter.\n\nMoi j'ai regardé la fumée.\n\nEt j'ai pensé :\n\n*espère avoir tort.*\n\n**« On y va. »** j'ai dit.\n\nOn est repartis au galop.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Une dernière pensée.",
+          "vers": "ikar_derniere_pensee"
+        },
+        {
+          "text": "Retourner à l'histoire principale.",
+          "vers": "fin_memoire_ikar"
+        }
+      ],
+      "x": 60,
+      "y": 1740
+    },
+    "ikar_derniere_pensee": {
+      "id": "ikar_derniere_pensee",
+      "title": "La Dernière Pensée",
+      "location": "Route d'Aerith",
+      "narrator": "",
+      "text": "Si on pouvait le sauver —\n\nAryn trouverait comment.\nTaera tendrait la main.\nVael trouverait les bons mots.\n\nEt moi.\n\nMoi je ferais quoi ?\n\nJe me battrais.\n\nMais pour quoi exactement.\n\nContre quoi exactement.\n\nPour la première fois en dix ans\nje ne savais pas.\n\nLe feu dans ma lame brûlait fort.\n\nIl ne savait pas non plus.\n\nOn avançait quand même.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Retourner à l'histoire principale.",
+          "vers": "fin_memoire_ikar",
+          "effects": [
+            {
+              "stat": "doute",
+              "val": 10
+            }
+          ]
+        }
+      ],
+      "x": 180,
+      "y": 1740
+    },
+    "fin_memoire_ikar": {
+      "id": "fin_memoire_ikar",
+      "title": "Fin — Mémoire d'Ikar",
+      "location": "",
+      "narrator": "",
+      "text": "Tu rouvres les yeux.\n\nIkar te regarde.\n\nToujours les bras croisés.\nToujours la mâchoire serrée.\n\nMais quelque chose a changé\ndans la façon dont il te regarde.\n\nLe feu ne ment pas.\n\nIl brûle ou il ne brûle pas.",
+      "isStart": false,
+      "isEnd": true,
+      "transition": "fade",
+      "choices": [],
+      "x": 60,
+      "y": 1860
+    },
+    "ikar_feu_obeit": {
+      "id": "ikar_feu_obeit",
+      "title": "L'Obéissance",
+      "location": "Village de forge",
+      "narrator": "",
+      "text": "Pas toujours.\n\nAu début il faisait ce qu'il voulait.\n\nMais rapidement.\n\nBeaucoup plus vite que les autres avec leurs éléments.\n\nAryn a mis des mois à contrôler l'eau.\n\nMoi le feu obéissait en semaines.\n\nKael disait que c'est parce que le feu et moi\non se comprenait naturellement.\n\nMême intention.\nMême impatience.\nMême façon d'avancer sans regarder en arrière.\n\nOn était pareils.\n\nJe sais pas si c'est rassurant ou inquiétant.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Continuer.",
+          "vers": "ikar_enfance_a"
+        }
+      ],
+      "x": 180,
+      "y": 60
+    },
+    "ikar_pere_manque": {
+      "id": "ikar_pere_manque",
+      "title": "La Forge",
+      "location": "Village de forge — Souvenir",
+      "narrator": "",
+      "text": "Oui.\n\nPas de façon spectaculaire.\n\nJuste des petites choses.\n\nL'odeur du métal chaud.\nLe bruit du marteau.\nLe silence qui voulait dire quelque chose.\n\nÀ Aurenthal il n'y avait pas de forge.\n\nLes premiers mois j'allais dans les cuisines du Temple.\nJuste pour entendre le feu dans les fourneaux.\n\nTaera m'avait demandé ce que je faisais là.\n\n**« Rien. »**\n\nElle avait hoché la tête.\n\nElle avait compris sans que j'explique.\n\nC'est une des choses que j'aime chez elle.\n\nElle n'oblige pas les gens à parler.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Continuer.",
+          "vers": "ikar_accident"
+        }
+      ],
+      "x": 180,
+      "y": 180
+    },
+    "ikar_isole": {
+      "id": "ikar_isole",
+      "title": "L'Isolement",
+      "location": "Champs derrière le village",
+      "narrator": "",
+      "text": "Oui.\n\nQuand tu décides vite et que les autres hésitent —\ntu finis souvent seul à l'avant.\n\nÀ la forge, après l'accident,\nles enfants du village ne jouaient plus avec moi.\n\nPas par méchanceté.\nPar peur.\n\nJe les comprenais.\n\nUn enfant qui peut mettre le feu sans le vouloir —\nc'est pas le genre de camarade qu'on choisit.\n\nJ'ai appris à me passer des autres.\n\nPuis à l'Ordre j'ai appris que c'était une erreur.\n\nPas une faiblesse d'avoir besoin des autres.\n\nUne erreur de croire qu'on peut tout porter seul.\n\nVael me l'a dit une fois.\n\nJe l'ai entendu.\nTrois ans après qu'il l'avait dit.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Continuer.",
+          "vers": "ikar_recrutement",
+          "effects": [
+            {
+              "stat": "doute",
+              "val": 5
+            }
+          ]
+        }
+      ],
+      "x": 180,
+      "y": 540
+    },
+    "ikar_vael_taera_debut": {
+      "id": "ikar_vael_taera_debut",
+      "title": "Vael et Taera",
+      "location": "Temple de l'Ordre — Premiers jours",
+      "narrator": "",
+      "text": "Taera était facile.\n\nElle souriait à tout le monde.\nElle t'écoutait vraiment.\nElle faisait ce qu'il fallait sans qu'on lui demande.\n\nPremière semaine elle m'avait apporté du pain.\n\n**« T'as pas mangé ce matin. »**\n\n**« Comment tu sais ? »**\n\n**« J'ai regardé. »**\n\nSimple comme ça.\n\nVael c'était différent.\n\nIl souriait aussi mais pour de mauvaises raisons.\n\nPour déstabiliser.\nPour tester.\nPour voir comment on réagissait.\n\nLa troisième semaine il avait fait disparaître ma lame pendant l'entraînement.\n\n**« Très drôle. »**\n\n**« Je voulais voir si tu paniquais. »**\n\n**« Et ? »**\n\n**« T'as juste brûlé le sol. »**\n**« Niveau panique c'est raisonnable. »**\n\nOn a fini par rire.\n\nÇa m'avait surpris.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Continuer.",
+          "vers": "ikar_entrainement"
+        }
+      ],
+      "x": 180,
+      "y": 780
+    },
+    "ikar_kael_autres": {
+      "id": "ikar_kael_autres",
+      "title": "Ce que Kael Pensait",
+      "location": "Temple de l'Ordre",
+      "narrator": "",
+      "text": "Une fois.\n\nUne seule.\n\n**« Les autres esprits sont différents de moi. »**\n\n**« Meilleurs ? »**\n\n**« Différents. »**\n\n**« L'eau cherche. »**\n**« La terre supporte. »**\n**« L'air contourne. »**\n\n**« Et le feu ? »**\n\n**« Avance. »**\n\n**« C'est tout ? »**\n\n**« C'est suffisant. »**\n\nIl avait disparu.\n\nJ'avais pas trouvé ça très utile sur le moment.\n\nAvec le temps j'ai compris.\n\nChaque élément a sa façon d'être au monde.\n\nLa mienne c'est d'avancer.\n\nLes autres avancent différemment.\n\nC'est pour ça qu'on est cinq et pas un.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Continuer.",
+          "vers": "ikar_pret_a_tout",
+          "effects": [
+            {
+              "stat": "doute",
+              "val": 5
+            }
+          ]
+        }
+      ],
+      "x": 180,
+      "y": 900
+    },
+    "ikar_depart_aryn": {
+      "id": "ikar_depart_aryn",
+      "title": "Le Regard d'Aryn",
+      "location": "Temple de l'Ordre — Cour",
+      "narrator": "",
+      "text": "Elle me regardait.\n\nElle savait ce que je pensais.\n\nElle savait depuis dix ans.\n\n**« Ikar. »**\n\n**« Quoi. »**\n\n**« On essaie d'abord. »**\n\n**« Je sais. »**\n\n**« Non. »** elle a dit.\n**« Tu sais pas. »**\n**« Tu *promets*. »**\n\nJe l'avais jamais vue me demander ça.\n\n**« Je promets d'essayer d'abord. »**\n\nElle a hoché la tête.\n\nUne promesse envers Aryn.\n\nÇa pesait.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Continuer.",
+          "vers": "ikar_route",
+          "effects": [
+            {
+              "stat": "doute",
+              "val": 10
+            }
+          ]
+        }
+      ],
+      "x": 180,
+      "y": 1500
+    },
+    "ikar_depart_taera": {
+      "id": "ikar_depart_taera",
+      "title": "Le Regard de Taera",
+      "location": "Temple de l'Ordre — Cour",
+      "narrator": "",
+      "text": "Taera regardait le ciel.\n\n**« Tu penses à quoi ? »** j'ai demandé.\n\nRare que je pose des questions.\n\n**« Au village. »**\n**« Au sien. »**\n**« Comment il était avant. »**\n\n**« T'as jamais vu son village. »**\n\n**« Non. »**\n**« Mais j'imagine. »**\n**« Des gens normaux. »**\n**« Qui se levaient le matin. »**\n\nElle s'est arrêtée.\n\n**« C'est pour eux qu'on y va. »** elle a dit.\n**« Pas pour les légendes. »**\n**« Pas pour l'Ordre. »**\n**« Pour les gens normaux. »**\n\nJ'avais oublié ça.\n\nDix ans à penser à la mission.\nÀ la technique.\nAu Chaos.\n\nPas aux gens.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Continuer.",
+          "vers": "ikar_route",
+          "effects": [
+            {
+              "stat": "doute",
+              "val": 5
+            }
+          ]
+        }
+      ],
+      "x": 300,
+      "y": 1500
+    },
+    "ikar_route_promesse": {
+      "id": "ikar_route_promesse",
+      "title": "La Promesse",
+      "location": "Route d'Aerith",
+      "narrator": "",
+      "text": "*Essayer d'abord.*\n\nJe ne savais même pas ce que ça voulait dire concrètement.\n\nEssayer quoi ?\n\nParler ?\nAryn parlerait mieux que moi.\n\nTendre la main ?\nTaera ferait ça naturellement.\n\nTrouver les bons mots ?\nVael était né pour ça.\n\nEt moi.\n\nSi ça n'allait pas.\nSi les autres n'y arrivaient pas.\n\nC'est là que j'interviendrais.\n\n*Essayer d'abord.*\n\nÇa voulait dire :\nêtre le dernier recours.\n\nPas le premier.\n\nC'était peut-être ça ma place dans ce groupe.\n\nPas l'avant.\n\nL'arrière-garde.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Continuer.",
+          "vers": "ikar_fumee",
+          "effects": [
+            {
+              "stat": "loyaute",
+              "val": 10
+            }
+          ]
+        }
+      ],
+      "x": 180,
+      "y": 1620
+    }
+  }
+}
