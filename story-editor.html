@@ -2054,7 +2054,6 @@ function exportTXT() {
 }
 
 function sendStory() {
-  // 1. Télécharger le JSON automatiquement
   project.theme = { ...currentTheme };
   project.kids = document.getElementById('kids-check').checked;
   const exportData = JSON.parse(JSON.stringify(project));
@@ -2063,9 +2062,47 @@ function sendStory() {
   });
   const filename = (project.name || 'histoire').replace(/\s+/g,'_').toLowerCase() + '.json';
   const blob = new Blob([JSON.stringify(exportData, null, 2)], {type:'application/json'});
-  download(blob, filename);
 
-  // 2. Ouvrir l'app mail pré-remplie
+  // ── Share API Capacitor (APK Android) ─────────────────────
+  if (window.Capacitor && window.Capacitor.isNativePlatform && window.Capacitor.isNativePlatform()) {
+    blob.arrayBuffer().then(buf => {
+      const base64 = btoa(String.fromCharCode(...new Uint8Array(buf)));
+      window.Capacitor.Plugins.Filesystem.writeFile({
+        path: filename,
+        data: base64,
+        directory: 'CACHE',
+        encoding: 'utf8'
+      }).then(result => {
+        window.Capacitor.Plugins.Share.share({
+          title: '[StoryForge] Soumission — ' + (project.name || 'Mon Histoire'),
+          text: `Bonjour l'équipe PegasusCorp,\n\nJe vous soumets mon histoire "${project.name || 'Mon Histoire'}".\n\nCordialement`,
+          url: result.uri,
+          dialogTitle: 'Envoyer à PegasusCorp'
+        });
+      });
+    });
+    return;
+  }
+
+  // ── Web Share API (navigateur mobile) ─────────────────────
+  if (navigator.share && navigator.canShare) {
+    const file = new File([blob], filename, { type: 'application/json' });
+    if (navigator.canShare({ files: [file] })) {
+      navigator.share({
+        files: [file],
+        title: '[StoryForge] Soumission — ' + (project.name || 'Mon Histoire'),
+        text: `Histoire "${project.name || 'Mon Histoire'}" créée avec StoryForge.`
+      }).catch(() => _sendMailtoFallback(blob, filename));
+      return;
+    }
+  }
+
+  // ── Fallback mailto + téléchargement ──────────────────────
+  _sendMailtoFallback(blob, filename);
+}
+
+function _sendMailtoFallback(blob, filename) {
+  download(blob, filename);
   const to      = 'team.pegasuscorp@gmail.com';
   const subject = encodeURIComponent('[StoryForge] Soumission — ' + (project.name || 'Mon Histoire'));
   const body    = encodeURIComponent(
@@ -2080,8 +2117,6 @@ Merci de prendre le temps de la lire !
 Cordialement,
 [Votre nom]`
   );
-
-  // Petit délai pour laisser le téléchargement démarrer
   setTimeout(() => {
     window.location.href = `mailto:${to}?subject=${subject}&body=${body}`;
     toast('📎 JSON téléchargé — ajoutez-le en pièce jointe !');
@@ -2143,6 +2178,39 @@ function shuffleArray(arr) {
 }
 
 function download(blob, filename) {
+  // ── Share API Capacitor (APK Android) ─────────────────────
+  if (window.Capacitor && window.Capacitor.isNativePlatform && window.Capacitor.isNativePlatform()) {
+    blob.arrayBuffer().then(buf => {
+      const base64 = btoa(String.fromCharCode(...new Uint8Array(buf)));
+      window.Capacitor.Plugins.Filesystem.writeFile({
+        path: filename,
+        data: base64,
+        directory: 'CACHE',
+        encoding: 'utf8'
+      }).then(result => {
+        window.Capacitor.Plugins.Share.share({
+          title: filename,
+          url: result.uri,
+          dialogTitle: 'Partager / Sauvegarder'
+        });
+      }).catch(() => _downloadFallback(blob, filename));
+    });
+    return;
+  }
+  // ── Web Share API (navigateur mobile moderne) ─────────────
+  if (navigator.share && navigator.canShare) {
+    const file = new File([blob], filename, { type: blob.type });
+    if (navigator.canShare({ files: [file] })) {
+      navigator.share({ files: [file], title: filename })
+        .catch(() => _downloadFallback(blob, filename));
+      return;
+    }
+  }
+  // ── Fallback navigateur classique ─────────────────────────
+  _downloadFallback(blob, filename);
+}
+
+function _downloadFallback(blob, filename) {
   const a = document.createElement('a');
   a.href = URL.createObjectURL(blob);
   a.download = filename;
