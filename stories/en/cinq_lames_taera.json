@@ -1,0 +1,727 @@
+{
+  "name": "The Five Blades — Taera's Memory",
+  "kids": false,
+  "askPlayerName": false,
+  "pack": "cinq_lames",
+  "stats": [
+    {
+      "id": "compassion",
+      "label": "Compassion",
+      "start": 50,
+      "max": 100,
+      "color": "#90be6d"
+    },
+    {
+      "id": "fermete",
+      "label": "Close",
+      "start": 20,
+      "max": 100,
+      "color": "#f9c74f"
+    }
+  ],
+  "theme": {},
+  "scenes": {
+    "taera_intro": {
+      "id": "taera_intro",
+      "title": "The Earth",
+      "location": "Mountain village — Garden",
+      "narrator": "Taera. Earth carrier. What she's wearing.",
+      "text": "The earth smells like rain the day before.\n\nEven when it didn't rain.\n\nShe keeps the smells for a long time.\n\nThat's why I like to dig.\n\nTo find out what's left.",
+      "isStart": true,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Continue.",
+          "vers": "taera_enfance"
+        },
+        {
+          "text": "What's she keeping?",
+          "vers": "taera_ce_quelle_garde"
+        }
+      ],
+      "x": 60,
+      "y": 60
+    },
+    "taera_ce_quelle_garde": {
+      "id": "taera_ce_quelle_garde",
+      "title": "What Keeps Earth",
+      "location": "Mountain village",
+      "narrator": "",
+      "text": "Everything.\n\nThe seeds we forgot to plant.\nThe roots of the trees we cut.\nThe fingerprints of the people who left.\n\nThe earth has a longer memory than men.\n\nWhen I touch the ground somewhere,\nI feel what happened there.\n\nNot clear.\n\nLike a vibration.\n\nA house that has welcomed many people\nvibrates differently from an empty house.\n\nA battlefield vibrates differently from a garden.\n\nMy mom thought I was making up.\n\nMy brother thought I was weird.\n\nMy dad thought it was a gift.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Continue.",
+          "vers": "taera_enfance"
+        }
+      ],
+      "x": 180,
+      "y": 60
+    },
+    "taera_enfance": {
+      "id": "taera_enfance",
+      "title": "The Garden",
+      "location": "Mountain village — Family garden",
+      "narrator": "",
+      "text": "We lived in the mountains.\n\nNot very high.\nJust enough to see the plain below.\n\nMy father was growing vegetables.\n\nNot to sell.\nTo eat.\nFor the neighbors.\nFor those who were missing.\n\nHe said:\n\n**\"The earth gives to those who give it. *\n\nI had my hands in the earth every day.\n\nCold in the morning.\nHot afternoon.\nHumid after the rain.\nDry in summer.\n\nI was learning his moods\nbefore learning to read.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Tell me about your father.",
+          "vers": "taera_pere"
+        },
+        {
+          "text": "Continue.",
+          "vers": "taera_decouverte"
+        }
+      ],
+      "x": 60,
+      "y": 180
+    },
+    "taera_pere": {
+      "id": "taera_pere",
+      "title": "The Father of Taera",
+      "location": "Mountain village — Garden",
+      "narrator": "",
+      "text": "My father had hands like roots.\n\nLarge.\nStrong.\nCovered with soil even after washing.\n\nHe didn't talk much.\nBut when he was talking,\nIt was always at the right time.\n\nAt night he sat by the garden.\nHe was watching what had pushed.\n\nHe didn't count.\nHe wasn't measuring.\n\nHe was just looking.\n\nOnce I asked him what he saw.\n\n**\"What was there before. *\n**\"And what will be there after. *\n\nI didn't understand.\n\nNow I get it.\n\nThat's exactly what I see, too.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Continue.",
+          "vers": "taera_decouverte",
+          "effects": [
+            {
+              "stat": "compassion",
+              "val": 5
+            }
+          ]
+        }
+      ],
+      "x": 180,
+      "y": 180
+    },
+    "taera_decouverte": {
+      "id": "taera_decouverte",
+      "title": "The First Time",
+      "location": "Mountain village — Fields",
+      "narrator": "",
+      "text": "I was six.\n\nA tree fell into the storm.\n\nDude.\nHuge.\nHe blocked the way to the neighbouring village.\n\nThe men were trying to move him.\nImpossible.\n\nI was there watching them.\n\nI put my hand on the trunk.\n\nJust to touch him.\n\nAnd the tree moved.\n\nNot much.\nJust enough for everyone to stop.\n\nThe men looked at me.\n\nI looked at my hand.\n\nThe bark was warm.\nLike the tree still breathes.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "How did they react?",
+          "vers": "taera_reaction_village"
+        },
+        {
+          "text": "How did you react?",
+          "vers": "taera_reaction_elle"
+        }
+      ],
+      "x": 60,
+      "y": 300
+    },
+    "taera_reaction_village": {
+      "id": "taera_reaction_village",
+      "title": "The Village",
+      "location": "Mountain village",
+      "narrator": "",
+      "text": "Bad.\n\nNot violently.\n\nBut the eyes had changed.\n\nThe women in the village signed up to see me passing.\nThe kids were moving away.\n\nMy mother came by my hand.\nShe was smiling at others.\nShe was shaking my hand hard.\n\nBoth at the same time.\n\n**\"You only do this at home now. *\n\n**\"But I didn't do it on purpose—\"**\n\n**\"I know. *\n\nShe tightened even harder.\n\n**\"I know. *\n\nI realized that my mother had two fears.\nFear for me.\nAnd scared of me.\n\nIt took me a long time to accept.\n\nThat both can exist at the same time.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Continue.",
+          "vers": "taera_apprendre",
+          "effects": [
+            {
+              "stat": "compassion",
+              "val": 10
+            }
+          ]
+        }
+      ],
+      "x": 180,
+      "y": 300
+    },
+    "taera_reaction_elle": {
+      "id": "taera_reaction_elle",
+      "title": "Its reaction",
+      "location": "Mountain village — Fields",
+      "narrator": "",
+      "text": "Curious.\n\nEspecially curious.\n\nThe tree was heavy.\nI felt it.\nIt's like his mass is crossing my arms.\n\nBut it wasn't unpleasant.\n\nLike lifting something important.\n\nI put my hand back on the trunk.\n\nNothing.\n\nAgain.\n\nThe tree shook.\n\nI smiled.\n\nThen my father came.\nHe saw my hand on the tree.\nHe saw my smile.\n\nHe didn't say anything.\n\nIn the evening he taught me how to plant seeds.\n\nLike it's the logical suite.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Continue.",
+          "vers": "taera_apprendre",
+          "effects": [
+            {
+              "stat": "fermete",
+              "val": 5
+            }
+          ]
+        }
+      ],
+      "x": 300,
+      "y": 300
+    },
+    "taera_apprendre": {
+      "id": "taera_apprendre",
+      "title": "Learning Alone",
+      "location": "Fields and forests",
+      "narrator": "",
+      "text": "My father taught me how to garden.\n\nHe didn't know that was what he was doing.\n\nBut plant a seed and watch it grow —\nIt's exactly the same gesture as holding his sword.\nand feel the earth responding.\n\nGive before taking.\nWait until you act.\nListen before you talk.\n\nI did this for two years.\n\nNo name.\nNot understanding everything.\n\nJust do it.\n\nThe earth does not ask questions.\nShe answers what we give her.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "The limits?",
+          "vers": "taera_limites"
+        },
+        {
+          "text": "Continue — recruitment.",
+          "vers": "taera_recrutement"
+        }
+      ],
+      "x": 60,
+      "y": 420
+    },
+    "taera_limites": {
+      "id": "taera_limites",
+      "title": "Limits",
+      "location": "Mountain forest",
+      "narrator": "",
+      "text": "I found one.\n\nOnly one really.\n\nIf I gave too much —\nwithout rest,\nwithout letting the earth regenerate —\n\nI was falling apart.\n\nNot physically.\n\nInside.\n\nLike a field overplanted.\n\nAfter too much effort,\nI slept two days.\nHands stuck to the ground.\nLike I need to be recharged.\n\nMy brother found me there in the morning.\n\nHe said nothing.\nHe was laying a blanket on me.\nAnd he was gonna do the rest of the work.\n\nThat's how we communicated.\n\nHim and me.\n\nNo words.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Continue.",
+          "vers": "taera_recrutement",
+          "effects": [
+            {
+              "stat": "compassion",
+              "val": 5
+            }
+          ]
+        }
+      ],
+      "x": 180,
+      "y": 420
+    },
+    "taera_recrutement": {
+      "id": "taera_recrutement",
+      "title": "Peter's Woman",
+      "location": "Mountain village",
+      "narrator": "",
+      "text": "She arrived one autumn morning.\n\nA woman.\n\nGreat.\nDressed in brown and green.\n\nShe felt the forest after the rain.\n\nShe stopped in front of our garden.\n\nShe looked at the earth.\n\nThen she looked at me.\n\n**\"You talk to the earth. *\n\n**\"She answers me. *\n\nShe seemed satisfied.\n\n**\"How long? *\n\n**\"Since I was six. *\n\n**\"And you were not afraid. *\n\n**\"No. *\n\n**\"Why? *\n\nI was thinking.\n\n**\"Because the earth does not hurt people who listen to it. *\n\nShe smiled.\n\n**\"True. *",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "What about your father?",
+          "vers": "taera_depart_famille"
+        },
+        {
+          "text": "Did she scare you?",
+          "vers": "taera_femme_peur"
+        },
+        {
+          "text": "Continue.",
+          "vers": "taera_depart_famille"
+        }
+      ],
+      "x": 60,
+      "y": 540
+    },
+    "taera_femme_peur": {
+      "id": "taera_femme_peur",
+      "title": "Not Fear",
+      "location": "Mountain village",
+      "narrator": "",
+      "text": "No.\n\nShe felt the forest.\n\nPeople who smell the forest\nusually do no harm.\n\nIt's a rule I set alone.\n\nProbably not very reliable.\n\nBut she'd been here.\n\nWhat surprised me was her look.\n\nShe looked at me like she knew something.\nI didn't know yet.\n\nNo pity.\nNo mistrust.\n\nJust: I know where you're going. *\n\nIt was both reassuring and terrifying.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Continue.",
+          "vers": "taera_depart_famille"
+        }
+      ],
+      "x": 180,
+      "y": 540
+    },
+    "taera_depart_famille": {
+      "id": "taera_depart_famille",
+      "title": "Departure",
+      "location": "Mountain Village — House",
+      "narrator": "",
+      "text": "My father listened to the stone woman.\n\nLong time.\n\nMy mother was crying softly in the kitchen.\n\nMy brother was standing against the wall.\nCross arms.\nLike Ikar now that I think about it.\n\nIn the end my father got up.\n\nHe went out into the garden.\n\nI followed him.\n\nHe took a handful of dirt.\n\nHe put it in my hand.\n\n**\"Will you keep it? *\n\n**\"Yes. *\n\n**\"Good. *\n\nHe's back.\n\nI put the earth in my palm.\n\nI still have it.\nIn a small purse.\nAround the neck.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "What about your brother?",
+          "vers": "taera_frere"
+        },
+        {
+          "text": "Continue.",
+          "vers": "taera_aurenthal"
+        }
+      ],
+      "x": 60,
+      "y": 660
+    },
+    "taera_frere": {
+      "id": "taera_frere",
+      "title": "Brother",
+      "location": "Mountain village",
+      "narrator": "",
+      "text": "He didn't say anything about the whole conversation.\n\nWhen I went out with my bag,\nHe was on the doorstep.\n\nHe gave me something.\n\nA little stone.\nRound.\nGrey.\nSmooth as if she had spent years in a river.\n\n**\"It comes from the garden. *\n\n**\"I know. *\n\n**\"She was under the tree you moved when you were six. *\n\nI looked at him.\n\n**\"Remember? *\n\n**\"I was always watching when you were doing weird things. *\n\nHe had raised his shoulders.\n\n**\"To see if it was dangerous. *\n\n**\"And? *\n\n**\"No. *\n\nHe was home.\n\nI put the stone in the purse with the earth.\n\nShe's still there.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Continue.",
+          "vers": "taera_aurenthal",
+          "effects": [
+            {
+              "stat": "compassion",
+              "val": 10
+            }
+          ]
+        }
+      ],
+      "x": 180,
+      "y": 660
+    },
+    "taera_aurenthal": {
+      "id": "taera_aurenthal",
+      "title": "Auenthal",
+      "location": "Auenthal — Temple of the Order",
+      "narrator": "",
+      "text": "Aurenthal felt the stone and the crowd.\n\nNot unpleasant.\n\nJust different.\n\nThe Temple smelled old wood and incense.\n\nThe other three were waiting.\n\nThe girl with silver hair looked at her hands.\n\nThe forearm burn boy said:\nYou're late. *\n\nNot mine.\nThe silver girl.\n\nI smiled at him anyway.\n\nHe didn't smile in return.\n\nThe other boy — his eyes everywhere — had made me a sign.\n\n*\"My name is Vael. *\n\n**\"Taera. *\n\n**\"How long did you travel? *\n\n**\"Three days. *\n\n*\"I five. *\n**\"The mountains are far away. *\n\nHe knew where I came from without me saying it.\n\nI thought it was nice.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Ikar at first.",
+          "vers": "taera_ikar_debut"
+        },
+        {
+          "text": "Continue.",
+          "vers": "taera_entrainement"
+        }
+      ],
+      "x": 60,
+      "y": 780
+    },
+    "taera_ikar_debut": {
+      "id": "taera_ikar_debut",
+      "title": "Ikar — The First Day",
+      "location": "Temple of the Order",
+      "narrator": "",
+      "text": "He was difficult.\n\nNot bad.\n\nHard.\n\nHe took too much space in conversations.\nHe decided before we finished talking.\nHe was acting before we finished thinking.\n\nThe second week I put bread in front of him.\n\nHe looked up.\n\n**\"You don't eat in the morning. *\n\n**\"How do you know? *\n\n**\"The earth knows when someone is empty. *\n\nHe looked at the bread.\nThen me.\nThen the bread.\n\nHe ate without saying anything.\n\nThe next day there was wood in front of my room.\n\nFor the nightlight.\n\nHe didn't tell me why.\n\nThat was his way of saying thank you.\n\nWe learned to talk like that.\nNo words.\nBy gestures.\n\nNot that different from my brother.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Continue.",
+          "vers": "taera_entrainement"
+        }
+      ],
+      "x": 180,
+      "y": 780
+    },
+    "taera_entrainement": {
+      "id": "taera_entrainement",
+      "title": "Training",
+      "location": "Temple of the Order — Garden",
+      "narrator": "",
+      "text": "The Earth's spirit was called Mael.\n\nOld.\nVery old.\nShe smelled of humus and wet stone.\n\nShe taught me when I did.\n\nNot by talking.\n\nWe were planting together.\nWe were digging together.\nWe were lifting together.\n\nOne day she dropped a huge rock.\n\n**\"Relevant. *\n\nI raised it.\n\n**« Higher. *\n\n**\"I can't. *\n\nYou didn't try. *\n\nI tried.\n\nI raised it higher.\n\n**\" Again. *\n\n**\"I will fall—\"**\n\n**\"Then fall. *\n\nI fell.\n\n**\"Good.** she said.\n**\"Now you know how far you can go. *\n\nThe land had cushioned my fall.\n\nSure.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "She was talking to you about the others?",
+          "vers": "taera_mael_autres"
+        },
+        {
+          "text": "Continue.",
+          "vers": "taera_pret_a_tout"
+        }
+      ],
+      "x": 60,
+      "y": 900
+    },
+    "taera_mael_autres": {
+      "id": "taera_mael_autres",
+      "title": "Mael and Others",
+      "location": "Temple of the Order — Garden",
+      "narrator": "",
+      "text": "Sometimes.\n\nShe spoke of them as elements.\n\n**\"The fire is impatient. *\n**\"Water is patient. *\n**\"The air is elusive. *\n\n**\"What about the earth? *\n\n**\"The earth is present. *\n\n**\"That's it? *\n\n**\"That's a lot. *\n\nShe planted a seed.\n\n**\"Be present. *\n**\"Completely there. *\n**\"Not in yesterday. *\n**\"Not tomorrow. *\n**\"There. *\n\n**\"This is your role in this group. *\n\n**\"To be there? *\n\n**\"To be there when others can no longer be there. *\n\nI didn't get it at the moment.\n\nNow I understand perfectly.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Continue.",
+          "vers": "taera_pret_a_tout",
+          "effects": [
+            {
+              "stat": "compassion",
+              "val": 10
+            }
+          ]
+        }
+      ],
+      "x": 180,
+      "y": 900
+    },
+    "taera_pret_a_tout": {
+      "id": "taera_pret_a_tout",
+      "title": "Ready for All",
+      "location": "Temple of the Order — Common Hall",
+      "narrator": "",
+      "text": "It was our third year.\n\nMael had brought us together.\n\nShe said:\n\n**\"The Chaos bearer will come. *\n**\"You will have to be ready for everything. *\n\nIkar said yes without hesitation.\n\nAryn looked at his hands.\n\nVael pretended to look elsewhere.\n\nI said:\n\n**\"No. *\n\nEveryone turned around.\n\nMael looked at me.\n\n**\"No what? *\n\n**\"No, I won't be ready for anything. *\n**\"There is always another way. *\n**\"We're looking for it long enough or we're not looking enough. *\n\nQuiet.\n\nMael had no head.\n\n**\"Good. *\n\nIkar said:\n\n**\"Well how? *\n\nShe didn't answer.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Why did you say no?",
+          "vers": "taera_pourquoi_non"
+        },
+        {
+          "text": "Ikar after that.",
+          "vers": "taera_ikar_apres"
+        },
+        {
+          "text": "Continue.",
+          "vers": "taera_annees"
+        }
+      ],
+      "x": 60,
+      "y": 1020
+    },
+    "taera_pourquoi_non": {
+      "id": "taera_pourquoi_non",
+      "title": "Why No",
+      "location": "Temple of the Order",
+      "narrator": "",
+      "text": "Because the earth does not destroy what it can feed.\n\nIt's her nature.\n\nIt can crush.\nShe can bury.\nShe can block.\n\nBut she's not burning.\nShe doesn't cut.\nShe doesn't kill if she can do otherwise.\n\nI'm the carrier of the Earth.\n\nMy nature is to find another way.\n\nEven if it takes longer.\nEven if it's harder.\nEven if everyone thinks it's impossible.\n\nThe seed in the stone.\n\nEveryone thinks it's impossible.\n\nThe seed knows it's not.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Continue.",
+          "vers": "taera_annees",
+          "effects": [
+            {
+              "stat": "fermete",
+              "val": 15
+            }
+          ]
+        }
+      ],
+      "x": 180,
+      "y": 1020
+    },
+    "taera_ikar_apres": {
+      "id": "taera_ikar_apres",
+      "title": "Ikar After",
+      "location": "Temple of the Order — Corridor",
+      "narrator": "",
+      "text": "He caught me in the hallway.\n\nYou're naive. *\n\n**\"Perhaps. *\n\n**\"There is not always another way. *\n\n**\"I think so. *\n\n**\"What if you're wrong? *\n\nI turned around.\n\n**\"Then I will be the first to admit it. *\n**\"And you will do what you have to do. *\n\nHe didn't say anything.\n\n**\"That's why we're many. \"** I added.\n**\"You can do what I can't. *\n**\"And I can try what you forbid. *\n\nHe had no head.\n\nI don't agree.\n\nBut he understood.\n\nThat was enough for me.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Continue.",
+          "vers": "taera_annees",
+          "effects": [
+            {
+              "stat": "fermete",
+              "val": 10
+            }
+          ]
+        }
+      ],
+      "x": 300,
+      "y": 1020
+    },
+    "taera_annees": {
+      "id": "taera_annees",
+      "title": "Years",
+      "location": "Temple of the Order",
+      "narrator": "Ten years. Eleven, twelve. Thirteen.",
+      "text": "We were growing up.\n\nMy garden in the Temple was growing too.\n\nI had set up a yard.\n\nNobody asked me.\nI did.\n\nIkar used to come there sometimes.\nHe was sitting.\nHe said nothing.\n\nAryn came there when she was thinking too much.\nWater and earth got along.\n\nVael never really came.\nBut sometimes in the morning I found little flowers\nthat the wind had brought.\n\nThat the wind had brought.\n\nSure.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "The garden and the others.",
+          "vers": "taera_jardin_autres"
+        },
+        {
+          "text": "Mael was getting older.",
+          "vers": "taera_mael_vieille"
+        },
+        {
+          "text": "Continue.",
+          "vers": "taera_veille"
+        }
+      ],
+      "x": 60,
+      "y": 1140
+    },
+    "taera_jardin_autres": {
+      "id": "taera_jardin_autres",
+      "title": "The Garden of the Four",
+      "location": "Temple of the Order — Garden",
+      "narrator": "",
+      "text": "The garden had become their way of being there\nwithout having to talk.\n\nIkar came when he was angry.\nThe earth was absorbing it.\n\nAryn came when she doubted.\nThe plants had no doubt.\n\nVael was coming... I wasn't sure why.\n\nOne night I asked her.\n\n**\"Why are you coming here? *\n\n**\"Your garden smells good. *\n\n**\"That's it? *\n\nHe looked at the plants.\n\n**\"Here everything grows. *\n**\"Even fragile stuff. *\n\nHe was gone.\n\nI got it.\n\nVael felt fragile sometimes.\n\nAnd in my garden it was allowed.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Continue.",
+          "vers": "taera_veille",
+          "effects": [
+            {
+              "stat": "compassion",
+              "val": 10
+            }
+          ]
+        }
+      ],
+      "x": 180,
+      "y": 1140
+    },
+    "taera_mael_vieille": {
+      "id": "taera_mael_vieille",
+      "title": "Mael",
+      "location": "Temple of the Order — Garden",
+      "narrator": "",
+      "text": "Spirits don't really get old.\n\nBut Mael became rarer.\n\nLess present.\n\nLike she's keeping her strength.\n\nOne night she stayed in the garden for a long time.\n\nYou're leaving? I asked.\n\n**\" Soon. *\n\n**\"After him? *\n\nShe knew who I meant.\n\n**\"Perhaps. *\n\n**\"What if we can't? *\n\nShe had laid her hand on the earth.\n\n**\"The earth remains. *\n**\"After all. *\n**\"Always. *\n\n**\"Is that supposed to reassure me? *\n\n**\"It's supposed to give you perspective. *\n\nShe was missing.\n\nI planted a seed where his hand had been.\n\nShe gave a flower.\nStill now.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Continue.",
+          "vers": "taera_veille",
+          "effects": [
+            {
+              "stat": "compassion",
+              "val": 5
+            }
+          ]
+        }
+      ],
+      "x": 300,
+      "y": 1140
+    },
+    "taera_veille": {
+      "id": "taera_veille",
+      "title": "The Signal",
+      "location": "Temple of the Order — Garden — Night",
+      "narrator": "",
+      "text": "I felt it in the earth.\n\nNot brutally.\n\nLike a distant vibration.\n\nThe ground that trembles slightly.\nNot an earthquake.\n\nThe signing of a huge power\nsomewhere west.\n\nI was in the garden.\nI had just planted the autumn seeds.\n\nMy hands were in the earth.\n\nAnd the earth said to me:\n\nNow. *\n\nI got up.\n\nI washed my hands.\n\nI took my purse around my neck.\n\nMy father's land.\nMy brother's stone.\n\nAnd I went to wake the others.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Wake up Ikar.",
+          "vers": "taera_reveille_ikar"
+        },
+        {
+          "text": "Wake up Aryn.",
+          "vers": "taera_reveille_aryn"
+        },
+        {
+          "text": "Continue.",
+          "vers": "taera_depart"
+        }
+      ],
+      "x": 60,
+      "y": 1260
+    },
+    "taera_reveille_ikar": {
+      "id": "taera_reveille_ikar",
+      "title": "Wake up Ikar",
+      "location": "Temple of the Order — Corridor",
+      "narrator": "",
+      "text": "He was already up.\n\nSure.\n\nThe fire had warned him before me.\n\nHe was buttoning his armor.\n\n*\"You felt too. *\n\n**\"Yes. *\n\n**\"Ikar. *\n\n**\"What. *\n\n**\"We try first. *\n\nHe looked up.\n\n**\"That's what you always say. *\n\n**\"And I will say it again tonight. *\n\nHe seemed to mean something.\n\nHe closed his armor.\n\n**\"I know. *\n\nIt was the first time he said \"I know\"\nWithout questioning.\n\nThe earth shook under my feet.\n\nSlightly.\n\nA good sign.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Continue.",
+          "vers": "taera_depart",
+          "effects": [
+            {
+              "stat": "fermete",
+              "val": 10
+            }
+          ]
+        }
+      ],
+      "x": 180,
+      "y": 1260
+    },
+    "taera_reveille_aryn": {
+      "id": "taera_reveille_aryn",
+      "title": "Wake up Aryn",
+      "location": "Temple of the Order — Corridor",
+      "narrator": "",
+      "text": "His light was on.\n\nShe was looking at her pelvis.\n\n*\"You felt. *\n\n**\"Yes.** she said.\n**\"He is alone. *\n\n**\"You know how? *\n\n**\"Water knows. *\n\nShe looked up.\n\n**\"Taera. *\n\n**\"Yes. *\n\n**\"He's scared. *\n\n**\"I know. *\n\n** \"Ikar will\"**\n\n**\"I talked to him. *\n\nShe looked at her pool again.\n\n**\"We have time to save him? *\n\nThe earth under my feet.\nAlways that vibration.\n\n**\"I think so. *\n\n**\"You think or you know? *\n\n**\"I think so. *\n\nShe shook her head.\n\nThat was enough for Aryn.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Continue.",
+          "vers": "taera_depart",
+          "effects": [
+            {
+              "stat": "compassion",
+              "val": 10
+            }
+          ]
+        }
+      ],
+      "x": 300,
+      "y": 1260
+    },
+    "taera_depart": {
+      "id": "taera_depart",
+      "title": "Departure",
+      "location": "Temple of the Order — Court",
+      "narrator": "",
+      "text": "Four silhouettes in the courtyard.\n\nIt was still dark.\n\nVael whistled.\n\n**\"Stop.** said Ikar.\n\n**\"Why? \"** said Vael.\n\n**\"Because. *\n\n**\"Argument solid. *\n\nI put my hand on the court floor.\n\nThe land of the Temple.\n\nCold.\nOld.\nFull of what had happened before us.\n\nAll generations that had left\nBefore us.\n\nSome had not returned.\n\n**\"We're going.** said Ikar.\n\nI put up my purse.\n\nMy father's land.\nMy brother's stone.\n\nAnd we're gone.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Continue.",
+          "vers": "taera_route"
+        }
+      ],
+      "x": 60,
+      "y": 1380
+    },
+    "taera_route": {
+      "id": "taera_route",
+      "title": "The Road",
+      "location": "Aerith Road — Dawn",
+      "narrator": "",
+      "text": "Land under horses' hoofs.\n\nEvery village we went through.\n\nI felt it changed.\n\nFertile by the rivers.\nDry on the trays.\nHeavy around old forests.\n\nAnd the closer we got —\n\nThe stronger the vibration.\n\nNot aggressive.\n\nWounded.\n\nLike a tree we cut too much.\nStill looking to grow\nBut in any direction.\n\n**\"You okay?** asked Vael.\n\n**\"He doesn't look mean. *\n\n**\"How do you know? *\n\n**\"The earth says when someone wants to hurt. *\n**\"This is different. *\n**\"It is someone who wants to help. *\n**\"And who doesn't know how. *\n\nVael looked at the road ahead.\n\n**\"It's worse in a sense. *\n\n**\"Yes. \"** I said.\n**\"That's why we're not gonna stop him. *\n**\"We'll help him. *",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Continue.",
+          "vers": "taera_fumee"
+        }
+      ],
+      "x": 60,
+      "y": 1500
+    },
+    "taera_fumee": {
+      "id": "taera_fumee",
+      "title": "Smoke",
+      "location": "Aerith Road — Crest",
+      "narrator": "",
+      "text": "We saw the smoke.\n\nI put my hand on the floor from my horse.\n\nHard.\nBut possible.\n\nThe vibration was there.\nStrong.\nPainful.\n\nBut below —\n\nSomething sweeter.\n\nShame maybe.\nPain.\n\nNot violence.\n\n**\"He's still here.** said Aryn.\n\n**\"He is alive. * I confirmed.\n\nIkar looked at the smoke.\n\nLong time.\n\n**\"We're going.** he said.\n\nI put up my scholarship one last time.\n\nMy father's land.\n*The earth gives to those who give it. *\n\nMy brother's stone.\nTo see if it was dangerous. *\n\nIt wasn't dangerous.\n\nIt was painful.\n\nIt's different.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "One last thought.",
+          "vers": "taera_derniere_pensee"
+        },
+        {
+          "text": "Go back to the main story.",
+          "vers": "fin_memoire_taera"
+        }
+      ],
+      "x": 60,
+      "y": 1620
+    },
+    "taera_derniere_pensee": {
+      "id": "taera_derniere_pensee",
+      "title": "What she wore",
+      "location": "Aerith Road",
+      "narrator": "",
+      "text": "The purse around the neck.\n\nMy father's land.\nMy brother's stone.\nThe dried flower of the garden of Mael.\n\nAnd something I put in it\nI didn't really decide.\n\nA seed.\n\nI didn't know what kind.\n\nI picked her up in the Temple Garden.\nthe morning of departure.\n\nJust a seed.\n\nTo remind me that even in places\nwho have lost everything —\n\nSomething can still grow.\n\nIf anyone takes the time to plant.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Go back to the main story.",
+          "vers": "fin_memoire_taera",
+          "effects": [
+            {
+              "stat": "compassion",
+              "val": 10
+            }
+          ]
+        }
+      ],
+      "x": 180,
+      "y": 1620
+    },
+    "fin_memoire_taera": {
+      "id": "fin_memoire_taera",
+      "title": "End — Memory of Taera",
+      "location": "",
+      "narrator": "",
+      "text": "The memory slowly arises.\n\nLike earth after rain.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Go back to the main story.",
+          "vers": "portail_taera",
+          "story": "stories/fr/cinq_lames_prologue.json"
+        }
+      ],
+      "x": 60,
+      "y": 1740
+    }
+  },
+  "lang": "en"
+}
