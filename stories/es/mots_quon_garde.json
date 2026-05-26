@@ -1,0 +1,438 @@
+{
+  "name": "Las palabras que guardamos",
+  "kids": true,
+  "askPlayerName": true,
+  "pack": "kids",
+  "stats": [
+    {
+      "id": "courage",
+      "label": "Valor",
+      "start": 10,
+      "max": 100,
+      "color": "#f94144"
+    },
+    {
+      "id": "empathie",
+      "label": "Empatía",
+      "start": 10,
+      "max": 100,
+      "color": "#f9c74f"
+    },
+    {
+      "id": "amitie",
+      "label": "Amistad",
+      "start": 50,
+      "max": 100,
+      "color": "#90be6d"
+    }
+  ],
+  "theme": {},
+  "scenes": {
+    "cour_recre": {
+      "id": "cour_recre",
+      "title": "El Cour de Récré",
+      "location": "Escuela - Tribunal de Recreación",
+      "narrator": "",
+      "text": "Es recreación.\n\nEstás con tu mejor amigo Tom.\nY otros tres camaradas.\n\nTom está tratando de dibujar una foto en su cuaderno.\n\nNo es muy bueno dibujando.\nLo sabe.\nPero sigue intentando.\n\nLos otros están mirando.\n\nQuieres hacer que todos se rían.\n\nAsí que dices algo.\n\n\"Haha, parece un tipo con piernas.\n\nLos otros se ríen.\n\nTom no se ríe.\n\nEstá cerrando su cuaderno.",
+      "isStart": true,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Sigue riéndote con los otros.",
+          "vers": "regard_tom",
+          "effects": [
+            {
+              "stat": "amitie",
+              "val": -10
+            }
+          ]
+        },
+        {
+          "text": "No era genial.",
+          "vers": "regard_tom",
+          "effects": [
+            {
+              "stat": "empathie",
+              "val": 10
+            }
+          ]
+        }
+      ],
+      "x": 60,
+      "y": 60
+    },
+    "regard_tom": {
+      "id": "regard_tom",
+      "title": "El ojo de Tom",
+      "location": "Escuela - Tribunal de Recreación",
+      "narrator": "",
+      "text": "Tom te está mirando.\n\nUn segundo.\n\nNo estoy enfadado.\n\nAlgo peor.\n\nDecepcionado.\n\nPone su cuaderno en su bolsa.\nSe levanta.\nVa a sentarse en otro lugar.\n\nSolo.\n\nLos otros ya se han olvidado.\n\nAikito estaba tumbado bajo el banco.\nEstá levantando su cabeza hacia ti.\n\n¿Viste su cara?",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "\"Sí... no debería haberlo hecho.\"",
+          "vers": "aikito_mots",
+          "effects": [
+            {
+              "stat": "empathie",
+              "val": 15
+            }
+          ]
+        },
+        {
+          "text": "\"Era sólo una broma.\"",
+          "vers": "aikito_mots",
+          "effects": [
+            {
+              "stat": "empathie",
+              "val": 5
+            }
+          ]
+        }
+      ],
+      "x": 60,
+      "y": 180
+    },
+    "aikito_mots": {
+      "id": "aikito_mots",
+      "title": "Lo que Aikito sabe",
+      "location": "Escuela - Banco",
+      "narrator": "",
+      "text": "Aikito se sienta frente a ti.\n\n** \"Las palabras no hacen ruido cuando se dice.\n** \"Pero hacen mucho ruido en la cabeza del que los recibe.\n\nMiras a Tom desde lejos.\n\nSigue dibujando.\nSolo.\nBaja la cabeza.\n\n¿Sigue dibujando? Estás preguntando.\n\nDice Aikito.\n**\"Pero dibuja más que antes. *\n\nTe ves mejor.\n\nCerró su cuaderno de rodillas.\nComo esconderlo.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Ve a hablar con él ahora.",
+          "vers": "aller_parler",
+          "effects": [
+            {
+              "stat": "courage",
+              "val": 15
+            }
+          ]
+        },
+        {
+          "text": "Esperando el final de la recreación.",
+          "vers": "fin_recre",
+          "effects": [
+            {
+              "stat": "courage",
+              "val": 5
+            }
+          ]
+        }
+      ],
+      "x": 60,
+      "y": 300
+    },
+    "aller_parler": {
+      "id": "aller_parler",
+      "title": "Ve con Tom.",
+      "location": "Escuela — Tom's Bench",
+      "narrator": "",
+      "text": "Te acercas a Tom.\n\nEs difícil.\n\nTus pies son más lentos de lo habitual.\n\nTom te está viendo llegar.\nEstá apretando su cuaderno.\n\nSiéntate junto a él.\n\nSilencio.\n\nAikito los mira desde una distancia.\nNo está diciendo nada.\n\nEs tuyo.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "\"Succionó lo que dije.\"",
+          "vers": "vraie_excuse",
+          "effects": [
+            {
+              "stat": "courage",
+              "val": 15
+            },
+            {
+              "stat": "empathie",
+              "val": 10
+            }
+          ]
+        },
+        {
+          "text": "\"¿Estás loco?\"",
+          "vers": "fausse_excuse",
+          "effects": [
+            {
+              "stat": "courage",
+              "val": 10
+            }
+          ]
+        },
+        {
+          "text": "No digas nada y quédate ahí.",
+          "vers": "silence_repare",
+          "effects": [
+            {
+              "stat": "empathie",
+              "val": 15
+            }
+          ]
+        }
+      ],
+      "x": 60,
+      "y": 420
+    },
+    "fin_recre": {
+      "id": "fin_recre",
+      "title": "El anillo",
+      "location": "Escuela - Corredor",
+      "narrator": "",
+      "text": "La campana suena.\n\nTodo el mundo vuelve a clase.\n\nTom pasa sin mirarte.\n\nAikito camina junto a ti.\n\nQuerías esperar el momento adecuado.\n**\"Pero el momento adecuado era antes. *\n\nEn clase, Tom se sienta lejos de ti.\n\nNormalmente estás de lado a lado.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Dale una palabra.",
+          "vers": "mot_papier",
+          "effects": [
+            {
+              "stat": "courage",
+              "val": 10
+            }
+          ]
+        },
+        {
+          "text": "Espera hasta que terminen las clases.",
+          "vers": "trop_tard",
+          "effects": [
+            {
+              "stat": "amitie",
+              "val": -10
+            }
+          ]
+        }
+      ],
+      "x": 180,
+      "y": 300
+    },
+    "mot_papier": {
+      "id": "mot_papier",
+      "title": "La Palabra",
+      "location": "Escuela - Clase",
+      "narrator": "",
+      "text": "Estás rompiendo un pedazo de papel.\n\nEstás pensando mucho tiempo.\n\n¿Qué escribimos en estos casos?\n\nEstás escribiendo:\n\nLo siento. No fue bueno.\n\nLo doblas.\nSe lo pasas a Tom.\n\nLo lee.\nLo leyó de nuevo.\n\nNo está diciendo nada.\n\nPero te está mirando.\nNo como antes.\nAún no.\n\nSolo... te está mirando.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Sonríe a él.",
+          "vers": "apres_cours",
+          "effects": [
+            {
+              "stat": "amitie",
+              "val": 10
+            },
+            {
+              "stat": "courage",
+              "val": 10
+            }
+          ]
+        }
+      ],
+      "x": 300,
+      "y": 300
+    },
+    "vraie_excuse": {
+      "id": "vraie_excuse",
+      "title": "Palabras verdaderas",
+      "location": "Escuela — Tom's Bench",
+      "narrator": "",
+      "text": "Tom te está mirando.\n\n¿Por qué lo dijiste entonces?\n\nEstás pensando.\n\nEn serio.\n\nPara hacer reír a los demás.\nFue estúpido.\n\nTom permanece en silencio.\n\n\"Mi dibujo apestaba de todos modos. * dice.\n\n**\"No.\n\nTom mira hacia arriba.\n\nLo intentaste. * continúa.\nEs diferente.\n\nAikito revuelve la cola detrás de ti.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "\"Muéstrame lo que estabas dibujando.\"",
+          "vers": "dessin_ensemble",
+          "effects": [
+            {
+              "stat": "amitie",
+              "val": 20
+            },
+            {
+              "stat": "empathie",
+              "val": 10
+            }
+          ]
+        }
+      ],
+      "x": 60,
+      "y": 540
+    },
+    "fausse_excuse": {
+      "id": "fausse_excuse",
+      "title": "Totalmente",
+      "location": "Escuela — Tom's Bench",
+      "narrator": "",
+      "text": "Tom levanta sus hombros.\n\nUn poco.\n\nSilencio.\n\nFue sólo por diversión. * dices.\n\nTom se ve lejos.\n\nLo sé.\n\nAikito se acerca lentamente.\n\nTe susurra.\n\n*\"Te disculpaste. *\nPero no le dijiste que estabas equivocado.\nNo es lo mismo.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "\"De hecho... Realmente no debería haberlo hecho. »",
+          "vers": "vraie_excuse",
+          "effects": [
+            {
+              "stat": "courage",
+              "val": 15
+            },
+            {
+              "stat": "empathie",
+              "val": 15
+            }
+          ]
+        }
+      ],
+      "x": 180,
+      "y": 420
+    },
+    "silence_repare": {
+      "id": "silence_repare",
+      "title": "Justo ahí.",
+      "location": "Escuela — Tom's Bench",
+      "narrator": "",
+      "text": "Siéntate junto a él.\n\nSin decir nada.\n\nTom dibuja.\n\nDespués de un tiempo,\nEstá girando el cuaderno hacia ti.\n\nEs un perro.\n\nNo es perfecto.\nPero admitimos que es un perro.\n\n¿Es Aikito? Estás preguntando.\n\nLo intentaba. Dice Tom.\n\nAikito se acerca.\nEstá mirando el dibujo.\nEstá sacudiendo su cola.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "\"Es tu dibujo.\"",
+          "vers": "dessin_ensemble",
+          "effects": [
+            {
+              "stat": "amitie",
+              "val": 15
+            },
+            {
+              "stat": "empathie",
+              "val": 10
+            }
+          ]
+        }
+      ],
+      "x": 180,
+      "y": 540
+    },
+    "dessin_ensemble": {
+      "id": "dessin_ensemble",
+      "title": "El nuevo dibujo",
+      "location": "Escuela - Banco",
+      "narrator": "",
+      "text": "Tom abre su cuaderno.\n\nTe muestra la página.\n\nHay muchos dibujos.\n\nCasas.\nAnimales.\nGente con cabeza redonda.\n\nEstoy tratando de aprender. * dice.\nEs duro.\n\n**\"Puedes seguir aprendiendo. * dices.\n** \"Aunque no es perfecto.\n\nTom está pensando.\n\n*\"Sólo dibuja conmigo. *\nEres peor que yo.\n\nSonríe.\n\nRealmente esta vez.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Toma un lápiz.",
+          "vers": "fin_repare",
+          "effects": [
+            {
+              "stat": "amitie",
+              "val": 20
+            },
+            {
+              "stat": "bonheur",
+              "val": 20
+            }
+          ]
+        }
+      ],
+      "x": 60,
+      "y": 660
+    },
+    "apres_cours": {
+      "id": "apres_cours",
+      "title": "Después de los cursos",
+      "location": "Escuela - Salida",
+      "narrator": "",
+      "text": "Al salir, Tom te está esperando.\n\nUn poco atrás.\n\nTe está devolviendo el papel.\n\nPodrías haberlo dicho.\n\nLo sé.\nNo me atreví.\n\nTom mira sus zapatos.\n\n**\"Mi dibujo era realmente un bloque con piernas?\n\nDudas.\n\nUn poco.\n\nSe ríe.\n\nNo mucho.\nPero de verdad.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Vuelvan juntos.",
+          "vers": "fin_lente",
+          "effects": [
+            {
+              "stat": "amitie",
+              "val": 15
+            }
+          ]
+        }
+      ],
+      "x": 300,
+      "y": 420
+    },
+    "trop_tard": {
+      "id": "trop_tard",
+      "title": "El fin de los cursos",
+      "location": "Escuela - Salida",
+      "narrator": "",
+      "text": "Al salir, Tom ya se ha ido.\n\nLo estás buscando.\n\nAikito está a tu lado.\n\nSe fue directo a casa.\n\nQuédate en la acera.\n\nHablaré con él mañana. Eso crees.\n\nAikito te está mirando.\n\n**Las palabras que decimos permanecen por mucho tiempo.\n**\"Disculpas también. *\n**\"Pero reparan menos bien al día siguiente. *",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Envíale un mensaje esta noche.",
+          "vers": "fin_demain"
+        }
+      ],
+      "x": 300,
+      "y": 420
+    },
+    "fin_repare": {
+      "id": "fin_repare",
+      "title": "Fin — Palabras Esa reparación",
+      "location": "",
+      "narrator": "",
+      "text": "Ambos están dibujando.\n\nRealmente no es hermoso.\n\nAikito pone su cabeza en el cuaderno.\n\nTom dibuja Aikito con un halo.\n\nTú dibujas a Tom con un lápiz gigante.\n\nEstás bromeando.\n\nEn serio.\n\nAikito te mira.\n\n**«Las palabras pueden doler.\n**\"Pero las buenas palabras también pueden arreglar. *\n# Encontrar los correctos. #\n\nTom dejó el cuaderno.\n\n¿Mañana continuamos?\n\nSí.",
+      "isStart": false,
+      "isEnd": true,
+      "transition": "fade",
+      "choices": [],
+      "x": 60,
+      "y": 780
+    },
+    "fin_lente": {
+      "id": "fin_lente",
+      "title": "Final — Casi como antes",
+      "location": "",
+      "narrator": "",
+      "text": "Te vas a casa juntos.\n\nNo hablas mucho.\n\nPero caminas de lado a lado.\n\nAikito trottine entre usted.\n\n¿Está arreglado? Pregúntale a Aikito ahí abajo.\n\nCasi.\nLas palabras deja rastros.\n** \"Pero los rastros se desvanecen con el tiempo.\n\nCon el tiempo... Es mucho tiempo.\n\nDice Aikito.\nPor eso es mejor que pienses antes.",
+      "isStart": false,
+      "isEnd": true,
+      "transition": "fade",
+      "choices": [],
+      "x": 180,
+      "y": 780
+    },
+    "fin_demain": {
+      "id": "fin_demain",
+      "title": "Final — El mensaje de la noche",
+      "location": "",
+      "narrator": "",
+      "text": "Por la noche, le envías un mensaje.\n\nSiento lo de esta mañana. Succionó.\n\nEspera.\n\nMucho tiempo.\n\nLuego aparecen tres puntos pequeños.\n\n- Vale.\n\nSólo *Ok. *\n\nAikito está a tu lado.\n\nEs bueno que lo hicieras.\n\n**\"Pero él respondió Ok...\"\n\nDice Aikito.\n**\"Las disculpas de la noche hacen menos bien.\nMañana, habla con él.",
+      "isStart": false,
+      "isEnd": true,
+      "transition": "fade",
+      "choices": [],
+      "x": 300,
+      "y": 780
+    }
+  },
+  "lang": "es"
+}
