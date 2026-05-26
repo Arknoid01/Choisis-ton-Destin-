@@ -1574,11 +1574,20 @@ function getStoredPin() {
 function handleKidsToggle(checkbox) {
   if (!checkbox.checked) {
     // Tentative de désactiver → demander PIN
-    checkbox.checked = true; // remettre en attendant validation
+    checkbox.checked = true;
     openPinPopup('verify');
   } else {
-    saveOptions();
-    if (typeof renderGameList === 'function') renderGameList();
+    // Activer — vérifier si un PIN a déjà été défini
+    const pinAlreadySet = localStorage.getItem('sf_parent_pin') !== null;
+    if (!pinAlreadySet) {
+      // Premier lancement — demander de créer un PIN
+      checkbox.checked = false; // en attendant la création
+      openPinPopup('create_new');
+    } else {
+      // PIN déjà défini — activer directement
+      saveOptions();
+      if (typeof renderGameList === 'function') renderGameList();
+    }
   }
 }
 
@@ -1591,12 +1600,14 @@ function openPinPopup(mode) {
   const titles = {
     verify     : 'Code Parental',
     change_old : 'Changer le code',
-    change_new : 'Nouveau code'
+    change_new : 'Nouveau code',
+    create_new : 'Créer un code PIN'
   };
   const questions = {
     verify     : 'Entre le code à 4 chiffres pour désactiver le mode enfant.',
     change_old : 'Entre ton code actuel.',
-    change_new : 'Choisis un nouveau code à 4 chiffres.'
+    change_new : 'Choisis un nouveau code à 4 chiffres.',
+    create_new : 'Choisis un code à 4 chiffres.\nTu en auras besoin pour désactiver le mode enfant.'
   };
   document.getElementById('pin-title').textContent    = titles[mode];
   document.getElementById('pin-question').textContent = questions[mode];
@@ -1606,7 +1617,11 @@ function openPinPopup(mode) {
 function cancelPin() {
   document.getElementById('pin-overlay').style.display = 'none';
   if (_pinMode === 'verify') {
+    // Remettre la checkbox à true si annulation de la désactivation
     document.getElementById('opt-kids').checked = true;
+  } else if (_pinMode === 'create_new') {
+    // Annuler la création → décocher le mode enfant
+    document.getElementById('opt-kids').checked = false;
   }
 }
 
@@ -1643,6 +1658,22 @@ function submitPin() {
       err.textContent = 'Code incorrect'; err.style.display = 'block';
       document.getElementById('pin-input').value = '';
     }
+  } else if (_pinMode === 'create_new') {
+    // Première création — sauvegarder et activer
+    localStorage.setItem('sf_parent_pin', _sha256sync(input));
+    document.getElementById('pin-overlay').style.display = 'none';
+    document.getElementById('opt-kids').checked = true;
+    saveOptions();
+    if (typeof renderGameList === 'function') renderGameList();
+    // Confirmation
+    const msg = document.createElement('div');
+    msg.style.cssText = `position:fixed;bottom:80px;left:50%;transform:translateX(-50%);
+      background:#13110e;border:1px solid rgba(109,250,188,0.4);border-radius:10px;
+      padding:10px 20px;font-family:'DM Mono',monospace;font-size:11px;
+      color:#6dfabc;z-index:999;white-space:nowrap`;
+    msg.textContent = '✓ Mode enfant activé !';
+    document.body.appendChild(msg);
+    setTimeout(() => msg.remove(), 2500);
   } else if (_pinMode === 'change_old') {
     if (_sha256sync(input) === getStoredPin()) {
       openPinPopup('change_new');
