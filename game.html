@@ -1206,8 +1206,13 @@ async function loadExternalStory(storyFile, startScene) {
     currentId = null;
 
     // Mettre à jour le titre
-    document.getElementById('story-title').textContent = story.name || '';
+    const titleEl = document.getElementById('story-title');
+    if (titleEl) titleEl.textContent = story.name || '';
     document.title = story.name || 'Fableris';
+
+    // Mettre à jour le titre dans le drawer aussi
+    const drawerTitle = document.getElementById('drawer-game-title');
+    if (drawerTitle) drawerTitle.textContent = story.name || '';
 
     // Réinitialiser les stats dans le drawer
     renderStatBadges();
@@ -1271,7 +1276,6 @@ function renderScene(scene) {
         ? `pickChoice('${c.vers}', ${i}, this, '${c.story}')`
         : `pickChoice('${c.vers}', ${i}, this)`}"
       ${locked || statLocked ? 'disabled' : ''}>
-      <span class="choice-index">— ${String(i+1).padStart(2,'0')}</span>
       ${c.story ? `<span style="float:right;font-size:10px;opacity:0.5">🔗</span>` : ''}
       ${escHtml(c.text)}
       ${statLocked ? `<span style="display:block;font-size:10px;color:var(--text3);margin-top:5px;font-family:'DM Mono',monospace;letter-spacing:0.5px">
