@@ -32,8 +32,24 @@
       "transition": "fade",
       "choices": [
         {
-          "text": "Continuer.",
-          "vers": "aryn_enfance"
+          "text": "L'eau t'a toujours parlé.",
+          "vers": "aryn_eau_enfance_a",
+          "effects": [
+            {
+              "stat": "conviction",
+              "val": 5
+            }
+          ]
+        },
+        {
+          "text": "Tu as appris à l'écouter.",
+          "vers": "aryn_eau_enfance_b",
+          "effects": [
+            {
+              "stat": "doute",
+              "val": 5
+            }
+          ]
         }
       ],
       "x": 60,
@@ -134,8 +150,29 @@
       "transition": "fade",
       "choices": [
         {
-          "text": "Continuer.",
-          "vers": "aryn_recrutement"
+          "text": "Tu l'avais vue en rêve.",
+          "vers": "aryn_femme_reve",
+          "effects": [
+            {
+              "stat": "conviction",
+              "val": 10
+            }
+          ]
+        },
+        {
+          "text": "Elle t'a fait peur.",
+          "vers": "aryn_femme_peur",
+          "effects": [
+            {
+              "stat": "doute",
+              "val": 10
+            }
+          ]
+        },
+        {
+          "text": "Tu n'as rien ressenti.",
+          "vers": "aryn_recrutement",
+          "effects": []
         }
       ],
       "x": 60,
@@ -320,14 +357,28 @@
       "transition": "fade",
       "choices": [
         {
-          "text": "Continuer.",
-          "vers": "aryn_veille",
+          "text": "Un doute sur les esprits.",
+          "vers": "aryn_doute_esprits",
           "effects": [
             {
-              "stat": "conviction",
+              "stat": "doute",
+              "val": 10
+            }
+          ]
+        },
+        {
+          "text": "Un doute sur toi-même.",
+          "vers": "aryn_doute_soi",
+          "effects": [
+            {
+              "stat": "doute",
               "val": 15
             }
           ]
+        },
+        {
+          "text": "Continuer.",
+          "vers": "aryn_veille"
         }
       ],
       "x": 180,
@@ -371,6 +422,36 @@
       "isEnd": false,
       "transition": "fade",
       "choices": [
+        {
+          "text": "Tu regardes Ikar.",
+          "vers": "aryn_depart_ikar",
+          "effects": [
+            {
+              "stat": "conviction",
+              "val": 5
+            }
+          ]
+        },
+        {
+          "text": "Tu regardes Taera.",
+          "vers": "aryn_depart_taera",
+          "effects": [
+            {
+              "stat": "conviction",
+              "val": 5
+            }
+          ]
+        },
+        {
+          "text": "Tu regardes Vael.",
+          "vers": "aryn_depart_vael",
+          "effects": [
+            {
+              "stat": "doute",
+              "val": 5
+            }
+          ]
+        },
         {
           "text": "Continuer.",
           "vers": "aryn_route"
@@ -417,6 +498,26 @@
       "isEnd": false,
       "transition": "fade",
       "choices": [
+        {
+          "text": "Tu penses à lui — pas au Chaos. À lui.",
+          "vers": "aryn_fumee_lui",
+          "effects": [
+            {
+              "stat": "conviction",
+              "val": 15
+            }
+          ]
+        },
+        {
+          "text": "Tu penses à Cendral.",
+          "vers": "aryn_fumee_cendral",
+          "effects": [
+            {
+              "stat": "doute",
+              "val": 5
+            }
+          ]
+        },
         {
           "text": "Retourner à l'histoire principale.",
           "vers": "fin_memoire_aryn"
@@ -611,6 +712,240 @@
       ],
       "x": 180,
       "y": 1620
+    },
+    "aryn_eau_enfance_a": {
+      "id": "aryn_eau_enfance_a",
+      "title": "Elle a Toujours Parlé",
+      "location": "Village côtier",
+      "narrator": "",
+      "text": "Pas avec des mots.\n\nAvec des sensations.\n\nQuand l'orage approchait, je le savais avant tout le monde.\nPas parce que je regardais le ciel.\nParce que l'eau dans le puits changeait de goût.\n\nMa mère pensait que j'inventais.\n\nMon père ne disait rien.\n\nLes pêcheurs savent que la mer sait des choses.\n\nIls préfèrent ne pas en parler.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Continuer.",
+          "vers": "aryn_enfance"
+        }
+      ],
+      "x": 180,
+      "y": 60
+    },
+    "aryn_eau_enfance_b": {
+      "id": "aryn_eau_enfance_b",
+      "title": "Apprendre à Écouter",
+      "location": "Village côtier",
+      "narrator": "",
+      "text": "Au début je n'entendais rien.\n\nJuste de l'eau.\nDu bruit.\nDu mouvement.\n\nC'est en restant immobile que ça a commencé.\n\nPas bouger.\nPas penser.\nJuste être là.\n\nL'eau parle aux gens qui attendent.\n\nC'est la première leçon.\nAvant même Lyra.\nAvant l'Ordre.\n\nLa mer me l'a apprise seule.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Continuer.",
+          "vers": "aryn_enfance"
+        }
+      ],
+      "x": 300,
+      "y": 60
+    },
+    "aryn_femme_reve": {
+      "id": "aryn_femme_reve",
+      "title": "Le Rêve",
+      "location": "Village côtier — Nuit",
+      "narrator": "",
+      "text": "Je l'avais vue.\n\nPas clairement.\nMais une silhouette bleue.\nSur le quai.\n\nLa nuit avant son arrivée.\n\nLa mer m'avait montrée quelqu'un qui venait.\n\nQuand elle est apparue sur la place ce matin-là,\nj'ai reconnu la couleur avant le visage.\n\n**« Tu m'attendais. »** elle a dit.\n\n**« Oui. »**\n\nElle a eu l'air surprise.\n\nPeut-être que les autres ne s'y attendaient pas.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Continuer.",
+          "vers": "aryn_recrutement",
+          "effects": [
+            {
+              "stat": "conviction",
+              "val": 5
+            }
+          ]
+        }
+      ],
+      "x": 180,
+      "y": 540
+    },
+    "aryn_femme_peur": {
+      "id": "aryn_femme_peur",
+      "title": "La Peur",
+      "location": "Village côtier — Place",
+      "narrator": "",
+      "text": "Elle savait.\n\nPour l'eau dans mes mains.\nPour les rêves.\nPour tout ce que j'avais gardé secret.\n\nElle savait tout ça en me regardant.\n\nC'était terrifiant.\n\nPas parce qu'elle était menaçante.\n\nParce que ça voulait dire que je n'avais jamais été vraiment seule.\nQue quelqu'un regardait.\nDepuis combien de temps ?\n\nJ'aurais voulu courir.\n\nMais l'eau dans le puits du village s'était mise à tourbillonner doucement.\n\nComme pour dire :\nreste.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Continuer.",
+          "vers": "aryn_recrutement",
+          "effects": [
+            {
+              "stat": "doute",
+              "val": 5
+            }
+          ]
+        }
+      ],
+      "x": 300,
+      "y": 540
+    },
+    "aryn_doute_esprits": {
+      "id": "aryn_doute_esprits",
+      "title": "Douter des Esprits",
+      "location": "Temple de l'Ordre",
+      "narrator": "",
+      "text": "Les esprits nous guidaient.\n\nMais ils avaient aussi échoué.\n\nCaël.\n\nIls l'avaient suivi. Formé les quatre sages.\nEt les quatre sages étaient morts.\n\nCaël avait quand même failli tout détruire.\n\nComment faire confiance à des esprits\nqui avaient déjà commis cette erreur ?\n\nLyra le savait.\n\n**« Tu doutes de nous. »** elle m'avait dit une fois.\n\n**« Oui. »**\n\n**« Bien. »** avait-elle répondu.\n**« Le jour où tu cesseras de douter de nous... »**\n**« ...c'est que tu auras cessé de penser. »**\n\nC'était la première fois que je l'aimais vraiment.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Continuer.",
+          "vers": "aryn_veille",
+          "effects": [
+            {
+              "stat": "conviction",
+              "val": 10
+            }
+          ]
+        }
+      ],
+      "x": 180,
+      "y": 1260
+    },
+    "aryn_doute_soi": {
+      "id": "aryn_doute_soi",
+      "title": "Douter de Soi",
+      "location": "Temple de l'Ordre — Nuit",
+      "narrator": "",
+      "text": "Et si j'avais tort ?\n\nEt si l'autre voie n'existait pas ?\n\nEt si Ikar avait raison depuis le début ?\n\n*Prêt à tout.*\n\nPeut-être que ça voulait dire exactement ce que ça voulait dire.\nPas de métaphore.\nPas d'interprétation.\n\nTuer le Chaos avant qu'il tue tout le reste.\n\nLes nuits où ce doute arrivait,\nje plongeais mes mains dans la bassine.\n\nL'eau restait froide.\nImmobile.\n\nL'eau ne me donnait pas la réponse.\n\nElle me disait juste :\n*attends.*\n\nJ'attendais.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Continuer.",
+          "vers": "aryn_veille",
+          "effects": [
+            {
+              "stat": "doute",
+              "val": 5
+            }
+          ]
+        }
+      ],
+      "x": 300,
+      "y": 1260
+    },
+    "aryn_depart_ikar": {
+      "id": "aryn_depart_ikar",
+      "title": "Le Regard d'Ikar",
+      "location": "Temple de l'Ordre — Cour",
+      "narrator": "",
+      "text": "Ikar était déjà en selle.\n\nIl regardait l'horizon à l'ouest.\n\nDouze ans ensemble.\nDes centaines d'entraînements.\nDes dizaines de disputes.\n\nJe savais exactement ce qu'il pensait.\n\nIl voulait arriver avant que ce soit trop tard.\n\nCe n'était pas de la violence.\nC'était de la peur.\n\nIkar avait peur depuis qu'il avait dix ans\net que l'esprit du Feu avait dit\n*prêt à tout.*\n\nIl avait décidé que ça voulait dire oui.\n\nEt douze ans plus tard\nil n'avait toujours pas changé d'avis.\n\nJe priais pour avoir assez de temps\npour le faire changer.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Continuer.",
+          "vers": "aryn_route"
+        }
+      ],
+      "x": 180,
+      "y": 1500
+    },
+    "aryn_depart_taera": {
+      "id": "aryn_depart_taera",
+      "title": "Le Regard de Taera",
+      "location": "Temple de l'Ordre — Cour",
+      "narrator": "",
+      "text": "Taera regardait le temple.\n\nElle s'en souvenait sans doute.\nLa première fois qu'elle l'avait vu.\nPetite. Les mains couvertes de terre.\nÉtonnée que les autres ne sentent pas la même chose qu'elle.\n\nElle allait peut-être ne jamais revenir.\n\nOu revenir différente.\n\nElle a surpris mon regard.\n\nElle a juste hoché la tête.\n\nPas de mots.\nOn n'en avait pas besoin.\n\nDouze ans dans les mêmes murs.\n\nLes mots étaient devenus presque superflus.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Continuer.",
+          "vers": "aryn_route"
+        }
+      ],
+      "x": 300,
+      "y": 1500
+    },
+    "aryn_depart_vael": {
+      "id": "aryn_depart_vael",
+      "title": "Le Regard de Vael",
+      "location": "Temple de l'Ordre — Cour",
+      "narrator": "",
+      "text": "Vael sifflotait.\n\nBien sûr.\n\nMême maintenant.\n\n**« Tu siffles vraiment en ce moment. »** j'ai dit.\n\n**« Toujours. »**\n\n**« Tu n'as pas peur ? »**\n\nIl a arrêté de siffler.\n\nJuste une seconde.\n\n**« Si. »**\n\nIl a repris.\n\nPlus fort cette fois.\n\nVael avait compris quelque chose que j'avais mis des années à apprendre.\n\nLa peur ne disparaît pas quand on fait semblant qu'elle n'est pas là.\n\nMais elle prend moins de place.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Continuer.",
+          "vers": "aryn_route",
+          "effects": [
+            {
+              "stat": "conviction",
+              "val": 5
+            }
+          ]
+        }
+      ],
+      "x": 400,
+      "y": 1500
+    },
+    "aryn_fumee_lui": {
+      "id": "aryn_fumee_lui",
+      "title": "Pas le Chaos — Lui",
+      "location": "Route d'Aerith — Crête",
+      "narrator": "",
+      "text": "Les légendes parlaient du Chaos.\n\nPas d'une personne.\n\nMais là, devant cette fumée,\nje pensais à quelqu'un.\n\nQuelqu'un qui avait voulu protéger son village.\n\nQuelqu'un qui avait eu peur.\n\nQuelqu'un qui ne savait pas ce qu'il était.\n\nExactement comme Caël.\nExactement comme n'importe qui\nqui découvre quelque chose de trop grand en soi.\n\nCe n'était pas le Chaos qu'on allait trouver dans ces décombres.\n\nC'était quelqu'un.\n\nEt quelqu'un peut être rejoint.\nPeut être entendu.\n\nL'eau me l'avait dit.\n\n*Il voulait qu'on soit là.*",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Retourner à l'histoire principale.",
+          "vers": "fin_memoire_aryn",
+          "effects": [
+            {
+              "stat": "conviction",
+              "val": 5
+            }
+          ]
+        }
+      ],
+      "x": 180,
+      "y": 1740
+    },
+    "aryn_fumee_cendral": {
+      "id": "aryn_fumee_cendral",
+      "title": "Cendral",
+      "location": "Route d'Aerith — Crête",
+      "narrator": "",
+      "text": "Un village.\n\nComme le mien.\n\nDes gens qui se levaient le matin.\nQui faisaient leur pain.\nQui regardaient leurs enfants grandir.\n\nEt maintenant de la fumée.\n\nÀ cause d'un pouvoir qu'une personne n'avait pas choisi.\n\nJe pensais à ma mère.\n*Tu reviendras.*\n\nJe pensais à mon père.\n*L'eau revient toujours.*\n\nJe pensais à Lyra.\n*Quand ce sera fini je partirai.*\n\nTous ces gens qui m'avaient dit quelque chose d'important\nsans le savoir vraiment.\n\nJ'espérais être à la hauteur de ce qu'ils m'avaient transmis.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Retourner à l'histoire principale.",
+          "vers": "fin_memoire_aryn"
+        }
+      ],
+      "x": 300,
+      "y": 1740
     }
   }
 }
