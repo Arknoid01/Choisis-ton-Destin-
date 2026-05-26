@@ -1,0 +1,1600 @@
+{
+  "name": "The Five Blades — Erevane",
+  "kids": false,
+  "askPlayerName": true,
+  "pack": "cinq_lames",
+  "stats": [
+    {
+      "id": "chaos",
+      "label": "Chaos",
+      "start": 55,
+      "max": 100,
+      "color": "#9b5de5"
+    },
+    {
+      "id": "controle",
+      "label": "Monitoring",
+      "start": 20,
+      "max": 100,
+      "color": "#00bbf9"
+    },
+    {
+      "id": "paranoia",
+      "label": "Paranoia",
+      "start": 55,
+      "max": 100,
+      "color": "#f15bb5"
+    }
+  ],
+  "theme": {},
+  "scenes": {
+    "manipulation_debut": {
+      "id": "manipulation_debut",
+      "title": "Erevane",
+      "location": "Aerith Road — Dawn",
+      "narrator": "You leave before the four can answer.",
+      "text": "You're not running.\n\nRunning would mean you're scared.\n\nYou're walking.\n\nThe black blade against your flank.\nThe throat still marked by the heat of the blade of Ikar.\n\nBehind you, the camp remains silent.\n\nNobody shouts your name.\n\nNot yet.\n\nIt's almost worse.\n\nAryn could have spoken.\nTaera could have followed you.\nVael could have appeared in front of you with a bad joke.\nIkar could've blocked you.\n\nNothing.\n\nThen you keep going.\n\nSomewhere in front of you, Erevane is waiting for you.\n\nAnd for the first time since Cendral,\nYou know exactly where to go.",
+      "isStart": true,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Don't turn around.",
+          "vers": "ne_pas_retourner",
+          "effects": [
+            {
+              "stat": "paranoia",
+              "val": 10
+            }
+          ]
+        },
+        {
+          "text": "Look one last time behind you.",
+          "vers": "dernier_regard",
+          "effects": [
+            {
+              "stat": "controle",
+              "val": 5
+            }
+          ]
+        }
+      ],
+      "x": 60,
+      "y": 60
+    },
+    "dernier_regard": {
+      "id": "dernier_regard",
+      "title": "The Last Look",
+      "location": "Road — Side of the camp",
+      "narrator": "",
+      "text": "You turn around.\n\nThe camp is still here.\n\nKid.\nGrey.\nFragile under dawn.\n\nYou see a silhouette.\n\nAryn.\n\nShe's up.\n\nShe's not following you.\n\nShe's only looking at you.\n\nEven from afar, you know she understands.\n\nNot that she accepts.\n\nLet her understand.\n\nIt's almost enough to get you back.\n\nThen you think about the blade under your throat.\n\nIn Ikar.\nTo their silences.\nIn that sentence.\n\n* Ready for anything. *\n\nYou turn around.\n\nThis time you're not looking.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Continue.",
+          "vers": "ne_pas_retourner",
+          "effects": [
+            {
+              "stat": "paranoia",
+              "val": 5
+            }
+          ]
+        }
+      ],
+      "x": 180,
+      "y": 60
+    },
+    "ne_pas_retourner": {
+      "id": "ne_pas_retourner",
+      "title": "Without Return",
+      "location": "Road to the east",
+      "narrator": "",
+      "text": "The sun is rising.\n\nYou're walking a long time.\n\nAt first, every noise behind you makes your heart beat.\n\nA branch.\nA bird.\nThe wind in the grass.\n\nYou expect the four to come out.\n\nBut no one's coming.\n\nSolitude comes slowly.\n\nThen completely.\n\nAnd when she's here,\nYou realize something strange.\n\nThe blade is quieter.\n\nLess cold.\n\nAs if she too was breathing away from them.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Look for Erevane.",
+          "vers": "retrouver_erevane",
+          "effects": [
+            {
+              "stat": "chaos",
+              "val": 5
+            }
+          ]
+        },
+        {
+          "text": "Walk alone for another moment.",
+          "vers": "route_seul",
+          "effects": [
+            {
+              "stat": "controle",
+              "val": 5
+            }
+          ]
+        }
+      ],
+      "x": 60,
+      "y": 180
+    },
+    "route_seul": {
+      "id": "route_seul",
+      "title": "One Moment Alone",
+      "location": "Low hills",
+      "narrator": "",
+      "text": "You spend the day in the hills.\n\nNo voice.\nNo advice.\nNo worries.\n\nNobody tells you to breathe.\nNobody tells you to put the blade down.\nNobody's watching your hands.\n\nYou thought silence would scare.\n\nBut no.\n\nSilence doesn't judge you.\n\nAt night, you light a fire.\n\nNot with wood.\n\nWith the blade.\n\nA purple light licks the stones.\n\nShe's not burning.\n\nShe keeps the heat.\n\nYou smile in spite of yourself.\n\nMaybe they were wrong.\n\nMaybe alone, you can learn differently.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Continue to Erevane.",
+          "vers": "retrouver_erevane",
+          "effects": [
+            {
+              "stat": "chaos",
+              "val": 10
+            }
+          ]
+        }
+      ],
+      "x": 180,
+      "y": 180
+    },
+    "retrouver_erevane": {
+      "id": "retrouver_erevane",
+      "title": "The One Who Waits",
+      "location": "Old road — Evening",
+      "narrator": "",
+      "text": "Erevane's here.\n\nSitting near an old terminal.\n\nLike he never doubted you'd come.\n\nHe's not smiling too fast.\n\nHe doesn't get up too fast.\n\nHe'll let you get close.\n\nMaybe that's what keeps you down.\n\nHe's not asking for anything.\n\n**\"You left. *\n\n**\"Yes. *\n\n**\"They tried to stop you? *\n\nYou think of Aryn standing in the morning.\n\n**\"No. *\n\nErevane's looking down.\n\n**\"Then they were afraid of what they would have done if they tried. *\n\nThe sentence comes into you too easily.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "\" They didn't trust me. »",
+          "vers": "erevane_ecoute",
+          "effects": [
+            {
+              "stat": "paranoia",
+              "val": 10
+            }
+          ]
+        },
+        {
+          "text": "\"I don't know anymore. »",
+          "vers": "erevane_doute",
+          "effects": [
+            {
+              "stat": "controle",
+              "val": 5
+            }
+          ]
+        }
+      ],
+      "x": 60,
+      "y": 300
+    },
+    "erevane_doute": {
+      "id": "erevane_doute",
+      "title": "The Doubt",
+      "location": "Old road",
+      "narrator": "",
+      "text": "**\"I don't know anymore. *\n\nErevane nods her head.\n\nNot like someone who wins.\n\nLike someone who understands.\n\n**\"That's honest. *\n\nHe gives you a gourd.\n\nYou drink.\n\n**\"Beware of people who never doubt.** he said.\n\nYou're thinking about Ikar.\n\nThen you.\n\n**\"And people who doubt too much? *\n\nErevane finally smiled.\n\n**\"These are tiring. *\n\nYou're laughing.\n\nA short laugh.\nBroken.\n\nBut a laugh anyway.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Listen to him.",
+          "vers": "erevane_ecoute",
+          "effects": [
+            {
+              "stat": "controle",
+              "val": 5
+            }
+          ]
+        }
+      ],
+      "x": 180,
+      "y": 300
+    },
+    "erevane_ecoute": {
+      "id": "erevane_ecoute",
+      "title": "Listening",
+      "location": "Camp Yerevane",
+      "narrator": "",
+      "text": "Erevane doesn't talk much that night.\n\nHe's listening.\n\nYou tell Cendral.\nMarek.\nThe blade.\nThe Four.\nThroat.\nFear.\n\nSometimes you stop, sure you said too much.\n\nBut he never looks at you like a disaster.\n\nNever like a gun.\n\nNever like a mission.\n\nHe looks at you like someone.\n\nAnd that's exactly what you needed.\n\nThat's why you don't see the trap.\n\nBecause a trap that looks like compassion\nDon't make any noise when it closes.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Ask what Chaos really is.",
+          "vers": "lecon_chaos",
+          "effects": [
+            {
+              "stat": "chaos",
+              "val": 5
+            }
+          ]
+        },
+        {
+          "text": "Ask why the Order is lying.",
+          "vers": "ordre_mensonge",
+          "effects": [
+            {
+              "stat": "paranoia",
+              "val": 10
+            }
+          ]
+        }
+      ],
+      "x": 60,
+      "y": 420
+    },
+    "ordre_mensonge": {
+      "id": "ordre_mensonge",
+      "title": "What the Cache Order",
+      "location": "Camp Yerevane",
+      "narrator": "",
+      "text": "**\"Why would the Order hide this? *\n\nErevane stirs the embers with a stick.\n\n**\"Because a world built on fear must protect its fear. *\n\n**\"What does that mean? *\n\n**\"That if they admit that Chaos can be something other than a threat...\"**\n**\"...then they must admit that they were wrong for three hundred years. *\n\nHe's looking at you.\n\n**\"Institutions sometimes prefer to sacrifice a person rather than a certainty. *\n\nYou'd like to think that's an exaggeration.\n\nBut you still feel Ikar's blade under your throat.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Believe it.",
+          "vers": "erevane_nuance",
+          "effects": [
+            {
+              "stat": "chaos",
+              "val": 5
+            }
+          ]
+        },
+        {
+          "text": "It's a big deal.",
+          "vers": "detail_cloche",
+          "effects": [
+            {
+              "stat": "controle",
+              "val": 10
+            }
+          ]
+        }
+      ],
+      "x": 180,
+      "y": 420
+    },
+    "erevane_nuance": {
+      "id": "erevane_nuance",
+      "title": "Nuance",
+      "location": "Camp Yerevane",
+      "narrator": "",
+      "text": "**\"The Four are not the Order. *\n\nErevane nods her head.\n\n**\"No. *\n\nThe answer surprises you.\n\n**\"They may really love you. *\n\nThe word hurts.\n\n**\"Then why...\"**\n\n**\"Because love is not always enough to disobey a fear learned since childhood. *\n\nHe doesn't insult them.\n\nHe doesn't even really accuse them.\n\nIt's worse.\n\nHe makes their betrayal sadder.\n\nSo more credible.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Continue the lesson.",
+          "vers": "lecon_chaos",
+          "effects": [
+            {
+              "stat": "paranoia",
+              "val": 5
+            }
+          ]
+        }
+      ],
+      "x": 300,
+      "y": 420
+    },
+    "lecon_chaos": {
+      "id": "lecon_chaos",
+      "title": "The First Lesson",
+      "location": "Black light",
+      "narrator": "",
+      "text": "The next day Erevane takes you to a long burned clearing.\n\nNo tree has pushed back.\n\n**\"The Chaos is not destroyed.** he said.\n\nYou look at the dead ground.\n\n**\"Wrong example. *\n\nHe smiles.\n\n**\"Chaos is what remains when the imposed forms break. *\n\n**\"It looks a lot like destruction. *\n\n**\"Only for those who liked the form before. *\n\nHe's laying a stone in front of you.\n\n**\"Cut it. *\n\nYou draw.\n\nThe black blade absorbs light.\n\nThen she sings.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Knock gently.",
+          "vers": "pierre_douce",
+          "effects": [
+            {
+              "stat": "controle",
+              "val": 10
+            }
+          ]
+        },
+        {
+          "text": "Let the blade choose.",
+          "vers": "pierre_choisit",
+          "effects": [
+            {
+              "stat": "chaos",
+              "val": 15
+            }
+          ]
+        }
+      ],
+      "x": 60,
+      "y": 540
+    },
+    "pierre_douce": {
+      "id": "pierre_douce",
+      "title": "The Stone",
+      "location": "Black light",
+      "narrator": "",
+      "text": "You hit slowly.\n\nThe blade enters the stone.\n\nNo shock.\nNo noise.\n\nAs if the stone had forgotten that it had to resist.\n\nA purple line opens.\n\nThe stone splits in two.\n\nErevane observes.\n\n**\"See? *\n\n**\"I cut it. *\n\n**\"No. *\n\nHe picks up both pieces.\n\n**\"You reminded her that she could be something other than everything. *\n\nThat's absurd.\n\nAnd yet.\n\nThe blade in your hand seems lighter.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Start again.",
+          "vers": "progres",
+          "effects": [
+            {
+              "stat": "chaos",
+              "val": 5
+            },
+            {
+              "stat": "controle",
+              "val": 5
+            }
+          ]
+        }
+      ],
+      "x": 180,
+      "y": 540
+    },
+    "pierre_choisit": {
+      "id": "pierre_choisit",
+      "title": "The Blade Choisit",
+      "location": "Black light",
+      "narrator": "",
+      "text": "You're not running it.\n\nYou let the blade move.\n\nThe world becomes purple.\n\nJust a second.\n\nThe stone disappears.\n\nNot broken.\n\nNot reduced to dust.\n\nAbsent.\n\nA circle of earth collapses around you.\n\nErevane doesn't step back.\n\nHe looks at the void where the stone was laid.\n\nHer eyes are shining.\n\nJust a second.\n\nThen he lowers his head.\n\n**\"Magnificent. *\n\nThe word scares you.\n\nAnd pleasure.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "\"It wasn't controlled. »",
+          "vers": "progres",
+          "effects": [
+            {
+              "stat": "controle",
+              "val": 5
+            }
+          ]
+        },
+        {
+          "text": "\"I can do it again. »",
+          "vers": "progres",
+          "effects": [
+            {
+              "stat": "chaos",
+              "val": 10
+            }
+          ]
+        }
+      ],
+      "x": 300,
+      "y": 540
+    },
+    "progres": {
+      "id": "progres",
+      "title": "Progress",
+      "location": "Old roads — Several days",
+      "narrator": "Days become lessons.",
+      "text": "You learn fast.\n\nToo fast.\n\nThe black blade is no longer only cold.\nShe's responding.\n\nIt absorbs sounds when you need silence.\nShe cuts the shadows when the night is too heavy.\nIt opens paths in the rocks.\n\nErevane says you're not losing control.\n\nYou're giving up bad gestures.\n\nThe ones the Order would have taught you.\n\nThe ones the Four would have imposed on you.\n\nSometimes you think about them.\n\nLess often every day.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Continue.",
+          "vers": "ils_te_cherchent"
+        },
+        {
+          "text": "Notice the change.",
+          "vers": "remarquer_changement",
+          "effects": [
+            {
+              "stat": "controle",
+              "val": 10
+            }
+          ]
+        }
+      ],
+      "x": 60,
+      "y": 660
+    },
+    "ils_te_cherchent": {
+      "id": "ils_te_cherchent",
+      "title": "They're looking for you.",
+      "location": "Ruins of a relay",
+      "narrator": "",
+      "text": "**\"They're looking for me? *\n\nErevane closes the book he was reading.\n\n**\"Yes. *\n\nYour heart is closing.\n\n**\"To bring me back? *\n\n**\"Probably. *\n\n**\"To help me? *\n\nErevane doesn't answer right away.\n\nHe lets you fill the silence.\n\nYou fill it with all the wrong answers.\n\nFinally, he says:\n\n**\"They probably think that's what they do. *\n\nYou hate your head.\n\nThere.\n\nThat's exactly it.\n\nThey think.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Continue.",
+          "vers": "premiere_perte",
+          "effects": [
+            {
+              "stat": "paranoia",
+              "val": 10
+            }
+          ]
+        }
+      ],
+      "x": 180,
+      "y": 660
+    },
+    "premiere_perte": {
+      "id": "premiere_perte",
+      "title": "The Merchant",
+      "location": "Stone bridge",
+      "narrator": "",
+      "text": "The first real accident arrives on a bridge.\n\nA merchant won't let you through.\n\nNot bad.\n\nHe recognized the blade.\n\nHis hands tremble on the reins.\n\n**« Turn around. *\n\nYou're trying to talk.\n\nThe horse panics.\nThe cart flips.\nA child screams in the back.\n\nYou're reaching out.\n\nThe blade reacts before you.\n\nThe Chaos stops the cart.\n\nBut the bridge cracks.\n\nAn entire arch collapses in the river.\n\nNobody dies.\n\nThis time.\n\nThe merchant is looking at you.\n\nNot with gratitude.\n\nHorrible.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Help repair.",
+          "vers": "reparer_pont",
+          "effects": [
+            {
+              "stat": "controle",
+              "val": 10
+            }
+          ]
+        },
+        {
+          "text": "Go before they call someone.",
+          "vers": "partir_pont",
+          "effects": [
+            {
+              "stat": "paranoia",
+              "val": 10
+            }
+          ]
+        }
+      ],
+      "x": 60,
+      "y": 780
+    },
+    "reparer_pont": {
+      "id": "reparer_pont",
+      "title": "Repair",
+      "location": "Stone bridge",
+      "narrator": "",
+      "text": "You're trying to fix it.\n\nYou lay your hand on the split stone.\n\nYou're thinking about Taera.\n\nThe way he touched the ground before he acted.\n\nThe stone trembles.\n\nFor a moment, you think you can do it.\n\nThen a violet crack crosses the remaining arch.\n\nThe merchant's back.\n\n**\"Stop. *\n\nHis voice is sweet.\n\nSubstitute.\n\n**\"Please. *\n\nThen you stop.\n\nYou understand something.\n\nEven when you want to fix,\nPeople are afraid of what your hands can do.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Leave.",
+          "vers": "erevane_console",
+          "effects": [
+            {
+              "stat": "paranoia",
+              "val": 5
+            }
+          ]
+        }
+      ],
+      "x": 180,
+      "y": 780
+    },
+    "partir_pont": {
+      "id": "partir_pont",
+      "title": "Leave",
+      "location": "Stone bridge",
+      "narrator": "",
+      "text": "You're leaving.\n\nBehind you, the merchant calls the child by his name.\n\nAgain.\nAgain.\n\nThe child finally answers.\n\nYou're out.\n\nYou didn't know you were holding your breath.\n\nErevane walks next to you.\n\nHe doesn't blame you.\n\nIt's almost pleasant.\n\nIt's almost worse.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Continue.",
+          "vers": "erevane_console",
+          "effects": [
+            {
+              "stat": "chaos",
+              "val": 5
+            }
+          ]
+        }
+      ],
+      "x": 300,
+      "y": 780
+    },
+    "erevane_console": {
+      "id": "erevane_console",
+      "title": "Consolation",
+      "location": "Forest path",
+      "narrator": "",
+      "text": "**\"You saved him. \"** says Erevane.\n\n**\"I destroyed the bridge. *\n\n**\"A bridge is rebuilt. *\n\n**\"What if someone was dead? *\n\nHe walks a long time without answering.\n\nThen:\n\n**\"All authorities have a cost. *\n\n**\"Easy to say when you don't pay. *\n\nHe stops.\n\nFor the first time, he looks hurt.\n\n**\"Do you think I paid nothing? *\n\nYou don't know what to answer.\n\nThen he starts walking again.\n\nAnd you follow him.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Continue.",
+          "vers": "erevane_perte"
+        },
+        {
+          "text": "Something in his voice.",
+          "vers": "voix_erevane",
+          "effects": [
+            {
+              "stat": "controle",
+              "val": 10
+            }
+          ]
+        }
+      ],
+      "x": 60,
+      "y": 900
+    },
+    "erevane_perte": {
+      "id": "erevane_perte",
+      "title": "What He Lost",
+      "location": "Forest path",
+      "narrator": "",
+      "text": "**\"What did you lose? *\n\nErevane doesn't turn around.\n\n*\"A brother. *\n\nThe word falls between you.\n\nSimple.\nHeavy.\n\n**\"Because of the Chaos? *\n\n**\"Because of those who claimed to understand it. *\n\nHe continues.\n\n\"My brother believed that Caël could be saved. *\n**\"He was called heretic. *\n**« Cleared from archives. *\n\nHe finally stops.\n\n**\"We made her voice disappear. *\n\nHis eyes are damp.\n\nYou believe him.\n\nBecause it's true.\n\nIt's only incomplete.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Continue.",
+          "vers": "lecon_memoire",
+          "effects": [
+            {
+              "stat": "paranoia",
+              "val": 10
+            }
+          ]
+        }
+      ],
+      "x": 180,
+      "y": 900
+    },
+    "lecon_memoire": {
+      "id": "lecon_memoire",
+      "title": "Memory",
+      "location": "Old ruins",
+      "narrator": "",
+      "text": "Erevane takes you to ruins covered in foam.\n\nNames are engraved on the walls.\n\nSome erased.\n\n**\"The Chaos keeps what the world rejects.** he said.\n\nYou put your fingers on a broken inscription.\n\nA pain is going through you.\n\nNot yours.\n\nSomeone begging.\nSomeone fleeing.\nSomeone we forget voluntarily.\n\nYou take your hand off.\n\n**\"What was that? *\n\n**\"A memory. *\n\n**« Whose memory? *\n\n**\"Of all those we have decided not to hear anymore. *\n\nThe black blade vibrates.\n\nAs if she recognized the deleted names.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Listen to the memoirs.",
+          "vers": "ecouter_memoires",
+          "effects": [
+            {
+              "stat": "chaos",
+              "val": 15
+            }
+          ]
+        },
+        {
+          "text": "Back up.",
+          "vers": "ville_rouge",
+          "effects": [
+            {
+              "stat": "controle",
+              "val": 10
+            }
+          ]
+        }
+      ],
+      "x": 60,
+      "y": 1020
+    },
+    "ecouter_memoires": {
+      "id": "ecouter_memoires",
+      "title": "Voices",
+      "location": "Old ruins",
+      "narrator": "",
+      "text": "You're listening.\n\nError.\n\nOr miracle.\n\nThe voices are rising.\n\nToo many.\n\nChildren.\nOld people.\nSoldiers.\nFailed porters.\nPeople burned by a prophecy before they even acted.\n\nTheir fears come into your chest.\n\nTheir anger, too.\n\nYou're on your knees.\n\nErevane put a hand on your shoulder.\n\n**\"Don't push them back. *\n\n**\"It hurts. *\n\n**\"Yes. *\n\nHis voice trembles.\n\n**\"At last someone hears them. *\n\nThen you keep going.\n\nBecause how can we refuse the dead?",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Continue.",
+          "vers": "ville_rouge",
+          "effects": [
+            {
+              "stat": "chaos",
+              "val": 20
+            },
+            {
+              "stat": "paranoia",
+              "val": 10
+            }
+          ]
+        }
+      ],
+      "x": 180,
+      "y": 1020
+    },
+    "ville_rouge": {
+      "id": "ville_rouge",
+      "title": "The Red City",
+      "location": "City of Sorn",
+      "narrator": "A few days later.",
+      "text": "Sorn is a red town.\n\nRed bricks.\nRed roofs.\nRed dust in the streets.\n\nYou should have bypassed her.\n\nBut Erevane needs ink.\nFood.\nCards.\n\nAnd you need to prove that you can cross a city without disaster.\n\nFor an hour, it works.\n\nNobody knows you.\n\nThen a child sees the blade under your coat.\n\nHe's pointing.\n\nSilence returns.\n\nStill the same.\n\nLike an old song we hate\nBut we know by heart.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Ignore your eyes.",
+          "vers": "sorn_ignore",
+          "effects": [
+            {
+              "stat": "controle",
+              "val": 5
+            }
+          ]
+        },
+        {
+          "text": "Fix them back.",
+          "vers": "sorn_fixe",
+          "effects": [
+            {
+              "stat": "paranoia",
+              "val": 10
+            }
+          ]
+        }
+      ],
+      "x": 60,
+      "y": 1140
+    },
+    "sorn_ignore": {
+      "id": "sorn_ignore",
+      "title": "Ignore",
+      "location": "Sorn — Market Street",
+      "narrator": "",
+      "text": "You look down.\n\nYou're moving.\n\nA man whispers:\n\n**\"That's him. *\n\nYou keep going.\n\nOne woman answered:\n\n**\"The Blades are looking for him. *\n\nYou stop.\n\nThe Blades.\n\nSo they're approaching.\n\nErevane put a light hand on your back.\n\n**\"Not here. *\n\nYou hate your head.\n\nHe's right.\n\nNot here.\n\nNot in front of these people.\n\nNot yet.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Leave town.",
+          "vers": "auberge_sorn",
+          "effects": [
+            {
+              "stat": "controle",
+              "val": 5
+            }
+          ]
+        }
+      ],
+      "x": 180,
+      "y": 1140
+    },
+    "sorn_fixe": {
+      "id": "sorn_fixe",
+      "title": "Watch Back",
+      "location": "Sorn — Market Street",
+      "narrator": "",
+      "text": "You raise your head.\n\nThe murmurs die one by one.\n\nThe light around you gets colder.\n\nMore purple.\n\nA fruit stall wilts.\n\nA window splits.\n\nNobody's moving.\n\nYou didn't mean to scare them.\n\nBut part of you is relieved that they are silent.\n\nThis part disgusts you.\n\nErevane takes you gently by the arm.\n\n**\"Come. *\n\nNot an order.\n\nA rescue.\n\nYou follow him.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Get out of the street.",
+          "vers": "auberge_sorn",
+          "effects": [
+            {
+              "stat": "chaos",
+              "val": 10
+            },
+            {
+              "stat": "paranoia",
+              "val": 5
+            }
+          ]
+        }
+      ],
+      "x": 300,
+      "y": 1140
+    },
+    "auberge_sorn": {
+      "id": "auberge_sorn",
+      "title": "The Inn",
+      "location": "Sorn — Auberge des Tuiles Rouges",
+      "narrator": "",
+      "text": "You take a room upstairs.\n\nErevane closes the shutters.\n\nNot to lock you up.\n\nTo protect you from eyes.\n\nThat's what he says.\n\nYou sit on the bed.\n\nThe black blade on your knees.\n\nIt vibrates slowly.\n\nDownstairs, the conversations resume.\n\nLower.\n\nFaster.\n\nThen a noise outside.\n\nSabots.\n\nA voice you know.\n\nAryn.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Ask what we do.",
+          "vers": "demander_erevane"
+        },
+        {
+          "text": "Observer Erevane.",
+          "vers": "observer_erevane_sorn",
+          "effects": [
+            {
+              "stat": "controle",
+              "val": 10
+            }
+          ]
+        }
+      ],
+      "x": 60,
+      "y": 1260
+    },
+    "demander_erevane": {
+      "id": "demander_erevane",
+      "title": "What to do",
+      "location": "Hostel — Room",
+      "narrator": "",
+      "text": "**\"What am I doing? *\n\nErevane looks at the door.\n\nThen you.\n\n**\"Whatever you want. *\n\nThe answer is annoying.\n\n**\"This is not the time. *\n\n**\"That's the point. *\n\nHe's approaching.\n\n**\"All your life, we'll tell you this is not the time to choose. *\n**\"You're too dangerous. *\n**\"Too injured. *\n**\"Too unstable. *\n\nDown there, a chair falls.\n\n**\"Then choose now. *\n\nYou're up.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Watch outside.",
+          "vers": "les_quatre_arrivent",
+          "effects": [
+            {
+              "stat": "chaos",
+              "val": 5
+            }
+          ]
+        }
+      ],
+      "x": 180,
+      "y": 1260
+    },
+    "les_quatre_arrivent": {
+      "id": "les_quatre_arrivent",
+      "title": "They're here.",
+      "location": "Sorn — Street in front of the inn",
+      "narrator": "",
+      "text": "The Four are on the street.\n\nAryn in mind.\nTaera right behind.\nVael on the roof across the street.\nIkar in the middle of the road.\n\nThey look exhausted.\n\nDirty.\nWounded.\n\nLike they haven't slept in days.\n\nYour heart is closing in spite of you.\n\nThen Ikar looks up at the window.\n\nHe sees you.\n\nJust a second.\n\nRelief.\n\nThen he sees Erevane behind you.\n\nEverything changes.\n\nHer blade is burning.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Get down.",
+          "vers": "descendre_rue",
+          "effects": [
+            {
+              "stat": "controle",
+              "val": 5
+            }
+          ]
+        },
+        {
+          "text": "Stay near Yerevane.",
+          "vers": "rester_pres_erevane",
+          "effects": [
+            {
+              "stat": "paranoia",
+              "val": 10
+            }
+          ]
+        }
+      ],
+      "x": 60,
+      "y": 1380
+    },
+    "rester_pres_erevane": {
+      "id": "rester_pres_erevane",
+      "title": "Near Yerevane",
+      "location": "Hostel — Room",
+      "narrator": "",
+      "text": "You're not coming down.\n\nNot yet.\n\nErevane stay calm.\n\nToo quiet.\n\nDown below, Ikar screams:\n\n**\"Get away from him! *\n\nNot: *come back. *\nNot: We need to talk. *\n\nGet away from him.\n\nLike you can't choose who to stay with.\n\nLike you still belong to their decision.\n\nErevane's looking down.\n\n**\"I'm sorry. *\n\n**\"From what? *\n\nHe's not answering.\n\nIt's worse than an answer.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Get down on the street.",
+          "vers": "descendre_rue",
+          "effects": [
+            {
+              "stat": "paranoia",
+              "val": 10
+            }
+          ]
+        }
+      ],
+      "x": 180,
+      "y": 1380
+    },
+    "descendre_rue": {
+      "id": "descendre_rue",
+      "title": "Red Street",
+      "location": "Sorn — In front of the hostel",
+      "narrator": "",
+      "text": "You're coming down.\n\nStreet's empty.\n\nThe shutters are closed.\n\nThe locals are still watching.\n\nAlways.\n\nAryn is taking a step towards you.\n\n**\"We're not coming to take you back. *\n\nYou want to believe her.\n\nThen Ikar points his blade to Erevane.\n\n**\"He, on the other hand, comes with us. *\n\nErevane don't move.\n\nHe's not hiding behind you.\n\nHe's not begging.\n\nHe's waiting.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "\"Why? »",
+          "vers": "pourquoi_erevane",
+          "effects": [
+            {
+              "stat": "controle",
+              "val": 5
+            }
+          ]
+        },
+        {
+          "text": "Put you in front of Erevane.",
+          "vers": "devant_erevane",
+          "effects": [
+            {
+              "stat": "paranoia",
+              "val": 15
+            }
+          ]
+        }
+      ],
+      "x": 60,
+      "y": 1500
+    },
+    "pourquoi_erevane": {
+      "id": "pourquoi_erevane",
+      "title": "Why Him",
+      "location": "Sorn — Red Street",
+      "narrator": "",
+      "text": "**\"Why him? *\n\nAryn's responding too fast.\n\n**\"Because he manipulates you. *\n\nThe word hits you.\n\n*Manipule. *\n\n**\"How do you know? *\n\n**\"Because we know him. \"** says Aryn.\n**\"Erevane has existed for a long time. *\n**\"Too long. *\n**\"He was there in the time of Cael too. *\n\nThe ground is disappearing.\n\n**\"What? *\n\n**\"He was not old at the time. *\n**\"But he was there. *\n**\"He told her the same thing. *\n**\"Another prophecy. *\n**\"Another way. *\n**\"Away from the four wise men. *\n\n**\"And Caël...\"**\n\n**\"Caël followed him. \"** says Aryn.\n**\"And he destroyed everything. *\n**\"Alone. *",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Turn to Erevane.",
+          "vers": "devant_erevane",
+          "effects": [
+            {
+              "stat": "chaos",
+              "val": 10
+            }
+          ]
+        },
+        {
+          "text": "\"Is that true? »",
+          "vers": "erevane_confirme",
+          "effects": [
+            {
+              "stat": "controle",
+              "val": 10
+            }
+          ]
+        }
+      ],
+      "x": 180,
+      "y": 1500
+    },
+    "devant_erevane": {
+      "id": "devant_erevane",
+      "title": "Before Him",
+      "location": "Sorn — Red Street",
+      "narrator": "",
+      "text": "You're standing in front of Erevane.\n\nThe black blade in your hand.\n\nAryn's fading.\n\n**\"Don't do that. *\n\n*\"Me? *\n\nYou're laughing.\n\nNot because it's funny.\n\n**\"You arrive in arms. *\n**\"You threaten the only man who told me the truth. *\n**\"And I do something? *\n\nIkar tightens his teeth.\n\n**\"He's lying. *\n\n**\"Like you? *\n\nNobody answers fast enough.\n\nThat's enough.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Continue.",
+          "vers": "ikar_attaque",
+          "effects": [
+            {
+              "stat": "paranoia",
+              "val": 10
+            },
+            {
+              "stat": "chaos",
+              "val": 10
+            }
+          ]
+        }
+      ],
+      "x": 60,
+      "y": 1620
+    },
+    "ikar_attaque": {
+      "id": "ikar_attaque",
+      "title": "Error",
+      "location": "Sorn — Red Street",
+      "narrator": "Fire moves before words.",
+      "text": "Ikar attacks.\n\nNot you.\n\nErevane.\n\nIt crosses the street like a flame launched.\n\nToo fast for Aryn to stop him.\nToo fast for Taera to scream.\nToo fast for Vael to get off the roof.\n\nErevane doesn't even raise her hands.\n\nThe old man stays here.\n\nFragile.\nRight.\nSad.\n\n** \"No.\"** he said.\n\nNot in Ikar.\n\nYour turn.\n\n**\"Not for me. *\n\nBut it's too late.\n\nYour black blade goes up.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Block Ikar.",
+          "vers": "bloquer_ikar",
+          "effects": [
+            {
+              "stat": "chaos",
+              "val": 15
+            },
+            {
+              "stat": "paranoia",
+              "val": 10
+            }
+          ]
+        },
+        {
+          "text": "Push everyone back.",
+          "vers": "repousser_tous",
+          "effects": [
+            {
+              "stat": "chaos",
+              "val": 25
+            }
+          ]
+        }
+      ],
+      "x": 60,
+      "y": 1740,
+      "timer": {
+        "duration": 10,
+        "auto": "first"
+      }
+    },
+    "bloquer_ikar": {
+      "id": "bloquer_ikar",
+      "title": "Blocking",
+      "location": "Sorn — Red Street",
+      "narrator": "",
+      "text": "Your blade blocks Ikar's.\n\nFire against empty.\n\nThe street disappears in a purple flash.\n\nThe windows explode.\nThe pavements rise.\nA wall collapses further.\n\nSomeone screams.\n\nIkar's taking three steps back.\n\nHer eyes don't leave Erevane.\n\n**\"Go away. *\n\n**\"No. *\n\n**\"You don't understand what he's doing. *\n\n**\"I understand exactly. *\n\nAnd that's the problem.\n\nYou understand.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Charge the Four.",
+          "vers": "accuser_quatre",
+          "effects": [
+            {
+              "stat": "paranoia",
+              "val": 10
+            }
+          ]
+        }
+      ],
+      "x": 180,
+      "y": 1740
+    },
+    "repousser_tous": {
+      "id": "repousser_tous",
+      "title": "The Wave",
+      "location": "Sorn — Red Street",
+      "narrator": "",
+      "text": "You're not blocking.\n\nYou reject.\n\nEverything.\n\nA purple wave comes from you.\n\nIkar is projected against a fountain.\nAryn slides on the pavements.\nTaera sets up a wall of earth that cracks immediately.\nVael disappears just before he gets hit.\n\nHouses are shaking.\n\nA fireplace falls.\n\nA voice calls for help behind a shutter.\n\nYou hear me.\n\nBut you can't stop fast enough.\n\nWhen the silence returns,\nRed town has a black scar.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Charge the Four.",
+          "vers": "accuser_quatre",
+          "effects": [
+            {
+              "stat": "chaos",
+              "val": 15
+            },
+            {
+              "stat": "paranoia",
+              "val": 10
+            }
+          ]
+        }
+      ],
+      "x": 300,
+      "y": 1740
+    },
+    "accuser_quatre": {
+      "id": "accuser_quatre",
+      "title": "Since the beginning",
+      "location": "Sorn — Red Street",
+      "narrator": "",
+      "text": "**\"From the beginning...\"**\n\nYour voice is shaking.\n\nThe blade, too.\n\n**\"From the beginning you were just waiting for a reason. *\n\nAryn shakes his head.\n\n**\"No. *\n\nToo weak.\n\nToo late.\n\n**\"Ikar had her blade under my throat. *\n**\"Now you want to kill Erevane. *\n**\"And then? *\n\nTaera is crying.\n\n**\"We want you back. *\n\n**\"No. *\n\nThe word comes out like a fracture.\n\n**\"You want me to be someone you can watch again. *",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Listen to Aryn.",
+          "vers": "aryn_supplie",
+          "effects": [
+            {
+              "stat": "controle",
+              "val": 10
+            }
+          ]
+        },
+        {
+          "text": "Don't listen to them anymore.",
+          "vers": "erevane_parle",
+          "effects": [
+            {
+              "stat": "paranoia",
+              "val": 15
+            }
+          ]
+        }
+      ],
+      "x": 60,
+      "y": 1860
+    },
+    "aryn_supplie": {
+      "id": "aryn_supplie",
+      "title": "Aryn",
+      "location": "Sorn — Red Street",
+      "narrator": "",
+      "text": "Aryn's moving ahead despite the blade.\n\nDespite the light.\n\nDespite the fear.\n\n**\"I beg you. *\n\nHis voice breaks.\n\nYou never heard her that way.\n\n**\"He uses your pain. *\n**\"I know we scared you. *\n**\"I know Ikar did something unforgivable. *\n\nIkar closes his eyes.\n\n**\"But Erevane does not want to save you. *\n\nErevane's not answering.\n\nHe doesn't need it.\n\nBecause behind Aryn,\nIkar is already raising his blade.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "See Ikar's blade.",
+          "vers": "erevane_parle",
+          "effects": [
+            {
+              "stat": "paranoia",
+              "val": 15
+            }
+          ]
+        }
+      ],
+      "x": 180,
+      "y": 1860
+    },
+    "erevane_parle": {
+      "id": "erevane_parle",
+      "title": "The Last Sweet Word",
+      "location": "Sorn — Red Street",
+      "narrator": "",
+      "text": "Erevane put a hand on your shoulder.\n\nLight.\n\nAlmost nothing.\n\n**\"You don't have to defend me.** he said.\n\nThe Four freeze.\n\nEven Vael.\n\nBecause they hear what you don't hear yet.\n\nThe perfect trap.\n\nErevane continues:\n\n**\"You no longer need to prove that you deserve to exist. *\n\nThe sentence goes through you.\n\nShe finds all the wounds.\n\nAll of them.\n\n**\"The world asked you to be small. *\n**\"To be calm. *\n**\"To be forgiven. *\n\nHis hand barely shakes.\n\n**\"You can be true. *",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Let the Chaos answer.",
+          "vers": "chaos_repond",
+          "effects": [
+            {
+              "stat": "chaos",
+              "val": 25
+            }
+          ]
+        },
+        {
+          "text": "Resist one last time.",
+          "vers": "resister_dernier",
+          "effects": [
+            {
+              "stat": "controle",
+              "val": 15
+            }
+          ]
+        }
+      ],
+      "x": 60,
+      "y": 1980,
+      "timer": {
+        "duration": 12,
+        "auto": "first"
+      }
+    },
+    "resister_dernier": {
+      "id": "resister_dernier",
+      "title": "Resist",
+      "location": "Sorn — Red Street",
+      "narrator": "",
+      "text": "You resist.\n\nJust a second.\n\nTwo.\n\nYou're thinking about Aryn.\nTo Taera.\nTo Vael.\nEven in Ikar.\n\nYou think about what they were before fear.\n\nHands stretched out.\nShared meals.\nLess heavy silences.\n\nThe purple light is falling.\n\nAryn sees it.\n\nShe's reaching out.\n\nAnd behind her, a city guard shoots an arrow.\n\nNot on you.\n\nOn Erevane.\n\nThe Chaos smells like it.\n\nYour fear chooses before you.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Too late.",
+          "vers": "chaos_repond",
+          "effects": [
+            {
+              "stat": "chaos",
+              "val": 20
+            },
+            {
+              "stat": "paranoia",
+              "val": 10
+            }
+          ]
+        }
+      ],
+      "x": 180,
+      "y": 1980
+    },
+    "chaos_repond": {
+      "id": "chaos_repond",
+      "title": "The Chaos Answers",
+      "location": "Sorn — Red Street",
+      "narrator": "",
+      "text": "The world is opening.\n\nNot like a wound.\n\nLike an eye.\n\nThe violet light swallows the street.\n\nYou hear the voices of the ruins.\nThe dead erased.\nThe forgotten names.\nAsendral.\nMarek.\nThe bridge.\nSorn.\nEverything.\n\nYou wanted us to hear you.\n\nNow everyone hears.\n\nThe Four are back.\n\nNot by choice.\n\nBy force.\n\nErevane whispers behind you:\n\n**\"Yes. *\n\nOne word.\n\nToo happy.\n\nToo true.\n\nAnd for the first time,\nYou're afraid of him.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Go back to Erevane.",
+          "vers": "revelation_erevane",
+          "effects": [
+            {
+              "stat": "controle",
+              "val": 5
+            }
+          ]
+        },
+        {
+          "text": "Continue against the Four.",
+          "vers": "combat_contre_quatre",
+          "effects": [
+            {
+              "stat": "chaos",
+              "val": 15
+            }
+          ]
+        }
+      ],
+      "x": 60,
+      "y": 2100
+    },
+    "revelation_erevane": {
+      "id": "revelation_erevane",
+      "title": "Truth",
+      "location": "Sorn — Broken street",
+      "narrator": "",
+      "text": "You turn around.\n\nErevane has eyes full of tears.\n\nBut they're not tears of fear.\n\nThey're someone's tears.\nWho finally sees what he was waiting for.\n\n**\"I'm sorry.** he said.\n\n**\"No, you're not. *\n\nHe's lowering his head.\n\n**\"No. *\n\n**\"Your brother. *\n\n**\" He died because of Caël. *\n**\"And you spent three hundred years...\"**\n\n**\"Looking for another carrier. *\n**\"Who would do what Caël did not finish. *\n\nHe raises his eyes.\n\n**\"The Chaos should not be contained. *\n**\"He should be released. *\n**\"Completely. *\n**\"Once and for all. *\n**\"To get Aerith back on track. *\n**\"From the beginning. *\n**\"Without the mistakes of the past. *\n\nThe blade vibrates.\n\nShe understands before you.\n\n**\"You didn't want to help me. *\n**\"You wanted to use the Chaos. *\n\n**\"Yes. *\n\nOne word.\n\nThe worst we ever told you.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "\"You lied to me. »",
+          "vers": "mensonge_erevane",
+          "effects": [
+            {
+              "stat": "controle",
+              "val": 5
+            }
+          ]
+        }
+      ],
+      "x": 180,
+      "y": 2100
+    },
+    "mensonge_erevane": {
+      "id": "mensonge_erevane",
+      "title": "The Lie",
+      "location": "Sorn — Broken street",
+      "narrator": "",
+      "text": "**\"You lied to me. *\n\nErevane shakes her head.\n\n**\"Never on the essential. *\n\n**\"You wanted to use me. *\n\n**\"I wanted to free what you were wearing. *\n\n**\"I'm not the Chaos. *\n\nThis time, he looks at you with almost sincere sadness.\n\n**\"No. *\n\nHe says that like a blessing.\n\n**\"You're what kept her so far. *\n\nThe sentence destroys you.\n\nBecause you understand.\n\nThe Four wanted to save you.\n\nErevane wanted to save the Chaos.\n\nAnd you chose the one who could speak better.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Watch the Four.",
+          "vers": "combat_contre_quatre",
+          "effects": [
+            {
+              "stat": "chaos",
+              "val": 10
+            }
+          ]
+        }
+      ],
+      "x": 300,
+      "y": 2100
+    },
+    "combat_contre_quatre": {
+      "id": "combat_contre_quatre",
+      "title": "Four Against One",
+      "location": "Sorn — Broken street",
+      "narrator": "",
+      "text": "The Four come together.\n\nAryn wipes blood on his head.\nTaera holds her arm against her.\nVael has no more jokes in his eyes.\nIkar is struggling to get up.\n\nThey're hurt.\n\nThey're staying.\n\nBecause obviously they're staying.\n\nAryn shouts your name.\n\nYour real name.\n\nNot the Chaos carrier. *\n\nNot prophesy. *\n\nYour name.\n\nFor a moment, you hear it.\n\nThen the voices in the world shout louder.\n\nThe black blade is rising.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Fight.",
+          "vers": "combat_aryn",
+          "effects": [
+            {
+              "stat": "chaos",
+              "val": 15
+            }
+          ]
+        }
+      ],
+      "x": 60,
+      "y": 2220
+    },
+    "combat_aryn": {
+      "id": "combat_aryn",
+      "title": "Water",
+      "location": "Sorn — Broken street",
+      "narrator": "",
+      "text": "Aryn's coming first.\n\nNot to hit.\n\nTo slow down.\n\nHis water surrounds your blade.\n\nShe's whispering something.\n\nYou don't understand.\n\nMaybe a prayer.\nMaybe your name.\n\nYou're pushing back.\n\nWater turns black for a second.\n\nAryn is projected against the pavements.\n\nShe's not up yet.\n\nTaera screams.\n\nThe city is shaking.\n\nYou want to stop.\n\nThe Chaos won't.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Continue.",
+          "vers": "combat_taera",
+          "effects": [
+            {
+              "stat": "chaos",
+              "val": 10
+            }
+          ]
+        }
+      ],
+      "x": 180,
+      "y": 2220
+    },
+    "combat_taera": {
+      "id": "combat_taera",
+      "title": "The Earth",
+      "location": "Sorn — Broken street",
+      "narrator": "",
+      "text": "Taera sets up walls.\n\nNot around you.\n\nAround the inhabitants.\n\nShe's still protecting.\n\nEven now.\n\nEven from you.\n\nYou hit.\n\nThe first wall holds.\n\nThe second one too.\n\nThe third splits.\n\nTaera falls on her knees.\n\nHis hands bleed on the stone.\n\nShe's looking at you.\n\nNot afraid.\n\nWith grief.\n\n**\"Come back. *\n\nOne word.\n\nYou almost want to obey.\n\nThen Erevane coughs behind you.\n\nWounded.\nFragile.\n\nAnger comes back.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Continue.",
+          "vers": "combat_vael",
+          "effects": [
+            {
+              "stat": "paranoia",
+              "val": 10
+            },
+            {
+              "stat": "chaos",
+              "val": 10
+            }
+          ]
+        }
+      ],
+      "x": 300,
+      "y": 2220
+    },
+    "combat_vael": {
+      "id": "combat_vael",
+      "title": "Air",
+      "location": "Sorn — Roofs collapsed",
+      "narrator": "",
+      "text": "Vael disappears.\n\nCome back behind you.\n\nFor the first time, he's not kidding.\n\n**\"You're not talking here. *\n\nYou're laughing.\n\nSound doesn't sound like your voice.\n\n**\"How long have you known me, Vael? *\n\nHe cashes the sentence like a blow.\n\n**\"Sufficient to know you're suffering. *\n\n**\"Everyone suffers. *\n\n**\"Yes. *\n\nHe smiled sadly.\n\n**\"But not everyone has an apocalyptic sword to mishandle this. *\n\nThat should have made you laugh.\n\nCould have.\n\nIn another life.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Repel it.",
+          "vers": "combat_ikar",
+          "effects": [
+            {
+              "stat": "chaos",
+              "val": 10
+            }
+          ]
+        }
+      ],
+      "x": 60,
+      "y": 2340
+    },
+    "combat_ikar": {
+      "id": "combat_ikar",
+      "title": "Fire",
+      "location": "Sorn — Broken street",
+      "narrator": "",
+      "text": "Ikar comes last.\n\nOf course.\n\nFire against the Chaos.\n\nHis face is covered in dust.\n\nA cut through his cheek.\n\nHe's not looking at Erevane.\n\nNot anymore.\n\nHe's looking at you.\n\n**\"It's my fault. *\n\nThe sentence splits something into you.\n\n**\"Yes. *\n\nHe's nodding his head.\n\nHe accepts.\n\n**\"But I won't let you disappear because of me. *\n\nHe's attacking.\n\nThis time, not to kill.\n\nTo hold you back.\n\nBut holding a storm with bare hands\nremains a way of dying.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Break his guard.",
+          "vers": "les_quatre_tombent",
+          "effects": [
+            {
+              "stat": "chaos",
+              "val": 20
+            }
+          ]
+        }
+      ],
+      "x": 180,
+      "y": 2340
+    },
+    "les_quatre_tombent": {
+      "id": "les_quatre_tombent",
+      "title": "They fall",
+      "location": "Sorn — Purple silence",
+      "narrator": "",
+      "text": "One by one,\nThey're falling.\n\nNot dead.\n\nNot yet.\n\nBut defeated.\n\nAryn against the inn steps.\nTaera by the wall she set up for the inhabitants.\nVael on a broken roof.\nIkar kneeling in front of you.\n\nHe's still trying to get up.\n\nSure.\n\nYou point the blade towards him.\n\nHe doesn't look down.\n\n**\"Come back.** he said.\n\nNot an order.\n\nA request.\n\nToo late.\n\nToo human.\n\nThe Chaos rubs.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Save Ikar.",
+          "vers": "epargner_ikar",
+          "effects": [
+            {
+              "stat": "controle",
+              "val": 10
+            }
+          ]
+        },
+        {
+          "text": "Let the Chaos decide.",
+          "vers": "chaos_gagne",
+          "effects": [
+            {
+              "stat": "chaos",
+              "val": 20
+            }
+          ]
+        }
+      ],
+      "x": 60,
+      "y": 2460,
+      "timer": {
+        "duration": 12,
+        "auto": "first"
+      }
+    },
+    "epargner_ikar": {
+      "id": "epargner_ikar",
+      "title": "Too bad to come back",
+      "location": "Sorn — Purple silence",
+      "narrator": "",
+      "text": "You lower the blade.\n\nJust a second.\n\nIkar sees him.\n\nAryn, too.\n\nTaera hands.\n\nEven Vael lifts his head.\n\nThere's still something.\n\nA wire.\n\nDamn.\nAlmost invisible.\n\nThen Erevane talks behind you:\n\n**\"They will do it again. *\n\nThe sentence cuts the wire.\n\nYou close your eyes.\n\nWhen you reopen them,\nThe purple light has invaded everything.\n\nYou saved Ikar.\n\nBut you didn't come back.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Continue.",
+          "vers": "chaos_gagne",
+          "effects": [
+            {
+              "stat": "paranoia",
+              "val": 10
+            },
+            {
+              "stat": "chaos",
+              "val": 10
+            }
+          ]
+        }
+      ],
+      "x": 180,
+      "y": 2460
+    },
+    "chaos_gagne": {
+      "id": "chaos_gagne",
+      "title": "The Chaos Win",
+      "location": "Sorn — Breaking centre",
+      "narrator": "",
+      "text": "The sky folds.\n\nNot really.\n\nBut everyone who looks at him would swear yes.\n\nThe violet light rises from the broken street.\n\nThe Four can't move anymore.\n\nErevane walks to you.\n\nSlowly.\n\nLike a priest to an altar.\n\n**\"See? \"** he whispers.\n\nHis voice trembles.\n\n**\"This was not the end. *\n\nYou look around.\n\nRed town.\nThe hidden inhabitants.\nThe Four on the floor.\nErevane behind you.\n\nAnd finally, you understand.\n\nYou didn't win your freedom.\n\nYou only changed cages.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Understand too late.",
+          "vers": "trop_tard",
+          "effects": [
+            {
+              "stat": "controle",
+              "val": 5
+            }
+          ]
+        }
+      ],
+      "x": 60,
+      "y": 2580
+    },
+    "trop_tard": {
+      "id": "trop_tard",
+      "title": "Too bad.",
+      "location": "Sorn — Broken street",
+      "narrator": "",
+      "text": "The Four wanted to save the player.\n\nErevane wanted to save the Chaos.\n\nThe difference is huge.\n\nYou see her now.\n\nNow that Aryn can't reach out.\nNow that Taera can't protect the street anymore.\nNow that Vael can't say anything.\nNow that Ikar's lowered his blade.\n\nNow that there's no one between you\nAnd what you're wearing.\n\nYou want to step back.\n\nYou want to say their names.\n\nYou still want to be someone we can bring back.\n\nBut the Chaos doesn't look back.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "End.",
+          "vers": "fin_catastrophe"
+        }
+      ],
+      "x": 180,
+      "y": 2580
+    },
+    "fin_catastrophe": {
+      "id": "fin_catastrophe",
+      "title": "The Sacred Disaster",
+      "location": "Aerith Borders — Later",
+      "narrator": "",
+      "text": "Later we'll say that Sorn survived.\n\nTechnically.\n\nThe walls still hold.\nThe streets still exist.\n\nBut Sorn is no longer a city.\n\nIt's a scar.\n\nThe Chaos crossed Aerith as an idea\nWe can't undo it anymore.\n\nErevane got what he wanted.\n\nThree hundred years of waiting.\n\nFor this.\n\nThe Four are alive.\n\nSomewhere.\n\nAryn's still looking.\n\nTaera replants.\n\nVael walks in places where the air is different.\n\nIkar didn't hit his blade.\n\nThey're looking for a way to fix it.\n\nHe's not sure he exists.\n\nBut they're looking.\n\nBecause that's what they do.\n\nBecause that's what they've always done.\n\nAnd you.\n\nYou're here.\n\nSomewhere in this.\n\nThe cold black blade in your hand.\n\nYou remember Yerevane saying,\nThe Chaos is not a curse. It's a gift. *\n\nYou remember Taera's seed.\n\nTwo blows on the anvil.\n\nMarek's knife.\n\nThese things have not been destroyed.\n\nThey still exist.\n\nSomewhere.\n\nMaybe it's a start.\n\nMaybe.",
+      "isStart": false,
+      "isEnd": true,
+      "transition": "fade",
+      "choices": [],
+      "x": 60,
+      "y": 2700
+    },
+    "detail_cloche": {
+      "id": "detail_cloche",
+      "title": "Something",
+      "location": "Campfire — Night",
+      "narrator": "",
+      "text": "Erevane knows too much.\n\nNo generalities.\n\nDetails.\n\nMarek's name.\nThe color of Aryn's blade.\nThe exact moment the Chaos woke up.\n\n**\"How do you know all this? *\n\nHe's shaking the embers.\n\n**\"I have been studying Chaos for a long time. *\n\n**\"How long? *\n\nTake a break.\n\nShort.\n\n**\"Very long. *\n\nHe doesn't look at you saying that.\n\nYou put the observation away.\n\nNot knowing what to do with it.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Continue.",
+          "vers": "erevane_nuance",
+          "effects": [
+            {
+              "stat": "controle",
+              "val": 5
+            }
+          ]
+        }
+      ],
+      "x": 300,
+      "y": 380
+    },
+    "remarquer_changement": {
+      "id": "remarquer_changement",
+      "title": "The Mirror",
+      "location": "Clear — Morning",
+      "narrator": "",
+      "text": "You see your reflection in a pond.\n\nYou stop.\n\nYour eyes.\n\nThey have a tint.\n\nViolet.\n\nLight.\n\nAs if the blade had started to turn off.\n\nYou're thinking about Taera.\n\n*The earth knows when someone is empty. *\n\nYou're thinking about Aryn.\n\nThe Chaos is in you but you are bigger than the Chaos. *\n\nYou're thinking about Vael.\n\n*People who arrive at the right time with exactly the right answers. *\n\nYou put those thoughts away.\n\nErevane calls you from the clearing.\n\nYou follow.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Continue.",
+          "vers": "ils_te_cherchent",
+          "effects": [
+            {
+              "stat": "controle",
+              "val": 5
+            }
+          ]
+        }
+      ],
+      "x": 300,
+      "y": 700
+    },
+    "voix_erevane": {
+      "id": "voix_erevane",
+      "title": "His Voice",
+      "location": "Campfire",
+      "narrator": "",
+      "text": "**\"A bridge is rebuilt. *\n\nHe says that too easily.\n\nLike someone who said that phrase a lot of times.\n\nNot to comfort you.\n\nTo move on.\n\n**\"The important thing is that you learn. *\n\nThe important thing. *\n\nNot the child.\nNot the merchant.\nNot the bridge.\n\nThe important thing is that you learn. *\n\nYou can't tell if it's wisdom or something.\n\nYou're watching Erevane.\n\nHe's already turning a page of his book.\n\nHe's already moved on.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Continue.",
+          "vers": "erevane_perte",
+          "effects": [
+            {
+              "stat": "controle",
+              "val": 10
+            }
+          ]
+        }
+      ],
+      "x": 300,
+      "y": 960
+    },
+    "observer_erevane_sorn": {
+      "id": "observer_erevane_sorn",
+      "title": "The Observer",
+      "location": "Hostel — Sorn",
+      "narrator": "",
+      "text": "Erevane is calm.\n\nToo quiet.\n\nThe city whispers its name outside.\nThe Four are somewhere on the streets.\n\nHe's reading.\n\nAn old book.\nNot the one he showed you.\n\nAnother one.\n\nThe cover is different.\n\nNot black.\n\nDark red.\n\nHe closes it when he sees you looking.\n\n**\"Old Treaty.** he said.\n**\"Womany. *\n\nHe smiles.\n\nHis usual smile.\n\nBut her eyes go to the door for a second.\n\nLike he's expecting something.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Continue.",
+          "vers": "demander_erevane",
+          "effects": [
+            {
+              "stat": "controle",
+              "val": 10
+            }
+          ]
+        }
+      ],
+      "x": 300,
+      "y": 1400
+    },
+    "erevane_confirme": {
+      "id": "erevane_confirme",
+      "title": "Confirmation",
+      "location": "Red Street — Sorn",
+      "narrator": "",
+      "text": "You go back to Erevane.\n\n**\"Is that true? *\n\nHe's not answering right now.\n\nThat silence.\n\nThis silence says everything.\n\n**\"I was there.** he finally says.\n**\"But Caël had made his own choices. *\n\n**\"You told him the same thing you told me. *\n\n**\"I told the truth. *\n\n**\"Your truth. *\n\nHe doesn't deny it.\n\nHe doesn't confirm either.\n\nIt's not the same thing as lying.\n\nBut that's not the truth either.\n\nAnd you know that now.\n\nYou know that.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Continue.",
+          "vers": "devant_erevane",
+          "effects": [
+            {
+              "stat": "chaos",
+              "val": 15
+            }
+          ]
+        }
+      ],
+      "x": 300,
+      "y": 1560
+    }
+  },
+  "lang": "en"
+}
