@@ -1,0 +1,1678 @@
+{
+  "name": "Les Cinq Lames — Prologue",
+  "kids": false,
+  "askPlayerName": true,
+  "pack": "cinq_lames",
+  "stats": [
+    {
+      "id": "chaos",
+      "label": "Chaos",
+      "start": 10,
+      "max": 100,
+      "color": "#9b5de5"
+    },
+    {
+      "id": "controle",
+      "label": "Contrôle",
+      "start": 50,
+      "max": 100,
+      "color": "#00bbf9"
+    },
+    {
+      "id": "paranoia",
+      "label": "Paranoïa",
+      "start": 0,
+      "max": 100,
+      "color": "#f15bb5"
+    }
+  ],
+  "theme": {},
+  "scenes": {
+    "cendral_matin": {
+      "id": "cendral_matin",
+      "title": "Cendral",
+      "location": "Village de Cendral — Aube",
+      "narrator": "Aux frontières d'Aerith, loin d'Aurenthal et de ses lumières.",
+      "text": "Le soleil se lève sur Cendral.\n\nTu aiguises ton couteau sur le pas de la porte.\n\nC'est une habitude.\nPas pour te battre — pour le bois.\nTu sculptes depuis que tu as huit ans.\n\nLe village s'éveille doucement.\n\nLa boulangère allume son four.\nLes enfants courent entre les maisons.\nLe vieux Marek promène son chien comme chaque matin.\n\nCendral n'est pas grand.\nPas de mage de renom.\nPas de garnison d'Aurenthal.\n\nJuste un village frontière comme des centaines d'autres.\n\nMais c'est chez toi.\n\nDepuis toujours.",
+      "isStart": true,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Regarder le village s'éveiller.",
+          "vers": "journee_marek",
+          "effects": [
+            {
+              "stat": "controle",
+              "val": 5
+            }
+          ]
+        },
+        {
+          "text": "Entrer t'entraîner à l'épée.",
+          "vers": "journee_marek",
+          "effects": [
+            {
+              "stat": "chaos",
+              "val": 5
+            }
+          ]
+        }
+      ],
+      "x": 60,
+      "y": 60
+    },
+    "village_calme": {
+      "id": "village_calme",
+      "title": "Une Matinée Ordinaire",
+      "location": "Village de Cendral — Place",
+      "narrator": "",
+      "text": "Tu poses ton couteau.\n\nTu t'assis sur le muret de la place.\n\nCendral a toujours été comme ça.\nCalme.\nPrévisible.\nSans surprise.\n\nParfois tu te demandes ce qu'il y a au-delà des collines.\nLes autres villages.\nLes grandes villes du royaume.\nLes routes qu'on ne prend jamais.\n\nLe vieux Marek s'arrête à côté de toi.\n\n**« Tu rêvasses encore. »**\n\n**« J'observe. »** tu réponds.\n\nIl rit.\n\n**« C'est ce que disent tous les rêvasseurs. »**\n\nIl repart.\n\nTu regardes les collines.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Aller t'entraîner.",
+          "vers": "entrainement",
+          "effects": [
+            {
+              "stat": "controle",
+              "val": 5
+            }
+          ]
+        },
+        {
+          "text": "Rester encore un moment.",
+          "vers": "sculpture_bois",
+          "effects": [
+            {
+              "stat": "controle",
+              "val": 10
+            }
+          ]
+        }
+      ],
+      "x": 180,
+      "y": 60
+    },
+    "entrainement": {
+      "id": "entrainement",
+      "title": "L'Épée",
+      "location": "Derrière la maison — Matin",
+      "narrator": "",
+      "text": "Tu prends l'épée accrochée au mur.\n\nElle appartenait à ton père.\nSimple. Solide. Sans ornement.\n\nPas une lame élémentaire — juste du fer.\nÀ Cendral, personne n'a les moyens d'aller chez un forgeron d'Aurenthal.\n\nTu commences les mouvements de base.\n\nFrappe haute. Frappe basse. Parade. Contre.\n\nTu t'entraînes seul depuis des années.\nPersonne à Cendral ne sait vraiment se battre.\n\nJuste toi.\n\nEn frappant le poteau d'entraînement,\ntu remarques quelque chose d'étrange.\n\nTes mains.\n\nUne légère teinte violette.\nComme de l'électricité statique.\n\nÇa disparaît aussitôt.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Ignorer et continuer.",
+          "vers": "rumeur_bandits",
+          "effects": [
+            {
+              "stat": "chaos",
+              "val": 5
+            }
+          ]
+        },
+        {
+          "text": "Regarder ses mains.",
+          "vers": "mains_etranges",
+          "effects": [
+            {
+              "stat": "chaos",
+              "val": 10
+            }
+          ]
+        }
+      ],
+      "x": 300,
+      "y": 60
+    },
+    "mains_etranges": {
+      "id": "mains_etranges",
+      "title": "Quelque Chose d'Étrange",
+      "location": "Derrière la maison",
+      "narrator": "",
+      "text": "Tu retournes tes mains.\n\nRien.\n\nPeau normale.\nAucune trace.\n\nTu serres le poing.\n\nUne étincelle.\nViolette.\nBrève.\nRéelle.\n\nDans les légendes d'Aerith,\nil y a une couleur associée à un seul élément.\n\nPas l'eau.\nPas le feu.\nPas la terre.\nPas l'air.\n\nLe Chaos.\n\nLe nom de Caël traverse ton esprit.\n\nTu chasses cette pensée immédiatement.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "En parler à quelqu'un.",
+          "vers": "rumeur_bandits",
+          "effects": [
+            {
+              "stat": "controle",
+              "val": 10
+            }
+          ]
+        },
+        {
+          "text": "Garder ça pour toi.",
+          "vers": "rumeur_bandits",
+          "effects": [
+            {
+              "stat": "chaos",
+              "val": 10
+            },
+            {
+              "stat": "paranoia",
+              "val": 5
+            }
+          ]
+        }
+      ],
+      "x": 420,
+      "y": 60
+    },
+    "alerte_bandits": {
+      "id": "alerte_bandits",
+      "title": "L'Alerte",
+      "location": "Village de Cendral — Place",
+      "narrator": "",
+      "text": "Un cri traverse le village.\n\nPuis un autre.\n\nTu cours vers la place.\n\nUne vingtaine de bandits armés descendent de la colline nord.\nÀ cheval.\nRapides.\n\nLes villageois fuient.\nLes enfants pleurent.\n\nLe vieux Marek essaie de barrer le passage avec son bâton.\n\nUn bandit le frappe sans s'arrêter.\n\nMarek tombe.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Prendre ton épée et charger.",
+          "vers": "combat_bandits",
+          "effects": [
+            {
+              "stat": "chaos",
+              "val": 10
+            }
+          ]
+        },
+        {
+          "text": "Essayer de faire évacuer les villageois.",
+          "vers": "evacuation",
+          "effects": [
+            {
+              "stat": "controle",
+              "val": 10
+            }
+          ]
+        }
+      ],
+      "x": 60,
+      "y": 200,
+      "timer": {
+        "duration": 5,
+        "auto": "first"
+      }
+    },
+    "evacuation": {
+      "id": "evacuation",
+      "title": "Evacuer",
+      "location": "Village de Cendral — Ruelles",
+      "narrator": "",
+      "text": "Tu cries aux villageois de courir vers la forêt.\n\nCertains t'écoutent.\nD'autres sont paralysés.\n\nTu attrapes deux enfants par la main.\nTu les pousses vers les arbres.\n\nUn bandit te bloque le chemin.\n\nIl sourit.\n\n**« Où tu vas comme ça ? »**\n\nDerrière toi, tu entends les maisons qui brûlent.\n\nLa colère monte.\nQuelque chose monte avec elle.\n\nDans tes mains.\nDans ta poitrine.\nPartout.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Tenir bon.",
+          "vers": "basculement_pouvoir",
+          "effects": [
+            {
+              "stat": "chaos",
+              "val": 10
+            }
+          ]
+        },
+        {
+          "text": "Lâcher.",
+          "vers": "basculement_pouvoir",
+          "effects": [
+            {
+              "stat": "chaos",
+              "val": 20
+            }
+          ]
+        }
+      ],
+      "x": 180,
+      "y": 200
+    },
+    "combat_bandits": {
+      "id": "combat_bandits",
+      "title": "Le Combat",
+      "location": "Village de Cendral — Place",
+      "narrator": "",
+      "text": "Tu charges le premier bandit.\n\nTon épée contre la sienne.\n\nTu es plus rapide qu'eux.\nTu l'as toujours su.\n\nMais ils sont vingt.\n\nTu en renverses trois.\nQuatre.\n\nMais le cinquième te frappe l'épaule.\n\nTu tombes.\n\nUn bandit lève sa lame au-dessus de toi.\n\nDerrière lui, une maison s'effondre.\n\nL'enfant de la boulangère est encore là-dedans.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Penser à l'enfant.",
+          "vers": "basculement_pouvoir",
+          "effects": [
+            {
+              "stat": "chaos",
+              "val": 15
+            }
+          ]
+        },
+        {
+          "text": "Fermer les yeux.",
+          "vers": "basculement_pouvoir",
+          "effects": [
+            {
+              "stat": "chaos",
+              "val": 20
+            }
+          ]
+        }
+      ],
+      "x": 300,
+      "y": 200,
+      "timer": {
+        "duration": 4,
+        "auto": "last"
+      }
+    },
+    "basculement_pouvoir": {
+      "id": "basculement_pouvoir",
+      "title": "Le Chaos",
+      "location": "Village de Cendral — Place",
+      "narrator": "",
+      "text": "Quelque chose se brise en toi.\n\nPas de la peur.\nPas de la colère.\n\nQuelque chose de plus profond.\nDe plus ancien.\n\nUne lumière violette explose de tes mains.\n\nElle traverse le bandit devant toi.\nLe mur derrière lui.\nLa maison derrière le mur.\n\nTu ne contrôles pas.\n\nTu ne peux pas contrôler.\n\nC'est comme essayer d'arrêter une rivière avec les mains.\n\nLes bandits fuient en hurlant.\n\nMais le pouvoir continue.\n\nEt Cendral est dans son chemin.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Essayer d'arrêter.",
+          "vers": "cendral_detruit",
+          "effects": [
+            {
+              "stat": "chaos",
+              "val": 20
+            },
+            {
+              "stat": "controle",
+              "val": -20
+            }
+          ]
+        },
+        {
+          "text": "Laisser faire.",
+          "vers": "cendral_detruit",
+          "effects": [
+            {
+              "stat": "chaos",
+              "val": 30
+            },
+            {
+              "stat": "controle",
+              "val": -30
+            }
+          ]
+        }
+      ],
+      "x": 60,
+      "y": 340
+    },
+    "cendral_detruit": {
+      "id": "cendral_detruit",
+      "title": "Les Décombres",
+      "location": "Cendral — Ruines",
+      "narrator": "",
+      "text": "Le silence.\n\nTu regardes autour de toi.\n\nCendral n'existe plus.\n\nLes maisons sont des ruines.\nLa boulangerie.\nLa place.\nLe muret où tu t'asseyais.\n\nLes villageois sont vivants.\nIls ont eu le temps de fuir.\n\nMais ils te regardent de loin.\n\nAvec de la peur dans les yeux.\n\nToi.\n\nIls te regardent toi.\n\nPuis tu la vois.\n\nDans les cendres, à tes pieds.\n\nUne épée.\n\nNoire.\nElle absorbe la lumière autour d'elle.\nComme si l'obscurité gravitait vers sa lame.\n\nElle n'était pas là avant.\n\nElle est là maintenant.\n\nLe vieux Marek est assis dans les décombres.\nIl te regarde.\nIl regarde la lame.\n\nEt dans son regard tu lis quelque chose\nque tu n'oublieras jamais.\n\nIl ne te reconnaît plus.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Essayer de lui parler.",
+          "vers": "marek_peur",
+          "effects": [
+            {
+              "stat": "paranoia",
+              "val": 10
+            }
+          ]
+        },
+        {
+          "text": "Reculer.",
+          "vers": "quatre_arrivent",
+          "effects": [
+            {
+              "stat": "paranoia",
+              "val": 15
+            }
+          ]
+        }
+      ],
+      "x": 60,
+      "y": 460
+    },
+    "marek_peur": {
+      "id": "marek_peur",
+      "title": "Le Regard de Marek",
+      "location": "Cendral — Ruines",
+      "narrator": "",
+      "text": "Tu t'approches de Marek.\n\nIl recule.\n\nLe vieux Marek qui t'a vu grandir.\nQui t'a appris à sculpter le bois.\nQui riait de tes rêvasseries.\n\nIl recule devant toi.\n\n**« Marek... c'est moi. »**\n\nIl regarde la lame noire dans ta main.\n\nSa voix tremble.\n\n**« La prophétie... »**\n\nIl secoue la tête.\n\n**« Je savais pas que c'était toi. »**\n\nPas de colère.\nJuste de la peur.\n\n**« Pas toi. »**\n\nIl se lève et s'éloigne sans se retourner.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Rester là.",
+          "vers": "quatre_arrivent",
+          "effects": [
+            {
+              "stat": "paranoia",
+              "val": 15
+            },
+            {
+              "stat": "controle",
+              "val": -10
+            }
+          ]
+        }
+      ],
+      "x": 180,
+      "y": 460
+    },
+    "quatre_arrivent": {
+      "id": "quatre_arrivent",
+      "title": "Ils Arrivent",
+      "location": "Cendral — Ruines",
+      "narrator": "Ils étaient déjà en route. Depuis des jours.",
+      "text": "Tu les entends avant de les voir.\n\nQuatre chevaux.\nRapides.\n\nIls s'arrêtent au bord des ruines.\n\nQuatre silhouettes descendent de cheval.\n\nUne fille aux cheveux argentés — son épée brille comme de l'eau.\nUn garçon à la mâchoire serrée — sa lame brûle sans s'éteindre.\nUne fille aux mains couvertes de terre — son épée est large comme un rocher.\nUn garçon qui sourit — son épée disparaît et réapparaît dans l'air.\n\nIls regardent les ruines.\n\nPuis ils voient la lame dans ta main.\n\nLa lame noire.\n\nAryn ferme les yeux une seconde.\n\nIkar dit quelque chose à voix basse.\n\n*\"C'est lui.\"*\n\nTaera pose une main sur sa bouche.\n\nVael ne sourit plus.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Tenir ton épée.",
+          "vers": "premiere_rencontre",
+          "effects": [
+            {
+              "stat": "paranoia",
+              "val": 10
+            }
+          ]
+        },
+        {
+          "text": "Attendre.",
+          "vers": "premiere_rencontre",
+          "effects": [
+            {
+              "stat": "controle",
+              "val": 5
+            }
+          ]
+        }
+      ],
+      "x": 60,
+      "y": 580
+    },
+    "premiere_rencontre": {
+      "id": "premiere_rencontre",
+      "title": "Les Cinq Lames",
+      "location": "Cendral — Ruines",
+      "narrator": "",
+      "text": "La fille aux cheveux argentés s'avance.\n\nElle ne touche pas son épée.\n\n**« Tu t'appelles {{player}}. »**\n\nCe n'est pas une question.\n\n**« Je suis Aryn. »**\n\nElle montre les trois autres.\n\n**« Ikar. Taera. Vael. »**\n\nTu serres la lame noire.\n\n**« Vous êtes les Quatre Lames. »**\n\nTout Aerith connaît leurs noms.\nLeurs exploits.\nLes statues à Aurenthal.\n\nAryn hoche la tête.\n\n**« On t'attendait. »** dit-elle.\n\n**« Vous attendiez ça ? »** tu demandes en montrant les ruines.\n\nSilence.\n\nTaera baisse la tête.\n\n**« On espérait que non. »**\n\n**« Mais la prophétie... »** dit Ikar.\n\nAryn lui coupe la parole d'un regard.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "« Qui êtes-vous vraiment ? »",
+          "vers": "explication_ordre",
+          "effects": [
+            {
+              "stat": "paranoia",
+              "val": 5
+            }
+          ]
+        },
+        {
+          "text": "« Partez. »",
+          "vers": "refus_aide",
+          "effects": [
+            {
+              "stat": "paranoia",
+              "val": 15
+            },
+            {
+              "stat": "chaos",
+              "val": 10
+            }
+          ]
+        },
+        {
+          "text": "Écouter.",
+          "vers": "explication_ordre",
+          "effects": [
+            {
+              "stat": "controle",
+              "val": 10
+            }
+          ]
+        }
+      ],
+      "x": 60,
+      "y": 700
+    },
+    "refus_aide": {
+      "id": "refus_aide",
+      "title": "Laisser-moi",
+      "location": "Cendral — Ruines",
+      "narrator": "",
+      "text": "Ils ne bougent pas.\n\nIkar fait un pas vers toi.\n\n**« Ce n'est pas une suggestion. »** tu dis.\n\nUne étincelle violette crépite dans ta main.\n\nIkar s'arrête.\n\nVael pose une main sur son épaule.\n\n**« On part pas. »** dit Ikar.\n**« Même si tu nous en veux. »**\n**« Surtout si tu nous en veux. »**\n\nTaera s'assoit sur un morceau de mur effondré.\nComme si elle avait l'intention de rester toute la nuit.\n\n**« On a nulle part où aller. »** dit-elle doucement.\n**« Toi non plus. »**",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Baisser la garde.",
+          "vers": "explication_ordre",
+          "effects": [
+            {
+              "stat": "controle",
+              "val": 10
+            }
+          ]
+        },
+        {
+          "text": "Rester méfiant.",
+          "vers": "explication_ordre",
+          "effects": [
+            {
+              "stat": "paranoia",
+              "val": 10
+            }
+          ]
+        }
+      ],
+      "x": 180,
+      "y": 700
+    },
+    "explication_ordre": {
+      "id": "explication_ordre",
+      "title": "L'Ordre des Lames",
+      "location": "Cendral — Ruines — Nuit tombante",
+      "narrator": "",
+      "text": "Aryn parle.\n\nLongtemps.\n\nL'Ordre des Cinq Lames existe depuis des siècles.\nQuatre guerriers. Quatre éléments.\nEt un porteur du Chaos.\nEau. Feu. Terre. Air. Et Chaos.\n\n**« Le Chaos est le plus puissant. »** dit-elle.\n**« Et le plus dangereux seul. »**\n\nElle marque une pause.\n\n**« Il y a trois cents ans... Caël. »**\n\nLe nom tombe dans le silence.\n\nMême ici, dans les ruines, il pèse.\n\n**« Il avait reçu une prophétie. »** continue Aryn.\n**« Qu'il détruirait tout. »**\n**« Il a voulu l'éviter. »**\n**« Il s'est isolé. »**\n**« Et en s'isolant... »**\n\nElle n'a pas besoin de finir.\n\n**« Les quatre sages de l'époque l'ont arrêté. »**\n**« Pas tué. »**\n**« Arrêté. »**\n**« Au prix de leur vie. »**\n\nIkar te regarde.\n\n**« On s'entraîne depuis qu'on a sept ans. »**\n**« Pour ne pas répéter ça. »**\n\nVael lève les yeux au ciel.\n\n**« Façon romantique de dire qu'on a pas eu le choix. »**\n\nTaera lui donne un coup de coude.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "« Vous m'avez surveillé. »",
+          "vers": "surveille",
+          "effects": [
+            {
+              "stat": "paranoia",
+              "val": 10
+            }
+          ]
+        },
+        {
+          "text": "« Pourquoi vous ne m'avez pas prévenu ? »",
+          "vers": "pas_prevenu",
+          "effects": [
+            {
+              "stat": "controle",
+              "val": 5
+            }
+          ]
+        },
+        {
+          "text": "« Qu'est-ce que vous voulez de moi ? »",
+          "vers": "ce_quils_veulent",
+          "effects": [
+            {
+              "stat": "controle",
+              "val": 10
+            }
+          ]
+        },
+        {
+          "text": "« Racontez-moi Caël. »",
+          "vers": "lore_cael",
+          "effects": [
+            {
+              "stat": "controle",
+              "val": 5
+            }
+          ]
+        },
+        {
+          "text": "« Comment l'Ordre fonctionne ? »",
+          "vers": "lore_ordre",
+          "effects": [
+            {
+              "stat": "controle",
+              "val": 5
+            }
+          ]
+        },
+        {
+          "text": "« C'est quoi exactement la prophétie ? »",
+          "vers": "lore_prophetie",
+          "effects": [
+            {
+              "stat": "paranoia",
+              "val": 5
+            }
+          ]
+        }
+      ],
+      "x": 60,
+      "y": 820
+    },
+    "surveille": {
+      "id": "surveille",
+      "title": "Sous Surveillance",
+      "location": "Cendral — Ruines",
+      "narrator": "",
+      "text": "Aryn ne détourne pas le regard.\n\n**« Oui. »**\n\n**« Depuis combien de temps ? »**\n\n**« Depuis ta naissance. »**\n\nLe silence tombe.\n\nIkar croise les bras.\n\n**« C'est pas ce que tu crois. »**\n\n**« C'est exactement ce que je crois. »** tu réponds.\n\nVael s'approche.\n\n**« On t'a pas suivi pour te contrôler. »**\n**« On t'a surveillé pour être là quand ça arriverait. »**\n\nIl montre les ruines.\n\n**« Et on était en retard. »**\n\nDans sa voix — quelque chose qui ressemble à de la culpabilité.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Les croire.",
+          "vers": "ce_quils_veulent",
+          "effects": [
+            {
+              "stat": "controle",
+              "val": 10
+            }
+          ]
+        },
+        {
+          "text": "Ne pas les croire.",
+          "vers": "ce_quils_veulent",
+          "effects": [
+            {
+              "stat": "paranoia",
+              "val": 15
+            }
+          ]
+        }
+      ],
+      "x": 180,
+      "y": 820
+    },
+    "pas_prevenu": {
+      "id": "pas_prevenu",
+      "title": "Pourquoi Pas Avant ?",
+      "location": "Cendral — Ruines",
+      "narrator": "",
+      "text": "Taera répond.\n\nDoucement. Comme toujours.\n\n**« On ne savait pas quand ça arriverait. »**\n**« Les pouvoirs du Chaos s'éveillent différemment pour chacun. »**\n\n**« Certains à l'adolescence. »**\n**« D'autres plus tard. »**\n**« Certains jamais. »**\n\n**« Et si tu m'avais dit dès le début ? »**\n\nElle réfléchit.\n\n**« T'aurais cru ? »**\n\nTu n'as pas de réponse.\n\nIkar hausse les épaules.\n\n**« Exactement. »**",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Continuer à écouter.",
+          "vers": "ce_quils_veulent",
+          "effects": [
+            {
+              "stat": "controle",
+              "val": 10
+            }
+          ]
+        }
+      ],
+      "x": 300,
+      "y": 820
+    },
+    "ce_quils_veulent": {
+      "id": "ce_quils_veulent",
+      "title": "Ce Qu'ils Veulent",
+      "location": "Cendral — Ruines — Nuit",
+      "narrator": "",
+      "text": "**« Qu'est-ce que vous voulez de moi ? »**\n\nAryn te regarde longuement.\n\n**« T'apprendre à maîtriser le Chaos. »**\n\n**« Et si je ne veux pas ? »**\n\n**« Alors Aerith finira comme Cendral. »**\n\nPas dit méchamment.\nJuste la vérité.\n\nIkar s'assoit par terre.\n\n**« On va pas te forcer. »** dit-il.\n**« Mais on va pas partir non plus. »**\n\nVael sort quelque chose de son sac.\nDe la nourriture.\n\n**« C'est une longue nuit. »** il dit.\n**« Autant manger. »**\n\nTaera s'installe près du feu qu'elle vient de faire apparaître.\n\nComme si c'était normal.\nComme s'ils avaient toujours fait ça ensemble.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "S'asseoir avec eux.",
+          "vers": "nuit_ensemble",
+          "effects": [
+            {
+              "stat": "controle",
+              "val": 15
+            }
+          ]
+        },
+        {
+          "text": "Rester à l'écart.",
+          "vers": "nuit_ecart",
+          "effects": [
+            {
+              "stat": "paranoia",
+              "val": 10
+            }
+          ]
+        },
+        {
+          "text": "S'éloigner sans répondre.",
+          "vers": "nuit_ecart",
+          "requires": {
+            "stat": "paranoia",
+            "min": 30
+          },
+          "effects": [
+            {
+              "stat": "paranoia",
+              "val": 10
+            }
+          ]
+        }
+      ],
+      "x": 60,
+      "y": 940
+    },
+    "nuit_ensemble": {
+      "id": "nuit_ensemble",
+      "title": "Autour du Feu",
+      "location": "Cendral — Ruines — Nuit",
+      "narrator": "",
+      "text": "Tu t'assieds.\n\nVael te tend du pain.\n\nLe feu de Taera brûle sans bois.\nJuste de la chaleur, là où elle veut.\n\n**« Ça fait longtemps que vous vous connaissez ? »** tu demandes.\n\nVael rit.\n\n**« Depuis qu'on a sept ans. »**\n**« L'Ordre nous a réunis. »**\n\n**« Vous avez choisi ? »**\n\nIkar secoue la tête.\n\n**« Non. »**\n\nTaera sourit.\n\n**« Mais on aurait choisi pareil. »**\n\nUn silence confortable.\n\nLe genre de silence qu'on partage avec des gens\nqu'on connaît depuis longtemps.\n\nSauf que toi tu les as rencontrés ce soir.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "« C'est comment Aurenthal ? »",
+          "vers": "lore_aurenthal"
+        },
+        {
+          "text": "Demander à voir leurs épées.",
+          "vers": "epees_elements",
+          "effects": [
+            {
+              "stat": "controle",
+              "val": 5
+            },
+            {
+              "stat": "chaos",
+              "val": 5
+            }
+          ]
+        },
+        {
+          "text": "Demander leurs histoires.",
+          "vers": "portails_memoires",
+          "effects": [
+            {
+              "stat": "controle",
+              "val": 10
+            }
+          ]
+        }
+      ],
+      "x": 60,
+      "y": 1060
+    },
+    "nuit_ecart": {
+      "id": "nuit_ecart",
+      "title": "Seul Dans le Noir",
+      "location": "Cendral — Ruines — Nuit",
+      "narrator": "",
+      "text": "Tu t'assieds loin d'eux.\n\nTu les observes depuis les décombres.\n\nIls parlent entre eux à voix basse.\nIls rient parfois.\n\nVael dit quelque chose.\nIkar lui lance du pain.\nTaera soupire.\nAryn ne dit rien mais sourit.\n\nQuatre amis.\n\nAutour d'un feu.\n\nComme si tout allait bien.\n\nComme si Cendral n'était pas en ruines derrière eux.\n\nTu serres les poings.\n\nIls sont à l'aise ici.\nTrop à l'aise.\n\nComme si c'était prévu.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "S'approcher quand même.",
+          "vers": "epees_elements",
+          "effects": [
+            {
+              "stat": "controle",
+              "val": 10
+            }
+          ]
+        },
+        {
+          "text": "Rester dans l'ombre.",
+          "vers": "epees_elements",
+          "effects": [
+            {
+              "stat": "paranoia",
+              "val": 15
+            }
+          ]
+        },
+        {
+          "text": "Rester dans l'ombre jusqu'au sommeil.",
+          "vers": "endormissement",
+          "effects": [
+            {
+              "stat": "paranoia",
+              "val": 15
+            }
+          ]
+        }
+      ],
+      "x": 180,
+      "y": 1060
+    },
+    "epees_elements": {
+      "id": "epees_elements",
+      "title": "Les Épées",
+      "location": "Cendral — Ruines — Nuit",
+      "narrator": "",
+      "text": "Ikar remarque ton regard sur sa lame.\n\nIl la sort.\n\nLa flamme s'allume aussitôt.\nOrange et bleue.\nVivante.\n\n**« Chaque lame est forgée par un artisan d'Aurenthal. »** dit Aryn.\n**« Accordée à l'élément de son porteur. »**\n**« N'importe qui peut en avoir une. »**\n\nElle sort la sienne.\nTranslucide.\nComme de l'eau figée.\n\nTaera pose la main sur la poignée de la sienne.\nDe la mousse pousse instantanément sur les pierres autour d'elle.\n\nVael fait apparaître la sienne depuis l'air.\nLittéralement.\nElle se matérialise de nulle part.\n\nTu regardes la lame noire dans ta main.\n\n**« La mienne... personne ne l'a forgée. »**\n\n**« Non. »** dit Aryn.\n**« Elle s'est forgée elle-même. »**\n**« Ça ne s'est pas vu depuis... »**\n\n**« Depuis Caël. »** dit Ikar.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "« Comment les lames sont forgées ? »",
+          "vers": "lore_forgerons"
+        },
+        {
+          "text": "Demander leurs histoires.",
+          "vers": "portails_memoires",
+          "effects": [
+            {
+              "stat": "controle",
+              "val": 5
+            }
+          ]
+        },
+        {
+          "text": "Aller dormir.",
+          "vers": "endormissement",
+          "effects": [
+            {
+              "stat": "paranoia",
+              "val": 5
+            }
+          ]
+        }
+      ],
+      "x": 300,
+      "y": 1060
+    },
+    "portails_memoires": {
+      "id": "portails_memoires",
+      "title": "Leurs Histoires",
+      "location": "Cendral — Ruines — Nuit",
+      "narrator": "Fermer les yeux. Se laisser aller. Faire confiance.",
+      "text": "**« Racontez-moi. »**\n\nAryn te regarde.\n\n**« Nos histoires ? »**\n\n**« Comment vous avez découvert vos pouvoirs. »**\n**« Comment vous en êtes arrivés là. »**\n\nIls échangent un regard.\n\nTaera parle en premier.\n\n**« C'est pas une histoire courte. »**\n\nVael sourit.\n\n**« La nuit est longue. »**\n\nAryn pose la main sur son épée.\n\n**« Ferme les yeux. »**\n**« On va te montrer. »**",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Fermer les yeux — voir la mémoire d'Aryn.",
+          "vers": "portail_aryn",
+          "story": "stories/fr/cinq_lames_aryn.json",
+          "requires": {
+            "stat": "paranoia",
+            "max": 39
+          }
+        },
+        {
+          "text": "Fermer les yeux — voir la mémoire d'Ikar.",
+          "vers": "portail_ikar",
+          "story": "stories/fr/cinq_lames_ikar.json",
+          "requires": {
+            "stat": "paranoia",
+            "max": 39
+          }
+        },
+        {
+          "text": "Fermer les yeux — voir la mémoire de Taera.",
+          "vers": "portail_taera",
+          "story": "stories/fr/cinq_lames_taera.json",
+          "requires": {
+            "stat": "paranoia",
+            "max": 39
+          }
+        },
+        {
+          "text": "Fermer les yeux — voir la mémoire de Vael.",
+          "vers": "portail_vael",
+          "story": "stories/fr/cinq_lames_vael.json",
+          "requires": {
+            "stat": "paranoia",
+            "max": 39
+          }
+        },
+        {
+          "text": "Pas ce soir. Aller dormir.",
+          "vers": "endormissement",
+          "effects": [
+            {
+              "stat": "paranoia",
+              "val": 5
+            }
+          ]
+        },
+        {
+          "text": "Non. Tu n'as pas envie de te laisser aller.",
+          "vers": "refus_memoires",
+          "requires": {
+            "stat": "paranoia",
+            "min": 40
+          }
+        }
+      ],
+      "x": 60,
+      "y": 1180
+    },
+    "portail_aryn": {
+      "id": "portail_aryn",
+      "title": "La Mémoire de Aryn",
+      "location": "Cendral — Ruines",
+      "narrator": "",
+      "text": "Tu rouvres les yeux.\n\nLe feu crépite.\n\nAryn te regarde.\n\n**« Tu as vu. »**\n\nCe n'est pas une question.\n\nTu hoches la tête.\n\nQuelque chose a changé dans la façon dont tu les regardes.\nPas beaucoup.\nMais quelque chose.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Voir une autre mémoire.",
+          "vers": "portails_memoires",
+          "effects": [
+            {
+              "stat": "controle",
+              "val": 5
+            }
+          ]
+        },
+        {
+          "text": "Aller dormir.",
+          "vers": "endormissement",
+          "effects": [
+            {
+              "stat": "controle",
+              "val": 5
+            }
+          ]
+        }
+      ],
+      "x": 180,
+      "y": 1300
+    },
+    "portail_ikar": {
+      "id": "portail_ikar",
+      "title": "La Mémoire de Ikar",
+      "location": "Cendral — Ruines",
+      "narrator": "",
+      "text": "Tu rouvres les yeux.\n\nLe feu crépite.\n\nIkar te regarde.\n\n**« Tu as vu. »**\n\nCe n'est pas une question.\n\nTu hoches la tête.\n\nQuelque chose a changé dans la façon dont tu les regardes.\nPas beaucoup.\nMais quelque chose.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Voir une autre mémoire.",
+          "vers": "portails_memoires",
+          "effects": [
+            {
+              "stat": "controle",
+              "val": 5
+            }
+          ]
+        },
+        {
+          "text": "Aller dormir.",
+          "vers": "endormissement",
+          "effects": [
+            {
+              "stat": "controle",
+              "val": 5
+            }
+          ]
+        }
+      ],
+      "x": 300,
+      "y": 1300
+    },
+    "portail_taera": {
+      "id": "portail_taera",
+      "title": "La Mémoire de Taera",
+      "location": "Cendral — Ruines",
+      "narrator": "",
+      "text": "Tu rouvres les yeux.\n\nLe feu crépite.\n\nTaera te regarde.\n\n**« Tu as vu. »**\n\nCe n'est pas une question.\n\nTu hoches la tête.\n\nQuelque chose a changé dans la façon dont tu les regardes.\nPas beaucoup.\nMais quelque chose.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Voir une autre mémoire.",
+          "vers": "portails_memoires",
+          "effects": [
+            {
+              "stat": "controle",
+              "val": 5
+            }
+          ]
+        },
+        {
+          "text": "Aller dormir.",
+          "vers": "endormissement",
+          "effects": [
+            {
+              "stat": "controle",
+              "val": 5
+            }
+          ]
+        }
+      ],
+      "x": 420,
+      "y": 1300
+    },
+    "portail_vael": {
+      "id": "portail_vael",
+      "title": "La Mémoire de Vael",
+      "location": "Cendral — Ruines",
+      "narrator": "",
+      "text": "Tu rouvres les yeux.\n\nLe feu crépite.\n\nVael te regarde.\n\n**« Tu as vu. »**\n\nCe n'est pas une question.\n\nTu hoches la tête.\n\nQuelque chose a changé dans la façon dont tu les regardes.\nPas beaucoup.\nMais quelque chose.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Voir une autre mémoire.",
+          "vers": "portails_memoires",
+          "effects": [
+            {
+              "stat": "controle",
+              "val": 5
+            }
+          ]
+        },
+        {
+          "text": "Aller dormir.",
+          "vers": "endormissement",
+          "effects": [
+            {
+              "stat": "controle",
+              "val": 5
+            }
+          ]
+        }
+      ],
+      "x": 540,
+      "y": 1300
+    },
+    "lendemain_matin": {
+      "id": "lendemain_matin",
+      "title": "Le Lendemain",
+      "location": "Cendral — Ruines — Aube",
+      "narrator": "",
+      "text": "Tu te réveilles dans les décombres.\n\nLe feu de Taera s'est éteint.\n\nIls sont tous là.\nAssis.\nIls t'attendaient.\n\nAryn se lève.\n\n**« On part aujourd'hui. »**\n\n**« Où ? »**\n\n**« Loin de Cendral. »** dit Ikar.\n**« Les gens ont peur. »**\n**« Et tant que tu contrôles pas... »**\n\nIl ne finit pas sa phrase.\n\nIl n'a pas besoin.\n\nTu regardes les ruines une dernière fois.\n\nLa maison de Marek.\nLa boulangerie.\nLe muret de la place.\n\nTout ça existe encore.\nJuste en morceaux.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Partir avec eux.",
+          "vers": "depart_cendral",
+          "effects": [
+            {
+              "stat": "controle",
+              "val": 10
+            }
+          ]
+        },
+        {
+          "text": "Demander encore du temps.",
+          "vers": "au_revoir_cendral",
+          "effects": [
+            {
+              "stat": "paranoia",
+              "val": 5
+            }
+          ]
+        }
+      ],
+      "x": 60,
+      "y": 1420
+    },
+    "au_revoir_cendral": {
+      "id": "au_revoir_cendral",
+      "title": "Au Revoir Cendral",
+      "location": "Cendral — Ruines",
+      "narrator": "",
+      "text": "Tu marches seul dans les décombres.\n\nLa maison de Marek.\nTu t'arrêtes devant la porte effondrée.\n\nTu ramasses quelque chose dans les cendres.\n\nTon couteau à sculpter.\nIntact.\n\nTu le ranges dans ta ceinture.\n\nTaera t'a suivi sans faire de bruit.\n\nElle pose une main sur ton épaule.\n\nElle ne dit rien.\n\nC'est mieux comme ça.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Partir.",
+          "vers": "depart_cendral",
+          "effects": [
+            {
+              "stat": "controle",
+              "val": 10
+            },
+            {
+              "stat": "paranoia",
+              "val": -5
+            }
+          ]
+        }
+      ],
+      "x": 180,
+      "y": 1420
+    },
+    "depart_cendral": {
+      "id": "depart_cendral",
+      "title": "La Route",
+      "location": "Route d'Aerith — Aube",
+      "narrator": "",
+      "text": "Quatre silhouettes sur la route.\nEt toi.\n\nLe soleil se lève devant vous.\n\nVael marche à côté de toi.\n\n**« Première fois que tu quittes Cendral ? »**\n\n**« Oui. »**\n\n**« C'est pas idéal comme départ. »** il dit.\n\n**« Non. »**\n\nIl rit doucement.\n\nSur la route, un paysan vous croise.\n\nIl voit la lame noire à ta ceinture.\n\nIl s'écarte.\n\nSon visage.\n\nTu connais ce visage maintenant.\nC'est le même que celui de Marek.\n\nLa prophétie te précède.\nPartout où tu iras.\n\nIkar marche devant.\nRapide. Comme toujours.\n\nAryn est en tête.\nElle connaît le chemin.\n\nTaera est derrière.\nElle regarde Cendral une dernière fois.\n\nToi tu regardes la lame noire.\n\nElle absorbe le soleil du matin.\n\nEt tu ne sais pas encore\nsi c'est une malédiction\nou autre chose.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Continuer — La suite de l'aventure.",
+          "vers": "fin_prologue",
+          "story": "stories/fr/cinq_lames_paranoia.json"
+        }
+      ],
+      "x": 60,
+      "y": 1540
+    },
+    "fin_prologue": {
+      "id": "fin_prologue",
+      "title": "Prologue — Fin",
+      "location": "",
+      "narrator": "",
+      "text": "La route d'Aerith s'étend devant vous.\n\nQuatre lames.\nEt le Chaos.\n\nEnsemble pour la première fois.\n\nL'aventure commence.",
+      "isStart": false,
+      "isEnd": true,
+      "transition": "fade",
+      "choices": [],
+      "x": 180,
+      "y": 1540
+    },
+    "journee_marek": {
+      "id": "journee_marek",
+      "title": "Marek",
+      "location": "Village de Cendral — Place",
+      "narrator": "",
+      "text": "Le vieux Marek est assis sur son banc habituel.\n\nSon chien Brun dort à ses pieds.\n\nIl sculpte quelque chose dans un bout de bois.\nSes mains tremblent un peu maintenant.\nMais le geste reste précis.\n\nC'est lui qui t'a appris.\nIl y a longtemps.\n\n**« Tu restes planté là ou tu t'assois ? »**\n\nIl n'a pas levé les yeux.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "S'asseoir à côté de lui.",
+          "vers": "conversation_marek",
+          "effects": [
+            {
+              "stat": "controle",
+              "val": 5
+            }
+          ]
+        },
+        {
+          "text": "Aller voir la boulangère.",
+          "vers": "boulangerie_matin",
+          "effects": [
+            {
+              "stat": "controle",
+              "val": 5
+            }
+          ]
+        }
+      ],
+      "x": 60,
+      "y": 120
+    },
+    "conversation_marek": {
+      "id": "conversation_marek",
+      "title": "Une Leçon de Marek",
+      "location": "Village de Cendral — Banc",
+      "narrator": "",
+      "text": "Tu t'assieds.\n\nMarek sculpte sans parler.\n\nAu bout d'un moment il te tend son bout de bois.\n\nUn chien. Petit. Pas parfait.\nMais on reconnaît que c'est un chien.\n\n**« Brun quand il était jeune. »**\n\nTu le regardes.\n\n**« C'est bien. »**\n\n**« C'est raté. »** dit-il.\n**« Mais c'est honnête. »**\n\nIl reprend son couteau.\n\n**« Un beau mensonge vaut moins qu'une vérité bancale. »**\n\nIl dit ça comme si c'était une évidence.\n\nBrun ouvre un œil.\nPuis le referme.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "« Tu connais les légendes des Cinq Lames ? »",
+          "vers": "lore_marek_legendes",
+          "effects": [
+            {
+              "stat": "controle",
+              "val": 5
+            }
+          ]
+        },
+        {
+          "text": "Rester encore un moment.",
+          "vers": "marek_rumeur",
+          "effects": [
+            {
+              "stat": "controle",
+              "val": 10
+            }
+          ]
+        },
+        {
+          "text": "Aller voir la boulangère.",
+          "vers": "boulangerie_matin",
+          "effects": [
+            {
+              "stat": "controle",
+              "val": 5
+            }
+          ]
+        }
+      ],
+      "x": 180,
+      "y": 120
+    },
+    "marek_rumeur": {
+      "id": "marek_rumeur",
+      "title": "La Rumeur",
+      "location": "Village de Cendral — Banc",
+      "narrator": "",
+      "text": "Marek range son couteau.\n\n**« T'as entendu ? »**\n\n**« Quoi ? »**\n\n**« Des gens du village d'à côté sont passés hier soir. »**\n\nIl regarde la colline nord.\n\n**« Ils parlaient de bandits sur la route. »**\n**« Plus nombreux que d'habitude. »**\n\nIl tapote le dos de Brun.\n\n**« Probablement rien. »**\n\nIl dit ça.\nMais il continue de regarder la colline.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Aller prévenir quelqu'un.",
+          "vers": "prevenir_village",
+          "effects": [
+            {
+              "stat": "controle",
+              "val": 10
+            }
+          ]
+        },
+        {
+          "text": "« C'est probablement rien. »",
+          "vers": "boulangerie_matin",
+          "effects": [
+            {
+              "stat": "controle",
+              "val": 5
+            }
+          ]
+        }
+      ],
+      "x": 300,
+      "y": 120
+    },
+    "boulangerie_matin": {
+      "id": "boulangerie_matin",
+      "title": "La Boulangerie",
+      "location": "Village de Cendral — Boulangerie",
+      "narrator": "",
+      "text": "L'odeur du pain chaud envahit la rue.\n\nLa boulangère — Mira — sort une fournée.\n\nElle chante en travaillant.\nToujours.\nMême seule.\n\nElle te voit et pose aussitôt quelque chose sur le comptoir.\n\nUne brioche.\nEncore chaude.\n\n**« T'as encore l'air de pas avoir mangé. »**\n\n**« J'ai mangé. »**\n\n**« Un couteau à sculpter c'est pas un repas. »**\n\nElle pousse la brioche vers toi.\n\nSon fils Luc joue derrière le comptoir.\nIl fait semblant d'être un chevalier avec une baguette de pain.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Prendre la brioche.",
+          "vers": "luc_enfant",
+          "effects": [
+            {
+              "stat": "controle",
+              "val": 10
+            }
+          ]
+        },
+        {
+          "text": "Jouer au chevalier avec Luc.",
+          "vers": "luc_enfant",
+          "effects": [
+            {
+              "stat": "controle",
+              "val": 15
+            }
+          ]
+        }
+      ],
+      "x": 60,
+      "y": 240
+    },
+    "luc_enfant": {
+      "id": "luc_enfant",
+      "title": "Luc le Chevalier",
+      "location": "Village de Cendral — Boulangerie",
+      "narrator": "",
+      "text": "Luc lève sa baguette de pain.\n\n**« Je suis le grand chevalier Luc ! »**\n**« Défenseur de Cendral ! »**\n\nIl charge un ennemi imaginaire.\n\nLa baguette se casse contre le mur.\n\nIl regarde les deux morceaux.\n\n**« ...Je suis toujours le grand chevalier Luc. »**\n\nMira soupire.\n\n**« C'était pour le dîner cette baguette. »**\n\nTu ris.\n\nLuc te regarde avec des yeux sérieux.\n\n**« Toi tu saurais te battre pour de vrai ? »**\n\nTu croises le regard de Mira.\n\nElle sourit sans répondre.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "« Peut-être un peu. »",
+          "vers": "sculpture_bois",
+          "effects": [
+            {
+              "stat": "controle",
+              "val": 5
+            }
+          ]
+        },
+        {
+          "text": "« Je protégerais Cendral si il le fallait. »",
+          "vers": "sculpture_bois",
+          "effects": [
+            {
+              "stat": "controle",
+              "val": 10
+            },
+            {
+              "stat": "chaos",
+              "val": 5
+            }
+          ]
+        }
+      ],
+      "x": 180,
+      "y": 240
+    },
+    "sculpture_bois": {
+      "id": "sculpture_bois",
+      "title": "La Sculpture",
+      "location": "Derrière ta maison",
+      "narrator": "",
+      "text": "Tu t'assieds sur le pas de ta porte.\n\nTu prends un bout de bois dans ta réserve.\n\nTu commences à sculpter.\n\nPas de plan.\nJuste le geste.\n\nLe couteau enlève des copeaux fins.\n\nQuelque chose apparaît doucement.\n\nUn chien.\n\nTu regardes ce que tu as fait.\n\nTu penses à Brun.\nÀ Marek.\nÀ Mira qui chante.\nÀ Luc et sa baguette cassée.\n\nCendral est petit.\nCendral est ordinaire.\n\nMais chaque visage que tu connais ici\na une histoire.\n\nTu les connais toutes.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Aller t'entraîner.",
+          "vers": "entrainement",
+          "effects": [
+            {
+              "stat": "controle",
+              "val": 10
+            }
+          ]
+        },
+        {
+          "text": "Rester à sculpter.",
+          "vers": "rumeur_bandits",
+          "effects": [
+            {
+              "stat": "controle",
+              "val": 15
+            }
+          ]
+        }
+      ],
+      "x": 300,
+      "y": 240
+    },
+    "rumeur_bandits": {
+      "id": "rumeur_bandits",
+      "title": "Une Mauvaise Nouvelle",
+      "location": "Village de Cendral — Place",
+      "narrator": "",
+      "text": "Un homme arrive au galop depuis la route du nord.\n\nIl descend de cheval en criant.\n\n**« Des bandits ! »**\n**« Une vingtaine ! »**\n**« Ils arrivent ! »**\n\nLes villageois se figent.\n\nMarek se lève de son banc.\n\nMira attrape Luc par l'épaule.\n\nLe regard de tout le monde converge vers un point.\n\nVers toi.\n\nPas parce que tu es un guerrier.\nParce que tu es le seul à avoir une épée.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Prendre ton épée.",
+          "vers": "alerte_bandits",
+          "effects": [
+            {
+              "stat": "chaos",
+              "val": 5
+            },
+            {
+              "stat": "controle",
+              "val": 5
+            }
+          ]
+        },
+        {
+          "text": "Dire aux gens de fuir.",
+          "vers": "alerte_bandits",
+          "effects": [
+            {
+              "stat": "controle",
+              "val": 15
+            }
+          ]
+        }
+      ],
+      "x": 60,
+      "y": 360
+    },
+    "endormissement": {
+      "id": "endormissement",
+      "title": "Le Sommeil",
+      "location": "Cendral — Ruines — Nuit profonde",
+      "narrator": "",
+      "text": "Le feu de Taera s'est réduit à des braises.\n\nTu t'allonges sur ce qui reste d'un mur.\n\nLes étoiles au-dessus de Cendral.\n\nLes mêmes qu'avant.\n\nTu fermes les yeux.\n\nLe sommeil vient vite.\nTrop vite.\n\nComme si ton corps voulait fuir quelque chose.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Dormir.",
+          "vers": "voix_nuit",
+          "effects": [
+            {
+              "stat": "controle",
+              "val": 5
+            }
+          ]
+        }
+      ],
+      "x": 60,
+      "y": 1180
+    },
+    "voix_nuit": {
+      "id": "voix_nuit",
+      "title": "Des Voix",
+      "location": "Cendral — Ruines — Milieu de nuit",
+      "narrator": "Tu dors. Puis tu ne dors plus.",
+      "text": "Des voix.\n\nBasses.\nProches.\n\nTu ouvres les yeux à moitié.\n\nLes quatre sont assis ensemble, loin du feu.\nIls parlent à voix basse.\n\nTu entends des bribes.\n\n**« ...pas le choix... »**\n\nSilence.\n\n**« ...si ça empire... »**\n\nIkar dit quelque chose.\nTu n'entends pas.\n\nAryn répond.\n\n**« ...les anciens avaient raison sur... »**\n\nLe vent couvre la fin de la phrase.\n\nTaera secoue la tête.\n\n**« ...pas comme Caël... »**\n\nTon prénom.\n\nTu as entendu ton prénom.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Faire semblant de dormir.",
+          "vers": "ecouter_suite",
+          "effects": [
+            {
+              "stat": "paranoia",
+              "val": 15
+            }
+          ]
+        },
+        {
+          "text": "Se lever et leur demander.",
+          "vers": "confronter_nuit",
+          "effects": [
+            {
+              "stat": "courage",
+              "val": 10
+            },
+            {
+              "stat": "paranoia",
+              "val": 5
+            }
+          ]
+        }
+      ],
+      "x": 180,
+      "y": 1180
+    },
+    "ecouter_suite": {
+      "id": "ecouter_suite",
+      "title": "Bribes",
+      "location": "Cendral — Ruines — Nuit",
+      "narrator": "Tu retiens ta respiration.",
+      "text": "Tu fermes les yeux.\n\nTu écoutes.\n\nIkar parle.\nSa voix est tendue.\n\n**« ...on peut pas attendre que... »**\n\nVael l'interrompt.\nPlus doucement.\n\n**« ...ce sera à lui de choisir... »**\n\n**« Et si il choisit pas ? »** dit Ikar.\n\nSilence long.\n\nAryn répond.\n\nTrop bas.\n\nTrop bas pour toi.\n\nMais tu vois Ikar poser la main sur sa lame.\n\nJuste une seconde.\n\nPuis il enlève sa main.\n\nTaera dit quelque chose qui ressemble à une question.\n\nAryn répond en deux mots.\n\nIls se taisent tous les quatre.\n\nPuis Vael dit quelque chose.\n\nIls rient doucement.\n\nTu ne comprends pas pourquoi ils rient.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Fermer les yeux et faire comme si tu n'avais rien entendu.",
+          "vers": "nuit_sans_sommeil",
+          "effects": [
+            {
+              "stat": "paranoia",
+              "val": 20
+            }
+          ]
+        },
+        {
+          "text": "Se lever.",
+          "vers": "confronter_nuit",
+          "effects": [
+            {
+              "stat": "paranoia",
+              "val": 10
+            },
+            {
+              "stat": "courage",
+              "val": 10
+            }
+          ]
+        }
+      ],
+      "x": 300,
+      "y": 1180
+    },
+    "confronter_nuit": {
+      "id": "confronter_nuit",
+      "title": "Qu'est-ce que Vous Disiez ?",
+      "location": "Cendral — Ruines — Nuit",
+      "narrator": "",
+      "text": "Tu te lèves.\n\nIls s'arrêtent tous les quatre.\n\nIls te regardent.\n\n**« Qu'est-ce que vous disiez ? »**\n\nUn silence.\n\nVael sourit.\n\n**« On parlait des étoiles. »**\n\n**« Vraiment. »**\n\n**« Celle-là c'est l'Épée du Nord. »** il montre le ciel.\n**« Et celle-là c'est... »**\n\n**« Ikar a mis la main sur sa lame. »**\n\nLe sourire de Vael disparaît.\n\nIkar te regarde.\n\n**« J'avais une crampe. »**\n\nSa voix est plate.\nNi chaude ni froide.\n\nAryn te regarde longuement.\n\n**« Tu devrais dormir. »** elle dit.\n**« Demain la route est longue. »**\n\nQuelque chose dans son ton.\nPas de la froideur.\n\nDe la tristesse.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Retourner dormir.",
+          "vers": "nuit_sans_sommeil",
+          "effects": [
+            {
+              "stat": "paranoia",
+              "val": 10
+            }
+          ]
+        },
+        {
+          "text": "Les croire.",
+          "vers": "nuit_sans_sommeil",
+          "effects": [
+            {
+              "stat": "controle",
+              "val": 10
+            }
+          ]
+        }
+      ],
+      "x": 400,
+      "y": 1180
+    },
+    "nuit_sans_sommeil": {
+      "id": "nuit_sans_sommeil",
+      "title": "Les Yeux Ouverts",
+      "location": "Cendral — Ruines — Fin de nuit",
+      "narrator": "",
+      "text": "Tu t'allonges.\n\nLes yeux ouverts.\n\nTu regardes les étoiles.\n\n*Pas le choix.*\n*Si ça empire.*\n*Les anciens avaient raison.*\n\nLes phrases tournent.\n\nTu ne sais pas ce qu'elles signifient.\n\nTu construis des réponses.\nChacune pire que la précédente.\n\nPeut-être que c'est normal.\nPeut-être qu'ils parlaient d'autre chose.\n\nPeut-être.\n\nMais Ikar a mis la main sur sa lame.\n\nJuste une seconde.\n\nDans le noir, tu serres la poignée de ta lame noire.\n\nElle est froide.\n\nRassurante.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Attendre l'aube.",
+          "vers": "lendemain_matin",
+          "effects": [
+            {
+              "stat": "paranoia",
+              "val": 15
+            },
+            {
+              "stat": "controle",
+              "val": -10
+            }
+          ]
+        }
+      ],
+      "x": 60,
+      "y": 1300
+    },
+    "refus_memoires": {
+      "id": "refus_memoires",
+      "title": "Pas Ce Soir",
+      "location": "Cendral — Ruines — Nuit",
+      "narrator": "",
+      "text": "Aryn te regarde.\n\nElle attend.\n\nTu ne fermes pas les yeux.\n\n**« Une autre fois peut-être. »**\n\nElle hoche la tête doucement.\n\nPas de pression.\nPas d'insistance.\n\nMais quelque chose dans son regard.\n\nComme si elle savait déjà.\nQue cette autre fois n'arriverait peut-être pas.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Aller dormir.",
+          "vers": "endormissement",
+          "effects": [
+            {
+              "stat": "paranoia",
+              "val": 10
+            }
+          ]
+        }
+      ],
+      "x": 500,
+      "y": 1180
+    },
+    "lore_marek_legendes": {
+      "id": "lore_marek_legendes",
+      "title": "Les Légendes de Marek",
+      "location": "Village de Cendral — Banc",
+      "narrator": "",
+      "text": "Marek pose son couteau.\n\nIl réfléchit.\n\n**« Les Quatre Lames... »**\n**« Mon père en parlait. »**\n\nIl regarde ses mains.\n\n**« À Aurenthal ils ont des statues. »**\n**« Hautes comme des maisons. »**\n**« Je les ai vues une fois. »**\n\n**« Tu es allé à Aurenthal ? »**\n\n**« Jeune. »** il dit.\n**« Avant que Cendral devienne ma vie. »**\n\nIl reprend son bois.\n\n**« Ils ont aussi une statue de Caël. »**\n**« Mais elle est dans une cave. »**\n**« Personne la montre aux touristes. »**\n\nIl sourit sans humour.\n\n**« Pour rappeler. »**\n**« Pas pour honorer. »**",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Continuer la conversation.",
+          "vers": "marek_rumeur"
+        }
+      ],
+      "x": 500,
+      "y": 120
+    },
+    "lore_cael": {
+      "id": "lore_cael",
+      "title": "L'Histoire de Caël",
+      "location": "Cendral — Ruines — Nuit",
+      "narrator": "Vael jette une brindille dans le feu.",
+      "text": "**« Caël avait ton âge. »** dit Aryn.\n\n**« À peu près. »**\n\nElle regarde les braises.\n\n**« Il vivait dans un village comme Cendral. »**\n**« Aux frontières. »**\n**« Loin d'Aurenthal. »**\n\n**« Quelqu'un lui a prédit son destin. »**\n**« Qu'il détruirait tout. »**\n**« Qu'il était dangereux. »**\n\nTaera prend la suite.\n\n**« Il a essayé de partir. »**\n**« De s'isoler. »**\n**« Pour protéger les autres. »**\n\n**« Et ça l'a tué. »** dit Ikar.\n**« Pas physiquement. »**\n**« Ça a tué ce qu'il était. »**\n\nVael regarde le feu.\n\n**« Seul avec le Chaos... »**\n**« ...le Chaos gagne toujours. »**\n\nSilence.\n\n**« C'est pour ça qu'on est là. »** dit Aryn.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Continuer.",
+          "vers": "ce_quils_veulent"
+        }
+      ],
+      "x": 500,
+      "y": 820
+    },
+    "lore_ordre": {
+      "id": "lore_ordre",
+      "title": "L'Ordre des Lames",
+      "location": "Cendral — Ruines — Nuit",
+      "narrator": "",
+      "text": "**« L'Ordre existe depuis Caël. »** dit Aryn.\n\n**« Les quatre sages qui l'ont arrêté... »**\n**« ...leurs esprits ont fondé l'Ordre. »**\n\n**« Leurs esprits ? »**\n\nTaera acquiesce.\n\n**« Ils sont morts en l'arrêtant. »**\n**« Mais leurs esprits sont restés. »**\n**« Pour former les générations suivantes. »**\n\n**« C'est eux qui nous ont trouvés. »** dit Ikar.\n**« À sept ans. »**\n**« Un par un. »**\n\nVael sourit.\n\n**« Moi ils m'ont trouvé en train de voler des pommes. »**\n**« Grande destinée. »**\n\nTaera rit malgré elle.\n\n**« L'Ordre choisit un porteur par élément. »** dit Aryn.\n**« Par génération. »**\n**« On s'entraîne ensemble. »**\n**« On attend. »**\n\n**« Vous avez attendu moi ? »**\n\n**« Toute notre vie. »** dit-elle.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Continuer.",
+          "vers": "ce_quils_veulent"
+        }
+      ],
+      "x": 600,
+      "y": 820
+    },
+    "lore_prophetie": {
+      "id": "lore_prophetie",
+      "title": "La Prophétie",
+      "location": "Cendral — Ruines — Nuit",
+      "narrator": "Aryn hésite.",
+      "text": "**« Tu veux vraiment savoir ? »**\n\n**« Oui. »**\n\nElle regarde Ikar.\nIl hausse les épaules.\n\n**« Le porteur du Chaos viendra des frontières. »**\n**« Né d'une douleur ordinaire. »**\n**« Il brûlera ce qu'il aime le plus. »**\n\nElle marque une pause.\n\n**« Et il choisira. »**\n**« Être la tempête. »**\n**« Ou la fin de la tempête. »**\n\nSilence.\n\n**« C'est tout ? »** tu demandes.\n\n**« C'est tout. »**\n\nTu regardes les ruines de Cendral.\n\n*Il brûlera ce qu'il aime le plus.*\n\nC'est déjà fait.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Continuer.",
+          "vers": "ce_quils_veulent"
+        }
+      ],
+      "x": 700,
+      "y": 820
+    },
+    "lore_aurenthal": {
+      "id": "lore_aurenthal",
+      "title": "Aurenthal",
+      "location": "Cendral — Ruines — Nuit",
+      "narrator": "",
+      "text": "Vael s'anime.\n\n**« Aurenthal c'est... »**\n**« ...beaucoup. »**\n\n**« Beaucoup comment ? »**\n\n**« Beaucoup de monde. »**\n**« Beaucoup de lumière. »**\n**« Beaucoup de magie ordinaire partout. »**\n\nIl montre sa main.\nUne légère brise tourbillonne entre ses doigts.\n\n**« Ici c'est rare. »**\n**« Là-bas les enfants font ça dans la rue. »**\n\nIkar regardepar-dessus le feu.\n\n**« Et beaucoup de gens qui ont peur du Chaos. »**\n\n**« Ikar... »** dit Taera.\n\n**« C'est vrai. »** dit-il.\n**« Il mérite de savoir. »**\n**« À Aurenthal le nom de Caël... »**\n**« ...on le dit pas à voix haute. »**\n\nIl te regarde.\n\n**« Le tien non plus maintenant. »**",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Continuer.",
+          "vers": "epees_elements"
+        }
+      ],
+      "x": 500,
+      "y": 1060
+    },
+    "lore_forgerons": {
+      "id": "lore_forgerons",
+      "title": "Les Forgerons d'Aurenthal",
+      "location": "Cendral — Ruines — Nuit",
+      "narrator": "",
+      "text": "Taera répond.\n\n**« Les forgerons d'Aurenthal lisent l'élément. »**\n**« Dans la façon dont tu te tiens. »**\n**« Dans ta respiration. »**\n**« Dans tes mains. »**\n\n**« Ils forgent la lame en conséquence. »**\n**« Ça prend des semaines. »**\n**« Parfois des mois. »**\n\n**« N'importe qui peut en avoir une ? »**\n\n**« N'importe qui qui peut payer. »** dit Ikar.\n\n**« Et les vôtres ? »**\n\nAryn regarde sa lame translucide.\n\n**« Les nôtres sont différentes. »**\n**« Les esprits des anciens maîtres les ont forgées. »**\n**« Avant même qu'on naisse. »**\n**« Elles nous attendaient. »**\n\nElle hésite.\n\n**« La tienne... »**\n**« ...personne ne l'a forgée. »**\n**« Elle est née du Chaos lui-même. »**\n**« C'est la première fois depuis Caël. »**\n\nTu regardes la lame noire.\n\nElle absorbe la lumière du feu.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Continuer.",
+          "vers": "portails_memoires"
+        }
+      ],
+      "x": 600,
+      "y": 1060
+    },
+    "prevenir_village": {
+      "id": "prevenir_village",
+      "title": "Prévenir le Village",
+      "location": "Village de Cendral — Rues",
+      "narrator": "",
+      "text": "Tu fais le tour du village.\n\nLe forgeron.\nLe boulanger.\nLes familles.\n\n**« Des bandits sur la route du nord. »**\n**« Restez chez vous ce soir. »**\n\nCertains hochent la tête.\nD'autres haussent les épaules.\n\nDes bandits, ça arrive.\nÀ Cendral comme ailleurs.\n\nMira sort la tête de sa boulangerie.\n\n**« Merci de prévenir. »** elle dit.\n**« Luc, rentre. »**\n\nLuc proteste.\n\n**« Mais maman— »**\n\n**« Rentre. »**\n\nIl rentre.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Retourner chez toi.",
+          "vers": "sculpture_bois",
+          "effects": [
+            {
+              "stat": "controle",
+              "val": 10
+            }
+          ]
+        }
+      ],
+      "x": 400,
+      "y": 120
+    }
+  }
+}
