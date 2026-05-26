@@ -1205,12 +1205,28 @@ async function loadExternalStory(storyFile, startScene) {
     // Attendre la fin de la transition
     await new Promise(res => setTimeout(res, 600));
 
+    // Sauvegarder les stats de l'histoire actuelle
+    const savedStats = {...stats};
+    const savedStoryName = story.name || '';
+
     // Réinitialiser complètement l'état
     story     = newStory;
     stats     = {};
     (story.stats || []).forEach(s => stats[s.id] = s.start || 0);
     history   = [];
     currentId = null;
+
+    // Si on revient sur l'histoire précédente — restaurer les stats
+    if (newStory.name === savedStoryName) {
+      stats = savedStats;
+    }
+    // Sinon sauvegarder les stats de l'histoire précédente pour un retour éventuel
+    window._savedStoryStats = window._savedStoryStats || {};
+    window._savedStoryStats[savedStoryName] = savedStats;
+    // Restaurer les stats si on revient sur une histoire déjà jouée
+    if (window._savedStoryStats[newStory.name]) {
+      stats = window._savedStoryStats[newStory.name];
+    }
 
     // Mettre à jour le titre
     const titleEl = document.getElementById('story-title');
