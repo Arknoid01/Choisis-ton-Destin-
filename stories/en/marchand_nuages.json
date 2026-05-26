@@ -1,0 +1,355 @@
+{
+  "name": "The Cloud Marchand",
+  "kids": true,
+  "askPlayerName": true,
+  "pack": "kids",
+  "stats": [
+    {
+      "id": "curiosite",
+      "label": "Curiosity",
+      "start": 20,
+      "max": 100,
+      "color": "#90e0ef"
+    },
+    {
+      "id": "courage",
+      "label": "Courage",
+      "start": 10,
+      "max": 100,
+      "color": "#f94144"
+    },
+    {
+      "id": "bonheur",
+      "label": "Happiness",
+      "start": 30,
+      "max": 100,
+      "color": "#90be6d"
+    }
+  ],
+  "theme": {},
+  "scenes": {
+    "ciel_bizarre": {
+      "id": "ciel_bizarre",
+      "title": "A Bizarre Sky",
+      "location": "The village — Out",
+      "narrator": "",
+      "text": "You're out of your house this morning.\n\nThe sky is full of colorful clouds.\n\nA pink and round that dances gently.\nA dark blue that rumbles on its own.\nA yellow that jumps like a child.\n\nAikito is sitting next to you.\nIt lifts the snout towards the sky.\n\n**\"In this village, emotions rise into the sky. *\n**\"They become clouds. *\n\nYou look above your head.\n\nA tiny orange cloud floats there.\n\n**\"It's yours.** says Aikito.\n**« Curiosity has an orange colour. *",
+      "isStart": true,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Touch my orange cloud.",
+          "vers": "exploration_nuages",
+          "effects": [
+            {
+              "stat": "curiosite",
+              "val": 10
+            },
+            {
+              "stat": "bonheur",
+              "val": 10
+            }
+          ]
+        },
+        {
+          "text": "Observe the clouds of others.",
+          "vers": "exploration_nuages",
+          "effects": [
+            {
+              "stat": "curiosite",
+              "val": 15
+            }
+          ]
+        }
+      ],
+      "x": 60,
+      "y": 60
+    },
+    "marchand_arrive": {
+      "id": "marchand_arrive",
+      "title": "Mr. Grey",
+      "location": "The village square",
+      "narrator": "",
+      "text": "In the square, a carriage stops.\n\nINDUSTRIAL DIY**\n*Emotions well arranged. All the same. *\n\nA man in a grey suit comes down.\n\nHello! Your clouds are far too... different. *\n**\"I bring well tidy clouds instead! *\n\nHe pulls a big net.\n\nAnd start catching the clouds of the village.\n\nThe rose resists.\nThe blue rumbles louder.\nYellow jumps faster and faster.\n\n**\"Stop! You shout.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Run to talk to him.",
+          "vers": "pourquoi_gris",
+          "effects": [
+            {
+              "stat": "courage",
+              "val": 15
+            }
+          ]
+        },
+        {
+          "text": "Ask Aikito what to do.",
+          "vers": "aikito_conseil",
+          "effects": [
+            {
+              "stat": "curiosite",
+              "val": 10
+            }
+          ]
+        }
+      ],
+      "x": 60,
+      "y": 180
+    },
+    "aikito_conseil": {
+      "id": "aikito_conseil",
+      "title": "Aikito Council",
+      "location": "The village square",
+      "narrator": "",
+      "text": "Aikito is looking at you.\n\n**\"Dogs show their emotions directly. *\n**\"We don't need clouds. *\n\nHe's looking at Mr. Grey.\n\n**\"But he's afraid of something. *\n**\"Look at his cloud. *\n\nOver Mr. Grey floats a tiny cloud.\nGrey.\nAlone.\nAll sad.\n\n**\"Go talk to him.** says Aikito.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Go talk to Mr. Gris.",
+          "vers": "pourquoi_gris",
+          "effects": [
+            {
+              "stat": "courage",
+              "val": 15
+            }
+          ]
+        }
+      ],
+      "x": 180,
+      "y": 180
+    },
+    "pourquoi_gris": {
+      "id": "pourquoi_gris",
+      "title": "Why?",
+      "location": "The village square",
+      "narrator": "",
+      "text": "You're standing in front of Mr. Grey.\n\n**\"Why are you taking our clouds? *\n\nHe stops.\n\n**\"Because they're too different. *\n**\"It's messy. *\n**\"People see your emotions and it bothers them. *\n\nYou look at his little gray cloud above him.\n\n**\"What about yours? You're asking.\n\nHe's looking up.\n\nHer smile stops for a second.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "\" Your cloud is all grey and all alone. »",
+          "vers": "village_peur",
+          "effects": [
+            {
+              "stat": "courage",
+              "val": 10
+            },
+            {
+              "stat": "bonheur",
+              "val": 5
+            }
+          ]
+        },
+        {
+          "text": "\"What's your real color? »",
+          "vers": "village_peur",
+          "effects": [
+            {
+              "stat": "curiosite",
+              "val": 15
+            }
+          ]
+        }
+      ],
+      "x": 60,
+      "y": 300
+    },
+    "secret_gris": {
+      "id": "secret_gris",
+      "title": "The Secret",
+      "location": "The village square",
+      "narrator": "",
+      "text": "Mr. Grey looks at his cloud for a long time.\n\n**\"It was coloured before. *\n\nHis voice changes.\nSofter.\n\n**\"But people said my emotions were too strong. *\n**\"Too visible. *\n**\"Then I put everything in grey. *\n\nHe keeps his net down slowly.\n\n**\"And I thought it would be better for everyone. *\n\nAikito is approaching.\nHe lays his foot on Mr. Gris' foot.\n\n**\"It wasn't a good idea.** says Aikito.\n**\"But it's not too late. *",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "\"Show us your true color. »",
+          "vers": "fin_couleurs",
+          "effects": [
+            {
+              "stat": "bonheur",
+              "val": 20
+            }
+          ]
+        },
+        {
+          "text": "Smile at him without saying anything.",
+          "vers": "fin_couleurs",
+          "effects": [
+            {
+              "stat": "bonheur",
+              "val": 15
+            }
+          ]
+        },
+        {
+          "text": "Let him go.",
+          "vers": "fin_gris_part"
+        }
+      ],
+      "x": 60,
+      "y": 420
+    },
+    "fin_couleurs": {
+      "id": "fin_couleurs",
+      "title": "End — True Heaven",
+      "location": "",
+      "narrator": "",
+      "text": "Mr. Grey closes his eyes.\n\nHis little gray cloud is beginning to change.\n\nFirst purple.\nThen red.\nThen bright yellow.\n\nHe's opening his eyes.\n\n**\"I... I didn't know. *\n**\"It's been a long time. *\n\nThe sky above the village is full of colorful clouds.\n\nAll different.\nAll true.\n\nAikito raises the snout.\n\n**\"This is the most beautiful sky I've ever seen. *\n\nAnd for once,\nEveryone agrees.",
+      "isStart": false,
+      "isEnd": true,
+      "transition": "fade",
+      "choices": [],
+      "x": 60,
+      "y": 540
+    },
+    "fin_gris_part": {
+      "id": "fin_gris_part",
+      "title": "End — The Cloud Who Waits",
+      "location": "",
+      "narrator": "",
+      "text": "Mr. Gris leaves with his empty carriage.\n\nHe stops at the edge of the village.\n\nHe looks at the sky one last time.\n\nHis little gray cloud floats above him.\n\nBut you notice something.\n\nVery small.\nIn a corner.\n\nRed dot.\n\nIt's like a blaze waiting.\n\nAikito is looking at you.\n\n**\"He may come back. *\n**\"When it is ready. *",
+      "isStart": false,
+      "isEnd": true,
+      "transition": "fade",
+      "choices": [],
+      "x": 180,
+      "y": 540
+    },
+    "exploration_nuages": {
+      "id": "exploration_nuages",
+      "title": "The Clouds of the Village",
+      "location": "The streets of the village",
+      "narrator": "",
+      "text": "You walk around the village with Aikito.\n\nAbove each house, different clouds.\n\nThe baker has a warm brown cloud.\n*Pride for his morning bread. *\n\nThe factor has a clear green cloud.\n* Fun walking every day. *\n\nA little girl has a purple cloud swirling.\nShe dreams of something beautiful. *\n\nYou look at yours.\nOrange. Curious. A little impatient.\n\n**\"Each cloud tells a story.** says Aikito.\n**\"That's why they're all different. *",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Ask the little girl what she thinks.",
+          "vers": "petite_fille_nuage",
+          "effects": [
+            {
+              "stat": "bonheur",
+              "val": 10
+            }
+          ]
+        },
+        {
+          "text": "Keep walking.",
+          "vers": "marchand_arrive",
+          "effects": [
+            {
+              "stat": "curiosite",
+              "val": 10
+            }
+          ]
+        }
+      ],
+      "x": 60,
+      "y": 160
+    },
+    "petite_fille_nuage": {
+      "id": "petite_fille_nuage",
+      "title": "Lea's Dream",
+      "location": "In front of a house",
+      "narrator": "",
+      "text": "The little girl is looking at you.\n\n**\"I dream of flying.** she simply says.\n**\"Every evening. *\n\nShe shows her purple cloud.\n\n**\"It appears when I think about it. *\n\nShe's smiling.\n\n**\"I love my cloud. *\n**\"He looks like nobody else. *\n\nAikito moves the tail.\n\n**\" Exactly. *\n\nThat's where you hear the car coming to the square.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Run and see what happens.",
+          "vers": "marchand_arrive",
+          "effects": [
+            {
+              "stat": "curiosite",
+              "val": 10
+            },
+            {
+              "stat": "courage",
+              "val": 5
+            }
+          ]
+        }
+      ],
+      "x": 180,
+      "y": 160
+    },
+    "village_peur": {
+      "id": "village_peur",
+      "title": "The Fear of the Village",
+      "location": "The village square",
+      "narrator": "",
+      "text": "Mr. Grey is listening to you.\n\nBut the inhabitants of the village are putting their heads down.\n\nThe baker hides her brown cloud behind her apron.\nThe mailman looks at his feet.\n\n**\"Maybe he's right...\"** whispers someone.\n**\"Our clouds are a little... too visible. *\n\nYou're watching Aikito.\n\nHe grunts slowly.\n\n**\"They are ashamed of their emotions. *\n**\"This is the real problem. *",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "\"No! Your clouds are beautiful! »",
+          "vers": "secret_gris",
+          "effects": [
+            {
+              "stat": "courage",
+              "val": 20
+            }
+          ]
+        },
+        {
+          "text": "Show everyone your orange cloud.",
+          "vers": "montrer_nuage",
+          "effects": [
+            {
+              "stat": "courage",
+              "val": 15
+            },
+            {
+              "stat": "bonheur",
+              "val": 10
+            }
+          ]
+        }
+      ],
+      "x": 60,
+      "y": 380
+    },
+    "montrer_nuage": {
+      "id": "montrer_nuage",
+      "title": "My Cloud",
+      "location": "The village square",
+      "narrator": "",
+      "text": "You raise your arms.\n\nYour orange cloud rises a little higher.\n\n**\"Mys is curiosity. *\n**\"It's not perfect. *\n**\"But it's me. *\n\nThe baker's looking at you.\n\nShe hesitates.\n\nThen she takes off her apron.\n\nHis warm brown cloud reappears.\n\n**\"Mys is pride.** she says softly.\n\nOne by one, the others do the same.\n\nMr. Grey looks around him.\nThen her little gray cloud.\nThen you.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "\"What is yours? »",
+          "vers": "secret_gris",
+          "effects": [
+            {
+              "stat": "bonheur",
+              "val": 15
+            }
+          ]
+        }
+      ],
+      "x": 180,
+      "y": 380
+    }
+  },
+  "lang": "en"
+}
