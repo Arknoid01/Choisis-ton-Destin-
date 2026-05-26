@@ -103,7 +103,8 @@ body {
     width:100%;
     max-width:800px;
   }
-  #logo-block { flex:1; text-align:center; flex-shrink:0; }
+  #logo-block { flex:1; text-align:center; flex-shrink:0;
+    opacity:0; animation:fade-up .6s ease forwards; animation-delay:.2s; }
   #logo-title { font-size:clamp(32px,5vw,56px); }
   #logo-sub   { font-size:11px; }
   #buttons-block {
@@ -112,6 +113,7 @@ body {
     grid-template-columns:1fr 1fr;
     gap:10px;
     max-width:420px;
+    opacity:0; animation:fade-up .6s ease forwards; animation-delay:.5s;
   }
   .btn-main {
     margin-bottom:0 !important;
@@ -264,7 +266,14 @@ body {
   text-transform:uppercase; cursor:pointer;
   position:relative; overflow:hidden;
   transition:all .3s cubic-bezier(.4,0,.2,1);
+  opacity:0;
+  animation:fade-up .5s ease forwards;
 }
+#btn-start    { animation-delay:.8s; }
+#btn-options  { animation-delay:1.0s; }
+#btn-progress { animation-delay:1.2s; }
+#btn-news     { animation-delay:1.4s; }
+#btn-submit   { animation-delay:1.6s; }
 .btn-main::before {
   content:''; position:absolute; inset:0;
   background:linear-gradient(135deg, rgba(200,169,110,0.1), transparent);
@@ -417,6 +426,10 @@ body {
 @keyframes scale-in {
   from { transform:scale(0.9); opacity:0; }
   to   { transform:scale(1);   opacity:1; }
+}
+@keyframes fade-up {
+  from { opacity:0; transform:translateY(16px); }
+  to   { opacity:1; transform:translateY(0); }
 }
 @keyframes fade-out {
   from { opacity:1; }
