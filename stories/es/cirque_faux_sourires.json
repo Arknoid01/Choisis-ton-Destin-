@@ -1,0 +1,649 @@
+{
+  "name": "Cirque des False Smiles",
+  "kids": true,
+  "askPlayerName": true,
+  "pack": "kids",
+  "stats": [
+    {
+      "id": "curiosite",
+      "label": "Curiosidad",
+      "start": 20,
+      "max": 100,
+      "color": "#f9c74f"
+    },
+    {
+      "id": "courage",
+      "label": "Valor",
+      "start": 10,
+      "max": 100,
+      "color": "#f94144"
+    },
+    {
+      "id": "bonheur",
+      "label": "Felicidad",
+      "start": 30,
+      "max": 100,
+      "color": "#90be6d"
+    }
+  ],
+  "theme": {},
+  "scenes": {
+    "arrivee_ville": {
+      "id": "arrivee_ville",
+      "title": "La ciudad de los sonrisas",
+      "location": "Main Street",
+      "narrator": "",
+      "text": "Vienes a la ciudad con Aikito.\n\nEs hermoso.\n\nLas casas son bonitas.\nLa gente está vestida con cuidado.\n\nPero algo es raro.\n\nTodos sonríen.\n\nLa señora llevaba bolsas demasiado pesadas. Sonríe.\nEl caballero cuya bicicleta es plana. Sonríe.\nLa niña que se cayó. Sonríe.\n\nAikito se sienta a tu lado.\n\nSe apoya en la cabeza.\n\n\"Estas sonrisas no van al ojo.",
+      "isStart": true,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "\"Tienes razón, es raro.\"",
+          "vers": "affiche_cirque",
+          "effects": [
+            {
+              "stat": "curiosite",
+              "val": 10
+            }
+          ]
+        },
+        {
+          "text": "Mira a la gente más de cerca.",
+          "vers": "affiche_cirque",
+          "effects": [
+            {
+              "stat": "curiosite",
+              "val": 15
+            }
+          ]
+        }
+      ],
+      "x": 60,
+      "y": 60
+    },
+    "affiche_cirque": {
+      "id": "affiche_cirque",
+      "title": "El cartel",
+      "location": "Plaza de pueblo",
+      "narrator": "",
+      "text": "En el centro de la plaza, un gran cartel anuncia:\n\nEl Gran CIRQUE está invadido\n*Donde todo el mundo es siempre feliz*\n* Esta noche y todas las noches*\n\nEstrellas doradas por todas partes.\nCaras que sonríen en el cartel.\n\nUn hombre en alta forma distribuye billetes.\n\nTambién sonríe.\nMuy fuerte.\nDemasiado fuerte.\n\nAikito huele el billete.\n\nHuele a papel y tristeza.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Toma un billete.",
+          "vers": "entree_cirque",
+          "effects": [
+            {
+              "stat": "curiosite",
+              "val": 10
+            }
+          ]
+        },
+        {
+          "text": "Pregúntale al hombre qué es este circo.",
+          "vers": "homme_billet",
+          "effects": [
+            {
+              "stat": "curiosite",
+              "val": 15
+            }
+          ]
+        }
+      ],
+      "x": 60,
+      "y": 160
+    },
+    "homme_billet": {
+      "id": "homme_billet",
+      "title": "El hombre en las entradas",
+      "location": "Plaza de pueblo",
+      "narrator": "",
+      "text": "El hombre te mira con su gran sonrisa.\n\n**« En Grand Cirque Perfect, todo el mundo es feliz! *\nNo hay lágrimas. Sin ira. Sin tristeza.\n¡Toda la felicidad!\n\nDice eso muy rápido.\nComo si estuviera recitando una lección.\n\nTe das cuenta de que sus manos están temblando un poco.\nCuando te dé el boleto.\n\nAikito lo mira a los ojos.\n\nEl hombre le quita los ojos.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Toma el boleto y entra.",
+          "vers": "entree_cirque",
+          "effects": [
+            {
+              "stat": "curiosite",
+              "val": 10
+            }
+          ]
+        },
+        {
+          "text": "Pregunta por qué sus manos están temblando.",
+          "vers": "mains_tremblantes",
+          "effects": [
+            {
+              "stat": "courage",
+              "val": 15
+            }
+          ]
+        }
+      ],
+      "x": 180,
+      "y": 160
+    },
+    "mains_tremblantes": {
+      "id": "mains_tremblantes",
+      "title": "Las Manos del Temblor",
+      "location": "Plaza de pueblo",
+      "narrator": "",
+      "text": "El hombre deja de sonreír por un segundo.\n\nUn segundo.\n\nNo temblo.\n\nEmpieza a sonreír muy rápido.\n\n¡Está todo muy bien! Entra, entra.\n\nPero lo viste.\nAikito también lo vio.\n\nTe da un pequeño hocico en la mano.\n\nTiene miedo de algo.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Entra en el circo para entender.",
+          "vers": "entree_cirque",
+          "effects": [
+            {
+              "stat": "curiosite",
+              "val": 10
+            },
+            {
+              "stat": "courage",
+              "val": 10
+            }
+          ]
+        }
+      ],
+      "x": 300,
+      "y": 160
+    },
+    "entree_cirque": {
+      "id": "entree_cirque",
+      "title": "Circus Entry",
+      "location": "Capítulo - Entrada",
+      "narrator": "",
+      "text": "La capital es grande y roja.\n\nLuces de oro por todas partes.\nMúsica alegre que juega muy duro.\n\nLa gente dentro de toda sonrisa.\nEstán viendo la pista.\nAplauden.\n\nPero nadie habla.\nNadie se ríe.\n\nAplausos.\nY sonríe.\n\nAikito le pega las orejas.\n\nDemasiado ruido. No hay suficiente alegría.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Ve a ver a los artistas.",
+          "vers": "clown_coulisses",
+          "effects": [
+            {
+              "stat": "curiosite",
+              "val": 10
+            }
+          ]
+        },
+        {
+          "text": "Mira al público.",
+          "vers": "observer_public",
+          "effects": [
+            {
+              "stat": "curiosite",
+              "val": 10
+            }
+          ]
+        },
+        {
+          "text": "Encuentra al director.",
+          "vers": "coulisses",
+          "effects": [
+            {
+              "stat": "courage",
+              "val": 10
+            }
+          ]
+        }
+      ],
+      "x": 60,
+      "y": 280
+    },
+    "observer_public": {
+      "id": "observer_public",
+      "title": "El público",
+      "location": "Capítulo - Grados",
+      "narrator": "",
+      "text": "Te sientas en las gradas.\n\nLa niña a tu lado sonríe.\nPero sus ojos están rojos.\nLloró antes de entrar.\n\nEl hombre detrás de ti sonríe.\nPero siempre está despertando.\n\nLa dama delante de ti sonríe.\nPero mira sus zapatos.\n\nTe inclinas hacia la niña.\n\n¿Estás bien?\n\nTe está mirando, sorpresa.\n\nNadie le había hecho esa pregunta durante mucho tiempo.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Habla con ella.",
+          "vers": "petite_fille",
+          "effects": [
+            {
+              "stat": "courage",
+              "val": 10
+            },
+            {
+              "stat": "bonheur",
+              "val": 10
+            }
+          ]
+        },
+        {
+          "text": "Ve a ver a los artistas detrás de las escenas.",
+          "vers": "clown_coulisses",
+          "effects": [
+            {
+              "stat": "curiosite",
+              "val": 10
+            }
+          ]
+        }
+      ],
+      "x": 180,
+      "y": 280
+    },
+    "petite_fille": {
+      "id": "petite_fille",
+      "title": "Pequeña",
+      "location": "Capítulo - Grados",
+      "narrator": "",
+      "text": "La niña mira a su alrededor.\n\nEntonces susurra muy fuerte.\n\nNo quiero sonreír hoy.\n**\"Pero si no sonrío, el Director está enfadado.\n**\"Y si el Director está enojado, todo el mundo está enojado.\n\nAikito se acerca lentamente.\n\nLe pone la cabeza de rodillas.\n\nLo está mirando.\n\nY por primera vez,\nEstá muy sonriendo.\n\nSólo un poco.\nPero de verdad.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "\"Estar triste a veces es normal.\"",
+          "vers": "clown_coulisses",
+          "effects": [
+            {
+              "stat": "bonheur",
+              "val": 15
+            },
+            {
+              "stat": "courage",
+              "val": 10
+            }
+          ]
+        },
+        {
+          "text": "Ve a ver por qué el Director hace esto.",
+          "vers": "coulisses",
+          "effects": [
+            {
+              "stat": "curiosite",
+              "val": 10
+            },
+            {
+              "stat": "courage",
+              "val": 15
+            }
+          ]
+        }
+      ],
+      "x": 300,
+      "y": 280
+    },
+    "clown_coulisses": {
+      "id": "clown_coulisses",
+      "title": "El payaso",
+      "location": "Atrás del circo",
+      "narrator": "",
+      "text": "Detrás de la cortina roja, encontrarás un payaso.\n\nEstá sentado en el suelo.\nSu peluca naranja está equivocada.\n\nSe ríe.\n\nSe sigue riendo.\n\nPero sus ojos no se ríen.\n\nNo puedo parar...\n\nAikito se sienta delante de él.\nMuy tranquilo.\nEstá esperando.\n\nEl payaso lo está vigilando.\nY para un segundo.\n\nNo sonríes.\nEso es bueno.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "\"¿Por qué no puedes parar? »",
+          "vers": "secret_clown",
+          "effects": [
+            {
+              "stat": "curiosite",
+              "val": 15
+            }
+          ]
+        },
+        {
+          "text": "Siéntate junto a él en silencio.",
+          "vers": "secret_clown",
+          "effects": [
+            {
+              "stat": "bonheur",
+              "val": 10
+            },
+            {
+              "stat": "courage",
+              "val": 10
+            }
+          ]
+        }
+      ],
+      "x": 60,
+      "y": 400
+    },
+    "secret_clown": {
+      "id": "secret_clown",
+      "title": "El Secreto del Payaso",
+      "location": "Atrás del circo",
+      "narrator": "",
+      "text": "El payaso baja su voz.\n\nEl director dice que si deja de sonreír...\nA la gente no le gustará el espectáculo.\n¿Y si a la gente no le gusta...?\nEstaremos más en el circo.\n\nMira sus zapatos grandes.\n\nEntonces sonrío.\nHasta cuando me duele el estómago.\nHasta cuando estoy cansado.\nHasta cuando quiero llorar.\n\nAikito le lame la mano.\n\nTu vientre sabe la verdad.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "\"La gente te ama, no tu sonrisa. »",
+          "vers": "trapeziste",
+          "effects": [
+            {
+              "stat": "courage",
+              "val": 15
+            },
+            {
+              "stat": "bonheur",
+              "val": 10
+            }
+          ]
+        },
+        {
+          "text": "Ve a hablar con el Director.",
+          "vers": "coulisses",
+          "effects": [
+            {
+              "stat": "courage",
+              "val": 20
+            }
+          ]
+        }
+      ],
+      "x": 180,
+      "y": 400
+    },
+    "trapeziste": {
+      "id": "trapeziste",
+      "title": "Trapist",
+      "location": "Detrás de las escenas — Altura",
+      "narrator": "",
+      "text": "Subes a unos pasos.\n\nArriba, una joven se sienta en su columpio.\nElla sonríe.\n\nPero sus piernas tiemblan.\n\nMe da miedo el vacío.\nSiempre.\n\n# Pero el Director dice un artista sonriente #\n**\" da confianza al público. *\n\nAikito se ladra una vez.\nTranquilo.\n\nLo está mirando.\n\nNo tiene miedo de decir la verdad.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "\"No tienes que fingir.\"",
+          "vers": "coulisses",
+          "effects": [
+            {
+              "stat": "courage",
+              "val": 15
+            },
+            {
+              "stat": "bonheur",
+              "val": 10
+            }
+          ]
+        },
+        {
+          "text": "Ve al Director ahora.",
+          "vers": "coulisses",
+          "effects": [
+            {
+              "stat": "courage",
+              "val": 20
+            }
+          ]
+        }
+      ],
+      "x": 300,
+      "y": 400
+    },
+    "coulisses": {
+      "id": "coulisses",
+      "title": "Detrás de las escenas",
+      "location": "Tras la escena",
+      "narrator": "",
+      "text": "Vas detrás de las escenas.\n\nEn todas partes, artistas sonriendo.\nPero se detienen tan pronto como creen que nadie los mira.\n\nUn malabarista que frunció las cejas.\nUn acróbata suspirante.\nUn músico estirando sus hombros.\n\nSus caras reales duran dos segundos.\nEntonces la sonrisa vuelve.\n\nComo una máscara que ponemos.\n\nAikito te está mirando.\n\nOlvidaron que las máscaras son agotadoras.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Encuentra la Oficina del Director.",
+          "vers": "bureau_directeur",
+          "effects": [
+            {
+              "stat": "courage",
+              "val": 10
+            }
+          ]
+        },
+        {
+          "text": "Deja el circo.",
+          "vers": "fin_partir"
+        }
+      ],
+      "x": 60,
+      "y": 520
+    },
+    "bureau_directeur": {
+      "id": "bureau_directeur",
+      "title": "Oficina del Director",
+      "location": "Caravana del Director",
+      "narrator": "",
+      "text": "El Director es un hombre alto con bigote.\n\nTe da la bienvenida con la mayor sonrisa que has visto.\n\n¡Bienvenido! ¡Está bien aquí!\n¡Toda la felicidad! ¡Toda alegría!\n\nMira alrededor.\n\nHay una foto en su escritorio.\nUn viejo circo.\nGente que realmente se ríe.\n\nAlgunos tienen lágrimas en sus ojos tanto que se ríen.\n\nEl Director nota que estás mirando la foto.\n\nSu sonrisa se sacude por un minuto.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "\"¿Qué es esta imagen? »",
+          "vers": "photo_directeur",
+          "effects": [
+            {
+              "stat": "curiosite",
+              "val": 15
+            }
+          ]
+        },
+        {
+          "text": "\"¿Por qué todos tienen que sonreír aquí? »",
+          "vers": "question_directeur",
+          "effects": [
+            {
+              "stat": "courage",
+              "val": 20
+            }
+          ]
+        }
+      ],
+      "x": 180,
+      "y": 520
+    },
+    "photo_directeur": {
+      "id": "photo_directeur",
+      "title": "La foto",
+      "location": "Caravana del Director",
+      "narrator": "",
+      "text": "El Director toma la foto.\n\nLa mira mucho tiempo.\n\nFue... mi viejo circo.\n\nSu voz cambia.\nMás suave. Truer.\n\n\"La gente realmente se rió. Llorando a veces.\n\"Miedo. Estaba sorprendida.\nTodas las emociones.\n\nEstá descansando la foto.\n\n# Pero una noche, nadie vino. #\n**\"Y tenía miedo de que fuera porque no eran felices.\n**\"Entonces decidí que todos estarían siempre felices.\n\nAikito pone su pie en el pie del director.\n\n\"Tenías miedo.\nEntonces pones una máscara a todos.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "\"Pero la gente también ama las emociones reales. »",
+          "vers": "grand_moment",
+          "effects": [
+            {
+              "stat": "bonheur",
+              "val": 15
+            },
+            {
+              "stat": "courage",
+              "val": 15
+            }
+          ]
+        }
+      ],
+      "x": 300,
+      "y": 520
+    },
+    "question_directeur": {
+      "id": "question_directeur",
+      "title": "La cuestión",
+      "location": "Caravana del Director",
+      "narrator": "",
+      "text": "El Director se detiene.\n\nSu gran sonrisa está temblando.\n\nPorque... ¡porque la gente viene a ser feliz!\n\n**\"Y si los artistas son tristes, la gente estará triste.\nY si la gente está triste, no volverán.\n\nDice eso muy rápido.\nComo si fuera urgente.\n\nAikito se sienta.\nSólo está vomitando.\nSilencio.\n\nEl Director lo está mirando.\n\n\"No parece feliz...\"\nY aún así quiero acariciarlo.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Exactamente. Nos encantan los reales. »",
+          "vers": "grand_moment",
+          "effects": [
+            {
+              "stat": "bonheur",
+              "val": 10
+            },
+            {
+              "stat": "courage",
+              "val": 15
+            }
+          ]
+        }
+      ],
+      "x": 400,
+      "y": 520
+    },
+    "grand_moment": {
+      "id": "grand_moment",
+      "title": "Verdad",
+      "location": "Caravana del Director",
+      "narrator": "",
+      "text": "El Director sigue en silencio.\n\nMucho tiempo.\n\nAikito se acostará en sus pies.\n\nEl Director lo está mirando.\nLuego te mira.\n\n\"La gente vino esa noche...\"\n**\"... aunque no fuera perfecto.\n\nEstá mirando la foto otra vez.\n\nTal vez no tenía miedo de nada.\n\nSe levanta lentamente.\nSe está quitando la cabeza.\n\nAbajo, su pelo está loco.\n\nSonríe.\n\nNo es su gran sonrisa.\n\nUna pequeña sonrisa cansada.\nPero cierto.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Para acompañarlo en el escenario.",
+          "vers": "scene_finale",
+          "effects": [
+            {
+              "stat": "bonheur",
+              "val": 20
+            }
+          ]
+        },
+        {
+          "text": "Déjalo ir solo.",
+          "vers": "scene_finale",
+          "effects": [
+            {
+              "stat": "bonheur",
+              "val": 15
+            }
+          ]
+        }
+      ],
+      "x": 60,
+      "y": 640
+    },
+    "scene_finale": {
+      "id": "scene_finale",
+      "title": "En escena",
+      "location": "Capítulo - Tema central",
+      "narrator": "",
+      "text": "El director está en el escenario.\n\nSe quita su gran sonrisa forzada.\n\nEstá hablando con el público.\n\n*\"Esta noche... tienes derecho a ser como eres. *\n\nSilencio.\n\nEntonces la niñita en las gradas dijo:\nEstaba triste antes.\n\nAlguien más dice:\nEstaba cansada.\n\nY luego todo el mundo empieza a hablar.\nDe sus días reales.\nSus emociones reales.\n\nY algo extraño está pasando.\n\nEstán sonriendo.\n\nEn serio.\n\nAikito mueve la cola.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Cuidado con el payaso.",
+          "vers": "fin_clown_libre",
+          "effects": [
+            {
+              "stat": "bonheur",
+              "val": 10
+            }
+          ]
+        },
+        {
+          "text": "Cuidado con el trapezista.",
+          "vers": "fin_trapeziste_libre",
+          "effects": [
+            {
+              "stat": "bonheur",
+              "val": 10
+            }
+          ]
+        },
+        {
+          "text": "Cuidado con todos.",
+          "vers": "fin_principale",
+          "effects": [
+            {
+              "stat": "bonheur",
+              "val": 20
+            }
+          ]
+        }
+      ],
+      "x": 180,
+      "y": 640
+    },
+    "fin_principale": {
+      "id": "fin_principale",
+      "title": "Fin - El verdadero Cirque",
+      "location": "",
+      "narrator": "",
+      "text": "El payaso quita su sonrisa pintada.\n\nDe todas formas, sonríe.\nPero de verdad esta vez.\n\nEl trapezista salta.\nTodavía tiene miedo.\nPero grita saltando.\n\nUn verdadero grito.\nY la gente aplaude aún más fuerte.\n\nCuando te vas, la niña se pone al día contigo.\n\nGracias.\n**\"Nunca me dijeron que era normal estar triste.\n\nAikito la mira.\n\nLas emociones son como el clima.\n*\"Cambian. *\nEso es lo que es bueno.\n\nOdias tu cabeza.\n\nEsta noche, el circo es imperfecto.\n\nY por eso es hermoso.",
+      "isStart": false,
+      "isEnd": true,
+      "transition": "fade",
+      "choices": [],
+      "x": 60,
+      "y": 760
+    },
+    "fin_clown_libre": {
+      "id": "fin_clown_libre",
+      "title": "Final — La risa del vestido",
+      "location": "",
+      "narrator": "",
+      "text": "El payaso quita su maquillaje.\n\nTiene una cara normal.\nCon arrugas de alguien que se rió y lloró.\n\nTe está mirando.\n\nOlvidé cómo hacerlo.\n\"Risas de verdad\".\n\nLo está intentando.\n\nUna risa.\nUn poco oxidado.\n\nEntonces uno más grande.\n\nAikito se ladra con alegría.\n\nEsta noche, el payaso se ríe por primera vez en mucho tiempo.\n\nY es el mejor número del circo.",
+      "isStart": false,
+      "isEnd": true,
+      "transition": "fade",
+      "choices": [],
+      "x": 180,
+      "y": 760
+    },
+    "fin_trapeziste_libre": {
+      "id": "fin_trapeziste_libre",
+      "title": "End — The Cree of Trapeziste",
+      "location": "",
+      "narrator": "",
+      "text": "El trapezista subió.\n\nEstá temblando.\n\nEstá saltando.\n\nY esta vez grita.\nUn verdadero grito de alguien que tiene miedo\nY todavía salta.\n\nEl público está en silencio.\n\nEntonces alguien aplaude.\n\nEntonces todos.\n\nEstá aterrizando.\nLágrimas en los ojos.\n\n\"Fue mejor...\" Dijo.\n\nAikito ha vuelto a la fila.\n\nTener miedo y mostrarlo,\nEs más valiente que fingir.",
+      "isStart": false,
+      "isEnd": true,
+      "transition": "fade",
+      "choices": [],
+      "x": 300,
+      "y": 760
+    },
+    "fin_partir": {
+      "id": "fin_partir",
+      "title": "Fin — El camino del retorno",
+      "location": "",
+      "narrator": "",
+      "text": "No encontraste al director.\n\nPero cuando salgas del circo,\nConoces al payaso.\n\nYa no se ríe.\n\nMira el cielo.\n\n\"Buena noche.\n\nSí.\n\nQuédate aquí un momento.\nNo sonríe.\nNo fingiendo.\n\nSólo dos personas mirando el cielo.\n\nAikito se sienta entre ustedes.\n\nA veces,\nun minuto real\nMejor que una hora de fingir.",
+      "isStart": false,
+      "isEnd": true,
+      "transition": "fade",
+      "choices": [],
+      "x": 400,
+      "y": 760
+    }
+  },
+  "lang": "es"
+}
