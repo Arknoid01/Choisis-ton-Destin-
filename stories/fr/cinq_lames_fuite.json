@@ -1,0 +1,1121 @@
+{
+  "name": "Les Cinq Lames — La Fuite",
+  "kids": false,
+  "askPlayerName": true,
+  "pack": "cinq_lames",
+  "stats": [
+    {
+      "id": "chaos",
+      "label": "Chaos",
+      "start": 50,
+      "max": 100,
+      "color": "#9b5de5"
+    },
+    {
+      "id": "controle",
+      "label": "Contrôle",
+      "start": 20,
+      "max": 100,
+      "color": "#00bbf9"
+    },
+    {
+      "id": "solitude",
+      "label": "Solitude",
+      "start": 30,
+      "max": 100,
+      "color": "#577590"
+    }
+  ],
+  "theme": {},
+  "scenes": {
+    "fuite_debut": {
+      "id": "fuite_debut",
+      "title": "Partir",
+      "location": "Camp — Aube",
+      "narrator": "Tu as choisi de partir.",
+      "text": "Personne ne te retient.\n\nC'est presque pire.\n\nAryn baisse les yeux.\nTaera fait un pas vers toi, puis s'arrête.\nVael garde les mains dans les poches.\nIkar ne bouge pas.\n\nTa lame noire pend à ta main.\n\nElle est plus légère que d'habitude.\n\nOu peut-être que c'est toi.\n\n**« Je dois partir. »**\n\nTu ne sais pas si tu leur dis ça à eux.\n\nOu à toi-même.\n\nAryn hoche lentement la tête.\n\n**« Je sais. »**\n\nEt ça fait mal.\n\nParce qu'elle a l'air de savoir depuis longtemps.",
+      "isStart": true,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Regarder Aryn.",
+          "vers": "fuite_aryn",
+          "effects": [
+            {
+              "stat": "controle",
+              "val": 5
+            }
+          ]
+        },
+        {
+          "text": "Regarder Ikar.",
+          "vers": "fuite_ikar",
+          "effects": [
+            {
+              "stat": "chaos",
+              "val": 5
+            }
+          ]
+        },
+        {
+          "text": "Ne regarder personne.",
+          "vers": "route_seul",
+          "effects": [
+            {
+              "stat": "solitude",
+              "val": 10
+            }
+          ]
+        }
+      ],
+      "x": 60,
+      "y": 60
+    },
+    "fuite_aryn": {
+      "id": "fuite_aryn",
+      "title": "Aryn",
+      "location": "Camp — Aube",
+      "narrator": "",
+      "text": "Aryn s'approche.\n\nPas trop.\n\nJuste assez pour que tu entendes sa voix sans que les autres entendent tout.\n\n**« Partir ne veut pas dire que tu dois disparaître. »**\n\nTu ris presque.\n\nPas parce que c'est drôle.\n\nParce que c'est une phrase d'Aryn.\n\nLe genre de phrase qui essaie d'ouvrir une porte\nsans jamais forcer la poignée.\n\n**« Si tu veux revenir... »**\n\nElle s'arrête.\n\nElle corrige.\n\n**« Quand tu voudras revenir. »**\n\nTu ne réponds pas.\n\nElle comprend quand même.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Continuer.",
+          "vers": "taera_derniere_main",
+          "effects": [
+            {
+              "stat": "controle",
+              "val": 5
+            }
+          ]
+        }
+      ],
+      "x": 180,
+      "y": 60
+    },
+    "fuite_ikar": {
+      "id": "fuite_ikar",
+      "title": "Ikar",
+      "location": "Camp — Aube",
+      "narrator": "",
+      "text": "Ikar ne dit rien.\n\nC'est rare.\n\nEnfin non.\n\nC'est Ikar.\n\nMais ce silence-là n'est pas le même.\n\nIl regarde ta lame noire.\n\nPuis la sienne.\n\nPuis le sol.\n\n**« Je suis désolé. »**\n\nEncore.\n\nLes mêmes mots.\n\nMoins violents que sa lame sous ta gorge.\n\nPlus lourds.\n\nTu voudrais lui répondre.\n\nLui dire que tu comprends.\nOu que tu ne comprends pas.\nOu que tu lui en veux.\nOu que tu ne sais pas.\n\nRien ne sort.\n\nIkar hoche la tête comme si ton silence était une réponse.\n\nPeut-être que ça en est une.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Continuer.",
+          "vers": "taera_derniere_main",
+          "effects": [
+            {
+              "stat": "solitude",
+              "val": 5
+            }
+          ]
+        }
+      ],
+      "x": 300,
+      "y": 60
+    },
+    "taera_derniere_main": {
+      "id": "taera_derniere_main",
+      "title": "La Dernière Main",
+      "location": "Camp — Aube",
+      "narrator": "",
+      "text": "Taera avance enfin.\n\nElle te tend quelque chose.\n\nUne petite bourse.\n\nDe la terre.\n\n**« Pas de mon village. »** dit-elle.\n**« D'ici. »**\n**« Pour que tu aies un endroit où revenir. »**\n\nTu fixes sa main.\n\nTu pourrais la prendre.\n\nTu pourrais aussi refuser.\n\nVael tousse derrière elle.\n\n**« Je rappelle que les cadeaux gratuits sont rares. »**\n**« Surtout les cadeaux pleins de poussière. »**\n\nTaera lui lance un regard.\n\nIl hausse les épaules.\n\n**« Quoi ? C'est une belle poussière. »**\n\nTu souris malgré toi.\n\nUn instant seulement.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Prendre la bourse.",
+          "vers": "vael_phrase",
+          "effects": [
+            {
+              "stat": "controle",
+              "val": 10
+            }
+          ]
+        },
+        {
+          "text": "Refuser doucement.",
+          "vers": "vael_phrase",
+          "effects": [
+            {
+              "stat": "solitude",
+              "val": 10
+            }
+          ]
+        }
+      ],
+      "x": 60,
+      "y": 200
+    },
+    "vael_phrase": {
+      "id": "vael_phrase",
+      "title": "La Phrase de Vael",
+      "location": "Camp — Aube",
+      "narrator": "",
+      "text": "Vael t'accompagne quelques pas.\n\nPas loin.\n\nJuste assez pour faire semblant que ce n'est pas un adieu.\n\n**« Bon. »** dit-il.\n**« Je vais dire quelque chose de très profond. »**\n\nIl inspire.\n\nTrès sérieusement.\n\n**« Évite les auberges avec des enseignes en forme de canard. »**\n\nTu le regardes.\n\n**« C'est ça, ta phrase profonde ? »**\n\n**« Non. »**\n**« Ça c'était un vrai conseil. »**\n\nIl sourit.\n\nPuis son sourire bouge à peine.\n\n**« La phrase profonde, c'est : quand tu seras fatigué d'être seul... »**\n**« ne confonds pas la honte avec une porte fermée. »**\n\nLe vent passe entre vous.\n\nPour une fois, Vael ne rajoute rien.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Partir.",
+          "vers": "route_seul",
+          "effects": [
+            {
+              "stat": "solitude",
+              "val": 5
+            }
+          ]
+        }
+      ],
+      "x": 180,
+      "y": 200
+    },
+    "route_seul": {
+      "id": "route_seul",
+      "title": "La Route Seule",
+      "location": "Route du Nord — Matin",
+      "narrator": "Les premiers jours sont presque faciles.",
+      "text": "Tu marches vers le nord.\n\nPas vers Aurenthal.\nPas vers Erevane.\nPas vers les Quatre.\n\nLe nord, simplement.\n\nLe monde est grand quand personne ne te dit où aller.\n\nLa lame noire reste silencieuse.\n\nLes villages sont loin.\nLes routes sont vides.\nLes nuits sont froides, mais supportables.\n\nTu dors mieux.\n\nPas bien.\n\nMieux.\n\nPendant trois jours, tu crois avoir trouvé la réponse.\n\nPas d'Ordre.\nPas de prophétie.\nPas de regards qui te mesurent.\n\nJuste toi.\n\nLe vent.\n\nLa route.\n\nEt la lame qui ne tremble plus.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Profiter du silence.",
+          "vers": "silence_paix",
+          "effects": [
+            {
+              "stat": "controle",
+              "val": 10
+            }
+          ]
+        },
+        {
+          "text": "Accélérer le pas.",
+          "vers": "premiers_bandits",
+          "effects": [
+            {
+              "stat": "solitude",
+              "val": 5
+            }
+          ]
+        }
+      ],
+      "x": 60,
+      "y": 340
+    },
+    "silence_paix": {
+      "id": "silence_paix",
+      "title": "Presque la Paix",
+      "location": "Collines du Nord",
+      "narrator": "",
+      "text": "Le silence a une forme.\n\nTu ne le savais pas avant.\n\nIl s'étale dans les collines.\nIl se pose sur les pierres.\nIl remplit les espaces que les voix des autres occupaient.\n\nAryn ne pose pas de questions.\nTaera ne regarde pas tes mains.\nVael ne fait pas de blague pour cacher ce qu'il a compris.\nIkar ne surveille pas ta lame.\n\nPersonne ne t'attend.\n\nPersonne ne te craint.\n\nParce qu'il n'y a personne.\n\nTu fermes les yeux.\n\nPour la première fois depuis Cendral,\ntu respires sans avoir l'impression\nque quelqu'un compte tes respirations.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Continuer.",
+          "vers": "premiers_bandits",
+          "effects": [
+            {
+              "stat": "controle",
+              "val": 5
+            },
+            {
+              "stat": "solitude",
+              "val": 5
+            }
+          ]
+        }
+      ],
+      "x": 180,
+      "y": 340
+    },
+    "premiers_bandits": {
+      "id": "premiers_bandits",
+      "title": "Les Bandits",
+      "location": "Route forestière — Crépuscule",
+      "narrator": "Le premier accident arrive presque sans bruit.",
+      "text": "Ils sont trois.\n\nPas des soldats.\nPas des monstres.\nPas des assassins légendaires.\n\nTrois hommes maigres avec des couteaux rouillés\net plus de peur que de méchanceté dans les yeux.\n\n**« La bourse. »** dit le premier.\n\nTu pourrais fuir.\n\nTu pourrais parler.\n\nTu pourrais lever les mains.\n\nMais depuis Cendral,\nton corps sait faire autre chose avant toi.\n\nLa lame noire sort.\n\nLa lumière violette frappe les arbres.\n\nUn souffle.\n\nUn seul.\n\nQuand tu rouvres les yeux,\nles trois hommes sont au sol.\n\nVivants.\n\nMais l'un d'eux hurle.\n\nSa jambe est coincée sous un tronc tombé.\n\nTu n'avais pas visé l'arbre.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "L'aider.",
+          "vers": "aider_bandit",
+          "effects": [
+            {
+              "stat": "controle",
+              "val": 10
+            }
+          ]
+        },
+        {
+          "text": "Partir avant que ça empire.",
+          "vers": "partir_bandit",
+          "effects": [
+            {
+              "stat": "solitude",
+              "val": 15
+            }
+          ]
+        }
+      ],
+      "x": 60,
+      "y": 480
+    },
+    "aider_bandit": {
+      "id": "aider_bandit",
+      "title": "Aider",
+      "location": "Forêt — Crépuscule",
+      "narrator": "",
+      "text": "Tu cours vers lui.\n\nIl te voit approcher avec la lame noire à la main.\n\nSon hurlement change.\n\nCe n'est plus la douleur.\n\nC'est toi.\n\n**« Non— non, approchez pas— »**\n\nTu t'arrêtes.\n\nTu poses la lame au sol.\n\nTu lèves les mains.\n\n**« Je veux aider. »**\n\nIl ne t'entend pas.\n\nOu il ne peut pas.\n\nTu soulèves le tronc avec le Chaos.\n\nTrop vite.\n\nLa force violette explose dans la terre.\nLes racines se déchirent.\nDes pierres volent.\n\nL'homme est libre.\n\nIl rampe loin de toi en pleurant.\n\nTu l'as sauvé.\n\nIl te regarde comme si tu l'avais détruit.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Reprendre la route.",
+          "vers": "paix_courte",
+          "effects": [
+            {
+              "stat": "chaos",
+              "val": 5
+            },
+            {
+              "stat": "solitude",
+              "val": 10
+            }
+          ]
+        }
+      ],
+      "x": 180,
+      "y": 480
+    },
+    "partir_bandit": {
+      "id": "partir_bandit",
+      "title": "Partir",
+      "location": "Forêt — Crépuscule",
+      "narrator": "",
+      "text": "Tu recules.\n\nTu te dis qu'ils t'ont attaqué.\n\nTu te dis que ce n'est pas ta faute.\n\nTu te dis que s'ils n'avaient pas levé leurs couteaux,\nrien ne serait arrivé.\n\nLe hurlement te suit entre les arbres.\n\nLongtemps.\n\nPlus longtemps que possible.\n\nQuand il s'arrête enfin,\nc'est pire.\n\nLe silence a changé.\n\nIl n'est plus vide.\n\nIl contient quelque chose.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Continuer.",
+          "vers": "paix_courte",
+          "effects": [
+            {
+              "stat": "chaos",
+              "val": 10
+            },
+            {
+              "stat": "solitude",
+              "val": 15
+            }
+          ]
+        }
+      ],
+      "x": 300,
+      "y": 480
+    },
+    "trace_violette": {
+      "id": "trace_violette",
+      "title": "La Trace",
+      "location": "Forêt du Nord — Nuit",
+      "narrator": "",
+      "text": "Tu dors mal.\n\nAu matin, tu retournes malgré toi\nvers l'endroit de l'accident.\n\nLa terre est fendue.\n\nLes arbres autour ont des marques noires,\nmais pas brûlées.\n\nAbsorbées.\n\nComme si la lumière avait été retirée de leur écorce.\n\nTu poses la main sur une cicatrice violette.\n\nElle est froide.\n\nTa lame répond.\n\nPas avec des mots.\n\nAvec une sensation.\n\nQuelque chose comme :\n\n*Je peux te protéger.*\n\nTu retires ta main.\n\nTu ne sais pas ce qui te fait le plus peur.\n\nQue ce soit faux.\n\nOu que ce soit vrai.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Éviter les routes.",
+          "vers": "eviter_routes",
+          "effects": [
+            {
+              "stat": "solitude",
+              "val": 10
+            }
+          ]
+        },
+        {
+          "text": "Continuer vers le prochain village.",
+          "vers": "village_grise",
+          "effects": [
+            {
+              "stat": "controle",
+              "val": 5
+            }
+          ]
+        }
+      ],
+      "x": 60,
+      "y": 620
+    },
+    "eviter_routes": {
+      "id": "eviter_routes",
+      "title": "Loin des Routes",
+      "location": "Bois et ravins — Plusieurs jours",
+      "narrator": "",
+      "text": "Tu évites les routes.\n\nLes villages deviennent des lumières au loin.\n\nTu les regardes depuis les collines.\n\nDes fenêtres chaudes.\nDes cheminées.\nDes voix.\n\nDes gens.\n\nTu restes dehors.\n\nC'est mieux comme ça.\n\nPersonne ne te provoque.\nPersonne ne se blesse.\nPersonne ne voit la lame.\n\nTu manges peu.\nTu dors par morceaux.\nTu parles de moins en moins.\n\nAu bout d'une semaine,\ntu réalises que tu n'as pas entendu ta propre voix\ndepuis trois jours.\n\nTu essaies de dire ton nom.\n\nIl sonne étrange.\n\nComme le nom de quelqu'un que tu as connu.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Descendre vers un village.",
+          "vers": "village_grise",
+          "effects": [
+            {
+              "stat": "controle",
+              "val": 5
+            }
+          ]
+        },
+        {
+          "text": "Rester seul.",
+          "vers": "orage",
+          "effects": [
+            {
+              "stat": "solitude",
+              "val": 15
+            }
+          ]
+        }
+      ],
+      "x": 180,
+      "y": 620
+    },
+    "village_grise": {
+      "id": "village_grise",
+      "title": "Griseval",
+      "location": "Village de Griseval — Soir",
+      "narrator": "",
+      "text": "Le village s'appelle Griseval.\n\nTu n'aurais pas dû t'arrêter.\n\nMais il pleut.\nTu as faim.\nEt pendant quelques heures,\ntu veux croire que tu peux entrer quelque part\nsans que le monde se tende autour de toi.\n\nTu caches la lame sous ton manteau.\n\nÀ l'auberge, personne ne te reconnaît.\n\nLa soupe est trop salée.\nLe pain est dur.\nLe banc grince.\n\nC'est le meilleur repas de ta vie.\n\nPuis une petite fille près de la cheminée\npointe ton manteau.\n\n**« Pourquoi ça fait de la lumière dessous ? »**\n\nTout le monde se tourne vers toi.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Dire la vérité.",
+          "vers": "verite_auberge",
+          "effects": [
+            {
+              "stat": "controle",
+              "val": 10
+            }
+          ]
+        },
+        {
+          "text": "Sortir immédiatement.",
+          "vers": "sortie_auberge",
+          "effects": [
+            {
+              "stat": "solitude",
+              "val": 10
+            }
+          ]
+        }
+      ],
+      "x": 60,
+      "y": 760
+    },
+    "verite_auberge": {
+      "id": "verite_auberge",
+      "title": "La Vérité",
+      "location": "Griseval — Auberge",
+      "narrator": "",
+      "text": "Tu ouvres ton manteau.\n\nLa lame noire absorbe la lumière de la salle.\n\nLes flammes de la cheminée se penchent vers elle.\n\nQuelqu'un murmure :\n\n**« Chaos. »**\n\nLe mot tombe sur les tables.\n\nTu lèves les mains.\n\n**« Je ne veux faire de mal à personne. »**\n\nPendant une seconde,\npersonne ne bouge.\n\nPuis la porte s'ouvre violemment.\n\nUn homme entre en courant.\n\n**« Les loups sont dans les enclos ! »**\n\nLa salle explose de bruit.\n\nEt toi,\navant même de réfléchir,\ntu sors avec eux.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Aider le village.",
+          "vers": "loups_enclos",
+          "effects": [
+            {
+              "stat": "controle",
+              "val": 5
+            }
+          ]
+        }
+      ],
+      "x": 180,
+      "y": 760
+    },
+    "sortie_auberge": {
+      "id": "sortie_auberge",
+      "title": "Fuir l'Auberge",
+      "location": "Griseval — Rue",
+      "narrator": "",
+      "text": "Tu sors trop vite.\n\nUne chaise tombe derrière toi.\nQuelqu'un crie.\nLa petite fille pleure.\n\nDans la rue, la pluie frappe ton visage.\n\nTu entends alors un autre cri.\n\nPas dans l'auberge.\n\nPlus loin.\n\nVers les enclos.\n\nDes loups.\n\nDes vrais.\n\nTu pourrais partir maintenant.\n\nPersonne ne te doit rien.\nTu ne dois rien à personne.\n\nSauf que tu vois une silhouette courir vers les bêtes.\n\nUn enfant.\n\nTrop petit.\n\nTrop lent.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Aider quand même.",
+          "vers": "loups_enclos",
+          "effects": [
+            {
+              "stat": "controle",
+              "val": 10
+            }
+          ]
+        },
+        {
+          "text": "Partir.",
+          "vers": "partir_griseval",
+          "effects": [
+            {
+              "stat": "solitude",
+              "val": 20
+            },
+            {
+              "stat": "chaos",
+              "val": 5
+            }
+          ]
+        }
+      ],
+      "x": 300,
+      "y": 760
+    },
+    "loups_enclos": {
+      "id": "loups_enclos",
+      "title": "Les Loups",
+      "location": "Griseval — Enclos",
+      "narrator": "",
+      "text": "Les loups ne sont pas normaux.\n\nLeurs yeux brillent d'une fièvre blanche.\nLeur salive fume sous la pluie.\n\nUn vieux dit :\n\n**« Malebrume. »**\n\nTu ne sais pas ce que ça veut dire.\n\nTu sais seulement que l'enfant est tombé.\n\nUn loup saute.\n\nTu frappes.\n\nLe Chaos répond.\n\nTrop fort.\n\nLa lumière violette traverse l'enclos,\nla bête,\nla barrière,\nla grange derrière.\n\nLe loup disparaît.\n\nLa grange s'effondre.\n\nDes gens hurlent dessous.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Creuser dans les décombres.",
+          "vers": "decombres",
+          "effects": [
+            {
+              "stat": "controle",
+              "val": 10
+            }
+          ]
+        },
+        {
+          "text": "Tuer les autres loups d'abord.",
+          "vers": "tuer_loups",
+          "effects": [
+            {
+              "stat": "chaos",
+              "val": 15
+            }
+          ]
+        }
+      ],
+      "x": 60,
+      "y": 900
+    },
+    "decombres": {
+      "id": "decombres",
+      "title": "Sous la Grange",
+      "location": "Griseval — Grange effondrée",
+      "narrator": "",
+      "text": "Tu cours vers les décombres.\n\nTa lame vibre.\n\nElle veut finir le combat.\n\nTu l'ignores.\n\nTu arraches les poutres une par une.\nTrop vite.\nPas assez doucement.\n\nTaera aurait su où poser les mains.\n\nAryn aurait dit quoi déplacer en premier.\n\nVael aurait trouvé l'enfant qui ne pleure pas.\n\nIkar aurait tenu les loups loin de toi.\n\nMais ils ne sont pas là.\n\nTu es seul.\n\nTu sors deux personnes vivantes.\n\nLa troisième ne bouge plus.\n\nLa pluie lave la poussière sur son visage.\n\nQuelqu'un derrière toi murmure :\n\n**« Tu nous as sauvés. »**\n\nPuis, plus bas :\n\n**« Mais regarde autour de toi. »**",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Rester jusqu'au matin.",
+          "vers": "matin_griseval",
+          "effects": [
+            {
+              "stat": "controle",
+              "val": 5
+            },
+            {
+              "stat": "solitude",
+              "val": 10
+            }
+          ]
+        }
+      ],
+      "x": 180,
+      "y": 900
+    },
+    "tuer_loups": {
+      "id": "tuer_loups",
+      "title": "Finir le Combat",
+      "location": "Griseval — Enclos",
+      "narrator": "",
+      "text": "Tu te retournes vers les autres loups.\n\nTu ne penses plus.\n\nC'est plus simple comme ça.\n\nLa lame noire trace des arcs violets dans la pluie.\nChaque frappe arrache de la terre.\nChaque esquive casse quelque chose.\nChaque souffle du Chaos élargit le cercle du désastre.\n\nQuand le dernier loup tombe,\nil n'y a plus d'enclos.\n\nPlus de grange.\n\nPlus de silence non plus.\n\nDes pleurs.\nDes cris.\nDes appels sous les poutres.\n\nTu as gagné.\n\nC'est le problème.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Aller vers les décombres.",
+          "vers": "decombres",
+          "effects": [
+            {
+              "stat": "chaos",
+              "val": 10
+            },
+            {
+              "stat": "solitude",
+              "val": 5
+            }
+          ]
+        }
+      ],
+      "x": 300,
+      "y": 900
+    },
+    "partir_griseval": {
+      "id": "partir_griseval",
+      "title": "Ne Pas Se Retourner",
+      "location": "Route de Griseval — Nuit",
+      "narrator": "",
+      "text": "Tu pars.\n\nLes cris restent derrière.\n\nTu te dis que ce n'était pas ton combat.\n\nQue chaque fois que tu t'approches,\nquelqu'un souffre.\n\nDonc partir,\nc'est peut-être aider.\n\nLa pluie rend la route noire.\n\nTa lame est froide contre ta jambe.\n\nAu bout d'une heure,\ntu t'arrêtes.\n\nTu as oublié le goût de la soupe.\n\nTu n'as pas oublié le cri de l'enfant.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Continuer seul.",
+          "vers": "orage",
+          "effects": [
+            {
+              "stat": "solitude",
+              "val": 20
+            },
+            {
+              "stat": "chaos",
+              "val": 10
+            }
+          ]
+        }
+      ],
+      "x": 420,
+      "y": 900
+    },
+    "matin_griseval": {
+      "id": "matin_griseval",
+      "title": "Le Matin Après",
+      "location": "Griseval — Aube",
+      "narrator": "",
+      "text": "Au matin, Griseval compte les dégâts.\n\nTrois blessés.\nUne morte.\nDeux maisons fissurées.\nLa grange détruite.\nLes loups morts.\n\nL'enfant vit.\n\nSa mère te remercie.\n\nElle tremble en le faisant.\n\nLe chef du village ne sait pas où poser les yeux.\n\n**« On sait ce que vous avez fait. »**\n**« On sait aussi ce qui est arrivé. »**\n\nIl inspire.\n\n**« Partez avant que les autres se réveillent. »**\n\nPas de colère.\n\nPas de haine.\n\nJuste de la peur fatiguée.\n\nC'est pire.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Partir.",
+          "vers": "honte",
+          "effects": [
+            {
+              "stat": "solitude",
+              "val": 15
+            }
+          ]
+        }
+      ],
+      "x": 60,
+      "y": 1040
+    },
+    "honte": {
+      "id": "honte",
+      "title": "La Honte",
+      "location": "Route au nord de Griseval",
+      "narrator": "",
+      "text": "Tu marches jusqu'à ne plus sentir tes jambes.\n\nGriseval disparaît derrière les collines.\n\nTu as sauvé un enfant.\nTu as tué les loups.\nTu as empêché pire.\n\nEt pourtant,\nune femme est morte sous une grange\nque ton pouvoir a fait tomber.\n\nTu repenses aux Quatre.\n\nÀ leurs regards.\nÀ leurs mains.\nÀ leurs voix autour du feu.\n\nIls n'étaient pas seulement là pour te surveiller.\n\nIls étaient là pour limiter les dégâts.\n\nPour être ce que tu n'es pas encore.\n\nUne pensée traverse ton esprit.\n\n*Je pourrais revenir.*\n\nElle ne reste pas longtemps.\n\nLa honte la chasse.\n\nTu continues.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Continuer.",
+          "vers": "orage",
+          "effects": [
+            {
+              "stat": "solitude",
+              "val": 10
+            },
+            {
+              "stat": "chaos",
+              "val": 5
+            }
+          ]
+        }
+      ],
+      "x": 180,
+      "y": 1040
+    },
+    "orage": {
+      "id": "orage",
+      "title": "L'Orage",
+      "location": "Plateau désert — Nuit",
+      "narrator": "Le ciel se déchire.",
+      "text": "L'orage arrive sans prévenir.\n\nLe vent couche l'herbe.\nLa pluie frappe de travers.\nLa foudre tombe loin, puis plus près.\n\nTu trouves refuge sous une arche de pierre.\n\nLa lame noire s'allume seule.\n\nViolet dans la nuit.\n\nTu la fixes.\n\n**« Arrête. »**\n\nElle ne s'arrête pas.\n\nLe tonnerre répond.\n\nOu peut-être que c'est toi.\n\nLa lumière violette monte le long de ton bras.\n\nPas une attaque.\n\nPas encore.\n\nUn débordement.\n\nComme un verre plein qu'on continue de remplir.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Planter la lame dans le sol.",
+          "vers": "ancrer_seul",
+          "effects": [
+            {
+              "stat": "controle",
+              "val": 10
+            }
+          ]
+        },
+        {
+          "text": "Laisser sortir.",
+          "vers": "laisser_sortir",
+          "effects": [
+            {
+              "stat": "chaos",
+              "val": 20
+            }
+          ]
+        }
+      ],
+      "x": 60,
+      "y": 1180
+    },
+    "ancrer_seul": {
+      "id": "ancrer_seul",
+      "title": "S'Ancrer Seul",
+      "location": "Plateau désert — Nuit",
+      "narrator": "",
+      "text": "Tu plantes la lame dans le sol.\n\nComme Taera te l'a appris.\n\nLes deux mains sur la poignée.\nLes genoux dans la boue.\nLa respiration basse.\n\n**« Je suis là. »**\n\nLa phrase a le goût de sa voix.\n\nLa terre tremble.\n\nPas assez.\n\nTu n'es pas Taera.\nTu n'es pas la Terre.\n\nTu retiens le Chaos quand même.\n\nUne partie descend dans le sol.\nUne autre reste dans tes os.\n\nAu matin,\nle plateau autour de toi est fendu\ncomme une vieille assiette.\n\nMais rien n'a brûlé.\n\nPersonne n'était là.\n\nC'est une victoire.\n\nUne victoire sans témoin.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Continuer.",
+          "vers": "rumeurs",
+          "effects": [
+            {
+              "stat": "controle",
+              "val": 10
+            },
+            {
+              "stat": "solitude",
+              "val": 10
+            }
+          ]
+        }
+      ],
+      "x": 180,
+      "y": 1180
+    },
+    "laisser_sortir": {
+      "id": "laisser_sortir",
+      "title": "Laisser Sortir",
+      "location": "Plateau désert — Nuit",
+      "narrator": "",
+      "text": "Tu cesses de retenir.\n\nPendant une seconde,\nc'est presque un soulagement.\n\nLe Chaos sort en cercle.\n\nLa pluie disparaît avant de toucher le sol.\nLes pierres éclatent.\nL'arche au-dessus de toi se brise et monte dans le ciel\ncomme si le monde tombait à l'envers.\n\nTu cries.\n\nPas de colère.\n\nDe fatigue.\n\nQuand tout s'arrête,\nl'orage est parti.\n\nLe plateau aussi.\n\nIl reste un cratère.\n\nEt toi au centre.\n\nDebout.\n\nIntact.\n\nC'est ça qui te terrifie le plus.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Quitter le cratère.",
+          "vers": "rumeurs",
+          "effects": [
+            {
+              "stat": "chaos",
+              "val": 15
+            },
+            {
+              "stat": "solitude",
+              "val": 10
+            }
+          ]
+        }
+      ],
+      "x": 300,
+      "y": 1180
+    },
+    "rumeurs": {
+      "id": "rumeurs",
+      "title": "Les Rumeurs",
+      "location": "Frontières d'Aerith — Plusieurs semaines",
+      "narrator": "Les semaines deviennent floues.",
+      "text": "Les rumeurs courent plus vite que toi.\n\nUn homme à la lame noire.\nUne lumière violette dans les montagnes.\nUn village sauvé et brisé.\nUn cratère sur un plateau où il n'y avait qu'une arche.\n\nTu entends ton histoire dans la bouche des autres.\n\nElle change à chaque fois.\n\nDans une version, tu es un monstre.\nDans une autre, un sauveur.\nDans une troisième, un signe de la fin.\n\nAucune ne dit que tu as eu peur.\n\nAucune ne dit que tu as essayé.\n\nAucune ne dit que tu aurais voulu\nque quelqu'un soit là pour te dire quoi faire après.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Chercher un endroit où personne ne vit.",
+          "vers": "frontiere_neige",
+          "effects": [
+            {
+              "stat": "solitude",
+              "val": 15
+            }
+          ]
+        },
+        {
+          "text": "Essayer encore d'aider.",
+          "vers": "caravane",
+          "effects": [
+            {
+              "stat": "controle",
+              "val": 10
+            }
+          ]
+        }
+      ],
+      "x": 60,
+      "y": 1320
+    },
+    "caravane": {
+      "id": "caravane",
+      "title": "La Caravane",
+      "location": "Route des Marchands — Midi",
+      "narrator": "",
+      "text": "La caravane est attaquée par des pillards.\n\nCette fois,\ntu attends.\n\nTu observes.\n\nTu choisis.\n\nAryn aurait approuvé.\n\nTu frappes le sol devant les chevaux.\nPas les hommes.\nPas les roues.\n\nLe Chaos ouvre une tranchée entre les pillards et la caravane.\n\nParfait.\n\nPresque.\n\nUn cheval panique.\nLa première charrette bascule.\nDes caisses tombent.\nUne roue se brise.\n\nPersonne ne meurt.\n\nMais un marchand te regarde,\nle visage blanc.\n\n**« Merci. »**\n\nIl le dit comme on donne une pièce à un loup\npour qu'il parte plus loin.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Accepter que c'est le mieux possible.",
+          "vers": "frontiere_neige",
+          "effects": [
+            {
+              "stat": "controle",
+              "val": 5
+            },
+            {
+              "stat": "solitude",
+              "val": 10
+            }
+          ]
+        },
+        {
+          "text": "Se promettre de ne plus aider personne.",
+          "vers": "frontiere_neige",
+          "effects": [
+            {
+              "stat": "solitude",
+              "val": 20
+            }
+          ]
+        }
+      ],
+      "x": 180,
+      "y": 1320
+    },
+    "frontiere_neige": {
+      "id": "frontiere_neige",
+      "title": "La Frontière Blanche",
+      "location": "Montagnes du Nord — Hiver",
+      "narrator": "",
+      "text": "Tu atteins les montagnes quand la neige commence.\n\nLà-haut,\nles villages sont rares.\nLes routes disparaissent.\nLes noms aussi.\n\nPersonne ne te suit.\n\nPas les Quatre.\nPas Erevane.\nPas les rumeurs.\n\nOu peut-être qu'ils suivent encore,\nmais trop loin pour te toucher.\n\nTu trouves une cabane abandonnée\nprès d'une falaise.\n\nLe toit tient mal.\nLa porte grince.\nLa cheminée fume à l'intérieur.\n\nC'est parfait.\n\nPas parce que c'est beau.\n\nParce que c'est loin.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "S'installer.",
+          "vers": "cabane",
+          "effects": [
+            {
+              "stat": "solitude",
+              "val": 10
+            }
+          ]
+        },
+        {
+          "text": "Continuer plus loin.",
+          "vers": "plus_loin",
+          "effects": [
+            {
+              "stat": "solitude",
+              "val": 20
+            }
+          ]
+        }
+      ],
+      "x": 60,
+      "y": 1460
+    },
+    "plus_loin": {
+      "id": "plus_loin",
+      "title": "Encore Plus Loin",
+      "location": "Montagnes du Nord",
+      "narrator": "",
+      "text": "Tu continues.\n\nToujours plus loin.\n\nIl y a quelque chose de rassurant\ndans l'idée qu'il existe toujours un endroit\nencore moins habité que le précédent.\n\nPlus de traces.\nPlus de fumée.\nPlus de voix.\n\nUn soir, tu trouves une grotte ouverte sur le vide.\n\nLe vent y chante comme Vael\nquand il faisait semblant de ne pas être triste.\n\nTu ris.\n\nUn vrai rire.\n\nPuis tu t'arrêtes.\n\nParce que personne ne l'a entendu.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Rester dans la grotte.",
+          "vers": "cabane",
+          "effects": [
+            {
+              "stat": "solitude",
+              "val": 10
+            }
+          ]
+        }
+      ],
+      "x": 180,
+      "y": 1460
+    },
+    "cabane": {
+      "id": "cabane",
+      "title": "Loin du Monde",
+      "location": "Montagnes du Nord — Mois qui passent",
+      "narrator": "",
+      "text": "Les mois passent.\n\nTu apprends à vivre avec peu.\n\nFaire du feu sans magie.\nRéparer un toit.\nPiéger un lièvre.\nReconnaître les nuages qui annoncent une tempête.\n\nLe Chaos se calme.\n\nOu alors il s'endort.\n\nTu ne sais plus.\n\nParfois tu rêves des Quatre.\n\nAryn te demande si tu dors.\nTaera pose une couverture sur tes épaules.\nIkar reste près de la porte.\nVael raconte une histoire absurde avec un canard, un roi et une botte.\n\nTu te réveilles avec la gorge serrée.\n\nLa cabane est vide.\n\nLa lame noire aussi.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Écrire leurs noms dans le bois.",
+          "vers": "noms_bois",
+          "effects": [
+            {
+              "stat": "controle",
+              "val": 10
+            }
+          ]
+        },
+        {
+          "text": "Effacer les souvenirs.",
+          "vers": "effacer",
+          "effects": [
+            {
+              "stat": "solitude",
+              "val": 15
+            }
+          ]
+        }
+      ],
+      "x": 60,
+      "y": 1600
+    },
+    "noms_bois": {
+      "id": "noms_bois",
+      "title": "Les Noms",
+      "location": "Cabane — Nuit",
+      "narrator": "",
+      "text": "Tu prends le couteau à sculpter de Marek.\n\nTes mains tremblent.\n\nSur la table, dans le bois usé de la cabane,\ntu graves quatre noms.\n\nAryn.\n\nLe A prend du temps.\nTu veux que ce soit bien.\n\nIkar.\n\nPlus direct.\nComme lui.\n\nTaera.\n\nTu dois t'arrêter entre les deux syllabes.\n\nVael.\n\nLe V sort de travers.\nTu le refais.\nDeux fois.\n\nPuis tu restes là.\nLe couteau dans la main.\nLes quatre noms dans le bois.\n\nTu touches chaque lettre.\n\nL'eau ne crie pas.\nLe feu avance.\nLa terre porte.\nL'air passe.\n\nDes leçons que tu n'as pas demandées.\n\nQue tu portes quand même.\n\nTu ranges le couteau.\n\nTu ne sais pas pourquoi tu as fait ça.\n\nSi.\n\nTu sais.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Continuer.",
+          "vers": "effacer",
+          "effects": [
+            {
+              "stat": "controle",
+              "val": 10
+            }
+          ]
+        },
+        {
+          "text": "Regarder les noms longtemps.",
+          "vers": "noms_longtemps"
+        }
+      ],
+      "x": 180,
+      "y": 1600
+    },
+    "effacer": {
+      "id": "effacer",
+      "title": "Ne Plus Penser",
+      "location": "Cabane — Nuit",
+      "narrator": "",
+      "text": "Tu ranges tout ce qui rappelle les autres.\n\nLa bourse de terre.\nUn morceau de tissu bleu.\nUne plume que tu ne te souviens pas avoir gardée.\nUne pierre noircie par le feu.\n\nTu les mets dans une boîte.\n\nPuis sous le plancher.\n\nPuis tu poses une table dessus.\n\nC'est ridicule.\n\nComme si les souvenirs avaient besoin d'une porte\npour sortir.\n\nCette nuit-là,\ntu ne rêves pas.\n\nAu matin,\ntu ne sais pas si c'est mieux.\n\nTu ne sais plus très bien ce que *mieux* veut dire.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Continuer.",
+          "vers": "annees",
+          "effects": [
+            {
+              "stat": "solitude",
+              "val": 15
+            }
+          ]
+        }
+      ],
+      "x": 300,
+      "y": 1600
+    },
+    "annees": {
+      "id": "annees",
+      "title": "Les Années",
+      "location": "Frontières du Nord",
+      "narrator": "Les années passent.",
+      "text": "On raconte des choses.\n\nQu'une silhouette marche parfois sur les crêtes.\nQue les tempêtes changent de route.\nQue les monstres évitent certaines vallées.\nQue des voyageurs perdus trouvent un feu déjà allumé,\npuis personne autour.\n\nOn raconte aussi qu'il ne faut pas chercher la silhouette.\n\nPas parce qu'elle attaque.\n\nParce que le monde autour d'elle casse.\n\nUn pont qui cède.\nUne avalanche qui part trop tôt.\nUne rivière qui gèle en plein été.\n\nRien de volontaire.\n\nJamais volontaire.\n\nMais les gens apprennent.\n\nIls survivent mieux\nquand ils gardent leurs distances.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Voir ce que deviennent les Quatre.",
+          "vers": "quatre_recherche",
+          "effects": [
+            {
+              "stat": "controle",
+              "val": 5
+            }
+          ]
+        },
+        {
+          "text": "Rester à distance du monde.",
+          "vers": "horizon",
+          "effects": [
+            {
+              "stat": "solitude",
+              "val": 20
+            }
+          ]
+        }
+      ],
+      "x": 60,
+      "y": 1740
+    },
+    "quatre_recherche": {
+      "id": "quatre_recherche",
+      "title": "Ceux Qui Cherchent",
+      "location": "Quelque part au sud",
+      "narrator": "",
+      "text": "Les Quatre cherchent longtemps.\n\nAryn lit toutes les rumeurs.\nTaera suit les terres brisées.\nIkar grimpe chaque route où quelqu'un a vu une lumière violette.\nVael parle aux gens qui disent n'avoir rien vu.\n\nSurtout eux.\n\nPendant des années,\nils arrivent toujours trop tard.\n\nUn feu encore tiède.\nUne empreinte dans la neige.\nUne table gravée de cinq noms dans une cabane vide.\n\nLe jour où ils trouvent la table,\npersonne ne parle.\n\nMême Vael.\n\nSurtout Vael.\n\nTaera pose la main sur ton nom.\n\nAryn ferme les yeux.\n\nIkar sort dehors.\n\nLe vent passe dans la cabane.\n\nEt pour une fois,\nil ne porte aucune blague.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Continuer.",
+          "vers": "horizon",
+          "effects": [
+            {
+              "stat": "solitude",
+              "val": 10
+            }
+          ]
+        }
+      ],
+      "x": 180,
+      "y": 1740
+    },
+    "horizon": {
+      "id": "horizon",
+      "title": "L'Horizon",
+      "location": "Falaise du Bout du Nord",
+      "narrator": "Fin : L'Horizon.",
+      "text": "Le monde survit.\n\nC'est déjà beaucoup.\n\nTu le regardes depuis une falaise\noù les cartes n'ont plus de noms.\n\nLa mer est en dessous.\n\nGrise.\nVaste.\nIndifférente.\n\nTa lame noire est à ta ceinture.\n\nElle ne vibre plus depuis des mois.\n\nOu elle vibre si doucement\nque tu as appris à ne plus faire la différence.\n\nTu sors le couteau de Marek.\n\nTu l'ouvres.\n\nTu le fermes.\n\nIl y a eu Cendral.\nIl y a eu le carrefour.\nIl y a eu la fuite.\n\nIl y a eu Griseval.\nL'orage.\nLa cabane.\nLes noms dans le bois.\n\nEt maintenant cette falaise.\n\nLe vent.\n\nLa mer.\n\nQuelque part Aerith continue.\n\nLes villes reconstruisent.\nLes gens se souviennent.\nLes quatre cherchent peut-être encore.\n\nOu peut-être qu'ils ont compris.\n\nQue certains chemins ont besoin de temps.\n\nEt que certaines tempêtes\nfinissent par se calmer\nseules.\n\nLentement.\n\nMais seules.",
+      "isStart": false,
+      "isEnd": true,
+      "transition": "fade",
+      "choices": [],
+      "x": 60,
+      "y": 1880
+    },
+    "paix_courte": {
+      "id": "paix_courte",
+      "title": "Un Soir Sans Rien",
+      "location": "Forêt — Clairière",
+      "narrator": "",
+      "text": "Ce soir-là tu trouves une clairière.\n\nPetite.\nProtégée du vent.\n\nTu fais un feu.\n\nPetit.\nSans magie.\nAvec tes mains.\n\nComme Ikar t'avait montré.\n*Le feu suit l'intention.*\n\nTu penses à lui en frappant le silex.\n\nLe feu prend.\n\nTu manges.\n\nTu regardes les étoiles.\n\nLa lame noire est posée loin.\n\nCe soir elle ne vibre pas.\n\nCe soir il ne se passe rien.\n\nJuste un feu.\nDes étoiles.\nEt le silence d'une forêt qui dort.\n\nTu penses à Cendral.\n\nAux feux qu'on faisait le soir sur la place.\n\nÇa ressemble pas.\n\nMais ça ressemble un peu.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Continuer.",
+          "vers": "trace_violette",
+          "effects": [
+            {
+              "stat": "controle",
+              "val": 5
+            }
+          ]
+        },
+        {
+          "text": "Penser à eux.",
+          "vers": "penser_eux_nuit"
+        }
+      ],
+      "x": 300,
+      "y": 400
+    },
+    "penser_eux_nuit": {
+      "id": "penser_eux_nuit",
+      "title": "Dans le Feu",
+      "location": "Forêt — Clairière — Nuit",
+      "narrator": "",
+      "text": "Tu regardes les flammes.\n\nIkar dirait que le feu pense pour toi.\n\nAryn dirait que l'eau autour de toi t'écoute.\n\nTaera dirait que la terre sous toi te porte.\n\nVael dirait quelque chose de drôle\npour que tu arrêtes de te faire du mal.\n\nIls ne sont pas là.\n\nMais leurs voix sont là.\n\nLes phrases qu'ils ont dites.\nLes gestes qu'ils ont faits.\n\nTu te demandes s'ils cherchent.\n\nProbablement.\n\nAryn cherche toujours.\n\nTu étires les jambes.\n\nLe feu crépite.\n\nTu dors mieux que depuis longtemps.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Continuer.",
+          "vers": "trace_violette",
+          "effects": [
+            {
+              "stat": "controle",
+              "val": 10
+            }
+          ]
+        }
+      ],
+      "x": 420,
+      "y": 400
+    },
+    "noms_longtemps": {
+      "id": "noms_longtemps",
+      "title": "Rester Là",
+      "location": "Cabane — Nuit",
+      "narrator": "",
+      "text": "Tu restes assis devant la table.\n\nLongtemps.\n\nLes noms.\n\nTu penses à ce qu'Aryn t'aurait dit.\n*Le doute est de l'eau. Il finit par trouver son chemin.*\n\nCe chemin-là t'a amené ici.\n\nDans une cabane sans nom.\nDans des montagnes sans cartes.\n\nAvec quatre noms gravés dans du bois.\n\nC'est pas ce qu'elle imaginait.\n\nC'est pas ce que tu imaginais.\n\nMais les noms sont là.\n\nEt ça veut dire quelque chose.\n\nQuelque chose que tu n'arrives pas encore à formuler.\n\nPeut-être un jour.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Continuer.",
+          "vers": "effacer",
+          "effects": [
+            {
+              "stat": "controle",
+              "val": 5
+            }
+          ]
+        }
+      ],
+      "x": 300,
+      "y": 1800
+    }
+  }
+}
