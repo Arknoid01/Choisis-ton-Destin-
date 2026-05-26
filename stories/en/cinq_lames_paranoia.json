@@ -1,0 +1,1047 @@
+{
+  "name": "The Five Blades — Paranoia",
+  "kids": false,
+  "askPlayerName": true,
+  "pack": "cinq_lames",
+  "stats": [
+    {
+      "id": "chaos",
+      "label": "Chaos",
+      "start": 40,
+      "max": 100,
+      "color": "#9b5de5"
+    },
+    {
+      "id": "controle",
+      "label": "Monitoring",
+      "start": 30,
+      "max": 100,
+      "color": "#00bbf9"
+    },
+    {
+      "id": "paranoia",
+      "label": "Paranoia",
+      "start": 35,
+      "max": 100,
+      "color": "#f15bb5"
+    }
+  ],
+  "theme": {},
+  "scenes": {
+    "paranoia_debut": {
+      "id": "paranoia_debut",
+      "title": "The Road",
+      "location": "Aerith Road — Several days",
+      "narrator": "Days pass. The road continues.",
+      "text": "You've been traveling for several days.\n\nThe four found a rhythm.\n\nAryn in mind.\nIkar's watching the back.\nTaera who stops to touch the land at every village crossed.\nVael disappears and reappears without warning.\n\nAnd you.\n\nYou're walking.\n\nYou look at your black blade.\n\nIt absorbs sunlight.\n\nIn the villages there is a distance.\nWe whisper.\nWe look at you like you're already the disaster.",
+      "isStart": true,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Look at the four.",
+          "vers": "observer_quatre",
+          "effects": [
+            {
+              "stat": "paranoia",
+              "val": 5
+            }
+          ]
+        },
+        {
+          "text": "Watch your blade.",
+          "vers": "regarder_lame",
+          "effects": [
+            {
+              "stat": "chaos",
+              "val": 5
+            }
+          ]
+        }
+      ],
+      "x": 60,
+      "y": 60
+    },
+    "observer_quatre": {
+      "id": "observer_quatre",
+      "title": "Observers",
+      "location": "Aerith Road",
+      "narrator": "",
+      "text": "They work well together.\n\nToo good.\n\nThings they do without talking to each other.\nEyes that mean something you don't understand.\n\nTwelve years together.\n\nYou've known them a few days.\n\nAryn says the right things.\nTaera smiles at the right time.\nVael makes jokes.\nIkar... Ikar often looks at your blade.\n\nNot long.\n\nJust a second.\n\nThen he turns away his eyes.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Continue.",
+          "vers": "premier_village"
+        }
+      ],
+      "x": 180,
+      "y": 60
+    },
+    "regarder_lame": {
+      "id": "regarder_lame",
+      "title": "The Black Blade",
+      "location": "Aerith Road",
+      "narrator": "",
+      "text": "It's cold in your hand.\n\nEven in the sun.\n\nYou remember how she appeared.\n\nIn the ashes of Cendral.\nLike she's waiting for you.\n\nLike it's all planned.\n\nProphecy.\nThe village.\nThe four who arrive at the right time.\n\nToo well calculated to be a coincidence.\n\nOr.\n\nYou're shaking your head.\n\nYou put those thoughts away.\n\nFor now.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Continue.",
+          "vers": "premier_village",
+          "effects": [
+            {
+              "stat": "paranoia",
+              "val": 5
+            }
+          ]
+        }
+      ],
+      "x": 300,
+      "y": 60
+    },
+    "premier_village": {
+      "id": "premier_village",
+      "title": "The Village of Maren",
+      "location": "Village of Maren",
+      "narrator": "",
+      "text": "The village is called Maren.\n\nKid.\nClean.\nOrdinary.\n\nLike Cendral.\n\nThe locals are watching you come in.\n\nThey see the four first.\n\nThe Four Blades.\nAerith's defenders.\n\nSome bow.\n\nThen they see you.\n\nAnd the black blade.\n\nSilence is changing in nature.\n\nAn old woman shoots her child behind her.\n\nA man closes his door.\n\nTaera puts her hand on your shoulder.\n\n**\"Ignore them. *\n\nEasy to say.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Watch the old woman.",
+          "vers": "vieille_femme_village",
+          "effects": [
+            {
+              "stat": "paranoia",
+              "val": 10
+            }
+          ]
+        },
+        {
+          "text": "Get into the tavern.",
+          "vers": "taverne",
+          "effects": [
+            {
+              "stat": "controle",
+              "val": 5
+            }
+          ]
+        }
+      ],
+      "x": 60,
+      "y": 200
+    },
+    "vieille_femme_village": {
+      "id": "vieille_femme_village",
+      "title": "The Eye",
+      "location": "Village of Maren",
+      "narrator": "",
+      "text": "She holds her child against her.\n\nShe's not leaving you.\n\nNo anger.\n\nJust fear.\n\nThe kind of fear we have in front of something\nWe can't control it.\n\nFire.\nA storm.\nA Chaos porter.\n\nYou want to tell him you don't want to hurt.\n\nBut Cendral is behind you.\n\nAnd the words were stuck in your throat\nSince Marek looked at you like that.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Get into the tavern.",
+          "vers": "taverne",
+          "effects": [
+            {
+              "stat": "paranoia",
+              "val": 5
+            }
+          ]
+        }
+      ],
+      "x": 180,
+      "y": 200
+    },
+    "taverne": {
+      "id": "taverne",
+      "title": "The Tavern",
+      "location": "Village of Maren — Taverne",
+      "narrator": "",
+      "text": "The tavern is hot.\n\nIt smells like beer and wood.\n\nAll four are moving in.\n\nTaera orders for everyone.\nVael makes the tavern laugh.\nAryn looks at the map.\nIkar drinks without talking.\n\nWe're serving you.\n\nExcept you.\n\nThe tavern puts the bowls in front of everyone.\n\nThen he looks at you.\n\nThen he leaves without asking anything in front of you.\n\nVael pushes his bowl towards you without a word.\n\nYou're not taking it.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Get out of the tavern.",
+          "vers": "dehors_taverne",
+          "effects": [
+            {
+              "stat": "paranoia",
+              "val": 15
+            }
+          ]
+        },
+        {
+          "text": "Take the bowl of Vael.",
+          "vers": "prendre_bol",
+          "effects": [
+            {
+              "stat": "controle",
+              "val": 10
+            }
+          ]
+        }
+      ],
+      "x": 60,
+      "y": 320
+    },
+    "prendre_bol": {
+      "id": "prendre_bol",
+      "title": "The Bol",
+      "location": "Tavern",
+      "narrator": "",
+      "text": "You take it.\n\nVael pretends he didn't notice.\n\nNeither is Aryn.\n\nTaera smiles in her soup.\n\nIkar looks outside.\n\nWe eat in silence.\n\nThis is the first meal since Cendral\nwhere you don't feel\nto be separated from them by something invisible.\n\nJust for a meal.\n\nThen Ikar said:\n\n**\"We're leaving tomorrow at dawn. *\n**\"We must continue training. *\n\nThe moment is closing.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Continue.",
+          "vers": "dehors_taverne",
+          "effects": [
+            {
+              "stat": "controle",
+              "val": 5
+            }
+          ]
+        }
+      ],
+      "x": 180,
+      "y": 320
+    },
+    "dehors_taverne": {
+      "id": "dehors_taverne",
+      "title": "Out",
+      "location": "Village of Maren — Rue",
+      "narrator": "",
+      "text": "The night falls on Maren.\n\nYou walk alone on the street.\n\nHouses go away one by one.\n\nSomewhere in the village\nA dog barks.\n\nIt stops when you come by.\n\nEven the dogs.\n\nYou sit on a wall.\n\nThe black blade in your hands.\n\nCold.\nStill cold.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Listen at night.",
+          "vers": "premiere_dispute",
+          "effects": [
+            {
+              "stat": "paranoia",
+              "val": 5
+            }
+          ]
+        }
+      ],
+      "x": 60,
+      "y": 440
+    },
+    "premiere_dispute": {
+      "id": "premiere_dispute",
+      "title": "Voices",
+      "location": "Village of Maren — Night",
+      "narrator": "You hear their voices from the tavern.",
+      "text": "The window is closed.\n\nVoices.\n\nIkar first.\n\n**\"...we can't wait indefinitely...\"**\n\nAryn answers him.\nToo low.\n\n**\"...the elders were right...\"**\n\nThe word \"old\" comes out clearly.\n\nThen Taera.\n\n**\"...but if we make the same mistake as...\"**\n\nVael says something.\nEverybody stop.\n\nThen Ikar again.\n\n**\"...you have to be ready for everything. *\n\nYou know that phrase.\n\nYou heard her in the ruins of Cendral.\n\nYou don't know the rest of the conversation.\n\nBut you know that phrase.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Stay and listen.",
+          "vers": "ecouter_plus",
+          "effects": [
+            {
+              "stat": "paranoia",
+              "val": 15
+            }
+          ]
+        },
+        {
+          "text": "Get away.",
+          "vers": "lendemain_maren",
+          "effects": [
+            {
+              "stat": "paranoia",
+              "val": 5
+            }
+          ]
+        }
+      ],
+      "x": 60,
+      "y": 560
+    },
+    "ecouter_plus": {
+      "id": "ecouter_plus",
+      "title": "Listen again",
+      "location": "Village of Maren — Night",
+      "narrator": "",
+      "text": "You're approaching the window.\n\nAryn's talking now.\n\n**\"...no right to...\"**\n\nIkar cuts.\n\n**\"...if the Chaos takes over...\"**\n\n** \"...that's not what's going to happen...\"** says Taera.\n\n**\"You can't know that. Ikar.\n\nQuiet.\n\nVael says something sweet.\nYou don't hear the words.\n\nBut you hear the tone.\n\nThe tone of someone trying to calm down.\n\n**\"...we must trust him...\"** says Aryn.\n\n**\"What if we're wrong? \"** says Ikar.\n\nNew silence.\n\nLong.\n\nNobody answers.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Go to sleep.",
+          "vers": "lendemain_maren",
+          "effects": [
+            {
+              "stat": "paranoia",
+              "val": 15
+            }
+          ]
+        }
+      ],
+      "x": 180,
+      "y": 560
+    },
+    "lendemain_maren": {
+      "id": "lendemain_maren",
+      "title": "The Lendemain",
+      "location": "Aerith Road — Dawn",
+      "narrator": "",
+      "text": "We're leaving at dawn.\n\nAs planned.\n\nIkar in the lead today.\n\nYou're walking next to Taera.\n\nShe's not talking right now.\n\nThen:\n\n**\"Did you sleep well? *\n\n**\"Yes. *\n\nYou're lying.\n\nShe knows that.\n\nShe's not saying anything.\n\nThe road continues.\n\nIn your head the sentences turn.\n\n* Ready for anything. *\nIf the Chaos takes over. *\nWhat if we're wrong? *\n\nPieces of a puzzle you don't have the full picture of.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Ask Taera.",
+          "vers": "demander_taera",
+          "effects": [
+            {
+              "stat": "controle",
+              "val": 10
+            }
+          ]
+        },
+        {
+          "text": "Keep for yourself.",
+          "vers": "semaines_route",
+          "effects": [
+            {
+              "stat": "paranoia",
+              "val": 10
+            }
+          ]
+        }
+      ],
+      "x": 60,
+      "y": 680
+    },
+    "demander_taera": {
+      "id": "demander_taera",
+      "title": "The Question",
+      "location": "Aerith Road",
+      "narrator": "",
+      "text": "**\"I heard your conversation last night. *\n\nTaera stops.\n\n**\"What did you hear? *\n\n**\"Ikar says you have to be ready for anything. *\n**\"And questions about if we're wrong. *\n\nShe's back on her walk.\n\n**\"The conversation was about how to help you. *\n**\"Not about anything else. *\n\n**\"What if you can't figure out how to help me? *\n\nShe's thinking a long time.\n\n**\"Then we're still looking. *\n\n**\"That's it? *\n\n**\"It's already a lot. *\n\nShe's not lying.\n\nYou feel it.\n\nBut you also know that she doesn't say everything.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Continue.",
+          "vers": "semaines_route",
+          "effects": [
+            {
+              "stat": "controle",
+              "val": 5
+            }
+          ]
+        }
+      ],
+      "x": 180,
+      "y": 680
+    },
+    "semaines_route": {
+      "id": "semaines_route",
+      "title": "Weeks",
+      "location": "Training Temple — Somewhere",
+      "narrator": "Three weeks pass.",
+      "text": "They're training you.\n\nAryn teaches you how to channel.\nTaera teaches you how to anchor.\nVael teaches you how to disperse.\n\nIkar teaches you how to hit.\n\nHe's the quickest mover with you.\n\nTwo blades that understand.\n\nBut the nights are long.\n\nAnd the sentences come back.\n\n* Ready for anything. *\n\nEvery morning you wake up and watch them sleep.\n\nFour familiar faces.\n\nFour people hiding something from you.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Continue training.",
+          "vers": "entrainement_scene",
+          "effects": [
+            {
+              "stat": "controle",
+              "val": 10
+            }
+          ]
+        },
+        {
+          "text": "Observe Ikar.",
+          "vers": "observer_ikar",
+          "effects": [
+            {
+              "stat": "paranoia",
+              "val": 10
+            }
+          ]
+        }
+      ],
+      "x": 60,
+      "y": 800
+    },
+    "entrainement_scene": {
+      "id": "entrainement_scene",
+      "title": "Training",
+      "location": "Clear — Morning",
+      "narrator": "",
+      "text": "Aryn shows you something.\n\n**\"Concentrate not on what you want to destroy. *\n**\"Concentrate on what you want to protect. *\n\n**\"It's the same. *\n\n**\"No.\"** she says.\n**\"It's exactly not the same. *\n\nYou're trying.\n\nThe black blade vibrates differently.\n\nLess chaos.\nMore... direction.\n\nAryn nods his head.\n\n**\"You see. *\n\nFor the first time since Cendral —\n\nSee.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Continue.",
+          "vers": "deuxieme_dispute",
+          "effects": [
+            {
+              "stat": "controle",
+              "val": 15
+            }
+          ]
+        }
+      ],
+      "x": 180,
+      "y": 800
+    },
+    "observer_ikar": {
+      "id": "observer_ikar",
+      "title": "Watch Ikar",
+      "location": "Camp — Night",
+      "narrator": "",
+      "text": "Ikar sleeps with her blade at hand.\n\nEverybody does that.\n\nBut Ikar holds her differently.\n\nLike someone getting ready.\n\nNot an outside attack.\n\nTo a decision.\n\nYou look at his hand on the handle.\n\nYou're thinking about the night in Cendral.\n\nConversation scraps.\n\n* Ready for anything. *\n\nHas he decided yet?\n\nDo the others know?\n\nThe question remains unanswered until morning.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Continue.",
+          "vers": "deuxieme_dispute",
+          "effects": [
+            {
+              "stat": "paranoia",
+              "val": 15
+            }
+          ]
+        }
+      ],
+      "x": 300,
+      "y": 800
+    },
+    "deuxieme_dispute": {
+      "id": "deuxieme_dispute",
+      "title": "The Second Night",
+      "location": "Camp — Night",
+      "narrator": "You don't really sleep anymore.",
+      "text": "You can still hear them.\n\nThis time more distinctly.\n\nIkar and Aryn.\n\n**\"...it's not progressing fast enough...\"** Ikar.\n\n**\"...it takes the time it takes...\"** Aryn.\n\n**\"...the elders said we must be ready to act before...\"**\n\n**\" The elders also said not to reproduce the same mistakes. *\n\n**\"The same mistakes were to wait too long. *\n\n** \"No.\"** Aryn — his voice changes.\n**\"The same mistakes were not to trust him. *\n**\"Not to reach out. *\n**\"That's what killed all four of the time. *\n\n**\"What if this time it's different? *\n\n**\"It's no different. *\n\n**\"Aryn. *\n\n**\"That's. Not. Different. *\n\nQuiet.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Get into the camp.",
+          "vers": "entrer_camp",
+          "effects": [
+            {
+              "stat": "controle",
+              "val": 10
+            }
+          ]
+        },
+        {
+          "text": "Stay in the dark.",
+          "vers": "rester_obscurite",
+          "effects": [
+            {
+              "stat": "paranoia",
+              "val": 20
+            }
+          ]
+        }
+      ],
+      "x": 60,
+      "y": 920
+    },
+    "entrer_camp": {
+      "id": "entrer_camp",
+      "title": "Enter",
+      "location": "Camp — Night",
+      "narrator": "",
+      "text": "You enter the light of fire.\n\nThey stop.\n\nIkar and Aryn look at each other.\n\n**\"You weren't sleeping. * says Vael from his side.\n\n**\"No. *\n\nQuiet.\n\n**\"What you said...\"** you start.\n\nAryn interrupts you.\n\n**\"We were talking about training strategy. *\n\n**\"No, you were talking about me. *\n\nNobody answers.\n\nThis silence confirms more than any answer.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Continue.",
+          "vers": "vieux_apparait",
+          "effects": [
+            {
+              "stat": "paranoia",
+              "val": 10
+            }
+          ]
+        }
+      ],
+      "x": 180,
+      "y": 920
+    },
+    "rester_obscurite": {
+      "id": "rester_obscurite",
+      "title": "In the Shadow",
+      "location": "Camp — Night",
+      "narrator": "",
+      "text": "You stay here.\n\nIn the dark.\n\nThe black blade in your hands.\n\nCold.\n\nThe same mistakes. *\n* Hands out. *\nIt's no different. *\n\nThe sentences come together differently depending on how they are read.\n\nIn a sense — Aryn defends the player.\n\nIn the other — they have a plan.\nA plan you don't know.\nA plan you're the subject of.\n\nThe blade vibrates slightly.\n\nLike she hears too.\n\nLike she understands too.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Continue.",
+          "vers": "vieux_apparait",
+          "effects": [
+            {
+              "stat": "paranoia",
+              "val": 25
+            },
+            {
+              "stat": "chaos",
+              "val": 10
+            }
+          ]
+        }
+      ],
+      "x": 300,
+      "y": 920
+    },
+    "vieux_apparait": {
+      "id": "vieux_apparait",
+      "title": "The Old Man",
+      "location": "Road — Morning",
+      "narrator": "He's here when you wake up.",
+      "text": "An old man.\n\nSitting on a rock by the roadside.\n\nHe hasn't seen you yet.\n\nHe sculpts something in a piece of wood.\n\nLike Marek.\n\nHe looks up when you approach.\n\nHe sees your black blade.\n\nHe's not going back.\n\nHe smiles.\n\n**\"Ah,\" he simply said.\n**\"I was waiting for you. *\n\nNot like a threat.\n\nLike someone who waited a long time\nAnd who is relieved that the wait is over.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "\"Who are you? »",
+          "vers": "vieux_identite",
+          "effects": [
+            {
+              "stat": "paranoia",
+              "val": 5
+            }
+          ]
+        },
+        {
+          "text": "Call the four.",
+          "vers": "vieux_avec_quatre",
+          "effects": [
+            {
+              "stat": "controle",
+              "val": 10
+            }
+          ]
+        },
+        {
+          "text": "Listen to him alone.",
+          "vers": "vieux_identite",
+          "effects": [
+            {
+              "stat": "paranoia",
+              "val": 10
+            }
+          ]
+        }
+      ],
+      "x": 60,
+      "y": 1040
+    },
+    "vieux_avec_quatre": {
+      "id": "vieux_avec_quatre",
+      "title": "With the Four",
+      "location": "Road",
+      "narrator": "",
+      "text": "You call the four.\n\nThey're coming.\n\nThe old man looks at them.\n\nHe doesn't change his expression.\n\nIkar's got his blade.\n\n**\"Who are you?** asks Aryn.\n\n**\"Someone who knows things. *\n**\"On the Chaos. *\n**\"On prophecy. *\n**\"What we're hiding from you. *\n\nHe's looking at you.\n\nNot the four.\n\nYou.\n\n**\"Not everything is said in front of everyone. *\n\nIkar is taking a step.\n\nTaera put her hand on her arm.\n\n**\"Let him speak. *\n\nVael is looking at you.\n\nHe's not smiling.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Listen to the old man.",
+          "vers": "vieux_identite",
+          "effects": [
+            {
+              "stat": "paranoia",
+              "val": 5
+            }
+          ]
+        },
+        {
+          "text": "Ignore and leave.",
+          "vers": "tension_monte",
+          "effects": [
+            {
+              "stat": "controle",
+              "val": 10
+            }
+          ]
+        }
+      ],
+      "x": 180,
+      "y": 1040
+    },
+    "vieux_identite": {
+      "id": "vieux_identite",
+      "title": "Erevane",
+      "location": "Road — Rock",
+      "narrator": "",
+      "text": "*\"My name is Erevane. *\n\nHe's putting his knife away.\n\n**\"I have studied Chaos all my life. *\n**\"Not in the Order's archives. *\n**\"In real archives. *\n**\"The ancients. *\n**\"The ones they didn't burn. *\n\n**« Burned? *\n\n**\"The Order keeps what suits them. *\n**\"And forget the rest. *\n\nHe pulls an old book out of his bag.\n\nAborted.\nBlack cover.\n\n**\"There is another prophecy. *\n**« Older than the one you know. *\n\nHe's giving you the book.\n\n**\"Chaos is not a curse. *\n**\"It's a gift. *\n**\"Ununderstood. *\n**\"Truly taught. *\n**\"For three hundred years. *",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Take the book.",
+          "vers": "vieux_livre",
+          "effects": [
+            {
+              "stat": "paranoia",
+              "val": 10
+            }
+          ]
+        },
+        {
+          "text": "\"Why tell me that? »",
+          "vers": "vieux_pourquoi",
+          "effects": [
+            {
+              "stat": "controle",
+              "val": 5
+            }
+          ]
+        }
+      ],
+      "x": 60,
+      "y": 1160
+    },
+    "vieux_pourquoi": {
+      "id": "vieux_pourquoi",
+      "title": "The Question",
+      "location": "Road — Rock",
+      "narrator": "",
+      "text": "Erevane is looking at you.\n\n**\"Because you need to hear it. *\n\n**\"What about the four? *\n\nHe hesitates.\n\nJust a second.\n\n**\"The four are formed by the Order. *\n**\"The Order has its certainties. *\n**\"His certainty has been there for three hundred years. *\n\n**\"What does that mean? *\n\n**\"It means they help you the way they do. *\n**\"Not necessarily as you need. *\n\nHe puts the book on the rock between you.\n\n**\"I'm not asking you to leave them. *\n**\"I'm just asking you to read. *",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Take the book.",
+          "vers": "vieux_livre",
+          "effects": [
+            {
+              "stat": "paranoia",
+              "val": 5
+            }
+          ]
+        },
+        {
+          "text": "Leave the book.",
+          "vers": "tension_monte",
+          "effects": [
+            {
+              "stat": "controle",
+              "val": 10
+            }
+          ]
+        }
+      ],
+      "x": 180,
+      "y": 1160
+    },
+    "vieux_livre": {
+      "id": "vieux_livre",
+      "title": "The Other Prophety",
+      "location": "Road — Rock",
+      "narrator": "",
+      "text": "You take the book.\n\nIt opens on a marked page.\n\nA prophecy.\nDifferent.\n\n\"The Chaos porter will come from the borders. *\nHis blade will absorb the light. *\n*And in this absorbed light—*\n*he will keep what the world has forgotten to keep. *\nIt's not the end. *\nIt's memory.\" *\n\nYou're watching Erevane.\n\n**\"Who wrote this? *\n\n**\"Someone who saw Caël before he tipped. *\n**\"Someone who thought we could have done otherwise. *\n\n**\"Why isn't the Order talking about this? *\n\nHe's taking over the book.\n\n**\"Because it calls into question everything they've built. *\n\nHe's packing the book.\n\n**\"I will be in the next city. *\n**\"If you want to know more. *\n\nHe's getting up.\nHe's going back on the road.\n\nLike he had all his time.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Watching him go.",
+          "vers": "apres_vieux",
+          "effects": [
+            {
+              "stat": "paranoia",
+              "val": 10
+            }
+          ]
+        }
+      ],
+      "x": 60,
+      "y": 1280
+    },
+    "apres_vieux": {
+      "id": "apres_vieux",
+      "title": "After",
+      "location": "Road",
+      "narrator": "",
+      "text": "All four are coming.\n\nOr are there from the beginning.\n\nYou don't know anymore.\n\n**\"Who was that?\"** asks Vael.\n\n**\"Someone passing by. *\n\nAryn's looking at you.\n\nHis eyes go to the rock where the old man was sitting.\n\nShe's not saying anything.\n\nIkar looks at the road in the direction he left.\n\n**\"We continue.** he said.\n\nYou keep going.\n\nBut something has changed.\n\nNot them.\n\nYou.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Continue.",
+          "vers": "tension_monte",
+          "effects": [
+            {
+              "stat": "paranoia",
+              "val": 5
+            }
+          ]
+        }
+      ],
+      "x": 60,
+      "y": 1400
+    },
+    "tension_monte": {
+      "id": "tension_monte",
+      "title": "Tension",
+      "location": "Camp — Several days",
+      "narrator": "The following days are different.",
+      "text": "You're looking for signs.\n\nIn their eyes.\nIn their silences.\nIn the way Ikar lays his hand near his blade.\n\nSometimes there's nothing.\n\nSometimes you're not sure.\n\nOne night Aryn sits next to you.\n\n**\"You okay? *\n\n**\"Yes. *\n\n*\"You sleep longer. *\n\n**\"I sleep. *\n\n**\"You don't sleep like you used to. *\n\nYou look at her.\n\n**\"How do you know how I slept before? *\n\nShe doesn't have an answer to that.\n\nShe leaves without saying anything.\n\nThe next morning Vael made a joke.\n\nNobody really laughs.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Go to Erevane.",
+          "vers": "retrouver_vieux",
+          "effects": [
+            {
+              "stat": "paranoia",
+              "val": 15
+            }
+          ]
+        },
+        {
+          "text": "Talk to Vael.",
+          "vers": "parler_vael",
+          "effects": [
+            {
+              "stat": "controle",
+              "val": 10
+            }
+          ]
+        }
+      ],
+      "x": 60,
+      "y": 1520
+    },
+    "parler_vael": {
+      "id": "parler_vael",
+      "title": "Vael",
+      "location": "Camp — Evening",
+      "narrator": "",
+      "text": "You sit next to him.\n\nHe doesn't say anything for a while.\n\nIt's rare for Vael.\n\n**\"You met someone on the road. * he says.\n\n**\"Someone passing by. *\n\n**\"Yeah. *\n\nHe's watching the fire.\n\n**\"You know what I find interesting? *\n\n**\"What. *\n\n**\"People who arrive at the right time. *\n**\"When you're alone. *\n**\"When looking for answers. *\n**\"And who have exactly the answers we are looking for. *\n\n**\"So what? *\n\n**\"And then nothing. *\n**\"I find it interesting. *\n\nHe's getting up.\n\n**\"Good night. *",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Continue.",
+          "vers": "lame_nuit",
+          "effects": [
+            {
+              "stat": "controle",
+              "val": 5
+            }
+          ]
+        }
+      ],
+      "x": 180,
+      "y": 1520
+    },
+    "retrouver_vieux": {
+      "id": "retrouver_vieux",
+      "title": "Find Erevane",
+      "location": "City — Tavern",
+      "narrator": "",
+      "text": "You find him in the tavern of the next city.\n\nLike he said.\n\nHe sees you coming in.\n\nHe's pushing a chair towards you.\n\n**\"Did you read? *\n\n**\"Yes. *\n\n**« Questions? *\n\n**\"A lot. *\n\nHe smiles.\n\nA teacher's kind of smile\nWho was exactly waiting for that.\n\n**\"Good. *\n**\"That's how it starts. *\n\nHe comes out of other books.\n\nOther pages marked.\n\nYou talk a long time.\n\nHe listens as much as he talks.\n\nHe never says you should leave the four. *\n\nBut at the end of the conversation\nYou realize you didn't mention them.\nOnly in the past.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Continue.",
+          "vers": "lame_nuit",
+          "effects": [
+            {
+              "stat": "paranoia",
+              "val": 15
+            }
+          ]
+        }
+      ],
+      "x": 300,
+      "y": 1520
+    },
+    "lame_nuit": {
+      "id": "lame_nuit",
+      "title": "The Night of the Blade",
+      "location": "Camp — Deep night",
+      "narrator": "You're not sleeping.",
+      "text": "The black blade is in front of you.\n\nIt absorbs light from the fire.\n\nYou've been watching her for an hour.\n\nYerevane's sentences.\nThe fights you heard.\nIkar's eyes.\nAryn's silence.\n\n* Ready for anything. *\nThe same mistakes. *\nIf the Chaos takes over. *\n\nAnd the prophecy of the book.\n\nIt's not the end. *\nIt's memory. *\n\nTwo prophecies.\nTwo readings of the world.\n\nYou have to choose which one to believe.\n\nYou hear someone moving.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Continue.",
+          "vers": "ikar_lame_gorge",
+          "effects": [
+            {
+              "stat": "paranoia",
+              "val": 5
+            }
+          ]
+        }
+      ],
+      "x": 60,
+      "y": 1640
+    },
+    "ikar_lame_gorge": {
+      "id": "ikar_lame_gorge",
+      "title": "The Blade",
+      "location": "Camp — Deep night",
+      "narrator": "A flame in the dark.",
+      "text": "You feel her before you see her.\n\nHeat.\n\nIkar's burning blade.\n\nUnder your throat.\n\nYou didn't move.\n\nYou didn't have time.\n\nOr you didn't want to.\n\nYou open your eyes.\n\nIkar's here.\n\nKnee.\n\nHis blade under your throat.\n\nHis eyes.\n\nNot anger.\n\nSomething much more difficult.\n\nHe's shaking slightly.\n\nThe blade trembles with him.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Hold still.",
+          "vers": "ikar_lache",
+          "effects": [
+            {
+              "stat": "controle",
+              "val": 10
+            }
+          ]
+        },
+        {
+          "text": "Push his blade.",
+          "vers": "ikar_lache",
+          "effects": [
+            {
+              "stat": "chaos",
+              "val": 15
+            }
+          ]
+        }
+      ],
+      "x": 60,
+      "y": 1760,
+      "timer": {
+        "duration": 8,
+        "auto": "first"
+      }
+    },
+    "ikar_lache": {
+      "id": "ikar_lache",
+      "title": "He can't",
+      "location": "Camp — Deep night",
+      "narrator": "",
+      "text": "Ikar don't move.\n\nHis blade doesn't move.\n\nBut he doesn't do anything.\n\nSecond.\n\nLong.\n\n**\"Do it. * you say.\n\nYour own voice surprises you.\n\nCalm down.\n\n**\"If that's what you have to do. *\n**\"Do it. *\n\nIkar closes his eyes.\n\nHis blade is extinguishing.\n\nHe takes his hand off.\n\nHe's staying here.\nHead down.\n\n**\"I couldn't. *\n\nNot tell you.\n\nTo himself.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Watch the others arrive.",
+          "vers": "autres_arrivent"
+        }
+      ],
+      "x": 60,
+      "y": 1880
+    },
+    "autres_arrivent": {
+      "id": "autres_arrivent",
+      "title": "Other",
+      "location": "Camp — Night",
+      "narrator": "",
+      "text": "Aryn's here.\n\nTaera, too.\n\nVael in the shadows.\n\nThey saw.\n\nOr heard.\n\nAryn kneels in front of Ikar.\n\nShe talks to him low.\n\nYou don't hear.\n\nTaera is looking at you.\n\nHer eyes shine in the dark.\n\n**\"You okay? *\n\n**\"Yes. *\n\nVael is next to you now.\n\nHe's not saying anything.\n\nBut he's here.\n\nIkar's getting up.\n\nHe's looking at you.\n\n**\"I'm sorry. *\n\nTwo words.\n\nThe toughest you've ever heard of.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "\"Why? »",
+          "vers": "confrontation_finale",
+          "effects": [
+            {
+              "stat": "controle",
+              "val": 10
+            }
+          ]
+        },
+        {
+          "text": "Don't say anything.",
+          "vers": "confrontation_finale",
+          "effects": [
+            {
+              "stat": "paranoia",
+              "val": 10
+            }
+          ]
+        }
+      ],
+      "x": 60,
+      "y": 2000
+    },
+    "confrontation_finale": {
+      "id": "confrontation_finale",
+      "title": "Truth",
+      "location": "Camp — Dawn",
+      "narrator": "The fire went out. The dawn is coming.",
+      "text": "You're sitting all five.\n\nFor the first time since Cendral —\nNobody pretends.\n\nAryn's talking.\n\n**\"The spirits told us to be ready for anything. *\n**\"Ikar understood it as...\"**\n**\"...the ultimate option. *\n\n**\"What about you? You're asking.\n\n**\"I understood that we must not reproduce Caël. *\n**\"Caël was alone. *\n**\"We're not here to watch you. *\n**\"We're here so you're not alone. *\n\nIkar looks at the ground.\n\n**\"I thought if it got too dangerous...\"**\n\n**\"No.\"** says Taera.\n**\"That was not what to do. *\n\n**\"I know now. *\n\nVael looks at the sky rising.\n\n**\"Beautiful way to start the day. *\n\nNobody laughs.\n\nBut Taera sketched a smile.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Believe them.",
+          "vers": "choix_final",
+          "effects": [
+            {
+              "stat": "controle",
+              "val": 20
+            }
+          ]
+        },
+        {
+          "text": "Don't know.",
+          "vers": "choix_final",
+          "effects": [
+            {
+              "stat": "paranoia",
+              "val": 10
+            }
+          ]
+        }
+      ],
+      "x": 60,
+      "y": 2120
+    },
+    "choix_final": {
+      "id": "choix_final",
+      "title": "The Carrefour",
+      "location": "Camp — Dawn",
+      "narrator": "It's all happening now.",
+      "text": "The sun is rising.\n\nThe four are looking at you.\n\nYour black blade absorbs the morning light.\n\nIkar. Aryn, Taera. Vael.\n\nFour faces waiting.\n\nErevane somewhere on the road.\nAnother prophecy in your head.\n\nCendral smoke.\nThe blade under your throat.\nApologies.\nThe doubts.\n\nIt's all there.\n\nAnd time passes.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Trust them. Go to the end together.",
+          "vers": "chemin_combat",
+          "story": "stories/fr/cinq_lames_combat.json",
+          "effects": [
+            {
+              "stat": "controle",
+              "val": 20
+            }
+          ]
+        },
+        {
+          "text": "Leave. Alone. Far from it.",
+          "vers": "chemin_fuite",
+          "story": "stories/fr/cinq_lames_fuite.json",
+          "effects": [
+            {
+              "stat": "paranoia",
+              "val": 10
+            }
+          ]
+        },
+        {
+          "text": "Find Erevane. Maybe he was right.",
+          "vers": "chemin_manipulation",
+          "story": "stories/fr/cinq_lames_manipulation.json",
+          "effects": [
+            {
+              "stat": "chaos",
+              "val": 15
+            }
+          ]
+        }
+      ],
+      "x": 60,
+      "y": 2240,
+      "timer": {
+        "duration": 15,
+        "auto": "first"
+      }
+    },
+    "chemin_combat": {
+      "id": "chemin_combat",
+      "title": "Combat",
+      "location": "",
+      "narrator": "",
+      "text": "You choose to trust them.",
+      "isStart": false,
+      "isEnd": true,
+      "transition": "fade",
+      "choices": [],
+      "x": 60,
+      "y": 2360
+    },
+    "chemin_fuite": {
+      "id": "chemin_fuite",
+      "title": "The Leak",
+      "location": "",
+      "narrator": "",
+      "text": "You turn your back and leave.",
+      "isStart": false,
+      "isEnd": true,
+      "transition": "fade",
+      "choices": [],
+      "x": 60,
+      "y": 2360
+    },
+    "chemin_manipulation": {
+      "id": "chemin_manipulation",
+      "title": "Erevane",
+      "location": "",
+      "narrator": "",
+      "text": "You're going to find the old man.",
+      "isStart": false,
+      "isEnd": true,
+      "transition": "fade",
+      "choices": [],
+      "x": 60,
+      "y": 2360
+    }
+  },
+  "lang": "en"
+}
