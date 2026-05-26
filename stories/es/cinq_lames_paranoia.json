@@ -1,0 +1,1047 @@
+{
+  "name": "Las cinco espadas — Paranoia",
+  "kids": false,
+  "askPlayerName": true,
+  "pack": "cinq_lames",
+  "stats": [
+    {
+      "id": "chaos",
+      "label": "Chaos",
+      "start": 40,
+      "max": 100,
+      "color": "#9b5de5"
+    },
+    {
+      "id": "controle",
+      "label": "Supervisión",
+      "start": 30,
+      "max": 100,
+      "color": "#00bbf9"
+    },
+    {
+      "id": "paranoia",
+      "label": "Paranoia",
+      "start": 35,
+      "max": 100,
+      "color": "#f15bb5"
+    }
+  ],
+  "theme": {},
+  "scenes": {
+    "paranoia_debut": {
+      "id": "paranoia_debut",
+      "title": "The Road",
+      "location": "Aerith Road — Varios días",
+      "narrator": "Pasan días. El camino continúa.",
+      "text": "Llevas varios días viajando.\n\nLos cuatro encontraron un ritmo.\n\nAryn en mente.\nIkar está mirando atrás.\nTaera que se detiene para tocar la tierra en cada aldea cruzada.\nVael desaparece y reaparece sin aviso.\n\nY tú.\n\nEstás caminando.\n\nMira tu espada negra.\n\nabsorbe la luz solar.\n\nEn las aldeas hay una distancia.\nSusurramos.\nTe miramos como si ya fueras el desastre.",
+      "isStart": true,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Mira los cuatro.",
+          "vers": "observer_quatre",
+          "effects": [
+            {
+              "stat": "paranoia",
+              "val": 5
+            }
+          ]
+        },
+        {
+          "text": "Cuidado con tu espada.",
+          "vers": "regarder_lame",
+          "effects": [
+            {
+              "stat": "chaos",
+              "val": 5
+            }
+          ]
+        }
+      ],
+      "x": 60,
+      "y": 60
+    },
+    "observer_quatre": {
+      "id": "observer_quatre",
+      "title": "Observadores",
+      "location": "Aerith Road",
+      "narrator": "",
+      "text": "Trabajan bien juntos.\n\nMuy bien.\n\nCosas que hacen sin hablar.\nOjos que significan algo que no entiendes.\n\nDoce años juntos.\n\nLos has conocido unos días.\n\nAryn dice lo correcto.\nTaera sonríe en el momento adecuado.\nVael hace bromas.\nIkar... Ikar a menudo mira tu espada.\n\nNo mucho.\n\nUn segundo.\n\nEntonces él aparta sus ojos.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Continúa.",
+          "vers": "premier_village"
+        }
+      ],
+      "x": 180,
+      "y": 60
+    },
+    "regarder_lame": {
+      "id": "regarder_lame",
+      "title": "La espada negra",
+      "location": "Aerith Road",
+      "narrator": "",
+      "text": "Hace frío en la mano.\n\nIncluso al sol.\n\nRecuerdas cómo apareció.\n\nEn las cenizas de Cendral.\nComo si te estuviera esperando.\n\nComo si todo estuviera planeado.\n\nProfecía.\nEl pueblo.\nLos cuatro que llegan al momento adecuado.\n\nDemasiado bien calculado para ser una coincidencia.\n\nO.\n\nEstás temblando la cabeza.\n\nGuarda esos pensamientos.\n\nPor ahora.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Continúa.",
+          "vers": "premier_village",
+          "effects": [
+            {
+              "stat": "paranoia",
+              "val": 5
+            }
+          ]
+        }
+      ],
+      "x": 300,
+      "y": 60
+    },
+    "premier_village": {
+      "id": "premier_village",
+      "title": "El pueblo de Maren",
+      "location": "Village of Maren",
+      "narrator": "",
+      "text": "El pueblo se llama Maren.\n\nNiño.\nLimpio.\nOrdinario.\n\nComo Cendral.\n\nLos lugareños te están viendo entrar.\n\nEllos ven los cuatro primero.\n\nLos Cuatro Blades.\nLos defensores de Aerith.\n\nUn poco de arco.\n\nLuego te ven.\n\nY la espada negra.\n\nEl silencio está cambiando de naturaleza.\n\nUna vieja le dispara a su hijo detrás de ella.\n\nUn hombre cierra su puerta.\n\nTaera pone su mano sobre su hombro.\n\nIgnóralos.\n\nFácil de decir.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Cuidado con la vieja.",
+          "vers": "vieille_femme_village",
+          "effects": [
+            {
+              "stat": "paranoia",
+              "val": 10
+            }
+          ]
+        },
+        {
+          "text": "Entra en la taberna.",
+          "vers": "taverne",
+          "effects": [
+            {
+              "stat": "controle",
+              "val": 5
+            }
+          ]
+        }
+      ],
+      "x": 60,
+      "y": 200
+    },
+    "vieille_femme_village": {
+      "id": "vieille_femme_village",
+      "title": "El ojo",
+      "location": "Village of Maren",
+      "narrator": "",
+      "text": "Sostiene a su hijo contra ella.\n\nNo te deja.\n\nSin ira.\n\nSólo miedo.\n\nEl tipo de miedo que tenemos delante de algo\nNo podemos controlarlo.\n\nFuego.\nUna tormenta.\nUn portero de Caos.\n\nQuieres decirle que no quieres lastimarte.\n\nPero Cendral está detrás de ti.\n\nY las palabras estaban pegadas en tu garganta\nDesde que Marek te miró así.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Entra en la taberna.",
+          "vers": "taverne",
+          "effects": [
+            {
+              "stat": "paranoia",
+              "val": 5
+            }
+          ]
+        }
+      ],
+      "x": 180,
+      "y": 200
+    },
+    "taverne": {
+      "id": "taverne",
+      "title": "El Tavern",
+      "location": "Pueblo de Maren — Taverne",
+      "narrator": "",
+      "text": "La taberna está caliente.\n\nHuele a cerveza y madera.\n\nLos cuatro se están moviendo.\n\nTaera ordena a todos.\nVael hace reír a la taberna.\nAryn mira el mapa.\nBebidas de kar sin hablar.\n\nTe estamos sirviendo.\n\nExcepto tú.\n\nLa taberna pone los tazones delante de todos.\n\nLuego te mira.\n\nLuego se va sin preguntar nada delante de ti.\n\nVael empuja su tazón hacia ti sin una palabra.\n\nNo lo estás tomando.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Sal de la taberna.",
+          "vers": "dehors_taverne",
+          "effects": [
+            {
+              "stat": "paranoia",
+              "val": 15
+            }
+          ]
+        },
+        {
+          "text": "Toma el tazón de Vael.",
+          "vers": "prendre_bol",
+          "effects": [
+            {
+              "stat": "controle",
+              "val": 10
+            }
+          ]
+        }
+      ],
+      "x": 60,
+      "y": 320
+    },
+    "prendre_bol": {
+      "id": "prendre_bol",
+      "title": "El Bol",
+      "location": "Tavern",
+      "narrator": "",
+      "text": "Tómalo.\n\nVael finge que no se dio cuenta.\n\nTampoco Aryn.\n\nTaera sonríe en su sopa.\n\nIkar mira afuera.\n\nComemos en silencio.\n\nEsta es la primera comida desde Cendral\ndonde no sientes\nser separado de ellos por algo invisible.\n\nSólo para una comida.\n\nEntonces Ikar dijo:\n\nNos vamos mañana al amanecer.\nDebemos continuar entrenando.\n\nEl momento está cerrando.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Continúa.",
+          "vers": "dehors_taverne",
+          "effects": [
+            {
+              "stat": "controle",
+              "val": 5
+            }
+          ]
+        }
+      ],
+      "x": 180,
+      "y": 320
+    },
+    "dehors_taverne": {
+      "id": "dehors_taverne",
+      "title": "Fuera.",
+      "location": "Village of Maren — Rue",
+      "narrator": "",
+      "text": "La noche cae en Maren.\n\nCaminas solo en la calle.\n\nLas casas desaparecen una a una.\n\nEn algún lugar del pueblo\nUn perro ladra.\n\nSe detiene cuando pasas.\n\nIncluso los perros.\n\nSiéntate en una pared.\n\nLa espada negra en tus manos.\n\nFrío.\nTodavía frío.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Escucha por la noche.",
+          "vers": "premiere_dispute",
+          "effects": [
+            {
+              "stat": "paranoia",
+              "val": 5
+            }
+          ]
+        }
+      ],
+      "x": 60,
+      "y": 440
+    },
+    "premiere_dispute": {
+      "id": "premiere_dispute",
+      "title": "Voces",
+      "location": "Pueblo de Maren — Noche",
+      "narrator": "Escuchas sus voces de la taberna.",
+      "text": "La ventana está cerrada.\n\nVoces.\n\nIkar primero.\n\n\"No podemos esperar indefinidamente...\"\n\nAryn le responde.\nDemasiado bajo.\n\nLos ancianos tenían razón...\n\nLa palabra \"antiguo\" sale claramente.\n\nEntonces Taera.\n\nPero si cometemos el mismo error que...\"\n\nVael dice algo.\nTodo el mundo para.\n\nEntonces Ikar otra vez.\n\nTienes que estar listo para todo.\n\nSabes esa frase.\n\nLa escuchaste en las ruinas de Cendral.\n\nNo sabes el resto de la conversación.\n\nPero sabes esa frase.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Quédate y escucha.",
+          "vers": "ecouter_plus",
+          "effects": [
+            {
+              "stat": "paranoia",
+              "val": 15
+            }
+          ]
+        },
+        {
+          "text": "Aléjate.",
+          "vers": "lendemain_maren",
+          "effects": [
+            {
+              "stat": "paranoia",
+              "val": 5
+            }
+          ]
+        }
+      ],
+      "x": 60,
+      "y": 560
+    },
+    "ecouter_plus": {
+      "id": "ecouter_plus",
+      "title": "Escucha otra vez.",
+      "location": "Pueblo de Maren — Noche",
+      "narrator": "",
+      "text": "Te acercas a la ventana.\n\nAryn está hablando ahora.\n\n\"No hay derecho a...\"\n\nCortes de Ikar.\n\nSi los Caos se apoderan...\n\n\"...no es lo que va a pasar...\" dice Taera.\n\nNo puedes saberlo. Ikar.\n\nSilencio.\n\nVael dice algo dulce.\nNo oyes las palabras.\n\nPero escuchas el tono.\n\nEl tono de alguien tratando de calmarse.\n\nDebemos confiar en él... dice Aryn.\n\n¿Y si nos equivocamos?\n\nNuevo silencio.\n\nLargo.\n\nNadie responde.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Vete a dormir.",
+          "vers": "lendemain_maren",
+          "effects": [
+            {
+              "stat": "paranoia",
+              "val": 15
+            }
+          ]
+        }
+      ],
+      "x": 180,
+      "y": 560
+    },
+    "lendemain_maren": {
+      "id": "lendemain_maren",
+      "title": "El Lendemain",
+      "location": "Aerith Road — Dawn",
+      "narrator": "",
+      "text": "Nos vamos al amanecer.\n\nComo estaba planeado.\n\nIkar en la cabeza hoy.\n\nCaminas junto a Taera.\n\nNo está hablando ahora mismo.\n\nEntonces:\n\n¿Has dormido bien?\n\nSí.\n\nEstás mintiendo.\n\nElla lo sabe.\n\nNo está diciendo nada.\n\nEl camino continúa.\n\nEn tu cabeza las frases giran.\n\n* Listo para cualquier cosa. *\nSi el Caos se hace cargo.\n¿Y si nos equivocamos?\n\nPiezas de un rompecabezas que no tienes la imagen completa.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Pregúntale a Taera.",
+          "vers": "demander_taera",
+          "effects": [
+            {
+              "stat": "controle",
+              "val": 10
+            }
+          ]
+        },
+        {
+          "text": "Quédate por ti mismo.",
+          "vers": "semaines_route",
+          "effects": [
+            {
+              "stat": "paranoia",
+              "val": 10
+            }
+          ]
+        }
+      ],
+      "x": 60,
+      "y": 680
+    },
+    "demander_taera": {
+      "id": "demander_taera",
+      "title": "La cuestión",
+      "location": "Aerith Road",
+      "narrator": "",
+      "text": "Anoche escuché tu conversación.\n\nTaera se detiene.\n\n¿Qué has oído?\n\n**\"Ikar dice que tienes que estar listo para cualquier cosa.\nY preguntas sobre si nos equivocamos.\n\nHa vuelto a caminar.\n\n**\"La conversación fue sobre cómo ayudarte.\nNo sobre nada más.\n\n¿Y si no puedes averiguar cómo ayudarme?\n\nEstá pensando mucho tiempo.\n\nEntonces seguimos buscando.\n\n¿Eso es todo?\n\n\"Ya es mucho.\n\nNo está mintiendo.\n\nLo sientes.\n\nPero también sabes que ella no dice todo.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Continúa.",
+          "vers": "semaines_route",
+          "effects": [
+            {
+              "stat": "controle",
+              "val": 5
+            }
+          ]
+        }
+      ],
+      "x": 180,
+      "y": 680
+    },
+    "semaines_route": {
+      "id": "semaines_route",
+      "title": "Semanas",
+      "location": "Templo de entrenamiento - En algún lugar",
+      "narrator": "Pasan tres semanas.",
+      "text": "Te están entrenando.\n\nAryn te enseña a canalizar.\nTaera te enseña cómo anclar.\nVael te enseña a dispersarte.\n\nIkar te enseña cómo golpear.\n\nEs el más rápido con usted.\n\nDos cuchillas que entienden.\n\nPero las noches son largas.\n\nY las frases vuelven.\n\n* Listo para cualquier cosa. *\n\nCada mañana te despiertas y los ves dormir.\n\nCuatro caras familiares.\n\nCuatro personas ocultando algo de ti.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Continúa entrenando.",
+          "vers": "entrainement_scene",
+          "effects": [
+            {
+              "stat": "controle",
+              "val": 10
+            }
+          ]
+        },
+        {
+          "text": "Observa a Ikar.",
+          "vers": "observer_ikar",
+          "effects": [
+            {
+              "stat": "paranoia",
+              "val": 10
+            }
+          ]
+        }
+      ],
+      "x": 60,
+      "y": 800
+    },
+    "entrainement_scene": {
+      "id": "entrainement_scene",
+      "title": "Capacitación",
+      "location": "Clear — Morning",
+      "narrator": "",
+      "text": "Aryn te muestra algo.\n\n**\"No concentres en lo que quieres destruir.\n**\"Concentra en lo que quieres proteger. *\n\nEs lo mismo.\n\nDice: \"No\".\nNo es exactamente lo mismo.\n\nLo estás intentando.\n\nLa hoja negra vibra de manera diferente.\n\nMenos caos.\nMás... dirección.\n\nAryn asiente su cabeza.\n\n*\"Lo ves. *\n\nPor primera vez desde Cendral —\n\nMira.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Continúa.",
+          "vers": "deuxieme_dispute",
+          "effects": [
+            {
+              "stat": "controle",
+              "val": 15
+            }
+          ]
+        }
+      ],
+      "x": 180,
+      "y": 800
+    },
+    "observer_ikar": {
+      "id": "observer_ikar",
+      "title": "Mira Ikar",
+      "location": "Campamento - Noche",
+      "narrator": "",
+      "text": "Ikar duerme con su espada a mano.\n\nTodo el mundo hace eso.\n\nPero Ikar la mantiene diferente.\n\nComo si alguien se estuviera preparando.\n\nNo es un ataque exterior.\n\nA una decisión.\n\nMira su mano en el mango.\n\nEstás pensando en la noche en Cendral.\n\nResiduos de conversación.\n\n* Listo para cualquier cosa. *\n\n¿Ya ha decidido?\n\n¿Los otros lo saben?\n\nLa pregunta sigue sin respuesta hasta la mañana.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Continúa.",
+          "vers": "deuxieme_dispute",
+          "effects": [
+            {
+              "stat": "paranoia",
+              "val": 15
+            }
+          ]
+        }
+      ],
+      "x": 300,
+      "y": 800
+    },
+    "deuxieme_dispute": {
+      "id": "deuxieme_dispute",
+      "title": "La segunda noche",
+      "location": "Campamento - Noche",
+      "narrator": "Ya no duermes más.",
+      "text": "Aún puedes oírlos.\n\nEsta vez más claramente.\n\nIkar y Aryn.\n\n** \"...no está progresando lo suficientemente rápido...\" Ikar.\n\n# ...se necesita el tiempo que se necesita... # Aryn.\n\nLos ancianos dijeron que debemos estar listos para actuar antes...\"\n\n** Los ancianos también dijeron que no reprodujeran los mismos errores.\n\nLos mismos errores eran esperar demasiado tiempo.\n\n** \"No\". Aryn — su voz cambia.\nLos mismos errores no eran confiar en él.\nNo hay que llegar.\nEso es lo que mató a los cuatro del tiempo.\n\n¿Y si esta vez es diferente?\n\nNo es diferente.\n\nAryn.\n\nEso es. No.\n\nSilencio.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Entra al campamento.",
+          "vers": "entrer_camp",
+          "effects": [
+            {
+              "stat": "controle",
+              "val": 10
+            }
+          ]
+        },
+        {
+          "text": "Quédate en la oscuridad.",
+          "vers": "rester_obscurite",
+          "effects": [
+            {
+              "stat": "paranoia",
+              "val": 20
+            }
+          ]
+        }
+      ],
+      "x": 60,
+      "y": 920
+    },
+    "entrer_camp": {
+      "id": "entrer_camp",
+      "title": "Entra",
+      "location": "Campamento - Noche",
+      "narrator": "",
+      "text": "Entras a la luz del fuego.\n\nSe detienen.\n\nIkar y Aryn se miran.\n\nNo estabas durmiendo. * dice Vael de su lado.\n\n**\"No.\n\nSilencio.\n\nLo que dijiste... Empiezas.\n\nAryn te interrumpe.\n\n**\"Hablamos de estrategia de entrenamiento. *\n\nNo, estabas hablando de mí.\n\nNadie responde.\n\nEste silencio confirma más que cualquier respuesta.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Continúa.",
+          "vers": "vieux_apparait",
+          "effects": [
+            {
+              "stat": "paranoia",
+              "val": 10
+            }
+          ]
+        }
+      ],
+      "x": 180,
+      "y": 920
+    },
+    "rester_obscurite": {
+      "id": "rester_obscurite",
+      "title": "En la sombra",
+      "location": "Campamento - Noche",
+      "narrator": "",
+      "text": "Quédate aquí.\n\nEn la oscuridad.\n\nLa espada negra en tus manos.\n\nFrío.\n\nLos mismos errores.\n* Manos fuera. *\nNo es diferente.\n\nLas frases se reúnen de manera diferente dependiendo de cómo se lean.\n\nEn cierto sentido — Aryn defiende al jugador.\n\nEn el otro, tienen un plan.\nUn plan que no sabes.\nUn plan del que eres objeto.\n\nLa espada vibra ligeramente.\n\nComo ella también oye.\n\nComo ella también lo entiende.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Continúa.",
+          "vers": "vieux_apparait",
+          "effects": [
+            {
+              "stat": "paranoia",
+              "val": 25
+            },
+            {
+              "stat": "chaos",
+              "val": 10
+            }
+          ]
+        }
+      ],
+      "x": 300,
+      "y": 920
+    },
+    "vieux_apparait": {
+      "id": "vieux_apparait",
+      "title": "El Viejo",
+      "location": "Road — Morning",
+      "narrator": "Está aquí cuando te despiertas.",
+      "text": "Un viejo.\n\nSentada en una roca junto a la carretera.\n\nAún no te ha visto.\n\nEsculpe algo en un pedazo de madera.\n\nComo Marek.\n\nMira hacia arriba cuando te acercas.\n\nÉl ve tu espada negra.\n\nNo volverá.\n\nSonríe.\n\n\"Ah\", simplemente dijo.\nTe estaba esperando.\n\nNo como una amenaza.\n\nComo alguien que esperó mucho tiempo\nY quien se siente aliviado de que la espera haya terminado.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "\"¿Quién eres? »",
+          "vers": "vieux_identite",
+          "effects": [
+            {
+              "stat": "paranoia",
+              "val": 5
+            }
+          ]
+        },
+        {
+          "text": "Llama a los cuatro.",
+          "vers": "vieux_avec_quatre",
+          "effects": [
+            {
+              "stat": "controle",
+              "val": 10
+            }
+          ]
+        },
+        {
+          "text": "Escúchalo solo.",
+          "vers": "vieux_identite",
+          "effects": [
+            {
+              "stat": "paranoia",
+              "val": 10
+            }
+          ]
+        }
+      ],
+      "x": 60,
+      "y": 1040
+    },
+    "vieux_avec_quatre": {
+      "id": "vieux_avec_quatre",
+      "title": "Con los Cuatro",
+      "location": "Road",
+      "narrator": "",
+      "text": "Llama a los cuatro.\n\nYa vienen.\n\nEl viejo los mira.\n\nNo cambia su expresión.\n\nIkar tiene su espada.\n\nPregunta a Aryn.\n\nAlguien que sabe cosas.\nEn el Caos.\nEn la profecía.\nLo que te estamos ocultando.\n\nTe está mirando.\n\nNo los cuatro.\n\nTú.\n\nNo todo se dice delante de todos.\n\nIkar está dando un paso.\n\nTaera le puso la mano en el brazo.\n\nQue hable.\n\nVael te está mirando.\n\nNo está sonriendo.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Escucha al viejo.",
+          "vers": "vieux_identite",
+          "effects": [
+            {
+              "stat": "paranoia",
+              "val": 5
+            }
+          ]
+        },
+        {
+          "text": "Ignora y vete.",
+          "vers": "tension_monte",
+          "effects": [
+            {
+              "stat": "controle",
+              "val": 10
+            }
+          ]
+        }
+      ],
+      "x": 180,
+      "y": 1040
+    },
+    "vieux_identite": {
+      "id": "vieux_identite",
+      "title": "Erevane",
+      "location": "Road — Rock",
+      "narrator": "",
+      "text": "Mi nombre es Erevane.\n\nEstá guardando su cuchillo.\n\nHe estudiado a Caos toda mi vida.\nNo en los archivos de la Orden.\nEn archivos reales.\nLos antiguos.\nLos que no quemaron.\n\n¿Quemado?\n\nLa Orden mantiene lo que les conviene.\nY olvida el resto.\n\nSaca un viejo libro de su bolsa.\n\nAbortado.\nCubierta negra.\n\nHay otra profecía.\n**« Más viejo que el que conoces.\n\nTe está dando el libro.\n\nEl caos no es una maldición.\nEs un regalo.\n\"Incomprendido\".\nEnseñada de verdad.\n*\"Durante trescientos años. *",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Toma el libro.",
+          "vers": "vieux_livre",
+          "effects": [
+            {
+              "stat": "paranoia",
+              "val": 10
+            }
+          ]
+        },
+        {
+          "text": "\"¿Por qué me dices eso?\"",
+          "vers": "vieux_pourquoi",
+          "effects": [
+            {
+              "stat": "controle",
+              "val": 5
+            }
+          ]
+        }
+      ],
+      "x": 60,
+      "y": 1160
+    },
+    "vieux_pourquoi": {
+      "id": "vieux_pourquoi",
+      "title": "La cuestión",
+      "location": "Road — Rock",
+      "narrator": "",
+      "text": "Erevane te está mirando.\n\nPorque necesitas oírlo.\n\n¿Qué hay de los cuatro?\n\nLo duda.\n\nUn segundo.\n\n**Los cuatro están formados por la Orden.\n**La Orden tiene sus certezas.\n**Su certeza ha estado allí durante trescientos años.\n\n¿Qué significa eso?\n\n* Significa que te ayudan de la manera que hacen. *\nNo necesariamente como usted necesita.\n\nPone el libro sobre la roca entre ustedes.\n\nNo te pido que los dejes.\nSolo te pido que leas.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Toma el libro.",
+          "vers": "vieux_livre",
+          "effects": [
+            {
+              "stat": "paranoia",
+              "val": 5
+            }
+          ]
+        },
+        {
+          "text": "Deja el libro.",
+          "vers": "tension_monte",
+          "effects": [
+            {
+              "stat": "controle",
+              "val": 10
+            }
+          ]
+        }
+      ],
+      "x": 180,
+      "y": 1160
+    },
+    "vieux_livre": {
+      "id": "vieux_livre",
+      "title": "El Otro Profeta",
+      "location": "Road — Rock",
+      "narrator": "",
+      "text": "Toma el libro.\n\nSe abre en una página marcada.\n\nUna profecía.\nDiferente.\n\n\"El portero Caos vendrá de las fronteras.\nSu espada absorberá la luz.\n*Y en esta luz absorbida*\n* Él guardará lo que el mundo ha olvidado guardar. *\nNo es el final.\nEs memoria.\"\n\nEstás viendo a Erevane.\n\n¿Quién escribió esto?\n\nAlguien que vio a Caël antes de que le diera una propina.\nAlguien que pensó que podríamos haber hecho otra cosa.\n\n¿Por qué la Orden no habla de esto?\n\nSe está apoderando del libro.\n\nPorque pone en duda todo lo que han construido.\n\nEstá empacando el libro.\n\n# Estaré en la próxima ciudad. #\nSi quieres saber más.\n\nSe levanta.\nVa a volver a la carretera.\n\nComo si tuviera todo su tiempo.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Vigilándolo ir.",
+          "vers": "apres_vieux",
+          "effects": [
+            {
+              "stat": "paranoia",
+              "val": 10
+            }
+          ]
+        }
+      ],
+      "x": 60,
+      "y": 1280
+    },
+    "apres_vieux": {
+      "id": "apres_vieux",
+      "title": "Después",
+      "location": "Road",
+      "narrator": "",
+      "text": "Vienen los cuatro.\n\nO están ahí desde el principio.\n\nYa no lo sabes.\n\n¿Quién era ese?\", pregunta Vael.\n\nAlguien que pasa.\n\nAryn te está mirando.\n\nSus ojos van a la roca donde el viejo estaba sentado.\n\nNo está diciendo nada.\n\nIkar mira la carretera en la dirección en que se fue.\n\n**\"Seguimos.** dijo.\n\nSigue adelante.\n\nPero algo ha cambiado.\n\nNo ellos.\n\nTú.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Continúa.",
+          "vers": "tension_monte",
+          "effects": [
+            {
+              "stat": "paranoia",
+              "val": 5
+            }
+          ]
+        }
+      ],
+      "x": 60,
+      "y": 1400
+    },
+    "tension_monte": {
+      "id": "tension_monte",
+      "title": "Tensión",
+      "location": "Campamento – Varios días",
+      "narrator": "Los días siguientes son diferentes.",
+      "text": "Estás buscando señales.\n\nEn sus ojos.\nEn sus silencios.\nEn la forma en que Ikar pone su mano cerca de su espada.\n\nA veces no hay nada.\n\nA veces no estás seguro.\n\nUna noche Aryn se sienta a tu lado.\n\n¿Estás bien?\n\nSí.\n\n*\"Duermes más. *\n\n# Duermo. #\n\nNo duermes como solías.\n\nMírala.\n\n¿Cómo sabes cómo me acosté antes?\n\nNo tiene respuesta a eso.\n\nSe va sin decir nada.\n\nAl día siguiente Vael hizo una broma.\n\nNadie se ríe.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Ve a Erevane.",
+          "vers": "retrouver_vieux",
+          "effects": [
+            {
+              "stat": "paranoia",
+              "val": 15
+            }
+          ]
+        },
+        {
+          "text": "Habla con Vael.",
+          "vers": "parler_vael",
+          "effects": [
+            {
+              "stat": "controle",
+              "val": 10
+            }
+          ]
+        }
+      ],
+      "x": 60,
+      "y": 1520
+    },
+    "parler_vael": {
+      "id": "parler_vael",
+      "title": "Varón",
+      "location": "Campamento - Buenas noches",
+      "narrator": "",
+      "text": "Siéntate junto a él.\n\nNo dice nada por un tiempo.\n\nEs raro para Vael.\n\nConociste a alguien en el camino. * dice.\n\nAlguien que pasa.\n\nSí.\n\nEstá mirando el fuego.\n\n¿Sabes lo que encuentro interesante?\n\n¿Qué?\n\n**\"Las personas que llegan al momento adecuado. *\nCuando estás sola.\n**\"Cuando buscas respuestas. *\n**\"Y quién tiene exactamente las respuestas que estamos buscando. *\n\n¿Qué?\n\nY luego nada.\n\"Lo encuentro interesante.\n\nSe levanta.\n\nBuenas noches.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Continúa.",
+          "vers": "lame_nuit",
+          "effects": [
+            {
+              "stat": "controle",
+              "val": 5
+            }
+          ]
+        }
+      ],
+      "x": 180,
+      "y": 1520
+    },
+    "retrouver_vieux": {
+      "id": "retrouver_vieux",
+      "title": "Encontrar Erevane",
+      "location": "Ciudad — Tavern",
+      "narrator": "",
+      "text": "Lo encuentras en la taberna de la próxima ciudad.\n\nComo dijo.\n\nTe ve entrar.\n\nEstá empujando una silla hacia ti.\n\n¿Leíste?\n\nSí.\n\n**¿Preguntas? *\n\nMucho.\n\nSonríe.\n\nUna especie de sonrisa de maestro\n¿Quién esperaba eso exactamente?\n\nBien.\nAsí es como empieza.\n\nSalió de otros libros.\n\nOtras páginas marcadas.\n\nHablas mucho tiempo.\n\nEscucha tanto como habla.\n\nNunca dice que debas dejar los cuatro.\n\nPero al final de la conversación\nTe das cuenta de que no los mencionaste.\nSólo en el pasado.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Continúa.",
+          "vers": "lame_nuit",
+          "effects": [
+            {
+              "stat": "paranoia",
+              "val": 15
+            }
+          ]
+        }
+      ],
+      "x": 300,
+      "y": 1520
+    },
+    "lame_nuit": {
+      "id": "lame_nuit",
+      "title": "La noche de la espada",
+      "location": "Campamento — Noche profunda",
+      "narrator": "No estás durmiendo.",
+      "text": "La espada negra está delante de ti.\n\nabsorbe la luz del fuego.\n\nLa has estado vigilando durante una hora.\n\nLas oraciones de Yerevane.\nLas peleas que escuchaste.\nLos ojos de Ikar.\nEl silencio de Aryn.\n\n* Listo para cualquier cosa. *\nLos mismos errores.\nSi el Caos se hace cargo.\n\nY la profecía del libro.\n\nNo es el final.\nEs memoria.\n\nDos profecías.\nDos lecturas del mundo.\n\nTienes que elegir cuál creer.\n\nOíste a alguien moverse.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Continúa.",
+          "vers": "ikar_lame_gorge",
+          "effects": [
+            {
+              "stat": "paranoia",
+              "val": 5
+            }
+          ]
+        }
+      ],
+      "x": 60,
+      "y": 1640
+    },
+    "ikar_lame_gorge": {
+      "id": "ikar_lame_gorge",
+      "title": "La espada",
+      "location": "Campamento — Noche profunda",
+      "narrator": "Una llama en la oscuridad.",
+      "text": "La sientes antes de verla.\n\nCalor.\n\nIkar está quemando espada.\n\nBajo tu garganta.\n\nNo te moviste.\n\nNo tenías tiempo.\n\nO no querías.\n\nAbre los ojos.\n\nIkar está aquí.\n\nKnee.\n\nSu espada bajo tu garganta.\n\nSus ojos.\n\nNo enojo.\n\nAlgo mucho más difícil.\n\nEstá temblando ligeramente.\n\nLa espada tembla con él.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Quieto.",
+          "vers": "ikar_lache",
+          "effects": [
+            {
+              "stat": "controle",
+              "val": 10
+            }
+          ]
+        },
+        {
+          "text": "Empuja su espada.",
+          "vers": "ikar_lache",
+          "effects": [
+            {
+              "stat": "chaos",
+              "val": 15
+            }
+          ]
+        }
+      ],
+      "x": 60,
+      "y": 1760,
+      "timer": {
+        "duration": 8,
+        "auto": "first"
+      }
+    },
+    "ikar_lache": {
+      "id": "ikar_lache",
+      "title": "No puede.",
+      "location": "Campamento — Noche profunda",
+      "narrator": "",
+      "text": "Ikar no se mueve.\n\nSu espada no se mueve.\n\nPero no hace nada.\n\nSegundo.\n\nLargo.\n\n\"Hazlo.\n\nTu propia voz te sorprende.\n\nCálmate.\n\nSi eso es lo que tienes que hacer.\nHazlo.\n\nIkar cierra los ojos.\n\nSu espada está extinguiendo.\n\nSe quita la mano.\n\nSe quedará aquí.\nBaja la cabeza.\n\nNo pude.\n\nNo te lo digas.\n\nPara sí mismo.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Mira a los otros llegar.",
+          "vers": "autres_arrivent"
+        }
+      ],
+      "x": 60,
+      "y": 1880
+    },
+    "autres_arrivent": {
+      "id": "autres_arrivent",
+      "title": "Otros",
+      "location": "Campamento - Noche",
+      "narrator": "",
+      "text": "Aryn está aquí.\n\nTaera también.\n\nVael en las sombras.\n\nLo vieron.\n\nO escuchado.\n\nAryn se arrodilla delante de Ikar.\n\nHabla con él bajo.\n\nNo oyes.\n\nTaera te está mirando.\n\nSus ojos brillan en la oscuridad.\n\n¿Estás bien?\n\nSí.\n\nVael está a tu lado ahora.\n\nNo está diciendo nada.\n\nPero está aquí.\n\nIkar se levanta.\n\nTe está mirando.\n\nLo siento.\n\nDos palabras.\n\nLo más difícil de lo que has oído.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "¿Por qué?",
+          "vers": "confrontation_finale",
+          "effects": [
+            {
+              "stat": "controle",
+              "val": 10
+            }
+          ]
+        },
+        {
+          "text": "No digas nada.",
+          "vers": "confrontation_finale",
+          "effects": [
+            {
+              "stat": "paranoia",
+              "val": 10
+            }
+          ]
+        }
+      ],
+      "x": 60,
+      "y": 2000
+    },
+    "confrontation_finale": {
+      "id": "confrontation_finale",
+      "title": "Verdad",
+      "location": "Campamento — Dawn",
+      "narrator": "El fuego salió. Llega el amanecer.",
+      "text": "Estás sentado los cinco.\n\nPor primera vez desde Cendral —\nNadie finge.\n\nAryn está hablando.\n\nLos espíritus nos dijeron que estemos listos para cualquier cosa.\n\"Ikar lo entendió como...\"\n**\"... la opción final. *\n\n¿Y tú? Estás preguntando.\n\n**Entendí que no debemos reproducir Caël.\nCaël estaba solo.\nNo estamos aquí para verte.\nEstamos aquí para que no estés sola.\n\nIkar mira el suelo.\n\nPensé que si era demasiado peligroso...\n\n**No.\"** dice Taera.\nNo fue eso lo que debía hacer.\n\nLo sé ahora.\n\nVael mira el cielo subiendo.\n\n**\"Una hermosa manera de empezar el día.\n\nNadie se ríe.\n\nPero Taera esbozó una sonrisa.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Créalos.",
+          "vers": "choix_final",
+          "effects": [
+            {
+              "stat": "controle",
+              "val": 20
+            }
+          ]
+        },
+        {
+          "text": "No lo sé.",
+          "vers": "choix_final",
+          "effects": [
+            {
+              "stat": "paranoia",
+              "val": 10
+            }
+          ]
+        }
+      ],
+      "x": 60,
+      "y": 2120
+    },
+    "choix_final": {
+      "id": "choix_final",
+      "title": "El Carrefour",
+      "location": "Campamento — Dawn",
+      "narrator": "Todo está pasando ahora.",
+      "text": "El sol está subiendo.\n\nLos cuatro te están mirando.\n\nSu espada negra absorbe la luz de la mañana.\n\nIkar. Aryn, Taera. Vael.\n\nCuatro caras esperando.\n\nErevane en alguna parte de la carretera.\nOtra profecía en tu cabeza.\n\nFuma de ciendra.\nLa hoja bajo tu garganta.\nDisculpas.\nLas dudas.\n\nEstá todo ahí.\n\nY pasa el tiempo.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Confía en ellos. Vayan juntos al final.",
+          "vers": "chemin_combat",
+          "story": "stories/fr/cinq_lames_combat.json",
+          "effects": [
+            {
+              "stat": "controle",
+              "val": 20
+            }
+          ]
+        },
+        {
+          "text": "Vete. Solo. Lejos.",
+          "vers": "chemin_fuite",
+          "story": "stories/fr/cinq_lames_fuite.json",
+          "effects": [
+            {
+              "stat": "paranoia",
+              "val": 10
+            }
+          ]
+        },
+        {
+          "text": "Encuentra a Erevane. Quizá tenía razón.",
+          "vers": "chemin_manipulation",
+          "story": "stories/fr/cinq_lames_manipulation.json",
+          "effects": [
+            {
+              "stat": "chaos",
+              "val": 15
+            }
+          ]
+        }
+      ],
+      "x": 60,
+      "y": 2240,
+      "timer": {
+        "duration": 15,
+        "auto": "first"
+      }
+    },
+    "chemin_combat": {
+      "id": "chemin_combat",
+      "title": "Combate",
+      "location": "",
+      "narrator": "",
+      "text": "Tú eliges confiar en ellos.",
+      "isStart": false,
+      "isEnd": true,
+      "transition": "fade",
+      "choices": [],
+      "x": 60,
+      "y": 2360
+    },
+    "chemin_fuite": {
+      "id": "chemin_fuite",
+      "title": "El Leak",
+      "location": "",
+      "narrator": "",
+      "text": "Te das la espalda y te vas.",
+      "isStart": false,
+      "isEnd": true,
+      "transition": "fade",
+      "choices": [],
+      "x": 60,
+      "y": 2360
+    },
+    "chemin_manipulation": {
+      "id": "chemin_manipulation",
+      "title": "Erevane",
+      "location": "",
+      "narrator": "",
+      "text": "Vas a encontrar al viejo.",
+      "isStart": false,
+      "isEnd": true,
+      "transition": "fade",
+      "choices": [],
+      "x": 60,
+      "y": 2360
+    }
+  },
+  "lang": "es"
+}
