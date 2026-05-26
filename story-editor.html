@@ -1022,7 +1022,13 @@ html,body { height:100%; overflow:hidden; font-family:'Syne',sans-serif; backgro
 // ══════════════════════════════════════════════
 function hasUnlock(feature) {
   const unlocked = JSON.parse(localStorage.getItem('sf_unlocked_packs') || '["free","kids"]');
-  return unlocked.includes(feature) || unlocked.includes('creator') || unlocked.includes('all');
+  if (unlocked.includes(feature)) return true;
+  if (unlocked.includes('creator') || unlocked.includes('all')) return true;
+  if (feature === 'portals') {
+    const freePacks = ['free','kids'];
+    return unlocked.some(p => !freePacks.includes(p));
+  }
+  return false;
 }
 
 function portalFieldHTML(scene) {

@@ -1829,7 +1829,13 @@ function _sha256sync(ascii) {
 
 function hasUnlock(feature) {
   const unlocked = JSON.parse(localStorage.getItem('sf_unlocked_packs') || '["free","kids"]');
-  return unlocked.includes(feature) || unlocked.includes('creator') || unlocked.includes('all');
+  if (unlocked.includes(feature)) return true;
+  if (unlocked.includes('creator') || unlocked.includes('all')) return true;
+  if (feature === 'portals') {
+    const freePacks = ['free','kids'];
+    return unlocked.some(p => !freePacks.includes(p));
+  }
+  return false;
 }
 
 // ── POPUP CODE CRÉATEUR ─────────────────────────────────────
