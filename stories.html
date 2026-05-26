@@ -248,40 +248,52 @@ const PACK_CONFIG = {
     free:  true,
     order: 1
   },
+  cinq_lames: {
+    name:  { fr:'Les Cinq Lames',      en:'The Five Blades', es:'Las Cinco Espadas' },
+    icon:  '⚔️',
+    color: 'rgba(155,93,229,0.6)',
+    price: '2,50€',
+    desc:  {
+      fr: 'Un monde magique. Cinq guerriers. Une destinée.',
+      en: 'A magical world. Five warriors. One destiny.',
+      es: 'Un mundo mágico. Cinco guerreros. Un destino.'
+    },
+    order: 2
+  },
   neon: {
     name:  { fr:'Pack Neon',           en:'Neon Pack',       es:'Pack Neón' },
     icon:  '⚡',
     color: 'rgba(0,245,255,0.6)',
     price: '2,99€',
-    order: 2
+    order: 3
   },
   pirates: {
     name:  { fr:'Pack Pirates',        en:'Pirates Pack',    es:'Pack Piratas' },
     icon:  '🏴‍☠️',
     color: 'rgba(212,160,32,0.6)',
     price: '2,99€',
-    order: 3
+    order: 4
   },
   cosmos: {
     name:  { fr:'Pack Cosmos',         en:'Cosmos Pack',     es:'Pack Cosmos' },
     icon:  '🚀',
     color: 'rgba(100,180,255,0.6)',
     price: '2,99€',
-    order: 4
+    order: 5
   },
   fantasy: {
     name:  { fr:'Pack Legends',        en:'Legends Pack',    es:'Pack Leyendas' },
     icon:  '⚔️',
     color: 'rgba(160,96,248,0.6)',
     price: '2,99€',
-    order: 5
+    order: 6
   },
   wilds: {
     name:  { fr:'Pack Wilds',          en:'Wilds Pack',      es:'Pack Wilds' },
     icon:  '🌿',
     color: 'rgba(100,220,150,0.6)',
     price: '2,99€',
-    order: 6
+    order: 7
   }
 };
 
@@ -445,29 +457,37 @@ function renderLibrary() {
           <div class="pack-meta">${countLabel} disponible${count > 1 && currentLang === 'fr' ? 's' : ''}</div>
         </div>
         ${priceBadge}
-      </div>`;
+      </div>
+      ${cfg.desc ? `<div style="font-size:12px;color:var(--text3);padding:0 16px 12px;font-style:italic;opacity:0.7">${cfg.desc[currentLang] || cfg.desc.fr}</div>` : ''}`;
+
 
     // Stories
     html += `<div class="stories-list">`;
     stories.forEach(g => {
-      const locked = !isUnlocked;
-      html += `<div class="story-card${locked ? ' locked' : ''}"
-        onclick="${locked ? '' : `launchStory('${g.file}')`}"
-        style="--pack-color:${colorVar}">
+      const locked  = !isUnlocked;
+      const isPortal = g.portal === true;
+      const clickable = !locked && !isPortal;
+
+      html += `<div class="story-card${locked ? ' locked' : ''}${isPortal ? ' portal' : ''}"
+        onclick="${clickable ? `launchStory('${g.file}')` : ''}"
+        style="--pack-color:${colorVar};${isPortal ? 'opacity:0.75;cursor:default' : ''}">
         <div class="story-icon">${g.kids ? '🧒' : (g.icon || '📖')}</div>
         <div class="story-info">
           <div class="story-title">${g.title}</div>
           <div class="story-desc">${g.desc || ''}</div>
           <div class="story-meta">
-            ${g.kids ? `<span class="story-tag kids">Enfants</span>` : ''}
-            ${g.new  ? `<span class="story-tag new">Nouveau</span>`  : ''}
+            ${g.kids    ? `<span class="story-tag kids">Enfants</span>`   : ''}
+            ${g.new     ? `<span class="story-tag new">Nouveau</span>`    : ''}
+            ${isPortal  ? `<span class="story-tag" style="background:rgba(155,93,229,0.15);color:#c084fc;border-color:rgba(155,93,229,0.4)">🔗 Via portail</span>` : ''}
             ${g.duration ? `<span class="story-tag">${g.duration}</span>` : ''}
             ${g.endings  ? `<span class="story-tag">${g.endings} fins</span>` : ''}
           </div>
         </div>
         ${locked
           ? `<div class="story-lock">🔒</div>`
-          : `<div class="story-arrow">›</div>`}
+          : isPortal
+            ? `<div class="story-lock" title="Accessible depuis l'histoire principale">🔗</div>`
+            : `<div class="story-arrow">›</div>`}
       </div>`;
     });
     html += `</div>`;
