@@ -1,0 +1,438 @@
+{
+  "name": "The Words We Keep",
+  "kids": true,
+  "askPlayerName": true,
+  "pack": "kids",
+  "stats": [
+    {
+      "id": "courage",
+      "label": "Courage",
+      "start": 10,
+      "max": 100,
+      "color": "#f94144"
+    },
+    {
+      "id": "empathie",
+      "label": "Empathy",
+      "start": 10,
+      "max": 100,
+      "color": "#f9c74f"
+    },
+    {
+      "id": "amitie",
+      "label": "Friendship",
+      "start": 50,
+      "max": 100,
+      "color": "#90be6d"
+    }
+  ],
+  "theme": {},
+  "scenes": {
+    "cour_recre": {
+      "id": "cour_recre",
+      "title": "The Cour de Récré",
+      "location": "School — Court of Recreation",
+      "narrator": "",
+      "text": "It's recreation.\n\nYou're with your best friend Tom.\nAnd three other comrades.\n\nTom is trying to draw a picture on his notebook.\n\nHe's not very good at drawing.\nHe knows.\nBut he's still trying.\n\nThe others are watching.\n\nYou want to make everyone laugh.\n\nSo you say something.\n\n**\"Haha, it looks like a blob with legs. *\n\nThe others laugh.\n\nTom doesn't laugh.\n\nHe's closing his notebook.",
+      "isStart": true,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Keep laughing with the others.",
+          "vers": "regard_tom",
+          "effects": [
+            {
+              "stat": "amitie",
+              "val": -10
+            }
+          ]
+        },
+        {
+          "text": "Realize it wasn't cool.",
+          "vers": "regard_tom",
+          "effects": [
+            {
+              "stat": "empathie",
+              "val": 10
+            }
+          ]
+        }
+      ],
+      "x": 60,
+      "y": 60
+    },
+    "regard_tom": {
+      "id": "regard_tom",
+      "title": "Tom's Eye",
+      "location": "School — Court of Recreation",
+      "narrator": "",
+      "text": "Tom is looking at you.\n\nJust a second.\n\nNot angry.\n\nSomething worse.\n\nDisappointed.\n\nHe puts his notebook in his bag.\nHe's getting up.\nHe's going to sit somewhere else.\n\nAlone.\n\nThe others have already forgotten.\n\nAikito was lying under the bench.\nHe's raising his head towards you.\n\n**\"Did you see his face? *",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "\"Yes... I shouldn't have. »",
+          "vers": "aikito_mots",
+          "effects": [
+            {
+              "stat": "empathie",
+              "val": 15
+            }
+          ]
+        },
+        {
+          "text": "\"It was just a joke. »",
+          "vers": "aikito_mots",
+          "effects": [
+            {
+              "stat": "empathie",
+              "val": 5
+            }
+          ]
+        }
+      ],
+      "x": 60,
+      "y": 180
+    },
+    "aikito_mots": {
+      "id": "aikito_mots",
+      "title": "What Aikito knows",
+      "location": "School — Bench",
+      "narrator": "",
+      "text": "Aikito sits in front of you.\n\n**\" Words make no noise when they are said. *\n**\"But they make a lot of noise in the head of the one who receives them. *\n\nYou look at Tom from a distance.\n\nHe's still drawing.\nAlone.\nHead down.\n\n**\"He's still drawing? You're asking.\n\n** \"Yes.\"** says Aikito.\n**\"But he draws more the same than before. *\n\nYou look better.\n\nHe closed his notebook on his knees.\nLike hiding it.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Go talk to him now.",
+          "vers": "aller_parler",
+          "effects": [
+            {
+              "stat": "courage",
+              "val": 15
+            }
+          ]
+        },
+        {
+          "text": "Waiting for the end of the recreation.",
+          "vers": "fin_recre",
+          "effects": [
+            {
+              "stat": "courage",
+              "val": 5
+            }
+          ]
+        }
+      ],
+      "x": 60,
+      "y": 300
+    },
+    "aller_parler": {
+      "id": "aller_parler",
+      "title": "Go To Tom",
+      "location": "School — Tom's Bench",
+      "narrator": "",
+      "text": "You're approaching Tom.\n\nIt's hard.\n\nYour feet are slower than usual.\n\nTom is watching you arrive.\nHe's tightening his notebook.\n\nYou sit next to him.\n\nQuiet.\n\nAikito looks at you both from a distance.\nHe's not saying anything.\n\nIt's yours.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "\"It sucked what I said. »",
+          "vers": "vraie_excuse",
+          "effects": [
+            {
+              "stat": "courage",
+              "val": 15
+            },
+            {
+              "stat": "empathie",
+              "val": 10
+            }
+          ]
+        },
+        {
+          "text": "\"Are you mad? »",
+          "vers": "fausse_excuse",
+          "effects": [
+            {
+              "stat": "courage",
+              "val": 10
+            }
+          ]
+        },
+        {
+          "text": "Don't say anything and stay there.",
+          "vers": "silence_repare",
+          "effects": [
+            {
+              "stat": "empathie",
+              "val": 15
+            }
+          ]
+        }
+      ],
+      "x": 60,
+      "y": 420
+    },
+    "fin_recre": {
+      "id": "fin_recre",
+      "title": "The Ring",
+      "location": "School — Corridor",
+      "narrator": "",
+      "text": "The bell rings.\n\nEveryone goes back to class.\n\nTom walks by without looking at you.\n\nAikito walks next to you.\n\n**\"You wanted to wait for the right time. *\n**\"But the right time was before. *\n\nIn class, Tom sits away from you.\n\nNormally you're side by side.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Give him a word.",
+          "vers": "mot_papier",
+          "effects": [
+            {
+              "stat": "courage",
+              "val": 10
+            }
+          ]
+        },
+        {
+          "text": "Wait until the classes are over.",
+          "vers": "trop_tard",
+          "effects": [
+            {
+              "stat": "amitie",
+              "val": -10
+            }
+          ]
+        }
+      ],
+      "x": 180,
+      "y": 300
+    },
+    "mot_papier": {
+      "id": "mot_papier",
+      "title": "The Word",
+      "location": "School — Class",
+      "narrator": "",
+      "text": "You're tearing a piece of paper.\n\nYou're thinking a long time.\n\nWhat do we write in these cases?\n\nYou're just writing:\n\nI'm sorry. It wasn't good. *\n\nYou bend it.\nYou pass it to Tom.\n\nHe reads it.\nHe read it again.\n\nHe's not saying anything.\n\nBut he's looking at you.\nNot like before.\nNot yet.\n\nJust... he's looking at you.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Smile at him.",
+          "vers": "apres_cours",
+          "effects": [
+            {
+              "stat": "amitie",
+              "val": 10
+            },
+            {
+              "stat": "courage",
+              "val": 10
+            }
+          ]
+        }
+      ],
+      "x": 300,
+      "y": 300
+    },
+    "vraie_excuse": {
+      "id": "vraie_excuse",
+      "title": "True Words",
+      "location": "School — Tom's Bench",
+      "narrator": "",
+      "text": "Tom is looking at you.\n\n**\"Why did you say so then? *\n\nYou're thinking.\n\nReally.\n\n**\"To make others laugh. *\n**\"It was stupid. *\n\nTom remains silent.\n\n**\"My drawing sucked anyway. * he says.\n\n**\"No. *\n\nTom looks up.\n\n**\"You were trying. * you continue.\n**\"It's different. *\n\nAikito stirs up the tail behind you.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "\"Show me what you were drawing. »",
+          "vers": "dessin_ensemble",
+          "effects": [
+            {
+              "stat": "amitie",
+              "val": 20
+            },
+            {
+              "stat": "empathie",
+              "val": 10
+            }
+          ]
+        }
+      ],
+      "x": 60,
+      "y": 540
+    },
+    "fausse_excuse": {
+      "id": "fausse_excuse",
+      "title": "Not Totally",
+      "location": "School — Tom's Bench",
+      "narrator": "",
+      "text": "Tom lifts his shoulders.\n\n**\"A little. *\n\nQuiet.\n\n**\"It was just for fun. * you say.\n\nTom looks away.\n\n**\"I know. *\n\nAikito approaches you slowly.\n\nHe whispers for you.\n\n**\"You apologized. *\n**\"But you didn't tell him you were wrong. *\n**\"It's not the same. *",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "\"In fact... I really shouldn't have. »",
+          "vers": "vraie_excuse",
+          "effects": [
+            {
+              "stat": "courage",
+              "val": 15
+            },
+            {
+              "stat": "empathie",
+              "val": 15
+            }
+          ]
+        }
+      ],
+      "x": 180,
+      "y": 420
+    },
+    "silence_repare": {
+      "id": "silence_repare",
+      "title": "Right there.",
+      "location": "School — Tom's Bench",
+      "narrator": "",
+      "text": "You sit next to him.\n\nWithout saying anything.\n\nTom draws.\n\nAfter a while,\nHe's turning the notebook towards you.\n\nIt's a dog.\n\nNot perfect.\nBut we admit it's a dog.\n\n**\"Is that Aikito? You're asking.\n\n**\"I was trying.** says Tom.\n\nAikito is approaching.\nHe's looking at the drawing.\nHe's shaking his tail.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "\" He's your drawing. »",
+          "vers": "dessin_ensemble",
+          "effects": [
+            {
+              "stat": "amitie",
+              "val": 15
+            },
+            {
+              "stat": "empathie",
+              "val": 10
+            }
+          ]
+        }
+      ],
+      "x": 180,
+      "y": 540
+    },
+    "dessin_ensemble": {
+      "id": "dessin_ensemble",
+      "title": "The New Drawing",
+      "location": "School — Bench",
+      "narrator": "",
+      "text": "Tom opens his notebook.\n\nHe shows you the page.\n\nThere are lots of drawings.\n\nHouses.\nAnimals.\nPeople with round heads.\n\n**\"I'm trying to learn. * he says.\n**\"It's hard. *\n\n**\"You can continue to learn. * you say.\n**\"Even though it's not perfect. *\n\nTom's thinking.\n\n*\"Just draw with me. *\n**\"You're even worse than me. *\n\nHe smiles.\n\nReally this time.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Take a pencil.",
+          "vers": "fin_repare",
+          "effects": [
+            {
+              "stat": "amitie",
+              "val": 20
+            },
+            {
+              "stat": "bonheur",
+              "val": 20
+            }
+          ]
+        }
+      ],
+      "x": 60,
+      "y": 660
+    },
+    "apres_cours": {
+      "id": "apres_cours",
+      "title": "After the Courses",
+      "location": "School — Exit",
+      "narrator": "",
+      "text": "On the way out, Tom is waiting for you.\n\nA little back.\n\nHe's giving you back the piece of paper.\n\n**\"You could have just said it. *\n\n**\"I know.** you answer.\n**\"I didn't dare. *\n\nTom looks at his shoes.\n\n**\"My drawing was really a blob with legs? *\n\nYou hesitate.\n\n**\"A little. *\n\nHe laughs.\n\nNot much.\nBut for real.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Go back together.",
+          "vers": "fin_lente",
+          "effects": [
+            {
+              "stat": "amitie",
+              "val": 15
+            }
+          ]
+        }
+      ],
+      "x": 300,
+      "y": 420
+    },
+    "trop_tard": {
+      "id": "trop_tard",
+      "title": "The End of Courses",
+      "location": "School — Exit",
+      "narrator": "",
+      "text": "On the way out, Tom's already gone.\n\nYou're looking for him.\n\nAikito is next to you.\n\n**\" He went straight home. *\n\nYou stay on the sidewalk.\n\n**\"I'll talk to him tomorrow. You think so.\n\nAikito is looking at you.\n\n**\"The words we say remain for a long time. *\n**\"Apologies too. *\n**\"But they repair less well the next day. *",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Send him a message tonight.",
+          "vers": "fin_demain"
+        }
+      ],
+      "x": 300,
+      "y": 420
+    },
+    "fin_repare": {
+      "id": "fin_repare",
+      "title": "End — Words That Repair",
+      "location": "",
+      "narrator": "",
+      "text": "You're both drawing.\n\nIt's really not beautiful.\n\nAikito puts his head on the notebook.\n\nTom draws Aikito with a halo.\n\nYou draw Tom with a giant pencil.\n\nYou're kidding.\n\nReally.\n\nAikito looks up at you.\n\n**« Words can hurt. *\n**\"But good words can also fix. *\n**\"Just find the right ones. *\n\nTom put the notebook away.\n\n**\"Tomorrow we continue? *\n\n**\"Yeah. *",
+      "isStart": false,
+      "isEnd": true,
+      "transition": "fade",
+      "choices": [],
+      "x": 60,
+      "y": 780
+    },
+    "fin_lente": {
+      "id": "fin_lente",
+      "title": "End — Almost As Before",
+      "location": "",
+      "narrator": "",
+      "text": "You're going home together.\n\nYou don't talk much.\n\nBut you walk side by side.\n\nAikito trottine between you.\n\n**\"Is it fixed? You ask Aikito down there.\n\n**\"Almost. * he says.\n**\"The words leave traces. *\n**\"But the traces fade over time. *\n\n**\"With time... It's a long time. *\n\n** \"Yes.\"** says Aikito.\n**\"That's why you better think before. *",
+      "isStart": false,
+      "isEnd": true,
+      "transition": "fade",
+      "choices": [],
+      "x": 180,
+      "y": 780
+    },
+    "fin_demain": {
+      "id": "fin_demain",
+      "title": "End — The Evening Message",
+      "location": "",
+      "narrator": "",
+      "text": "In the evening, you send him a message.\n\nSorry about this morning. It sucked. *\n\nYou wait.\n\nLong time.\n\nThen three small points appear.\n\n- Okay. *\n\nJust *Ok. *\n\nAikito is lying next to you.\n\n**\"It's good you did it. *\n\n**\"But he just replied Ok...\"**\n\n** \"Yes.\"** says Aikito.\n**\"The evening apologies do less well. *\n**\"Tomorrow, really talk to him. *",
+      "isStart": false,
+      "isEnd": true,
+      "transition": "fade",
+      "choices": [],
+      "x": 300,
+      "y": 780
+    }
+  },
+  "lang": "en"
+}
