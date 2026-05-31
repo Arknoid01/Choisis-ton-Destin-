@@ -2,8 +2,9 @@
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>Progression</title>
+<script src="capacitor.js"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300&family=Cinzel:wght@400;600;700&family=DM+Mono:wght@300;400&display=swap" onload="this.onload=null;this.rel='stylesheet'">
@@ -28,10 +29,13 @@ canvas#bg-canvas{position:fixed;inset:0;z-index:0;pointer-events:none;}
 
 /* ── TOPBAR ── */
 #topbar{
-  position:fixed;top:0;left:0;right:0;height:54px;z-index:100;
+  position:fixed;top:0;left:0;right:0;
+  height:calc(54px + var(--android-safe-area-inset-top, env(safe-area-inset-top, 0px)));
+  padding-top:var(--android-safe-area-inset-top, env(safe-area-inset-top, 0px));
+  z-index:100;
   background:rgba(13,13,15,0.9);border-bottom:1px solid var(--border);
   backdrop-filter:blur(12px);
-  display:flex;align-items:center;gap:12px;padding:0 16px;
+  display:flex;align-items:center;gap:12px;padding-left:16px;padding-right:16px;
 }
 #btn-back{
   width:36px;height:36px;border-radius:8px;
@@ -53,7 +57,7 @@ canvas#bg-canvas{position:fixed;inset:0;z-index:0;pointer-events:none;}
 #edit-name-btn:hover{border-color:var(--gold3);color:var(--gold);}
 
 /* ── SCROLL ── */
-#scroll{padding-top:54px;}
+#scroll{padding-top:calc(54px + var(--android-safe-area-inset-top, env(safe-area-inset-top, 0px)));}
 #content{max-width:520px;margin:0 auto;padding:20px 16px 60px;}
 
 /* ── HERO PROFILE ── */
@@ -218,6 +222,18 @@ canvas#bg-canvas{position:fixed;inset:0;z-index:0;pointer-events:none;}
 @keyframes fade-up{from{opacity:0;transform:translateY(10px);}to{opacity:1;transform:translateY(0);}}
 .fade-in{animation:fade-up .4s ease forwards;}
 </style>
+
+<script>
+  // Cache les barres systeme sur Android (Capacitor)
+  document.addEventListener('DOMContentLoaded', function() {
+    if (window.Capacitor && window.Capacitor.isNativePlatform && window.Capacitor.isNativePlatform()) {
+      var StatusBar = window.Capacitor.Plugins.StatusBar;
+      var NavigationBar = window.Capacitor.Plugins.NavigationBar;
+      if (StatusBar) StatusBar.hide().catch(function(){});
+      if (NavigationBar) NavigationBar.hide().catch(function(){});
+    }
+  });
+</script>
 </head>
 <body>
 

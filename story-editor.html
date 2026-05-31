@@ -2,11 +2,13 @@
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>StoryForge — Éditeur</title>
+<script src="capacitor.js"></script>
 <link href="https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet">
 <style>
 :root {
+  --safe-top: var(--android-safe-area-inset-top, env(safe-area-inset-top, 36px));
   --bg: #0e0e12;
   --bg2: #14141a;
   --bg3: #1c1c24;
@@ -30,7 +32,10 @@ html,body { height:100%; overflow:hidden; font-family:'Syne',sans-serif; backgro
 /* TOPBAR */
 #topbar {
   display:flex; align-items:center; gap:12px;
-  padding:0 16px; height:52px; flex-shrink:0;
+  padding:0 16px;
+  height:calc(52px + var(--safe-top)) !important;
+  padding-top:var(--safe-top) !important;
+  flex-shrink:0;
   background:var(--bg2); border-bottom:1px solid var(--border);
   z-index:100;
 }
@@ -749,6 +754,18 @@ html,body { height:100%; overflow:hidden; font-family:'Syne',sans-serif; backgro
   #search-input.open { width:140px; }
 }
 </style>
+
+<script>
+  // Cache les barres systeme sur Android (Capacitor)
+  document.addEventListener('DOMContentLoaded', function() {
+    if (window.Capacitor && window.Capacitor.isNativePlatform && window.Capacitor.isNativePlatform()) {
+      var StatusBar = window.Capacitor.Plugins.StatusBar;
+      var NavigationBar = window.Capacitor.Plugins.NavigationBar;
+      if (StatusBar) StatusBar.hide().catch(function(){});
+      if (NavigationBar) NavigationBar.hide().catch(function(){});
+    }
+  });
+</script>
 </head>
 <body>
 <div id="shell">
@@ -1086,7 +1103,7 @@ const EDITOR_I18N = {
     projectPlaceholder:'Nom du projet', kidsTitle:'Histoire pour enfants', statsBtn:'⚙ Stats', themeBtn:'🎨 Thème', layoutBtn:'⊞ Ordonner', importBtn:'↑ Importer', exportTxtBtn:'✎ Export TXT', exportJsonBtn:'↓ Export JSON', testBtn:'Tester l\'aperçu', sendBtn:'Envoyer mon histoire',
     selectScene:'Sélectionne une scène', deleteTitle:'Supprimer', newSceneTitle:'Nouvelle scène', centerTitle:'Recentrer', empty:'Crée ou sélectionne une scène dans l\'arbre pour l\'éditer.', newScene:'+ Nouvelle scène',
     statsTitle:'Configuration des Stats', statsDesc:'Définis les attributs de ton personnage. Ils seront disponibles dans chaque choix.', addStat:'+ Ajouter une stat', close:'Fermer',
-    visualTheme:'🎨 Thème visuel', presets:'Thèmes prédéfinis', customColors:'Couleurs custom', mainBg:'Fond principal', panelBg:'Fond panneaux', elementBg:'Fond éléments', accentMain:'Accent principal', accentSecond:'Accent secondaire', accentThird:'Accent tertiaire', mainText:'Texte principal', borders:'Bordures', preview:'Aperçu', previewTitle:'Titre de la scène', previewText:'Le héros avance dans l\'obscurité. Chaque pas résonne dans le couloir de pierre...', previewBtn:'→ Continuer',
+    visualTheme:'Thème visuel', presets:'Thèmes prédéfinis', customColors:'Couleurs custom', mainBg:'Fond principal', panelBg:'Fond panneaux', elementBg:'Fond éléments', accentMain:'Accent principal', accentSecond:'Accent secondaire', accentThird:'Accent tertiaire', mainText:'Texte principal', borders:'Bordures', preview:'Aperçu', previewTitle:'Titre de la scène', previewText:'Le héros avance dans l\'obscurité. Chaque pas résonne dans le couloir de pierre...', previewBtn:'→ Continuer',
     tree:'Arbre', edit:'Éditer', more:'Plus', orderTree:'Ordonner l\'arbre', exportTxt:'Exporter TXT', exportJson:'Exporter JSON', scene:'Scène',
     id:'Identifiant', sceneTitle:'Titre de la scène', sceneTitlePh:'Ex: Le dock maudit', location:'Lieu / Contexte', locationPh:'Ex: SECTEUR 9 — NIVEAU INFÉRIEUR', narrative:'Texte narratif', narrativePh:'L\'histoire se déroule ici...', varHelp:'Variable disponible : <code>{{player}}</code> sera remplacé par le nom du joueur.', insertPlayer:'+ insérer {{player}}',
     tipId:'Identifiant unique — généré automatiquement, ne pas modifier',
@@ -1110,7 +1127,7 @@ const EDITOR_I18N = {
     projectPlaceholder:'Project name', kidsTitle:'Story for children', statsBtn:'⚙ Stats', themeBtn:'🎨 Theme', layoutBtn:'⊞ Arrange', importBtn:'↑ Import', exportTxtBtn:'✎ Export TXT', exportJsonBtn:'↓ Export JSON', testBtn:'Preview test', sendBtn:'Send my story',
     selectScene:'Select a scene', deleteTitle:'Delete', newSceneTitle:'New scene', centerTitle:'Recenter', empty:'Create or select a scene in the tree to edit it.', newScene:'+ New scene',
     statsTitle:'Stats Configuration', statsDesc:'Define your character attributes. They will be available in every choice.', addStat:'+ Add stat', close:'Close',
-    visualTheme:'🎨 Visual theme', presets:'Preset themes', customColors:'Custom colors', mainBg:'Main background', panelBg:'Panel background', elementBg:'Element background', accentMain:'Main accent', accentSecond:'Secondary accent', accentThird:'Third accent', mainText:'Main text', borders:'Borders', preview:'Preview', previewTitle:'Scene title', previewText:'The hero moves forward in the dark. Every step echoes through the stone corridor...', previewBtn:'→ Continue',
+    visualTheme:'Visual theme', presets:'Preset themes', customColors:'Custom colors', mainBg:'Main background', panelBg:'Panel background', elementBg:'Element background', accentMain:'Main accent', accentSecond:'Secondary accent', accentThird:'Third accent', mainText:'Main text', borders:'Borders', preview:'Preview', previewTitle:'Scene title', previewText:'The hero moves forward in the dark. Every step echoes through the stone corridor...', previewBtn:'→ Continue',
     tree:'Tree', edit:'Edit', more:'More', orderTree:'Arrange tree', exportTxt:'Export TXT', exportJson:'Export JSON', scene:'Scene',
     id:'Identifier', sceneTitle:'Scene title', sceneTitlePh:'Ex: The cursed dock', location:'Location / Context', locationPh:'Ex: SECTOR 9 — LOWER LEVEL', narrative:'Narrative text', narrativePh:'The story begins here...', varHelp:'Available variable: <code>{{player}}</code> will be replaced by the player name.', insertPlayer:'+ insert {{player}}',
     tipId:'Unique identifier — auto-generated, do not modify',
@@ -1134,7 +1151,7 @@ const EDITOR_I18N = {
     projectPlaceholder:'Nombre del proyecto', kidsTitle:'Historia para niños', statsBtn:'⚙ Stats', themeBtn:'🎨 Tema', layoutBtn:'⊞ Ordenar', importBtn:'↑ Importar', exportTxtBtn:'✎ Exportar TXT', exportJsonBtn:'↓ Exportar JSON', testBtn:'Vista previa', sendBtn:'Enviar mi historia',
     selectScene:'Selecciona una escena', deleteTitle:'Eliminar', newSceneTitle:'Nueva escena', centerTitle:'Recentrar', empty:'Crea o selecciona una escena en el árbol para editarla.', newScene:'+ Nueva escena',
     statsTitle:'Configuración de Stats', statsDesc:'Define los atributos de tu personaje. Estarán disponibles en cada elección.', addStat:'+ Añadir stat', close:'Cerrar',
-    visualTheme:'🎨 Tema visual', presets:'Temas predefinidos', customColors:'Colores personalizados', mainBg:'Fondo principal', panelBg:'Fondo de paneles', elementBg:'Fondo de elementos', accentMain:'Acento principal', accentSecond:'Acento secundario', accentThird:'Acento terciario', mainText:'Texto principal', borders:'Bordes', preview:'Vista previa', previewTitle:'Título de la escena', previewText:'El héroe avanza en la oscuridad. Cada paso resuena en el pasillo de piedra...', previewBtn:'→ Continuar',
+    visualTheme:'Tema visual', presets:'Temas predefinidos', customColors:'Colores personalizados', mainBg:'Fondo principal', panelBg:'Fondo de paneles', elementBg:'Fondo de elementos', accentMain:'Acento principal', accentSecond:'Acento secundario', accentThird:'Acento terciario', mainText:'Texto principal', borders:'Bordes', preview:'Vista previa', previewTitle:'Título de la escena', previewText:'El héroe avanza en la oscuridad. Cada paso resuena en el pasillo de piedra...', previewBtn:'→ Continuar',
     tree:'Árbol', edit:'Editar', more:'Más', orderTree:'Ordenar el árbol', exportTxt:'Exportar TXT', exportJson:'Exportar JSON', scene:'Escena',
     id:'Identificador', sceneTitle:'Título de la escena', sceneTitlePh:'Ej: El muelle maldito', location:'Lugar / Contexto', locationPh:'Ej: SECTOR 9 — NIVEL INFERIOR', narrative:'Texto narrativo', narrativePh:'La historia empieza aquí...', varHelp:'Variable disponible: <code>{{player}}</code> será reemplazada por el nombre del jugador.', insertPlayer:'+ insertar {{player}}',
     tipId:'Identificador único — generado automáticamente, no modificar',
@@ -1194,7 +1211,7 @@ function applyEditorLanguage() {
   if (hb && hb.className === 'ok') hb.textContent = et('healthReady');
   byId('empty-btn',  et('newScene'));
   byId('stats-modal-title', et('statsTitle')); byId('stats-modal-desc', et('statsDesc')); byId('stats-add-btn', et('addStat')); byId('stats-close-btn', et('close'));
-  byId('theme-title', et('visualTheme')); byId('theme-presets-title', et('presets')); byId('theme-custom-title', et('customColors'));
+  byId('theme-title', '🎨 ' + et('visualTheme')); byId('theme-presets-title', et('presets')); byId('theme-custom-title', et('customColors'));
   byId('lbl-bg', et('mainBg')); byId('lbl-bg2', et('panelBg')); byId('lbl-bg3', et('elementBg')); byId('lbl-accent', et('accentMain')); byId('lbl-accent2', et('accentSecond')); byId('lbl-accent3', et('accentThird')); byId('lbl-text', et('mainText')); byId('lbl-border', et('borders'));
   byId('theme-preview-title', et('preview')); byId('pv-title', et('previewTitle')); byId('pv-text', et('previewText')); byId('pv-btn', et('previewBtn'));
   const mm = document.querySelectorAll('#mobile-menu .mmenu-item');
@@ -2063,23 +2080,32 @@ function sendStory() {
   const filename = (project.name || 'histoire').replace(/\s+/g,'_').toLowerCase() + '.json';
   const blob = new Blob([JSON.stringify(exportData, null, 2)], {type:'application/json'});
 
-  // ── Share API Capacitor (APK Android) ─────────────────────
-  if (window.Capacitor && window.Capacitor.isNativePlatform && window.Capacitor.isNativePlatform()) {
+  // Détection native
+  const isNative = (window.Capacitor && window.Capacitor.getPlatform && window.Capacitor.getPlatform() !== 'web') ||
+                   (window.location.protocol === 'capacitor:');
+
+  if (isNative) {
     blob.arrayBuffer().then(buf => {
-      const base64 = btoa(String.fromCharCode(...new Uint8Array(buf)));
-      window.Capacitor.Plugins.Filesystem.writeFile({
-        path: filename,
-        data: base64,
-        directory: 'CACHE',
-        encoding: 'utf8'
-      }).then(result => {
-        window.Capacitor.Plugins.Share.share({
-          title: '[StoryForge] Soumission — ' + (project.name || 'Mon Histoire'),
-          text: `Bonjour l'équipe PegasusCorp,\n\nJe vous soumets mon histoire "${project.name || 'Mon Histoire'}".\n\nCordialement`,
-          url: result.uri,
-          dialogTitle: 'Envoyer à PegasusCorp'
-        });
-      });
+      let binary = '';
+      const bytes = new Uint8Array(buf);
+      for (let i = 0; i < bytes.byteLength; i++) binary += String.fromCharCode(bytes[i]);
+      const base64 = btoa(binary);
+
+      const plugins = window.Capacitor.Plugins;
+      if (plugins && plugins.Filesystem && plugins.Share) {
+        plugins.Filesystem.writeFile({ path: filename, data: base64, directory: 'CACHE' })
+          .then(res => {
+            plugins.Share.share({
+              title: '[StoryForge] Soumission — ' + (project.name || 'Mon Histoire'),
+              text: `Bonjour l'équipe PegasusCorp,\n\nJe vous soumets mon histoire "${project.name || 'Mon Histoire'}".`,
+              files: [res.uri],
+              dialogTitle: 'Envoyer'
+            });
+          })
+          .catch(err => { alert('Erreur envoi: ' + err); _sendMailtoFallback(blob, filename); });
+      } else {
+        _sendMailtoFallback(blob, filename);
+      }
     });
     return;
   }
@@ -2178,22 +2204,42 @@ function shuffleArray(arr) {
 }
 
 function download(blob, filename) {
-  // ── Share API Capacitor (APK Android) ─────────────────────
-  if (window.Capacitor && window.Capacitor.isNativePlatform && window.Capacitor.isNativePlatform()) {
+  // Détection native
+  const isNative = (window.Capacitor && window.Capacitor.isNativePlatform && window.Capacitor.isNativePlatform()) ||
+                   (window.location.protocol === 'capacitor:');
+
+  if (isNative) {
     blob.arrayBuffer().then(buf => {
-      const base64 = btoa(String.fromCharCode(...new Uint8Array(buf)));
-      window.Capacitor.Plugins.Filesystem.writeFile({
-        path: filename,
-        data: base64,
-        directory: 'CACHE',
-        encoding: 'utf8'
-      }).then(result => {
-        window.Capacitor.Plugins.Share.share({
-          title: filename,
-          url: result.uri,
-          dialogTitle: 'Partager / Sauvegarder'
+      let binary = '';
+      const bytes = new Uint8Array(buf);
+      for (let i = 0; i < bytes.byteLength; i++) binary += String.fromCharCode(bytes[i]);
+      const base64 = btoa(binary);
+
+      const plugins = window.Capacitor.Plugins;
+      if (plugins && plugins.Filesystem && plugins.Share) {
+        plugins.Filesystem.writeFile({
+          path: filename,
+          data: base64,
+          directory: 'CACHE'
+        }).then(result => {
+          plugins.Share.share({
+            title: filename,
+            files: [result.uri],
+            dialogTitle: 'Sauvegarder / Partager'
+          }).catch(err => {
+            alert('Erreur partage: ' + JSON.stringify(err));
+          });
+        }).catch(err => {
+          alert('Erreur écriture: ' + JSON.stringify(err));
+          _downloadFallback(blob, filename);
         });
-      }).catch(() => _downloadFallback(blob, filename));
+      } else {
+        alert('Erreur: Plugins Capacitor Filesystem/Share non trouvés.');
+        _downloadFallback(blob, filename);
+      }
+    }).catch(err => {
+      alert('Erreur buffer: ' + err);
+      _downloadFallback(blob, filename);
     });
     return;
   }

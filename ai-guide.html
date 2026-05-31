@@ -2,74 +2,49 @@
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Créer avec l'IA — Fableris</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Aide éditeur & IA — Fableris</title>
+<script src="capacitor.js"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,300&family=Cinzel:wght@400;600&family=DM+Mono:wght@300;400&display=swap" onload="this.onload=null;this.rel='stylesheet'">
 <style>
 *,*::before,*::after { margin:0; padding:0; box-sizing:border-box; }
 html,body { min-height:100%; background:#0a0a0e; color:#e0d8f0; font-family:'Cormorant Garamond',serif; overflow-x:hidden; }
-
 :root {
   --gold:#c8a96e; --gold2:#e8d4a0; --gold3:#8a6a30;
   --purple:#7c6dfa; --green:#6dfabc;
   --bg:#0a0a0e; --bg2:#111118; --bg3:#18181f; --bg4:#202028;
   --border:#26262e; --text:#e0d8f0; --dim:#7070a0; --dimmer:#404050;
 }
-
-/* TOPBAR */
 #topbar {
-  position:fixed; top:0; left:0; right:0; height:52px; z-index:100;
-  background:rgba(10,10,14,0.92); border-bottom:1px solid var(--border);
-  backdrop-filter:blur(12px);
-  display:flex; align-items:center; gap:12px; padding:0 16px;
+  position:fixed; top:0; left:0; right:0;
+  height:calc(52px + var(--android-safe-area-inset-top, env(safe-area-inset-top, 0px)));
+  padding-top:var(--android-safe-area-inset-top, env(safe-area-inset-top, 0px));
+  z-index:100; background:rgba(10,10,14,0.92); border-bottom:1px solid var(--border);
+  backdrop-filter:blur(12px); display:flex; align-items:center; gap:12px; padding-left:16px; padding-right:16px;
 }
 .back-btn {
-  width:36px; height:36px; border-radius:8px;
-  border:1px solid var(--border); background:none;
-  color:var(--dim); font-size:18px; cursor:pointer;
-  display:flex; align-items:center; justify-content:center;
+  width:36px; height:36px; border-radius:8px; border:1px solid var(--border); background:none;
+  color:var(--dim); font-size:18px; cursor:pointer; display:flex; align-items:center; justify-content:center;
   text-decoration:none; transition:all .15s; flex-shrink:0;
 }
 .back-btn:hover { border-color:var(--gold3); color:var(--text); }
-.topbar-title {
-  font-family:'Cinzel',serif; font-size:13px; font-weight:600;
-  color:var(--text); letter-spacing:2px;
-}
-
-/* SCROLL */
-#scroll { padding-top:52px; }
+.topbar-title { font-family:'Cinzel',serif; font-size:13px; font-weight:600; color:var(--text); letter-spacing:2px; }
+#scroll { padding-top:calc(52px + var(--android-safe-area-inset-top, env(safe-area-inset-top, 0px))); }
 #content { max-width:600px; margin:0 auto; padding:28px 16px 80px; }
-
-/* HERO */
-.hero {
-  text-align:center; padding:32px 0 28px;
-  border-bottom:1px solid var(--border); margin-bottom:32px;
-}
+.hero { text-align:center; padding:32px 0 28px; border-bottom:1px solid var(--border); margin-bottom:32px; }
 .hero-icon { font-size:40px; margin-bottom:16px; }
-.hero-title {
-  font-family:'Cinzel',serif; font-size:22px; font-weight:600;
-  color:var(--text); letter-spacing:2px; margin-bottom:8px;
-}
-.hero-sub {
-  font-size:15px; color:var(--dim); font-style:italic; line-height:1.6;
-  max-width:400px; margin:0 auto;
-}
-
-/* SECTION */
+.hero-title { font-family:'Cinzel',serif; font-size:22px; font-weight:600; color:var(--text); letter-spacing:2px; margin-bottom:8px; }
+.hero-sub { font-size:15px; color:var(--dim); font-style:italic; line-height:1.6; max-width:400px; margin:0 auto; }
 .section { margin-bottom:32px; }
 .section-title {
-  font-family:'Cinzel',serif; font-size:11px; font-weight:600;
-  letter-spacing:4px; text-transform:uppercase; color:var(--dimmer);
-  margin-bottom:16px; display:flex; align-items:center; gap:10px;
+  font-family:'Cinzel',serif; font-size:11px; font-weight:600; letter-spacing:4px; text-transform:uppercase;
+  color:var(--dimmer); margin-bottom:16px; display:flex; align-items:center; gap:10px;
 }
 .section-title::after { content:''; flex:1; height:1px; background:var(--border); }
-
-/* STEP CARD */
 .step-card {
-  background:var(--bg2); border:1px solid var(--border);
-  border-radius:12px; padding:16px; margin-bottom:12px;
+  background:var(--bg2); border:1px solid var(--border); border-radius:12px; padding:16px; margin-bottom:12px;
   display:flex; gap:14px; align-items:flex-start;
 }
 .step-num {
@@ -78,108 +53,67 @@ html,body { min-height:100%; background:#0a0a0e; color:#e0d8f0; font-family:'Cor
   color:var(--purple); font-family:'DM Mono',monospace; font-size:12px;
   font-weight:700; display:flex; align-items:center; justify-content:center;
 }
-.step-body h3 {
-  font-family:'Cinzel',serif; font-size:14px; font-weight:600;
-  color:var(--text); margin-bottom:5px; letter-spacing:0.5px;
-}
-.step-body p {
-  font-size:13px; color:var(--dim); line-height:1.65;
-}
-
-/* INFO CARD */
-.info-card {
-  background:rgba(109,250,188,0.06); border:1px solid rgba(109,250,188,0.2);
-  border-radius:10px; padding:14px 16px; margin-bottom:12px;
-}
+.step-body h3 { font-family:'Cinzel',serif; font-size:14px; font-weight:600; color:var(--text); margin-bottom:5px; letter-spacing:0.5px; }
+.step-body p { font-size:13px; color:var(--dim); line-height:1.65; }
+.info-card { background:rgba(109,250,188,0.06); border:1px solid rgba(109,250,188,0.2); border-radius:10px; padding:14px 16px; margin-bottom:12px; }
 .info-card p { font-size:13px; color:#90eec0; line-height:1.65; }
 .info-card strong { color:var(--green); }
-
-/* PROMPT BOX */
-.prompt-box {
-  background:var(--bg3); border:1px solid var(--border);
-  border-radius:10px; overflow:hidden; margin-bottom:16px;
-}
-.prompt-header {
-  background:var(--bg4); border-bottom:1px solid var(--border);
-  padding:10px 14px;
-  display:flex; align-items:center; justify-content:space-between;
-}
-.prompt-label {
-  font-family:'DM Mono',monospace; font-size:10px;
-  color:var(--dimmer); letter-spacing:2px; text-transform:uppercase;
-}
-.copy-btn {
-  background:rgba(124,109,250,0.1); border:1px solid rgba(124,109,250,0.3);
-  border-radius:6px; color:var(--purple);
-  font-family:'DM Mono',monospace; font-size:10px; letter-spacing:1px;
-  padding:4px 10px; cursor:pointer; transition:all .15s;
-}
+.warn-card { background:rgba(200,169,110,0.06); border:1px solid rgba(200,169,110,0.2); border-radius:10px; padding:14px 16px; margin-bottom:12px; }
+.warn-card p { font-size:13px; color:#d4b87a; line-height:1.65; }
+.warn-card strong { color:var(--gold); }
+.prompt-box { background:var(--bg3); border:1px solid var(--border); border-radius:10px; overflow:hidden; margin-bottom:16px; }
+.prompt-header { background:var(--bg4); border-bottom:1px solid var(--border); padding:10px 14px; display:flex; align-items:center; justify-content:space-between; }
+.prompt-label { font-family:'DM Mono',monospace; font-size:10px; color:var(--dimmer); letter-spacing:2px; text-transform:uppercase; }
+.copy-btn { background:rgba(124,109,250,0.1); border:1px solid rgba(124,109,250,0.3); border-radius:6px; color:var(--purple); font-family:'DM Mono',monospace; font-size:10px; letter-spacing:1px; padding:4px 10px; cursor:pointer; transition:all .15s; }
 .copy-btn:hover { background:rgba(124,109,250,0.2); }
 .copy-btn.copied { color:var(--green); border-color:rgba(109,250,188,0.4); background:rgba(109,250,188,0.08); }
-.prompt-text {
-  padding:14px; font-family:'DM Mono',monospace; font-size:11px;
-  color:var(--dim); line-height:1.7; white-space:pre-wrap;
-  max-height:280px; overflow-y:auto;
-}
+.prompt-text { padding:14px; font-family:'DM Mono',monospace; font-size:11px; color:var(--dim); line-height:1.7; white-space:pre-wrap; max-height:280px; overflow-y:auto; }
 .prompt-text::-webkit-scrollbar { width:3px; }
 .prompt-text::-webkit-scrollbar-thumb { background:var(--border); border-radius:3px; }
-
-/* AI TOOLS */
 .ai-tools { display:flex; flex-direction:column; gap:10px; }
-.ai-tool {
-  background:var(--bg2); border:1px solid var(--border);
-  border-radius:10px; padding:14px 16px;
-  display:flex; align-items:center; gap:12px;
-  text-decoration:none; transition:all .2s;
-}
+.ai-tool { background:var(--bg2); border:1px solid var(--border); border-radius:10px; padding:14px 16px; display:flex; align-items:center; gap:12px; text-decoration:none; transition:all .2s; }
 .ai-tool:hover { border-color:var(--gold3); }
 .ai-tool-icon { font-size:22px; flex-shrink:0; }
-.ai-tool-name {
-  font-family:'Cinzel',serif; font-size:13px; font-weight:600;
-  color:var(--text); margin-bottom:2px;
-}
+.ai-tool-name { font-family:'Cinzel',serif; font-size:13px; font-weight:600; color:var(--text); margin-bottom:2px; }
 .ai-tool-desc { font-size:12px; color:var(--dim); }
 .ai-tool-arrow { margin-left:auto; color:var(--dimmer); font-size:16px; flex-shrink:0; }
-
-/* EXAMPLE JSON */
-.json-box {
-  background:var(--bg3); border:1px solid var(--border);
-  border-radius:10px; padding:14px;
-  font-family:'DM Mono',monospace; font-size:10px;
-  color:#7090c0; line-height:1.8; overflow-x:auto;
-  white-space:pre; margin-bottom:16px;
-}
+.json-box { background:var(--bg3); border:1px solid var(--border); border-radius:10px; padding:14px; font-family:'DM Mono',monospace; font-size:10px; color:#7090c0; line-height:1.8; overflow-x:auto; white-space:pre; margin-bottom:16px; }
 .json-box .key { color:#a070f0; }
 .json-box .str { color:#70c090; }
 .json-box .num { color:#f0a060; }
-
-/* CTA */
-.cta-section {
-  text-align:center; padding:24px;
-  background:var(--bg2); border:1px solid var(--border);
-  border-radius:12px; margin-top:24px;
-}
+.btn-grid { display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:12px; }
+.btn-card { background:var(--bg2); border:1px solid var(--border); border-radius:10px; padding:12px 14px; }
+.btn-card-icon { font-size:18px; margin-bottom:6px; }
+.btn-card-name { font-family:'Cinzel',serif; font-size:12px; font-weight:600; color:var(--text); margin-bottom:4px; }
+.btn-card-desc { font-size:11px; color:var(--dim); line-height:1.5; }
+.page-card { background:var(--bg2); border:1px solid var(--border); border-radius:12px; padding:16px; margin-bottom:10px; display:flex; gap:14px; align-items:flex-start; }
+.page-icon { font-size:24px; flex-shrink:0; margin-top:2px; }
+.page-body h3 { font-family:'Cinzel',serif; font-size:13px; font-weight:600; color:var(--text); margin-bottom:4px; }
+.page-body p { font-size:12px; color:var(--dim); line-height:1.6; }
+.cta-section { text-align:center; padding:24px; background:var(--bg2); border:1px solid var(--border); border-radius:12px; margin-top:24px; }
 .cta-title { font-family:'Cinzel',serif; font-size:15px; color:var(--text); margin-bottom:8px; }
 .cta-sub { font-size:13px; color:var(--dim); margin-bottom:18px; }
-.cta-btn {
-  display:inline-block; padding:12px 28px;
-  background:linear-gradient(135deg, rgba(200,169,110,0.15), rgba(200,169,110,0.05));
-  border:1px solid var(--gold3); border-radius:8px;
-  color:var(--gold); font-family:'Cinzel',serif; font-size:12px;
-  letter-spacing:2px; text-decoration:none; cursor:pointer;
-  transition:all .2s;
-}
+.cta-btn { display:inline-block; padding:12px 28px; background:linear-gradient(135deg, rgba(200,169,110,0.15), rgba(200,169,110,0.05)); border:1px solid var(--gold3); border-radius:8px; color:var(--gold); font-family:'Cinzel',serif; font-size:12px; letter-spacing:2px; text-decoration:none; cursor:pointer; transition:all .2s; }
 .cta-btn:hover { background:rgba(200,169,110,0.2); color:var(--gold2); }
-
 @keyframes fade-up { from{opacity:0;transform:translateY(10px);}to{opacity:1;transform:translateY(0);} }
 .fade-in { animation:fade-up .4s ease forwards; }
 </style>
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    if (window.Capacitor && window.Capacitor.isNativePlatform && window.Capacitor.isNativePlatform()) {
+      var StatusBar = window.Capacitor.Plugins.StatusBar;
+      var NavigationBar = window.Capacitor.Plugins.NavigationBar;
+      if (StatusBar) StatusBar.hide().catch(function(){});
+      if (NavigationBar) NavigationBar.hide().catch(function(){});
+    }
+  });
+</script>
 </head>
 <body>
 
 <div id="topbar">
   <a href="index.html" class="back-btn">←</a>
-  <div class="topbar-title" id="txt-title">Créer avec l'IA</div>
+  <div class="topbar-title" id="txt-title">Aide éditeur &amp; IA</div>
 </div>
 
 <div id="scroll">
@@ -187,17 +121,235 @@ html,body { min-height:100%; background:#0a0a0e; color:#e0d8f0; font-family:'Cor
 
   <!-- HERO -->
   <div class="hero fade-in">
-    <div class="hero-icon">🤖✍️</div>
-    <div class="hero-title" id="txt-hero-title">Écrire avec l'Intelligence Artificielle</div>
+    <div class="hero-icon">📖✨</div>
+    <div class="hero-title" id="txt-hero-title">Guide complet Fableris</div>
     <p class="hero-sub" id="txt-hero-sub">
-      Fableris est conçu pour être parfaitement compatible avec les IA narratives. 
-      Décris ton idée, laisse l'IA construire la structure, importe dans l'éditeur.
+      Tout ce que tu dois savoir pour jouer, créer et soumettre tes histoires.
     </p>
   </div>
 
-  <!-- COMMENT ÇA MARCHE -->
+  <!-- PAGES DE L'APP -->
   <div class="section fade-in">
-    <div class="section-title" id="txt-how">Comment ça marche</div>
+    <div class="section-title" id="txt-pages-section">Les pages de l'application</div>
+
+    <div class="page-card">
+      <div class="page-icon">📚</div>
+      <div class="page-body">
+        <h3 id="txt-page1-title">Bibliothèque</h3>
+        <p id="txt-page1-body">La page principale. Toutes les histoires disponibles sont regroupées par pack. Les histoires gratuites sont accessibles directement. Les histoires payantes affichent un cadenas 🔒 — elles se débloquent via un code ou un achat. Appuie sur une histoire pour voir sa description et la commencer.</p>
+      </div>
+    </div>
+
+    <div class="page-card">
+      <div class="page-icon">🎮</div>
+      <div class="page-body">
+        <h3 id="txt-page2-title">Le moteur de jeu</h3>
+        <p id="txt-page2-body">Le cœur de Fableris. Tu lis les scènes et tu fais tes choix. En haut : la barre de progression et tes stats (audace, prudence, savoir...). En bas : les choix disponibles. Certains choix 🔒 sont verrouillés si tes stats ne sont pas assez élevées. Tape sur l'écran pour afficher/masquer l'interface et entrer en mode immersif.</p>
+      </div>
+    </div>
+
+    <div class="page-card">
+      <div class="page-icon">📊</div>
+      <div class="page-body">
+        <h3 id="txt-page3-title">Ma Progression</h3>
+        <p id="txt-page3-body">Retrouve toutes tes parties en cours et terminées. Pour chaque histoire tu vois combien de fins tu as découvertes sur le total possible. Tu peux reprendre une partie là où tu l'as laissée ou recommencer depuis le début pour explorer d'autres chemins.</p>
+      </div>
+    </div>
+
+    <div class="page-card">
+      <div class="page-icon">📰</div>
+      <div class="page-body">
+        <h3 id="txt-page4-title">Actualités</h3>
+        <p id="txt-page4-body">Les dernières nouvelles de Fableris — nouvelles histoires, mises à jour, événements spéciaux. C'est ici que tu seras informé des prochaines sorties et des codes promotionnels.</p>
+      </div>
+    </div>
+
+    <div class="page-card">
+      <div class="page-icon">✍</div>
+      <div class="page-body">
+        <h3 id="txt-page5-title">Soumettre une histoire</h3>
+        <p id="txt-page5-body">Tu as une idée d'aventure ? Crée-la dans l'éditeur StoryForge et envoie-la nous. Les meilleures histoires sont publiées officiellement dans l'application. Tu recevras le badge Auteur et des avantages exclusifs.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- SYSTÈME DE PACKS -->
+  <div class="section fade-in">
+    <div class="section-title" id="txt-packs-section">Packs et déblocage</div>
+
+    <div class="step-card">
+      <div class="step-num">🆓</div>
+      <div class="step-body">
+        <h3 id="txt-pack1-title">Contenu gratuit</h3>
+        <p id="txt-pack1-body">Plusieurs histoires sont entièrement gratuites dès l'installation — dont le Pack Enfants complet. Aucun compte requis, aucune connexion nécessaire. Tout fonctionne hors ligne.</p>
+      </div>
+    </div>
+
+    <div class="step-card">
+      <div class="step-num">🔑</div>
+      <div class="step-body">
+        <h3 id="txt-pack2-title">Codes de déblocage</h3>
+        <p id="txt-pack2-body">Certains packs se débloquent avec un code. Dans Options → Entrer un code, saisis le code reçu par e-mail ou lors d'un événement. Le contenu est débloqué définitivement sur ton appareil.</p>
+      </div>
+    </div>
+
+    <div class="step-card">
+      <div class="step-num">🔒</div>
+      <div class="step-body">
+        <h3 id="txt-pack3-title">Histoires Via Portail</h3>
+        <p id="txt-pack3-body">Certaines histoires affichent le badge "Via Portail". Elles font partie d'un pack premium et nécessitent un accès spécial. Les testeurs officiels reçoivent un code pour y accéder gratuitement.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- STATS ET FINS -->
+  <div class="section fade-in">
+    <div class="section-title" id="txt-stats-section">Stats et fins alternatives</div>
+
+    <div class="info-card">
+      <p id="txt-stats-info"><strong>Comment fonctionnent les stats ?</strong> Chaque choix que tu fais peut augmenter une stat — Audace, Prudence, Savoir ou d'autres selon l'histoire. Ces stats influencent les choix disponibles et les fins possibles. Un joueur audacieux verra d'autres options qu'un joueur prudent.</p>
+    </div>
+
+    <div class="step-card">
+      <div class="step-num">🎯</div>
+      <div class="step-body">
+        <h3 id="txt-stats1-title">Fins multiples</h3>
+        <p id="txt-stats1-body">La plupart des histoires ont plusieurs fins possibles. Pour toutes les découvrir, rejoue l'histoire en faisant des choix différents. Ta progression est sauvegardée automatiquement — tu peux revenir à n'importe quel moment.</p>
+      </div>
+    </div>
+
+    <div class="step-card">
+      <div class="step-num">🔒</div>
+      <div class="step-body">
+        <h3 id="txt-stats2-title">Choix conditionnels</h3>
+        <p id="txt-stats2-body">Un choix grisé avec 🔒 indique qu'il nécessite un certain niveau de stat. Par exemple "Intervenir avec autorité" peut nécessiter Audace ≥ 30. Rejoue l'histoire en favorisant cette stat pour débloquer ces chemins cachés.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ÉDITEUR STORYFORGE -->
+  <div class="section fade-in">
+    <div class="section-title" id="txt-editor-section">Éditeur StoryForge — Vue d'ensemble</div>
+    <p style="font-size:13px;color:var(--dim);margin-bottom:16px;line-height:1.6" id="txt-editor-intro">
+      StoryForge est l'éditeur visuel intégré à Fableris. Il permet de créer des histoires complètes sans toucher au JSON. L'arbre visuel montre toutes tes scènes et leurs connexions en temps réel.
+    </p>
+
+    <div class="step-card">
+      <div class="step-num" style="background:rgba(109,250,188,0.1);border-color:rgba(109,250,188,0.3);color:#6dfabc">🌳</div>
+      <div class="step-body">
+        <h3 id="txt-tuto1-title">L'arbre visuel</h3>
+        <p id="txt-tuto1-body">Chaque bulle est une scène. Les flèches montrent les chemins possibles. Les flèches orange pointillées avec 🔒 indiquent des choix conditionnels. La bulle verte est la scène de départ, les bulles rouges sont les fins. Pince pour zoomer, glisse pour naviguer.</p>
+      </div>
+    </div>
+
+    <div class="step-card">
+      <div class="step-num" style="background:rgba(109,250,188,0.1);border-color:rgba(109,250,188,0.3);color:#6dfabc">✏</div>
+      <div class="step-body">
+        <h3 id="txt-tuto2-title">Éditer une scène</h3>
+        <p id="txt-tuto2-body">Tape sur une scène pour l'éditer. Tu peux modifier le titre, le lieu (affiché en haut de la scène), le narrateur (texte en italique avant le texte principal), le texte principal, la transition visuelle et l'illustration emoji. Chaque modification est sauvegardée automatiquement.</p>
+      </div>
+    </div>
+
+    <div class="step-card">
+      <div class="step-num" style="background:rgba(109,250,188,0.1);border-color:rgba(109,250,188,0.3);color:#6dfabc">→</div>
+      <div class="step-body">
+        <h3 id="txt-tuto3-title">Les choix</h3>
+        <p id="txt-tuto3-body">Chaque scène peut avoir plusieurs choix. Un choix a un texte, une destination (vers quelle scène il mène) et des effets sur les stats. Tu peux ajouter une condition 🔒 — le choix n'apparaîtra que si le joueur a assez de points dans une stat. Le bouton Lier permet de connecter visuellement deux scènes.</p>
+      </div>
+    </div>
+
+    <div class="step-card">
+      <div class="step-num" style="background:rgba(109,250,188,0.1);border-color:rgba(109,250,188,0.3);color:#6dfabc">⚙</div>
+      <div class="step-body">
+        <h3 id="txt-tuto4-title">Les stats</h3>
+        <p id="txt-tuto4-body">Définis les stats de ton histoire dans ⚙ Stats — courage, lucidité, chaleur... Chaque stat a un nom, une couleur et une valeur de départ. Les choix peuvent les modifier avec des valeurs positives ou négatives. Elles permettent des fins différentes selon le profil du joueur.</p>
+      </div>
+    </div>
+
+    <div class="step-card">
+      <div class="step-num" style="background:rgba(109,250,188,0.1);border-color:rgba(109,250,188,0.3);color:#6dfabc">▶</div>
+      <div class="step-body">
+        <h3 id="txt-tuto5-title">Tester l'histoire</h3>
+        <p id="txt-tuto5-body">Le bouton ▶ Tester ouvre ton histoire dans le vrai moteur de jeu. Tu peux simuler différents niveaux de stats pour vérifier que tes fins conditionnelles fonctionnent correctement. Reviens à l'éditeur avec le bouton retour.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- BOUTONS DE L'ÉDITEUR -->
+  <div class="section fade-in">
+    <div class="section-title" id="txt-buttons-section">Tous les boutons du menu ⋯</div>
+    <p style="font-size:13px;color:var(--dim);margin-bottom:16px;line-height:1.6" id="txt-buttons-intro">
+      Sur mobile, le menu ⋯ en haut à droite donne accès à toutes les actions. Sur tablette/PC, elles sont visibles directement dans la barre.
+    </p>
+
+    <div class="btn-grid">
+      <div class="btn-card">
+        <div class="btn-card-icon">⚙</div>
+        <div class="btn-card-name" id="txt-btn1-name">Stats</div>
+        <div class="btn-card-desc" id="txt-btn1-desc">Crée et gère les attributs du joueur. Ils apparaissent en haut pendant le jeu et influencent les choix conditionnels.</div>
+      </div>
+      <div class="btn-card">
+        <div class="btn-card-icon">🎨</div>
+        <div class="btn-card-name" id="txt-btn2-name">Thème visuel</div>
+        <div class="btn-card-desc" id="txt-btn2-desc">Choisis parmi des thèmes prédéfinis ou personnalise les couleurs de fond, bordures et accents de ton histoire.</div>
+      </div>
+      <div class="btn-card">
+        <div class="btn-card-icon">⊞</div>
+        <div class="btn-card-name" id="txt-btn3-name">Ordonner l'arbre</div>
+        <div class="btn-card-desc" id="txt-btn3-desc">Réorganise automatiquement les scènes dans l'arbre pour qu'elles soient lisibles et bien espacées.</div>
+      </div>
+      <div class="btn-card">
+        <div class="btn-card-icon">▶</div>
+        <div class="btn-card-name" id="txt-btn4-name">Tester l'histoire</div>
+        <div class="btn-card-desc" id="txt-btn4-desc">Lance ton histoire dans le moteur de jeu pour la tester comme un vrai joueur. Simule les stats pour tester les chemins conditionnels.</div>
+      </div>
+      <div class="btn-card">
+        <div class="btn-card-icon">↑</div>
+        <div class="btn-card-name" id="txt-btn5-name">Importer JSON</div>
+        <div class="btn-card-desc" id="txt-btn5-desc">Charge un fichier JSON existant dans l'éditeur. Utile pour importer une histoire générée par l'IA ou modifier une histoire existante.</div>
+      </div>
+      <div class="btn-card">
+        <div class="btn-card-icon">↓</div>
+        <div class="btn-card-name" id="txt-btn6-name">Exporter JSON</div>
+        <div class="btn-card-desc" id="txt-btn6-desc">Sauvegarde ton histoire en fichier JSON. C'est le format à envoyer à l'équipe Fableris pour publication.</div>
+      </div>
+      <div class="btn-card">
+        <div class="btn-card-icon">✎</div>
+        <div class="btn-card-name" id="txt-btn7-name">Export TXT</div>
+        <div class="btn-card-desc" id="txt-btn7-desc">Exporte ton histoire en texte brut lisible — pratique pour relire, partager ou corriger le texte dans un éditeur externe.</div>
+      </div>
+      <div class="btn-card">
+        <div class="btn-card-icon">✉</div>
+        <div class="btn-card-name" id="txt-btn8-name">Envoyer</div>
+        <div class="btn-card-desc" id="txt-btn8-desc">Envoie directement ton histoire par e-mail à l'équipe Fableris pour soumission. Le JSON est joint automatiquement.</div>
+      </div>
+    </div>
+
+    <div class="btn-grid">
+      <div class="btn-card">
+        <div class="btn-card-icon">🧒</div>
+        <div class="btn-card-name" id="txt-btn9-name">Histoire pour enfants</div>
+        <div class="btn-card-desc" id="txt-btn9-desc">Active le mode enfants — l'histoire apparaîtra dans le Pack Enfants avec une interface adaptée aux plus jeunes.</div>
+      </div>
+      <div class="btn-card">
+        <div class="btn-card-icon">👤</div>
+        <div class="btn-card-name" id="txt-btn10-name">Demander le prénom</div>
+        <div class="btn-card-desc" id="txt-btn10-desc">Si activé, le jeu demande son prénom au joueur avant de commencer. Le prénom peut apparaître dans les textes de l'histoire.</div>
+      </div>
+    </div>
+
+    <div class="info-card">
+      <p id="txt-health-tip"><strong>Badge santé ✓</strong> — En haut à droite de l'éditeur, ce badge indique l'état de ton histoire. Vert = tout va bien. Jaune = avertissements. Rouge = erreurs bloquantes (scène sans destination, choix cassé, pas de scène de départ). Clique dessus pour voir la liste détaillée.</p>
+    </div>
+
+    <div class="info-card" style="margin-top:8px">
+      <p id="txt-search-tip"><strong>🔍 Recherche &amp; Navigation</strong> — Le bouton loupe en bas à gauche de l'arbre permet de chercher une scène par nom. La minimap en bas à droite donne une vue d'ensemble et permet de naviguer rapidement dans les grandes histoires. Les boutons +/− et ◎ contrôlent le zoom et recentrent la vue.</p>
+    </div>
+  </div>
+
+  <!-- IA SECTION -->
+  <div class="section fade-in">
+    <div class="section-title" id="txt-how">Créer avec l'IA</div>
 
     <div class="step-card">
       <div class="step-num">01</div>
@@ -243,7 +395,6 @@ html,body { min-height:100%; background:#0a0a0e; color:#e0d8f0; font-family:'Cor
     <p style="font-size:13px;color:var(--dim);margin-bottom:14px;line-height:1.6" id="txt-prompt-intro">
       Copie ce prompt et colle-le dans ta conversation avec l'IA, suivi de la description de ton histoire.
     </p>
-
     <div class="prompt-box">
       <div class="prompt-header">
         <span class="prompt-label">Prompt à copier</span>
@@ -350,7 +501,6 @@ Retourne uniquement le JSON complet final.</div>
     </div>
   </div>
 
-
   <!-- JSON EXEMPLE -->
   <div class="section fade-in">
     <div class="section-title" id="txt-json-section">JSON d'exemple — Aikito</div>
@@ -437,62 +587,10 @@ Retourne uniquement le JSON complet final.</div>
     </div>
   </div>
 
-  <!-- TUTO ÉDITEUR -->
-  <div class="section fade-in">
-    <div class="section-title" id="txt-tuto-section">Guide de l'éditeur StoryForge</div>
-    <p style="font-size:13px;color:var(--dim);margin-bottom:16px;line-height:1.6" id="txt-tuto-intro">
-      L'éditeur visuel permet de créer et modifier des histoires sans toucher au JSON.
-    </p>
-
-    <div class="step-card">
-      <div class="step-num" style="background:rgba(109,250,188,0.1);border-color:rgba(109,250,188,0.3);color:#6dfabc">🌳</div>
-      <div class="step-body">
-        <h3 id="txt-tuto1-title">L'arbre visuel</h3>
-        <p id="txt-tuto1-body">Chaque bulle est une scène. Les flèches montrent les chemins possibles. Les flèches orange pointillées avec 🔒 indiquent des choix conditionnels qui nécessitent un certain niveau de stat. Pince pour zoomer, glisse pour naviguer.</p>
-      </div>
-    </div>
-
-    <div class="step-card">
-      <div class="step-num" style="background:rgba(109,250,188,0.1);border-color:rgba(109,250,188,0.3);color:#6dfabc">✏</div>
-      <div class="step-body">
-        <h3 id="txt-tuto2-title">Éditer une scène</h3>
-        <p id="txt-tuto2-body">Tape sur une scène pour l'éditer. Tu peux modifier le titre, le lieu, le narrateur (texte en italique), le texte principal, la transition et l'illustration. Le bouton + en bas à droite crée une nouvelle scène.</p>
-      </div>
-    </div>
-
-    <div class="step-card">
-      <div class="step-num" style="background:rgba(109,250,188,0.1);border-color:rgba(109,250,188,0.3);color:#6dfabc">→</div>
-      <div class="step-body">
-        <h3 id="txt-tuto3-title">Les choix</h3>
-        <p id="txt-tuto3-body">Chaque scène peut avoir plusieurs choix. Un choix a un texte, une destination (vers quelle scène il mène) et des effets sur les stats. Tu peux ajouter une condition 🔒 — le choix n'apparaîtra que si le joueur a assez de points dans une stat.</p>
-      </div>
-    </div>
-
-    <div class="step-card">
-      <div class="step-num" style="background:rgba(109,250,188,0.1);border-color:rgba(109,250,188,0.3);color:#6dfabc">⚙</div>
-      <div class="step-body">
-        <h3 id="txt-tuto4-title">Les stats</h3>
-        <p id="txt-tuto4-body">Définis les stats de ton histoire dans ⚙ Stats — courage, lucidité, chaleur... Chaque choix peut modifier ces stats. Elles permettent de créer des fins différentes selon le profil du joueur.</p>
-      </div>
-    </div>
-
-    <div class="step-card">
-      <div class="step-num" style="background:rgba(109,250,188,0.1);border-color:rgba(109,250,188,0.3);color:#6dfabc">▶</div>
-      <div class="step-body">
-        <h3 id="txt-tuto5-title">Tester et exporter</h3>
-        <p id="txt-tuto5-body">Le bouton ▶ Tester l'aperçu dans le menu ⋯ ouvre ton histoire dans le moteur de jeu. Tu peux simuler différents niveaux de stats pour vérifier que tes fins conditionnelles fonctionnent. Exporte en JSON quand tu es satisfait.</p>
-      </div>
-    </div>
-
-    <div class="info-card" style="margin-top:4px">
-      <p id="txt-tuto-tip">💡 <strong>Astuce :</strong> Le badge santé ✓ en haut à droite de l'éditeur indique si ton histoire a des problèmes — scène sans destination, choix cassé, pas de scène de départ. Clique dessus pour voir la liste des problèmes.</p>
-    </div>
-  </div>
-
   <!-- CTA -->
   <div class="cta-section fade-in">
     <div class="cta-title" id="txt-cta-title">Prêt à créer ?</div>
-    <p class="cta-sub" id="txt-cta-sub">Ouvre l'éditeur, importe ton JSON généré par l'IA et affine ton histoire.</p>
+    <p class="cta-sub" id="txt-cta-sub">Ouvre l'éditeur, crée ton histoire ou importe un JSON généré par l'IA.</p>
     <a href="story-editor.html" class="cta-btn" id="txt-cta-btn">Ouvrir l'éditeur</a>
   </div>
 
@@ -500,7 +598,6 @@ Retourne uniquement le JSON complet final.</div>
 </div>
 
 <script>
-// ── COPY PROMPT ──
 function copyJson() {
   const text = document.getElementById('json-content').textContent;
   navigator.clipboard.writeText(text).then(() => {
@@ -511,37 +608,64 @@ function copyJson() {
     setTimeout(() => { btn.textContent = t.copy; btn.classList.remove('copied'); }, 2000);
   });
 }
-
 function copyPrompt() {
   const text = document.getElementById('prompt-content').textContent;
   navigator.clipboard.writeText(text).then(() => {
     const btn = document.getElementById('copy-btn');
-    btn.textContent = '✓ Copié !';
+    const t = T[lang] || T.fr;
+    btn.textContent = t.copied;
     btn.classList.add('copied');
-    setTimeout(() => {
-      btn.textContent = 'Copier';
-      btn.classList.remove('copied');
-    }, 2000);
+    setTimeout(() => { btn.textContent = t.copy; btn.classList.remove('copied'); }, 2000);
   });
 }
 
-// ── TRANSLATIONS ──
 const lang = localStorage.getItem('sf_lang') || 'fr';
 const T = {
   fr: {
-    title: 'Créer avec l\'IA',
-    heroTitle: 'Écrire avec l\'Intelligence Artificielle',
-    heroSub: 'Fableris est conçu pour être parfaitement compatible avec les IA narratives. Décris ton idée, laisse l\'IA construire la structure, importe dans l\'éditeur.',
-    how: 'Comment ça marche',
-    step1Title: 'Décris ton idée à l\'IA',
-    step1Body: 'Ouvre ChatGPT, Claude ou Gemini. Décris l\'univers de ton histoire, les personnages, l\'ambiance, les choix que tu veux proposer. Pas besoin de connaître le format technique.',
-    step2Title: 'Utilise le prompt Fableris',
-    step2Body: 'Copie le prompt ci-dessous et colle-le dans ta conversation avec l\'IA. Il explique exactement le format JSON attendu par le moteur Fableris.',
-    step3Title: 'Importe dans l\'éditeur',
-    step3Body: 'L\'IA génère un fichier JSON complet. Ouvre StoryForge, utilise "Importer JSON" dans le menu ⋯ et ta scène s\'affiche directement dans l\'arbre visuel.',
-    step4Title: 'Affine et envoie',
-    step4Body: 'Retouche les textes, ajuste les choix, teste l\'aperçu. Quand tu es satisfait, exporte et envoie-nous ton histoire depuis l\'éditeur.',
-    info: '<strong>Conseil :</strong> Pour de meilleurs résultats, fournis d\'abord un exemple de JSON existant à l\'IA en lui demandant d\'analyser la structure, puis demande-lui de créer une nouvelle histoire dans le même format.',
+    title: 'Aide éditeur & IA',
+    heroTitle: 'Guide complet Fableris',
+    heroSub: 'Tout ce que tu dois savoir pour jouer, créer et soumettre tes histoires.',
+    pagesSection: 'Les pages de l\'application',
+    page1Title: 'Bibliothèque', page1Body: 'La page principale. Toutes les histoires disponibles sont regroupées par pack. Les histoires gratuites sont accessibles directement. Les histoires payantes affichent un cadenas 🔒. Appuie sur une histoire pour voir sa description et la commencer.',
+    page2Title: 'Le moteur de jeu', page2Body: 'Le cœur de Fableris. Tu lis les scènes et tu fais tes choix. En haut : tes stats. En bas : les choix disponibles. Certains choix 🔒 nécessitent un niveau de stat suffisant. Tape sur l\'écran pour entrer en mode immersif.',
+    page3Title: 'Ma Progression', page3Body: 'Retrouve toutes tes parties en cours et terminées. Pour chaque histoire tu vois combien de fins tu as découvertes. Tu peux reprendre ou recommencer pour explorer d\'autres chemins.',
+    page4Title: 'Actualités', page4Body: 'Les dernières nouvelles de Fableris — nouvelles histoires, mises à jour, codes promotionnels.',
+    page5Title: 'Soumettre une histoire', page5Body: 'Crée une histoire dans l\'éditeur et envoie-la nous. Les meilleures sont publiées officiellement avec badge Auteur.',
+    packsSection: 'Packs et déblocage',
+    pack1Title: 'Contenu gratuit', pack1Body: 'Plusieurs histoires sont gratuites dès l\'installation, dont le Pack Enfants complet. Tout fonctionne hors ligne.',
+    pack2Title: 'Codes de déblocage', pack2Body: 'Dans Options → Entrer un code. Le contenu est débloqué définitivement sur ton appareil.',
+    pack3Title: 'Histoires Via Portail', pack3Body: 'Histoires premium nécessitant un accès spécial. Les testeurs officiels reçoivent un code pour y accéder gratuitement.',
+    statsSection: 'Stats et fins alternatives',
+    statsInfo: '<strong>Comment fonctionnent les stats ?</strong> Chaque choix peut augmenter une stat — Audace, Prudence, Savoir... Elles influencent les choix disponibles et les fins possibles.',
+    stats1Title: 'Fins multiples', stats1Body: 'La plupart des histoires ont plusieurs fins. Pour toutes les découvrir, rejoue en faisant des choix différents. Ta progression est sauvegardée automatiquement.',
+    stats2Title: 'Choix conditionnels', stats2Body: 'Un choix grisé avec 🔒 nécessite un niveau de stat suffisant. Rejoue en favorisant cette stat pour débloquer ces chemins cachés.',
+    editorSection: 'Éditeur StoryForge — Vue d\'ensemble',
+    editorIntro: 'StoryForge est l\'éditeur visuel intégré. Il permet de créer des histoires sans toucher au JSON.',
+    tuto1Title: 'L\'arbre visuel', tuto1Body: 'Chaque bulle est une scène. Les flèches montrent les chemins. Les flèches orange 🔒 indiquent des choix conditionnels. Bulle verte = départ, rouge = fin. Pince pour zoomer, glisse pour naviguer.',
+    tuto2Title: 'Éditer une scène', tuto2Body: 'Tape sur une scène pour l\'éditer — titre, lieu, narrateur, texte, transition, illustration. Chaque modification est sauvegardée automatiquement.',
+    tuto3Title: 'Les choix', tuto3Body: 'Chaque scène peut avoir plusieurs choix avec texte, destination et effets sur les stats. Ajoute une condition 🔒 pour qu\'un choix n\'apparaisse qu\'avec assez de points.',
+    tuto4Title: 'Les stats', tuto4Body: 'Définis les stats dans ⚙ Stats — courage, lucidité... Chaque choix peut les modifier. Elles permettent des fins différentes selon le profil du joueur.',
+    tuto5Title: 'Tester l\'histoire', tuto5Body: 'Le bouton ▶ Tester ouvre ton histoire dans le moteur. Simule les stats pour vérifier les fins conditionnelles.',
+    buttonsSection: 'Tous les boutons du menu ⋯',
+    buttonsIntro: 'Sur mobile, le menu ⋯ donne accès à toutes les actions. Sur tablette/PC, elles sont visibles directement.',
+    btn1Name: 'Stats', btn1Desc: 'Crée et gère les attributs du joueur. Ils influencent les choix conditionnels.',
+    btn2Name: 'Thème visuel', btn2Desc: 'Choisis parmi des thèmes prédéfinis ou personnalise les couleurs de ton histoire.',
+    btn3Name: 'Ordonner l\'arbre', btn3Desc: 'Réorganise automatiquement les scènes pour qu\'elles soient lisibles.',
+    btn4Name: 'Tester l\'histoire', btn4Desc: 'Lance ton histoire dans le moteur. Simule les stats pour tester les chemins conditionnels.',
+    btn5Name: 'Importer JSON', btn5Desc: 'Charge un JSON dans l\'éditeur — histoire générée par IA ou fichier existant.',
+    btn6Name: 'Exporter JSON', btn6Desc: 'Sauvegarde ton histoire en fichier JSON — le format à envoyer pour publication.',
+    btn7Name: 'Export TXT', btn7Desc: 'Exporte en texte brut — pratique pour relire ou corriger dans un éditeur externe.',
+    btn8Name: 'Envoyer', btn8Desc: 'Envoie directement ton histoire par e-mail à l\'équipe Fableris. Le JSON est joint automatiquement.',
+    btn9Name: 'Histoire pour enfants', btn9Desc: 'Active le mode enfants — l\'histoire apparaîtra dans le Pack Enfants.',
+    btn10Name: 'Demander le prénom', btn10Desc: 'Le jeu demande son prénom au joueur avant de commencer. Il peut apparaître dans les textes.',
+    healthTip: '<strong>Badge santé ✓</strong> — Vert = tout va bien. Jaune = avertissements. Rouge = erreurs bloquantes. Clique pour voir la liste détaillée.',
+    searchTip: '<strong>🔍 Recherche & Navigation</strong> — Le bouton loupe cherche une scène par nom. La minimap donne une vue d\'ensemble. Les boutons +/− et ◎ contrôlent le zoom.',
+    how: 'Créer avec l\'IA',
+    step1Title: 'Décris ton idée à l\'IA', step1Body: 'Ouvre ChatGPT, Claude ou Gemini. Décris l\'univers, les personnages, l\'ambiance. Pas besoin de connaître le format technique.',
+    step2Title: 'Utilise le prompt Fableris', step2Body: 'Copie le prompt ci-dessous et colle-le dans ta conversation avec l\'IA. Il explique le format JSON attendu.',
+    step3Title: 'Importe dans l\'éditeur', step3Body: 'L\'IA génère un JSON complet. Ouvre StoryForge, utilise "Importer JSON" dans le menu ⋯.',
+    step4Title: 'Affine et envoie', step4Body: 'Retouche les textes, ajuste les choix, teste l\'aperçu. Exporte et envoie depuis l\'éditeur.',
+    info: '<strong>Conseil :</strong> Fournis d\'abord un JSON existant à l\'IA pour qu\'elle comprenne la structure, puis demande une nouvelle histoire dans le même format.',
     promptSection: 'Le prompt Fableris',
     promptIntro: 'Copie ce prompt et colle-le dans ta conversation avec l\'IA, suivi de la description de ton histoire.',
     structure: 'Structure d\'une scène',
@@ -551,83 +675,117 @@ const T = {
     toolClaude: 'Très précis sur la structure et le style narratif',
     toolGemini: 'Idéal pour les histoires créatives et les univers originaux',
     ctaTitle: 'Prêt à créer ?',
-    ctaSub: 'Ouvre l\'éditeur, importe ton JSON généré par l\'IA et affine ton histoire.',
+    ctaSub: 'Ouvre l\'éditeur, crée ton histoire ou importe un JSON généré par l\'IA.',
     ctaBtn: 'Ouvrir l\'éditeur',
-    copy: 'Copier',
-    copied: '✓ Copié !',
+    copy: 'Copier', copied: '✓ Copié !',
     jsonSection: 'JSON d\'exemple — Aikito',
-    jsonIntro: 'Copie ce JSON et fournis-le à l\'IA avec le prompt ci-dessus. Elle comprendra immédiatement le format attendu.',
-    tutoSection: 'Guide de l\'éditeur StoryForge',
-    tutoIntro: 'L\'éditeur visuel permet de créer et modifier des histoires sans toucher au JSON.',
-    tuto1Title: 'L\'arbre visuel',
-    tuto1Body: 'Chaque bulle est une scène. Les flèches montrent les chemins possibles. Les flèches orange 🔒 indiquent des choix conditionnels. Pince pour zoomer, glisse pour naviguer.',
-    tuto2Title: 'Éditer une scène',
-    tuto2Body: 'Tape sur une scène pour l\'éditer — titre, lieu, narrateur, texte, transition, illustration. Le bouton + crée une nouvelle scène.',
-    tuto3Title: 'Les choix',
-    tuto3Body: 'Chaque scène peut avoir plusieurs choix avec texte, destination et effets sur les stats. Ajoute une condition 🔒 pour que le choix n\'apparaisse qu\'avec assez de points.',
-    tuto4Title: 'Les stats',
-    tuto4Body: 'Définis les stats dans ⚙ Stats — courage, lucidité... Chaque choix peut les modifier. Elles permettent des fins différentes selon le profil du joueur.',
-    tuto5Title: 'Tester et exporter',
-    tuto5Body: 'Le bouton ▶ Tester l\'aperçu ouvre ton histoire dans le moteur. Simule les stats pour vérifier les fins conditionnelles. Exporte en JSON quand tu es satisfait.',
-    tutoTip: '💡 <strong>Astuce :</strong> Le badge santé ✓ en haut de l\'éditeur indique les problèmes — scène sans destination, choix cassé. Clique pour voir la liste.',
+    jsonIntro: 'Copie ce JSON et fournis-le à l\'IA avec le prompt ci-dessus.',
   },
   en: {
-    title: 'Create with AI',
-    heroTitle: 'Write with Artificial Intelligence',
-    heroSub: 'Fableris is designed to be perfectly compatible with narrative AI. Describe your idea, let the AI build the structure, import into the editor.',
-    how: 'How it works',
-    step1Title: 'Describe your idea to the AI',
-    step1Body: 'Open ChatGPT, Claude or Gemini. Describe your story universe, characters, atmosphere, and the choices you want to offer. No need to know the technical format.',
-    step2Title: 'Use the Fableris prompt',
-    step2Body: 'Copy the prompt below and paste it into your AI conversation. It explains exactly the JSON format expected by the Fableris engine.',
-    step3Title: 'Import into the editor',
-    step3Body: 'The AI generates a complete JSON file. Open StoryForge, use "Import JSON" in the ⋯ menu and your scene appears directly in the visual tree.',
-    step4Title: 'Refine and submit',
-    step4Body: 'Edit the texts, adjust the choices, test the preview. When satisfied, export and send us your story from the editor.',
-    info: '<strong>Tip:</strong> For best results, first provide the AI with an existing JSON example asking it to analyze the structure, then ask it to create a new story in the same format.',
+    title: 'Editor Help & AI',
+    heroTitle: 'Complete Fableris Guide',
+    heroSub: 'Everything you need to know to play, create and submit your stories.',
+    pagesSection: 'App pages',
+    page1Title: 'Library', page1Body: 'The main page. All available stories are grouped by pack. Free stories are accessible directly. Paid stories show a lock 🔒. Tap a story to see its description and start.',
+    page2Title: 'Game engine', page2Body: 'The heart of Fableris. Read scenes and make choices. Top: your stats. Bottom: available choices. Some choices 🔒 require enough stat points. Tap the screen to enter immersive mode.',
+    page3Title: 'My Progress', page3Body: 'Find all your ongoing and completed games. See how many endings you have discovered per story. Resume or restart to explore other paths.',
+    page4Title: 'News', page4Body: 'Latest Fableris news — new stories, updates, promo codes.',
+    page5Title: 'Submit a story', page5Body: 'Create a story in the editor and send it to us. The best ones are officially published with an Author badge.',
+    packsSection: 'Packs & unlocking',
+    pack1Title: 'Free content', pack1Body: 'Several stories are free from installation, including the full Kids Pack. Everything works offline.',
+    pack2Title: 'Unlock codes', pack2Body: 'In Options → Enter a code. Content is permanently unlocked on your device.',
+    pack3Title: 'Via Portal stories', pack3Body: 'Premium stories requiring special access. Official testers receive a free access code.',
+    statsSection: 'Stats and alternate endings',
+    statsInfo: '<strong>How do stats work?</strong> Each choice can increase a stat — Boldness, Caution, Knowledge... They influence available choices and possible endings.',
+    stats1Title: 'Multiple endings', stats1Body: 'Most stories have several endings. To discover them all, replay with different choices. Your progress is automatically saved.',
+    stats2Title: 'Conditional choices', stats2Body: 'A grayed-out choice with 🔒 requires enough stat points. Replay focusing on that stat to unlock hidden paths.',
+    editorSection: 'StoryForge Editor — Overview',
+    editorIntro: 'StoryForge is the built-in visual editor. Create stories without touching JSON.',
+    tuto1Title: 'The visual tree', tuto1Body: 'Each bubble is a scene. Arrows show possible paths. Orange arrows 🔒 indicate conditional choices. Green bubble = start, red = end. Pinch to zoom, drag to navigate.',
+    tuto2Title: 'Editing a scene', tuto2Body: 'Tap a scene to edit — title, location, narrator, text, transition, illustration. Changes are automatically saved.',
+    tuto3Title: 'Choices', tuto3Body: 'Each scene can have multiple choices with text, destination and stat effects. Add a 🔒 condition so a choice only appears with enough points.',
+    tuto4Title: 'Stats', tuto4Body: 'Define stats in ⚙ Stats — courage, lucidity... Each choice can modify them. They allow different endings based on player profile.',
+    tuto5Title: 'Test the story', tuto5Body: 'The ▶ Test button opens your story in the engine. Simulate stats to check conditional endings.',
+    buttonsSection: 'All buttons in the ⋯ menu',
+    buttonsIntro: 'On mobile, the ⋯ menu gives access to all actions. On tablet/PC, they are directly visible.',
+    btn1Name: 'Stats', btn1Desc: 'Create and manage player attributes. They influence conditional choices.',
+    btn2Name: 'Visual theme', btn2Desc: 'Choose from presets or customize your story colors.',
+    btn3Name: 'Arrange tree', btn3Desc: 'Automatically reorganizes scenes for readability.',
+    btn4Name: 'Test story', btn4Desc: 'Launch your story in the engine. Simulate stats to test conditional paths.',
+    btn5Name: 'Import JSON', btn5Desc: 'Load a JSON file into the editor — AI-generated or existing story.',
+    btn6Name: 'Export JSON', btn6Desc: 'Save your story as a JSON file — the format to submit for publication.',
+    btn7Name: 'Export TXT', btn7Desc: 'Export as plain text — handy for proofreading or editing externally.',
+    btn8Name: 'Send', btn8Desc: 'Send your story directly by email to the Fableris team. JSON is attached automatically.',
+    btn9Name: 'Kids story', btn9Desc: 'Enable kids mode — the story appears in the Kids Pack.',
+    btn10Name: 'Ask for name', btn10Desc: 'The game asks the player their name before starting. It can appear in story texts.',
+    healthTip: '<strong>Health badge ✓</strong> — Green = all good. Yellow = warnings. Red = blocking errors. Click to see the detailed list.',
+    searchTip: '<strong>🔍 Search & Navigation</strong> — The magnifier searches scenes by name. The minimap gives an overview. +/− and ◎ control zoom.',
+    how: 'Create with AI',
+    step1Title: 'Describe your idea', step1Body: 'Open ChatGPT, Claude or Gemini. Describe the universe, characters, atmosphere. No need to know the technical format.',
+    step2Title: 'Use the Fableris prompt', step2Body: 'Copy the prompt below and paste it into your AI conversation.',
+    step3Title: 'Import into editor', step3Body: 'The AI generates a complete JSON. Open StoryForge, use "Import JSON" in the ⋯ menu.',
+    step4Title: 'Refine and send', step4Body: 'Edit texts, adjust choices, test preview. Export and send from the editor.',
+    info: '<strong>Tip:</strong> First give the AI an existing JSON to understand the structure, then ask for a new story in the same format.',
     promptSection: 'The Fableris Prompt',
     promptIntro: 'Copy this prompt and paste it into your AI conversation, followed by your story description.',
     structure: 'Scene structure',
-    structureIntro: 'To help the AI understand the format, here is the minimal structure of a scene:',
+    structureIntro: 'To help the AI understand the format, here is the minimal scene structure:',
     tools: 'Recommended tools',
     toolGpt: 'Excellent for long stories and structured JSON',
     toolClaude: 'Very precise on structure and narrative style',
     toolGemini: 'Ideal for creative stories and original universes',
     ctaTitle: 'Ready to create?',
-    ctaSub: 'Open the editor, import your AI-generated JSON and refine your story.',
+    ctaSub: 'Open the editor, create your story or import an AI-generated JSON.',
     ctaBtn: 'Open editor',
-    copy: 'Copy',
-    copied: '✓ Copied!',
+    copy: 'Copy', copied: '✓ Copied!',
     jsonSection: 'Example JSON — Aikito',
-    jsonIntro: 'Copy this JSON and provide it to the AI with the prompt above. It will immediately understand the expected format.',
-    tutoSection: 'StoryForge Editor Guide',
-    tutoIntro: 'The visual editor lets you create and edit stories without touching the JSON.',
-    tuto1Title: 'The visual tree',
-    tuto1Body: 'Each bubble is a scene. Arrows show possible paths. Orange 🔒 arrows indicate conditional choices. Pinch to zoom, drag to navigate.',
-    tuto2Title: 'Editing a scene',
-    tuto2Body: 'Tap a scene to edit it — title, location, narrator, text, transition, illustration. The + button creates a new scene.',
-    tuto3Title: 'Choices',
-    tuto3Body: 'Each scene can have multiple choices with text, destination and stat effects. Add a 🔒 condition so a choice only appears with enough stat points.',
-    tuto4Title: 'Stats',
-    tuto4Body: 'Define stats in ⚙ Stats — courage, lucidity... Each choice can modify them. They allow different endings based on the player\'s profile.',
-    tuto5Title: 'Test and export',
-    tuto5Body: 'The ▶ Test preview button opens your story in the engine. Simulate stats to check conditional endings. Export as JSON when satisfied.',
-    tutoTip: '💡 <strong>Tip:</strong> The health badge ✓ at the top of the editor shows problems — scene without destination, broken choice. Click to see the list.',
+    jsonIntro: 'Copy this JSON and give it to the AI with the prompt above.',
   },
   es: {
-    title: 'Crear con IA',
-    heroTitle: 'Escribir con Inteligencia Artificial',
-    heroSub: 'Fableris está diseñado para ser perfectamente compatible con las IA narrativas. Describe tu idea, deja que la IA construya la estructura, importa en el editor.',
-    how: 'Cómo funciona',
-    step1Title: 'Describe tu idea a la IA',
-    step1Body: 'Abre ChatGPT, Claude o Gemini. Describe el universo de tu historia, los personajes, el ambiente y las elecciones que quieres ofrecer.',
-    step2Title: 'Usa el prompt de Fableris',
-    step2Body: 'Copia el prompt a continuación y pégalo en tu conversación con la IA. Explica exactamente el formato JSON esperado por el motor de Fableris.',
-    step3Title: 'Importa en el editor',
-    step3Body: 'La IA genera un archivo JSON completo. Abre StoryForge, usa "Importar JSON" en el menú ⋯ y tu escena aparece directamente en el árbol visual.',
-    step4Title: 'Refina y envía',
-    step4Body: 'Edita los textos, ajusta las elecciones, prueba la vista previa. Cuando estés satisfecho, exporta y envíanos tu historia desde el editor.',
-    info: '<strong>Consejo:</strong> Para mejores resultados, primero proporciona a la IA un ejemplo de JSON existente pidiéndole que analice la estructura, luego pídele que cree una nueva historia en el mismo formato.',
+    title: 'Ayuda editor & IA',
+    heroTitle: 'Guía completa de Fableris',
+    heroSub: 'Todo lo que necesitas saber para jugar, crear y enviar tus historias.',
+    pagesSection: 'Páginas de la aplicación',
+    page1Title: 'Biblioteca', page1Body: 'La página principal. Todas las historias disponibles agrupadas por pack. Las gratuitas son accesibles directamente. Las de pago muestran un candado 🔒. Toca una historia para ver su descripción.',
+    page2Title: 'Motor de juego', page2Body: 'El corazón de Fableris. Lee las escenas y haz tus elecciones. Arriba: tus estadísticas. Abajo: las elecciones disponibles. Algunas elecciones 🔒 requieren estadísticas suficientes. Toca la pantalla para el modo inmersivo.',
+    page3Title: 'Mi Progresión', page3Body: 'Encuentra todas tus partidas en curso y completadas. Puedes reanudar o reiniciar para explorar otros caminos.',
+    page4Title: 'Noticias', page4Body: 'Las últimas novedades de Fableris — nuevas historias, actualizaciones, códigos promocionales.',
+    page5Title: 'Enviar una historia', page5Body: 'Crea una historia en el editor y envíanosla. Las mejores se publican oficialmente con insignia de Autor.',
+    packsSection: 'Packs y desbloqueo',
+    pack1Title: 'Contenido gratuito', pack1Body: 'Varias historias son gratuitas desde la instalación, incluido el Pack Infantil completo. Todo funciona sin conexión.',
+    pack2Title: 'Códigos de desbloqueo', pack2Body: 'En Opciones → Introducir código. El contenido se desbloquea permanentemente en tu dispositivo.',
+    pack3Title: 'Historias Vía Portal', pack3Body: 'Historias premium que requieren acceso especial. Los testers oficiales reciben un código gratuito.',
+    statsSection: 'Estadísticas y finales alternativos',
+    statsInfo: '<strong>¿Cómo funcionan las estadísticas?</strong> Cada elección puede aumentar una estadística — Audacia, Prudencia, Saber... Influyen en las elecciones disponibles y los finales posibles.',
+    stats1Title: 'Finales múltiples', stats1Body: 'La mayoría de historias tienen varios finales. Para descubrirlos todos, vuelve a jugar con elecciones diferentes.',
+    stats2Title: 'Elecciones condicionales', stats2Body: 'Una elección en gris con 🔒 requiere estadísticas suficientes. Vuelve a jugar favoreciendo esa estadística.',
+    editorSection: 'Editor StoryForge — Vista general',
+    editorIntro: 'StoryForge es el editor visual integrado. Permite crear historias sin tocar el JSON.',
+    tuto1Title: 'El árbol visual', tuto1Body: 'Cada burbuja es una escena. Las flechas muestran los caminos. Las flechas naranjas 🔒 son elecciones condicionales. Verde = inicio, rojo = final. Pellizca para hacer zoom.',
+    tuto2Title: 'Editar una escena', tuto2Body: 'Toca una escena para editarla — título, lugar, narrador, texto, transición, ilustración. Los cambios se guardan automáticamente.',
+    tuto3Title: 'Las elecciones', tuto3Body: 'Cada escena puede tener varias elecciones con texto, destino y efectos. Añade una condición 🔒 para que aparezca solo con suficientes puntos.',
+    tuto4Title: 'Las estadísticas', tuto4Body: 'Define las estadísticas en ⚙ Stats. Cada elección puede modificarlas. Permiten finales diferentes según el perfil del jugador.',
+    tuto5Title: 'Probar la historia', tuto5Body: 'El botón ▶ Probar abre tu historia en el motor. Simula estadísticas para verificar los finales condicionales.',
+    buttonsSection: 'Todos los botones del menú ⋯',
+    buttonsIntro: 'En móvil, el menú ⋯ da acceso a todas las acciones. En tableta/PC están directamente visibles.',
+    btn1Name: 'Stats', btn1Desc: 'Crea y gestiona los atributos del jugador. Influyen en las elecciones condicionales.',
+    btn2Name: 'Tema visual', btn2Desc: 'Elige entre temas predefinidos o personaliza los colores de tu historia.',
+    btn3Name: 'Ordenar árbol', btn3Desc: 'Reorganiza automáticamente las escenas para que sean legibles.',
+    btn4Name: 'Probar historia', btn4Desc: 'Lanza tu historia en el motor. Simula estadísticas para probar caminos condicionales.',
+    btn5Name: 'Importar JSON', btn5Desc: 'Carga un JSON en el editor — historia generada por IA o archivo existente.',
+    btn6Name: 'Exportar JSON', btn6Desc: 'Guarda tu historia como archivo JSON — el formato para enviar para publicación.',
+    btn7Name: 'Export TXT', btn7Desc: 'Exporta como texto plano — útil para revisar o corregir externamente.',
+    btn8Name: 'Enviar', btn8Desc: 'Envía directamente tu historia por correo al equipo Fableris. El JSON se adjunta automáticamente.',
+    btn9Name: 'Historia infantil', btn9Desc: 'Activa el modo infantil — la historia aparece en el Pack Infantil.',
+    btn10Name: 'Pedir nombre', btn10Desc: 'El juego pide el nombre del jugador antes de empezar. Puede aparecer en los textos.',
+    healthTip: '<strong>Badge de salud ✓</strong> — Verde = todo bien. Amarillo = advertencias. Rojo = errores bloqueantes. Haz clic para ver la lista.',
+    searchTip: '<strong>🔍 Búsqueda & Navegación</strong> — La lupa busca escenas por nombre. El minimapa da una vista general. +/− y ◎ controlan el zoom.',
+    how: 'Crear con IA',
+    step1Title: 'Describe tu idea', step1Body: 'Abre ChatGPT, Claude o Gemini. Describe el universo, los personajes, el ambiente.',
+    step2Title: 'Usa el prompt de Fableris', step2Body: 'Copia el prompt a continuación y pégalo en tu conversación con la IA.',
+    step3Title: 'Importa en el editor', step3Body: 'La IA genera un JSON completo. Abre StoryForge, usa "Importar JSON" en el menú ⋯.',
+    step4Title: 'Refina y envía', step4Body: 'Edita los textos, ajusta las elecciones, prueba la vista previa. Exporta y envía desde el editor.',
+    info: '<strong>Consejo:</strong> Primero proporciona a la IA un JSON existente para que comprenda la estructura, luego pide una nueva historia en el mismo formato.',
     promptSection: 'El prompt de Fableris',
     promptIntro: 'Copia este prompt y pégalo en tu conversación con la IA, seguido de la descripción de tu historia.',
     structure: 'Estructura de una escena',
@@ -637,87 +795,87 @@ const T = {
     toolClaude: 'Muy preciso en la estructura y el estilo narrativo',
     toolGemini: 'Ideal para historias creativas y universos originales',
     ctaTitle: '¿Listo para crear?',
-    ctaSub: 'Abre el editor, importa tu JSON generado por IA y refina tu historia.',
+    ctaSub: 'Abre el editor, crea tu historia o importa un JSON generado por IA.',
     ctaBtn: 'Abrir editor',
-    copy: 'Copiar',
-    copied: '✓ ¡Copiado!',
+    copy: 'Copiar', copied: '✓ ¡Copiado!',
     jsonSection: 'JSON de ejemplo — Aikito',
-    jsonIntro: 'Copia este JSON y proporciónalo a la IA con el prompt anterior. Entenderá inmediatamente el formato esperado.',
-    tutoSection: 'Guía del editor StoryForge',
-    tutoIntro: 'El editor visual permite crear y editar historias sin tocar el JSON.',
-    tuto1Title: 'El árbol visual',
-    tuto1Body: 'Cada burbuja es una escena. Las flechas muestran los caminos posibles. Las flechas naranjas 🔒 indican elecciones condicionales. Pellizca para hacer zoom, desliza para navegar.',
-    tuto2Title: 'Editar una escena',
-    tuto2Body: 'Toca una escena para editarla — título, lugar, narrador, texto, transición, ilustración. El botón + crea una nueva escena.',
-    tuto3Title: 'Las elecciones',
-    tuto3Body: 'Cada escena puede tener varias elecciones con texto, destino y efectos en las estadísticas. Añade una condición 🔒 para que la elección solo aparezca con suficientes puntos.',
-    tuto4Title: 'Las estadísticas',
-    tuto4Body: 'Define las estadísticas en ⚙ Stats — valor, lucidez... Cada elección puede modificarlas. Permiten finales diferentes según el perfil del jugador.',
-    tuto5Title: 'Probar y exportar',
-    tuto5Body: 'El botón ▶ Vista previa abre tu historia en el motor. Simula estadísticas para verificar los finales condicionales. Exporta en JSON cuando estés satisfecho.',
-    tutoTip: '💡 <strong>Consejo:</strong> El badge de salud ✓ en la parte superior del editor muestra problemas — escena sin destino, elección rota. Haz clic para ver la lista.',
+    jsonIntro: 'Copia este JSON y proporciónalo a la IA con el prompt anterior.',
   }
 };
 
 function applyLang() {
   const t = T[lang] || T.fr;
   const set = (id, v) => { const el = document.getElementById(id); if(el) el.innerHTML = v; };
-  set('txt-title',          t.title);
-  set('txt-hero-title',     t.heroTitle);
-  set('txt-hero-sub',       t.heroSub);
-  set('txt-how',            t.how);
-  set('txt-step1-title',    t.step1Title);
-  set('txt-step1-body',     t.step1Body);
-  set('txt-step2-title',    t.step2Title);
-  set('txt-step2-body',     t.step2Body);
-  set('txt-step3-title',    t.step3Title);
-  set('txt-step3-body',     t.step3Body);
-  set('txt-step4-title',    t.step4Title);
-  set('txt-step4-body',     t.step4Body);
-  set('txt-info',           t.info);
+  set('txt-title', t.title);
+  set('txt-hero-title', t.heroTitle);
+  set('txt-hero-sub', t.heroSub);
+  set('txt-pages-section', t.pagesSection);
+  set('txt-page1-title', t.page1Title); set('txt-page1-body', t.page1Body);
+  set('txt-page2-title', t.page2Title); set('txt-page2-body', t.page2Body);
+  set('txt-page3-title', t.page3Title); set('txt-page3-body', t.page3Body);
+  set('txt-page4-title', t.page4Title); set('txt-page4-body', t.page4Body);
+  set('txt-page5-title', t.page5Title); set('txt-page5-body', t.page5Body);
+  set('txt-packs-section', t.packsSection);
+  set('txt-pack1-title', t.pack1Title); set('txt-pack1-body', t.pack1Body);
+  set('txt-pack2-title', t.pack2Title); set('txt-pack2-body', t.pack2Body);
+  set('txt-pack3-title', t.pack3Title); set('txt-pack3-body', t.pack3Body);
+  set('txt-stats-section', t.statsSection);
+  set('txt-stats-info', t.statsInfo);
+  set('txt-stats1-title', t.stats1Title); set('txt-stats1-body', t.stats1Body);
+  set('txt-stats2-title', t.stats2Title); set('txt-stats2-body', t.stats2Body);
+  set('txt-editor-section', t.editorSection);
+  set('txt-editor-intro', t.editorIntro);
+  set('txt-tuto1-title', t.tuto1Title); set('txt-tuto1-body', t.tuto1Body);
+  set('txt-tuto2-title', t.tuto2Title); set('txt-tuto2-body', t.tuto2Body);
+  set('txt-tuto3-title', t.tuto3Title); set('txt-tuto3-body', t.tuto3Body);
+  set('txt-tuto4-title', t.tuto4Title); set('txt-tuto4-body', t.tuto4Body);
+  set('txt-tuto5-title', t.tuto5Title); set('txt-tuto5-body', t.tuto5Body);
+  set('txt-buttons-section', t.buttonsSection);
+  set('txt-buttons-intro', t.buttonsIntro);
+  set('txt-btn1-name', t.btn1Name); set('txt-btn1-desc', t.btn1Desc);
+  set('txt-btn2-name', t.btn2Name); set('txt-btn2-desc', t.btn2Desc);
+  set('txt-btn3-name', t.btn3Name); set('txt-btn3-desc', t.btn3Desc);
+  set('txt-btn4-name', t.btn4Name); set('txt-btn4-desc', t.btn4Desc);
+  set('txt-btn5-name', t.btn5Name); set('txt-btn5-desc', t.btn5Desc);
+  set('txt-btn6-name', t.btn6Name); set('txt-btn6-desc', t.btn6Desc);
+  set('txt-btn7-name', t.btn7Name); set('txt-btn7-desc', t.btn7Desc);
+  set('txt-btn8-name', t.btn8Name); set('txt-btn8-desc', t.btn8Desc);
+  set('txt-btn9-name', t.btn9Name); set('txt-btn9-desc', t.btn9Desc);
+  set('txt-btn10-name', t.btn10Name); set('txt-btn10-desc', t.btn10Desc);
+  set('txt-health-tip', t.healthTip);
+  set('txt-search-tip', t.searchTip);
+  set('txt-how', t.how);
+  set('txt-step1-title', t.step1Title); set('txt-step1-body', t.step1Body);
+  set('txt-step2-title', t.step2Title); set('txt-step2-body', t.step2Body);
+  set('txt-step3-title', t.step3Title); set('txt-step3-body', t.step3Body);
+  set('txt-step4-title', t.step4Title); set('txt-step4-body', t.step4Body);
+  set('txt-info', t.info);
   set('txt-prompt-section', t.promptSection);
-  set('txt-prompt-intro',   t.promptIntro);
-  set('txt-structure',      t.structure);
-  set('txt-structure-intro',t.structureIntro);
-  set('txt-tools',          t.tools);
-  set('txt-tool-gpt',       t.toolGpt);
-  set('txt-tool-claude',    t.toolClaude);
-  set('txt-tool-gemini',    t.toolGemini);
-  set('txt-cta-title',      t.ctaTitle);
-  set('txt-cta-sub',        t.ctaSub);
-  set('txt-cta-btn',        t.ctaBtn);
-  set('txt-json-section',   t.jsonSection);
-  set('txt-json-intro',     t.jsonIntro);
-  set('txt-tuto-section',   t.tutoSection);
-  set('txt-tuto-intro',     t.tutoIntro);
-  set('txt-tuto1-title',    t.tuto1Title);
-  set('txt-tuto1-body',     t.tuto1Body);
-  set('txt-tuto2-title',    t.tuto2Title);
-  set('txt-tuto2-body',     t.tuto2Body);
-  set('txt-tuto3-title',    t.tuto3Title);
-  set('txt-tuto3-body',     t.tuto3Body);
-  set('txt-tuto4-title',    t.tuto4Title);
-  set('txt-tuto4-body',     t.tuto4Body);
-  set('txt-tuto5-title',    t.tuto5Title);
-  set('txt-tuto5-body',     t.tuto5Body);
-  set('txt-tuto-tip',       t.tutoTip);
+  set('txt-prompt-intro', t.promptIntro);
+  set('txt-structure', t.structure);
+  set('txt-structure-intro', t.structureIntro);
+  set('txt-tools', t.tools);
+  set('txt-tool-gpt', t.toolGpt);
+  set('txt-tool-claude', t.toolClaude);
+  set('txt-tool-gemini', t.toolGemini);
+  set('txt-cta-title', t.ctaTitle);
+  set('txt-cta-sub', t.ctaSub);
+  set('txt-cta-btn', t.ctaBtn);
+  set('txt-json-section', t.jsonSection);
+  set('txt-json-intro', t.jsonIntro);
   document.getElementById('copy-btn').textContent = t.copy;
   document.getElementById('copy-json-btn').textContent = t.copy;
   document.title = t.title + ' — Fableris';
   document.documentElement.lang = lang;
-
-  // Rewrite copyPrompt with correct copied text
   window.copyPrompt = function() {
     const text = document.getElementById('prompt-content').textContent;
     navigator.clipboard.writeText(text).then(() => {
       const btn = document.getElementById('copy-btn');
-      btn.textContent = t.copied;
-      btn.classList.add('copied');
+      btn.textContent = t.copied; btn.classList.add('copied');
       setTimeout(() => { btn.textContent = t.copy; btn.classList.remove('copied'); }, 2000);
     });
   };
 }
-
 applyLang();
 </script>
 </body>

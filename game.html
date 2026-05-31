@@ -2,8 +2,9 @@
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
 <title>StoryForge</title>
+<script src="capacitor.js"></script>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Cinzel:wght@400;600&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
 <style>
 /* ── BACKGROUND ── */
@@ -46,6 +47,7 @@ html, body { height:100%; overflow:hidden; }
 
 /* ── CSS VARS — overridden by theme ── */
 :root {
+  --safe-top: var(--android-safe-area-inset-top, env(safe-area-inset-top, 36px));
   --bg:      #0e0e12;
   --bg2:     #14141a;
   --bg3:     #1c1c24;
@@ -65,15 +67,18 @@ body {
   font-family: 'Cormorant Garamond', serif;
   font-size: 17px;
   line-height: 1.75;
+  padding-top: var(--safe-top) !important;
 }
 
 /* ── TOPBAR ── */
 #topbar {
   position: fixed; top: 0; left: 0; right: 0;
-  height: 52px; z-index: 100;
+  height: calc(52px + var(--safe-top)) !important;
+  padding-top: var(--safe-top) !important;
+  z-index: 100;
   display: flex; align-items: center; gap: 12px;
-  padding: 0 16px;
-  background: color-mix(in srgb, var(--bg2) 85%, transparent);
+  padding-left: 16px; padding-right: 16px;
+  background: #0a0a0f; /* Fond solide pour bien couvrir l'encoche */
   border-bottom: 1px solid var(--border);
   backdrop-filter: blur(12px);
   transition: opacity .35s ease, transform .35s ease;
@@ -119,7 +124,7 @@ body {
 
 /* ── STATS BAR ── */
 #stats-bar {
-  position: fixed; top: 52px; left: 0; right: 0;
+  position: fixed; top: calc(52px + var(--safe-top)) !important; left: 0; right: 0;
   z-index: 99;
   background: color-mix(in srgb, var(--bg2) 80%, transparent);
   border-bottom: 1px solid var(--border);
@@ -161,14 +166,14 @@ body {
 /* ── SCROLL AREA ── */
 #scroll-area {
   position: fixed;
-  top: 52px; left: 0; right: 0; bottom: 0;
+  top: calc(52px + var(--safe-top)); left: 0; right: 0; bottom: 0;
   overflow-y: auto;
   scroll-behavior: smooth;
   z-index: 10;
   transition: top .35s ease;
 }
-#scroll-area.has-stats { top: 92px; }
-#scroll-area.ui-hidden { top: 0; }
+#scroll-area.has-stats { top: calc(92px + var(--safe-top)); }
+#scroll-area.ui-hidden { top: var(--safe-top); }
 #scroll-area::-webkit-scrollbar { width: 3px; }
 #scroll-area::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
 
@@ -689,7 +694,7 @@ body {
 
 /* ── IMMERSIVE DOT ── */
 #immersive-dot {
-  position:fixed; top:16px; left:16px; z-index:200;
+  position:fixed; top:calc(16px + var(--safe-top)); left:16px; z-index:200;
   width:10px; height:10px; border-radius:50%;
   background:var(--accent); opacity:0.5;
   cursor:pointer; transition:all .2s;
@@ -757,7 +762,7 @@ body {
 }
 #bm-toast.show { opacity:1; }
 #progress-bar {
-  position: fixed; top: 52px; left: 0; right: 0;
+  position: fixed; top: calc(52px + var(--safe-top)); left: 0; right: 0;
   height: 2px; z-index: 98;
   background: var(--border);
   transition: opacity .35s ease;
@@ -771,6 +776,18 @@ body {
   width: 0%;
 }
 </style>
+
+<script>
+  // Cache les barres systeme sur Android (Capacitor)
+  document.addEventListener('DOMContentLoaded', function() {
+    if (window.Capacitor && window.Capacitor.isNativePlatform && window.Capacitor.isNativePlatform()) {
+      var StatusBar = window.Capacitor.Plugins.StatusBar;
+      var NavigationBar = window.Capacitor.Plugins.NavigationBar;
+      if (StatusBar) StatusBar.hide().catch(function(){});
+      if (NavigationBar) NavigationBar.hide().catch(function(){});
+    }
+  });
+</script>
 </head>
 <body>
 
@@ -1937,6 +1954,7 @@ function hideUI() {
   document.getElementById('progress-bar')?.classList.add('ui-hidden');
   document.getElementById('immersive-dot')?.classList.remove('ui-visible');
   document.getElementById('scroll-area')?.classList.add('ui-hidden');
+  document.body.style.paddingTop = 'var(--safe-top)';
 }
 
 function showUI() {
@@ -1947,6 +1965,7 @@ function showUI() {
   document.getElementById('progress-bar')?.classList.remove('ui-hidden');
   document.getElementById('immersive-dot')?.classList.add('ui-visible');
   document.getElementById('scroll-area')?.classList.remove('ui-hidden');
+  document.body.style.paddingTop = 'calc(52px + var(--safe-top))';
   // Auto-hide after 4s
   clearTimeout(uiHideTimer);
   uiHideTimer = setTimeout(hideUI, 4000);

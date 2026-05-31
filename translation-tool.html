@@ -2,15 +2,17 @@
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>Outil de Traduction — Fableris</title>
+<script src="capacitor.js"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&family=DM+Mono:wght@300;400&display=swap" onload="this.onload=null;this.rel='stylesheet'">
 <style>
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
-html,body{min-height:100%;background:#0a0a0e;color:#e0d8f0;font-family:'DM Mono',monospace;overflow-x:hidden;}
+html,body{min-height:100%;background:#0a0a0e;color:#e0d8f0;font-family:'DM Mono',monospace;overflow-x:hidden;padding-top:var(--safe-top) !important;}
 
 :root{
+  --safe-top: var(--android-safe-area-inset-top, env(safe-area-inset-top, 36px));
   --purple:#7c6dfa; --green:#6dfabc; --gold:#c8a96e;
   --red:#fa6d8f; --orange:#ffaa00;
   --bg:#0a0a0e; --bg2:#111118; --bg3:#18181f; --bg4:#202028;
@@ -18,7 +20,10 @@ html,body{min-height:100%;background:#0a0a0e;color:#e0d8f0;font-family:'DM Mono'
 }
 
 #topbar{
-  position:fixed;top:0;left:0;right:0;height:52px;z-index:100;
+  position:fixed;top:0;left:0;right:0;
+  height:calc(52px + var(--safe-top)) !important;
+  padding-top:var(--safe-top) !important;
+  z-index:100;
   background:rgba(10,10,14,0.92);border-bottom:1px solid var(--border);
   backdrop-filter:blur(12px);
   display:flex;align-items:center;gap:12px;padding:0 16px;
@@ -33,7 +38,7 @@ html,body{min-height:100%;background:#0a0a0e;color:#e0d8f0;font-family:'DM Mono'
 .back-btn:hover{border-color:var(--gold);color:var(--text);}
 .topbar-title{font-family:'Cinzel',serif;font-size:13px;font-weight:600;color:var(--text);letter-spacing:2px;}
 
-#scroll{padding-top:52px;}
+#scroll{padding-top:0;}
 #content{max-width:600px;margin:0 auto;padding:24px 16px 80px;}
 
 .hero{text-align:center;padding:28px 0 24px;border-bottom:1px solid var(--border);margin-bottom:28px;}
@@ -152,6 +157,18 @@ input[type=file]{display:none;}
   font-size:12px;color:var(--red);margin-top:10px;display:none;
 }
 </style>
+
+<script>
+  // Cache les barres systeme sur Android (Capacitor)
+  document.addEventListener('DOMContentLoaded', function() {
+    if (window.Capacitor && window.Capacitor.isNativePlatform && window.Capacitor.isNativePlatform()) {
+      var StatusBar = window.Capacitor.Plugins.StatusBar;
+      var NavigationBar = window.Capacitor.Plugins.NavigationBar;
+      if (StatusBar) StatusBar.hide().catch(function(){});
+      if (NavigationBar) NavigationBar.hide().catch(function(){});
+    }
+  });
+</script>
 </head>
 <body>
 

@@ -2,8 +2,9 @@
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>Bibliothèque</title>
+<script src="capacitor.js"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Cinzel:wght@400;600;700&family=Lato:wght@300;400&display=swap" onload="this.onload=null;this.rel='stylesheet'">
@@ -12,6 +13,7 @@
 html,body { height:100%; background:#0d0d0f; color:#e8e0d0; font-family:'Cormorant Garamond',serif; overflow-x:hidden; }
 
 :root {
+  --android-safe-area-inset-top: 36px;
   --gold:   #c8a96e;
   --gold2:  #e8d4a0;
   --gold3:  #8a6a30;
@@ -34,10 +36,12 @@ html,body { height:100%; background:#0d0d0f; color:#e8e0d0; font-family:'Cormora
 
 /* ── TOPBAR ── */
 #topbar {
-  position:fixed; top:0; left:0; right:0; height:54px;
+  position:fixed; top:0; left:0; right:0;
+  height:calc(54px + var(--android-safe-area-inset-top, 0px));
+  padding-top:var(--android-safe-area-inset-top, 0px);
   background:rgba(13,13,15,0.9); border-bottom:1px solid var(--border);
   backdrop-filter:blur(12px); z-index:100;
-  display:flex; align-items:center; gap:12px; padding:0 16px;
+  display:flex; align-items:center; gap:12px; padding-left:16px; padding-right:16px;
 }
 #btn-back {
   width:36px; height:36px; border-radius:8px;
@@ -56,7 +60,7 @@ html,body { height:100%; background:#0d0d0f; color:#e8e0d0; font-family:'Cormora
 
 /* ── SCROLL AREA ── */
 #scroll {
-  position:fixed; top:54px; left:0; right:0; bottom:0;
+  position:fixed; top:calc(54px + var(--android-safe-area-inset-top, 0px)); left:0; right:0; bottom:0;
   overflow-y:auto; z-index:10;
 }
 #scroll::-webkit-scrollbar { width:3px; }
@@ -211,6 +215,18 @@ html,body { height:100%; background:#0d0d0f; color:#e8e0d0; font-family:'Cormora
   to   { opacity:1; transform:translateY(0); }
 }
 </style>
+
+<script>
+  // Cache les barres systeme sur Android (Capacitor)
+  document.addEventListener('DOMContentLoaded', function() {
+    if (window.Capacitor && window.Capacitor.isNativePlatform && window.Capacitor.isNativePlatform()) {
+      var StatusBar = window.Capacitor.Plugins.StatusBar;
+      var NavigationBar = window.Capacitor.Plugins.NavigationBar;
+      if (StatusBar) StatusBar.hide().catch(function(){});
+      if (NavigationBar) NavigationBar.hide().catch(function(){});
+    }
+  });
+</script>
 </head>
 <body>
 

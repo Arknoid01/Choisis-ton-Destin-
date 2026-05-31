@@ -2,8 +2,9 @@
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>Choisis ton Destin</title>
+<script src="capacitor.js"></script>
 <!-- Preconnect pour accélérer Google Fonts -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -274,6 +275,7 @@ body {
 #btn-progress { animation-delay:1.2s; }
 #btn-news     { animation-delay:1.4s; }
 #btn-submit   { animation-delay:1.6s; }
+#btn-contact  { animation-delay:1.8s; }
 .btn-main::before {
   content:''; position:absolute; inset:0;
   background:linear-gradient(135deg, rgba(200,169,110,0.1), transparent);
@@ -411,7 +413,7 @@ body {
 
 /* ── LANGUE POPUP ── */
 #lang-overlay {
-  position:fixed; inset:0; z-index:600;
+  position:fixed; inset:0; z-index:950;
   background:rgba(0,0,0,0.85);
   display:flex; align-items:center; justify-content:center;
   backdrop-filter:blur(8px);
@@ -761,6 +763,18 @@ body {
   #options-box { margin:12px; padding:24px; }
 }
 </style>
+
+<script>
+  // Cache les barres systeme sur Android (Capacitor)
+  document.addEventListener('DOMContentLoaded', function() {
+    if (window.Capacitor && window.Capacitor.isNativePlatform && window.Capacitor.isNativePlatform()) {
+      var StatusBar = window.Capacitor.Plugins.StatusBar;
+      var NavigationBar = window.Capacitor.Plugins.NavigationBar;
+      if (StatusBar) StatusBar.hide().catch(function(){});
+      if (NavigationBar) NavigationBar.hide().catch(function(){});
+    }
+  });
+</script>
 </head>
 <body>
 
@@ -922,6 +936,9 @@ body {
     <button class="btn-main" id="btn-submit" onclick="openSubmitPopup()">
       <span id="txt-btn-submit">✍ Soumettre une histoire</span>
     </button>
+    <button class="btn-main" id="btn-contact" onclick="contactUs()">
+      <span id="txt-btn-contact">✉ Nous contacter</span>
+    </button>
   </div>
 
 </div>
@@ -991,6 +1008,49 @@ body {
     <p class="submit-note" id="txt-submit-note">
       Une fois votre histoire écrite, exportez le JSON et envoyez-le directement depuis l'éditeur.
     </p>
+  </div>
+</div>
+
+<!-- ── TUTORIAL POPUP ── -->
+<div id="tuto-overlay" style="display:none;position:fixed;inset:0;z-index:960;background:rgba(0,0,0,0.85);align-items:center;justify-content:center;backdrop-filter:blur(8px);animation:fade-in .4s ease;">
+  <div id="tuto-box" style="background:#13110e;border:1px solid var(--gold3);border-radius:20px;padding:36px 28px;max-width:340px;width:90%;text-align:center;animation:scale-in .4s ease;">
+    <div style="font-size:36px;margin-bottom:16px;">💡</div>
+    <div id="txt-tuto-title" style="font-family:'Cinzel',serif;font-size:18px;font-weight:600;color:var(--cream);letter-spacing:2px;margin-bottom:16px;">Astuces de navigation</div>
+    <div style="display:flex;flex-direction:column;gap:16px;text-align:left;margin-bottom:28px;">
+      <div style="display:flex;gap:12px;align-items:flex-start;">
+        <span style="font-size:18px;background:var(--bg3);width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;color:var(--gold);">●</span>
+        <p id="txt-tuto-menu" style="font-size:13px;color:var(--dim);line-height:1.5;"><strong>Le point bleu</strong> en haut de l'écran permet d'ouvrir le menu pendant une histoire.</p>
+      </div>
+      <div style="display:flex;gap:12px;align-items:flex-start;">
+        <span style="font-size:18px;background:var(--bg3);width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;color:var(--gold);">+</span>
+        <p id="txt-tuto-save" style="font-size:13px;color:var(--dim);line-height:1.5;"><strong>Le bouton +</strong> en bas à droite permet de poser un marque-page pour sauvegarder votre progression.</p>
+      </div>
+    </div>
+    <button id="txt-tuto-btn" class="lang-confirm-btn" onclick="closeTuto()">J'AI COMPRIS</button>
+  </div>
+</div>
+
+<!-- PIN SETUP POPUP — configuration du code parental au premier démarrage -->
+<div id="pin-setup-overlay" style="display:none;position:fixed;inset:0;z-index:970;background:rgba(0,0,0,0.85);align-items:center;justify-content:center;backdrop-filter:blur(8px);animation:fade-in .4s ease;">
+  <div id="pin-setup-box" style="background:#13110e;border:1px solid var(--gold3);border-radius:20px;padding:36px 28px;max-width:340px;width:90%;text-align:center;animation:scale-in .4s ease;">
+    <div style="font-size:36px;margin-bottom:16px;">🔒</div>
+    <div id="txt-pinsetup-title" style="font-family:'Cinzel',serif;font-size:18px;font-weight:600;color:var(--cream);letter-spacing:2px;margin-bottom:12px;">Code Parental</div>
+    <p id="txt-pinsetup-body" style="font-size:13px;color:var(--dim);line-height:1.6;margin-bottom:20px;">Créez un code à 4 chiffres pour protéger le mode enfant. Il vous sera demandé pour le désactiver.</p>
+    <div id="txt-pinsetup-enter" style="text-align:left;margin-bottom:6px;font-size:11px;color:var(--dimmer);font-family:'DM Mono',monospace;letter-spacing:1px">Code à 4 chiffres</div>
+    <input id="pin-setup-input" type="password" inputmode="numeric" maxlength="4" placeholder="••••"
+      style="width:100%;background:var(--bg2);border:1px solid var(--border);border-radius:8px;color:var(--cream);font-family:'DM Mono',monospace;font-size:24px;padding:12px;outline:none;text-align:center;letter-spacing:8px;box-sizing:border-box"
+      onkeydown="if(event.key==='Enter')document.getElementById('pin-setup-input2').focus()">
+    <div id="txt-pinsetup-confirm" style="text-align:left;margin:14px 0 6px;font-size:11px;color:var(--dimmer);font-family:'DM Mono',monospace;letter-spacing:1px">Confirme le code</div>
+    <input id="pin-setup-input2" type="password" inputmode="numeric" maxlength="4" placeholder="••••"
+      style="width:100%;background:var(--bg2);border:1px solid var(--border);border-radius:8px;color:var(--cream);font-family:'DM Mono',monospace;font-size:24px;padding:12px;outline:none;text-align:center;letter-spacing:8px;box-sizing:border-box"
+      onkeydown="if(event.key==='Enter')submitPinSetup()">
+    <div id="pin-setup-error" style="display:none;margin-top:8px;font-size:11px;color:#fa6d8f;font-family:'DM Mono',monospace"></div>
+    <label style="display:flex;align-items:center;gap:10px;margin-top:18px;text-align:left;cursor:pointer">
+      <input type="checkbox" id="pin-setup-kids" style="width:18px;height:18px;accent-color:var(--gold);flex-shrink:0;cursor:pointer">
+      <span id="txt-pinsetup-kids" style="font-size:12px;color:var(--dim);line-height:1.4">Activer le mode enfant maintenant</span>
+    </label>
+    <button id="txt-pinsetup-create" class="lang-confirm-btn" style="margin-top:20px" onclick="submitPinSetup()">CRÉER LE CODE</button>
+    <button id="txt-pinsetup-skip" onclick="skipPinSetup()" style="margin-top:12px;background:none;border:none;color:var(--dimmer);font-size:12px;letter-spacing:1px;cursor:pointer;font-family:'DM Mono',monospace">Plus tard</button>
   </div>
 </div>
 
@@ -1091,7 +1151,9 @@ const LANG = {
     btnStart:       'Le début de votre aventure',
     btnOptions:     'Options',
     btnNews:        '📰 Actualités',
+    btnProgress:    '✦ Ma progression',
     btnSubmit:      '✍ Soumettre une histoire',
+    btnContact:     '✉ Nous contacter',
     footer:         'StoryForge • Romans interactifs',
     sheetTitle:     'Vos aventures',
     sheetSub:       'Choisissez une histoire à vivre',
@@ -1137,8 +1199,22 @@ const LANG = {
     perk3:          '<strong>Badge Auteur</strong> — Votre nom associé à votre création dans l\'app',
     submitEditor:   'Ouvrir l\'éditeur',
     submitCancel:   'Annuler',
-    submitAi:       '✦ Créer avec l\'IA',
+    submitAi:       '✦ Aide Éditeur & IA',
     submitNote:     'Une fois votre histoire écrite, exportez le JSON et envoyez-le directement depuis l\'éditeur.',
+    tutoTitle:      'Astuces de navigation',
+    tutoMenu:       '<strong>Le point bleu</strong> en haut de l\'écran permet d\'ouvrir le menu pendant une histoire.',
+    tutoSave:       '<strong>Le bouton +</strong> en bas à droite permet de poser un marque-page pour sauvegarder votre progression.',
+    tutoBtn:        'J\'AI COMPRIS',
+    pinSetupTitle:  'Code Parental',
+    pinSetupBody:   'Créez un code à 4 chiffres pour protéger le mode enfant. Il vous sera demandé pour le désactiver.',
+    pinSetupCreate: 'CRÉER LE CODE',
+    pinSetupSkip:   'Plus tard',
+    pinSetupError:  '4 chiffres requis',
+    pinSetupDone:   '✓ Code parental enregistré !',
+    pinSetupEnter:    'Code à 4 chiffres',
+    pinSetupConfirm:  'Confirme le code',
+    pinSetupMismatch: 'Les codes ne correspondent pas',
+    pinSetupKids:     'Activer le mode enfant maintenant',
   },
   en: {
     eyebrow:        'An adventure awaits',
@@ -1147,7 +1223,9 @@ const LANG = {
     btnStart:       'Begin your adventure',
     btnOptions:     'Options',
     btnNews:        '📰 News',
+    btnProgress:    '✦ My Progress',
     btnSubmit:      '✍ Submit a story',
+    btnContact:     '✉ Contact us',
     footer:         'StoryForge • Interactive Fiction',
     sheetTitle:     'Your Adventures',
     sheetSub:       'Choose a story to experience',
@@ -1161,6 +1239,10 @@ const LANG = {
     optAnim:        'Animations',
     optAnimDesc:    'Visual effects',
     optTextspeed:   'Text Speed',
+    optLocked:      'Conditional Choices',
+    optLockedDesc:  'Choices requiring specific stats',
+    optLockedHidden:'Hidden',
+    optLockedGrayed:'Grayed out',
     optLang:        'Language',
     speedFast:      'Fast',
     speedNormal:    'Normal',
@@ -1189,8 +1271,22 @@ const LANG = {
     perk3:          '<strong>Author Badge</strong> — Your name linked to your creation in the app',
     submitEditor:   'Open the editor',
     submitCancel:   'Cancel',
-    submitAi:       '✦ Create with AI',
+    submitAi:       '✦ Editor & AI Help',
     submitNote:     'Once your story is written, export the JSON and send it directly from the editor.',
+    tutoTitle:      'Navigation Tips',
+    tutoMenu:       'The <strong>blue dot</strong> at the top of the screen opens the menu during a story.',
+    tutoSave:       'The <strong>+ button</strong> at the bottom right allows you to place a bookmark and save your progress.',
+    tutoBtn:        'GOT IT',
+    pinSetupTitle:  'Parental Code',
+    pinSetupBody:   'Create a 4-digit code to protect Kids Mode. It will be required to turn it off.',
+    pinSetupCreate: 'CREATE CODE',
+    pinSetupSkip:   'Later',
+    pinSetupError:  '4 digits required',
+    pinSetupDone:   '✓ Parental code saved!',
+    pinSetupEnter:    '4-digit code',
+    pinSetupConfirm:  'Confirm the code',
+    pinSetupMismatch: 'Codes do not match',
+    pinSetupKids:     'Enable Kids Mode now',
   },
   es: {
     eyebrow:        'Una aventura te espera',
@@ -1199,7 +1295,9 @@ const LANG = {
     btnStart:       'El comienzo de tu aventura',
     btnOptions:     'Opciones',
     btnNews:        '📰 Noticias',
+    btnProgress:    '✦ Mi progreso',
     btnSubmit:      '✍ Enviar una historia',
+    btnContact:     '✉ Contacto',
     footer:         'StoryForge • Ficción interactiva',
     sheetTitle:     'Tus aventuras',
     sheetSub:       'Elige una historia para vivir',
@@ -1247,6 +1345,20 @@ const LANG = {
     submitCancel:   'Cancelar',
     submitAi:       '✦ Crear con IA',
     submitNote:     'Una vez escrita tu historia, exporta el JSON y envíalo directamente desde el editor.',
+    tutoTitle:      'Consejos de navegación',
+    tutoMenu:       'El <strong>punto azul</strong> en la parte superior de la pantalla abre el menú durante una historia.',
+    tutoSave:       'El <strong>botón +</strong> en la parte inferior derecha te permite colocar un marcador para guardar tu progreso.',
+    tutoBtn:        'ENTENDIDO',
+    pinSetupTitle:  'Código Parental',
+    pinSetupBody:   'Crea un código de 4 dígitos para proteger el modo infantil. Se solicitará para desactivarlo.',
+    pinSetupCreate: 'CREAR CÓDIGO',
+    pinSetupSkip:   'Más tarde',
+    pinSetupError:  'Se requieren 4 dígitos',
+    pinSetupDone:   '✓ ¡Código parental guardado!',
+    pinSetupEnter:    'Código de 4 dígitos',
+    pinSetupConfirm:  'Confirma el código',
+    pinSetupMismatch: 'Los códigos no coinciden',
+    pinSetupKids:     'Activar el modo infantil ahora',
   }
 };
 
@@ -1274,7 +1386,9 @@ function applyLang() {
   set('txt-btn-start',      t.btnStart);
   set('txt-btn-options',    t.btnOptions);
   set('txt-btn-news',       t.btnNews);
+  set('txt-btn-progress',   t.btnProgress);
   set('txt-btn-submit',     t.btnSubmit);
+  set('txt-btn-contact',    t.btnContact);
   set('txt-footer',         t.footer);
   set('txt-sheet-title',    t.sheetTitle);
   set('txt-sheet-sub',      t.sheetSub);
@@ -1312,8 +1426,26 @@ function applyLang() {
   set('txt-submit-cancel',   t.submitCancel);
   set('txt-submit-ai',       t.submitAi);
   set('txt-submit-note',     t.submitNote);
+  set('txt-tuto-title',      t.tutoTitle);
+  set('txt-tuto-menu',       t.tutoMenu, true);
+  set('txt-tuto-save',       t.tutoSave, true);
+  set('txt-tuto-btn',        t.tutoBtn);
+  set('txt-pinsetup-title',  t.pinSetupTitle);
+  set('txt-pinsetup-body',   t.pinSetupBody);
+  set('txt-pinsetup-create', t.pinSetupCreate);
+  set('txt-pinsetup-skip',   t.pinSetupSkip);
+  set('txt-pinsetup-enter',  t.pinSetupEnter);
+  set('txt-pinsetup-confirm',t.pinSetupConfirm);
+  set('txt-pinsetup-kids',   t.pinSetupKids);
   document.title = t.docTitle;
   document.documentElement.lang = currentLang;
+}
+
+function contactUs() {
+  const email = 'team.pegasuscorp@gmail.com';
+  const subject = encodeURIComponent('Contact — Fableris');
+  const body = encodeURIComponent('Bonjour l\'équipe PegasusCorp,\n\n');
+  window.location.href = `mailto:${email}?subject=${subject}&body=${body}`;
 }
 
 // ── SUBMIT POPUP ──
@@ -1323,6 +1455,7 @@ function openSubmitPopup() {
 function closeSubmitPopup() {
   document.getElementById('submit-overlay').classList.remove('open');
 }
+
 function handleSubmitClick(e) {
   if (e.target === document.getElementById('submit-overlay')) closeSubmitPopup();
 }
@@ -1695,6 +1828,73 @@ function submitPin() {
   }
 }
 
+// ── CONFIGURATION DU PIN AU PREMIER DÉMARRAGE ───────────────
+function maybeShowPinSetup() {
+  // Affiche la popup uniquement si aucun PIN n'a encore été créé
+  // et que l'étape n'a pas déjà été passée/ignorée
+  if (localStorage.getItem('sf_pin_setup_done')) return;
+  if (localStorage.getItem('sf_parent_pin') !== null) return;
+  showPinSetup();
+}
+
+function showPinSetup() {
+  const overlay = document.getElementById('pin-setup-overlay');
+  document.getElementById('pin-setup-input').value = '';
+  document.getElementById('pin-setup-input2').value = '';
+  document.getElementById('pin-setup-kids').checked = false;
+  document.getElementById('pin-setup-error').style.display = 'none';
+  overlay.style.display = 'flex';
+  setTimeout(() => document.getElementById('pin-setup-input').focus(), 100);
+}
+
+function closePinSetup() {
+  localStorage.setItem('sf_pin_setup_done', '1');
+  const overlay = document.getElementById('pin-setup-overlay');
+  overlay.style.animation = 'fade-out .3s ease forwards';
+  setTimeout(() => { overlay.style.display = 'none'; overlay.style.animation = ''; }, 300);
+}
+
+function skipPinSetup() {
+  closePinSetup();
+}
+
+function submitPinSetup() {
+  const input  = document.getElementById('pin-setup-input').value.trim();
+  const input2 = document.getElementById('pin-setup-input2').value.trim();
+  const err    = document.getElementById('pin-setup-error');
+  const t      = LANG[currentLang] || LANG.fr;
+  if (!/^\d{4}$/.test(input)) {
+    err.textContent = t.pinSetupError;
+    err.style.display = 'block';
+    document.getElementById('pin-setup-input').focus();
+    return;
+  }
+  if (input !== input2) {
+    err.textContent = t.pinSetupMismatch;
+    err.style.display = 'block';
+    document.getElementById('pin-setup-input2').value = '';
+    document.getElementById('pin-setup-input2').focus();
+    return;
+  }
+  localStorage.setItem('sf_parent_pin', _sha256sync(input));
+  // Option : activer le mode enfant immédiatement
+  if (document.getElementById('pin-setup-kids').checked) {
+    const kidsToggle = document.getElementById('opt-kids');
+    if (kidsToggle) kidsToggle.checked = true;
+    if (typeof saveOptions === 'function') saveOptions();
+    if (typeof renderGameList === 'function') renderGameList();
+  }
+  closePinSetup();
+  const msg = document.createElement('div');
+  msg.style.cssText = `position:fixed;bottom:80px;left:50%;transform:translateX(-50%);
+    background:#13110e;border:1px solid rgba(109,250,188,0.4);border-radius:10px;
+    padding:10px 20px;font-family:'DM Mono',monospace;font-size:11px;
+    color:#6dfabc;z-index:999;white-space:nowrap`;
+  msg.textContent = t.pinSetupDone;
+  document.body.appendChild(msg);
+  setTimeout(() => msg.remove(), 2500);
+}
+
 let _pinCalcAnswer = 0;
 
 function generateCalcQuestion() {
@@ -1886,28 +2086,53 @@ function confirmLang() {
   currentLang = _pendingLang;
   setLang(currentLang);
   const overlay = document.getElementById('lang-overlay');
-  overlay.style.animation = 'fade-out .3s ease forwards';
-  setTimeout(() => overlay.style.display = 'none', 300);
+  if (overlay) {
+    overlay.style.animation = 'fade-out .3s ease forwards';
+    setTimeout(() => {
+      overlay.style.display = 'none';
+      overlay.style.animation = '';
+      setTimeout(startLaunchSequence, 500);
+    }, 300);
+  }
 }
 
-function showLangPopupIfNeeded() {
+function startLaunchSequence() {
+  // Cacher tout d'abord
+  ['lang-overlay', 'tuto-overlay', 'pin-setup-overlay'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.style.display = 'none';
+  });
+
   if (!localStorage.getItem('sf_lang_chosen')) {
     const overlay = document.getElementById('lang-overlay');
-    overlay.style.display = 'flex';
-    // Pré-sélectionner la langue détectée du navigateur
-    const browserLang = (navigator.language || 'fr').substring(0,2).toLowerCase();
-    const supported = ['fr','en','es'];
-    const detected = supported.includes(browserLang) ? browserLang : 'fr';
-    const btn = document.getElementById(`lp-${detected}`);
-    if (btn) {
-      document.querySelectorAll('.lang-choice-btn').forEach(b => {
-        b.classList.remove('selected');
-        b.querySelector('.lang-check').textContent = '';
-      });
-      btn.classList.add('selected');
-      btn.querySelector('.lang-check').textContent = '✓';
-      _pendingLang = detected;
-    }
+    if (overlay) overlay.style.display = 'flex';
+  } else if (!localStorage.getItem('sf_tuto_shown')) {
+    showTuto();
+  } else {
+    maybeShowPinSetup();
+  }
+}
+
+function showTuto() {
+  const overlay = document.getElementById('tuto-overlay');
+  overlay.style.display = 'flex';
+  const t = LANG[currentLang] || LANG.fr;
+  if (t.tutoTitle) document.getElementById('txt-tuto-title').textContent = t.tutoTitle;
+  if (t.tutoMenu)  document.getElementById('txt-tuto-menu').innerHTML  = t.tutoMenu;
+  if (t.tutoSave)  document.getElementById('txt-tuto-save').innerHTML  = t.tutoSave;
+  if (t.tutoBtn)   document.getElementById('txt-tuto-btn').textContent  = t.tutoBtn;
+}
+
+function closeTuto() {
+  localStorage.setItem('sf_tuto_shown', '1');
+  const overlay = document.getElementById('tuto-overlay');
+  if (overlay) {
+    overlay.style.animation = 'fade-out .3s ease forwards';
+    setTimeout(() => {
+      overlay.style.display = 'none';
+      overlay.style.animation = '';
+      setTimeout(startLaunchSequence, 500);
+    }, 300);
   }
 }
 
@@ -1917,7 +2142,7 @@ function showLangPopupIfNeeded() {
   initCanvas();
   createParticles();
   await loadGameRegistry();
-  showLangPopupIfNeeded();
+  startLaunchSequence();
 })();
 </script>
 </body>
