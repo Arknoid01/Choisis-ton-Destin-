@@ -1778,6 +1778,13 @@ function insertChoiceVariable(index, variable) {
   updateChoice(index, 'text', el.value);
 }
 
+function insertMobileVar(inputId, key, variable) {
+  const el = document.getElementById(inputId);
+  if (!el) return;
+  insertAtCursor(el, variable);
+  updateField(key, el.value);
+}
+
 // ── RICH TEXT TOOLBAR ──
 function richFormat(inputId, key, before, after) {
   const el = document.getElementById(inputId);
@@ -2834,7 +2841,20 @@ function renderEditorInto(id, container) {
     </div>
     <div class="form-group">
       <label class="form-label">${et('narrative')}</label>
-      <textarea class="form-textarea" style="min-height:110px" oninput="updateField('text',this.value)" placeholder="${et('narrativePh')}">${esc(scene.text)}</textarea>
+      <div class="rich-toolbar">
+        <button class="rtb-btn" title="Gras" onclick="richFormat('m-text','text','**','**')"><b>B</b></button>
+        <button class="rtb-btn" title="Italique" onclick="richFormat('m-text','text','*','*')"><i>I</i></button>
+        <button class="rtb-btn" title="Souligné" onclick="richFormat('m-text','text','<u>','</u>')"><u>U</u></button>
+        <div class="rtb-sep"></div>
+        <button class="rtb-btn rtb-wide" onclick="richFormatLine('m-text','text','## ')">H2</button>
+        <button class="rtb-btn rtb-wide" onclick="richFormatLine('m-text','text','### ')">H3</button>
+        <div class="rtb-sep"></div>
+        <button class="rtb-btn" onclick="richFormatLine('m-text','text','> ')">❝</button>
+        <button class="rtb-btn" onclick="richFormatLine('m-text','text','- ')">≡</button>
+        <div class="rtb-sep"></div>
+        <button class="rtb-btn rtb-wide" onclick="insertMobileVar('m-text','text','{{player}}')">👤</button>
+      </div>
+      <textarea class="form-textarea" id="m-text" style="min-height:110px" oninput="updateField('text',this.value)" placeholder="${et('narrativePh')}">${esc(scene.text)}</textarea>
     </div>
     <div class="section-divider">${et('sceneImmersion')}</div>
     <div class="form-group">
@@ -2889,7 +2909,22 @@ function renderMobileChoices(id) {
     const opts = Object.values(project.scenes).map(s =>
       `<option value="${s.id}" ${choice.vers===s.id?'selected':''}>${s.title||s.id}</option>`).join('');
 
-    // Condition field
+    const statsInline = project.stats.length ? `
+      <div class="choice-section-label">⚡ Bonus / Malus</div>
+      <div class="stats-inline-grid">
+        ${project.stats.map(s => {
+          const eff = (choice.effects||[]).find(e => e.stat === s.id);
+          const val = eff ? eff.val : 0;
+          const cls = val > 0 ? 'positive' : val < 0 ? 'negative' : '';
+          return `<div class="stat-inline-row">
+            <div class="stat-inline-dot" style="background:${s.color||'var(--text3)'}"></div>
+            <span class="stat-inline-label">${esc(s.label)}</span>
+            <input type="number" class="stat-inline-input ${cls}" value="${val}" min="-999" max="999"
+              oninput="updateStatInline(${ci},'${s.id}',parseInt(this.value)||0);this.className='stat-inline-input '+(parseInt(this.value)>0?'positive':parseInt(this.value)<0?'negative':'')">
+          </div>`;
+        }).join('')}
+      </div>` : '';
+
     const conditionHTML = project.stats.length ? `
       <div class="condition-field${hasLock?' active':''}" style="margin-top:8px">
         <label class="form-label" style="font-size:9px">🔒 Condition d'affichage</label>
@@ -2920,11 +2955,14 @@ function renderMobileChoices(id) {
         </span>
         <button class="icon-btn danger" onclick="removeChoice(${ci});renderMobileChoices('${id}')" style="width:24px;height:24px;font-size:12px">✕</button>
       </div>
+
+      <div class="choice-section-label">✏️ Texte</div>
       <div class="form-group" style="margin-bottom:8px">
         <input class="form-input" value="${esc(choice.text)}" oninput="updateChoice(${ci},'text',this.value)" placeholder="${et('choiceTextPh')}">
       </div>
+
+      <div class="choice-section-label">➜ Destination</div>
       <div class="form-group" style="margin-bottom:8px">
-        <label class="form-label" style="font-size:9px">${et('leadsTo')}</label>
         <div style="display:flex;gap:6px;align-items:center">
           <select class="form-select" style="flex:1" onchange="updateChoice(${ci},'vers',this.value);drawConnections();renderMobileChoices('${id}')">
             <option value="">${et('noDestination')}</option>${opts}
@@ -2937,18 +2975,25 @@ function renderMobileChoices(id) {
           ? `<div class="link-hint-inline">Aucune destination — crée une suite avec ＋→</div>`
           : `<div class="link-hint-inline linked">→ Lié à : <strong>${esc(project.scenes[choice.vers]?.title || choice.vers)}</strong></div>`}
       </div>
-      <div class="form-group" style="margin-bottom:8px">
-        <label class="form-label" style="font-size:9px">${et('clickEffect')}</label>
-        <select class="form-select" onchange="updateChoice(${ci},'clickEffect',this.value)">
-          ${presetOptions(CLICK_EFFECT_PRESETS, choice.clickEffect || 'pulse', 'clicks')}
-        </select>
+
+      ${statsInline}
+
+      <div class="choice-section-label" style="margin-top:10px">⚙ Effets</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:8px">
+        <div>
+          <div class="form-label" style="font-size:9px;margin-bottom:3px">${et('clickEffect')}</div>
+          <select class="form-select" style="font-size:11px" onchange="updateChoice(${ci},'clickEffect',this.value)">
+            ${presetOptions(CLICK_EFFECT_PRESETS, choice.clickEffect || 'pulse', 'clicks')}
+          </select>
+        </div>
+        <div>
+          <div class="form-label" style="font-size:9px;margin-bottom:3px">${et('clickSound')}</div>
+          <select class="form-select" style="font-size:11px" onchange="updateChoice(${ci},'sound',this.value)">
+            ${presetOptions(SOUND_PRESETS, choice.sound || 'click_neon', 'sounds')}
+          </select>
+        </div>
       </div>
-      <div class="form-group" style="margin-bottom:0">
-        <label class="form-label" style="font-size:9px">${et('clickSound')}</label>
-        <select class="form-select" onchange="updateChoice(${ci},'sound',this.value)">
-          ${presetOptions(SOUND_PRESETS, choice.sound || 'click_neon', 'sounds')}
-        </select>
-      </div>
+
       ${conditionHTML}
     </div>`;
   }).join('');
