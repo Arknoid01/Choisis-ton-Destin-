@@ -553,6 +553,52 @@ html,body { height:100%; overflow:hidden; font-family:'Syne',sans-serif; backgro
 }
 #zoom-indicator.visible { opacity:1; }
 
+/* ── RICH TEXT TOOLBAR ── */
+.rich-toolbar {
+  display:flex; gap:3px; flex-wrap:wrap;
+  padding:6px 8px; background:var(--bg4);
+  border:1px solid var(--border); border-bottom:none;
+  border-radius:7px 7px 0 0;
+}
+.rich-toolbar + .form-textarea { border-radius:0 0 7px 7px; border-top:none; }
+.rtb-btn {
+  width:28px; height:26px; border-radius:5px;
+  border:1px solid transparent; background:none;
+  color:var(--text3); font-size:12px; font-weight:700;
+  cursor:pointer; display:flex; align-items:center; justify-content:center;
+  transition:all .15s; font-family:'Syne',sans-serif; flex-shrink:0;
+}
+.rtb-btn:hover { background:var(--bg3); color:var(--text); border-color:var(--border); }
+.rtb-sep { width:1px; height:18px; background:var(--border); margin:0 3px; align-self:center; flex-shrink:0; }
+.rtb-wide { width:auto; padding:0 8px; font-size:11px; letter-spacing:0.5px; }
+
+/* ── STATS INLINE ── */
+.stats-inline-grid { display:grid; grid-template-columns:1fr 1fr; gap:6px; margin-top:6px; }
+.stat-inline-row {
+  display:flex; align-items:center; gap:6px;
+  background:var(--bg4); border:1px solid var(--border);
+  border-radius:7px; padding:5px 8px; transition:border-color .15s;
+}
+.stat-inline-row:hover { border-color:color-mix(in srgb,var(--accent) 30%,var(--border)); }
+.stat-inline-dot { width:7px; height:7px; border-radius:50%; flex-shrink:0; }
+.stat-inline-label { font-size:11px; color:var(--text2); font-weight:600; flex:1; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.stat-inline-input {
+  width:48px; background:var(--bg3); border:1px solid var(--border);
+  border-radius:5px; color:var(--text); font-family:'DM Mono',monospace;
+  font-size:12px; padding:3px 5px; outline:none; text-align:center; transition:border-color .15s;
+}
+.stat-inline-input:focus { border-color:var(--accent); }
+.stat-inline-input.positive { color:#6dfabc; border-color:rgba(109,250,188,0.3); background:rgba(109,250,188,0.06); }
+.stat-inline-input.negative { color:#fa6d8f; border-color:rgba(250,109,143,0.3); background:rgba(250,109,143,0.06); }
+
+/* ── CHOICE CARD AMÉLIORÉE ── */
+.choice-section-label {
+  font-size:9px; font-weight:700; letter-spacing:2px; text-transform:uppercase;
+  color:var(--text3); margin:10px 0 6px;
+  display:flex; align-items:center; gap:6px;
+}
+.choice-section-label::after { content:''; flex:1; height:1px; background:var(--border); }
+
 /* ── NODE WIDTH RESPONSIVE ── */
 @media (max-width:700px) {
   :root { --node-w: 130px; --node-h: 54px; }
@@ -1503,9 +1549,21 @@ function renderEditor(id) {
     </div>
     <div class="form-group">
       <label class="form-label">${et('narrative')} <span class="tip" data-tip="${et('tipText')}">?</span></label>
+      <div class="rich-toolbar">
+        <button class="rtb-btn" title="Gras (**texte**)" onclick="richFormat('f-text','text','**','**')"><b>B</b></button>
+        <button class="rtb-btn" title="Italique (*texte*)" onclick="richFormat('f-text','text','*','*')"><i>I</i></button>
+        <button class="rtb-btn" title="Souligné" onclick="richFormat('f-text','text','<u>','</u>')"><u>U</u></button>
+        <div class="rtb-sep"></div>
+        <button class="rtb-btn rtb-wide" title="Titre H2" onclick="richFormatLine('f-text','text','## ')">H2</button>
+        <button class="rtb-btn rtb-wide" title="Titre H3" onclick="richFormatLine('f-text','text','### ')">H3</button>
+        <div class="rtb-sep"></div>
+        <button class="rtb-btn" title="Citation" onclick="richFormatLine('f-text','text','> ')">❝</button>
+        <button class="rtb-btn" title="Liste" onclick="richFormatLine('f-text','text','- ')">≡</button>
+        <div class="rtb-sep"></div>
+        <button class="rtb-btn rtb-wide" title="Insérer {{player}}" onclick="insertVariable('f-text','text','{{player}}')">👤</button>
+      </div>
       <textarea class="form-textarea" style="min-height:120px" id="f-text" oninput="updateField('text',this.value)" placeholder="${et('narrativePh')}">${esc(scene.text)}</textarea>
       <div class="var-help">${et('varHelp')}</div>
-      <button type="button" class="var-btn" onclick="insertVariable('f-text','text','{{player}}')">${et('insertPlayer')}</button>
     </div>
     <div class="section-divider">${et('sceneImmersion')}</div>
     <div class="form-group">
@@ -1591,69 +1649,83 @@ function renderChoices(id) {
       .map(s => `<option value="${s.id}" ${choice.vers===s.id?'selected':''}>${s.title||s.id}</option>`)
       .join('');
 
-    const effects = (choice.effects||[]).map((eff, ei) => {
-      const statOpts = project.stats.map(s =>
-        `<option value="${s.id}" ${eff.stat===s.id?'selected':''}>${s.label}</option>`
-      ).join('');
-      return `<div class="effect-pill">
-        <select onchange="updateEffect(${ci},${ei},'stat',this.value)">${statOpts}</select>
-        <input type="number" value="${eff.val}" min="-999" max="999"
-          onchange="updateEffect(${ci},${ei},'val',parseInt(this.value))" style="width:55px">
-        <button class="pill-remove" onclick="removeEffect(${ci},${ei})">✕</button>
-      </div>`;
-    }).join('');
-
     const hasLock = !!(choice.requires?.stat);
+
+    // Stats inline grid — inspiré MyHero
+    const statsInline = project.stats.length ? `
+      <div class="choice-section-label">⚡ Bonus / Malus stats</div>
+      <div class="stats-inline-grid">
+        ${project.stats.map(s => {
+          const eff = (choice.effects||[]).find(e => e.stat === s.id);
+          const val = eff ? eff.val : 0;
+          const cls = val > 0 ? 'positive' : val < 0 ? 'negative' : '';
+          return `<div class="stat-inline-row">
+            <div class="stat-inline-dot" style="background:${s.color||'var(--text3)'}"></div>
+            <span class="stat-inline-label">${esc(s.label)}</span>
+            <input type="number" class="stat-inline-input ${cls}" value="${val}" min="-999" max="999"
+              oninput="updateStatInline(${ci},'${s.id}',parseInt(this.value)||0);this.className='stat-inline-input '+(parseInt(this.value)>0?'positive':parseInt(this.value)<0?'negative':'')">
+          </div>`;
+        }).join('')}
+      </div>` : '';
+
     return `<div class="choice-card${hasLock?' has-lock':''}" id="choice-${ci}">
       <div class="choice-card-header">
         <div class="choice-num${hasLock?' locked':''}">${hasLock?'🔒':ci+1}</div>
         <span style="color:${hasLock?'#ffaa00':'var(--text2)'}">${et('choice')} ${ci+1}${hasLock?` <span style="font-size:10px;font-weight:400">· conditionnel</span>`:''}${choice.text?` — <span style="font-weight:400;color:var(--text3)">${esc(choice.text.substring(0,28))}${choice.text.length>28?'…':''}</span>`:''}</span>
         <button class="icon-btn danger" onclick="removeChoice(${ci})" style="width:24px;height:24px;font-size:12px">✕</button>
       </div>
+
+      <div class="choice-section-label">✏️ Texte du choix</div>
       <div class="form-group" style="margin-bottom:10px">
-        <label class="form-label" style="font-size:10px">${et('choiceText')} <span class="tip tip-down" data-tip="${et('tipChoiceText')}">?</span></label>
         <input class="form-input" id="choice-text-${ci}" value="${esc(choice.text)}"
           oninput="updateChoice(${ci},'text',this.value)" placeholder="${et('choiceTextPh')}">
         <div class="var-help">${et('choiceVar')}</div>
-        <button type="button" class="var-btn" onclick="insertChoiceVariable(${ci},'{{player}}')">${et('insertPlayer')}</button>
       </div>
+
+      <div class="choice-section-label">➜ Destination</div>
       <div class="form-group" style="margin-bottom:10px">
-        <label class="form-label" style="font-size:10px">${et('leadsTo')} <span class="tip tip-down" data-tip="${et('tipLeadsTo')}">?</span></label>
         <div style="display:flex;gap:6px;align-items:center">
           <select class="form-select" style="flex:1" onchange="updateChoice(${ci},'vers',this.value)">
             <option value="">${et('noDestination')}</option>
             ${sceneOptions}
           </select>
-          ${!choice.vers ? `<button class="quick-link-btn" title="Créer une scène suite" onclick="quickCreateLinked('${id}',${ci})">＋→</button>` : `<button class="quick-link-btn unlink-btn" title="Délier" onclick="updateChoice(${ci},'vers','');renderChoices('${id}')">✕</button>`}
+          ${!choice.vers
+            ? `<button class="quick-link-btn" title="Créer une scène suite" onclick="quickCreateLinked('${id}',${ci})">＋→</button>`
+            : `<button class="quick-link-btn unlink-btn" title="Délier" onclick="updateChoice(${ci},'vers','');renderChoices('${id}')">✕</button>`}
         </div>
-        ${!choice.vers ? `<div class="link-hint-inline">Aucune destination — crée une suite avec ＋→</div>` : `<div class="link-hint-inline linked">→ Lié à : <strong>${esc(project.scenes[choice.vers]?.title || choice.vers)}</strong></div>`}
+        ${!choice.vers
+          ? `<div class="link-hint-inline">Aucune destination — crée une suite avec ＋→</div>`
+          : `<div class="link-hint-inline linked">→ Lié à : <strong>${esc(project.scenes[choice.vers]?.title || choice.vers)}</strong></div>`}
       </div>
+
+      ${statsInline}
+
+      <div class="choice-section-label" style="margin-top:12px">⚙ Effets & Sons</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:8px">
+        <div>
+          <div class="form-label" style="font-size:9px;margin-bottom:4px">${et('clickEffect')}</div>
+          <select class="form-select" style="font-size:11px" onchange="updateChoice(${ci},'clickEffect',this.value)">
+            ${presetOptions(CLICK_EFFECT_PRESETS, choice.clickEffect || 'pulse', 'clicks')}
+          </select>
+        </div>
+        <div>
+          <div class="form-label" style="font-size:9px;margin-bottom:4px">${et('clickSound')}</div>
+          <select class="form-select" style="font-size:11px" onchange="updateChoice(${ci},'sound',this.value)">
+            ${presetOptions(SOUND_PRESETS, choice.sound || 'click_neon', 'sounds')}
+          </select>
+        </div>
+      </div>
+
       ${hasUnlock('portals') ? `
-      <div class="form-group" style="margin-bottom:10px">
-        <label class="form-label" style="font-size:10px">🔗 Portail — JSON externe <span style="font-size:9px;color:var(--text3);font-weight:400">(optionnel)</span></label>
+      <div class="form-group" style="margin-bottom:8px">
+        <label class="form-label" style="font-size:9px">🔗 Portail — JSON externe <span style="font-size:9px;color:var(--text3);font-weight:400">(optionnel)</span></label>
         <input class="form-input" value="${esc(choice.story||'')}"
           placeholder="ex: stories/fr/cinq_lames_aryn.json"
           oninput="updateChoice(${ci},'story',this.value)"
           style="font-family:'DM Mono',monospace;font-size:11px">
         ${choice.story ? `<div style="font-size:10px;color:#6dfabc;margin-top:4px">✓ Portail actif → ${esc(choice.story)}</div>` : ''}
       </div>` : ''}
-      <div class="form-group" style="margin-bottom:10px">
-        <label class="form-label" style="font-size:10px">${et('clickEffect')} <span class="tip tip-down" data-tip="${et('tipClickFx')}">?</span></label>
-        <select class="form-select" onchange="updateChoice(${ci},'clickEffect',this.value)">
-          ${presetOptions(CLICK_EFFECT_PRESETS, choice.clickEffect || 'pulse', 'clicks')}
-        </select>
-      </div>
-      <div class="form-group" style="margin-bottom:10px">
-        <label class="form-label" style="font-size:10px">${et('clickSound')}</label>
-        <select class="form-select" onchange="updateChoice(${ci},'sound',this.value)">
-          ${presetOptions(SOUND_PRESETS, choice.sound || 'click_neon', 'sounds')}
-        </select>
-      </div>
-      <div class="form-group" style="margin-bottom:6px">
-        <label class="form-label" style="font-size:9px">${et('statEffects')} <span class="tip tip-down" data-tip="${et('tipEffect')}">?</span></label>
-        <div class="choice-effects" id="effects-${ci}">${effects}</div>
-        <button class="add-effect-btn" onclick="addEffect(${ci})">${et('effect')}</button>
-      </div>
+
       ${project.stats.length ? `
       <div class="condition-field${choice.requires?.stat ? ' active' : ''}">
         <label class="form-label" style="font-size:9px">🔒 Condition d'affichage</label>
@@ -1672,10 +1744,10 @@ function renderChoices(id) {
             onchange="updateChoiceRequires(${ci},'min',parseInt(this.value))">
           ` : ''}
         </div>
-        ${choice.requires?.stat ? `
-        <div class="condition-badge">🔒 Visible si ${choice.requires.stat} ≥ ${choice.requires.min||0}</div>
-        ` : `<div style="font-size:10px;color:var(--text3);margin-top:4px;font-style:italic">Aucune condition — choix toujours visible</div>`}
-      </div>` : `<div style="font-size:10px;color:var(--text3);font-style:italic;padding:6px 0">Définis des stats pour ajouter des conditions</div>`}
+        ${choice.requires?.stat
+          ? `<div class="condition-badge">🔒 Visible si ${choice.requires.stat} ≥ ${choice.requires.min||0}</div>`
+          : `<div style="font-size:10px;color:var(--text3);margin-top:4px;font-style:italic">Aucune condition — choix toujours visible</div>`}
+      </div>` : `<div style="font-size:10px;color:var(--text3);font-style:italic;padding:4px 0">Définis des stats pour ajouter des conditions</div>`}
     </div>`;
   }).join('');
 }
@@ -1704,6 +1776,56 @@ function insertChoiceVariable(index, variable) {
   const el = document.getElementById(`choice-text-${index}`);
   insertAtCursor(el, variable);
   updateChoice(index, 'text', el.value);
+}
+
+// ── RICH TEXT TOOLBAR ──
+function richFormat(inputId, key, before, after) {
+  const el = document.getElementById(inputId);
+  if (!el) return;
+  const start = el.selectionStart ?? 0;
+  const end   = el.selectionEnd ?? 0;
+  const sel   = el.value.slice(start, end);
+  const replacement = sel ? before + sel + after : before + after;
+  el.value = el.value.slice(0, start) + replacement + el.value.slice(end);
+  const cursor = sel ? start + replacement.length : start + before.length;
+  el.focus();
+  el.setSelectionRange(cursor, cursor);
+  el.dispatchEvent(new Event('input', { bubbles:true }));
+  updateField(key, el.value);
+}
+
+function richFormatLine(inputId, key, prefix) {
+  const el = document.getElementById(inputId);
+  if (!el) return;
+  const start = el.selectionStart ?? 0;
+  const lineStart = el.value.lastIndexOf('\n', start - 1) + 1;
+  const already = el.value.slice(lineStart).startsWith(prefix);
+  if (already) {
+    el.value = el.value.slice(0, lineStart) + el.value.slice(lineStart + prefix.length);
+  } else {
+    el.value = el.value.slice(0, lineStart) + prefix + el.value.slice(lineStart);
+  }
+  el.focus();
+  el.dispatchEvent(new Event('input', { bubbles:true }));
+  updateField(key, el.value);
+}
+
+// ── STATS INLINE UPDATE ──
+function updateStatInline(choiceIndex, statId, val) {
+  const scene = project.scenes[selectedId];
+  if (!scene) return;
+  const choice = scene.choices[choiceIndex];
+  if (!choice) return;
+  pushUndo();
+  if (!choice.effects) choice.effects = [];
+  const existing = choice.effects.findIndex(e => e.stat === statId);
+  if (val === 0) {
+    if (existing >= 0) choice.effects.splice(existing, 1);
+  } else {
+    if (existing >= 0) choice.effects[existing].val = val;
+    else choice.effects.push({ stat: statId, val });
+  }
+  render();
 }
 
 function updateField(key, val) {
