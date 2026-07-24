@@ -2159,7 +2159,7 @@ function exportJSON() {
     scene.choices = shuffleArray(scene.choices);
   });
   const blob = new Blob([JSON.stringify(exportData, null, 2)], {type:'application/json'});
-  download(blob, (project.name||'histoire') + '.json');
+  download(blob, safeFilename(project.name, '.json'));
   toast('JSON exporté ✓');
 }
 
@@ -2195,7 +2195,7 @@ function exportTXT() {
   });
 
   const blob = new Blob([txt], {type:'text/plain;charset=utf-8'});
-  download(blob, (project.name||'histoire') + '_traduction.txt');
+  download(blob, safeFilename(project.name, '_traduction.txt'));
   toast('TXT traduction exporté ✓');
 }
 
@@ -2206,7 +2206,7 @@ function sendStory() {
   Object.values(exportData.scenes).forEach(scene => {
     scene.choices = shuffleArray(scene.choices);
   });
-  const filename = (project.name || 'histoire').replace(/\s+/g,'_').toLowerCase() + '.json';
+  const filename = safeFilename(project.name, '.json');
   const blob = new Blob([JSON.stringify(exportData, null, 2)], {type:'application/json'});
 
   // Détection native
@@ -2224,14 +2224,21 @@ function sendStory() {
       if (plugins && plugins.Filesystem && plugins.Share) {
         plugins.Filesystem.writeFile({ path: filename, data: base64, directory: 'CACHE' })
           .then(res => {
-            plugins.Share.share({
+            // Pas de champ `text` ici : il fait remonter toutes les applis
+            // capables de recevoir du texte (PayPal, réseaux sociaux...).
+            // Avec `files` seul, la liste se limite aux applis gérant un fichier.
+            return plugins.Share.share({
               title: '[StoryForge] Soumission — ' + (project.name || 'Mon Histoire'),
-              text: `Bonjour l'équipe PegasusCorp,\n\nJe vous soumets mon histoire "${project.name || 'Mon Histoire'}".`,
               files: [res.uri],
-              dialogTitle: 'Envoyer'
+              dialogTitle: 'Envoyer à PegasusCorp'
             });
           })
-          .catch(err => { alert('Erreur envoi: ' + err); _sendMailtoFallback(blob, filename); });
+          .catch(err => {
+            if (isShareCancel(err)) return;          // fermeture volontaire
+            console.error('[sendStory]', err);
+            toast('Envoi impossible : ' + errMsg(err));
+            _sendMailtoFallback(blob, filename);
+          });
       } else {
         _sendMailtoFallback(blob, filename);
       }
@@ -2257,7 +2264,15 @@ function sendStory() {
 }
 
 function _sendMailtoFallback(blob, filename) {
-  download(blob, filename);
+  // Sur natif, download() rouvrirait une feuille de partage : on enregistre
+  // directement le fichier puis on ouvre le client mail.
+  const isNative = (window.Capacitor && window.Capacitor.getPlatform && window.Capacitor.getPlatform() !== 'web') ||
+                   (window.location.protocol === 'capacitor:');
+  if (isNative) {
+    _saveToDocuments(blob, filename);
+  } else {
+    _downloadFallback(blob, filename);
+  }
   const to      = 'team.pegasuscorp@gmail.com';
   const subject = encodeURIComponent('[StoryForge] Soumission — ' + (project.name || 'Mon Histoire'));
   const body    = encodeURIComponent(
@@ -2323,6 +2338,32 @@ function esc(s) {
   return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
 }
 
+// Nettoie un nom de projet pour en faire un nom de fichier sûr
+// (accents, espaces, slashs cassent Filesystem.writeFile / FileProvider)
+function safeFilename(name, ext) {
+  const base = String(name || 'histoire')
+    .normalize('NFD').replace(/[\u0300-\u036f]/g, '')
+    .replace(/\s+/g, '_')
+    .replace(/[^a-zA-Z0-9_.-]/g, '_')
+    .replace(/_+/g, '_')
+    .replace(/^_|_$/g, '')
+    .slice(0, 60)
+    .toLowerCase();
+  return (base || 'histoire') + ext;
+}
+
+// Extrait un message lisible d'une erreur native.
+// JSON.stringify(err) renvoie {} sur un Error : message/stack ne sont pas enumerables.
+function errMsg(err) {
+  if (!err) return 'erreur inconnue';
+  return err.message || err.errorMessage || err.error || String(err);
+}
+
+// L'utilisateur qui ferme la feuille de partage declenche un reject : ce n'est pas un bug
+function isShareCancel(err) {
+  return /cancel|abort|dismiss/i.test(errMsg(err));
+}
+
 function shuffleArray(arr) {
   const a = [...arr];
   for (let i = a.length-1; i>0; i--) {
@@ -2356,18 +2397,22 @@ function download(blob, filename) {
             files: [result.uri],
             dialogTitle: 'Sauvegarder / Partager'
           }).catch(err => {
-            alert('Erreur partage: ' + JSON.stringify(err));
+            if (isShareCancel(err)) return;          // fermeture volontaire
+            console.error('[share]', err);
+            toast('Partage impossible : ' + errMsg(err));
           });
         }).catch(err => {
-          alert('Erreur écriture: ' + JSON.stringify(err));
+          console.error('[writeFile]', err);
+          toast('Écriture impossible : ' + errMsg(err));
           _downloadFallback(blob, filename);
         });
       } else {
-        alert('Erreur: Plugins Capacitor Filesystem/Share non trouvés.');
+        console.warn('Plugins Capacitor Filesystem/Share indisponibles');
         _downloadFallback(blob, filename);
       }
     }).catch(err => {
-      alert('Erreur buffer: ' + err);
+      console.error('[buffer]', err);
+      toast('Erreur de lecture : ' + errMsg(err));
       _downloadFallback(blob, filename);
     });
     return;
@@ -2383,6 +2428,27 @@ function download(blob, filename) {
   }
   // ── Fallback navigateur classique ─────────────────────────
   _downloadFallback(blob, filename);
+}
+
+// Enregistre le fichier dans Documents (natif) sans ouvrir de feuille de partage
+function _saveToDocuments(blob, filename) {
+  const plugins = window.Capacitor && window.Capacitor.Plugins;
+  if (!plugins || !plugins.Filesystem) { toast('Enregistrement impossible'); return; }
+  blob.arrayBuffer().then(buf => {
+    let binary = '';
+    const bytes = new Uint8Array(buf);
+    for (let i = 0; i < bytes.byteLength; i++) binary += String.fromCharCode(bytes[i]);
+    return plugins.Filesystem.writeFile({
+      path: filename,
+      data: btoa(binary),
+      directory: 'DOCUMENTS'
+    });
+  }).then(() => {
+    toast('📎 Fichier enregistré dans Documents');
+  }).catch(err => {
+    console.error('[saveToDocuments]', err);
+    toast('Enregistrement impossible : ' + errMsg(err));
+  });
 }
 
 function _downloadFallback(blob, filename) {
