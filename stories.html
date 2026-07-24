@@ -245,6 +245,7 @@ html,body { height:100%; background:#0d0d0f; color:#e8e0d0; font-family:'Cormora
   </div>
 </div>
 
+<script src="billing.js"></script>
 <script>
 // ══════════════════════════════════════════════
 // CONFIG
@@ -313,8 +314,10 @@ const PACK_CONFIG = {
   }
 };
 
-// Packs déverrouillés (sera géré par RevenueCat plus tard)
+// Packs déverrouillés — source de vérité : Google Play via SFBilling.
+// Le module maintient le cache localStorage 'sf_unlocked_packs'.
 function getUnlockedPacks() {
+  if (window.SFBilling) return SFBilling.getUnlockedPacks();
   try {
     return JSON.parse(localStorage.getItem('sf_unlocked_packs') || '["free","kids"]');
   } catch { return ['free','kids']; }
@@ -455,7 +458,8 @@ function renderLibrary() {
     } else if (isUnlocked) {
       priceBadge = `<span class="pack-price" style="--pack-color:${colorVar};border-color:rgba(100,220,150,0.5);color:#64dc96;background:rgba(100,220,150,0.08)">✓ Débloqué</span>`;
     } else {
-      priceBadge = `<span class="pack-price locked" style="--pack-color:${colorVar}" onclick="buyPack('${packId}')">🔒 ${cfg.price || ''}</span>`;
+      const livePrice = window.SFBilling ? SFBilling.getPrice(packId) : null;
+      priceBadge = `<span class="pack-price locked" style="--pack-color:${colorVar}" onclick="buyPack('${packId}')">🔒 ${livePrice || cfg.price || ''}</span>`;
     }
 
     // Compteur
@@ -525,6 +529,7 @@ function renderLibrary() {
   });
 
   document.getElementById('content').innerHTML = html;
+  injectRestoreButton();
 }
 
 // ══════════════════════════════════════════════
@@ -546,12 +551,102 @@ function launchStory(file) {
   }
 }
 
-function buyPack(packId) {
-  // Placeholder — sera remplacé par RevenueCat
+// ══════════════════════════════════════════════
+// ACHATS
+// ══════════════════════════════════════════════
+const BILLING_TXT = {
+  fr: { unavailable:"Les achats ne sont disponibles que dans l'application Android.",
+        pending:'Ouverture de Google Play…', owned:'Ce pack est déjà débloqué ✓',
+        success:'Pack débloqué ✓ Bonne lecture !', failed:'Achat impossible pour le moment.',
+        restoring:'Restauration en cours…', restored:'Achats restaurés ✓',
+        nothing:'Aucun achat à restaurer.', restore:'Restaurer mes achats' },
+  en: { unavailable:'Purchases are only available in the Android app.',
+        pending:'Opening Google Play…', owned:'This pack is already unlocked ✓',
+        success:'Pack unlocked ✓ Enjoy!', failed:'Purchase failed for now.',
+        restoring:'Restoring…', restored:'Purchases restored ✓',
+        nothing:'Nothing to restore.', restore:'Restore purchases' },
+  es: { unavailable:'Las compras solo están disponibles en la app de Android.',
+        pending:'Abriendo Google Play…', owned:'Este pack ya está desbloqueado ✓',
+        success:'¡Pack desbloqueado ✓!', failed:'No se pudo completar la compra.',
+        restoring:'Restaurando…', restored:'Compras restauradas ✓',
+        nothing:'No hay compras que restaurar.', restore:'Restaurar compras' }
+};
+function bt(key) { return (BILLING_TXT[currentLang] || BILLING_TXT.fr)[key]; }
+
+function sfToast(msg) {
+  let el = document.getElementById('sf-toast');
+  if (!el) {
+    el = document.createElement('div');
+    el.id = 'sf-toast';
+    el.style.cssText = 'position:fixed;left:50%;bottom:28px;transform:translateX(-50%);' +
+      'background:#1a1710;border:1px solid #3a3222;color:#e8e0d0;padding:12px 18px;' +
+      'border-radius:10px;font-size:13px;max-width:80%;text-align:center;z-index:900;' +
+      'opacity:0;transition:opacity .25s;pointer-events:none';
+    document.body.appendChild(el);
+  }
+  el.textContent = msg;
+  el.style.opacity = '1';
+  clearTimeout(el._t);
+  el._t = setTimeout(() => { el.style.opacity = '0'; }, 2600);
+}
+
+let _buying = false;
+async function buyPack(packId) {
+  if (_buying) return;                       // évite le double-tap
   const cfg = PACK_CONFIG[packId];
-  const name = cfg?.name[currentLang] || packId;
-  const price = cfg?.price || '';
-  alert(`Achat du ${name} — ${price}\n\n(Système d'achat à intégrer via RevenueCat)`);
+  if (!cfg) return;
+
+  if (!window.SFBilling || !SFBilling.isAvailable()) {
+    sfToast(bt('unavailable'));
+    return;
+  }
+  if (SFBilling.isUnlocked(packId)) { sfToast(bt('owned')); return; }
+
+  _buying = true;
+  sfToast(bt('pending'));
+  try {
+    const res = await SFBilling.buy(packId);
+    if (res.ok) {
+      sfToast(bt('success'));
+      renderLibrary();
+    } else if (res.reason === 'cancelled') {
+      // fermeture volontaire de la fenêtre Google Play : rien à signaler
+    } else {
+      sfToast(bt('failed'));
+    }
+  } finally {
+    _buying = false;
+  }
+}
+
+// Google Play impose un moyen de restaurer ses achats (changement
+// de téléphone, réinstallation) — sinon l'utilisateur perd ses packs.
+async function restorePurchases() {
+  if (!window.SFBilling || !SFBilling.isAvailable()) {
+    sfToast(bt('unavailable'));
+    return;
+  }
+  const before = SFBilling.getUnlockedPacks().length;
+  sfToast(bt('restoring'));
+  const res = await SFBilling.restore();
+  if (!res.ok) { sfToast(bt('failed')); return; }
+  renderLibrary();
+  sfToast(res.packs.length > before ? bt('restored') : bt('nothing'));
+}
+
+// Bouton de restauration en bas de la bibliothèque
+function injectRestoreButton() {
+  if (document.getElementById('btn-restore')) return;
+  const content = document.getElementById('content');
+  if (!content) return;
+  const wrap = document.createElement('div');
+  wrap.style.cssText = 'text-align:center;padding:24px 16px 40px';
+  wrap.innerHTML = `<button id="btn-restore"
+      style="background:none;border:1px solid #2a2418;color:#9a8a70;font-size:11px;
+             letter-spacing:1.5px;padding:10px 18px;border-radius:8px;cursor:pointer;
+             font-family:Lato,sans-serif">${bt('restore')}</button>`;
+  content.appendChild(wrap);
+  document.getElementById('btn-restore').onclick = restorePurchases;
 }
 
 // ── NAME POPUP (repris de index) ──
@@ -595,6 +690,13 @@ function showNamePopup(file) {
 // ══════════════════════════════════════════════
 // INIT
 // ══════════════════════════════════════════════
+
+// Initialise la facturation puis rafraîchit l'affichage quand les
+// droits arrivent (asynchrone : la bibliothèque s'affiche sans attendre).
+if (window.SFBilling) {
+  SFBilling.onChange(() => { try { renderLibrary(); } catch(e) {} });
+  SFBilling.init();
+}
 
 loadGames();
 </script>
