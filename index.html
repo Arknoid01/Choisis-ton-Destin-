@@ -275,8 +275,19 @@ body {
 #btn-progress { animation-delay:1.2s; }
 #btn-news     { animation-delay:1.4s; }
 #btn-community { animation-delay:1.5s; }
-#btn-submit   { animation-delay:1.6s; }
-#btn-contact  { animation-delay:1.8s; }
+#btn-ai-create { animation-delay:1.55s; }
+#btn-submit   { animation-delay:1.65s; }
+#btn-contact  { animation-delay:1.85s; }
+.btn-main.ai-btn {
+  background:linear-gradient(135deg, rgba(124,109,250,0.14), rgba(109,250,188,0.08));
+  border-color:rgba(124,109,250,0.45);
+  color:#c0b0ff;
+}
+.btn-main.ai-btn:hover {
+  border-color:#b8a8ff;
+  box-shadow:0 0 30px rgba(124,109,250,0.15), inset 0 0 30px rgba(124,109,250,0.06);
+  color:#d4cbff;
+}
 .btn-main::before {
   content:''; position:absolute; inset:0;
   background:linear-gradient(135deg, rgba(200,169,110,0.1), transparent);
@@ -694,9 +705,6 @@ body {
   color:var(--dimmer); text-align:center; margin-top:12px;
   letter-spacing:.5px; line-height:1.5;
 }
-  from { opacity:0; transform:translateY(16px); }
-  to   { opacity:1; transform:translateY(0); }
-}
 
 /* ── MOBILE ── */
 @media (max-width:480px) {
@@ -846,6 +854,9 @@ body {
     </button>
     <button class="btn-main" id="btn-community" onclick="SFCommunity.open()">
       <span id="txt-btn-community">🏆 Communauté</span>
+    </button>
+    <button class="btn-main ai-btn" id="btn-ai-create" onclick="window.location.href='ai-guide.html'">
+      <span id="txt-btn-ai">✦ Créer avec l'IA</span>
     </button>
     <button class="btn-main" id="btn-submit" onclick="openSubmitPopup()">
       <span id="txt-btn-submit">✍ Soumettre une histoire</span>
@@ -1032,6 +1043,7 @@ const LANG = {
     btnOptions:     'Options',
     btnNews:        '📰 Actualités',
     btnCommunity:   '🏆 Communauté',
+    btnAiCreate:    '✦ Créer avec l\'IA',
     btnProgress:    '✦ Ma progression',
     btnSubmit:      '✍ Soumettre une histoire',
     btnContact:     '✉ Nous contacter',
@@ -1080,7 +1092,7 @@ const LANG = {
     perk3:          '<strong>Badge Auteur</strong> — Votre nom associé à votre création dans l\'app',
     submitEditor:   'Ouvrir l\'éditeur',
     submitCancel:   'Annuler',
-    submitAi:       '✦ Aide Éditeur & IA',
+    submitAi:       '✦ Créer avec l\'IA',
     submitNote:     'Ouvrez StoryForge, écrivez votre histoire, remplissez le formulaire d\'envoi — le JSON part en un clic, sans export manuel.',
     submitContest:  'Voir le concours en cours →',
     tutoTitle:      'Astuces de navigation',
@@ -1106,6 +1118,7 @@ const LANG = {
     btnOptions:     'Options',
     btnNews:        '📰 News',
     btnCommunity:   '🏆 Community',
+    btnAiCreate:    '✦ Create with AI',
     btnProgress:    '✦ My Progress',
     btnSubmit:      '✍ Submit a story',
     btnContact:     '✉ Contact us',
@@ -1154,7 +1167,7 @@ const LANG = {
     perk3:          '<strong>Author Badge</strong> — Your name linked to your creation in the app',
     submitEditor:   'Open the editor',
     submitCancel:   'Cancel',
-    submitAi:       '✦ Editor & AI Help',
+    submitAi:       '✦ Create with AI',
     submitNote:     'Open StoryForge, write your story, fill in the send form — your JSON goes out in one tap, no manual export.',
     submitContest:  'See the current contest →',
     tutoTitle:      'Navigation Tips',
@@ -1180,6 +1193,7 @@ const LANG = {
     btnOptions:     'Opciones',
     btnNews:        '📰 Noticias',
     btnCommunity:   '🏆 Comunidad',
+    btnAiCreate:    '✦ Crear con IA',
     btnProgress:    '✦ Mi progreso',
     btnSubmit:      '✍ Enviar una historia',
     btnContact:     '✉ Contacto',
@@ -1273,6 +1287,7 @@ function applyLang() {
   set('txt-btn-options',    t.btnOptions);
   set('txt-btn-news',       t.btnNews);
   set('txt-btn-community',  t.btnCommunity);
+  set('txt-btn-ai',         t.btnAiCreate);
   set('txt-btn-progress',   t.btnProgress);
   set('txt-btn-submit',     t.btnSubmit);
   set('txt-btn-contact',    t.btnContact);

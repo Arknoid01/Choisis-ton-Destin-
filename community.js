@@ -100,6 +100,22 @@ window.SFCommunity = (function () {
       .sf-comm-section::after{
         content:'';flex:1;height:1px;background:#2a2418;
       }
+      .sf-comm-ai{
+        background:linear-gradient(135deg,rgba(124,109,250,0.1),rgba(109,250,188,0.06));
+        border:1px solid rgba(124,109,250,0.35);border-radius:12px;
+        padding:14px 16px;margin-bottom:16px;
+      }
+      .sf-comm-ai-title{
+        font-family:'Cinzel',serif;font-size:13px;color:#d4cbff;
+        letter-spacing:1px;margin-bottom:6px;
+      }
+      .sf-comm-ai-text{font-size:12px;color:#9a8a70;line-height:1.55;margin-bottom:10px;}
+      .sf-comm-ai-btn{
+        width:100%;padding:10px 14px;border-radius:8px;cursor:pointer;
+        border:1px solid rgba(124,109,250,0.45);background:rgba(124,109,250,0.12);
+        color:#d4cbff;font-family:'Cinzel',serif;font-size:11px;letter-spacing:2px;
+      }
+      .sf-comm-ai-btn:hover{border-color:#b8a8ff;color:#fff;}
       .sf-comm-contest{
         background:linear-gradient(135deg,rgba(124,109,250,0.08),rgba(200,169,110,0.08));
         border:1px solid rgba(200,169,110,0.3);border-radius:12px;
@@ -225,6 +241,16 @@ window.SFCommunity = (function () {
     return null;
   }
 
+  function renderAiTip(d) {
+    if (!d.ai_tip_title) return '';
+    return `
+      <div class="sf-comm-ai">
+        <div class="sf-comm-ai-title">${esc(d.ai_tip_title)}</div>
+        <div class="sf-comm-ai-text">${esc(d.ai_tip_text || '')}</div>
+        <button type="button" class="sf-comm-ai-btn" id="sf-comm-ai">${esc(d.btn_ai || 'AI')}</button>
+      </div>`;
+  }
+
   function renderContest(d) {
     const c = d.contest;
     if (!c || !c.active) return '';
@@ -284,6 +310,11 @@ window.SFCommunity = (function () {
     window.location.href = 'game.html?story=' + encodeURIComponent(file);
   }
 
+  function goAi() {
+    close();
+    window.location.href = 'ai-guide.html';
+  }
+
   function goSubmit() {
     close();
     if (typeof openSubmitPopup === 'function') {
@@ -311,7 +342,7 @@ window.SFCommunity = (function () {
     document.getElementById('sf-comm-title').textContent = d.title || 'Communauté';
     document.getElementById('sf-comm-sub').textContent = d.subtitle || '';
     document.getElementById('sf-comm-body').innerHTML =
-      renderContest(d) + renderStories(d) + renderCreators(d);
+      renderContest(d) + renderAiTip(d) + renderStories(d) + renderCreators(d);
 
     document.getElementById('sf-comm-body').querySelectorAll('.sf-comm-card[data-file]').forEach(card => {
       const file = card.getAttribute('data-file');
@@ -332,6 +363,8 @@ window.SFCommunity = (function () {
     if (showParticipate) {
       document.getElementById('sf-comm-participate').addEventListener('click', goSubmit);
     }
+    const aiBtn = document.getElementById('sf-comm-ai');
+    if (aiBtn) aiBtn.addEventListener('click', goAi);
     document.getElementById('sf-comm-submit').addEventListener('click', goSubmit);
     document.getElementById('sf-comm-close-btn').addEventListener('click', close);
 
