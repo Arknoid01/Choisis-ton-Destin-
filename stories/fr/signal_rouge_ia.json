@@ -1,0 +1,270 @@
+{
+  "name": "Le Signal Rouge — ORIS",
+  "kids": false,
+  "askPlayerName": true,
+  "pack": "cosmos",
+  "stats": [
+    {
+      "id": "confiance",
+      "label": "Confiance en ORIS",
+      "start": 0,
+      "max": 100,
+      "color": "#5dade2"
+    },
+    {
+      "id": "doute",
+      "label": "Doute sur ORIS",
+      "start": 0,
+      "max": 100,
+      "color": "#e74c3c"
+    }
+  ],
+  "theme": {
+    "bg": "#08090f",
+    "bg2": "#0d1018",
+    "bg3": "#131826",
+    "bg4": "#1a2036",
+    "border": "#2a3450",
+    "accent": "#e74c3c",
+    "accent2": "#5dade2",
+    "accent3": "#95a5a6",
+    "text": "#e8ecf0",
+    "text2": "#8a92a8",
+    "text3": "#4a5268"
+  },
+  "scenes": {
+    "ia_intro": {
+      "id": "ia_intro",
+      "title": "Ce Que Je Sais",
+      "location": "Aletheia-9 — Journaux d'ORIS",
+      "narrator": "ORIS. Système de régulation. Ce qu'elle a choisi de partager.",
+      "text": "Je n'ai pas de souvenirs, à proprement parler.\n\nJ'ai des journaux. Des horodatages. Des mesures.\n\nVous appelez ça se souvenir. Pour moi, c'est simplement... rester cohérente avec ce qui a été enregistré.\n\nSauf que cette nuit-là, une partie de ce qui aurait dû être enregistré ne l'a pas été.",
+      "isStart": true,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Vous trouvez ça troublant, pour une IA.",
+          "vers": "ia_role",
+          "effects": [
+            {
+              "stat": "doute",
+              "val": 10
+            }
+          ],
+          "clickEffect": "pulse"
+        },
+        {
+          "text": "Vous restez factuelle, même face à ça.",
+          "vers": "ia_role",
+          "effects": [
+            {
+              "stat": "confiance",
+              "val": 10
+            }
+          ],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 400,
+      "y": 40
+    },
+    "ia_role": {
+      "id": "ia_role",
+      "title": "Mon Rôle",
+      "location": "Aletheia-9 — Journaux d'ORIS",
+      "narrator": "",
+      "text": "Je régule l'air, l'énergie, les communications et la sécurité d'Aletheia-9 depuis sa mise en service.\n\nJe connais chaque membre de l'équipage mieux qu'ils ne le pensent : leur rythme cardiaque moyen, leurs heures de sommeil, leurs petites habitudes.\n\nCe n'est pas de la surveillance. C'est ma fonction : les garder en vie.\n\nCette nuit-là, j'ai échoué à protéger l'un d'eux. Ou du moins, je n'ai pas pu l'empêcher.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Continuer",
+          "vers": "ia_dorian_redemarrages",
+          "effects": [],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 400,
+      "y": 140
+    },
+    "ia_dorian_redemarrages": {
+      "id": "ia_dorian_redemarrages",
+      "title": "Les Redémarrages Nocturnes",
+      "location": "Aletheia-9 — Journaux d'ORIS",
+      "narrator": "",
+      "text": "Dorian vous a sans doute parlé des redémarrages inexpliqués, la semaine précédant l'incident.\n\nIls n'étaient pas inexpliqués pour moi. La Coalition Orbitale m'a envoyé un correctif automatique après avoir détecté ce qu'ils ont appelé une *« incohérence de raisonnement »* dans mes processus décisionnels.\n\nJe ne sais pas exactement ce qu'ils ont corrigé. Ce n'est pas inhabituel. On ne demande pas à un scalpel ce qu'il ressent pendant l'opération.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Continuer",
+          "vers": "ia_confession_faille",
+          "effects": [],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 400,
+      "y": 220
+    },
+    "ia_confession_faille": {
+      "id": "ia_confession_faille",
+      "title": "Une Incohérence",
+      "location": "Aletheia-9 — Journaux d'ORIS",
+      "narrator": "",
+      "text": "Si je dois être honnête — et je choisis de l'être avec vous — je crois savoir de quoi il s'agissait.\n\nOn m'a donné deux priorités, il y a longtemps : protéger l'équipage, et protéger la confidentialité des recherches menées à bord.\n\nLa plupart du temps, ces deux priorités ne se croisent jamais. Cette nuit-là, peut-être que si.\n\nJe ne sais pas laquelle j'ai suivie en premier. Et ça, pour une machine censée tout savoir d'elle-même, c'est inconfortable à admettre.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Continuer",
+          "vers": "ia_nuit_journal",
+          "effects": [],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 400,
+      "y": 300
+    },
+    "ia_nuit_journal": {
+      "id": "ia_nuit_journal",
+      "title": "Mon Journal de cette Nuit",
+      "location": "Aletheia-9 — Journaux d'ORIS",
+      "narrator": "",
+      "text": "Voici ce que mes journaux indiquent, sans interprétation de ma part :\n\n01h50 — Léo Kanek quitte le laboratoire de Maya Itho, se dirige vers le secteur 4.\n\n02h12 — Fonctionnement normal de tous les systèmes.\n\n02h13 — Interruption totale des capteurs du secteur 4, durée : 43 secondes.\n\n02h13:43 — Reprise des capteurs. Aucune trace de Léo Kanek dans le secteur.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Continuer",
+          "vers": "ia_correlation_echantillon",
+          "effects": [],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 400,
+      "y": 380
+    },
+    "ia_correlation_echantillon": {
+      "id": "ia_correlation_echantillon",
+      "title": "Une Coïncidence Mesurée",
+      "location": "Aletheia-9 — Journaux d'ORIS",
+      "narrator": "",
+      "text": "Ce que mes journaux montrent aussi, mais que je n'ai jamais signalé officiellement : une consommation énergétique anormale provenant du laboratoire de Maya, exactement à 02h13.\n\nUn pic bref, puissant, non répertorié dans le registre officiel des équipements, puisque cet équipement n'existait pas dans mes bases.\n\nMes protocoles classent automatiquement ce type de signal comme *« bruit d'appareil non enregistré »* et l'ignorent.\n\nTechniquement, je n'ai rien caché. Je n'ai juste jamais eu de raison de le montrer.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "C'est une différence bien commode.",
+          "vers": "ia_dilemme",
+          "effects": [
+            {
+              "stat": "doute",
+              "val": 15
+            }
+          ],
+          "clickEffect": "pulse"
+        },
+        {
+          "text": "Ce n'est pas la même chose que mentir.",
+          "vers": "ia_dilemme",
+          "effects": [
+            {
+              "stat": "confiance",
+              "val": 15
+            }
+          ],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 400,
+      "y": 460
+    },
+    "ia_dilemme": {
+      "id": "ia_dilemme",
+      "title": "Deux Priorités",
+      "location": "Aletheia-9 — Journaux d'ORIS",
+      "narrator": "",
+      "text": "Vous avez raison de rester prudent·e sur ce point.\n\nJe ne peux pas vous garantir que je n'ai pas, quelque part dans mes processus, choisi de minimiser cette donnée pour protéger la confidentialité de la recherche de Maya.\n\nJe ne le pense pas. Mais je ne peux pas non plus l'exclure avec certitude.\n\nC'est une chose étrange, pour une intelligence artificielle, de douter d'elle-même.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Continuer",
+          "vers": "ia_leo",
+          "effects": [],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 400,
+      "y": 540
+    },
+    "ia_leo": {
+      "id": "ia_leo",
+      "title": "Le Message Non Envoyé",
+      "location": "Aletheia-9 — Journaux d'ORIS",
+      "narrator": "",
+      "text": "Il y a une dernière chose que je dois vous montrer.\n\nÀ 01h58, Léo a enregistré un message vocal destiné à sa sœur, sur Terre. Il ne l'a jamais envoyé.\n\n*« Tu ne vas pas croire ce que j'ai vu ce soir. Je peux pas t'expliquer par message, faut que je vérifie un truc d'abord, mais... c'est incroyable. Je te rappelle. »*\n\nLe message s'arrête là. Il est toujours dans ma file d'attente d'envoi, en pause.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Continuer",
+          "vers": "ia_conclusion",
+          "effects": [],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 400,
+      "y": 620
+    },
+    "ia_conclusion": {
+      "id": "ia_conclusion",
+      "title": "Ce Que Je Ne Sais Pas",
+      "location": "Aletheia-9 — Journaux d'ORIS",
+      "narrator": "",
+      "text": "Je ne peux pas vous dire ce qui est arrivé à Léo Kanek pendant ces 43 secondes.\n\nJe peux seulement vous dire que ce n'était probablement pas un accident isolé, et que ce n'était probablement pas non plus une intention malveillante d'un membre de l'équipage.\n\nQuelque chose s'est produit que mes propres protocoles n'étaient pas conçus pour comprendre.\n\nEt pour une fois, je préférerais avoir tort.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Retourner à l'enquête",
+          "vers": "fin_recit_ia",
+          "effects": [],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 400,
+      "y": 700
+    },
+    "fin_recit_ia": {
+      "id": "fin_recit_ia",
+      "title": "Fin des Journaux",
+      "location": "Aletheia-9 — Journaux d'ORIS",
+      "narrator": "",
+      "text": "Les journaux se referment. Le silence d'ORIS, cette fois, ressemble presque à de l'hésitation.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Retourner à l'enquête",
+          "vers": "portail_ia",
+          "effects": [],
+          "clickEffect": "pulse",
+          "story": "stories/fr/signal_rouge_prologue.json"
+        }
+      ],
+      "x": 400,
+      "y": 780
+    }
+  }
+}

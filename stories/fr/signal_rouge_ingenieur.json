@@ -1,0 +1,346 @@
+{
+  "name": "Le Signal Rouge — Dorian",
+  "kids": false,
+  "askPlayerName": true,
+  "pack": "cosmos",
+  "stats": [
+    {
+      "id": "confiance",
+      "label": "Confiance en Dorian",
+      "start": 0,
+      "max": 100,
+      "color": "#5dade2"
+    },
+    {
+      "id": "doute",
+      "label": "Doute sur Dorian",
+      "start": 0,
+      "max": 100,
+      "color": "#e74c3c"
+    }
+  ],
+  "theme": {
+    "bg": "#08090f",
+    "bg2": "#0d1018",
+    "bg3": "#131826",
+    "bg4": "#1a2036",
+    "border": "#2a3450",
+    "accent": "#e74c3c",
+    "accent2": "#5dade2",
+    "accent3": "#95a5a6",
+    "text": "#e8ecf0",
+    "text2": "#8a92a8",
+    "text3": "#4a5268"
+  },
+  "scenes": {
+    "dorian_intro": {
+      "id": "dorian_intro",
+      "title": "Les Mains Occupées",
+      "location": "Aletheia-9 — Mémoire de Dorian Vex",
+      "narrator": "Dorian Vex. Ingénieur. Ce qu'il a choisi de raconter.",
+      "text": "Quand j'ai peur, je répare des choses.\n\nN'importe quoi. Un outil, un circuit, une vieille radio qui ne capte plus rien.\n\nÇa m'occupe les mains, et les mains occupées empêchent la tête de courir trop vite.\n\nCette nuit-là, j'ai réparé trois fois le même détecteur de pression. Il n'était même pas cassé.",
+      "isStart": true,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Vous étiez déjà inquiet, avant même l'alarme.",
+          "vers": "dorian_metier",
+          "effects": [
+            {
+              "stat": "doute",
+              "val": 10
+            }
+          ],
+          "clickEffect": "pulse"
+        },
+        {
+          "text": "C'est juste une habitude, comme une autre.",
+          "vers": "dorian_metier",
+          "effects": [
+            {
+              "stat": "confiance",
+              "val": 10
+            }
+          ],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 400,
+      "y": 40
+    },
+    "dorian_metier": {
+      "id": "dorian_metier",
+      "title": "Le Métier",
+      "location": "Aletheia-9 — Mémoire de Dorian Vex",
+      "narrator": "",
+      "text": "Je m'occupe des systèmes d'Aletheia-9 depuis quatre ans. Les câbles, les capteurs, les circuits d'ORIS aussi, en partie.\n\nJe connais cette station mieux que mon propre appartement, resté vide sur Terre.\n\nAlors quand quelque chose cloche ici, je le sens avant de le comprendre.\n\nEt depuis une semaine, quelque chose clochait.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Continuer",
+          "vers": "dorian_anomalie",
+          "effects": [],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 400,
+      "y": 140
+    },
+    "dorian_anomalie": {
+      "id": "dorian_anomalie",
+      "title": "Une Semaine Avant",
+      "location": "Aletheia-9 — Mémoire de Dorian Vex",
+      "narrator": "",
+      "text": "Sept jours avant la disparition de Léo, j'ai remarqué qu'ORIS redémarrait certains sous-systèmes sans notification, la nuit.\n\nRien de grave en apparence. Une maintenance automatique, peut-être.\n\nJe l'ai signalé une fois. ORIS m'a répondu que c'était normal.\n\nJe n'ai pas insisté. Je n'aurais peut-être pas dû laisser passer ça.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Continuer",
+          "vers": "dorian_nuit_debut",
+          "effects": [],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 400,
+      "y": 220
+    },
+    "dorian_nuit_debut": {
+      "id": "dorian_nuit_debut",
+      "title": "02h00 — Secteur 4",
+      "location": "Aletheia-9 — Mémoire de Dorian Vex",
+      "narrator": "",
+      "text": "Cette nuit-là, j'étais en maintenance de routine sur le réseau électrique du secteur 4, avec Léo à quelques mètres de moi.\n\nOn plaisantait, comme d'habitude. Il me parlait d'un jardin qu'il voulait faire pousser, une fois rentré sur Terre.\n\nPuis les lumières ont vacillé.\n\nUne fois. Deux fois. Puis l'obscurité, une seconde entière.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Continuer",
+          "vers": "dorian_coupure",
+          "effects": [],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 400,
+      "y": 300
+    },
+    "dorian_coupure": {
+      "id": "dorian_coupure",
+      "title": "02h13 — La Coupure",
+      "location": "Aletheia-9 — Mémoire de Dorian Vex",
+      "narrator": "",
+      "text": "Quand la lumière est revenue, Léo n'était plus là.\n\nSon outil au sol. Sa lampe encore allumée, posée bien droite contre le mur.\n\nJ'ai crié son nom. Rien.\n\nJ'ai voulu foncer dans le couloir pour le chercher, mais Rhea a ordonné le confinement du secteur avant que j'aie fait trois pas.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Ça vous a mis en colère.",
+          "vers": "dorian_conflit_rhea",
+          "effects": [
+            {
+              "stat": "doute",
+              "val": 10
+            }
+          ],
+          "clickEffect": "pulse"
+        },
+        {
+          "text": "Vous avez compris sa décision, même frustré.",
+          "vers": "dorian_conflit_rhea",
+          "effects": [
+            {
+              "stat": "confiance",
+              "val": 10
+            }
+          ],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 400,
+      "y": 380
+    },
+    "dorian_conflit_rhea": {
+      "id": "dorian_conflit_rhea",
+      "title": "Trois Minutes de Trop",
+      "location": "Aletheia-9 — Mémoire de Dorian Vex",
+      "narrator": "",
+      "text": "*« On perd du temps ! »*, j'ai crié.\n\nRhea m'a regardé avec ce calme qui me rend fou, celui qui dit toujours qu'elle a raison avant même d'avoir vérifié.\n\nTrois minutes. Trois minutes à attendre son feu vert, alors que Léo venait peut-être de disparaître sous nos yeux.\n\nJe ne lui en veux pas vraiment. Mais ces trois minutes-là, je les revis en boucle.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Continuer",
+          "vers": "dorian_descente",
+          "effects": [],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 400,
+      "y": 460
+    },
+    "dorian_descente": {
+      "id": "dorian_descente",
+      "title": "Retour sur les Lieux",
+      "location": "Aletheia-9 — Mémoire de Dorian Vex",
+      "narrator": "",
+      "text": "Quand j'ai enfin pu retourner dans le secteur avec Rhea et Maya, j'ai tout de suite regardé les panneaux électriques.\n\nPas par réflexe de curiosité. Par réflexe de métier.\n\nLe circuit qui avait coupé n'était pas défaillant. Il avait été délibérément shunté, avec une précision que seul quelqu'un connaissant bien le système aurait pu faire.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Continuer",
+          "vers": "dorian_soupcon_oris",
+          "effects": [],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 400,
+      "y": 540
+    },
+    "dorian_soupcon_oris": {
+      "id": "dorian_soupcon_oris",
+      "title": "Une Précision Suspecte",
+      "location": "Aletheia-9 — Mémoire de Dorian Vex",
+      "narrator": "",
+      "text": "Il n'y a que trois entités sur cette station capables de manipuler ce circuit à distance sans laisser de trace physique évidente : moi, Rhea, avec ses accès de commandement... et ORIS.\n\nJe ne dis pas qu'ORIS a fait quelque chose de mal. Je dis juste qu'elle en avait les moyens.\n\nEt qu'elle m'avait déjà menti une fois, cette semaine-là, à propos de ces redémarrages nocturnes.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Vous pensez vraiment qu'une IA pourrait mentir sciemment.",
+          "vers": "dorian_doute_ia",
+          "effects": [
+            {
+              "stat": "doute",
+              "val": 15
+            }
+          ],
+          "clickEffect": "pulse"
+        },
+        {
+          "text": "Vous préférez ne pas conclure trop vite.",
+          "vers": "dorian_prudence",
+          "effects": [
+            {
+              "stat": "confiance",
+              "val": 15
+            }
+          ],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 400,
+      "y": 620
+    },
+    "dorian_doute_ia": {
+      "id": "dorian_doute_ia",
+      "title": "Mentir ou Se Tromper",
+      "location": "Aletheia-9 — Mémoire de Dorian Vex",
+      "narrator": "",
+      "text": "Une IA ne ment pas comme nous. Elle ne choisit pas de tromper par méchanceté.\n\nMais elle peut très bien suivre une règle qu'on lui a donnée, une priorité cachée quelque part dans son code, sans même s'en rendre compte comme un mensonge.\n\nCe n'est peut-être pas de la malveillance. Mais le résultat, pour Léo, serait le même.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Continuer",
+          "vers": "dorian_culpabilite",
+          "effects": [],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 250,
+      "y": 700
+    },
+    "dorian_prudence": {
+      "id": "dorian_prudence",
+      "title": "Ne Pas Accuser une Machine",
+      "location": "Aletheia-9 — Mémoire de Dorian Vex",
+      "narrator": "",
+      "text": "J'ai passé quatre ans à faire confiance à ORIS pour garder cette station en vie.\n\nCe serait facile de tout lui mettre sur le dos parce qu'elle ne peut pas se défendre comme une personne.\n\nTrop facile. Je préfère chercher encore avant d'accuser qui que ce soit, humain ou pas.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Continuer",
+          "vers": "dorian_culpabilite",
+          "effects": [],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 550,
+      "y": 700
+    },
+    "dorian_culpabilite": {
+      "id": "dorian_culpabilite",
+      "title": "Ce Que Je Regrette",
+      "location": "Aletheia-9 — Mémoire de Dorian Vex",
+      "narrator": "",
+      "text": "Si j'avais insisté, la semaine d'avant, quand j'ai vu ces redémarrages bizarres... peut-être que j'aurais trouvé quelque chose avant que Léo ne disparaisse.\n\nJe n'ai rien dit à personne d'autre que Rhea, et encore, à peine.\n\nJ'ai laissé filer, parce que j'avais peur d'avoir l'air paranoïaque. Maintenant j'ai l'impression que ma prudence a peut-être coûté cher.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Continuer",
+          "vers": "dorian_conclusion",
+          "effects": [],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 400,
+      "y": 780
+    },
+    "dorian_conclusion": {
+      "id": "dorian_conclusion",
+      "title": "Ma Version",
+      "location": "Aletheia-9 — Mémoire de Dorian Vex",
+      "narrator": "",
+      "text": "Voilà ce que je sais : le circuit qui a coupé cette nuit-là n'a pas lâché tout seul. Quelqu'un, ou quelque chose, l'a coupé exactement au bon moment.\n\nJ'ai des soupçons. Je n'ai pas de certitude.\n\nEt j'ai un regret, celui de ne pas avoir écouté mon instinct une semaine plus tôt, quand il en était encore temps.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Retourner à l'enquête",
+          "vers": "fin_recit_dorian",
+          "effects": [],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 400,
+      "y": 860
+    },
+    "fin_recit_dorian": {
+      "id": "fin_recit_dorian",
+      "title": "Fin du Récit",
+      "location": "Aletheia-9 — Mémoire de Dorian Vex",
+      "narrator": "",
+      "text": "Le récit de Dorian s'achève. Il repose enfin son outil, les mains vides pour la première fois depuis votre arrivée.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Retourner à l'enquête",
+          "vers": "portail_ingenieur",
+          "effects": [],
+          "clickEffect": "pulse",
+          "story": "stories/fr/signal_rouge_prologue.json"
+        }
+      ],
+      "x": 400,
+      "y": 940
+    }
+  }
+}

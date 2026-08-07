@@ -1,0 +1,346 @@
+{
+  "name": "Le Signal Rouge — Rhea",
+  "kids": false,
+  "askPlayerName": true,
+  "pack": "cosmos",
+  "stats": [
+    {
+      "id": "confiance",
+      "label": "Confiance en Rhea",
+      "start": 0,
+      "max": 100,
+      "color": "#5dade2"
+    },
+    {
+      "id": "doute",
+      "label": "Doute sur Rhea",
+      "start": 0,
+      "max": 100,
+      "color": "#e74c3c"
+    }
+  ],
+  "theme": {
+    "bg": "#08090f",
+    "bg2": "#0d1018",
+    "bg3": "#131826",
+    "bg4": "#1a2036",
+    "border": "#2a3450",
+    "accent": "#e74c3c",
+    "accent2": "#5dade2",
+    "accent3": "#95a5a6",
+    "text": "#e8ecf0",
+    "text2": "#8a92a8",
+    "text3": "#4a5268"
+  },
+  "scenes": {
+    "rhea_intro": {
+      "id": "rhea_intro",
+      "title": "Le Protocole",
+      "location": "Aletheia-9 — Mémoire de Rhea Solys",
+      "narrator": "Rhea Solys. Commandante. Ce qu'elle a choisi de raconter.",
+      "text": "Un protocole n'est pas une prison.\n\nC'est un filet.\n\nOn le tisse avant la chute, pas pendant.\n\nJ'ai passé onze ans à apprendre ça, avant de prendre le commandement d'Aletheia-9.\n\nOnze ans à croire que si je suivais chaque règle, à la lettre, personne sous mes ordres ne se perdrait.",
+      "isStart": true,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Vous avez toujours cru en la discipline.",
+          "vers": "rhea_devoir",
+          "effects": [
+            {
+              "stat": "confiance",
+              "val": 10
+            }
+          ],
+          "clickEffect": "pulse"
+        },
+        {
+          "text": "La discipline vous a coûté quelque chose, un jour.",
+          "vers": "rhea_devoir",
+          "effects": [
+            {
+              "stat": "doute",
+              "val": 10
+            }
+          ],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 400,
+      "y": 40
+    },
+    "rhea_devoir": {
+      "id": "rhea_devoir",
+      "title": "Onze Ans de Silence",
+      "location": "Aletheia-9 — Mémoire de Rhea Solys",
+      "narrator": "",
+      "text": "Avant Aletheia-9, j'ai perdu un homme sous mon commandement. Une autre station, une autre vie.\n\nUne erreur de procédure. La mienne.\n\nDepuis, je ne laisse plus rien au hasard.\n\nMon équipage me trouve froide. Rigide. Peut-être.\n\nMais aucun de mes équipages n'a jamais perdu personne. Jusqu'à cette nuit.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Continuer",
+          "vers": "rhea_nuit_debut",
+          "effects": [],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 400,
+      "y": 140
+    },
+    "rhea_nuit_debut": {
+      "id": "rhea_nuit_debut",
+      "title": "02h00 — Poste de Commandement",
+      "location": "Aletheia-9 — Mémoire de Rhea Solys",
+      "narrator": "",
+      "text": "Cette nuit-là, je faisais ma ronde de contrôle habituelle. Rien d'anormal.\n\nDorian était en maintenance de routine, secteur 4. Maya travaillait tard sur ses cultures cellulaires, comme toujours.\n\nLéo effectuait une vérification des câblages électriques, prévue depuis trois jours.\n\nUne nuit ordinaire. Je l'aurais juré.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Continuer",
+          "vers": "rhea_alerte",
+          "effects": [],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 400,
+      "y": 220
+    },
+    "rhea_alerte": {
+      "id": "rhea_alerte",
+      "title": "02h13 — L'Alarme",
+      "location": "Aletheia-9 — Mémoire de Rhea Solys",
+      "narrator": "",
+      "text": "L'alarme rouge a retenti à 02h13 précises. Micro-coupure secteur 4, puis silence radio de Léo.\n\nORIS n'arrivait plus à localiser son transpondeur.\n\nEn onze ans, je n'avais jamais vu ce type de défaillance.\n\nMon premier réflexe a été le protocole de confinement. Toujours le protocole.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Vous avez suivi le protocole à la lettre.",
+          "vers": "rhea_lockdown",
+          "effects": [
+            {
+              "stat": "confiance",
+              "val": 10
+            }
+          ],
+          "clickEffect": "pulse"
+        },
+        {
+          "text": "Vous avez hésité, une seconde de trop.",
+          "vers": "rhea_lockdown",
+          "effects": [
+            {
+              "stat": "doute",
+              "val": 10
+            }
+          ],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 400,
+      "y": 300
+    },
+    "rhea_lockdown": {
+      "id": "rhea_lockdown",
+      "title": "Confinement Partiel",
+      "location": "Aletheia-9 — Mémoire de Rhea Solys",
+      "narrator": "",
+      "text": "J'ai ordonné le confinement partiel du secteur 4, le temps d'évaluer la menace.\n\nDorian voulait y aller immédiatement, sans attendre mon feu vert.\n\nJe l'ai retenu. Le protocole existe pour ça : ne pas envoyer une deuxième personne se perdre en cherchant la première.\n\nIl ne me l'a pas pardonné, je crois.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Continuer",
+          "vers": "rhea_conflit_dorian",
+          "effects": [],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 400,
+      "y": 380
+    },
+    "rhea_conflit_dorian": {
+      "id": "rhea_conflit_dorian",
+      "title": "Un Désaccord",
+      "location": "Aletheia-9 — Mémoire de Rhea Solys",
+      "narrator": "",
+      "text": "*« On perd du temps ! »*, m'a-t-il crié.\n\n*« On ne perd rien. On évite d'en perdre deux. »*, j'ai répondu.\n\nIl a serré les poings, mais il est resté. Comme toujours.\n\nTrois minutes plus tard, j'ai levé le confinement et je suis descendue moi-même, avec Maya.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Continuer",
+          "vers": "rhea_deplacement",
+          "effects": [],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 400,
+      "y": 460
+    },
+    "rhea_deplacement": {
+      "id": "rhea_deplacement",
+      "title": "Descente au Secteur 4",
+      "location": "Aletheia-9 — Mémoire de Rhea Solys",
+      "narrator": "",
+      "text": "Le trajet a duré quatre minutes. Maya ne disait rien, concentrée, presque trop calme pour la situation.\n\nLes néons du secteur clignotaient encore par intermittence.\n\nUne odeur de circuit brûlé flottait dans l'air, plus forte qu'elle n'aurait dû l'être pour une simple micro-coupure.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Continuer",
+          "vers": "rhea_scene_vide",
+          "effects": [],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 400,
+      "y": 540
+    },
+    "rhea_scene_vide": {
+      "id": "rhea_scene_vide",
+      "title": "Rien",
+      "location": "Aletheia-9 — Mémoire de Rhea Solys",
+      "narrator": "",
+      "text": "Le panneau de maintenance était ouvert. Les outils de Léo, posés au sol, bien rangés.\n\nTrop bien rangés pour quelqu'un en pleine urgence.\n\nAucune trace de lutte. Aucune trace de sortie. Aucune trace de lui, tout court.\n\nJ'ai senti, pour la première fois en onze ans, que le protocole ne suffirait peut-être pas.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Continuer",
+          "vers": "rhea_soupcon",
+          "effects": [],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 400,
+      "y": 620
+    },
+    "rhea_soupcon": {
+      "id": "rhea_soupcon",
+      "title": "Une Question de Procédure",
+      "location": "Aletheia-9 — Mémoire de Rhea Solys",
+      "narrator": "",
+      "text": "Ce n'était pas un accident. Un accident laisse du désordre. Là, tout était trop propre.\n\nJ'ai pensé à Dorian, à sa colère de ne pas être descendu tout de suite. À Maya, si calme, presque absente.\n\nJ'ai pensé à moi aussi, à cette minute de confinement qui a peut-être coûté une vie.\n\nUn bon commandant envisage toutes les hypothèses. Même les pires. Même les siennes.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Vous soupçonnez Dorian, n'est-ce pas ?",
+          "vers": "rhea_reflexion_dorian",
+          "effects": [
+            {
+              "stat": "doute",
+              "val": 10
+            }
+          ],
+          "clickEffect": "pulse"
+        },
+        {
+          "text": "Vous vous demandez si c'est votre faute.",
+          "vers": "rhea_secret",
+          "effects": [
+            {
+              "stat": "confiance",
+              "val": 10
+            }
+          ],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 400,
+      "y": 700
+    },
+    "rhea_reflexion_dorian": {
+      "id": "rhea_reflexion_dorian",
+      "title": "Le Nerveux",
+      "location": "Aletheia-9 — Mémoire de Rhea Solys",
+      "narrator": "",
+      "text": "Dorian panique facilement. Il improvise, il enfreint les règles quand ça l'arrange.\n\nCe n'est pas une preuve. Je le sais. Mais onze ans de commandement, ça apprend à repérer qui craque le premier.\n\nCette nuit-là, il a craqué avant même que je descende.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Continuer",
+          "vers": "rhea_secret",
+          "effects": [],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 250,
+      "y": 780
+    },
+    "rhea_secret": {
+      "id": "rhea_secret",
+      "title": "Ce Que Je N'ai Jamais Signalé",
+      "location": "Aletheia-9 — Mémoire de Rhea Solys",
+      "narrator": "",
+      "text": "Il y a six mois, un rapport technique signalait une instabilité dans le réseau électrique du secteur 4.\n\nJe l'ai classé comme mineur. Je ne voulais pas d'un audit de plus sur mon dossier, si près de ma promotion.\n\nJe ne pensais pas que ça reviendrait me hanter comme ça.\n\nSi j'avais fait remonter ce rapport... peut-être que Léo serait encore là.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Continuer",
+          "vers": "rhea_conclusion",
+          "effects": [],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 400,
+      "y": 860
+    },
+    "rhea_conclusion": {
+      "id": "rhea_conclusion",
+      "title": "Ma Version",
+      "location": "Aletheia-9 — Mémoire de Rhea Solys",
+      "narrator": "",
+      "text": "Voilà ce que je sais : quelqu'un, ou quelque chose, a fait disparaître Léo Kanek à 02h13, dans un secteur que je connaissais comme instable et que j'ai choisi de taire.\n\nJe ne peux pas vous dire qui. Ou quoi.\n\nMais je peux vous dire que le protocole, cette nuit-là, n'a pas suffi. Et que ça, c'est ma responsabilité.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Retourner à l'enquête",
+          "vers": "fin_recit_rhea",
+          "effects": [],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 400,
+      "y": 940
+    },
+    "fin_recit_rhea": {
+      "id": "fin_recit_rhea",
+      "title": "Fin du Récit",
+      "location": "Aletheia-9 — Mémoire de Rhea Solys",
+      "narrator": "",
+      "text": "Le récit de Rhea s'achève. Elle vous regarde, presque soulagée d'avoir enfin parlé.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Retourner à l'enquête",
+          "vers": "portail_commandante",
+          "effects": [],
+          "clickEffect": "pulse",
+          "story": "stories/fr/signal_rouge_prologue.json"
+        }
+      ],
+      "x": 400,
+      "y": 1020
+    }
+  }
+}

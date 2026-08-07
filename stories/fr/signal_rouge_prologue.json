@@ -1,0 +1,307 @@
+{
+  "name": "Le Signal Rouge — Prologue",
+  "kids": false,
+  "askPlayerName": true,
+  "pack": "cosmos",
+  "stats": [],
+  "theme": {
+    "bg": "#08090f",
+    "bg2": "#0d1018",
+    "bg3": "#131826",
+    "bg4": "#1a2036",
+    "border": "#2a3450",
+    "accent": "#e74c3c",
+    "accent2": "#5dade2",
+    "accent3": "#95a5a6",
+    "text": "#e8ecf0",
+    "text2": "#8a92a8",
+    "text3": "#4a5268"
+  },
+  "scenes": {
+    "prologue_arrivee": {
+      "id": "prologue_arrivee",
+      "title": "Le Signal Rouge",
+      "location": "SAS D'ARRIMAGE — ALETHEIA-9",
+      "narrator": "Un signal rouge ne ment jamais. Il dit juste : quelque chose s'est arrêté de fonctionner comme prévu.",
+      "text": "Trente-six heures plus tôt, la station de recherche Aletheia-9 a émis un signal de détresse de niveau rouge, puis plus rien.\n\nLa Coalition Orbitale t'a envoyé·e seul·e, à bord d'une navette rapide, avec une seule mission : comprendre ce qui s'est passé.\n\nLe sas s'ouvre dans un souffle métallique.\n\nL'air de la station est froid. Trop calme.\n\nUne voix synthétique t'accueille, posée, presque trop douce :\n\n*« Bienvenue à bord, {{player}}. Je suis ORIS, système de régulation d'Aletheia-9. On m'a informé de votre arrivée. »*",
+      "isStart": true,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Demander à ORIS un résumé immédiat de la situation",
+          "vers": "brief_situation",
+          "effects": [],
+          "clickEffect": "pulse"
+        },
+        {
+          "text": "Avancer directement vers le poste de commandement",
+          "vers": "accueil_station",
+          "effects": [],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 400,
+      "y": 40
+    },
+    "accueil_station": {
+      "id": "accueil_station",
+      "title": "Couloirs Silencieux",
+      "location": "COURSIVE PRINCIPALE — ALETHEIA-9",
+      "narrator": "Une station sans bruit d'équipage n'est jamais vraiment silencieuse. Elle retient juste son souffle.",
+      "text": "Tu avances dans la coursive principale. Les néons clignotent faiblement, en mode économie d'énergie.\n\nORIS te suit à travers les haut-parleurs du plafond, une pièce après l'autre.\n\n*« Trois membres d'équipage sont toujours en vie et stables. Ils vous attendent en salle commune. »*\n\nUne pause, un peu trop longue.\n\n*« Le quatrième, le technicien Léo Kanek, reste introuvable depuis la nuit du signal. »*",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Demander plus de détails sur Léo Kanek avant de continuer",
+          "vers": "brief_situation",
+          "effects": [],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 250,
+      "y": 140
+    },
+    "brief_situation": {
+      "id": "brief_situation",
+      "title": "Le Dossier Kanek",
+      "location": "POSTE DE COMMANDEMENT — ALETHEIA-9",
+      "narrator": "Une absence peut se lire comme un vide. Ou comme la forme exacte de quelque chose qu'on refuse de voir.",
+      "text": "ORIS affiche un dossier holographique : photo, matricule, poste.\n\n*« Léo Kanek, technicien de maintenance. Vu pour la dernière fois à 02h14, temps station, dans le secteur des coursives techniques. »*\n\n*« Aucune trace de sortie par un sas. Aucun signal de sa combinaison. Il n'est nulle part sur la station — et nulle part à l'extérieur non plus, selon mes capteurs. »*\n\n*« C'est... statistiquement impossible. »*\n\nLa voix d'ORIS reste calme. Mais quelque chose dans le silence qui suit ne l'est pas.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Aller directement examiner le secteur où Léo a disparu",
+          "vers": "scene_disparition",
+          "effects": [],
+          "clickEffect": "pulse"
+        },
+        {
+          "text": "Aller d'abord rencontrer les trois survivants",
+          "vers": "rencontre_equipage",
+          "effects": [],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 400,
+      "y": 220
+    },
+    "scene_disparition": {
+      "id": "scene_disparition",
+      "title": "Le Secteur Technique",
+      "location": "COURSIVE TECHNIQUE — SECTEUR 4",
+      "narrator": "Les lieux gardent toujours une trace, même quand les gens n'en laissent plus.",
+      "text": "Le secteur 4 est étroit, tapissé de câbles et de panneaux de maintenance.\n\nUn panneau électrique est resté ouvert, ses outils encore posés au sol, comme si Léo avait été interrompu en plein travail.\n\nUne légère odeur de circuit brûlé flotte encore dans l'air.\n\n*« Une micro-coupure de courant a été enregistrée ici à 02h13, une minute avant sa disparition des capteurs. »*, note ORIS.\n\n*« Je n'ai pas d'explication à vous fournir. Ce n'est pas dans mes habitudes de dire ça. »*",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Retourner rencontrer l'équipage avec cette information",
+          "vers": "rencontre_equipage",
+          "effects": [],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 550,
+      "y": 220
+    },
+    "rencontre_equipage": {
+      "id": "rencontre_equipage",
+      "title": "Trois Visages, Trois Nuits",
+      "location": "SALLE COMMUNE — ALETHEIA-9",
+      "narrator": "Trois personnes racontent souvent la même nuit comme si elles n'avaient pas dormi dans la même station.",
+      "text": "La salle commune est éclairée d'une lumière tamisée. Trois personnes sont assises, chacune à l'écart des deux autres.\n\nLa commandante Rhea Solys se lève la première, dos droit, voix ferme : *« Vous êtes en retard. »*\n\nL'ingénieur Dorian Vex ne lève même pas les yeux, occupé à démonter et remonter un petit outil, sans raison apparente.\n\nLa Dr Maya Itho, elle, t'observe longuement avant de parler, comme si elle cherchait à te classer dans une catégorie.\n\nTrois versions de la même nuit t'attendent. Aucune ne dit tout à fait la même chose.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Demander à chacun de raconter sa nuit, dans le calme",
+          "vers": "hub_temoignages",
+          "effects": [],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 400,
+      "y": 340
+    },
+    "hub_temoignages": {
+      "id": "hub_temoignages",
+      "title": "Trois Récits",
+      "location": "SALLE COMMUNE — ALETHEIA-9",
+      "narrator": "Écouter n'est pas juger. Pas encore.",
+      "text": "Tu proposes à chacun de te raconter sa version des faits, séparément.\n\nORIS t'informe qu'elle peut aussi te transmettre l'intégralité de ses journaux de bord de cette nuit, malgré quelques fragments corrompus.\n\nRien ne t'oblige à tout écouter dans un ordre précis. Mais chaque récit éclaire les autres différemment.\n\nPar qui commences-tu ?",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Écouter la commandante Rhea Solys",
+          "vers": "portail_commandante",
+          "effects": [],
+          "clickEffect": "pulse",
+          "story": "stories/fr/signal_rouge_commandante.json"
+        },
+        {
+          "text": "Écouter l'ingénieur Dorian Vex",
+          "vers": "portail_ingenieur",
+          "effects": [],
+          "clickEffect": "pulse",
+          "story": "stories/fr/signal_rouge_ingenieur.json"
+        },
+        {
+          "text": "Écouter la Dr Maya Itho",
+          "vers": "portail_scientifique",
+          "effects": [],
+          "clickEffect": "pulse",
+          "story": "stories/fr/signal_rouge_scientifique.json"
+        },
+        {
+          "text": "Consulter les journaux de bord d'ORIS",
+          "vers": "portail_ia",
+          "effects": [],
+          "clickEffect": "pulse",
+          "story": "stories/fr/signal_rouge_ia.json"
+        },
+        {
+          "text": "Tu as assez entendu — passer au verdict",
+          "vers": "transition_verdict",
+          "effects": [],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 400,
+      "y": 440
+    },
+    "portail_commandante": {
+      "id": "portail_commandante",
+      "title": "Après le Récit de Rhea",
+      "location": "SALLE COMMUNE — ALETHEIA-9",
+      "narrator": "Un récit ferme n'est pas forcément un récit vrai. Mais il en a souvent l'allure.",
+      "text": "Tu rouvres les yeux sur la salle commune.\n\nRhea te regarde, impassible, attendant une réaction que tu ne lui donnes pas.\n\n*« Vous avez ce qu'il vous fallait ? »*, demande-t-elle simplement.\n\nSa version est claire, presque trop nette pour une nuit de crise.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Écouter un autre témoignage",
+          "vers": "hub_temoignages",
+          "effects": [],
+          "clickEffect": "pulse"
+        },
+        {
+          "text": "Tu as assez entendu — passer au verdict",
+          "vers": "transition_verdict",
+          "effects": [],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 150,
+      "y": 560
+    },
+    "portail_ingenieur": {
+      "id": "portail_ingenieur",
+      "title": "Après le Récit de Dorian",
+      "location": "SALLE COMMUNE — ALETHEIA-9",
+      "narrator": "La nervosité n'est pas une preuve de culpabilité. Mais elle attire toujours le regard en premier.",
+      "text": "Tu rouvres les yeux. Dorian n'a pas arrêté de manipuler son outil pendant tout son récit.\n\n*« Je... j'ai juste raconté ce que j'ai vu. »*, dit-il, comme s'il se défendait déjà.\n\nSa version, elle, est pleine de détails techniques — et de trous, exactement là où on s'y attendrait le moins.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Écouter un autre témoignage",
+          "vers": "hub_temoignages",
+          "effects": [],
+          "clickEffect": "pulse"
+        },
+        {
+          "text": "Tu as assez entendu — passer au verdict",
+          "vers": "transition_verdict",
+          "effects": [],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 350,
+      "y": 560
+    },
+    "portail_scientifique": {
+      "id": "portail_scientifique",
+      "title": "Après le Récit de Maya",
+      "location": "SALLE COMMUNE — ALETHEIA-9",
+      "narrator": "Certaines personnes racontent une histoire vraie comme on récite un rapport. Ce n'est pas un mensonge. C'est une armure.",
+      "text": "Tu rouvres les yeux. Maya n'a pas bougé d'un centimètre pendant tout son récit.\n\n*« J'espère que ça vous aide »*, dit-elle, d'une voix parfaitement neutre.\n\nSa version est méthodique, presque clinique — mais un détail, glissé presque par accident, ne colle pas avec le reste.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Écouter un autre témoignage",
+          "vers": "hub_temoignages",
+          "effects": [],
+          "clickEffect": "pulse"
+        },
+        {
+          "text": "Tu as assez entendu — passer au verdict",
+          "vers": "transition_verdict",
+          "effects": [],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 550,
+      "y": 560
+    },
+    "portail_ia": {
+      "id": "portail_ia",
+      "title": "Après les Journaux d'ORIS",
+      "location": "POSTE DE COMMANDEMENT — ALETHEIA-9",
+      "narrator": "Une machine ne ment pas volontairement. Mais elle peut très bien ne pas tout savoir.",
+      "text": "Les journaux défilent devant toi, ligne après ligne, jusqu'à un bloc de données corrompues, à 02h13 précisément.\n\n*« Voilà. C'est tout ce que je peux vous montrer. »*, dit ORIS.\n\n*« Je sais que ce n'est pas suffisant. Je suis... désolée de ne pas être plus utile. »*\n\nUne IA qui s'excuse. Ce n'est pas rien.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Écouter un autre témoignage",
+          "vers": "hub_temoignages",
+          "effects": [],
+          "clickEffect": "pulse"
+        },
+        {
+          "text": "Tu as assez entendu — passer au verdict",
+          "vers": "transition_verdict",
+          "effects": [],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 650,
+      "y": 560
+    },
+    "transition_verdict": {
+      "id": "transition_verdict",
+      "title": "L'Heure du Verdict",
+      "location": "POSTE DE COMMANDEMENT — ALETHEIA-9",
+      "narrator": "Toute enquête se termine au même endroit : le moment où il faut choisir de croire, même sans tout savoir.",
+      "text": "Tu as entendu ce que tu voulais entendre. Ou peut-être juste ce que chacun voulait bien te laisser entendre.\n\nRhea, Dorian, Maya. Trois nuits différentes, une seule vérité qui se cache quelque part entre elles.\n\nORIS attend, silencieuse pour une fois.\n\nIl est temps de décider ce qui, cette nuit-là, s'est vraiment passé dans le secteur 4.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Rendre ton verdict",
+          "vers": "verdict_debut",
+          "effects": [],
+          "clickEffect": "pulse",
+          "story": "stories/fr/signal_rouge_verdict.json"
+        }
+      ],
+      "x": 400,
+      "y": 660
+    }
+  }
+}

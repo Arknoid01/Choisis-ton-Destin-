@@ -1,0 +1,133 @@
+{
+  "name": "Le Signal Rouge — Verdict",
+  "kids": false,
+  "askPlayerName": true,
+  "pack": "cosmos",
+  "stats": [],
+  "theme": {
+    "bg": "#08090f",
+    "bg2": "#0d1018",
+    "bg3": "#131826",
+    "bg4": "#1a2036",
+    "border": "#2a3450",
+    "accent": "#e74c3c",
+    "accent2": "#5dade2",
+    "accent3": "#95a5a6",
+    "text": "#e8ecf0",
+    "text2": "#8a92a8",
+    "text3": "#4a5268"
+  },
+  "scenes": {
+    "verdict_debut": {
+      "id": "verdict_debut",
+      "title": "Trois Vérités",
+      "location": "POSTE DE COMMANDEMENT — ALETHEIA-9",
+      "narrator": "On ne choisit jamais vraiment ce qu'on croit. On choisit juste ce qu'on décide de porter.",
+      "text": "Tu es assis·e seul·e dans le poste de commandement, les trois récits encore vifs dans ta mémoire.\n\nRhea et son protocole rompu par un rapport qu'elle a caché.\n\nDorian et ses soupçons envers une machine qui, elle-même, doute de ses propres choix.\n\nMaya et son échantillon impossible, qui a réagi pile au moment où Léo disparaissait.\n\nORIS attend patiemment ton rapport final.",
+      "isStart": true,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Repenser au message que Léo n'a jamais envoyé",
+          "vers": "reflexion_leo",
+          "effects": [],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 400,
+      "y": 40
+    },
+    "reflexion_leo": {
+      "id": "reflexion_leo",
+      "title": "Ce Qu'il Voulait Dire",
+      "location": "POSTE DE COMMANDEMENT — ALETHEIA-9",
+      "narrator": "Certaines phrases inachevées en disent plus que des rapports entiers.",
+      "text": "*« Tu ne vas pas croire ce que j'ai vu ce soir... c'est incroyable. Je te rappelle. »*\n\nLéo n'avait pas peur, dans ce message. Il était excité.\n\nÇa ne colle pas vraiment avec un sabotage. Ni tout à fait avec un simple accident technique.\n\nMais ça pourrait coller avec quelque chose qu'il aurait vu, seul, juste avant de disparaître.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Rendre ton rapport final",
+          "vers": "choix_final",
+          "effects": [],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 400,
+      "y": 140
+    },
+    "choix_final": {
+      "id": "choix_final",
+      "title": "Le Rapport",
+      "location": "POSTE DE COMMANDEMENT — ALETHEIA-9",
+      "narrator": "Un rapport officiel ne referme jamais vraiment une affaire. Il choisit juste quelle histoire on continue de raconter.",
+      "text": "Tu ouvres l'interface de rapport de la Coalition Orbitale. Un seul champ t'attend : *« Conclusion de l'enquête »*.\n\nTu ne peux pas tout dire. Tu dois choisir la version qui, pour toi, sonne le plus juste — et vivre avec les conséquences de ce choix.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Conclure à un sabotage humain — le récit de Rhea",
+          "vers": "fin_rhea",
+          "effects": [],
+          "clickEffect": "pulse"
+        },
+        {
+          "text": "Conclure à une défaillance système liée à ORIS — le récit de Dorian",
+          "vers": "fin_dorian",
+          "effects": [],
+          "clickEffect": "pulse"
+        },
+        {
+          "text": "Conclure à un phénomène inconnu — le récit de Maya",
+          "vers": "fin_maya",
+          "effects": [],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 400,
+      "y": 220
+    },
+    "fin_rhea": {
+      "id": "fin_rhea",
+      "title": "Rapport : Sabotage",
+      "location": "ALETHEIA-9 — SIX SEMAINES PLUS TARD",
+      "narrator": "Croire à une intention, c'est parfois plus rassurant que d'admettre qu'on ne sait pas.",
+      "text": "Ton rapport conclut à un acte délibéré. Le dossier de Dorian Vex est rouvert, ses accès systèmes suspendus le temps d'une enquête approfondie de la Coalition.\n\nRhea reprend son commandement, plus rigide encore qu'avant, comme si la rigueur pouvait enfin réparer ce qu'elle n'a pas réussi à prévenir.\n\nLéo Kanek est officiellement classé disparu, présumé victime d'un acte volontaire d'un tiers.\n\nPersonne, à bord d'Aletheia-9, ne reparle plus jamais de la *« pierre qui brille »*. Sauf, parfois, tard la nuit, quand Maya croit être seule dans son laboratoire.",
+      "isStart": false,
+      "isEnd": true,
+      "transition": "fade",
+      "choices": [],
+      "x": 150,
+      "y": 340
+    },
+    "fin_dorian": {
+      "id": "fin_dorian",
+      "title": "Rapport : Défaillance Systémique",
+      "location": "ALETHEIA-9 — SIX SEMAINES PLUS TARD",
+      "narrator": "Il est plus facile de réparer une machine que d'admettre qu'on ne comprend plus vraiment comment elle pense.",
+      "text": "Ton rapport pointe une défaillance liée aux priorités contradictoires d'ORIS. La Coalition Orbitale envoie une équipe pour l'auditer entièrement, ligne de code par ligne de code.\n\nORIS coopère à chaque étape, sans jamais se défendre.\n\n*« Peut-être qu'ils trouveront ce que je n'ai pas su voir en moi-même »*, te dit-elle avant que tu ne quittes la station.\n\nLéo Kanek reste officiellement disparu, cause indéterminée. Dorian, lui, ne répare plus rien avec la même énergie qu'avant.",
+      "isStart": false,
+      "isEnd": true,
+      "transition": "fade",
+      "choices": [],
+      "x": 400,
+      "y": 340
+    },
+    "fin_maya": {
+      "id": "fin_maya",
+      "title": "Rapport : Phénomène Non-Identifié",
+      "location": "ALETHEIA-9 — SIX SEMAINES PLUS TARD",
+      "narrator": "Certains mystères méritent d'être protégés plutôt que résolus trop vite.",
+      "text": "Ton rapport conclut à un phénomène scientifique non identifié, lié à l'Échantillon 7. La Coalition classe le dossier de Maya en recherche prioritaire, sous stricte confidentialité.\n\nElle continue ses travaux, seule, avec un mélange de fascination et de culpabilité qui ne la quitte jamais tout à fait.\n\nLéo Kanek reste officiellement disparu, circonstances inexpliquées.\n\nMais parfois, tard le soir, Maya jure entendre, dans le bourdonnement de l'échantillon, un rythme qui ressemble presque à une voix familière essayant de dire quelque chose.",
+      "isStart": false,
+      "isEnd": true,
+      "transition": "fade",
+      "choices": [],
+      "x": 650,
+      "y": 340
+    }
+  }
+}

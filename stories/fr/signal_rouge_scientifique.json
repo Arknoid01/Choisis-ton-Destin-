@@ -1,0 +1,330 @@
+{
+  "name": "Le Signal Rouge — Maya",
+  "kids": false,
+  "askPlayerName": true,
+  "pack": "cosmos",
+  "stats": [
+    {
+      "id": "confiance",
+      "label": "Confiance en Maya",
+      "start": 0,
+      "max": 100,
+      "color": "#5dade2"
+    },
+    {
+      "id": "doute",
+      "label": "Doute sur Maya",
+      "start": 0,
+      "max": 100,
+      "color": "#e74c3c"
+    }
+  ],
+  "theme": {
+    "bg": "#08090f",
+    "bg2": "#0d1018",
+    "bg3": "#131826",
+    "bg4": "#1a2036",
+    "border": "#2a3450",
+    "accent": "#e74c3c",
+    "accent2": "#5dade2",
+    "accent3": "#95a5a6",
+    "text": "#e8ecf0",
+    "text2": "#8a92a8",
+    "text3": "#4a5268"
+  },
+  "scenes": {
+    "maya_intro": {
+      "id": "maya_intro",
+      "title": "La Distance Nécessaire",
+      "location": "Aletheia-9 — Mémoire de Maya Itho",
+      "narrator": "Maya Itho. Scientifique. Ce qu'elle a choisi de raconter.",
+      "text": "On m'a souvent reproché mon calme. Comme si ressentir moins fort voulait dire comprendre moins bien.\n\nC'est l'inverse.\n\nLa distance, c'est ce qui permet de voir clairement, sans que la peur ne déforme ce qu'on regarde.\n\nCette nuit-là, j'ai eu besoin de toute la distance dont j'étais capable.",
+      "isStart": true,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Vous cachez ce que vous ressentez très bien.",
+          "vers": "maya_metier",
+          "effects": [
+            {
+              "stat": "doute",
+              "val": 10
+            }
+          ],
+          "clickEffect": "pulse"
+        },
+        {
+          "text": "Vous avez juste une façon différente de faire face.",
+          "vers": "maya_metier",
+          "effects": [
+            {
+              "stat": "confiance",
+              "val": 10
+            }
+          ],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 400,
+      "y": 40
+    },
+    "maya_metier": {
+      "id": "maya_metier",
+      "title": "Le Laboratoire",
+      "location": "Aletheia-9 — Mémoire de Maya Itho",
+      "narrator": "",
+      "text": "Je suis biologiste sur Aletheia-9 depuis deux ans, chargée d'étudier les échantillons ramenés par les sondes du système.\n\nMon laboratoire est mon vrai poste de commandement, même si personne ne l'appelle comme ça.\n\nTrois semaines avant la disparition de Léo, une sonde a rapporté un échantillon prélevé sur un fragment cométaire.\n\nRien d'officiellement extraordinaire. Sur le papier.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Continuer",
+          "vers": "maya_echantillon",
+          "effects": [],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 400,
+      "y": 140
+    },
+    "maya_echantillon": {
+      "id": "maya_echantillon",
+      "title": "L'Échantillon 7",
+      "location": "Aletheia-9 — Mémoire de Maya Itho",
+      "narrator": "",
+      "text": "Je l'ai appelé Échantillon 7, par simplicité.\n\nUne structure cristalline, inerte en apparence, mais avec une réaction bioluminescente légère à certaines fréquences électriques.\n\nCe n'était pas dans le protocole de la mission de l'étudier plus que le strict nécessaire. Je l'ai fait quand même, sur mon temps libre.\n\nJ'aurais dû le signaler officiellement. Je ne l'ai pas fait.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Continuer",
+          "vers": "maya_decouverte",
+          "effects": [],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 400,
+      "y": 220
+    },
+    "maya_decouverte": {
+      "id": "maya_decouverte",
+      "title": "Une Semaine Avant",
+      "location": "Aletheia-9 — Mémoire de Maya Itho",
+      "narrator": "",
+      "text": "Cinq jours avant l'incident, l'échantillon a réagi de façon inhabituelle : une pulsation lumineuse rythmée, presque régulière, en réponse à une simple variation de courant dans mon laboratoire.\n\nJ'ai noté l'observation dans mon journal personnel. Pas dans le rapport officiel.\n\nJe voulais comprendre avant d'alarmer qui que ce soit pour rien. C'est ce que je me suis dit, en tout cas.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Continuer",
+          "vers": "maya_nuit_debut",
+          "effects": [],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 400,
+      "y": 300
+    },
+    "maya_nuit_debut": {
+      "id": "maya_nuit_debut",
+      "title": "02h00 — Laboratoire",
+      "location": "Aletheia-9 — Mémoire de Maya Itho",
+      "narrator": "",
+      "text": "Cette nuit-là, j'étais dans mon laboratoire, l'Échantillon 7 sous vitrine, à surveiller ses variations comme chaque soir depuis une semaine.\n\nLéo est passé me voir en fin de soirée, avant de partir en maintenance.\n\nIl m'a demandé, presque timidement, s'il pouvait voir *« la pierre qui brille »*. Il en avait entendu parler par une rumeur de couloir.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Continuer",
+          "vers": "maya_leo",
+          "effects": [],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 400,
+      "y": 380
+    },
+    "maya_leo": {
+      "id": "maya_leo",
+      "title": "Léo",
+      "location": "Aletheia-9 — Mémoire de Maya Itho",
+      "narrator": "",
+      "text": "Je lui ai montré, brièvement. Il est resté fasciné devant la vitrine, presque hypnotisé par le rythme des pulsations.\n\n*« On dirait qu'elle respire »*, a-t-il dit.\n\nIl m'a posé beaucoup de questions, plus que d'habitude. Sur son origine, sur ce qu'elle pourrait bien être.\n\nPuis il est reparti vers le secteur 4 pour sa vérification de routine, un peu après 01h50.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Continuer",
+          "vers": "maya_coupure",
+          "effects": [],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 400,
+      "y": 460
+    },
+    "maya_coupure": {
+      "id": "maya_coupure",
+      "title": "02h13 — La Coïncidence",
+      "location": "Aletheia-9 — Mémoire de Maya Itho",
+      "narrator": "",
+      "text": "À 02h13, au moment exact où l'alarme a retenti, l'Échantillon 7 a émis un pic lumineux plus intense que je n'en avais jamais mesuré.\n\nPresque au même instant que la coupure de courant du secteur 4, à l'autre bout de la station.\n\nUne coïncidence. Sûrement. Les coïncidences existent, en science.\n\nMais celle-ci m'a glacée.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Vous avez immédiatement voulu prévenir quelqu'un.",
+          "vers": "maya_choix",
+          "effects": [
+            {
+              "stat": "confiance",
+              "val": 10
+            }
+          ],
+          "clickEffect": "pulse"
+        },
+        {
+          "text": "Vous avez d'abord pensé à protéger vos recherches.",
+          "vers": "maya_choix",
+          "effects": [
+            {
+              "stat": "doute",
+              "val": 15
+            }
+          ],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 400,
+      "y": 540
+    },
+    "maya_choix": {
+      "id": "maya_choix",
+      "title": "Une Décision Rapide",
+      "location": "Aletheia-9 — Mémoire de Maya Itho",
+      "narrator": "",
+      "text": "J'ai hésité, l'espace de quelques secondes à peine, avant de rejoindre le poste de commandement.\n\nJe n'ai pas mentionné l'échantillon à ce moment-là. Seulement la coupure, comme tout le monde.\n\nJe me suis dit que ce n'était probablement pas lié. Que le mentionner ne ferait que semer la confusion.\n\nJe ne suis plus sûre que c'était la bonne raison.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Continuer",
+          "vers": "maya_confinement",
+          "effects": [],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 400,
+      "y": 620
+    },
+    "maya_confinement": {
+      "id": "maya_confinement",
+      "title": "La Descente",
+      "location": "Aletheia-9 — Mémoire de Maya Itho",
+      "narrator": "",
+      "text": "Rhea m'a demandé de l'accompagner au secteur 4, une fois le confinement levé.\n\nDorian voulait descendre seul, plus tôt, mais Rhea a insisté pour que ce soit moi, à cause de mes connaissances techniques sur les anomalies énergétiques.\n\nJe n'ai rien dit de l'échantillon, ni pendant le trajet, ni sur place.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Continuer",
+          "vers": "maya_scene_vide",
+          "effects": [],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 400,
+      "y": 700
+    },
+    "maya_scene_vide": {
+      "id": "maya_scene_vide",
+      "title": "Une Trace Familière",
+      "location": "Aletheia-9 — Mémoire de Maya Itho",
+      "narrator": "",
+      "text": "Le panneau ouvert, les outils au sol, aucune trace de Léo : tout cela, je l'ai vu comme les autres.\n\nMais j'ai remarqué autre chose, près du panneau électrique : une fine trace de résidu cristallin, presque invisible, qui rappelait exactement la structure de l'Échantillon 7.\n\nJe ne l'ai signalée à personne sur le moment.\n\nJe l'ai discrètement prélevée, pour l'analyser seule, plus tard.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Continuer",
+          "vers": "maya_secret",
+          "effects": [],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 400,
+      "y": 780
+    },
+    "maya_secret": {
+      "id": "maya_secret",
+      "title": "Ce Que Je N'ai Toujours Pas Dit",
+      "location": "Aletheia-9 — Mémoire de Maya Itho",
+      "narrator": "",
+      "text": "Je n'ai jamais déclaré officiellement l'Échantillon 7, ni ses réactions étranges, ni cette trace retrouvée près du panneau.\n\nUne partie de moi avait peur qu'on m'interdise mes recherches. Une autre partie, plus honnête, avait peur d'avoir raison.\n\nSi cet échantillon a un lien avec la disparition de Léo, alors je porte une responsabilité que je n'ai pas encore trouvé le courage d'assumer entièrement.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Continuer",
+          "vers": "maya_conclusion",
+          "effects": [],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 400,
+      "y": 860
+    },
+    "maya_conclusion": {
+      "id": "maya_conclusion",
+      "title": "Ma Version",
+      "location": "Aletheia-9 — Mémoire de Maya Itho",
+      "narrator": "",
+      "text": "Je ne crois pas à un sabotage humain. Je ne crois pas non plus à une simple défaillance technique.\n\nJe crois que quelque chose s'est produit cette nuit-là que nous ne comprenons pas encore complètement — quelque chose lié à ce que j'étudie depuis trois semaines en secret.\n\nJe ne peux pas vous dire où est Léo. Mais je peux vous dire que je n'ai pas tout raconté, jusqu'à maintenant.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Retourner à l'enquête",
+          "vers": "fin_recit_maya",
+          "effects": [],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 400,
+      "y": 940
+    },
+    "fin_recit_maya": {
+      "id": "fin_recit_maya",
+      "title": "Fin du Récit",
+      "location": "Aletheia-9 — Mémoire de Maya Itho",
+      "narrator": "",
+      "text": "Le récit de Maya s'achève. Pour la première fois depuis votre arrivée, sa voix a tremblé, à peine.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Retourner à l'enquête",
+          "vers": "portail_scientifique",
+          "effects": [],
+          "clickEffect": "pulse",
+          "story": "stories/fr/signal_rouge_prologue.json"
+        }
+      ],
+      "x": 400,
+      "y": 1020
+    }
+  }
+}
