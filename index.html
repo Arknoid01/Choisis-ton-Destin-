@@ -274,6 +274,7 @@ body {
 #btn-options  { animation-delay:1.0s; }
 #btn-progress { animation-delay:1.2s; }
 #btn-news     { animation-delay:1.4s; }
+#btn-community { animation-delay:1.5s; }
 #btn-submit   { animation-delay:1.6s; }
 #btn-contact  { animation-delay:1.8s; }
 .btn-main::before {
@@ -680,6 +681,7 @@ body {
   border-color: #7c6dfa;
   color: #c0b0ff;
 }
+.submit-btn.secondary {
   background:none; border-color:var(--border);
   color:var(--dim); letter-spacing:2px;
 }
@@ -1577,7 +1579,7 @@ function initCanvas() {
 // Si les animations CSS ne se déclenchent pas (navigateur, polices lentes)
 // on force l'affichage après 1.5s
 setTimeout(() => {
-  document.querySelectorAll('.ornament,.eyebrow,.main-title,.subtitle,.divider,.btn-group,.footer,#pegasus-logo').forEach(el => {
+  document.querySelectorAll('.ornament,.eyebrow,.main-title,.subtitle,.divider,#buttons-block,.btn-main,.footer,#pegasus-logo').forEach(el => {
     if (getComputedStyle(el).opacity === '0') {
       el.style.opacity = '1';
       el.style.transform = 'translateY(0)';
