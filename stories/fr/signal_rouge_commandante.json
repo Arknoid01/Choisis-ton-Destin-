@@ -80,9 +80,25 @@
       "transition": "fade",
       "choices": [
         {
-          "text": "Continuer",
+          "text": "Le protocole avant tout.",
           "vers": "rhea_nuit_debut",
-          "effects": [],
+          "effects": [
+            {
+              "stat": "confiance",
+              "val": 10
+            }
+          ],
+          "clickEffect": "pulse"
+        },
+        {
+          "text": "Même le protocole a des limites.",
+          "vers": "rhea_nuit_debut",
+          "effects": [
+            {
+              "stat": "doute",
+              "val": 10
+            }
+          ],
           "clickEffect": "pulse"
         }
       ],
@@ -100,9 +116,25 @@
       "transition": "fade",
       "choices": [
         {
-          "text": "Continuer",
+          "text": "Vous avez réagi vite.",
           "vers": "rhea_alerte",
-          "effects": [],
+          "effects": [
+            {
+              "stat": "confiance",
+              "val": 10
+            }
+          ],
+          "clickEffect": "pulse"
+        },
+        {
+          "text": "Vous étiez déjà sur le qui-vive.",
+          "vers": "rhea_alerte",
+          "effects": [
+            {
+              "stat": "doute",
+              "val": 5
+            }
+          ],
           "clickEffect": "pulse"
         }
       ],
@@ -156,9 +188,25 @@
       "transition": "fade",
       "choices": [
         {
-          "text": "Continuer",
+          "text": "C'était la bonne décision.",
           "vers": "rhea_conflit_dorian",
-          "effects": [],
+          "effects": [
+            {
+              "stat": "confiance",
+              "val": 10
+            }
+          ],
+          "clickEffect": "pulse"
+        },
+        {
+          "text": "Le confinement a tout figé.",
+          "vers": "rhea_conflit_dorian",
+          "effects": [
+            {
+              "stat": "doute",
+              "val": 10
+            }
+          ],
           "clickEffect": "pulse"
         }
       ],
@@ -176,9 +224,25 @@
       "transition": "fade",
       "choices": [
         {
-          "text": "Continuer",
+          "text": "Dorian désobéissait.",
           "vers": "rhea_deplacement",
-          "effects": [],
+          "effects": [
+            {
+              "stat": "confiance",
+              "val": 5
+            }
+          ],
+          "clickEffect": "pulse"
+        },
+        {
+          "text": "Vous le traitiez comme un suspect.",
+          "vers": "rhea_deplacement",
+          "effects": [
+            {
+              "stat": "doute",
+              "val": 15
+            }
+          ],
           "clickEffect": "pulse"
         }
       ],
@@ -196,9 +260,25 @@
       "transition": "fade",
       "choices": [
         {
-          "text": "Continuer",
+          "text": "Vous avez gardé le contrôle.",
           "vers": "rhea_scene_vide",
-          "effects": [],
+          "effects": [
+            {
+              "stat": "confiance",
+              "val": 10
+            }
+          ],
+          "clickEffect": "pulse"
+        },
+        {
+          "text": "Vous avez évité le secteur 4.",
+          "vers": "rhea_scene_vide",
+          "effects": [
+            {
+              "stat": "doute",
+              "val": 10
+            }
+          ],
           "clickEffect": "pulse"
         }
       ],
@@ -216,9 +296,25 @@
       "transition": "fade",
       "choices": [
         {
-          "text": "Continuer",
+          "text": "Rien ne justifie une disparition.",
           "vers": "rhea_soupcon",
-          "effects": [],
+          "effects": [
+            {
+              "stat": "confiance",
+              "val": 5
+            }
+          ],
+          "clickEffect": "pulse"
+        },
+        {
+          "text": "Quelque chose a été effacé.",
+          "vers": "rhea_soupcon",
+          "effects": [
+            {
+              "stat": "doute",
+              "val": 10
+            }
+          ],
           "clickEffect": "pulse"
         }
       ],
@@ -272,9 +368,25 @@
       "transition": "fade",
       "choices": [
         {
-          "text": "Continuer",
+          "text": "Vous ne lui faisiez pas confiance.",
           "vers": "rhea_secret",
-          "effects": [],
+          "effects": [
+            {
+              "stat": "confiance",
+              "val": 5
+            }
+          ],
+          "clickEffect": "pulse"
+        },
+        {
+          "text": "Il vous rendait nerveuse.",
+          "vers": "rhea_secret",
+          "effects": [
+            {
+              "stat": "doute",
+              "val": 10
+            }
+          ],
           "clickEffect": "pulse"
         }
       ],
@@ -292,9 +404,25 @@
       "transition": "fade",
       "choices": [
         {
-          "text": "Continuer",
+          "text": "Ce rapport aurait dû être transmis.",
           "vers": "rhea_conclusion",
-          "effects": [],
+          "effects": [
+            {
+              "stat": "doute",
+              "val": 15
+            }
+          ],
+          "clickEffect": "pulse"
+        },
+        {
+          "text": "Vous protégiez la mission.",
+          "vers": "rhea_conclusion",
+          "effects": [
+            {
+              "stat": "confiance",
+              "val": 5
+            }
+          ],
           "clickEffect": "pulse"
         }
       ],

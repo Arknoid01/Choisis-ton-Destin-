@@ -59,6 +59,12 @@
           "vers": "brief_situation",
           "effects": [],
           "clickEffect": "pulse"
+        },
+        {
+          "text": "Continuer vers la salle commune sans attendre",
+          "vers": "rencontre_equipage",
+          "effects": [],
+          "clickEffect": "pulse"
         }
       ],
       "x": 250,
@@ -105,10 +111,36 @@
           "vers": "rencontre_equipage",
           "effects": [],
           "clickEffect": "pulse"
+        },
+        {
+          "text": "Examiner les outils laissés au sol",
+          "vers": "indices_techniques",
+          "effects": [],
+          "clickEffect": "pulse"
         }
       ],
       "x": 550,
       "y": 220
+    },
+    "indices_techniques": {
+      "id": "indices_techniques",
+      "title": "Des Outils Qui Parlent",
+      "location": "COURSIVE TECHNIQUE — SECTEUR 4",
+      "narrator": "Un outil abandonné en plein travail raconte souvent une histoire plus honnête qu'un rapport officiel.",
+      "text": "Tu ramasses le tournevis magnétique de Léo. Il porte encore une trace de suie sur le manche.\n\nORIS précise : *« Température anormale enregistrée sur ce panneau : 412 degrés Celsius pendant 0,3 seconde. »*\n\nSur le mur, une marque de brûlure en forme de cercle parfait.\n\nTrop nette pour être accidentelle.\n\n*« Je n'ai pas vu qui l'a faite »*, ajoute ORIS, presque gênée.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Rejoindre l'équipage avec ces indices",
+          "vers": "rencontre_equipage",
+          "effects": [],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 650,
+      "y": 280
     },
     "rencontre_equipage": {
       "id": "rencontre_equipage",
@@ -125,6 +157,13 @@
           "vers": "hub_temoignages",
           "effects": [],
           "clickEffect": "pulse"
+        },
+        {
+          "text": "Demander d'abord à ORIS de rejouer les journaux de la nuit",
+          "vers": "portail_ia",
+          "effects": [],
+          "clickEffect": "pulse",
+          "story": "stories/fr/signal_rouge_ia.json"
         }
       ],
       "x": 400,

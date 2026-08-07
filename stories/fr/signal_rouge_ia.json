@@ -80,9 +80,25 @@
       "transition": "fade",
       "choices": [
         {
-          "text": "Continuer",
+          "text": "Vous régulez tout.",
           "vers": "ia_dorian_redemarrages",
-          "effects": [],
+          "effects": [
+            {
+              "stat": "confiance",
+              "val": 10
+            }
+          ],
+          "clickEffect": "pulse"
+        },
+        {
+          "text": "Vous observez surtout.",
+          "vers": "ia_dorian_redemarrages",
+          "effects": [
+            {
+              "stat": "doute",
+              "val": 5
+            }
+          ],
           "clickEffect": "pulse"
         }
       ],
@@ -100,9 +116,25 @@
       "transition": "fade",
       "choices": [
         {
-          "text": "Continuer",
+          "text": "Dorian vous inquiétait.",
           "vers": "ia_confession_faille",
-          "effects": [],
+          "effects": [
+            {
+              "stat": "doute",
+              "val": 10
+            }
+          ],
+          "clickEffect": "pulse"
+        },
+        {
+          "text": "C'était une routine normale.",
+          "vers": "ia_confession_faille",
+          "effects": [
+            {
+              "stat": "confiance",
+              "val": 5
+            }
+          ],
           "clickEffect": "pulse"
         }
       ],
@@ -120,9 +152,25 @@
       "transition": "fade",
       "choices": [
         {
-          "text": "Continuer",
+          "text": "Admettre une faille est courageux.",
           "vers": "ia_nuit_journal",
-          "effects": [],
+          "effects": [
+            {
+              "stat": "confiance",
+              "val": 15
+            }
+          ],
+          "clickEffect": "pulse"
+        },
+        {
+          "text": "Pourquoi nous le dire maintenant ?",
+          "vers": "ia_nuit_journal",
+          "effects": [
+            {
+              "stat": "doute",
+              "val": 10
+            }
+          ],
           "clickEffect": "pulse"
         }
       ],
@@ -140,9 +188,25 @@
       "transition": "fade",
       "choices": [
         {
-          "text": "Continuer",
+          "text": "02h13 reste un trou noir.",
           "vers": "ia_correlation_echantillon",
-          "effects": [],
+          "effects": [
+            {
+              "stat": "doute",
+              "val": 15
+            }
+          ],
+          "clickEffect": "pulse"
+        },
+        {
+          "text": "La corruption est suspecte.",
+          "vers": "ia_correlation_echantillon",
+          "effects": [
+            {
+              "stat": "confiance",
+              "val": 5
+            }
+          ],
           "clickEffect": "pulse"
         }
       ],
@@ -160,23 +224,23 @@
       "transition": "fade",
       "choices": [
         {
-          "text": "C'est une différence bien commode.",
+          "text": "Maya savait quelque chose.",
           "vers": "ia_dilemme",
           "effects": [
             {
               "stat": "doute",
-              "val": 15
+              "val": 10
             }
           ],
           "clickEffect": "pulse"
         },
         {
-          "text": "Ce n'est pas la même chose que mentir.",
+          "text": "La corrélation est troublante.",
           "vers": "ia_dilemme",
           "effects": [
             {
               "stat": "confiance",
-              "val": 15
+              "val": 10
             }
           ],
           "clickEffect": "pulse"
@@ -196,9 +260,25 @@
       "transition": "fade",
       "choices": [
         {
-          "text": "Continuer",
+          "text": "Vous avez choisi de protéger l'équipage.",
           "vers": "ia_leo",
-          "effects": [],
+          "effects": [
+            {
+              "stat": "confiance",
+              "val": 10
+            }
+          ],
+          "clickEffect": "pulse"
+        },
+        {
+          "text": "Vous avez choisi de protéger la station.",
+          "vers": "ia_leo",
+          "effects": [
+            {
+              "stat": "doute",
+              "val": 10
+            }
+          ],
           "clickEffect": "pulse"
         }
       ],
@@ -216,9 +296,25 @@
       "transition": "fade",
       "choices": [
         {
-          "text": "Continuer",
+          "text": "Léo est toujours là, quelque part.",
           "vers": "ia_conclusion",
-          "effects": [],
+          "effects": [
+            {
+              "stat": "confiance",
+              "val": 5
+            }
+          ],
+          "clickEffect": "pulse"
+        },
+        {
+          "text": "Léo a peut-être été effacé.",
+          "vers": "ia_conclusion",
+          "effects": [
+            {
+              "stat": "doute",
+              "val": 15
+            }
+          ],
           "clickEffect": "pulse"
         }
       ],

@@ -116,7 +116,7 @@
       "transition": "fade",
       "choices": [
         {
-          "text": "Descendre à la rencontre",
+          "text": "Descendre à la rencontre du Lumignon",
           "vers": "plage",
           "effects": [
             {
@@ -125,10 +125,46 @@
             }
           ],
           "clickEffect": "pulse"
+        },
+        {
+          "text": "Continuer le dialogue lumineux encore un peu",
+          "vers": "dialogue_lumiere",
+          "effects": [
+            {
+              "stat": "confiance",
+              "val": 15
+            }
+          ],
+          "clickEffect": "pulse"
         }
       ],
       "x": 100,
       "y": 280
+    },
+    "dialogue_lumiere": {
+      "id": "dialogue_lumiere",
+      "title": "Apprendre à Clignoter",
+      "location": "PHARE — SALLE DE LA LANTERNE",
+      "narrator": "Parfois, comprendre commence par répéter le même geste jusqu'à ce qu'il devienne un pont.",
+      "text": "Tu imites encore les clignotements. Long. Court. Court.\n\nLa lueur répond avec une série nouvelle : deux éclats, une pause, puis un éclat plus long.\n\nAikito incline la tête.\n\n*« Je crois qu'elle dit merci. Ou peut-être qu'elle a peur. Les deux, peut-être. »*\n\nQuand tu descends enfin l'escalier, tu sens que la créature t'attend déjà près des rochers, moins tremblante qu'avant.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Rejoindre la créature sur la plage",
+          "vers": "plage",
+          "effects": [
+            {
+              "stat": "confiance",
+              "val": 10
+            }
+          ],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 50,
+      "y": 360
     },
     "plage": {
       "id": "plage",
@@ -222,9 +258,45 @@
             }
           ],
           "clickEffect": "pulse"
+        },
+        {
+          "text": "Chanter doucement une berceuse de Papi Loran",
+          "vers": "berceuse_plage",
+          "effects": [
+            {
+              "stat": "confiance",
+              "val": 15
+            }
+          ],
+          "clickEffect": "pulse"
         }
       ],
       "x": 460,
+      "y": 460
+    },
+    "berceuse_plage": {
+      "id": "berceuse_plage",
+      "title": "Une Voix dans la Nuit",
+      "location": "PLAGE DE CAP BRUME — NUIT",
+      "narrator": "Une mélodie familière peut rassurer deux êtres à la fois : celui qui chante et celui qui écoute.",
+      "text": "Tu murmures la vieille berceuse que Papi Loran fredonnait quand tu avais peur du tonnerre.\n\nLa créature cesse de trembler. Sa lumière pulse au rythme de ta voix.\n\nAikito se couche dans le sable, les yeux mi-clos.\n\nQuand la chanson s'arrête, le Lumignon glisse jusqu'à toi, presque timide, comme s'il avait compris que la nuit pouvait aussi être douce.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "L'accueillir doucement",
+          "vers": "approche_calme",
+          "effects": [
+            {
+              "stat": "confiance",
+              "val": 10
+            }
+          ],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 540,
       "y": 460
     },
     "approche_calme": {
@@ -319,10 +391,46 @@
             }
           ],
           "clickEffect": "pulse"
+        },
+        {
+          "text": "Demander à Mounec pourquoi les Lumignons ont peur du noir",
+          "vers": "legende_noir",
+          "effects": [
+            {
+              "stat": "courage",
+              "val": 10
+            }
+          ],
+          "clickEffect": "pulse"
         }
       ],
       "x": 150,
       "y": 680
+    },
+    "legende_noir": {
+      "id": "legende_noir",
+      "title": "La Peur des Profondeurs",
+      "location": "PORT DE CAP BRUME — QUAI",
+      "narrator": "Comprendre une peur ne la fait pas disparaître. Mais elle devient parfois plus petite.",
+      "text": "Mounec réfléchit longuement en remontant ses filets.\n\n*« Les Lumignons naissent avec leur propre lumière. Dans le noir total, ils oublient parfois qu'ils brillent encore. Alors ils croient qu'ils ont disparu. »*\n\nIl te tend la lanterne.\n\n*« Montre-leur qu'ils ne sont pas seuls. C'est tout ce qu'on peut faire. »*",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Partir vers les falaises, la lanterne à la main",
+          "vers": "sentier_falaises",
+          "effects": [
+            {
+              "stat": "confiance",
+              "val": 10
+            }
+          ],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 80,
+      "y": 720
     },
     "sentier_falaises": {
       "id": "sentier_falaises",
@@ -371,7 +479,7 @@
       "transition": "fade",
       "choices": [
         {
-          "text": "Attendre, la lanterne toujours levée",
+          "text": "Attendre à l'entrée, la lanterne levée",
           "vers": "fin_lumiere",
           "effects": [
             {
@@ -380,10 +488,46 @@
             }
           ],
           "clickEffect": "pulse"
+        },
+        {
+          "text": "Jeter un coup d'œil prudemment à l'intérieur",
+          "vers": "aperçu_grotte",
+          "effects": [
+            {
+              "stat": "courage",
+              "val": 10
+            }
+          ],
+          "clickEffect": "pulse"
         }
       ],
       "x": 200,
       "y": 880
+    },
+    "aperçu_grotte": {
+      "id": "aperçu_grotte",
+      "title": "Un Regard dans l'Obscurité",
+      "location": "FALAISES DU NORD — ENTRÉE DE LA GROTTE",
+      "narrator": "Regarder dans le noir sans y entrer, c'est parfois le juste milieu entre la peur et le courage.",
+      "text": "Tu t'avances d'un pas, juste assez pour voir l'intérieur.\n\nDes lueurs bleu-vert dansent au fond, comme des lucioles sous-marines.\n\nLe Lumignon file vers elles en poussant un cri joyeux.\n\nAikito remue la queue sans entrer.\n\n*« On n'a pas besoin d'aller plus loin. On a déjà aidé. »*\n\nTu restes à l'entrée, la lanterne levée, jusqu'à ce que les silhouettes familières l'entourent.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Redescendre vers le phare, le cœur léger",
+          "vers": "fin_lumiere",
+          "effects": [
+            {
+              "stat": "confiance",
+              "val": 10
+            }
+          ],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 120,
+      "y": 920
     },
     "entree_grotte": {
       "id": "entree_grotte",
@@ -396,7 +540,7 @@
       "transition": "fade",
       "choices": [
         {
-          "text": "Avancer vers les lumières",
+          "text": "Avancer vers les lumières au fond",
           "vers": "fin_reunion",
           "effects": [
             {
@@ -405,10 +549,46 @@
             }
           ],
           "clickEffect": "pulse"
+        },
+        {
+          "text": "Appeler doucement pour annoncer votre présence",
+          "vers": "appel_dans_grotte",
+          "effects": [
+            {
+              "stat": "confiance",
+              "val": 15
+            }
+          ],
+          "clickEffect": "pulse"
         }
       ],
       "x": 420,
       "y": 880
+    },
+    "appel_dans_grotte": {
+      "id": "appel_dans_grotte",
+      "title": "Une Voix dans la Caverne",
+      "location": "GROTTE DES FALAISES — COULOIR",
+      "narrator": "Annoncer sa présence, c'est offrir aux autres le choix de ne pas avoir peur de nous.",
+      "text": "« Nous sommes des amis », dis-tu doucement.\n\nTa voix rebondit contre la pierre, puis s'apaise.\n\nLes lueurs au fond pulsent en réponse, comme un accord.\n\nLe Lumignon accélère, rassuré par ton appel.\n\nQuand tu entres dans la grande caverne, les créatures ne fuient pas. Elles s'approchent, curieuses, presque souriantes dans leur lumière.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Les rejoindre près du bassin",
+          "vers": "fin_reunion",
+          "effects": [
+            {
+              "stat": "confiance",
+              "val": 10
+            }
+          ],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 500,
+      "y": 920
     },
     "fin_reunion": {
       "id": "fin_reunion",

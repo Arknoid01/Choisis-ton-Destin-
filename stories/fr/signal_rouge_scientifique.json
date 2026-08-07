@@ -80,9 +80,25 @@
       "transition": "fade",
       "choices": [
         {
-          "text": "Continuer",
+          "text": "Pourquoi garder ça secret ?",
           "vers": "maya_echantillon",
-          "effects": [],
+          "effects": [
+            {
+              "stat": "doute",
+              "val": 10
+            }
+          ],
+          "clickEffect": "pulse"
+        },
+        {
+          "text": "Continuez votre récit.",
+          "vers": "maya_echantillon",
+          "effects": [
+            {
+              "stat": "confiance",
+              "val": 10
+            }
+          ],
           "clickEffect": "pulse"
         }
       ],
@@ -100,9 +116,25 @@
       "transition": "fade",
       "choices": [
         {
-          "text": "Continuer",
+          "text": "Vous regrettez de ne pas l'avoir signalé ?",
           "vers": "maya_decouverte",
-          "effects": [],
+          "effects": [
+            {
+              "stat": "confiance",
+              "val": 10
+            }
+          ],
+          "clickEffect": "pulse"
+        },
+        {
+          "text": "C'était une violation de protocole.",
+          "vers": "maya_decouverte",
+          "effects": [
+            {
+              "stat": "doute",
+              "val": 10
+            }
+          ],
           "clickEffect": "pulse"
         }
       ],
@@ -120,9 +152,25 @@
       "transition": "fade",
       "choices": [
         {
-          "text": "Continuer",
+          "text": "La science exige parfois de la prudence.",
           "vers": "maya_nuit_debut",
-          "effects": [],
+          "effects": [
+            {
+              "stat": "confiance",
+              "val": 5
+            }
+          ],
+          "clickEffect": "pulse"
+        },
+        {
+          "text": "Vous avez surtout eu peur des conséquences.",
+          "vers": "maya_nuit_debut",
+          "effects": [
+            {
+              "stat": "doute",
+              "val": 10
+            }
+          ],
           "clickEffect": "pulse"
         }
       ],
@@ -140,9 +188,25 @@
       "transition": "fade",
       "choices": [
         {
-          "text": "Continuer",
+          "text": "Léo semblait innocent dans tout ça.",
           "vers": "maya_leo",
-          "effects": [],
+          "effects": [
+            {
+              "stat": "confiance",
+              "val": 10
+            }
+          ],
+          "clickEffect": "pulse"
+        },
+        {
+          "text": "Pourquoi lui avoir montré l'échantillon ?",
+          "vers": "maya_leo",
+          "effects": [
+            {
+              "stat": "doute",
+              "val": 10
+            }
+          ],
           "clickEffect": "pulse"
         }
       ],
@@ -160,9 +224,25 @@
       "transition": "fade",
       "choices": [
         {
-          "text": "Continuer",
+          "text": "Il était curieux, pas coupable.",
           "vers": "maya_coupure",
-          "effects": [],
+          "effects": [
+            {
+              "stat": "confiance",
+              "val": 10
+            }
+          ],
+          "clickEffect": "pulse"
+        },
+        {
+          "text": "Sa curiosité vous inquiétait déjà.",
+          "vers": "maya_coupure",
+          "effects": [
+            {
+              "stat": "doute",
+              "val": 10
+            }
+          ],
           "clickEffect": "pulse"
         }
       ],
@@ -216,9 +296,25 @@
       "transition": "fade",
       "choices": [
         {
-          "text": "Continuer",
+          "text": "Vous auriez dû parler tout de suite.",
           "vers": "maya_confinement",
-          "effects": [],
+          "effects": [
+            {
+              "stat": "doute",
+              "val": 10
+            }
+          ],
+          "clickEffect": "pulse"
+        },
+        {
+          "text": "La panique peut expliquer le silence.",
+          "vers": "maya_confinement",
+          "effects": [
+            {
+              "stat": "confiance",
+              "val": 10
+            }
+          ],
           "clickEffect": "pulse"
         }
       ],
@@ -236,9 +332,25 @@
       "transition": "fade",
       "choices": [
         {
-          "text": "Continuer",
+          "text": "Rhea vous a fait confiance.",
           "vers": "maya_scene_vide",
-          "effects": [],
+          "effects": [
+            {
+              "stat": "confiance",
+              "val": 5
+            }
+          ],
+          "clickEffect": "pulse"
+        },
+        {
+          "text": "Vous saviez déjà ce que vous alliez trouver.",
+          "vers": "maya_scene_vide",
+          "effects": [
+            {
+              "stat": "doute",
+              "val": 15
+            }
+          ],
           "clickEffect": "pulse"
         }
       ],
@@ -256,9 +368,25 @@
       "transition": "fade",
       "choices": [
         {
-          "text": "Continuer",
+          "text": "Cette trace change tout.",
           "vers": "maya_secret",
-          "effects": [],
+          "effects": [
+            {
+              "stat": "doute",
+              "val": 15
+            }
+          ],
+          "clickEffect": "pulse"
+        },
+        {
+          "text": "Montrez-moi ce que vous avez prélevé.",
+          "vers": "maya_secret",
+          "effects": [
+            {
+              "stat": "confiance",
+              "val": 10
+            }
+          ],
           "clickEffect": "pulse"
         }
       ],
@@ -276,9 +404,25 @@
       "transition": "fade",
       "choices": [
         {
-          "text": "Continuer",
+          "text": "Vous portez une part de responsabilité.",
           "vers": "maya_conclusion",
-          "effects": [],
+          "effects": [
+            {
+              "stat": "doute",
+              "val": 10
+            }
+          ],
+          "clickEffect": "pulse"
+        },
+        {
+          "text": "Vous avez enfin dit la vérité.",
+          "vers": "maya_conclusion",
+          "effects": [
+            {
+              "stat": "confiance",
+              "val": 15
+            }
+          ],
           "clickEffect": "pulse"
         }
       ],

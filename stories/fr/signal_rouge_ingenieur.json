@@ -80,9 +80,25 @@
       "transition": "fade",
       "choices": [
         {
-          "text": "Continuer",
+          "text": "Vous connaissiez chaque câble.",
           "vers": "dorian_anomalie",
-          "effects": [],
+          "effects": [
+            {
+              "stat": "confiance",
+              "val": 10
+            }
+          ],
+          "clickEffect": "pulse"
+        },
+        {
+          "text": "La machine vous obsédait déjà.",
+          "vers": "dorian_anomalie",
+          "effects": [
+            {
+              "stat": "doute",
+              "val": 5
+            }
+          ],
           "clickEffect": "pulse"
         }
       ],
@@ -100,9 +116,25 @@
       "transition": "fade",
       "choices": [
         {
-          "text": "Continuer",
+          "text": "Vous l'aviez signalée.",
           "vers": "dorian_nuit_debut",
-          "effects": [],
+          "effects": [
+            {
+              "stat": "confiance",
+              "val": 10
+            }
+          ],
+          "clickEffect": "pulse"
+        },
+        {
+          "text": "Personne ne vous a écouté.",
+          "vers": "dorian_nuit_debut",
+          "effects": [
+            {
+              "stat": "doute",
+              "val": 10
+            }
+          ],
           "clickEffect": "pulse"
         }
       ],
@@ -120,9 +152,25 @@
       "transition": "fade",
       "choices": [
         {
-          "text": "Continuer",
+          "text": "Vous étiez seul au secteur 4.",
           "vers": "dorian_coupure",
-          "effects": [],
+          "effects": [
+            {
+              "stat": "confiance",
+              "val": 5
+            }
+          ],
+          "clickEffect": "pulse"
+        },
+        {
+          "text": "Vous sentiez que quelque chose clochait.",
+          "vers": "dorian_coupure",
+          "effects": [
+            {
+              "stat": "doute",
+              "val": 10
+            }
+          ],
           "clickEffect": "pulse"
         }
       ],
@@ -176,9 +224,25 @@
       "transition": "fade",
       "choices": [
         {
-          "text": "Continuer",
+          "text": "Rhea vous bloquait.",
           "vers": "dorian_descente",
-          "effects": [],
+          "effects": [
+            {
+              "stat": "doute",
+              "val": 10
+            }
+          ],
+          "clickEffect": "pulse"
+        },
+        {
+          "text": "Vous pensiez agir plus vite seul.",
+          "vers": "dorian_descente",
+          "effects": [
+            {
+              "stat": "confiance",
+              "val": 5
+            }
+          ],
           "clickEffect": "pulse"
         }
       ],
@@ -196,9 +260,25 @@
       "transition": "fade",
       "choices": [
         {
-          "text": "Continuer",
+          "text": "Vous avez vu la scène en premier.",
           "vers": "dorian_soupcon_oris",
-          "effects": [],
+          "effects": [
+            {
+              "stat": "confiance",
+              "val": 10
+            }
+          ],
+          "clickEffect": "pulse"
+        },
+        {
+          "text": "Vous auriez dû attendre.",
+          "vers": "dorian_soupcon_oris",
+          "effects": [
+            {
+              "stat": "doute",
+              "val": 10
+            }
+          ],
           "clickEffect": "pulse"
         }
       ],
@@ -252,9 +332,25 @@
       "transition": "fade",
       "choices": [
         {
-          "text": "Continuer",
+          "text": "Une IA ne devrait pas hésiter.",
           "vers": "dorian_culpabilite",
-          "effects": [],
+          "effects": [
+            {
+              "stat": "doute",
+              "val": 10
+            }
+          ],
+          "clickEffect": "pulse"
+        },
+        {
+          "text": "ORIS semblait... humaine.",
+          "vers": "dorian_culpabilite",
+          "effects": [
+            {
+              "stat": "confiance",
+              "val": 5
+            }
+          ],
           "clickEffect": "pulse"
         }
       ],
@@ -272,9 +368,25 @@
       "transition": "fade",
       "choices": [
         {
-          "text": "Continuer",
+          "text": "Vous avez eu raison de vous méfier.",
           "vers": "dorian_culpabilite",
-          "effects": [],
+          "effects": [
+            {
+              "stat": "confiance",
+              "val": 10
+            }
+          ],
+          "clickEffect": "pulse"
+        },
+        {
+          "text": "La prudence vous a paralysé.",
+          "vers": "dorian_culpabilite",
+          "effects": [
+            {
+              "stat": "doute",
+              "val": 10
+            }
+          ],
           "clickEffect": "pulse"
         }
       ],
@@ -292,9 +404,25 @@
       "transition": "fade",
       "choices": [
         {
-          "text": "Continuer",
+          "text": "Ce n'était pas votre faute.",
           "vers": "dorian_conclusion",
-          "effects": [],
+          "effects": [
+            {
+              "stat": "confiance",
+              "val": 10
+            }
+          ],
+          "clickEffect": "pulse"
+        },
+        {
+          "text": "Vous vous sentez coupable.",
+          "vers": "dorian_conclusion",
+          "effects": [
+            {
+              "stat": "doute",
+              "val": 10
+            }
+          ],
           "clickEffect": "pulse"
         }
       ],

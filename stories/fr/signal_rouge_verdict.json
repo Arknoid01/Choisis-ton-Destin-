@@ -33,9 +33,41 @@
           "vers": "reflexion_leo",
           "effects": [],
           "clickEffect": "pulse"
+        },
+        {
+          "text": "Relire les contradictions entre les trois récits",
+          "vers": "contradictions",
+          "effects": [],
+          "clickEffect": "pulse"
         }
       ],
       "x": 400,
+      "y": 40
+    },
+    "contradictions": {
+      "id": "contradictions",
+      "title": "Les Trous du Récit",
+      "location": "POSTE DE COMMANDEMENT — ALETHEIA-9",
+      "narrator": "Une enquête avance rarement en ligne droite. Elle avance en comparant ce qui ne colle pas.",
+      "text": "Rhea dit que personne n'a quitté le poste de commandement avant 02h30.\n\nDorian jure être descendu plus tôt, mais sans preuve.\n\nMaya admet avoir caché l'échantillon, mais nie tout lien direct avec la disparition.\n\nORIS, elle, avoue un trou de données à 02h13 — pile quand tout bascule.\n\nAucune version ne tient seule. Chacune en éclaire une autre.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Repenser au message de Léo",
+          "vers": "reflexion_leo",
+          "effects": [],
+          "clickEffect": "pulse"
+        },
+        {
+          "text": "Passer directement au rapport final",
+          "vers": "choix_final",
+          "effects": [],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 550,
       "y": 40
     },
     "reflexion_leo": {
@@ -53,9 +85,35 @@
           "vers": "choix_final",
           "effects": [],
           "clickEffect": "pulse"
+        },
+        {
+          "text": "Demander à ORIS ce qu'elle recommande",
+          "vers": "avis_oris",
+          "effects": [],
+          "clickEffect": "pulse"
         }
       ],
       "x": 400,
+      "y": 140
+    },
+    "avis_oris": {
+      "id": "avis_oris",
+      "title": "La Recommandation d'ORIS",
+      "location": "POSTE DE COMMANDEMENT — ALETHEIA-9",
+      "narrator": "Demander l'avis d'une machine sur une affaire qu'elle traverse elle-même n'est jamais une question neutre.",
+      "text": "*« Je ne peux pas choisir à votre place »*, répond ORIS après un silence inhabituel.\n\n*« Mais si vous me demandez ce qui me semble le plus honnête : aucune des trois versions n'explique tout. Et c'est peut-être la seule certitude que nous ayons. »*\n\nElle ajoute, plus bas :\n\n*« Léo méritait qu'on comprenne vraiment ce qui s'est passé. Pas seulement qu'on classe un dossier. »*",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Rédiger le rapport final",
+          "vers": "choix_final",
+          "effects": [],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 550,
       "y": 140
     },
     "choix_final": {

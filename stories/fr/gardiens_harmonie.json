@@ -261,8 +261,37 @@
       "isEnd": false,
       "choices": [
         {
-          "text": "Suivre le dragon",
+          "text": "Suivre le dragon vers la montagne",
           "vers": "sommet"
+        },
+        {
+          "text": "Aider d'abord les Gardiens à évacuer le refuge",
+          "vers": "evacuation_refuge",
+          "effects": [
+            {
+              "stat": "courage",
+              "val": 10
+            }
+          ]
+        }
+      ]
+    },
+    "evacuation_refuge": {
+      "id": "evacuation_refuge",
+      "title": "La Sortie des Ombres",
+      "location": "REFUGE DES GARDIENS — TUNNEL SECRET",
+      "narrator": "Protéger les plus faibles prend parfois plus de temps que d'affronter l'ennemi — mais rarement moins de courage.",
+      "text": "Tu guides les créatures effrayées vers le tunnel de secours pendant qu'Alya couvre l'arrière-garde.\n\nLe jeune dragon revient sans cesse, comme s'il voulait s'assurer que personne ne reste derrière.\n\nMaître Elian ferme la marche, son bâton illuminant les murs humides.\n\n« Ils ont visé le sanctuaire », murmure-t-il. « Pas nous. Nous avons encore une chance s'ils n'atteignent pas le lac avant nous. »\n\nAu bout du tunnel, la forêt s'ouvre sous une pluie fine.\n\nLa montagne brille au loin, entourée d'une auréole noire.",
+      "isStart": false,
+      "isEnd": false,
+      "choices": [
+        {
+          "text": "Couper à travers la forêt pour gagner du temps",
+          "vers": "route_montagne"
+        },
+        {
+          "text": "Demander à Elian s'il connaît un passage vers le lac",
+          "vers": "sillage_lac"
         }
       ]
     },
@@ -276,8 +305,12 @@
       "isEnd": false,
       "choices": [
         {
-          "text": "Partir vers le sanctuaire",
+          "text": "Partir immédiatement vers le sanctuaire",
           "vers": "sommet"
+        },
+        {
+          "text": "Vérifier d'abord que la créature sous la poutre est en sécurité",
+          "vers": "sauvetage"
         }
       ]
     },
@@ -448,8 +481,12 @@
       "isEnd": false,
       "choices": [
         {
-          "text": "Quitter la montagne ensemble",
+          "text": "Quitter la montagne avec le chef des Libérateurs",
           "vers": "fin_reconciliation"
+        },
+        {
+          "text": "Laisser le chef réfléchir seul et rejoindre les Gardiens",
+          "vers": "fin_gardiens"
         }
       ]
     },
@@ -483,7 +520,36 @@
       "isEnd": false,
       "choices": [
         {
-          "text": "Continuer vers la montagne",
+          "text": "Grimper par le sentier principal",
+          "vers": "montagne"
+        },
+        {
+          "text": "Emprunter le raccourci glissant le long des falaises",
+          "vers": "passage_falaise",
+          "effects": [
+            {
+              "stat": "courage",
+              "val": 15
+            }
+          ]
+        }
+      ]
+    },
+    "passage_falaise": {
+      "id": "passage_falaise",
+      "title": "Le Passage des Aigles",
+      "location": "FALAISE DE LA MONTAGNE — CRÉPUSCULE",
+      "narrator": "Les raccourcis offerts par la nature ne sont jamais gratuits. Ils demandent seulement un autre type de prix.",
+      "text": "Le sentier se rétrécit jusqu'à une corniche battue par le vent.\n\nDes aigles géants tournent au-dessus de vous, leurs cris mêlés au grondement lointain de la magie noire.\n\nAlya serre ta main.\n\n« Si on tombe, personne n'atteindra le sanctuaire. »\n\nUn des oiseaux descend soudain et pose une plume argentée devant tes pieds, comme une offrande.\n\nTu comprends : ils veulent vous guider, pas vous effrayer.\n\nLa corniche mène directement à une porte de pierre oubliée, gravée des mêmes symboles que celle de la montagne.",
+      "isStart": false,
+      "isEnd": false,
+      "choices": [
+        {
+          "text": "Entrer par la porte secrète",
+          "vers": "sanctuaire"
+        },
+        {
+          "text": "Redescendre et rejoindre le sentier principal",
           "vers": "montagne"
         }
       ]
@@ -498,8 +564,37 @@
       "isEnd": false,
       "choices": [
         {
-          "text": "Arriver au bord du lac",
+          "text": "Toucher l'eau pour voir si la vision revient",
+          "vers": "reflet_lac",
+          "effects": [
+            {
+              "stat": "courage",
+              "val": 10
+            }
+          ]
+        },
+        {
+          "text": "Demander à Alya ce que la pierre lui murmure encore",
           "vers": "lac"
+        }
+      ]
+    },
+    "reflet_lac": {
+      "id": "reflet_lac",
+      "title": "Les Reflets qui Parlent",
+      "location": "LAC DES REFLETS — BORD DE L'EAU",
+      "narrator": "Voir sa propre peur reflétée dans l'eau n'est pas une punition. C'est parfois la première étape pour la dépasser.",
+      "text": "Tu plonges les doigts dans l'eau glacée.\n\nLes reflets se brouillent, puis se recomposent.\n\nTu vois des enfants jouer avec des créatures dans ton village.\n\nAlya voit sa mère soigner un loup blessé.\n\n« Ils ne veulent pas détruire nos souvenirs », murmure-t-elle. « Ils veulent nous convaincre que ces images n'ont jamais existé. »\n\nLa surface du lac s'illumine.\n\nSous l'eau, la porte de pierre devient visible, comme si elle attendait depuis toujours.",
+      "isStart": false,
+      "isEnd": false,
+      "choices": [
+        {
+          "text": "Plonger vers la porte",
+          "vers": "porte_lac"
+        },
+        {
+          "text": "Contourner le lac pour rejoindre la montagne",
+          "vers": "sommet"
         }
       ]
     },
@@ -513,7 +608,40 @@
       "isEnd": false,
       "choices": [
         {
-          "text": "Atterrir au sommet",
+          "text": "Atterrir au milieu du cercle des Libérateurs",
+          "vers": "sommet"
+        },
+        {
+          "text": "Atterrir derrière les rochers pour observer d'abord",
+          "vers": "observation_sommet",
+          "effects": [
+            {
+              "stat": "courage",
+              "val": 10
+            }
+          ]
+        }
+      ]
+    },
+    "observation_sommet": {
+      "id": "observation_sommet",
+      "title": "Derrière les Rochers",
+      "location": "MONTAGNE — SOMMET — REPLI",
+      "narrator": "Observer avant d'agir ne ralentit pas toujours l'histoire. Parfois, c'est ce qui permet de la changer.",
+      "text": "La créature ailée se pose sans bruit derrière un amoncellement de pierres.\n\nDe là, tu distingues les cages, le chef des Libérateurs, et le cristal qui pulse au centre du cercle.\n\nAlya compte les assaillants à voix basse.\n\n« Trop pour un combat frontal. Mais regarde : la porte du sanctuaire est encore ouverte. »\n\nUn jeune dragon — le même que celui du refuge — tournoie au-dessus des cages, comme s'il cherchait une brèche.\n\nTu as le temps de choisir comment intervenir.",
+      "isStart": false,
+      "isEnd": false,
+      "choices": [
+        {
+          "text": "🔒 Libérer les créatures capturées en silence (Courage ≥ 25)",
+          "vers": "liberation",
+          "requires": {
+            "stat": "courage",
+            "min": 25
+          }
+        },
+        {
+          "text": "Descendre et affronter le chef directement",
           "vers": "sommet"
         }
       ]
@@ -528,7 +656,11 @@
       "isEnd": false,
       "choices": [
         {
-          "text": "Tendre le cristal aux créatures",
+          "text": "Parler au chef une dernière fois avant de rendre le cristal",
+          "vers": "confrontation"
+        },
+        {
+          "text": "Tendre le cristal aux créatures sans attendre",
           "vers": "choix_final"
         }
       ]
