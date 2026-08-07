@@ -174,6 +174,20 @@ html,body { height:100%; background:#0d0d0f; color:#e8e0d0; font-family:'Cormora
 .pack-price.locked {
   filter:grayscale(0.3);
 }
+.pack-price.soon {
+  cursor:default; filter:none;
+  border-color:rgba(200,169,110,0.35); color:var(--gold2);
+  background:rgba(200,169,110,0.1); letter-spacing:0.5px;
+}
+.pack-price.soon:hover { transform:none; }
+.pack-soon-bar {
+  background:rgba(200,169,110,0.06); border:1px solid var(--border);
+  border-top:none; border-radius:0 0 14px 14px;
+  padding:14px 16px; text-align:center;
+  font-family:'Lato',sans-serif; font-size:12px; color:var(--dim);
+  line-height:1.5;
+}
+.pack-soon-bar strong { color:var(--gold2); font-weight:600; }
 
 /* LOCK OVERLAY ON PACK */
 .pack-locked-bar {
@@ -373,6 +387,12 @@ const PACK_CONFIG = {
     icon:  '⚡',
     color: 'rgba(0,245,255,0.6)',
     price: '2,99€',
+    comingSoon: true,
+    desc:  {
+      fr: 'Cyberpunk et néons — histoires en préparation.',
+      en: 'Cyberpunk and neon — stories in the works.',
+      es: 'Cyberpunk y neón — historias en preparación.'
+    },
     order: 3
   },
   pirates: {
@@ -380,6 +400,12 @@ const PACK_CONFIG = {
     icon:  '🏴‍☠️',
     color: 'rgba(212,160,32,0.6)',
     price: '2,99€',
+    comingSoon: true,
+    desc:  {
+      fr: 'Haute mer et trésors — à l\'ancre bientôt.',
+      en: 'High seas and treasure — dropping anchor soon.',
+      es: 'Alta mar y tesoros — zarparemos pronto.'
+    },
     order: 4
   },
   cosmos: {
@@ -394,6 +420,12 @@ const PACK_CONFIG = {
     icon:  '⚔️',
     color: 'rgba(160,96,248,0.6)',
     price: '2,99€',
+    comingSoon: true,
+    desc:  {
+      fr: 'Épopées fantastiques — en cours d\'écriture.',
+      en: 'Epic fantasy — currently being written.',
+      es: 'Épicas de fantasía — en proceso de escritura.'
+    },
     order: 6
   },
   wilds: {
@@ -401,6 +433,12 @@ const PACK_CONFIG = {
     icon:  '🌿',
     color: 'rgba(100,220,150,0.6)',
     price: '2,99€',
+    comingSoon: true,
+    desc:  {
+      fr: 'Nature sauvage et mystères — bientôt disponible.',
+      en: 'Wild nature and mysteries — coming soon.',
+      es: 'Naturaleza salvaje y misterios — próximamente.'
+    },
     order: 7
   }
 };
@@ -571,7 +609,11 @@ function renderLibrary() {
     byPack[packId].push(g);
   });
 
-  const packIds = Object.keys(byPack).sort((a,b) => {
+  const packIds = Object.keys(byPack);
+  Object.keys(PACK_CONFIG).forEach(id => {
+    if (PACK_CONFIG[id].comingSoon && !packIds.includes(id)) packIds.push(id);
+  });
+  packIds.sort((a,b) => {
     const oa = PACK_CONFIG[a]?.order ?? 99;
     const ob = PACK_CONFIG[b]?.order ?? 99;
     return oa - ob;
@@ -591,9 +633,13 @@ function renderLibrary() {
     const count = stories.length;
     const colorVar = cfg.color;
 
+    const soonLabel = { fr:'BIENTÔT', en:'COMING SOON', es:'PRÓXIMAMENTE' }[currentLang] || 'BIENTÔT';
+
     // Badge prix/gratuit
     let priceBadge = '';
-    if (cfg.free) {
+    if (cfg.comingSoon) {
+      priceBadge = `<span class="pack-price soon" style="--pack-color:${colorVar}">⏳ ${soonLabel}</span>`;
+    } else if (cfg.free) {
       priceBadge = `<span class="pack-price free">GRATUIT</span>`;
     } else if (isUnlocked) {
       priceBadge = `<span class="pack-price" style="--pack-color:${colorVar};border-color:rgba(100,220,150,0.5);color:#64dc96;background:rgba(100,220,150,0.08)">✓ Débloqué</span>`;
@@ -603,18 +649,20 @@ function renderLibrary() {
     }
 
     // Compteur
-    const countLabel = currentLang === 'fr'
-      ? `<strong>${count}</strong> histoire${count > 1 ? 's' : ''}`
-      : currentLang === 'en'
-        ? `<strong>${count}</strong> stor${count > 1 ? 'ies' : 'y'}`
-        : `<strong>${count}</strong> historia${count > 1 ? 's' : ''}`;
+    const countLabel = cfg.comingSoon
+      ? ({ fr:'Histoires <strong>en préparation</strong>', en:'Stories <strong>in the works</strong>', es:'Historias <strong>en preparación</strong>' }[currentLang] || 'Histoires <strong>en préparation</strong>')
+      : currentLang === 'fr'
+        ? `<strong>${count}</strong> histoire${count > 1 ? 's' : ''}`
+        : currentLang === 'en'
+          ? `<strong>${count}</strong> stor${count > 1 ? 'ies' : 'y'}`
+          : `<strong>${count}</strong> historia${count > 1 ? 's' : ''}`;
 
     html += `<div class="pack-section" style="--pack-color:${colorVar}">
       <div class="pack-header">
         <div class="pack-icon">${cfg.icon}</div>
         <div class="pack-info">
           <div class="pack-name">${packName}</div>
-          <div class="pack-meta">${countLabel} disponible${count > 1 && currentLang === 'fr' ? 's' : ''}</div>
+          <div class="pack-meta">${cfg.comingSoon ? countLabel : `${countLabel} disponible${count > 1 && currentLang === 'fr' ? 's' : ''}`}</div>
         </div>
         ${priceBadge}
       </div>
@@ -623,6 +671,14 @@ function renderLibrary() {
 
     // Stories
     html += `<div class="stories-list">`;
+    if (cfg.comingSoon && !count) {
+      const soonMsg = {
+        fr:'Ce pack arrive bientôt sur Fableris. Les histoires sont en cours d\'écriture — l\'achat n\'est pas encore ouvert.',
+        en:'This pack is coming soon to Fableris. Stories are being written — purchases are not open yet.',
+        es:'Este pack llegará pronto a Fableris. Las historias están en preparación — la compra aún no está abierta.'
+      };
+      html += `<div class="pack-soon-bar"><strong>⏳ ${soonLabel}</strong><br>${soonMsg[currentLang] || soonMsg.fr}</div>`;
+    }
     stories.forEach(g => {
       const locked  = !isUnlocked;
       const isPortal = g.portal === true;
@@ -655,8 +711,8 @@ function renderLibrary() {
     });
     html += `</div>`;
 
-    // Barre verrouillée
-    if (!isUnlocked) {
+    // Barre verrouillée (pas pour les packs « bientôt »)
+    if (!cfg.comingSoon && !isUnlocked && count > 0) {
       const lockMsg = {
         fr:`Achetez le ${packName} pour débloquer ces histoires`,
         en:`Purchase the ${packName} to unlock these stories`,
@@ -707,6 +763,7 @@ const BILLING_TXT = {
         pending:'Ouverture de Google Play…', owned:'Ce pack est déjà débloqué ✓',
         success:'Pack débloqué ✓ Bonne lecture !', failed:'Achat impossible pour le moment.',
         notfound:'Ce pack n\'est pas encore disponible à la vente.',
+        comingSoon:'Ce pack arrive bientôt — achat pas encore ouvert.',
         processing:'Achat en cours de validation par Google Play…',
         restoring:'Restauration en cours…', restored:'Achats restaurés ✓',
         nothing:'Aucun achat à restaurer.', restore:'Restaurer mes achats' },
@@ -715,6 +772,7 @@ const BILLING_TXT = {
         pending:'Opening Google Play…', owned:'This pack is already unlocked ✓',
         success:'Pack unlocked ✓ Enjoy!', failed:'Purchase failed for now.',
         notfound:'This pack is not on sale yet.',
+        comingSoon:'This pack is coming soon — not available for purchase yet.',
         processing:'Purchase is being validated by Google Play…',
         restoring:'Restoring…', restored:'Purchases restored ✓',
         nothing:'Nothing to restore.', restore:'Restore purchases' },
@@ -723,6 +781,7 @@ const BILLING_TXT = {
         pending:'Abriendo Google Play…', owned:'Este pack ya está desbloqueado ✓',
         success:'¡Pack desbloqueado ✓!', failed:'No se pudo completar la compra.',
         notfound:'Este pack aún no está a la venta.',
+        comingSoon:'Este pack llegará pronto — compra aún no disponible.',
         processing:'Google Play está validando la compra…',
         restoring:'Restaurando…', restored:'Compras restauradas ✓',
         nothing:'No hay compras que restaurar.', restore:'Restaurar compras' }
@@ -751,6 +810,7 @@ async function buyPack(packId) {
   if (_buying) return;                       // évite le double-tap
   const cfg = PACK_CONFIG[packId];
   if (!cfg) return;
+  if (cfg.comingSoon) { sfToast(bt('comingSoon')); return; }
 
   if (!window.SFBilling || !SFBilling.isAvailable()) {
     sfToast(bt('unavailable'));
@@ -778,6 +838,8 @@ async function buyPack(packId) {
       sfToast(bt('processing'));
     } else if (res.reason === 'not_found') {
       sfToast(bt('notfound'));
+    } else if (res.reason === 'coming_soon') {
+      sfToast(bt('comingSoon'));
     } else if (res.reason === 'web' || res.reason === 'plugin_missing') {
       sfToast(bt('unavailable'));
     } else {

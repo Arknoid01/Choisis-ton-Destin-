@@ -37,11 +37,14 @@ window.SFBilling = (function () {
     wilds:      'fableris.dlc.wilds'
   };
 
-  const FREE_PACKS    = ['free', 'kids'];
+  const FREE_PACKS        = ['free', 'kids'];
+  // Packs sans histoires : visibles en « bientôt » mais pas à la vente.
+  const COMING_SOON_PACKS = ['neon', 'pirates', 'fantasy', 'wilds'];
   const CACHE_KEY     = 'sf_unlocked_packs';
   const CODE_KEY      = 'sf_code_unlocks';
   const PRICE_KEY     = 'sf_pack_prices';
   const PRODUCT_PACKS = Object.keys(PRODUCTS);
+  const SELLABLE_PACKS = () => PRODUCT_PACKS.filter(p => !COMING_SOON_PACKS.includes(p));
 
   const DEVICE_READY_TIMEOUT = 15000;
   const STORE_INIT_TIMEOUT   = 20000;
@@ -133,6 +136,7 @@ window.SFBilling = (function () {
     if (!store) return;
     const prices = {};
     PRODUCT_PACKS.forEach(packId => {
+      if (COMING_SOON_PACKS.includes(packId)) return;
       const p = store.get(PRODUCTS[packId]);
       const offer = p && p.getOffer && p.getOffer();
       const price = offer && offer.pricingPhases && offer.pricingPhases[0]
@@ -210,7 +214,7 @@ window.SFBilling = (function () {
       if (!configured) {
         configured = true;
 
-        store.register(PRODUCT_PACKS.map(packId => ({
+        store.register(SELLABLE_PACKS().map(packId => ({
           id: PRODUCTS[packId],
           type: ProductType.NON_CONSUMABLE,
           platform: Platform.GOOGLE_PLAY
@@ -338,6 +342,7 @@ window.SFBilling = (function () {
   async function buy(packId) {
     const productId = PRODUCTS[packId];
     if (!productId) return { ok: false, reason: 'unknown_pack' };
+    if (COMING_SOON_PACKS.includes(packId)) return { ok: false, reason: 'coming_soon' };
     if (isUnlocked(packId)) return { ok: true, reason: 'already_owned' };
 
     await init();
