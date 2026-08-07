@@ -2504,7 +2504,7 @@ const TEMPLATE_SCENE_COPY = {
 };
 
 function buildTemplateProject(type) {
-  const lang = editorLang();
+  const lang = editorLang;
   const copy = (TEMPLATE_SCENE_COPY[lang] || TEMPLATE_SCENE_COPY.fr)[type];
   if (!copy) return null;
   const s = [genId(), genId(), genId(), genId(), genId()];
@@ -2608,7 +2608,7 @@ function buildSubmitMeta(author, email, message) {
     author,
     email,
     message,
-    lang: editorLang(),
+    lang: editorLang,
     sceneCount: Object.keys(scenes).length,
     endingCount: Object.values(scenes).filter(s => s.isEnd).length,
     kids: !!project.kids
@@ -2616,7 +2616,7 @@ function buildSubmitMeta(author, email, message) {
 }
 
 function sendMailBody(filename, meta, jsonText, delivery) {
-  const lang = meta?.lang || editorLang();
+  const lang = meta?.lang || editorLang;
   const name = meta?.title || project.name || 'Mon Histoire';
   const author = meta?.author || '';
   const emailLine = meta?.email || '';
