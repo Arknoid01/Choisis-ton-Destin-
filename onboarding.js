@@ -485,6 +485,7 @@ window.SFOnboarding = (function () {
 
   // ── Étape 2 : micro-démo interactive ───────────────────────
   function showDemo() {
+    hideAll();
     applyTexts();
     resetDemoView();
     show('sf-onb-demo');
@@ -509,6 +510,7 @@ window.SFOnboarding = (function () {
 
   // ── Étape 3 : tutoriel ───────────────────────────────────────
   function showTuto() {
+    hideAll();
     applyTexts();
     show('sf-onb-tuto');
   }
@@ -526,6 +528,7 @@ window.SFOnboarding = (function () {
   }
 
   function showPin() {
+    hideAll();
     applyTexts();
     const err = document.getElementById('sf-onb-pin-error');
     document.getElementById('sf-onb-pin-input').value = '';
