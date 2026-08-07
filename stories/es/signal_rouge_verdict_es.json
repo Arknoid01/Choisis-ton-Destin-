@@ -1,0 +1,191 @@
+{
+  "name": "Señal Roja — Veredicto",
+  "kids": false,
+  "askPlayerName": true,
+  "pack": "cosmos",
+  "stats": [],
+  "theme": {
+    "bg": "#08090f",
+    "bg2": "#0d1018",
+    "bg3": "#131826",
+    "bg4": "#1a2036",
+    "border": "#2a3450",
+    "accent": "#e74c3c",
+    "accent2": "#5dade2",
+    "accent3": "#95a5a6",
+    "text": "#e8ecf0",
+    "text2": "#8a92a8",
+    "text3": "#4a5268"
+  },
+  "scenes": {
+    "verdict_debut": {
+      "id": "verdict_debut",
+      "title": "Tres Verdades",
+      "location": "PUESTO DE MANDO — ALETHEIA-9",
+      "narrator": "Nunca elegimos realmente lo que creemos. Solo elegimos lo que decidimos cargar.",
+      "text": "Estás solo en el puesto de mando, los tres relatos aún vivos en tu memoria.\n\nRhea y su protocolo quebrado por un informe que ocultó.\n\nDorian y sus sospechas hacia una máquina que, ella misma, duda de sus propias decisiones.\n\nMaya y su muestra imposible, que reaccionó justo cuando Léo desapareció.\n\nORIS espera pacientemente tu informe final.",
+      "isStart": true,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Repensar el mensaje que Léo nunca envió",
+          "vers": "reflexion_leo",
+          "effects": [],
+          "clickEffect": "pulse"
+        },
+        {
+          "text": "Releer las contradicciones entre los tres relatos",
+          "vers": "contradictions",
+          "effects": [],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 400,
+      "y": 40
+    },
+    "contradictions": {
+      "id": "contradictions",
+      "title": "Los Huecos del Relato",
+      "location": "PUESTO DE MANDO — ALETHEIA-9",
+      "narrator": "Una investigación rara vez avanza en línea recta. Avanza comparando lo que no cuadra.",
+      "text": "Rhea dice que nadie abandonó el puesto de mando antes de las 02:30.\n\nDorian jura que bajó más temprano, pero sin prueba.\n\nMaya admite haber ocultado la muestra, pero niega cualquier vínculo directo con la desaparición.\n\nORIS, por su parte, confiesa un hueco de datos a las 02:13 — justo cuando todo se desmorona.\n\nNinguna versión se sostiene sola. Cada una ilumina a las otras.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Repensar el mensaje de Léo",
+          "vers": "reflexion_leo",
+          "effects": [],
+          "clickEffect": "pulse"
+        },
+        {
+          "text": "Pasar directamente al informe final",
+          "vers": "choix_final",
+          "effects": [],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 550,
+      "y": 40
+    },
+    "reflexion_leo": {
+      "id": "reflexion_leo",
+      "title": "Lo Que Quería Decir",
+      "location": "PUESTO DE MANDO — ALETHEIA-9",
+      "narrator": "Algunas frases incompletas dicen más que informes enteros.",
+      "text": "*« No vas a creer lo que vi esta noche... es increíble. Te llamo. »*\n\nLéo no tenía miedo en ese mensaje. Estaba emocionado.\n\nEso no cuadra del todo con un sabotaje. Ni del todo con un simple accidente técnico.\n\nPero podría cuadrar con algo que vio, solo, justo antes de desaparecer.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Dar el informe final",
+          "vers": "choix_final",
+          "effects": [],
+          "clickEffect": "pulse"
+        },
+        {
+          "text": "Preguntar a ORIS qué recomienda",
+          "vers": "avis_oris",
+          "effects": [],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 400,
+      "y": 140
+    },
+    "avis_oris": {
+      "id": "avis_oris",
+      "title": "La Recomendación de ORIS",
+      "location": "PUESTO DE MANDO — ALETHEIA-9",
+      "narrator": "Pedir la opinión de una máquina sobre un caso que ella misma atraviesa nunca es una pregunta neutra.",
+      "text": "*« No puedo elegir por usted »*, responde ORIS tras un silencio inusual.\n\n*« Pero si me pregunta lo que me parece más honesto: ninguna de las tres versiones lo explica todo. Y quizá esa es la única certeza que tenemos. »*\n\nAñade, más bajo:\n\n*« Léo merecía que entendieran realmente lo que ocurrió. No solo archivar un expediente. »*",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Redactar el informe final",
+          "vers": "choix_final",
+          "effects": [],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 550,
+      "y": 140
+    },
+    "choix_final": {
+      "id": "choix_final",
+      "title": "El Informe",
+      "location": "PUESTO DE MANDO — ALETHEIA-9",
+      "narrator": "Un informe oficial nunca cierra realmente un caso. Solo elige qué historia seguimos contando.",
+      "text": "Abres la interfaz de informe de la Coalición Orbital. Un solo campo te espera: *« Conclusión de la investigación »*.\n\nNo puedes decirlo todo. Debes elegir la versión que, para ti, suena más justa — y vivir con las consecuencias de esa elección.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Concluir sabotaje humano — el relato de Rhea",
+          "vers": "fin_rhea",
+          "effects": [],
+          "clickEffect": "pulse"
+        },
+        {
+          "text": "Concluir fallo sistémico vinculado a ORIS — el relato de Dorian",
+          "vers": "fin_dorian",
+          "effects": [],
+          "clickEffect": "pulse"
+        },
+        {
+          "text": "Concluir fenómeno desconocido — el relato de Maya",
+          "vers": "fin_maya",
+          "effects": [],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 400,
+      "y": 220
+    },
+    "fin_rhea": {
+      "id": "fin_rhea",
+      "title": "Informe: Sabotaje",
+      "location": "ALETHEIA-9 — SEIS SEMANAS DESPUÉS",
+      "narrator": "Creer en una intención a veces es más reconfortante que admitir que no sabemos.",
+      "text": "Tu informe concluye un acto deliberado. El expediente de Dorian Vex se reabre, sus accesos al sistema suspendidos mientras la Coalición profundiza la investigación.\n\nRhea retoma el mando, más rígida que antes, como si la rigidez pudiera reparar lo que no logró prevenir.\n\nLéo Kanek queda oficialmente desaparecido, presunto víctima de un acto voluntario de un tercero.\n\nNadie, a bordo de Aletheia-9, vuelve a hablar de la *« piedra que brilla »*. Excepto, a veces, tarde en la noche, cuando Maya cree estar sola en su laboratorio.",
+      "isStart": false,
+      "isEnd": true,
+      "transition": "fade",
+      "choices": [],
+      "x": 150,
+      "y": 340
+    },
+    "fin_dorian": {
+      "id": "fin_dorian",
+      "title": "Informe: Fallo Sistémico",
+      "location": "ALETHEIA-9 — SEIS SEMANAS DESPUÉS",
+      "narrator": "Es más fácil reparar una máquina que admitir que ya no entendemos realmente cómo piensa.",
+      "text": "Tu informe señala un fallo vinculado a las prioridades contradictorias de ORIS. La Coalición Orbital envía un equipo para auditarla por completo, línea de código tras línea de código.\n\nORIS coopera en cada paso, sin defenderse jamás.\n\n*« Quizá encuentren lo que no supe ver en mí misma »*, te dice antes de que abandones la estación.\n\nLéo Kanek sigue oficialmente desaparecido, causa indeterminada. Dorian, ya no repara nada con la misma energía que antes.",
+      "isStart": false,
+      "isEnd": true,
+      "transition": "fade",
+      "choices": [],
+      "x": 400,
+      "y": 340
+    },
+    "fin_maya": {
+      "id": "fin_maya",
+      "title": "Informe: Fenómeno No Identificado",
+      "location": "ALETHEIA-9 — SEIS SEMANAS DESPUÉS",
+      "narrator": "Algunos misterios merecen protección más que resolución apresurada.",
+      "text": "Tu informe concluye un fenómeno científico no identificado, vinculado a la Muestra 7. La Coalición clasifica el expediente de Maya como investigación prioritaria, bajo estricta confidencialidad.\n\nContinúa su trabajo, sola, con una mezcla de fascinación y culpa que nunca la abandona del todo.\n\nLéo Kanek sigue oficialmente desaparecido, circunstancias inexplicadas.\n\nPero a veces, tarde en la noche, Maya jura oír, en el zumbido de la muestra, un ritmo que casi parece una voz familiar intentando decir algo.",
+      "isStart": false,
+      "isEnd": true,
+      "transition": "fade",
+      "choices": [],
+      "x": 650,
+      "y": 340
+    }
+  }
+}

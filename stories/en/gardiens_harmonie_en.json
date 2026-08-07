@@ -1,0 +1,678 @@
+{
+  "name": "Guardians of Harmony",
+  "kids": false,
+  "askPlayerName": true,
+  "pack": "free",
+  "companion": "Alya",
+  "scenes": {
+    "prologue": {
+      "id": "prologue",
+      "title": "The Whispering Forest",
+      "location": "GOLDEN FOREST — DAWN",
+      "narrator": "When nature stops singing, the guardians know danger is approaching.",
+      "text": "Your name is {{player}}, and for several years now, you have been one of the Guardians of Nature.\n\nYour mission seems simple: protect the extraordinary creatures that live alongside humans and prevent the balance between the two worlds from being broken.\n\nThat morning, you walk among the great trees of the Golden Forest with Alya, your patrol companion.\n\nAlya is brave, fast, and knows almost every creature in the forest.\n\nBut today, she hardly speaks at all.\n\nThe birds have fallen silent.\n\nThe little luminous foxes have vanished into their burrows.\n\nEven the wind seems to hold its breath.\n\nThen a rumble runs through the trees.\n\nAn immense creature bursts between the branches. Its eyes glow with blue light, and a strange black mark covers its flank.\n\nAlya takes a step back.\n\n« {{player}}... that's not a wild creature. Someone did this to it. »\n\nIn the distance, a bell rings.\n\nThe guardians' alarm signal.",
+      "isStart": true,
+      "isEnd": false,
+      "choices": [
+        {
+          "text": "Approach the creature gently",
+          "vers": "creature",
+          "effects": [
+            {
+              "stat": "courage",
+              "val": 15
+            }
+          ]
+        },
+        {
+          "text": "Follow the trail of the black mark",
+          "vers": "piste"
+        }
+      ]
+    },
+    "creature": {
+      "id": "creature",
+      "title": "The Wounded Guardian",
+      "location": "GOLDEN FOREST — CLEARING",
+      "narrator": "Some creatures attack because they are afraid. Others because they no longer have anyone to trust.",
+      "text": "You slowly raise your hands.\n\nThe creature growls but does not charge.\n\nAlya takes a small healing stone from her pouch.\n\n« If we heal it, it might show us what happened. »\n\nYou advance further.\n\nThe creature trembles.\n\nThen you notice a small metal chain around its paw.\n\nIt bears the symbol of an unknown organization: a black circle surrounding a white claw.\n\nSuddenly, the creature places its paw on the ground.\n\nA vision appears.\n\nCages.\n\nCaptured creatures.\n\nFigures dressed in black cloaks.\n\nAnd an immense stone door opening beneath a mountain.\n\nAlya turns pale.\n\n« I know this symbol... »\n\nShe clenches her fists.\n\n« They call themselves the Liberators. »",
+      "isStart": false,
+      "isEnd": false,
+      "choices": [
+        {
+          "text": "Ask Alya what she knows",
+          "vers": "alya_secret"
+        },
+        {
+          "text": "Follow the vision to the mountain",
+          "vers": "montagne"
+        }
+      ]
+    },
+    "piste": {
+      "id": "piste",
+      "title": "Marks in the Mud",
+      "location": "GOLDEN FOREST — FORGOTTEN PATH",
+      "narrator": "A trail can lead to danger. But it can also reveal the truth.",
+      "text": "You crouch near the tracks left in the mud.\n\nThey don't look like an animal's.\n\nBoots.\n\nMany boots.\n\nBeside them, several creature prints seem to have been dragged by force.\n\nAlya examines a broken branch.\n\n« They passed here last night. »\n\nYou advance with her to an old abandoned cabin.\n\nInside, you find regional maps, ropes, empty cages, and several posters depicting fantastic creatures.\n\nOn one of them, someone wrote:\n\n« Humans will never change. »\n\nAlya stays silent before the sentence.\n\nThen you find a map indicating a mountain to the north.\n\nA black symbol is drawn on it.",
+      "isStart": false,
+      "isEnd": false,
+      "choices": [
+        {
+          "text": "Take the map and alert the Guardians",
+          "vers": "refuge"
+        },
+        {
+          "text": "Head immediately toward the mountain",
+          "vers": "montagne"
+        }
+      ]
+    },
+    "alya_secret": {
+      "id": "alya_secret",
+      "title": "Alya's Secret",
+      "location": "GOLDEN FOREST — BENEATH THE GREAT OAKS",
+      "narrator": "Sometimes, those who accompany us carry their own wounds.",
+      "text": "Alya looks away.\n\n« I've heard of them before. »\n\nShe hesitates.\n\n« When I was little, a creature I was protecting was hurt by humans. After that, it was afraid of everyone. I never managed to earn its trust again. »\n\nShe lowers her head.\n\n« The Liberators say no creature should depend on humans. They want to open all the reserves, free all the creatures, and make the cities that surround them disappear. »\n\nYou ask her if she thinks they're right.\n\nAlya doesn't answer right away.\n\n« I don't know anymore. »\n\nA noise rings out behind you.\n\nBranches crack.\n\nSomeone is watching you.",
+      "isStart": false,
+      "isEnd": false,
+      "choices": [
+        {
+          "text": "Stay and search for who is watching",
+          "vers": "embuscade"
+        },
+        {
+          "text": "Leave discreetly toward the mountain",
+          "vers": "montagne"
+        }
+      ]
+    },
+    "refuge": {
+      "id": "refuge",
+      "title": "The Guardians' Refuge",
+      "location": "GUARDIANS' REFUGE — NOON",
+      "narrator": "When a threat grows, guardians must choose between acting quickly and understanding first.",
+      "text": "The refuge is hidden behind a waterfall.\n\nYou present the map to the council of Guardians.\n\nThe room falls silent.\n\nMaster Elian, the eldest of the guardians, studies the black symbol.\n\n« The Liberators have returned. »\n\nHe explains that they have long sought an ancient sanctuary capable of controlling the most powerful creatures in the world.\n\nIf the sanctuary is activated, the creatures could lose their free will.\n\n« You must reach the mountain before them. »\n\nAlya steps forward.\n\n« And if we fail? »\n\nElian answers softly:\n\n« Then you will have to remind humans and creatures why they chose to live together. »\n\nAn old winged creature waits before the refuge.\n\nIt seems ready to lead you.",
+      "isStart": false,
+      "isEnd": false,
+      "choices": [
+        {
+          "text": "Leave with the winged creature",
+          "vers": "voyage"
+        },
+        {
+          "text": "Ask for an old map of the sanctuary",
+          "vers": "archives"
+        }
+      ]
+    },
+    "archives": {
+      "id": "archives",
+      "title": "The Forbidden Map",
+      "location": "GUARDIANS' REFUGE — ARCHIVES",
+      "narrator": "Old maps don't just show paths. Sometimes they show the mistakes of the past.",
+      "text": "The archives are filled with dusty books and maps so old their colors have nearly vanished.\n\nYou finally find a map hidden behind a shelf.\n\nIt depicts the northern mountain.\n\nBut something is strange.\n\nThe sanctuary is not beneath the mountain.\n\nIt is beneath the lake behind it.\n\nAlya reads an inscription on the back of the map:\n\n« Only those who refuse to choose between the two worlds can open the door. »\n\nAlya frowns.\n\n« I think that sentence is about us. »\n\nA tremor suddenly shakes the refuge.\n\nOutside, an immense red light appears in the sky.\n\nThe Liberators have just begun their attack.",
+      "isStart": false,
+      "isEnd": false,
+      "choices": [
+        {
+          "text": "Run to defend the refuge",
+          "vers": "attaque_refuge"
+        },
+        {
+          "text": "Use the chaos to leave for the lake",
+          "vers": "lac"
+        }
+      ]
+    },
+    "embuscade": {
+      "id": "embuscade",
+      "title": "The Liberators",
+      "location": "GOLDEN FOREST — UNDERGROWTH",
+      "narrator": "You are never alone when an organization is looking for you.",
+      "text": "Three figures appear between the trees.\n\nThey wear the symbol of the white claw.\n\nThe person at the center removes their hood.\n\n« {{player}}. »\n\nThey know your name.\n\n« We don't want to fight you. We only want to stop humans from continuing to use creatures. »\n\nAlya takes a step forward.\n\n« You capture creatures to free them. Don't you see the problem? »\n\nThe figure answers:\n\n« We have stopped believing that harmony was possible. »\n\nThey place a small shining stone on the ground.\n\n« Come see the sanctuary. You will understand. »\n\nThen the three figures disappear into the forest.",
+      "isStart": false,
+      "isEnd": false,
+      "choices": [
+        {
+          "text": "Ignore their invitation and continue toward the mountain",
+          "vers": "route_montagne",
+          "effects": [
+            {
+              "stat": "courage",
+              "val": 15
+            }
+          ]
+        },
+        {
+          "text": "Take the mysterious stone",
+          "vers": "pierre"
+        }
+      ]
+    },
+    "pierre": {
+      "id": "pierre",
+      "title": "The Stone That Listens",
+      "location": "GOLDEN FOREST — STREAM",
+      "narrator": "Some stones guard secrets. This one seems to guard memories above all.",
+      "text": "The moment you touch the stone, you hear voices.\n\nDozens of voices.\n\nHumans.\n\nWolves.\n\nBirds.\n\nCreatures whose names you don't even know.\n\nAll speaking at once.\n\nThen one voice becomes clearer.\n\n« Harmony doesn't mean everyone is the same. It means everyone can choose. »\n\nAlya listens too.\n\nHer face changes.\n\n« That's exactly what my mother used to say. »\n\nShe takes the stone.\n\nBut a shadow appears on the surface of the water.\n\nA gigantic aquatic creature watches you.\n\nIt points its snout toward the north.",
+      "isStart": false,
+      "isEnd": false,
+      "choices": [
+        {
+          "text": "Follow the creature to the lake",
+          "vers": "sillage_lac"
+        },
+        {
+          "text": "Ask the creature to lead you to the mountain",
+          "vers": "montagne"
+        }
+      ]
+    },
+    "voyage": {
+      "id": "voyage",
+      "title": "Above the Clouds",
+      "location": "SKY OF THE MOUNTAINS",
+      "narrator": "From above, the borders between worlds seem very small.",
+      "text": "The winged creature carries you above the forest.\n\nThe villages become tiny.\n\nThe rivers look like threads of silver.\n\nAnd farther away, the mountain appears.\n\nA column of black light rises from its summit.\n\nAlya grits her teeth.\n\n« They've already begun. »\n\nSuddenly, a swarm of small flying creatures surrounds you.\n\nThey don't seem hostile.\n\nThey show you a path to a lake hidden behind the mountain.\n\nOne of them lands on your shoulder.\n\nIt chirps as if it wants to tell you something.\n\nYou understand that it wants you to follow it.",
+      "isStart": false,
+      "isEnd": false,
+      "choices": [
+        {
+          "text": "Follow the small creatures",
+          "vers": "lac"
+        },
+        {
+          "text": "Go directly to the summit",
+          "vers": "approche_sommet"
+        }
+      ]
+    },
+    "montagne": {
+      "id": "montagne",
+      "title": "The Black Mountain",
+      "location": "NORTHERN MOUNTAIN — LATE AFTERNOON",
+      "narrator": "Some mountains hide treasures. This one hides a decision.",
+      "text": "The path becomes narrower and narrower.\n\nSnow covers the stones.\n\nAs you climb, you spot abandoned cages and traces of magic on the rocks.\n\nAlya stops before a gigantic door.\n\nIt is covered with symbols depicting humans and creatures living side by side.\n\nAt the center, a phrase is engraved:\n\n« No world must possess the other. »\n\nThe door opens slowly.\n\nBehind it lies an immense staircase descending into the mountain.\n\nAlya looks at you.\n\n« {{player}}... whatever is down there, we must stay together. »",
+      "isStart": false,
+      "isEnd": false,
+      "choices": [
+        {
+          "text": "Descend into the sanctuary",
+          "vers": "sanctuaire"
+        },
+        {
+          "text": "Search first for the lake indicated on the map",
+          "vers": "lac"
+        }
+      ]
+    },
+    "lac": {
+      "id": "lac",
+      "title": "The Lake of Reflections",
+      "location": "LAKE OF REFLECTIONS — EVENING",
+      "narrator": "A reflection doesn't always show what exists. Sometimes it shows what we fear.",
+      "text": "The lake is perfectly still.\n\nNo waves.\n\nNo insects.\n\nEven your reflections seem strange.\n\nWhen you look at the water, you see the village where you grew up.\n\nBut it is empty.\n\nAlya looks too.\n\nShe sees a forest without humans.\n\nFree creatures roam the deserted streets.\n\nShe murmurs:\n\n« That's what they want to create. »\n\nThen the lake lights up.\n\nA door appears beneath the surface.\n\nA voice echoes:\n\n« Those who choose only one world will doom both. »\n\nAlya looks at you.\n\n« {{player}}... we need to find a third path. »",
+      "isStart": false,
+      "isEnd": false,
+      "choices": [
+        {
+          "text": "Dive toward the door",
+          "vers": "porte_lac"
+        },
+        {
+          "text": "Return to the mountain",
+          "vers": "sommet"
+        }
+      ]
+    },
+    "attaque_refuge": {
+      "id": "attaque_refuge",
+      "title": "Defending the Refuge",
+      "location": "GUARDIANS' REFUGE — NIGHT",
+      "narrator": "Protecting creatures sometimes means protecting those who protect them.",
+      "text": "The refuge trembles under bursts of magic.\n\nCreatures hide in the underground halls.\n\nThe Guardians try to repel the invaders without hurting anyone.\n\nYou spot a small creature trapped beneath a beam.\n\nFarther away, a group of Liberators approaches.\n\nAlya runs toward you.\n\n« {{player}}! We have to choose! »\n\nYou look at the wounded creature.\n\nThen the attackers.\n\nThe fight could wait.\n\nShe couldn't.",
+      "isStart": false,
+      "isEnd": false,
+      "choices": [
+        {
+          "text": "Save the creature",
+          "vers": "sauvetage"
+        },
+        {
+          "text": "Repel the Liberators",
+          "vers": "combat_refuge",
+          "effects": [
+            {
+              "stat": "courage",
+              "val": 20
+            }
+          ]
+        }
+      ]
+    },
+    "sauvetage": {
+      "id": "sauvetage",
+      "title": "The Little Dragon",
+      "location": "GUARDIANS' REFUGE — CELLAR",
+      "narrator": "Courage isn't always about defeating an enemy. Sometimes it's about stopping to help.",
+      "text": "You lift the beam with Alya.\n\nThe small creature emerges trembling.\n\nIt's a young dragon with wings too large for its body.\n\nIt sneezes.\n\nA small flame shoots from its nose and sets the nearby curtain on fire.\n\nAlya laughs despite the danger.\n\n« I think it just thanked us. »\n\nThe dragon looks at you, then flies down the corridor.\n\nIt returns a few seconds later with a piece of black cloth in its mouth.\n\nThe Liberators' symbol is embroidered on it.\n\nBut beneath the symbol, an address is written.\n\nThe mountain.\n\nThe sanctuary.",
+      "isStart": false,
+      "isEnd": false,
+      "choices": [
+        {
+          "text": "Follow the dragon to the mountain",
+          "vers": "sommet"
+        },
+        {
+          "text": "Help the Guardians evacuate the refuge first",
+          "vers": "evacuation_refuge",
+          "effects": [
+            {
+              "stat": "courage",
+              "val": 10
+            }
+          ]
+        }
+      ]
+    },
+    "evacuation_refuge": {
+      "id": "evacuation_refuge",
+      "title": "Exit Through the Shadows",
+      "location": "GUARDIANS' REFUGE — SECRET TUNNEL",
+      "narrator": "Protecting the weakest sometimes takes longer than facing the enemy — but rarely takes less courage.",
+      "text": "You guide frightened creatures through the emergency tunnel while Alya covers the rear.\n\nThe young dragon keeps coming back, as if making sure no one is left behind.\n\nMaster Elian brings up the rear, his staff lighting the damp walls.\n\n« They targeted the sanctuary, » he murmurs. « Not us. We still have a chance if they don't reach the lake before us. »\n\nAt the end of the tunnel, the forest opens beneath a fine rain.\n\nThe mountain shines in the distance, surrounded by a dark halo.",
+      "isStart": false,
+      "isEnd": false,
+      "choices": [
+        {
+          "text": "Cut through the forest to save time",
+          "vers": "route_montagne"
+        },
+        {
+          "text": "Ask Elian if he knows a passage to the lake",
+          "vers": "sillage_lac"
+        }
+      ]
+    },
+    "combat_refuge": {
+      "id": "combat_refuge",
+      "title": "The Guardians' Battle",
+      "location": "GUARDIANS' REFUGE — NIGHT",
+      "narrator": "A battle can be won without anyone being forced to become a monster.",
+      "text": "You run toward the invaders.\n\nThe Guardians form a barrier before the creatures.\n\nThe Liberators use black magic that shakes the ground.\n\nYou manage to disable their main device.\n\nThe attackers retreat.\n\nBut before fleeing, their leader shouts:\n\n« You understand nothing! The sanctuary will open soon! »\n\nAlya joins you.\n\n« We have to go. Now. »\n\nBehind you, the refuge still stands.\n\nBefore you, the mountain is lit by a gigantic column of light.",
+      "isStart": false,
+      "isEnd": false,
+      "choices": [
+        {
+          "text": "Leave immediately for the sanctuary",
+          "vers": "sommet"
+        },
+        {
+          "text": "Check first that the creature beneath the beam is safe",
+          "vers": "sauvetage"
+        }
+      ]
+    },
+    "porte_lac": {
+      "id": "porte_lac",
+      "title": "Beneath the Lake",
+      "location": "UNDERWATER SANCTUARY",
+      "narrator": "The most impossible paths sometimes hide the simplest answers.",
+      "text": "You dive.\n\nBut instead of running out of air, you discover the water becomes luminous around you.\n\nAlya swims at your side.\n\nYou cross the door.\n\nBehind it lies an immense underground hall.\n\nStatues of creatures surround a stone circle.\n\nAt the center stands a crystal.\n\nWhen you approach, a voice echoes:\n\n« The sanctuary's power doesn't control creatures. It amplifies their will. »\n\nAlya understands immediately.\n\n« If the Liberators activate this with their anger, all the creatures could turn against humans. »\n\nA door opens in the rock.\n\nFootsteps echo behind.",
+      "isStart": false,
+      "isEnd": false,
+      "choices": [
+        {
+          "text": "Hide the crystal",
+          "vers": "cristal"
+        },
+        {
+          "text": "Wait for the Liberators",
+          "vers": "confrontation"
+        }
+      ]
+    },
+    "sommet": {
+      "id": "sommet",
+      "title": "The Burning Summit",
+      "location": "MOUNTAIN — SUMMIT",
+      "narrator": "When two visions of the world clash, someone must have the courage to propose something else.",
+      "text": "At the summit, an immense stone structure dominates the mountain.\n\nDozens of Liberators surround a luminous circle.\n\nAt the center stands their leader.\n\nAnd beside him, you recognize several captured creatures.\n\nAlya freezes.\n\n« No... »\n\nThe leader raises his hand.\n\n« Look at them! Humans imprisoned them. We will finally free them! »\n\nAlya steps forward.\n\n« Freeing them doesn't mean asking them to destroy the world. »\n\nThe leader replies:\n\n« You say that because you're still afraid of what might happen. »\n\nAlya doesn't answer.\n\nThen you understand something.\n\nThe real battle may not be against the Liberators.\n\nIt will be against the fear that drove them this far.",
+      "isStart": false,
+      "isEnd": false,
+      "choices": [
+        {
+          "text": "Speak to the leader",
+          "vers": "confrontation"
+        },
+        {
+          "text": "🔒 Free the captured creatures (Courage ≥ 30)",
+          "vers": "liberation",
+          "requires": {
+            "stat": "courage",
+            "min": 30
+          }
+        }
+      ]
+    },
+    "sanctuaire": {
+      "id": "sanctuaire",
+      "title": "Heart of the Sanctuary",
+      "location": "ANCIENT SANCTUARY — NIGHT",
+      "narrator": "The greatest power is not the one that commands. It's the one that lets choose.",
+      "text": "The staircase opens into a gigantic hall.\n\nHundreds of crystals float in the air.\n\nEach seems to contain a creature's memory.\n\nYou advance.\n\nA light appears before you.\n\nIt takes the form of an ancient guardian.\n\n« For centuries, humans and creatures have protected one another. But each generation must choose again to live together. »\n\nAlya lowers her eyes.\n\n« And if we get it wrong? »\n\nThe guardian answers:\n\n« Then you will learn. Harmony is not a promise never to make mistakes. »\n\nSuddenly, the sanctuary trembles.\n\nThe Liberators have arrived.",
+      "isStart": false,
+      "isEnd": false,
+      "choices": [
+        {
+          "text": "Protect the sanctuary",
+          "vers": "confrontation",
+          "effects": [
+            {
+              "stat": "courage",
+              "val": 20
+            }
+          ]
+        },
+        {
+          "text": "Search for another exit",
+          "vers": "cristal"
+        }
+      ]
+    },
+    "cristal": {
+      "id": "cristal",
+      "title": "The Crystal of Choice",
+      "location": "SANCTUARY — CENTRAL CHAMBER",
+      "narrator": "A dangerous power becomes even more dangerous when you believe you're the only one who knows how to use it.",
+      "text": "You take the crystal.\n\nImmediately, all the creatures in the sanctuary appear around you.\n\nYou feel their fear.\n\nTheir anger.\n\nBut also their happy memories with humans.\n\nAlya gently places her hand on your shoulder.\n\n« We must not choose for them. »\n\nThen you understand how to use the crystal.\n\nIt must belong neither to the Guardians nor to the Liberators.\n\nIt must be returned to the creatures themselves.\n\nBut a voice rings out behind you.\n\n« Put down that crystal. »\n\nAlya turns around.\n\nIt's the leader of the Liberators.\n\nAnd he holds a black key capable of activating the sanctuary.",
+      "isStart": false,
+      "isEnd": false,
+      "choices": [
+        {
+          "text": "🔒 Try to convince the leader (Courage ≥ 30)",
+          "vers": "confrontation",
+          "requires": {
+            "stat": "courage",
+            "min": 30
+          }
+        },
+        {
+          "text": "Give the crystal to the creatures",
+          "vers": "reflexion_cristal"
+        }
+      ]
+    },
+    "liberation": {
+      "id": "liberation",
+      "title": "Open Doors",
+      "location": "MOUNTAIN — GREAT GATE",
+      "narrator": "To free someone is also to accept not knowing what they will do next.",
+      "text": "You open the cages.\n\nOne by one, the creatures emerge.\n\nSome flee.\n\nOthers remain motionless.\n\nA large silver wolf approaches the leader of the Liberators.\n\nHe looks at him for a long time.\n\nThen he turns and walks into the forest.\n\nThe leader is speechless.\n\nAlya murmurs:\n\n« They can choose. »\n\nA small creature comes to stand beside you.\n\nThen a second.\n\nThen a third.\n\nBut the sanctuary's crystal begins to vibrate.\n\nSomeone must decide what will happen next.",
+      "isStart": false,
+      "isEnd": false,
+      "choices": [
+        {
+          "text": "Let the creatures decide",
+          "vers": "choix_final"
+        },
+        {
+          "text": "Destroy the crystal",
+          "vers": "destruction"
+        }
+      ]
+    },
+    "confrontation": {
+      "id": "confrontation",
+      "title": "The Final Discussion",
+      "location": "SANCTUARY — STONE CIRCLE",
+      "narrator": "It sometimes takes more courage to listen to an adversary than to fight them.",
+      "text": "The leader of the Liberators advances.\n\n« Why do you still defend humans? »\n\nYou answer:\n\n« Because some humans harm creatures. But some protect them too. »\n\nAlya takes a deep breath.\n\n« And some creatures frighten humans. Yet we don't decide they're all bad. »\n\nSilence falls.\n\nThe leader looks at the crystal.\n\nFor a few seconds, you think he will lower his weapon.\n\nBut he grips the black key.\n\n« Then prove to me that harmony is possible. »\n\nHe activates the sanctuary.",
+      "isStart": false,
+      "isEnd": false,
+      "choices": [
+        {
+          "text": "Trust the creatures",
+          "vers": "choix_final"
+        },
+        {
+          "text": "Use the power of the sanctuary",
+          "vers": "pouvoir"
+        }
+      ]
+    },
+    "choix_final": {
+      "id": "choix_final",
+      "title": "The Creatures' Choice",
+      "location": "SANCTUARY — DAWN",
+      "narrator": "To live together, we must sometimes accept that the other chooses something we wouldn't have chosen ourselves.",
+      "text": "The crystal rises into the air.\n\nA light crosses the sanctuary.\n\nAll the creatures present can finally choose.\n\nSome return to the forests.\n\nOthers stay near the villages.\n\nA few approach humans.\n\nNo one commands them.\n\nNo one gives them orders.\n\nAlya looks at the leader of the Liberators.\n\nHe falls to his knees.\n\n« They... really choose. »\n\nYou nod.\n\n« That's harmony. »\n\nThe sun rises above the mountain.\n\nFor the first time in a long while, humans and creatures look at the same horizon.",
+      "isStart": false,
+      "isEnd": true,
+      "choices": []
+    },
+    "pouvoir": {
+      "id": "pouvoir",
+      "title": "Absolute Power",
+      "location": "SANCTUARY — HEART OF THE CRYSTAL",
+      "narrator": "Power can solve a problem. But it can't teach beings to understand one another.",
+      "text": "You use the power of the sanctuary.\n\nA wave of light crosses the mountain.\n\nAll the creatures stop.\n\nSilence is total.\n\nFor a moment, you could give them any order.\n\nAlya looks at you with worry.\n\n« {{player}}... you really can control them all. »\n\nThen you understand the trap.\n\nEven if your intention is good, controlling them would be doing exactly what the Liberators blame humans for.\n\nYou release the power.\n\nThe crystal cracks.\n\nThe light disappears.\n\nThe creatures regain their freedom.\n\nThe sanctuary begins to collapse.",
+      "isStart": false,
+      "isEnd": false,
+      "choices": [
+        {
+          "text": "Save Alya and get out",
+          "vers": "fin_gardiens"
+        },
+        {
+          "text": "Go back for the leader of the Liberators",
+          "vers": "fin_reconciliation"
+        }
+      ]
+    },
+    "destruction": {
+      "id": "destruction",
+      "title": "The End of the Crystal",
+      "location": "SANCTUARY — CENTRAL CHAMBER",
+      "narrator": "Destroying a power can be harder than using it.",
+      "text": "You raise the crystal.\n\nAlya understands what you're going to do.\n\n« {{player}}... if you destroy it, no one will ever be able to use this power again. »\n\nYou strike.\n\nThe crystal explodes in a white light.\n\nAll the magical chains disappear.\n\nThe creatures are free.\n\nThe sanctuary begins to collapse.\n\nAmid the falling stones, the leader of the Liberators remains motionless.\n\nHe watches the creatures leave without receiving any order.\n\n« Perhaps... we had forgotten why we wanted to free them. »\n\nAlya smiles.\n\n« Then it's time to start again differently. »",
+      "isStart": false,
+      "isEnd": false,
+      "choices": [
+        {
+          "text": "Leave the mountain with the leader of the Liberators",
+          "vers": "fin_reconciliation"
+        },
+        {
+          "text": "Let the leader think alone and join the Guardians",
+          "vers": "fin_gardiens"
+        }
+      ]
+    },
+    "fin_reconciliation": {
+      "id": "fin_reconciliation",
+      "title": "A New Alliance",
+      "location": "VALLEY — A FEW DAYS LATER",
+      "narrator": "Great stories don't always end with victory. Some begin with a second chance.",
+      "text": "A few days later, the Guardians' refuge welcomes an unexpected visitor.\n\nThe leader of the Liberators came without a weapon.\n\nHe doesn't ask forgiveness right away.\n\nHe simply tells what he lived through.\n\nThe Guardians listen.\n\nAlya too.\n\nThen a creature approaches him.\n\nThe same silver wolf he had freed.\n\nThe wolf sits before him.\n\nThe leader extends his hand.\n\nThe wolf doesn't back away.\n\nFor the first time, both sides work together.\n\nNot to control creatures.\n\nNot to separate them from humans.\n\nBut to let them choose.\n\nAlya looks at {{player}}.\n\n« Do you think we succeeded? »\n\nIn the distance, a small creature sneezes and accidentally sets the refuge's sign on fire.\n\n{{player}} smiles.\n\n« Looks like the work is just beginning. »",
+      "isStart": false,
+      "isEnd": true,
+      "choices": []
+    },
+    "fin_gardiens": {
+      "id": "fin_gardiens",
+      "title": "Guardian of Harmony",
+      "location": "GOLDEN FOREST — MORNING",
+      "narrator": "You don't become a guardian because you're strong enough to command. You become one because you know when to let others choose.",
+      "text": "You leave the mountain with Alya as the sun rises.\n\nBehind you, the sanctuary has collapsed.\n\nIts power can never again be used to control creatures.\n\nThe Guardians arrive shortly after.\n\nMaster Elian listens to your story without interrupting.\n\nThen he smiles.\n\n« You understood something many guardians take a lifetime to learn. »\n\nAlya looks at the forest.\n\nCreatures appear between the trees.\n\nThey don't flee from you.\n\nThey watch you.\n\nThen the young dragon from the refuge lands on Alya's shoulder.\n\nIt sneezes.\n\nA small flame shoots from its nose.\n\nAlya bursts out laughing.\n\nThe forest begins to sing again.\n\nAnd you, {{player}}, understand that your adventure is only beginning.",
+      "isStart": false,
+      "isEnd": true,
+      "choices": []
+    },
+    "route_montagne": {
+      "id": "route_montagne",
+      "title": "The Mountain Path",
+      "location": "MOUNTAIN TRAIL — EARLY EVENING",
+      "narrator": "Refusing an invitation is sometimes choosing a harder path — but a more honest one.",
+      "text": "You turn away from the shining stone.\n\n« We keep going, » you tell Alya.\n\nShe nods, almost relieved.\n\nThe trail climbs silently between the rocks.\n\nThe wind grows colder with each step.\n\nIn the distance, the mountain rises, dark despite the evening light.\n\nAlya pulls her hood tighter.\n\n« I don't like this silence. »\n\nYou don't either.\n\nEven the forest's most discreet creatures have vanished.\n\nOnly the sound of your footsteps echoes on the stone.\n\nThen, around the bend, the mountain appears in full before you.",
+      "isStart": false,
+      "isEnd": false,
+      "choices": [
+        {
+          "text": "Climb the main trail",
+          "vers": "montagne"
+        },
+        {
+          "text": "Take the slippery shortcut along the cliffs",
+          "vers": "passage_falaise",
+          "effects": [
+            {
+              "stat": "courage",
+              "val": 15
+            }
+          ]
+        }
+      ]
+    },
+    "passage_falaise": {
+      "id": "passage_falaise",
+      "title": "The Eagles' Passage",
+      "location": "MOUNTAIN CLIFF — TWILIGHT",
+      "narrator": "Shortcuts offered by nature are never free. They only demand a different kind of price.",
+      "text": "The path narrows to a wind-battered ledge.\n\nGiant eagles circle above you, their cries mixed with the distant rumble of black magic.\n\nAlya grips your hand.\n\n« If we fall, no one will reach the sanctuary. »\n\nOne of the birds suddenly descends and places a silver feather at your feet, like an offering.\n\nYou understand: they want to guide you, not frighten you.\n\nThe ledge leads directly to a forgotten stone door, engraved with the same symbols as the mountain door.",
+      "isStart": false,
+      "isEnd": false,
+      "choices": [
+        {
+          "text": "Enter through the secret door",
+          "vers": "sanctuaire"
+        },
+        {
+          "text": "Go back down and join the main trail",
+          "vers": "montagne"
+        }
+      ]
+    },
+    "sillage_lac": {
+      "id": "sillage_lac",
+      "title": "In the Creature's Wake",
+      "location": "STREAM — ON THE WAY TO THE LAKE",
+      "narrator": "Some creatures don't speak, but they always know where the true path leads.",
+      "text": "The aquatic creature glides before you between the stream's rocks.\n\nIt never turns back, as if it knows you're following.\n\nAlya still clutches the stone against her.\n\n« Those voices... they haven't fallen silent yet, » she murmurs.\n\nThe stream gradually widens.\n\nThe trees part.\n\nA scent of calm water rises in the evening air.\n\nThe creature suddenly stops and dives.\n\nBefore you stretches an immense, perfectly still surface.\n\n« We're here, » Alya whispers.",
+      "isStart": false,
+      "isEnd": false,
+      "choices": [
+        {
+          "text": "Touch the water to see if the vision returns",
+          "vers": "reflet_lac",
+          "effects": [
+            {
+              "stat": "courage",
+              "val": 10
+            }
+          ]
+        },
+        {
+          "text": "Ask Alya what the stone is still whispering to her",
+          "vers": "lac"
+        }
+      ]
+    },
+    "reflet_lac": {
+      "id": "reflet_lac",
+      "title": "Reflections That Speak",
+      "location": "LAKE OF REFLECTIONS — WATER'S EDGE",
+      "narrator": "Seeing your own fear reflected in the water isn't punishment. It's sometimes the first step to overcoming it.",
+      "text": "You dip your fingers into the icy water.\n\nThe reflections blur, then reform.\n\nYou see children playing with creatures in your village.\n\nAlya sees her mother tending a wounded wolf.\n\n« They don't want to destroy our memories, » she murmurs. « They want to convince us these images never existed. »\n\nThe lake's surface lights up.\n\nBeneath the water, the stone door becomes visible, as if it had been waiting forever.",
+      "isStart": false,
+      "isEnd": false,
+      "choices": [
+        {
+          "text": "Dive toward the door",
+          "vers": "porte_lac"
+        },
+        {
+          "text": "Circle the lake to reach the mountain",
+          "vers": "sommet"
+        }
+      ]
+    },
+    "approche_sommet": {
+      "id": "approche_sommet",
+      "title": "Toward the Summit",
+      "location": "SKY OF THE MOUNTAINS — FINAL APPROACH",
+      "narrator": "The closer you get to danger, the louder the silence becomes.",
+      "text": "The winged creature banks its wings and dives toward the summit.\n\nWind whistles in your ears.\n\nThe column of black light grows every second.\n\nAlya leans toward you.\n\n« Whatever we find up there, we stay together. »\n\nYou squeeze her hand for a moment.\n\nThe clouds finally part.\n\nThe stone structure on the summit appears, immense, surrounded by hooded figures.\n\nThe creature slows its flight and begins its descent.",
+      "isStart": false,
+      "isEnd": false,
+      "choices": [
+        {
+          "text": "Land in the middle of the Liberators' circle",
+          "vers": "sommet"
+        },
+        {
+          "text": "Land behind the rocks to observe first",
+          "vers": "observation_sommet",
+          "effects": [
+            {
+              "stat": "courage",
+              "val": 10
+            }
+          ]
+        }
+      ]
+    },
+    "observation_sommet": {
+      "id": "observation_sommet",
+      "title": "Behind the Rocks",
+      "location": "MOUNTAIN — SUMMIT — COVER",
+      "narrator": "Observing before acting doesn't always slow the story. Sometimes it's what allows you to change it.",
+      "text": "The winged creature lands quietly behind a pile of stones.\n\nFrom there, you can see the cages, the leader of the Liberators, and the crystal pulsing at the center of the circle.\n\nAlya counts the attackers in a low voice.\n\n« Too many for a frontal fight. But look: the sanctuary door is still open. »\n\nA young dragon — the same one from the refuge — circles above the cages, as if looking for a gap.\n\nYou have time to choose how to intervene.",
+      "isStart": false,
+      "isEnd": false,
+      "choices": [
+        {
+          "text": "🔒 Free the captured creatures in silence (Courage ≥ 25)",
+          "vers": "liberation",
+          "requires": {
+            "stat": "courage",
+            "min": 25
+          }
+        },
+        {
+          "text": "Descend and confront the leader directly",
+          "vers": "sommet"
+        }
+      ]
+    },
+    "reflexion_cristal": {
+      "id": "reflexion_cristal",
+      "title": "Breath Before the Choice",
+      "location": "SANCTUARY — CENTRAL CHAMBER",
+      "narrator": "Returning a power is sometimes more courageous than keeping it.",
+      "text": "The leader of the Liberators grips the black key, ready to act.\n\nBut you don't back down.\n\nAlya stands at your side, hands trembling but firm.\n\n« Are you sure? » she asks softly.\n\nYou look at the crystal, then at the creatures around you, silent, attentive.\n\n« This choice doesn't belong to us, » you answer.\n\nThe leader takes a step forward to stop you.\n\nBut it's already too late.\n\nYou raise the crystal toward the gathered creatures.",
+      "isStart": false,
+      "isEnd": false,
+      "choices": [
+        {
+          "text": "Speak to the leader one last time before returning the crystal",
+          "vers": "confrontation"
+        },
+        {
+          "text": "Hand the crystal to the creatures without waiting",
+          "vers": "choix_final"
+        }
+      ]
+    }
+  },
+  "stats": [
+    {
+      "id": "courage",
+      "label": "Courage",
+      "start": 0,
+      "max": 100,
+      "color": "#f6a623"
+    }
+  ]
+}

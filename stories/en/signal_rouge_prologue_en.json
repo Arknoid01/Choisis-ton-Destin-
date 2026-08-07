@@ -1,0 +1,346 @@
+{
+  "name": "Red Signal — Prologue",
+  "kids": false,
+  "askPlayerName": true,
+  "pack": "cosmos",
+  "stats": [],
+  "theme": {
+    "bg": "#08090f",
+    "bg2": "#0d1018",
+    "bg3": "#131826",
+    "bg4": "#1a2036",
+    "border": "#2a3450",
+    "accent": "#e74c3c",
+    "accent2": "#5dade2",
+    "accent3": "#95a5a6",
+    "text": "#e8ecf0",
+    "text2": "#8a92a8",
+    "text3": "#4a5268"
+  },
+  "scenes": {
+    "prologue_arrivee": {
+      "id": "prologue_arrivee",
+      "title": "The Red Signal",
+      "location": "DOCKING AIRLOCK — ALETHEIA-9",
+      "narrator": "A red signal never lies. It only says: something stopped working the way it was supposed to.",
+      "text": "Thirty-six hours ago, research station Aletheia-9 sent out a level-red distress signal, then nothing.\n\nThe Orbital Coalition sent you alone, aboard a fast shuttle, with a single mission: find out what happened.\n\nThe airlock opens with a metallic hiss.\n\nThe station air is cold. Too quiet.\n\nA synthetic voice greets you, calm, almost too soft:\n\n*\"Welcome aboard, {{player}}. I am ORIS, Aletheia-9's regulation system. I was informed of your arrival.\"*",
+      "isStart": true,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Ask ORIS for an immediate situation briefing",
+          "vers": "brief_situation",
+          "effects": [],
+          "clickEffect": "pulse"
+        },
+        {
+          "text": "Head straight to the command center",
+          "vers": "accueil_station",
+          "effects": [],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 400,
+      "y": 40
+    },
+    "accueil_station": {
+      "id": "accueil_station",
+      "title": "Silent Corridors",
+      "location": "MAIN CORRIDOR — ALETHEIA-9",
+      "narrator": "A station without crew noise is never truly silent. It only holds its breath.",
+      "text": "You move down the main corridor. The neon lights flicker faintly, in power-saving mode.\n\nORIS follows you through the ceiling speakers, room by room.\n\n*\"Three crew members are still alive and stable. They are waiting for you in the common room.\"*\n\nA pause, a little too long.\n\n*\"The fourth, technician Léo Kanek, has been missing since the night of the signal.\"*",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Ask for more details about Léo Kanek before continuing",
+          "vers": "brief_situation",
+          "effects": [],
+          "clickEffect": "pulse"
+        },
+        {
+          "text": "Continue to the common room without waiting",
+          "vers": "rencontre_equipage",
+          "effects": [],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 250,
+      "y": 140
+    },
+    "brief_situation": {
+      "id": "brief_situation",
+      "title": "The Kanek File",
+      "location": "COMMAND CENTER — ALETHEIA-9",
+      "narrator": "An absence can read like a void. Or like the exact shape of something we refuse to see.",
+      "text": "ORIS displays a holographic file: photo, ID number, position.\n\n*\"Léo Kanek, maintenance technician. Last seen at 02:14 station time, in the technical corridor sector.\"*\n\n*\"No trace of exit through an airlock. No signal from his suit. He is nowhere on the station — and nowhere outside either, according to my sensors.\"*\n\n*\"It is... statistically impossible.\"*\n\nORIS's voice stays calm. But something in the silence that follows is not.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Go directly to examine the sector where Léo vanished",
+          "vers": "scene_disparition",
+          "effects": [],
+          "clickEffect": "pulse"
+        },
+        {
+          "text": "Meet the three survivors first",
+          "vers": "rencontre_equipage",
+          "effects": [],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 400,
+      "y": 220
+    },
+    "scene_disparition": {
+      "id": "scene_disparition",
+      "title": "The Technical Sector",
+      "location": "TECHNICAL CORRIDOR — SECTOR 4",
+      "narrator": "Places always keep a trace, even when people stop leaving one.",
+      "text": "Sector 4 is narrow, lined with cables and maintenance panels.\n\nAn electrical panel has been left open, tools still on the floor, as if Léo had been interrupted mid-work.\n\nA faint smell of burnt circuitry still hangs in the air.\n\n*\"A micro power outage was recorded here at 02:13, one minute before he vanished from the sensors.\"*, ORIS notes.\n\n*\"I have no explanation to offer you. It is not my habit to say that.\"*",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Return to meet the crew with this information",
+          "vers": "rencontre_equipage",
+          "effects": [],
+          "clickEffect": "pulse"
+        },
+        {
+          "text": "Examine the tools left on the floor",
+          "vers": "indices_techniques",
+          "effects": [],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 550,
+      "y": 220
+    },
+    "indices_techniques": {
+      "id": "indices_techniques",
+      "title": "Tools That Talk",
+      "location": "TECHNICAL CORRIDOR — SECTOR 4",
+      "narrator": "A tool abandoned mid-work often tells a more honest story than an official report.",
+      "text": "You pick up Léo's magnetic screwdriver. It still bears a trace of soot on the handle.\n\nORIS adds: *\"Abnormal temperature recorded on this panel: 412 degrees Celsius for 0.3 seconds.\"*\n\nOn the wall, a burn mark in the shape of a perfect circle.\n\nToo clean to be accidental.\n\n*\"I did not see who made it\"*, ORIS adds, almost embarrassed.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Join the crew with these clues",
+          "vers": "rencontre_equipage",
+          "effects": [],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 650,
+      "y": 280
+    },
+    "rencontre_equipage": {
+      "id": "rencontre_equipage",
+      "title": "Three Faces, Three Nights",
+      "location": "COMMON ROOM — ALETHEIA-9",
+      "narrator": "Three people often tell the same night as if they had not slept in the same station.",
+      "text": "The common room is lit by dim light. Three people sit, each apart from the other two.\n\nCommander Rhea Solys stands first, back straight, voice firm: *\"You're late.\"*\n\nEngineer Dorian Vex does not even look up, busy taking apart and reassembling a small tool, for no apparent reason.\n\nDr. Maya Itho watches you at length before speaking, as if trying to sort you into a category.\n\nThree versions of the same night await you. None of them quite match.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Ask each of them to recount their night, calmly",
+          "vers": "hub_temoignages",
+          "effects": [],
+          "clickEffect": "pulse"
+        },
+        {
+          "text": "Ask ORIS to replay the night's logs first",
+          "vers": "portail_ia",
+          "effects": [],
+          "clickEffect": "pulse",
+          "story": "stories/en/signal_rouge_ia_en.json"
+        }
+      ],
+      "x": 400,
+      "y": 340
+    },
+    "hub_temoignages": {
+      "id": "hub_temoignages",
+      "title": "Three Accounts",
+      "location": "COMMON ROOM — ALETHEIA-9",
+      "narrator": "Listening is not judging. Not yet.",
+      "text": "You ask each of them to tell you their version of events, separately.\n\nORIS informs you that she can also transmit the full ship's logs from that night, despite a few corrupted fragments.\n\nNothing forces you to hear everything in a particular order. But each account illuminates the others differently.\n\nWho do you start with?",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Listen to Commander Rhea Solys",
+          "vers": "portail_commandante",
+          "effects": [],
+          "clickEffect": "pulse",
+          "story": "stories/en/signal_rouge_commandante_en.json"
+        },
+        {
+          "text": "Listen to Engineer Dorian Vex",
+          "vers": "portail_ingenieur",
+          "effects": [],
+          "clickEffect": "pulse",
+          "story": "stories/en/signal_rouge_ingenieur_en.json"
+        },
+        {
+          "text": "Listen to Dr. Maya Itho",
+          "vers": "portail_scientifique",
+          "effects": [],
+          "clickEffect": "pulse",
+          "story": "stories/en/signal_rouge_scientifique_en.json"
+        },
+        {
+          "text": "Review ORIS's ship's logs",
+          "vers": "portail_ia",
+          "effects": [],
+          "clickEffect": "pulse",
+          "story": "stories/en/signal_rouge_ia_en.json"
+        },
+        {
+          "text": "You've heard enough — proceed to the verdict",
+          "vers": "transition_verdict",
+          "effects": [],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 400,
+      "y": 440
+    },
+    "portail_commandante": {
+      "id": "portail_commandante",
+      "title": "After Rhea's Account",
+      "location": "COMMON ROOM — ALETHEIA-9",
+      "narrator": "A firm account is not necessarily a true one. But it often looks like one.",
+      "text": "You open your eyes back in the common room.\n\nRhea watches you, impassive, waiting for a reaction you do not give her.\n\n*\"Did you get what you needed?\"*, she asks simply.\n\nHer version is clear, almost too clean for a night of crisis.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Listen to another testimony",
+          "vers": "hub_temoignages",
+          "effects": [],
+          "clickEffect": "pulse"
+        },
+        {
+          "text": "You've heard enough — proceed to the verdict",
+          "vers": "transition_verdict",
+          "effects": [],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 150,
+      "y": 560
+    },
+    "portail_ingenieur": {
+      "id": "portail_ingenieur",
+      "title": "After Dorian's Account",
+      "location": "COMMON ROOM — ALETHEIA-9",
+      "narrator": "Nervousness is not proof of guilt. But it always draws the eye first.",
+      "text": "You open your eyes. Dorian has not stopped fiddling with his tool throughout his entire account.\n\n*\"I... I just told you what I saw.\"*, he says, as if already defending himself.\n\nHis version is full of technical details — and gaps, exactly where you would least expect them.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Listen to another testimony",
+          "vers": "hub_temoignages",
+          "effects": [],
+          "clickEffect": "pulse"
+        },
+        {
+          "text": "You've heard enough — proceed to the verdict",
+          "vers": "transition_verdict",
+          "effects": [],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 350,
+      "y": 560
+    },
+    "portail_scientifique": {
+      "id": "portail_scientifique",
+      "title": "After Maya's Account",
+      "location": "COMMON ROOM — ALETHEIA-9",
+      "narrator": "Some people tell a true story the way they recite a report. It is not a lie. It is armor.",
+      "text": "You open your eyes. Maya has not moved an inch throughout her entire account.\n\n*\"I hope this helps\"*, she says, in a perfectly neutral voice.\n\nHer version is methodical, almost clinical — but one detail, slipped in almost by accident, does not fit with the rest.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Listen to another testimony",
+          "vers": "hub_temoignages",
+          "effects": [],
+          "clickEffect": "pulse"
+        },
+        {
+          "text": "You've heard enough — proceed to the verdict",
+          "vers": "transition_verdict",
+          "effects": [],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 550,
+      "y": 560
+    },
+    "portail_ia": {
+      "id": "portail_ia",
+      "title": "After ORIS's Logs",
+      "location": "COMMAND CENTER — ALETHEIA-9",
+      "narrator": "A machine does not lie on purpose. But it can very well not know everything.",
+      "text": "The logs scroll before you, line after line, until a block of corrupted data at exactly 02:13.\n\n*\"There. That is all I can show you.\"*, ORIS says.\n\n*\"I know it is not enough. I am... sorry I cannot be more useful.\"*\n\nAn AI that apologizes. That is not nothing.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Listen to another testimony",
+          "vers": "hub_temoignages",
+          "effects": [],
+          "clickEffect": "pulse"
+        },
+        {
+          "text": "You've heard enough — proceed to the verdict",
+          "vers": "transition_verdict",
+          "effects": [],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 650,
+      "y": 560
+    },
+    "transition_verdict": {
+      "id": "transition_verdict",
+      "title": "Time for the Verdict",
+      "location": "COMMAND CENTER — ALETHEIA-9",
+      "narrator": "Every investigation ends in the same place: the moment you must choose what to believe, even without knowing everything.",
+      "text": "You have heard what you wanted to hear. Or perhaps only what each of them was willing to let you hear.\n\nRhea, Dorian, Maya. Three different nights, one truth hiding somewhere between them.\n\nORIS waits, silent for once.\n\nIt is time to decide what really happened in sector 4 that night.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Render your verdict",
+          "vers": "verdict_debut",
+          "effects": [],
+          "clickEffect": "pulse",
+          "story": "stories/en/signal_rouge_verdict_en.json"
+        }
+      ],
+      "x": 400,
+      "y": 660
+    }
+  }
+}

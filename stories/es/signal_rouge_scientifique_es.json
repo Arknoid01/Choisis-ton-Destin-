@@ -1,0 +1,474 @@
+{
+  "name": "Señal Roja — Maya",
+  "kids": false,
+  "askPlayerName": true,
+  "pack": "cosmos",
+  "stats": [
+    {
+      "id": "confiance",
+      "label": "Confianza en Maya",
+      "start": 0,
+      "max": 100,
+      "color": "#5dade2"
+    },
+    {
+      "id": "doute",
+      "label": "Duda sobre Maya",
+      "start": 0,
+      "max": 100,
+      "color": "#e74c3c"
+    }
+  ],
+  "theme": {
+    "bg": "#08090f",
+    "bg2": "#0d1018",
+    "bg3": "#131826",
+    "bg4": "#1a2036",
+    "border": "#2a3450",
+    "accent": "#e74c3c",
+    "accent2": "#5dade2",
+    "accent3": "#95a5a6",
+    "text": "#e8ecf0",
+    "text2": "#8a92a8",
+    "text3": "#4a5268"
+  },
+  "scenes": {
+    "maya_intro": {
+      "id": "maya_intro",
+      "title": "La Distancia Necesaria",
+      "location": "Aletheia-9 — Memoria de Maya Itho",
+      "narrator": "Maya Itho. Científica. Lo que eligió contar.",
+      "text": "A menudo me han reprochado mi calma. Como si sentir menos fuerte significara entender menos.\n\nEs lo contrario.\n\nLa distancia es lo que permite ver con claridad, sin que el miedo deforme lo que miras.\n\nEsa noche, necesité toda la distancia que pude reunir.",
+      "isStart": true,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Oculta muy bien lo que siente.",
+          "vers": "maya_metier",
+          "effects": [
+            {
+              "stat": "doute",
+              "val": 10
+            }
+          ],
+          "clickEffect": "pulse"
+        },
+        {
+          "text": "Solo tiene otra forma de enfrentarlo.",
+          "vers": "maya_metier",
+          "effects": [
+            {
+              "stat": "confiance",
+              "val": 10
+            }
+          ],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 400,
+      "y": 40
+    },
+    "maya_metier": {
+      "id": "maya_metier",
+      "title": "El Laboratorio",
+      "location": "Aletheia-9 — Memoria de Maya Itho",
+      "narrator": "",
+      "text": "Soy bióloga en Aletheia-9 desde hace dos años, encargada de estudiar las muestras traídas por las sondas del sistema.\n\nMi laboratorio es mi verdadero puesto de mando, aunque nadie lo llame así.\n\nTres semanas antes de la desaparición de Léo, una sonda trajo una muestra tomada de un fragmento cometario.\n\nNada oficialmente extraordinario. En el papel.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "¿Por qué guardar eso en secreto?",
+          "vers": "maya_echantillon",
+          "effects": [
+            {
+              "stat": "doute",
+              "val": 10
+            }
+          ],
+          "clickEffect": "pulse"
+        },
+        {
+          "text": "Continúe con su relato.",
+          "vers": "maya_echantillon",
+          "effects": [
+            {
+              "stat": "confiance",
+              "val": 10
+            }
+          ],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 400,
+      "y": 140
+    },
+    "maya_echantillon": {
+      "id": "maya_echantillon",
+      "title": "La Muestra 7",
+      "location": "Aletheia-9 — Memoria de Maya Itho",
+      "narrator": "",
+      "text": "La llamé Muestra 7, por simplicidad.\n\nUna estructura cristalina, inerte en apariencia, pero con una reacción bioluminiscente leve a ciertas frecuencias eléctricas.\n\nNo estaba en el protocolo de la misión estudiarla más de lo estrictamente necesario. Lo hice de todos modos, en mi tiempo libre.\n\nDebería haberlo señalado oficialmente. No lo hice.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "¿Lamenta no haberlo señalado?",
+          "vers": "maya_decouverte",
+          "effects": [
+            {
+              "stat": "confiance",
+              "val": 10
+            }
+          ],
+          "clickEffect": "pulse"
+        },
+        {
+          "text": "Fue una violación del protocolo.",
+          "vers": "maya_decouverte",
+          "effects": [
+            {
+              "stat": "doute",
+              "val": 10
+            }
+          ],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 400,
+      "y": 220
+    },
+    "maya_decouverte": {
+      "id": "maya_decouverte",
+      "title": "Una Semana Antes",
+      "location": "Aletheia-9 — Memoria de Maya Itho",
+      "narrator": "",
+      "text": "Cinco días antes del incidente, la muestra reaccionó de forma inusual: una pulsación lumínica rítmica, casi regular, en respuesta a una simple variación de corriente en mi laboratorio.\n\nAnoté la observación en mi diario personal. No en el informe oficial.\n\nQuería entender antes de alarmar a nadie por nada. Eso es lo que me dije, al menos.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "La ciencia exige prudencia a veces.",
+          "vers": "maya_nuit_debut",
+          "effects": [
+            {
+              "stat": "confiance",
+              "val": 5
+            }
+          ],
+          "clickEffect": "pulse"
+        },
+        {
+          "text": "Sobre todo tuvo miedo de las consecuencias.",
+          "vers": "maya_nuit_debut",
+          "effects": [
+            {
+              "stat": "doute",
+              "val": 10
+            }
+          ],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 400,
+      "y": 300
+    },
+    "maya_nuit_debut": {
+      "id": "maya_nuit_debut",
+      "title": "02:00 — Laboratorio",
+      "location": "Aletheia-9 — Memoria de Maya Itho",
+      "narrator": "",
+      "text": "Esa noche, estaba en mi laboratorio, la Muestra 7 bajo vitrina, vigilando sus variaciones como cada noche desde hacía una semana.\n\nLéo pasó a verme al final de la tarde, antes de ir a mantenimiento.\n\nMe preguntó, casi con timidez, si podía ver *« la piedra que brilla »*. Había oído hablar de ella por un rumor de corredor.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Léo parecía inocente en todo esto.",
+          "vers": "maya_leo",
+          "effects": [
+            {
+              "stat": "confiance",
+              "val": 10
+            }
+          ],
+          "clickEffect": "pulse"
+        },
+        {
+          "text": "¿Por qué le mostró la muestra?",
+          "vers": "maya_leo",
+          "effects": [
+            {
+              "stat": "doute",
+              "val": 10
+            }
+          ],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 400,
+      "y": 380
+    },
+    "maya_leo": {
+      "id": "maya_leo",
+      "title": "Léo",
+      "location": "Aletheia-9 — Memoria de Maya Itho",
+      "narrator": "",
+      "text": "Le mostré, brevemente. Se quedó fascinado ante la vitrina, casi hipnotizado por el ritmo de las pulsaciones.\n\n*« Parece que respira »*, dijo.\n\nMe hizo muchas preguntas, más de lo habitual. Sobre su origen, sobre qué podría ser.\n\nLuego se fue hacia el sector 4 para su verificación rutinaria, poco después de las 01:50.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Era curioso, no culpable.",
+          "vers": "maya_coupure",
+          "effects": [
+            {
+              "stat": "confiance",
+              "val": 10
+            }
+          ],
+          "clickEffect": "pulse"
+        },
+        {
+          "text": "Su curiosidad ya la preocupaba.",
+          "vers": "maya_coupure",
+          "effects": [
+            {
+              "stat": "doute",
+              "val": 10
+            }
+          ],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 400,
+      "y": 460
+    },
+    "maya_coupure": {
+      "id": "maya_coupure",
+      "title": "02:13 — La Coincidencia",
+      "location": "Aletheia-9 — Memoria de Maya Itho",
+      "narrator": "",
+      "text": "A las 02:13, en el momento exacto en que sonó la alarma, la Muestra 7 emitió un pico lumínico más intenso que cualquiera que había medido.\n\nCasi al mismo instante que el corte de energía del sector 4, al otro extremo de la estación.\n\nUna coincidencia. Seguro. Las coincidencias existen, en ciencia.\n\nPero esta me heló.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Inmediatamente quiso avisar a alguien.",
+          "vers": "maya_choix",
+          "effects": [
+            {
+              "stat": "confiance",
+              "val": 10
+            }
+          ],
+          "clickEffect": "pulse"
+        },
+        {
+          "text": "Primero pensó en proteger su investigación.",
+          "vers": "maya_choix",
+          "effects": [
+            {
+              "stat": "doute",
+              "val": 15
+            }
+          ],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 400,
+      "y": 540
+    },
+    "maya_choix": {
+      "id": "maya_choix",
+      "title": "Una Decisión Rápida",
+      "location": "Aletheia-9 — Memoria de Maya Itho",
+      "narrator": "",
+      "text": "Dudé, solo unos segundos, antes de ir al puesto de mando.\n\nNo mencioné la muestra en ese momento. Solo el corte, como todos.\n\nMe dije que probablemente no estaba relacionado. Que mencionarlo solo sembraría confusión.\n\nYa no estoy segura de que fuera la razón correcta.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Debería haber hablado de inmediato.",
+          "vers": "maya_confinement",
+          "effects": [
+            {
+              "stat": "doute",
+              "val": 10
+            }
+          ],
+          "clickEffect": "pulse"
+        },
+        {
+          "text": "El pánico puede explicar el silencio.",
+          "vers": "maya_confinement",
+          "effects": [
+            {
+              "stat": "confiance",
+              "val": 10
+            }
+          ],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 400,
+      "y": 620
+    },
+    "maya_confinement": {
+      "id": "maya_confinement",
+      "title": "El Descenso",
+      "location": "Aletheia-9 — Memoria de Maya Itho",
+      "narrator": "",
+      "text": "Rhea me pidió que la acompañara al sector 4, una vez levantado el confinamiento.\n\nDorian quería bajar solo, más temprano, pero Rhea insistió en que fuera yo, por mis conocimientos técnicos sobre anomalías energéticas.\n\nNo dije nada de la muestra, ni durante el trayecto, ni en el lugar.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Rhea confiaba en ella.",
+          "vers": "maya_scene_vide",
+          "effects": [
+            {
+              "stat": "confiance",
+              "val": 5
+            }
+          ],
+          "clickEffect": "pulse"
+        },
+        {
+          "text": "Ya sabía lo que iba a encontrar.",
+          "vers": "maya_scene_vide",
+          "effects": [
+            {
+              "stat": "doute",
+              "val": 15
+            }
+          ],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 400,
+      "y": 700
+    },
+    "maya_scene_vide": {
+      "id": "maya_scene_vide",
+      "title": "Una Huella Familiar",
+      "location": "Aletheia-9 — Memoria de Maya Itho",
+      "narrator": "",
+      "text": "El panel abierto, las herramientas en el suelo, sin rastro de Léo: todo eso lo vi como los demás.\n\nPero noté otra cosa, cerca del panel eléctrico: un fino residuo cristalino, casi invisible, que recordaba exactamente la estructura de la Muestra 7.\n\nNo lo señalé a nadie en el momento.\n\nLo recogí discretamente, para analizarlo sola, más tarde.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Esa huella lo cambia todo.",
+          "vers": "maya_secret",
+          "effects": [
+            {
+              "stat": "doute",
+              "val": 15
+            }
+          ],
+          "clickEffect": "pulse"
+        },
+        {
+          "text": "Muéstreme lo que recogió.",
+          "vers": "maya_secret",
+          "effects": [
+            {
+              "stat": "confiance",
+              "val": 10
+            }
+          ],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 400,
+      "y": 780
+    },
+    "maya_secret": {
+      "id": "maya_secret",
+      "title": "Lo Que Todavía No He Dicho",
+      "location": "Aletheia-9 — Memoria de Maya Itho",
+      "narrator": "",
+      "text": "Nunca declaré oficialmente la Muestra 7, ni sus reacciones extrañas, ni esa huella encontrada junto al panel.\n\nUna parte de mí temía que me prohibieran mis investigaciones. Otra, más honesta, temía tener razón.\n\nSi esta muestra tiene un vínculo con la desaparición de Léo, entonces cargo una responsabilidad que aún no he encontrado el valor de asumir por completo.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Carga una parte de responsabilidad.",
+          "vers": "maya_conclusion",
+          "effects": [
+            {
+              "stat": "doute",
+              "val": 10
+            }
+          ],
+          "clickEffect": "pulse"
+        },
+        {
+          "text": "Por fin ha dicho la verdad.",
+          "vers": "maya_conclusion",
+          "effects": [
+            {
+              "stat": "confiance",
+              "val": 15
+            }
+          ],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 400,
+      "y": 860
+    },
+    "maya_conclusion": {
+      "id": "maya_conclusion",
+      "title": "Mi Versión",
+      "location": "Aletheia-9 — Memoria de Maya Itho",
+      "narrator": "",
+      "text": "No creo en un sabotaje humano. No creo tampoco en una simple falla técnica.\n\nCreo que algo ocurrió esa noche que aún no comprendemos del todo — algo vinculado a lo que estudio en secreto desde hace tres semanas.\n\nNo puedo decirle dónde está Léo. Pero puedo decirle que no lo he contado todo, hasta ahora.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Volver a la investigación",
+          "vers": "fin_recit_maya",
+          "effects": [],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 400,
+      "y": 940
+    },
+    "fin_recit_maya": {
+      "id": "fin_recit_maya",
+      "title": "Fin del Relato",
+      "location": "Aletheia-9 — Memoria de Maya Itho",
+      "narrator": "",
+      "text": "El relato de Maya termina. Por primera vez desde tu llegada, su voz ha temblado, apenas.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Volver a la investigación",
+          "vers": "portail_scientifique",
+          "effects": [],
+          "clickEffect": "pulse",
+          "story": "stories/es/signal_rouge_prologue_es.json"
+        }
+      ],
+      "x": 400,
+      "y": 1020
+    }
+  }
+}

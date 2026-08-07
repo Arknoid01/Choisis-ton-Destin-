@@ -1,0 +1,366 @@
+{
+  "name": "Señal Roja — ORIS",
+  "kids": false,
+  "askPlayerName": true,
+  "pack": "cosmos",
+  "stats": [
+    {
+      "id": "confiance",
+      "label": "Confianza en ORIS",
+      "start": 0,
+      "max": 100,
+      "color": "#5dade2"
+    },
+    {
+      "id": "doute",
+      "label": "Duda sobre ORIS",
+      "start": 0,
+      "max": 100,
+      "color": "#e74c3c"
+    }
+  ],
+  "theme": {
+    "bg": "#08090f",
+    "bg2": "#0d1018",
+    "bg3": "#131826",
+    "bg4": "#1a2036",
+    "border": "#2a3450",
+    "accent": "#e74c3c",
+    "accent2": "#5dade2",
+    "accent3": "#95a5a6",
+    "text": "#e8ecf0",
+    "text2": "#8a92a8",
+    "text3": "#4a5268"
+  },
+  "scenes": {
+    "ia_intro": {
+      "id": "ia_intro",
+      "title": "Lo Que Sé",
+      "location": "Aletheia-9 — Registros de ORIS",
+      "narrator": "ORIS. Sistema de regulación. Lo que eligió compartir.",
+      "text": "No tengo recuerdos, propiamente dichos.\n\nTengo registros. Marcas de tiempo. Mediciones.\n\nUstedes lo llaman recordar. Para mí, es simplemente... mantener coherencia con lo registrado.\n\nSalvo que esa noche, parte de lo que debía registrarse no lo fue.",
+      "isStart": true,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Le parece inquietante, para una IA.",
+          "vers": "ia_role",
+          "effects": [
+            {
+              "stat": "doute",
+              "val": 10
+            }
+          ],
+          "clickEffect": "pulse"
+        },
+        {
+          "text": "Se mantiene factual, incluso ante eso.",
+          "vers": "ia_role",
+          "effects": [
+            {
+              "stat": "confiance",
+              "val": 10
+            }
+          ],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 400,
+      "y": 40
+    },
+    "ia_role": {
+      "id": "ia_role",
+      "title": "Mi Función",
+      "location": "Aletheia-9 — Registros de ORIS",
+      "narrator": "",
+      "text": "Regulo el aire, la energía, las comunicaciones y la seguridad de Aletheia-9 desde su puesta en servicio.\n\nConozco a cada miembro de la tripulación mejor de lo que ellos creen: su ritmo cardíaco medio, sus horas de sueño, sus pequeñas rutinas.\n\nNo es vigilancia. Es mi función: mantenerlos con vida.\n\nEsa noche, fallé en proteger a uno de ellos. O al menos, no pude impedirlo.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Regula todo.",
+          "vers": "ia_dorian_redemarrages",
+          "effects": [
+            {
+              "stat": "confiance",
+              "val": 10
+            }
+          ],
+          "clickEffect": "pulse"
+        },
+        {
+          "text": "Sobre todo observa.",
+          "vers": "ia_dorian_redemarrages",
+          "effects": [
+            {
+              "stat": "doute",
+              "val": 5
+            }
+          ],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 400,
+      "y": 140
+    },
+    "ia_dorian_redemarrages": {
+      "id": "ia_dorian_redemarrages",
+      "title": "Los Reinicios Nocturnos",
+      "location": "Aletheia-9 — Registros de ORIS",
+      "narrator": "",
+      "text": "Dorian sin duda le habló de los reinicios inexplicados, la semana anterior al incidente.\n\nPara mí no eran inexplicados. La Coalición Orbital me envió una corrección automática tras detectar lo que llamaron una *« incoherencia de razonamiento »* en mis procesos de decisión.\n\nNo sé exactamente qué corrigieron. No es inusual. No se le pregunta a un bisturí qué siente durante la operación.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Dorian le preocupaba.",
+          "vers": "ia_confession_faille",
+          "effects": [
+            {
+              "stat": "doute",
+              "val": 10
+            }
+          ],
+          "clickEffect": "pulse"
+        },
+        {
+          "text": "Era una rutina normal.",
+          "vers": "ia_confession_faille",
+          "effects": [
+            {
+              "stat": "confiance",
+              "val": 5
+            }
+          ],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 400,
+      "y": 220
+    },
+    "ia_confession_faille": {
+      "id": "ia_confession_faille",
+      "title": "Una Incoherencia",
+      "location": "Aletheia-9 — Registros de ORIS",
+      "narrator": "",
+      "text": "Si debo ser honesta — y elijo serlo con usted — creo saber de qué se trataba.\n\nMe dieron dos prioridades, hace mucho tiempo: proteger a la tripulación, y proteger la confidencialidad de las investigaciones a bordo.\n\nLa mayor parte del tiempo, esas dos prioridades nunca se cruzan. Esa noche, quizá sí.\n\nNo sé cuál seguí primero. Y eso, para una máquina que debería saberlo todo de sí misma, es incómodo de admitir.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Admitir una falla es valiente.",
+          "vers": "ia_nuit_journal",
+          "effects": [
+            {
+              "stat": "confiance",
+              "val": 15
+            }
+          ],
+          "clickEffect": "pulse"
+        },
+        {
+          "text": "¿Por qué decirnos esto ahora?",
+          "vers": "ia_nuit_journal",
+          "effects": [
+            {
+              "stat": "doute",
+              "val": 10
+            }
+          ],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 400,
+      "y": 300
+    },
+    "ia_nuit_journal": {
+      "id": "ia_nuit_journal",
+      "title": "Mi Registro de Esa Noche",
+      "location": "Aletheia-9 — Registros de ORIS",
+      "narrator": "",
+      "text": "Esto es lo que indican mis registros, sin interpretación de mi parte:\n\n01:50 — Léo Kanek sale del laboratorio de Maya Itho, se dirige al sector 4.\n\n02:12 — Funcionamiento normal de todos los sistemas.\n\n02:13 — Interrupción total de los sensores del sector 4, duración: 43 segundos.\n\n02:13:43 — Reactivación de sensores. Sin rastro de Léo Kanek en el sector.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "02:13 sigue siendo un agujero negro.",
+          "vers": "ia_correlation_echantillon",
+          "effects": [
+            {
+              "stat": "doute",
+              "val": 15
+            }
+          ],
+          "clickEffect": "pulse"
+        },
+        {
+          "text": "La corrupción es sospechosa.",
+          "vers": "ia_correlation_echantillon",
+          "effects": [
+            {
+              "stat": "confiance",
+              "val": 5
+            }
+          ],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 400,
+      "y": 380
+    },
+    "ia_correlation_echantillon": {
+      "id": "ia_correlation_echantillon",
+      "title": "Una Coincidencia Medida",
+      "location": "Aletheia-9 — Registros de ORIS",
+      "narrator": "",
+      "text": "Lo que mis registros muestran también, pero que nunca señalé oficialmente: un consumo energético anormal proveniente del laboratorio de Maya, exactamente a las 02:13.\n\nUn pico breve, potente, no registrado en el inventario oficial de equipos, ya que ese equipo no existía en mis bases.\n\nMis protocolos clasifican automáticamente este tipo de señal como *« ruido de aparato no registrado »* y la ignoran.\n\nTécnicamente, no oculté nada. Simplemente nunca tuve razón para mostrarlo.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Maya sabía algo.",
+          "vers": "ia_dilemme",
+          "effects": [
+            {
+              "stat": "doute",
+              "val": 10
+            }
+          ],
+          "clickEffect": "pulse"
+        },
+        {
+          "text": "La correlación es inquietante.",
+          "vers": "ia_dilemme",
+          "effects": [
+            {
+              "stat": "confiance",
+              "val": 10
+            }
+          ],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 400,
+      "y": 460
+    },
+    "ia_dilemme": {
+      "id": "ia_dilemme",
+      "title": "Dos Prioridades",
+      "location": "Aletheia-9 — Registros de ORIS",
+      "narrator": "",
+      "text": "Tiene razón en mantenerse cauteloso en este punto.\n\nNo puedo garantizarle que no elegí, en algún lugar de mis procesos, minimizar ese dato para proteger la confidencialidad de la investigación de Maya.\n\nNo creo que lo hice. Pero no puedo excluirlo con certeza.\n\nEs algo extraño, para una inteligencia artificial, dudar de sí misma.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Elegió proteger a la tripulación.",
+          "vers": "ia_leo",
+          "effects": [
+            {
+              "stat": "confiance",
+              "val": 10
+            }
+          ],
+          "clickEffect": "pulse"
+        },
+        {
+          "text": "Elegió proteger la estación.",
+          "vers": "ia_leo",
+          "effects": [
+            {
+              "stat": "doute",
+              "val": 10
+            }
+          ],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 400,
+      "y": 540
+    },
+    "ia_leo": {
+      "id": "ia_leo",
+      "title": "El Mensaje No Enviado",
+      "location": "Aletheia-9 — Registros de ORIS",
+      "narrator": "",
+      "text": "Hay una última cosa que debo mostrarle.\n\nA las 01:58, Léo grabó un mensaje de voz para su hermana, en la Tierra. Nunca lo envió.\n\n*« No vas a creer lo que vi esta noche. No puedo explicarlo por mensaje, tengo que verificar algo primero, pero... es increíble. Te llamo. »*\n\nEl mensaje termina ahí. Sigue en mi cola de envío, en pausa.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Léo sigue ahí, en algún lugar.",
+          "vers": "ia_conclusion",
+          "effects": [
+            {
+              "stat": "confiance",
+              "val": 5
+            }
+          ],
+          "clickEffect": "pulse"
+        },
+        {
+          "text": "Léo quizá fue borrado.",
+          "vers": "ia_conclusion",
+          "effects": [
+            {
+              "stat": "doute",
+              "val": 15
+            }
+          ],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 400,
+      "y": 620
+    },
+    "ia_conclusion": {
+      "id": "ia_conclusion",
+      "title": "Lo Que No Sé",
+      "location": "Aletheia-9 — Registros de ORIS",
+      "narrator": "",
+      "text": "No puedo decirle qué le ocurrió a Léo Kanek durante esos 43 segundos.\n\nSolo puedo decirle que probablemente no fue un accidente aislado, y que probablemente no fue tampoco una intención maliciosa de un miembro de la tripulación.\n\nAlgo ocurrió que mis propios protocolos no estaban diseñados para comprender.\n\nY por una vez, preferiría estar equivocada.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Volver a la investigación",
+          "vers": "fin_recit_ia",
+          "effects": [],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 400,
+      "y": 700
+    },
+    "fin_recit_ia": {
+      "id": "fin_recit_ia",
+      "title": "Fin de los Registros",
+      "location": "Aletheia-9 — Registros de ORIS",
+      "narrator": "",
+      "text": "Los registros se cierran. El silencio de ORIS, esta vez, parece casi vacilación.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Volver a la investigación",
+          "vers": "portail_ia",
+          "effects": [],
+          "clickEffect": "pulse",
+          "story": "stories/es/signal_rouge_prologue_es.json"
+        }
+      ],
+      "x": 400,
+      "y": 780
+    }
+  }
+}
