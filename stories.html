@@ -55,8 +55,14 @@ html,body { height:100%; background:#0d0d0f; color:#e8e0d0; font-family:'Cormora
   font-family:'Cinzel',serif; font-size:14px; font-weight:600;
   color:var(--cream); letter-spacing:2px; flex:1;
 }
-
-
+#btn-community {
+  width:36px;height:36px;border-radius:8px;
+  border:1px solid var(--border);background:none;
+  color:var(--dim);font-size:16px;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+  flex-shrink:0;transition:all .15s;
+}
+#btn-community:hover { border-color:var(--gold3);color:var(--gold); }
 
 /* ── SCROLL AREA ── */
 #scroll {
@@ -265,6 +271,7 @@ html,body { height:100%; background:#0d0d0f; color:#e8e0d0; font-family:'Cormora
 <div id="topbar">
   <a href="index.html" id="btn-back">←</a>
   <div class="topbar-title" id="txt-library">Bibliothèque</div>
+  <button type="button" id="btn-community" onclick="SFCommunity.open()" title="Communauté">🏆</button>
 </div>
 
 <!-- SCROLL AREA -->
@@ -275,6 +282,7 @@ html,body { height:100%; background:#0d0d0f; color:#e8e0d0; font-family:'Cormora
 </div>
 
 <script src="billing.js"></script>
+<script src="community.js"></script>
 <script src="onboarding.js"></script>
 <script>
 // ══════════════════════════════════════════════
@@ -801,11 +809,17 @@ if (window.SFBilling) {
   SFBilling.init();
 }
 
+if (window.SFCommunity) SFCommunity.init();
+
 if (window.SFOnboarding) {
   SFOnboarding.start({
     onLangChange: lang => {
       currentLang = lang;
       try { renderLibrary(); } catch(e) {}
+      const commBtn = document.getElementById('btn-community');
+      if (commBtn) {
+        commBtn.title = { fr:'Communauté', en:'Community', es:'Comunidad' }[lang] || 'Communauté';
+      }
     }
   });
 }

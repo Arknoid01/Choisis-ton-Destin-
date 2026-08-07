@@ -826,6 +826,9 @@ body {
     <button class="btn-main" id="btn-news" onclick="window.location.href='news.html'">
       <span id="txt-btn-news">📰 Actualités</span>
     </button>
+    <button class="btn-main" id="btn-community" onclick="SFCommunity.open()">
+      <span id="txt-btn-community">🏆 Communauté</span>
+    </button>
     <button class="btn-main" id="btn-submit" onclick="openSubmitPopup()">
       <span id="txt-btn-submit">✍ Soumettre une histoire</span>
     </button>
@@ -900,6 +903,12 @@ body {
     </div>
     <p class="submit-note" id="txt-submit-note">
       Une fois votre histoire écrite, exportez le JSON et envoyez-le directement depuis l'éditeur.
+    </p>
+    <p class="submit-note" style="margin-top:6px">
+      <a href="#" id="txt-submit-contest" onclick="event.preventDefault();closeSubmitPopup();SFCommunity.open();"
+        style="color:var(--gold);text-decoration:none;border-bottom:1px solid rgba(200,169,110,0.35)">
+        Voir le concours en cours →
+      </a>
     </p>
   </div>
 </div>
@@ -989,6 +998,7 @@ body {
   </div>
 </div>
 
+<script src="community.js"></script>
 <script src="onboarding.js"></script>
 <script>
 // ══════════════════════════════════════════════
@@ -1002,6 +1012,7 @@ const LANG = {
     btnStart:       'Lire une histoire interactive',
     btnOptions:     'Options',
     btnNews:        '📰 Actualités',
+    btnCommunity:   '🏆 Communauté',
     btnProgress:    '✦ Ma progression',
     btnSubmit:      '✍ Soumettre une histoire',
     btnContact:     '✉ Nous contacter',
@@ -1052,6 +1063,7 @@ const LANG = {
     submitCancel:   'Annuler',
     submitAi:       '✦ Aide Éditeur & IA',
     submitNote:     'Une fois votre histoire écrite, exportez le JSON et envoyez-le directement depuis l\'éditeur.',
+    submitContest:  'Voir le concours en cours →',
     tutoTitle:      'Astuces de navigation',
     tutoMenu:       '<strong>Le point bleu</strong> en haut de l\'écran permet d\'ouvrir le menu pendant une histoire.',
     tutoSave:       '<strong>Le bouton +</strong> en bas à droite permet de poser un marque-page pour sauvegarder votre progression.',
@@ -1074,6 +1086,7 @@ const LANG = {
     btnStart:       'Read an interactive story',
     btnOptions:     'Options',
     btnNews:        '📰 News',
+    btnCommunity:   '🏆 Community',
     btnProgress:    '✦ My Progress',
     btnSubmit:      '✍ Submit a story',
     btnContact:     '✉ Contact us',
@@ -1124,6 +1137,7 @@ const LANG = {
     submitCancel:   'Cancel',
     submitAi:       '✦ Editor & AI Help',
     submitNote:     'Once your story is written, export the JSON and send it directly from the editor.',
+    submitContest:  'See the current contest →',
     tutoTitle:      'Navigation Tips',
     tutoMenu:       'The <strong>blue dot</strong> at the top of the screen opens the menu during a story.',
     tutoSave:       'The <strong>+ button</strong> at the bottom right allows you to place a bookmark and save your progress.',
@@ -1146,6 +1160,7 @@ const LANG = {
     btnStart:       'Leer una historia interactiva',
     btnOptions:     'Opciones',
     btnNews:        '📰 Noticias',
+    btnCommunity:   '🏆 Comunidad',
     btnProgress:    '✦ Mi progreso',
     btnSubmit:      '✍ Enviar una historia',
     btnContact:     '✉ Contacto',
@@ -1196,6 +1211,7 @@ const LANG = {
     submitCancel:   'Cancelar',
     submitAi:       '✦ Crear con IA',
     submitNote:     'Una vez escrita tu historia, exporta el JSON y envíalo directamente desde el editor.',
+    submitContest:  'Ver el concurso actual →',
     tutoTitle:      'Consejos de navegación',
     tutoMenu:       'El <strong>punto azul</strong> en la parte superior de la pantalla abre el menú durante una historia.',
     tutoSave:       'El <strong>botón +</strong> en la parte inferior derecha te permite colocar un marcador para guardar tu progreso.',
@@ -1237,6 +1253,7 @@ function applyLang() {
   set('txt-btn-start',      t.btnStart);
   set('txt-btn-options',    t.btnOptions);
   set('txt-btn-news',       t.btnNews);
+  set('txt-btn-community',  t.btnCommunity);
   set('txt-btn-progress',   t.btnProgress);
   set('txt-btn-submit',     t.btnSubmit);
   set('txt-btn-contact',    t.btnContact);
@@ -1277,6 +1294,8 @@ function applyLang() {
   set('txt-submit-cancel',   t.submitCancel);
   set('txt-submit-ai',       t.submitAi);
   set('txt-submit-note',     t.submitNote);
+  const contestLink = document.getElementById('txt-submit-contest');
+  if (contestLink) contestLink.textContent = t.submitContest;
   if (window.SFOnboarding) SFOnboarding.applyTexts();
   document.title = t.docTitle;
   document.documentElement.lang = currentLang;
@@ -1857,9 +1876,13 @@ async function submitCode() {
   if (window.SFOnboarding) {
     SFOnboarding.start({ onLangChange: lang => setLang(lang) });
   }
+  if (window.SFCommunity) SFCommunity.init();
   initCanvas();
   createParticles();
   await loadGameRegistry();
+  if (new URLSearchParams(location.search).get('submit') === '1') {
+    setTimeout(() => openSubmitPopup(), 400);
+  }
 })();
 </script>
 </body>

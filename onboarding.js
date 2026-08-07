@@ -522,7 +522,11 @@ window.SFOnboarding = (function () {
 
   // ── Étape 4 : code parental ──────────────────────────────────
   function maybeShowPin() {
-    if (lsGet('sf_pin_setup_done')) return;
+    if (lsGet('sf_pin_setup_done')) {
+      hideAll();
+      if (window.SFCommunity) SFCommunity.maybeAutoShow();
+      return;
+    }
     if (lsGet('sf_parent_pin') !== null) return;
     showPin();
   }
@@ -544,7 +548,10 @@ window.SFOnboarding = (function () {
 
   function closePin() {
     lsSet('sf_pin_setup_done', '1');
-    fadeOut('sf-onb-pin');
+    fadeOut('sf-onb-pin', () => {
+      hideAll();
+      if (window.SFCommunity) SFCommunity.maybeAutoShow();
+    });
   }
 
   function skipPin() {
