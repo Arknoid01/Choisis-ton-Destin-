@@ -833,7 +833,8 @@ html,body { height:100%; overflow:hidden; font-family:'Syne',sans-serif; backgro
 .template-card {
   border:1px solid var(--border); border-radius:12px; padding:14px;
   background:var(--bg3); cursor:pointer; transition:border-color .15s, transform .15s;
-  text-align:left;
+  text-align:left; width:100%; display:block; font:inherit; color:inherit;
+  -webkit-tap-highlight-color:rgba(109,250,188,0.15);
 }
 .template-card:hover { border-color:var(--accent); transform:translateY(-1px); }
 .template-card strong {
@@ -2524,7 +2525,7 @@ const TEMPLATE_SCENE_COPY = {
 };
 
 function buildTemplateProject(type) {
-  const lang = editorLang;
+  const lang = getEditorLang();
   const copy = (TEMPLATE_SCENE_COPY[lang] || TEMPLATE_SCENE_COPY.fr)[type];
   if (!copy) return null;
   const s = [genId(), genId(), genId(), genId(), genId()];
@@ -2578,45 +2579,74 @@ function renderTemplateCards() {
     { type: 'kids', title: et('templateKidsTitle'), desc: et('templateKidsDesc') }
   ];
   grid.innerHTML = items.map(item => `
-    <button type="button" class="template-card" onclick="applyStoryTemplate('${item.type}')">
-      <strong>${item.title}</strong>
-      <span>${item.desc}</span>
+    <button type="button" class="template-card" data-template="${item.type}">
+      <strong>${esc(item.title)}</strong>
+      <span>${esc(item.desc)}</span>
     </button>`).join('');
 }
 
+function initTemplateGrid() {
+  const grid = document.getElementById('template-grid');
+  if (!grid || grid.dataset.bound) return;
+  grid.dataset.bound = '1';
+  grid.addEventListener('click', (e) => {
+    const card = e.target.closest('[data-template]');
+    if (!card) return;
+    e.preventDefault();
+    e.stopPropagation();
+    applyStoryTemplate(card.dataset.template);
+  });
+}
+
 function openTemplatesModal() {
+  refreshEditorLang();
   renderTemplateCards();
   document.getElementById('template-modal-overlay')?.classList.add('open');
 }
+window.openTemplatesModal = openTemplatesModal;
 
 function closeTemplatesModal() {
   document.getElementById('template-modal-overlay')?.classList.remove('open');
 }
+window.closeTemplatesModal = closeTemplatesModal;
 
 function handleTemplateOverlayClick(e) {
   if (e.target?.id === 'template-modal-overlay') closeTemplatesModal();
 }
+window.handleTemplateOverlayClick = handleTemplateOverlayClick;
 
 function applyStoryTemplate(type) {
-  const data = buildTemplateProject(type);
-  if (!data) return;
-  pushUndo();
-  project.name = data.name;
-  project.kids = data.kids;
-  project.askPlayerName = data.askPlayerName;
-  project.stats = data.stats;
-  project.scenes = data.scenes;
-  const nameEl = document.getElementById('project-name');
-  if (nameEl) nameEl.value = project.name;
-  const kidsEl = document.getElementById('kids-check');
-  if (kidsEl) kidsEl.checked = !!project.kids;
-  const playerEl = document.getElementById('player-name-check');
-  if (playerEl) playerEl.checked = !!project.askPlayerName;
-  selectedId = null;
-  closeTemplatesModal();
-  render();
-  toast(et('templateApplied'));
+  try {
+    const data = buildTemplateProject(type);
+    if (!data) {
+      toast('Modèle introuvable');
+      return;
+    }
+    pushUndo();
+    project.name = data.name;
+    project.kids = data.kids;
+    project.askPlayerName = data.askPlayerName;
+    project.stats = data.stats;
+    project.scenes = data.scenes;
+    const nameEl = document.getElementById('project-name');
+    if (nameEl) nameEl.value = project.name;
+    const kidsEl = document.getElementById('kids-check');
+    if (kidsEl) kidsEl.checked = !!project.kids;
+    const playerEl = document.getElementById('player-name-check');
+    if (playerEl) playerEl.checked = !!project.askPlayerName;
+    selectedId = null;
+    pan = { x: 60, y: 60 };
+    zoom = window.innerWidth <= 700 ? 0.6 : 1;
+    closeTemplatesModal();
+    render();
+    showEmptyEditor();
+    toast(et('templateApplied'));
+  } catch (err) {
+    console.error('[applyStoryTemplate]', err);
+    toast('Erreur modèle : ' + (err.message || String(err)));
+  }
 }
+window.applyStoryTemplate = applyStoryTemplate;
 
 const SUBMIT_EMAIL = 'team.pegasuscorp@gmail.com';
 const MAILTO_JSON_INLINE_MAX = 1800;
@@ -3811,6 +3841,7 @@ selectScene = function(id) {
       choices:[], x:120, y:360 }
   };
   applyEditorLanguage();
+  initTemplateGrid();
   if (window.innerWidth <= 700) { zoom = 0.6; pan = { x: 10, y: 10 }; }
   render();
 })();
