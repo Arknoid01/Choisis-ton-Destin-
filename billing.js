@@ -49,6 +49,7 @@ window.SFBilling = (function () {
 
   let store       = null;   // instance CdvPurchase.store
   let ready       = false;  // catalogue Play chargé
+  let configured  = false;  // produits enregistrés + écouteurs branchés
   let initPromise = null;
   let lastError   = null;
   const listeners = [];     // callbacks appelés quand les droits changent
@@ -204,33 +205,39 @@ window.SFBilling = (function () {
       store = CdvPurchase.store;
       const { ProductType, Platform } = CdvPurchase;
 
-      store.register(PRODUCT_PACKS.map(packId => ({
-        id: PRODUCTS[packId],
-        type: ProductType.NON_CONSUMABLE,
-        platform: Platform.GOOGLE_PLAY
-      })));
+      // Une seule fois, même si init() est relancée après un échec :
+      // réenregistrer les produits duplique les écouteurs.
+      if (!configured) {
+        configured = true;
 
-      store.when()
-        .productUpdated(() => { cachePrices(); notify(); })
-        .approved(transaction => {
-          // Pas de validation serveur : verify() se résout aussitôt et
-          // enchaîne sur verified → finish().
-          transaction.verify();
-        })
-        .verified(receipt => {
-          // finish() = acknowledge côté Google. SANS CET APPEL,
-          // Google rembourse automatiquement l'achat sous 3 jours.
-          receipt.finish();
-        })
-        .finished(() => { syncFromStore(); })
-        .receiptsReady(() => { ready = true; syncFromStore(); });
+        store.register(PRODUCT_PACKS.map(packId => ({
+          id: PRODUCTS[packId],
+          type: ProductType.NON_CONSUMABLE,
+          platform: Platform.GOOGLE_PLAY
+        })));
 
-      store.error(err => {
-        if (err && CdvPurchase.ErrorCode &&
-            err.code === CdvPurchase.ErrorCode.PAYMENT_CANCELLED) return;
-        lastError = err && err.message ? err.message : 'store_error';
-        console.error('[billing]', err && err.code, err && err.message);
-      });
+        store.when()
+          .productUpdated(() => { cachePrices(); notify(); })
+          .approved(transaction => {
+            // Pas de validation serveur : verify() se résout aussitôt et
+            // enchaîne sur verified → finish().
+            transaction.verify();
+          })
+          .verified(receipt => {
+            // finish() = acknowledge côté Google. SANS CET APPEL,
+            // Google rembourse automatiquement l'achat sous 3 jours.
+            receipt.finish();
+          })
+          .finished(() => { syncFromStore(); })
+          .receiptsReady(() => { ready = true; syncFromStore(); });
+
+        store.error(err => {
+          if (err && CdvPurchase.ErrorCode &&
+              err.code === CdvPurchase.ErrorCode.PAYMENT_CANCELLED) return;
+          lastError = err && err.message ? err.message : 'store_error';
+          console.error('[billing]', err && err.code, err && err.message);
+        });
+      }
 
       const result = await withTimeout(
         store.initialize([Platform.GOOGLE_PLAY]).then(() => 'ok', err => {
