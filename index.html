@@ -1062,7 +1062,7 @@ const LANG = {
     submitEditor:   'Ouvrir l\'éditeur',
     submitCancel:   'Annuler',
     submitAi:       '✦ Aide Éditeur & IA',
-    submitNote:     'Une fois votre histoire écrite, exportez le JSON et envoyez-le directement depuis l\'éditeur.',
+    submitNote:     'Ouvrez StoryForge, écrivez votre histoire, puis appuyez sur « Envoyer en 1 clic » — c\'est tout.',
     submitContest:  'Voir le concours en cours →',
     tutoTitle:      'Astuces de navigation',
     tutoMenu:       '<strong>Le point bleu</strong> en haut de l\'écran permet d\'ouvrir le menu pendant une histoire.',
@@ -1136,7 +1136,7 @@ const LANG = {
     submitEditor:   'Open the editor',
     submitCancel:   'Cancel',
     submitAi:       '✦ Editor & AI Help',
-    submitNote:     'Once your story is written, export the JSON and send it directly from the editor.',
+    submitNote:     'Open StoryForge, write your story, then tap « Send in 1 tap » — that\'s it.',
     submitContest:  'See the current contest →',
     tutoTitle:      'Navigation Tips',
     tutoMenu:       'The <strong>blue dot</strong> at the top of the screen opens the menu during a story.',
@@ -1210,7 +1210,7 @@ const LANG = {
     submitEditor:   'Abrir el editor',
     submitCancel:   'Cancelar',
     submitAi:       '✦ Crear con IA',
-    submitNote:     'Una vez escrita tu historia, exporta el JSON y envíalo directamente desde el editor.',
+    submitNote:     'Abre StoryForge, escribe tu historia y pulsa « Enviar en 1 clic » — listo.',
     submitContest:  'Ver el concurso actual →',
     tutoTitle:      'Consejos de navegación',
     tutoMenu:       'El <strong>punto azul</strong> en la parte superior de la pantalla abre el menú durante una historia.',
@@ -1882,6 +1882,9 @@ async function submitCode() {
   await loadGameRegistry();
   if (new URLSearchParams(location.search).get('submit') === '1') {
     setTimeout(() => openSubmitPopup(), 400);
+  }
+  if (new URLSearchParams(location.search).get('community') === '1') {
+    setTimeout(() => { if (window.SFCommunity) SFCommunity.open(); }, 400);
   }
 })();
 </script>

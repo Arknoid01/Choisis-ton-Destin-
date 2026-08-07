@@ -398,6 +398,13 @@ body {
   transition: border-color .2s, color .2s;
 }
 .first-finish-link:hover { border-color: var(--accent); }
+.first-finish-actions {
+  display: flex; flex-wrap: wrap; gap: 8px;
+}
+.first-finish-link.secondary {
+  border-color: rgba(124,109,250,0.35); color: #a090ff;
+}
+.first-finish-link.secondary:hover { border-color: #7c6dfa; }
 
 /* ── TRANSITIONS D'ARRIVÉE ── */
 @keyframes fx-fade {
@@ -1555,23 +1562,33 @@ function renderEndScene(scene) {
   const lang = localStorage.getItem('sf_lang') || 'fr';
   const firstFinishNotes = {
     fr: {
-      text: 'Vous venez de vivre un roman interactif : vos choix ont orienté ce récit. D\'autres histoires vous attendent dans la bibliothèque, à votre rythme.',
-      btn: 'Explorer la bibliothèque'
+      text: 'Vous venez de vivre un roman interactif : vos choix ont orienté ce récit. Et si c\'était vous l\'auteur de la prochaine ?',
+      btnLibrary: 'Explorer la bibliothèque',
+      btnCreate: 'Créer une histoire',
+      btnCommunity: 'Voir la communauté'
     },
     en: {
-      text: 'You just experienced an interactive novel — your choices shaped this story. More tales await in the library, at your own pace.',
-      btn: 'Browse the library'
+      text: 'You just experienced an interactive novel — your choices shaped this story. What if you wrote the next one?',
+      btnLibrary: 'Browse the library',
+      btnCreate: 'Create a story',
+      btnCommunity: 'See the community'
     },
     es: {
-      text: 'Acabas de vivir una novela interactiva: tus elecciones orientaron este relato. Otras historias te esperan en la biblioteca, a tu ritmo.',
-      btn: 'Explorar la biblioteca'
+      text: 'Acabas de vivir una novela interactiva: tus elecciones orientaron este relato. ¿Y si fueras el autor de la próxima?',
+      btnLibrary: 'Explorar la biblioteca',
+      btnCreate: 'Crear una historia',
+      btnCommunity: 'Ver la comunidad'
     }
   };
   const note = firstFinishNotes[lang] || firstFinishNotes.fr;
   const firstFinishHtml = finishedCount === 1 ? `
     <div class="first-finish-note">
       <p>${note.text}</p>
-      <a class="first-finish-link" href="stories.html">${note.btn} →</a>
+      <div class="first-finish-actions">
+        <a class="first-finish-link" href="story-editor.html">${note.btnCreate} →</a>
+        <a class="first-finish-link secondary" href="index.html?community=1">${note.btnCommunity} →</a>
+        <a class="first-finish-link" href="stories.html">${note.btnLibrary} →</a>
+      </div>
     </div>` : '';
 
   const statsRows = (story.stats || []).map(s => {

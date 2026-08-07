@@ -799,6 +799,48 @@ html,body { height:100%; overflow:hidden; font-family:'Syne',sans-serif; backgro
   #search-wrap { top:8px; left:8px; }
   #search-input.open { width:140px; }
 }
+
+#creator-banner {
+  display:flex; align-items:center; justify-content:space-between; gap:12px;
+  padding:8px 16px; border-bottom:1px solid var(--border);
+  background:linear-gradient(90deg, rgba(124,109,250,0.08), rgba(200,169,110,0.06));
+  flex-shrink:0;
+}
+#creator-challenge-text {
+  font-size:12px; color:var(--text2); line-height:1.45; flex:1;
+}
+#btn-templates-banner {
+  flex-shrink:0; padding:8px 12px !important; font-size:10px !important;
+}
+#template-modal-overlay {
+  position:fixed; inset:0; z-index:400; display:none;
+  align-items:center; justify-content:center;
+  background:rgba(0,0,0,0.75); backdrop-filter:blur(8px); padding:16px;
+}
+#template-modal-overlay.open { display:flex; }
+#template-modal {
+  width:100%; max-width:520px; max-height:85vh; overflow-y:auto;
+  background:var(--bg2); border:1px solid var(--border); border-radius:16px; padding:22px;
+}
+#template-modal h3 {
+  font-family:'Cinzel',serif; font-size:16px; letter-spacing:2px;
+  color:var(--accent2); margin-bottom:6px;
+}
+#template-modal-sub {
+  font-size:13px; color:var(--text2); margin-bottom:16px; line-height:1.5;
+}
+.template-grid { display:grid; gap:10px; }
+.template-card {
+  border:1px solid var(--border); border-radius:12px; padding:14px;
+  background:var(--bg3); cursor:pointer; transition:border-color .15s, transform .15s;
+  text-align:left;
+}
+.template-card:hover { border-color:var(--accent); transform:translateY(-1px); }
+.template-card strong {
+  display:block; font-family:'Cinzel',serif; font-size:12px;
+  color:var(--accent2); letter-spacing:1px; margin-bottom:4px;
+}
+.template-card span { font-size:12px; color:var(--text2); line-height:1.45; }
 </style>
 
 <script>
@@ -835,11 +877,17 @@ html,body { height:100%; overflow:hidden; font-family:'Syne',sans-serif; backgro
     <button class="topbtn" onclick="openThemePanel()">🎨 Thème</button>
     <button class="topbtn" onclick="autoLayout()">⊞ Ordonner</button>
     <div class="sep"></div>
+    <button class="topbtn" id="btn-templates" onclick="openTemplatesModal()">📋 Modèles</button>
     <button class="topbtn" onclick="importJSON()">↑ Importer</button>
     <button class="topbtn test-btn" onclick="testStory()" id="btn-test">▶ Tester</button>
     <button class="topbtn" onclick="exportTXT()">✎ Export TXT</button>
     <button class="topbtn" onclick="exportJSON()">↓ Export JSON</button>
     <button class="topbtn send-btn" onclick="sendStory()">✉ Envoyer</button>
+  </div>
+
+  <div id="creator-banner">
+    <span id="creator-challenge-text"></span>
+    <button type="button" class="topbtn" id="btn-templates-banner" onclick="openTemplatesModal()">📋 Modèles</button>
   </div>
 
   <!-- MAIN -->
@@ -895,6 +943,18 @@ html,body { height:100%; overflow:hidden; font-family:'Syne',sans-serif; backgro
       </div>
     </div>
 
+  </div>
+</div>
+
+<!-- MODAL STATS -->
+<div id="template-modal-overlay" onclick="handleTemplateOverlayClick(event)">
+  <div id="template-modal">
+    <h3 id="template-modal-title">Choisir un modèle</h3>
+    <p id="template-modal-sub"></p>
+    <div class="template-grid" id="template-grid"></div>
+    <div class="modal-actions" style="margin-top:14px">
+      <button class="topbtn" id="template-close-btn" onclick="closeTemplatesModal()">Fermer</button>
+    </div>
   </div>
 </div>
 
@@ -1146,7 +1206,12 @@ let nodeDragOffset = null;
 
 const EDITOR_I18N = {
   fr: {
-    projectPlaceholder:'Nom du projet', kidsTitle:'Histoire pour enfants', statsBtn:'⚙ Stats', themeBtn:'🎨 Thème', layoutBtn:'⊞ Ordonner', importBtn:'↑ Importer', exportTxtBtn:'✎ Export TXT', exportJsonBtn:'↓ Export JSON', testBtn:'Tester l\'aperçu', sendBtn:'Envoyer mon histoire',
+    projectPlaceholder:'Nom du projet', kidsTitle:'Histoire pour enfants', statsBtn:'⚙ Stats', themeBtn:'🎨 Thème', layoutBtn:'⊞ Ordonner', importBtn:'↑ Importer', exportTxtBtn:'✎ Export TXT', exportJsonBtn:'↓ Export JSON', testBtn:'Tester l\'aperçu', sendBtn:'✉ Envoyer en 1 clic', templatesBtn:'📋 Modèles',
+    challengeBanner:'Micro-défi : écris 5 scènes et 2 fins — pas une saga !', templateModalTitle:'Choisir un modèle', templateModalSub:'Des bases prêtes à personnaliser. Remplacez les textes, testez, puis envoyez en un clic.',
+    templateMysteryTitle:'Mystère court', templateMysteryDesc:'5 scènes, 2 fins — ambiance énigme et choix tendus.',
+    templateKidsTitle:'Histoire enfant', templateKidsDesc:'5 scènes douces, mode enfant activé.',
+    templateMicroTitle:'Micro-défi express', templateMicroDesc:'Le format du concours : court, jouable, publiable.',
+    templateApplied:'Modèle chargé ✓', sendToastMail:'Ouverture de votre messagerie…', sendToastShare:'Choisissez votre messagerie — envoyez à team.pegasuscorp@gmail.com',
     selectScene:'Sélectionne une scène', deleteTitle:'Supprimer', newSceneTitle:'Nouvelle scène', centerTitle:'Recentrer', empty:'Crée ou sélectionne une scène dans l\'arbre pour l\'éditer.', newScene:'+ Nouvelle scène',
     statsTitle:'Configuration des Stats', statsDesc:'Définis les attributs de ton personnage. Ils seront disponibles dans chaque choix.', addStat:'+ Ajouter une stat', close:'Fermer',
     visualTheme:'Thème visuel', presets:'Thèmes prédéfinis', customColors:'Couleurs custom', mainBg:'Fond principal', panelBg:'Fond panneaux', elementBg:'Fond éléments', accentMain:'Accent principal', accentSecond:'Accent secondaire', accentThird:'Accent tertiaire', mainText:'Texte principal', borders:'Bordures', preview:'Aperçu', previewTitle:'Titre de la scène', previewText:'Le héros avance dans l\'obscurité. Chaque pas résonne dans le couloir de pierre...', previewBtn:'→ Continuer',
@@ -1170,7 +1235,12 @@ const EDITOR_I18N = {
     healthReady:'✓ Prête', healthWarn:'⚠ {n} avert.', healthError:'✕ {n} erreur(s)', healthOk:'Aucun problème détecté', healthNoStart:'Aucune scène de départ définie', healthMultiStart:'{n} scènes de départ', healthEmptyText:'"{t}" — texte vide', healthNoLink:'"{t}" — choix {i} sans destination', healthDeadLink:'"{t}" — destination supprimée', healthNoChoice:'"{t}" — sans choix, non finale', searchNoResult:'Aucun résultat', undone:'↩ Annulé', redone:'↪ Rétabli', nodeColor:'🎨 Couleur du nœud', kidsOn:'🧒 Mode enfant activé', kidsOff:'Mode enfant désactivé', playerOn:'👤 Prénom activé', playerOff:'Prénom désactivé', kidsLabel:'Histoire pour enfants', playerLabel:'Demander le prénom', healthTitle:'Santé de l\'histoire'
   },
   en: {
-    projectPlaceholder:'Project name', kidsTitle:'Story for children', statsBtn:'⚙ Stats', themeBtn:'🎨 Theme', layoutBtn:'⊞ Arrange', importBtn:'↑ Import', exportTxtBtn:'✎ Export TXT', exportJsonBtn:'↓ Export JSON', testBtn:'Preview test', sendBtn:'Send my story',
+    projectPlaceholder:'Project name', kidsTitle:'Story for children', statsBtn:'⚙ Stats', themeBtn:'🎨 Theme', layoutBtn:'⊞ Arrange', importBtn:'↑ Import', exportTxtBtn:'✎ Export TXT', exportJsonBtn:'↓ Export JSON', testBtn:'Preview test', sendBtn:'✉ Send in 1 tap', templatesBtn:'📋 Templates',
+    challengeBanner:'Micro-challenge: write 5 scenes and 2 endings — not a saga!', templateModalTitle:'Choose a template', templateModalSub:'Ready-made bases to customize. Edit the text, test, then send in one tap.',
+    templateMysteryTitle:'Short mystery', templateMysteryDesc:'5 scenes, 2 endings — tense mystery mood.',
+    templateKidsTitle:'Kids story', templateKidsDesc:'5 gentle scenes, kids mode enabled.',
+    templateMicroTitle:'Express micro-challenge', templateMicroDesc:'The contest format: short, playable, publishable.',
+    templateApplied:'Template loaded ✓', sendToastMail:'Opening your email app…', sendToastShare:'Pick your mail app — send to team.pegasuscorp@gmail.com',
     selectScene:'Select a scene', deleteTitle:'Delete', newSceneTitle:'New scene', centerTitle:'Recenter', empty:'Create or select a scene in the tree to edit it.', newScene:'+ New scene',
     statsTitle:'Stats Configuration', statsDesc:'Define your character attributes. They will be available in every choice.', addStat:'+ Add stat', close:'Close',
     visualTheme:'Visual theme', presets:'Preset themes', customColors:'Custom colors', mainBg:'Main background', panelBg:'Panel background', elementBg:'Element background', accentMain:'Main accent', accentSecond:'Secondary accent', accentThird:'Third accent', mainText:'Main text', borders:'Borders', preview:'Preview', previewTitle:'Scene title', previewText:'The hero moves forward in the dark. Every step echoes through the stone corridor...', previewBtn:'→ Continue',
@@ -1194,7 +1264,12 @@ const EDITOR_I18N = {
     healthReady:'✓ Ready', healthWarn:'⚠ {n} warn.', healthError:'✕ {n} error(s)', healthOk:'No issues detected', healthNoStart:'No start scene defined', healthMultiStart:'{n} start scenes', healthEmptyText:'"{t}" — empty text', healthNoLink:'"{t}" — choice {i} has no destination', healthDeadLink:'"{t}" — deleted destination', healthNoChoice:'"{t}" — no choices, not marked as end', searchNoResult:'No results', undone:'↩ Undone', redone:'↪ Redone', nodeColor:'🎨 Node color', kidsOn:'🧒 Kids mode on', kidsOff:'Kids mode off', playerOn:'👤 Name prompt on', playerOff:'Name prompt off', kidsLabel:'Kids story', playerLabel:'Ask for name', healthTitle:'Story health'
   },
   es: {
-    projectPlaceholder:'Nombre del proyecto', kidsTitle:'Historia para niños', statsBtn:'⚙ Stats', themeBtn:'🎨 Tema', layoutBtn:'⊞ Ordenar', importBtn:'↑ Importar', exportTxtBtn:'✎ Exportar TXT', exportJsonBtn:'↓ Exportar JSON', testBtn:'Vista previa', sendBtn:'Enviar mi historia',
+    projectPlaceholder:'Nombre del proyecto', kidsTitle:'Historia para niños', statsBtn:'⚙ Stats', themeBtn:'🎨 Tema', layoutBtn:'⊞ Ordenar', importBtn:'↑ Importar', exportTxtBtn:'✎ Exportar TXT', exportJsonBtn:'↓ Exportar JSON', testBtn:'Vista previa', sendBtn:'✉ Enviar en 1 clic', templatesBtn:'📋 Plantillas',
+    challengeBanner:'Micro-reto: escribe 5 escenas y 2 finales — ¡no una saga!', templateModalTitle:'Elegir una plantilla', templateModalSub:'Bases listas para personalizar. Edita, prueba y envía en un clic.',
+    templateMysteryTitle:'Misterio corto', templateMysteryDesc:'5 escenas, 2 finales — ambiente de enigma.',
+    templateKidsTitle:'Historia infantil', templateKidsDesc:'5 escenas suaves, modo infantil activado.',
+    templateMicroTitle:'Micro-reto exprés', templateMicroDesc:'El formato del concurso: corto, jugable, publicable.',
+    templateApplied:'Plantilla cargada ✓', sendToastMail:'Abriendo tu correo…', sendToastShare:'Elige tu app de correo — envía a team.pegasuscorp@gmail.com',
     selectScene:'Selecciona una escena', deleteTitle:'Eliminar', newSceneTitle:'Nueva escena', centerTitle:'Recentrar', empty:'Crea o selecciona una escena en el árbol para editarla.', newScene:'+ Nueva escena',
     statsTitle:'Configuración de Stats', statsDesc:'Define los atributos de tu personaje. Estarán disponibles en cada elección.', addStat:'+ Añadir stat', close:'Cerrar',
     visualTheme:'Tema visual', presets:'Temas predefinidos', customColors:'Colores personalizados', mainBg:'Fondo principal', panelBg:'Fondo de paneles', elementBg:'Fondo de elementos', accentMain:'Acento principal', accentSecond:'Acento secundario', accentThird:'Acento terciario', mainText:'Texto principal', borders:'Bordes', preview:'Vista previa', previewTitle:'Título de la escena', previewText:'El héroe avanza en la oscuridad. Cada paso resuena en el pasillo de piedra...', previewBtn:'→ Continuar',
@@ -1272,6 +1347,18 @@ function applyEditorLanguage() {
   if (mm[6]) mm[6].innerHTML = '<span class="mmenu-icon">✎</span> ' + et('exportTxt');
   if (mm[7]) mm[7].innerHTML = '<span class="mmenu-icon">↓</span> ' + et('exportJson');
   if (mm[8]) mm[8].innerHTML = '<span class="mmenu-icon">✉</span> ' + et('sendBtn');
+  const sendBtn = document.querySelector('.send-btn');
+  if (sendBtn) sendBtn.textContent = et('sendBtn');
+  const tplBtn = document.getElementById('btn-templates');
+  if (tplBtn) tplBtn.textContent = et('templatesBtn');
+  const tplBannerBtn = document.getElementById('btn-templates-banner');
+  if (tplBannerBtn) tplBannerBtn.textContent = et('templatesBtn');
+  const challenge = document.getElementById('creator-challenge-text');
+  if (challenge) challenge.textContent = et('challengeBanner');
+  byId('template-modal-title', et('templateModalTitle'));
+  byId('template-modal-sub', et('templateModalSub'));
+  byId('template-close-btn', et('close'));
+  renderTemplateCards();
 }
 
 // ══════════════════════════════════════════════
@@ -2199,6 +2286,214 @@ function exportTXT() {
   toast('TXT traduction exporté ✓');
 }
 
+// ══════════════════════════════════════════════
+// STORY TEMPLATES
+// ══════════════════════════════════════════════
+const TEMPLATE_SCENE_COPY = {
+  fr: {
+    mystery: {
+      name: 'Mystère court',
+      kids: false,
+      s1t: 'La lettre', s1l: 'Chez vous', s1x: 'Une enveloppe sans expéditeur attend sur la table. À l\'intérieur, un seul mot : « Viens ».',
+      c1a: 'Suivre l\'adresse', c1b: 'Brûler la lettre',
+      s2t: 'L\'entrepôt', s2l: 'Quai abandonné', s2x: 'La porte grince. Une silhouette recule dans l\'ombre.',
+      s3t: 'Le silence', s3l: 'Chez vous', s3x: 'Les cendres refroidissent. La nuit semble plus lourde qu\'avant.',
+      s4t: 'Fin — La vérité', s4x: 'La silhouette prononce votre nom. Vous comprenez enfin pourquoi la lettre vous attendait.',
+      s5t: 'Fin — L\'oubli', s5x: 'Vous refermez la porte. Certains mystères valent mieux qu\'on ne les ouvre pas.'
+    },
+    kids: {
+      name: 'Aventure douce',
+      kids: true,
+      s1t: 'Le jardin', s1l: 'Matin ensoleillé', s1x: 'Dans le jardin, une libellule bleue tourne autour de vous comme si elle vous invitait à la suivre.',
+      c1a: 'La suivre', c1b: 'Rester sur le banc',
+      s2t: 'La clairière', s2l: 'Derrière les arbres', s2x: 'La libellule s\'arrête près d\'une fleur qui brille doucement.',
+      s3t: 'Le banc', s3l: 'Sous le grand chêne', s3x: 'Vous écoutez le vent. Parfois, ne rien faire est aussi une aventure.',
+      s4t: 'Fin — Le secret', s4x: 'La fleur s\'ouvre et libère des pétales lumineux. Vous souriez.',
+      s5t: 'Fin — La pause', s5x: 'Le vent vous berce. Demain sera un autre jour pour explorer.'
+    },
+    micro: {
+      name: 'Micro-défi — 5 scènes',
+      kids: false,
+      s1t: 'Le carrefour', s1l: 'Route inconnue', s1x: 'Deux chemins. Un panneau effacé. Vous n\'avez que quelques décisions à prendre.',
+      c1a: 'Prendre la route de gauche', c1b: 'Prendre la route de droite',
+      s2t: 'La rencontre', s2l: 'Route de gauche', s2x: 'Un voyageur vous tend une carte sans un mot.',
+      s3t: 'La solitude', s3l: 'Route de droite', s3x: 'Personne. Seulement le bruit de vos pas.',
+      s4t: 'Fin — La carte', s4x: 'La carte mène à un lieu que vous n\'oublierez pas.',
+      s5t: 'Fin — Le chemin seul', s5x: 'Parfois, avancer seul suffit pour changer une histoire.'
+    }
+  },
+  en: {
+    mystery: {
+      name: 'Short mystery',
+      kids: false,
+      s1t: 'The letter', s1l: 'At home', s1x: 'An envelope with no sender waits on the table. Inside, one word: "Come".',
+      c1a: 'Follow the address', c1b: 'Burn the letter',
+      s2t: 'The warehouse', s2l: 'Abandoned dock', s2x: 'The door creaks. A silhouette steps back into the shadows.',
+      s3t: 'Silence', s3l: 'At home', s3x: 'The ashes cool. The night feels heavier than before.',
+      s4t: 'End — The truth', s4x: 'The figure speaks your name. You finally understand why the letter waited for you.',
+      s5t: 'End — Forgetting', s5x: 'You close the door. Some mysteries are better left unopened.'
+    },
+    kids: {
+      name: 'Gentle adventure',
+      kids: true,
+      s1t: 'The garden', s1l: 'Sunny morning', s1x: 'In the garden, a blue dragonfly circles you as if inviting you to follow.',
+      c1a: 'Follow it', c1b: 'Stay on the bench',
+      s2t: 'The clearing', s2l: 'Behind the trees', s2x: 'The dragonfly stops near a flower that glows softly.',
+      s3t: 'The bench', s3l: 'Under the oak', s3x: 'You listen to the wind. Sometimes doing nothing is an adventure too.',
+      s4t: 'End — The secret', s4x: 'The flower opens and releases glowing petals. You smile.',
+      s5t: 'End — The pause', s5x: 'The wind rocks you gently. Tomorrow is another day to explore.'
+    },
+    micro: {
+      name: 'Micro-challenge — 5 scenes',
+      kids: false,
+      s1t: 'The crossroads', s1l: 'Unknown road', s1x: 'Two paths. A faded sign. You only have a few decisions to make.',
+      c1a: 'Take the left road', c1b: 'Take the right road',
+      s2t: 'The encounter', s2l: 'Left road', s2x: 'A traveler hands you a map without a word.',
+      s3t: 'Solitude', s3l: 'Right road', s3x: 'No one. Only the sound of your steps.',
+      s4t: 'End — The map', s4x: 'The map leads somewhere you will not forget.',
+      s5t: 'End — Walking alone', s5x: 'Sometimes moving forward alone is enough to change a story.'
+    }
+  },
+  es: {
+    mystery: {
+      name: 'Misterio corto',
+      kids: false,
+      s1t: 'La carta', s1l: 'En casa', s1x: 'Un sobre sin remitente espera en la mesa. Dentro, una sola palabra: «Ven».',
+      c1a: 'Seguir la dirección', c1b: 'Quemar la carta',
+      s2t: 'El almacén', s2l: 'Muelle abandonado', s2x: 'La puerta cruje. Una silueta retrocede hacia la sombra.',
+      s3t: 'El silencio', s3l: 'En casa', s3x: 'Las cenizas se enfrían. La noche pesa más que antes.',
+      s4t: 'Fin — La verdad', s4x: 'La figura pronuncia tu nombre. Por fin entiendes por qué te esperaba la carta.',
+      s5t: 'Fin — El olvido', s5x: 'Cierras la puerta. Algunos misterios es mejor no abrirlos.'
+    },
+    kids: {
+      name: 'Aventura suave',
+      kids: true,
+      s1t: 'El jardín', s1l: 'Mañana soleada', s1x: 'En el jardín, una libélula azul gira a tu alrededor como invitándote a seguirla.',
+      c1a: 'Seguirla', c1b: 'Quedarse en el banco',
+      s2t: 'El claro', s2l: 'Detrás de los árboles', s2x: 'La libélula se detiene junto a una flor que brilla suavemente.',
+      s3t: 'El banco', s3l: 'Bajo el roble', s3x: 'Escuchas el viento. A veces no hacer nada también es una aventura.',
+      s4t: 'Fin — El secreto', s4x: 'La flor se abre y suelta pétalos luminosos. Sonríes.',
+      s5t: 'Fin — La pausa', s5x: 'El viento te mece. Mañana será otro día para explorar.'
+    },
+    micro: {
+      name: 'Micro-reto — 5 escenas',
+      kids: false,
+      s1t: 'La encrucijada', s1l: 'Camino desconocido', s1x: 'Dos caminos. Un cartel borroso. Solo tienes unas pocas decisiones.',
+      c1a: 'Tomar el camino izquierdo', c1b: 'Tomar el camino derecho',
+      s2t: 'El encuentro', s2l: 'Camino izquierdo', s2x: 'Un viajero te entrega un mapa sin decir palabra.',
+      s3t: 'La soledad', s3l: 'Camino derecho', s3x: 'Nadie. Solo el sonido de tus pasos.',
+      s4t: 'Fin — El mapa', s4x: 'El mapa lleva a un lugar que no olvidarás.',
+      s5t: 'Fin — Caminar solo', s5x: 'A veces avanzar solo basta para cambiar una historia.'
+    }
+  }
+};
+
+function buildTemplateProject(type) {
+  const lang = editorLang();
+  const copy = (TEMPLATE_SCENE_COPY[lang] || TEMPLATE_SCENE_COPY.fr)[type];
+  if (!copy) return null;
+  const s = [genId(), genId(), genId(), genId(), genId()];
+  const kids = !!copy.kids;
+  return {
+    name: copy.name,
+    kids,
+    askPlayerName: kids,
+    stats: kids
+      ? [{ id:'joie', label: lang==='en'?'Joy':lang==='es'?'Alegría':'Joie', start:50, max:100, color:'#90be6d' }]
+      : [{ id:'tension', label: lang==='en'?'Tension':lang==='es'?'Tensión':'Tension', start:30, max:100, color:'#fa6d8f' }],
+    scenes: {
+      [s[0]]: {
+        id: s[0], title: copy.s1t, location: copy.s1l, text: copy.s1x,
+        isStart: true, isEnd: false,
+        choices: [
+          { text: copy.c1a, vers: s[1], effects: [] },
+          { text: copy.c1b, vers: s[2], effects: [] }
+        ], x: 320, y: 40
+      },
+      [s[1]]: {
+        id: s[1], title: copy.s2t, location: copy.s2l, text: copy.s2x,
+        isStart: false, isEnd: false,
+        choices: [{ text: lang==='en'?'Continue':lang==='es'?'Continuar':'Continuer', vers: s[3], effects: [] }],
+        x: 120, y: 200
+      },
+      [s[2]]: {
+        id: s[2], title: copy.s3t, location: copy.s3l, text: copy.s3x,
+        isStart: false, isEnd: false,
+        choices: [{ text: lang==='en'?'Continue':lang==='es'?'Continuar':'Continuer', vers: s[4], effects: [] }],
+        x: 520, y: 200
+      },
+      [s[3]]: {
+        id: s[3], title: copy.s4t, location: '', text: copy.s4x,
+        isStart: false, isEnd: true, choices: [], x: 120, y: 360
+      },
+      [s[4]]: {
+        id: s[4], title: copy.s5t, location: '', text: copy.s5x,
+        isStart: false, isEnd: true, choices: [], x: 520, y: 360
+      }
+    }
+  };
+}
+
+function renderTemplateCards() {
+  const grid = document.getElementById('template-grid');
+  if (!grid) return;
+  const items = [
+    { type: 'micro', title: et('templateMicroTitle'), desc: et('templateMicroDesc') },
+    { type: 'mystery', title: et('templateMysteryTitle'), desc: et('templateMysteryDesc') },
+    { type: 'kids', title: et('templateKidsTitle'), desc: et('templateKidsDesc') }
+  ];
+  grid.innerHTML = items.map(item => `
+    <button type="button" class="template-card" onclick="applyStoryTemplate('${item.type}')">
+      <strong>${item.title}</strong>
+      <span>${item.desc}</span>
+    </button>`).join('');
+}
+
+function openTemplatesModal() {
+  renderTemplateCards();
+  document.getElementById('template-modal-overlay')?.classList.add('open');
+}
+
+function closeTemplatesModal() {
+  document.getElementById('template-modal-overlay')?.classList.remove('open');
+}
+
+function handleTemplateOverlayClick(e) {
+  if (e.target?.id === 'template-modal-overlay') closeTemplatesModal();
+}
+
+function applyStoryTemplate(type) {
+  const data = buildTemplateProject(type);
+  if (!data) return;
+  pushUndo();
+  project.name = data.name;
+  project.kids = data.kids;
+  project.askPlayerName = data.askPlayerName;
+  project.stats = data.stats;
+  project.scenes = data.scenes;
+  const nameEl = document.getElementById('project-name');
+  if (nameEl) nameEl.value = project.name;
+  const kidsEl = document.getElementById('kids-check');
+  if (kidsEl) kidsEl.checked = !!project.kids;
+  const playerEl = document.getElementById('player-name-check');
+  if (playerEl) playerEl.checked = !!project.askPlayerName;
+  selectedId = null;
+  closeTemplatesModal();
+  render();
+  toast(et('templateApplied'));
+}
+
+function sendMailBody(filename) {
+  const lang = editorLang();
+  const name = project.name || 'Mon Histoire';
+  const bodies = {
+    fr: `Bonjour l'équipe PegasusCorp,\n\nJe vous soumets mon histoire "${name}" créée avec StoryForge.\n\nLe fichier JSON est joint (${filename}) — ou en pièce jointe si votre messagerie le permet.\n\nMerci de prendre le temps de la lire !\n\nCordialement,\n[Votre nom]`,
+    en: `Hello PegasusCorp team,\n\nI am submitting my story "${name}" created with StoryForge.\n\nThe JSON file is attached (${filename}) — or as an attachment if your mail app allows it.\n\nThank you for reading it!\n\nBest regards,\n[Your name]`,
+    es: `Hola equipo PegasusCorp,\n\nLes envío mi historia "${name}" creada con StoryForge.\n\nEl archivo JSON está adjunto (${filename}) — o como adjunto si su app de correo lo permite.\n\n¡Gracias por leerla!\n\nSaludos,\n[Su nombre]`
+  };
+  return bodies[lang] || bodies.fr;
+}
+
 function sendStory() {
   project.theme = { ...currentTheme };
   project.kids = document.getElementById('kids-check').checked;
@@ -2228,9 +2523,9 @@ function sendStory() {
             // capables de recevoir du texte (PayPal, réseaux sociaux...).
             // Avec `files` seul, la liste se limite aux applis gérant un fichier.
             return plugins.Share.share({
-              title: '[StoryForge] Soumission — ' + (project.name || 'Mon Histoire'),
+              title: '[StoryForge] ' + (project.name || 'Mon Histoire'),
               files: [res.uri],
-              dialogTitle: 'Envoyer à PegasusCorp'
+              dialogTitle: et('sendToastShare')
             });
           })
           .catch(err => {
@@ -2252,8 +2547,8 @@ function sendStory() {
     if (navigator.canShare({ files: [file] })) {
       navigator.share({
         files: [file],
-        title: '[StoryForge] Soumission — ' + (project.name || 'Mon Histoire'),
-        text: `Histoire "${project.name || 'Mon Histoire'}" créée avec StoryForge.`
+        title: '[StoryForge] ' + (project.name || 'Mon Histoire'),
+        text: `Story "${project.name || 'Mon Histoire'}" — StoryForge`
       }).catch(() => _sendMailtoFallback(blob, filename));
       return;
     }
@@ -2274,22 +2569,11 @@ function _sendMailtoFallback(blob, filename) {
     _downloadFallback(blob, filename);
   }
   const to      = 'team.pegasuscorp@gmail.com';
-  const subject = encodeURIComponent('[StoryForge] Soumission — ' + (project.name || 'Mon Histoire'));
-  const body    = encodeURIComponent(
-`Bonjour l'équipe PegasusCorp,
-
-Je vous soumets mon histoire "${project.name || 'Mon Histoire'}" créée avec StoryForge.
-
-Vous trouverez le fichier JSON en pièce jointe (${filename}).
-
-Merci de prendre le temps de la lire !
-
-Cordialement,
-[Votre nom]`
-  );
+  const subject = encodeURIComponent('[StoryForge] ' + (project.name || 'Mon Histoire'));
+  const body    = encodeURIComponent(sendMailBody(filename));
   setTimeout(() => {
     window.location.href = `mailto:${to}?subject=${subject}&body=${body}`;
-    toast('📎 JSON téléchargé — ajoutez-le en pièce jointe !');
+    toast(et('sendToastMail'));
   }, 400);
 }
 
