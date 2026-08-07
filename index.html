@@ -1139,6 +1139,7 @@ body {
   </div>
 </div>
 
+<script src="onboarding.js"></script>
 <script>
 // ══════════════════════════════════════════════
 // TRANSLATIONS
@@ -1495,7 +1496,10 @@ let allGames = [];
 
 async function loadGameRegistry() {
   try {
-    const r = await fetch('games.json');
+    const r = await Promise.race([
+      fetch('games.json'),
+      new Promise((_, reject) => setTimeout(() => reject(new Error('timeout')), 5000))
+    ]);
     if (r.ok) { allGames = await r.json(); return; }
   } catch(e) {}
   // fallback to demo list
@@ -1828,73 +1832,6 @@ function submitPin() {
   }
 }
 
-// ── CONFIGURATION DU PIN AU PREMIER DÉMARRAGE ───────────────
-function maybeShowPinSetup() {
-  // Affiche la popup uniquement si aucun PIN n'a encore été créé
-  // et que l'étape n'a pas déjà été passée/ignorée
-  if (localStorage.getItem('sf_pin_setup_done')) return;
-  if (localStorage.getItem('sf_parent_pin') !== null) return;
-  showPinSetup();
-}
-
-function showPinSetup() {
-  const overlay = document.getElementById('pin-setup-overlay');
-  document.getElementById('pin-setup-input').value = '';
-  document.getElementById('pin-setup-input2').value = '';
-  document.getElementById('pin-setup-kids').checked = false;
-  document.getElementById('pin-setup-error').style.display = 'none';
-  overlay.style.display = 'flex';
-  setTimeout(() => document.getElementById('pin-setup-input').focus(), 100);
-}
-
-function closePinSetup() {
-  localStorage.setItem('sf_pin_setup_done', '1');
-  const overlay = document.getElementById('pin-setup-overlay');
-  overlay.style.animation = 'fade-out .3s ease forwards';
-  setTimeout(() => { overlay.style.display = 'none'; overlay.style.animation = ''; }, 300);
-}
-
-function skipPinSetup() {
-  closePinSetup();
-}
-
-function submitPinSetup() {
-  const input  = document.getElementById('pin-setup-input').value.trim();
-  const input2 = document.getElementById('pin-setup-input2').value.trim();
-  const err    = document.getElementById('pin-setup-error');
-  const t      = LANG[currentLang] || LANG.fr;
-  if (!/^\d{4}$/.test(input)) {
-    err.textContent = t.pinSetupError;
-    err.style.display = 'block';
-    document.getElementById('pin-setup-input').focus();
-    return;
-  }
-  if (input !== input2) {
-    err.textContent = t.pinSetupMismatch;
-    err.style.display = 'block';
-    document.getElementById('pin-setup-input2').value = '';
-    document.getElementById('pin-setup-input2').focus();
-    return;
-  }
-  localStorage.setItem('sf_parent_pin', _sha256sync(input));
-  // Option : activer le mode enfant immédiatement
-  if (document.getElementById('pin-setup-kids').checked) {
-    const kidsToggle = document.getElementById('opt-kids');
-    if (kidsToggle) kidsToggle.checked = true;
-    if (typeof saveOptions === 'function') saveOptions();
-    if (typeof renderGameList === 'function') renderGameList();
-  }
-  closePinSetup();
-  const msg = document.createElement('div');
-  msg.style.cssText = `position:fixed;bottom:80px;left:50%;transform:translateX(-50%);
-    background:#13110e;border:1px solid rgba(109,250,188,0.4);border-radius:10px;
-    padding:10px 20px;font-family:'DM Mono',monospace;font-size:11px;
-    color:#6dfabc;z-index:999;white-space:nowrap`;
-  msg.textContent = t.pinSetupDone;
-  document.body.appendChild(msg);
-  setTimeout(() => msg.remove(), 2500);
-}
-
 let _pinCalcAnswer = 0;
 
 function generateCalcQuestion() {
@@ -2068,81 +2005,19 @@ async function submitCode() {
     resultEl.textContent = '✕ ' + result.msg;
   }
 }
-let _pendingLang = localStorage.getItem('sf_lang') || 'fr';
-
-function selectLangPopup(lang, btn) {
-  _pendingLang = lang;
-  document.querySelectorAll('.lang-choice-btn').forEach(b => {
-    b.classList.remove('selected');
-    b.querySelector('.lang-check').textContent = '';
-  });
-  btn.classList.add('selected');
-  btn.querySelector('.lang-check').textContent = '✓';
-}
-
-function confirmLang() {
-  localStorage.setItem('sf_lang', _pendingLang);
-  localStorage.setItem('sf_lang_chosen', '1');
-  currentLang = _pendingLang;
-  setLang(currentLang);
-  const overlay = document.getElementById('lang-overlay');
-  if (overlay) {
-    overlay.style.animation = 'fade-out .3s ease forwards';
-    setTimeout(() => {
-      overlay.style.display = 'none';
-      overlay.style.animation = '';
-      setTimeout(startLaunchSequence, 500);
-    }, 300);
-  }
-}
-
-function startLaunchSequence() {
-  // Cacher tout d'abord
-  ['lang-overlay', 'tuto-overlay', 'pin-setup-overlay'].forEach(id => {
-    const el = document.getElementById(id);
-    if (el) el.style.display = 'none';
-  });
-
-  if (!localStorage.getItem('sf_lang_chosen')) {
-    const overlay = document.getElementById('lang-overlay');
-    if (overlay) overlay.style.display = 'flex';
-  } else if (!localStorage.getItem('sf_tuto_shown')) {
-    showTuto();
-  } else {
-    maybeShowPinSetup();
-  }
-}
-
-function showTuto() {
-  const overlay = document.getElementById('tuto-overlay');
-  overlay.style.display = 'flex';
-  const t = LANG[currentLang] || LANG.fr;
-  if (t.tutoTitle) document.getElementById('txt-tuto-title').textContent = t.tutoTitle;
-  if (t.tutoMenu)  document.getElementById('txt-tuto-menu').innerHTML  = t.tutoMenu;
-  if (t.tutoSave)  document.getElementById('txt-tuto-save').innerHTML  = t.tutoSave;
-  if (t.tutoBtn)   document.getElementById('txt-tuto-btn').textContent  = t.tutoBtn;
-}
-
-function closeTuto() {
-  localStorage.setItem('sf_tuto_shown', '1');
-  const overlay = document.getElementById('tuto-overlay');
-  if (overlay) {
-    overlay.style.animation = 'fade-out .3s ease forwards';
-    setTimeout(() => {
-      overlay.style.display = 'none';
-      overlay.style.animation = '';
-      setTimeout(startLaunchSequence, 500);
-    }, 300);
-  }
-}
-
 (async function init() {
   loadOptions();
   setLang(currentLang);
+  // Lancer l'onboarding tout de suite — ne pas attendre games.json
+  if (window.SFOnboarding) {
+    SFOnboarding.start({
+      getLang: () => currentLang,
+      setLang: lang => setLang(lang)
+    });
+  }
   initCanvas();
   createParticles();
   await loadGameRegistry();
-  startLaunchSequence();
 })();
 </script>
 </body>

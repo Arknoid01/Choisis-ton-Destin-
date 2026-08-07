@@ -34,6 +34,7 @@ window.SFBilling = (function () {
   const FREE_PACKS   = ['free', 'kids'];
   const CACHE_KEY    = 'sf_unlocked_packs';
   const PRICE_KEY    = 'sf_pack_prices';
+  const PRODUCT_PACKS = Object.keys(PRODUCTS);
 
   let store        = null;   // instance CdvPurchase.store
   let ready        = false;  // plugin initialisé et catalogue chargé
@@ -64,16 +65,25 @@ window.SFBilling = (function () {
     listeners.forEach(fn => { try { fn(packs); } catch (e) { console.error(e); } });
   }
 
+  // Préserve les déblocages hors Play (codes créateur, promos, flags éditeur).
+  function preservedUnlocks(previous, ownedFromPlay) {
+    const ownedSet = new Set(ownedFromPlay);
+    return previous.filter(p => {
+      if (FREE_PACKS.includes(p)) return false;
+      if (!PRODUCT_PACKS.includes(p)) return true;
+      return !ownedSet.has(p);
+    });
+  }
+
   // ── Resynchronisation avec ce que Google Play dit vraiment ───
-  // On repart de zéro à chaque fois : un remboursement ou une
-  // annulation doit pouvoir REVERROUILLER un pack.
   function syncFromStore() {
     if (!store) return;
-    const owned = Object.keys(PRODUCTS).filter(packId => {
+    const previous = readCache();
+    const ownedFromPlay = PRODUCT_PACKS.filter(packId => {
       const p = store.get(PRODUCTS[packId]);
       return !!(p && p.owned);
     });
-    writeCache(owned);
+    writeCache(ownedFromPlay.concat(preservedUnlocks(previous, ownedFromPlay)));
     cachePrices();
     notify();
   }
@@ -83,7 +93,7 @@ window.SFBilling = (function () {
   function cachePrices() {
     if (!store) return;
     const prices = {};
-    Object.keys(PRODUCTS).forEach(packId => {
+    PRODUCT_PACKS.forEach(packId => {
       const p = store.get(PRODUCTS[packId]);
       const offer = p && p.getOffer && p.getOffer();
       const price = offer && offer.pricingPhases && offer.pricingPhases[0]
@@ -93,23 +103,54 @@ window.SFBilling = (function () {
     try { localStorage.setItem(PRICE_KEY, JSON.stringify(prices)); } catch (e) {}
   }
 
+  function waitForUnlock(packId, timeoutMs) {
+    const limit = timeoutMs || 60000;
+    return new Promise(resolve => {
+      if (isUnlocked(packId)) {
+        resolve(true);
+        return;
+      }
+      let settled = false;
+      const finish = ok => {
+        if (settled) return;
+        settled = true;
+        clearTimeout(timer);
+        const idx = listeners.indexOf(onChange);
+        if (idx >= 0) listeners.splice(idx, 1);
+        resolve(ok);
+      };
+      const onChange = packs => {
+        if (packs.includes(packId)) finish(true);
+      };
+      listeners.push(onChange);
+      const timer = setTimeout(() => finish(isUnlocked(packId)), limit);
+    });
+  }
+
   // ── Initialisation ───────────────────────────────────────────
   function init() {
     if (initPromise) return initPromise;
 
     initPromise = new Promise(resolve => {
+      let settled = false;
+      const done = value => {
+        if (settled) return;
+        settled = true;
+        resolve(value);
+      };
+
       const CdvPurchase = window.CdvPurchase;
       if (!CdvPurchase || !CdvPurchase.store) {
         console.info('[billing] plugin absent (web) — achats désactivés');
-        resolve(false);
+        done(false);
         return;
       }
 
       store = CdvPurchase.store;
       const { ProductType, Platform } = CdvPurchase;
 
-      store.register(Object.values(PRODUCTS).map(id => ({
-        id,
+      store.register(PRODUCT_PACKS.map(packId => ({
+        id: PRODUCTS[packId],
         type: ProductType.NON_CONSUMABLE,
         platform: Platform.GOOGLE_PLAY
       })));
@@ -126,7 +167,11 @@ window.SFBilling = (function () {
           receipt.finish();
         })
         .finished(() => { syncFromStore(); })
-        .receiptsReady(() => { syncFromStore(); resolve(true); });
+        .receiptsReady(() => {
+          ready = true;
+          syncFromStore();
+          done(true);
+        });
 
       store.error(err => {
         // 6777006 / PAYMENT_CANCELLED : l'utilisateur a fermé la fenêtre
@@ -135,12 +180,19 @@ window.SFBilling = (function () {
       });
 
       store.initialize([Platform.GOOGLE_PLAY])
-        .then(() => { ready = true; syncFromStore(); resolve(true); })
-        .catch(err => { console.error('[billing] init', err); resolve(false); });
+        .then(() => {
+          ready = true;
+          syncFromStore();
+          done(true);
+        })
+        .catch(err => {
+          console.error('[billing] init', err);
+          done(false);
+        });
 
       // Filet de sécurité : ne jamais bloquer l'affichage de la
       // bibliothèque si le service Play ne répond pas.
-      setTimeout(() => resolve(ready), 8000);
+      setTimeout(() => done(ready), 10000);
     });
 
     return initPromise;
@@ -150,6 +202,10 @@ window.SFBilling = (function () {
 
   function isAvailable() {
     return !!(window.CdvPurchase && window.CdvPurchase.store);
+  }
+
+  function isReady() {
+    return ready && !!store;
   }
 
   function isUnlocked(packId) {
@@ -180,11 +236,16 @@ window.SFBilling = (function () {
     if (!productId) return { ok: false, reason: 'unknown_pack' };
     if (isUnlocked(packId)) return { ok: true, reason: 'already_owned' };
 
-    await init();
-    if (!store) return { ok: false, reason: 'unavailable' };
+    const initialized = await init();
+    if (!initialized || !store) return { ok: false, reason: 'unavailable' };
 
-    const product = store.get(productId);
-    const offer = product && product.getOffer && product.getOffer();
+    let product = store.get(productId);
+    let offer = product && product.getOffer && product.getOffer();
+    if (!offer && store.update) {
+      try { await store.update(); } catch (e) {}
+      product = store.get(productId);
+      offer = product && product.getOffer && product.getOffer();
+    }
     if (!offer) return { ok: false, reason: 'not_found' };
 
     try {
@@ -195,8 +256,10 @@ window.SFBilling = (function () {
           err.code === window.CdvPurchase.ErrorCode.PAYMENT_CANCELLED;
         return { ok: false, reason: cancelled ? 'cancelled' : 'error', error: err };
       }
-      syncFromStore();
-      return { ok: isUnlocked(packId), reason: 'purchased' };
+
+      // L'achat est validé de façon asynchrone (approved → verified → finished).
+      const ok = await waitForUnlock(packId);
+      return { ok, reason: ok ? 'purchased' : 'pending' };
     } catch (e) {
       console.error('[billing] order', e);
       return { ok: false, reason: 'error', error: e };
@@ -205,8 +268,8 @@ window.SFBilling = (function () {
 
   /** Restaure les achats. Obligatoire côté Google Play. */
   async function restore() {
-    await init();
-    if (!store) return { ok: false, reason: 'unavailable' };
+    const initialized = await init();
+    if (!initialized || !store) return { ok: false, reason: 'unavailable' };
     try {
       await store.restorePurchases();
       syncFromStore();
@@ -217,5 +280,8 @@ window.SFBilling = (function () {
     }
   }
 
-  return { init, isAvailable, isUnlocked, getUnlockedPacks, getPrice, onChange, buy, restore, PRODUCTS };
+  return {
+    init, isAvailable, isReady, isUnlocked, getUnlockedPacks,
+    getPrice, onChange, buy, restore, PRODUCTS
+  };
 })();

@@ -246,6 +246,7 @@ html,body { height:100%; background:#0d0d0f; color:#e8e0d0; font-family:'Cormora
 </div>
 
 <script src="billing.js"></script>
+<script src="onboarding.js"></script>
 <script>
 // ══════════════════════════════════════════════
 // CONFIG
@@ -605,12 +606,17 @@ async function buyPack(packId) {
   _buying = true;
   sfToast(bt('pending'));
   try {
+    if (SFBilling.isReady && !SFBilling.isReady()) {
+      await SFBilling.init();
+    }
     const res = await SFBilling.buy(packId);
     if (res.ok) {
       sfToast(bt('success'));
       renderLibrary();
     } else if (res.reason === 'cancelled') {
       // fermeture volontaire de la fenêtre Google Play : rien à signaler
+    } else if (res.reason === 'pending') {
+      sfToast(bt('pending'));
     } else {
       sfToast(bt('failed'));
     }
@@ -696,6 +702,17 @@ function showNamePopup(file) {
 if (window.SFBilling) {
   SFBilling.onChange(() => { try { renderLibrary(); } catch(e) {} });
   SFBilling.init();
+}
+
+if (window.SFOnboarding) {
+  SFOnboarding.start({
+    getLang: () => currentLang,
+    setLang: lang => {
+      currentLang = lang;
+      localStorage.setItem('sf_lang', lang);
+      try { renderLibrary(); } catch(e) {}
+    }
+  });
 }
 
 loadGames();
