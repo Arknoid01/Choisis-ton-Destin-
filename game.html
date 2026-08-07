@@ -405,6 +405,10 @@ body {
   border-color: rgba(124,109,250,0.35); color: #a090ff;
 }
 .first-finish-link.secondary:hover { border-color: #7c6dfa; }
+.first-finish-link.ai {
+  border-color: rgba(124,109,250,0.45); color: #c0b0ff;
+}
+.first-finish-link.ai:hover { border-color: #b8a8ff; background: rgba(124,109,250,0.08); }
 
 /* ── TRANSITIONS D'ARRIVÉE ── */
 @keyframes fx-fade {
@@ -1565,18 +1569,21 @@ function renderEndScene(scene) {
       text: 'Vous venez de vivre un roman interactif : vos choix ont orienté ce récit. Et si c\'était vous l\'auteur de la prochaine ?',
       btnLibrary: 'Explorer la bibliothèque',
       btnCreate: 'Créer une histoire',
+      btnAi: 'Créer avec l\'IA',
       btnCommunity: 'Voir la communauté'
     },
     en: {
       text: 'You just experienced an interactive novel — your choices shaped this story. What if you wrote the next one?',
       btnLibrary: 'Browse the library',
       btnCreate: 'Create a story',
+      btnAi: 'Create with AI',
       btnCommunity: 'See the community'
     },
     es: {
       text: 'Acabas de vivir una novela interactiva: tus elecciones orientaron este relato. ¿Y si fueras el autor de la próxima?',
       btnLibrary: 'Explorar la biblioteca',
       btnCreate: 'Crear una historia',
+      btnAi: 'Crear con IA',
       btnCommunity: 'Ver la comunidad'
     }
   };
@@ -1586,6 +1593,7 @@ function renderEndScene(scene) {
       <p>${note.text}</p>
       <div class="first-finish-actions">
         <a class="first-finish-link" href="story-editor.html">${note.btnCreate} →</a>
+        <a class="first-finish-link ai" href="ai-guide.html">${note.btnAi} →</a>
         <a class="first-finish-link secondary" href="index.html?community=1">${note.btnCommunity} →</a>
         <a class="first-finish-link" href="stories.html">${note.btnLibrary} →</a>
       </div>
