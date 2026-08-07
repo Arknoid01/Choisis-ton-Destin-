@@ -1,6 +1,6 @@
 /* ══════════════════════════════════════════════════════════════
    SFOnboarding — séquence de premier lancement
-   (langue → tutoriel → code parental)
+   (langue → micro-démo → tutoriel → code parental)
 
    Partagé entre index.html et stories.html : l'utilisateur voit la
    séquence quelle que soit la page sur laquelle il arrive.
@@ -32,7 +32,16 @@ window.SFOnboarding = (function () {
       pinEnter: 'Code à 4 chiffres',
       pinConfirm: 'Confirme le code',
       pinMismatch: 'Les codes ne correspondent pas',
-      pinKids: 'Activer le mode enfant maintenant'
+      pinKids: 'Activer le mode enfant maintenant',
+      demoTitle: 'Un roman dont vous êtes le héros',
+      demoSetup: 'Vous arrivez à un carrefour dans la forêt. Que faites-vous ?',
+      demoChoiceA: 'Prendre le sentier lumineux',
+      demoChoiceB: 'S\'engager dans l\'ombre',
+      demoOutcomeA: 'Le sentier mène à une clairière paisible. Votre histoire aurait pris une tournure douce…',
+      demoOutcomeB: 'L\'ombre recèle des secrets. Votre récit aurait basculé vers le mystère…',
+      demoConclusion: 'Chaque histoire fonctionne ainsi : vos choix orientent le récit. Essayez-en une gratuitement, à votre rythme.',
+      demoContinue: 'CONTINUER',
+      demoSkip: 'Passer'
     },
     en: {
       langTitle: 'Choose your language',
@@ -51,7 +60,16 @@ window.SFOnboarding = (function () {
       pinEnter: '4-digit code',
       pinConfirm: 'Confirm the code',
       pinMismatch: 'Codes do not match',
-      pinKids: 'Enable Kids Mode now'
+      pinKids: 'Enable Kids Mode now',
+      demoTitle: 'A story where you choose',
+      demoSetup: 'You reach a crossroads in the forest. What do you do?',
+      demoChoiceA: 'Take the bright path',
+      demoChoiceB: 'Venture into the shadows',
+      demoOutcomeA: 'The path leads to a peaceful clearing. Your story would have taken a gentle turn…',
+      demoOutcomeB: 'The shadows hold secrets. Your tale would have shifted toward mystery…',
+      demoConclusion: 'Every story works like this: your choices shape the narrative. Try a free one whenever you like.',
+      demoContinue: 'CONTINUE',
+      demoSkip: 'Skip'
     },
     es: {
       langTitle: 'Elige tu idioma',
@@ -70,7 +88,16 @@ window.SFOnboarding = (function () {
       pinEnter: 'Código de 4 dígitos',
       pinConfirm: 'Confirma el código',
       pinMismatch: 'Los códigos no coinciden',
-      pinKids: 'Activar el modo infantil ahora'
+      pinKids: 'Activar el modo infantil ahora',
+      demoTitle: 'Una novela en la que tú eliges',
+      demoSetup: 'Llegas a una encrucijada en el bosque. ¿Qué haces?',
+      demoChoiceA: 'Tomar el sendero luminoso',
+      demoChoiceB: 'Adentrarse en la sombra',
+      demoOutcomeA: 'El sendero conduce a un claro tranquilo. Tu historia habría tomado un rumbo apacible…',
+      demoOutcomeB: 'La sombra guarda secretos. Tu relato habría virado hacia el misterio…',
+      demoConclusion: 'Cada historia funciona así: tus elecciones orientan el relato. Prueba una gratis, sin prisa.',
+      demoContinue: 'CONTINUAR',
+      demoSkip: 'Omitir'
     }
   };
 
@@ -237,6 +264,26 @@ window.SFOnboarding = (function () {
         margin-top:12px;background:none;border:none;color:#5a5040;font-size:12px;
         letter-spacing:1px;cursor:pointer;font-family:ui-monospace,monospace;
       }
+      .sf-onb-demo-setup{font-size:15px;color:#e8e0d0;line-height:1.65;margin-bottom:20px;font-style:italic}
+      .sf-onb-demo-choices{display:flex;flex-direction:column;gap:10px;margin-bottom:8px}
+      .sf-onb-demo-choice{
+        width:100%;padding:13px 16px;border-radius:10px;border:1px solid #2a2418;
+        background:#1a1710;color:#e8e0d0;font-family:'Cormorant Garamond',Georgia,serif;
+        font-size:15px;text-align:left;cursor:pointer;transition:border-color .2s,background .2s;
+      }
+      .sf-onb-demo-choice:hover{border-color:#8a6a30;background:rgba(200,169,110,.06)}
+      .sf-onb-demo-outcome{
+        display:none;font-size:14px;color:#c8a96e;line-height:1.6;margin:16px 0;
+        padding:14px;border-radius:10px;border:1px solid rgba(200,169,110,.2);
+        background:rgba(200,169,110,.05);font-style:italic;
+      }
+      .sf-onb-demo-outcome.visible{display:block}
+      .sf-onb-demo-conclusion{
+        display:none;font-size:13px;color:#9a8a70;line-height:1.6;margin-bottom:4px;
+      }
+      .sf-onb-demo-conclusion.visible{display:block}
+      .sf-onb-demo-actions{display:none;margin-top:16px}
+      .sf-onb-demo-actions.visible{display:block}
       .sf-onb-toast{
         position:fixed;bottom:80px;left:50%;transform:translateX(-50%);
         background:#13110e;border:1px solid rgba(109,250,188,.4);border-radius:10px;
@@ -276,6 +323,23 @@ window.SFOnboarding = (function () {
           <button class="sf-onb-btn" id="sf-onb-lang-confirm" type="button"></button>
         </div>
       </div>
+      <div class="sf-onb-overlay" id="sf-onb-demo">
+        <div class="sf-onb-box">
+          <div class="sf-onb-icon">📖</div>
+          <div class="sf-onb-title" id="sf-onb-demo-title"></div>
+          <p class="sf-onb-demo-setup" id="sf-onb-demo-setup"></p>
+          <div class="sf-onb-demo-choices" id="sf-onb-demo-choices">
+            <button class="sf-onb-demo-choice" id="sf-onb-demo-choice-a" type="button"></button>
+            <button class="sf-onb-demo-choice" id="sf-onb-demo-choice-b" type="button"></button>
+          </div>
+          <p class="sf-onb-demo-outcome" id="sf-onb-demo-outcome"></p>
+          <p class="sf-onb-demo-conclusion" id="sf-onb-demo-conclusion"></p>
+          <div class="sf-onb-demo-actions" id="sf-onb-demo-actions">
+            <button class="sf-onb-btn" id="sf-onb-demo-continue" type="button"></button>
+          </div>
+          <button class="sf-onb-skip" id="sf-onb-demo-skip" type="button"></button>
+        </div>
+      </div>
       <div class="sf-onb-overlay" id="sf-onb-tuto">
         <div class="sf-onb-box">
           <div class="sf-onb-icon">💡</div>
@@ -313,6 +377,10 @@ window.SFOnboarding = (function () {
       btn.addEventListener('click', () => selectLang(btn.dataset.lang));
     });
     document.getElementById('sf-onb-lang-confirm').addEventListener('click', confirmLang);
+    document.getElementById('sf-onb-demo-choice-a').addEventListener('click', () => pickDemo('a'));
+    document.getElementById('sf-onb-demo-choice-b').addEventListener('click', () => pickDemo('b'));
+    document.getElementById('sf-onb-demo-continue').addEventListener('click', closeDemo);
+    document.getElementById('sf-onb-demo-skip').addEventListener('click', closeDemo);
     document.getElementById('sf-onb-tuto-close').addEventListener('click', closeTuto);
     document.getElementById('sf-onb-pin-create').addEventListener('click', submitPin);
     document.getElementById('sf-onb-pin-skip').addEventListener('click', skipPin);
@@ -350,10 +418,28 @@ window.SFOnboarding = (function () {
     set('sf-onb-pin-kids-label', tr.pinKids);
     set('sf-onb-pin-create', tr.pinCreate);
     set('sf-onb-pin-skip', tr.pinSkip);
+    set('sf-onb-demo-title', tr.demoTitle);
+    set('sf-onb-demo-setup', tr.demoSetup);
+    set('sf-onb-demo-choice-a', tr.demoChoiceA);
+    set('sf-onb-demo-choice-b', tr.demoChoiceB);
+    set('sf-onb-demo-conclusion', tr.demoConclusion);
+    set('sf-onb-demo-continue', tr.demoContinue);
+    set('sf-onb-demo-skip', tr.demoSkip);
+  }
+
+  function resetDemoView() {
+    const outcome = document.getElementById('sf-onb-demo-outcome');
+    const conclusion = document.getElementById('sf-onb-demo-conclusion');
+    const actions = document.getElementById('sf-onb-demo-actions');
+    const choices = document.getElementById('sf-onb-demo-choices');
+    if (outcome) { outcome.textContent = ''; outcome.classList.remove('visible'); }
+    if (conclusion) conclusion.classList.remove('visible');
+    if (actions) actions.classList.remove('visible');
+    if (choices) choices.style.display = '';
   }
 
   function hideAll() {
-    ['sf-onb-lang', 'sf-onb-tuto', 'sf-onb-pin'].forEach(id => {
+    ['sf-onb-lang', 'sf-onb-demo', 'sf-onb-tuto', 'sf-onb-pin'].forEach(id => {
       const el = document.getElementById(id);
       if (el) { el.style.display = 'none'; el.style.animation = ''; }
     });
@@ -397,7 +483,31 @@ window.SFOnboarding = (function () {
     fadeOut('sf-onb-lang', next);
   }
 
-  // ── Étape 2 : tutoriel ───────────────────────────────────────
+  // ── Étape 2 : micro-démo interactive ───────────────────────
+  function showDemo() {
+    applyTexts();
+    resetDemoView();
+    show('sf-onb-demo');
+  }
+
+  function pickDemo(which) {
+    const tr = t();
+    const outcome = document.getElementById('sf-onb-demo-outcome');
+    const choices = document.getElementById('sf-onb-demo-choices');
+    if (!outcome || !choices) return;
+    outcome.textContent = which === 'a' ? tr.demoOutcomeA : tr.demoOutcomeB;
+    outcome.classList.add('visible');
+    choices.style.display = 'none';
+    document.getElementById('sf-onb-demo-conclusion').classList.add('visible');
+    document.getElementById('sf-onb-demo-actions').classList.add('visible');
+  }
+
+  function closeDemo() {
+    lsSet('sf_demo_shown', '1');
+    fadeOut('sf-onb-demo', next);
+  }
+
+  // ── Étape 3 : tutoriel ───────────────────────────────────────
   function showTuto() {
     applyTexts();
     show('sf-onb-tuto');
@@ -408,7 +518,7 @@ window.SFOnboarding = (function () {
     fadeOut('sf-onb-tuto', next);
   }
 
-  // ── Étape 3 : code parental ──────────────────────────────────
+  // ── Étape 4 : code parental ──────────────────────────────────
   function maybeShowPin() {
     if (lsGet('sf_pin_setup_done')) return;
     if (lsGet('sf_parent_pin') !== null) return;
@@ -496,6 +606,8 @@ window.SFOnboarding = (function () {
       selectLang(currentLang());
       applyTexts();
       show('sf-onb-lang');
+    } else if (!lsGet('sf_demo_shown')) {
+      showDemo();
     } else if (!lsGet('sf_tuto_shown')) {
       showTuto();
     } else {
@@ -518,7 +630,7 @@ window.SFOnboarding = (function () {
 
   /** Remet à zéro la séquence — utile pour revoir le tutoriel. */
   function reset() {
-    ['sf_lang_chosen', 'sf_tuto_shown', 'sf_pin_setup_done'].forEach(k => {
+    ['sf_lang_chosen', 'sf_demo_shown', 'sf_tuto_shown', 'sf_pin_setup_done'].forEach(k => {
       try { localStorage.removeItem(k); } catch (e) {}
     });
     next();

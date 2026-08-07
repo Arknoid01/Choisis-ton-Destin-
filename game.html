@@ -381,6 +381,23 @@ body {
   color: var(--bg); font-weight: 600;
 }
 .end-btn.primary:hover { opacity: 0.9; }
+.first-finish-note {
+  margin: 0 auto 24px; max-width: 340px; padding: 16px 18px;
+  border-radius: 12px; border: 1px solid rgba(200,169,110,0.25);
+  background: rgba(200,169,110,0.06); text-align: left;
+}
+.first-finish-note p {
+  font-size: 14px; color: var(--text2); line-height: 1.65;
+  font-style: italic; margin-bottom: 12px;
+}
+.first-finish-link {
+  display: inline-block; padding: 10px 16px; border-radius: 8px;
+  border: 1px solid rgba(200,169,110,0.35); color: var(--accent);
+  font-family: 'Cinzel', serif; font-size: 11px; letter-spacing: 1.5px;
+  text-decoration: none; cursor: pointer; background: none;
+  transition: border-color .2s, color .2s;
+}
+.first-finish-link:hover { border-color: var(--accent); }
 
 /* ── TRANSITIONS D'ARRIVÉE ── */
 @keyframes fx-fade {
@@ -1534,6 +1551,29 @@ function typewrite(html, container, onDone, narratorMode = false) {
 function renderEndScene(scene) {
   document.getElementById('progress-fill').style.width = '100%';
 
+  const finishedCount = recordStoryFinished();
+  const lang = localStorage.getItem('sf_lang') || 'fr';
+  const firstFinishNotes = {
+    fr: {
+      text: 'Vous venez de vivre un roman interactif : vos choix ont orienté ce récit. D\'autres histoires vous attendent dans la bibliothèque, à votre rythme.',
+      btn: 'Explorer la bibliothèque'
+    },
+    en: {
+      text: 'You just experienced an interactive novel — your choices shaped this story. More tales await in the library, at your own pace.',
+      btn: 'Browse the library'
+    },
+    es: {
+      text: 'Acabas de vivir una novela interactiva: tus elecciones orientaron este relato. Otras historias te esperan en la biblioteca, a tu ritmo.',
+      btn: 'Explorar la biblioteca'
+    }
+  };
+  const note = firstFinishNotes[lang] || firstFinishNotes.fr;
+  const firstFinishHtml = finishedCount === 1 ? `
+    <div class="first-finish-note">
+      <p>${note.text}</p>
+      <a class="first-finish-link" href="stories.html">${note.btn} →</a>
+    </div>` : '';
+
   const statsRows = (story.stats || []).map(s => {
     const val = stats[s.id] ?? s.start ?? 0;
     return `<div class="end-stat-row">
@@ -1550,6 +1590,7 @@ function renderEndScene(scene) {
         : ''}
       <div class="scene-text">${formatText(scene.text || '')}</div>
       ${statsRows ? `<div class="end-stats">${statsRows}</div>` : ''}
+      ${firstFinishHtml}
       <div class="end-buttons">
         <button class="end-btn primary" onclick="restartGame()">↺ Recommencer</button>
         <button class="end-btn" onclick="window.location.href='index.html'">← Menu principal</button>
@@ -1571,13 +1612,17 @@ const PLAY_STORE_URL = 'https://play.google.com/store/apps/details?id=com.pegasu
 const RATING_KEY     = 'sf_rating_done';
 const PLAYS_KEY      = 'sf_stories_finished';
 
+function recordStoryFinished() {
+  const n = parseInt(localStorage.getItem(PLAYS_KEY) || '0', 10) + 1;
+  localStorage.setItem(PLAYS_KEY, String(n));
+  return n;
+}
+
 function maybeShowRatingPopup() {
   // Ne jamais afficher si déjà noté ou refusé définitivement
   if (localStorage.getItem(RATING_KEY) === 'done') return;
 
-  // Compter les histoires terminées
-  const plays = parseInt(localStorage.getItem(PLAYS_KEY) || '0') + 1;
-  localStorage.setItem(PLAYS_KEY, plays);
+  const plays = parseInt(localStorage.getItem(PLAYS_KEY) || '0', 10);
 
   // Afficher seulement à partir de la 2ème histoire terminée
   if (plays < 2) return;

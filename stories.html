@@ -83,6 +83,35 @@ html,body { height:100%; background:#0d0d0f; color:#e8e0d0; font-family:'Cormora
   color:#ffd700; letter-spacing:1px; margin-bottom:2px;
 }
 .kids-banner-sub { font-size:12px; color:var(--dim); font-style:italic; }
+
+/* ── STARTER BANNER (nouveaux lecteurs) ── */
+.starter-banner {
+  background:linear-gradient(135deg, rgba(200,169,110,0.1), rgba(200,169,110,0.03));
+  border:1px solid rgba(200,169,110,0.22); border-radius:14px;
+  padding:16px; margin-bottom:20px; cursor:pointer;
+  transition:border-color .2s, background .2s;
+}
+.starter-banner:hover {
+  border-color:rgba(200,169,110,0.4);
+  background:linear-gradient(135deg, rgba(200,169,110,0.14), rgba(200,169,110,0.05));
+}
+.starter-label {
+  font-family:'Lato',sans-serif; font-size:10px; letter-spacing:2px;
+  text-transform:uppercase; color:var(--gold); margin-bottom:6px;
+}
+.starter-title {
+  font-family:'Cinzel',serif; font-size:15px; font-weight:600;
+  color:var(--cream); letter-spacing:1px; margin-bottom:4px;
+}
+.starter-sub { font-size:13px; color:var(--dim); font-style:italic; line-height:1.5; margin-bottom:12px; }
+.starter-row { display:flex; align-items:center; gap:12px; }
+.starter-icon { font-size:28px; flex-shrink:0; }
+.starter-btn {
+  display:inline-block; padding:8px 14px; border-radius:8px;
+  border:1px solid rgba(200,169,110,0.35); color:var(--gold2);
+  font-family:'Cinzel',serif; font-size:11px; letter-spacing:1.5px;
+}
+
 .kids-free-badge {
   background:#ffd70022; border:1px solid #ffd70044;
   border-radius:20px; padding:4px 10px;
@@ -315,6 +344,24 @@ const PACK_CONFIG = {
   }
 };
 
+// Histoire recommandée pour les nouveaux lecteurs (gratuite, sans achat).
+const STARTER_STORIES = {
+  fr: 'stories/fr/dernieres_minutes_final.json',
+  en: 'stories/en/dernieres_minutes_final_en.json',
+  es: 'stories/es/dernieres_minutes_final_es.json',
+  kids: {
+    fr: 'stories/fr/aikito_v2.json',
+    en: 'stories/en/aikito_v2_en.json',
+    es: 'stories/es/aikito_v2_es.json'
+  }
+};
+
+const STARTER_TXT = {
+  fr: { label:'Nouveau ici ?', title:'Commencez par ici', sub:'Une histoire gratuite pour découvrir le format — vos choix comptent.', btn:'Lancer l\'histoire' },
+  en: { label:'New here?', title:'Start here', sub:'A free story to discover the format — your choices matter.', btn:'Start the story' },
+  es: { label:'¿Nuevo aquí?', title:'Empieza aquí', sub:'Una historia gratis para descubrir el formato — tus elecciones importan.', btn:'Empezar la historia' }
+};
+
 // Packs déverrouillés — source de vérité : Google Play via SFBilling.
 // Le module maintient le cache localStorage 'sf_unlocked_packs'.
 function getUnlockedPacks() {
@@ -358,6 +405,32 @@ async function loadGames() {
 // ══════════════════════════════════════════════
 // RENDER
 // ══════════════════════════════════════════════
+function getStoriesFinishedCount() {
+  return parseInt(localStorage.getItem('sf_stories_finished') || '0', 10) || 0;
+}
+
+function renderStarterBanner(kidsOnly) {
+  if (getStoriesFinishedCount() > 0) return '';
+  const txt = STARTER_TXT[currentLang] || STARTER_TXT.fr;
+  const file = kidsOnly
+    ? (STARTER_STORIES.kids[currentLang] || STARTER_STORIES.kids.fr)
+    : (STARTER_STORIES[currentLang] || STARTER_STORIES.fr);
+  const game = allGames.find(g => g.file === file && g.lang === currentLang);
+  if (!game) return '';
+
+  return `<div class="starter-banner" onclick="launchStory('${game.file}')">
+    <div class="starter-label">${txt.label}</div>
+    <div class="starter-row">
+      <div class="starter-icon">${game.icon || '📖'}</div>
+      <div style="flex:1">
+        <div class="starter-title">${txt.title}</div>
+        <div class="starter-sub">${game.title} — ${txt.sub}</div>
+        <span class="starter-btn">${txt.btn} →</span>
+      </div>
+    </div>
+  </div>`;
+}
+
 function renderLibrary() {
   const unlocked = getUnlockedPacks();
   let opts = {};
@@ -389,6 +462,8 @@ function renderLibrary() {
       </div>
     </div>`;
   }
+
+  html += renderStarterBanner(kidsOnly);
 
   if (bookmarks.length) {
     const bmTitle = { fr:'Reprendre', en:'Continue', es:'Continuar' }[currentLang] || 'Reprendre';
