@@ -268,7 +268,7 @@ body {
   position:relative; overflow:hidden;
   transition:all .3s cubic-bezier(.4,0,.2,1);
   opacity:0;
-  animation:fade-up .5s ease forwards;
+  animation:fade-up .5s ease both;
 }
 #btn-start    { animation-delay:.8s; }
 #btn-options  { animation-delay:1.0s; }
@@ -1591,8 +1591,10 @@ function initCanvas() {
 }
 
 // ── ANIMATION FALLBACK ──
-// Si les animations CSS ne se déclenchent pas (navigateur, polices lentes)
-// on force l'affichage après 1.5s
+// Filet de sécurité si les animations CSS ne se déclenchent pas du tout
+// (navigateur exotique). On attend que toutes les animations décalées
+// soient censées être terminées (dernier délai 1.85s + 0.5s) pour ne pas
+// interrompre l'apparition en cascade et provoquer un clignotement.
 setTimeout(() => {
   document.querySelectorAll('.ornament,.eyebrow,.main-title,.subtitle,.divider,#buttons-block,.btn-main,.footer,#pegasus-logo').forEach(el => {
     if (getComputedStyle(el).opacity === '0') {
@@ -1601,7 +1603,7 @@ setTimeout(() => {
       el.style.transition = 'opacity .5s ease, transform .5s ease';
     }
   });
-}, 600);
+}, 2600);
 // ── SYSTÈME PIN PARENTAL ─────────────────────────────────────
 const PIN_DEFAULT = '1234';
 let _pinMode = 'verify';
