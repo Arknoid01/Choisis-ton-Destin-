@@ -396,6 +396,22 @@ body {
   font-style:italic; white-space:nowrap;
   overflow:hidden; text-overflow:ellipsis;
 }
+.game-card-author {
+  font-size:11px; color:#b8a8ff; margin-bottom:2px;
+  white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
+}
+.game-card-tags {
+  display:flex; gap:5px; flex-wrap:wrap; margin-top:4px;
+}
+.game-card-tag {
+  font-family:'Lato',sans-serif; font-size:9px; letter-spacing:1px;
+  padding:2px 6px; border-radius:20px; border:1px solid var(--border);
+  color:var(--dimmer); text-transform:uppercase;
+}
+.game-card-tag.community {
+  border-color:rgba(124,109,250,0.45); color:#b8a8ff;
+  background:rgba(124,109,250,0.1);
+}
 .game-card-lang {
   font-family:'Lato',sans-serif; font-size:10px;
   letter-spacing:1px; color:var(--dimmer);
@@ -998,6 +1014,7 @@ body {
   </div>
 </div>
 
+<script src="story-meta.js"></script>
 <script src="community.js"></script>
 <script src="onboarding.js"></script>
 <script>
@@ -1062,7 +1079,7 @@ const LANG = {
     submitEditor:   'Ouvrir l\'éditeur',
     submitCancel:   'Annuler',
     submitAi:       '✦ Aide Éditeur & IA',
-    submitNote:     'Ouvrez StoryForge, écrivez votre histoire, puis appuyez sur « Envoyer en 1 clic » — c\'est tout.',
+    submitNote:     'Ouvrez StoryForge, écrivez votre histoire, remplissez le formulaire d\'envoi — le JSON part en un clic, sans export manuel.',
     submitContest:  'Voir le concours en cours →',
     tutoTitle:      'Astuces de navigation',
     tutoMenu:       '<strong>Le point bleu</strong> en haut de l\'écran permet d\'ouvrir le menu pendant une histoire.',
@@ -1136,7 +1153,7 @@ const LANG = {
     submitEditor:   'Open the editor',
     submitCancel:   'Cancel',
     submitAi:       '✦ Editor & AI Help',
-    submitNote:     'Open StoryForge, write your story, then tap « Send in 1 tap » — that\'s it.',
+    submitNote:     'Open StoryForge, write your story, fill in the send form — your JSON goes out in one tap, no manual export.',
     submitContest:  'See the current contest →',
     tutoTitle:      'Navigation Tips',
     tutoMenu:       'The <strong>blue dot</strong> at the top of the screen opens the menu during a story.',
@@ -1210,7 +1227,7 @@ const LANG = {
     submitEditor:   'Abrir el editor',
     submitCancel:   'Cancelar',
     submitAi:       '✦ Crear con IA',
-    submitNote:     'Abre StoryForge, escribe tu historia y pulsa « Enviar en 1 clic » — listo.',
+    submitNote:     'Abre StoryForge, escribe tu historia, rellena el formulario de envío — el JSON sale en un clic, sin exportar manualmente.',
     submitContest:  'Ver el concurso actual →',
     tutoTitle:      'Consejos de navegación',
     tutoMenu:       'El <strong>punto azul</strong> en la parte superior de la pantalla abre el menú durante una historia.',
@@ -1388,17 +1405,26 @@ function renderGameList() {
     return;
   }
 
-  container.innerHTML = filtered.map(g => `
+  container.innerHTML = filtered.map(g => {
+    const authorLine = window.SFStoryMeta
+      ? SFStoryMeta.authorLine(g, currentLang, 'game-card-author')
+      : (g.author ? `<div class="game-card-author">Par ${g.author}</div>` : '');
+    const communityTag = window.SFStoryMeta && SFStoryMeta.isCommunity(g)
+      ? `<span class="game-card-tag community">✦ ${SFStoryMeta.t(currentLang).community}</span>`
+      : (g.community ? `<span class="game-card-tag community">✦ Communauté</span>` : '');
+    return `
     <div class="game-card" onclick="launchGame('${g.file}')">
       <div class="game-card-icon">${g.kids ? '🧒' : (g.icon || '📖')}</div>
       <div class="game-card-info">
         <div class="game-card-title">${g.title}</div>
+        ${authorLine}
         <div class="game-card-desc">${g.desc || ''}</div>
+        ${communityTag ? `<div class="game-card-tags">${communityTag}</div>` : ''}
       </div>
       <div class="game-card-lang">${g.lang.toUpperCase()}</div>
       <div class="game-card-arrow">›</div>
-    </div>
-  `).join('');
+    </div>`;
+  }).join('');
 }
 
 function launchGame(file) {

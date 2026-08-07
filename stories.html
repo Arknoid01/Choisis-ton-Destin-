@@ -234,6 +234,58 @@ html,body { height:100%; background:#0d0d0f; color:#e8e0d0; font-family:'Cormora
 }
 .story-tag.kids { border-color:rgba(255,215,0,0.3); color:#ffd700; }
 .story-tag.new  { border-color:rgba(100,220,150,0.3); color:#64dc96; }
+.story-tag.community {
+  border-color:rgba(124,109,250,0.45); color:#b8a8ff;
+  background:rgba(124,109,250,0.1);
+}
+.story-tag.portal {
+  background:rgba(155,93,229,0.15); color:#c084fc; border-color:rgba(155,93,229,0.4);
+}
+.story-author {
+  font-size:11px; color:#b8a8ff; margin-top:2px;
+  white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
+}
+
+/* ── COMMUNITY SPOTLIGHT ── */
+.community-spotlight {
+  margin-bottom:18px; padding:16px;
+  border:1px solid rgba(124,109,250,0.35);
+  border-radius:14px;
+  background:linear-gradient(135deg, rgba(124,109,250,0.08), rgba(200,169,110,0.04));
+}
+.community-spotlight-label {
+  font-family:'Lato',sans-serif; font-size:9px; letter-spacing:2px;
+  text-transform:uppercase; color:#b8a8ff;
+}
+.community-spotlight-title {
+  font-family:'Cinzel',serif; font-size:15px; color:var(--cream);
+  margin:6px 0 4px; font-weight:600;
+}
+.community-spotlight-sub {
+  font-size:12px; color:var(--dim); font-style:italic; margin:0 0 12px;
+}
+.community-spotlight-list { display:flex; flex-direction:column; gap:8px; }
+.community-spot-card {
+  display:flex; align-items:center; gap:12px; padding:10px 12px;
+  border:1px solid var(--border); border-radius:10px; background:var(--bg2);
+  cursor:pointer; transition:all .2s;
+}
+.community-spot-card:hover { border-color:rgba(124,109,250,0.45); background:rgba(124,109,250,0.06); }
+.community-spot-icon { font-size:22px; flex-shrink:0; }
+.community-spot-info { flex:1; min-width:0; }
+.community-spot-title {
+  font-family:'Cinzel',serif; font-size:12px; color:var(--cream);
+  white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
+}
+.community-spot-author { font-size:11px; color:#b8a8ff; margin-top:2px; }
+.community-spot-arrow { color:var(--dim); font-size:16px; }
+.community-spotlight-btn {
+  width:100%; margin-top:12px; padding:10px 14px; border-radius:10px;
+  border:1px solid rgba(124,109,250,0.4); background:rgba(124,109,250,0.12);
+  color:#d4cbff; font-family:'Lato',sans-serif; font-size:11px;
+  letter-spacing:1px; cursor:pointer; transition:all .2s;
+}
+.community-spotlight-btn:hover { border-color:#b8a8ff; color:#fff; }
 
 .story-arrow { color:var(--dim); font-size:18px; transition:transform .2s; flex-shrink:0; }
 .story-lock  { color:var(--dimmer); font-size:16px; flex-shrink:0; }
@@ -282,6 +334,7 @@ html,body { height:100%; background:#0d0d0f; color:#e8e0d0; font-family:'Cormora
 </div>
 
 <script src="billing.js"></script>
+<script src="story-meta.js"></script>
 <script src="community.js"></script>
 <script src="onboarding.js"></script>
 <script>
@@ -472,6 +525,9 @@ function renderLibrary() {
   }
 
   html += renderStarterBanner(kidsOnly);
+  if (window.SFStoryMeta) {
+    html += SFStoryMeta.spotlightBanner(filtered, currentLang, 'launchStory', 'openCommunityFromLibrary');
+  }
 
   if (bookmarks.length) {
     const bmTitle = { fr:'Reprendre', en:'Continue', es:'Continuar' }[currentLang] || 'Reprendre';
@@ -578,13 +634,16 @@ function renderLibrary() {
         <div class="story-icon">${g.kids ? '🧒' : (g.icon || '📖')}</div>
         <div class="story-info">
           <div class="story-title">${g.title}</div>
+          ${window.SFStoryMeta ? SFStoryMeta.authorLine(g, currentLang) : (g.author ? `<div class="story-author">Par ${g.author}</div>` : '')}
           <div class="story-desc">${g.desc || ''}</div>
           <div class="story-meta">
+            ${window.SFStoryMeta ? SFStoryMeta.metaTags(g, currentLang, { portal: isPortal }) : ''}
+            ${!window.SFStoryMeta ? `
             ${g.kids    ? `<span class="story-tag kids">Enfants</span>`   : ''}
             ${g.new     ? `<span class="story-tag new">Nouveau</span>`    : ''}
-            ${isPortal  ? `<span class="story-tag" style="background:rgba(155,93,229,0.15);color:#c084fc;border-color:rgba(155,93,229,0.4)">🔗 Via portail</span>` : ''}
+            ${isPortal  ? `<span class="story-tag portal">🔗 Via portail</span>` : ''}
             ${g.duration ? `<span class="story-tag">${g.duration}</span>` : ''}
-            ${g.endings  ? `<span class="story-tag">${g.endings} fins</span>` : ''}
+            ${g.endings  ? `<span class="story-tag">${g.endings} fins</span>` : ''}` : ''}
           </div>
         </div>
         ${locked
@@ -633,6 +692,10 @@ function launchStory(file) {
   } else {
     window.location.href = 'game.html?story=' + encodeURIComponent(file);
   }
+}
+
+function openCommunityFromLibrary() {
+  if (window.SFCommunity) SFCommunity.open();
 }
 
 // ══════════════════════════════════════════════
