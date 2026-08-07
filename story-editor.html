@@ -996,28 +996,47 @@ html,body { height:100%; overflow:hidden; font-family:'Syne',sans-serif; backgro
 
 <div id="submit-modal-overlay" onclick="handleSubmitOverlayClick(event)">
   <div id="submit-modal" onclick="event.stopPropagation()">
-    <h3 id="submit-modal-title">Envoyer votre histoire</h3>
-    <p id="submit-modal-sub"></p>
-    <div class="submit-field">
-      <label id="submit-lbl-title" for="submit-story-title">Titre</label>
-      <input id="submit-story-title" type="text" readonly>
+    <div id="submit-view-form">
+      <h3 id="submit-modal-title">Envoyer votre histoire</h3>
+      <p id="submit-modal-sub"></p>
+      <div class="submit-field">
+        <label id="submit-lbl-title" for="submit-story-title">Titre</label>
+        <input id="submit-story-title" type="text" readonly>
+      </div>
+      <div class="submit-field">
+        <label id="submit-lbl-author" for="submit-author">Votre nom ou pseudo</label>
+        <input id="submit-author" type="text" autocomplete="name" maxlength="80">
+      </div>
+      <div class="submit-field">
+        <label id="submit-lbl-email" for="submit-email">Email (optionnel)</label>
+        <input id="submit-email" type="email" autocomplete="email" maxlength="120">
+      </div>
+      <div class="submit-field">
+        <label id="submit-lbl-message" for="submit-message">Message (optionnel)</label>
+        <textarea id="submit-message" maxlength="500"></textarea>
+      </div>
+      <p class="submit-hint" id="submit-modal-hint"></p>
+      <div class="modal-actions">
+        <button class="topbtn" id="submit-cancel-btn" onclick="closeSubmitModal()">Annuler</button>
+        <button class="topbtn primary" id="submit-confirm-btn" onclick="confirmSendStory()">Envoyer</button>
+      </div>
     </div>
-    <div class="submit-field">
-      <label id="submit-lbl-author" for="submit-author">Votre nom ou pseudo</label>
-      <input id="submit-author" type="text" autocomplete="name" maxlength="80">
-    </div>
-    <div class="submit-field">
-      <label id="submit-lbl-email" for="submit-email">Email (optionnel)</label>
-      <input id="submit-email" type="email" autocomplete="email" maxlength="120">
-    </div>
-    <div class="submit-field">
-      <label id="submit-lbl-message" for="submit-message">Message (optionnel)</label>
-      <textarea id="submit-message" maxlength="500"></textarea>
-    </div>
-    <p class="submit-hint" id="submit-modal-hint"></p>
-    <div class="modal-actions">
-      <button class="topbtn" id="submit-cancel-btn" onclick="closeSubmitModal()">Annuler</button>
-      <button class="topbtn primary" id="submit-confirm-btn" onclick="confirmSendStory()">Envoyer</button>
+
+    <div id="submit-view-done" style="display:none">
+      <h3 id="submit-done-title">Presque terminé</h3>
+      <p id="submit-done-sub" class="submit-hint" style="margin-bottom:14px"></p>
+      <div class="submit-field">
+        <label id="submit-done-email-lbl">Envoyer à</label>
+        <div style="display:flex;gap:8px">
+          <input id="submit-done-email" type="text" readonly style="flex:1">
+          <button class="topbtn" id="submit-copy-email-btn" onclick="copySubmitEmail()">⧉</button>
+        </div>
+      </div>
+      <div class="modal-actions" style="flex-direction:column;gap:8px;align-items:stretch">
+        <button class="topbtn primary" id="submit-open-mail-btn" onclick="openMailFromDone()">✉ Ouvrir ma messagerie</button>
+        <button class="topbtn" id="submit-copy-all-btn" onclick="copySubmitMessage()">⧉ Copier le message + JSON</button>
+        <button class="topbtn" id="submit-done-close-btn" onclick="closeSubmitModal()">Fermer</button>
+      </div>
     </div>
   </div>
 </div>
@@ -1280,6 +1299,7 @@ const EDITOR_I18N = {
     sendLblTitle:'Titre', sendLblAuthor:'Votre nom ou pseudo', sendLblEmail:'Email (optionnel)', sendLblMessage:'Message (optionnel)',
     sendModalHint:'Choisis ta messagerie (Gmail, Outlook…) : le message est déjà rédigé et le fichier JSON joint automatiquement.',
     sendAuthorRequired:'Indiquez votre nom ou pseudo pour envoyer.', sendSuccess:'Prêt à envoyer ✓ Choisis ta messagerie', sendSending:'Préparation…',
+    sendDoneTitle:'Presque terminé', sendDoneSub:'Le fichier JSON a été téléchargé. Ouvre ta messagerie pour finaliser l\'envoi, ou copie le message si l\'app mail ne s\'ouvre pas.', sendDoneEmailLbl:'Envoyer à', sendOpenMail:'✉ Ouvrir ma messagerie', sendCopyAll:'⧉ Copier le message + JSON', sendCopyEmail:'⧉', sendCopied:'Copié ✓', sendEmailCopied:'E-mail copié ✓',
     selectScene:'Sélectionne une scène', deleteTitle:'Supprimer', newSceneTitle:'Nouvelle scène', centerTitle:'Recentrer', empty:'Crée ou sélectionne une scène dans l\'arbre pour l\'éditer.', emptyAi:'Pas d\'idée ? Génère ton histoire avec l\'IA puis importe le JSON.', emptyAiBtn:'✦ Créer avec l\'IA', newScene:'+ Nouvelle scène',
     statsTitle:'Configuration des Stats', statsDesc:'Définis les attributs de ton personnage. Ils seront disponibles dans chaque choix.', addStat:'+ Ajouter une stat', close:'Fermer',
     visualTheme:'Thème visuel', presets:'Thèmes prédéfinis', customColors:'Couleurs custom', mainBg:'Fond principal', panelBg:'Fond panneaux', elementBg:'Fond éléments', accentMain:'Accent principal', accentSecond:'Accent secondaire', accentThird:'Accent tertiaire', mainText:'Texte principal', borders:'Bordures', preview:'Aperçu', previewTitle:'Titre de la scène', previewText:'Le héros avance dans l\'obscurité. Chaque pas résonne dans le couloir de pierre...', previewBtn:'→ Continuer',
@@ -1313,6 +1333,7 @@ const EDITOR_I18N = {
     sendLblTitle:'Title', sendLblAuthor:'Your name or pen name', sendLblEmail:'Email (optional)', sendLblMessage:'Message (optional)',
     sendModalHint:'Pick your mail app (Gmail, Outlook…): the message is already written and the JSON file is attached.',
     sendAuthorRequired:'Enter your name or pen name to send.', sendSuccess:'Ready to send ✓ Pick your mail app', sendSending:'Preparing…',
+    sendDoneTitle:'Almost done', sendDoneSub:'The JSON file was downloaded. Open your mail app to finish sending, or copy the message if the mail app does not open.', sendDoneEmailLbl:'Send to', sendOpenMail:'✉ Open my mail app', sendCopyAll:'⧉ Copy message + JSON', sendCopyEmail:'⧉', sendCopied:'Copied ✓', sendEmailCopied:'Email copied ✓',
     selectScene:'Select a scene', deleteTitle:'Delete', newSceneTitle:'New scene', centerTitle:'Recenter', empty:'Create or select a scene in the tree to edit it.', emptyAi:'No idea yet? Generate your story with AI, then import the JSON.', emptyAiBtn:'✦ Create with AI', newScene:'+ New scene',
     statsTitle:'Stats Configuration', statsDesc:'Define your character attributes. They will be available in every choice.', addStat:'+ Add stat', close:'Close',
     visualTheme:'Visual theme', presets:'Preset themes', customColors:'Custom colors', mainBg:'Main background', panelBg:'Panel background', elementBg:'Element background', accentMain:'Main accent', accentSecond:'Secondary accent', accentThird:'Third accent', mainText:'Main text', borders:'Borders', preview:'Preview', previewTitle:'Scene title', previewText:'The hero moves forward in the dark. Every step echoes through the stone corridor...', previewBtn:'→ Continue',
@@ -1346,6 +1367,7 @@ const EDITOR_I18N = {
     sendLblTitle:'Título', sendLblAuthor:'Tu nombre o seudónimo', sendLblEmail:'Email (opcional)', sendLblMessage:'Mensaje (opcional)',
     sendModalHint:'Elige tu app de correo (Gmail, Outlook…): el mensaje ya está redactado y el archivo JSON va adjunto.',
     sendAuthorRequired:'Indica tu nombre o seudónimo para enviar.', sendSuccess:'Listo para enviar ✓ Elige tu correo', sendSending:'Preparando…',
+    sendDoneTitle:'Casi listo', sendDoneSub:'El archivo JSON se descargó. Abre tu correo para finalizar el envío, o copia el mensaje si la app de correo no se abre.', sendDoneEmailLbl:'Enviar a', sendOpenMail:'✉ Abrir mi correo', sendCopyAll:'⧉ Copiar mensaje + JSON', sendCopyEmail:'⧉', sendCopied:'Copiado ✓', sendEmailCopied:'Correo copiado ✓',
     selectScene:'Selecciona una escena', deleteTitle:'Eliminar', newSceneTitle:'Nueva escena', centerTitle:'Recentrar', empty:'Crea o selecciona una escena en el árbol para editarla.', emptyAi:'¿Sin ideas? Genera tu historia con IA e importa el JSON.', emptyAiBtn:'✦ Crear con IA', newScene:'+ Nueva escena',
     statsTitle:'Configuración de Stats', statsDesc:'Define los atributos de tu personaje. Estarán disponibles en cada elección.', addStat:'+ Añadir stat', close:'Cerrar',
     visualTheme:'Tema visual', presets:'Temas predefinidos', customColors:'Colores personalizados', mainBg:'Fondo principal', panelBg:'Fondo de paneles', elementBg:'Fondo de elementos', accentMain:'Acento principal', accentSecond:'Acento secundario', accentThird:'Acento terciario', mainText:'Texto principal', borders:'Bordes', preview:'Vista previa', previewTitle:'Título de la escena', previewText:'El héroe avanza en la oscuridad. Cada paso resuena en el pasillo de piedra...', previewBtn:'→ Continuar',
@@ -1445,6 +1467,12 @@ function applyEditorLanguage() {
   byId('submit-modal-hint', et('sendModalHint'));
   byId('submit-cancel-btn', et('cancel'));
   byId('submit-confirm-btn', et('sendBtn'));
+  byId('submit-done-title', et('sendDoneTitle'));
+  byId('submit-done-sub', et('sendDoneSub'));
+  byId('submit-done-email-lbl', et('sendDoneEmailLbl'));
+  byId('submit-open-mail-btn', et('sendOpenMail'));
+  byId('submit-copy-all-btn', et('sendCopyAll'));
+  byId('submit-done-close-btn', et('close'));
   renderTemplateCards();
 }
 
@@ -2671,6 +2699,15 @@ function buildExportBlob() {
   return { blob, filename, exportData };
 }
 
+let _pendingSubmit = null;
+
+function showSubmitView(view) {
+  const formEl = document.getElementById('submit-view-form');
+  const doneEl = document.getElementById('submit-view-done');
+  if (formEl) formEl.style.display = view === 'done' ? 'none' : '';
+  if (doneEl) doneEl.style.display = view === 'done' ? '' : 'none';
+}
+
 function openSubmitModal() {
   const scenes = project.scenes || {};
   if (!Object.keys(scenes).length) {
@@ -2678,6 +2715,7 @@ function openSubmitModal() {
     openTemplatesModal();
     return;
   }
+  showSubmitView('form');
   const titleEl = document.getElementById('submit-story-title');
   const authorEl = document.getElementById('submit-author');
   const emailEl = document.getElementById('submit-email');
@@ -2711,6 +2749,52 @@ function openMailtoNow(filename, meta, jsonText) {
   window.location.href = `mailto:${SUBMIT_EMAIL}?subject=${subject}&body=${body}`;
 }
 
+function buildMailtoUrl(meta, jsonText) {
+  const delivery = resolveMailDelivery(jsonText);
+  const bodyText = sendMailBody(_pendingSubmit?.filename || 'histoire.json', meta, jsonText, delivery);
+  const subject = encodeURIComponent('[StoryForge] ' + meta.title + ' — ' + meta.author);
+  const body = encodeURIComponent(bodyText);
+  return { url: `mailto:${SUBMIT_EMAIL}?subject=${subject}&body=${body}`, bodyText };
+}
+
+function showSubmitDoneView(meta, jsonText, filename) {
+  const { bodyText } = buildMailtoUrl(meta, jsonText);
+  _pendingSubmit = { meta, jsonText, filename, bodyText };
+  const emailEl = document.getElementById('submit-done-email');
+  if (emailEl) emailEl.value = SUBMIT_EMAIL;
+  showSubmitView('done');
+}
+
+function openMailFromDone() {
+  if (!_pendingSubmit) return;
+  const { url } = buildMailtoUrl(_pendingSubmit.meta, _pendingSubmit.jsonText);
+  window.location.href = url;
+}
+
+async function copySubmitEmail() {
+  try {
+    await navigator.clipboard.writeText(SUBMIT_EMAIL);
+    toast(et('sendEmailCopied'));
+  } catch (e) {
+    const el = document.getElementById('submit-done-email');
+    if (el) { el.focus(); el.select(); }
+  }
+}
+
+async function copySubmitMessage() {
+  if (!_pendingSubmit) return;
+  const full = `${SUBMIT_EMAIL}\n\n${_pendingSubmit.bodyText}`;
+  try {
+    await navigator.clipboard.writeText(full);
+    toast(et('sendCopied'));
+  } catch (e) {
+    toast(et('sendCopied'));
+  }
+}
+window.openMailFromDone = openMailFromDone;
+window.copySubmitEmail = copySubmitEmail;
+window.copySubmitMessage = copySubmitMessage;
+
 async function confirmSendStory() {
   const author = document.getElementById('submit-author')?.value?.trim() || '';
   const email = document.getElementById('submit-email')?.value?.trim() || '';
@@ -2735,12 +2819,11 @@ async function confirmSendStory() {
   const canShareFiles = navigator.share && navigator.canShare && navigator.canShare({ files: [shareFile] });
 
   try {
+    // Web sans partage de fichiers : on télécharge le JSON et on montre une
+    // vue de confirmation avec des actions fiables (mailto/clipboard sur clic).
     if (!isNative && !canShareFiles) {
-      closeSubmitModal();
-      if (!isNative) _downloadFallback(blob, filename);
-      else _saveToDocuments(blob, filename);
-      openMailtoNow(filename, meta, jsonText);
-      toast(et('sendToastMail'));
+      _downloadFallback(blob, filename);
+      showSubmitDoneView(meta, jsonText, filename);
       return;
     }
 
@@ -2749,8 +2832,8 @@ async function confirmSendStory() {
     if (shared !== false) toast(et('sendSuccess'));
   } catch (err) {
     console.error('[confirmSendStory]', err);
-    toast(et('sendToastMail'));
-    openMailtoNow(filename, meta, jsonText);
+    _downloadFallback(blob, filename);
+    showSubmitDoneView(meta, jsonText, filename);
   } finally {
     if (btn) { btn.disabled = false; btn.textContent = et('sendBtn'); }
   }
