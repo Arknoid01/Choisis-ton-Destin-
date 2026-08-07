@@ -411,85 +411,10 @@ body {
   color:var(--dimmer); font-style:italic; font-size:14px;
 }
 
-/* ── LANGUE POPUP ── */
-#lang-overlay {
-  position:fixed; inset:0; z-index:950;
-  background:rgba(0,0,0,0.85);
-  display:flex; align-items:center; justify-content:center;
-  backdrop-filter:blur(8px);
-  animation:fade-in .4s ease;
-}
-#lang-box {
-  background:#13110e; border:1px solid var(--gold3);
-  border-radius:20px; padding:36px 28px;
-  max-width:340px; width:90%; text-align:center;
-  animation:scale-in .4s ease;
-}
-@keyframes scale-in {
-  from { transform:scale(0.9); opacity:0; }
-  to   { transform:scale(1);   opacity:1; }
-}
 @keyframes fade-up {
   from { opacity:0; transform:translateY(16px); }
   to   { opacity:1; transform:translateY(0); }
 }
-@keyframes fade-out {
-  from { opacity:1; }
-  to   { opacity:0; }
-}
-.lang-box-icon { font-size:36px; margin-bottom:16px; }
-.lang-box-title {
-  font-family:'Cinzel',serif; font-size:18px; font-weight:600;
-  color:var(--cream); letter-spacing:2px; margin-bottom:8px;
-}
-.lang-box-sub {
-  font-size:13px; color:var(--dim); font-style:italic;
-  margin-bottom:28px; line-height:1.6;
-}
-.lang-choices {
-  display:flex; flex-direction:column; gap:10px;
-}
-.lang-choice-btn {
-  display:flex; align-items:center; gap:14px;
-  padding:14px 18px; border-radius:12px;
-  border:1px solid var(--border2); background:var(--bg2);
-  cursor:pointer; transition:all .2s; text-align:left;
-  width:100%;
-}
-.lang-choice-btn:hover {
-  border-color:var(--gold3);
-  background:rgba(200,169,110,0.06);
-}
-.lang-choice-btn.selected {
-  border-color:var(--gold);
-  background:rgba(200,169,110,0.1);
-}
-.lang-flag { font-size:26px; flex-shrink:0; }
-.lang-info { flex:1; }
-.lang-name {
-  font-family:'Cinzel',serif; font-size:14px; font-weight:600;
-  color:var(--cream); display:block;
-}
-.lang-native { font-size:12px; color:var(--dim); }
-.lang-check {
-  width:20px; height:20px; border-radius:50%;
-  border:2px solid var(--border2); flex-shrink:0;
-  display:flex; align-items:center; justify-content:center;
-  font-size:11px; transition:all .2s;
-}
-.lang-choice-btn.selected .lang-check {
-  background:var(--gold); border-color:var(--gold); color:#000;
-}
-.lang-confirm-btn {
-  margin-top:20px; width:100%;
-  padding:13px; border-radius:10px;
-  border:1px solid var(--gold3);
-  background:linear-gradient(135deg,rgba(200,169,110,0.15),rgba(200,169,110,0.05));
-  color:var(--gold); font-family:'Cinzel',serif;
-  font-size:12px; letter-spacing:2px; cursor:pointer;
-  transition:all .2s;
-}
-.lang-confirm-btn:hover { background:rgba(200,169,110,0.2); }
 #options-panel {
   position:fixed; inset:0; z-index:200;
   display:flex; align-items:center; justify-content:center;
@@ -855,40 +780,8 @@ body {
     </div>
   </div>
 </div>
-<div id="lang-overlay" style="display:none">
-  <div id="lang-box">
-    <div class="lang-box-icon">✦</div>
-    <div class="lang-box-title">Choisissez votre langue</div>
-    <p class="lang-box-sub">Choose your language · Elige tu idioma</p>
-    <div class="lang-choices">
-      <button class="lang-choice-btn selected" id="lp-fr" onclick="selectLangPopup('fr',this)">
-        <span class="lang-flag">🇫🇷</span>
-        <div class="lang-info">
-          <span class="lang-name">Français</span>
-          <span class="lang-native">French</span>
-        </div>
-        <div class="lang-check">✓</div>
-      </button>
-      <button class="lang-choice-btn" id="lp-en" onclick="selectLangPopup('en',this)">
-        <span class="lang-flag">🇬🇧</span>
-        <div class="lang-info">
-          <span class="lang-name">English</span>
-          <span class="lang-native">Anglais</span>
-        </div>
-        <div class="lang-check"></div>
-      </button>
-      <button class="lang-choice-btn" id="lp-es" onclick="selectLangPopup('es',this)">
-        <span class="lang-flag">🇪🇸</span>
-        <div class="lang-info">
-          <span class="lang-name">Español</span>
-          <span class="lang-native">Espagnol</span>
-        </div>
-        <div class="lang-check"></div>
-      </button>
-    </div>
-    <button class="lang-confirm-btn" onclick="confirmLang()">CONTINUER</button>
-  </div>
-</div>
+<!-- Les popups de premier lancement (langue, tutoriel, code parental)
+     sont injectées par onboarding.js, partagé avec stories.html -->
 
 <div class="bg-gradient"></div>
 <canvas id="bg-canvas"></canvas>
@@ -1011,49 +904,6 @@ body {
   </div>
 </div>
 
-<!-- ── TUTORIAL POPUP ── -->
-<div id="tuto-overlay" style="display:none;position:fixed;inset:0;z-index:960;background:rgba(0,0,0,0.85);align-items:center;justify-content:center;backdrop-filter:blur(8px);animation:fade-in .4s ease;">
-  <div id="tuto-box" style="background:#13110e;border:1px solid var(--gold3);border-radius:20px;padding:36px 28px;max-width:340px;width:90%;text-align:center;animation:scale-in .4s ease;">
-    <div style="font-size:36px;margin-bottom:16px;">💡</div>
-    <div id="txt-tuto-title" style="font-family:'Cinzel',serif;font-size:18px;font-weight:600;color:var(--cream);letter-spacing:2px;margin-bottom:16px;">Astuces de navigation</div>
-    <div style="display:flex;flex-direction:column;gap:16px;text-align:left;margin-bottom:28px;">
-      <div style="display:flex;gap:12px;align-items:flex-start;">
-        <span style="font-size:18px;background:var(--bg3);width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;color:var(--gold);">●</span>
-        <p id="txt-tuto-menu" style="font-size:13px;color:var(--dim);line-height:1.5;"><strong>Le point bleu</strong> en haut de l'écran permet d'ouvrir le menu pendant une histoire.</p>
-      </div>
-      <div style="display:flex;gap:12px;align-items:flex-start;">
-        <span style="font-size:18px;background:var(--bg3);width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;color:var(--gold);">+</span>
-        <p id="txt-tuto-save" style="font-size:13px;color:var(--dim);line-height:1.5;"><strong>Le bouton +</strong> en bas à droite permet de poser un marque-page pour sauvegarder votre progression.</p>
-      </div>
-    </div>
-    <button id="txt-tuto-btn" class="lang-confirm-btn" onclick="closeTuto()">J'AI COMPRIS</button>
-  </div>
-</div>
-
-<!-- PIN SETUP POPUP — configuration du code parental au premier démarrage -->
-<div id="pin-setup-overlay" style="display:none;position:fixed;inset:0;z-index:970;background:rgba(0,0,0,0.85);align-items:center;justify-content:center;backdrop-filter:blur(8px);animation:fade-in .4s ease;">
-  <div id="pin-setup-box" style="background:#13110e;border:1px solid var(--gold3);border-radius:20px;padding:36px 28px;max-width:340px;width:90%;text-align:center;animation:scale-in .4s ease;">
-    <div style="font-size:36px;margin-bottom:16px;">🔒</div>
-    <div id="txt-pinsetup-title" style="font-family:'Cinzel',serif;font-size:18px;font-weight:600;color:var(--cream);letter-spacing:2px;margin-bottom:12px;">Code Parental</div>
-    <p id="txt-pinsetup-body" style="font-size:13px;color:var(--dim);line-height:1.6;margin-bottom:20px;">Créez un code à 4 chiffres pour protéger le mode enfant. Il vous sera demandé pour le désactiver.</p>
-    <div id="txt-pinsetup-enter" style="text-align:left;margin-bottom:6px;font-size:11px;color:var(--dimmer);font-family:'DM Mono',monospace;letter-spacing:1px">Code à 4 chiffres</div>
-    <input id="pin-setup-input" type="password" inputmode="numeric" maxlength="4" placeholder="••••"
-      style="width:100%;background:var(--bg2);border:1px solid var(--border);border-radius:8px;color:var(--cream);font-family:'DM Mono',monospace;font-size:24px;padding:12px;outline:none;text-align:center;letter-spacing:8px;box-sizing:border-box"
-      onkeydown="if(event.key==='Enter')document.getElementById('pin-setup-input2').focus()">
-    <div id="txt-pinsetup-confirm" style="text-align:left;margin:14px 0 6px;font-size:11px;color:var(--dimmer);font-family:'DM Mono',monospace;letter-spacing:1px">Confirme le code</div>
-    <input id="pin-setup-input2" type="password" inputmode="numeric" maxlength="4" placeholder="••••"
-      style="width:100%;background:var(--bg2);border:1px solid var(--border);border-radius:8px;color:var(--cream);font-family:'DM Mono',monospace;font-size:24px;padding:12px;outline:none;text-align:center;letter-spacing:8px;box-sizing:border-box"
-      onkeydown="if(event.key==='Enter')submitPinSetup()">
-    <div id="pin-setup-error" style="display:none;margin-top:8px;font-size:11px;color:#fa6d8f;font-family:'DM Mono',monospace"></div>
-    <label style="display:flex;align-items:center;gap:10px;margin-top:18px;text-align:left;cursor:pointer">
-      <input type="checkbox" id="pin-setup-kids" style="width:18px;height:18px;accent-color:var(--gold);flex-shrink:0;cursor:pointer">
-      <span id="txt-pinsetup-kids" style="font-size:12px;color:var(--dim);line-height:1.4">Activer le mode enfant maintenant</span>
-    </label>
-    <button id="txt-pinsetup-create" class="lang-confirm-btn" style="margin-top:20px" onclick="submitPinSetup()">CRÉER LE CODE</button>
-    <button id="txt-pinsetup-skip" onclick="skipPinSetup()" style="margin-top:12px;background:none;border:none;color:var(--dimmer);font-size:12px;letter-spacing:1px;cursor:pointer;font-family:'DM Mono',monospace">Plus tard</button>
-  </div>
-</div>
-
 <!-- ── GAME SELECTOR PANEL ── -->
 <div id="game-panel" onclick="handlePanelClick(event)">
   <div id="game-sheet">
@@ -1139,6 +989,7 @@ body {
   </div>
 </div>
 
+<script src="onboarding.js"></script>
 <script>
 // ══════════════════════════════════════════════
 // TRANSLATIONS
@@ -1426,17 +1277,7 @@ function applyLang() {
   set('txt-submit-cancel',   t.submitCancel);
   set('txt-submit-ai',       t.submitAi);
   set('txt-submit-note',     t.submitNote);
-  set('txt-tuto-title',      t.tutoTitle);
-  set('txt-tuto-menu',       t.tutoMenu, true);
-  set('txt-tuto-save',       t.tutoSave, true);
-  set('txt-tuto-btn',        t.tutoBtn);
-  set('txt-pinsetup-title',  t.pinSetupTitle);
-  set('txt-pinsetup-body',   t.pinSetupBody);
-  set('txt-pinsetup-create', t.pinSetupCreate);
-  set('txt-pinsetup-skip',   t.pinSetupSkip);
-  set('txt-pinsetup-enter',  t.pinSetupEnter);
-  set('txt-pinsetup-confirm',t.pinSetupConfirm);
-  set('txt-pinsetup-kids',   t.pinSetupKids);
+  if (window.SFOnboarding) SFOnboarding.applyTexts();
   document.title = t.docTitle;
   document.documentElement.lang = currentLang;
 }
@@ -1495,7 +1336,10 @@ let allGames = [];
 
 async function loadGameRegistry() {
   try {
-    const r = await fetch('games.json');
+    const r = await Promise.race([
+      fetch('games.json'),
+      new Promise((_, reject) => setTimeout(() => reject(new Error('timeout')), 5000))
+    ]);
     if (r.ok) { allGames = await r.json(); return; }
   } catch(e) {}
   // fallback to demo list
@@ -1828,73 +1672,6 @@ function submitPin() {
   }
 }
 
-// ── CONFIGURATION DU PIN AU PREMIER DÉMARRAGE ───────────────
-function maybeShowPinSetup() {
-  // Affiche la popup uniquement si aucun PIN n'a encore été créé
-  // et que l'étape n'a pas déjà été passée/ignorée
-  if (localStorage.getItem('sf_pin_setup_done')) return;
-  if (localStorage.getItem('sf_parent_pin') !== null) return;
-  showPinSetup();
-}
-
-function showPinSetup() {
-  const overlay = document.getElementById('pin-setup-overlay');
-  document.getElementById('pin-setup-input').value = '';
-  document.getElementById('pin-setup-input2').value = '';
-  document.getElementById('pin-setup-kids').checked = false;
-  document.getElementById('pin-setup-error').style.display = 'none';
-  overlay.style.display = 'flex';
-  setTimeout(() => document.getElementById('pin-setup-input').focus(), 100);
-}
-
-function closePinSetup() {
-  localStorage.setItem('sf_pin_setup_done', '1');
-  const overlay = document.getElementById('pin-setup-overlay');
-  overlay.style.animation = 'fade-out .3s ease forwards';
-  setTimeout(() => { overlay.style.display = 'none'; overlay.style.animation = ''; }, 300);
-}
-
-function skipPinSetup() {
-  closePinSetup();
-}
-
-function submitPinSetup() {
-  const input  = document.getElementById('pin-setup-input').value.trim();
-  const input2 = document.getElementById('pin-setup-input2').value.trim();
-  const err    = document.getElementById('pin-setup-error');
-  const t      = LANG[currentLang] || LANG.fr;
-  if (!/^\d{4}$/.test(input)) {
-    err.textContent = t.pinSetupError;
-    err.style.display = 'block';
-    document.getElementById('pin-setup-input').focus();
-    return;
-  }
-  if (input !== input2) {
-    err.textContent = t.pinSetupMismatch;
-    err.style.display = 'block';
-    document.getElementById('pin-setup-input2').value = '';
-    document.getElementById('pin-setup-input2').focus();
-    return;
-  }
-  localStorage.setItem('sf_parent_pin', _sha256sync(input));
-  // Option : activer le mode enfant immédiatement
-  if (document.getElementById('pin-setup-kids').checked) {
-    const kidsToggle = document.getElementById('opt-kids');
-    if (kidsToggle) kidsToggle.checked = true;
-    if (typeof saveOptions === 'function') saveOptions();
-    if (typeof renderGameList === 'function') renderGameList();
-  }
-  closePinSetup();
-  const msg = document.createElement('div');
-  msg.style.cssText = `position:fixed;bottom:80px;left:50%;transform:translateX(-50%);
-    background:#13110e;border:1px solid rgba(109,250,188,0.4);border-radius:10px;
-    padding:10px 20px;font-family:'DM Mono',monospace;font-size:11px;
-    color:#6dfabc;z-index:999;white-space:nowrap`;
-  msg.textContent = t.pinSetupDone;
-  document.body.appendChild(msg);
-  setTimeout(() => msg.remove(), 2500);
-}
-
 let _pinCalcAnswer = 0;
 
 function generateCalcQuestion() {
@@ -1957,6 +1734,11 @@ function redeemCode(code) {
     }
   });
   localStorage.setItem('sf_unlocked_packs', JSON.stringify(unlocked));
+  // Enregistré à part : la resynchro Google Play ne doit pas effacer
+  // un pack débloqué par code.
+  const codeUnlocks = JSON.parse(localStorage.getItem('sf_code_unlocks') || '[]');
+  entry.unlocks.forEach(u => { if (!codeUnlocks.includes(u)) codeUnlocks.push(u); });
+  localStorage.setItem('sf_code_unlocks', JSON.stringify(codeUnlocks));
   used.push(hash);
   localStorage.setItem('sf_used_codes', JSON.stringify(used));
   return { ok: true, msg: (t.codeUnlocked || 'Débloqué : ') + entry.label, unlocks: entry.unlocks };
@@ -2068,81 +1850,16 @@ async function submitCode() {
     resultEl.textContent = '✕ ' + result.msg;
   }
 }
-let _pendingLang = localStorage.getItem('sf_lang') || 'fr';
-
-function selectLangPopup(lang, btn) {
-  _pendingLang = lang;
-  document.querySelectorAll('.lang-choice-btn').forEach(b => {
-    b.classList.remove('selected');
-    b.querySelector('.lang-check').textContent = '';
-  });
-  btn.classList.add('selected');
-  btn.querySelector('.lang-check').textContent = '✓';
-}
-
-function confirmLang() {
-  localStorage.setItem('sf_lang', _pendingLang);
-  localStorage.setItem('sf_lang_chosen', '1');
-  currentLang = _pendingLang;
-  setLang(currentLang);
-  const overlay = document.getElementById('lang-overlay');
-  if (overlay) {
-    overlay.style.animation = 'fade-out .3s ease forwards';
-    setTimeout(() => {
-      overlay.style.display = 'none';
-      overlay.style.animation = '';
-      setTimeout(startLaunchSequence, 500);
-    }, 300);
-  }
-}
-
-function startLaunchSequence() {
-  // Cacher tout d'abord
-  ['lang-overlay', 'tuto-overlay', 'pin-setup-overlay'].forEach(id => {
-    const el = document.getElementById(id);
-    if (el) el.style.display = 'none';
-  });
-
-  if (!localStorage.getItem('sf_lang_chosen')) {
-    const overlay = document.getElementById('lang-overlay');
-    if (overlay) overlay.style.display = 'flex';
-  } else if (!localStorage.getItem('sf_tuto_shown')) {
-    showTuto();
-  } else {
-    maybeShowPinSetup();
-  }
-}
-
-function showTuto() {
-  const overlay = document.getElementById('tuto-overlay');
-  overlay.style.display = 'flex';
-  const t = LANG[currentLang] || LANG.fr;
-  if (t.tutoTitle) document.getElementById('txt-tuto-title').textContent = t.tutoTitle;
-  if (t.tutoMenu)  document.getElementById('txt-tuto-menu').innerHTML  = t.tutoMenu;
-  if (t.tutoSave)  document.getElementById('txt-tuto-save').innerHTML  = t.tutoSave;
-  if (t.tutoBtn)   document.getElementById('txt-tuto-btn').textContent  = t.tutoBtn;
-}
-
-function closeTuto() {
-  localStorage.setItem('sf_tuto_shown', '1');
-  const overlay = document.getElementById('tuto-overlay');
-  if (overlay) {
-    overlay.style.animation = 'fade-out .3s ease forwards';
-    setTimeout(() => {
-      overlay.style.display = 'none';
-      overlay.style.animation = '';
-      setTimeout(startLaunchSequence, 500);
-    }, 300);
-  }
-}
-
 (async function init() {
   loadOptions();
   setLang(currentLang);
+  // Lancer l'onboarding tout de suite — ne pas attendre games.json
+  if (window.SFOnboarding) {
+    SFOnboarding.start({ onLangChange: lang => setLang(lang) });
+  }
   initCanvas();
   createParticles();
   await loadGameRegistry();
-  startLaunchSequence();
 })();
 </script>
 </body>
