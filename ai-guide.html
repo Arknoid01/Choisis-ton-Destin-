@@ -397,48 +397,10 @@ html,body { min-height:100%; background:#0a0a0e; color:#e0d8f0; font-family:'Cor
     </p>
     <div class="prompt-box">
       <div class="prompt-header">
-        <span class="prompt-label">Prompt à copier</span>
+        <span class="prompt-label" id="txt-prompt-label">Prompt à copier</span>
         <button class="copy-btn" id="copy-btn" onclick="copyPrompt()">Copier</button>
       </div>
-      <div class="prompt-text" id="prompt-content">Analyse attentivement le JSON fourni.
-
-Tu dois comprendre précisément :
-- la structure des scènes,
-- le système de choix,
-- les transitions,
-- les fins,
-- les variables,
-- les effets,
-- les IDs,
-- le style d'écriture,
-- le format exact attendu.
-
-Ensuite, génère une NOUVELLE histoire complète parfaitement compatible avec cette structure JSON.
-
-IMPORTANT :
-- respecte exactement le même format,
-- ne casse aucun lien entre les scènes,
-- chaque choix doit pointer vers une scène existante,
-- garde des IDs cohérents et uniques,
-- conserve la compatibilité avec le moteur narratif,
-- ajoute des descriptions longues et immersives,
-- privilégie les ambiances fortes,
-- les personnages récurrents,
-- les chemins annexes,
-- les fins alternatives,
-- les scènes absurdes ou marquantes si le ton de l'histoire s'y prête.
-
-L'histoire doit être directement exploitable sans modification technique.
-
-Le style doit ressembler à une vraie histoire interactive moderne, avec :
-- narration immersive,
-- dialogues naturels,
-- scènes mémorables,
-- choix intéressants,
-- et une structure claire pour le joueur.
-
-Ne donne aucune explication.
-Retourne uniquement le JSON complet final.</div>
+      <div class="prompt-text" id="prompt-content"></div>
     </div>
   </div>
 
@@ -509,7 +471,7 @@ Retourne uniquement le JSON complet final.</div>
     </p>
     <div class="prompt-box">
       <div class="prompt-header">
-        <span class="prompt-label">Le Temps Perdu avec Aikito — JSON complet</span>
+        <span class="prompt-label" id="txt-json-label">Le Temps Perdu avec Aikito — JSON complet</span>
         <button class="copy-btn" id="copy-json-btn" onclick="copyJson()">Copier</button>
       </div>
       <div class="prompt-text" id="json-content" style="font-size:10px;max-height:200px">{
@@ -655,7 +617,7 @@ const T = {
     btn5Name: 'Importer JSON', btn5Desc: 'Charge un JSON dans l\'éditeur — histoire générée par IA ou fichier existant.',
     btn6Name: 'Exporter JSON', btn6Desc: 'Sauvegarde ton histoire en fichier JSON — le format à envoyer pour publication.',
     btn7Name: 'Export TXT', btn7Desc: 'Exporte en texte brut — pratique pour relire ou corriger dans un éditeur externe.',
-    btn8Name: 'Envoyer', btn8Desc: 'Envoie directement ton histoire par e-mail à l\'équipe Fableris. Le JSON est joint automatiquement.',
+    btn8Name: 'Envoyer', btn8Desc: 'Envoie ton histoire en un clic depuis l\'éditeur — formulaire intégré, sans export manuel.',
     btn9Name: 'Histoire pour enfants', btn9Desc: 'Active le mode enfants — l\'histoire apparaîtra dans le Pack Enfants.',
     btn10Name: 'Demander le prénom', btn10Desc: 'Le jeu demande son prénom au joueur avant de commencer. Il peut apparaître dans les textes.',
     healthTip: '<strong>Badge santé ✓</strong> — Vert = tout va bien. Jaune = avertissements. Rouge = erreurs bloquantes. Clique pour voir la liste détaillée.',
@@ -664,10 +626,54 @@ const T = {
     step1Title: 'Décris ton idée à l\'IA', step1Body: 'Ouvre ChatGPT, Claude ou Gemini. Décris l\'univers, les personnages, l\'ambiance. Pas besoin de connaître le format technique.',
     step2Title: 'Utilise le prompt Fableris', step2Body: 'Copie le prompt ci-dessous et colle-le dans ta conversation avec l\'IA. Il explique le format JSON attendu.',
     step3Title: 'Importe dans l\'éditeur', step3Body: 'L\'IA génère un JSON complet. Ouvre StoryForge, utilise "Importer JSON" dans le menu ⋯.',
-    step4Title: 'Affine et envoie', step4Body: 'Retouche les textes, ajuste les choix, teste l\'aperçu. Exporte et envoie depuis l\'éditeur.',
+    step4Title: 'Affine et envoie', step4Body: 'Retouche les textes, teste l\'aperçu, puis appuie sur « Envoyer en 1 clic » — le JSON part directement.',
     info: '<strong>Conseil :</strong> Fournis d\'abord un JSON existant à l\'IA pour qu\'elle comprenne la structure, puis demande une nouvelle histoire dans le même format.',
     promptSection: 'Le prompt Fableris',
     promptIntro: 'Copie ce prompt et colle-le dans ta conversation avec l\'IA, suivi de la description de ton histoire.',
+    promptLabel: 'Prompt à copier',
+    promptText: `Analyse attentivement le JSON fourni.
+
+Tu dois comprendre précisément :
+- la structure des scènes,
+- le système de choix,
+- les transitions,
+- les fins,
+- les variables,
+- les effets,
+- les IDs,
+- le style d'écriture,
+- le format exact attendu.
+
+Ensuite, génère une NOUVELLE histoire complète parfaitement compatible avec cette structure JSON.
+
+FORMAT CONCOURS (recommandé) :
+- 5 scènes maximum,
+- 2 fins,
+- court, jouable en quelques minutes — pas une saga.
+
+IMPORTANT :
+- respecte exactement le même format,
+- ne casse aucun lien entre les scènes,
+- chaque choix doit pointer vers une scène existante,
+- garde des IDs cohérents et uniques,
+- conserve la compatibilité avec le moteur narratif,
+- ajoute des descriptions immersives,
+- privilégie les ambiances fortes,
+- les personnages récurrents,
+- les chemins annexes,
+- les fins alternatives.
+
+L'histoire doit être directement exploitable sans modification technique.
+
+Le style doit ressembler à une vraie histoire interactive moderne, avec :
+- narration immersive,
+- dialogues naturels,
+- scènes mémorables,
+- choix intéressants,
+- et une structure claire pour le joueur.
+
+Ne donne aucune explication.
+Retourne uniquement le JSON complet final.`,
     structure: 'Structure d\'une scène',
     structureIntro: 'Pour aider l\'IA à comprendre le format, voici la structure minimale d\'une scène :',
     tools: 'Outils recommandés',
@@ -680,6 +686,7 @@ const T = {
     copy: 'Copier', copied: '✓ Copié !',
     jsonSection: 'JSON d\'exemple — Aikito',
     jsonIntro: 'Copie ce JSON et fournis-le à l\'IA avec le prompt ci-dessus.',
+    jsonLabel: 'Le Temps Perdu avec Aikito — JSON complet',
   },
   en: {
     title: 'Editor Help & AI',
@@ -715,7 +722,7 @@ const T = {
     btn5Name: 'Import JSON', btn5Desc: 'Load a JSON file into the editor — AI-generated or existing story.',
     btn6Name: 'Export JSON', btn6Desc: 'Save your story as a JSON file — the format to submit for publication.',
     btn7Name: 'Export TXT', btn7Desc: 'Export as plain text — handy for proofreading or editing externally.',
-    btn8Name: 'Send', btn8Desc: 'Send your story directly by email to the Fableris team. JSON is attached automatically.',
+    btn8Name: 'Send', btn8Desc: 'Send your story in one tap from the editor — built-in form, no manual export.',
     btn9Name: 'Kids story', btn9Desc: 'Enable kids mode — the story appears in the Kids Pack.',
     btn10Name: 'Ask for name', btn10Desc: 'The game asks the player their name before starting. It can appear in story texts.',
     healthTip: '<strong>Health badge ✓</strong> — Green = all good. Yellow = warnings. Red = blocking errors. Click to see the detailed list.',
@@ -724,10 +731,54 @@ const T = {
     step1Title: 'Describe your idea', step1Body: 'Open ChatGPT, Claude or Gemini. Describe the universe, characters, atmosphere. No need to know the technical format.',
     step2Title: 'Use the Fableris prompt', step2Body: 'Copy the prompt below and paste it into your AI conversation.',
     step3Title: 'Import into editor', step3Body: 'The AI generates a complete JSON. Open StoryForge, use "Import JSON" in the ⋯ menu.',
-    step4Title: 'Refine and send', step4Body: 'Edit texts, adjust choices, test preview. Export and send from the editor.',
+    step4Title: 'Refine and send', step4Body: 'Edit texts, test preview, then tap « Send in 1 tap » — your JSON goes out directly.',
     info: '<strong>Tip:</strong> First give the AI an existing JSON to understand the structure, then ask for a new story in the same format.',
     promptSection: 'The Fableris Prompt',
     promptIntro: 'Copy this prompt and paste it into your AI conversation, followed by your story description.',
+    promptLabel: 'Prompt to copy',
+    promptText: `Carefully analyze the provided JSON.
+
+You must understand precisely:
+- scene structure,
+- the choice system,
+- transitions,
+- endings,
+- variables,
+- effects,
+- IDs,
+- writing style,
+- the exact expected format.
+
+Then generate a NEW complete story fully compatible with this JSON structure.
+
+CONTEST FORMAT (recommended):
+- 5 scenes maximum,
+- 2 endings,
+- short, playable in a few minutes — not a saga.
+
+IMPORTANT:
+- follow exactly the same format,
+- do not break any links between scenes,
+- every choice must point to an existing scene,
+- keep consistent and unique IDs,
+- maintain compatibility with the narrative engine,
+- write immersive descriptions,
+- favor strong atmosphere,
+- recurring characters,
+- side paths,
+- alternate endings.
+
+The story must be directly usable without technical changes.
+
+The style should feel like a modern interactive story, with:
+- immersive narration,
+- natural dialogue,
+- memorable scenes,
+- interesting choices,
+- and a clear structure for the player.
+
+Do not give any explanation.
+Return only the complete final JSON.`,
     structure: 'Scene structure',
     structureIntro: 'To help the AI understand the format, here is the minimal scene structure:',
     tools: 'Recommended tools',
@@ -740,6 +791,7 @@ const T = {
     copy: 'Copy', copied: '✓ Copied!',
     jsonSection: 'Example JSON — Aikito',
     jsonIntro: 'Copy this JSON and give it to the AI with the prompt above.',
+    jsonLabel: 'The Lost Time with Aikito — full JSON',
   },
   es: {
     title: 'Ayuda editor & IA',
@@ -775,7 +827,7 @@ const T = {
     btn5Name: 'Importar JSON', btn5Desc: 'Carga un JSON en el editor — historia generada por IA o archivo existente.',
     btn6Name: 'Exportar JSON', btn6Desc: 'Guarda tu historia como archivo JSON — el formato para enviar para publicación.',
     btn7Name: 'Export TXT', btn7Desc: 'Exporta como texto plano — útil para revisar o corregir externamente.',
-    btn8Name: 'Enviar', btn8Desc: 'Envía directamente tu historia por correo al equipo Fableris. El JSON se adjunta automáticamente.',
+    btn8Name: 'Enviar', btn8Desc: 'Envía tu historia en un clic desde el editor — formulario integrado, sin exportar manualmente.',
     btn9Name: 'Historia infantil', btn9Desc: 'Activa el modo infantil — la historia aparece en el Pack Infantil.',
     btn10Name: 'Pedir nombre', btn10Desc: 'El juego pide el nombre del jugador antes de empezar. Puede aparecer en los textos.',
     healthTip: '<strong>Badge de salud ✓</strong> — Verde = todo bien. Amarillo = advertencias. Rojo = errores bloqueantes. Haz clic para ver la lista.',
@@ -784,10 +836,54 @@ const T = {
     step1Title: 'Describe tu idea', step1Body: 'Abre ChatGPT, Claude o Gemini. Describe el universo, los personajes, el ambiente.',
     step2Title: 'Usa el prompt de Fableris', step2Body: 'Copia el prompt a continuación y pégalo en tu conversación con la IA.',
     step3Title: 'Importa en el editor', step3Body: 'La IA genera un JSON completo. Abre StoryForge, usa "Importar JSON" en el menú ⋯.',
-    step4Title: 'Refina y envía', step4Body: 'Edita los textos, ajusta las elecciones, prueba la vista previa. Exporta y envía desde el editor.',
+    step4Title: 'Refina y envía', step4Body: 'Edita los textos, prueba la vista previa y pulsa « Enviar en 1 clic » — el JSON sale directamente.',
     info: '<strong>Consejo:</strong> Primero proporciona a la IA un JSON existente para que comprenda la estructura, luego pide una nueva historia en el mismo formato.',
     promptSection: 'El prompt de Fableris',
     promptIntro: 'Copia este prompt y pégalo en tu conversación con la IA, seguido de la descripción de tu historia.',
+    promptLabel: 'Prompt para copiar',
+    promptText: `Analiza atentamente el JSON proporcionado.
+
+Debes comprender con precisión:
+- la estructura de las escenas,
+- el sistema de elecciones,
+- las transiciones,
+- los finales,
+- las variables,
+- los efectos,
+- los IDs,
+- el estilo de escritura,
+- el formato exacto esperado.
+
+Luego genera una NUEVA historia completa perfectamente compatible con esta estructura JSON.
+
+FORMATO CONCURSO (recomendado):
+- 5 escenas máximo,
+- 2 finales,
+- corta, jugable en pocos minutos — no una saga.
+
+IMPORTANTE:
+- respeta exactamente el mismo formato,
+- no rompas ningún enlace entre escenas,
+- cada elección debe apuntar a una escena existente,
+- mantén IDs coherentes y únicos,
+- conserva la compatibilidad con el motor narrativo,
+- añade descripciones inmersivas,
+- privilegia ambientes intensos,
+- personajes recurrentes,
+- caminos secundarios,
+- finales alternativos.
+
+La historia debe ser directamente utilizable sin cambios técnicos.
+
+El estilo debe parecer una historia interactiva moderna, con:
+- narración inmersiva,
+- diálogos naturales,
+- escenas memorables,
+- elecciones interesantes,
+- y una estructura clara para el jugeur.
+
+No des ninguna explicación.
+Devuelve únicamente el JSON completo final.`,
     structure: 'Estructura de una escena',
     structureIntro: 'Para ayudar a la IA a entender el formato, aquí está la estructura mínima de una escena:',
     tools: 'Herramientas recomendadas',
@@ -800,6 +896,7 @@ const T = {
     copy: 'Copiar', copied: '✓ ¡Copiado!',
     jsonSection: 'JSON de ejemplo — Aikito',
     jsonIntro: 'Copia este JSON y proporciónalo a la IA con el prompt anterior.',
+    jsonLabel: 'El Tiempo Perdido con Aikito — JSON completo',
   }
 };
 
@@ -852,6 +949,9 @@ function applyLang() {
   set('txt-info', t.info);
   set('txt-prompt-section', t.promptSection);
   set('txt-prompt-intro', t.promptIntro);
+  set('txt-prompt-label', t.promptLabel);
+  const promptEl = document.getElementById('prompt-content');
+  if (promptEl && t.promptText) promptEl.textContent = t.promptText;
   set('txt-structure', t.structure);
   set('txt-structure-intro', t.structureIntro);
   set('txt-tools', t.tools);
@@ -863,6 +963,7 @@ function applyLang() {
   set('txt-cta-btn', t.ctaBtn);
   set('txt-json-section', t.jsonSection);
   set('txt-json-intro', t.jsonIntro);
+  set('txt-json-label', t.jsonLabel);
   document.getElementById('copy-btn').textContent = t.copy;
   document.getElementById('copy-json-btn').textContent = t.copy;
   document.title = t.title + ' — Fableris';
