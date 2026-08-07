@@ -1033,8 +1033,8 @@ html,body { height:100%; overflow:hidden; font-family:'Syne',sans-serif; backgro
         </div>
       </div>
       <div class="modal-actions" style="flex-direction:column;gap:8px;align-items:stretch">
-        <button class="topbtn primary" id="submit-share-btn" onclick="shareFromDone()" style="display:none">📤 Partager le fichier</button>
-        <button class="topbtn" id="submit-open-mail-btn" onclick="openMailFromDone()">✉ Ouvrir ma messagerie</button>
+        <button class="topbtn primary" id="submit-share-btn" onclick="shareFromDone()">📤 Partager le fichier</button>
+        <button class="topbtn" id="submit-open-mail-btn" onclick="openMailFromDone()" style="display:none">✉ Ouvrir ma messagerie</button>
         <button class="topbtn" id="submit-copy-all-btn" onclick="copySubmitMessage()">⧉ Copier le message + JSON</button>
         <button class="topbtn" id="submit-done-close-btn" onclick="closeSubmitModal()">Fermer</button>
       </div>
@@ -1295,12 +1295,12 @@ const EDITOR_I18N = {
     templateMysteryTitle:'Mystère court', templateMysteryDesc:'5 scènes, 2 fins — ambiance énigme et choix tendus.',
     templateKidsTitle:'Histoire enfant', templateKidsDesc:'5 scènes douces, mode enfant activé.',
     templateMicroTitle:'Micro-défi express', templateMicroDesc:'Le format du concours : court, jouable, publiable.',
-    templateApplied:'Modèle chargé ✓', sendToastMail:'Ouverture de votre messagerie…', sendToastShare:'Choisissez votre messagerie — envoyez à team.pegasuscorp@gmail.com',
-    sendModalTitle:'Envoyer votre histoire', sendModalSub:'Remplis ce formulaire — ton histoire partira par e-mail à l\'équipe Fableris, JSON inclus.',
+    templateApplied:'Modèle chargé ✓',     sendToastMail:'Ouverture de votre messagerie…', sendToastShare:'Choisis Gmail, WhatsApp, Drive… puis envoie à team.pegasuscorp@gmail.com',
+    sendModalTitle:'Envoyer votre histoire', sendModalSub:'Remplis ce formulaire — ton histoire sera exportée en JSON, prête à partager.',
     sendLblTitle:'Titre', sendLblAuthor:'Votre nom ou pseudo', sendLblEmail:'Email (optionnel)', sendLblMessage:'Message (optionnel)',
-    sendModalHint:'Choisis ta messagerie (Gmail, Outlook…) : le message est déjà rédigé et le fichier JSON joint automatiquement.',
-    sendAuthorRequired:'Indiquez votre nom ou pseudo pour envoyer.', sendSuccess:'Prêt à envoyer ✓ Choisis ta messagerie', sendSending:'Préparation…',
-    sendDoneTitle:'Presque terminé', sendDoneSub:'Ton fichier JSON est prêt. Partage-le par mail ou via le bouton ci-dessous.', sendDoneEmailLbl:'Envoyer à', sendOpenMail:'✉ Ouvrir ma messagerie', sendShareFile:'📤 Partager le fichier', sendCopyAll:'⧉ Copier le message + JSON', sendCopyEmail:'⧉', sendCopied:'Copié ✓', sendEmailCopied:'E-mail copié ✓',
+    sendModalHint:'Le fichier JSON sera joint automatiquement. Tu pourras l\'envoyer via Gmail, WhatsApp, Drive ou autre.',
+    sendAuthorRequired:'Indiquez votre nom ou pseudo pour envoyer.', sendSuccess:'Fichier prêt ✓ Choisis comment le partager', sendSending:'Préparation…',
+    sendDoneTitle:'Presque terminé', sendDoneSub:'Ton fichier JSON est prêt. Appuie sur Partager : choisis Gmail, WhatsApp ou Drive, puis envoie à l\'adresse ci-dessous.', sendDoneEmailLbl:'Adresse de l\'équipe', sendOpenMail:'✉ Ouvrir ma messagerie (navigateur)', sendShareFile:'📤 Partager le fichier', sendCopyAll:'⧉ Copier le message + JSON', sendCopyEmail:'⧉', sendCopied:'Copié ✓', sendEmailCopied:'E-mail copié ✓',
     selectScene:'Sélectionne une scène', deleteTitle:'Supprimer', newSceneTitle:'Nouvelle scène', centerTitle:'Recentrer', empty:'Crée ou sélectionne une scène dans l\'arbre pour l\'éditer.', emptyAi:'Pas d\'idée ? Génère ton histoire avec l\'IA puis importe le JSON.', emptyAiBtn:'✦ Créer avec l\'IA', newScene:'+ Nouvelle scène',
     statsTitle:'Configuration des Stats', statsDesc:'Définis les attributs de ton personnage. Ils seront disponibles dans chaque choix.', addStat:'+ Ajouter une stat', close:'Fermer',
     visualTheme:'Thème visuel', presets:'Thèmes prédéfinis', customColors:'Couleurs custom', mainBg:'Fond principal', panelBg:'Fond panneaux', elementBg:'Fond éléments', accentMain:'Accent principal', accentSecond:'Accent secondaire', accentThird:'Accent tertiaire', mainText:'Texte principal', borders:'Bordures', preview:'Aperçu', previewTitle:'Titre de la scène', previewText:'Le héros avance dans l\'obscurité. Chaque pas résonne dans le couloir de pierre...', previewBtn:'→ Continuer',
@@ -1329,12 +1329,12 @@ const EDITOR_I18N = {
     templateMysteryTitle:'Short mystery', templateMysteryDesc:'5 scenes, 2 endings — tense mystery mood.',
     templateKidsTitle:'Kids story', templateKidsDesc:'5 gentle scenes, kids mode enabled.',
     templateMicroTitle:'Express micro-challenge', templateMicroDesc:'The contest format: short, playable, publishable.',
-    templateApplied:'Template loaded ✓', sendToastMail:'Opening your email app…', sendToastShare:'Pick your mail app — send to team.pegasuscorp@gmail.com',
-    sendModalTitle:'Send your story', sendModalSub:'Fill in this form — your story will be emailed to the Fableris team with the JSON attached.',
+    templateApplied:'Template loaded ✓',     sendToastMail:'Opening your email app…', sendToastShare:'Pick Gmail, WhatsApp, Drive… then send to team.pegasuscorp@gmail.com',
+    sendModalTitle:'Send your story', sendModalSub:'Fill in this form — your story will be exported as JSON, ready to share.',
     sendLblTitle:'Title', sendLblAuthor:'Your name or pen name', sendLblEmail:'Email (optional)', sendLblMessage:'Message (optional)',
-    sendModalHint:'Pick your mail app (Gmail, Outlook…): the message is already written and the JSON file is attached.',
-    sendAuthorRequired:'Enter your name or pen name to send.', sendSuccess:'Ready to send ✓ Pick your mail app', sendSending:'Preparing…',
-    sendDoneTitle:'Almost done', sendDoneSub:'Your JSON file is ready. Share it by mail or use the button below.', sendDoneEmailLbl:'Send to', sendOpenMail:'✉ Open my mail app', sendShareFile:'📤 Share file', sendCopyAll:'⧉ Copy message + JSON', sendCopyEmail:'⧉', sendCopied:'Copied ✓', sendEmailCopied:'Email copied ✓',
+    sendModalHint:'The JSON file will be attached automatically. You can send it via Gmail, WhatsApp, Drive, or another app.',
+    sendAuthorRequired:'Enter your name or pen name to send.', sendSuccess:'File ready ✓ Choose how to share it', sendSending:'Preparing…',
+    sendDoneTitle:'Almost done', sendDoneSub:'Your JSON file is ready. Tap Share, pick Gmail/WhatsApp/Drive, then send to the address below.', sendDoneEmailLbl:'Team address', sendOpenMail:'✉ Open my mail app (browser)', sendShareFile:'📤 Share file', sendCopyAll:'⧉ Copy message + JSON', sendCopyEmail:'⧉', sendCopied:'Copied ✓', sendEmailCopied:'Email copied ✓',
     selectScene:'Select a scene', deleteTitle:'Delete', newSceneTitle:'New scene', centerTitle:'Recenter', empty:'Create or select a scene in the tree to edit it.', emptyAi:'No idea yet? Generate your story with AI, then import the JSON.', emptyAiBtn:'✦ Create with AI', newScene:'+ New scene',
     statsTitle:'Stats Configuration', statsDesc:'Define your character attributes. They will be available in every choice.', addStat:'+ Add stat', close:'Close',
     visualTheme:'Visual theme', presets:'Preset themes', customColors:'Custom colors', mainBg:'Main background', panelBg:'Panel background', elementBg:'Element background', accentMain:'Main accent', accentSecond:'Secondary accent', accentThird:'Third accent', mainText:'Main text', borders:'Borders', preview:'Preview', previewTitle:'Scene title', previewText:'The hero moves forward in the dark. Every step echoes through the stone corridor...', previewBtn:'→ Continue',
@@ -1363,12 +1363,12 @@ const EDITOR_I18N = {
     templateMysteryTitle:'Misterio corto', templateMysteryDesc:'5 escenas, 2 finales — ambiente de enigma.',
     templateKidsTitle:'Historia infantil', templateKidsDesc:'5 escenas suaves, modo infantil activado.',
     templateMicroTitle:'Micro-reto exprés', templateMicroDesc:'El formato del concurso: corto, jugable, publicable.',
-    templateApplied:'Plantilla cargada ✓', sendToastMail:'Abriendo tu correo…', sendToastShare:'Elige tu app de correo — envía a team.pegasuscorp@gmail.com',
-    sendModalTitle:'Enviar tu historia', sendModalSub:'Rellena este formulario — tu historia se enviará por correo al equipo Fableris con el JSON adjunto.',
+    templateApplied:'Plantilla cargada ✓',     sendToastMail:'Abriendo tu correo…', sendToastShare:'Elige Gmail, WhatsApp, Drive… y envía a team.pegasuscorp@gmail.com',
+    sendModalTitle:'Enviar tu historia', sendModalSub:'Rellena este formulario — tu historia se exportará en JSON, lista para compartir.',
     sendLblTitle:'Título', sendLblAuthor:'Tu nombre o seudónimo', sendLblEmail:'Email (opcional)', sendLblMessage:'Mensaje (opcional)',
-    sendModalHint:'Elige tu app de correo (Gmail, Outlook…): el mensaje ya está redactado y el archivo JSON va adjunto.',
-    sendAuthorRequired:'Indica tu nombre o seudónimo para enviar.', sendSuccess:'Listo para enviar ✓ Elige tu correo', sendSending:'Preparando…',
-    sendDoneTitle:'Casi listo', sendDoneSub:'Tu archivo JSON está listo. Compártelo por correo o con el botón de abajo.', sendDoneEmailLbl:'Enviar a', sendOpenMail:'✉ Abrir mi correo', sendShareFile:'📤 Compartir archivo', sendCopyAll:'⧉ Copiar mensaje + JSON', sendCopyEmail:'⧉', sendCopied:'Copiado ✓', sendEmailCopied:'Correo copiado ✓',
+    sendModalHint:'El archivo JSON se adjuntará automáticamente. Puedes enviarlo por Gmail, WhatsApp, Drive u otra app.',
+    sendAuthorRequired:'Indica tu nombre o seudónimo para enviar.', sendSuccess:'Archivo listo ✓ Elige cómo compartirlo', sendSending:'Preparando…',
+    sendDoneTitle:'Casi listo', sendDoneSub:'Tu archivo JSON está listo. Pulsa Compartir, elige Gmail/WhatsApp/Drive y envía a la dirección de abajo.', sendDoneEmailLbl:'Dirección del equipo', sendOpenMail:'✉ Abrir mi correo (navegador)', sendShareFile:'📤 Compartir archivo', sendCopyAll:'⧉ Copiar mensaje + JSON', sendCopyEmail:'⧉', sendCopied:'Copiado ✓', sendEmailCopied:'Correo copiado ✓',
     selectScene:'Selecciona una escena', deleteTitle:'Eliminar', newSceneTitle:'Nueva escena', centerTitle:'Recentrar', empty:'Crea o selecciona una escena en el árbol para editarla.', emptyAi:'¿Sin ideas? Genera tu historia con IA e importa el JSON.', emptyAiBtn:'✦ Crear con IA', newScene:'+ Nueva escena',
     statsTitle:'Configuración de Stats', statsDesc:'Define los atributos de tu personaje. Estarán disponibles en cada elección.', addStat:'+ Añadir stat', close:'Cerrar',
     visualTheme:'Tema visual', presets:'Temas predefinidos', customColors:'Colores personalizados', mainBg:'Fondo principal', panelBg:'Fondo de paneles', elementBg:'Fondo de elementos', accentMain:'Acento principal', accentSecond:'Acento secundario', accentThird:'Acento terciario', mainText:'Texto principal', borders:'Bordes', preview:'Vista previa', previewTitle:'Título de la escena', previewText:'El héroe avanza en la oscuridad. Cada paso resuena en el pasillo de piedra...', previewBtn:'→ Continuar',
@@ -2759,29 +2759,30 @@ function buildMailtoUrl(meta, jsonText) {
   return { url: `mailto:${SUBMIT_EMAIL}?subject=${subject}&body=${body}`, bodyText };
 }
 
-function showSubmitDoneView(meta, jsonText, filename, blob) {
-  const delivery = resolveMailDelivery(jsonText);
-  const bodyText = sendMailBody(filename, meta, jsonText, delivery);
-  _pendingSubmit = { meta, jsonText, filename, bodyText, blob };
-  const emailEl = document.getElementById('submit-done-email');
-  if (emailEl) emailEl.value = SUBMIT_EMAIL;
-  const isNative = (window.Capacitor && window.Capacitor.getPlatform && window.Capacitor.getPlatform() !== 'web') ||
-                   (window.location.protocol === 'capacitor:');
-  const shareBtn = document.getElementById('submit-share-btn');
-  if (shareBtn) shareBtn.style.display = isNative ? '' : 'none';
-  showSubmitView('done');
+function isNativeApp() {
+  return (window.Capacitor && window.Capacitor.getPlatform && window.Capacitor.getPlatform() !== 'web') ||
+         (window.location.protocol === 'capacitor:');
 }
 
-async function shareFromDone() {
-  if (!_pendingSubmit?.blob) return;
-  const { blob, filename, meta, jsonText } = _pendingSubmit;
-  const mailText = sendMailBody(filename, meta, jsonText, 'attach');
-  const plugins = window.Capacitor && window.Capacitor.Plugins;
-  if (!plugins?.Filesystem || !plugins?.Share) {
-    toast(et('sendToastShare'));
-    return;
+function canShareStoryFile(blob, filename) {
+  if (isNativeApp()) {
+    const plugins = window.Capacitor && window.Capacitor.Plugins;
+    return !!(plugins?.Filesystem && plugins?.Share);
   }
-  try {
+  if (navigator.share && navigator.canShare) {
+    const file = new File([blob], filename, { type: 'application/json' });
+    return navigator.canShare({ files: [file] });
+  }
+  return false;
+}
+
+async function shareStoryFile(blob, filename, meta, jsonText) {
+  const mailText = sendMailBody(filename, meta, jsonText, 'attach');
+  const title = '[StoryForge] ' + (meta?.title || 'Histoire');
+
+  if (isNativeApp()) {
+    const plugins = window.Capacitor && window.Capacitor.Plugins;
+    if (!plugins?.Filesystem || !plugins?.Share) return false;
     const buf = await blob.arrayBuffer();
     let binary = '';
     const bytes = new Uint8Array(buf);
@@ -2790,11 +2791,45 @@ async function shareFromDone() {
       path: filename, data: btoa(binary), directory: 'CACHE'
     });
     await plugins.Share.share({
-      title: '[StoryForge] ' + meta.title,
+      title,
       text: mailText,
       files: [res.uri],
       dialogTitle: et('sendToastShare')
     });
+    return true;
+  }
+
+  const file = new File([blob], filename, { type: 'application/json' });
+  if (navigator.share && navigator.canShare && navigator.canShare({ files: [file] })) {
+    await navigator.share({ files: [file], title, text: mailText });
+    return true;
+  }
+  return false;
+}
+
+function showSubmitDoneView(meta, jsonText, filename, blob) {
+  const delivery = resolveMailDelivery(jsonText);
+  const bodyText = sendMailBody(filename, meta, jsonText, delivery);
+  _pendingSubmit = { meta, jsonText, filename, bodyText, blob };
+  const emailEl = document.getElementById('submit-done-email');
+  if (emailEl) emailEl.value = SUBMIT_EMAIL;
+  const shareBtn = document.getElementById('submit-share-btn');
+  const mailBtn = document.getElementById('submit-open-mail-btn');
+  const canShare = canShareStoryFile(blob, filename);
+  if (shareBtn) {
+    shareBtn.style.display = canShare ? '' : 'none';
+    shareBtn.classList.toggle('primary', canShare);
+  }
+  if (mailBtn) mailBtn.style.display = (!isNativeApp() && canShare) ? '' : 'none';
+  showSubmitView('done');
+}
+
+async function shareFromDone() {
+  if (!_pendingSubmit?.blob) return;
+  const { blob, filename, meta, jsonText } = _pendingSubmit;
+  try {
+    const ok = await shareStoryFile(blob, filename, meta, jsonText);
+    if (!ok) toast(et('sendToastShare'));
   } catch (err) {
     if (!isShareCancel(err)) {
       console.error('[shareFromDone]', err);
@@ -2803,6 +2838,36 @@ async function shareFromDone() {
   }
 }
 window.shareFromDone = shareFromDone;
+
+function openMailFromDone() {
+  if (!_pendingSubmit) return;
+  const { url } = buildMailtoUrl(_pendingSubmit.meta, _pendingSubmit.jsonText);
+  window.location.href = url;
+}
+
+async function copySubmitEmail() {
+  try {
+    await navigator.clipboard.writeText(SUBMIT_EMAIL);
+    toast(et('sendEmailCopied'));
+  } catch (e) {
+    const el = document.getElementById('submit-done-email');
+    if (el) { el.focus(); el.select(); }
+  }
+}
+
+async function copySubmitMessage() {
+  if (!_pendingSubmit) return;
+  const full = `${SUBMIT_EMAIL}\n\n${_pendingSubmit.bodyText}`;
+  try {
+    await navigator.clipboard.writeText(full);
+    toast(et('sendCopied'));
+  } catch (e) {
+    toast(et('sendCopied'));
+  }
+}
+window.openMailFromDone = openMailFromDone;
+window.copySubmitEmail = copySubmitEmail;
+window.copySubmitMessage = copySubmitMessage;
 
 function confirmSendStory() {
   const author = document.getElementById('submit-author')?.value?.trim() || '';
@@ -2823,14 +2888,21 @@ function confirmSendStory() {
     const { blob, filename, exportData } = buildExportBlob();
     const jsonText = JSON.stringify(exportData, null, 2);
     const meta = buildSubmitMeta(author, email, message);
-    const isNative = (window.Capacitor && window.Capacitor.getPlatform && window.Capacitor.getPlatform() !== 'web') ||
-                     (window.location.protocol === 'capacitor:');
 
-    if (isNative) _saveToDocuments(blob, filename);
+    if (isNativeApp()) _saveToDocuments(blob, filename);
     else _downloadFallback(blob, filename);
 
     showSubmitDoneView(meta, jsonText, filename, blob);
     toast(et('sendSuccess'));
+
+    if (canShareStoryFile(blob, filename)) {
+      shareStoryFile(blob, filename, meta, jsonText).catch(err => {
+        if (!isShareCancel(err)) {
+          console.error('[confirmSendStory share]', err);
+          toast('Partage impossible : ' + errMsg(err));
+        }
+      });
+    }
   } catch (err) {
     console.error('[confirmSendStory]', err);
     toast('Erreur : ' + (err.message || String(err)));
