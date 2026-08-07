@@ -2820,7 +2820,7 @@ function showSubmitDoneView(meta, jsonText, filename, blob) {
     shareBtn.style.display = canShare ? '' : 'none';
     shareBtn.classList.toggle('primary', canShare);
   }
-  if (mailBtn) mailBtn.style.display = (!isNativeApp() && canShare) ? '' : 'none';
+  if (mailBtn) mailBtn.style.display = isNativeApp() ? 'none' : '';
   showSubmitView('done');
 }
 
