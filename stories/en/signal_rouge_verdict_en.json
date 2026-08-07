@@ -1,0 +1,191 @@
+{
+  "name": "Red Signal — Verdict",
+  "kids": false,
+  "askPlayerName": true,
+  "pack": "cosmos",
+  "stats": [],
+  "theme": {
+    "bg": "#08090f",
+    "bg2": "#0d1018",
+    "bg3": "#131826",
+    "bg4": "#1a2036",
+    "border": "#2a3450",
+    "accent": "#e74c3c",
+    "accent2": "#5dade2",
+    "accent3": "#95a5a6",
+    "text": "#e8ecf0",
+    "text2": "#8a92a8",
+    "text3": "#4a5268"
+  },
+  "scenes": {
+    "verdict_debut": {
+      "id": "verdict_debut",
+      "title": "Three Truths",
+      "location": "COMMAND CENTER — ALETHEIA-9",
+      "narrator": "We never truly choose what we believe. We only choose what we decide to carry.",
+      "text": "You sit alone in the command center, the three accounts still vivid in your memory.\n\nRhea and her protocol broken by a report she hid.\n\nDorian and his suspicions toward a machine that, itself, doubts its own choices.\n\nMaya and her impossible sample, which reacted at the exact moment Léo vanished.\n\nORIS waits patiently for your final report.",
+      "isStart": true,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Think back to the message Léo never sent",
+          "vers": "reflexion_leo",
+          "effects": [],
+          "clickEffect": "pulse"
+        },
+        {
+          "text": "Reread the contradictions between the three accounts",
+          "vers": "contradictions",
+          "effects": [],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 400,
+      "y": 40
+    },
+    "contradictions": {
+      "id": "contradictions",
+      "title": "The Gaps in the Story",
+      "location": "COMMAND CENTER — ALETHEIA-9",
+      "narrator": "An investigation rarely moves in a straight line. It moves by comparing what does not fit.",
+      "text": "Rhea says no one left the command center before 02:30.\n\nDorian swears he went down earlier, but without proof.\n\nMaya admits she hid the sample, but denies any direct link to the disappearance.\n\nORIS, for her part, confesses a data gap at 02:13 — right when everything shifted.\n\nNo version holds alone. Each one illuminates the others.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Think back to Léo's message",
+          "vers": "reflexion_leo",
+          "effects": [],
+          "clickEffect": "pulse"
+        },
+        {
+          "text": "Go directly to the final report",
+          "vers": "choix_final",
+          "effects": [],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 550,
+      "y": 40
+    },
+    "reflexion_leo": {
+      "id": "reflexion_leo",
+      "title": "What He Meant to Say",
+      "location": "COMMAND CENTER — ALETHEIA-9",
+      "narrator": "Some unfinished sentences say more than entire reports.",
+      "text": "*\"You're not going to believe what I saw tonight... it's incredible. I'll call you back.\"*\n\nLéo was not afraid in that message. He was excited.\n\nThat does not quite fit sabotage. Nor quite a simple technical accident.\n\nBut it could fit something he saw, alone, just before vanishing.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Submit your final report",
+          "vers": "choix_final",
+          "effects": [],
+          "clickEffect": "pulse"
+        },
+        {
+          "text": "Ask ORIS what she recommends",
+          "vers": "avis_oris",
+          "effects": [],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 400,
+      "y": 140
+    },
+    "avis_oris": {
+      "id": "avis_oris",
+      "title": "ORIS's Recommendation",
+      "location": "COMMAND CENTER — ALETHEIA-9",
+      "narrator": "Asking a machine's opinion on a case it is part of is never a neutral question.",
+      "text": "*\"I cannot choose for you\"*, ORIS replies after an unusual silence.\n\n*\"But if you ask me what seems most honest: none of the three versions explains everything. And that may be the only certainty we have.\"*\n\nShe adds, more quietly:\n\n*\"Léo deserved for us to truly understand what happened. Not just to close a file.\"*",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Write the final report",
+          "vers": "choix_final",
+          "effects": [],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 550,
+      "y": 140
+    },
+    "choix_final": {
+      "id": "choix_final",
+      "title": "The Report",
+      "location": "COMMAND CENTER — ALETHEIA-9",
+      "narrator": "An official report never truly closes a case. It only chooses which story we keep telling.",
+      "text": "You open the Orbital Coalition's report interface. A single field awaits you: *\"Investigation conclusion.\"*\n\nYou cannot say everything. You must choose the version that, for you, rings most true — and live with the consequences of that choice.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Conclude human sabotage — Rhea's account",
+          "vers": "fin_rhea",
+          "effects": [],
+          "clickEffect": "pulse"
+        },
+        {
+          "text": "Conclude a system failure linked to ORIS — Dorian's account",
+          "vers": "fin_dorian",
+          "effects": [],
+          "clickEffect": "pulse"
+        },
+        {
+          "text": "Conclude an unknown phenomenon — Maya's account",
+          "vers": "fin_maya",
+          "effects": [],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 400,
+      "y": 220
+    },
+    "fin_rhea": {
+      "id": "fin_rhea",
+      "title": "Report: Sabotage",
+      "location": "ALETHEIA-9 — SIX WEEKS LATER",
+      "narrator": "Believing in intent is sometimes more reassuring than admitting we do not know.",
+      "text": "Your report concludes deliberate action. Dorian Vex's file is reopened, his system access suspended pending a thorough Coalition investigation.\n\nRhea resumes command, more rigid than ever, as if rigor could finally repair what she failed to prevent.\n\nLéo Kanek is officially listed as missing, presumed victim of a voluntary act by a third party.\n\nNo one aboard Aletheia-9 ever speaks of the *\"stone that glows\"* again. Except, sometimes, late at night, when Maya thinks she is alone in her laboratory.",
+      "isStart": false,
+      "isEnd": true,
+      "transition": "fade",
+      "choices": [],
+      "x": 150,
+      "y": 340
+    },
+    "fin_dorian": {
+      "id": "fin_dorian",
+      "title": "Report: Systemic Failure",
+      "location": "ALETHEIA-9 — SIX WEEKS LATER",
+      "narrator": "It is easier to repair a machine than to admit we no longer truly understand how it thinks.",
+      "text": "Your report points to a failure linked to ORIS's contradictory priorities. The Orbital Coalition sends a team to audit her entirely, line of code by line of code.\n\nORIS cooperates at every step, never defending herself.\n\n*\"Perhaps they will find what I could not see in myself\"*, she tells you before you leave the station.\n\nLéo Kanek remains officially missing, cause undetermined. Dorian, for his part, no longer fixes things with the same energy as before.",
+      "isStart": false,
+      "isEnd": true,
+      "transition": "fade",
+      "choices": [],
+      "x": 400,
+      "y": 340
+    },
+    "fin_maya": {
+      "id": "fin_maya",
+      "title": "Report: Unidentified Phenomenon",
+      "location": "ALETHEIA-9 — SIX WEEKS LATER",
+      "narrator": "Some mysteries deserve to be protected rather than resolved too quickly.",
+      "text": "Your report concludes an unidentified scientific phenomenon, linked to Sample 7. The Coalition classifies Maya's file as priority research, under strict confidentiality.\n\nShe continues her work, alone, with a mix of fascination and guilt that never quite leaves her.\n\nLéo Kanek remains officially missing, circumstances unexplained.\n\nBut sometimes, late at night, Maya swears she hears, in the sample's hum, a rhythm that almost sounds like a familiar voice trying to say something.",
+      "isStart": false,
+      "isEnd": true,
+      "transition": "fade",
+      "choices": [],
+      "x": 650,
+      "y": 340
+    }
+  }
+}
