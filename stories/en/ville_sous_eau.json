@@ -1,0 +1,417 @@
+{
+  "name": "The Underwater Town",
+  "kids": true,
+  "askPlayerName": true,
+  "pack": "kids",
+  "stats": [
+    {
+      "id": "memoire",
+      "label": "Memory",
+      "start": 30,
+      "max": 100,
+      "color": "#90e0ef"
+    },
+    {
+      "id": "courage",
+      "label": "Courage",
+      "start": 10,
+      "max": 100,
+      "color": "#f94144"
+    },
+    {
+      "id": "acceptance",
+      "label": "Acceptance",
+      "start": 10,
+      "max": 100,
+      "color": "#90be6d"
+    }
+  ],
+  "theme": {},
+  "scenes": {
+    "arrivee_lac": {
+      "id": "arrivee_lac",
+      "title": "The Lake",
+      "location": "By the lake",
+      "narrator": "",
+      "text": "You arrive at the edge of a big lake.\n\nThe water is calm and clear.\n\nAikito is beside you.\nHe is wearing a diving mask and a snorkel.\nHe had them in his bag from the start.\n\n**\"How did you know?\"** you ask.\n\nHe shrugs.\n\n**\"I had a feeling.\"**\n\nYou look into the water.\n\nFar below,\nyou see rooftops.\nStreets.\nGardens.\n\nYour old town.",
+      "isStart": true,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Dive in right away.",
+          "vers": "premiere_rue",
+          "effects": [
+            {
+              "stat": "courage",
+              "val": 15
+            }
+          ]
+        },
+        {
+          "text": "Keep looking from the surface.",
+          "vers": "regarder_surface",
+          "effects": [
+            {
+              "stat": "memoire",
+              "val": 15
+            }
+          ]
+        }
+      ],
+      "x": 60,
+      "y": 60
+    },
+    "regarder_surface": {
+      "id": "regarder_surface",
+      "title": "From the Surface",
+      "location": "By the lake",
+      "narrator": "",
+      "text": "You lie on your stomach at the edge of the lake.\n\nYou look.\n\nYou recognize the main street.\nThe church steeple.\nThe big tree in the square.\n\nThey are still there.\nJust... below.\n\nAikito lies down beside you.\n\nHis snorkel sticks out of the water.\n\n**\"Do you want to go?\"**\n\nYou nod.\n\n**\"Then let's go.\"**",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Dive in.",
+          "vers": "premiere_rue",
+          "effects": [
+            {
+              "stat": "memoire",
+              "val": 10
+            },
+            {
+              "stat": "courage",
+              "val": 10
+            }
+          ]
+        }
+      ],
+      "x": 180,
+      "y": 60
+    },
+    "premiere_rue": {
+      "id": "premiere_rue",
+      "title": "Main Street",
+      "location": "Underwater — Main street",
+      "narrator": "",
+      "text": "Underwater, it feels strange.\n\nEverything is silent.\nBut not empty.\n\nThe baker takes bread out of the oven.\nBubbles rise toward the top.\n\nThe mail carrier pedals his bicycle.\nHis hair floats in every direction.\n\nChildren play hopscotch on the sidewalk.\nTheir laughter makes little circles in the water.\n\nNo one seems to find it odd.\n\nAikito swims beside you.\n\n**\"They kept going.\"** he says.\n**\"That's all.\"**",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Go see the baker.",
+          "vers": "boulangere",
+          "effects": [
+            {
+              "stat": "memoire",
+              "val": 10
+            }
+          ]
+        },
+        {
+          "text": "Look for your old house.",
+          "vers": "chercher_maison",
+          "effects": [
+            {
+              "stat": "memoire",
+              "val": 15
+            }
+          ]
+        },
+        {
+          "text": "Watch the children play.",
+          "vers": "enfants_marelle",
+          "effects": [
+            {
+              "stat": "acceptance",
+              "val": 10
+            }
+          ]
+        }
+      ],
+      "x": 60,
+      "y": 200
+    },
+    "boulangere": {
+      "id": "boulangere",
+      "title": "The Baker",
+      "location": "Underwater — Bakery",
+      "narrator": "",
+      "text": "The baker smiles at you.\n\nAs if you had left only yesterday.\n\nShe hands you a croissant.\n\nIt is soggy.\nBut she looks so proud.\n\n**\"It takes a long time underwater.\"** she says.\n**\"The dough keeps floating away.\"**\n\nShe laughs.\n\n**\"But we adapted.\"**\n\nYou look at the shop window.\nThe pastries float gently behind the glass.\n\n**\"Do you remember my apple tart?\"** she asks.\n\nYou nod.\n\nYou remember it very well.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "\"I remember everything.\"",
+          "vers": "chercher_maison",
+          "effects": [
+            {
+              "stat": "memoire",
+              "val": 15
+            },
+            {
+              "stat": "acceptance",
+              "val": 5
+            }
+          ]
+        },
+        {
+          "text": "Eat the soggy croissant.",
+          "vers": "chercher_maison",
+          "effects": [
+            {
+              "stat": "acceptance",
+              "val": 15
+            }
+          ]
+        }
+      ],
+      "x": 60,
+      "y": 320
+    },
+    "enfants_marelle": {
+      "id": "enfants_marelle",
+      "title": "Hopscotch",
+      "location": "Underwater — Square",
+      "narrator": "",
+      "text": "The children jump on the hopscotch grid.\n\nWith each jump, their feet leave the ground a second too long.\n\nThey float a little.\n\nThen land softly.\n\nOne of them sees you.\n\n**\"Want to play?\"**\n\nYou look at the hopscotch grid.\nThe squares are the same as before.\n\nAikito is already sitting on square 5.\nHe is pretending nothing is happening.\n\n**\"Aikito...\"**\n\n**\"What?\"**",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Play with them.",
+          "vers": "jouer_marelle",
+          "effects": [
+            {
+              "stat": "acceptance",
+              "val": 20
+            }
+          ]
+        },
+        {
+          "text": "Go look for your house.",
+          "vers": "chercher_maison",
+          "effects": [
+            {
+              "stat": "memoire",
+              "val": 10
+            }
+          ]
+        }
+      ],
+      "x": 180,
+      "y": 320
+    },
+    "jouer_marelle": {
+      "id": "jouer_marelle",
+      "title": "The Jump",
+      "location": "Underwater — Square",
+      "narrator": "",
+      "text": "You jump.\n\nOn square 3, your feet leave the ground.\n\nYou float for a second.\n\nIt is strange.\nIt is gentle.\n\nThe children laugh.\n\n**\"It's better underwater!\"** one says.\n**\"We jump higher.\"**\n\nAikito watches you from square 5.\n\n**\"You see.\"** he says.\n**\"Different.\"**\n**\"Not worse.\"**\n**\"Just different.\"**",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Go look for your house.",
+          "vers": "chercher_maison",
+          "effects": [
+            {
+              "stat": "acceptance",
+              "val": 10
+            },
+            {
+              "stat": "memoire",
+              "val": 10
+            }
+          ]
+        }
+      ],
+      "x": 300,
+      "y": 320
+    },
+    "chercher_maison": {
+      "id": "chercher_maison",
+      "title": "Your House",
+      "location": "Underwater — End of the street",
+      "narrator": "",
+      "text": "You find your old house at the end of the street.\n\nIt is there.\n\nThe blue door.\nThe rose bush against the wall.\nThe green shutters.\n\nEverything is there.\n\nBut someone else lives there now.\n\nA family.\nThe children have hung drawings in the windows.\nThe drawings float gently.\n\nYou stop in front of the door.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Knock on the door.",
+          "vers": "nouvelle_famille",
+          "effects": [
+            {
+              "stat": "courage",
+              "val": 15
+            }
+          ]
+        },
+        {
+          "text": "Stay outside without knocking.",
+          "vers": "devant_maison",
+          "effects": [
+            {
+              "stat": "memoire",
+              "val": 15
+            }
+          ]
+        }
+      ],
+      "x": 60,
+      "y": 440
+    },
+    "devant_maison": {
+      "id": "devant_maison",
+      "title": "In Front of the Door",
+      "location": "Underwater — In front of your house",
+      "narrator": "",
+      "text": "You stay there.\n\nYou look at the blue door.\n\nIt is the same color.\nExactly the same.\n\nAikito sits beside you.\n\nHe says nothing.\n\nHe waits.\n\nAfter a while, you say:\n\n**\"It is still there.\"**\n\n**\"Yes.\"** says Aikito.\n\n**\"And I remember it too.\"**\n\n**\"That's what matters.\"** says Aikito.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Knock anyway.",
+          "vers": "nouvelle_famille",
+          "effects": [
+            {
+              "stat": "courage",
+              "val": 10
+            },
+            {
+              "stat": "acceptance",
+              "val": 10
+            }
+          ]
+        },
+        {
+          "text": "Go back to the surface.",
+          "vers": "remonter",
+          "effects": [
+            {
+              "stat": "memoire",
+              "val": 10
+            }
+          ]
+        },
+        {
+          "text": "Say goodbye to the house.",
+          "vers": "fin_au_revoir",
+          "effects": [
+            {
+              "stat": "acceptance",
+              "val": 20
+            }
+          ]
+        }
+      ],
+      "x": 180,
+      "y": 440
+    },
+    "nouvelle_famille": {
+      "id": "nouvelle_famille",
+      "title": "The New Family",
+      "location": "Underwater — Your house",
+      "narrator": "",
+      "text": "The door opens.\n\nA woman smiles at you.\n\n**\"Hello!\"**\n\n**\"I used to live here.\"** you say.\n\nShe opens the door wide.\n\n**\"Come in!\"**\n\nInside, it is different.\nDifferent furniture.\nDifferent colors.\nDifferent smells.\n\nBut the big living-room window is in the same place.\nWith the same light coming through.\n\n**\"It's a beautiful house.\"** says the woman.\n\n**\"Yes.\"** you answer.\n\nAnd you really mean it.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Go back to the surface.",
+          "vers": "remonter",
+          "effects": [
+            {
+              "stat": "acceptance",
+              "val": 20
+            }
+          ]
+        }
+      ],
+      "x": 300,
+      "y": 440
+    },
+    "remonter": {
+      "id": "remonter",
+      "title": "Rising Up",
+      "location": "Between two waters",
+      "narrator": "",
+      "text": "You rise slowly.\n\nThe town moves away below you.\n\nYou see the rooftops.\nThe steeple.\nThe big tree.\n\nThe baker steps out of her shop.\nShe waves at you.\n\nThe hopscotch children look up.\nOne of them waves.\n\nAikito swims beside you.\n\n**\"Will you come back?\"** you ask.\n\n**\"If you want.\"** he says.\n**\"Memories are always there.\"**\n**\"You just have to dive.\"**",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Reach the surface.",
+          "vers": "fin_surface",
+          "effects": [
+            {
+              "stat": "acceptance",
+              "val": 10
+            }
+          ]
+        },
+        {
+          "text": "Go back down a little.",
+          "vers": "fin_rester",
+          "effects": [
+            {
+              "stat": "memoire",
+              "val": 10
+            }
+          ]
+        }
+      ],
+      "x": 60,
+      "y": 560
+    },
+    "fin_surface": {
+      "id": "fin_surface",
+      "title": "End — The Surface",
+      "location": "",
+      "narrator": "",
+      "text": "You lift your head out of the water.\n\nThe sun.\nThe air.\nThe sound of birds.\n\nYou lie on the grass by the lake.\n\nYou look at the sky.\n\nAikito takes off his mask.\nHe shakes himself dry.\n\n**\"So?\"**\n\nYou think.\n\n**\"It is still there.\"** you say.\n**\"Just... underneath.\"**\n\nAikito lies down beside you.\n\n**\"The places we love stay.\"**\n**\"In the water.\"**\n**\"In our heads.\"**\n**\"It's the same.\"**\n\nYou look at the lake.\n\nThe water is calm.\nAnd below, life goes on.",
+      "isStart": false,
+      "isEnd": true,
+      "transition": "fade",
+      "choices": [],
+      "x": 60,
+      "y": 680
+    },
+    "fin_rester": {
+      "id": "fin_rester",
+      "title": "End — A Little Longer",
+      "location": "",
+      "narrator": "",
+      "text": "You go back down.\n\nThe baker is waiting with another croissant.\nSoggy.\nBut warm.\n\nThe children start hopscotch again.\n\nThe town goes on.\n\nYou sit on the bench in the square.\nThe same bench as before.\n\nAikito settles beside you.\n\nYou watch the town move.\n\nBubbles rise.\nShutters open and close.\nThe mail carrier passes by.\n\n**\"Can we stay a little longer?\"** you ask.\n\n**\"As long as we want.\"** says Aikito.\n\nMemories have all the time in the world.",
+      "isStart": false,
+      "isEnd": true,
+      "transition": "fade",
+      "choices": [],
+      "x": 180,
+      "y": 680
+    },
+    "fin_au_revoir": {
+      "id": "fin_au_revoir",
+      "title": "End — Goodbye",
+      "location": "",
+      "narrator": "",
+      "text": "Before going back up,\nyou return to your house.\n\nYou place your hand on the blue door.\n\nIt is cold.\nAnd soft.\n\n**\"Goodbye.\"** you whisper.\n\nThe door does not answer.\n\nBut something in your chest\nsettles gently.\n\nLike a stone you set down.\nNot one you throw.\nOne you place.\n\nAikito looks at you.\n\n**\"Are you okay?\"**\n\n**\"Yes.\"** you answer.\n\nAnd it is true.",
+      "isStart": false,
+      "isEnd": true,
+      "transition": "fade",
+      "choices": [],
+      "x": 300,
+      "y": 680
+    }
+  }
+}

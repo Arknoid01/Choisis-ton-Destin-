@@ -1,0 +1,417 @@
+{
+  "name": "La Ciudad Bajo el Agua",
+  "kids": true,
+  "askPlayerName": true,
+  "pack": "kids",
+  "stats": [
+    {
+      "id": "memoire",
+      "label": "Memoria",
+      "start": 30,
+      "max": 100,
+      "color": "#90e0ef"
+    },
+    {
+      "id": "courage",
+      "label": "Valor",
+      "start": 10,
+      "max": 100,
+      "color": "#f94144"
+    },
+    {
+      "id": "acceptance",
+      "label": "Aceptación",
+      "start": 10,
+      "max": 100,
+      "color": "#90be6d"
+    }
+  ],
+  "theme": {},
+  "scenes": {
+    "arrivee_lac": {
+      "id": "arrivee_lac",
+      "title": "El Lago",
+      "location": "A la orilla del lago",
+      "narrator": "",
+      "text": "Llegas a la orilla de un gran lago.\n\nEl agua está tranquila y transparente.\n\nAikito está a tu lado.\nLleva una máscara de buceo y un tubo.\nLos tenía en su bolsa desde el principio.\n\n**« ¿Cómo lo sabías? »** preguntas.\n\nSe encoge de hombros.\n\n**« Tuve una intuición. »**\n\nMiras el agua.\n\nAl fondo,\nves tejados.\nCalles.\nJardines.\n\nTu antiguo pueblo.",
+      "isStart": true,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Bucear de inmediato.",
+          "vers": "premiere_rue",
+          "effects": [
+            {
+              "stat": "courage",
+              "val": 15
+            }
+          ]
+        },
+        {
+          "text": "Seguir mirando desde la superficie.",
+          "vers": "regarder_surface",
+          "effects": [
+            {
+              "stat": "memoire",
+              "val": 15
+            }
+          ]
+        }
+      ],
+      "x": 60,
+      "y": 60
+    },
+    "regarder_surface": {
+      "id": "regarder_surface",
+      "title": "Desde la Superficie",
+      "location": "A la orilla del lago",
+      "narrator": "",
+      "text": "Te tumbas boca abajo a la orilla del lago.\n\nMiras.\n\nReconoces la calle principal.\nEl campanario de la iglesia.\nEl gran árbol de la plaza.\n\nSiguen ahí.\nSolo que... abajo.\n\nAikito se tumba a tu lado.\n\nSu tubo sobresale del agua.\n\n**« ¿Quieres ir? »**\n\nAsientes.\n\n**« Entonces vamos. »**",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Bucear.",
+          "vers": "premiere_rue",
+          "effects": [
+            {
+              "stat": "memoire",
+              "val": 10
+            },
+            {
+              "stat": "courage",
+              "val": 10
+            }
+          ]
+        }
+      ],
+      "x": 180,
+      "y": 60
+    },
+    "premiere_rue": {
+      "id": "premiere_rue",
+      "title": "La Calle Principal",
+      "location": "Bajo el agua — Calle principal",
+      "narrator": "",
+      "text": "Bajo el agua, es extraño.\n\nTodo está en silencio.\nPero no vacío.\n\nLa panadera saca el pan del horno.\nLas burbujas suben hacia arriba.\n\nEl cartero pedalea en su bicicleta.\nSu pelo flota en todas direcciones.\n\nUnos niños juegan a la rayuela en la acera.\nSus risas hacen pequeños círculos en el agua.\n\nNadie parece encontrarlo raro.\n\nAikito nada a tu lado.\n\n**« Siguieron adelante. »** dice.\n**« Eso es todo. »**",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Ir a ver a la panadera.",
+          "vers": "boulangere",
+          "effects": [
+            {
+              "stat": "memoire",
+              "val": 10
+            }
+          ]
+        },
+        {
+          "text": "Buscar tu antigua casa.",
+          "vers": "chercher_maison",
+          "effects": [
+            {
+              "stat": "memoire",
+              "val": 15
+            }
+          ]
+        },
+        {
+          "text": "Observar a los niños jugar.",
+          "vers": "enfants_marelle",
+          "effects": [
+            {
+              "stat": "acceptance",
+              "val": 10
+            }
+          ]
+        }
+      ],
+      "x": 60,
+      "y": 200
+    },
+    "boulangere": {
+      "id": "boulangere",
+      "title": "La Panadera",
+      "location": "Bajo el agua — Panadería",
+      "narrator": "",
+      "text": "La panadera te sonríe.\n\nComo si te hubieras ido ayer.\n\nTe ofrece un croissant.\n\nEstá empapado.\nPero parece tan orgullosa.\n\n**« Bajo el agua tarda mucho. »** dice.\n**« La masa flota todo el tiempo. »**\n\nSe ríe.\n\n**« Pero nos adaptamos. »**\n\nMiras el escaparate.\nLos pasteles flotan suavemente detrás del cristal.\n\n**« ¿Recuerdas mi tarta de manzana? »** pregunta.\n\nAsientes.\n\nLo recuerdas muy bien.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "« Recuerdo todo. »",
+          "vers": "chercher_maison",
+          "effects": [
+            {
+              "stat": "memoire",
+              "val": 15
+            },
+            {
+              "stat": "acceptance",
+              "val": 5
+            }
+          ]
+        },
+        {
+          "text": "Comer el croissant empapado.",
+          "vers": "chercher_maison",
+          "effects": [
+            {
+              "stat": "acceptance",
+              "val": 15
+            }
+          ]
+        }
+      ],
+      "x": 60,
+      "y": 320
+    },
+    "enfants_marelle": {
+      "id": "enfants_marelle",
+      "title": "La Rayuela",
+      "location": "Bajo el agua — Plaza",
+      "narrator": "",
+      "text": "Los niños saltan en la rayuela.\n\nCon cada salto, sus pies se separan del suelo un segundo de más.\n\nFlotan un poco.\n\nLuego caen suavemente.\n\nUno de ellos te ve.\n\n**« ¿Juegas? »**\n\nMiras la rayuela.\nLos casilleros son los mismos de antes.\n\nAikito ya está sentado en el casillero 5.\nHace como si nada.\n\n**« Aikito... »**\n\n**« ¿Qué? »**",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Jugar con ellos.",
+          "vers": "jouer_marelle",
+          "effects": [
+            {
+              "stat": "acceptance",
+              "val": 20
+            }
+          ]
+        },
+        {
+          "text": "Ir a buscar tu casa.",
+          "vers": "chercher_maison",
+          "effects": [
+            {
+              "stat": "memoire",
+              "val": 10
+            }
+          ]
+        }
+      ],
+      "x": 180,
+      "y": 320
+    },
+    "jouer_marelle": {
+      "id": "jouer_marelle",
+      "title": "El Salto",
+      "location": "Bajo el agua — Plaza",
+      "narrator": "",
+      "text": "Saltas.\n\nEn el casillero 3, tus pies se separan del suelo.\n\nFlotas un segundo.\n\nEs raro.\nEs suave.\n\nLos niños se ríen.\n\n**« ¡Es mejor bajo el agua! »** dice uno.\n**« Saltamos más alto. »**\n\nAikito te mira desde el casillero 5.\n\n**« Ves. »** dice.\n**« Diferente. »**\n**« No peor. »**\n**« Solo diferente. »**",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Ir a buscar tu casa.",
+          "vers": "chercher_maison",
+          "effects": [
+            {
+              "stat": "acceptance",
+              "val": 10
+            },
+            {
+              "stat": "memoire",
+              "val": 10
+            }
+          ]
+        }
+      ],
+      "x": 300,
+      "y": 320
+    },
+    "chercher_maison": {
+      "id": "chercher_maison",
+      "title": "Tu Casa",
+      "location": "Bajo el agua — Calle del fondo",
+      "narrator": "",
+      "text": "Encuentras tu antigua casa al final de la calle.\n\nEstá ahí.\n\nLa puerta azul.\nEl rosal contra la pared.\nLas contraventanas verdes.\n\nTodo está ahí.\n\nPero ahora vive otra familia.\n\nUna familia.\nLos niños han colgado dibujos en las ventanas.\nLos dibujos flotan suavemente.\n\nTe detienes frente a la puerta.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Llamar a la puerta.",
+          "vers": "nouvelle_famille",
+          "effects": [
+            {
+              "stat": "courage",
+              "val": 15
+            }
+          ]
+        },
+        {
+          "text": "Quedarse fuera sin llamar.",
+          "vers": "devant_maison",
+          "effects": [
+            {
+              "stat": "memoire",
+              "val": 15
+            }
+          ]
+        }
+      ],
+      "x": 60,
+      "y": 440
+    },
+    "devant_maison": {
+      "id": "devant_maison",
+      "title": "Frente a la Puerta",
+      "location": "Bajo el agua — Frente a tu casa",
+      "narrator": "",
+      "text": "Te quedas ahí.\n\nMiras la puerta azul.\n\nTiene el mismo color.\nExactamente el mismo.\n\nAikito se sienta a tu lado.\n\nNo dice nada.\n\nEspera.\n\nAl cabo de un rato, dices:\n\n**« Sigue ahí. »**\n\n**« Sí. »** dice Aikito.\n\n**« Y yo también lo recuerdo. »**\n\n**« Eso es lo que importa. »** dice Aikito.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Llamar de todos modos.",
+          "vers": "nouvelle_famille",
+          "effects": [
+            {
+              "stat": "courage",
+              "val": 10
+            },
+            {
+              "stat": "acceptance",
+              "val": 10
+            }
+          ]
+        },
+        {
+          "text": "Volver a la superficie.",
+          "vers": "remonter",
+          "effects": [
+            {
+              "stat": "memoire",
+              "val": 10
+            }
+          ]
+        },
+        {
+          "text": "Despedirse de la casa.",
+          "vers": "fin_au_revoir",
+          "effects": [
+            {
+              "stat": "acceptance",
+              "val": 20
+            }
+          ]
+        }
+      ],
+      "x": 180,
+      "y": 440
+    },
+    "nouvelle_famille": {
+      "id": "nouvelle_famille",
+      "title": "La Nueva Familia",
+      "location": "Bajo el agua — Tu casa",
+      "narrator": "",
+      "text": "La puerta se abre.\n\nUna mujer te sonríe.\n\n**« ¡Hola! »**\n\n**« Yo vivía aquí antes. »** dices.\n\nAbre la puerta de par en par.\n\n**« ¡Entra! »**\n\nDentro, es diferente.\nOtros muebles.\nOtros colores.\nOtros olores.\n\nPero la gran ventana del salón está en el mismo sitio.\nCon la misma luz entrando.\n\n**« Es una casa preciosa. »** dice la mujer.\n\n**« Sí. »** respondes.\n\nY lo piensas de verdad.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Volver a la superficie.",
+          "vers": "remonter",
+          "effects": [
+            {
+              "stat": "acceptance",
+              "val": 20
+            }
+          ]
+        }
+      ],
+      "x": 300,
+      "y": 440
+    },
+    "remonter": {
+      "id": "remonter",
+      "title": "Subir",
+      "location": "Entre dos aguas",
+      "narrator": "",
+      "text": "Subes lentamente.\n\nEl pueblo se aleja debajo de ti.\n\nVes los tejados.\nEl campanario.\nEl gran árbol.\n\nLa panadera sale a la puerta de su tienda.\nTe hace señas.\n\nLos niños de la rayuela miran hacia arriba.\nUno agita la mano.\n\nAikito nada a tu lado.\n\n**« ¿Volverás? »** preguntas.\n\n**« Si quieres. »** dice.\n**« Los recuerdos siempre están ahí. »**\n**« Solo hay que bucear. »**",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Llegar a la superficie.",
+          "vers": "fin_surface",
+          "effects": [
+            {
+              "stat": "acceptance",
+              "val": 10
+            }
+          ]
+        },
+        {
+          "text": "Bajar un poco más.",
+          "vers": "fin_rester",
+          "effects": [
+            {
+              "stat": "memoire",
+              "val": 10
+            }
+          ]
+        }
+      ],
+      "x": 60,
+      "y": 560
+    },
+    "fin_surface": {
+      "id": "fin_surface",
+      "title": "Fin — La Superficie",
+      "location": "",
+      "narrator": "",
+      "text": "Sacas la cabeza del agua.\n\nEl sol.\nEl aire.\nEl canto de los pájaros.\n\nTe tumbas en la hierba a la orilla del lago.\n\nMiras el cielo.\n\nAikito se quita la máscara.\nSe sacude.\n\n**« ¿Y bien? »**\n\nPiensas.\n\n**« Sigue ahí. »** dices.\n**« Solo que... debajo. »**\n\nAikito se tumba a tu lado.\n\n**« Los lugares que queremos permanecen. »**\n**« En el agua. »**\n**« En la cabeza. »**\n**« Es lo mismo. »**\n\nMiras el lago.\n\nEl agua está tranquila.\nY debajo, la vida continúa.",
+      "isStart": false,
+      "isEnd": true,
+      "transition": "fade",
+      "choices": [],
+      "x": 60,
+      "y": 680
+    },
+    "fin_rester": {
+      "id": "fin_rester",
+      "title": "Fin — Un Poco Más",
+      "location": "",
+      "narrator": "",
+      "text": "Bajas de nuevo.\n\nLa panadera te espera con otro croissant.\nEmpapado.\nPero caliente.\n\nLos niños retoman la rayuela.\n\nEl pueblo sigue.\n\nTe sientas en el banco de la plaza.\nEl mismo banco de antes.\n\nAikito se instala a tu lado.\n\nMiráis el pueblo moverse.\n\nLas burbujas suben.\nLas contraventanas se abren y cierran.\nPasa el cartero.\n\n**« ¿Podemos quedarnos un poco más? »** preguntas.\n\n**« Todo lo que queramos. »** dice Aikito.\n\nLos recuerdos tienen todo el tiempo del mundo.",
+      "isStart": false,
+      "isEnd": true,
+      "transition": "fade",
+      "choices": [],
+      "x": 180,
+      "y": 680
+    },
+    "fin_au_revoir": {
+      "id": "fin_au_revoir",
+      "title": "Fin — Adiós",
+      "location": "",
+      "narrator": "",
+      "text": "Antes de subir,\nvuelves frente a tu casa.\n\nPones la mano en la puerta azul.\n\nEstá fría.\nY suave.\n\n**« Adiós. »** dices en voz baja.\n\nLa puerta no responde.\n\nPero algo en tu pecho\nse asienta suavemente.\n\nComo una piedra que se deja.\nNo que se lanza.\nQue se deja.\n\nAikito te mira.\n\n**« ¿Estás bien? »**\n\n**« Sí. »** respondes.\n\nY es verdad.",
+      "isStart": false,
+      "isEnd": true,
+      "transition": "fade",
+      "choices": [],
+      "x": 300,
+      "y": 680
+    }
+  }
+}
