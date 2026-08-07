@@ -1,0 +1,441 @@
+{
+  "name": "La Lumière qui a Peur du Noir",
+  "kids": true,
+  "askPlayerName": true,
+  "pack": "kids",
+  "stats": [
+    {
+      "id": "courage",
+      "label": "Courage",
+      "start": 20,
+      "max": 100,
+      "color": "#FF9B50"
+    },
+    {
+      "id": "confiance",
+      "label": "Confiance",
+      "start": 20,
+      "max": 100,
+      "color": "#4FD0E4"
+    }
+  ],
+  "theme": {
+    "bg": "#0a1420",
+    "bg2": "#0f1e2e",
+    "bg3": "#152840",
+    "bg4": "#1c3450",
+    "border": "#274a68",
+    "accent": "#4FD0E4",
+    "accent2": "#FF9B50",
+    "accent3": "#90EE90",
+    "text": "#e8f2f0",
+    "text2": "#7fa8b0",
+    "text3": "#4a6a75"
+  },
+  "scenes": {
+    "prologue": {
+      "id": "prologue",
+      "title": "Seul avec le Phare",
+      "location": "PHARE DE CAP BRUME — NUIT",
+      "narrator": "Certaines nuits, le monde chuchote juste assez fort pour qu'on l'entende.",
+      "text": "Ce soir, Papi Loran est parti pêcher au large, et pour la première fois, c'est toi qui veilles sur le phare de Cap Brume.\n\nAikito, ton petit chien curieux, trotte à tes côtés, la truffe en l'air.\n\nTu montes l'escalier en colimaçon, une lanterne à la main.\n\nPar la fenêtre, la mer est noire et calme.\n\nPuis, loin sur l'eau, une lueur bleu-vert apparaît, tremblante, comme une étoile tombée dans les vagues.\n\nUn cri grave et triste traverse la nuit.\n\nAikito se fige, les oreilles dressées.\n\n*« Ça, ce n'est pas un bateau. »*\n\n{{player}}, ton cœur bat plus vite.",
+      "isStart": true,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Descendre prendre la barque pour aller voir",
+          "vers": "plage",
+          "effects": [
+            {
+              "stat": "courage",
+              "val": 15
+            }
+          ],
+          "clickEffect": "pulse"
+        },
+        {
+          "text": "Observer d'abord à la longue-vue du phare",
+          "vers": "observation",
+          "effects": [
+            {
+              "stat": "confiance",
+              "val": 10
+            }
+          ],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 400,
+      "y": 40
+    },
+    "observation": {
+      "id": "observation",
+      "title": "La Longue-Vue",
+      "location": "PHARE — SALLE DE LA LANTERNE",
+      "narrator": "Regarder avant d'agir n'est pas avoir peur : c'est apprendre à comprendre.",
+      "text": "Tu poses la lanterne et attrapes la longue-vue de Papi Loran.\n\nAikito se dresse sur ses pattes arrière contre le rebord de la fenêtre pour essayer de voir, lui aussi.\n\nÀ travers la lentille, la lueur devient plus claire : une forme ronde, presque douce, qui clignote par intervalles.\n\nUn clignotement long. Deux courts. Encore un long.\n\n*« On dirait qu'elle nous parle »*, souffle Aikito, la tête penchée.\n\nTon cœur se calme un peu. Ce qui brille là-bas ne ressemble pas à un monstre. Ça ressemble à quelqu'un qui appelle.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Répondre avec la lumière du phare",
+          "vers": "signal",
+          "effects": [
+            {
+              "stat": "confiance",
+              "val": 15
+            }
+          ],
+          "clickEffect": "pulse"
+        },
+        {
+          "text": "Descendre directement à la plage",
+          "vers": "plage",
+          "effects": [
+            {
+              "stat": "courage",
+              "val": 10
+            }
+          ],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 200,
+      "y": 160
+    },
+    "signal": {
+      "id": "signal",
+      "title": "Un Message de Lumière",
+      "location": "PHARE — SALLE DE LA LANTERNE",
+      "narrator": "Parler une langue qu'on ne connaît pas encore, ça commence souvent par un clignement de lumière.",
+      "text": "Tu actionnes le mécanisme du phare. Long. Court. Court.\n\nLa lueur sur l'eau s'arrête net.\n\nPuis elle répond : trois éclats rapides, comme un petit rire.\n\nElle se rapproche des rochers, doucement, comme si elle avait enfin trouvé quelqu'un qui l'écoute.\n\nAikito remue la queue, déjà prêt à descendre.\n\n*« Viens, viens, viens ! »*",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Descendre à la rencontre",
+          "vers": "plage",
+          "effects": [
+            {
+              "stat": "courage",
+              "val": 10
+            }
+          ],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 100,
+      "y": 280
+    },
+    "plage": {
+      "id": "plage",
+      "title": "Ce Qui Brille dans l'Eau",
+      "location": "PLAGE DE CAP BRUME — NUIT",
+      "narrator": "Le noir cache autant de peurs que de merveilles — la seule différence, c'est qui ose regarder.",
+      "text": "Le sable froid crisse sous tes pieds. Aikito trottine devant, puis s'arrête net.\n\nPrès des rochers, la lueur flotte à la surface : une petite créature marine, couverte d'écailles qui brillent comme des étoiles mouillées.\n\nElle a de grands yeux sombres et deux longues antennes lumineuses qui tremblent.\n\nDès qu'elle vous voit, elle plonge à moitié, prête à fuir.\n\nAikito s'assoit lentement dans le sable, comme pour montrer qu'il n'est pas dangereux.\n\nElle est plus petite que toi. Et elle a l'air aussi effrayée que vous deux.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Rester immobile et parler doucement",
+          "vers": "approche_calme",
+          "effects": [
+            {
+              "stat": "confiance",
+              "val": 15
+            }
+          ],
+          "clickEffect": "pulse"
+        },
+        {
+          "text": "Reculer d'un pas, surpris·e",
+          "vers": "peur_reaction",
+          "effects": [
+            {
+              "stat": "courage",
+              "val": -10
+            }
+          ],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 300,
+      "y": 280
+    },
+    "peur_reaction": {
+      "id": "peur_reaction",
+      "title": "Un Mouvement de Recul",
+      "location": "PLAGE DE CAP BRUME — NUIT",
+      "narrator": "Avoir peur n'est pas grave. Ce qui compte, c'est ce qu'on fait juste après.",
+      "text": "Tu recules sans le vouloir.\n\nLa créature sursaute et disparaît sous l'eau dans un éclair de lumière.\n\nAikito te donne un petit coup de truffe contre la jambe.\n\n*« C'est bon, c'est bon... elle a eu aussi peur que toi. »*\n\nTu te sens un peu bête. Elle n'avait rien fait de mal — elle avait juste crié, comme on appelle quand on est perdu.\n\nUn faible scintillement réapparaît, un peu plus loin, hésitant.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "S'excuser à voix basse et rester calme cette fois",
+          "vers": "creature_revient",
+          "effects": [
+            {
+              "stat": "confiance",
+              "val": 15
+            }
+          ],
+          "clickEffect": "pulse"
+        },
+        {
+          "text": "Attendre patiemment sans bouger",
+          "vers": "creature_revient",
+          "effects": [
+            {
+              "stat": "courage",
+              "val": 10
+            }
+          ],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 380,
+      "y": 380
+    },
+    "creature_revient": {
+      "id": "creature_revient",
+      "title": "Une Seconde Chance",
+      "location": "PLAGE DE CAP BRUME — NUIT",
+      "narrator": "La confiance, ça se reconstruit doucement, comme une marée qui remonte.",
+      "text": "La lueur approche à nouveau, plus lentement.\n\nLa créature garde ses distances, mais ne repart pas.\n\nElle observe surtout Aikito, immobile et silencieux pour une fois.\n\nTu t'assois dans le sable, pour paraître plus petit·e, moins effrayant·e.\n\nPeu à peu, elle glisse jusqu'au bord de l'eau, juste devant vous.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Tendre doucement la main",
+          "vers": "approche_calme",
+          "effects": [
+            {
+              "stat": "confiance",
+              "val": 10
+            }
+          ],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 460,
+      "y": 460
+    },
+    "approche_calme": {
+      "id": "approche_calme",
+      "title": "Le Petit Lumignon",
+      "location": "PLAGE DE CAP BRUME — BORD DE L'EAU",
+      "narrator": "Ce qui nous fait peur au premier regard n'a parfois besoin que d'un peu de patience.",
+      "text": "La créature s'approche enfin de ta main, timide. Aikito reste sagement couché à côté, la queue battant doucement le sable.\n\nSa peau est douce et tiède, et sa lumière pulse comme un petit cœur qui bat.\n\nAutour de son cou, une coquille en spirale est accrochée à un fil d'algue tressée — comme un collier.\n\nElle pousse un petit cri, plus doux cette fois, et regarde vers le large, puis vers toi.\n\n*« Elle veut nous montrer quelque chose »*, murmure Aikito.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Examiner la coquille de plus près",
+          "vers": "indice_coquillage",
+          "effects": [
+            {
+              "stat": "confiance",
+              "val": 10
+            }
+          ],
+          "clickEffect": "pulse"
+        },
+        {
+          "text": "Regarder où elle montre, vers le large",
+          "vers": "indice_coquillage",
+          "effects": [
+            {
+              "stat": "courage",
+              "val": 10
+            }
+          ],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 300,
+      "y": 460
+    },
+    "indice_coquillage": {
+      "id": "indice_coquillage",
+      "title": "Le Collier de Coquillage",
+      "location": "PLAGE DE CAP BRUME — BORD DE L'EAU",
+      "narrator": "Un petit indice suffit parfois à changer toute une nuit.",
+      "text": "La coquille porte une gravure en spirale, comme les motifs que tu as déjà vus sculptés sur les vieilles falaises au nord de Cap Brume.\n\nLa créature tremble légèrement — pas de peur, mais de froid. Elle est seule depuis trop longtemps.\n\nAikito renifle la coquille avec attention, puis lève la tête vers les falaises au loin.\n\nTu comprends : elle n'est pas un monstre échoué là par hasard.\n\nElle cherche sa famille, et elle s'est perdue en chemin.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Aller demander conseil au vieux pêcheur du port",
+          "vers": "vieux_pecheur",
+          "effects": [
+            {
+              "stat": "confiance",
+              "val": 10
+            }
+          ],
+          "clickEffect": "pulse"
+        },
+        {
+          "text": "Suivre directement le chemin des falaises",
+          "vers": "sentier_falaises",
+          "effects": [
+            {
+              "stat": "courage",
+              "val": 15
+            }
+          ],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 300,
+      "y": 560
+    },
+    "vieux_pecheur": {
+      "id": "vieux_pecheur",
+      "title": "La Légende de Mounec",
+      "location": "PORT DE CAP BRUME — QUAI",
+      "narrator": "Les histoires que l'on croit inventées cachent parfois une part de vérité.",
+      "text": "Le vieux pêcheur Mounec range ses filets à la lueur d'une lampe. Aikito s'assoit poliment devant lui, ce qui le fait sourire.\n\nQuand tu lui décris la créature, son visage s'éclaire.\n\n*« Un Lumignon... Ça fait trente ans que je n'en ai pas vu un. Leur famille vit dans une grotte, sous les falaises du nord. Ils ne sortent que les nuits sans lune, et seulement pour chercher un petit égaré. »*\n\nIl te tend une lanterne à l'huile.\n\n*« Vas-y doucement. Le noir là-bas peut sembler effrayant. Mais ce n'est jamais vide. »*",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Prendre la lanterne et partir vers les falaises",
+          "vers": "sentier_falaises",
+          "effects": [
+            {
+              "stat": "confiance",
+              "val": 15
+            }
+          ],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 150,
+      "y": 680
+    },
+    "sentier_falaises": {
+      "id": "sentier_falaises",
+      "title": "Le Chemin des Falaises",
+      "location": "FALAISES DU NORD — SENTIER ÉTROIT",
+      "narrator": "Le chemin le plus sombre est souvent celui qui mène quelque part.",
+      "text": "Le sentier grimpe entre les rochers. Aikito ouvre la marche, la truffe collée au sol, comme s'il suivait une odeur invisible.\n\nLe Lumignon glisse à côté de vous sur les flaques, sa lumière éclairant juste assez le chemin.\n\nLe vent souffle fort. En bas, les vagues claquent contre la roche.\n\nPuis, au détour d'un rocher, tu aperçois une ouverture sombre dans la falaise — une grotte, silencieuse.\n\nLe Lumignon s'arrête net, hésitant devant l'entrée noire. Même Aikito ne jappe pas.\n\nIl te regarde, comme pour te demander : *tu viens avec moi ?*",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Entrer dans la grotte avec le Lumignon",
+          "vers": "entree_grotte",
+          "effects": [
+            {
+              "stat": "courage",
+              "val": 20
+            }
+          ],
+          "clickEffect": "pulse"
+        },
+        {
+          "text": "Rester à l'entrée et l'appeler avec la lanterne",
+          "vers": "appel_lanterne",
+          "effects": [
+            {
+              "stat": "confiance",
+              "val": 10
+            }
+          ],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 300,
+      "y": 760
+    },
+    "appel_lanterne": {
+      "id": "appel_lanterne",
+      "title": "Un Signal dans le Noir",
+      "location": "FALAISES DU NORD — ENTRÉE DE LA GROTTE",
+      "narrator": "On peut aider quelqu'un même sans tout affronter à sa place.",
+      "text": "Tu restes à l'entrée et balances doucement la lanterne, en rythme, comme le signal du phare.\n\nLong. Court. Court.\n\nAikito s'assoit juste à côté de toi, sans un bruit, comme s'il montait la garde.\n\nLe Lumignon hésite, puis avance seul dans le noir, rassuré par la lumière qui continue de briller derrière lui.\n\nAu fond de la grotte, d'autres lueurs bleu-vert s'allument, une à une, comme des étoiles qui se réveillent.\n\nDes cris joyeux résonnent contre la roche.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Attendre, la lanterne toujours levée",
+          "vers": "fin_lumiere",
+          "effects": [
+            {
+              "stat": "confiance",
+              "val": 15
+            }
+          ],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 200,
+      "y": 880
+    },
+    "entree_grotte": {
+      "id": "entree_grotte",
+      "title": "Dans le Noir, Ensemble",
+      "location": "GROTTE DES FALAISES — ENTRÉE",
+      "narrator": "Le courage, ce n'est pas de ne jamais avoir peur. C'est d'avancer quand même, à côté de quelqu'un.",
+      "text": "Tu prends une grande respiration et entres dans la grotte, ta lanterne levée devant toi.\n\nAikito trottine juste derrière tes talons, plus proche que d'habitude.\n\nLe Lumignon reste tout près, sa lumière collée à ton ombre.\n\nL'obscurité est épaisse, le bruit des vagues résonne étrangement.\n\nPuis, au détour d'un couloir de pierre, la grotte s'ouvre sur une immense caverne.\n\nElle est remplie de lueurs bleu-vert qui dansent doucement contre les parois.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Avancer vers les lumières",
+          "vers": "fin_reunion",
+          "effects": [
+            {
+              "stat": "courage",
+              "val": 15
+            }
+          ],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 420,
+      "y": 880
+    },
+    "fin_reunion": {
+      "id": "fin_reunion",
+      "title": "Les Lumignons de la Grotte",
+      "location": "GROTTE DES FALAISES — CAVERNE INTÉRIEURE",
+      "narrator": "Ce qui nous semblait effrayant cache parfois juste quelqu'un qui a besoin d'aide.",
+      "text": "Des dizaines de créatures semblables au Lumignon nagent autour de toi dans un bassin d'eau claire, leur lumière pulsant doucement.\n\nDeux d'entre elles, plus grandes, se précipitent vers ton petit compagnon en poussant des cris de joie.\n\nSa famille.\n\nAikito aboie une fois, joyeusement, avant de se rasseoir bien sagement contre ta jambe.\n\nLe Lumignon se blottit contre les siens, puis se retourne vers vous deux une dernière fois, ses antennes clignotant doucement — un vrai merci.\n\nEn repartant vers le phare, tu comprends : ce qui t'avait fait si peur cette nuit-là n'était qu'un petit être perdu, cherchant simplement sa route vers ceux qu'il aimait.",
+      "isStart": false,
+      "isEnd": true,
+      "transition": "fade",
+      "choices": [],
+      "x": 420,
+      "y": 980
+    },
+    "fin_lumiere": {
+      "id": "fin_lumiere",
+      "title": "La Lumière qui Guide",
+      "location": "FALAISES DU NORD — ENTRÉE DE LA GROTTE",
+      "narrator": "On n'a pas besoin de tout affronter pour aider — parfois, tenir la lumière suffit.",
+      "text": "Tu ne vois pas la grotte de l'intérieur, mais tu entends les cris joyeux résonner contre la roche.\n\nAikito colle sa tête contre ta jambe, les oreilles dressées, à l'écoute.\n\nLe Lumignon ressort un instant, entouré de deux grandes silhouettes lumineuses — sa famille, venue le chercher.\n\nIl clignote une dernière fois dans ta direction avant de replonger avec eux dans le noir.\n\nTu redescends vers le phare avec Aikito, ta lanterne encore chaude dans la main.\n\nTu n'as pas eu besoin d'entrer dans le noir pour aider quelqu'un à retrouver son chemin. Il suffisait de rester, et de tenir la lumière.",
+      "isStart": false,
+      "isEnd": true,
+      "transition": "fade",
+      "choices": [],
+      "x": 200,
+      "y": 980
+    }
+  },
+  "companion": "Aikito"
+}
