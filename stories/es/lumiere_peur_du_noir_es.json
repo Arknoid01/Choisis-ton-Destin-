@@ -1,0 +1,621 @@
+{
+  "name": "La Luz que Tiene Miedo a la Oscuridad",
+  "kids": true,
+  "askPlayerName": true,
+  "pack": "kids",
+  "stats": [
+    {
+      "id": "courage",
+      "label": "Valor",
+      "start": 20,
+      "max": 100,
+      "color": "#FF9B50"
+    },
+    {
+      "id": "confiance",
+      "label": "Confianza",
+      "start": 20,
+      "max": 100,
+      "color": "#4FD0E4"
+    }
+  ],
+  "theme": {
+    "bg": "#0a1420",
+    "bg2": "#0f1e2e",
+    "bg3": "#152840",
+    "bg4": "#1c3450",
+    "border": "#274a68",
+    "accent": "#4FD0E4",
+    "accent2": "#FF9B50",
+    "accent3": "#90EE90",
+    "text": "#e8f2f0",
+    "text2": "#7fa8b0",
+    "text3": "#4a6a75"
+  },
+  "scenes": {
+    "prologue": {
+      "id": "prologue",
+      "title": "Solo con el Faro",
+      "location": "FARO DEL CABO NIEBLA — NOCHE",
+      "narrator": "Algunas noches, el mundo susurra justo lo bastante fuerte para que lo oigas.",
+      "text": "Esta noche, el abuelo Loran ha salido a pescar mar adentro, y por primera vez eres tú quien vigila el faro del Cabo Niebla.\n\nAikito, tu perrito curioso, trota a tu lado con el hocico en alto.\n\nSubes la escalera de caracol, con una linterna en la mano.\n\nPor la ventana, el mar es negro y tranquilo.\n\nEntonces, lejos sobre el agua, aparece un resplandor azul verdoso, tembloroso, como una estrella caída entre las olas.\n\nUn grito grave y triste atraviesa la noche.\n\nAikito se queda inmóvil, con las orejas erguidas.\n\n*«Eso no es un barco.»*\n\n{{player}}, tu corazón late más rápido.",
+      "isStart": true,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Bajar y tomar la barca para ir a ver",
+          "vers": "plage",
+          "effects": [
+            {
+              "stat": "courage",
+              "val": 15
+            }
+          ],
+          "clickEffect": "pulse"
+        },
+        {
+          "text": "Observar primero con el catalejo del faro",
+          "vers": "observation",
+          "effects": [
+            {
+              "stat": "confiance",
+              "val": 10
+            }
+          ],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 400,
+      "y": 40
+    },
+    "observation": {
+      "id": "observation",
+      "title": "El Catalejo",
+      "location": "FARO — SALA DE LA LINTERNA",
+      "narrator": "Mirar antes de actuar no es tener miedo: es aprender a comprender.",
+      "text": "Dejas la linterna y coges el catalejo del abuelo Loran.\n\nAikito se pone de pie sobre las patas traseras contra el alféizar de la ventana, intentando ver también.\n\nA través de la lente, el resplandor se vuelve más claro: una forma redonda, casi suave, que parpadea a intervalos.\n\nUn parpadeo largo. Dos cortos. Otro largo.\n\n*«Parece que nos está hablando»*, susurra Aikito, con la cabeza inclinada.\n\nTu corazón se calma un poco. Lo que brilla allá lejos no parece un monstruo. Parece alguien que llama.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Responder con la luz del faro",
+          "vers": "signal",
+          "effects": [
+            {
+              "stat": "confiance",
+              "val": 15
+            }
+          ],
+          "clickEffect": "pulse"
+        },
+        {
+          "text": "Bajar directamente a la playa",
+          "vers": "plage",
+          "effects": [
+            {
+              "stat": "courage",
+              "val": 10
+            }
+          ],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 200,
+      "y": 160
+    },
+    "signal": {
+      "id": "signal",
+      "title": "Un Mensaje de Luz",
+      "location": "FARO — SALA DE LA LINTERNA",
+      "narrator": "Hablar un idioma que aún no conoces suele empezar con un parpadeo de luz.",
+      "text": "Accionas el mecanismo del faro. Largo. Corto. Corto.\n\nEl resplandor sobre el agua se detiene de golpe.\n\nLuego responde: tres destellos rápidos, como una pequeña risa.\n\nSe acerca a las rocas, despacio, como si por fin hubiera encontrado a alguien que la escucha.\n\nAikito mueve la cola, ya listo para bajar.\n\n*«¡Vamos, vamos, vamos!»*",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Bajar al encuentro del Lumignon",
+          "vers": "plage",
+          "effects": [
+            {
+              "stat": "courage",
+              "val": 10
+            }
+          ],
+          "clickEffect": "pulse"
+        },
+        {
+          "text": "Seguir el diálogo luminoso un poco más",
+          "vers": "dialogue_lumiere",
+          "effects": [
+            {
+              "stat": "confiance",
+              "val": 15
+            }
+          ],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 100,
+      "y": 280
+    },
+    "dialogue_lumiere": {
+      "id": "dialogue_lumiere",
+      "title": "Aprender a Parpadear",
+      "location": "FARO — SALA DE LA LINTERNA",
+      "narrator": "A veces, comprender empieza por repetir el mismo gesto hasta que se convierte en un puente.",
+      "text": "Imitas otra vez los parpadeos. Largo. Corto. Corto.\n\nEl resplandor responde con una secuencia nueva: dos destellos, una pausa, y luego uno más largo.\n\nAikito inclina la cabeza.\n\n*«Creo que dice gracias. O quizá tiene miedo. Tal vez las dos cosas.»*\n\nCuando por fin bajas la escalera, sientes que la criatura ya te espera junto a las rocas, menos temblorosa que antes.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Reunirte con la criatura en la playa",
+          "vers": "plage",
+          "effects": [
+            {
+              "stat": "confiance",
+              "val": 10
+            }
+          ],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 50,
+      "y": 360
+    },
+    "plage": {
+      "id": "plage",
+      "title": "Lo que Brilla en el Agua",
+      "location": "PLAYA DEL CABO NIEBLA — NOCHE",
+      "narrator": "La oscuridad esconde tantos miedos como maravillas; la única diferencia es quién se atreve a mirar.",
+      "text": "La arena fría cruje bajo tus pies. Aikito trota delante y se detiene de golpe.\n\nJunto a las rocas, el resplandor flota en la superficie: una pequeña criatura marina, cubierta de escamas que brillan como estrellas mojadas.\n\nTiene grandes ojos oscuros y dos largas antenas luminosas que tiemblan.\n\nEn cuanto os ve, se sumerge a medias, lista para huir.\n\nAikito se sienta despacio en la arena, como para mostrar que no es peligroso.\n\nEs más pequeña que tú. Y parece tan asustada como vosotros dos.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Quedarte quieto y hablar en voz baja",
+          "vers": "approche_calme",
+          "effects": [
+            {
+              "stat": "confiance",
+              "val": 15
+            }
+          ],
+          "clickEffect": "pulse"
+        },
+        {
+          "text": "Retroceder un paso, sobresaltado",
+          "vers": "peur_reaction",
+          "effects": [
+            {
+              "stat": "courage",
+              "val": -10
+            }
+          ],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 300,
+      "y": 280
+    },
+    "peur_reaction": {
+      "id": "peur_reaction",
+      "title": "Un Paso Atrás",
+      "location": "PLAYA DEL CABO NIEBLA — NOCHE",
+      "narrator": "Tener miedo no está mal. Lo que importa es lo que haces justo después.",
+      "text": "Retrocedes sin querer.\n\nLa criatura se sobresalta y desaparece bajo el agua en un destello de luz.\n\nAikito te da un pequeño empujón con el hocico en la pierna.\n\n*«Está bien, está bien... también tuvo miedo, como tú.»*\n\nTe sientes un poco tonto. No había hecho nada malo; solo había gritado, como se llama cuando uno está perdido.\n\nUn débil destello reaparece, un poco más lejos, vacilante.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Disculparte en voz baja y mantener la calma esta vez",
+          "vers": "creature_revient",
+          "effects": [
+            {
+              "stat": "confiance",
+              "val": 15
+            }
+          ],
+          "clickEffect": "pulse"
+        },
+        {
+          "text": "Esperar con paciencia sin moverte",
+          "vers": "creature_revient",
+          "effects": [
+            {
+              "stat": "courage",
+              "val": 10
+            }
+          ],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 380,
+      "y": 380
+    },
+    "creature_revient": {
+      "id": "creature_revient",
+      "title": "Una Segunda Oportunidad",
+      "location": "PLAYA DEL CABO NIEBLA — NOCHE",
+      "narrator": "La confianza se reconstruye despacio, como una marea que vuelve a subir.",
+      "text": "El resplandor se acerca de nuevo, más despacio.\n\nLa criatura mantiene la distancia, pero no se va.\n\nObserva sobre todo a Aikito, inmóvil y en silencio por una vez.\n\nTe sientas en la arena, para parecer más pequeño y menos amenazador.\n\nPoco a poco, se desliza hasta la orilla del agua, justo delante de vosotros.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Tender suavemente la mano",
+          "vers": "approche_calme",
+          "effects": [
+            {
+              "stat": "confiance",
+              "val": 10
+            }
+          ],
+          "clickEffect": "pulse"
+        },
+        {
+          "text": "Cantar en voz baja una nana del abuelo Loran",
+          "vers": "berceuse_plage",
+          "effects": [
+            {
+              "stat": "confiance",
+              "val": 15
+            }
+          ],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 460,
+      "y": 460
+    },
+    "berceuse_plage": {
+      "id": "berceuse_plage",
+      "title": "Una Voz en la Noche",
+      "location": "PLAYA DEL CABO NIEBLA — NOCHE",
+      "narrator": "Una melodía familiar puede tranquilizar a dos seres a la vez: el que canta y el que escucha.",
+      "text": "Murmuras la vieja nana que el abuelo Loran tarareaba cuando tenías miedo al trueno.\n\nLa criatura deja de temblar. Su luz late al ritmo de tu voz.\n\nAikito se tumba en la arena, con los ojos entrecerrados.\n\nCuando la canción termina, el Lumignon se desliza hasta ti, casi tímido, como si hubiera entendido que la noche también puede ser suave.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Recibirlo con suavidad",
+          "vers": "approche_calme",
+          "effects": [
+            {
+              "stat": "confiance",
+              "val": 10
+            }
+          ],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 540,
+      "y": 460
+    },
+    "approche_calme": {
+      "id": "approche_calme",
+      "title": "El Pequeño Lumignon",
+      "location": "PLAYA DEL CABO NIEBLA — ORILLA DEL AGUA",
+      "narrator": "Lo que nos asusta a primera vista a veces solo necesita un poco de paciencia.",
+      "text": "La criatura por fin se acerca a tu mano, tímida. Aikito permanece tumbado con calma a tu lado, con la cola moviéndose suavemente sobre la arena.\n\nSu piel es suave y tibia, y su luz late como un pequeño corazón.\n\nAlrededor de su cuello, una concha en espiral cuelga de un hilo de alga trenzada, como un collar.\n\nSuelta un pequeño grito, más suave esta vez, y mira hacia mar abierto, luego hacia ti.\n\n*«Quiere enseñarnos algo»*, murmura Aikito.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Examinar la concha de cerca",
+          "vers": "indice_coquillage",
+          "effects": [
+            {
+              "stat": "confiance",
+              "val": 10
+            }
+          ],
+          "clickEffect": "pulse"
+        },
+        {
+          "text": "Mirar hacia donde señala, mar adentro",
+          "vers": "indice_coquillage",
+          "effects": [
+            {
+              "stat": "courage",
+              "val": 10
+            }
+          ],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 300,
+      "y": 460
+    },
+    "indice_coquillage": {
+      "id": "indice_coquillage",
+      "title": "El Collar de Concha",
+      "location": "PLAYA DEL CABO NIEBLA — ORILLA DEL AGUA",
+      "narrator": "A veces basta una pequeña pista para cambiar toda una noche.",
+      "text": "La concha lleva un grabado en espiral, como los motivos que ya has visto esculpidos en los viejos acantilados al norte del Cabo Niebla.\n\nLa criatura tiembla ligeramente, no de miedo, sino de frío. Lleva demasiado tiempo sola.\n\nAikito olfatea la concha con atención y luego levanta la cabeza hacia los acantilados lejanos.\n\nLo entiendes: no es un monstruo varado allí por casualidad.\n\nBusca a su familia, y se perdió en el camino.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Ir a pedir consejo al viejo pescador del puerto",
+          "vers": "vieux_pecheur",
+          "effects": [
+            {
+              "stat": "confiance",
+              "val": 10
+            }
+          ],
+          "clickEffect": "pulse"
+        },
+        {
+          "text": "Seguir directamente el camino de los acantilados",
+          "vers": "sentier_falaises",
+          "effects": [
+            {
+              "stat": "courage",
+              "val": 15
+            }
+          ],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 300,
+      "y": 560
+    },
+    "vieux_pecheur": {
+      "id": "vieux_pecheur",
+      "title": "La Leyenda de Mounec",
+      "location": "PUERTO DEL CABO NIEBLA — MUELLE",
+      "narrator": "Las historias que creemos inventadas a veces esconden una parte de verdad.",
+      "text": "El viejo pescador Mounec recoge sus redes a la luz de una lámpara. Aikito se sienta educadamente delante de él, lo que le hace sonreír.\n\nCuando le describes la criatura, su rostro se ilumina.\n\n*«Un Lumignon... Hace treinta años que no veo uno. Su familia vive en una cueva, bajo los acantilados del norte. Solo salen las noches sin luna, y únicamente para buscar a un pequeño extraviado.»*\n\nTe entrega una linterna de aceite.\n\n*«Ve con calma. La oscuridad de allí puede parecer aterradora. Pero nunca está vacía.»*",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Tomar la linterna y partir hacia los acantilados",
+          "vers": "sentier_falaises",
+          "effects": [
+            {
+              "stat": "confiance",
+              "val": 15
+            }
+          ],
+          "clickEffect": "pulse"
+        },
+        {
+          "text": "Preguntar a Mounec por qué los Lumignons tienen miedo a la oscuridad",
+          "vers": "legende_noir",
+          "effects": [
+            {
+              "stat": "courage",
+              "val": 10
+            }
+          ],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 150,
+      "y": 680
+    },
+    "legende_noir": {
+      "id": "legende_noir",
+      "title": "El Miedo a las Profundidades",
+      "location": "PUERTO DEL CABO NIEBLA — MUELLE",
+      "narrator": "Comprender un miedo no lo hace desaparecer. Pero a veces se vuelve más pequeño.",
+      "text": "Mounec reflexiona largamente mientras enrolla sus redes.\n\n*«Los Lumignons nacen con su propia luz. En la oscuridad total, a veces olvidan que aún brillan. Entonces creen que han desaparecido.»*\n\nTe entrega la linterna.\n\n*«Muéstrales que no están solos. Eso es todo lo que podemos hacer.»*",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Partir hacia los acantilados, con la linterna en la mano",
+          "vers": "sentier_falaises",
+          "effects": [
+            {
+              "stat": "confiance",
+              "val": 10
+            }
+          ],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 80,
+      "y": 720
+    },
+    "sentier_falaises": {
+      "id": "sentier_falaises",
+      "title": "El Camino de los Acantilados",
+      "location": "ACANTILADOS DEL NORTE — SENDERO ESTRECHO",
+      "narrator": "El camino más oscuro suele ser el que lleva a algún lugar.",
+      "text": "El sendero sube entre las rocas. Aikito abre la marcha, con el hocico pegado al suelo, como si siguiera un olor invisible.\n\nEl Lumignon se desliza a vuestro lado sobre los charcos, su luz iluminando justo lo suficiente el camino.\n\nEl viento sopla con fuerza. Abajo, las olas golpean contra la roca.\n\nEntonces, al doblar una roca, vislumbras una abertura oscura en el acantilado: una cueva, silenciosa.\n\nEl Lumignon se detiene de golpe, vacilando ante la entrada negra. Ni siquiera Aikito ladra.\n\nTe mira, como preguntándote: *¿vienes conmigo?*",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Entrar en la cueva con el Lumignon",
+          "vers": "entree_grotte",
+          "effects": [
+            {
+              "stat": "courage",
+              "val": 20
+            }
+          ],
+          "clickEffect": "pulse"
+        },
+        {
+          "text": "Quedarte en la entrada y llamarlo con la linterna",
+          "vers": "appel_lanterne",
+          "effects": [
+            {
+              "stat": "confiance",
+              "val": 10
+            }
+          ],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 300,
+      "y": 760
+    },
+    "appel_lanterne": {
+      "id": "appel_lanterne",
+      "title": "Una Señal en la Oscuridad",
+      "location": "ACANTILADOS DEL NORTE — ENTRADA DE LA CUEVA",
+      "narrator": "Se puede ayudar a alguien incluso sin enfrentarlo todo en su lugar.",
+      "text": "Te quedas en la entrada y balanceas suavemente la linterna, al ritmo, como la señal del faro.\n\nLargo. Corto. Corto.\n\nAikito se sienta justo a tu lado, sin hacer ruido, como si hiciera guardia.\n\nEl Lumignon vacila, luego avanza solo hacia la oscuridad, tranquilizado por la luz que sigue brillando detrás de él.\n\nAl fondo de la cueva, otros resplandores azul verdosos se encienden, uno a uno, como estrellas que despiertan.\n\nGritos alegres resuenan contra la roca.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Esperar en la entrada, con la linterna en alto",
+          "vers": "fin_lumiere",
+          "effects": [
+            {
+              "stat": "confiance",
+              "val": 15
+            }
+          ],
+          "clickEffect": "pulse"
+        },
+        {
+          "text": "Echar un vistazo prudente al interior",
+          "vers": "aperçu_grotte",
+          "effects": [
+            {
+              "stat": "courage",
+              "val": 10
+            }
+          ],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 200,
+      "y": 880
+    },
+    "aperçu_grotte": {
+      "id": "aperçu_grotte",
+      "title": "Una Mirada en la Oscuridad",
+      "location": "ACANTILADOS DEL NORTE — ENTRADA DE LA CUEVA",
+      "narrator": "Mirar en la oscuridad sin entrar es a veces el término medio justo entre el miedo y el valor.",
+      "text": "Das un paso, justo lo bastante para ver el interior.\n\nResplandores azul verdosos bailan al fondo, como luciérnagas submarinas.\n\nEl Lumignon se lanza hacia ellos con un grito alegre.\n\nAikito mueve la cola sin entrar.\n\n*«No necesitamos ir más lejos. Ya hemos ayudado.»*\n\nTe quedas en la entrada, con la linterna en alto, hasta que siluetas familiares lo rodean.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Bajar de nuevo hacia el faro, con el corazón ligero",
+          "vers": "fin_lumiere",
+          "effects": [
+            {
+              "stat": "confiance",
+              "val": 10
+            }
+          ],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 120,
+      "y": 920
+    },
+    "entree_grotte": {
+      "id": "entree_grotte",
+      "title": "En la Oscuridad, Juntos",
+      "location": "CUEVA DE LOS ACANTILADOS — ENTRADA",
+      "narrator": "El valor no es no tener nunca miedo. Es seguir adelante de todos modos, junto a alguien.",
+      "text": "Respiras hondo y entras en la cueva, con la linterna en alto delante de ti.\n\nAikito trota justo detrás de tus talones, más cerca de lo habitual.\n\nEl Lumignon permanece muy cerca, su luz pegada a tu sombra.\n\nLa oscuridad es espesa, y el sonido de las olas resuena de forma extraña.\n\nEntonces, al doblar un corredor de piedra, la cueva se abre en una inmensa caverna.\n\nEstá llena de resplandores azul verdosos que bailan suavemente contra las paredes.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Avanzar hacia las luces del fondo",
+          "vers": "fin_reunion",
+          "effects": [
+            {
+              "stat": "courage",
+              "val": 15
+            }
+          ],
+          "clickEffect": "pulse"
+        },
+        {
+          "text": "Llamar en voz baja para anunciar vuestra presencia",
+          "vers": "appel_dans_grotte",
+          "effects": [
+            {
+              "stat": "confiance",
+              "val": 15
+            }
+          ],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 420,
+      "y": 880
+    },
+    "appel_dans_grotte": {
+      "id": "appel_dans_grotte",
+      "title": "Una Voz en la Caverna",
+      "location": "CUEVA DE LOS ACANTILADOS — CORREDOR DE PIEDRA",
+      "narrator": "Anunciar tu presencia es ofrecer a los demás la opción de no tener miedo de ti.",
+      "text": "«Somos amigos», dices en voz baja.\n\nTu voz rebota contra la piedra y luego se apacigua.\n\nLos resplandores del fondo laten en respuesta, como un acorde.\n\nEl Lumignon acelera, tranquilizado por tu llamada.\n\nCuando entras en la gran caverna, las criaturas no huyen. Se acercan, curiosas, casi sonrientes en su luz.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Reunirte con ellos junto al estanque",
+          "vers": "fin_reunion",
+          "effects": [
+            {
+              "stat": "confiance",
+              "val": 10
+            }
+          ],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 500,
+      "y": 920
+    },
+    "fin_reunion": {
+      "id": "fin_reunion",
+      "title": "Los Lumignons de la Cueva",
+      "location": "CUEVA DE LOS ACANTILADOS — CAVERNA INTERIOR",
+      "narrator": "Lo que nos parecía aterrador a veces esconde solo a alguien que necesita ayuda.",
+      "text": "Decenas de criaturas parecidas al Lumignon nadan a tu alrededor en un estanque de agua clara, con su luz latiendo suavemente.\n\nDos de ellas, más grandes, se precipitan hacia tu pequeño compañero con gritos de alegría.\n\nSu familia.\n\nAikito ladra una vez, alegremente, antes de sentarse muy correctamente contra tu pierna.\n\nEl Lumignon se acurruca junto a los suyos y luego se vuelve hacia vosotros dos una última vez, con sus antenas parpadeando suavemente: un verdadero gracias.\n\nAl volver hacia el faro, lo entiendes: lo que te había asustado tanto esa noche no era más que un pequeño ser perdido, buscando simplemente el camino de vuelta hacia quienes amaba.",
+      "isStart": false,
+      "isEnd": true,
+      "transition": "fade",
+      "choices": [],
+      "x": 420,
+      "y": 980
+    },
+    "fin_lumiere": {
+      "id": "fin_lumiere",
+      "title": "La Luz que Guía",
+      "location": "ACANTILADOS DEL NORTE — ENTRADA DE LA CUEVA",
+      "narrator": "No hace falta enfrentarlo todo para ayudar; a veces, basta con sostener la luz.",
+      "text": "No ves el interior de la cueva, pero oyes los gritos alegres resonar contra la roca.\n\nAikito apoya la cabeza contra tu pierna, con las orejas erguidas, escuchando.\n\nEl Lumignon sale un instante, rodeado de dos grandes siluetas luminosas: su familia, que ha venido a buscarlo.\n\nParpadea una última vez en tu dirección antes de volver a sumergirse con ellos en la oscuridad.\n\nBajas hacia el faro con Aikito, con la linterna aún caliente en la mano.\n\nNo necesitaste entrar en la oscuridad para ayudar a alguien a encontrar su camino. Solo hacía falta quedarse, y sostener la luz.",
+      "isStart": false,
+      "isEnd": true,
+      "transition": "fade",
+      "choices": [],
+      "x": 200,
+      "y": 980
+    }
+  },
+  "companion": "Aikito"
+}

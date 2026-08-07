@@ -1,0 +1,621 @@
+{
+  "name": "The Light Afraid of the Dark",
+  "kids": true,
+  "askPlayerName": true,
+  "pack": "kids",
+  "stats": [
+    {
+      "id": "courage",
+      "label": "Courage",
+      "start": 20,
+      "max": 100,
+      "color": "#FF9B50"
+    },
+    {
+      "id": "confiance",
+      "label": "Confidence",
+      "start": 20,
+      "max": 100,
+      "color": "#4FD0E4"
+    }
+  ],
+  "theme": {
+    "bg": "#0a1420",
+    "bg2": "#0f1e2e",
+    "bg3": "#152840",
+    "bg4": "#1c3450",
+    "border": "#274a68",
+    "accent": "#4FD0E4",
+    "accent2": "#FF9B50",
+    "accent3": "#90EE90",
+    "text": "#e8f2f0",
+    "text2": "#7fa8b0",
+    "text3": "#4a6a75"
+  },
+  "scenes": {
+    "prologue": {
+      "id": "prologue",
+      "title": "Alone with the Lighthouse",
+      "location": "CAPE MIST LIGHTHOUSE — NIGHT",
+      "narrator": "Some nights, the world whispers just loudly enough for you to hear.",
+      "text": "Tonight, Grandpa Loran has gone fishing out at sea, and for the first time, you are the one keeping watch over the Cape Mist lighthouse.\n\nAikito, your curious little dog, trots at your side, nose lifted to the air.\n\nYou climb the spiral staircase, a lantern in your hand.\n\nThrough the window, the sea is black and calm.\n\nThen, far out on the water, a blue-green glow appears, trembling, like a star fallen into the waves.\n\nA deep, sorrowful cry cuts through the night.\n\nAikito freezes, ears pricked.\n\n*\"That is not a boat.\"*\n\n{{player}}, your heart beats faster.",
+      "isStart": true,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Go down and take the rowboat to see",
+          "vers": "plage",
+          "effects": [
+            {
+              "stat": "courage",
+              "val": 15
+            }
+          ],
+          "clickEffect": "pulse"
+        },
+        {
+          "text": "Look first through the lighthouse spyglass",
+          "vers": "observation",
+          "effects": [
+            {
+              "stat": "confiance",
+              "val": 10
+            }
+          ],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 400,
+      "y": 40
+    },
+    "observation": {
+      "id": "observation",
+      "title": "The Spyglass",
+      "location": "LIGHTHOUSE — LANTERN ROOM",
+      "narrator": "Looking before you act is not being afraid — it is learning to understand.",
+      "text": "You set down the lantern and grab Grandpa Loran's spyglass.\n\nAikito rises on his hind legs against the windowsill, trying to see too.\n\nThrough the lens, the glow grows clearer: a round shape, almost soft, blinking at intervals.\n\nOne long blink. Two short ones. Another long one.\n\n*\"It looks like it's talking to us,\"* Aikito breathes, head tilted.\n\nYour heart settles a little. Whatever shines out there does not look like a monster. It looks like someone calling for help.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Answer with the lighthouse light",
+          "vers": "signal",
+          "effects": [
+            {
+              "stat": "confiance",
+              "val": 15
+            }
+          ],
+          "clickEffect": "pulse"
+        },
+        {
+          "text": "Go straight down to the beach",
+          "vers": "plage",
+          "effects": [
+            {
+              "stat": "courage",
+              "val": 10
+            }
+          ],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 200,
+      "y": 160
+    },
+    "signal": {
+      "id": "signal",
+      "title": "A Message of Light",
+      "location": "LIGHTHOUSE — LANTERN ROOM",
+      "narrator": "Speaking a language you do not yet know often begins with a blink of light.",
+      "text": "You work the lighthouse mechanism. Long. Short. Short.\n\nThe glow on the water stops still.\n\nThen it answers: three quick flashes, like a little laugh.\n\nIt drifts closer to the rocks, gently, as if it has finally found someone who listens.\n\nAikito wags his tail, already ready to go down.\n\n*\"Come on, come on, come on!\"*",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Go down to meet the Lumignon",
+          "vers": "plage",
+          "effects": [
+            {
+              "stat": "courage",
+              "val": 10
+            }
+          ],
+          "clickEffect": "pulse"
+        },
+        {
+          "text": "Keep the light conversation going a little longer",
+          "vers": "dialogue_lumiere",
+          "effects": [
+            {
+              "stat": "confiance",
+              "val": 15
+            }
+          ],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 100,
+      "y": 280
+    },
+    "dialogue_lumiere": {
+      "id": "dialogue_lumiere",
+      "title": "Learning to Blink",
+      "location": "LIGHTHOUSE — LANTERN ROOM",
+      "narrator": "Sometimes, understanding begins by repeating the same gesture until it becomes a bridge.",
+      "text": "You mimic the blinks again. Long. Short. Short.\n\nThe glow answers with a new pattern: two flashes, a pause, then a longer one.\n\nAikito tilts his head.\n\n*\"I think it's saying thank you. Or maybe it's scared. Maybe both.\"*\n\nWhen you finally go down the stairs, you feel the creature is already waiting by the rocks, less trembling than before.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Join the creature on the beach",
+          "vers": "plage",
+          "effects": [
+            {
+              "stat": "confiance",
+              "val": 10
+            }
+          ],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 50,
+      "y": 360
+    },
+    "plage": {
+      "id": "plage",
+      "title": "What Shines in the Water",
+      "location": "CAPE MIST BEACH — NIGHT",
+      "narrator": "The dark hides as many fears as wonders — the only difference is who dares to look.",
+      "text": "Cold sand crunches beneath your feet. Aikito trots ahead, then stops short.\n\nNear the rocks, the glow floats on the surface: a small sea creature, covered in scales that shine like wet stars.\n\nIt has large dark eyes and two long glowing antennae that tremble.\n\nThe moment it sees you, it half-dives, ready to flee.\n\nAikito sits slowly in the sand, as if to show he is not dangerous.\n\nIt is smaller than you. And it looks just as frightened as the two of you.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Stay still and speak softly",
+          "vers": "approche_calme",
+          "effects": [
+            {
+              "stat": "confiance",
+              "val": 15
+            }
+          ],
+          "clickEffect": "pulse"
+        },
+        {
+          "text": "Step back, startled",
+          "vers": "peur_reaction",
+          "effects": [
+            {
+              "stat": "courage",
+              "val": -10
+            }
+          ],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 300,
+      "y": 280
+    },
+    "peur_reaction": {
+      "id": "peur_reaction",
+      "title": "A Step Backward",
+      "location": "CAPE MIST BEACH — NIGHT",
+      "narrator": "Being afraid is not a bad thing. What matters is what you do right after.",
+      "text": "You step back without meaning to.\n\nThe creature startles and vanishes beneath the water in a flash of light.\n\nAikito nudges your leg with his nose.\n\n*\"It's okay, it's okay... it was just as scared as you.\"*\n\nYou feel a little foolish. It had done nothing wrong — it had only cried out, the way you call when you are lost.\n\nA faint shimmer reappears, a little farther off, hesitant.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Apologize in a whisper and stay calm this time",
+          "vers": "creature_revient",
+          "effects": [
+            {
+              "stat": "confiance",
+              "val": 15
+            }
+          ],
+          "clickEffect": "pulse"
+        },
+        {
+          "text": "Wait patiently without moving",
+          "vers": "creature_revient",
+          "effects": [
+            {
+              "stat": "courage",
+              "val": 10
+            }
+          ],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 380,
+      "y": 380
+    },
+    "creature_revient": {
+      "id": "creature_revient",
+      "title": "A Second Chance",
+      "location": "CAPE MIST BEACH — NIGHT",
+      "narrator": "Trust is rebuilt slowly, like a tide coming back in.",
+      "text": "The glow draws near again, more slowly.\n\nThe creature keeps its distance, but does not leave.\n\nIt watches Aikito most of all, still and silent for once.\n\nYou sit down in the sand, to seem smaller, less frightening.\n\nLittle by little, it glides to the water's edge, right in front of you.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Gently reach out your hand",
+          "vers": "approche_calme",
+          "effects": [
+            {
+              "stat": "confiance",
+              "val": 10
+            }
+          ],
+          "clickEffect": "pulse"
+        },
+        {
+          "text": "Softly sing one of Grandpa Loran's lullabies",
+          "vers": "berceuse_plage",
+          "effects": [
+            {
+              "stat": "confiance",
+              "val": 15
+            }
+          ],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 460,
+      "y": 460
+    },
+    "berceuse_plage": {
+      "id": "berceuse_plage",
+      "title": "A Voice in the Night",
+      "location": "CAPE MIST BEACH — NIGHT",
+      "narrator": "A familiar melody can comfort two beings at once: the one who sings and the one who listens.",
+      "text": "You murmur the old lullaby Grandpa Loran used to hum when you were afraid of thunder.\n\nThe creature stops trembling. Its light pulses to the rhythm of your voice.\n\nAikito lies down in the sand, eyes half closed.\n\nWhen the song ends, the Lumignon glides up to you, almost shy, as if it has understood that the night can be gentle too.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Welcome it gently",
+          "vers": "approche_calme",
+          "effects": [
+            {
+              "stat": "confiance",
+              "val": 10
+            }
+          ],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 540,
+      "y": 460
+    },
+    "approche_calme": {
+      "id": "approche_calme",
+      "title": "The Little Lumignon",
+      "location": "CAPE MIST BEACH — WATER'S EDGE",
+      "narrator": "What frightens us at first glance sometimes needs only a little patience.",
+      "text": "The creature finally draws near your hand, timid. Aikito stays lying quietly beside you, tail softly thumping the sand.\n\nIts skin is soft and warm, and its light pulses like a little beating heart.\n\nAround its neck, a spiral shell hangs from a braided strand of seaweed — like a necklace.\n\nIt lets out a small cry, gentler this time, and looks out to sea, then back at you.\n\n*\"It wants to show us something,\"* Aikito murmurs.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Look more closely at the shell",
+          "vers": "indice_coquillage",
+          "effects": [
+            {
+              "stat": "confiance",
+              "val": 10
+            }
+          ],
+          "clickEffect": "pulse"
+        },
+        {
+          "text": "Look where it points, out to sea",
+          "vers": "indice_coquillage",
+          "effects": [
+            {
+              "stat": "courage",
+              "val": 10
+            }
+          ],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 300,
+      "y": 460
+    },
+    "indice_coquillage": {
+      "id": "indice_coquillage",
+      "title": "The Shell Necklace",
+      "location": "CAPE MIST BEACH — WATER'S EDGE",
+      "narrator": "A small clue is sometimes enough to change a whole night.",
+      "text": "The shell bears a spiral carving, like the patterns you have seen etched into the old cliffs north of Cape Mist.\n\nThe creature trembles slightly — not from fear, but from cold. It has been alone too long.\n\nAikito sniffs the shell carefully, then lifts his head toward the distant cliffs.\n\nYou understand: it is not some monster washed ashore by chance.\n\nIt is looking for its family, and it got lost along the way.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Go ask the old fisherman at the harbor for advice",
+          "vers": "vieux_pecheur",
+          "effects": [
+            {
+              "stat": "confiance",
+              "val": 10
+            }
+          ],
+          "clickEffect": "pulse"
+        },
+        {
+          "text": "Follow the cliff path directly",
+          "vers": "sentier_falaises",
+          "effects": [
+            {
+              "stat": "courage",
+              "val": 15
+            }
+          ],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 300,
+      "y": 560
+    },
+    "vieux_pecheur": {
+      "id": "vieux_pecheur",
+      "title": "Mounec's Legend",
+      "location": "CAPE MIST HARBOR — DOCK",
+      "narrator": "Stories we think are made up sometimes hide a grain of truth.",
+      "text": "Old fisherman Mounec puts away his nets by the glow of a lamp. Aikito sits politely in front of him, which makes him smile.\n\nWhen you describe the creature, his face lights up.\n\n*\"A Lumignon... I haven't seen one in thirty years. Their family lives in a cave beneath the northern cliffs. They only come out on moonless nights, and only to search for a little one who has wandered off.\"*\n\nHe hands you an oil lantern.\n\n*\"Go gently. The dark out there can seem frightening. But it is never empty.\"*",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Take the lantern and head for the cliffs",
+          "vers": "sentier_falaises",
+          "effects": [
+            {
+              "stat": "confiance",
+              "val": 15
+            }
+          ],
+          "clickEffect": "pulse"
+        },
+        {
+          "text": "Ask Mounec why Lumignons are afraid of the dark",
+          "vers": "legende_noir",
+          "effects": [
+            {
+              "stat": "courage",
+              "val": 10
+            }
+          ],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 150,
+      "y": 680
+    },
+    "legende_noir": {
+      "id": "legende_noir",
+      "title": "The Fear of the Depths",
+      "location": "CAPE MIST HARBOR — DOCK",
+      "narrator": "Understanding a fear does not make it vanish. But sometimes it grows smaller.",
+      "text": "Mounec thinks for a long while as he coils his nets.\n\n*\"Lumignons are born with their own light. In total darkness, they sometimes forget they are still shining. Then they believe they have disappeared.\"*\n\nHe hands you the lantern.\n\n*\"Show them they are not alone. That is all we can do.\"*",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Set off for the cliffs, lantern in hand",
+          "vers": "sentier_falaises",
+          "effects": [
+            {
+              "stat": "confiance",
+              "val": 10
+            }
+          ],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 80,
+      "y": 720
+    },
+    "sentier_falaises": {
+      "id": "sentier_falaises",
+      "title": "The Cliff Path",
+      "location": "NORTHERN CLIFFS — NARROW TRAIL",
+      "narrator": "The darkest path is often the one that leads somewhere.",
+      "text": "The trail climbs between the rocks. Aikito leads the way, nose to the ground, as if following an invisible scent.\n\nThe Lumignon glides beside you over the puddles, its light brightening just enough of the path.\n\nThe wind blows hard. Below, waves crash against the stone.\n\nThen, around a bend, you spot a dark opening in the cliff — a cave, silent.\n\nThe Lumignon stops short, hesitating before the black entrance. Even Aikito does not bark.\n\nHe looks at you, as if to ask: *are you coming with me?*",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Enter the cave with the Lumignon",
+          "vers": "entree_grotte",
+          "effects": [
+            {
+              "stat": "courage",
+              "val": 20
+            }
+          ],
+          "clickEffect": "pulse"
+        },
+        {
+          "text": "Stay at the entrance and call with the lantern",
+          "vers": "appel_lanterne",
+          "effects": [
+            {
+              "stat": "confiance",
+              "val": 10
+            }
+          ],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 300,
+      "y": 760
+    },
+    "appel_lanterne": {
+      "id": "appel_lanterne",
+      "title": "A Signal in the Dark",
+      "location": "NORTHERN CLIFFS — CAVE ENTRANCE",
+      "narrator": "You can help someone even without facing everything in their place.",
+      "text": "You stay at the entrance and swing the lantern gently, in rhythm, like the lighthouse signal.\n\nLong. Short. Short.\n\nAikito sits right beside you, not making a sound, as if standing guard.\n\nThe Lumignon hesitates, then moves on alone into the dark, reassured by the light still shining behind it.\n\nDeep in the cave, other blue-green glows light up, one by one, like stars waking.\n\nJoyful cries echo against the rock.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Wait at the entrance, lantern raised",
+          "vers": "fin_lumiere",
+          "effects": [
+            {
+              "stat": "confiance",
+              "val": 15
+            }
+          ],
+          "clickEffect": "pulse"
+        },
+        {
+          "text": "Peek cautiously inside",
+          "vers": "aperçu_grotte",
+          "effects": [
+            {
+              "stat": "courage",
+              "val": 10
+            }
+          ],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 200,
+      "y": 880
+    },
+    "aperçu_grotte": {
+      "id": "aperçu_grotte",
+      "title": "A Glimpse into the Darkness",
+      "location": "NORTHERN CLIFFS — CAVE ENTRANCE",
+      "narrator": "Looking into the dark without going in is sometimes the right balance between fear and courage.",
+      "text": "You step forward just enough to see inside.\n\nBlue-green glows dance at the back, like fireflies beneath the sea.\n\nThe Lumignon darts toward them with a joyful cry.\n\nAikito wags his tail without going in.\n\n*\"We don't need to go any farther. We've already helped.\"*\n\nYou stay at the entrance, lantern raised, until familiar shapes surround it.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Head back down to the lighthouse, heart light",
+          "vers": "fin_lumiere",
+          "effects": [
+            {
+              "stat": "confiance",
+              "val": 10
+            }
+          ],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 120,
+      "y": 920
+    },
+    "entree_grotte": {
+      "id": "entree_grotte",
+      "title": "In the Dark, Together",
+      "location": "CLIFF CAVE — ENTRANCE",
+      "narrator": "Courage is not never being afraid. It is moving forward anyway, beside someone.",
+      "text": "You take a deep breath and step into the cave, lantern raised before you.\n\nAikito trots just behind your heels, closer than usual.\n\nThe Lumignon stays right beside you, its light pressed to your shadow.\n\nThe darkness is thick, and the sound of the waves echoes strangely.\n\nThen, around a corridor of stone, the cave opens into an immense cavern.\n\nIt is filled with blue-green glows dancing softly against the walls.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Move toward the lights at the back",
+          "vers": "fin_reunion",
+          "effects": [
+            {
+              "stat": "courage",
+              "val": 15
+            }
+          ],
+          "clickEffect": "pulse"
+        },
+        {
+          "text": "Call softly to announce your presence",
+          "vers": "appel_dans_grotte",
+          "effects": [
+            {
+              "stat": "confiance",
+              "val": 15
+            }
+          ],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 420,
+      "y": 880
+    },
+    "appel_dans_grotte": {
+      "id": "appel_dans_grotte",
+      "title": "A Voice in the Cavern",
+      "location": "CLIFF CAVE — STONE CORRIDOR",
+      "narrator": "Announcing your presence gives others the choice not to be afraid of you.",
+      "text": "\"We are friends,\" you say softly.\n\nYour voice bounces off the stone, then settles.\n\nThe glows at the back pulse in answer, like a chord.\n\nThe Lumignon speeds up, reassured by your call.\n\nWhen you enter the great cavern, the creatures do not flee. They draw closer, curious, almost smiling in their light.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Join them by the pool",
+          "vers": "fin_reunion",
+          "effects": [
+            {
+              "stat": "confiance",
+              "val": 10
+            }
+          ],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 500,
+      "y": 920
+    },
+    "fin_reunion": {
+      "id": "fin_reunion",
+      "title": "The Lumignons of the Cave",
+      "location": "CLIFF CAVE — INNER CAVERN",
+      "narrator": "What seemed frightening sometimes hides only someone who needs help.",
+      "text": "Dozens of creatures like the Lumignon swim around you in a pool of clear water, their light pulsing gently.\n\nTwo of them, larger, rush toward your little companion with cries of joy.\n\nIts family.\n\nAikito barks once, happily, then sits very properly against your leg.\n\nThe Lumignon nestles against its own, then turns toward the two of you one last time, its antennae blinking softly — a true thank you.\n\nAs you head back to the lighthouse, you understand: what had frightened you so much that night was only a little lost being, simply trying to find its way back to those it loved.",
+      "isStart": false,
+      "isEnd": true,
+      "transition": "fade",
+      "choices": [],
+      "x": 420,
+      "y": 980
+    },
+    "fin_lumiere": {
+      "id": "fin_lumiere",
+      "title": "The Light That Guides",
+      "location": "NORTHERN CLIFFS — CAVE ENTRANCE",
+      "narrator": "You do not need to face everything to help — sometimes, holding the light is enough.",
+      "text": "You do not see the inside of the cave, but you hear joyful cries echoing against the rock.\n\nAikito presses his head against your leg, ears pricked, listening.\n\nThe Lumignon comes out for a moment, surrounded by two large glowing shapes — its family, come to fetch it.\n\nIt blinks one last time in your direction before diving back into the dark with them.\n\nYou make your way down to the lighthouse with Aikito, your lantern still warm in your hand.\n\nYou did not need to enter the dark to help someone find their way home. You only had to stay, and hold the light.",
+      "isStart": false,
+      "isEnd": true,
+      "transition": "fade",
+      "choices": [],
+      "x": 200,
+      "y": 980
+    }
+  },
+  "companion": "Aikito"
+}
