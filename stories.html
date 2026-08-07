@@ -557,18 +557,27 @@ function launchStory(file) {
 // ══════════════════════════════════════════════
 const BILLING_TXT = {
   fr: { unavailable:"Les achats ne sont disponibles que dans l'application Android.",
+        connecting:'Connexion à Google Play…',
         pending:'Ouverture de Google Play…', owned:'Ce pack est déjà débloqué ✓',
         success:'Pack débloqué ✓ Bonne lecture !', failed:'Achat impossible pour le moment.',
+        notfound:'Ce pack n\'est pas encore disponible à la vente.',
+        processing:'Achat en cours de validation par Google Play…',
         restoring:'Restauration en cours…', restored:'Achats restaurés ✓',
         nothing:'Aucun achat à restaurer.', restore:'Restaurer mes achats' },
   en: { unavailable:'Purchases are only available in the Android app.',
+        connecting:'Connecting to Google Play…',
         pending:'Opening Google Play…', owned:'This pack is already unlocked ✓',
         success:'Pack unlocked ✓ Enjoy!', failed:'Purchase failed for now.',
+        notfound:'This pack is not on sale yet.',
+        processing:'Purchase is being validated by Google Play…',
         restoring:'Restoring…', restored:'Purchases restored ✓',
         nothing:'Nothing to restore.', restore:'Restore purchases' },
   es: { unavailable:'Las compras solo están disponibles en la app de Android.',
+        connecting:'Conectando con Google Play…',
         pending:'Abriendo Google Play…', owned:'Este pack ya está desbloqueado ✓',
         success:'¡Pack desbloqueado ✓!', failed:'No se pudo completar la compra.',
+        notfound:'Este pack aún no está a la venta.',
+        processing:'Google Play está validando la compra…',
         restoring:'Restaurando…', restored:'Compras restauradas ✓',
         nothing:'No hay compras que restaurar.', restore:'Restaurar compras' }
 };
@@ -604,11 +613,14 @@ async function buyPack(packId) {
   if (SFBilling.isUnlocked(packId)) { sfToast(bt('owned')); return; }
 
   _buying = true;
-  sfToast(bt('pending'));
   try {
-    if (SFBilling.isReady && !SFBilling.isReady()) {
-      await SFBilling.init();
-    }
+    // Le plugin n'est prêt qu'après deviceready : on l'attend avant
+    // de conclure quoi que ce soit sur la disponibilité des achats.
+    if (!SFBilling.isReady()) sfToast(bt('connecting'));
+    const available = await SFBilling.ensureReady();
+    if (!available) { sfToast(bt('unavailable')); return; }
+
+    sfToast(bt('pending'));
     const res = await SFBilling.buy(packId);
     if (res.ok) {
       sfToast(bt('success'));
@@ -616,9 +628,15 @@ async function buyPack(packId) {
     } else if (res.reason === 'cancelled') {
       // fermeture volontaire de la fenêtre Google Play : rien à signaler
     } else if (res.reason === 'pending') {
-      sfToast(bt('pending'));
+      // paiement accepté mais pas encore confirmé (paiement différé)
+      sfToast(bt('processing'));
+    } else if (res.reason === 'not_found') {
+      sfToast(bt('notfound'));
+    } else if (res.reason === 'web' || res.reason === 'plugin_missing') {
+      sfToast(bt('unavailable'));
     } else {
       sfToast(bt('failed'));
+      console.error('[billing] achat échoué:', res.reason, SFBilling.getLastError());
     }
   } finally {
     _buying = false;
@@ -635,7 +653,11 @@ async function restorePurchases() {
   const before = SFBilling.getUnlockedPacks().length;
   sfToast(bt('restoring'));
   const res = await SFBilling.restore();
-  if (!res.ok) { sfToast(bt('failed')); return; }
+  if (!res.ok) {
+    sfToast(res.reason === 'web' || res.reason === 'plugin_missing'
+      ? bt('unavailable') : bt('failed'));
+    return;
+  }
   renderLibrary();
   sfToast(res.packs.length > before ? bt('restored') : bt('nothing'));
 }
@@ -706,10 +728,8 @@ if (window.SFBilling) {
 
 if (window.SFOnboarding) {
   SFOnboarding.start({
-    getLang: () => currentLang,
-    setLang: lang => {
+    onLangChange: lang => {
       currentLang = lang;
-      localStorage.setItem('sf_lang', lang);
       try { renderLibrary(); } catch(e) {}
     }
   });

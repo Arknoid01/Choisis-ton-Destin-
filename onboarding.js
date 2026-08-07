@@ -1,73 +1,90 @@
 /* ══════════════════════════════════════════════════════════════
-   SFOnboarding — séquence de premier lancement (langue, tuto, PIN)
-   Partagé entre index.html et stories.html
+   SFOnboarding — séquence de premier lancement
+   (langue → tutoriel → code parental)
+
+   Partagé entre index.html et stories.html : l'utilisateur voit la
+   séquence quelle que soit la page sur laquelle il arrive.
+
+   Les overlays sont injectés dans le DOM par ce module, avec des
+   identifiants préfixés sf-onb- pour ne jamais entrer en conflit
+   avec le balisage des pages hôtes.
    ══════════════════════════════════════════════════════════════ */
 
 window.SFOnboarding = (function () {
+
+  const LANGS = ['fr', 'en', 'es'];
+
   const TXT = {
     fr: {
       langTitle: 'Choisissez votre langue',
       langSub: 'Choose your language · Elige tu idioma',
       langConfirm: 'CONTINUER',
       tutoTitle: 'Astuces de navigation',
-      tutoMenu: '<strong>Le point bleu</strong> en haut de l\'écran permet d\'ouvrir le menu pendant une histoire.',
+      tutoMenu: '<strong>Le point doré</strong> en haut de l\'écran permet d\'ouvrir le menu pendant une histoire.',
       tutoSave: '<strong>Le bouton +</strong> en bas à droite permet de poser un marque-page pour sauvegarder votre progression.',
       tutoBtn: 'J\'AI COMPRIS',
-      pinSetupTitle: 'Code Parental',
-      pinSetupBody: 'Créez un code à 4 chiffres pour protéger le mode enfant. Il vous sera demandé pour le désactiver.',
-      pinSetupCreate: 'CRÉER LE CODE',
-      pinSetupSkip: 'Plus tard',
-      pinSetupError: '4 chiffres requis',
-      pinSetupDone: '✓ Code parental enregistré !',
-      pinSetupEnter: 'Code à 4 chiffres',
-      pinSetupConfirm: 'Confirme le code',
-      pinSetupMismatch: 'Les codes ne correspondent pas',
-      pinSetupKids: 'Activer le mode enfant maintenant'
+      pinTitle: 'Code Parental',
+      pinBody: 'Créez un code à 4 chiffres pour protéger le mode enfant. Il vous sera demandé pour le désactiver.',
+      pinCreate: 'CRÉER LE CODE',
+      pinSkip: 'Plus tard',
+      pinError: '4 chiffres requis',
+      pinDone: '✓ Code parental enregistré !',
+      pinEnter: 'Code à 4 chiffres',
+      pinConfirm: 'Confirme le code',
+      pinMismatch: 'Les codes ne correspondent pas',
+      pinKids: 'Activer le mode enfant maintenant'
     },
     en: {
       langTitle: 'Choose your language',
       langSub: 'Choisissez votre langue · Elige tu idioma',
       langConfirm: 'CONTINUE',
       tutoTitle: 'Navigation tips',
-      tutoMenu: '<strong>The blue dot</strong> at the top opens the menu during a story.',
-      tutoSave: '<strong>The + button</strong> at the bottom right lets you bookmark your progress.',
+      tutoMenu: '<strong>The golden dot</strong> at the top of the screen opens the menu during a story.',
+      tutoSave: '<strong>The + button</strong> at the bottom right lets you bookmark and save your progress.',
       tutoBtn: 'GOT IT',
-      pinSetupTitle: 'Parental Code',
-      pinSetupBody: 'Create a 4-digit code to protect Kids Mode. It will be required to turn it off.',
-      pinSetupCreate: 'CREATE CODE',
-      pinSetupSkip: 'Later',
-      pinSetupError: '4 digits required',
-      pinSetupDone: '✓ Parental code saved!',
-      pinSetupEnter: '4-digit code',
-      pinSetupConfirm: 'Confirm the code',
-      pinSetupMismatch: 'Codes do not match',
-      pinSetupKids: 'Enable Kids Mode now'
+      pinTitle: 'Parental Code',
+      pinBody: 'Create a 4-digit code to protect Kids Mode. It will be required to turn it off.',
+      pinCreate: 'CREATE CODE',
+      pinSkip: 'Later',
+      pinError: '4 digits required',
+      pinDone: '✓ Parental code saved!',
+      pinEnter: '4-digit code',
+      pinConfirm: 'Confirm the code',
+      pinMismatch: 'Codes do not match',
+      pinKids: 'Enable Kids Mode now'
     },
     es: {
       langTitle: 'Elige tu idioma',
       langSub: 'Choisissez votre langue · Choose your language',
       langConfirm: 'CONTINUAR',
       tutoTitle: 'Consejos de navegación',
-      tutoMenu: '<strong>El punto azul</strong> en la parte superior abre el menú durante una historia.',
-      tutoSave: '<strong>El botón +</strong> abajo a la derecha permite guardar un marcador.',
+      tutoMenu: '<strong>El punto dorado</strong> en la parte superior abre el menú durante una historia.',
+      tutoSave: '<strong>El botón +</strong> abajo a la derecha permite guardar un marcador con tu progreso.',
       tutoBtn: 'ENTENDIDO',
-      pinSetupTitle: 'Código Parental',
-      pinSetupBody: 'Crea un código de 4 dígitos para proteger el modo infantil. Se solicitará para desactivarlo.',
-      pinSetupCreate: 'CREAR CÓDIGO',
-      pinSetupSkip: 'Más tarde',
-      pinSetupError: 'Se requieren 4 dígitos',
-      pinSetupDone: '✓ ¡Código parental guardado!',
-      pinSetupEnter: 'Código de 4 dígitos',
-      pinSetupConfirm: 'Confirma el código',
-      pinSetupMismatch: 'Los códigos no coinciden',
-      pinSetupKids: 'Activar el modo infantil ahora'
+      pinTitle: 'Código Parental',
+      pinBody: 'Crea un código de 4 dígitos para proteger el modo infantil. Se solicitará para desactivarlo.',
+      pinCreate: 'CREAR CÓDIGO',
+      pinSkip: 'Más tarde',
+      pinError: 'Se requieren 4 dígitos',
+      pinDone: '✓ ¡Código parental guardado!',
+      pinEnter: 'Código de 4 dígitos',
+      pinConfirm: 'Confirma el código',
+      pinMismatch: 'Los códigos no coinciden',
+      pinKids: 'Activar el modo infantil ahora'
     }
   };
 
-  let _pendingLang = 'fr';
-  let _getLang = () => localStorage.getItem('sf_lang') || 'fr';
-  let _setLang = lang => { localStorage.setItem('sf_lang', lang); };
+  const LANG_LABELS = {
+    fr: { flag: '🇫🇷', name: 'Français', native: 'French' },
+    en: { flag: '🇬🇧', name: 'English',  native: 'Anglais' },
+    es: { flag: '🇪🇸', name: 'Español',  native: 'Espagnol' }
+  };
 
+  let _pendingLang = 'fr';
+  let _onLangChange = null;
+  let _injected = false;
+
+  // ── localStorage tolérant (mode privé, quota dépassé) ────────
   function lsGet(key) {
     try { return localStorage.getItem(key); } catch (e) { return null; }
   }
@@ -77,197 +94,278 @@ window.SFOnboarding = (function () {
   }
 
   function currentLang() {
-    const lang = _getLang();
-    return TXT[lang] ? lang : 'fr';
+    const lang = lsGet('sf_lang');
+    return LANGS.includes(lang) ? lang : 'fr';
   }
 
   function t() {
     return TXT[currentLang()] || TXT.fr;
   }
 
-  function hashPin(value) {
-    if (typeof window._sha256sync === 'function') return window._sha256sync(value);
-    return value;
+  // ── SHA-256 ──────────────────────────────────────────────────
+  // Implémentation locale : le code PIN doit produire exactement le
+  // même hash sur toutes les pages, y compris celles qui ne chargent
+  // pas le SHA-256 de index.html.
+  function sha256(ascii) {
+    function rightRotate(value, amount) { return (value >>> amount) | (value << (32 - amount)); }
+    const mathPow = Math.pow;
+    const maxWord = mathPow(2, 32);
+    let result = '';
+    const words = [];
+    const asciiBitLength = ascii.length * 8;
+    let hash = [];
+    const k = [];
+    let primeCounter = 0;
+    const isComposite = {};
+    for (let candidate = 2; primeCounter < 64; candidate++) {
+      if (!isComposite[candidate]) {
+        for (let i = 0; i < 313; i += candidate) isComposite[i] = candidate;
+        hash[primeCounter] = (mathPow(candidate, .5) * maxWord) | 0;
+        k[primeCounter++] = (mathPow(candidate, 1 / 3) * maxWord) | 0;
+      }
+    }
+    ascii += '\x80';
+    while (ascii.length % 64 - 56) ascii += '\x00';
+    for (let i = 0; i < ascii.length; i++) {
+      const j = ascii.charCodeAt(i);
+      if (j >> 8) return '';
+      words[i >> 2] |= j << ((3 - i) % 4) * 8;
+    }
+    words[words.length] = ((asciiBitLength / maxWord) | 0);
+    words[words.length] = (asciiBitLength | 0);
+    for (let j = 0; j < words.length;) {
+      const w = words.slice(j, j += 16);
+      const oldHash = hash.slice(0);
+      for (let i = 0; i < 64; i++) {
+        const w15 = w[i - 15], w2 = w[i - 2];
+        const a = hash[0], e = hash[4];
+        const temp1 = hash[7] + (rightRotate(e, 6) ^ rightRotate(e, 11) ^ rightRotate(e, 25))
+          + ((e & hash[5]) ^ (~e & hash[6])) + k[i]
+          + (w[i] = (i < 16) ? w[i] : (w[i - 16] + (rightRotate(w15, 7) ^ rightRotate(w15, 18) ^ (w15 >>> 3))
+            + w[i - 7] + (rightRotate(w2, 17) ^ rightRotate(w2, 19) ^ (w2 >>> 10))) | 0);
+        const temp2 = (rightRotate(a, 2) ^ rightRotate(a, 13) ^ rightRotate(a, 22))
+          + ((a & hash[1]) ^ (a & hash[2]) ^ (hash[1] & hash[2]));
+        hash = [(temp1 + temp2) | 0].concat(hash);
+        hash[4] = (hash[4] + temp1) | 0;
+        hash.length = 8;
+      }
+      hash = hash.map((x, i) => (x + oldHash[i]) | 0);
+    }
+    hash.forEach(x => {
+      for (let j = 3; j + 1; j--) {
+        const hex = ((x >> (j * 8)) & 255).toString(16);
+        result += (hex.length === 1 ? '0' : '') + hex;
+      }
+    });
+    return result;
   }
 
+  // ── Styles ───────────────────────────────────────────────────
   function injectStyles() {
-    if (document.getElementById('sf-onboarding-style')) return;
+    if (document.getElementById('sf-onb-style')) return;
     const style = document.createElement('style');
-    style.id = 'sf-onboarding-style';
+    style.id = 'sf-onb-style';
     style.textContent = `
-      #lang-overlay,#tuto-overlay,#pin-setup-overlay{
-        position:fixed;inset:0;z-index:960;
-        background:rgba(0,0,0,0.85);
+      .sf-onb-overlay{
+        position:fixed;inset:0;z-index:9000;
+        background:rgba(0,0,0,0.88);
         display:none;align-items:center;justify-content:center;
-        backdrop-filter:blur(8px);animation:sf-onb-fade-in .4s ease;
+        backdrop-filter:blur(8px);
+        animation:sf-onb-fade-in .35s ease;
+        padding:20px;box-sizing:border-box;overflow-y:auto;
       }
-      #pin-setup-overlay{z-index:970}
       @keyframes sf-onb-fade-in{from{opacity:0}to{opacity:1}}
-      @keyframes sf-onb-scale-in{from{transform:scale(0.9);opacity:0}to{transform:scale(1);opacity:1}}
       @keyframes sf-onb-fade-out{from{opacity:1}to{opacity:0}}
+      @keyframes sf-onb-scale-in{from{transform:scale(.92);opacity:0}to{transform:scale(1);opacity:1}}
       .sf-onb-box{
         background:#13110e;border:1px solid #8a6a30;border-radius:20px;
-        padding:36px 28px;max-width:340px;width:90%;text-align:center;
-        animation:sf-onb-scale-in .4s ease;
+        padding:32px 24px;max-width:340px;width:100%;text-align:center;
+        animation:sf-onb-scale-in .35s ease;margin:auto;
+        font-family:'Cormorant Garamond',Georgia,serif;
       }
-      .sf-onb-title{font-family:'Cinzel',serif;font-size:18px;font-weight:600;color:#e8e0d0;letter-spacing:2px;margin-bottom:8px}
-      .sf-onb-sub{font-size:13px;color:#9a8a70;font-style:italic;margin-bottom:28px;line-height:1.6}
+      .sf-onb-icon{font-size:34px;margin-bottom:14px}
+      .sf-onb-title{
+        font-family:'Cinzel',Georgia,serif;font-size:18px;font-weight:600;
+        color:#e8e0d0;letter-spacing:2px;margin-bottom:8px;
+      }
+      .sf-onb-sub{font-size:13px;color:#9a8a70;font-style:italic;margin-bottom:24px;line-height:1.6}
       .sf-onb-choices{display:flex;flex-direction:column;gap:10px}
       .sf-onb-choice{
         display:flex;align-items:center;gap:14px;padding:14px 18px;border-radius:12px;
-        border:1px solid #2a2418;background:#13110e;cursor:pointer;text-align:left;width:100%;
+        border:1px solid #2a2418;background:#1a1710;cursor:pointer;text-align:left;
+        width:100%;transition:border-color .2s,background .2s;font:inherit;
       }
-      .sf-onb-choice.selected{border-color:#c8a96e;background:rgba(200,169,110,0.1)}
+      .sf-onb-choice.selected{border-color:#c8a96e;background:rgba(200,169,110,.1)}
       .sf-onb-flag{font-size:26px;flex-shrink:0}
-      .sf-onb-name{font-family:'Cinzel',serif;font-size:14px;font-weight:600;color:#e8e0d0;display:block}
+      .sf-onb-choice-info{flex:1}
+      .sf-onb-name{font-family:'Cinzel',Georgia,serif;font-size:14px;font-weight:600;color:#e8e0d0;display:block}
       .sf-onb-native{font-size:12px;color:#9a8a70}
       .sf-onb-check{
         width:20px;height:20px;border-radius:50%;border:2px solid #2a2418;flex-shrink:0;
-        display:flex;align-items:center;justify-content:center;font-size:11px;margin-left:auto;
+        display:flex;align-items:center;justify-content:center;font-size:11px;color:#000;
       }
-      .sf-onb-choice.selected .sf-onb-check{background:#c8a96e;border-color:#c8a96e;color:#000}
+      .sf-onb-choice.selected .sf-onb-check{background:#c8a96e;border-color:#c8a96e}
       .sf-onb-btn{
         margin-top:20px;width:100%;padding:13px;border-radius:10px;border:1px solid #8a6a30;
-        background:linear-gradient(135deg,rgba(200,169,110,0.15),rgba(200,169,110,0.05));
-        color:#c8a96e;font-family:'Cinzel',serif;font-size:12px;letter-spacing:2px;cursor:pointer;
+        background:linear-gradient(135deg,rgba(200,169,110,.15),rgba(200,169,110,.05));
+        color:#c8a96e;font-family:'Cinzel',Georgia,serif;font-size:12px;
+        letter-spacing:2px;cursor:pointer;transition:background .2s;
       }
+      .sf-onb-btn:hover{background:rgba(200,169,110,.2)}
+      .sf-onb-tips{margin-bottom:24px}
       .sf-onb-tip{display:flex;gap:12px;align-items:flex-start;text-align:left;margin-bottom:16px}
       .sf-onb-tip-icon{
         font-size:18px;background:#1a1710;width:32px;height:32px;border-radius:50%;
         display:flex;align-items:center;justify-content:center;flex-shrink:0;color:#c8a96e;
       }
-      .sf-onb-tip p{font-size:13px;color:#9a8a70;line-height:1.5}
-      .sf-onb-input{
-        width:100%;background:#13110e;border:1px solid #2a2418;border-radius:8px;color:#e8e0d0;
-        font-family:'DM Mono',monospace;font-size:24px;padding:12px;outline:none;text-align:center;
-        letter-spacing:8px;box-sizing:border-box;
+      .sf-onb-tip p{font-size:13px;color:#9a8a70;line-height:1.5;margin:0}
+      .sf-onb-label{
+        text-align:left;margin-bottom:6px;font-size:11px;color:#5a5040;
+        font-family:ui-monospace,monospace;letter-spacing:1px;
       }
-      .sf-onb-label{text-align:left;margin-bottom:6px;font-size:11px;color:#5a5040;font-family:'DM Mono',monospace;letter-spacing:1px}
-      .sf-onb-error{display:none;margin-top:8px;font-size:11px;color:#fa6d8f;font-family:'DM Mono',monospace}
-      .sf-onb-skip{margin-top:12px;background:none;border:none;color:#5a5040;font-size:12px;letter-spacing:1px;cursor:pointer;font-family:'DM Mono',monospace}
+      .sf-onb-input{
+        width:100%;background:#1a1710;border:1px solid #2a2418;border-radius:8px;color:#e8e0d0;
+        font-family:ui-monospace,monospace;font-size:24px;padding:12px;outline:none;
+        text-align:center;letter-spacing:8px;box-sizing:border-box;
+      }
+      .sf-onb-input:focus{border-color:#8a6a30}
+      .sf-onb-error{display:none;margin-top:8px;font-size:11px;color:#fa6d8f;font-family:ui-monospace,monospace}
+      .sf-onb-kids{display:flex;align-items:center;gap:10px;margin-top:18px;text-align:left;cursor:pointer}
+      .sf-onb-kids input{width:18px;height:18px;accent-color:#c8a96e;flex-shrink:0;cursor:pointer}
+      .sf-onb-kids span{font-size:12px;color:#9a8a70;line-height:1.4}
+      .sf-onb-skip{
+        margin-top:12px;background:none;border:none;color:#5a5040;font-size:12px;
+        letter-spacing:1px;cursor:pointer;font-family:ui-monospace,monospace;
+      }
+      .sf-onb-toast{
+        position:fixed;bottom:80px;left:50%;transform:translateX(-50%);
+        background:#13110e;border:1px solid rgba(109,250,188,.4);border-radius:10px;
+        padding:10px 20px;font-family:ui-monospace,monospace;font-size:11px;
+        color:#6dfabc;z-index:9100;white-space:nowrap;
+      }
     `;
-    document.head.appendChild(style);
+    (document.head || document.documentElement).appendChild(style);
   }
 
+  // ── Overlays ─────────────────────────────────────────────────
   function injectOverlays() {
-    if (document.getElementById('lang-overlay')) return;
+    if (_injected) return;
+    _injected = true;
+
+    const langChoices = LANGS.map(code => {
+      const l = LANG_LABELS[code];
+      return `<button class="sf-onb-choice" data-lang="${code}" type="button">
+          <span class="sf-onb-flag">${l.flag}</span>
+          <span class="sf-onb-choice-info">
+            <span class="sf-onb-name">${l.name}</span>
+            <span class="sf-onb-native">${l.native}</span>
+          </span>
+          <span class="sf-onb-check"></span>
+        </button>`;
+    }).join('');
 
     const wrap = document.createElement('div');
+    wrap.id = 'sf-onb-root';
     wrap.innerHTML = `
-      <div id="lang-overlay">
+      <div class="sf-onb-overlay" id="sf-onb-lang">
         <div class="sf-onb-box">
-          <div style="font-size:36px;margin-bottom:16px">✦</div>
-          <div class="sf-onb-title" id="txt-onb-lang-title"></div>
-          <p class="sf-onb-sub" id="txt-onb-lang-sub"></p>
-          <div class="sf-onb-choices">
-            <button class="sf-onb-choice selected" data-lang="fr" type="button">
-              <span class="sf-onb-flag">🇫🇷</span>
-              <div><span class="sf-onb-name">Français</span><span class="sf-onb-native">French</span></div>
-              <div class="sf-onb-check">✓</div>
-            </button>
-            <button class="sf-onb-choice" data-lang="en" type="button">
-              <span class="sf-onb-flag">🇬🇧</span>
-              <div><span class="sf-onb-name">English</span><span class="sf-onb-native">Anglais</span></div>
-              <div class="sf-onb-check"></div>
-            </button>
-            <button class="sf-onb-choice" data-lang="es" type="button">
-              <span class="sf-onb-flag">🇪🇸</span>
-              <div><span class="sf-onb-name">Español</span><span class="sf-onb-native">Espagnol</span></div>
-              <div class="sf-onb-check"></div>
-            </button>
-          </div>
-          <button class="sf-onb-btn" id="btn-onb-lang-confirm" type="button"></button>
+          <div class="sf-onb-icon">✦</div>
+          <div class="sf-onb-title" id="sf-onb-lang-title"></div>
+          <p class="sf-onb-sub" id="sf-onb-lang-sub"></p>
+          <div class="sf-onb-choices">${langChoices}</div>
+          <button class="sf-onb-btn" id="sf-onb-lang-confirm" type="button"></button>
         </div>
       </div>
-      <div id="tuto-overlay">
+      <div class="sf-onb-overlay" id="sf-onb-tuto">
         <div class="sf-onb-box">
-          <div style="font-size:36px;margin-bottom:16px">💡</div>
-          <div class="sf-onb-title" id="txt-onb-tuto-title"></div>
-          <div style="margin-bottom:28px">
-            <div class="sf-onb-tip"><span class="sf-onb-tip-icon">●</span><p id="txt-onb-tuto-menu"></p></div>
-            <div class="sf-onb-tip"><span class="sf-onb-tip-icon">+</span><p id="txt-onb-tuto-save"></p></div>
+          <div class="sf-onb-icon">💡</div>
+          <div class="sf-onb-title" id="sf-onb-tuto-title" style="margin-bottom:20px"></div>
+          <div class="sf-onb-tips">
+            <div class="sf-onb-tip"><span class="sf-onb-tip-icon">●</span><p id="sf-onb-tuto-menu"></p></div>
+            <div class="sf-onb-tip"><span class="sf-onb-tip-icon">+</span><p id="sf-onb-tuto-save"></p></div>
           </div>
-          <button class="sf-onb-btn" id="btn-onb-tuto-close" type="button"></button>
+          <button class="sf-onb-btn" id="sf-onb-tuto-close" type="button"></button>
         </div>
       </div>
-      <div id="pin-setup-overlay">
+      <div class="sf-onb-overlay" id="sf-onb-pin">
         <div class="sf-onb-box">
-          <div style="font-size:36px;margin-bottom:16px">🔒</div>
-          <div class="sf-onb-title" id="txt-onb-pin-title"></div>
-          <p class="sf-onb-sub" id="txt-onb-pin-body" style="margin-bottom:20px"></p>
-          <div class="sf-onb-label" id="txt-onb-pin-enter"></div>
-          <input id="pin-setup-input" class="sf-onb-input" type="password" inputmode="numeric" maxlength="4" placeholder="••••">
-          <div class="sf-onb-label" id="txt-onb-pin-confirm" style="margin-top:14px"></div>
-          <input id="pin-setup-input2" class="sf-onb-input" type="password" inputmode="numeric" maxlength="4" placeholder="••••">
-          <div id="pin-setup-error" class="sf-onb-error"></div>
-          <label style="display:flex;align-items:center;gap:10px;margin-top:18px;text-align:left;cursor:pointer">
-            <input type="checkbox" id="pin-setup-kids" style="width:18px;height:18px;accent-color:#c8a96e">
-            <span id="txt-onb-pin-kids" style="font-size:12px;color:#9a8a70;line-height:1.4"></span>
+          <div class="sf-onb-icon">🔒</div>
+          <div class="sf-onb-title" id="sf-onb-pin-title"></div>
+          <p class="sf-onb-sub" id="sf-onb-pin-body" style="margin-bottom:20px"></p>
+          <div class="sf-onb-label" id="sf-onb-pin-enter-label"></div>
+          <input id="sf-onb-pin-input" class="sf-onb-input" type="password"
+                 inputmode="numeric" maxlength="4" placeholder="••••" autocomplete="off">
+          <div class="sf-onb-label" id="sf-onb-pin-confirm-label" style="margin-top:14px"></div>
+          <input id="sf-onb-pin-input2" class="sf-onb-input" type="password"
+                 inputmode="numeric" maxlength="4" placeholder="••••" autocomplete="off">
+          <div id="sf-onb-pin-error" class="sf-onb-error"></div>
+          <label class="sf-onb-kids">
+            <input type="checkbox" id="sf-onb-pin-kids">
+            <span id="sf-onb-pin-kids-label"></span>
           </label>
-          <button class="sf-onb-btn" id="btn-onb-pin-create" type="button"></button>
-          <button class="sf-onb-skip" id="btn-onb-pin-skip" type="button"></button>
+          <button class="sf-onb-btn" id="sf-onb-pin-create" type="button"></button>
+          <button class="sf-onb-skip" id="sf-onb-pin-skip" type="button"></button>
         </div>
       </div>`;
     document.body.appendChild(wrap);
 
-    document.querySelectorAll('#lang-overlay .sf-onb-choice').forEach(btn => {
-      btn.addEventListener('click', () => selectLang(btn.dataset.lang, btn));
+    wrap.querySelectorAll('.sf-onb-choice').forEach(btn => {
+      btn.addEventListener('click', () => selectLang(btn.dataset.lang));
     });
-    document.getElementById('btn-onb-lang-confirm').addEventListener('click', confirmLang);
-    document.getElementById('btn-onb-tuto-close').addEventListener('click', closeTuto);
-    document.getElementById('btn-onb-pin-create').addEventListener('click', submitPinSetup);
-    document.getElementById('btn-onb-pin-skip').addEventListener('click', skipPinSetup);
-    document.getElementById('pin-setup-input').addEventListener('keydown', e => {
-      if (e.key === 'Enter') document.getElementById('pin-setup-input2').focus();
+    document.getElementById('sf-onb-lang-confirm').addEventListener('click', confirmLang);
+    document.getElementById('sf-onb-tuto-close').addEventListener('click', closeTuto);
+    document.getElementById('sf-onb-pin-create').addEventListener('click', submitPin);
+    document.getElementById('sf-onb-pin-skip').addEventListener('click', skipPin);
+
+    const pin1 = document.getElementById('sf-onb-pin-input');
+    const pin2 = document.getElementById('sf-onb-pin-input2');
+    const digitsOnly = el => el.addEventListener('input', () => {
+      el.value = el.value.replace(/\D/g, '').slice(0, 4);
     });
-    document.getElementById('pin-setup-input2').addEventListener('keydown', e => {
-      if (e.key === 'Enter') submitPinSetup();
-    });
+    digitsOnly(pin1);
+    digitsOnly(pin2);
+    pin1.addEventListener('keydown', e => { if (e.key === 'Enter') pin2.focus(); });
+    pin2.addEventListener('keydown', e => { if (e.key === 'Enter') submitPin(); });
   }
 
   function applyTexts() {
+    if (!_injected) return;
     const tr = t();
     const set = (id, val, html) => {
       const el = document.getElementById(id);
       if (!el) return;
       if (html) el.innerHTML = val; else el.textContent = val;
     };
-    set('txt-onb-lang-title', tr.langTitle);
-    set('txt-onb-lang-sub', tr.langSub);
-    set('btn-onb-lang-confirm', tr.langConfirm);
-    set('txt-onb-tuto-title', tr.tutoTitle);
-    set('txt-onb-tuto-menu', tr.tutoMenu, true);
-    set('txt-onb-tuto-save', tr.tutoSave, true);
-    set('btn-onb-tuto-close', tr.tutoBtn);
-    set('txt-onb-pin-title', tr.pinSetupTitle);
-    set('txt-onb-pin-body', tr.pinSetupBody);
-    set('txt-onb-pin-enter', tr.pinSetupEnter);
-    set('txt-onb-pin-confirm', tr.pinSetupConfirm);
-    set('txt-onb-pin-kids', tr.pinSetupKids);
-    set('btn-onb-pin-create', tr.pinSetupCreate);
-    set('btn-onb-pin-skip', tr.pinSetupSkip);
-    // index.html (overlays existants)
-    set('txt-tuto-title', tr.tutoTitle);
-    set('txt-tuto-menu', tr.tutoMenu, true);
-    set('txt-tuto-save', tr.tutoSave, true);
-    set('txt-tuto-btn', tr.tutoBtn);
-    set('txt-pinsetup-title', tr.pinSetupTitle);
-    set('txt-pinsetup-body', tr.pinSetupBody);
-    set('txt-pinsetup-enter', tr.pinSetupEnter);
-    set('txt-pinsetup-confirm', tr.pinSetupConfirm);
-    set('txt-pinsetup-kids', tr.pinSetupKids);
-    set('txt-pinsetup-create', tr.pinSetupCreate);
-    set('txt-pinsetup-skip', tr.pinSetupSkip);
+    set('sf-onb-lang-title', tr.langTitle);
+    set('sf-onb-lang-sub', tr.langSub);
+    set('sf-onb-lang-confirm', tr.langConfirm);
+    set('sf-onb-tuto-title', tr.tutoTitle);
+    set('sf-onb-tuto-menu', tr.tutoMenu, true);
+    set('sf-onb-tuto-save', tr.tutoSave, true);
+    set('sf-onb-tuto-close', tr.tutoBtn);
+    set('sf-onb-pin-title', tr.pinTitle);
+    set('sf-onb-pin-body', tr.pinBody);
+    set('sf-onb-pin-enter-label', tr.pinEnter);
+    set('sf-onb-pin-confirm-label', tr.pinConfirm);
+    set('sf-onb-pin-kids-label', tr.pinKids);
+    set('sf-onb-pin-create', tr.pinCreate);
+    set('sf-onb-pin-skip', tr.pinSkip);
   }
 
   function hideAll() {
-    ['lang-overlay', 'tuto-overlay', 'pin-setup-overlay'].forEach(id => {
+    ['sf-onb-lang', 'sf-onb-tuto', 'sf-onb-pin'].forEach(id => {
       const el = document.getElementById(id);
-      if (el) el.style.display = 'none';
+      if (el) { el.style.display = 'none'; el.style.animation = ''; }
     });
   }
 
-  function fadeOut(el, cb) {
+  function show(id) {
+    const el = document.getElementById(id);
+    if (el) el.style.display = 'flex';
+  }
+
+  function fadeOut(id, cb) {
+    const el = document.getElementById(id);
     if (!el) { if (cb) cb(); return; }
     el.style.animation = 'sf-onb-fade-out .3s ease forwards';
     setTimeout(() => {
@@ -277,140 +375,154 @@ window.SFOnboarding = (function () {
     }, 300);
   }
 
-  function selectLang(lang, btn) {
+  // ── Étape 1 : langue ─────────────────────────────────────────
+  function selectLang(lang) {
+    if (!LANGS.includes(lang)) return;
     _pendingLang = lang;
-    document.querySelectorAll('#lang-overlay .sf-onb-choice').forEach(b => {
-      b.classList.remove('selected');
+    document.querySelectorAll('#sf-onb-lang .sf-onb-choice').forEach(b => {
+      const on = b.dataset.lang === lang;
+      b.classList.toggle('selected', on);
       const check = b.querySelector('.sf-onb-check');
-      if (check) check.textContent = '';
+      if (check) check.textContent = on ? '✓' : '';
     });
-    btn.classList.add('selected');
-    const check = btn.querySelector('.sf-onb-check');
-    if (check) check.textContent = '✓';
   }
 
   function confirmLang() {
     lsSet('sf_lang', _pendingLang);
     lsSet('sf_lang_chosen', '1');
-    _setLang(_pendingLang);
-    fadeOut(document.getElementById('lang-overlay'), () => {
-      setTimeout(startLaunchSequence, 200);
-    });
+    if (typeof _onLangChange === 'function') {
+      try { _onLangChange(_pendingLang); } catch (e) { console.error(e); }
+    }
+    applyTexts();
+    fadeOut('sf-onb-lang', next);
   }
 
+  // ── Étape 2 : tutoriel ───────────────────────────────────────
   function showTuto() {
     applyTexts();
-    const overlay = document.getElementById('tuto-overlay');
-    if (!overlay) return;
-    overlay.style.display = 'flex';
+    show('sf-onb-tuto');
   }
 
   function closeTuto() {
     lsSet('sf_tuto_shown', '1');
-    fadeOut(document.getElementById('tuto-overlay'), () => {
-      setTimeout(startLaunchSequence, 200);
+    fadeOut('sf-onb-tuto', next);
+  }
+
+  // ── Étape 3 : code parental ──────────────────────────────────
+  function maybeShowPin() {
+    if (lsGet('sf_pin_setup_done')) return;
+    if (lsGet('sf_parent_pin') !== null) return;
+    showPin();
+  }
+
+  function showPin() {
+    applyTexts();
+    const err = document.getElementById('sf-onb-pin-error');
+    document.getElementById('sf-onb-pin-input').value = '';
+    document.getElementById('sf-onb-pin-input2').value = '';
+    document.getElementById('sf-onb-pin-kids').checked = false;
+    if (err) err.style.display = 'none';
+    show('sf-onb-pin');
+    setTimeout(() => {
+      const el = document.getElementById('sf-onb-pin-input');
+      if (el) el.focus();
+    }, 120);
+  }
+
+  function closePin() {
+    lsSet('sf_pin_setup_done', '1');
+    fadeOut('sf-onb-pin');
+  }
+
+  function skipPin() {
+    closePin();
+  }
+
+  // Écrit directement dans sf_options : la page hôte n'expose pas
+  // forcément saveOptions() (stories.html n'a pas de panneau options).
+  function enableKidsMode() {
+    let opts = {};
+    try { opts = JSON.parse(lsGet('sf_options') || '{}') || {}; } catch (e) {}
+    opts.kids = true;
+    lsSet('sf_options', JSON.stringify(opts));
+
+    const toggle = document.getElementById('opt-kids');
+    if (toggle) toggle.checked = true;
+    ['renderGameList', 'renderLibrary'].forEach(fn => {
+      if (typeof window[fn] === 'function') {
+        try { window[fn](); } catch (e) {}
+      }
     });
   }
 
-  function maybeShowPinSetup() {
-    if (lsGet('sf_pin_setup_done')) return;
-    if (lsGet('sf_parent_pin') !== null) return;
-    showPinSetup();
-  }
-
-  function showPinSetup() {
-    applyTexts();
-    const overlay = document.getElementById('pin-setup-overlay');
-    if (!overlay) return;
-    document.getElementById('pin-setup-input').value = '';
-    document.getElementById('pin-setup-input2').value = '';
-    document.getElementById('pin-setup-kids').checked = false;
-    document.getElementById('pin-setup-error').style.display = 'none';
-    overlay.style.display = 'flex';
-    setTimeout(() => document.getElementById('pin-setup-input').focus(), 100);
-  }
-
-  function closePinSetup() {
-    lsSet('sf_pin_setup_done', '1');
-    fadeOut(document.getElementById('pin-setup-overlay'));
-  }
-
-  function skipPinSetup() {
-    closePinSetup();
-  }
-
-  function submitPinSetup() {
+  function submitPin() {
     const tr = t();
-    const input = document.getElementById('pin-setup-input').value.trim();
-    const input2 = document.getElementById('pin-setup-input2').value.trim();
-    const err = document.getElementById('pin-setup-error');
-    if (!/^\d{4}$/.test(input)) {
-      err.textContent = tr.pinSetupError;
+    const input = document.getElementById('sf-onb-pin-input').value.trim();
+    const input2 = document.getElementById('sf-onb-pin-input2').value.trim();
+    const err = document.getElementById('sf-onb-pin-error');
+
+    const fail = msg => {
+      err.textContent = msg;
       err.style.display = 'block';
-      document.getElementById('pin-setup-input').focus();
+    };
+
+    if (!/^\d{4}$/.test(input)) {
+      fail(tr.pinError);
+      document.getElementById('sf-onb-pin-input').focus();
       return;
     }
     if (input !== input2) {
-      err.textContent = tr.pinSetupMismatch;
-      err.style.display = 'block';
-      document.getElementById('pin-setup-input2').value = '';
-      document.getElementById('pin-setup-input2').focus();
+      fail(tr.pinMismatch);
+      document.getElementById('sf-onb-pin-input2').value = '';
+      document.getElementById('sf-onb-pin-input2').focus();
       return;
     }
-    lsSet('sf_parent_pin', hashPin(input));
-    if (document.getElementById('pin-setup-kids').checked) {
-      const kidsToggle = document.getElementById('opt-kids');
-      if (kidsToggle) kidsToggle.checked = true;
-      if (typeof window.saveOptions === 'function') window.saveOptions();
-      if (typeof window.renderGameList === 'function') window.renderGameList();
-      if (typeof window.renderLibrary === 'function') window.renderLibrary();
-    }
-    closePinSetup();
+
+    lsSet('sf_parent_pin', sha256(input));
+    if (document.getElementById('sf-onb-pin-kids').checked) enableKidsMode();
+    closePin();
+
     const msg = document.createElement('div');
-    msg.style.cssText = 'position:fixed;bottom:80px;left:50%;transform:translateX(-50%);' +
-      'background:#13110e;border:1px solid rgba(109,250,188,0.4);border-radius:10px;' +
-      'padding:10px 20px;font-family:monospace;font-size:11px;color:#6dfabc;z-index:999';
-    msg.textContent = tr.pinSetupDone;
+    msg.className = 'sf-onb-toast';
+    msg.textContent = tr.pinDone;
     document.body.appendChild(msg);
     setTimeout(() => msg.remove(), 2500);
   }
 
-  function startLaunchSequence() {
-    injectStyles();
-    injectOverlays();
-    applyTexts();
+  // ── Orchestration ────────────────────────────────────────────
+  function next() {
     hideAll();
-
     if (!lsGet('sf_lang_chosen')) {
-      _pendingLang = _getLang();
-      const overlay = document.getElementById('lang-overlay');
-      if (overlay) overlay.style.display = 'flex';
+      selectLang(currentLang());
+      applyTexts();
+      show('sf-onb-lang');
     } else if (!lsGet('sf_tuto_shown')) {
       showTuto();
     } else {
-      maybeShowPinSetup();
+      maybeShowPin();
     }
   }
 
   function start(opts) {
     opts = opts || {};
-    if (typeof opts.getLang === 'function') _getLang = opts.getLang;
-    if (typeof opts.setLang === 'function') _setLang = opts.setLang;
-    _pendingLang = _getLang();
-    startLaunchSequence();
+    _onLangChange = typeof opts.onLangChange === 'function' ? opts.onLangChange : null;
+    const boot = () => {
+      injectStyles();
+      injectOverlays();
+      _pendingLang = currentLang();
+      next();
+    };
+    if (document.body) boot();
+    else document.addEventListener('DOMContentLoaded', boot, { once: true });
   }
 
-  // Rétrocompatibilité avec index.html
-  window.startLaunchSequence = startLaunchSequence;
-  window.confirmLang = confirmLang;
-  window.selectLangPopup = selectLang;
-  window.showTuto = showTuto;
-  window.closeTuto = closeTuto;
-  window.maybeShowPinSetup = maybeShowPinSetup;
-  window.showPinSetup = showPinSetup;
-  window.closePinSetup = closePinSetup;
-  window.skipPinSetup = skipPinSetup;
-  window.submitPinSetup = submitPinSetup;
+  /** Remet à zéro la séquence — utile pour revoir le tutoriel. */
+  function reset() {
+    ['sf_lang_chosen', 'sf_tuto_shown', 'sf_pin_setup_done'].forEach(k => {
+      try { localStorage.removeItem(k); } catch (e) {}
+    });
+    next();
+  }
 
-  return { start, startLaunchSequence };
+  return { start, next, reset, applyTexts, sha256 };
 })();
