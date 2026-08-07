@@ -1301,6 +1301,7 @@ const EDITOR_I18N = {
     sendModalHint:'Le fichier JSON sera joint automatiquement. Tu pourras l\'envoyer via Gmail, WhatsApp, Drive ou autre.',
     sendAuthorRequired:'Indiquez votre nom ou pseudo pour envoyer.', sendSuccess:'Fichier prêt ✓ Choisis comment le partager', sendSending:'Préparation…',
     sendDoneTitle:'Presque terminé', sendDoneSub:'Ton fichier JSON est prêt. Appuie sur Partager : choisis Gmail, WhatsApp ou Drive, puis envoie à l\'adresse ci-dessous.', sendDoneEmailLbl:'Adresse de l\'équipe', sendOpenMail:'✉ Ouvrir ma messagerie (navigateur)', sendShareFile:'📤 Partager le fichier', sendCopyAll:'⧉ Copier le message + JSON', sendCopyEmail:'⧉', sendCopied:'Copié ✓', sendEmailCopied:'E-mail copié ✓',
+    sendDefaultTitle:'Mon Histoire', sendShareRecipient:'→ Envoie ce fichier à : team.pegasuscorp@gmail.com',
     selectScene:'Sélectionne une scène', deleteTitle:'Supprimer', newSceneTitle:'Nouvelle scène', centerTitle:'Recentrer', empty:'Crée ou sélectionne une scène dans l\'arbre pour l\'éditer.', emptyAi:'Pas d\'idée ? Génère ton histoire avec l\'IA puis importe le JSON.', emptyAiBtn:'✦ Créer avec l\'IA', newScene:'+ Nouvelle scène',
     statsTitle:'Configuration des Stats', statsDesc:'Définis les attributs de ton personnage. Ils seront disponibles dans chaque choix.', addStat:'+ Ajouter une stat', close:'Fermer',
     visualTheme:'Thème visuel', presets:'Thèmes prédéfinis', customColors:'Couleurs custom', mainBg:'Fond principal', panelBg:'Fond panneaux', elementBg:'Fond éléments', accentMain:'Accent principal', accentSecond:'Accent secondaire', accentThird:'Accent tertiaire', mainText:'Texte principal', borders:'Bordures', preview:'Aperçu', previewTitle:'Titre de la scène', previewText:'Le héros avance dans l\'obscurité. Chaque pas résonne dans le couloir de pierre...', previewBtn:'→ Continuer',
@@ -1335,6 +1336,7 @@ const EDITOR_I18N = {
     sendModalHint:'The JSON file will be attached automatically. You can send it via Gmail, WhatsApp, Drive, or another app.',
     sendAuthorRequired:'Enter your name or pen name to send.', sendSuccess:'File ready ✓ Choose how to share it', sendSending:'Preparing…',
     sendDoneTitle:'Almost done', sendDoneSub:'Your JSON file is ready. Tap Share, pick Gmail/WhatsApp/Drive, then send to the address below.', sendDoneEmailLbl:'Team address', sendOpenMail:'✉ Open my mail app (browser)', sendShareFile:'📤 Share file', sendCopyAll:'⧉ Copy message + JSON', sendCopyEmail:'⧉', sendCopied:'Copied ✓', sendEmailCopied:'Email copied ✓',
+    sendDefaultTitle:'My Story', sendShareRecipient:'→ Send this file to: team.pegasuscorp@gmail.com',
     selectScene:'Select a scene', deleteTitle:'Delete', newSceneTitle:'New scene', centerTitle:'Recenter', empty:'Create or select a scene in the tree to edit it.', emptyAi:'No idea yet? Generate your story with AI, then import the JSON.', emptyAiBtn:'✦ Create with AI', newScene:'+ New scene',
     statsTitle:'Stats Configuration', statsDesc:'Define your character attributes. They will be available in every choice.', addStat:'+ Add stat', close:'Close',
     visualTheme:'Visual theme', presets:'Preset themes', customColors:'Custom colors', mainBg:'Main background', panelBg:'Panel background', elementBg:'Element background', accentMain:'Main accent', accentSecond:'Secondary accent', accentThird:'Third accent', mainText:'Main text', borders:'Borders', preview:'Preview', previewTitle:'Scene title', previewText:'The hero moves forward in the dark. Every step echoes through the stone corridor...', previewBtn:'→ Continue',
@@ -1369,6 +1371,7 @@ const EDITOR_I18N = {
     sendModalHint:'El archivo JSON se adjuntará automáticamente. Puedes enviarlo por Gmail, WhatsApp, Drive u otra app.',
     sendAuthorRequired:'Indica tu nombre o seudónimo para enviar.', sendSuccess:'Archivo listo ✓ Elige cómo compartirlo', sendSending:'Preparando…',
     sendDoneTitle:'Casi listo', sendDoneSub:'Tu archivo JSON está listo. Pulsa Compartir, elige Gmail/WhatsApp/Drive y envía a la dirección de abajo.', sendDoneEmailLbl:'Dirección del equipo', sendOpenMail:'✉ Abrir mi correo (navegador)', sendShareFile:'📤 Compartir archivo', sendCopyAll:'⧉ Copiar mensaje + JSON', sendCopyEmail:'⧉', sendCopied:'Copiado ✓', sendEmailCopied:'Correo copiado ✓',
+    sendDefaultTitle:'Mi Historia', sendShareRecipient:'→ Envía este archivo a: team.pegasuscorp@gmail.com',
     selectScene:'Selecciona una escena', deleteTitle:'Eliminar', newSceneTitle:'Nueva escena', centerTitle:'Recentrar', empty:'Crea o selecciona una escena en el árbol para editarla.', emptyAi:'¿Sin ideas? Genera tu historia con IA e importa el JSON.', emptyAiBtn:'✦ Crear con IA', newScene:'+ Nueva escena',
     statsTitle:'Configuración de Stats', statsDesc:'Define los atributos de tu personaje. Estarán disponibles en cada elección.', addStat:'+ Añadir stat', close:'Cerrar',
     visualTheme:'Tema visual', presets:'Temas predefinidos', customColors:'Colores personalizados', mainBg:'Fondo principal', panelBg:'Fondo de paneles', elementBg:'Fondo de elementos', accentMain:'Acento principal', accentSecond:'Acento secundario', accentThird:'Acento terciario', mainText:'Texto principal', borders:'Bordes', preview:'Vista previa', previewTitle:'Título de la escena', previewText:'El héroe avanza en la oscuridad. Cada paso resuena en el pasillo de piedra...', previewBtn:'→ Continuar',
@@ -1392,9 +1395,24 @@ const EDITOR_I18N = {
     healthReady:'✓ Lista', healthWarn:'⚠ {n} advert.', healthError:'✕ {n} error(s)', healthOk:'Sin problemas detectados', healthNoStart:'Sin escena de inicio definida', healthMultiStart:'{n} escenas de inicio', healthEmptyText:'"{t}" — texto vacío', healthNoLink:'"{t}" — elección {i} sin destino', healthDeadLink:'"{t}" — destino eliminado', healthNoChoice:'"{t}" — sin elecciones, no es final', searchNoResult:'Sin resultados', undone:'↩ Deshecho', redone:'↪ Rehecho', nodeColor:'🎨 Color del nodo', kidsOn:'🧒 Modo infantil activado', kidsOff:'Modo infantil desactivado', playerOn:'👤 Nombre activado', playerOff:'Nombre desactivado', kidsLabel:'Historia para niños', playerLabel:'Pedir nombre', healthTitle:'Salud de la historia'
   }
 };
-let editorLang = ['fr','en','es'].includes(localStorage.getItem('sf_lang')) ? localStorage.getItem('sf_lang') : 'fr';
+function getEditorLang() {
+  const l = localStorage.getItem('sf_lang');
+  return ['fr','en','es'].includes(l) ? l : 'fr';
+}
+let editorLang = getEditorLang();
 function et(key){ return (EDITOR_I18N[editorLang] && EDITOR_I18N[editorLang][key]) || EDITOR_I18N.fr[key] || key; }
 function emap(map, value){ return (EDITOR_I18N[editorLang] && EDITOR_I18N[editorLang][map] && EDITOR_I18N[editorLang][map][value]) || value; }
+
+function refreshEditorLang() {
+  const next = getEditorLang();
+  if (next === editorLang) return;
+  editorLang = next;
+  applyEditorLanguage();
+}
+window.addEventListener('storage', e => { if (e.key === 'sf_lang') refreshEditorLang(); });
+document.addEventListener('visibilitychange', () => {
+  if (!document.hidden) refreshEditorLang();
+});
 
 const TRANSITION_PRESETS = ['fade','glitch','scanline','flash','none'];
 const CLICK_EFFECT_PRESETS = ['pulse','shake','glitch','flash','vibrate','none'];
@@ -2605,12 +2623,13 @@ const MAILTO_JSON_INLINE_MAX = 1800;
 
 function buildSubmitMeta(author, email, message) {
   const scenes = project.scenes || {};
+  const lang = getEditorLang();
   return {
-    title: project.name || 'Mon Histoire',
+    title: project.name || et('sendDefaultTitle'),
     author,
     email,
     message,
-    lang: editorLang,
+    lang,
     sceneCount: Object.keys(scenes).length,
     endingCount: Object.values(scenes).filter(s => s.isEnd).length,
     kids: !!project.kids
@@ -2618,11 +2637,13 @@ function buildSubmitMeta(author, email, message) {
 }
 
 function sendMailBody(filename, meta, jsonText, delivery) {
-  const lang = meta?.lang || editorLang;
-  const name = meta?.title || project.name || 'Mon Histoire';
+  const lang = meta?.lang || getEditorLang();
+  const i18n = EDITOR_I18N[lang] || EDITOR_I18N.fr;
+  const name = meta?.title || project.name || i18n.sendDefaultTitle || 'Mon Histoire';
   const author = meta?.author || '';
   const emailLine = meta?.email || '';
   const messageBlock = meta?.message ? meta.message : '';
+  const langNames = { fr: 'Français', en: 'English', es: 'Español' };
   const kids = meta?.kids
     ? (lang === 'en' ? 'Yes' : lang === 'es' ? 'Sí' : 'Oui')
     : (lang === 'en' ? 'No' : lang === 'es' ? 'No' : 'Non');
@@ -2665,7 +2686,7 @@ function sendMailBody(filename, meta, jsonText, delivery) {
   body += `${b.title} : ${name}\n`;
   body += `${b.author} : ${author}\n`;
   if (emailLine) body += `${b.email} : ${emailLine}\n`;
-  body += `${b.lang} : ${lang.toUpperCase()}\n`;
+  body += `${b.lang} : ${langNames[lang] || lang.toUpperCase()}\n`;
   body += `${b.scenes} : ${meta?.sceneCount ?? '?'}\n`;
   body += `${b.endings} : ${meta?.endingCount ?? '?'}\n`;
   body += `${b.kids} : ${kids}\n`;
@@ -2711,6 +2732,7 @@ function showSubmitView(view) {
 }
 
 function openSubmitModal() {
+  refreshEditorLang();
   const scenes = project.scenes || {};
   if (!Object.keys(scenes).length) {
     toast(et('needOneScene'));
@@ -2776,9 +2798,18 @@ function canShareStoryFile(blob, filename) {
   return false;
 }
 
+function buildShareText(filename, meta, jsonText) {
+  const lang = meta?.lang || getEditorLang();
+  const i18n = EDITOR_I18N[lang] || EDITOR_I18N.fr;
+  const body = sendMailBody(filename, meta, jsonText, 'attach');
+  return (i18n.sendShareRecipient || '') + '\n\n' + body;
+}
+
 async function shareStoryFile(blob, filename, meta, jsonText) {
-  const mailText = sendMailBody(filename, meta, jsonText, 'attach');
-  const title = '[StoryForge] ' + (meta?.title || 'Histoire');
+  const lang = meta?.lang || getEditorLang();
+  const i18n = EDITOR_I18N[lang] || EDITOR_I18N.fr;
+  const mailText = buildShareText(filename, meta, jsonText);
+  const title = '[StoryForge] ' + (meta?.title || i18n.sendDefaultTitle || 'Mon Histoire');
 
   if (isNativeApp()) {
     const plugins = window.Capacitor && window.Capacitor.Plugins;
@@ -2857,7 +2888,9 @@ async function copySubmitEmail() {
 
 async function copySubmitMessage() {
   if (!_pendingSubmit) return;
-  const full = `${SUBMIT_EMAIL}\n\n${_pendingSubmit.bodyText}`;
+  const lang = _pendingSubmit.meta?.lang || getEditorLang();
+  const i18n = EDITOR_I18N[lang] || EDITOR_I18N.fr;
+  const full = `${i18n.sendShareRecipient || ''}\n\n${SUBMIT_EMAIL}\n\n${_pendingSubmit.bodyText}`;
   try {
     await navigator.clipboard.writeText(full);
     toast(et('sendCopied'));
@@ -2870,6 +2903,7 @@ window.copySubmitEmail = copySubmitEmail;
 window.copySubmitMessage = copySubmitMessage;
 
 function confirmSendStory() {
+  refreshEditorLang();
   const author = document.getElementById('submit-author')?.value?.trim() || '';
   const email = document.getElementById('submit-email')?.value?.trim() || '';
   const message = document.getElementById('submit-message')?.value?.trim() || '';
