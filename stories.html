@@ -626,7 +626,7 @@ function renderLibrary() {
   }
 
   packIds.forEach(packId => {
-    const stories = byPack[packId];
+    const stories = byPack[packId] || [];
     const cfg = PACK_CONFIG[packId] || { name:{fr:packId,en:packId,es:packId}, icon:'📖', color:'rgba(200,169,110,0.5)', order:99 };
     const isUnlocked = cfg.free || unlocked.includes(packId);
     const packName = cfg.name[currentLang] || cfg.name.fr;
