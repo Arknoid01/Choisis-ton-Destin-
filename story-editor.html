@@ -841,6 +841,39 @@ html,body { height:100%; overflow:hidden; font-family:'Syne',sans-serif; backgro
   color:var(--accent2); letter-spacing:1px; margin-bottom:4px;
 }
 .template-card span { font-size:12px; color:var(--text2); line-height:1.45; }
+
+#submit-modal-overlay {
+  position:fixed; inset:0; z-index:450; display:none;
+  align-items:center; justify-content:center;
+  background:rgba(0,0,0,0.75); backdrop-filter:blur(8px); padding:16px;
+}
+#submit-modal-overlay.open { display:flex; }
+#submit-modal {
+  width:100%; max-width:440px; max-height:90vh; overflow-y:auto;
+  background:var(--bg2); border:1px solid var(--border); border-radius:16px; padding:22px;
+}
+#submit-modal h3 {
+  font-family:'Cinzel',serif; font-size:16px; letter-spacing:2px;
+  color:var(--accent2); margin-bottom:6px;
+}
+#submit-modal-sub {
+  font-size:13px; color:var(--text2); margin-bottom:16px; line-height:1.5;
+}
+.submit-field { margin-bottom:12px; }
+.submit-field label {
+  display:block; font-size:10px; letter-spacing:1px; text-transform:uppercase;
+  color:var(--text2); margin-bottom:6px;
+}
+.submit-field input, .submit-field textarea {
+  width:100%; box-sizing:border-box; padding:10px 12px; border-radius:10px;
+  border:1px solid var(--border); background:var(--bg3); color:var(--text);
+  font-family:'Lato',sans-serif; font-size:14px;
+}
+.submit-field input[readonly] { opacity:0.75; }
+.submit-field textarea { min-height:72px; resize:vertical; }
+.submit-hint {
+  font-size:11px; color:var(--text2); line-height:1.45; margin:4px 0 14px;
+}
 </style>
 
 <script>
@@ -957,6 +990,35 @@ html,body { height:100%; overflow:hidden; font-family:'Syne',sans-serif; backgro
     </div>
   </div>
 </div>
+
+<div id="submit-modal-overlay" onclick="handleSubmitOverlayClick(event)">
+  <div id="submit-modal">
+    <h3 id="submit-modal-title">Envoyer votre histoire</h3>
+    <p id="submit-modal-sub"></p>
+    <div class="submit-field">
+      <label id="submit-lbl-title" for="submit-story-title">Titre</label>
+      <input id="submit-story-title" type="text" readonly>
+    </div>
+    <div class="submit-field">
+      <label id="submit-lbl-author" for="submit-author">Votre nom ou pseudo</label>
+      <input id="submit-author" type="text" autocomplete="name" maxlength="80">
+    </div>
+    <div class="submit-field">
+      <label id="submit-lbl-email" for="submit-email">Email (optionnel)</label>
+      <input id="submit-email" type="email" autocomplete="email" maxlength="120">
+    </div>
+    <div class="submit-field">
+      <label id="submit-lbl-message" for="submit-message">Message (optionnel)</label>
+      <textarea id="submit-message" maxlength="500"></textarea>
+    </div>
+    <p class="submit-hint" id="submit-modal-hint"></p>
+    <div class="modal-actions">
+      <button class="topbtn" id="submit-cancel-btn" onclick="closeSubmitModal()">Annuler</button>
+      <button class="topbtn primary" id="submit-confirm-btn" onclick="confirmSendStory()">Envoyer</button>
+    </div>
+  </div>
+</div>
+<iframe name="sf-submit-iframe" id="sf-submit-iframe" style="display:none" title="submit"></iframe>
 
 <!-- MODAL STATS -->
 <div id="modal-overlay">
@@ -1212,6 +1274,10 @@ const EDITOR_I18N = {
     templateKidsTitle:'Histoire enfant', templateKidsDesc:'5 scènes douces, mode enfant activé.',
     templateMicroTitle:'Micro-défi express', templateMicroDesc:'Le format du concours : court, jouable, publiable.',
     templateApplied:'Modèle chargé ✓', sendToastMail:'Ouverture de votre messagerie…', sendToastShare:'Choisissez votre messagerie — envoyez à team.pegasuscorp@gmail.com',
+    sendModalTitle:'Envoyer votre histoire', sendModalSub:'Quelques infos et on s\'occupe du reste — pas besoin d\'exporter le JSON vous-même.',
+    sendLblTitle:'Titre', sendLblAuthor:'Votre nom ou pseudo', sendLblEmail:'Email (optionnel)', sendLblMessage:'Message (optionnel)',
+    sendModalHint:'Votre histoire sera transmise à l\'équipe Fableris. Si le formulaire en ligne n\'est pas disponible, votre messagerie s\'ouvrira avec tout prérempli.',
+    sendAuthorRequired:'Indiquez votre nom ou pseudo pour envoyer.', sendSuccess:'Histoire envoyée ✓ Merci !', sendSending:'Envoi en cours…',
     selectScene:'Sélectionne une scène', deleteTitle:'Supprimer', newSceneTitle:'Nouvelle scène', centerTitle:'Recentrer', empty:'Crée ou sélectionne une scène dans l\'arbre pour l\'éditer.', newScene:'+ Nouvelle scène',
     statsTitle:'Configuration des Stats', statsDesc:'Définis les attributs de ton personnage. Ils seront disponibles dans chaque choix.', addStat:'+ Ajouter une stat', close:'Fermer',
     visualTheme:'Thème visuel', presets:'Thèmes prédéfinis', customColors:'Couleurs custom', mainBg:'Fond principal', panelBg:'Fond panneaux', elementBg:'Fond éléments', accentMain:'Accent principal', accentSecond:'Accent secondaire', accentThird:'Accent tertiaire', mainText:'Texte principal', borders:'Bordures', preview:'Aperçu', previewTitle:'Titre de la scène', previewText:'Le héros avance dans l\'obscurité. Chaque pas résonne dans le couloir de pierre...', previewBtn:'→ Continuer',
@@ -1241,6 +1307,10 @@ const EDITOR_I18N = {
     templateKidsTitle:'Kids story', templateKidsDesc:'5 gentle scenes, kids mode enabled.',
     templateMicroTitle:'Express micro-challenge', templateMicroDesc:'The contest format: short, playable, publishable.',
     templateApplied:'Template loaded ✓', sendToastMail:'Opening your email app…', sendToastShare:'Pick your mail app — send to team.pegasuscorp@gmail.com',
+    sendModalTitle:'Send your story', sendModalSub:'A few details and we handle the rest — no need to export JSON yourself.',
+    sendLblTitle:'Title', sendLblAuthor:'Your name or pen name', sendLblEmail:'Email (optional)', sendLblMessage:'Message (optional)',
+    sendModalHint:'Your story will be sent to the Fableris team. If the online form is unavailable, your mail app opens with everything prefilled.',
+    sendAuthorRequired:'Enter your name or pen name to send.', sendSuccess:'Story sent ✓ Thank you!', sendSending:'Sending…',
     selectScene:'Select a scene', deleteTitle:'Delete', newSceneTitle:'New scene', centerTitle:'Recenter', empty:'Create or select a scene in the tree to edit it.', newScene:'+ New scene',
     statsTitle:'Stats Configuration', statsDesc:'Define your character attributes. They will be available in every choice.', addStat:'+ Add stat', close:'Close',
     visualTheme:'Visual theme', presets:'Preset themes', customColors:'Custom colors', mainBg:'Main background', panelBg:'Panel background', elementBg:'Element background', accentMain:'Main accent', accentSecond:'Secondary accent', accentThird:'Third accent', mainText:'Main text', borders:'Borders', preview:'Preview', previewTitle:'Scene title', previewText:'The hero moves forward in the dark. Every step echoes through the stone corridor...', previewBtn:'→ Continue',
@@ -1270,6 +1340,10 @@ const EDITOR_I18N = {
     templateKidsTitle:'Historia infantil', templateKidsDesc:'5 escenas suaves, modo infantil activado.',
     templateMicroTitle:'Micro-reto exprés', templateMicroDesc:'El formato del concurso: corto, jugable, publicable.',
     templateApplied:'Plantilla cargada ✓', sendToastMail:'Abriendo tu correo…', sendToastShare:'Elige tu app de correo — envía a team.pegasuscorp@gmail.com',
+    sendModalTitle:'Enviar tu historia', sendModalSub:'Unos datos y nosotros nos encargamos — no hace falta exportar el JSON manualmente.',
+    sendLblTitle:'Título', sendLblAuthor:'Tu nombre o seudónimo', sendLblEmail:'Email (opcional)', sendLblMessage:'Mensaje (opcional)',
+    sendModalHint:'Tu historia se enviará al equipo Fableris. Si el formulario en línea no está disponible, se abrirá tu correo con todo preparado.',
+    sendAuthorRequired:'Indica tu nombre o seudónimo para enviar.', sendSuccess:'¡Historia enviada ✓ Gracias!', sendSending:'Enviando…',
     selectScene:'Selecciona una escena', deleteTitle:'Eliminar', newSceneTitle:'Nueva escena', centerTitle:'Recentrar', empty:'Crea o selecciona una escena en el árbol para editarla.', newScene:'+ Nueva escena',
     statsTitle:'Configuración de Stats', statsDesc:'Define los atributos de tu personaje. Estarán disponibles en cada elección.', addStat:'+ Añadir stat', close:'Cerrar',
     visualTheme:'Tema visual', presets:'Temas predefinidos', customColors:'Colores personalizados', mainBg:'Fondo principal', panelBg:'Fondo de paneles', elementBg:'Fondo de elementos', accentMain:'Acento principal', accentSecond:'Acento secundario', accentThird:'Acento terciario', mainText:'Texto principal', borders:'Bordes', preview:'Vista previa', previewTitle:'Título de la escena', previewText:'El héroe avanza en la oscuridad. Cada paso resuena en el pasillo de piedra...', previewBtn:'→ Continuar',
@@ -1358,6 +1432,15 @@ function applyEditorLanguage() {
   byId('template-modal-title', et('templateModalTitle'));
   byId('template-modal-sub', et('templateModalSub'));
   byId('template-close-btn', et('close'));
+  byId('submit-modal-title', et('sendModalTitle'));
+  byId('submit-modal-sub', et('sendModalSub'));
+  byId('submit-lbl-title', et('sendLblTitle'));
+  byId('submit-lbl-author', et('sendLblAuthor'));
+  byId('submit-lbl-email', et('sendLblEmail'));
+  byId('submit-lbl-message', et('sendLblMessage'));
+  byId('submit-modal-hint', et('sendModalHint'));
+  byId('submit-cancel-btn', et('cancel'));
+  byId('submit-confirm-btn', et('sendBtn'));
   renderTemplateCards();
 }
 
@@ -2483,18 +2566,19 @@ function applyStoryTemplate(type) {
   toast(et('templateApplied'));
 }
 
-function sendMailBody(filename) {
-  const lang = editorLang();
-  const name = project.name || 'Mon Histoire';
-  const bodies = {
-    fr: `Bonjour l'équipe PegasusCorp,\n\nJe vous soumets mon histoire "${name}" créée avec StoryForge.\n\nLe fichier JSON est joint (${filename}) — ou en pièce jointe si votre messagerie le permet.\n\nMerci de prendre le temps de la lire !\n\nCordialement,\n[Votre nom]`,
-    en: `Hello PegasusCorp team,\n\nI am submitting my story "${name}" created with StoryForge.\n\nThe JSON file is attached (${filename}) — or as an attachment if your mail app allows it.\n\nThank you for reading it!\n\nBest regards,\n[Your name]`,
-    es: `Hola equipo PegasusCorp,\n\nLes envío mi historia "${name}" creada con StoryForge.\n\nEl archivo JSON está adjunto (${filename}) — o como adjunto si su app de correo lo permite.\n\n¡Gracias por leerla!\n\nSaludos,\n[Su nombre]`
-  };
-  return bodies[lang] || bodies.fr;
+let _submitConfig = null;
+
+async function loadSubmitConfig() {
+  if (_submitConfig) return _submitConfig;
+  try {
+    const r = await fetch('submit-config.json');
+    if (r.ok) _submitConfig = await r.json();
+  } catch (e) {}
+  _submitConfig = _submitConfig || { enabled: false, contact_email: 'team.pegasuscorp@gmail.com', fields: {} };
+  return _submitConfig;
 }
 
-function sendStory() {
+function buildExportBlob() {
   project.theme = { ...currentTheme };
   project.kids = document.getElementById('kids-check').checked;
   const exportData = JSON.parse(JSON.stringify(project));
@@ -2502,65 +2586,187 @@ function sendStory() {
     scene.choices = shuffleArray(scene.choices);
   });
   const filename = safeFilename(project.name, '.json');
-  const blob = new Blob([JSON.stringify(exportData, null, 2)], {type:'application/json'});
+  const blob = new Blob([JSON.stringify(exportData, null, 2)], { type: 'application/json' });
+  return { blob, filename, exportData };
+}
 
-  // Détection native
+function openSubmitModal() {
+  const scenes = project.scenes || {};
+  if (!Object.keys(scenes).length) {
+    toast(et('needOneScene'));
+    return;
+  }
+  const titleEl = document.getElementById('submit-story-title');
+  const authorEl = document.getElementById('submit-author');
+  const emailEl = document.getElementById('submit-email');
+  const msgEl = document.getElementById('submit-message');
+  if (titleEl) titleEl.value = project.name || '';
+  if (authorEl) authorEl.value = localStorage.getItem('sf_author_name') || '';
+  if (emailEl) emailEl.value = localStorage.getItem('sf_author_email') || '';
+  if (msgEl) msgEl.value = '';
+  document.getElementById('submit-modal-overlay')?.classList.add('open');
+  setTimeout(() => authorEl?.focus(), 200);
+}
+
+function closeSubmitModal() {
+  document.getElementById('submit-modal-overlay')?.classList.remove('open');
+}
+
+function handleSubmitOverlayClick(e) {
+  if (e.target?.id === 'submit-modal-overlay') closeSubmitModal();
+}
+
+function sendMailBody(filename, meta) {
+  const lang = editorLang();
+  const name = project.name || 'Mon Histoire';
+  const author = meta?.author || '[Votre nom]';
+  const email = meta?.email ? `\nEmail : ${meta.email}` : '';
+  const message = meta?.message ? `\n\nMessage :\n${meta.message}` : '';
+  const bodies = {
+    fr: `Bonjour l'équipe PegasusCorp,\n\nJe vous soumets mon histoire "${name}" créée avec StoryForge.\n\nAuteur : ${author}${email}${message}\n\nLe fichier JSON est joint (${filename}) — ou en pièce jointe si votre messagerie le permet.\n\nMerci de prendre le temps de la lire !\n\nCordialement,\n${author}`,
+    en: `Hello PegasusCorp team,\n\nI am submitting my story "${name}" created with StoryForge.\n\nAuthor: ${author}${email}${message}\n\nThe JSON file is attached (${filename}) — or as an attachment if your mail app allows it.\n\nThank you for reading it!\n\nBest regards,\n${author}`,
+    es: `Hola equipo PegasusCorp,\n\nLes envío mi historia "${name}" creada con StoryForge.\n\nAutor: ${author}${email}${message}\n\nEl archivo JSON está adjunto (${filename}) — o como adjunto si su app de correo lo permite.\n\n¡Gracias por leerla!\n\nSaludos,\n${author}`
+  };
+  return bodies[lang] || bodies.fr;
+}
+
+function postToGoogleForm(config, values) {
+  return new Promise(resolve => {
+    const iframe = document.getElementById('sf-submit-iframe');
+    const form = document.createElement('form');
+    form.method = 'POST';
+    form.action = config.form_action;
+    form.target = 'sf-submit-iframe';
+    form.style.display = 'none';
+    Object.entries(values).forEach(([name, value]) => {
+      if (!name || value == null) return;
+      const input = document.createElement('input');
+      input.type = 'hidden';
+      input.name = name;
+      input.value = String(value);
+      form.appendChild(input);
+    });
+    let done = false;
+    const finish = () => {
+      if (done) return;
+      done = true;
+      iframe?.removeEventListener('load', finish);
+      resolve();
+    };
+    iframe?.addEventListener('load', finish);
+    document.body.appendChild(form);
+    form.submit();
+    document.body.removeChild(form);
+    setTimeout(finish, 2500);
+  });
+}
+
+async function tryGoogleFormSubmit(config, meta, jsonText) {
+  if (!config?.enabled || !config.form_action || config.form_action.includes('REMPLACER')) return false;
+  const f = config.fields || {};
+  const values = {};
+  if (f.title) values[f.title] = meta.title;
+  if (f.author) values[f.author] = meta.author;
+  if (f.email) values[f.email] = meta.email || '';
+  if (f.message) values[f.message] = meta.message || '';
+  if (f.json) values[f.json] = jsonText;
+  if (f.lang) values[f.lang] = editorLang();
+  if (!Object.keys(values).length) return false;
+  await postToGoogleForm(config, values);
+  return true;
+}
+
+function sendStory() {
+  openSubmitModal();
+}
+
+async function confirmSendStory() {
+  const author = document.getElementById('submit-author')?.value?.trim() || '';
+  const email = document.getElementById('submit-email')?.value?.trim() || '';
+  const message = document.getElementById('submit-message')?.value?.trim() || '';
+  if (!author) {
+    toast(et('sendAuthorRequired'));
+    document.getElementById('submit-author')?.focus();
+    return;
+  }
+  localStorage.setItem('sf_author_name', author);
+  if (email) localStorage.setItem('sf_author_email', email);
+
+  const { blob, filename, exportData } = buildExportBlob();
+  const meta = {
+    title: project.name || 'Mon Histoire',
+    author,
+    email,
+    message
+  };
+  const btn = document.getElementById('submit-confirm-btn');
+  if (btn) { btn.disabled = true; btn.textContent = et('sendSending'); }
+
+  try {
+    const config = await loadSubmitConfig();
+    const sentForm = await tryGoogleFormSubmit(config, meta, JSON.stringify(exportData, null, 2));
+    if (sentForm) {
+      closeSubmitModal();
+      toast(et('sendSuccess'));
+      return;
+    }
+    closeSubmitModal();
+    await dispatchStoryFile(blob, filename, meta);
+  } finally {
+    if (btn) { btn.disabled = false; btn.textContent = et('sendBtn'); }
+  }
+}
+
+async function dispatchStoryFile(blob, filename, meta) {
   const isNative = (window.Capacitor && window.Capacitor.getPlatform && window.Capacitor.getPlatform() !== 'web') ||
                    (window.location.protocol === 'capacitor:');
 
   if (isNative) {
-    blob.arrayBuffer().then(buf => {
-      let binary = '';
-      const bytes = new Uint8Array(buf);
-      for (let i = 0; i < bytes.byteLength; i++) binary += String.fromCharCode(bytes[i]);
-      const base64 = btoa(binary);
-
-      const plugins = window.Capacitor.Plugins;
-      if (plugins && plugins.Filesystem && plugins.Share) {
-        plugins.Filesystem.writeFile({ path: filename, data: base64, directory: 'CACHE' })
-          .then(res => {
-            // Pas de champ `text` ici : il fait remonter toutes les applis
-            // capables de recevoir du texte (PayPal, réseaux sociaux...).
-            // Avec `files` seul, la liste se limite aux applis gérant un fichier.
-            return plugins.Share.share({
-              title: '[StoryForge] ' + (project.name || 'Mon Histoire'),
-              files: [res.uri],
-              dialogTitle: et('sendToastShare')
-            });
-          })
-          .catch(err => {
-            if (isShareCancel(err)) return;          // fermeture volontaire
-            console.error('[sendStory]', err);
-            toast('Envoi impossible : ' + errMsg(err));
-            _sendMailtoFallback(blob, filename);
-          });
-      } else {
-        _sendMailtoFallback(blob, filename);
+    const buf = await blob.arrayBuffer();
+    let binary = '';
+    const bytes = new Uint8Array(buf);
+    for (let i = 0; i < bytes.byteLength; i++) binary += String.fromCharCode(bytes[i]);
+    const base64 = btoa(binary);
+    const plugins = window.Capacitor.Plugins;
+    if (plugins && plugins.Filesystem && plugins.Share) {
+      try {
+        const res = await plugins.Filesystem.writeFile({ path: filename, data: base64, directory: 'CACHE' });
+        await plugins.Share.share({
+          title: '[StoryForge] ' + (project.name || 'Mon Histoire'),
+          files: [res.uri],
+          dialogTitle: et('sendToastShare')
+        });
+        return;
+      } catch (err) {
+        if (isShareCancel(err)) return;
+        console.error('[sendStory]', err);
+        toast('Envoi impossible : ' + errMsg(err));
       }
-    });
+    }
+    _sendMailtoFallback(blob, filename, meta);
     return;
   }
 
-  // ── Web Share API (navigateur mobile) ─────────────────────
   if (navigator.share && navigator.canShare) {
     const file = new File([blob], filename, { type: 'application/json' });
     if (navigator.canShare({ files: [file] })) {
-      navigator.share({
-        files: [file],
-        title: '[StoryForge] ' + (project.name || 'Mon Histoire'),
-        text: `Story "${project.name || 'Mon Histoire'}" — StoryForge`
-      }).catch(() => _sendMailtoFallback(blob, filename));
-      return;
+      try {
+        await navigator.share({
+          files: [file],
+          title: '[StoryForge] ' + (project.name || 'Mon Histoire'),
+          text: `Story "${project.name || 'Mon Histoire'}" — ${meta.author}`
+        });
+        return;
+      } catch (e) {
+        if (isShareCancel(e)) return;
+      }
     }
   }
 
-  // ── Fallback mailto + téléchargement ──────────────────────
-  _sendMailtoFallback(blob, filename);
+  _sendMailtoFallback(blob, filename, meta);
 }
 
-function _sendMailtoFallback(blob, filename) {
-  // Sur natif, download() rouvrirait une feuille de partage : on enregistre
-  // directement le fichier puis on ouvre le client mail.
+function _sendMailtoFallback(blob, filename, meta) {
   const isNative = (window.Capacitor && window.Capacitor.getPlatform && window.Capacitor.getPlatform() !== 'web') ||
                    (window.location.protocol === 'capacitor:');
   if (isNative) {
@@ -2568,9 +2774,10 @@ function _sendMailtoFallback(blob, filename) {
   } else {
     _downloadFallback(blob, filename);
   }
-  const to      = 'team.pegasuscorp@gmail.com';
-  const subject = encodeURIComponent('[StoryForge] ' + (project.name || 'Mon Histoire'));
-  const body    = encodeURIComponent(sendMailBody(filename));
+  const configEmail = _submitConfig?.contact_email || 'team.pegasuscorp@gmail.com';
+  const to = configEmail;
+  const subject = encodeURIComponent('[StoryForge] ' + (project.name || 'Mon Histoire') + ' — ' + (meta?.author || ''));
+  const body = encodeURIComponent(sendMailBody(filename, meta));
   setTimeout(() => {
     window.location.href = `mailto:${to}?subject=${subject}&body=${body}`;
     toast(et('sendToastMail'));
