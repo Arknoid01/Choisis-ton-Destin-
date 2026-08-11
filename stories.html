@@ -837,6 +837,7 @@ async function buyPack(packId) {
       // paiement accepté mais pas encore confirmé (paiement différé)
       sfToast(bt('processing'));
     } else if (res.reason === 'not_found') {
+      console.error('[billing] not_found', packId, SFBilling.getProductDebug?.(packId));
       sfToast(bt('notfound'));
     } else if (res.reason === 'coming_soon') {
       sfToast(bt('comingSoon'));
