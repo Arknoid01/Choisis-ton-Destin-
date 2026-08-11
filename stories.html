@@ -64,6 +64,26 @@ html,body { height:100%; background:#0d0d0f; color:#e8e0d0; font-family:'Cormora
 }
 #btn-community:hover { border-color:var(--gold3);color:var(--gold); }
 
+#billing-diag-overlay {
+  display:none; position:fixed; inset:0; z-index:950;
+  background:rgba(0,0,0,0.75); align-items:center; justify-content:center; padding:16px;
+}
+#billing-diag-overlay.open { display:flex; }
+#billing-diag-box {
+  background:#1a1710; border:1px solid #3a3222; border-radius:12px;
+  max-width:420px; width:100%; max-height:80vh; overflow:auto; padding:18px;
+}
+#billing-diag-box h3 {
+  font-family:'Cinzel',serif; font-size:14px; color:var(--gold); margin:0 0 12px;
+  letter-spacing:1px;
+}
+#billing-diag-lines { font-size:12px; line-height:1.6; color:#c8b89a; white-space:pre-wrap; }
+#billing-diag-close {
+  margin-top:14px; width:100%; padding:10px; border-radius:8px;
+  border:1px solid #3a3222; background:none; color:#9a8a70; cursor:pointer;
+  font-family:Lato,sans-serif; font-size:12px;
+}
+
 /* ── SCROLL AREA ── */
 #scroll {
   position:fixed; top:calc(54px + var(--android-safe-area-inset-top, 0px)); left:0; right:0; bottom:0;
@@ -344,6 +364,14 @@ html,body { height:100%; background:#0d0d0f; color:#e8e0d0; font-family:'Cormora
 <div id="scroll">
   <div id="content">
     <div class="empty-state">Chargement...</div>
+  </div>
+</div>
+
+<div id="billing-diag-overlay" onclick="if(event.target===this)closeBillingDiagnostic()">
+  <div id="billing-diag-box">
+    <h3>Diagnostic achats</h3>
+    <div id="billing-diag-lines">Chargement…</div>
+    <button type="button" id="billing-diag-close" onclick="closeBillingDiagnostic()">Fermer</button>
   </div>
 </div>
 
@@ -839,6 +867,7 @@ async function buyPack(packId) {
     } else if (res.reason === 'not_found') {
       console.error('[billing] not_found', packId, SFBilling.getProductDebug?.(packId));
       sfToast(bt('notfound'));
+      setTimeout(() => showBillingDiagnostic(), 400);
     } else if (res.reason === 'coming_soon') {
       sfToast(bt('comingSoon'));
     } else if (res.reason === 'web' || res.reason === 'plugin_missing') {
@@ -872,18 +901,110 @@ async function restorePurchases() {
 }
 
 // Bouton de restauration en bas de la bibliothèque
+function explainBillingDiag(d) {
+  const L = {
+    fr: {
+      title:'Diagnostic achats', nativeOk:'✓ Application native',
+      nativeKo:'❌ Pas en app native (navigateur web)',
+      pluginOk:'✓ Plugin Google Play détecté',
+      pluginKo:'❌ Plugin billing absent — cordova-plugin-purchase manquant dans l\'APK',
+      storeOk:'✓ Catalogue Google Play chargé',
+      storeKo:'⚠ Catalogue Google Play pas encore prêt',
+      err:'Dernière erreur', notReg:'⚠ Non enregistré côté app (PLAY_PRODUCT_PACKS)',
+      missing:'❌ Absent du catalogue Google (ID inexistant, inactif, ou app pas installée via Play Store)',
+      noOffer:'❌ Produit vu mais sans offre/prix (option d\'achat manquante ou propagation en cours)',
+      ok:'✓ Disponible à l\'achat', hint:'Astuce : maintenir « Restaurer mes achats » 1 seconde pour rouvrir ce diagnostic.'
+    },
+    en: {
+      title:'Purchase diagnostic', nativeOk:'✓ Native app',
+      nativeKo:'❌ Not in native app (web browser)',
+      pluginOk:'✓ Google Play plugin detected',
+      pluginKo:'❌ Billing plugin missing from APK',
+      storeOk:'✓ Google Play catalog loaded',
+      storeKo:'⚠ Google Play catalog not ready',
+      err:'Last error', notReg:'⚠ Not registered in app (PLAY_PRODUCT_PACKS)',
+      missing:'❌ Missing from Google catalog',
+      noOffer:'❌ No offer/price available',
+      ok:'✓ Ready to purchase', hint:'Tip: hold « Restore purchases » for 1 second to reopen.'
+    },
+    es: {
+      title:'Diagnóstico de compras', nativeOk:'✓ App nativa',
+      nativeKo:'❌ No es app nativa (navegador web)',
+      pluginOk:'✓ Plugin de Google Play detectado',
+      pluginKo:'❌ Plugin de facturación ausente en el APK',
+      storeOk:'✓ Catálogo de Google Play cargado',
+      storeKo:'⚠ Catálogo de Google Play no listo',
+      err:'Último error', notReg:'⚠ No registrado en la app',
+      missing:'❌ Ausente del catálogo de Google',
+      noOffer:'❌ Sin oferta/precio disponible',
+      ok:'✓ Listo para comprar', hint:'Mantén « Restaurar compras » 1 segundo para reabrir.'
+    }
+  }[currentLang] || null;
+  const t = L || {
+    nativeOk:'✓ Native', nativeKo:'❌ Not native', pluginOk:'✓ Plugin', pluginKo:'❌ No plugin',
+    storeOk:'✓ Store', storeKo:'⚠ Store', err:'Error', notReg:'⚠ Not registered',
+    missing:'❌ Missing', noOffer:'❌ No offer', ok:'✓ OK', hint:''
+  };
+  const lines = [t.nativeOk && d.native ? t.nativeOk : t.nativeKo,
+    d.plugin ? t.pluginOk : t.pluginKo,
+    d.storeReady ? t.storeOk : t.storeKo];
+  if (d.lastError) lines.push(t.err + ' : ' + d.lastError);
+  (d.products || []).forEach(p => {
+    if (p.note === 'not_registered_on_play') lines.push(t.notReg + ' — ' + p.productId);
+    else if (!p.loaded) lines.push(t.missing + '\n   ' + p.productId);
+    else if (!p.hasOffer) lines.push(t.noOffer + '\n   ' + p.productId);
+    else lines.push(t.ok + ' — ' + p.productId);
+  });
+  lines.push('', t.hint);
+  return lines.join('\n');
+}
+
+async function showBillingDiagnostic() {
+  const overlay = document.getElementById('billing-diag-overlay');
+  const lines = document.getElementById('billing-diag-lines');
+  if (!overlay || !lines) return;
+  overlay.classList.add('open');
+  lines.textContent = 'Chargement…';
+  if (!window.SFBilling || !SFBilling.getFullDiagnostic) {
+    lines.textContent = 'billing.js indisponible';
+    return;
+  }
+  try {
+    const d = await SFBilling.getFullDiagnostic();
+    lines.textContent = explainBillingDiag(d);
+    console.info('[billing] diagnostic', d);
+  } catch (e) {
+    lines.textContent = 'Erreur diagnostic : ' + (e.message || e);
+  }
+}
+
+function closeBillingDiagnostic() {
+  document.getElementById('billing-diag-overlay')?.classList.remove('open');
+}
+
 function injectRestoreButton() {
   if (document.getElementById('btn-restore')) return;
   const content = document.getElementById('content');
   if (!content) return;
   const wrap = document.createElement('div');
-  wrap.style.cssText = 'text-align:center;padding:24px 16px 40px';
+  wrap.style.cssText = 'text-align:center;padding:24px 16px 8px';
   wrap.innerHTML = `<button id="btn-restore"
       style="background:none;border:1px solid #2a2418;color:#9a8a70;font-size:11px;
              letter-spacing:1.5px;padding:10px 18px;border-radius:8px;cursor:pointer;
-             font-family:Lato,sans-serif">${bt('restore')}</button>`;
+             font-family:Lato,sans-serif">${bt('restore')}</button>
+      <div style="font-size:10px;color:#5a5040;margin-top:8px;opacity:0.7">Maintenir 1 s → diagnostic achats</div>`;
   content.appendChild(wrap);
-  document.getElementById('btn-restore').onclick = restorePurchases;
+  const btn = document.getElementById('btn-restore');
+  btn.onclick = restorePurchases;
+  let holdTimer = null;
+  const startHold = () => { holdTimer = setTimeout(() => { holdTimer = null; showBillingDiagnostic(); }, 900); };
+  const cancelHold = () => { if (holdTimer) { clearTimeout(holdTimer); holdTimer = null; } };
+  btn.addEventListener('mousedown', startHold);
+  btn.addEventListener('mouseup', cancelHold);
+  btn.addEventListener('mouseleave', cancelHold);
+  btn.addEventListener('touchstart', startHold, { passive: true });
+  btn.addEventListener('touchend', cancelHold);
+  btn.addEventListener('touchcancel', cancelHold);
 }
 
 // ── NAME POPUP (repris de index) ──
