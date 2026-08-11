@@ -40,11 +40,13 @@ window.SFBilling = (function () {
   const FREE_PACKS        = ['free', 'kids'];
   // Packs sans histoires : visibles en « bientôt » mais pas à la vente.
   const COMING_SOON_PACKS = ['neon', 'pirates', 'fantasy', 'wilds'];
+  // Produits réellement créés et actifs dans la Play Console.
+  // N'enregistrer que ceux-ci — ajouter 'cosmos' quand créé dans Play Console.
+  const PLAY_PRODUCT_PACKS = ['cinq_lames'];
   const CACHE_KEY     = 'sf_unlocked_packs';
   const CODE_KEY      = 'sf_code_unlocks';
   const PRICE_KEY     = 'sf_pack_prices';
   const PRODUCT_PACKS = Object.keys(PRODUCTS);
-  const SELLABLE_PACKS = () => PRODUCT_PACKS.filter(p => !COMING_SOON_PACKS.includes(p));
 
   const DEVICE_READY_TIMEOUT = 15000;
   const STORE_INIT_TIMEOUT   = 20000;
@@ -119,8 +121,8 @@ window.SFBilling = (function () {
   // conservés puisqu'ils ne dépendent pas de Google.
   function syncFromStore() {
     if (!store) return;
-    const ownedFromPlay = PRODUCT_PACKS.filter(packId => {
-      const p = store.get(PRODUCTS[packId]);
+    const ownedFromPlay = PLAY_PRODUCT_PACKS.filter(packId => {
+      const p = getProduct(PRODUCTS[packId]);
       return !!(p && p.owned);
     });
     writeJSON(CACHE_KEY, Array.from(new Set(
@@ -135,9 +137,8 @@ window.SFBilling = (function () {
   function cachePrices() {
     if (!store) return;
     const prices = {};
-    PRODUCT_PACKS.forEach(packId => {
-      if (COMING_SOON_PACKS.includes(packId)) return;
-      const p = store.get(PRODUCTS[packId]);
+    PLAY_PRODUCT_PACKS.forEach(packId => {
+      const p = getProduct(PRODUCTS[packId]);
       const offer = p && p.getOffer && p.getOffer();
       const price = offer && offer.pricingPhases && offer.pricingPhases[0]
         ? offer.pricingPhases[0].price : null;
@@ -214,7 +215,7 @@ window.SFBilling = (function () {
       if (!configured) {
         configured = true;
 
-        store.register(SELLABLE_PACKS().map(packId => ({
+        store.register(PLAY_PRODUCT_PACKS.map(packId => ({
           id: PRODUCTS[packId],
           type: ProductType.NON_CONSUMABLE,
           platform: Platform.GOOGLE_PLAY
@@ -253,8 +254,16 @@ window.SFBilling = (function () {
       );
 
       if (result === 'ok') {
+        if (typeof store.update === 'function') {
+          try { await withTimeout(store.update(), 10000); } catch (e) {}
+        }
         ready = true;
         syncFromStore();
+        PLAY_PRODUCT_PACKS.forEach(packId => {
+          const pid = PRODUCTS[packId];
+          const p = getProduct(pid);
+          console.info('[billing] catalogue', pid, p ? 'loaded' : 'missing', findOffer(pid) ? 'offer ok' : 'no offer');
+        });
         return true;
       }
 
@@ -333,9 +342,51 @@ window.SFBilling = (function () {
     if (typeof fn === 'function') listeners.push(fn);
   }
 
+  function getProduct(productId) {
+    if (!store) return null;
+    const Platform = window.CdvPurchase && window.CdvPurchase.Platform;
+    return Platform
+      ? store.get(productId, Platform.GOOGLE_PLAY)
+      : store.get(productId);
+  }
+
   function findOffer(productId) {
-    const product = store.get(productId);
+    const product = getProduct(productId);
     return product && product.getOffer ? product.getOffer() : null;
+  }
+
+  /** Attend que Google Play renvoie une offre pour ce produit. */
+  async function waitForOffer(productId, timeoutMs) {
+    const deadline = Date.now() + (timeoutMs || 20000);
+    while (Date.now() < deadline) {
+      const offer = findOffer(productId);
+      if (offer) return offer;
+      if (typeof store.update === 'function') {
+        try { await withTimeout(store.update(), 5000); } catch (e) {}
+      }
+      await new Promise(r => setTimeout(r, 400));
+    }
+    return findOffer(productId);
+  }
+
+  /** Diagnostic : état du catalogue Play pour un pack. */
+  function getProductDebug(packId) {
+    const productId = PRODUCTS[packId];
+    if (!productId) return { packId, error: 'unknown_pack' };
+    if (!PLAY_PRODUCT_PACKS.includes(packId)) {
+      return { packId, productId, playConsole: false, note: 'not_registered_on_play' };
+    }
+    const product = getProduct(productId);
+    return {
+      packId,
+      productId,
+      ready,
+      plugin: !!(window.CdvPurchase && window.CdvPurchase.store),
+      loaded: !!product,
+      owned: !!(product && product.owned),
+      hasOffer: !!findOffer(productId),
+      lastError
+    };
   }
 
   /** Lance l'achat d'un pack. Résout { ok, reason }. */
@@ -345,20 +396,20 @@ window.SFBilling = (function () {
     if (COMING_SOON_PACKS.includes(packId)) return { ok: false, reason: 'coming_soon' };
     if (isUnlocked(packId)) return { ok: true, reason: 'already_owned' };
 
+    if (!PLAY_PRODUCT_PACKS.includes(packId)) {
+      lastError = 'not_on_play_console';
+      return { ok: false, reason: 'not_found' };
+    }
+
     await init();
     if (!store) {
       return { ok: false, reason: isNative() ? 'plugin_missing' : 'web' };
     }
 
-    let offer = findOffer(productId);
-    if (!offer && typeof store.update === 'function') {
-      // Catalogue pas encore chargé : on force un rafraîchissement.
-      try { await withTimeout(store.update(), 10000); } catch (e) {}
-      offer = findOffer(productId);
-    }
+    let offer = await waitForOffer(productId);
     if (!offer) {
-      // Produit absent du catalogue Play : ID inexistant, produit
-      // inactif, ou build non distribué par Google Play.
+      lastError = 'product_not_in_catalog:' + productId;
+      console.error('[billing] offre introuvable', getProductDebug(packId));
       return { ok: false, reason: 'not_found' };
     }
 
@@ -402,6 +453,6 @@ window.SFBilling = (function () {
 
   return {
     init, ensureReady, isAvailable, isReady, isUnlocked, getUnlockedPacks,
-    getPrice, onChange, buy, restore, addCodeUnlock, getLastError, PRODUCTS
+    getPrice, onChange, buy, restore, addCodeUnlock, getLastError, getProductDebug, PRODUCTS, PLAY_PRODUCT_PACKS
   };
 })();
