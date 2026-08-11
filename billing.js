@@ -451,8 +451,28 @@ window.SFBilling = (function () {
     }
   }
 
+  /** Rapport complet pour diagnostic utilisateur / support. */
+  async function getFullDiagnostic() {
+    if (isNative()) {
+      try { await init(); } catch (e) {}
+      if (typeof store?.update === 'function') {
+        try { await withTimeout(store.update(), 8000); } catch (e) {}
+      }
+    }
+    return {
+      native: isNative(),
+      plugin: !!(window.CdvPurchase && window.CdvPurchase.store),
+      storeReady: ready && !!store,
+      lastError,
+      registeredPacks: PLAY_PRODUCT_PACKS.slice(),
+      unlocked: readCache(),
+      products: PLAY_PRODUCT_PACKS.map(p => getProductDebug(p))
+    };
+  }
+
   return {
     init, ensureReady, isAvailable, isReady, isUnlocked, getUnlockedPacks,
-    getPrice, onChange, buy, restore, addCodeUnlock, getLastError, getProductDebug, PRODUCTS, PLAY_PRODUCT_PACKS
+    getPrice, onChange, buy, restore, addCodeUnlock, getLastError, getProductDebug,
+    getFullDiagnostic, PRODUCTS, PLAY_PRODUCT_PACKS
   };
 })();
