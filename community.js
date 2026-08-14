@@ -168,6 +168,22 @@ window.SFCommunity = (function () {
       .sf-comm-card-meta{
         font-size:11px;color:#c8a96e;margin-bottom:4px;
       }
+      .sf-comm-card-date{
+        font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.5px;
+        color:#5a5040;margin-bottom:4px;
+      }
+      .sf-comm-card-dlc{
+        border-color:rgba(100,180,255,0.35);
+        background:rgba(100,180,255,0.05);
+      }
+      .sf-comm-card-dlc:hover{border-color:rgba(100,180,255,0.55);}
+      .sf-comm-card-dlc .sf-comm-card-meta{color:#8ec4ff;}
+      .sf-comm-card-badge{
+        display:inline-block;font-family:'DM Mono',monospace;font-size:8px;
+        letter-spacing:1.5px;text-transform:uppercase;padding:2px 6px;
+        border-radius:20px;border:1px solid rgba(100,180,255,0.4);
+        color:#8ec4ff;margin-left:6px;vertical-align:middle;
+      }
       .sf-comm-card-text{font-size:12px;color:#9a8a70;line-height:1.5;}
       .sf-comm-empty{
         font-size:13px;color:#9a8a70;line-height:1.6;font-style:italic;
@@ -273,15 +289,23 @@ window.SFCommunity = (function () {
     if (!stories.length) {
       return html + `<div class="sf-comm-empty">${esc(d.empty_stories)}</div>`;
     }
-    html += stories.map(s => `
-      <div class="sf-comm-card" data-file="${esc(s.file || '')}" role="button" tabindex="0">
+    html += stories.map(s => {
+      const isDlc = s.type === 'dlc';
+      const byLabel = lang() === 'en' ? 'By' : lang() === 'es' ? 'Por' : 'Par';
+      const metaLine = s.author
+        ? `${esc(byLabel)} ${esc(s.author)}`
+        : (isDlc && s.badge ? esc(s.badge) : '');
+      return `
+      <div class="sf-comm-card${isDlc ? ' sf-comm-card-dlc' : ''}" data-file="${esc(s.file || '')}" role="button" tabindex="0">
         <div class="sf-comm-card-icon">${esc(s.icon || '📖')}</div>
         <div class="sf-comm-card-body">
-          <div class="sf-comm-card-title">${esc(s.title)}</div>
-          ${s.author ? `<div class="sf-comm-card-meta">${esc(lang() === 'en' ? 'By' : lang() === 'es' ? 'Por' : 'Par')} ${esc(s.author)}</div>` : ''}
+          <div class="sf-comm-card-title">${esc(s.title)}${isDlc && s.badge ? `<span class="sf-comm-card-badge">${esc(s.badge)}</span>` : ''}</div>
+          ${s.date ? `<div class="sf-comm-card-date">${formatDate(s.date)}</div>` : ''}
+          ${metaLine ? `<div class="sf-comm-card-meta">${metaLine}</div>` : ''}
           ${s.note ? `<div class="sf-comm-card-text">${esc(s.note)}</div>` : ''}
         </div>
-      </div>`).join('');
+      </div>`;
+    }).join('');
     return html;
   }
 
