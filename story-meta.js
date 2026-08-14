@@ -79,28 +79,14 @@ window.SFStoryMeta = (function () {
     if (!community.length) return '';
     const tx = t(lang);
 
-    const prologue = (games || []).find(g =>
-      g.lang === lang && g.pack === 'cosmos' && /prologue/i.test(g.file || '') && g.portal !== true
-    );
-
-    const items = [];
-    if (community[0]) items.push({ kind: 'story', game: community[0] });
-    if (prologue) items.push({ kind: 'dlc', game: prologue });
-    if (community[1]) items.push({ kind: 'story', game: community[1] });
-    community.slice(2).forEach(g => items.push({ kind: 'story', game: g }));
-
-    const cards = items.map(item => {
-      const g = item.game;
-      const isDlc = item.kind === 'dlc';
+    const cards = community.map(g => {
       const safeFile = esc(g.file).replace(/'/g, "\\'");
       return `
-      <div class="community-spot-card${isDlc ? ' community-spot-dlc' : ''}" onclick="${onLaunch}('${safeFile}')">
-        <span class="community-spot-icon">${g.icon || (isDlc ? '🚀' : '📖')}</span>
+      <div class="community-spot-card" onclick="${onLaunch}('${safeFile}')">
+        <span class="community-spot-icon">${g.icon || '📖'}</span>
         <div class="community-spot-info">
           <div class="community-spot-title">${esc(g.title)}</div>
-          ${isDlc
-            ? `<div class="community-spot-author">DLC · ${esc({ fr: 'Pack Cosmos', en: 'Cosmos Pack', es: 'Pack Cosmos' }[lang] || 'Pack Cosmos')}</div>`
-            : (g.author ? `<div class="community-spot-author">${esc(tx.by)} ${esc(g.author)}</div>` : '')}
+          ${g.author ? `<div class="community-spot-author">${esc(tx.by)} ${esc(g.author)}</div>` : ''}
         </div>
         <span class="community-spot-arrow">›</span>
       </div>`;
