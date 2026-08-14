@@ -9,6 +9,24 @@ window.SFCommunity = (function () {
   let _loaded = false;
   let _autoQueued = false;
 
+  const BANNER_TXT = {
+    fr: {
+      text: 'Première histoire terminée ? Participez au concours — votre récit pourrait être publié.',
+      btn: 'Participer au concours',
+      dismiss: 'Fermer'
+    },
+    en: {
+      text: 'Finished your first story? Join the contest — yours could be published.',
+      btn: 'Join the contest',
+      dismiss: 'Dismiss'
+    },
+    es: {
+      text: '¿Terminaste tu primera historia? Participa en el concurso — la tuya podría publicarse.',
+      btn: 'Participar en el concurso',
+      dismiss: 'Cerrar'
+    }
+  };
+
   function lang() {
     const l = localStorage.getItem('sf_lang') || 'fr';
     return ['fr', 'en', 'es'].includes(l) ? l : 'fr';
@@ -20,6 +38,47 @@ window.SFCommunity = (function () {
 
   function lsSet(k, v) {
     try { localStorage.setItem(k, v); } catch (e) {}
+  }
+
+  function getStoriesFinishedCount() {
+    return parseInt(lsGet('sf_stories_finished') || '0', 10) || 0;
+  }
+
+  function getBannerHost() {
+    return document.getElementById('content')
+      || document.getElementById('content-block')
+      || null;
+  }
+
+  function injectContestBanner(d) {
+    injectStyles();
+    if (document.getElementById('sf-contest-banner')) return;
+    const host = getBannerHost();
+    if (!host) return;
+    const tx = BANNER_TXT[lang()] || BANNER_TXT.fr;
+    const el = document.createElement('div');
+    el.id = 'sf-contest-banner';
+    el.className = 'sf-contest-banner';
+    el.innerHTML = `
+      <div class="sf-contest-banner-text">${esc(tx.text)}</div>
+      <div class="sf-contest-banner-actions">
+        <button type="button" class="sf-contest-banner-btn" id="sf-contest-banner-go">${esc(tx.btn)}</button>
+        <button type="button" class="sf-contest-banner-dismiss" id="sf-contest-banner-x" aria-label="${esc(tx.dismiss)}">✕</button>
+      </div>`;
+    host.insertBefore(el, host.firstChild);
+    document.getElementById('sf-contest-banner-go').addEventListener('click', goSubmit);
+    document.getElementById('sf-contest-banner-x').addEventListener('click', () => {
+      if (d.popup_id) lsSet('sf_contest_banner_dismiss_' + d.popup_id, '1');
+      el.remove();
+    });
+  }
+
+  async function maybeShowContestBanner() {
+    const d = await loadData();
+    if (!d?.contest?.active || !d.popup_id) return;
+    if (getStoriesFinishedCount() < 1) return;
+    if (lsGet('sf_contest_banner_dismiss_' + d.popup_id)) return;
+    injectContestBanner(d);
   }
 
   function esc(s) {
@@ -208,6 +267,34 @@ window.SFCommunity = (function () {
         background:none;border-color:#2a2418;color:#9a8a70;letter-spacing:1.5px;
       }
       .sf-comm-btn.secondary:hover{border-color:#8a6a30;color:#e8e0d0;}
+      .sf-contest-banner{
+        width:100%;max-width:520px;margin:0 auto 14px;
+        background:linear-gradient(135deg,rgba(200,169,110,0.1),rgba(124,109,250,0.06));
+        border:1px solid rgba(200,169,110,0.35);border-radius:12px;
+        padding:12px 14px;display:flex;align-items:center;gap:10px;flex-wrap:wrap;
+        animation:sf-comm-banner-in .45s ease both;
+      }
+      @keyframes sf-comm-banner-in{
+        from{opacity:0;transform:translateY(-6px);}
+        to{opacity:1;transform:translateY(0);}
+      }
+      .sf-contest-banner-text{
+        flex:1;min-width:180px;font-size:13px;color:#c8a96e;line-height:1.5;
+        font-family:'Cormorant Garamond',serif;font-style:italic;
+      }
+      .sf-contest-banner-actions{display:flex;gap:8px;flex-shrink:0;}
+      .sf-contest-banner-btn{
+        padding:8px 12px;border-radius:8px;cursor:pointer;
+        border:1px solid #8a6a30;background:rgba(200,169,110,0.12);
+        color:#e8d4a0;font-family:'Cinzel',serif;font-size:10px;letter-spacing:1.5px;
+      }
+      .sf-contest-banner-btn:hover{border-color:#c8a96e;}
+      .sf-contest-banner-dismiss{
+        padding:8px 10px;border-radius:8px;cursor:pointer;
+        border:1px solid #2a2418;background:none;color:#5a5040;
+        font-size:14px;line-height:1;
+      }
+      .sf-contest-banner-dismiss:hover{border-color:#8a6a30;color:#9a8a70;}
     `;
     document.head.appendChild(s);
   }
@@ -402,24 +489,15 @@ window.SFCommunity = (function () {
   }
 
   async function maybeAutoShow() {
-    if (_autoQueued) return;
-    const d = await loadData();
-    if (!d || !d.auto_show || !d.popup_id) return;
-    if (lsGet('sf_community_seen_' + d.popup_id)) return;
-    if (!lsGet('sf_lang_chosen')) return;
-    if (isOnboardingActive()) return;
-    _autoQueued = true;
-    setTimeout(() => {
-      if (isOnboardingActive()) return;
-      open();
-    }, 800);
+    // Pas de popup auto au premier lancement — bandeau concours après la 1re histoire (maybeShowContestBanner).
+    return;
   }
 
   function init() {
     injectStyles();
     injectOverlay();
-    loadData();
+    loadData().then(() => maybeShowContestBanner());
   }
 
-  return { init, open, close, maybeAutoShow, loadData };
+  return { init, open, close, maybeAutoShow, maybeShowContestBanner, loadData };
 })();

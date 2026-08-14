@@ -204,6 +204,15 @@ canvas#bg-canvas{position:fixed;inset:0;z-index:0;pointer-events:none;}
   color:var(--dimmer);font-style:italic;
 }
 .empty-progress .ep-icon{font-size:36px;margin-bottom:12px;opacity:0.4;}
+.empty-progress p{color:var(--dim);font-size:14px;line-height:1.6;margin-bottom:4px;}
+.empty-progress-cta{
+  display:inline-block;margin-top:16px;padding:11px 20px;border-radius:10px;
+  border:1px solid rgba(200,169,110,0.4);
+  background:linear-gradient(135deg,rgba(200,169,110,0.12),rgba(138,106,48,0.06));
+  color:var(--gold);font-family:'Cinzel',serif;font-size:11px;
+  letter-spacing:1.5px;text-decoration:none;transition:all .2s;
+}
+.empty-progress-cta:hover{border-color:var(--gold);color:var(--gold2);}
 
 /* ── RESET BTN ── */
 .danger-zone{
@@ -252,6 +261,7 @@ canvas#bg-canvas{position:fixed;inset:0;z-index:0;pointer-events:none;}
   </div>
 </div>
 
+<script src="onboarding.js"></script>
 <script>
 // ══════════════════════════════════════════════
 // TRANSLATIONS
@@ -266,7 +276,8 @@ const T = {
     scenesRead:'Scènes\nlues', choicesMade:'Choix\neffectués',
     endingsFound:'Fins\ntrouvées', timeSpent:'Temps\nestimé',
     myStories:'Mes histoires',
-    noStories:'Aucune histoire commencée.\nLance-toi dans une aventure !',
+    noStories:'Jouez votre première histoire — vos fins débloquées apparaîtront ici.',
+    emptyCta:'Commencer une histoire (~15 min)',
     endingsOf:'fins débloquées',
     badges:'Badges',
     activity:'Activité (7 derniers jours)',
@@ -284,7 +295,8 @@ const T = {
     scenesRead:'Scenes\nread', choicesMade:'Choices\nmade',
     endingsFound:'Endings\nfound', timeSpent:'Time\nestimated',
     myStories:'My stories',
-    noStories:'No stories started yet.\nLaunch an adventure!',
+    noStories:'Play your first story — your unlocked endings will appear here.',
+    emptyCta:'Start a story (~15 min)',
     endingsOf:'endings unlocked',
     badges:'Badges',
     activity:'Activity (last 7 days)',
@@ -302,7 +314,8 @@ const T = {
     scenesRead:'Escenas\nleídas', choicesMade:'Elecciones\nhechas',
     endingsFound:'Finales\nencontrados', timeSpent:'Tiempo\nestimado',
     myStories:'Mis historias',
-    noStories:'Ninguna historia comenzada.\n¡Lánzate a una aventura!',
+    noStories:'Juega tu primera historia — tus finales desbloqueados aparecerán aquí.',
+    emptyCta:'Empezar una historia (~15 min)',
     endingsOf:'finales desbloqueados',
     badges:'Insignias',
     activity:'Actividad (últimos 7 días)',
@@ -367,6 +380,38 @@ function getProgress() {
 // Called by game.html to record events
 // Usage: sf_player_stats events are updated externally
 // We also read from bookmarks/saves to reconstruct
+
+function getStarterGameUrl() {
+  if (window.SFOnboarding && typeof SFOnboarding.getStarterGameUrl === 'function') {
+    return SFOnboarding.getStarterGameUrl(lang);
+  }
+  let kids = false;
+  try {
+    const opts = JSON.parse(localStorage.getItem('sf_options') || '{}');
+    kids = opts.kids === true || opts.kids === 'true';
+  } catch (e) {}
+  const paths = kids
+    ? {
+        fr: 'stories/fr/aikito_v2.json',
+        en: 'stories/en/aikito_v2_en.json',
+        es: 'stories/es/aikito_v2_es.json'
+      }
+    : {
+        fr: 'stories/fr/lumiere_peur_du_noir.json',
+        en: 'stories/en/lumiere_peur_du_noir_en.json',
+        es: 'stories/es/lumiere_peur_du_noir_es.json'
+      };
+  const file = paths[lang] || paths.fr;
+  return 'game.html?story=' + encodeURIComponent(file);
+}
+
+function renderEmptyStories() {
+  return `<div class="empty-progress">
+    <div class="ep-icon">📖</div>
+    <p>${t.noStories}</p>
+    <a class="empty-progress-cta" href="${getStarterGameUrl()}">${t.emptyCta}</a>
+  </div>`;
+}
 
 function getStoriesProgress() {
   const saves = {};
@@ -526,7 +571,7 @@ function render() {
     <div class="section fade-in">
       <div class="section-title">${t.myStories}</div>
       ${storyEntries.length === 0
-        ? `<div class="empty-progress"><div class="ep-icon">📖</div><p>${t.noStories}</p></div>`
+        ? renderEmptyStories()
         : storyEntries.map(([file, save]) => {
             const bmList = JSON.parse(localStorage.getItem('sf_bookmarks')||'[]');
             const bm = bmList.find(b => b.storyFile === file);

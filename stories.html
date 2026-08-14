@@ -219,6 +219,13 @@ html,body { height:100%; background:#0d0d0f; color:#e8e0d0; font-family:'Cormora
 }
 .pack-locked-bar .lock-icon { font-size:14px; }
 
+.pack-portal-hook {
+  background:rgba(100,180,255,0.04); border:1px solid var(--border);
+  border-top:none; padding:10px 16px 12px;
+  font-family:'Cormorant Garamond',serif; font-size:13px;
+  color:var(--text3); font-style:italic; line-height:1.55;
+}
+
 /* ── STORY CARDS ── */
 .stories-list {
   border:1px solid var(--border); border-top:none;
@@ -480,6 +487,12 @@ const PACK_CONFIG = {
   }
 };
 
+const PORTAL_PACK_HOOK = {
+  fr: 'Enquête multi-chapitres — vos choix dans un chapitre influencent les autres.',
+  en: 'Multi-chapter investigation — choices in one chapter affect the others.',
+  es: 'Investigación multi-capitular — tus elecciones en un capítulo influyen en los demás.'
+};
+
 // Histoire recommandée pour les nouveaux lecteurs — alignée avec onboarding.js (Lumière / Aikito).
 const STARTER_STORIES = {
   default: {
@@ -723,6 +736,10 @@ function renderLibrary() {
       </div>
       ${cfg.desc ? `<div style="font-size:12px;color:var(--text3);padding:0 16px 12px;font-style:italic;opacity:0.7">${cfg.desc[currentLang] || cfg.desc.fr}</div>` : ''}`;
 
+    const hasPortals = stories.some(g => g.portal === true);
+    if (!cfg.comingSoon && !isUnlocked && hasPortals) {
+      html += `<div class="pack-portal-hook">🔗 ${PORTAL_PACK_HOOK[currentLang] || PORTAL_PACK_HOOK.fr}</div>`;
+    }
 
     // Stories
     html += `<div class="stories-list">`;
