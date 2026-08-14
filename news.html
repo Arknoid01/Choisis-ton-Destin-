@@ -255,6 +255,10 @@ function renderNews(data) {
   const news = (data.news || []).slice().sort((a, b) => {
     const da = Date.parse(a.date || '') || 0;
     const db = Date.parse(b.date || '') || 0;
+    const now = Date.now();
+    const aFuture = da > now ? 1 : 0;
+    const bFuture = db > now ? 1 : 0;
+    if (aFuture !== bFuture) return aFuture - bFuture;
     return db - da;
   });
 
