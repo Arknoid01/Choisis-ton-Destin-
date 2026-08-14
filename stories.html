@@ -151,14 +151,27 @@ html,body { height:100%; background:#0d0d0f; color:#e8e0d0; font-family:'Cormora
 
 .pack-header {
   display:flex; align-items:center; gap:12px;
-  padding:14px 16px; border-radius:14px 14px 0 0;
+  padding:14px 16px; border-radius:14px;
   background:var(--bg3); border:1px solid var(--border);
-  border-bottom:none; position:relative; overflow:hidden;
+  position:relative; overflow:hidden;
+  cursor:pointer; user-select:none;
+  transition:border-radius .2s;
+}
+.pack-section:not(.collapsed) .pack-header {
+  border-radius:14px 14px 0 0;
+  border-bottom:none;
 }
 .pack-header::before {
   content:''; position:absolute; inset:0;
   background:linear-gradient(135deg, var(--pack-color, rgba(200,169,110,0.08)), transparent);
 }
+.pack-toggle {
+  font-size:18px; color:var(--dim); flex-shrink:0; position:relative;
+  transition:transform .25s ease; line-height:1;
+}
+.pack-section:not(.collapsed) .pack-toggle { transform:rotate(90deg); }
+.pack-body { display:block; }
+.pack-section.collapsed .pack-body { display:none; }
 .pack-icon { font-size:24px; flex-shrink:0; position:relative; }
 .pack-info { flex:1; position:relative; }
 .pack-name {
@@ -417,6 +430,13 @@ const PACK_CONFIG = {
     },
     order: 2
   },
+  cosmos: {
+    name:  { fr:'Pack Cosmos',         en:'Cosmos Pack',     es:'Pack Cosmos' },
+    icon:  '🚀',
+    color: 'rgba(100,180,255,0.6)',
+    price: '2,99€',
+    order: 3
+  },
   neon: {
     name:  { fr:'Pack Neon',           en:'Neon Pack',       es:'Pack Neón' },
     icon:  '⚡',
@@ -428,7 +448,7 @@ const PACK_CONFIG = {
       en: 'Cyberpunk and neon — stories in the works.',
       es: 'Cyberpunk y neón — historias en preparación.'
     },
-    order: 3
+    order: 4
   },
   pirates: {
     name:  { fr:'Pack Pirates',        en:'Pirates Pack',    es:'Pack Piratas' },
@@ -441,13 +461,6 @@ const PACK_CONFIG = {
       en: 'High seas and treasure — dropping anchor soon.',
       es: 'Alta mar y tesoros — zarparemos pronto.'
     },
-    order: 4
-  },
-  cosmos: {
-    name:  { fr:'Pack Cosmos',         en:'Cosmos Pack',     es:'Pack Cosmos' },
-    icon:  '🚀',
-    color: 'rgba(100,180,255,0.6)',
-    price: '2,99€',
     order: 5
   },
   fantasy: {
@@ -531,10 +544,58 @@ let allGames = [];
 function scrollToPackHash() {
   const hash = location.hash;
   if (!hash || !hash.startsWith('#pack-')) return;
+  const packId = hash.slice(6);
+  expandPackSection(packId);
   requestAnimationFrame(() => {
     const el = document.querySelector(hash);
     if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
   });
+}
+
+function getExpandedPacks() {
+  try {
+    return new Set(JSON.parse(localStorage.getItem('sf_pack_expanded') || '[]'));
+  } catch { return new Set(); }
+}
+
+function setExpandedPacks(set) {
+  try { localStorage.setItem('sf_pack_expanded', JSON.stringify([...set])); } catch (e) {}
+}
+
+function isPackExpanded(packId) {
+  return getExpandedPacks().has(packId);
+}
+
+function applyPackCollapse(packId, expanded) {
+  const el = document.getElementById('pack-' + packId);
+  if (!el) return;
+  el.classList.toggle('collapsed', !expanded);
+  const header = el.querySelector('.pack-header');
+  if (header) header.setAttribute('aria-expanded', expanded ? 'true' : 'false');
+}
+
+function expandPackSection(packId) {
+  const set = getExpandedPacks();
+  set.add(packId);
+  setExpandedPacks(set);
+  applyPackCollapse(packId, true);
+}
+
+function togglePackSection(packId) {
+  const set = getExpandedPacks();
+  const expanded = !set.has(packId);
+  if (expanded) set.add(packId);
+  else set.delete(packId);
+  setExpandedPacks(set);
+  applyPackCollapse(packId, expanded);
+}
+
+function packSectionAttrs(packId) {
+  const expanded = isPackExpanded(packId);
+  return {
+    cls: expanded ? 'pack-section' : 'pack-section collapsed',
+    aria: expanded ? 'true' : 'false'
+  };
 }
 
 async function loadGames() {
@@ -628,14 +689,18 @@ function renderLibrary() {
 
   if (bookmarks.length) {
     const bmTitle = { fr:'Reprendre', en:'Continue', es:'Continuar' }[currentLang] || 'Reprendre';
-    html += `<div class="pack-section" style="--pack-color:rgba(100,220,150,0.6);margin-bottom:20px">
-      <div class="pack-header">
+    const bm = packSectionAttrs('bookmarks');
+    html += `<div class="${bm.cls}" id="pack-bookmarks" style="--pack-color:rgba(100,220,150,0.6);margin-bottom:20px">
+      <div class="pack-header" role="button" tabindex="0" aria-expanded="${bm.aria}"
+        onclick="togglePackSection('bookmarks')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();togglePackSection('bookmarks')}">
         <div class="pack-icon">🔖</div>
         <div class="pack-info">
           <div class="pack-name">${bmTitle}</div>
           <div class="pack-meta">${bookmarks.length} marque-page${bookmarks.length > 1 ? 's' : ''}</div>
         </div>
+        <span class="pack-toggle" aria-hidden="true">›</span>
       </div>
+      <div class="pack-body">
       <div class="stories-list">`;
 
     bookmarks.forEach(bm => {
@@ -657,7 +722,7 @@ function renderLibrary() {
       </div>`;
     });
 
-    html += `</div></div>`;
+    html += `</div></div></div>`;
   }
 
   // Grouper par pack
@@ -704,7 +769,7 @@ function renderLibrary() {
       priceBadge = `<span class="pack-price" style="--pack-color:${colorVar};border-color:rgba(100,220,150,0.5);color:#64dc96;background:rgba(100,220,150,0.08)">✓ Débloqué</span>`;
     } else {
       const livePrice = window.SFBilling ? SFBilling.getPrice(packId) : null;
-      priceBadge = `<span class="pack-price locked" style="--pack-color:${colorVar}" onclick="buyPack('${packId}')">🔒 ${livePrice || cfg.price || ''}</span>`;
+      priceBadge = `<span class="pack-price locked" style="--pack-color:${colorVar}" onclick="event.stopPropagation(); buyPack('${packId}')">🔒 ${livePrice || cfg.price || ''}</span>`;
     }
 
     // Compteur
@@ -716,16 +781,19 @@ function renderLibrary() {
           ? `<strong>${count}</strong> stor${count > 1 ? 'ies' : 'y'}`
           : `<strong>${count}</strong> historia${count > 1 ? 's' : ''}`;
 
-    html += `<div class="pack-section" id="pack-${packId}" style="--pack-color:${colorVar}">
-      <div class="pack-header">
+    html += `<div class="${packSectionAttrs(packId).cls}" id="pack-${packId}" style="--pack-color:${colorVar}">
+      <div class="pack-header" role="button" tabindex="0" aria-expanded="${packSectionAttrs(packId).aria}"
+        onclick="togglePackSection('${packId}')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();togglePackSection('${packId}')}">
         <div class="pack-icon">${cfg.icon}</div>
         <div class="pack-info">
           <div class="pack-name">${packName}</div>
           <div class="pack-meta">${cfg.comingSoon ? countLabel : `${countLabel} disponible${count > 1 && currentLang === 'fr' ? 's' : ''}`}</div>
         </div>
         ${priceBadge}
+        <span class="pack-toggle" aria-hidden="true">›</span>
       </div>
-      ${cfg.desc ? `<div style="font-size:12px;color:var(--text3);padding:0 16px 12px;font-style:italic;opacity:0.7">${cfg.desc[currentLang] || cfg.desc.fr}</div>` : ''}`;
+      <div class="pack-body">`;
+    html += cfg.desc ? `<div style="font-size:12px;color:var(--text3);padding:0 16px 12px;font-style:italic;opacity:0.7;border:1px solid var(--border);border-top:none;background:var(--bg3)">${cfg.desc[currentLang] || cfg.desc.fr}</div>` : '';
 
     const hasPortals = stories.some(g => g.portal === true);
     if (!cfg.comingSoon && !isUnlocked && hasPortals) {
@@ -787,7 +855,7 @@ function renderLibrary() {
       </div>`;
     }
 
-    html += `</div>`;
+    html += `</div></div>`;
   });
 
   document.getElementById('content').innerHTML = html;
