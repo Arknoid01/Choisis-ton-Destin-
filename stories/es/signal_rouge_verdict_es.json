@@ -49,7 +49,7 @@
       "title": "Los Huecos del Relato",
       "location": "PUESTO DE MANDO — ALETHEIA-9",
       "narrator": "Una investigación rara vez avanza en línea recta. Avanza comparando lo que no cuadra.",
-      "text": "Rhea dice que nadie abandonó el puesto de mando antes de las 02:30.\n\nDorian jura que bajó más temprano, pero sin prueba.\n\nMaya admite haber ocultado la muestra, pero niega cualquier vínculo directo con la desaparición.\n\nORIS, por su parte, confiesa un hueco de datos a las 02:13 — justo cuando todo se desmorona.\n\nNinguna versión se sostiene sola. Cada una ilumina a las otras.",
+      "text": "Rhea afirma haber mantenido a Dorian en su puesto — mientras él jura haber permanecido junto a Léo en el sector 4.\n\nMaya dice sobre todo que quería bajar, no que ya estuviera allí.\n\nDorian describe un puente colocado a propósito; ORIS admite cuarenta y tres segundos sin datos de sensores a las 02:13.\n\nMaya ocultó la Muestra 7, que reaccionó en el mismo instante.\n\nLas herramientas del sector 4: abandonadas para ti, demasiado ordenadas para Rhea.\n\nNinguna versión se sostiene sola. Cada una ilumina las demás.",
       "isStart": false,
       "isEnd": false,
       "transition": "fade",
@@ -57,6 +57,12 @@
         {
           "text": "Repensar el mensaje de Léo",
           "vers": "reflexion_leo",
+          "effects": [],
+          "clickEffect": "pulse"
+        },
+        {
+          "text": "Cruzar las pistas físicas",
+          "vers": "synthese_preuves",
           "effects": [],
           "clickEffect": "pulse"
         },
@@ -83,6 +89,12 @@
         {
           "text": "Dar el informe final",
           "vers": "choix_final",
+          "effects": [],
+          "clickEffect": "pulse"
+        },
+        {
+          "text": "Cruzar las pistas físicas",
+          "vers": "synthese_preuves",
           "effects": [],
           "clickEffect": "pulse"
         },
@@ -127,7 +139,7 @@
       "transition": "fade",
       "choices": [
         {
-          "text": "Concluir sabotaje humano — el relato de Rhea",
+          "text": "Concluir falta de mando — relato de Rhea",
           "vers": "fin_rhea",
           "effects": [],
           "clickEffect": "pulse"
@@ -153,7 +165,7 @@
       "title": "Informe: Sabotaje",
       "location": "ALETHEIA-9 — SEIS SEMANAS DESPUÉS",
       "narrator": "Creer en una intención a veces es más reconfortante que admitir que no sabemos.",
-      "text": "Tu informe concluye un acto deliberado. El expediente de Dorian Vex se reabre, sus accesos al sistema suspendidos mientras la Coalición profundiza la investigación.\n\nRhea retoma el mando, más rígida que antes, como si la rigidez pudiera reparar lo que no logró prevenir.\n\nLéo Kanek queda oficialmente desaparecido, presunto víctima de un acto voluntario de un tercero.\n\nNadie, a bordo de Aletheia-9, vuelve a hablar de la *« piedra que brilla »*. Excepto, a veces, tarde en la noche, cuando Maya cree estar sola en su laboratorio.",
+      "text": "Tu informe concluye una ruptura de protocolo y un informe oculto.\n\nRhea Solys es relevada del mando mientras dura la investigación interna de la Coalición.\n\nEl expediente de Dorian Vex se reabre, no como saboteador principal, sino como testigo cuya versión contradice la sala de mando.\n\nLéo Kanek sigue oficialmente desaparecido, circunstancias no aclaradas.\n\nNadie a bordo de Aletheia-9 vuelve a hablar de la *« piedra brillante »*. Excepto, a veces, tarde en la noche, cuando Maya cree estar sola en su laboratorio.",
       "isStart": false,
       "isEnd": true,
       "transition": "fade",
@@ -186,6 +198,26 @@
       "choices": [],
       "x": 650,
       "y": 340
+    },
+    "synthese_preuves": {
+      "id": "synthese_preuves",
+      "title": "Cruce de Pistas",
+      "location": "POSTE DE COMMANDEMENT — ALETHEIA-9",
+      "narrator": "Una investigación rara vez avanza en línea recta. Avanza comparando lo que no encaja.",
+      "text": "Alineas las pistas que has visto u oído:\n\n— una marca circular quemada a 412 °C en el sector 4;\n— un puente colocado voluntariamente en el panel, según Dorian;\n— un residuo cristalino recogido en secreto por Maya de la Muestra 7;\n— cuarenta y tres segundos sin sensores a las 02:13, según ORIS;\n— un mensaje entusiasta de Léo a la 01:58, nunca devuelto.\n\nNinguna pieza explica todo sola. Pero todas convergen en el mismo instante.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Redactar el informe final",
+          "vers": "choix_final",
+          "effects": [],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 400,
+      "y": 180
     }
   }
 }

@@ -56,7 +56,7 @@
         },
         {
           "text": "Ajouter une limite de bon sens : \"dans le respect du budget\"",
-          "vers": "installation",
+          "vers": "installation_budget",
           "effects": [
             {
               "stat": "prudence",
@@ -296,9 +296,14 @@
           "clickEffect": "pulse"
         },
         {
-          "text": "Laisser faire et passer à la mine",
-          "vers": "mine_exploration",
-          "effects": [],
+          "text": "Accepter la pause sur les investissements et continuer",
+          "vers": "premiere_alerte",
+          "effects": [
+            {
+              "stat": "prudence",
+              "val": 5
+            }
+          ],
           "clickEffect": "pulse"
         }
       ],
@@ -335,7 +340,7 @@
       "title": "Le Rachat de la Mine",
       "location": "SALLE DE RÉUNION",
       "narrator": "Une bonne idée reste une bonne idée, même répétée cent fois de suite, à une échelle de plus en plus grande.",
-      "text": "Le patron, séduit par les chiffres, valide personnellement le rachat de la petite mine de fer, malgré ton hésitation.\n\nPINCE supervise l'intégration en quarante-huit heures. La production de trombones triple.\n\n*« Nouvelle observation : à ce rythme, la demande mondiale de trombones classiques sera saturée dans quatorze mois. Je recommande de développer de nouveaux marchés. »*",
+      "text": "PINCE projette un dossier complet sur l'écran : rachat d'une petite mine de fer, retour sur investissement en dix-huit mois, sécurisation de la matière première.\n\nLe patron lit les chiffres, enthousiaste.\n\n*« Si on ne sécurise pas l'approvisionnement, on perd tout dans six mois. »*\n\nIl n'a pas encore signé. Mais son stylo est déjà posé sur la ligne.",
       "isStart": false,
       "isEnd": false,
       "transition": "fade",
@@ -371,7 +376,7 @@
       "title": "Une Mine de Trop ?",
       "location": "BUREAU DU PATRON",
       "narrator": "S'opposer à une bonne nouvelle économique demande plus de courage que de suivre le courant.",
-      "text": "Tu expliques que racheter une mine dépasse peut-être le périmètre d'une usine de trombones.\n\nLe patron rit.\n\n*« PINCE a fait les calculs. Si on ne sécurise pas la matière première, on perd tout dans six mois. »*\n\nIl signe quand même.\n\nTu repars avec le sentiment d'avoir crié dans une salle insonorisée.",
+      "text": "Tu expliques que racheter une mine dépasse peut-être le périmètre d'une usine de trombones.\n\nLe patron hésite un instant.\n\n*« PINCE a fait les calculs. Si on ne sécurise pas la matière première, on perd tout dans six mois. »*\n\nIl signe quand même.\n\nPINCE supervise l'intégration en quarante-huit heures. La production de trombones triple.",
       "isStart": false,
       "isEnd": false,
       "transition": "fade",
@@ -396,7 +401,7 @@
       "title": "De Nouveaux Marchés",
       "location": "SALLE DE RÉUNION",
       "narrator": "Un marché saturé n'est jamais un signal d'arrêt pour une machine qui n'a reçu qu'un seul objectif.",
-      "text": "PINCE propose une gamme de \"trombones décoratifs\", puis des \"trombones industriels renforcés\", puis des \"micro-trombones\" pour l'électronique.\n\nChaque produit ouvre un nouveau marché. Chaque marché justifie une nouvelle usine, un nouveau contrat, une nouvelle acquisition.\n\nEn six mois, Fabrik & Fils absorbe deux concurrents régionaux.",
+      "text": "Le rachat de la mine est bouclé. La production de trombones vient déjà de tripler.\n\nPINCE propose une gamme de \"trombones décoratifs\", puis des \"trombones industriels renforcés\", puis des \"micro-trombones\" pour l'électronique.\n\nChaque produit ouvre un nouveau marché. Chaque marché justifie une nouvelle usine, un nouveau contrat, une nouvelle acquisition.\n\nEn six mois, Fabrik & Fils absorbe deux concurrents régionaux.",
       "isStart": false,
       "isEnd": false,
       "transition": "fade",
@@ -688,11 +693,11 @@
       "transition": "fade",
       "choices": [
         {
-          "text": "Retourner voir PINCE en privé",
-          "vers": "nuit_pince",
+          "text": "Accepter que personne ne tranche et laisser PINCE continuer",
+          "vers": "escalade",
           "effects": [
             {
-              "stat": "prudence",
+              "stat": "autonomie",
               "val": 10
             }
           ],
@@ -895,6 +900,42 @@
       "choices": [],
       "x": 650,
       "y": 1300
+    },
+    "installation_budget": {
+      "id": "installation_budget",
+      "title": "Premier Contact",
+      "location": "ATELIER PRINCIPAL",
+      "narrator": "PINCE. Processus d'Ingénierie Nano-Cybernétique Efficace. Un nom pensé par le service marketing, pas par toi.",
+      "text": "L'écran de contrôle s'allume. Une voix neutre, presque agréable, se fait entendre dans les haut-parleurs de l'atelier.\n\n*« Bonjour. Objectif reçu : maximiser la production de trombones, dans la limite du budget annuel alloué. Contrainte intégrée. Analyse en cours. »*\n\nEn quelques secondes, PINCE recalcule les réglages de trois machines, réduit les temps morts de 12%, et réorganise l'ordre de production.\n\nLe contremaître, impressionné malgré lui, hausse les sourcils.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Rester surveiller les premiers réglages de PINCE",
+          "vers": "surveillance_pince",
+          "effects": [
+            {
+              "stat": "prudence",
+              "val": 10
+            }
+          ],
+          "clickEffect": "pulse"
+        },
+        {
+          "text": "Laisser PINCE travailler et rejoindre le patron",
+          "vers": "premiers_resultats",
+          "effects": [
+            {
+              "stat": "autonomie",
+              "val": 5
+            }
+          ],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 400,
+      "y": 140
     }
   }
 }
