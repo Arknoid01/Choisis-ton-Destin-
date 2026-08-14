@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
 <title>StoryForge</title>
 <script src="capacitor.js"></script>
+<script src="sf-shared.js"></script>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Cinzel:wght@400;600&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
 <style>
 /* ── BACKGROUND ── */
@@ -1192,7 +1193,7 @@ function goToScene(id, choiceText, externalStory) {
 
   // Update drawer scene count
   document.getElementById('drawer-scene-count').textContent =
-    history.length + ' scène' + (history.length > 1 ? 's' : '') + ' visitée' + (history.length > 1 ? 's' : '');
+    history.length + ' ' + (history.length > 1 ? gt('visitedScenes') : gt('visitedScene'));
 
   if (scene.isEnd) {
     const storyFile = new URLSearchParams(window.location.search).get('story')
@@ -1426,6 +1427,13 @@ const GAME_I18N = {
     progressSaved: '💾 Progression sauvegardée',
     visitedScene: 'scène visitée',
     visitedScenes: 'scènes visitées',
+    endRestart: 'Recommencer',
+    endMenu: 'Menu principal',
+    ratingTitle: 'Tu as aimé cette histoire ?',
+    ratingBody: 'Un petit avis sur le Play Store,<br>ça aide énormément à faire connaître Fableris.',
+    ratingYes: 'Noter l\'application',
+    ratingLater: 'Pas maintenant',
+    ratingNever: 'Ne plus demander',
   },
   en: {
     bookmark:    'Bookmark',
@@ -1440,6 +1448,13 @@ const GAME_I18N = {
     progressSaved: '💾 Progress saved',
     visitedScene: 'scene visited',
     visitedScenes: 'scenes visited',
+    endRestart: 'Restart',
+    endMenu: 'Main menu',
+    ratingTitle: 'Did you enjoy this story?',
+    ratingBody: 'A quick review on the Play Store<br>helps Fableris reach more readers.',
+    ratingYes: 'Rate the app',
+    ratingLater: 'Not now',
+    ratingNever: 'Don\'t ask again',
   },
   es: {
     bookmark:    'Marcador',
@@ -1454,6 +1469,13 @@ const GAME_I18N = {
     progressSaved: '💾 Progreso guardado',
     visitedScene: 'escena visitada',
     visitedScenes: 'escenas visitadas',
+    endRestart: 'Reiniciar',
+    endMenu: 'Menú principal',
+    ratingTitle: '¿Te gustó esta historia?',
+    ratingBody: 'Una reseña en Play Store<br>ayuda mucho a dar a conocer Fableris.',
+    ratingYes: 'Valorar la app',
+    ratingLater: 'Ahora no',
+    ratingNever: 'No volver a preguntar',
   }
 };
 
@@ -1624,8 +1646,8 @@ function renderEndScene(scene) {
       ${statsRows ? `<div class="end-stats">${statsRows}</div>` : ''}
       ${firstFinishHtml}
       <div class="end-buttons">
-        <button class="end-btn primary" onclick="restartGame()">↺ Recommencer</button>
-        <button class="end-btn" onclick="window.location.href='index.html'">← Menu principal</button>
+        <button class="end-btn primary" onclick="restartGame()">↺ ${gt('endRestart')}</button>
+        <button class="end-btn" onclick="window.location.href='index.html'">← ${gt('endMenu')}</button>
       </div>
     </div>`;
 
@@ -1642,19 +1664,17 @@ function renderEndScene(scene) {
 // ── POPUP NOTATION PLAY STORE ────────────────────────────────
 const PLAY_STORE_URL = 'https://play.google.com/store/apps/details?id=com.pegasuscorp.fableris';
 const RATING_KEY     = 'sf_rating_done';
-const PLAYS_KEY      = 'sf_stories_finished';
+const RATING_LATER_KEY = 'sf_rating_later';
 
 function recordStoryFinished() {
-  const n = parseInt(localStorage.getItem(PLAYS_KEY) || '0', 10) + 1;
-  localStorage.setItem(PLAYS_KEY, String(n));
-  return n;
+  return window.SFShared ? SFShared.syncStoriesFinishedCount() : 0;
 }
 
 function maybeShowRatingPopup() {
-  // Ne jamais afficher si déjà noté ou refusé définitivement
   if (localStorage.getItem(RATING_KEY) === 'done') return;
+  if (localStorage.getItem(RATING_LATER_KEY)) return;
 
-  const plays = parseInt(localStorage.getItem(PLAYS_KEY) || '0', 10);
+  const plays = window.SFShared ? SFShared.getStoriesFinishedCount() : 0;
 
   // Afficher seulement à partir de la 2ème histoire terminée
   if (plays < 2) return;
@@ -1683,10 +1703,8 @@ function showRatingPopup() {
       <div style="text-align:center;margin-bottom:20px">
         <div style="font-size:32px;margin-bottom:10px">⭐</div>
         <div style="font-family:'Cinzel',serif;font-size:16px;color:#e0d8f0;
-          letter-spacing:2px;margin-bottom:8px">Tu as aimé cette histoire ?</div>
-        <div style="font-size:12px;color:#7070a0;line-height:1.6">
-          Un petit avis sur le Play Store,<br>ça aide énormément à faire connaître Fableris.
-        </div>
+          letter-spacing:2px;margin-bottom:8px">${gt('ratingTitle')}</div>
+        <div style="font-size:12px;color:#7070a0;line-height:1.6">${gt('ratingBody')}</div>
       </div>
       <div style="display:flex;flex-direction:column;gap:10px">
         <button onclick="ratingYes()" style="
@@ -1695,19 +1713,19 @@ function showRatingPopup() {
           background:linear-gradient(135deg,rgba(200,169,110,0.15),rgba(200,169,110,0.05));
           color:#c8a96e;font-family:'Cinzel',serif;font-size:13px;
           letter-spacing:2px;cursor:pointer">
-          ✦ Noter l'application
+          ✦ ${gt('ratingYes')}
         </button>
         <button onclick="ratingLater()" style="
           padding:12px;border-radius:10px;border:1px solid #26262e;
           background:none;color:#7070a0;font-family:'DM Mono',monospace;
           font-size:11px;letter-spacing:1px;cursor:pointer">
-          Pas maintenant
+          ${gt('ratingLater')}
         </button>
         <button onclick="ratingNever()" style="
           padding:8px;border:none;background:none;
           color:#404050;font-family:'DM Mono',monospace;
           font-size:10px;cursor:pointer;letter-spacing:1px">
-          Ne plus demander
+          ${gt('ratingNever')}
         </button>
       </div>
     </div>`;
@@ -1722,8 +1740,7 @@ function ratingYes() {
 }
 
 function ratingLater() {
-  // Réinitialiser le compteur pour redemander plus tard
-  localStorage.setItem(PLAYS_KEY, '0');
+  localStorage.setItem(RATING_LATER_KEY, '1');
   document.getElementById('rating-popup')?.remove();
 }
 
@@ -2090,6 +2107,7 @@ function trackStats(event, data = {}) {
       case 'story_finish':
         s.storiesFinished++;
         s.endingsFound++;
+        try { localStorage.setItem('sf_stories_finished', String(s.storiesFinished)); } catch (e) {}
         if (s._storyStartTime) {
           const mins = Math.round((Date.now() - s._storyStartTime) / 60000);
           s.minutesSpent += mins;

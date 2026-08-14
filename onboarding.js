@@ -113,32 +113,13 @@ window.SFOnboarding = (function () {
     es: { flag: '🇪🇸', name: 'Español',  native: 'Espagnol' }
   };
 
-  // Première histoire recommandée (~15 min, gratuite) — mode enfant → Aikito, sinon Lumière.
-  const STARTER_STORIES = {
-    default: {
-      fr: 'stories/fr/lumiere_peur_du_noir.json',
-      en: 'stories/en/lumiere_peur_du_noir_en.json',
-      es: 'stories/es/lumiere_peur_du_noir_es.json'
-    },
-    kids: {
-      fr: 'stories/fr/aikito_v2.json',
-      en: 'stories/en/aikito_v2_en.json',
-      es: 'stories/es/aikito_v2_es.json'
-    }
-  };
-
-  const STARTER_TITLES = {
-    default: {
-      fr: 'La Lumière qui a Peur du Noir',
-      en: 'The Light Afraid of the Dark',
-      es: 'La Luz que Teme a la Oscuridad'
-    },
-    kids: {
-      fr: 'Le Temps Perdu avec Aikito',
-      en: 'Lost Time with Aikito',
-      es: 'El Tiempo Perdido con Aikito'
-    }
-  };
+  // Starter / compteur / PIN — délégués à SFShared (sf-shared.js)
+  function isKidsMode() { return window.SFShared ? SFShared.isKidsMode() : false; }
+  function getStarterFile(lang) { return SFShared.getStarterFile(lang); }
+  function getStarterTitle(lang) { return SFShared.getStarterTitle(lang); }
+  function getStarterGameUrl(lang) { return SFShared.getStarterGameUrl(lang); }
+  function shouldShowStarterHint() { return SFShared.shouldShowStarterHint(); }
+  function sha256(input) { return SFShared.sha256(input); }
 
   let _pendingLang = 'fr';
   let _onLangChange = null;
@@ -164,39 +145,6 @@ window.SFOnboarding = (function () {
     return TXT[currentLang()] || TXT.fr;
   }
 
-  function isKidsMode() {
-    try {
-      const opts = JSON.parse(lsGet('sf_options') || '{}') || {};
-      return opts.kids === true || opts.kids === 'true';
-    } catch (e) {
-      return false;
-    }
-  }
-
-  function getStarterFile(lang) {
-    const code = LANGS.includes(lang) ? lang : currentLang();
-    const bucket = isKidsMode() ? STARTER_STORIES.kids : STARTER_STORIES.default;
-    return bucket[code] || bucket.fr;
-  }
-
-  function getStarterTitle(lang) {
-    const code = LANGS.includes(lang) ? lang : currentLang();
-    const bucket = isKidsMode() ? STARTER_TITLES.kids : STARTER_TITLES.default;
-    return bucket[code] || bucket.fr;
-  }
-
-  function getStarterGameUrl(lang) {
-    return 'game.html?story=' + encodeURIComponent(getStarterFile(lang));
-  }
-
-  function getStoriesFinishedCount() {
-    return parseInt(lsGet('sf_stories_finished') || '0', 10) || 0;
-  }
-
-  function shouldShowStarterHint() {
-    return getStoriesFinishedCount() === 0;
-  }
-
   function isActive() {
     return ['sf-onb-lang', 'sf-onb-demo', 'sf-onb-tuto', 'sf-onb-pin'].some(id => {
       const el = document.getElementById(id);
@@ -215,64 +163,6 @@ window.SFOnboarding = (function () {
   function goToStarterStory() {
     lsSet('sf_demo_shown', '1');
     window.location.href = getStarterGameUrl(currentLang());
-  }
-
-  // ── SHA-256 ──────────────────────────────────────────────────
-  // Implémentation locale : le code PIN doit produire exactement le
-  // même hash sur toutes les pages, y compris celles qui ne chargent
-  // pas le SHA-256 de index.html.
-  function sha256(ascii) {
-    function rightRotate(value, amount) { return (value >>> amount) | (value << (32 - amount)); }
-    const mathPow = Math.pow;
-    const maxWord = mathPow(2, 32);
-    let result = '';
-    const words = [];
-    const asciiBitLength = ascii.length * 8;
-    let hash = [];
-    const k = [];
-    let primeCounter = 0;
-    const isComposite = {};
-    for (let candidate = 2; primeCounter < 64; candidate++) {
-      if (!isComposite[candidate]) {
-        for (let i = 0; i < 313; i += candidate) isComposite[i] = candidate;
-        hash[primeCounter] = (mathPow(candidate, .5) * maxWord) | 0;
-        k[primeCounter++] = (mathPow(candidate, 1 / 3) * maxWord) | 0;
-      }
-    }
-    ascii += '\x80';
-    while (ascii.length % 64 - 56) ascii += '\x00';
-    for (let i = 0; i < ascii.length; i++) {
-      const j = ascii.charCodeAt(i);
-      if (j >> 8) return '';
-      words[i >> 2] |= j << ((3 - i) % 4) * 8;
-    }
-    words[words.length] = ((asciiBitLength / maxWord) | 0);
-    words[words.length] = (asciiBitLength | 0);
-    for (let j = 0; j < words.length;) {
-      const w = words.slice(j, j += 16);
-      const oldHash = hash.slice(0);
-      for (let i = 0; i < 64; i++) {
-        const w15 = w[i - 15], w2 = w[i - 2];
-        const a = hash[0], e = hash[4];
-        const temp1 = hash[7] + (rightRotate(e, 6) ^ rightRotate(e, 11) ^ rightRotate(e, 25))
-          + ((e & hash[5]) ^ (~e & hash[6])) + k[i]
-          + (w[i] = (i < 16) ? w[i] : (w[i - 16] + (rightRotate(w15, 7) ^ rightRotate(w15, 18) ^ (w15 >>> 3))
-            + w[i - 7] + (rightRotate(w2, 17) ^ rightRotate(w2, 19) ^ (w2 >>> 10))) | 0);
-        const temp2 = (rightRotate(a, 2) ^ rightRotate(a, 13) ^ rightRotate(a, 22))
-          + ((a & hash[1]) ^ (a & hash[2]) ^ (hash[1] & hash[2]));
-        hash = [(temp1 + temp2) | 0].concat(hash);
-        hash[4] = (hash[4] + temp1) | 0;
-        hash.length = 8;
-      }
-      hash = hash.map((x, i) => (x + oldHash[i]) | 0);
-    }
-    hash.forEach(x => {
-      for (let j = 3; j + 1; j--) {
-        const hex = ((x >> (j * 8)) & 255).toString(16);
-        result += (hex.length === 1 ? '0' : '') + hex;
-      }
-    });
-    return result;
   }
 
   // ── Styles ───────────────────────────────────────────────────

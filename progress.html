@@ -261,6 +261,7 @@ canvas#bg-canvas{position:fixed;inset:0;z-index:0;pointer-events:none;}
   </div>
 </div>
 
+<script src="sf-shared.js"></script>
 <script src="onboarding.js"></script>
 <script>
 // ══════════════════════════════════════════════
@@ -393,27 +394,12 @@ function getProgress() {
 // We also read from bookmarks/saves to reconstruct
 
 function getStarterGameUrl() {
+  const lang = localStorage.getItem('sf_lang') || 'fr';
+  if (window.SFShared) return SFShared.getStarterGameUrl(lang);
   if (window.SFOnboarding && typeof SFOnboarding.getStarterGameUrl === 'function') {
     return SFOnboarding.getStarterGameUrl(lang);
   }
-  let kids = false;
-  try {
-    const opts = JSON.parse(localStorage.getItem('sf_options') || '{}');
-    kids = opts.kids === true || opts.kids === 'true';
-  } catch (e) {}
-  const paths = kids
-    ? {
-        fr: 'stories/fr/aikito_v2.json',
-        en: 'stories/en/aikito_v2_en.json',
-        es: 'stories/es/aikito_v2_es.json'
-      }
-    : {
-        fr: 'stories/fr/lumiere_peur_du_noir.json',
-        en: 'stories/en/lumiere_peur_du_noir_en.json',
-        es: 'stories/es/lumiere_peur_du_noir_es.json'
-      };
-  const file = paths[lang] || paths.fr;
-  return 'game.html?story=' + encodeURIComponent(file);
+  return 'game.html?story=' + encodeURIComponent('stories/fr/lumiere_peur_du_noir.json');
 }
 
 function renderEmptyStories() {
