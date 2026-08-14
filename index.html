@@ -139,7 +139,7 @@ body {
     border-right:1px solid var(--border);
   }
   .menu-panel .btn-main:nth-child(2n) { border-right:none; }
-  .menu-panel .btn-main:nth-last-child(-n+2) { border-bottom:none; }
+  .menu-panel-footer { grid-column:1 / -1; }
   .btn-main.primary { grid-column:1 / -1; margin-bottom:8px; }
 }
 
@@ -247,13 +247,13 @@ body {
 
 /* ── DIVIDER ── */
 .divider {
-  display:flex; align-items:center; gap:16px;
-  margin-bottom:24px; width:100%; max-width:340px;
+  display:flex; align-items:center; justify-content:center; gap:12px;
+  margin:0 auto 24px; width:100%; max-width:340px;
   opacity:0; animation:fade-up .4s ease forwards;
   animation-delay:.2s;
 }
 .divider::before, .divider::after {
-  content:''; flex:1; height:1px;
+  content:''; flex:1 1 0; min-width:24px; max-width:72px; height:1px;
   background:linear-gradient(90deg, transparent, var(--border), transparent);
 }
 .divider-gem {
@@ -305,6 +305,11 @@ body {
   animation:fade-up .45s ease both;
 }
 .menu-panel .btn-main:last-child { border-bottom:none; }
+
+.menu-panel-footer {
+  width:100%;
+}
+.menu-panel-footer .btn-main:last-child { border-bottom:none; }
 
 .menu-tile-icon {
   width:42px; height:42px; flex-shrink:0;
@@ -757,18 +762,19 @@ body {
 /* ── MOBILE ── */
 @media (max-width:480px) {
   #shell {
-    padding-top:calc(44px + var(--android-safe-area-inset-top, 0px));
+    padding-top:calc(52px + var(--android-safe-area-inset-top, 0px));
     padding-left:14px;
     padding-right:14px;
     padding-bottom:calc(44px + env(safe-area-inset-bottom, 0px));
   }
-  #content-block { gap:14px; padding:4px 0 12px; }
+  #content-block { gap:14px; padding:16px 0 12px; margin-top:8px; }
   .ornament { margin-bottom:4px; }
   .ornament svg { width:90px; height:16px; }
   .eyebrow { font-size:10px; letter-spacing:3px; margin-bottom:6px; }
   .main-title { letter-spacing:1px; font-size:clamp(24px, 7.5vw, 36px); margin-bottom:4px; line-height:1.05; }
   .subtitle { font-size:14px; margin-bottom:8px; }
-  .divider { max-width:220px; gap:10px; }
+  .divider { max-width:min(220px, 100%); gap:10px; }
+  .divider::before, .divider::after { max-width:56px; }
   .divider-gem { width:5px; height:5px; }
   #buttons-block { gap:6px; }
   .btn-main { font-size:10px; padding:11px 12px; gap:10px; letter-spacing:1px; }
@@ -778,6 +784,10 @@ body {
   .menu-panel {
     display:grid;
     grid-template-columns:1fr 1fr;
+    gap:6px;
+    background:transparent;
+    border:none;
+    overflow:visible;
   }
   .menu-panel .btn-main {
     flex-direction:column;
@@ -787,17 +797,28 @@ body {
     gap:6px;
     padding:10px 6px;
     min-height:72px;
-    border-right:1px solid var(--border);
+    border:1px solid var(--border);
+    border-radius:10px;
   }
-  .menu-panel .btn-main:nth-child(2n) { border-right:none; }
-  .menu-panel .btn-main:nth-last-child(-n+2) { border-bottom:none; }
-  .menu-panel .btn-main:nth-child(odd):last-child {
+  .menu-panel-footer {
     grid-column:1 / -1;
-    flex-direction:row;
-    text-align:left;
-    min-height:0;
-    padding:11px 12px;
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+    margin-top:2px;
   }
+  .menu-panel-footer .btn-main {
+    flex-direction:row;
+    align-items:center;
+    justify-content:flex-start;
+    text-align:left;
+    gap:10px;
+    padding:11px 12px;
+    min-height:0;
+    border:1px solid var(--border);
+    border-radius:10px;
+  }
+  .menu-panel-footer .btn-main:last-child { border-bottom:1px solid var(--border); }
   #options-box { margin:12px; padding:24px; }
 }
 
@@ -963,14 +984,16 @@ body {
         <span class="menu-tile-icon">✨</span>
         <span class="menu-tile-label" id="txt-btn-ai">Créer avec l'IA</span>
       </button>
-      <button class="btn-main" id="btn-submit" onclick="openSubmitPopup()">
-        <span class="menu-tile-icon">✍</span>
-        <span class="menu-tile-label" id="txt-btn-submit">Soumettre une histoire</span>
-      </button>
-      <button class="btn-main" id="btn-contact" onclick="contactUs()">
-        <span class="menu-tile-icon">✉</span>
-        <span class="menu-tile-label" id="txt-btn-contact">Nous contacter</span>
-      </button>
+      <div class="menu-panel-footer">
+        <button class="btn-main" id="btn-submit" onclick="openSubmitPopup()">
+          <span class="menu-tile-icon">✍</span>
+          <span class="menu-tile-label" id="txt-btn-submit">Soumettre une histoire</span>
+        </button>
+        <button class="btn-main" id="btn-contact" onclick="contactUs()">
+          <span class="menu-tile-icon">✉</span>
+          <span class="menu-tile-label" id="txt-btn-contact">Nous contacter</span>
+        </button>
+      </div>
     </div>
   </div>
 
@@ -1149,12 +1172,12 @@ const LANG = {
     subtitle:       'Chaque choix façonne votre histoire',
     btnStart:       'Lire une histoire interactive',
     btnOptions:     'Options',
-    btnNews:        '📰 Actualités',
-    btnCommunity:   '🏆 Communauté',
-    btnAiCreate:    '✦ Créer avec l\'IA',
-    btnProgress:    '✦ Ma progression',
-    btnSubmit:      '✍ Soumettre une histoire',
-    btnContact:     '✉ Nous contacter',
+    btnNews:        'Actualités',
+    btnCommunity:   'Communauté',
+    btnAiCreate:    'Créer avec l\'IA',
+    btnProgress:    'Ma progression',
+    btnSubmit:      'Soumettre une histoire',
+    btnContact:     'Nous contacter',
     footer:         'StoryForge • Romans interactifs',
     sheetTitle:     'Vos aventures',
     sheetSub:       'Choisissez une histoire à vivre',
@@ -1224,12 +1247,12 @@ const LANG = {
     subtitle:       'Every choice shapes your story',
     btnStart:       'Read an interactive story',
     btnOptions:     'Options',
-    btnNews:        '📰 News',
-    btnCommunity:   '🏆 Community',
-    btnAiCreate:    '✦ Create with AI',
-    btnProgress:    '✦ My Progress',
-    btnSubmit:      '✍ Submit a story',
-    btnContact:     '✉ Contact us',
+    btnNews:        'News',
+    btnCommunity:   'Community',
+    btnAiCreate:    'Create with AI',
+    btnProgress:    'My Progress',
+    btnSubmit:      'Submit a story',
+    btnContact:     'Contact us',
     footer:         'StoryForge • Interactive Fiction',
     sheetTitle:     'Your Adventures',
     sheetSub:       'Choose a story to experience',
@@ -1299,12 +1322,12 @@ const LANG = {
     subtitle:       'Cada elección da forma a tu historia',
     btnStart:       'Leer una historia interactiva',
     btnOptions:     'Opciones',
-    btnNews:        '📰 Noticias',
-    btnCommunity:   '🏆 Comunidad',
-    btnAiCreate:    '✦ Crear con IA',
-    btnProgress:    '✦ Mi progreso',
-    btnSubmit:      '✍ Enviar una historia',
-    btnContact:     '✉ Contacto',
+    btnNews:        'Noticias',
+    btnCommunity:   'Comunidad',
+    btnAiCreate:    'Crear con IA',
+    btnProgress:    'Mi progreso',
+    btnSubmit:      'Enviar una historia',
+    btnContact:     'Contacto',
     footer:         'StoryForge • Ficción interactiva',
     sheetTitle:     'Tus aventuras',
     sheetSub:       'Elige una historia para vivir',
