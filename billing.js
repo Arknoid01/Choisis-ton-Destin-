@@ -41,8 +41,7 @@ window.SFBilling = (function () {
   // Packs sans histoires : visibles en « bientôt » mais pas à la vente.
   const COMING_SOON_PACKS = ['neon', 'pirates', 'fantasy', 'wilds'];
   // Produits réellement créés et actifs dans la Play Console.
-  // N'enregistrer que ceux-ci — ajouter 'cosmos' quand créé dans Play Console.
-  const PLAY_PRODUCT_PACKS = ['cinq_lames'];
+  const PLAY_PRODUCT_PACKS = ['cinq_lames', 'cosmos'];
   const CACHE_KEY     = 'sf_unlocked_packs';
   const CODE_KEY      = 'sf_code_unlocks';
   const PRICE_KEY     = 'sf_pack_prices';

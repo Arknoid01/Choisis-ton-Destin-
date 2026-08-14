@@ -41,7 +41,7 @@ window.SFCommunity = (function () {
   }
 
   function getStoriesFinishedCount() {
-    return parseInt(lsGet('sf_stories_finished') || '0', 10) || 0;
+    return window.SFShared ? SFShared.getStoriesFinishedCount() : 0;
   }
 
   function getBannerHost() {

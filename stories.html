@@ -172,6 +172,7 @@ html,body { height:100%; background:#0d0d0f; color:#e8e0d0; font-family:'Cormora
 .pack-section:not(.collapsed) .pack-toggle { transform:rotate(90deg); }
 .pack-body { display:block; }
 .pack-section.collapsed .pack-body { display:none; }
+.pack-collapsed-hint { color:var(--gold2); font-style:normal; opacity:0.85; }
 
 .pack-reveal-item {
   opacity:0;
@@ -401,6 +402,7 @@ html,body { height:100%; background:#0d0d0f; color:#e8e0d0; font-family:'Cormora
   </div>
 </div>
 
+<script src="sf-shared.js"></script>
 <script src="billing.js"></script>
 <script src="story-meta.js"></script>
 <script src="community.js"></script>
@@ -503,20 +505,38 @@ const PORTAL_PACK_HOOK = {
   es: 'Investigación multi-capitular — tus elecciones en un capítulo influyen en los demás.'
 };
 
-// Histoire recommandée pour les nouveaux lecteurs — alignée avec onboarding.js (Lumière / Aikito).
-const STARTER_STORIES = {
-  default: {
-    fr: 'stories/fr/lumiere_peur_du_noir.json',
-    en: 'stories/en/lumiere_peur_du_noir_en.json',
-    es: 'stories/es/lumiere_peur_du_noir_es.json'
+const PACK_UI = {
+  fr: {
+    free: 'GRATUIT',
+    unlocked: '✓ Débloqué',
+    soon: 'BIENTÔT',
+    bookmark: n => `${n} marque-page${n > 1 ? 's' : ''}`,
+    tapToExpand: n => `Toucher pour voir ${n} histoire${n > 1 ? 's' : ''}`,
+    available: (n, label) => `${label} disponible${n > 1 ? 's' : ''}`
   },
-  kids: {
-    fr: 'stories/fr/aikito_v2.json',
-    en: 'stories/en/aikito_v2_en.json',
-    es: 'stories/es/aikito_v2_es.json'
+  en: {
+    free: 'FREE',
+    unlocked: '✓ Unlocked',
+    soon: 'COMING SOON',
+    bookmark: n => `${n} bookmark${n > 1 ? 's' : ''}`,
+    tapToExpand: n => `Tap to see ${n} stor${n > 1 ? 'ies' : 'y'}`,
+    available: (n, label) => `${label} available`
+  },
+  es: {
+    free: 'GRATIS',
+    unlocked: '✓ Desbloqueado',
+    soon: 'PRÓXIMAMENTE',
+    bookmark: n => `${n} marcador${n > 1 ? 'es' : ''}`,
+    tapToExpand: n => `Toca para ver ${n} historia${n > 1 ? 's' : ''}`,
+    available: (n, label) => `${label} disponible${n > 1 ? 's' : ''}`
   }
 };
 
+function packUi(lang) {
+  return PACK_UI[lang] || PACK_UI.fr;
+}
+
+// Histoire recommandée — voir sf-shared.js (SFShared)
 const STARTER_TXT = {
   fr: { label:'Nouveau ici ?', title:'Commencez par ici', sub:'~15 min, gratuite — vos choix comptent.', btn:'Lancer l\'histoire' },
   en: { label:'New here?', title:'Start here', sub:'~15 min, free — your choices matter.', btn:'Start the story' },
@@ -524,11 +544,8 @@ const STARTER_TXT = {
 };
 
 function getStarterStoryFile(kidsOnly) {
-  if (window.SFOnboarding && typeof SFOnboarding.getStarterFile === 'function') {
-    return SFOnboarding.getStarterFile(currentLang);
-  }
-  const bucket = kidsOnly ? STARTER_STORIES.kids : STARTER_STORIES.default;
-  return bucket[currentLang] || bucket.fr;
+  if (window.SFShared) return SFShared.getStarterFile(currentLang);
+  return 'stories/fr/lumiere_peur_du_noir.json';
 }
 
 // Packs déverrouillés — source de vérité : Google Play via SFBilling.
@@ -636,7 +653,8 @@ function packSectionAttrs(packId) {
   const expanded = isPackExpanded(packId);
   return {
     cls: expanded ? 'pack-section' : 'pack-section collapsed',
-    aria: expanded ? 'true' : 'false'
+    aria: expanded ? 'true' : 'false',
+    expanded
   };
 }
 
@@ -669,7 +687,7 @@ async function loadGames() {
 // RENDER
 // ══════════════════════════════════════════════
 function getStoriesFinishedCount() {
-  return parseInt(localStorage.getItem('sf_stories_finished') || '0', 10) || 0;
+  return window.SFShared ? SFShared.getStoriesFinishedCount() : 0;
 }
 
 function renderStarterBanner(kidsOnly) {
@@ -693,6 +711,7 @@ function renderStarterBanner(kidsOnly) {
 }
 
 function renderLibrary() {
+  if (window.SFShared) SFShared.ensureDefaultExpandedPacks();
   const unlocked = getUnlockedPacks();
   let opts = {};
   try { opts = JSON.parse(localStorage.getItem('sf_options') || '{}'); } catch(e) {}
@@ -731,6 +750,7 @@ function renderLibrary() {
 
   if (bookmarks.length) {
     const bmTitle = { fr:'Reprendre', en:'Continue', es:'Continuar' }[currentLang] || 'Reprendre';
+    const ui = packUi(currentLang);
     const bm = packSectionAttrs('bookmarks');
     html += `<div class="${bm.cls}" id="pack-bookmarks" style="--pack-color:rgba(100,220,150,0.6);margin-bottom:20px">
       <div class="pack-header" role="button" tabindex="0" aria-expanded="${bm.aria}"
@@ -738,7 +758,7 @@ function renderLibrary() {
         <div class="pack-icon">🔖</div>
         <div class="pack-info">
           <div class="pack-name">${bmTitle}</div>
-          <div class="pack-meta">${bookmarks.length} marque-page${bookmarks.length > 1 ? 's' : ''}</div>
+          <div class="pack-meta">${ui.bookmark(bookmarks.length)}</div>
         </div>
         <span class="pack-toggle" aria-hidden="true">›</span>
       </div>
@@ -799,22 +819,23 @@ function renderLibrary() {
     const count = stories.length;
     const colorVar = cfg.color;
 
-    const soonLabel = { fr:'BIENTÔT', en:'COMING SOON', es:'PRÓXIMAMENTE' }[currentLang] || 'BIENTÔT';
+    const ui = packUi(currentLang);
+    const soonLabel = ui.soon;
 
     // Badge prix/gratuit
     let priceBadge = '';
     if (cfg.comingSoon) {
       priceBadge = `<span class="pack-price soon" style="--pack-color:${colorVar}">⏳ ${soonLabel}</span>`;
     } else if (cfg.free) {
-      priceBadge = `<span class="pack-price free">GRATUIT</span>`;
+      priceBadge = `<span class="pack-price free">${ui.free}</span>`;
     } else if (isUnlocked) {
-      priceBadge = `<span class="pack-price" style="--pack-color:${colorVar};border-color:rgba(100,220,150,0.5);color:#64dc96;background:rgba(100,220,150,0.08)">✓ Débloqué</span>`;
+      priceBadge = `<span class="pack-price" style="--pack-color:${colorVar};border-color:rgba(100,220,150,0.5);color:#64dc96;background:rgba(100,220,150,0.08)">${ui.unlocked}</span>`;
     } else {
       const livePrice = window.SFBilling ? SFBilling.getPrice(packId) : null;
       priceBadge = `<span class="pack-price locked" style="--pack-color:${colorVar}" onclick="event.stopPropagation(); buyPack('${packId}')">🔒 ${livePrice || cfg.price || ''}</span>`;
     }
 
-    // Compteur
+    const packState = packSectionAttrs(packId);
     const countLabel = cfg.comingSoon
       ? ({ fr:'Histoires <strong>en préparation</strong>', en:'Stories <strong>in the works</strong>', es:'Historias <strong>en preparación</strong>' }[currentLang] || 'Histoires <strong>en préparation</strong>')
       : currentLang === 'fr'
@@ -823,13 +844,21 @@ function renderLibrary() {
           ? `<strong>${count}</strong> stor${count > 1 ? 'ies' : 'y'}`
           : `<strong>${count}</strong> historia${count > 1 ? 's' : ''}`;
 
-    html += `<div class="${packSectionAttrs(packId).cls}" id="pack-${packId}" style="--pack-color:${colorVar}">
-      <div class="pack-header" role="button" tabindex="0" aria-expanded="${packSectionAttrs(packId).aria}"
+    const collapsedHint = (!packState.expanded && count > 0 && !cfg.comingSoon)
+      ? `<span class="pack-collapsed-hint"> · ${ui.tapToExpand(count)}</span>`
+      : '';
+
+    const metaLine = cfg.comingSoon
+      ? countLabel
+      : `${countLabel}${collapsedHint}`;
+
+    html += `<div class="${packState.cls}" id="pack-${packId}" style="--pack-color:${colorVar}">
+      <div class="pack-header" role="button" tabindex="0" aria-expanded="${packState.aria}"
         onclick="togglePackSection('${packId}')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();togglePackSection('${packId}')}">
         <div class="pack-icon">${cfg.icon}</div>
         <div class="pack-info">
           <div class="pack-name">${packName}</div>
-          <div class="pack-meta">${cfg.comingSoon ? countLabel : `${countLabel} disponible${count > 1 && currentLang === 'fr' ? 's' : ''}`}</div>
+          <div class="pack-meta">${metaLine}</div>
         </div>
         ${priceBadge}
         <span class="pack-toggle" aria-hidden="true">›</span>
