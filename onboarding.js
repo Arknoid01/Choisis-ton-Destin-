@@ -40,6 +40,8 @@ window.SFOnboarding = (function () {
       demoOutcomeA: 'Le sentier mène à une clairière paisible. Votre histoire aurait pris une tournure douce…',
       demoOutcomeB: 'L\'ombre recèle des secrets. Votre récit aurait basculé vers le mystère…',
       demoConclusion: 'Chaque histoire fonctionne ainsi : vos choix orientent le récit. Essayez-en une gratuitement, à votre rythme.',
+      demoReady: 'Prêt ? Commencez par une histoire courte (~15 min) :',
+      demoStarterPlay: 'Jouer',
       demoContinue: 'CONTINUER',
       demoSkip: 'Passer'
     },
@@ -68,6 +70,8 @@ window.SFOnboarding = (function () {
       demoOutcomeA: 'The path leads to a peaceful clearing. Your story would have taken a gentle turn…',
       demoOutcomeB: 'The shadows hold secrets. Your tale would have shifted toward mystery…',
       demoConclusion: 'Every story works like this: your choices shape the narrative. Try a free one whenever you like.',
+      demoReady: 'Ready? Start with a short story (~15 min):',
+      demoStarterPlay: 'Play',
       demoContinue: 'CONTINUE',
       demoSkip: 'Skip'
     },
@@ -96,6 +100,8 @@ window.SFOnboarding = (function () {
       demoOutcomeA: 'El sendero conduce a un claro tranquilo. Tu historia habría tomado un rumbo apacible…',
       demoOutcomeB: 'La sombra guarda secretos. Tu relato habría virado hacia el misterio…',
       demoConclusion: 'Cada historia funciona así: tus elecciones orientan el relato. Prueba una gratis, sin prisa.',
+      demoReady: '¿Listo? Empieza con una historia corta (~15 min):',
+      demoStarterPlay: 'Jugar',
       demoContinue: 'CONTINUAR',
       demoSkip: 'Omitir'
     }
@@ -107,9 +113,38 @@ window.SFOnboarding = (function () {
     es: { flag: '🇪🇸', name: 'Español',  native: 'Espagnol' }
   };
 
+  // Première histoire recommandée (~15 min, gratuite) — mode enfant → Aikito, sinon Lumière.
+  const STARTER_STORIES = {
+    default: {
+      fr: 'stories/fr/lumiere_peur_du_noir.json',
+      en: 'stories/en/lumiere_peur_du_noir_en.json',
+      es: 'stories/es/lumiere_peur_du_noir_es.json'
+    },
+    kids: {
+      fr: 'stories/fr/aikito_v2.json',
+      en: 'stories/en/aikito_v2_en.json',
+      es: 'stories/es/aikito_v2_es.json'
+    }
+  };
+
+  const STARTER_TITLES = {
+    default: {
+      fr: 'La Lumière qui a Peur du Noir',
+      en: 'The Light Afraid of the Dark',
+      es: 'La Luz que Teme a la Oscuridad'
+    },
+    kids: {
+      fr: 'Le Temps Perdu avec Aikito',
+      en: 'Lost Time with Aikito',
+      es: 'El Tiempo Perdido con Aikito'
+    }
+  };
+
   let _pendingLang = 'fr';
   let _onLangChange = null;
+  let _onComplete = null;
   let _injected = false;
+  let _finished = false;
 
   // ── localStorage tolérant (mode privé, quota dépassé) ────────
   function lsGet(key) {
@@ -127,6 +162,59 @@ window.SFOnboarding = (function () {
 
   function t() {
     return TXT[currentLang()] || TXT.fr;
+  }
+
+  function isKidsMode() {
+    try {
+      const opts = JSON.parse(lsGet('sf_options') || '{}') || {};
+      return opts.kids === true || opts.kids === 'true';
+    } catch (e) {
+      return false;
+    }
+  }
+
+  function getStarterFile(lang) {
+    const code = LANGS.includes(lang) ? lang : currentLang();
+    const bucket = isKidsMode() ? STARTER_STORIES.kids : STARTER_STORIES.default;
+    return bucket[code] || bucket.fr;
+  }
+
+  function getStarterTitle(lang) {
+    const code = LANGS.includes(lang) ? lang : currentLang();
+    const bucket = isKidsMode() ? STARTER_TITLES.kids : STARTER_TITLES.default;
+    return bucket[code] || bucket.fr;
+  }
+
+  function getStarterGameUrl(lang) {
+    return 'game.html?story=' + encodeURIComponent(getStarterFile(lang));
+  }
+
+  function getStoriesFinishedCount() {
+    return parseInt(lsGet('sf_stories_finished') || '0', 10) || 0;
+  }
+
+  function shouldShowStarterHint() {
+    return getStoriesFinishedCount() === 0;
+  }
+
+  function isActive() {
+    return ['sf-onb-lang', 'sf-onb-demo', 'sf-onb-tuto', 'sf-onb-pin'].some(id => {
+      const el = document.getElementById(id);
+      return el && el.style.display === 'flex';
+    });
+  }
+
+  function finishOnboarding() {
+    if (_finished) return;
+    _finished = true;
+    if (typeof _onComplete === 'function') {
+      try { _onComplete(); } catch (e) { console.error(e); }
+    }
+  }
+
+  function goToStarterStory() {
+    lsSet('sf_demo_shown', '1');
+    window.location.href = getStarterGameUrl(currentLang());
   }
 
   // ── SHA-256 ──────────────────────────────────────────────────
@@ -282,6 +370,19 @@ window.SFOnboarding = (function () {
         display:none;font-size:13px;color:#9a8a70;line-height:1.6;margin-bottom:4px;
       }
       .sf-onb-demo-conclusion.visible{display:block}
+      .sf-onb-demo-ready{
+        display:none;font-size:13px;color:#e8e0d0;line-height:1.55;margin:14px 0 10px;
+      }
+      .sf-onb-demo-ready.visible{display:block}
+      .sf-onb-starter-link{
+        display:none;width:100%;margin-bottom:12px;padding:12px 14px;border-radius:10px;
+        border:1px solid rgba(200,169,110,.45);
+        background:rgba(200,169,110,.08);color:#c8a96e;text-decoration:none;
+        font-family:'Cinzel',Georgia,serif;font-size:11px;letter-spacing:1.5px;
+        box-sizing:border-box;transition:background .2s,border-color .2s;
+      }
+      .sf-onb-starter-link.visible{display:block}
+      .sf-onb-starter-link:hover{background:rgba(200,169,110,.16);border-color:#c8a96e}
       .sf-onb-demo-actions{display:none;margin-top:16px}
       .sf-onb-demo-actions.visible{display:block}
       .sf-onb-toast{
@@ -334,6 +435,8 @@ window.SFOnboarding = (function () {
           </div>
           <p class="sf-onb-demo-outcome" id="sf-onb-demo-outcome"></p>
           <p class="sf-onb-demo-conclusion" id="sf-onb-demo-conclusion"></p>
+          <p class="sf-onb-demo-ready" id="sf-onb-demo-ready"></p>
+          <a class="sf-onb-starter-link" id="sf-onb-demo-starter" href="#"></a>
           <div class="sf-onb-demo-actions" id="sf-onb-demo-actions">
             <button class="sf-onb-btn" id="sf-onb-demo-continue" type="button"></button>
           </div>
@@ -381,6 +484,10 @@ window.SFOnboarding = (function () {
     document.getElementById('sf-onb-demo-choice-b').addEventListener('click', () => pickDemo('b'));
     document.getElementById('sf-onb-demo-continue').addEventListener('click', closeDemo);
     document.getElementById('sf-onb-demo-skip').addEventListener('click', closeDemo);
+    document.getElementById('sf-onb-demo-starter').addEventListener('click', e => {
+      e.preventDefault();
+      goToStarterStory();
+    });
     document.getElementById('sf-onb-tuto-close').addEventListener('click', closeTuto);
     document.getElementById('sf-onb-pin-create').addEventListener('click', submitPin);
     document.getElementById('sf-onb-pin-skip').addEventListener('click', skipPin);
@@ -423,17 +530,32 @@ window.SFOnboarding = (function () {
     set('sf-onb-demo-choice-a', tr.demoChoiceA);
     set('sf-onb-demo-choice-b', tr.demoChoiceB);
     set('sf-onb-demo-conclusion', tr.demoConclusion);
+    set('sf-onb-demo-ready', tr.demoReady);
+    updateDemoStarterLink();
     set('sf-onb-demo-continue', tr.demoContinue);
     set('sf-onb-demo-skip', tr.demoSkip);
+  }
+
+  function updateDemoStarterLink() {
+    const link = document.getElementById('sf-onb-demo-starter');
+    if (!link) return;
+    const tr = t();
+    const title = getStarterTitle(currentLang());
+    link.textContent = tr.demoStarterPlay + ' → ' + title;
+    link.href = getStarterGameUrl(currentLang());
   }
 
   function resetDemoView() {
     const outcome = document.getElementById('sf-onb-demo-outcome');
     const conclusion = document.getElementById('sf-onb-demo-conclusion');
+    const ready = document.getElementById('sf-onb-demo-ready');
+    const starter = document.getElementById('sf-onb-demo-starter');
     const actions = document.getElementById('sf-onb-demo-actions');
     const choices = document.getElementById('sf-onb-demo-choices');
     if (outcome) { outcome.textContent = ''; outcome.classList.remove('visible'); }
     if (conclusion) conclusion.classList.remove('visible');
+    if (ready) ready.classList.remove('visible');
+    if (starter) starter.classList.remove('visible');
     if (actions) actions.classList.remove('visible');
     if (choices) choices.style.display = '';
   }
@@ -500,6 +622,9 @@ window.SFOnboarding = (function () {
     outcome.classList.add('visible');
     choices.style.display = 'none';
     document.getElementById('sf-onb-demo-conclusion').classList.add('visible');
+    document.getElementById('sf-onb-demo-ready').classList.add('visible');
+    updateDemoStarterLink();
+    document.getElementById('sf-onb-demo-starter').classList.add('visible');
     document.getElementById('sf-onb-demo-actions').classList.add('visible');
   }
 
@@ -525,9 +650,13 @@ window.SFOnboarding = (function () {
     if (lsGet('sf_pin_setup_done')) {
       hideAll();
       if (window.SFCommunity) SFCommunity.maybeAutoShow();
+      finishOnboarding();
       return;
     }
-    if (lsGet('sf_parent_pin') !== null) return;
+    if (lsGet('sf_parent_pin') !== null) {
+      finishOnboarding();
+      return;
+    }
     showPin();
   }
 
@@ -551,6 +680,7 @@ window.SFOnboarding = (function () {
     fadeOut('sf-onb-pin', () => {
       hideAll();
       if (window.SFCommunity) SFCommunity.maybeAutoShow();
+      finishOnboarding();
     });
   }
 
@@ -628,6 +758,8 @@ window.SFOnboarding = (function () {
   function start(opts) {
     opts = opts || {};
     _onLangChange = typeof opts.onLangChange === 'function' ? opts.onLangChange : null;
+    _onComplete = typeof opts.onComplete === 'function' ? opts.onComplete : null;
+    _finished = false;
     const boot = () => {
       injectStyles();
       injectOverlays();
@@ -643,8 +775,21 @@ window.SFOnboarding = (function () {
     ['sf_lang_chosen', 'sf_demo_shown', 'sf_tuto_shown', 'sf_pin_setup_done'].forEach(k => {
       try { localStorage.removeItem(k); } catch (e) {}
     });
+    _finished = false;
     next();
   }
 
-  return { start, next, reset, applyTexts, sha256 };
+  return {
+    start,
+    next,
+    reset,
+    applyTexts,
+    sha256,
+    getStarterFile,
+    getStarterGameUrl,
+    getStarterTitle,
+    shouldShowStarterHint,
+    isActive,
+    isKidsMode
+  };
 })();
