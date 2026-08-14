@@ -43,13 +43,8 @@ Fichiers liés à tenir alignés :
 ## Inventaire
 
 - **30** histoires (fichier FR de référence)
-- **28** publiées dans le catalogue · **2** non publiées
+- **30** publiées dans le catalogue
 - **30** entièrement traduites FR · EN · ES
-
-### ⚠ Non publiées (fichier OK, absent de `games.json`)
-
-- **L'Horloger des Rêves** — `horloger_des_reves.json` — trad. FR · EN · ES
-- **Les Gardiens de l'Harmonie** — `gardiens_harmonie.json` — trad. FR · EN · ES
 
 ### Tableau complet
 
@@ -72,12 +67,12 @@ Fichiers liés à tenir alignés :
 | Le Signal Rouge — Prologue | `signal_rouge_prologue.json` | FR · EN · ES | dlc (cosmos) | EN · ES · FR | 2026-08-10 |
 | Le Signal Rouge — Rhea | `signal_rouge_commandante.json` | FR · EN · ES | dlc (cosmos) | EN · ES · FR | — |
 | Le Signal Rouge — Verdict | `signal_rouge_verdict.json` | FR · EN · ES | dlc (cosmos) | EN · ES · FR | — |
-| L'Horloger des Rêves | `horloger_des_reves.json` | FR · EN · ES | free | non | — |
+| L'Horloger des Rêves | `horloger_des_reves.json` | FR · EN · ES | free | EN · ES · FR | 2026-08-14 |
 | La Lame de Diamant | `lame_diamant.json` | FR · EN · ES | free | EN · ES · FR | — |
 | Le Dernier Round | `le_dernier_round_boxe_complet.json` | FR · EN · ES | free | EN · ES · FR | — |
 | Le Théâtre de Carcosa | `theatre_carcosa.json` | FR · EN · ES | free | EN · ES · FR | — |
 | Les Dernières Minutes | `dernieres_minutes_final.json` | FR · EN · ES | free | EN · ES · FR | — |
-| Les Gardiens de l'Harmonie | `gardiens_harmonie.json` | FR · EN · ES | free | non | — |
+| Les Gardiens de l'Harmonie | `gardiens_harmonie.json` | FR · EN · ES | free | EN · ES · FR | 2026-08-14 |
 | Project Lazarus — L'Odyssée des Architects | `lazarus.json` | FR · EN · ES | free | EN · ES · FR | — |
 | La Lumière qui a Peur du Noir | `lumiere_peur_du_noir.json` | FR · EN · ES | free (enfants) | EN · ES · FR | — |
 | La Ville Sous l'Eau | `ville_sous_eau.json` | FR · EN · ES | free (enfants) | EN · ES · FR | — |
