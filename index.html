@@ -25,6 +25,7 @@ body {
 
 /* ── CSS VARS ── */
 :root {
+  --android-safe-area-inset-top: env(safe-area-inset-top, 0px);
   --gold:    #c8a96e;
   --gold2:   #e8d4a0;
   --gold3:   #8a6a30;
@@ -71,17 +72,28 @@ body {
 /* ── LAYOUT ── */
 #shell {
   position:relative; z-index:10;
-  height:100vh;
+  min-height:100vh; min-height:100dvh;
   display:flex; flex-direction:column;
   align-items:center; justify-content:center;
-  padding:0 20px;
-  overflow:hidden;
+  padding:
+    calc(56px + var(--android-safe-area-inset-top, 0px))
+    20px
+    72px;
+  overflow-y:auto;
+  overflow-x:hidden;
 }
 #content-block {
   display:flex; flex-direction:column;
   align-items:center;
-  transform:translateY(-20%);
+  justify-content:center;
+  gap:28px;
   width:100%; max-width:380px;
+  margin:auto 0;
+}
+#logo-block {
+  width:100%;
+  text-align:center;
+  flex-shrink:0;
 }
 
 /* ── PAYSAGE TABLETTE ET MOBILE ── */
@@ -91,13 +103,10 @@ body {
     align-items:center;
     justify-content:center;
     gap:40px;
-    padding:0 40px;
-    overflow:hidden;
+    padding:calc(24px + var(--android-safe-area-inset-top, 0px)) 40px 48px;
+    overflow-y:auto;
   }
   #content-block {
-    transform:none;
-    margin:0;
-    max-width:none;
     flex-direction:row;
     align-items:center;
     gap:40px;
@@ -110,19 +119,21 @@ body {
   #logo-sub   { font-size:11px; }
   #buttons-block {
     flex:1;
-    display:grid !important;
-    grid-template-columns:1fr 1fr;
-    gap:10px;
     max-width:420px;
     opacity:0; animation:fade-up .6s ease forwards; animation-delay:.5s;
   }
-  .btn-main {
-    margin-bottom:0 !important;
-    padding:14px 16px;
-    font-size:11px;
-    max-width:none;
-    width:100%;
+  .menu-panel {
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:0;
   }
+  .menu-panel .btn-main {
+    border-bottom:1px solid var(--border);
+    border-right:1px solid var(--border);
+  }
+  .menu-panel .btn-main:nth-child(2n) { border-right:none; }
+  .menu-panel .btn-main:nth-last-child(-n+2) { border-bottom:none; }
+  .btn-main.primary { grid-column:1 / -1; margin-bottom:8px; }
 }
 
 /* ── PAYSAGE MOBILE PETIT (hauteur < 400px) ── */
@@ -132,12 +143,10 @@ body {
     align-items:center;
     justify-content:center;
     gap:20px;
-    padding:0 20px;
-    overflow:hidden;
+    padding:calc(16px + var(--android-safe-area-inset-top, 0px)) 20px 32px;
+    overflow-y:auto;
   }
   #content-block {
-    transform:none;
-    margin:0;
     flex-direction:row;
     align-items:center;
     gap:20px;
@@ -149,25 +158,21 @@ body {
   .eyebrow { font-size:9px; margin-bottom:2px; }
   #logo-title { font-size:clamp(20px,5vw,32px); margin-bottom:2px; }
   #logo-sub   { font-size:9px; }
-  #buttons-block {
-    flex:1;
-    display:grid !important;
+  #buttons-block { flex:1; max-width:380px; }
+  .menu-panel {
+    display:grid;
     grid-template-columns:1fr 1fr;
-    gap:7px;
-    max-width:380px;
+    gap:0;
   }
-  .btn-main {
-    margin-bottom:0 !important;
-    padding:10px 12px;
-    font-size:10px;
-    max-width:none;
-    width:100%;
-  }
+  .menu-panel .btn-main { padding:10px 12px; font-size:10px; }
+  .menu-tile-icon { width:34px; height:34px; font-size:15px; }
 }
 
 /* ── LANG SWITCH ── */
 #lang-switch {
-  position:fixed; top:20px; right:20px; z-index:100;
+  position:fixed;
+  top:calc(12px + var(--android-safe-area-inset-top, 0px));
+  right:16px; z-index:100;
   display:flex; gap:2px;
   background:rgba(13,13,15,0.8);
   border:1px solid var(--border);
@@ -249,74 +254,106 @@ body {
   transform:rotate(45deg); flex-shrink:0;
 }
 
-/* ── MAIN BUTTONS ── */
-.btn-group {
-  display:flex; flex-direction:column;
-  align-items:center; gap:14px;
-  width:100%; max-width:320px;
-  opacity:0; animation:fade-up .4s ease forwards;
-  animation-delay:.25s;
+/* ── MAIN BUTTONS (tuiles menu — alignées bibliothèque) ── */
+#buttons-block {
+  width:100%;
+  display:flex;
+  flex-direction:column;
+  gap:8px;
+  opacity:0;
+  animation:fade-up .5s ease forwards;
+  animation-delay:.35s;
+}
+
+.menu-panel {
+  width:100%;
+  background:var(--bg2);
+  border:1px solid var(--border);
+  border-radius:14px;
+  overflow:hidden;
 }
 
 .btn-main {
-  width:100%; padding:16px 32px;
-  border-radius:4px; border:1px solid var(--gold3);
-  background:transparent;
-  color:var(--gold2); font-family:'Cinzel',serif;
-  font-size:13px; font-weight:600; letter-spacing:3px;
-  text-transform:uppercase; cursor:pointer;
-  position:relative; overflow:hidden;
-  transition:all .3s cubic-bezier(.4,0,.2,1);
+  width:100%;
+  display:flex;
+  align-items:center;
+  gap:14px;
+  padding:14px 16px;
+  border-radius:0;
+  border:none;
+  border-bottom:1px solid var(--border);
+  background:var(--bg2);
+  color:var(--cream);
+  font-family:'Cinzel',serif;
+  font-size:12px;
+  font-weight:600;
+  letter-spacing:1.5px;
+  text-transform:none;
+  text-align:left;
+  cursor:pointer;
+  position:relative;
+  overflow:hidden;
+  transition:background .2s, color .2s;
   opacity:0;
-  animation:fade-up .5s ease both;
+  animation:fade-up .45s ease both;
 }
-#btn-start    { animation-delay:.8s; }
-#btn-options  { animation-delay:1.0s; }
-#btn-progress { animation-delay:1.2s; }
-#btn-news     { animation-delay:1.4s; }
-#btn-community { animation-delay:1.5s; }
-#btn-ai-create { animation-delay:1.55s; }
-#btn-submit   { animation-delay:1.65s; }
-#btn-contact  { animation-delay:1.85s; }
-.btn-main.ai-btn {
-  background:linear-gradient(135deg, rgba(124,109,250,0.14), rgba(109,250,188,0.08));
-  border-color:rgba(124,109,250,0.45);
-  color:#c0b0ff;
+.menu-panel .btn-main:last-child { border-bottom:none; }
+
+.menu-tile-icon {
+  width:42px; height:42px; flex-shrink:0;
+  border-radius:10px;
+  background:var(--bg3);
+  border:1px solid var(--border);
+  display:flex; align-items:center; justify-content:center;
+  font-size:18px; line-height:1;
 }
-.btn-main.ai-btn:hover {
-  border-color:#b8a8ff;
-  box-shadow:0 0 30px rgba(124,109,250,0.15), inset 0 0 30px rgba(124,109,250,0.06);
-  color:#d4cbff;
-}
-.btn-main::before {
-  content:''; position:absolute; inset:0;
-  background:linear-gradient(135deg, rgba(200,169,110,0.1), transparent);
-  opacity:0; transition:opacity .3s;
-}
-.btn-main::after {
-  content:''; position:absolute;
-  bottom:0; left:50%; right:50%;
-  height:1px; background:var(--gold);
-  transition:all .3s cubic-bezier(.4,0,.2,1);
-  box-shadow:0 0 8px var(--gold);
-}
+.menu-tile-label { flex:1; min-width:0; line-height:1.35; }
+
+#btn-start    { animation-delay:.55s; }
+#btn-options  { animation-delay:.65s; }
+#btn-progress { animation-delay:.72s; }
+#btn-news     { animation-delay:.79s; }
+#btn-community { animation-delay:.86s; }
+#btn-ai-create { animation-delay:.93s; }
+#btn-submit   { animation-delay:1.0s; }
+#btn-contact  { animation-delay:1.07s; }
+
 .btn-main:hover {
-  border-color:var(--gold);
+  background:color-mix(in srgb, var(--gold3) 8%, var(--bg2));
   color:var(--gold2);
-  box-shadow:0 0 30px rgba(200,169,110,0.1), inset 0 0 30px rgba(200,169,110,0.05);
-  transform:translateY(-1px);
 }
-.btn-main:hover::before { opacity:1; }
-.btn-main:hover::after { left:10%; right:10%; }
-.btn-main:active { transform:translateY(0); }
+.btn-main:active { opacity:0.92; }
 
 .btn-main.primary {
-  background:linear-gradient(135deg, rgba(200,169,110,0.15), rgba(138,106,48,0.1));
-  border-color:var(--gold);
-  box-shadow:0 0 20px rgba(200,169,110,0.08);
+  border-radius:14px;
+  border:1px solid rgba(200,169,110,0.35);
+  border-bottom:1px solid rgba(200,169,110,0.35);
+  background:linear-gradient(135deg, rgba(200,169,110,0.14), rgba(138,106,48,0.06));
+  padding:16px 18px;
+  margin-bottom:4px;
+  box-shadow:0 4px 24px rgba(0,0,0,0.25);
+}
+.btn-main.primary .menu-tile-icon {
+  background:rgba(200,169,110,0.12);
+  border-color:rgba(200,169,110,0.35);
 }
 .btn-main.primary:hover {
-  box-shadow:0 0 40px rgba(200,169,110,0.2), inset 0 0 40px rgba(200,169,110,0.08);
+  border-color:rgba(200,169,110,0.55);
+  background:linear-gradient(135deg, rgba(200,169,110,0.2), rgba(138,106,48,0.1));
+  box-shadow:0 4px 28px rgba(200,169,110,0.12);
+}
+
+.btn-main.ai-btn {
+  background:var(--bg2);
+  color:#c8bcff;
+}
+.btn-main.ai-btn .menu-tile-icon {
+  background:rgba(124,109,250,0.12);
+  border-color:rgba(124,109,250,0.35);
+}
+.btn-main.ai-btn:hover {
+  background:color-mix(in srgb, rgba(124,109,250,0.15) 12%, var(--bg2));
+  color:#ddd4ff;
 }
 
 .btn-small {
@@ -708,9 +745,14 @@ body {
 
 /* ── MOBILE ── */
 @media (max-width:480px) {
-  #content-block { transform:translateY(-32%); }
-  .main-title { letter-spacing:1px; }
-  .btn-main { font-size:12px; padding:15px 24px; letter-spacing:2px; }
+  #shell {
+    padding-top:calc(52px + var(--android-safe-area-inset-top, 0px));
+    padding-bottom:64px;
+  }
+  #content-block { gap:22px; }
+  .main-title { letter-spacing:1px; font-size:clamp(28px, 8vw, 44px); }
+  .btn-main { font-size:11px; padding:13px 14px; }
+  .menu-tile-icon { width:38px; height:38px; font-size:16px; }
   #options-box { margin:12px; padding:24px; }
 }
 </style>
@@ -841,29 +883,39 @@ body {
   <!-- BUTTONS BLOCK -->
   <div id="buttons-block">
     <button class="btn-main primary" id="btn-start" onclick="window.location.href='stories.html'">
-      ✦ <span id="txt-btn-start">Le début de votre aventure</span>
+      <span class="menu-tile-icon">✦</span>
+      <span class="menu-tile-label" id="txt-btn-start">Le début de votre aventure</span>
     </button>
-    <button class="btn-main" id="btn-options" onclick="openOptions()">
-      <span id="txt-btn-options">Options</span>
-    </button>
-    <button class="btn-main" id="btn-progress" onclick="window.location.href='progress.html'">
-      <span id="txt-btn-progress">✦ Ma progression</span>
-    </button>
-    <button class="btn-main" id="btn-news" onclick="window.location.href='news.html'">
-      <span id="txt-btn-news">📰 Actualités</span>
-    </button>
-    <button class="btn-main" id="btn-community" onclick="SFCommunity.open()">
-      <span id="txt-btn-community">🏆 Communauté</span>
-    </button>
-    <button class="btn-main ai-btn" id="btn-ai-create" onclick="window.location.href='ai-guide.html'">
-      <span id="txt-btn-ai">✦ Créer avec l'IA</span>
-    </button>
-    <button class="btn-main" id="btn-submit" onclick="openSubmitPopup()">
-      <span id="txt-btn-submit">✍ Soumettre une histoire</span>
-    </button>
-    <button class="btn-main" id="btn-contact" onclick="contactUs()">
-      <span id="txt-btn-contact">✉ Nous contacter</span>
-    </button>
+    <div class="menu-panel">
+      <button class="btn-main" id="btn-options" onclick="openOptions()">
+        <span class="menu-tile-icon">⚙</span>
+        <span class="menu-tile-label" id="txt-btn-options">Options</span>
+      </button>
+      <button class="btn-main" id="btn-progress" onclick="window.location.href='progress.html'">
+        <span class="menu-tile-icon">📊</span>
+        <span class="menu-tile-label" id="txt-btn-progress">Ma progression</span>
+      </button>
+      <button class="btn-main" id="btn-news" onclick="window.location.href='news.html'">
+        <span class="menu-tile-icon">📰</span>
+        <span class="menu-tile-label" id="txt-btn-news">Actualités</span>
+      </button>
+      <button class="btn-main" id="btn-community" onclick="SFCommunity.open()">
+        <span class="menu-tile-icon">🏆</span>
+        <span class="menu-tile-label" id="txt-btn-community">Communauté</span>
+      </button>
+      <button class="btn-main ai-btn" id="btn-ai-create" onclick="window.location.href='ai-guide.html'">
+        <span class="menu-tile-icon">✨</span>
+        <span class="menu-tile-label" id="txt-btn-ai">Créer avec l'IA</span>
+      </button>
+      <button class="btn-main" id="btn-submit" onclick="openSubmitPopup()">
+        <span class="menu-tile-icon">✍</span>
+        <span class="menu-tile-label" id="txt-btn-submit">Soumettre une histoire</span>
+      </button>
+      <button class="btn-main" id="btn-contact" onclick="contactUs()">
+        <span class="menu-tile-icon">✉</span>
+        <span class="menu-tile-label" id="txt-btn-contact">Nous contacter</span>
+      </button>
+    </div>
   </div>
 
 </div>
