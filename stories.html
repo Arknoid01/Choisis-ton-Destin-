@@ -480,11 +480,13 @@ const PACK_CONFIG = {
   }
 };
 
-// Histoire recommandée pour les nouveaux lecteurs (gratuite, sans achat).
+// Histoire recommandée pour les nouveaux lecteurs — alignée avec onboarding.js (Lumière / Aikito).
 const STARTER_STORIES = {
-  fr: 'stories/fr/dernieres_minutes_final.json',
-  en: 'stories/en/dernieres_minutes_final_en.json',
-  es: 'stories/es/dernieres_minutes_final_es.json',
+  default: {
+    fr: 'stories/fr/lumiere_peur_du_noir.json',
+    en: 'stories/en/lumiere_peur_du_noir_en.json',
+    es: 'stories/es/lumiere_peur_du_noir_es.json'
+  },
   kids: {
     fr: 'stories/fr/aikito_v2.json',
     en: 'stories/en/aikito_v2_en.json',
@@ -493,10 +495,18 @@ const STARTER_STORIES = {
 };
 
 const STARTER_TXT = {
-  fr: { label:'Nouveau ici ?', title:'Commencez par ici', sub:'Une histoire gratuite pour découvrir le format — vos choix comptent.', btn:'Lancer l\'histoire' },
-  en: { label:'New here?', title:'Start here', sub:'A free story to discover the format — your choices matter.', btn:'Start the story' },
-  es: { label:'¿Nuevo aquí?', title:'Empieza aquí', sub:'Una historia gratis para descubrir el formato — tus elecciones importan.', btn:'Empezar la historia' }
+  fr: { label:'Nouveau ici ?', title:'Commencez par ici', sub:'~15 min, gratuite — vos choix comptent.', btn:'Lancer l\'histoire' },
+  en: { label:'New here?', title:'Start here', sub:'~15 min, free — your choices matter.', btn:'Start the story' },
+  es: { label:'¿Nuevo aquí?', title:'Empieza aquí', sub:'~15 min, gratis — tus elecciones importan.', btn:'Empezar la historia' }
 };
+
+function getStarterStoryFile(kidsOnly) {
+  if (window.SFOnboarding && typeof SFOnboarding.getStarterFile === 'function') {
+    return SFOnboarding.getStarterFile(currentLang);
+  }
+  const bucket = kidsOnly ? STARTER_STORIES.kids : STARTER_STORIES.default;
+  return bucket[currentLang] || bucket.fr;
+}
 
 // Packs déverrouillés — source de vérité : Google Play via SFBilling.
 // Le module maintient le cache localStorage 'sf_unlocked_packs'.
@@ -558,9 +568,7 @@ function getStoriesFinishedCount() {
 function renderStarterBanner(kidsOnly) {
   if (getStoriesFinishedCount() > 0) return '';
   const txt = STARTER_TXT[currentLang] || STARTER_TXT.fr;
-  const file = kidsOnly
-    ? (STARTER_STORIES.kids[currentLang] || STARTER_STORIES.kids.fr)
-    : (STARTER_STORIES[currentLang] || STARTER_STORIES.fr);
+  const file = getStarterStoryFile(kidsOnly);
   const game = allGames.find(g => g.file === file && g.lang === currentLang);
   if (!game) return '';
 
