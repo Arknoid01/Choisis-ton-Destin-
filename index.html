@@ -762,29 +762,29 @@ body {
 /* ── MOBILE ── */
 @media (max-width:480px) {
   #shell {
-    padding-top:calc(44px + var(--android-safe-area-inset-top, 0px));
+    padding-top:calc(36px + var(--android-safe-area-inset-top, 0px));
     padding-left:14px;
     padding-right:14px;
     padding-bottom:calc(56px + env(safe-area-inset-bottom, 0px));
   }
-  #content-block { gap:14px; padding:8px 0 20px; margin-top:0; }
-  .ornament { margin-bottom:4px; }
+  #content-block { gap:10px; padding:4px 0 20px; margin-top:0; }
+  .ornament { margin-bottom:2px; }
   .ornament svg { width:90px; height:16px; }
-  .eyebrow { font-size:10px; letter-spacing:3px; margin-bottom:6px; }
-  .main-title { letter-spacing:1px; font-size:clamp(24px, 7.5vw, 36px); margin-bottom:4px; line-height:1.05; }
-  .subtitle { font-size:14px; margin-bottom:8px; }
-  .divider { max-width:min(220px, 100%); gap:10px; }
+  .eyebrow { font-size:10px; letter-spacing:3px; margin-bottom:4px; }
+  .main-title { letter-spacing:1px; font-size:clamp(24px, 7.5vw, 36px); margin-bottom:2px; line-height:1.05; }
+  .subtitle { font-size:14px; margin-bottom:6px; }
+  .divider { max-width:min(220px, 100%); gap:10px; margin-bottom:16px; }
   .divider::before, .divider::after { max-width:56px; }
   .divider-gem { width:5px; height:5px; }
-  #buttons-block { gap:6px; }
-  .btn-main { font-size:10px; padding:11px 12px; gap:10px; letter-spacing:1px; }
-  .btn-main.primary { padding:13px 14px; margin-bottom:2px; }
+  #buttons-block { gap:4px; }
+  .btn-main { font-size:10px; padding:10px 12px; gap:8px; letter-spacing:1px; }
+  .btn-main.primary { padding:12px 14px; margin-bottom:0; }
   .menu-tile-icon { width:34px; height:34px; font-size:15px; border-radius:8px; }
   .menu-tile-label { font-size:10px; line-height:1.25; }
   .menu-panel {
     display:flex;
     flex-direction:column;
-    gap:6px;
+    gap:4px;
     background:transparent;
     border:none;
     overflow:visible;
@@ -796,8 +796,8 @@ body {
     align-items:center;
     justify-content:flex-start;
     text-align:left;
-    gap:10px;
-    padding:11px 12px;
+    gap:8px;
+    padding:10px 12px;
     min-height:0;
     border:1px solid var(--border);
     border-radius:10px;
@@ -810,10 +810,10 @@ body {
   .ornament { display:none; }
   .subtitle { display:none; }
   .divider { display:none; }
-  #content-block { gap:10px; padding-bottom:24px; }
+  #content-block { gap:8px; padding-bottom:24px; }
   .main-title { font-size:clamp(22px, 6.5vw, 30px); }
   .menu-panel .btn-main,
-  .menu-panel-footer .btn-main { padding:10px 12px; }
+  .menu-panel-footer .btn-main { padding:9px 12px; }
   .menu-tile-icon { width:30px; height:30px; font-size:14px; }
 }
 </style>
