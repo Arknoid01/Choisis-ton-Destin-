@@ -1195,7 +1195,14 @@ function goToScene(id, choiceText, externalStory) {
     history.length + ' scène' + (history.length > 1 ? 's' : '') + ' visitée' + (history.length > 1 ? 's' : '');
 
   if (scene.isEnd) {
-    trackStats('story_finish');
+    const storyFile = new URLSearchParams(window.location.search).get('story')
+      || localStorage.getItem('sf_game_file') || '';
+    const pack = story.pack || (story.kids ? 'kids' : 'free');
+    trackStats('story_finish', {
+      kids: !!story.kids,
+      community: /gare_regret|usine_a_trombones/i.test(storyFile),
+      dlc: pack !== 'free' && pack !== 'kids'
+    });
     playTransition(scene.transition || 'fade', () => renderEndScene(scene));
   } else {
     playTransition(scene.transition || 'fade', () => renderScene(scene));
@@ -2088,6 +2095,9 @@ function trackStats(event, data = {}) {
           s.minutesSpent += mins;
           if (mins < 5) s.hadFastRun = true;
         }
+        if (data.kids) s.hadKidsStory = true;
+        if (data.community) s.hadCommunityStory = true;
+        if (data.dlc) s.hadDlcStory = true;
         break;
     }
     localStorage.setItem('sf_player_stats', JSON.stringify(s));
