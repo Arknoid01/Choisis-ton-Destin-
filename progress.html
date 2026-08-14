@@ -342,7 +342,18 @@ const BADGES = [
   { id:'fast_reader',    icon:'⚡', name:{fr:'Speedrunner',    en:'Speedrunner',     es:'Speedrunner'},     desc:{fr:'Histoire terminée < 5 min',en:'Story finished < 5 min',es:'Historia terminada < 5 min'} },
   { id:'comeback',       icon:'↩', name:{fr:'Revenant',       en:'Comeback',        es:'De vuelta'},       desc:{fr:'Reprendre après 7 jours',en:'Resume after 7 days',es:'Retomar tras 7 días'} },
   { id:'choices100',     icon:'🎯', name:{fr:'Décideur',       en:'Decisive',        es:'Decidido'},        desc:{fr:'100 choix effectués',en:'100 choices made',es:'100 elecciones hechas'} },
+  { id:'first_choice',   icon:'🎲', name:{fr:'Premier choix',  en:'First choice',    es:'Primera elección'}, desc:{fr:'Faire votre premier choix',en:'Make your first choice',es:'Hacer tu primera elección'} },
+  { id:'five_stories',   icon:'📗', name:{fr:'Lecteur assidu', en:'Avid reader',     es:'Lector asiduo'},   desc:{fr:'5 histoires terminées',en:'5 stories finished',es:'5 historias terminadas'} },
+  { id:'endings5',       icon:'🎭', name:{fr:'Collectionneur', en:'Collector',       es:'Coleccionista'},   desc:{fr:'5 fins découvertes',en:'5 endings discovered',es:'5 finales descubiertos'} },
+  { id:'endings15',      icon:'💎', name:{fr:'Chasseur de fins',en:'Ending hunter',  es:'Cazador de finales'},desc:{fr:'15 fins découvertes',en:'15 endings discovered',es:'15 finales descubiertos'} },
+  { id:'choices250',     icon:'🧭', name:{fr:'Cartographe',    en:'Pathfinder',      es:'Cartógrafo'},      desc:{fr:'250 choix effectués',en:'250 choices made',es:'250 elecciones hechas'} },
+  { id:'scenes200',      icon:'📜', name:{fr:'Passionné',      en:'Story lover',     es:'Apasionado'},      desc:{fr:'200 scènes lues',en:'200 scenes read',es:'200 escenas leídas'} },
   { id:'scenes500',      icon:'🌟', name:{fr:'Insatiable',     en:'Insatiable',      es:'Insaciable'},      desc:{fr:'500 scènes lues',en:'500 scenes read',es:'500 escenas leídas'} },
+  { id:'hour_played',    icon:'⏳', name:{fr:'Heure d\'aventure',en:'Hour of adventure',es:'Hora de aventura'},desc:{fr:'60 minutes de jeu cumulées',en:'60 minutes of play',es:'60 minutos de juego'} },
+  { id:'kids_heart',     icon:'🧒', name:{fr:'Ami des petits', en:'Kids friend',     es:'Amigo infantil'},  desc:{fr:'Terminer une histoire enfant',en:'Finish a kids story',es:'Terminar una historia infantil'} },
+  { id:'community_voice',icon:'✦', name:{fr:'Voix communauté',en:'Community voice', es:'Voz comunidad'},   desc:{fr:'Terminer une histoire communauté',en:'Finish a community story',es:'Terminar una historia de la comunidad'} },
+  { id:'dlc_explorer',   icon:'🚀', name:{fr:'Explorateur DLC',en:'DLC explorer',    es:'Explorador DLC'},  desc:{fr:'Terminer une histoire de pack payant',en:'Finish a paid pack story',es:'Terminar una historia de pack de pago'} },
+  { id:'curious',        icon:'👀', name:{fr:'Curieux',        en:'Curious',         es:'Curioso'},         desc:{fr:'5 histoires commencées',en:'5 stories started',es:'5 historias comenzadas'} },
   { id:'legend',         icon:'👑', name:{fr:'Légende',        en:'Legend',          es:'Leyenda'},         desc:{fr:'Tous les badges débloqués',en:'All badges unlocked',es:'Todas las insignias desbloqueadas'} },
 ];
 
@@ -431,6 +442,15 @@ function getStoriesProgress() {
 // ══════════════════════════════════════════════
 // BADGES CHECK
 // ══════════════════════════════════════════════
+function hasUnlockedDlcPack() {
+  try {
+    const packs = JSON.parse(localStorage.getItem('sf_unlocked_packs') || '[]');
+    return packs.some(p => p === 'cosmos' || p === 'cinq_lames' || p === 'all' || p === 'creator');
+  } catch (e) {
+    return false;
+  }
+}
+
 function checkBadges(stats) {
   const unlocked = new Set(stats.unlockedBadges || []);
   const newBadges = [];
@@ -445,15 +465,26 @@ function checkBadges(stats) {
   };
 
   check('first_story',   (stats.storiesFinished || 0) >= 1);
+  check('first_choice',  (stats.choicesMade || 0) >= 1);
   check('three_stories', (stats.storiesFinished || 0) >= 3);
+  check('five_stories',  (stats.storiesFinished || 0) >= 5);
   check('ten_stories',   (stats.storiesFinished || 0) >= 10);
+  check('curious',       (stats.storiesStarted || 0) >= 5);
   check('bookmarks5',    (JSON.parse(localStorage.getItem('sf_bookmarks')||'[]')).length >= 5);
   check('three_langs',   (stats.langsPlayed||[]).length >= 3);
   check('choices100',    (stats.choicesMade || 0) >= 100);
+  check('choices250',    (stats.choicesMade || 0) >= 250);
+  check('scenes200',     (stats.scenesRead || 0) >= 200);
   check('scenes500',     (stats.scenesRead || 0) >= 500);
+  check('endings5',      (stats.endingsFound || 0) >= 5);
+  check('endings15',     (stats.endingsFound || 0) >= 15);
+  check('hour_played',   (stats.minutesSpent || 0) >= 60);
   check('fast_reader',   (stats.hadFastRun || false));
   check('night_reader',  (stats.playedAtNight || false));
   check('comeback',      (stats.hadComeBack || false));
+  check('kids_heart',    (stats.hadKidsStory || false));
+  check('community_voice', (stats.hadCommunityStory || false));
+  check('dlc_explorer',  (stats.hadDlcStory || false) || hasUnlockedDlcPack());
   check('all_endings',   (stats.completedAllEndings || false));
   check('legend',        unlocked.size >= BADGES.length - 1);
 
