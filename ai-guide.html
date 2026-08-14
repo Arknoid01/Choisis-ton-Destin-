@@ -624,14 +624,24 @@ const T = {
     searchTip: '<strong>🔍 Recherche & Navigation</strong> — Le bouton loupe cherche une scène par nom. La minimap donne une vue d\'ensemble. Les boutons +/− et ◎ contrôlent le zoom.',
     how: 'Créer avec l\'IA',
     step1Title: 'Décris ton idée à l\'IA', step1Body: 'Ouvre ChatGPT, Claude ou Gemini. Décris l\'univers, les personnages, l\'ambiance. Pas besoin de connaître le format technique.',
-    step2Title: 'Utilise le prompt Fableris', step2Body: 'Copie le prompt ci-dessous et colle-le dans ta conversation avec l\'IA. Il explique le format JSON attendu.',
+    step2Title: 'Utilise le prompt Fableris', step2Body: 'Copie le prompt ci-dessous : remplis d\'abord le bloc « Mon histoire » en haut, ajoute le JSON d\'exemple, puis envoie le tout à l\'IA.',
     step3Title: 'Importe dans l\'éditeur', step3Body: 'L\'IA génère un JSON complet. Ouvre StoryForge, utilise "Importer JSON" dans le menu ⋯.',
     step4Title: 'Affine et envoie', step4Body: 'Retouche les textes, teste l\'aperçu, puis appuie sur « Envoyer en 1 clic » — le JSON part directement.',
     info: '<strong>Conseil :</strong> Fournis d\'abord un JSON existant à l\'IA pour qu\'elle comprenne la structure, puis demande une nouvelle histoire dans le même format.',
     promptSection: 'Le prompt Fableris',
-    promptIntro: 'Copie ce prompt et colle-le dans ta conversation avec l\'IA, suivi de la description de ton histoire.',
+    promptIntro: 'Remplis le bloc « Mon histoire » en haut du prompt, puis copie l\'ensemble (prompt + JSON d\'exemple ci-dessous) dans ta conversation avec l\'IA.',
     promptLabel: 'Prompt à copier',
-    promptText: `Analyse attentivement le JSON fourni.
+    promptText: `══════════════════════════════════════════════════
+▶ MON HISTOIRE (OBLIGATOIRE — à compléter avant d'envoyer)
+══════════════════════════════════════════════════
+
+Décris ton histoire ici : univers, personnages, intrigue, ambiance, type de fins souhaitées.
+
+[Ton texte ici — ne laisse pas ce bloc vide]
+
+══════════════════════════════════════════════════
+
+Analyse attentivement le JSON fourni.
 
 Tu dois comprendre précisément :
 - la structure des scènes,
@@ -733,14 +743,24 @@ Après création du fichier, affiche uniquement le lien vers le fichier génér�
     searchTip: '<strong>🔍 Search & Navigation</strong> — The magnifier searches scenes by name. The minimap gives an overview. +/− and ◎ control zoom.',
     how: 'Create with AI',
     step1Title: 'Describe your idea', step1Body: 'Open ChatGPT, Claude or Gemini. Describe the universe, characters, atmosphere. No need to know the technical format.',
-    step2Title: 'Use the Fableris prompt', step2Body: 'Copy the prompt below and paste it into your AI conversation.',
+    step2Title: 'Use the Fableris prompt', step2Body: 'Copy the prompt below: fill in the « My story » block at the top first, add the example JSON, then send everything to the AI.',
     step3Title: 'Import into editor', step3Body: 'The AI generates a complete JSON. Open StoryForge, use "Import JSON" in the ⋯ menu.',
     step4Title: 'Refine and send', step4Body: 'Edit texts, test preview, then tap « Send in 1 tap » — your JSON goes out directly.',
     info: '<strong>Tip:</strong> First give the AI an existing JSON to understand the structure, then ask for a new story in the same format.',
     promptSection: 'The Fableris Prompt',
-    promptIntro: 'Copy this prompt and paste it into your AI conversation, followed by your story description.',
+    promptIntro: 'Fill in the « My story » block at the top of the prompt, then copy everything (prompt + example JSON below) into your AI conversation.',
     promptLabel: 'Prompt to copy',
-    promptText: `Carefully analyze the provided JSON.
+    promptText: `══════════════════════════════════════════════════
+▶ MY STORY (REQUIRED — fill in before sending)
+══════════════════════════════════════════════════
+
+Describe your story here: setting, characters, plot, atmosphere, desired ending types.
+
+[Your text here — do not leave this block empty]
+
+══════════════════════════════════════════════════
+
+Carefully analyze the provided JSON.
 
 You must understand precisely:
 - scene structure,
@@ -842,14 +862,24 @@ After creating the file, display only the link to the generated file.`,
     searchTip: '<strong>🔍 Búsqueda & Navegación</strong> — La lupa busca escenas por nombre. El minimapa da una vista general. +/− y ◎ controlan el zoom.',
     how: 'Crear con IA',
     step1Title: 'Describe tu idea', step1Body: 'Abre ChatGPT, Claude o Gemini. Describe el universo, los personajes, el ambiente.',
-    step2Title: 'Usa el prompt de Fableris', step2Body: 'Copia el prompt a continuación y pégalo en tu conversación con la IA.',
+    step2Title: 'Usa el prompt de Fableris', step2Body: 'Copia el prompt a continuación: rellena primero el bloque « Mi historia » arriba, añade el JSON de ejemplo y envía todo a la IA.',
     step3Title: 'Importa en el editor', step3Body: 'La IA genera un JSON completo. Abre StoryForge, usa "Importar JSON" en el menú ⋯.',
     step4Title: 'Refina y envía', step4Body: 'Edita los textos, prueba la vista previa y pulsa « Enviar en 1 clic » — el JSON sale directamente.',
     info: '<strong>Consejo:</strong> Primero proporciona a la IA un JSON existente para que comprenda la estructura, luego pide una nueva historia en el mismo formato.',
     promptSection: 'El prompt de Fableris',
-    promptIntro: 'Copia este prompt y pégalo en tu conversación con la IA, seguido de la descripción de tu historia.',
+    promptIntro: 'Rellena el bloque « Mi historia » arriba del prompt, luego copia todo (prompt + JSON de ejemplo abajo) en tu conversación con la IA.',
     promptLabel: 'Prompt para copiar',
-    promptText: `Analiza atentamente el JSON proporcionado.
+    promptText: `══════════════════════════════════════════════════
+▶ MI HISTORIA (OBLIGATORIO — complétalo antes de enviar)
+══════════════════════════════════════════════════
+
+Describe tu historia aquí: universo, personajes, intriga, ambiente, tipo de finales deseados.
+
+[Tu texto aquí — no dejes este bloque vacío]
+
+══════════════════════════════════════════════════
+
+Analiza atentamente el JSON proporcionado.
 
 Debes comprender con precisión:
 - la estructura de las escenas,
