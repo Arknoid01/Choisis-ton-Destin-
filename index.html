@@ -782,31 +782,15 @@ body {
   .menu-tile-icon { width:34px; height:34px; font-size:15px; border-radius:8px; }
   .menu-tile-label { font-size:10px; line-height:1.25; }
   .menu-panel {
-    display:grid;
-    grid-template-columns:1fr 1fr;
+    display:flex;
+    flex-direction:column;
     gap:6px;
     background:transparent;
     border:none;
     overflow:visible;
   }
-  .menu-panel .btn-main {
-    flex-direction:column;
-    align-items:center;
-    justify-content:center;
-    text-align:center;
-    gap:6px;
-    padding:10px 6px;
-    min-height:72px;
-    border:1px solid var(--border);
-    border-radius:10px;
-  }
-  .menu-panel-footer {
-    grid-column:1 / -1;
-    display:flex;
-    flex-direction:column;
-    gap:10px;
-    margin-top:2px;
-  }
+  .menu-panel-footer { display:contents; }
+  .menu-panel .btn-main,
   .menu-panel-footer .btn-main {
     flex-direction:row;
     align-items:center;
@@ -818,7 +802,6 @@ body {
     border:1px solid var(--border);
     border-radius:10px;
   }
-  .menu-panel-footer .btn-main:last-child { border-bottom:1px solid var(--border); }
   #options-box { margin:12px; padding:24px; }
 }
 
@@ -829,7 +812,8 @@ body {
   .divider { display:none; }
   #content-block { gap:10px; }
   .main-title { font-size:clamp(22px, 6.5vw, 30px); }
-  .menu-panel .btn-main { min-height:64px; padding:8px 4px; }
+  .menu-panel .btn-main,
+  .menu-panel-footer .btn-main { padding:10px 12px; }
   .menu-tile-icon { width:30px; height:30px; font-size:14px; }
 }
 </style>
