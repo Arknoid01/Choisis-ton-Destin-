@@ -172,6 +172,12 @@ html,body { height:100%; background:#0d0d0f; color:#e8e0d0; font-family:'Cormora
 .pack-section:not(.collapsed) .pack-toggle { transform:rotate(90deg); }
 .pack-body { display:block; }
 .pack-section.collapsed .pack-body { display:none; }
+
+.pack-reveal-item {
+  opacity:0;
+  animation:fade-up .45s ease both;
+  animation-delay:calc(var(--reveal-i, 0) * 0.07s);
+}
 .pack-icon { font-size:24px; flex-shrink:0; position:relative; }
 .pack-info { flex:1; position:relative; }
 .pack-name {
@@ -352,7 +358,7 @@ html,body { height:100%; background:#0d0d0f; color:#e8e0d0; font-family:'Cormora
 
 /* ── ANIMATIONS ── */
 @keyframes fade-up {
-  from { opacity:0; transform:translateY(10px); }
+  from { opacity:0; transform:translateY(16px); }
   to   { opacity:1; transform:translateY(0); }
 }
 </style>
@@ -566,12 +572,48 @@ function isPackExpanded(packId) {
   return getExpandedPacks().has(packId);
 }
 
-function applyPackCollapse(packId, expanded) {
+function applyPackCollapse(packId, expanded, animateReveal) {
   const el = document.getElementById('pack-' + packId);
   if (!el) return;
   el.classList.toggle('collapsed', !expanded);
   const header = el.querySelector('.pack-header');
   if (header) header.setAttribute('aria-expanded', expanded ? 'true' : 'false');
+  if (expanded && animateReveal !== false) {
+    requestAnimationFrame(() => animatePackReveal(packId));
+  }
+}
+
+function animatePackReveal(packId) {
+  const el = document.getElementById('pack-' + packId);
+  if (!el || el.classList.contains('collapsed')) return;
+
+  const items = [];
+  ['.pack-desc', '.pack-portal-hook', '.stories-list .story-card', '.pack-soon-bar', '.pack-locked-bar']
+    .forEach(sel => el.querySelectorAll('.pack-body ' + sel).forEach(node => items.push(node)));
+  if (!items.length) return;
+
+  items.forEach(node => {
+    node.classList.remove('pack-reveal-item');
+    node.style.removeProperty('--reveal-i');
+  });
+  el.classList.remove('pack-reveal');
+  void el.offsetWidth;
+
+  items.forEach((node, i) => {
+    node.style.setProperty('--reveal-i', i);
+    node.classList.add('pack-reveal-item');
+  });
+  el.classList.add('pack-reveal');
+
+  const duration = 450 + Math.max(0, items.length - 1) * 70 + 50;
+  clearTimeout(el._revealTimer);
+  el._revealTimer = setTimeout(() => {
+    el.classList.remove('pack-reveal');
+    items.forEach(node => {
+      node.classList.remove('pack-reveal-item');
+      node.style.removeProperty('--reveal-i');
+    });
+  }, duration);
 }
 
 function expandPackSection(packId) {
@@ -587,7 +629,7 @@ function togglePackSection(packId) {
   if (expanded) set.add(packId);
   else set.delete(packId);
   setExpandedPacks(set);
-  applyPackCollapse(packId, expanded);
+  applyPackCollapse(packId, expanded, expanded);
 }
 
 function packSectionAttrs(packId) {
@@ -793,7 +835,7 @@ function renderLibrary() {
         <span class="pack-toggle" aria-hidden="true">›</span>
       </div>
       <div class="pack-body">`;
-    html += cfg.desc ? `<div style="font-size:12px;color:var(--text3);padding:0 16px 12px;font-style:italic;opacity:0.7;border:1px solid var(--border);border-top:none;background:var(--bg3)">${cfg.desc[currentLang] || cfg.desc.fr}</div>` : '';
+    html += cfg.desc ? `<div class="pack-desc" style="font-size:12px;color:var(--text3);padding:0 16px 12px;font-style:italic;opacity:0.7;border:1px solid var(--border);border-top:none;background:var(--bg3)">${cfg.desc[currentLang] || cfg.desc.fr}</div>` : '';
 
     const hasPortals = stories.some(g => g.portal === true);
     if (!cfg.comingSoon && !isUnlocked && hasPortals) {
