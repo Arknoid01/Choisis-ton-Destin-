@@ -762,12 +762,12 @@ body {
 /* ── MOBILE ── */
 @media (max-width:480px) {
   #shell {
-    padding-top:calc(52px + var(--android-safe-area-inset-top, 0px));
+    padding-top:calc(44px + var(--android-safe-area-inset-top, 0px));
     padding-left:14px;
     padding-right:14px;
-    padding-bottom:calc(44px + env(safe-area-inset-bottom, 0px));
+    padding-bottom:calc(56px + env(safe-area-inset-bottom, 0px));
   }
-  #content-block { gap:14px; padding:16px 0 12px; margin-top:8px; }
+  #content-block { gap:14px; padding:8px 0 20px; margin-top:0; }
   .ornament { margin-bottom:4px; }
   .ornament svg { width:90px; height:16px; }
   .eyebrow { font-size:10px; letter-spacing:3px; margin-bottom:6px; }
@@ -810,7 +810,7 @@ body {
   .ornament { display:none; }
   .subtitle { display:none; }
   .divider { display:none; }
-  #content-block { gap:10px; }
+  #content-block { gap:10px; padding-bottom:24px; }
   .main-title { font-size:clamp(22px, 6.5vw, 30px); }
   .menu-panel .btn-main,
   .menu-panel-footer .btn-main { padding:10px 12px; }
