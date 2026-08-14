@@ -514,6 +514,15 @@ let allGames = [];
 // ══════════════════════════════════════════════
 // LOAD
 // ══════════════════════════════════════════════
+function scrollToPackHash() {
+  const hash = location.hash;
+  if (!hash || !hash.startsWith('#pack-')) return;
+  requestAnimationFrame(() => {
+    const el = document.querySelector(hash);
+    if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
+}
+
 async function loadGames() {
   try {
     const r = await fetch('games.json');
@@ -531,6 +540,7 @@ async function loadGames() {
   }
   try {
     renderLibrary();
+    scrollToPackHash();
   } catch(e) {
     console.error('renderLibrary error:', e);
     document.getElementById('content').innerHTML =
@@ -694,7 +704,7 @@ function renderLibrary() {
           ? `<strong>${count}</strong> stor${count > 1 ? 'ies' : 'y'}`
           : `<strong>${count}</strong> historia${count > 1 ? 's' : ''}`;
 
-    html += `<div class="pack-section" style="--pack-color:${colorVar}">
+    html += `<div class="pack-section" id="pack-${packId}" style="--pack-color:${colorVar}">
       <div class="pack-header">
         <div class="pack-icon">${cfg.icon}</div>
         <div class="pack-info">
