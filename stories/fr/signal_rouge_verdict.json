@@ -49,7 +49,7 @@
       "title": "Les Trous du Récit",
       "location": "POSTE DE COMMANDEMENT — ALETHEIA-9",
       "narrator": "Une enquête avance rarement en ligne droite. Elle avance en comparant ce qui ne colle pas.",
-      "text": "Rhea dit que personne n'a quitté le poste de commandement avant 02h30.\n\nDorian jure être descendu plus tôt, mais sans preuve.\n\nMaya admet avoir caché l'échantillon, mais nie tout lien direct avec la disparition.\n\nORIS, elle, avoue un trou de données à 02h13 — pile quand tout bascule.\n\nAucune version ne tient seule. Chacune en éclaire une autre.",
+      "text": "Rhea affirme avoir maintenu Dorian au poste — alors qu'il jure être resté près de Léo dans le secteur 4.\n\nMaya dit surtout qu'il voulait descendre, pas qu'il y était déjà.\n\nDorian décrit un shunt posé délibérément ; ORIS reconnaît quarante-trois secondes sans données à 02h13.\n\nMaya a caché l'Échantillon 7, qui a réagi au même instant.\n\nLes outils du secteur 4 : abandonnés pour toi, trop rangés pour Rhea.\n\nAucune version ne tient seule. Chacune en éclaire une autre.",
       "isStart": false,
       "isEnd": false,
       "transition": "fade",
@@ -57,6 +57,12 @@
         {
           "text": "Repenser au message de Léo",
           "vers": "reflexion_leo",
+          "effects": [],
+          "clickEffect": "pulse"
+        },
+        {
+          "text": "Recouper les indices physiques",
+          "vers": "synthese_preuves",
           "effects": [],
           "clickEffect": "pulse"
         },
@@ -83,6 +89,12 @@
         {
           "text": "Rendre ton rapport final",
           "vers": "choix_final",
+          "effects": [],
+          "clickEffect": "pulse"
+        },
+        {
+          "text": "Recouper les indices physiques",
+          "vers": "synthese_preuves",
           "effects": [],
           "clickEffect": "pulse"
         },
@@ -127,7 +139,7 @@
       "transition": "fade",
       "choices": [
         {
-          "text": "Conclure à un sabotage humain — le récit de Rhea",
+          "text": "Conclure à une faute de commandement — le récit de Rhea",
           "vers": "fin_rhea",
           "effects": [],
           "clickEffect": "pulse"
@@ -153,7 +165,7 @@
       "title": "Rapport : Sabotage",
       "location": "ALETHEIA-9 — SIX SEMAINES PLUS TARD",
       "narrator": "Croire à une intention, c'est parfois plus rassurant que d'admettre qu'on ne sait pas.",
-      "text": "Ton rapport conclut à un acte délibéré. Le dossier de Dorian Vex est rouvert, ses accès systèmes suspendus le temps d'une enquête approfondie de la Coalition.\n\nRhea reprend son commandement, plus rigide encore qu'avant, comme si la rigueur pouvait enfin réparer ce qu'elle n'a pas réussi à prévenir.\n\nLéo Kanek est officiellement classé disparu, présumé victime d'un acte volontaire d'un tiers.\n\nPersonne, à bord d'Aletheia-9, ne reparle plus jamais de la *« pierre qui brille »*. Sauf, parfois, tard la nuit, quand Maya croit être seule dans son laboratoire.",
+      "text": "Ton rapport conclut à une rupture de protocole et à un rapport dissimulé.\n\nRhea Solys est relevée de son commandement le temps d'une enquête interne de la Coalition.\n\nLe dossier de Dorian Vex est rouvert, non comme saboteur principal, mais comme témoin dont la version contredit la salle de commandement.\n\nLéo Kanek reste officiellement disparu, circonstances non élucidées.\n\nPersonne, à bord d'Aletheia-9, ne reparle plus jamais de la *« pierre qui brille »*. Sauf, parfois, tard la nuit, quand Maya croit être seule dans son laboratoire.",
       "isStart": false,
       "isEnd": true,
       "transition": "fade",
@@ -186,6 +198,26 @@
       "choices": [],
       "x": 650,
       "y": 340
+    },
+    "synthese_preuves": {
+      "id": "synthese_preuves",
+      "title": "Recoupement des Indices",
+      "location": "POSTE DE COMMANDEMENT — ALETHEIA-9",
+      "narrator": "Une enquête avance rarement en ligne droite. Elle avance en comparant ce qui ne colle pas.",
+      "text": "Tu alignes les indices que tu as vus ou entendus :\n\n— une marque circulaire brûlée à 412 °C dans le secteur 4 ;\n— un shunt posé volontairement sur le panneau, selon Dorian ;\n— un résidu cristallin prélevé en secret par Maya sur l'Échantillon 7 ;\n— quarante-trois secondes sans capteurs à 02h13, selon ORIS ;\n— un message enthousiaste de Léo à 01h58, jamais rappelé.\n\nAucune pièce seule n'explique tout. Mais toutes convergent vers le même instant.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Rédiger le rapport final",
+          "vers": "choix_final",
+          "effects": [],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 400,
+      "y": 180
     }
   }
 }

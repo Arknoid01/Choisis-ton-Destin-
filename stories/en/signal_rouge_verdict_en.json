@@ -49,7 +49,7 @@
       "title": "The Gaps in the Story",
       "location": "COMMAND CENTER — ALETHEIA-9",
       "narrator": "An investigation rarely moves in a straight line. It moves by comparing what does not fit.",
-      "text": "Rhea says no one left the command center before 02:30.\n\nDorian swears he went down earlier, but without proof.\n\nMaya admits she hid the sample, but denies any direct link to the disappearance.\n\nORIS, for her part, confesses a data gap at 02:13 — right when everything shifted.\n\nNo version holds alone. Each one illuminates the others.",
+      "text": "Rhea claims she kept Dorian at his post — while he swears he stayed near Léo in sector 4.\n\nMaya mainly says he wanted to go down, not that he was already there.\n\nDorian describes a deliberate shunt; ORIS admits forty-three seconds without sensor data at 02:13.\n\nMaya hid Sample 7, which reacted at the same instant.\n\nThe tools in sector 4: abandoned for you, too neatly arranged for Rhea.\n\nNo version holds alone. Each illuminates the others.",
       "isStart": false,
       "isEnd": false,
       "transition": "fade",
@@ -57,6 +57,12 @@
         {
           "text": "Think back to Léo's message",
           "vers": "reflexion_leo",
+          "effects": [],
+          "clickEffect": "pulse"
+        },
+        {
+          "text": "Cross-check the physical clues",
+          "vers": "synthese_preuves",
           "effects": [],
           "clickEffect": "pulse"
         },
@@ -83,6 +89,12 @@
         {
           "text": "Submit your final report",
           "vers": "choix_final",
+          "effects": [],
+          "clickEffect": "pulse"
+        },
+        {
+          "text": "Cross-check the physical clues",
+          "vers": "synthese_preuves",
           "effects": [],
           "clickEffect": "pulse"
         },
@@ -127,7 +139,7 @@
       "transition": "fade",
       "choices": [
         {
-          "text": "Conclude human sabotage — Rhea's account",
+          "text": "Conclude command failure — Rhea's account",
           "vers": "fin_rhea",
           "effects": [],
           "clickEffect": "pulse"
@@ -153,7 +165,7 @@
       "title": "Report: Sabotage",
       "location": "ALETHEIA-9 — SIX WEEKS LATER",
       "narrator": "Believing in intent is sometimes more reassuring than admitting we do not know.",
-      "text": "Your report concludes deliberate action. Dorian Vex's file is reopened, his system access suspended pending a thorough Coalition investigation.\n\nRhea resumes command, more rigid than ever, as if rigor could finally repair what she failed to prevent.\n\nLéo Kanek is officially listed as missing, presumed victim of a voluntary act by a third party.\n\nNo one aboard Aletheia-9 ever speaks of the *\"stone that glows\"* again. Except, sometimes, late at night, when Maya thinks she is alone in her laboratory.",
+      "text": "Your report concludes a protocol breach and a concealed report.\n\nRhea Solys is relieved of command pending the Coalition's internal inquiry.\n\nDorian Vex's file is reopened, not as the main saboteur, but as a witness whose account contradicts the command room.\n\nLéo Kanek remains officially missing, circumstances unexplained.\n\nNo one aboard Aletheia-9 ever speaks again of the *« shining stone »*. Except, sometimes, late at night, when Maya thinks she is alone in her lab.",
       "isStart": false,
       "isEnd": true,
       "transition": "fade",
@@ -186,6 +198,26 @@
       "choices": [],
       "x": 650,
       "y": 340
+    },
+    "synthese_preuves": {
+      "id": "synthese_preuves",
+      "title": "Cross-Checking the Clues",
+      "location": "POSTE DE COMMANDEMENT — ALETHEIA-9",
+      "narrator": "An investigation rarely moves in a straight line. It moves by comparing what does not fit.",
+      "text": "You align the clues you have seen or heard:\n\n— a circular burn mark at 412 °C in sector 4;\n— a shunt deliberately placed on the panel, according to Dorian;\n— a crystalline residue secretly collected by Maya from Sample 7;\n— forty-three seconds without sensors at 02:13, according to ORIS;\n— an enthusiastic message from Léo at 01:58, never followed up.\n\nNo single piece explains everything. But all converge on the same instant.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Write the final report",
+          "vers": "choix_final",
+          "effects": [],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 400,
+      "y": 180
     }
   }
 }
