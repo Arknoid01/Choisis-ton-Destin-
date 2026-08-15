@@ -876,6 +876,71 @@ html,body { height:100%; overflow:hidden; font-family:'Syne',sans-serif; backgro
 .submit-hint {
   font-size:11px; color:var(--text2); line-height:1.45; margin:4px 0 14px;
 }
+
+#ui-guide-overlay {
+  position:fixed; inset:0; z-index:2200; display:none;
+  align-items:center; justify-content:center;
+  background:rgba(0,0,0,0.78); backdrop-filter:blur(8px); padding:16px;
+}
+#ui-guide-overlay.open { display:flex; }
+#ui-guide-modal {
+  width:100%; max-width:560px; max-height:88vh; overflow-y:auto;
+  background:var(--bg2); border:1px solid var(--border); border-radius:16px; padding:22px;
+}
+#ui-guide-modal h3 {
+  font-family:'Cinzel',serif; font-size:16px; letter-spacing:2px;
+  color:var(--accent3); margin-bottom:8px;
+}
+.ui-guide-intro {
+  font-size:13px; color:var(--text2); margin-bottom:16px; line-height:1.6;
+}
+.ui-guide-section {
+  font-family:'Cinzel',serif; font-size:10px; font-weight:600; letter-spacing:3px;
+  text-transform:uppercase; color:var(--text3); margin:18px 0 10px;
+  display:flex; align-items:center; gap:10px;
+}
+.ui-guide-section::after { content:''; flex:1; height:1px; background:var(--border); }
+.ui-guide-step {
+  background:var(--bg3); border:1px solid var(--border); border-radius:12px;
+  padding:14px; margin-bottom:10px; display:flex; gap:12px; align-items:flex-start;
+}
+.ui-guide-step-icon {
+  width:28px; height:28px; border-radius:8px; flex-shrink:0;
+  background:rgba(109,250,188,0.1); border:1px solid rgba(109,250,188,0.25);
+  color:var(--accent3); font-size:14px; display:flex; align-items:center; justify-content:center;
+}
+.ui-guide-step h4 {
+  font-family:'Cinzel',serif; font-size:13px; font-weight:600; color:var(--text);
+  margin-bottom:4px; letter-spacing:0.5px;
+}
+.ui-guide-step p { font-size:12px; color:var(--text2); line-height:1.6; margin:0; }
+.ui-guide-btn-grid {
+  display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-bottom:10px;
+}
+@media (max-width:520px) { .ui-guide-btn-grid { grid-template-columns:1fr; } }
+.ui-guide-btn-card {
+  background:var(--bg3); border:1px solid var(--border); border-radius:10px; padding:10px 12px;
+}
+.ui-guide-btn-card .icon { font-size:16px; margin-bottom:4px; }
+.ui-guide-btn-card .name {
+  font-family:'Cinzel',serif; font-size:11px; font-weight:600; color:var(--text); margin-bottom:3px;
+}
+.ui-guide-btn-card .desc { font-size:11px; color:var(--text2); line-height:1.45; }
+.ui-guide-info {
+  background:rgba(109,250,188,0.06); border:1px solid rgba(109,250,188,0.18);
+  border-radius:10px; padding:12px 14px; margin-top:8px;
+}
+.ui-guide-info p { font-size:12px; color:#90eec0; line-height:1.55; margin:0; }
+.ui-guide-info strong { color:var(--accent3); }
+.ui-guide-footer {
+  margin-top:16px; padding-top:14px; border-top:1px solid var(--border);
+  display:flex; flex-direction:column; gap:12px;
+}
+.ui-guide-dismiss-row {
+  display:flex; align-items:center; gap:8px; cursor:pointer; user-select:none;
+}
+.ui-guide-dismiss-row input { accent-color:var(--accent); width:15px; height:15px; flex-shrink:0; }
+.ui-guide-dismiss-row span { font-size:12px; color:var(--text2); line-height:1.4; }
 </style>
 
 <script>
@@ -918,6 +983,7 @@ html,body { height:100%; overflow:hidden; font-family:'Syne',sans-serif; backgro
     <button class="topbtn" onclick="exportTXT()">✎ Export TXT</button>
     <button class="topbtn" onclick="exportJSON()">↓ Export JSON</button>
     <button class="topbtn send-btn" onclick="sendStory()">✉ Envoyer</button>
+    <button class="topbtn" id="btn-ui-guide" onclick="openUiGuideModal(true)" title="Guide">💡</button>
   </div>
 
   <div id="creator-banner">
@@ -991,6 +1057,60 @@ html,body { height:100%; overflow:hidden; font-family:'Syne',sans-serif; backgro
     <div class="template-grid" id="template-grid"></div>
     <div class="modal-actions" style="margin-top:14px">
       <button class="topbtn" id="template-close-btn" onclick="closeTemplatesModal()">Fermer</button>
+    </div>
+  </div>
+</div>
+
+<div id="ui-guide-overlay" onclick="handleUiGuideOverlayClick(event)">
+  <div id="ui-guide-modal" onclick="event.stopPropagation()">
+    <h3 id="ui-guide-title">Guide de l'interface</h3>
+    <p class="ui-guide-intro" id="ui-guide-intro"></p>
+
+    <div class="ui-guide-step">
+      <div class="ui-guide-step-icon">🌳</div>
+      <div><h4 id="ui-guide-tuto1-title"></h4><p id="ui-guide-tuto1-body"></p></div>
+    </div>
+    <div class="ui-guide-step">
+      <div class="ui-guide-step-icon">✏</div>
+      <div><h4 id="ui-guide-tuto2-title"></h4><p id="ui-guide-tuto2-body"></p></div>
+    </div>
+    <div class="ui-guide-step">
+      <div class="ui-guide-step-icon">→</div>
+      <div><h4 id="ui-guide-tuto3-title"></h4><p id="ui-guide-tuto3-body"></p></div>
+    </div>
+    <div class="ui-guide-step">
+      <div class="ui-guide-step-icon">⚙</div>
+      <div><h4 id="ui-guide-tuto4-title"></h4><p id="ui-guide-tuto4-body"></p></div>
+    </div>
+    <div class="ui-guide-step">
+      <div class="ui-guide-step-icon">▶</div>
+      <div><h4 id="ui-guide-tuto5-title"></h4><p id="ui-guide-tuto5-body"></p></div>
+    </div>
+
+    <div class="ui-guide-section" id="ui-guide-buttons-section"></div>
+    <p class="ui-guide-intro" id="ui-guide-buttons-intro" style="margin-top:0;margin-bottom:10px"></p>
+    <div class="ui-guide-btn-grid">
+      <div class="ui-guide-btn-card"><div class="icon">⚙</div><div class="name" id="ui-guide-btn1-name"></div><div class="desc" id="ui-guide-btn1-desc"></div></div>
+      <div class="ui-guide-btn-card"><div class="icon">🎨</div><div class="name" id="ui-guide-btn2-name"></div><div class="desc" id="ui-guide-btn2-desc"></div></div>
+      <div class="ui-guide-btn-card"><div class="icon">⊞</div><div class="name" id="ui-guide-btn3-name"></div><div class="desc" id="ui-guide-btn3-desc"></div></div>
+      <div class="ui-guide-btn-card"><div class="icon">▶</div><div class="name" id="ui-guide-btn4-name"></div><div class="desc" id="ui-guide-btn4-desc"></div></div>
+      <div class="ui-guide-btn-card"><div class="icon">↑</div><div class="name" id="ui-guide-btn5-name"></div><div class="desc" id="ui-guide-btn5-desc"></div></div>
+      <div class="ui-guide-btn-card"><div class="icon">↓</div><div class="name" id="ui-guide-btn6-name"></div><div class="desc" id="ui-guide-btn6-desc"></div></div>
+      <div class="ui-guide-btn-card"><div class="icon">✎</div><div class="name" id="ui-guide-btn7-name"></div><div class="desc" id="ui-guide-btn7-desc"></div></div>
+      <div class="ui-guide-btn-card"><div class="icon">✉</div><div class="name" id="ui-guide-btn8-name"></div><div class="desc" id="ui-guide-btn8-desc"></div></div>
+      <div class="ui-guide-btn-card"><div class="icon">🧒</div><div class="name" id="ui-guide-btn9-name"></div><div class="desc" id="ui-guide-btn9-desc"></div></div>
+      <div class="ui-guide-btn-card"><div class="icon">👤</div><div class="name" id="ui-guide-btn10-name"></div><div class="desc" id="ui-guide-btn10-desc"></div></div>
+    </div>
+
+    <div class="ui-guide-info"><p id="ui-guide-health-tip"></p></div>
+    <div class="ui-guide-info" style="margin-top:8px"><p id="ui-guide-search-tip"></p></div>
+
+    <div class="ui-guide-footer">
+      <label class="ui-guide-dismiss-row" for="ui-guide-dismiss">
+        <input type="checkbox" id="ui-guide-dismiss">
+        <span id="ui-guide-dismiss-label">Ne plus afficher ce message</span>
+      </label>
+      <button class="topbtn primary" id="ui-guide-close-btn" onclick="closeUiGuideModal()" type="button">J'ai compris</button>
     </div>
   </div>
 </div>
@@ -1323,7 +1443,28 @@ const EDITOR_I18N = {
     tipClickFx:'Animation jouée sur le bouton quand le joueur tape dessus',
     sceneImmersion:'Immersion de la scène', arrivalTransition:'Transition d\'arrivée', arrivalSound:'Son d\'arrivée', startScene:'Scène de départ', endScene:'Scène finale', choices:'Choix', addChoice:'+ Ajouter un choix', choice:'Choix', choiceText:'Texte du choix', choiceTextPh:'Ex: Accepter le contrat', choiceVar:'Tu peux écrire <code>{{player}}</code> dans un choix.', leadsTo:'Mène vers', noDestination:'— Aucune destination —', clickEffect:'Effet au clic', clickSound:'Son au clic', statEffects:'Effets sur les stats', effect:'+ Effet', noTitle:'Sans titre', choicesCount:'choix', needOneScene:'Au moins une scène requise', defineStats:'Définis d\'abord des stats', invalidFormat:'Format invalide', addLinkedScene:'Créer une scène liée', addLinkedSceneDesc:'Choisis depuis quelle scène et quelle réponse le joueur arrivera sur la nouvelle tuile.', sourceScene:'Scène source', sourceHint:'La nouvelle scène sera reliée depuis cette scène.', sourceChoice:'Réponse source', createNewChoice:'Créer une nouvelle réponse', newChoiceText:'Texte de la nouvelle réponse', newChoiceTextDefault:'Continuer', newSceneName:'Titre de la nouvelle scène', cancel:'Annuler', createScene:'Créer la scène', sceneCreatedLinked:'Scène créée et reliée ✦', sceneCreated:'Scène créée ✦', deletedScene:'Scène supprimée',
     transitions:{fade:'Fondu doux', glitch:'Glitch numérique', scanline:'Scanlines', flash:'Flash rapide', none:'Aucune'}, clicks:{pulse:'Pulse néon', shake:'Secousse', glitch:'Glitch', flash:'Flash', vibrate:'Vibration mobile', none:'Aucun'}, sounds:{none:'Aucun', click_neon:'Clic néon', glitch:'Glitch court', success:'Succès', error:'Erreur'},
-    healthReady:'✓ Prête', healthWarn:'⚠ {n} avert.', healthError:'✕ {n} erreur(s)', healthOk:'Aucun problème détecté', healthNoStart:'Aucune scène de départ définie', healthMultiStart:'{n} scènes de départ', healthEmptyText:'"{t}" — texte vide', healthNoLink:'"{t}" — choix {i} sans destination', healthDeadLink:'"{t}" — destination supprimée', healthNoChoice:'"{t}" — sans choix, non finale', healthStatsNotArray:'stats doit être un tableau (pas un objet)', healthStatNoId:'Stat #{i} sans id valide', healthStatDuplicate:'Stat en double : "{id}"', healthEffectsNotArray:'"{t}" — choix {i} : effects doit être un tableau', healthEffectNoStat:'"{t}" — choix {i} : effect sans champ stat', healthEffectBadStat:'"{t}" — choix {i} : stat "{s}" inexistante (effect)', healthEffectBadVal:'"{t}" — choix {i} : val non numérique pour "{s}"', healthRequiresBadType:'"{t}" — choix {i} : requires doit être un objet', healthRequiresEmpty:'"{t}" — choix {i} : requires vide', healthRequiresNoStat:'"{t}" — choix {i} : requires.stat manquant ou invalide', healthRequiresBadStat:'"{t}" — choix {i} : requires.stat "{s}" inexistante', healthRequiresBadMin:'"{t}" — choix {i} : requires.min doit être un nombre', healthRequiresBadMax:'"{t}" — choix {i} : requires.max doit être un nombre', healthRequiresBadLegacy:'"{t}" — choix {i} : requires["{s}"] doit être un nombre', healthRequiresBadLegacyStat:'"{t}" — choix {i} : requires["{s}"] référence une stat inexistante', searchNoResult:'Aucun résultat', undone:'↩ Annulé', redone:'↪ Rétabli', nodeColor:'🎨 Couleur du nœud', kidsOn:'🧒 Mode enfant activé', kidsOff:'Mode enfant désactivé', playerOn:'👤 Prénom activé', playerOff:'Prénom désactivé', kidsLabel:'Histoire pour enfants', playerLabel:'Demander le prénom', healthTitle:'Santé de l\'histoire'
+    healthReady:'✓ Prête', healthWarn:'⚠ {n} avert.', healthError:'✕ {n} erreur(s)', healthOk:'Aucun problème détecté', healthNoStart:'Aucune scène de départ définie', healthMultiStart:'{n} scènes de départ', healthEmptyText:'"{t}" — texte vide', healthNoLink:'"{t}" — choix {i} sans destination', healthDeadLink:'"{t}" — destination supprimée', healthNoChoice:'"{t}" — sans choix, non finale', healthStatsNotArray:'stats doit être un tableau (pas un objet)', healthStatNoId:'Stat #{i} sans id valide', healthStatDuplicate:'Stat en double : "{id}"', healthEffectsNotArray:'"{t}" — choix {i} : effects doit être un tableau', healthEffectNoStat:'"{t}" — choix {i} : effect sans champ stat', healthEffectBadStat:'"{t}" — choix {i} : stat "{s}" inexistante (effect)', healthEffectBadVal:'"{t}" — choix {i} : val non numérique pour "{s}"', healthRequiresBadType:'"{t}" — choix {i} : requires doit être un objet', healthRequiresEmpty:'"{t}" — choix {i} : requires vide', healthRequiresNoStat:'"{t}" — choix {i} : requires.stat manquant ou invalide', healthRequiresBadStat:'"{t}" — choix {i} : requires.stat "{s}" inexistante', healthRequiresBadMin:'"{t}" — choix {i} : requires.min doit être un nombre', healthRequiresBadMax:'"{t}" — choix {i} : requires.max doit être un nombre', healthRequiresBadLegacy:'"{t}" — choix {i} : requires["{s}"] doit être un nombre', healthRequiresBadLegacyStat:'"{t}" — choix {i} : requires["{s}"] référence une stat inexistante', searchNoResult:'Aucun résultat', undone:'↩ Annulé', redone:'↪ Rétabli', nodeColor:'🎨 Couleur du nœud', kidsOn:'🧒 Mode enfant activé', kidsOff:'Mode enfant désactivé', playerOn:'👤 Prénom activé', playerOff:'Prénom désactivé', kidsLabel:'Histoire pour enfants', playerLabel:'Demander le prénom', healthTitle:'Santé de l\'histoire',
+    uiGuideTitle:'Guide de l\'interface', uiGuideDismiss:'Ne plus afficher ce message', uiGuideClose:'J\'ai compris', uiGuideHelpBtn:'Guide de l\'interface',
+    editorSection:'Éditeur StoryForge — Vue d\'ensemble',
+    editorIntro:'StoryForge est l\'éditeur visuel intégré à Fableris. Il permet de créer des histoires complètes sans toucher au JSON. L\'arbre visuel montre toutes tes scènes et leurs connexions en temps réel.',
+    tuto1Title:'L\'arbre visuel', tuto1Body:'Chaque bulle est une scène. Les flèches montrent les chemins possibles. Les flèches orange pointillées avec 🔒 indiquent des choix conditionnels. La bulle verte est la scène de départ, les bulles rouges sont les fins. Pince pour zoomer, glisse pour naviguer.',
+    tuto2Title:'Éditer une scène', tuto2Body:'Tape sur une scène pour l\'éditer. Tu peux modifier le titre, le lieu (affiché en haut de la scène), le narrateur (texte en italique avant le texte principal), le texte principal, la transition visuelle et l\'illustration emoji. Chaque modification est sauvegardée automatiquement.',
+    tuto3Title:'Les choix', tuto3Body:'Chaque scène peut avoir plusieurs choix. Un choix a un texte, une destination (vers quelle scène il mène) et des effets sur les stats. Tu peux ajouter une condition 🔒 — le choix n\'apparaîtra que si le joueur a assez de points dans une stat. Le bouton Lier permet de connecter visuellement deux scènes.',
+    tuto4Title:'Les stats', tuto4Body:'Définis les stats de ton histoire dans ⚙ Stats — courage, lucidité, chaleur... Chaque stat a un nom, une couleur et une valeur de départ. Les choix peuvent les modifier avec des valeurs positives ou négatives. Elles permettent des fins différentes selon le profil du joueur.',
+    tuto5Title:'Tester l\'histoire', tuto5Body:'Le bouton ▶ Tester ouvre ton histoire dans le vrai moteur de jeu. Tu peux simuler différents niveaux de stats pour vérifier que tes fins conditionnelles fonctionnent correctement. Reviens à l\'éditeur avec le bouton retour.',
+    buttonsSection:'Tous les boutons du menu ⋯', buttonsIntro:'Sur mobile, le menu ⋯ en haut à droite donne accès à toutes les actions. Sur tablette/PC, elles sont visibles directement dans la barre.',
+    btn1Name:'Stats', btn1Desc:'Crée et gère les attributs du joueur. Ils apparaissent en haut pendant le jeu et influencent les choix conditionnels.',
+    btn2Name:'Thème visuel', btn2Desc:'Choisis parmi des thèmes prédéfinis ou personnalise les couleurs de fond, bordures et accents de ton histoire.',
+    btn3Name:'Ordonner l\'arbre', btn3Desc:'Réorganise automatiquement les scènes dans l\'arbre pour qu\'elles soient lisibles et bien espacées.',
+    btn4Name:'Tester l\'histoire', btn4Desc:'Lance ton histoire dans le moteur de jeu pour la tester comme un vrai joueur. Simule les stats pour tester les chemins conditionnels.',
+    btn5Name:'Importer JSON', btn5Desc:'Charge un fichier JSON existant dans l\'éditeur. Utile pour importer une histoire générée par l\'IA ou modifier une histoire existante.',
+    btn6Name:'Exporter JSON', btn6Desc:'Sauvegarde ton histoire en fichier JSON. C\'est le format à envoyer à l\'équipe Fableris pour publication.',
+    btn7Name:'Export TXT', btn7Desc:'Exporte ton histoire en texte brut lisible — pratique pour relire, partager ou corriger le texte dans un éditeur externe.',
+    btn8Name:'Envoyer', btn8Desc:'Envoie directement ton histoire par e-mail à l\'équipe Fableris pour soumission. Le JSON est joint automatiquement.',
+    btn9Name:'Histoire pour enfants', btn9Desc:'Active le mode enfants — l\'histoire apparaîtra dans le Pack Enfants avec une interface adaptée aux plus jeunes.',
+    btn10Name:'Demander le prénom', btn10Desc:'Si activé, le jeu demande son prénom au joueur avant de commencer. Le prénom peut apparaître dans les textes de l\'histoire.',
+    healthTip:'<strong>Badge santé ✓</strong> — En haut à droite de l\'éditeur, ce badge indique l\'état de ton histoire. Vert = tout va bien. Jaune = avertissements. Rouge = erreurs bloquantes (scène sans destination, choix cassé, pas de scène de départ). Clique dessus pour voir la liste détaillée.',
+    searchTip:'<strong>🔍 Recherche & Navigation</strong> — Le bouton loupe en bas à gauche de l\'arbre permet de chercher une scène par nom. La minimap en bas à droite donne une vue d\'ensemble et permet de naviguer rapidement dans les grandes histoires. Les boutons +/− et ◎ contrôlent le zoom et recentrent la vue.'
   },
   en: {
     projectPlaceholder:'Project name', kidsTitle:'Story for children', statsBtn:'⚙ Stats', themeBtn:'🎨 Theme', layoutBtn:'⊞ Arrange', importBtn:'↑ Import', exportTxtBtn:'✎ Export TXT', exportJsonBtn:'↓ Export JSON', testBtn:'Preview test', sendBtn:'✉ Send in 1 tap', templatesBtn:'📋 Templates',
@@ -1358,7 +1499,28 @@ const EDITOR_I18N = {
     tipClickFx:'Animation played on the button when the player taps it',
     sceneImmersion:'Scene immersion', arrivalTransition:'Arrival transition', arrivalSound:'Arrival sound', startScene:'Start scene', endScene:'Final scene', choices:'Choices', addChoice:'+ Add choice', choice:'Choice', choiceText:'Choice text', choiceTextPh:'Ex: Accept the contract', choiceVar:'You can write <code>{{player}}</code> in a choice.', leadsTo:'Leads to', noDestination:'— No destination —', clickEffect:'Click effect', clickSound:'Click sound', statEffects:'Stat effects', effect:'+ Effect', noTitle:'Untitled', choicesCount:'choices', needOneScene:'At least one scene is required', defineStats:'Define stats first', invalidFormat:'Invalid format', addLinkedScene:'Create linked scene', addLinkedSceneDesc:'Choose which scene and which answer will lead the player to the new tile.', sourceScene:'Source scene', sourceHint:'The new scene will be linked from this scene.', sourceChoice:'Source answer', createNewChoice:'Create a new answer', newChoiceText:'New answer text', newChoiceTextDefault:'Continue', newSceneName:'New scene title', cancel:'Cancel', createScene:'Create scene', sceneCreatedLinked:'Scene created and linked ✦', sceneCreated:'Scene created ✦', deletedScene:'Scene deleted',
     transitions:{fade:'Soft fade', glitch:'Digital glitch', scanline:'Scanlines', flash:'Quick flash', none:'None'}, clicks:{pulse:'Neon pulse', shake:'Shake', glitch:'Glitch', flash:'Flash', vibrate:'Mobile vibration', none:'None'}, sounds:{none:'None', click_neon:'Neon click', glitch:'Short glitch', success:'Success', error:'Error'},
-    healthReady:'✓ Ready', healthWarn:'⚠ {n} warn.', healthError:'✕ {n} error(s)', healthOk:'No issues detected', healthNoStart:'No start scene defined', healthMultiStart:'{n} start scenes', healthEmptyText:'"{t}" — empty text', healthNoLink:'"{t}" — choice {i} has no destination', healthDeadLink:'"{t}" — deleted destination', healthNoChoice:'"{t}" — no choices, not marked as end', healthStatsNotArray:'stats must be an array (not an object)', healthStatNoId:'Stat #{i} has no valid id', healthStatDuplicate:'Duplicate stat: "{id}"', healthEffectsNotArray:'"{t}" — choice {i}: effects must be an array', healthEffectNoStat:'"{t}" — choice {i}: effect missing stat field', healthEffectBadStat:'"{t}" — choice {i}: unknown stat "{s}" in effect', healthEffectBadVal:'"{t}" — choice {i}: non-numeric val for "{s}"', healthRequiresBadType:'"{t}" — choice {i}: requires must be an object', healthRequiresEmpty:'"{t}" — choice {i}: empty requires', healthRequiresNoStat:'"{t}" — choice {i}: requires.stat missing or invalid', healthRequiresBadStat:'"{t}" — choice {i}: requires.stat "{s}" does not exist', healthRequiresBadMin:'"{t}" — choice {i}: requires.min must be a number', healthRequiresBadMax:'"{t}" — choice {i}: requires.max must be a number', healthRequiresBadLegacy:'"{t}" — choice {i}: requires["{s}"] must be a number', healthRequiresBadLegacyStat:'"{t}" — choice {i}: requires["{s}"] references unknown stat', searchNoResult:'No results', undone:'↩ Undone', redone:'↪ Redone', nodeColor:'🎨 Node color', kidsOn:'🧒 Kids mode on', kidsOff:'Kids mode off', playerOn:'👤 Name prompt on', playerOff:'Name prompt off', kidsLabel:'Kids story', playerLabel:'Ask for name', healthTitle:'Story health'
+    healthReady:'✓ Ready', healthWarn:'⚠ {n} warn.', healthError:'✕ {n} error(s)', healthOk:'No issues detected', healthNoStart:'No start scene defined', healthMultiStart:'{n} start scenes', healthEmptyText:'"{t}" — empty text', healthNoLink:'"{t}" — choice {i} has no destination', healthDeadLink:'"{t}" — deleted destination', healthNoChoice:'"{t}" — no choices, not marked as end', healthStatsNotArray:'stats must be an array (not an object)', healthStatNoId:'Stat #{i} has no valid id', healthStatDuplicate:'Duplicate stat: "{id}"', healthEffectsNotArray:'"{t}" — choice {i}: effects must be an array', healthEffectNoStat:'"{t}" — choice {i}: effect missing stat field', healthEffectBadStat:'"{t}" — choice {i}: unknown stat "{s}" in effect', healthEffectBadVal:'"{t}" — choice {i}: non-numeric val for "{s}"', healthRequiresBadType:'"{t}" — choice {i}: requires must be an object', healthRequiresEmpty:'"{t}" — choice {i}: empty requires', healthRequiresNoStat:'"{t}" — choice {i}: requires.stat missing or invalid', healthRequiresBadStat:'"{t}" — choice {i}: requires.stat "{s}" does not exist', healthRequiresBadMin:'"{t}" — choice {i}: requires.min must be a number', healthRequiresBadMax:'"{t}" — choice {i}: requires.max must be a number', healthRequiresBadLegacy:'"{t}" — choice {i}: requires["{s}"] must be a number', healthRequiresBadLegacyStat:'"{t}" — choice {i}: requires["{s}"] references unknown stat', searchNoResult:'No results', undone:'↩ Undone', redone:'↪ Redone', nodeColor:'🎨 Node color', kidsOn:'🧒 Kids mode on', kidsOff:'Kids mode off', playerOn:'👤 Name prompt on', playerOff:'Name prompt off', kidsLabel:'Kids story', playerLabel:'Ask for name', healthTitle:'Story health',
+    uiGuideTitle:'Interface guide', uiGuideDismiss:'Don\'t show this again', uiGuideClose:'Got it', uiGuideHelpBtn:'Interface guide',
+    editorSection:'StoryForge Editor — Overview',
+    editorIntro:'StoryForge is the built-in visual editor. Create complete stories without touching JSON. The visual tree shows all your scenes and their connections in real time.',
+    tuto1Title:'The visual tree', tuto1Body:'Each bubble is a scene. Arrows show possible paths. Orange dashed arrows with 🔒 indicate conditional choices. Green bubble = start, red bubbles = endings. Pinch to zoom, drag to navigate.',
+    tuto2Title:'Editing a scene', tuto2Body:'Tap a scene to edit — title, location (shown at the top of the scene), narrator (italic text before the main text), main text, visual transition and emoji illustration. Every change is saved automatically.',
+    tuto3Title:'Choices', tuto3Body:'Each scene can have multiple choices with text, destination and stat effects. Add a 🔒 condition so a choice only appears when the player has enough points. The Link button connects two scenes visually.',
+    tuto4Title:'Stats', tuto4Body:'Define your story stats in ⚙ Stats — courage, lucidity, warmth... Each stat has a name, color and starting value. Choices can modify them positively or negatively. They enable different endings based on player profile.',
+    tuto5Title:'Test the story', tuto5Body:'The ▶ Test button opens your story in the real game engine. Simulate different stat levels to verify conditional endings work correctly. Return to the editor with the back button.',
+    buttonsSection:'All buttons in the ⋯ menu', buttonsIntro:'On mobile, the ⋯ menu at the top right gives access to all actions. On tablet/PC, they are visible directly in the bar.',
+    btn1Name:'Stats', btn1Desc:'Create and manage player attributes. They appear at the top during play and influence conditional choices.',
+    btn2Name:'Visual theme', btn2Desc:'Choose from preset themes or customize background, border and accent colors for your story.',
+    btn3Name:'Arrange tree', btn3Desc:'Automatically reorganizes scenes in the tree so they are readable and well spaced.',
+    btn4Name:'Test story', btn4Desc:'Launch your story in the game engine to test it like a real player. Simulate stats to test conditional paths.',
+    btn5Name:'Import JSON', btn5Desc:'Load an existing JSON file into the editor — useful for AI-generated stories or editing existing ones.',
+    btn6Name:'Export JSON', btn6Desc:'Save your story as a JSON file — the format to send to the Fableris team for publication.',
+    btn7Name:'Export TXT', btn7Desc:'Export your story as plain readable text — handy for proofreading or editing in an external editor.',
+    btn8Name:'Send', btn8Desc:'Send your story directly by email to the Fableris team for submission. JSON is attached automatically.',
+    btn9Name:'Kids story', btn9Desc:'Enable kids mode — the story appears in the Kids Pack with an interface adapted for younger players.',
+    btn10Name:'Ask for name', btn10Desc:'When enabled, the game asks the player their name before starting. The name can appear in story texts.',
+    healthTip:'<strong>Health badge ✓</strong> — At the top right of the editor, this badge shows your story status. Green = all good. Yellow = warnings. Red = blocking errors (missing destination, broken choice, no start scene). Click to see the detailed list.',
+    searchTip:'<strong>🔍 Search & Navigation</strong> — The magnifier at the bottom left of the tree searches scenes by name. The minimap at the bottom right gives an overview and quick navigation in large stories. +/− and ◎ control zoom and recenter the view.'
   },
   es: {
     projectPlaceholder:'Nombre del proyecto', kidsTitle:'Historia para niños', statsBtn:'⚙ Stats', themeBtn:'🎨 Tema', layoutBtn:'⊞ Ordenar', importBtn:'↑ Importar', exportTxtBtn:'✎ Exportar TXT', exportJsonBtn:'↓ Exportar JSON', testBtn:'Vista previa', sendBtn:'✉ Enviar en 1 clic', templatesBtn:'📋 Plantillas',
@@ -1393,7 +1555,28 @@ const EDITOR_I18N = {
     tipClickFx:'Animación en el botón cuando el jugador lo toca',
     sceneImmersion:'Inmersión de la escena', arrivalTransition:'Transición de llegada', arrivalSound:'Sonido de llegada', startScene:'Escena inicial', endScene:'Escena final', choices:'Elecciones', addChoice:'+ Añadir elección', choice:'Elección', choiceText:'Texto de la elección', choiceTextPh:'Ej: Aceptar el contrato', choiceVar:'Puedes escribir <code>{{player}}</code> en una elección.', leadsTo:'Lleva a', noDestination:'— Sin destino —', clickEffect:'Efecto al tocar', clickSound:'Sonido al tocar', statEffects:'Efectos en stats', effect:'+ Efecto', noTitle:'Sin título', choicesCount:'elecciones', needOneScene:'Se requiere al menos una escena', defineStats:'Define stats primero', invalidFormat:'Formato inválido', addLinkedScene:'Crear escena vinculada', addLinkedSceneDesc:'Elige desde qué escena y qué respuesta llevará al jugador a la nueva tarjeta.', sourceScene:'Escena de origen', sourceHint:'La nueva escena se vinculará desde esta escena.', sourceChoice:'Respuesta de origen', createNewChoice:'Crear una nueva respuesta', newChoiceText:'Texto de la nueva respuesta', newChoiceTextDefault:'Continuar', newSceneName:'Título de la nueva escena', cancel:'Cancelar', createScene:'Crear escena', sceneCreatedLinked:'Escena creada y vinculada ✦', sceneCreated:'Escena creada ✦', deletedScene:'Escena eliminada',
     transitions:{fade:'Fundido suave', glitch:'Glitch digital', scanline:'Scanlines', flash:'Flash rápido', none:'Ninguna'}, clicks:{pulse:'Pulso neón', shake:'Sacudida', glitch:'Glitch', flash:'Flash', vibrate:'Vibración móvil', none:'Ninguno'}, sounds:{none:'Ninguno', click_neon:'Clic neón', glitch:'Glitch corto', success:'Éxito', error:'Error'},
-    healthReady:'✓ Lista', healthWarn:'⚠ {n} advert.', healthError:'✕ {n} error(s)', healthOk:'Sin problemas detectados', healthNoStart:'Sin escena de inicio definida', healthMultiStart:'{n} escenas de inicio', healthEmptyText:'"{t}" — texto vacío', healthNoLink:'"{t}" — elección {i} sin destino', healthDeadLink:'"{t}" — destino eliminado', healthNoChoice:'"{t}" — sin elecciones, no es final', healthStatsNotArray:'stats debe ser un array (no un objeto)', healthStatNoId:'Stat #{i} sin id válido', healthStatDuplicate:'Stat duplicada: "{id}"', healthEffectsNotArray:'"{t}" — elección {i}: effects debe ser un array', healthEffectNoStat:'"{t}" — elección {i}: effect sin campo stat', healthEffectBadStat:'"{t}" — elección {i}: stat "{s}" inexistente (effect)', healthEffectBadVal:'"{t}" — elección {i}: val no numérico para "{s}"', healthRequiresBadType:'"{t}" — elección {i}: requires debe ser un objeto', healthRequiresEmpty:'"{t}" — elección {i}: requires vacío', healthRequiresNoStat:'"{t}" — elección {i}: requires.stat ausente o inválido', healthRequiresBadStat:'"{t}" — elección {i}: requires.stat "{s}" inexistente', healthRequiresBadMin:'"{t}" — elección {i}: requires.min debe ser un número', healthRequiresBadMax:'"{t}" — elección {i}: requires.max debe ser un número', healthRequiresBadLegacy:'"{t}" — elección {i}: requires["{s}"] debe ser un número', healthRequiresBadLegacyStat:'"{t}" — elección {i}: requires["{s}"] referencia una stat inexistente', searchNoResult:'Sin resultados', undone:'↩ Deshecho', redone:'↪ Rehecho', nodeColor:'🎨 Color del nodo', kidsOn:'🧒 Modo infantil activado', kidsOff:'Modo infantil desactivado', playerOn:'👤 Nombre activado', playerOff:'Nombre desactivado', kidsLabel:'Historia para niños', playerLabel:'Pedir nombre', healthTitle:'Salud de la historia'
+    healthReady:'✓ Lista', healthWarn:'⚠ {n} advert.', healthError:'✕ {n} error(s)', healthOk:'Sin problemas detectados', healthNoStart:'Sin escena de inicio definida', healthMultiStart:'{n} escenas de inicio', healthEmptyText:'"{t}" — texto vacío', healthNoLink:'"{t}" — elección {i} sin destino', healthDeadLink:'"{t}" — destino eliminado', healthNoChoice:'"{t}" — sin elecciones, no es final', healthStatsNotArray:'stats debe ser un array (no un objeto)', healthStatNoId:'Stat #{i} sin id válido', healthStatDuplicate:'Stat duplicada: "{id}"', healthEffectsNotArray:'"{t}" — elección {i}: effects debe ser un array', healthEffectNoStat:'"{t}" — elección {i}: effect sin campo stat', healthEffectBadStat:'"{t}" — elección {i}: stat "{s}" inexistente (effect)', healthEffectBadVal:'"{t}" — elección {i}: val no numérico para "{s}"', healthRequiresBadType:'"{t}" — elección {i}: requires debe ser un objeto', healthRequiresEmpty:'"{t}" — elección {i}: requires vacío', healthRequiresNoStat:'"{t}" — elección {i}: requires.stat ausente o inválido', healthRequiresBadStat:'"{t}" — elección {i}: requires.stat "{s}" inexistente', healthRequiresBadMin:'"{t}" — elección {i}: requires.min debe ser un número', healthRequiresBadMax:'"{t}" — elección {i}: requires.max debe ser un número', healthRequiresBadLegacy:'"{t}" — elección {i}: requires["{s}"] debe ser un número', healthRequiresBadLegacyStat:'"{t}" — elección {i}: requires["{s}"] referencia una stat inexistente', searchNoResult:'Sin resultados', undone:'↩ Deshecho', redone:'↪ Rehecho', nodeColor:'🎨 Color del nodo', kidsOn:'🧒 Modo infantil activado', kidsOff:'Modo infantil desactivado', playerOn:'👤 Nombre activado', playerOff:'Nombre desactivado', kidsLabel:'Historia para niños', playerLabel:'Pedir nombre', healthTitle:'Salud de la historia',
+    uiGuideTitle:'Guía de la interfaz', uiGuideDismiss:'No volver a mostrar este mensaje', uiGuideClose:'Entendido', uiGuideHelpBtn:'Guía de la interfaz',
+    editorSection:'Editor StoryForge — Vista general',
+    editorIntro:'StoryForge es el editor visual integrado. Permite crear historias completas sin tocar el JSON. El árbol visual muestra todas tus escenas y sus conexiones en tiempo real.',
+    tuto1Title:'El árbol visual', tuto1Body:'Cada burbuja es una escena. Las flechas muestran los caminos posibles. Las flechas naranjas punteadas con 🔒 indican elecciones condicionales. La burbuja verde es el inicio, las rojas son finales. Pellizca para hacer zoom, desliza para navegar.',
+    tuto2Title:'Editar una escena', tuto2Body:'Toca una escena para editarla — título, lugar (mostrado arriba de la escena), narrador (texto en cursiva antes del texto principal), texto principal, transición visual e ilustración emoji. Cada cambio se guarda automáticamente.',
+    tuto3Title:'Las elecciones', tuto3Body:'Cada escena puede tener varias elecciones con texto, destino y efectos en stats. Añade una condición 🔒 para que solo aparezca con suficientes puntos. El botón Vincular conecta dos escenas visualmente.',
+    tuto4Title:'Las estadísticas', tuto4Body:'Define las stats de tu historia en ⚙ Stats — coraje, lucidez, calidez... Cada stat tiene nombre, color y valor inicial. Las elecciones pueden modificarlas positiva o negativamente. Permiten finales diferentes según el perfil del jugador.',
+    tuto5Title:'Probar la historia', tuto5Body:'El botón ▶ Probar abre tu historia en el motor de juego real. Simula distintos niveles de stats para verificar que los finales condicionales funcionan. Vuelve al editor con el botón atrás.',
+    buttonsSection:'Todos los botones del menú ⋯', buttonsIntro:'En móvil, el menú ⋯ arriba a la derecha da acceso a todas las acciones. En tableta/PC están visibles directamente en la barra.',
+    btn1Name:'Stats', btn1Desc:'Crea y gestiona los atributos del jugador. Aparecen arriba durante el juego e influyen en las elecciones condicionales.',
+    btn2Name:'Tema visual', btn2Desc:'Elige entre temas predefinidos o personaliza colores de fondo, bordes y acentos de tu historia.',
+    btn3Name:'Ordenar árbol', btn3Desc:'Reorganiza automáticamente las escenas en el árbol para que sean legibles y estén bien espaciadas.',
+    btn4Name:'Probar historia', btn4Desc:'Lanza tu historia en el motor de juego para probarla como un jugador real. Simula stats para probar caminos condicionales.',
+    btn5Name:'Importar JSON', btn5Desc:'Carga un archivo JSON existente en el editor — útil para historias generadas por IA o existentes.',
+    btn6Name:'Exportar JSON', btn6Desc:'Guarda tu historia como archivo JSON — el formato para enviar al equipo Fableris para publicación.',
+    btn7Name:'Export TXT', btn7Desc:'Exporta tu historia como texto plano legible — práctico para revisar o corregir en un editor externo.',
+    btn8Name:'Enviar', btn8Desc:'Envía directamente tu historia por email al equipo Fableris para envío. El JSON se adjunta automáticamente.',
+    btn9Name:'Historia infantil', btn9Desc:'Activa el modo infantil — la historia aparecerá en el Pack Infantil con una interfaz adaptada a los más jóvenes.',
+    btn10Name:'Pedir nombre', btn10Desc:'Si está activado, el juego pide el nombre del jugador antes de empezar. Puede aparecer en los textos de la historia.',
+    healthTip:'<strong>Badge de salud ✓</strong> — Arriba a la derecha del editor, este badge indica el estado de tu historia. Verde = todo bien. Amarillo = advertencias. Rojo = errores bloqueantes (destino ausente, elección rota, sin escena de inicio). Haz clic para ver la lista detallada.',
+    searchTip:'<strong>🔍 Búsqueda & Navegación</strong> — La lupa abajo a la izquierda del árbol busca escenas por nombre. El minimapa abajo a la derecha da una vista general y permite navegar rápido en historias grandes. +/− y ◎ controlan el zoom y recentran la vista.'
   }
 };
 function getEditorLang() {
@@ -1495,6 +1678,65 @@ function applyEditorLanguage() {
   byId('submit-copy-all-btn', et('sendCopyAll'));
   byId('submit-done-close-btn', et('close'));
   renderTemplateCards();
+  applyUiGuideTexts();
+}
+
+const UI_GUIDE_DISMISS_KEY = 'sf_editor_ui_guide_dismissed';
+
+function isUiGuideDismissed() {
+  try { return localStorage.getItem(UI_GUIDE_DISMISS_KEY) === '1'; } catch (e) { return false; }
+}
+
+function applyUiGuideTexts() {
+  const set = (id, key, html) => {
+    const el = document.getElementById(id);
+    if (!el) return;
+    if (html) el.innerHTML = et(key);
+    else el.textContent = et(key);
+  };
+  set('ui-guide-title', 'uiGuideTitle');
+  set('ui-guide-intro', 'editorIntro');
+  for (let i = 1; i <= 5; i++) {
+    set(`ui-guide-tuto${i}-title`, `tuto${i}Title`);
+    set(`ui-guide-tuto${i}-body`, `tuto${i}Body`);
+  }
+  set('ui-guide-buttons-section', 'buttonsSection');
+  set('ui-guide-buttons-intro', 'buttonsIntro');
+  for (let i = 1; i <= 10; i++) {
+    set(`ui-guide-btn${i}-name`, `btn${i}Name`);
+    set(`ui-guide-btn${i}-desc`, `btn${i}Desc`);
+  }
+  set('ui-guide-health-tip', 'healthTip', true);
+  set('ui-guide-search-tip', 'searchTip', true);
+  set('ui-guide-dismiss-label', 'uiGuideDismiss');
+  set('ui-guide-close-btn', 'uiGuideClose');
+  const helpBtn = document.getElementById('btn-ui-guide');
+  if (helpBtn) helpBtn.title = et('uiGuideHelpBtn');
+}
+
+function openUiGuideModal(force) {
+  applyUiGuideTexts();
+  const dismiss = document.getElementById('ui-guide-dismiss');
+  if (dismiss) dismiss.checked = !!force && isUiGuideDismissed();
+  document.getElementById('ui-guide-overlay')?.classList.add('open');
+}
+
+function closeUiGuideModal() {
+  const dismiss = document.getElementById('ui-guide-dismiss');
+  try {
+    if (dismiss?.checked) localStorage.setItem(UI_GUIDE_DISMISS_KEY, '1');
+    else localStorage.removeItem(UI_GUIDE_DISMISS_KEY);
+  } catch (e) {}
+  document.getElementById('ui-guide-overlay')?.classList.remove('open');
+}
+
+function handleUiGuideOverlayClick(e) {
+  if (e.target?.id === 'ui-guide-overlay') closeUiGuideModal();
+}
+
+function maybeShowUiGuideOnLoad() {
+  if (isUiGuideDismissed()) return;
+  setTimeout(() => openUiGuideModal(false), 350);
 }
 
 // ══════════════════════════════════════════════
@@ -3919,6 +4161,7 @@ selectScene = function(id) {
   initTemplateGrid();
   if (window.innerWidth <= 700) { zoom = 0.6; pan = { x: 10, y: 10 }; }
   render();
+  maybeShowUiGuideOnLoad();
 })();
 </script>
 </body>
