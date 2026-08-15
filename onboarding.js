@@ -665,6 +665,7 @@ window.SFOnboarding = (function () {
     ['sf_lang_chosen', 'sf_demo_shown', 'sf_tuto_shown', 'sf_pin_setup_done'].forEach(k => {
       try { localStorage.removeItem(k); } catch (e) {}
     });
+    if (window.SFShared?.resetGameHints) SFShared.resetGameHints();
     _finished = false;
     next();
   }

@@ -63,6 +63,14 @@ html,body { height:100%; background:#0d0d0f; color:#e8e0d0; font-family:'Cormora
   flex-shrink:0;transition:all .15s;
 }
 #btn-community:hover { border-color:var(--gold3);color:var(--gold); }
+#btn-options {
+  width:36px;height:36px;border-radius:8px;
+  border:1px solid var(--border);background:none;
+  color:var(--dim);font-size:16px;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+  flex-shrink:0;transition:all .15s;text-decoration:none;
+}
+#btn-options:hover { border-color:var(--gold3);color:var(--gold); }
 
 #billing-diag-overlay {
   display:none; position:fixed; inset:0; z-index:950;
@@ -543,6 +551,7 @@ html,body { height:100%; background:#0d0d0f; color:#e8e0d0; font-family:'Cormora
 <div id="topbar">
   <a href="index.html" id="btn-back">←</a>
   <div class="topbar-title" id="txt-library">Bibliothèque</div>
+  <a href="index.html?open=options" id="btn-options" title="Options">⚙</a>
   <button type="button" id="btn-community" onclick="SFCommunity.open()" title="Communauté">🏆</button>
 </div>
 
@@ -1685,6 +1694,10 @@ if (window.SFOnboarding) {
       const commBtn = document.getElementById('btn-community');
       if (commBtn) {
         commBtn.title = { fr:'Communauté', en:'Community', es:'Comunidad' }[lang] || 'Communauté';
+      }
+      const optBtn = document.getElementById('btn-options');
+      if (optBtn) {
+        optBtn.title = { fr:'Options', en:'Options', es:'Opciones' }[lang] || 'Options';
       }
     }
   });

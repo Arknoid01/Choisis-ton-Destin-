@@ -869,6 +869,35 @@ body {
 }
 .immersive-hint-btn:active { transform:scale(0.98); }
 
+/* Mini-tuto marque-page (FAB) */
+#fab-hint {
+  position:fixed; inset:0; z-index:211;
+  display:none; pointer-events:none;
+}
+#fab-hint.show { display:block; pointer-events:all; }
+.fab-hint-ring {
+  position:fixed;
+  bottom:calc(13px + env(safe-area-inset-bottom, 0px)); right:13px;
+  width:54px; height:54px; border-radius:50%;
+  border:2px solid var(--accent);
+  box-shadow:0 0 0 9999px rgba(0,0,0,0.72);
+  animation:hint-ring-pulse 1.5s ease infinite;
+  pointer-events:none;
+}
+.fab-hint-card {
+  top:auto; left:auto;
+  bottom:calc(82px + env(safe-area-inset-bottom, 0px)); right:16px;
+  width:min(280px, calc(100vw - 32px));
+}
+#fab-wrap.hint-highlight {
+  opacity:1 !important; pointer-events:all !important;
+  transform:none !important; z-index:212;
+}
+#fab-main.hint-highlight {
+  border-color:var(--accent);
+  animation:hint-dot-pulse 1.2s ease-in-out infinite;
+}
+
 @keyframes dot-breathe {
   0%,100% { box-shadow: 0 0 0 0 rgba(124,109,250,0.4); }
   50%      { box-shadow: 0 0 0 5px rgba(124,109,250,0); }
@@ -984,6 +1013,16 @@ body {
     <h3 id="immersive-hint-title"></h3>
     <p id="immersive-hint-body"></p>
     <button type="button" class="immersive-hint-btn" id="immersive-hint-btn"></button>
+  </div>
+</div>
+
+<!-- MINI-TUTO PREMIER PASSAGE (marque-page) -->
+<div id="fab-hint" aria-hidden="true">
+  <div class="fab-hint-ring" aria-hidden="true"></div>
+  <div class="immersive-hint-card fab-hint-card" role="dialog" aria-labelledby="fab-hint-title">
+    <h3 id="fab-hint-title"></h3>
+    <p id="fab-hint-body"></p>
+    <button type="button" class="immersive-hint-btn" id="fab-hint-btn"></button>
   </div>
 </div>
 
@@ -1593,6 +1632,9 @@ const GAME_I18N = {
     immersiveHintBtn: 'Compris',
     immersiveHintDotAria: 'Afficher l\'interface et le menu',
     immersiveDotTitle: 'Afficher l\'interface',
+    fabHintTitle: 'Sauvegarder ta progression',
+    fabHintBody: 'Tape sur <strong>🔖</strong> pour poser un marque-page à cet endroit de l\'histoire.',
+    fabHintBtn: 'Compris',
     visitedScene: 'scène visitée',
     visitedScenes: 'scènes visitées',
     endRestart: 'Recommencer',
@@ -1631,6 +1673,9 @@ const GAME_I18N = {
     immersiveHintBtn: 'Got it',
     immersiveHintDotAria: 'Show interface and menu',
     immersiveDotTitle: 'Show interface',
+    fabHintTitle: 'Save your progress',
+    fabHintBody: 'Tap <strong>🔖</strong> to bookmark this spot in the story.',
+    fabHintBtn: 'Got it',
     visitedScene: 'scene visited',
     visitedScenes: 'scenes visited',
     endRestart: 'Restart',
@@ -1669,6 +1714,9 @@ const GAME_I18N = {
     immersiveHintBtn: 'Entendido',
     immersiveHintDotAria: 'Mostrar interfaz y menú',
     immersiveDotTitle: 'Mostrar interfaz',
+    fabHintTitle: 'Guardar tu progreso',
+    fabHintBody: 'Toca <strong>🔖</strong> para dejar un marcador en este punto de la historia.',
+    fabHintBtn: 'Entendido',
     visitedScene: 'escena visitada',
     visitedScenes: 'escenas visitadas',
     endRestart: 'Reiniciar',
@@ -1712,10 +1760,13 @@ function applyGameUI() {
   const dot = document.getElementById('immersive-dot');
   if (dot) dot.setAttribute('title', gt('immersiveDotTitle'));
   applyImmersiveHintUI();
+  applyFabHintUI();
 }
 
 const IMMERSIVE_HINT_KEY = 'sf_game_immersive_hint_shown';
+const FAB_HINT_KEY = 'sf_game_fab_hint_shown';
 let _immersiveHintVisible = false;
+let _fabHintVisible = false;
 
 function immersiveHintSeen() {
   try { return localStorage.getItem(IMMERSIVE_HINT_KEY) === '1'; } catch (e) { return true; }
@@ -1742,7 +1793,60 @@ function dismissImmersiveHint() {
   }
   document.getElementById('immersive-dot')?.classList.remove('hint-highlight');
   try { localStorage.setItem(IMMERSIVE_HINT_KEY, '1'); } catch (e) {}
+  if (!uiVisible) maybeShowFabHint();
 }
+
+function fabHintSeen() {
+  try { return localStorage.getItem(FAB_HINT_KEY) === '1'; } catch (e) { return true; }
+}
+
+function applyFabHintUI() {
+  const title = document.getElementById('fab-hint-title');
+  const body = document.getElementById('fab-hint-body');
+  const btn = document.getElementById('fab-hint-btn');
+  if (title) title.textContent = gt('fabHintTitle');
+  if (body) body.innerHTML = gt('fabHintBody');
+  if (btn) btn.textContent = gt('fabHintBtn');
+}
+
+function dismissFabHint() {
+  if (!_fabHintVisible) return;
+  _fabHintVisible = false;
+  const hint = document.getElementById('fab-hint');
+  if (hint) {
+    hint.classList.remove('show');
+    hint.setAttribute('aria-hidden', 'true');
+  }
+  document.getElementById('fab-wrap')?.classList.remove('hint-highlight');
+  document.getElementById('fab-main')?.classList.remove('hint-highlight');
+  if (!uiVisible) document.getElementById('fab-wrap')?.classList.add('ui-hidden');
+  try { localStorage.setItem(FAB_HINT_KEY, '1'); } catch (e) {}
+}
+
+function canShowFabHint() {
+  if (fabHintSeen() || _fabHintVisible || _immersiveHintVisible) return false;
+  if (!immersiveHintSeen()) return false;
+  if (!story || !currentId || uiVisible) return false;
+  const loading = document.getElementById('loading');
+  if (loading && loading.style.display !== 'none' && !loading.classList.contains('fade')) return false;
+  const nameOv = document.getElementById('name-overlay');
+  if (nameOv && nameOv.style.display === 'flex' && !nameOv.classList.contains('hide')) return false;
+  if (document.getElementById('menu-overlay')?.classList.contains('open')) return false;
+  return true;
+}
+
+function maybeShowFabHint() {
+  if (!canShowFabHint()) return;
+  _fabHintVisible = true;
+  applyFabHintUI();
+  document.getElementById('fab-wrap')?.classList.remove('ui-hidden');
+  document.getElementById('fab-wrap')?.classList.add('hint-highlight');
+  document.getElementById('fab-main')?.classList.add('hint-highlight');
+  document.getElementById('fab-hint')?.classList.add('show');
+  document.getElementById('fab-hint')?.setAttribute('aria-hidden', 'false');
+}
+
+document.getElementById('fab-hint-btn')?.addEventListener('click', dismissFabHint);
 
 function canShowImmersiveHint() {
   if (immersiveHintSeen() || _immersiveHintVisible) return false;
@@ -2311,15 +2415,17 @@ function hideUI() {
   uiVisible = false;
   document.getElementById('topbar')?.classList.add('ui-hidden');
   document.getElementById('stats-bar')?.classList.add('ui-hidden');
-  document.getElementById('fab-wrap')?.classList.add('ui-hidden');
+  if (!_fabHintVisible) document.getElementById('fab-wrap')?.classList.add('ui-hidden');
   document.getElementById('progress-bar')?.classList.add('ui-hidden');
   document.getElementById('immersive-dot')?.classList.remove('ui-visible');
   document.getElementById('scroll-area')?.classList.add('ui-hidden');
   document.body.style.paddingTop = 'var(--safe-top)';
   maybeShowImmersiveHint();
+  if (immersiveHintSeen() && !_immersiveHintVisible) maybeShowFabHint();
 }
 
 function showUI() {
+  if (_fabHintVisible) dismissFabHint();
   if (_immersiveHintVisible) dismissImmersiveHint();
   uiVisible = true;
   document.getElementById('topbar')?.classList.remove('ui-hidden');
@@ -2400,6 +2506,7 @@ function getSaveKey() {
 }
 
 function saveBookmark() {
+  if (_fabHintVisible) dismissFabHint();
   if (!currentId || !story) return;
   const data = buildSaveData(true);
   const key = getSaveKey();

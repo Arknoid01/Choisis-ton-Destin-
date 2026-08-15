@@ -220,6 +220,106 @@ window.SFShared = (function () {
 
   migrateStoriesFinishedCount();
 
+  const BACKUP_VERSION = 1;
+  const BACKUP_KEYS = [
+    'sf_player_stats', 'sf_stories_finished', 'sf_bookmarks', 'sf_player_name',
+    'sf_options', 'sf_lang', 'sf_unlocked_packs', 'sf_pack_expanded', 'sf_game_file',
+    'sf_lang_chosen', 'sf_demo_shown', 'sf_tuto_shown', 'sf_pin_setup_done',
+    'sf_parent_pin', 'sf_game_immersive_hint_shown', 'sf_game_fab_hint_shown',
+    'sf_rating_done', 'sf_rating_later', 'sf_library_tip_dismissed', 'sf_library_view',
+    'sf_used_codes', 'sf_code_unlocks', 'sf_author_name', 'sf_author_email'
+  ];
+  const ONBOARDING_HINT_KEYS = [
+    'sf_lang_chosen', 'sf_demo_shown', 'sf_tuto_shown', 'sf_pin_setup_done',
+    'sf_game_immersive_hint_shown', 'sf_game_fab_hint_shown'
+  ];
+  const PROGRESS_RESET_KEYS = [
+    'sf_player_stats', 'sf_stories_finished', 'sf_bookmarks'
+  ];
+
+  function listSaveKeys() {
+    const keys = [];
+    try {
+      for (let i = 0; i < localStorage.length; i++) {
+        const key = localStorage.key(i);
+        if (key?.startsWith('sf_save_')) keys.push(key);
+      }
+    } catch (e) {}
+    return keys;
+  }
+
+  function collectBackupKeys() {
+    const keys = {};
+    BACKUP_KEYS.forEach(k => {
+      const v = lsGet(k);
+      if (v !== null) keys[k] = v;
+    });
+    listSaveKeys().forEach(k => {
+      const v = lsGet(k);
+      if (v !== null) keys[k] = v;
+    });
+    return keys;
+  }
+
+  function exportPlayerBackup() {
+    return {
+      app: 'fableris',
+      version: BACKUP_VERSION,
+      exportedAt: new Date().toISOString(),
+      keys: collectBackupKeys()
+    };
+  }
+
+  function downloadPlayerBackup() {
+    const payload = exportPlayerBackup();
+    const blob = new Blob([JSON.stringify(payload, null, 2)], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'fableris-sauvegarde-' + new Date().toISOString().slice(0, 10) + '.json';
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    URL.revokeObjectURL(url);
+  }
+
+  function clearPlayerBackupKeys() {
+    BACKUP_KEYS.forEach(k => { try { localStorage.removeItem(k); } catch (e) {} });
+    listSaveKeys().forEach(k => { try { localStorage.removeItem(k); } catch (e) {} });
+  }
+
+  function importPlayerBackup(raw, opts) {
+    opts = opts || {};
+    let payload = raw;
+    if (typeof raw === 'string') {
+      try { payload = JSON.parse(raw); } catch (e) { return { ok: false, error: 'parse' }; }
+    }
+    if (!payload || payload.app !== 'fableris' || !payload.keys || typeof payload.keys !== 'object') {
+      return { ok: false, error: 'invalid' };
+    }
+    if (!opts.merge) clearPlayerBackupKeys();
+    let count = 0;
+    Object.entries(payload.keys).forEach(([k, v]) => {
+      if (!k.startsWith('sf_') || typeof v !== 'string') return;
+      lsSet(k, v);
+      count++;
+    });
+    migrateStoriesFinishedCount();
+    return { ok: true, count };
+  }
+
+  function clearPlayerProgress() {
+    PROGRESS_RESET_KEYS.forEach(k => { try { localStorage.removeItem(k); } catch (e) {} });
+    ONBOARDING_HINT_KEYS.forEach(k => { try { localStorage.removeItem(k); } catch (e) {} });
+    listSaveKeys().forEach(k => { try { localStorage.removeItem(k); } catch (e) {} });
+  }
+
+  function resetGameHints() {
+    ['sf_game_immersive_hint_shown', 'sf_game_fab_hint_shown'].forEach(k => {
+      try { localStorage.removeItem(k); } catch (e) {}
+    });
+  }
+
   return {
     LANGS,
     STARTER_STORIES,
@@ -240,6 +340,11 @@ window.SFShared = (function () {
     isKidsMode,
     currentLang,
     getDefaultExpandedPackIds,
-    ensureDefaultExpandedPacks
+    ensureDefaultExpandedPacks,
+    exportPlayerBackup,
+    downloadPlayerBackup,
+    importPlayerBackup,
+    clearPlayerProgress,
+    resetGameHints
   };
 })();
