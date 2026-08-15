@@ -1,24 +1,27 @@
 # Instructions agents (Fableris / StoryForge)
 
-## Branche par défaut
+## Branches
 
-Travaillez sur **`main`**. Créez les branches feature en `cursor/<description>-0aad` **depuis `main`**.
+| Branche | Usage |
+|---------|--------|
+| **`main`** | Prochaine MàJ courante (v1.6 affichée) |
+| **`1.7`** | Release 1.7 — développement libre |
 
-## Branche release `1.7` — protégée
+## Sur `1.7` — libre
 
-La branche **`1.7`** prépare la version 1.7. Elle **ne doit pas** être utilisée par un agent sans autorisation explicite du propriétaire.
+Checkout, commits, push et PR **vers `1.7`** : **aucune autorisation** requise.
 
-**Interdit sans autorisation :**
+## Vers `main` — autorisation requise pour la 1.7
 
-- checkout / commit / push sur `1.7`
-- PR impliquant `1.7` (base ou head)
-- merge ou cherry-pick entre `1.7` et `main`
+**Interdit sans autorisation explicite du propriétaire** (ex. « autorise le merge de la 1.7 sur main ») :
 
-**Autorisation :** le propriétaire doit écrire explicitement qu'il autorise le travail sur `1.7` (ex. « autorise la branche 1.7 »).
+- Merger **`1.7` → `main`**
+- Cherry-pick / importer du code de **`1.7` vers `main`**
+- PR **`1.7` → `main`**
 
-**Release :** merge `1.7` → `main` uniquement quand le propriétaire le demande, en ajoutant le label GitHub `release-1.7-authorized` si la CI bloque la PR.
+Sur GitHub, ajouter le label **`release-1.7-authorized`** sur la PR `1.7` → `main` une fois autorisé.
 
-## Fichiers de référence
+## Référence
 
 - Règle Cursor : `.cursor/rules/release-1-7-protected.mdc`
-- CI : `.github/workflows/protect-release-branch.yml`
+- CI : `.github/workflows/protect-release-branch.yml` (bloque seulement `1.7` → `main`)
