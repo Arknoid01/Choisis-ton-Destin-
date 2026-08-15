@@ -1,4 +1,4 @@
-# Bloque le merge 1.7 / 1.8 / 1.9 → main sans label explicite.
+# Bloque le merge des branches release → main sans label explicite.
 name: Protect release branches
 
 on:
@@ -20,33 +20,21 @@ jobs:
             echo "Not targeting main — OK."
             exit 0
           fi
-          case "$HEAD_REF" in
-            1.7)
-              echo "$LABELS_JSON" | grep -q 'release-1.7-authorized' && {
-                echo "Label release-1.7-authorized present — OK."
-                exit 0
-              }
-              echo "::error::Merge 1.7 → main bloqué. Ajoutez le label release-1.7-authorized."
-              exit 1
-              ;;
-            1.8)
-              echo "$LABELS_JSON" | grep -q 'release-1.8-authorized' && {
-                echo "Label release-1.8-authorized present — OK."
-                exit 0
-              }
-              echo "::error::Merge 1.8 → main bloqué. Ajoutez le label release-1.8-authorized."
-              exit 1
-              ;;
-            1.9)
-              echo "$LABELS_JSON" | grep -q 'release-1.9-authorized' && {
-                echo "Label release-1.9-authorized present — OK."
-                exit 0
-              }
-              echo "::error::Merge 1.9 → main bloqué. Ajoutez le label release-1.9-authorized."
-              exit 1
-              ;;
-            *)
-              echo "Not a protected release → main PR — OK."
+          check_label() {
+            local branch="$1"
+            local label="$2"
+            if [ "$HEAD_REF" != "$branch" ]; then return 0; fi
+            echo "$LABELS_JSON" | grep -q "$label" && {
+              echo "Label $label present — OK."
               exit 0
-              ;;
-          esac
+            }
+            echo "::error::Merge $branch → main bloqué. Ajoutez le label $label."
+            exit 1
+          }
+          check_label "1.7" "release-1.7-authorized"
+          check_label "1.8" "release-1.8-authorized"
+          check_label "1.9" "release-1.9-authorized"
+          check_label "2.0" "release-2.0-authorized"
+          check_label "2.1" "release-2.1-authorized"
+          check_label "2.2" "release-2.2-authorized"
+          echo "Not a protected release → main PR — OK."

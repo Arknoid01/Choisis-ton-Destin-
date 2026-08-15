@@ -426,6 +426,37 @@ body {
   border-bottom-color:rgba(232,212,160,0.55);
 }
 
+.home-season-banner {
+  display: none;
+  width: 100%;
+  max-width: 420px;
+  margin: 0 auto 16px;
+  padding: 10px 14px;
+  align-items: flex-start;
+  gap: 10px;
+  text-align: left;
+  border-radius: 12px;
+  border: 1px solid rgba(196,48,58,0.28);
+  background: linear-gradient(135deg, rgba(196,48,58,0.1), rgba(60,100,70,0.08));
+  opacity: 0;
+  animation: fade-up .45s ease forwards;
+  animation-delay: .02s;
+}
+.home-season-banner[hidden] { display: none !important; }
+.home-season-banner-icon {
+  font-size: 20px;
+  line-height: 1.2;
+  flex-shrink: 0;
+}
+.home-season-banner p {
+  margin: 0;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 14px;
+  font-style: italic;
+  line-height: 1.45;
+  color: var(--cream, #f5f0e8);
+}
+
 .btn-main.ai-btn {
   background:var(--bg2);
   color:#c8bcff;
@@ -865,6 +896,11 @@ body {
 <div id="shell">
 <div id="content-block">
 
+  <div id="home-season-banner" class="home-season-banner" hidden>
+    <span class="home-season-banner-icon" aria-hidden="true">🎄</span>
+    <p id="txt-season-banner"></p>
+  </div>
+
   <!-- LOGO BLOCK -->
   <div id="logo-block">
     <div class="ornament">
@@ -939,7 +975,7 @@ body {
 <div class="footer">
   <p class="footer-text" id="txt-footer">StoryForge • Romans interactifs</p>
 </div>
-<div class="version" id="app-version">v1.9</div>
+<div class="version" id="app-version">v2.0</div>
 
 <!-- PEGASUS LOGO -->
 <div id="pegasus-logo">
@@ -1117,7 +1153,40 @@ const HOME_THEME_COPY = {
       btnStartIcon: '🎃',
     },
   },
+  christmas: {
+    fr: {
+      eyebrow:  '🎄 Magie de Noël',
+      subtitle: 'De nouvelles histoires — concours ouvert',
+      btnStartIcon: '🎄',
+      seasonBanner: 'C\'est Noël avant l\'heure avec Fableris — de nouvelles histoires sur le thème de Noël.',
+    },
+    en: {
+      eyebrow:  '🎄 Christmas magic',
+      subtitle: 'New stories — contest open now',
+      btnStartIcon: '🎄',
+      seasonBanner: 'Christmas comes early with Fableris — new stories on the holiday theme.',
+    },
+    es: {
+      eyebrow:  '🎄 Magia de Navidad',
+      subtitle: 'Nuevas historias — concurso abierto',
+      btnStartIcon: '🎄',
+      seasonBanner: 'La Navidad llega antes con Fableris — nuevas historias sobre el tema navideño.',
+    },
+  },
 };
+
+function applySeasonBanner() {
+  const banner = document.getElementById('home-season-banner');
+  const textEl = document.getElementById('txt-season-banner');
+  if (!banner || !textEl) return;
+  const seasonal = HOME_THEME_COPY[getHomeTheme()]?.[currentLang];
+  if (seasonal?.seasonBanner) {
+    textEl.textContent = seasonal.seasonBanner;
+    banner.hidden = false;
+  } else {
+    banner.hidden = true;
+  }
+}
 
 function getHomeSparkPalette() {
   return window.SFTheme ? SFTheme.sparkPalette() : {
@@ -1420,6 +1489,7 @@ function applyLang() {
   } else if (startIcon) {
     startIcon.textContent = '✦';
   }
+  applySeasonBanner();
   set('txt-opt-replay-tips', t.optReplayTips);
   set('txt-opt-section-device', t.optSectionDevice);
   set('txt-opt-device-desc', t.optDeviceDesc, true);

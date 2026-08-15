@@ -125,3 +125,108 @@ html[data-home-theme="halloween"] .menu-panel {
 
 html[data-sf-theme="halloween"] .home-halloween-decor,
 html[data-home-theme="halloween"] .home-halloween-decor { display: none; }
+
+/* ── Noël ── */
+html[data-sf-theme="christmas"],
+html[data-home-theme="christmas"] {
+  --gold:    #d4b05a;
+  --gold2:   #ffe8b8;
+  --gold3:   #8a6020;
+  --cream:   #f5f0e8;
+  --text:    #f0ebe3;
+  --dim:     #a8a090;
+  --dimmer:  #706858;
+  --bg:      #0a1014;
+  --bg2:     #101820;
+  --bg3:     #162028;
+  --bg4:     #1c2830;
+  --border:  #2a3840;
+  --glow:    rgba(196,48,58,0.18);
+  --accent:  #c4303a;
+  --glow-top:    rgba(196,48,58,0.07);
+  --glow-bottom: rgba(40,100,60,0.08);
+}
+
+html[data-sf-theme="christmas"],
+html[data-sf-theme="christmas"] body,
+html[data-home-theme="christmas"],
+html[data-home-theme="christmas"] body {
+  background: var(--bg);
+  color: var(--cream, var(--text, #f5f0e8));
+}
+
+html[data-sf-theme="christmas"] #topbar,
+html[data-home-theme="christmas"] #topbar {
+  background: rgba(10,16,20,0.92);
+  border-bottom-color: var(--border);
+}
+
+html[data-sf-theme="christmas"] .bg-gradient,
+html[data-home-theme="christmas"] .bg-gradient {
+  background:
+    radial-gradient(ellipse 60% 50% at 15% 10%, rgba(196,48,58,0.12) 0%, transparent 55%),
+    radial-gradient(ellipse 55% 45% at 88% 15%, rgba(60,120,80,0.14) 0%, transparent 55%),
+    radial-gradient(ellipse 80% 40% at 50% 100%, rgba(212,176,90,0.06) 0%, transparent 60%),
+    linear-gradient(180deg, #0a1014 0%, #101820 50%, #0a1014 100%);
+}
+
+html[data-sf-theme="christmas"]::before,
+html[data-home-theme="christmas"]::before {
+  content: '';
+  position: fixed;
+  top: calc(10px + var(--android-safe-area-inset-top, env(safe-area-inset-top, 0px)));
+  right: 16px;
+  width: 28px;
+  height: 28px;
+  z-index: 2;
+  pointer-events: none;
+  opacity: 0.55;
+  background:
+    linear-gradient(160deg, transparent 40%, rgba(255,255,255,0.9) 40%, rgba(255,255,255,0.9) 45%, transparent 45%),
+    radial-gradient(circle at 50% 18%, #c4303a 0%, #8a1820 100%);
+  clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+  filter: drop-shadow(0 0 8px rgba(196,48,58,0.35));
+}
+
+html[data-sf-theme="christmas"] .particle,
+html[data-home-theme="christmas"] .particle {
+  background: rgba(255,255,255,0.85);
+  box-shadow: 0 0 6px rgba(255,255,255,0.35);
+}
+
+html[data-sf-theme="christmas"] .ornament svg line,
+html[data-home-theme="christmas"] .ornament svg line { stroke: #5a8868; }
+
+html[data-sf-theme="christmas"] .ornament svg polygon,
+html[data-home-theme="christmas"] .ornament svg polygon { fill: #c4303a; }
+
+html[data-sf-theme="christmas"] .main-title em,
+html[data-home-theme="christmas"] .main-title em { color: #e85058; }
+
+html[data-sf-theme="christmas"] .divider-gem,
+html[data-home-theme="christmas"] .divider-gem {
+  background: #c4303a;
+  box-shadow: 0 0 6px rgba(196,48,58,0.35);
+}
+
+html[data-sf-theme="christmas"] .btn-main.primary,
+html[data-home-theme="christmas"] .btn-main.primary {
+  border-color: rgba(196,48,58,0.4);
+  background: linear-gradient(135deg, rgba(196,48,58,0.18), rgba(60,100,70,0.12));
+}
+
+html[data-sf-theme="christmas"] .btn-main.primary .menu-tile-icon,
+html[data-home-theme="christmas"] .btn-main.primary .menu-tile-icon {
+  background: rgba(196,48,58,0.12);
+  border-color: rgba(196,48,58,0.32);
+}
+
+html[data-sf-theme="christmas"] .menu-panel,
+html[data-home-theme="christmas"] .menu-panel {
+  border-color: color-mix(in srgb, #c4303a 18%, var(--border));
+}
+
+html[data-sf-theme="christmas"] .home-season-banner,
+html[data-home-theme="christmas"] .home-season-banner {
+  display: flex;
+}

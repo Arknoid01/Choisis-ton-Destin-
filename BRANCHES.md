@@ -1,60 +1,34 @@
 # Politique des branches
 
+Voir aussi **`RELEASES.md`** pour le calendrier détaillé (contenu par MàJ).
+
 ## `main`
 
-Prochaine mise à jour Play Store / web. Version affichée : **v1.6** (jusqu’au release 1.7).
+Prochaine mise à jour Play Store / web. Version affichée : **v1.6** (jusqu’aux merges release autorisés).
 
-Travail courant, correctifs et features **hors releases 1.7 / 1.8 / 1.9**.
+## Branches release (résumé)
 
-## `1.7`
+| Branche | Cible | Thème `SF_THEME` | Rôle |
+|---------|-------|------------------|------|
+| **1.7** | — | — | Release Profondeurs / fin 1.7 |
+| **1.8** | Halloween | `halloween` | MàJ Halloween 🎃 |
+| **1.9** | ~10–11 nov. | `default` | Post-Halloween |
+| **2.0** | **1er déc.** | `christmas` | Noël + concours + histoires (en cours) |
+| **2.1** | **~20 déc.** | `christmas` | Lauréat concours communauté |
+| **2.2** | **3–4 jan.** | `default` | Post-Noël |
 
-Branche de **release 1.7** (version affichée v1.7).
+## Règles communes
 
-- **Travail libre** : commits, PR vers `1.7`, branches feature depuis `1.7`.
-- **Vers `main` : interdit sans autorisation** — pas de merge, cherry-pick ni import de la 1.7 sur `main` tant que le propriétaire n’a pas explicitement validé la release.
-
-### Release 1.7 (manuel, avec autorisation)
-
-1. Finaliser sur `1.7`
-2. Dire à l’agent ou valider soi-même : merge 1.7 → main autorisé
-3. PR **`1.7` → `main`** + label **`release-1.7-authorized`**
-4. Merger
-
-La CI bloque **uniquement** les PR **`1.7` → `main`** sans ce label.
-
-## `1.8`
-
-Branche **Halloween** (version affichée v1.8, thème orange 🎃, concours actif).
-
-- **Travail libre** : commits, PR vers `1.8`, branches feature depuis `1.8`.
-- **Vers `main` : interdit sans autorisation**
-
-### Release 1.8 (manuel, avec autorisation)
-
-PR **`1.8` → `main`** + label **`release-1.8-authorized`**
-
-## `1.9`
-
-Branche **post-Halloween** (version affichée v1.9, thème normal, concours clos).
-
-- **Travail libre** : commits, PR vers `1.9`, branches feature depuis `1.9`.
-- **Vers `main` : interdit sans autorisation**
-
-### Release 1.9 (manuel, avec autorisation)
-
-1. Finaliser sur `1.9` (après la MàJ Halloween en production)
-2. PR **`1.9` → `main`** + label **`release-1.9-authorized`**
-3. Merger
-
-La CI bloque les PR **`1.9` → `main`** sans ce label.
+- **Travail libre** sur la branche release courante (commits, PR vers cette branche).
+- **Vers `main` : interdit sans autorisation** + label `release-X.Y-authorized`.
 
 ## GitHub Pages
 
-Site : [arknoid01.github.io/Choisis-ton-Destin-/](https://arknoid01.github.io/Choisis-ton-Destin-/)
+| Période | Branche |
+|---------|---------|
+| Halloween | `1.8` |
+| Nov. | `1.9` |
+| Décembre | `2.0` → `2.1` |
+| Janvier | `2.2` |
 
-| Période | Branche Pages | Thème |
-|---------|---------------|-------|
-| Avant / pendant Halloween | **`1.8`** | Orange 🎃 |
-| Après Halloween | **`1.9`** | Or classique |
-
-Réglage : Repo → **Settings** → **Pages** → branche **`/` (root)`**.
+Interrupteur thème : **`sf-theme.js`** → `window.SF_THEME` (`default` | `halloween` | `christmas`).
