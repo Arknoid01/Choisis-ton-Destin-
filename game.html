@@ -2437,6 +2437,9 @@ function toggleMenu() {
 function handleMenuClick(e) {
   if (e.target === document.getElementById('menu-overlay')) closeMenu();
 }
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape' && document.getElementById('menu-overlay')?.classList.contains('open')) closeMenu();
+});
 
 // ══════════════════════════════════════════════
 // RESTART
