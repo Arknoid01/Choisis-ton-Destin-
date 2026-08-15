@@ -1,0 +1,291 @@
+{
+  "name": "La Pandilla del Cementerio",
+  "kids": false,
+  "askPlayerName": true,
+  "pack": "free",
+  "stats": [
+    {
+      "id": "audace",
+      "label": "Audacia",
+      "start": 15,
+      "max": 100,
+      "color": "#e8934a"
+    },
+    {
+      "id": "lucidite",
+      "label": "Lucidez",
+      "start": 10,
+      "max": 100,
+      "color": "#9b59b6"
+    }
+  ],
+  "theme": {
+    "bg": "#0a080c",
+    "bg2": "#120e14",
+    "bg3": "#1a1520",
+    "bg4": "#221828",
+    "border": "#3d2838",
+    "accent": "#e8934a",
+    "accent2": "#9b59b6",
+    "accent3": "#6dfabc",
+    "text": "#f2ebe0",
+    "text2": "#9a8070",
+    "text3": "#6a5548"
+  },
+  "scenes": {
+    "prologue": {
+      "id": "prologue",
+      "title": "Halloween, por fin",
+      "location": "CEMENTERIO DE SAINT-LUNAIRE — MEDIANOCHE",
+      "narrator": "Algunas noches crees que corres hacia el susto. A veces, el susto te estaba esperando.",
+      "text": "Te llamas {{player}}, y llevas semanas esperando este momento.\n\nLeo por fin encontró una escalera para saltar el muro del cementerio de Saint-Lunaire. Maya aprieta su abrigo. Sam ya está grabando todo con el móvil. Inès preparó tres historias «de miedo de verdad».\n\nLa luna está llena. Las calabazas de las casas cercanas aún brillan a lo lejos.\n\nLeo susurra al saltar: «¡Vamos, cobardes — hagamos una noche memorable!»\n\nRíes con ellos. El aire huele a cera y tierra húmeda. Te sientes vivo/a, emocionado/a, listo/a para gritar al menor ruido.\n\nNadie te mira cuando hablas. Crees que es la emoción. Que todos hablan a la vez.",
+      "isStart": true,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Ser el/la primero/a en correr hacia las tumbas",
+          "vers": "legende",
+          "effects": [{ "stat": "audace", "val": 15 }],
+          "clickEffect": "pulse"
+        },
+        {
+          "text": "Pedir a Inès que empiece con una historia",
+          "vers": "legende",
+          "effects": [{ "stat": "lucidite", "val": 10 }],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 400,
+      "y": 40
+    },
+    "legende": {
+      "id": "legende",
+      "title": "La leyenda del quinto",
+      "location": "PASEO DE TEJOS — CEMENTERIO",
+      "narrator": "Las leyendas que contamos en broma a veces tienen la mala costumbre de recordarnos.",
+      "text": "Inès se detiene bajo un tejo podado como columna.\n\n«¿Conocéis la leyenda? Cada Halloween, un fantasma se une a un grupo de jóvenes en un cementerio. Cree que forma parte de la pandilla. Ríe, grita, juega a retos…»\n\nMaya tiembla: «Genial, gracias Inès.»\n\n«… y solo al final de la noche entiende que nadie lo veía.»\n\nLeo estalla en risas: «¡Menos mal que somos cuatro, no cinco! Venga Sam, graba la cara de Maya.»\n\nSam encuadra al grupo. Te colocas entre Maya y Leo, seguro/a de estar en la foto.\n\nCuando Sam baja el móvil, no te comenta. Solo dice: «Perfecto, chicos, seguimos.»",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Lanzar un reto: entrar en el mausoleo",
+          "vers": "defi",
+          "effects": [{ "stat": "audace", "val": 12 }],
+          "clickEffect": "pulse"
+        },
+        {
+          "text": "Notar que nadie te respondió",
+          "vers": "defi",
+          "effects": [{ "stat": "lucidite", "val": 15 }],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 400,
+      "y": 140
+    },
+    "defi": {
+      "id": "defi",
+      "title": "Verdad o reto",
+      "location": "MAUSOLEO VALMONT — PATIO",
+      "narrator": "Oser es a veces avanzar donde los vivos aún dudan.",
+      "text": "Leo saca una botella de refresco vacía — su «botella mágica» de verano reciclada para Halloween.\n\nVerdad o reto, edición cementerio. Sin vuelta atrás.\n\nLa botella gira sobre una losa inclinada. Se detiene… en el espacio vacío entre tú y Maya.\n\n«¡Pues {{player}}!» dice Maya riendo.\n\nSilencio. Leo parpadea: «Eh… si quieres, hacemos Reto igual. Atrévete a entrar en el mausoleo Valmont.»\n\nMiras la puerta de hierro oxidado. Una vieja linterna cuelga de la reja.\n\nLa coges. Tus dedos no la sienten del todo — pero la llama se enciende igual.\n\n«Qué guay», dice Sam. «¿Quién la encendió?»\n\nAbres la boca para responder. Nadie te interrumpe porque nadie te espera.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Empujar la puerta y entrar el/la primero/a",
+          "vers": "mausolee",
+          "effects": [{ "stat": "audace", "val": 15 }],
+          "clickEffect": "pulse"
+        },
+        {
+          "text": "Observar la llama que no te quema",
+          "vers": "mausolee",
+          "effects": [{ "stat": "lucidite", "val": 12 }],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 400,
+      "y": 240
+    },
+    "mausolee": {
+      "id": "mausolee",
+      "title": "La puerta que cruje",
+      "location": "MAUSOLEO VALMONT — INTERIOR",
+      "narrator": "En la oscuridad se oye mejor lo que nos negamos a ver.",
+      "text": "La puerta cruje como una risa vieja.\n\nPor dentro huele a piedra fría y cera seca. Nombres de familia cubren las paredes: VALMONT, 1843–1921.\n\nLeo silba: «Vale, esto da miedo. ¿Nos vamos?»\n\nTe deslizas detrás de Maya para asustarla — conoces la técnica: inspirar, gritar, mano en el hombro…\n\nTu mano atraviesa su abrigo como niebla.\n\nMaya igual salta y se gira de golpe.\n\n«Sentí una corriente de aire», dice.\n\nLeo te mira… a través de ti, hacia Sam: «¿Oíste algo?»\n\nRíes demasiado fuerte. Nadie ríe contigo.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Gritar «¡BU!» con todas tus fuerzas",
+          "vers": "cabriole",
+          "effects": [{ "stat": "audace", "val": 10 }],
+          "clickEffect": "pulse"
+        },
+        {
+          "text": "Mirar tu mano transparente",
+          "vers": "cabriole",
+          "effects": [{ "stat": "lucidite", "val": 18 }],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 400,
+      "y": 340
+    },
+    "cabriole": {
+      "id": "cabriole",
+      "title": "Escondite macabro",
+      "location": "CEMENTERIO — PASEO DE LOS ANCIANOS",
+      "narrator": "A veces crees ser el autor del susto. A menudo solo eres espectador.",
+      "text": "Fuera, el juego continúa. Escondite entre las lápidas, edición Halloween: quien grite más fuerte gana.\n\nTe escondes tras un ángel de mármol. Ves pasar a Leo a un metro, buscando a Maya.\n\n«{{player}} debe estar al otro lado», dice.\n\nNo te mira ni un segundo aunque estás justo ahí.\n\nSaltas delante gritando.\n\nLeo no se sobresalta. Frunce el ceño: «… Qué viento más raro esta noche.»\n\nSam levanta el móvil: «¡Selfie de la noche! Venga, los cuatro, apretaos.»",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Colocarte en el centro del grupo",
+          "vers": "photo",
+          "effects": [{ "stat": "audace", "val": 8 }],
+          "clickEffect": "pulse"
+        },
+        {
+          "text": "Contar cuántos son de verdad",
+          "vers": "photo",
+          "effects": [{ "stat": "lucidite", "val": 12 }],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 400,
+      "y": 440
+    },
+    "photo": {
+      "id": "photo",
+      "title": "Cuatro en la foto",
+      "location": "CEMENTERIO — CRUCE DE SENDAS",
+      "narrator": "Una imagen no miente. Solo muestra lo que elige guardar.",
+      "text": "Sam gira la pantalla.\n\nCuatro caras: Leo sacando la lengua, Maya con los ojos muy abiertos, Inès digna, Sam a medias.\n\nY donde estabas tú — una mancha naranja, como vaho en la lente.\n\n«Qué fea la mancha», dice Leo.\n\nSusurras: «Pero estoy aquí…»\n\nInès mira la foto y luego un callejón más oscuro: «Vamos allí. Como cada año.»\n\nMaya asiente, de repente seria. Sam guarda el móvil sin decir nada.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Insistir: «¡Miradme!»",
+          "vers": "brume",
+          "effects": [{ "stat": "lucidite", "val": 15 }],
+          "clickEffect": "pulse"
+        },
+        {
+          "text": "Seguirlos en silencio",
+          "vers": "brume",
+          "effects": [{ "stat": "audace", "val": 5 }],
+          "clickEffect": "pulse"
+        },
+        {
+          "text": "Intentar agarrar el móvil de Sam",
+          "vers": "tombe",
+          "effects": [{ "stat": "lucidite", "val": 20 }],
+          "requires": { "stat": "lucidite", "min": 35 },
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 400,
+      "y": 540
+    },
+    "brume": {
+      "id": "brume",
+      "title": "Una voz en la niebla",
+      "location": "CEMENTERIO — COLINAS DEL NORTE",
+      "narrator": "Cuando nadie responde, no siempre es porque no escuchan.",
+      "text": "Una niebla sube entre las tumbas — fina, fría, pegada al suelo.\n\nGritas sus nombres. Leo, Maya, Sam, Inès. Uno a uno.\n\nCaminan delante sin frenar. Caminas en sus pasos. Tus pies no dejan huella en el barro.\n\nInès habla bajo: «¿Crees que nos oye, allí arriba?»\n\nMaya aprieta una bolsa de dulces: «Cada año decimos lo mismo. Y cada año volvemos.»\n\nAún no entiendes. Pero tu corazón — o lo que queda — se aprieta.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Seguirles",
+          "vers": "tombe",
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 300,
+      "y": 640
+    },
+    "tombe": {
+      "id": "tombe",
+      "title": "Como cada año",
+      "location": "TUMBA — CEMENTERIO DE SAINT-LUNAIRE",
+      "narrator": "Llega un momento en que el susto deja de jugar. Te mira de frente.",
+      "text": "Se detienen ante una piedra que conoces demasiado bien.\n\nTu nombre está grabado. {{player}}. 2008–2025.\n\nUna fecha de Halloween. Una caída del muro. Una ambulancia que no llegó a tiempo.\n\nMaya deja caramelos con forma de calabaza al pie.\n\nLeo enciende una vela: «… Bueno. Como siempre, {{player}}. Nos lo pasamos bien sin ti. Bueno — lo intentamos.»\n\nSam murmura: «Vinimos a buscarte para la ronda. Te perdiste lo mejor.»\n\nInès mira el vacío junto a la tumba — exactamente donde estás.\n\n«Te echamos de menos», dice.\n\nNo a ti. A la persona bajo la piedra.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "flash",
+      "choices": [
+        {
+          "text": "Leer la fecha en la piedra",
+          "vers": "revelation",
+          "effects": [{ "stat": "lucidite", "val": 20 }],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 400,
+      "y": 740
+    },
+    "revelation": {
+      "id": "revelation",
+      "title": "El quinto eras tú",
+      "location": "CEMENTERIO — PASADA LA MEDIANOCHE",
+      "narrator": "El mayor giro no es gritar. Es entender por qué nadie gritó contigo.",
+      "text": "Todo encaja de golpe — como un puzzle que por fin hace clic.\n\nLa leyenda de Inès. La mano que atraviesa el abrigo. La foto donde no existes. La botella que «elige» un vacío.\n\nNo te uniste a la pandilla esta noche.\n\nLos **seguiste** — como **cada** Halloween desde hace un año.\n\nEres el fantasma que aún creía estar vivo. Pasaste la noche asustándoos con ellos, sin notar que hablaban **de** ti, no **contigo**.\n\nLeo seca una lágrima riendo: «Vale, si {{player}} está aquí, que tumbe la vela. Le guardo sitio en mi cama épica.»\n\nLa vela vacila.\n\nNadie ve tu mano. Pero la llama se inclina igual.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Soplar la vela — un último susto para ellos",
+          "vers": "fin_rideau",
+          "effects": [{ "stat": "audace", "val": 10 }],
+          "clickEffect": "pulse"
+        },
+        {
+          "text": "Aceptar lo que te has convertido",
+          "vers": "fin_veille",
+          "effects": [{ "stat": "lucidite", "val": 10 }],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 400,
+      "y": 840
+    },
+    "fin_rideau": {
+      "id": "fin_rideau",
+      "title": "Bu, chicos",
+      "location": "CEMENTERIO — TUMBA DE SAINT-LUNAIRE",
+      "narrator": "A veces el mejor grito es el que sientes en la nuca sin conocer su origen.",
+      "text": "Soplas. La vela se apaga de un golpe.\n\nMaya grita — de verdad esta vez. Leo retrocede tropezando con una raíz. Sam casi suelta el móvil.\n\n«VALE VALE VALE», jadea Leo. «No hacía gracia. Bueno sí. Bueno… **¿{{player}}**?»\n\nInès ríe nerviosa con lágrimas: «Lo sentíamos. Siempre lo sentíamos.»\n\nCorren hacia la salida gritando, felices y aterrados — exactamente como habrías querido.\n\nTú te quedas junto a la piedra, sonriendo.\n\nYa no eres el quinto olvidado. Eres el chiste final de Halloween.\n\nY sinceramente: **mejor final de noche, imposible.**\n\n**FIN — El susto perfecto**",
+      "isStart": false,
+      "isEnd": true,
+      "transition": "fade",
+      "choices": [],
+      "x": 280,
+      "y": 940
+    },
+    "fin_veille": {
+      "id": "fin_veille",
+      "title": "Velar sin estorbar",
+      "location": "CEMENTERIO — AMANECER",
+      "narrator": "Algunos fantasmas gritan. Otros solo mantienen encendida la vela en el corazón de los vivos.",
+      "text": "No soplas la vela.\n\nTe sientas en la piedra — a través, en realidad — y los ves marcharse al amanecer, ojos hinchados pero aliviados.\n\nMaya se gira una última vez hacia la tumba: «Hasta el año que viene, {{player}}. Prepárate, volveremos a asustarte.»\n\nYa no necesitas que te vean para formar parte de la pandilla.\n\nVelarás por ellos entre tejos, calabazas y malas bromas.\n\nY el próximo Halloween, cuando Inès cuente la historia del quinto…\n\nSonreirás. Porque esta vez, **conoces el remate.**\n\n**FIN — Guardián del cementerio**",
+      "isStart": false,
+      "isEnd": true,
+      "transition": "fade",
+      "choices": [],
+      "x": 520,
+      "y": 940
+    }
+  }
+}

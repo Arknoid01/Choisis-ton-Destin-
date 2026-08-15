@@ -1,0 +1,291 @@
+{
+  "name": "La Bande du Cimetière",
+  "kids": false,
+  "askPlayerName": true,
+  "pack": "free",
+  "stats": [
+    {
+      "id": "audace",
+      "label": "Audace",
+      "start": 15,
+      "max": 100,
+      "color": "#e8934a"
+    },
+    {
+      "id": "lucidite",
+      "label": "Lucidité",
+      "start": 10,
+      "max": 100,
+      "color": "#9b59b6"
+    }
+  ],
+  "theme": {
+    "bg": "#0a080c",
+    "bg2": "#120e14",
+    "bg3": "#1a1520",
+    "bg4": "#221828",
+    "border": "#3d2838",
+    "accent": "#e8934a",
+    "accent2": "#9b59b6",
+    "accent3": "#6dfabc",
+    "text": "#f2ebe0",
+    "text2": "#9a8070",
+    "text3": "#6a5548"
+  },
+  "scenes": {
+    "prologue": {
+      "id": "prologue",
+      "title": "Halloween, enfin",
+      "location": "CIMETIÈRE DE SAINT-LUNAIRE — MINUIT",
+      "narrator": "Certaines nuits, on croit courir vers le frisson. Parfois, c'est le frisson qui nous attend.",
+      "text": "Tu t'appelles {{player}}, et tu attends ce moment depuis des semaines.\n\nLéo a enfin trouvé l'échelle pour passer par-dessus le mur du cimetière de Saint-Lunaire. Maya serre son manteau. Sam filme déjà tout avec son téléphone. Inès a préparé trois histoires « vraiment flippantes ».\n\nLa lune est pleine. Les citrouilles des maisons voisines brillent encore au loin.\n\nLéo chuchote en sautant le mur : « Allez, bande de lâches — on va se faire une nuit mémorable ! »\n\nTu ris avec eux. L'air sent la cire et l'humus. Tu te sens vivant·e, excité·e, prêt·e à crier au moindre bruit.\n\nPersonne ne te regarde directement quand tu parles. Tu crois que c'est l'excitation. Que tout le monde parle en même temps.",
+      "isStart": true,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Être le·la premier·e à foncer vers les tombes",
+          "vers": "legende",
+          "effects": [{ "stat": "audace", "val": 15 }],
+          "clickEffect": "pulse"
+        },
+        {
+          "text": "Demander à Inès de commencer par une histoire",
+          "vers": "legende",
+          "effects": [{ "stat": "lucidite", "val": 10 }],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 400,
+      "y": 40
+    },
+    "legende": {
+      "id": "legende",
+      "title": "L'histoire du cinquième",
+      "location": "ALLÉE DES IFs — CIMETIÈRE",
+      "narrator": "Les légendes qu'on raconte pour rire ont parfois une mauvaise habitude de se rappeler à nous.",
+      "text": "Inès s'arrête sous un if taillé en colonnade.\n\n« Vous connaissez la légende ? Chaque Halloween, un fantôme rejoint un groupe de jeunes dans un cimetière. Il croit faire partie de la bande. Il rigole, il crie, il joue aux défis… »\n\nMaya frissonne : « Super, merci Inès. »\n\n« … et ce n'est qu'à la fin de la nuit qu'il comprend que personne ne le voyait. »\n\nLéo éclate de rire : « Bah heureusement qu'on est quatre, pas cinq ! Allez Sam, filme-nous la tête de Maya. »\n\nSam cadre le groupe. Tu te mets entre Maya et Léo, sûr·e d'être dans le cadre.\n\nQuand Sam baisse son téléphone, il ne te commente pas. Il dit juste : « Parfait, les gars, on continue. »",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Lancer un défi : oser entrer dans le mausolée",
+          "vers": "defi",
+          "effects": [{ "stat": "audace", "val": 12 }],
+          "clickEffect": "pulse"
+        },
+        {
+          "text": "Noter que personne ne t'a répondu",
+          "vers": "defi",
+          "effects": [{ "stat": "lucidite", "val": 15 }],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 400,
+      "y": 140
+    },
+    "defi": {
+      "id": "defi",
+      "title": "Action ou vérité",
+      "location": "MAUSOLÉE DES VALMONT — COUR",
+      "narrator": "Oser, c'est parfois avancer là où les vivants hésitent encore.",
+      "text": "Léo sort une bouteille de soda vide — leur « bouteille magique » d'été recyclée pour Halloween.\n\nAction ou vérité, version cimetière. Pas de retour en arrière.\n\nLa bouteille tourne sur une dalle inclinée. Elle s'arrête… du côté de l'espace vide entre toi et Maya.\n\n« Bah, c'est {{player}} ! » dit Maya en riant.\n\nSilence. Léo cligne des yeux : « Euh… si tu veux, on fait Action quand même. Ose entrer dans le mausolée des Valmont. »\n\nTu regardes la porte de fer rouillée. Une vieille lanterne pend à la grille.\n\nTu la saisis. Tes doigts ne la sentent pas vraiment — mais la flamme s'allume quand même.\n\n« Oh, stylé », dit Sam. « Qui a allumé ça ? »\n\nTu ouvres la bouche pour répondre. Personne ne te coupe la parole parce que personne ne t'attend.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Pousser la porte et entrer le premier·e",
+          "vers": "mausolee",
+          "effects": [{ "stat": "audace", "val": 15 }],
+          "clickEffect": "pulse"
+        },
+        {
+          "text": "Observer la flamme qui ne te brûle pas",
+          "vers": "mausolee",
+          "effects": [{ "stat": "lucidite", "val": 12 }],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 400,
+      "y": 240
+    },
+    "mausolee": {
+      "id": "mausolee",
+      "title": "La porte qui grince",
+      "location": "MAUSOLÉE DES VALMONT — INTÉRIEUR",
+      "narrator": "Dans le noir, on entend mieux ce que l'on refuse de voir.",
+      "text": "La porte grince comme un vieux rire.\n\nL'intérieur sent la pierre froide et la cire séchée. Des noms de famille couvrent les murs : VALMONT, 1843–1921.\n\nLéo siffle : « OK, c'est glauque. On sort ? »\n\nTu te glisses derrière Maya pour lui faire peur — tu connais la technique : inspiration, cri, main sur l'épaule…\n\nTa main traverse son manteau comme une brume.\n\nMaya sursaute quand même et se retourne d'un coup.\n\n« J'ai senti un courant d'air », dit-elle.\n\nLéo te regarde… à travers toi, vers Sam : « T'as entendu un truc, toi ? »\n\nTu rigoles trop fort. Personne ne rigole avec toi.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Crier « BOUH ! » de toutes tes forces",
+          "vers": "cabriole",
+          "effects": [{ "stat": "audace", "val": 10 }],
+          "clickEffect": "pulse"
+        },
+        {
+          "text": "Regarder ta main transparente",
+          "vers": "cabriole",
+          "effects": [{ "stat": "lucidite", "val": 18 }],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 400,
+      "y": 340
+    },
+    "cabriole": {
+      "id": "cabriole",
+      "title": "Cache-cache macabre",
+      "location": "CIMETIÈRE — ALLÉE DES ANCIENS",
+      "narrator": "On croit parfois être l'auteur du frisson. Souvent, on n'en est que le spectateur.",
+      "text": "Dehors, le jeu reprend. Cache-cache entre les pierres, version Halloween : celui qui crie le plus fort a gagné.\n\nTu te caches derrière un angelot de marbre. Tu vois Léo passer à un mètre, cherchant Maya.\n\n« {{player}} doit être de l'autre côté », dit-il.\n\nIl ne te regarde pas une seule seconde alors que tu es juste là.\n\nTu bonds devant lui en hurlant.\n\nLéo ne sursaute pas. Il fronce les sourcils : « … Y a un vent bizarre ce soir. »\n\nSam lève son téléphone : « Selfie de la nuit ! Allez, les quatre, serrez-vous. »",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Te placer au centre du groupe",
+          "vers": "photo",
+          "effects": [{ "stat": "audace", "val": 8 }],
+          "clickEffect": "pulse"
+        },
+        {
+          "text": "Compter combien ils sont vraiment",
+          "vers": "photo",
+          "effects": [{ "stat": "lucidite", "val": 12 }],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 400,
+      "y": 440
+    },
+    "photo": {
+      "id": "photo",
+      "title": "Quatre sur la photo",
+      "location": "CIMETIÈRE — CROISÉE DES ALLÉES",
+      "narrator": "Une image ne ment pas. Elle montre seulement ce qu'elle choisit de garder.",
+      "text": "Sam retourne l'écran.\n\nQuatre visages : Léo qui tire la langue, Maya les yeux écarquillés, Inès digne, Sam moitié coupé.\n\nEt à l'endroit où tu te tenais — un flou orange, comme une buée devant l'objectif.\n\n« Moche la tache », dit Léo.\n\nTu murmures : « Mais je suis là… »\n\nInès baise les yeux vers la photo, puis vers une allée plus sombre : « On va là-bas. Comme chaque année. »\n\nMaya hoche la tête, soudain sérieuse. Sam range son téléphone sans un mot.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Insister : « Regardez-moi ! »",
+          "vers": "brume",
+          "effects": [{ "stat": "lucidite", "val": 15 }],
+          "clickEffect": "pulse"
+        },
+        {
+          "text": "Les suivre en silence",
+          "vers": "brume",
+          "effects": [{ "stat": "audace", "val": 5 }],
+          "clickEffect": "pulse"
+        },
+        {
+          "text": "Essayer de saisir le téléphone de Sam",
+          "vers": "tombe",
+          "effects": [{ "stat": "lucidite", "val": 20 }],
+          "requires": { "stat": "lucidite", "min": 35 },
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 400,
+      "y": 540
+    },
+    "brume": {
+      "id": "brume",
+      "title": "Une voix dans le brouillard",
+      "location": "CIMETIÈRE — COLLINES DU NORD",
+      "narrator": "Quand personne ne répond, ce n'est pas toujours qu'on n'écoute pas.",
+      "text": "Une brume monte entre les tombes — fine, froide, collée au sol.\n\nTu cries leur prénom. Léo, Maya, Sam, Inès. Un par un.\n\nIls marchent devant toi sans ralentir. Tu marches dans leurs pas. Tes pieds ne laissent aucune empreinte dans la boue.\n\nInès parle doucement : « Tu crois qu'·il·elle nous entend, là-haut ? »\n\nMaya serre un paquet de bonbons : « Chaque année on dit la même chose. Et chaque année on revient. »\n\nTu ne comprends pas encore. Mais ton cœur — ou ce qu'il en reste — se serre.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Continuer à les suivre",
+          "vers": "tombe",
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 300,
+      "y": 640
+    },
+    "tombe": {
+      "id": "tombe",
+      "title": "Comme chaque année",
+      "location": "TOMBE — CIMETIÈRE DE SAINT-LUNAIRE",
+      "narrator": "Il arrive un moment où le frisson cesse de jouer. Il regarde en face.",
+      "text": "Ils s'arrêtent devant une pierre que tu connais trop bien.\n\nTon prénom est gravé dessus. {{player}}. 2008–2025.\n\nUne date d'Halloween. Une chute du mur. Une ambulance qui n'est pas arrivée à temps.\n\nMaya pose des bonbons au foot en forme de citrouilles.\n\nLéo allume une bougie : « … Bon. Comme d'hab, {{player}}. On s'est marrés sans toi. Enfin — on a essayé. »\n\nSam murmure : « On est venu·e·s te chercher pour la tournée. T'as raté le meilleur. »\n\nInès regarde le vide à côté de la tombe — exactement là où tu te tiens.\n\n« Tu nous manques », dit-elle.\n\nPas à toi. À la personne sous la pierre.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "flash",
+      "choices": [
+        {
+          "text": "Lire la date sur la pierre",
+          "vers": "revelation",
+          "effects": [{ "stat": "lucidite", "val": 20 }],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 400,
+      "y": 740
+    },
+    "revelation": {
+      "id": "revelation",
+      "title": "Le cinquième, c'était toi",
+      "location": "CIMETIÈRE — MINUIT PASSÉ",
+      "narrator": "Le plus grand twist n'est pas de crier. C'est de comprendre pourquoi personne n'a crié avec toi.",
+      "text": "Tout se recale d'un coup — comme un puzzle qui enfin clique.\n\nLa légende d'Inès. La main qui traverse le manteau. La photo où tu n'existes pas. La bouteille qui « choisit » un vide.\n\nTu n'as pas rejoint la bande ce soir.\n\nTu les as **rejoints** — comme **chaque** Halloween depuis un an.\n\nTu es le fantôme qui croyait encore faire partie des vivants. Tu as passé la soirée à te faire peur avec eux, sans jamais remarquer qu'ils parlaient **de** toi, pas **à** toi.\n\nLéo essuie une larme en riant : « OK, si {{player}} est là, qu'·il·elle fasse tomber la bougie. Je lui fais une place dans mon lit de ouf. »\n\nLa bougie vacille.\n\nPersonne ne voit ta main. Mais la flamme penche quand même.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Souffler la bougie — un dernier frisson pour eux",
+          "vers": "fin_rideau",
+          "effects": [{ "stat": "audace", "val": 10 }],
+          "clickEffect": "pulse"
+        },
+        {
+          "text": "Accepter ce que tu es devenu·e",
+          "vers": "fin_veille",
+          "effects": [{ "stat": "lucidite", "val": 10 }],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 400,
+      "y": 840
+    },
+    "fin_rideau": {
+      "id": "fin_rideau",
+      "title": "Bouh, les gars",
+      "location": "CIMETIÈRE — TOMBE DE SAINT-LUNAIRE",
+      "narrator": "Parfois, le meilleur cri est celui qu'on ressent dans la nuque sans en connaître la source.",
+      "text": "Tu souffles. La bougie s'éteint d'un seul coup.\n\nMaya hurle — vraiment, cette fois. Léo recule en trébuchant sur une racine. Sam lâche presque son téléphone.\n\n« OK OK OK », bredouille Léo, le souffle court. « C'était pas drôle. Enfin si. Enfin… **{{player}}** ? »\n\nInès rit jaune avec des larmes aux yeux : « On le sentait. On le sentait toujours. »\n\nIls courent vers la sortie en hurlant, heureux et terrifiés — exactement comme tu l'aurais voulu.\n\nToi, tu restes près de la pierre, souriant.\n\nTu n'es plus le cinquième oublié. Tu es la blague ultime d'Halloween.\n\nEt franchement ? **Meilleure fin de soirée, impossible.**\n\n**FIN — Le frisson parfait**",
+      "isStart": false,
+      "isEnd": true,
+      "transition": "fade",
+      "choices": [],
+      "x": 280,
+      "y": 940
+    },
+    "fin_veille": {
+      "id": "fin_veille",
+      "title": "Veiller sans gêner",
+      "location": "CIMETIÈRE — AUBE",
+      "narrator": "Certains fantômes hurlent. D'autres gardent juste la chandelle allumée dans le cœur des vivants.",
+      "text": "Tu ne souffles pas sur la bougie.\n\nTu t'assois sur la pierre — enfin, à travers — et tu les regardes partir au petit matin, les yeux gonflés mais soulagés.\n\nMaya se retourne une dernière fois vers la tombe : « À l'année prochaine, {{player}}. Prépare-toi, on reviendra te faire peur. »\n\nTu n'as plus besoin qu'ils te voient pour faire partie de la bande.\n\nTu veilleras sur eux entre les ifs, les citrouilles et les mauvaises blagues.\n\nEt le Halloween prochain, quand Inès racontera l'histoire du cinquième…\n\nTu souriras. Parce que cette fois, **tu connaîtras la chute.**\n\n**FIN — Le gardien du cimetière**",
+      "isStart": false,
+      "isEnd": true,
+      "transition": "fade",
+      "choices": [],
+      "x": 520,
+      "y": 940
+    }
+  }
+}
