@@ -1,0 +1,206 @@
+{
+  "name": "Les Profondeurs — Épisode 4 : Le Sonar",
+  "kids": false,
+  "askPlayerName": true,
+  "pack": "abysses",
+  "stats": [
+    {
+      "id": "audace",
+      "label": "Audace",
+      "start": 15,
+      "max": 100,
+      "color": "#e8934a"
+    },
+    {
+      "id": "lucidite",
+      "label": "Lucidité",
+      "start": 10,
+      "max": 100,
+      "color": "#2a8aa8"
+    }
+  ],
+  "theme": {
+    "bg": "#040810",
+    "bg2": "#081018",
+    "bg3": "#0c1824",
+    "bg4": "#122030",
+    "border": "#1e4058",
+    "accent": "#e8934a",
+    "accent2": "#2a8aa8",
+    "accent3": "#6dfabc",
+    "text": "#d8e8f0",
+    "text2": "#6890a8",
+    "text3": "#3a5868"
+  },
+  "scenes": {
+    "approche": {
+      "id": "approche",
+      "title": "Le ping",
+      "location": "FALAISE EST — 360 m",
+      "narrator": "Un signal régulier sous l'eau, c'est une main tendue — ou un leurre.",
+      "text": "Tu quittes la terrasse minière — épisode 3 derrière toi, le portail toujours devant.\n\nLe **ping** revient. Régulier. Mécanique. **Toutes les quatre secondes.**\n\nTon HUD :\n\n**450 m restants · prof. 360 m · lampe 18 % · cap 214°**\n\nTu nages vers le signal. La falaise cède la place à une **structure** — pylônes tordus, dôme écrasé, antenne sonar brisée qui pointe vers le haut comme un doigt coupé.\n\n**RELAIS N-7.** Une station minière Fableris. Abandonnée. Allumée, quand même.",
+      "isStart": true,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Accélérer — atteindre la station avant que la lampe lâche",
+          "vers": "station",
+          "effects": [{ "stat": "audace", "val": 10 }],
+          "clickEffect": "pulse"
+        },
+        {
+          "text": "Couper ton sonar — éviter les interférences",
+          "vers": "station",
+          "effects": [{ "stat": "lucidite", "val": 10 }],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 400,
+      "y": 40
+    },
+    "station": {
+      "id": "station",
+      "title": "Relais N-7",
+      "location": "RELAIS N-7 — EXTÉRIEUR · 410 m",
+      "narrator": "Une station qui pulse dans le noir attire ceux qui cherchent — et ceux qui guettent.",
+      "text": "Tu contournes le dôme.\n\nDes **lumières d'urgence** clignotent sous l'eau — vert malade, faible. Pas ta lampe. Pas le portail. Autre chose.\n\nLe ping vient **de l'intérieur**. Plus fort, maintenant. Chaque pulse fait vibrer ta combinaison — résonance dans la cage thoracique.\n\nUne trappe d'accès : ouverte. Eau stable. Pas de courant.\n\nTa lampe : **17 %**.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Descendre par la trappe",
+          "vers": "interieur",
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 400,
+      "y": 140
+    },
+    "interieur": {
+      "id": "interieur",
+      "title": "Salle des échos",
+      "location": "RELAIS N-7 — NIVEAU 1 · 430 m",
+      "narrator": "Dans une salle sonar, chaque paroi renvoie une version différente de la vérité.",
+      "text": "Tu entres.\n\nDes consoles mortes. Des câbles arrachés. Et au centre, l'**émetteur** — sphère fissurée, toujours active, ping toutes les quatre secondes.\n\nTon sonar se rallume **seul**.\n\n**Ping.** Cible : **devant toi**, 5 m.\n\nTu avances. Rien.\n\n**Ping.** Cible : **derrière toi**, 3 m.\n\n**Ping.** Cible : **partout**. Douze contacts. Vingt. Le HUD devient une constellation de menaces.\n\nLa radio :\n\n*« —{{player}}… ne fais pas confiance au relais… coupe-le… — »*\n\nStatic — noyée par le ping suivant.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Suivre le contact le plus proche — foncer",
+          "vers": "mensonge",
+          "effects": [{ "stat": "audace", "val": 8 }],
+          "clickEffect": "pulse"
+        },
+        {
+          "text": "Chercher le panneau d'alimentation du relais",
+          "vers": "mensonge",
+          "effects": [{ "stat": "lucidite", "val": 8 }],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 400,
+      "y": 240
+    },
+    "mensonge": {
+      "id": "mensonge",
+      "title": "Carte fausse",
+      "location": "RELAIS N-7 — SALLE SONAR · 440 m",
+      "narrator": "Quand tous les capteurs crient en même temps, le silence devient une boussole.",
+      "text": "Le sonar affiche le portail **au-dessus** de toi — à 200 m de profondeur. Impossible. Tu es à **440 m**.\n\nPuis **en dessous**, à 900 m. Puis **de côté**, à 2 m — dans le mur.\n\nUne rampe de maintenance descend vers le niveau 2. Marquée **SORTIE EST**. Le sonar insiste : **NE DESCENDS PAS.**\n\nTa lampe **clignote** — synchronisée avec le ping. Comme si le relais **pompait** ta batterie.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "🔦 Garder la lampe — suivre le contact le plus fort vers le bas",
+          "vers": "audace_puits",
+          "effects": [{ "stat": "audace", "val": 15 }],
+          "clickEffect": "pulse"
+        },
+        {
+          "text": "🫧 Éteindre lampe et sonar — descendre la rampe à l'aveugle",
+          "vers": "lucidite_rampe",
+          "effects": [{ "stat": "lucidite", "val": 15 }],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 400,
+      "y": 340
+    },
+    "audace_puits": {
+      "id": "audace_puits",
+      "title": "Le puits d'écho",
+      "location": "RELAIS N-7 — PUITS · 470 m",
+      "narrator": "Suivre un signal qui ment, c'est parfois tomber exactement où il fallait.",
+      "text": "Tu plonges dans un puits de service — vertical, étroit.\n\nLe contact « le plus fort » te guide. Tu **crois**.\n\nÀ **470 m**, la paroi s'ouvre brusquement. Ta lampe — **14 %**, tremblante — balaie une **colonne** de bulles montantes. Pas naturelles. **Respiration** mécanique. Une pompe encore active, quelque part.\n\nLe ping du relais faiblit enfin.\n\nEt dans le silence qui suit, un bruit **grave** — lointain, régulier. Pas le sonar. Pas la station.\n\n**Cliquetis.** Métal sur roche. En masse.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "flash",
+      "choices": [
+        {
+          "text": "Sortir du puits — chercher la source du bruit",
+          "vers": "sortie",
+          "effects": [{ "stat": "audace", "val": 10 }],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 280,
+      "y": 440
+    },
+    "lucidite_rampe": {
+      "id": "lucidite_rampe",
+      "title": "Rampe muette",
+      "location": "RELAIS N-7 — NIVEAU 2 · 465 m",
+      "narrator": "Sans écran ni faisceau, il reste la gravité — honnête, lente, implacable.",
+      "text": "Tu coupes tout.\n\nNoir total. Seule la rampe sous tes bottes — angle connu, métal rugueux, **marques Fableris** gravées tous les dix mètres. Descente. Descente.\n\nTu comptes. Quarante marques. Cinquante.\n\nQuand tu rallumes : **16 %** — le relais ne te vole plus la batterie.\n\nNiveau 2 : salle de stockage inondée. Caisses flottantes. Sur l'une, un stencil : **SECTEUR 7 — MATÉRIEL LOURD**.\n\nLe cliquetis métallique vient **d'en bas**. Plus net, maintenant.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Traverser le stockage vers la sortie est",
+          "vers": "sortie",
+          "effects": [{ "stat": "lucidite", "val": 10 }],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 520,
+      "y": 440
+    },
+    "sortie": {
+      "id": "sortie",
+      "title": "Sortie est",
+      "location": "RELAIS N-7 — ÉVACUATION · 505 m",
+      "narrator": "Quitter une station qui ment, c'est retrouver un océan qui, lui, n'a pas besoin de mentir.",
+      "text": "Tu gagnes la sortie est.\n\nUn tunnel incliné — deux cents mètres de roche percée, peut-être plus. L'eau est plus **froide** ici. Plus **dense**.\n\nTu en émerges.\n\nLe HUD se recalibre enfin — une seule ligne, stable :\n\n**290 m restants · prof. 505 m · cap 214°**\n\nTa lampe : **13 %**.\n\nDevant toi : plus de falaise. Un **champ de débris** — coques, grues, containers, épaves empilées sur des kilomètres, aussi loin que ta lumière porte.\n\nLe cliquetis ne s'arrête pas.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Noter la profondeur et avancer vers le champ",
+          "vers": "fin_sonar",
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 400,
+      "y": 540
+    },
+    "fin_sonar": {
+      "id": "fin_sonar",
+      "title": "Sous les épaves",
+      "location": "LISIÈRE DU CHAMP — 515 m",
+      "narrator": "Un cimetière de machines sous l'eau ne demande pas la permission pour grandir.",
+      "text": "Tu t'arrêtes à la lisière.\n\nUne grue tordue te fait face — bras cassé, hook ouvert comme une mâchoire.\n\nLa lueur orange pulse **entre** les épaves. Plus proche. **290 mètres** encore.\n\nTa lampe : **12 %**. Le sonar de ta combinaison reste **éteint** — tu as appris.\n\nQuelque chose **bouge** dans le champ. Lent. Lourd. Trop grand pour être un courant.\n\n**FIN ÉPISODE 4 — Le Sonar**\n\n*Épisode 5 : Le Champ de débris — bientôt*",
+      "isStart": false,
+      "isEnd": true,
+      "transition": "fade",
+      "choices": [],
+      "x": 400,
+      "y": 640
+    }
+  }
+}

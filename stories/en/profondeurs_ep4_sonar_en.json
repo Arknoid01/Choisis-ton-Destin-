@@ -1,0 +1,206 @@
+{
+  "name": "The Depths — Episode 4: Sonar",
+  "kids": false,
+  "askPlayerName": true,
+  "pack": "abysses",
+  "stats": [
+    {
+      "id": "audace",
+      "label": "Boldness",
+      "start": 15,
+      "max": 100,
+      "color": "#e8934a"
+    },
+    {
+      "id": "lucidite",
+      "label": "Clarity",
+      "start": 10,
+      "max": 100,
+      "color": "#2a8aa8"
+    }
+  ],
+  "theme": {
+    "bg": "#040810",
+    "bg2": "#081018",
+    "bg3": "#0c1824",
+    "bg4": "#122030",
+    "border": "#1e4058",
+    "accent": "#e8934a",
+    "accent2": "#2a8aa8",
+    "accent3": "#6dfabc",
+    "text": "#d8e8f0",
+    "text2": "#6890a8",
+    "text3": "#3a5868"
+  },
+  "scenes": {
+    "approche": {
+      "id": "approche",
+      "title": "The Ping",
+      "location": "EAST CLIFF — 360 m",
+      "narrator": "A steady signal underwater is an outstretched hand — or a lure.",
+      "text": "You leave the mining terrace — episode 3 behind you, the portal still ahead.\n\nThe **ping** returns. Steady. Mechanical. **Every four seconds.**\n\nYour HUD:\n\n**450 m remaining · depth 360 m · lamp 18% · heading 214°**\n\nYou swim toward the signal. The cliff gives way to a **structure** — twisted pylons, crushed dome, broken sonar antenna pointing upward like a severed finger.\n\n**RELAY N-7.** A Fableris mining station. Abandoned. Lit, somehow.",
+      "isStart": true,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Speed up — reach the station before the lamp fails",
+          "vers": "station",
+          "effects": [{ "stat": "audace", "val": 10 }],
+          "clickEffect": "pulse"
+        },
+        {
+          "text": "Switch off your sonar — avoid interference",
+          "vers": "station",
+          "effects": [{ "stat": "lucidite", "val": 10 }],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 400,
+      "y": 40
+    },
+    "station": {
+      "id": "station",
+      "title": "Relay N-7",
+      "location": "RELAY N-7 — EXTERIOR · 410 m",
+      "narrator": "A station pulsing in the black draws those who search — and those who wait.",
+      "text": "You circle the dome.\n\n**Emergency lights** blink underwater — sick green, faint. Not your lamp. Not the portal. Something else.\n\nThe ping comes **from inside**. Louder now. Each pulse makes your suit vibrate — resonance in your ribcage.\n\nAn access hatch: open. Water stable. No current.\n\nYour lamp: **17%**.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Descend through the hatch",
+          "vers": "interieur",
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 400,
+      "y": 140
+    },
+    "interieur": {
+      "id": "interieur",
+      "title": "Echo Chamber",
+      "location": "RELAY N-7 — LEVEL 1 · 430 m",
+      "narrator": "In a sonar room, every wall returns a different version of the truth.",
+      "text": "You enter.\n\nDead consoles. Torn cables. And at the centre, the **emitter** — cracked sphere, still active, ping every four seconds.\n\nYour sonar switches on **by itself**.\n\n**Ping.** Target: **ahead of you**, 5 m.\n\nYou move forward. Nothing.\n\n**Ping.** Target: **behind you**, 3 m.\n\n**Ping.** Target: **everywhere**. Twelve contacts. Twenty. The HUD becomes a constellation of threats.\n\nThe radio:\n\n*« —{{player}}… don't trust the relay… shut it down… — »*\n\nStatic — drowned by the next ping.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Follow the nearest contact — charge",
+          "vers": "mensonge",
+          "effects": [{ "stat": "audace", "val": 8 }],
+          "clickEffect": "pulse"
+        },
+        {
+          "text": "Find the relay power panel",
+          "vers": "mensonge",
+          "effects": [{ "stat": "lucidite", "val": 8 }],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 400,
+      "y": 240
+    },
+    "mensonge": {
+      "id": "mensonge",
+      "title": "False Map",
+      "location": "RELAY N-7 — SONAR ROOM · 440 m",
+      "narrator": "When every sensor screams at once, silence becomes a compass.",
+      "text": "The sonar shows the portal **above** you — at 200 m depth. Impossible. You're at **440 m**.\n\nThen **below**, at 900 m. Then **to the side**, at 2 m — in the wall.\n\nA maintenance ramp descends to level 2. Marked **EAST EXIT**. The sonar insists: **DO NOT DESCEND.**\n\nYour lamp **flickers** — synced with the ping. As if the relay were **draining** your battery.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "🔦 Keep the lamp on — follow the strongest contact downward",
+          "vers": "audace_puits",
+          "effects": [{ "stat": "audace", "val": 15 }],
+          "clickEffect": "pulse"
+        },
+        {
+          "text": "🫧 Switch off lamp and sonar — descend the ramp blind",
+          "vers": "lucidite_rampe",
+          "effects": [{ "stat": "lucidite", "val": 15 }],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 400,
+      "y": 340
+    },
+    "audace_puits": {
+      "id": "audace_puits",
+      "title": "Echo Shaft",
+      "location": "RELAY N-7 — SHAFT · 470 m",
+      "narrator": "Following a signal that lies sometimes drops you exactly where you needed to be.",
+      "text": "You dive into a service shaft — vertical, narrow.\n\nThe « strongest » contact guides you. You **think**.\n\nAt **470 m**, the wall opens abruptly. Your lamp — **14%**, trembling — sweeps a **column** of rising bubbles. Not natural. **Mechanical breathing**. A pump still active, somewhere.\n\nThe relay ping finally weakens.\n\nAnd in the silence that follows, a **deep** sound — distant, steady. Not sonar. Not the station.\n\n**Clattering.** Metal on rock. In bulk.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "flash",
+      "choices": [
+        {
+          "text": "Leave the shaft — find the source of the noise",
+          "vers": "sortie",
+          "effects": [{ "stat": "audace", "val": 10 }],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 280,
+      "y": 440
+    },
+    "lucidite_rampe": {
+      "id": "lucidite_rampe",
+      "title": "Silent Ramp",
+      "location": "RELAY N-7 — LEVEL 2 · 465 m",
+      "narrator": "Without screen or beam, gravity remains — honest, slow, relentless.",
+      "text": "You cut everything.\n\nTotal black. Only the ramp under your boots — known angle, rough metal, **Fableris marks** carved every ten metres. Down. Down.\n\nYou count. Forty marks. Fifty.\n\nWhen you switch on again: **16%** — the relay no longer steals your battery.\n\nLevel 2: flooded storage room. Floating crates. On one, a stencil: **SECTOR 7 — HEAVY EQUIPMENT**.\n\nThe metallic clatter comes **from below**. Clearer now.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Cross the storage toward the east exit",
+          "vers": "sortie",
+          "effects": [{ "stat": "lucidite", "val": 10 }],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 520,
+      "y": 440
+    },
+    "sortie": {
+      "id": "sortie",
+      "title": "East Exit",
+      "location": "RELAY N-7 — EVACUATION · 505 m",
+      "narrator": "Leaving a station that lies means finding an ocean that doesn't need to.",
+      "text": "You reach the east exit.\n\nAn inclined tunnel — two hundred metres of drilled rock, maybe more. The water is **colder** here. **Denser**.\n\nYou emerge.\n\nThe HUD finally recalibrates — one line, stable:\n\n**290 m remaining · depth 505 m · heading 214°**\n\nYour lamp: **13%**.\n\nAhead: no more cliff. A **debris field** — hulls, cranes, containers, wrecks stacked for kilometres, as far as your light reaches.\n\nThe clattering doesn't stop.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Note the depth and move toward the field",
+          "vers": "fin_sonar",
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 400,
+      "y": 540
+    },
+    "fin_sonar": {
+      "id": "fin_sonar",
+      "title": "Below the Wrecks",
+      "location": "FIELD EDGE — 515 m",
+      "narrator": "A machine graveyard underwater doesn't ask permission to grow.",
+      "text": "You stop at the edge.\n\nA twisted crane faces you — broken arm, hook open like a jaw.\n\nThe orange glow pulses **between** the wrecks. Closer. **290 metres** still to go.\n\nYour lamp: **12%**. Your suit sonar stays **off** — you've learned.\n\nSomething **moves** in the field. Slow. Heavy. Too large to be a current.\n\n**END EPISODE 4 — Sonar**\n\n*Episode 5: The Debris Field — coming soon*",
+      "isStart": false,
+      "isEnd": true,
+      "transition": "fade",
+      "choices": [],
+      "x": 400,
+      "y": 640
+    }
+  }
+}

@@ -1,0 +1,206 @@
+{
+  "name": "Las Profundidades — Episodio 4: El Sonar",
+  "kids": false,
+  "askPlayerName": true,
+  "pack": "abysses",
+  "stats": [
+    {
+      "id": "audace",
+      "label": "Audacia",
+      "start": 15,
+      "max": 100,
+      "color": "#e8934a"
+    },
+    {
+      "id": "lucidite",
+      "label": "Lucidez",
+      "start": 10,
+      "max": 100,
+      "color": "#2a8aa8"
+    }
+  ],
+  "theme": {
+    "bg": "#040810",
+    "bg2": "#081018",
+    "bg3": "#0c1824",
+    "bg4": "#122030",
+    "border": "#1e4058",
+    "accent": "#e8934a",
+    "accent2": "#2a8aa8",
+    "accent3": "#6dfabc",
+    "text": "#d8e8f0",
+    "text2": "#6890a8",
+    "text3": "#3a5868"
+  },
+  "scenes": {
+    "approche": {
+      "id": "approche",
+      "title": "El ping",
+      "location": "ACANTILADO ESTE — 360 m",
+      "narrator": "Una señal regular bajo el agua es una mano tendida — o un señuelo.",
+      "text": "Abandonas la terraza minera — episodio 3 atrás, el portal aún delante.\n\nEl **ping** vuelve. Regular. Mecánico. **Cada cuatro segundos.**\n\nTu HUD:\n\n**450 m restantes · prof. 360 m · linterna 18 % · rumbo 214°**\n\nNadas hacia la señal. El acantilado cede ante una **estructura** — pilotes retorcidos, cúpula aplastada, antena de sonar rota que apunta hacia arriba como un dedo cortado.\n\n**RELEVO N-7.** Una estación minera Fableris. Abandonada. Encendida, de todos modos.",
+      "isStart": true,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Acelerar — alcanzar la estación antes de que falle la linterna",
+          "vers": "station",
+          "effects": [{ "stat": "audace", "val": 10 }],
+          "clickEffect": "pulse"
+        },
+        {
+          "text": "Apagar tu sonar — evitar interferencias",
+          "vers": "station",
+          "effects": [{ "stat": "lucidite", "val": 10 }],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 400,
+      "y": 40
+    },
+    "station": {
+      "id": "station",
+      "title": "Relevo N-7",
+      "location": "RELEVO N-7 — EXTERIOR · 410 m",
+      "narrator": "Una estación que late en la oscuridad atrae a quienes buscan — y a quienes acechan.",
+      "text": "Rodeas la cúpula.\n\n**Luces de emergencia** parpadean bajo el agua — verde enfermo, débil. No tu linterna. No el portal. Otra cosa.\n\nEl ping viene **de dentro**. Más fuerte ahora. Cada pulso hace vibrar tu traje — resonancia en el pecho.\n\nUna escotilla de acceso: abierta. Agua estable. Sin corriente.\n\nTu linterna: **17 %**.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Descender por la escotilla",
+          "vers": "interieur",
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 400,
+      "y": 140
+    },
+    "interieur": {
+      "id": "interieur",
+      "title": "Sala de ecos",
+      "location": "RELEVO N-7 — NIVEL 1 · 430 m",
+      "narrator": "En una sala de sonar, cada pared devuelve una versión distinta de la verdad.",
+      "text": "Entras.\n\nConsolas muertas. Cables arrancados. Y en el centro, el **emisor** — esfera agrietada, aún activa, ping cada cuatro segundos.\n\nTu sonar se enciende **solo**.\n\n**Ping.** Objetivo: **delante de ti**, a 5 m.\n\nAvanzas. Nada.\n\n**Ping.** Objetivo: **detrás de ti**, a 3 m.\n\n**Ping.** Objetivo: **en todas partes**. Doce contactos. Veinte. El HUD se vuelve una constelación de amenazas.\n\nLa radio:\n\n*« —{{player}}… no confíes en el relevo… apágalo… — »*\n\nEstática — ahogada por el siguiente ping.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Seguir el contacto más cercano — lanzarte",
+          "vers": "mensonge",
+          "effects": [{ "stat": "audace", "val": 8 }],
+          "clickEffect": "pulse"
+        },
+        {
+          "text": "Buscar el panel de alimentación del relevo",
+          "vers": "mensonge",
+          "effects": [{ "stat": "lucidite", "val": 8 }],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 400,
+      "y": 240
+    },
+    "mensonge": {
+      "id": "mensonge",
+      "title": "Mapa falso",
+      "location": "RELEVO N-7 — SALA SONAR · 440 m",
+      "narrator": "Cuando todos los sensores gritan a la vez, el silencio se vuelve brújula.",
+      "text": "El sonar muestra el portal **encima** de ti — a 200 m de profundidad. Imposible. Estás a **440 m**.\n\nLuego **abajo**, a 900 m. Luego **al lado**, a 2 m — en la pared.\n\nUna rampa de mantenimiento desciende al nivel 2. Marcada **SALIDA ESTE**. El sonar insiste: **NO DESCENDAS.**\n\nTu linterna **parpadea** — sincronizada con el ping. Como si el relevo **drenara** tu batería.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "🔦 Mantener la linterna — seguir el contacto más fuerte hacia abajo",
+          "vers": "audace_puits",
+          "effects": [{ "stat": "audace", "val": 15 }],
+          "clickEffect": "pulse"
+        },
+        {
+          "text": "🫧 Apagar linterna y sonar — bajar la rampa a ciegas",
+          "vers": "lucidite_rampe",
+          "effects": [{ "stat": "lucidite", "val": 15 }],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 400,
+      "y": 340
+    },
+    "audace_puits": {
+      "id": "audace_puits",
+      "title": "Pozo de eco",
+      "location": "RELEVO N-7 — POZO · 470 m",
+      "narrator": "Seguir una señal que miente a veces te deja exactamente donde debías estar.",
+      "text": "Te lanzas a un pozo de servicio — vertical, estrecho.\n\nEl contacto « más fuerte » te guía. **Crees**.\n\nA **470 m**, la pared se abre de golpe. Tu linterna — **14 %**, temblorosa — barre una **columna** de burbujas ascendentes. No naturales. **Respiración** mecánica. Una bomba aún activa, en algún lugar.\n\nEl ping del relevo por fin se debilita.\n\nY en el silencio que sigue, un ruido **grave** — lejano, regular. No el sonar. No la estación.\n\n**Chasquido.** Metal sobre roca. En masa.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "flash",
+      "choices": [
+        {
+          "text": "Salir del pozo — buscar la fuente del ruido",
+          "vers": "sortie",
+          "effects": [{ "stat": "audace", "val": 10 }],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 280,
+      "y": 440
+    },
+    "lucidite_rampe": {
+      "id": "lucidite_rampe",
+      "title": "Rampa muda",
+      "location": "RELEVO N-7 — NIVEL 2 · 465 m",
+      "narrator": "Sin pantalla ni haz, queda la gravedad — honesta, lenta, implacable.",
+      "text": "Apagas todo.\n\nOscuridad total. Solo la rampa bajo tus botas — ángulo conocido, metal áspero, **marcas Fableris** grabadas cada diez metros. Descenso. Descenso.\n\nCuentas. Cuarenta marcas. Cincuenta.\n\nCuando vuelves a encender: **16 %** — el relevo ya no te roba la batería.\n\nNivel 2: almacén inundado. Cajas flotantes. En una, un stencil: **SECTOR 7 — MATERIAL PESADO**.\n\nEl chasquido metálico viene **de abajo**. Más claro ahora.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Atravesar el almacén hacia la salida este",
+          "vers": "sortie",
+          "effects": [{ "stat": "lucidite", "val": 10 }],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 520,
+      "y": 440
+    },
+    "sortie": {
+      "id": "sortie",
+      "title": "Salida este",
+      "location": "RELEVO N-7 — EVACUACIÓN · 505 m",
+      "narrator": "Dejar una estación que miente es volver a un océano que no necesita hacerlo.",
+      "text": "Alcanzas la salida este.\n\nUn túnel inclinado — doscientos metros de roca perforada, quizá más. El agua es más **fría** aquí. Más **densa**.\n\nEmerges.\n\nEl HUD por fin se recalibra — una sola línea, estable:\n\n**290 m restantes · prof. 505 m · rumbo 214°**\n\nTu linterna: **13 %**.\n\nDelante: ya no hay acantilado. Un **campo de escombros** — cascos, grúas, contenedores, naufragios apilados durante kilómetros, tan lejos como alcanza tu luz.\n\nEl chasquido no se detiene.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Anotar la profundidad y avanzar hacia el campo",
+          "vers": "fin_sonar",
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 400,
+      "y": 540
+    },
+    "fin_sonar": {
+      "id": "fin_sonar",
+      "title": "Bajo los naufragios",
+      "location": "ORILLA DEL CAMPO — 515 m",
+      "narrator": "Un cementerio de máquinas bajo el agua no pide permiso para crecer.",
+      "text": "Te detienes en la orilla.\n\nUna grúa retorcida te mira de frente — brazo roto, gancho abierto como una mandíbula.\n\nEl resplandor naranja late **entre** los restos. Más cerca. **290 metros** aún.\n\nTu linterna: **12 %**. El sonar de tu traje permanece **apagado** — has aprendido.\n\nAlgo **se mueve** en el campo. Lento. Pesado. Demasiado grande para ser una corriente.\n\n**FIN EPISODIO 4 — El Sonar**\n\n*Episodio 5: El Campo de escombros — pronto*",
+      "isStart": false,
+      "isEnd": true,
+      "transition": "fade",
+      "choices": [],
+      "x": 400,
+      "y": 640
+    }
+  }
+}
