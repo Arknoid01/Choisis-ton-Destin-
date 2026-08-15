@@ -748,11 +748,18 @@ function scrollToPackHash() {
   const hash = location.hash;
   if (!hash || !hash.startsWith('#pack-')) return;
   const packId = hash.slice(6);
-  expandPackSection(packId);
-  requestAnimationFrame(() => {
-    const el = document.querySelector(hash);
-    if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-  });
+  if (getLibraryViewMode() === 'list') {
+    expandPackSection(packId);
+    requestAnimationFrame(() => {
+      const el = document.querySelector(hash);
+      if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  } else {
+    requestAnimationFrame(() => {
+      const el = document.getElementById('shelf-' + packId);
+      if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  }
 }
 
 function getExpandedPacks() {
@@ -1157,6 +1164,7 @@ function getOnboardTipDismissed() {
 function dismissOnboardTip() {
   const tip = document.getElementById('onboard-tip');
   if (tip) tip.style.display = 'none';
+  try { sessionStorage.setItem('sf_library_tip_hidden', '1'); } catch (e) {}
   const checkbox = document.getElementById('tip-hide-checkbox');
   if (checkbox && checkbox.checked) {
     try { localStorage.setItem('sf_library_tip_dismissed', '1'); } catch(e) {}
@@ -1166,6 +1174,7 @@ function initOnboardTip() {
   const tip = document.getElementById('onboard-tip');
   if (!tip) return;
   if (getOnboardTipDismissed()) { tip.style.display = 'none'; return; }
+  try { if (sessionStorage.getItem('sf_library_tip_hidden') === '1') { tip.style.display = 'none'; return; } } catch (e) {}
   const txt = { fr:'👆 Ce bouton bascule entre la vue étagère et la vue liste classique — choisis celle que tu préfères !',
                 en:'👆 This button switches between the shelf view and the classic list view — pick whichever you prefer!',
                 es:'👆 Este botón alterna entre la vista de estantería y la vista de lista clásica — ¡elige la que prefieras!' };
@@ -1174,9 +1183,10 @@ function initOnboardTip() {
   const l = document.getElementById('onboard-tip-checklabel');
   if (t) t.textContent = txt[currentLang] || txt.fr;
   if (l) l.textContent = lbl[currentLang] || lbl.fr;
-  const checkbox = document.getElementById('tip-hide-checkbox');
-  if (checkbox) checkbox.checked = false;
-  tip.style.display = 'block';
+  if (!window._libraryTipInitialized) {
+    window._libraryTipInitialized = true;
+    tip.style.display = 'block';
+  }
 }
 
 const SHELF_TONES = {
@@ -1220,7 +1230,9 @@ function renderShelfLibrary() {
     html += SFStoryMeta.spotlightBanner(filtered, currentLang, 'launchStory', 'openCommunityFromLibrary');
   }
 
-  const esc = (s) => String(s == null ? '' : s).replace(/"/g, '&quot;');
+  const escAttr = (s) => String(s == null ? '' : s).replace(/"/g, '&quot;');
+  const escHtml = (s) => window.SFShared ? SFShared.esc(s) : String(s == null ? '' : s);
+  const isCommunityStory = (g) => window.SFStoryMeta ? SFStoryMeta.isCommunity(g) : (g.community === true || g.community === 'true');
 
   if (bookmarks.length) {
     const bmTitle = { fr:'Reprendre', en:'Continue', es:'Continuar' }[currentLang] || 'Reprendre';
@@ -1231,9 +1243,9 @@ function renderShelfLibrary() {
       const game = allGames.find(g => g.file === bm.storyFile);
       const date = new Date(bm.savedAt).toLocaleDateString();
       html += `<div class="book tone-bookmarks" onclick="openBookPopover(this)"
-        data-icon="${esc(game?.icon || '📖')}" data-title="${esc(bm.storyName)}" data-author=""
-        data-desc="📍 ${esc(bm.sceneTitle)} — ${esc(date)}" data-locked="0" data-action="resume" data-file="${esc(bm.storyFile)}">
-        <div class="book-icon">${game?.icon || '📖'}</div><div class="book-title">${bm.storyName}</div></div>`;
+        data-icon="${escAttr(game?.icon || '📖')}" data-title="${escAttr(bm.storyName)}" data-author=""
+        data-desc="📍 ${escAttr(bm.sceneTitle)} — ${escAttr(date)}" data-locked="0" data-action="resume" data-file="${escAttr(bm.storyFile)}">
+        <div class="book-icon">${game?.icon || '📖'}</div><div class="book-title">${escHtml(bm.storyName)}</div></div>`;
     });
     html += `</div><div class="shelf-plank"></div></div>`;
   }
@@ -1291,15 +1303,15 @@ function renderShelfLibrary() {
       stories.forEach(g => {
         const locked = !isUnlocked;
         const isPortal = g.portal === true;
-        const isCommunity = !!g.author;
+        const isCommunity = isCommunityStory(g);
         const action = locked ? 'buy' : (isPortal ? 'none' : 'launch');
         html += `<div class="book ${tone}${locked ? ' locked' : ''}" onclick="openBookPopover(this)"
-          data-icon="${esc(g.kids ? '🧒' : (g.icon || '📖'))}" data-title="${esc(g.title)}"
-          data-author="${esc(g.author || '')}" data-desc="${esc(g.desc || '')}"
-          data-locked="${locked ? '1' : '0'}" data-action="${action}" data-file="${esc(g.file)}" data-pack="${esc(packId)}">
+          data-icon="${escAttr(g.kids ? '🧒' : (g.icon || '📖'))}" data-title="${escAttr(g.title)}"
+          data-author="${escAttr(g.author || '')}" data-desc="${escAttr(g.desc || '')}"
+          data-locked="${locked ? '1' : '0'}" data-action="${action}" data-file="${escAttr(g.file)}" data-pack="${escAttr(packId)}">
           ${isCommunity ? '<div class="book-community-dot"></div>' : ''}
           <div class="book-icon">${g.kids ? '🧒' : (g.icon || '📖')}</div>
-          <div class="book-title">${g.title}</div>
+          <div class="book-title">${escHtml(g.title)}</div>
           ${locked ? '<div class="book-lock">🔒</div>' : ''}
         </div>`;
       });
@@ -1315,6 +1327,12 @@ function renderShelfLibrary() {
 let shelfSelectedBook = null;
 let shelfSelectedRow = null;
 let shelfSelectedBlock = null;
+
+const POPOVER_UI = {
+  fr: { by: 'Par', play: '▶ Jouer', resume: '▶ Reprendre', unlock: '🔒 Débloquer le pack', portal: '🔗 Accessible via portail' },
+  en: { by: 'By', play: '▶ Play', resume: '▶ Resume', unlock: '🔒 Unlock pack', portal: '🔗 Access via portal' },
+  es: { by: 'Por', play: '▶ Jugar', resume: '▶ Continuar', unlock: '🔒 Desbloquear pack', portal: '🔗 Accesible por portal' }
+};
 
 function openBookPopover(el) {
   if (shelfSelectedBook && shelfSelectedBook !== el) shelfSelectedBook.classList.remove('selected');
@@ -1333,23 +1351,24 @@ function openBookPopover(el) {
 
   const locked = el.dataset.locked === '1';
   const action = el.dataset.action;
+  const ui = POPOVER_UI[currentLang] || POPOVER_UI.fr;
   document.getElementById('bp-icon').textContent = el.dataset.icon || '📖';
   document.getElementById('bp-title').textContent = el.dataset.title || '';
-  document.getElementById('bp-author').textContent = el.dataset.author ? 'Par ' + el.dataset.author : '';
+  document.getElementById('bp-author').textContent = el.dataset.author ? `${ui.by} ${el.dataset.author}` : '';
   document.getElementById('bp-desc').textContent = el.dataset.desc || '';
 
   const playBtn = document.getElementById('bp-play');
   if (action === 'buy') {
-    playBtn.textContent = '🔒 Débloquer le pack';
+    playBtn.textContent = ui.unlock;
     playBtn.onclick = () => { closeBookPopover(); buyPack(el.dataset.pack); };
   } else if (action === 'resume') {
-    playBtn.textContent = '▶ Reprendre';
+    playBtn.textContent = ui.resume;
     playBtn.onclick = () => { closeBookPopover(); resumeStory(el.dataset.file); };
   } else if (action === 'none') {
-    playBtn.textContent = '🔗 Accessible via portail';
+    playBtn.textContent = ui.portal;
     playBtn.onclick = () => closeBookPopover();
   } else {
-    playBtn.textContent = '▶ Jouer';
+    playBtn.textContent = ui.play;
     playBtn.onclick = () => { closeBookPopover(); launchStory(el.dataset.file); };
   }
 
