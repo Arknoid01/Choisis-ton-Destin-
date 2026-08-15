@@ -342,8 +342,7 @@ html,body { height:100%; background:#0d0d0f; color:#e8e0d0; font-family:'Cormora
 .onboard-tip-row label { font-family:'Lato',sans-serif; font-size:10px; color:var(--dim); cursor:pointer; }
 .onboard-tip-close { position:absolute; top:8px; right:10px; font-size:13px; color:var(--dim); cursor:pointer; }
 
-.shelf-block { margin-bottom:10px; transition:margin-top .45s cubic-bezier(.16,1,.3,1); }
-.shelf-block.has-selected { margin-top:38px; }
+.shelf-block { margin-bottom:10px; }
 .shelf-block-header { display:flex; flex-direction:column; align-items:center; text-align:center; gap:3px; margin-bottom:6px; }
 .shelf-block-header-main { display:flex; align-items:center; gap:7px; }
 .shelf-block-icon { font-size:16px; }
@@ -356,14 +355,16 @@ html,body { height:100%; background:#0d0d0f; color:#e8e0d0; font-family:'Cormora
 .shelf-block-price.soon { color:var(--gold2); border-color:var(--gold3); }
 
 .bookcase-row {
-  display:flex; flex-wrap:wrap; align-items:flex-end; justify-content:flex-start;
-  gap:6px; padding:12px 6px 0;
-  max-height:290px; overflow-y:auto; overflow-x:hidden;
+  display:flex; flex-wrap:nowrap; align-items:flex-end; justify-content:flex-start;
+  gap:8px; padding:48px 10px 6px;
+  min-height:210px; overflow-x:auto; overflow-y:visible;
+  scroll-behavior:smooth; scroll-snap-type:x proximity;
   -webkit-overflow-scrolling:touch;
+  scrollbar-width:thin; scrollbar-color:var(--border) transparent;
 }
-.bookcase-row::-webkit-scrollbar { width:4px; }
+.bookcase-row::-webkit-scrollbar { height:5px; }
 .bookcase-row::-webkit-scrollbar-thumb { background:var(--border); border-radius:4px; }
-.bookcase-row.has-selected { overflow:visible; max-height:none; }
+.bookcase-row::-webkit-scrollbar-track { background:transparent; }
 
 .shelf-plank {
   height:10px; margin:0 4px 18px;
@@ -381,8 +382,9 @@ html,body { height:100%; background:#0d0d0f; color:#e8e0d0; font-family:'Cormora
     inset 0 -2px 0 rgba(0,0,0,0.35),
     1px 2px 5px rgba(0,0,0,0.45);
   border:1px solid rgba(0,0,0,0.35); border-right:2px solid rgba(0,0,0,0.3);
-  transition:transform .34s cubic-bezier(.16,1,.3,1), box-shadow .34s ease;
+  transition:transform .48s cubic-bezier(.22,1,.36,1), box-shadow .48s ease, opacity .32s ease;
   transform-origin:bottom center;
+  scroll-snap-align:center;
 }
 .book::before {
   content:''; position:absolute; top:8px; bottom:8px; left:4px; width:1px;
@@ -390,13 +392,13 @@ html,body { height:100%; background:#0d0d0f; color:#e8e0d0; font-family:'Cormora
 }
 .book:active { transform:scale(1.03) translateY(-2px); }
 .book.selected {
-  transform:scale(1.28) translateY(-10px);
+  transform:scale(1.2) translateY(-12px);
   z-index:50;
   box-shadow:
     inset -4px 0 7px rgba(0,0,0,0.4),
     inset 0 2px 0 rgba(255,255,255,0.12),
     inset 0 -2px 0 rgba(0,0,0,0.35),
-    0 10px 22px rgba(0,0,0,0.6), 0 0 0 2px var(--gold);
+    0 12px 26px rgba(0,0,0,0.55), 0 0 0 2px var(--gold);
 }
 .book.locked { opacity:0.45; }
 .book.locked.selected { opacity:0.85; }
@@ -437,10 +439,16 @@ html,body { height:100%; background:#0d0d0f; color:#e8e0d0; font-family:'Cormora
   display:none; position:fixed; left:16px; right:16px; bottom:16px;
   background:var(--bg3); border:1px solid var(--gold3); border-radius:14px;
   padding:16px; z-index:200; box-shadow:0 -8px 30px rgba(0,0,0,0.6);
-  animation:popIn .18s ease-out; max-width:520px; margin:0 auto;
+  animation:popIn .32s cubic-bezier(.22,1,.36,1); max-width:520px; margin:0 auto;
 }
 .book-popover.open { display:block; }
-@keyframes popIn { from{ transform:translateY(12px); opacity:0; } to{ transform:translateY(0); opacity:1; } }
+@keyframes popIn { from{ transform:translateY(16px); opacity:0; } to{ transform:translateY(0); opacity:1; } }
+.popover-backdrop.open { display:block; animation:backdropIn .28s ease-out; }
+@keyframes backdropIn { from{ opacity:0; } to{ opacity:1; } }
+.popover-backdrop {
+  display:none; position:fixed; inset:0; background:rgba(0,0,0,0.5); z-index:199;
+  transition:opacity .28s ease;
+}
 .popover-head { display:flex; align-items:center; gap:10px; margin-bottom:8px; }
 .popover-icon {
   width:38px; height:38px; border-radius:9px; background:var(--bg);
@@ -457,8 +465,6 @@ html,body { height:100%; background:#0d0d0f; color:#e8e0d0; font-family:'Cormora
 }
 .popover-btn.play { background:var(--gold); color:#1a1408; font-weight:700; }
 .popover-btn.close { background:none; border:1px solid var(--border); color:var(--dim); flex:0 0 44px; }
-.popover-backdrop { display:none; position:fixed; inset:0; background:rgba(0,0,0,0.5); z-index:199; }
-.popover-backdrop.open { display:block; }
 
 /* ── COMMUNITY SPOTLIGHT ── */
 .community-spotlight {
@@ -1325,8 +1331,6 @@ function renderShelfLibrary() {
 }
 
 let shelfSelectedBook = null;
-let shelfSelectedRow = null;
-let shelfSelectedBlock = null;
 
 const POPOVER_UI = {
   fr: { by: 'Par', play: '▶ Jouer', resume: '▶ Reprendre', unlock: '🔒 Débloquer le pack', portal: '🔗 Accessible via portail' },
@@ -1336,20 +1340,14 @@ const POPOVER_UI = {
 
 function openBookPopover(el) {
   if (shelfSelectedBook && shelfSelectedBook !== el) shelfSelectedBook.classList.remove('selected');
-  clearShelfSelectionSpace();
 
   el.classList.add('selected');
   shelfSelectedBook = el;
-  const row = el.closest('.bookcase-row');
-  const block = el.closest('.shelf-block');
-  if (row && block) {
-    row.classList.add('has-selected');
-    block.classList.add('has-selected');
-    shelfSelectedRow = row;
-    shelfSelectedBlock = block;
-  }
 
-  const locked = el.dataset.locked === '1';
+  requestAnimationFrame(() => {
+    el.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+  });
+
   const action = el.dataset.action;
   const ui = POPOVER_UI[currentLang] || POPOVER_UI.fr;
   document.getElementById('bp-icon').textContent = el.dataset.icon || '📖';
@@ -1375,16 +1373,9 @@ function openBookPopover(el) {
   document.getElementById('book-popover').classList.add('open');
   document.getElementById('book-backdrop').classList.add('open');
 }
-function clearShelfSelectionSpace() {
-  if (shelfSelectedRow) shelfSelectedRow.classList.remove('has-selected');
-  if (shelfSelectedBlock) shelfSelectedBlock.classList.remove('has-selected');
-  shelfSelectedRow = null;
-  shelfSelectedBlock = null;
-}
 function closeBookPopover() {
   if (shelfSelectedBook) shelfSelectedBook.classList.remove('selected');
   shelfSelectedBook = null;
-  clearShelfSelectionSpace();
   const pop = document.getElementById('book-popover');
   const bd = document.getElementById('book-backdrop');
   if (pop) pop.classList.remove('open');
