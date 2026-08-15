@@ -1,0 +1,207 @@
+{
+  "name": "Les Profondeurs — Épisode 5 : Le Champ de débris",
+  "kids": false,
+  "askPlayerName": true,
+  "pack": "abysses",
+  "stats": [
+    {
+      "id": "audace",
+      "label": "Audace",
+      "start": 15,
+      "max": 100,
+      "color": "#e8934a"
+    },
+    {
+      "id": "lucidite",
+      "label": "Lucidité",
+      "start": 10,
+      "max": 100,
+      "color": "#2a8aa8"
+    }
+  ],
+  "theme": {
+    "bg": "#040810",
+    "bg2": "#081018",
+    "bg3": "#0c1824",
+    "bg4": "#122030",
+    "border": "#1e4058",
+    "accent": "#e8934a",
+    "accent2": "#2a8aa8",
+    "accent3": "#6dfabc",
+    "text": "#d8e8f0",
+    "text2": "#6890a8",
+    "text3": "#3a5868"
+  },
+  "scenes": {
+    "entree": {
+      "id": "entree",
+      "title": "Lisière",
+      "location": "CHAMP DE DÉBRIS — 520 m",
+      "narrator": "Entre deux épaves, l'eau ne coule plus — elle hésite.",
+      "text": "Tu entres dans le champ — épisode 4 derrière toi, le cliquetis **devant**.\n\nTon HUD :\n\n**290 m restants · prof. 520 m · lampe 12 % · cap 214°**\n\nDes coques retournées. Des containers empilés comme des dés jetés. Une grue sans cabine, bras enseveli dans la vase.\n\nLe bruit métallique reprend — plus **proche**. Quelque chose **déplace** les épaves. Lentement. Comme un corps qui cherche un couloir trop étroit.\n\nLa lueur orange pulse entre deux cargos — cap toujours bon.",
+      "isStart": true,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Foncer entre les cargos — raccourcir",
+          "vers": "couloir",
+          "effects": [{ "stat": "audace", "val": 10 }],
+          "clickEffect": "pulse"
+        },
+        {
+          "text": "Contourner par le haut des épaves — plus long, plus sûr",
+          "vers": "couloir",
+          "effects": [{ "stat": "lucidite", "val": 10 }],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 400,
+      "y": 40
+    },
+    "couloir": {
+      "id": "couloir",
+      "title": "Couloir d'épaves",
+      "location": "CHAMP DE DÉBRIS — 560 m",
+      "narrator": "Un couloir sous l'eau n'a pas de murs — seulement ce qui n'a pas encore bougé.",
+      "text": "Tu avances dans un goulet — containers de chaque côté, un mètre trente de passage.\n\nÀ **560 m**, le cliquetis **s'arrête**.\n\nSilence.\n\nPuis un grincement — long, aigu — **au-dessus** de toi. Un container glisse de cinq centimètres. Pas tombé. **Ajusté.**\n\nTa lampe : **11 %**.\n\nDeux issues visibles :\n\n**A — Passer sous la grue** (couloir bas, 80 cm)\n**B — Fracture dans une coque** (intérieur d'épave · obscur)",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Passer sous la grue — vite",
+          "vers": "audace_grue",
+          "effects": [{ "stat": "audace", "val": 12 }],
+          "clickEffect": "pulse"
+        },
+        {
+          "text": "Entrer dans la coque fissurée",
+          "vers": "lucidite_coque",
+          "effects": [{ "stat": "lucidite", "val": 12 }],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 400,
+      "y": 140
+    },
+    "audace_grue": {
+      "id": "audace_grue",
+      "title": "Sous la grue",
+      "location": "CHAMP DE DÉBRIS — 580 m",
+      "narrator": "Quand le métal bouge au-dessus de toi, la vitesse devient une prière.",
+      "text": "Tu te glisses sous le bras de la grue.\n\nEspace étroit. Ta combinaison accroche une plaque rouillée. Tu tires.\n\nLa lampe balaie l'eau trouble — et **accroche** quelque chose.\n\nPas une épave.\n\nUne **bande** de peau pâle, lisse, qui traverse le couloir d'épaves à ton niveau — puis disparaît entre deux containers **sans les écarter**. Comme si le métal s'était ouvert.\n\nLe cliquetis reprend — **derrière** toi maintenant.\n\nBatterie : **10 %**.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "flash",
+      "choices": [
+        {
+          "text": "🔦 Garder la lumière — sprint vers la sortie du goulet",
+          "vers": "audace_fuite",
+          "effects": [{ "stat": "audace", "val": 15 }],
+          "clickEffect": "pulse"
+        },
+        {
+          "text": "🫧 Éteindre — avancer au toucher",
+          "vers": "lucidite_sombre",
+          "effects": [{ "stat": "lucidite", "val": 8 }],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 280,
+      "y": 240
+    },
+    "audace_fuite": {
+      "id": "audace_fuite",
+      "title": "Sprint d'épaves",
+      "location": "CHAMP DE DÉBRIS — 610 m",
+      "narrator": "Courir sous l'eau, c'est accepter que la peur te porte plus vite que tes palmes.",
+      "text": "Tu fonces.\n\nContainers. Tôle. Un hook de grue qui manque ton casque d'un centimètre.\n\nDerrière — le cliquetis **accélère**. Pas un courant. Un **poursuivant**.\n\nTu émerge du goulet à **610 m**. Espace ouvert — relativement.\n\nTa lampe clignote : **9 %**.\n\nLa radio, une syllabe :\n\n*« —…ne regarde pas en arrière… — »*",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Continuer vers la lueur — sans te retourner",
+          "vers": "passage",
+          "effects": [{ "stat": "audace", "val": 10 }],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 200,
+      "y": 340
+    },
+    "lucidite_coque": {
+      "id": "lucidite_coque",
+      "title": "Dans l'épave",
+      "location": "CARGO INONDÉ — 575 m",
+      "narrator": "L'intérieur d'un vaisseau mort garde la mémoire de ses couloirs — même sans lumière.",
+      "text": "Tu entres par la fracture.\n\nCouloir incliné. Caisses flottantes. Panneaux morts.\n\nTu **éteins** la lampe — réflexe appris au relais N-7.\n\nDans le noir : le cliquetis est **étouffé**. Loin. Dehors.\n\nTu avances à la main — paroi gauche, compteur mental. Trois coude à droite. Descente. Cinquième porte ouverte.\n\nQuand tu rallumes : **11 %** — tu n'as pas couru.\n\nSortie par une brèche dans la coque — **610 m**, hors du champ dense.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Rejoindre la lueur orange",
+          "vers": "passage",
+          "effects": [{ "stat": "lucidite", "val": 10 }],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 520,
+      "y": 240
+    },
+    "lucidite_sombre": {
+      "id": "lucidite_sombre",
+      "title": "À l'aveugle",
+      "location": "CHAMP DE DÉBRIS — 595 m",
+      "narrator": "Sans faisceau, on apprend que la peur a aussi une géométrie.",
+      "text": "Noir total.\n\nMain sur le container de gauche. Pas de cliquetis **immédiat**. Le poursuivant cherche ailleurs — ou attend.\n\nTu comptes tes palmes. Vingt. Quarante.\n\nUn courant froid — vertical. **Descente** naturelle. Tu le suis.\n\nQuand tu rallumes enfin : **10 %**. Goulet dégagé. **595 m**.\n\nPersonne ne t'a touché·e. Tu **crois**.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Gagner le passage ouvert",
+          "vers": "passage",
+          "effects": [{ "stat": "lucidite", "val": 10 }],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 360,
+      "y": 340
+    },
+    "passage": {
+      "id": "passage",
+      "title": "Sortie du champ",
+      "location": "CHAMP DE DÉBRIS — 640 m",
+      "narrator": "Quand les épaves s'éclaircissent, ce qui reste devant toi n'est plus du métal — c'est de l'architecture.",
+      "text": "Les containers s'écartent.\n\nLe cliquetis s'éloigne — ou s'arrête. Tu ne sais plus.\n\nTon HUD :\n\n**165 m restants · prof. 640 m · cap 214°**\n\nTa lampe : **8 %**.\n\nDevant toi, la lueur orange révèle enfin sa source partielle — pas le portail. Un **arc** de pierre noire, immense, sculpté de runes Fableris et de motifs citrouille.\n\nUne **cathédrale** sous-marine. Entrée béante. Noire.\n\nLa radio murmure :\n\n*« —{{player}}… dernière ligne droite… la lampe ne tiendra pas jusqu'au portail… — »*",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Descendre vers l'arc — dernière poussée",
+          "vers": "fin_debris",
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 400,
+      "y": 440
+    },
+    "fin_debris": {
+      "id": "fin_debris",
+      "title": "L'arc noir",
+      "location": "SEUIL DE LA CATHÉDRALE — 670 m",
+      "narrator": "Certaines portes sous l'eau n'attendent pas qu'on les ouvre — elles attendent qu'on ose entrer.",
+      "text": "Tu atteins le seuil à **670 m**.\n\nLe champ de débris s'étend **derrière** toi — kilomètres de ferraille, silence retrouvé.\n\nDevant : l'arc. Au-delà : nef inondée, colonnes qui montent dans le noir, autel lointain où pulse la **vraie** lueur — plus chaude que les relais. Plus proche du portail.\n\n**140 m restants.**\n\nTa lampe : **7 %**. Une dernière pulsation — puis stable. Pour combien de temps ?\n\n**FIN ÉPISODE 5 — Le Champ de débris**\n\n*Épisode 6 : La Cathédrale — bientôt*",
+      "isStart": false,
+      "isEnd": true,
+      "transition": "fade",
+      "choices": [],
+      "x": 400,
+      "y": 540
+    }
+  }
+}
