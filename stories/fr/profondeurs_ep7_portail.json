@@ -90,7 +90,7 @@
       "title": "Hors lumière",
       "location": "SECTEUR 7 — SEUIL · 828 m",
       "narrator": "Ce qui te suit depuis la Derelicta n'a pas besoin de voir pour savoir où tu es.",
-      "text": "Le cliquetis **revient** — étouffé par la pression, mais là.\n\nDans le halo orange, tu vois seulement l'**ombre** : trop longue, trop souple, bord effilé comme la peau vue dans le jet de la coque.\n\nElle ne fonce pas. Elle **serre** le cercle — te laissant le portail, retirant le reste.\n\n**10 mètres** du centre.\n\nLa radio murmure :\n\n*« —Ne lui fais pas de place. Traverse. — »*\n\nL'arc s'**élargit** — une fissure de lumière, large comme tes épaules. Prête.",
+      "text": "Le cliquetis **revient** — étouffé par la pression, mais là.\n\nDans le halo orange, tu ne vois **rien** de net. Seulement l'eau qui **se courbe** — un volume qui serre le cercle autour de toi sans entrer dans la lumière.\n\nElle ne fonce pas. Elle **retire** les issues — sauf le portail.\n\n**10 mètres** du centre.\n\nLa radio murmure :\n\n*« —Ne lui fais pas de place. Traverse. — »*\n\nOu peut-être :\n\n*« —Laisse-la te guider. Traverse. — »*\n\nTu ne sais plus quelle phrase tu as entendue en premier.\n\nL'arc s'**élargit** — une fissure de lumière, large comme tes épaules. Prête.",
       "isStart": false,
       "isEnd": false,
       "transition": "fade",
@@ -116,7 +116,7 @@
       "title": "Franchir",
       "location": "PORTAIL — ENTRÉE · 832 m",
       "narrator": "Parfois fuir vers l'avant est la seule forme de courage qui compte.",
-      "text": "Tu te propulses.\n\nL'ombre **fonce** — un souffle d'eau, un effleurement sur ta cheville. Pas de morsure. Pas encore.\n\nTu traverses la fissure.\n\nLe monde **change** — pression qui chute, couleurs qui crient, son qui devient **musique** étouffée.\n\nDerrière toi, un grondement : le portail **se referme**. La chose reste de l'autre côté.\n\nTu es **dedans**.",
+      "text": "Tu te propulses.\n\nUn **souffle** d'eau te frôle — cheville, combinaison, pression. Pas de morsure. Pas de contact **solide**.\n\nTu traverses la fissure.\n\nLe monde **change** — pression qui chute, couleurs qui crient, son qui devient **musique** étouffée.\n\nDerrière toi, un grondement : le portail **se referme**. Le cliquetis s'arrête **net**.\n\nTu es **dedans**.",
       "isStart": false,
       "isEnd": false,
       "transition": "flash",
@@ -136,7 +136,7 @@
       "title": "La dette",
       "location": "SECTEUR 7 — SEUIL · 830 m",
       "narrator": "Nommer ce qu'on doit, c'est parfois la clé qu'on cherchait sans le savoir.",
-      "text": "Tu poses ta main sur le linteau.\n\nTu prononces — dans ta tête, la Coalition l'entendra peut-être :\n\n*« Je suis {{player}}. J'ai emprunté la lumière. Je rends la descente. »*\n\nL'arc **répond** — runes qui s'allument une à une, citrouilles qui sourient **vraiment**.\n\nL'ombre recule — pas par peur. Par **règle**. Ce portail ne lui appartient pas.\n\nLa fissure s'ouvre **doucement**.\n\nTu entres sans course. L'eau devient lumière.",
+      "text": "Tu poses ta main sur le linteau.\n\nTu prononces — dans ta tête, la Coalition l'entendra peut-être :\n\n*« Je suis {{player}}. J'ai emprunté la lumière. Je rends la descente. »*\n\nL'arc **répond** — runes qui s'allument une à une, citrouilles qui sourient **vraiment**.\n\nLe souffle de pression **recule** — pas par peur. Par **règle**. Ce portail ne lui appartient pas. Ou : elle t'a **mené·e** ici depuis la Derelicta, et son travail est fini.\n\nTu n'en es pas sûr·e. Tu n'as **rien vu**.\n\nLa fissure s'ouvre **doucement**.\n\nTu entres sans course. L'eau devient lumière.",
       "isStart": false,
       "isEnd": false,
       "transition": "fade",
@@ -156,7 +156,7 @@
       "title": "Traversée",
       "location": "PORTAIL FABLERIS — ENTRE-DEUX",
       "narrator": "Entre deux mondes, le temps n'a ni haut ni bas — seulement un passage.",
-      "text": "Tu nages dans la lumière.\n\nPas d'eau — ou trop. Images qui défilent : la Derelicta qui coule, la falaise, le relais N-7, la grue, la cathédrale, ta lampe qui meurt.\n\n**800 m**, murmure le HUD une dernière fois. Puis les chiffres **disparaissent**.\n\nUne voix — la radio, enfin **stable** :\n\n*« —Extraction confirmée. Bienvenue, {{player}}. — »*\n\nDevant toi : une **seconde** surface. Pas Narhex. Ciel **étoilé**. Air froid d'automne. Odeur de citrouille et de sel.",
+      "text": "Tu nages dans la lumière.\n\nPas d'eau — ou trop. Images qui défilent : la Derelicta qui coule, la falaise, le relais N-7, la grue, la cathédrale, ta lampe qui meurt.\n\n**800 m**, murmure le HUD une dernière fois. Puis les chiffres **disparaissent**.\n\nUne voix — la radio, enfin **stable** :\n\n*« —Extraction confirmée. Bienvenue, {{player}}. — »*\n\nLa voix ressemble à celle de l'épisode 2 — **presque** la tienne. Tu ne sais plus si tu montes ou si tu **replays** une descente déjà ratée.\n\nDevant toi : une **seconde** surface. Pas Narhex. Ciel **étoilé**. Air froid d'automne. Odeur de citrouille et de sel.",
       "isStart": false,
       "isEnd": false,
       "transition": "fade",
@@ -181,6 +181,18 @@
       "transition": "fade",
       "choices": [
         {
+          "text": "Regarder l'eau — la menace est derrière le portail",
+          "vers": "fin_audace",
+          "requires": { "stat": "audace", "min": 50 },
+          "clickEffect": "pulse"
+        },
+        {
+          "text": "Regarder l'eau — ce n'était peut-être pas une chasse",
+          "vers": "fin_lucidite",
+          "requires": { "stat": "lucidite", "min": 50 },
+          "clickEffect": "pulse"
+        },
+        {
           "text": "Regarder une dernière fois l'eau noire",
           "vers": "fin_portail",
           "clickEffect": "pulse"
@@ -188,6 +200,32 @@
       ],
       "x": 400,
       "y": 540
+    },
+    "fin_audace": {
+      "id": "fin_audace",
+      "title": "Extraction — Audace",
+      "location": "HAVRE FABLERIS — NUIT D'HALLOWEEN",
+      "narrator": "Survivre, parfois, c'est accepter d'avoir eu raison d'avoir peur.",
+      "text": "Tu regardes l'eau.\n\nNoire encore — **derrière** un portail fermé. Quelque chose **frappe** la barrière une fois — sourd, lointain — puis plus rien.\n\nTu as **fui** vers l'avant. Tu as **eu** raison.\n\nAu loin, citrouilles lumineuses. La Coalition applaudit sans savoir **ce qui** est resté de l'autre côté.\n\nLa radio :\n\n*« —Repos, {{player}}. Tu as descendu. Tu es remonté·e. — »*\n\n**FIN — Les Profondeurs** *(Audace)*\n\n*Merci d'avoir joué · Pack Les Profondeurs · Fableris*",
+      "isStart": false,
+      "isEnd": true,
+      "transition": "fade",
+      "choices": [],
+      "x": 280,
+      "y": 640
+    },
+    "fin_lucidite": {
+      "id": "fin_lucidite",
+      "title": "Extraction — Lucidité",
+      "location": "HAVRE FABLERIS — NUIT D'HALLOWEEN",
+      "narrator": "Comprendre ne garantit pas la paix — seulement une autre peur.",
+      "text": "Tu regardes l'eau.\n\nNoire encore — **derrière** un portail fermé. Pas de choc. Pas de chasse. **Silence**.\n\nPeut-être que la présence **t'a** poussé·e ici — berger, pas prédateur. Peut-être que le vrai piège, c'est **Fableris** qui envoie seul·e et appelle ça une mission.\n\nLa radio murmure — sans static, **trop** proche :\n\n*« —Je ne suis pas la Coalition. Je suis ce qu'il reste quand la descente échoue. Toi, tu as réussi. Cette fois. — »*\n\n**FIN — Les Profondeurs** *(Lucidité)*\n\n*Merci d'avoir joué · Pack Les Profondeurs · Fableris*",
+      "isStart": false,
+      "isEnd": true,
+      "transition": "fade",
+      "choices": [],
+      "x": 520,
+      "y": 640
     },
     "fin_portail": {
       "id": "fin_portail",

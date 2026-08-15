@@ -45,19 +45,39 @@
       "choices": [
         {
           "text": "Foncer entre les cargos — raccourcir",
-          "vers": "couloir",
+          "vers": "derive",
           "effects": [{ "stat": "audace", "val": 10 }],
           "clickEffect": "pulse"
         },
         {
           "text": "Contourner par le haut des épaves — plus long, plus sûr",
-          "vers": "couloir",
+          "vers": "derive",
           "effects": [{ "stat": "lucidite", "val": 10 }],
           "clickEffect": "pulse"
         }
       ],
       "x": 400,
       "y": 40
+    },
+    "derive": {
+      "id": "derive",
+      "title": "Dérive horizontale",
+      "location": "CHAMP DE DÉBRIS — 520 m",
+      "narrator": "Quand on ne descend plus, parfois c'est l'océan qui tourne autour de toi.",
+      "text": "Tu avances **latéralement** — entre les épaves, cap 214°.\n\nPendant longtemps, tu ne descends **pas**.\n\nTon HUD :\n\n**prof. 520 m**\n\nPuis **520 m**.\n\nPuis **519 m**.\n\nPuis **520 m** encore.\n\nTu ne sais plus si tu progresses ou si tu **tournes**. La lueur orange semble partout — devant, sur le côté, **derrière**.\n\nLa radio — trop calme :\n\n*« —{{player}}… tu es sur la bonne route… continue… — »*\n\nTu n'as pas encore choisi de tourner.\n\nTa lampe : **12 %** — puis **11 %** — puis **12 %**.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Fixer un repère — forcer une direction",
+          "vers": "couloir",
+          "effects": [{ "stat": "lucidite", "val": 8 }],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 400,
+      "y": 100
     },
     "couloir": {
       "id": "couloir",
@@ -90,7 +110,7 @@
       "title": "Sous la grue",
       "location": "CHAMP DE DÉBRIS — 580 m",
       "narrator": "Quand le métal bouge au-dessus de toi, la vitesse devient une prière.",
-      "text": "Tu te glisses sous le bras de la grue.\n\nEspace étroit. Ta combinaison accroche une plaque rouillée. Tu tires.\n\nLa lampe balaie l'eau trouble — et **accroche** quelque chose.\n\nPas une épave.\n\nUne **bande** de peau pâle, lisse, qui traverse le couloir d'épaves à ton niveau — puis disparaît entre deux containers **sans les écarter**. Comme si le métal s'était ouvert.\n\nLe cliquetis reprend — **derrière** toi maintenant.\n\nBatterie : **10 %**.",
+      "text": "Tu te glisses sous le bras de la grue.\n\nEspace étroit. Ta combinaison accroche une plaque rouillée. Tu tires.\n\nTa lampe **s'éteint** trois secondes — sans que tu touches le boîtier.\n\nQuand elle revient : l'eau **vibre** — un souffle de pression qui traverse le goulet **sans** ouvrir les containers. Comme si quelque chose passait **dans** l'eau, pas **entre** le métal.\n\nLe cliquetis reprend — **derrière** toi maintenant.\n\nBatterie : **10 %** — affichée **9 %**, puis **11 %**, puis **10 %**.",
       "isStart": false,
       "isEnd": false,
       "transition": "flash",
@@ -176,7 +196,7 @@
       "title": "Sortie du champ",
       "location": "CHAMP DE DÉBRIS — 640 m",
       "narrator": "Quand les épaves s'éclaircissent, ce qui reste devant toi n'est plus du métal — c'est de l'architecture.",
-      "text": "Les containers s'écartent.\n\nLe cliquetis s'éloigne — ou s'arrête. Tu ne sais plus.\n\nTon HUD :\n\n**165 m restants · prof. 640 m · cap 214°**\n\nTa lampe : **8 %**.\n\nDevant toi, la lueur orange révèle enfin sa source partielle — pas le portail. Un **arc** de pierre noire, immense, sculpté de runes Fableris et de motifs citrouille.\n\nUne **cathédrale** sous-marine. Entrée béante. Noire.\n\nLa radio murmure :\n\n*« —{{player}}… dernière ligne droite… la lampe ne tiendra pas jusqu'au portail… — »*",
+      "text": "Les containers s'écartent.\n\nLe cliquetis s'éloigne — ou s'arrête. Tu ne sais plus.\n\nTon HUD :\n\n**165 m restants · prof. 640 m · cap 214°**\n\nTa lampe : **8 %**.\n\nDevant toi, la lueur orange révèle enfin sa source partielle — pas le portail. Un **arc** de pierre noire, immense, sculpté de runes Fableris et de motifs citrouille.\n\nUne **cathédrale** sous-marine. Entrée béante. Noire.\n\nLa radio murmure :\n\n*« —{{player}}… dernière ligne droite… la lampe ne tiendra pas jusqu'au portail… — »*\n\nElle reprend mot pour mot une phrase de ton **dossier de mission** — celle que tu n'as jamais lue à voix haute.",
       "isStart": false,
       "isEnd": false,
       "transition": "fade",
