@@ -1,0 +1,31 @@
+# GitHub Pages — déploie le site statique depuis la branche release 1.7.
+# Réglage repo : Settings → Pages → Source = GitHub Actions (une fois).
+name: Deploy GitHub Pages (1.7)
+
+on:
+  push:
+    branches: [1.7]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages-1-7
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: .
+      - uses: actions/deploy-pages@v4
+        id: deployment

@@ -21,3 +21,11 @@ Branche de **release 1.7** (version affichée v1.7).
 4. Merger
 
 La CI bloque **uniquement** les PR **`1.7` → `main`** sans ce label.
+
+## GitHub Pages
+
+Le site public ([arknoid01.github.io/Choisis-ton-Destin-/](https://arknoid01.github.io/Choisis-ton-Destin-/)) est déployé depuis la branche **`1.7`** (workflow `deploy-pages.yml`).
+
+**Réglage unique (si pas déjà fait) :** GitHub → *Settings* → *Pages* → *Build and deployment* → **Source : GitHub Actions**.
+
+Chaque push sur `1.7` redéploie le site (version v1.7).
