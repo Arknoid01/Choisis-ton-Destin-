@@ -1,0 +1,29 @@
+# Bloque les PR touchant la branche release 1.7 sans label explicite.
+# Le propriétaire ajoute le label "release-1.7-authorized" quand il autorise une PR 1.7.
+name: Protect release branch 1.7
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened, labeled, unlabeled, edited]
+
+jobs:
+  guard:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check branch 1.7 policy
+        env:
+          HEAD_REF: ${{ github.head_ref }}
+          BASE_REF: ${{ github.base_ref }}
+          LABELS_JSON: ${{ toJson(github.event.pull_request.labels.*.name) }}
+        run: |
+          set -e
+          if [ "$HEAD_REF" != "1.7" ] && [ "$BASE_REF" != "1.7" ]; then
+            echo "PR does not involve branch 1.7 — OK."
+            exit 0
+          fi
+          echo "$LABELS_JSON" | grep -q 'release-1.7-authorized' && {
+            echo "Label release-1.7-authorized present — OK."
+            exit 0
+          }
+          echo "::error::Branche 1.7 protégée. Cette PR touche 1.7 (head=$HEAD_REF, base=$BASE_REF). Ajoutez le label release-1.7-authorized après autorisation du propriétaire, ou évitez les PR agents sur 1.7."
+          exit 1
