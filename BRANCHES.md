@@ -24,8 +24,15 @@ La CI bloque **uniquement** les PR **`1.7` → `main`** sans ce label.
 
 ## GitHub Pages
 
-Le site public ([arknoid01.github.io/Choisis-ton-Destin-/](https://arknoid01.github.io/Choisis-ton-Destin-/)) est déployé depuis la branche **`1.7`** (workflow `deploy-pages.yml`).
+Site : [arknoid01.github.io/Choisis-ton-Destin-/](https://arknoid01.github.io/Choisis-ton-Destin-/)
 
-**Réglage unique (si pas déjà fait) :** GitHub → *Settings* → *Pages* → *Build and deployment* → **Source : GitHub Actions**.
+**Source : branche `1.7`**, dossier `/` (racine).
 
-Chaque push sur `1.7` redéploie le site (version v1.7).
+Réglage GitHub (une fois, manuel — le token agent n’a pas les droits) :
+
+1. Repo → **Settings** → **Pages**
+2. *Build and deployment* → **Deploy from a branch**
+3. Branch : **`1.7`** · Folder : **`/ (root)`**
+4. Save
+
+Chaque push sur `1.7` met à jour le site (version **v1.7**). Tant que ce réglage n’est pas fait, Pages reste sur **`main`**.
