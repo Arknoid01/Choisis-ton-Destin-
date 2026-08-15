@@ -1,0 +1,206 @@
+{
+  "name": "Las Profundidades — Episodio 3: Descenso",
+  "kids": false,
+  "askPlayerName": true,
+  "pack": "abysses",
+  "stats": [
+    {
+      "id": "audace",
+      "label": "Audacia",
+      "start": 15,
+      "max": 100,
+      "color": "#e8934a"
+    },
+    {
+      "id": "lucidite",
+      "label": "Lucidez",
+      "start": 10,
+      "max": 100,
+      "color": "#2a8aa8"
+    }
+  ],
+  "theme": {
+    "bg": "#040810",
+    "bg2": "#081018",
+    "bg3": "#0c1824",
+    "bg4": "#122030",
+    "border": "#1e4058",
+    "accent": "#e8934a",
+    "accent2": "#2a8aa8",
+    "accent3": "#6dfabc",
+    "text": "#d8e8f0",
+    "text2": "#6890a8",
+    "text3": "#3a5868"
+  },
+  "scenes": {
+    "plongee": {
+      "id": "plongee",
+      "title": "Aguas libres",
+      "location": "OCÉANO DE NARHEX — 190 m",
+      "narrator": "Dejar el naufragio es volver a la escala del mundo — vertical, sin referencias.",
+      "text": "Te alejas buceando de la Derelicta.\n\nArriba: solo negro. Abajo: el **resplandor naranja**, rumbo **214°**.\n\nTu HUD:\n\n**620 m restantes · prof. 190 m · linterna 26 %**\n\n**Cables** aparecen en tu haz — viejos, corroídos, fijados a un acantilado submarino que cae recto al abismo.\n\nUna colonia minera abandonada. O una ruta que alguien dejó para quienes descienden.",
+      "isStart": true,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Agarrar el primer cable y descender rápido",
+          "vers": "falaise",
+          "effects": [{ "stat": "audace", "val": 10 }],
+          "clickEffect": "pulse"
+        },
+        {
+          "text": "Escanear el acantilado — localizar la vía más segura",
+          "vers": "falaise",
+          "effects": [{ "stat": "lucidite", "val": 10 }],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 400,
+      "y": 40
+    },
+    "falaise": {
+      "id": "falaise",
+      "title": "El acantilado",
+      "location": "ACANTILADO ESTE — 240 m",
+      "narrator": "Un muro vertical bajo el agua nunca muestra todo su alto. Ni todo su bajo.",
+      "text": "Desciendes por los cables.\n\nLa roca es lisa, casi pulida — no natural. **Marcas de perforación** paralelas, antiguas.\n\nA **240 m**, tu HUD parpadea un segundo:\n\n**ATENCIÓN — RUMBO INVERTIDO**\n\nLuego vuelve a la normalidad. Tú **crees**.\n\nEl resplandor naranja parece a veces **encima** de ti. A veces abajo. Narhex juega con la verticalidad.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Confiar en el HUD — seguir",
+          "vers": "vertige",
+          "effects": [{ "stat": "audace", "val": 8 }],
+          "clickEffect": "pulse"
+        },
+        {
+          "text": "Contar tus brazadas — orientarte tú mismo",
+          "vers": "vertige",
+          "effects": [{ "stat": "lucidite", "val": 8 }],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 400,
+      "y": 140
+    },
+    "vertige": {
+      "id": "vertige",
+      "title": "Pérdida de referencias",
+      "location": "ACANTILADO ESTE — 290 m",
+      "narrator": "Cuando ya no sabes si subes, cada metro descendido parece una traición.",
+      "text": "El sonar integrado de tu traje se activa — reliquia Fableris, modo emergencia.\n\n**Ping.** Objetivo: **detrás de ti**, a 40 m.\n\nTe giras. Nada en la linterna.\n\n**Ping.** Objetivo: **arriba**, a 10 m.\n\nMiras hacia arriba. Negro.\n\nLa radio crepita:\n\n*« —{{player}}… el sonar miente… el resplandor, abajo… — »*\n\nEstática.\n\nTu linterna **parpadea** — una vez, dos veces.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Esperar a que la linterna se estabilice",
+          "vers": "lampe",
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 400,
+      "y": 240
+    },
+    "lampe": {
+      "id": "lampe",
+      "title": "La linterna que falla",
+      "location": "ACANTILADO ESTE — 295 m",
+      "narrator": "Sin luz, el acantilado ya no tiene alto ni bajo. Solo vacío a ambos lados.",
+      "text": "Tercer parpadeo.\n\n**Apagado.**\n\nBatería: **22 %** mostrada — luego cero un segundo. Bug. Fallo. Miedo.\n\nEn la oscuridad total, el cable bajo tu mano **vibra** — débilmente, con regularidad. Como un motor lejano. Como una **llamada** hacia abajo.\n\nY en algún lugar, muy cerca, un soplo de agua que **no es** el tuyo.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "🔦 Golpear la linterna — forzar el haz",
+          "vers": "audace_fosse",
+          "effects": [{ "stat": "audace", "val": 15 }],
+          "clickEffect": "pulse"
+        },
+        {
+          "text": "🫧 Soltar la luz — seguir la vibración del cable",
+          "vers": "lucidite_cable",
+          "effects": [{ "stat": "lucidite", "val": 15 }],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 400,
+      "y": 340
+    },
+    "audace_fosse": {
+      "id": "audace_fosse",
+      "title": "El borde del abismo",
+      "location": "ACANTILADO ESTE — 310 m",
+      "narrator": "Iluminar un abismo a veces le da una boca.",
+      "text": "Golpeas la carcasa. La linterna vuelve — haz tembloroso, **22 %**.\n\nBarre el vacío.\n\nSin pared. Ya no hay acantilado. Estás en el **borde** — el cable continúa en la oscuridad, hacia un pozo sin fondo visible.\n\nAl límite del cono, durante un fotograma, algo **se mueve** — más ancho que la Derelicta, más lento que tu pulso.\n\nLuego nada.\n\nLa radio: *« —Desciende. Ahora. — »*",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "flash",
+      "choices": [
+        {
+          "text": "Dejarte deslizar por el cable hacia el pozo",
+          "vers": "replat",
+          "effects": [{ "stat": "audace", "val": 10 }],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 280,
+      "y": 440
+    },
+    "lucidite_cable": {
+      "id": "lucidite_cable",
+      "title": "El hilo que tira",
+      "location": "ACANTILADO ESTE — 305 m",
+      "narrator": "Cuando la luz miente, el tacto se vuelve cartografía.",
+      "text": "Cierras los ojos — inútil bajo el agua, pero el gesto **ayuda**.\n\nTu mano en el cable: vibración ascendente, regular. No un motor. Un **ritmo** — tres cortos, uno largo. Señal Fableris. **Descender.**\n\nSigues sin linterna. Diez metros. Veinte.\n\nCuando por fin la enciendes: **24 %** — ahorrado en la oscuridad.\n\nUna **alcoba** excavada en la roca. Guarida. No una boca abierta.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Alcanzar la alcoba — recuperar el aliento",
+          "vers": "replat",
+          "effects": [{ "stat": "lucidite", "val": 10 }],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 520,
+      "y": 440
+    },
+    "replat": {
+      "id": "replat",
+      "title": "El repliegue",
+      "location": "TERRAZA MINERA — 350 m",
+      "narrator": "Una meseta bajo el agua es un raro permiso para respirar — si te atreves.",
+      "text": "Alcanzas una terraza — restos de vías, postes retorcidos, **símbolo de calabaza** grabado en la roca, a medias borrado.\n\nEl HUD por fin se estabiliza:\n\n**450 m restantes · prof. 350 m · rumbo 214°**\n\nEl resplandor naranja está **abajo**. Esta vez, lo tienes claro.\n\nTu linterna: **19 %**.\n\nA lo lejos, un **ping** fijo — regular, mecánico. Una estación. El siguiente hito.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Anotar las coordenadas y preparar lo que sigue",
+          "vers": "fin_descente",
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 400,
+      "y": 540
+    },
+    "fin_descente": {
+      "id": "fin_descente",
+      "title": "Aún más abajo",
+      "location": "TERRAZA MINERA — 355 m",
+      "narrator": "En Narhex, cada hito ganado es una promesa — no una victoria.",
+      "text": "Abandonas la terraza.\n\nEl acantilado continúa abajo — pero ya sabes leer la mentira. Sonar. Luz. Verticalidad.\n\n**450 metros** aún. El portal late en algún lugar bajo tus pies.\n\nTu linterna: **18 %**. El ping de la estación te espera.\n\n**FIN EPISODIO 3 — Descenso**\n\n*Episodio 4: El Sonar — pronto*",
+      "isStart": false,
+      "isEnd": true,
+      "transition": "fade",
+      "choices": [],
+      "x": 400,
+      "y": 640
+    }
+  }
+}

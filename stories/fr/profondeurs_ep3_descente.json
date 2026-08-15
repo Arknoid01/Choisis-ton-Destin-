@@ -1,0 +1,206 @@
+{
+  "name": "Les Profondeurs — Épisode 3 : Descente",
+  "kids": false,
+  "askPlayerName": true,
+  "pack": "abysses",
+  "stats": [
+    {
+      "id": "audace",
+      "label": "Audace",
+      "start": 15,
+      "max": 100,
+      "color": "#e8934a"
+    },
+    {
+      "id": "lucidite",
+      "label": "Lucidité",
+      "start": 10,
+      "max": 100,
+      "color": "#2a8aa8"
+    }
+  ],
+  "theme": {
+    "bg": "#040810",
+    "bg2": "#081018",
+    "bg3": "#0c1824",
+    "bg4": "#122030",
+    "border": "#1e4058",
+    "accent": "#e8934a",
+    "accent2": "#2a8aa8",
+    "accent3": "#6dfabc",
+    "text": "#d8e8f0",
+    "text2": "#6890a8",
+    "text3": "#3a5868"
+  },
+  "scenes": {
+    "plongee": {
+      "id": "plongee",
+      "title": "Eaux libres",
+      "location": "OCÉAN DE NARHEX — 190 m",
+      "narrator": "Quitter l'épave, c'est retrouver l'échelle du monde — verticale, sans repères.",
+      "text": "Tu plonges loin de la Derelicta.\n\nAu-dessus : plus rien que le noir. En dessous : la **lueur orange**, cap **214°**.\n\nTon HUD :\n\n**620 m restants · prof. 190 m · lampe 26 %**\n\nDes **câbles** apparaissent dans ton faisceau — anciens, corrodés, fixés à une falaise sous-marine qui plonge droit dans l'abîme.\n\nUne colonie minière abandonnée. Ou une route que quelqu'un a laissée pour ceux qui descendent.",
+      "isStart": true,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Saisir le premier câble et descendre vite",
+          "vers": "falaise",
+          "effects": [{ "stat": "audace", "val": 10 }],
+          "clickEffect": "pulse"
+        },
+        {
+          "text": "Scanner la falaise — repérer la voie la plus sûre",
+          "vers": "falaise",
+          "effects": [{ "stat": "lucidite", "val": 10 }],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 400,
+      "y": 40
+    },
+    "falaise": {
+      "id": "falaise",
+      "title": "La falaise",
+      "location": "FALAISE EST — 240 m",
+      "narrator": "Une paroi verticale sous l'eau ne montre jamais tout son haut. Ni tout son bas.",
+      "text": "Tu descends le long des câbles.\n\nLa roche est lisse, presque polie — pas naturelle. Des **marques de forage** parallèles, anciennes.\n\nÀ **240 m**, ton HUD clignote une seconde :\n\n**ATTENTION — CAP INVERSÉ**\n\nPuis revient à la normale. Tu **crois**.\n\nLa lueur orange semble parfois **au-dessus** de toi. Parfois en dessous. Narhex joue avec la verticalité.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Faire confiance au HUD — continuer",
+          "vers": "vertige",
+          "effects": [{ "stat": "audace", "val": 8 }],
+          "clickEffect": "pulse"
+        },
+        {
+          "text": "Compter tes coups de palme — te repérer toi-même",
+          "vers": "vertige",
+          "effects": [{ "stat": "lucidite", "val": 8 }],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 400,
+      "y": 140
+    },
+    "vertige": {
+      "id": "vertige",
+      "title": "Perte de repères",
+      "location": "FALAISE EST — 290 m",
+      "narrator": "Quand on ne sait plus si l'on monte, chaque mètre descendu ressemble à une trahison.",
+      "text": "Le sonar intégré de ta combinaison s'active — relique Fableris, mode secours.\n\n**Ping.** Cible : **derrière toi**, à 40 m.\n\nTu te retournes. Rien dans la lampe.\n\n**Ping.** Cible : **au-dessus**, à 10 m.\n\nTu regardes le haut. Noir.\n\nLa radio crache :\n\n*« —{{player}}… le sonar ment… la lueur, c'est le bas… — »*\n\nStatic.\n\nTa lampe **clignote** — une fois, deux fois.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Attendre que la lampe se stabilise",
+          "vers": "lampe",
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 400,
+      "y": 240
+    },
+    "lampe": {
+      "id": "lampe",
+      "title": "La lampe qui lâche",
+      "location": "FALAISE EST — 295 m",
+      "narrator": "Sans lumière, la falaise n'a plus de haut ni de bas. Seulement du vide des deux côtés.",
+      "text": "Troisième clignotement.\n\n**Extinction.**\n\nBatterie : **22 %** affichée — puis zéro une seconde. Bug. Panne. Peur.\n\nDans le noir total, le câble sous ta main **vibre** — faiblement, régulièrement. Comme un moteur lointain. Comme un **appel** vers le bas.\n\nEt quelque part, très proche, un souffle d'eau qui **n'est pas** le tien.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "🔦 Tapoter la lampe — forcer le faisceau",
+          "vers": "audace_fosse",
+          "effects": [{ "stat": "audace", "val": 15 }],
+          "clickEffect": "pulse"
+        },
+        {
+          "text": "🫧 Lâcher prise sur la lumière — suivre la vibration du câble",
+          "vers": "lucidite_cable",
+          "effects": [{ "stat": "lucidite", "val": 15 }],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 400,
+      "y": 340
+    },
+    "audace_fosse": {
+      "id": "audace_fosse",
+      "title": "Le bord du gouffre",
+      "location": "FALAISE EST — 310 m",
+      "narrator": "Éclairer un abîme, c'est parfois lui donner une bouche.",
+      "text": "Tu frappes le boîtier. La lampe revient — faisceau tremblant, **22 %**.\n\nElle balaie le vide.\n\nPas de paroi. Plus de falaise. Tu es au **bord** — le câble continue dans le noir, vers une fosse sans fond visible.\n\nÀ la limite du cône, pendant une frame, quelque chose **bouge** — plus large que la Derelicta, plus lent que ton pouls.\n\nPuis rien.\n\nLa radio : *« —Descends. Maintenant. — »*",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "flash",
+      "choices": [
+        {
+          "text": "Te laisser glisser le long du câble dans la fosse",
+          "vers": "replat",
+          "effects": [{ "stat": "audace", "val": 10 }],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 280,
+      "y": 440
+    },
+    "lucidite_cable": {
+      "id": "lucidite_cable",
+      "title": "Le fil qui tire",
+      "location": "FALAISE EST — 305 m",
+      "narrator": "Quand la lumière ment, le toucher devient cartographie.",
+      "text": "Tu fermes les yeux — inutile sous l'eau, mais le geste **aide**.\n\nTa main sur le câble : vibration montante, régulière. Pas un moteur. Un **rythme** — trois courts, un long. Signal Fableris. **Descendre.**\n\nTu suis sans lampe. Dix mètres. Vingt.\n\nQuand tu rallumes enfin : **24 %** — économisé dans le noir.\n\nUne **alcôve** creusée dans la roche. Repaire. Pas une gueule ouverte.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Gagner l'alcôve — reprendre ton souffle",
+          "vers": "replat",
+          "effects": [{ "stat": "lucidite", "val": 10 }],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 520,
+      "y": 440
+    },
+    "replat": {
+      "id": "replat",
+      "title": "Le replat",
+      "location": "TERRASSE MINIÈRE — 350 m",
+      "narrator": "Un plateau sous l'eau, c'est une rare permission de respirer — si l'on ose.",
+      "text": "Tu atteins une terrasse — vestiges de rails, poteaux tordus, **symbole citrouille** gravé dans la roche, à moitié effacé.\n\nLe HUD se stabilise enfin :\n\n**450 m restants · prof. 350 m · cap 214°**\n\nLa lueur orange est **en dessous**. Cette fois, tu en es sûr·e.\n\nTa lampe : **19 %**.\n\nAu loin, un **ping** fixe — régulier, mécanique. Une station. Le prochain palier.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Noter les coordonnées et préparer la suite",
+          "vers": "fin_descente",
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 400,
+      "y": 540
+    },
+    "fin_descente": {
+      "id": "fin_descente",
+      "title": "Plus bas encore",
+      "location": "TERRASSE MINIÈRE — 355 m",
+      "narrator": "Sur Narhex, chaque palier gagné est une promesse — pas une victoire.",
+      "text": "Tu quittes la terrasse.\n\nLa falaise continue en bas — mais tu sais lire le mensonge, maintenant. Sonar. Lumière. Verticalité.\n\n**450 mètres** encore. Le portail pulse quelque part sous tes pieds.\n\nTa lampe : **18 %**. Le ping de la station t'attend.\n\n**FIN ÉPISODE 3 — Descente**\n\n*Épisode 4 : Le Sonar — bientôt*",
+      "isStart": false,
+      "isEnd": true,
+      "transition": "fade",
+      "choices": [],
+      "x": 400,
+      "y": 640
+    }
+  }
+}
