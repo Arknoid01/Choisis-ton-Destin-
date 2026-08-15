@@ -497,6 +497,12 @@ body {
 #options-panel {
   position:fixed; inset:0; z-index:200;
   display:flex; align-items:center; justify-content:center;
+  box-sizing:border-box;
+  padding:
+    max(12px, var(--android-safe-area-inset-top, env(safe-area-inset-top, 0px)))
+    max(12px, env(safe-area-inset-right, 0px))
+    max(12px, env(safe-area-inset-bottom, 0px))
+    max(12px, env(safe-area-inset-left, 0px));
   background:rgba(10,8,5,0); pointer-events:none;
   transition:background .35s;
 }
@@ -506,8 +512,25 @@ body {
   backdrop-filter:blur(8px);
 }
 #options-box {
-  width:100%; max-width:420px; margin:20px;
-  max-height:calc(100vh - 40px); overflow-y:auto;
+  width:100%; max-width:420px; margin:0;
+  max-height:calc(
+    100vh
+    - 24px
+    - var(--android-safe-area-inset-top, env(safe-area-inset-top, 0px))
+    - env(safe-area-inset-bottom, 0px)
+  );
+  max-height:calc(
+    100dvh
+    - 24px
+    - var(--android-safe-area-inset-top, env(safe-area-inset-top, 0px))
+    - env(safe-area-inset-bottom, 0px)
+  );
+  overflow-y:auto;
+  -webkit-overflow-scrolling:touch;
+  overscroll-behavior:contain;
+  box-sizing:border-box;
+  flex-shrink:1;
+  min-height:0;
   background:var(--bg2); border:1px solid var(--border);
   border-radius:16px; padding:32px;
   transform:scale(0.95) translateY(10px);
@@ -779,7 +802,30 @@ body {
   .menu-panel-footer .btn-main:last-child {
     border-bottom:1px solid var(--border);
   }
-  #options-box { margin:12px; padding:24px; }
+  #options-panel {
+    align-items:flex-start;
+    padding-top:calc(6px + var(--android-safe-area-inset-top, 0px));
+    padding-bottom:calc(6px + env(safe-area-inset-bottom, 0px));
+  }
+  #options-box {
+    margin:0;
+    padding:20px 18px;
+    max-height:calc(
+      100vh
+      - 12px
+      - var(--android-safe-area-inset-top, env(safe-area-inset-top, 0px))
+      - env(safe-area-inset-bottom, 0px)
+    );
+    max-height:calc(
+      100dvh
+      - 12px
+      - var(--android-safe-area-inset-top, env(safe-area-inset-top, 0px))
+      - env(safe-area-inset-bottom, 0px)
+    );
+  }
+  .options-title { margin-bottom:18px; }
+  .option-row { padding:10px 0; }
+  .options-section { margin-top:16px; padding-top:14px; }
 }
 
 /* Très petits écrans / hauteur limitée */
@@ -792,6 +838,11 @@ body {
   .menu-panel .btn-main,
   .menu-panel-footer .btn-main { padding:9px 12px; }
   .menu-tile-icon { width:30px; height:30px; font-size:14px; }
+  #options-box { padding:16px 14px; }
+  .options-title { margin-bottom:14px; font-size:15px; }
+  .option-row { padding:8px 0; }
+  .options-section { margin-top:12px; padding-top:12px; }
+  .options-section-desc { margin-bottom:10px; }
 }
 </style>
 
