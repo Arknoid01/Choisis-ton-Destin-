@@ -1,0 +1,206 @@
+{
+  "name": "The Depths — Episode 7: The Portal",
+  "kids": false,
+  "askPlayerName": true,
+  "pack": "abysses",
+  "stats": [
+    {
+      "id": "audace",
+      "label": "Boldness",
+      "start": 15,
+      "max": 100,
+      "color": "#e8934a"
+    },
+    {
+      "id": "lucidite",
+      "label": "Clarity",
+      "start": 10,
+      "max": 100,
+      "color": "#2a8aa8"
+    }
+  ],
+  "theme": {
+    "bg": "#040810",
+    "bg2": "#081018",
+    "bg3": "#0c1824",
+    "bg4": "#122030",
+    "border": "#1e4058",
+    "accent": "#e8934a",
+    "accent2": "#2a8aa8",
+    "accent3": "#6dfabc",
+    "text": "#d8e8f0",
+    "text2": "#6890a8",
+    "text3": "#3a5868"
+  },
+  "scenes": {
+    "antechambre": {
+      "id": "antechambre",
+      "title": "Last Chamber",
+      "location": "SECTOR 7 — ANTECHAMBER · 815 m",
+      "narrator": "Twenty-five metres. On Narhex, that's an eternity — or a second.",
+      "text": "You advance — episode 6 behind you, everything else ahead.\n\nYour HUD:\n\n**25 m remaining · depth 815 m · lamp 0% · heading 214°**\n\nNo beam. Only the **Halloween portal** glow — orange arch carved with runes and pumpkin faces that almost **breathe**.\n\nThe chamber is circular. No exit. One path.\n\nThe radio, clear:\n\n*« —{{player}}. You made it. — »*",
+      "isStart": true,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Swim straight for the arch — don't stop",
+          "vers": "arc",
+          "effects": [{ "stat": "audace", "val": 10 }],
+          "clickEffect": "pulse"
+        },
+        {
+          "text": "Measure the distance — count fin strokes",
+          "vers": "arc",
+          "effects": [{ "stat": "lucidite", "val": 10 }],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 400,
+      "y": 40
+    },
+    "arc": {
+      "id": "arc",
+      "title": "The Living Arch",
+      "location": "SECTOR 7 — THRESHOLD · 825 m",
+      "narrator": "A Fableris portal doesn't open — it recognises you.",
+      "text": "You reach it.\n\n**825 m**. **15 metres** from the centre.\n\nThe arch pulses with your heartbeat — involuntary sync. The water grows **warmer**. **Lighter**.\n\nOn the lintel, a Fableris inscription:\n\n*« Whoever descended without their own light may enter. »*\n\nYou descended. Your lamp has been **dead** since the cathedral.\n\nBehind you — **heavy** movement. Outside the portal's light. The thing from the wrecks did **not** follow into the nave. It **waited** here.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Turn around — face what's approaching",
+          "vers": "gardien",
+          "effects": [{ "stat": "audace", "val": 8 }],
+          "clickEffect": "pulse"
+        },
+        {
+          "text": "Don't turn — keep your eyes on the arch",
+          "vers": "gardien",
+          "effects": [{ "stat": "lucidite", "val": 8 }],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 400,
+      "y": 140
+    },
+    "gardien": {
+      "id": "gardien",
+      "title": "Outside the Light",
+      "location": "SECTOR 7 — THRESHOLD · 828 m",
+      "narrator": "What's followed you since the Derelicta doesn't need sight to know where you are.",
+      "text": "The clattering **returns** — muffled by pressure, but there.\n\nIn the orange halo, you see only the **shadow**: too long, too supple, edged like the skin glimpsed in the hull jet.\n\nIt doesn't charge. It **tightens** the circle — leaving you the portal, taking the rest.\n\n**10 metres** from the centre.\n\nThe radio murmurs:\n\n*« —Don't make room for it. Cross. — »*\n\nThe arch **widens** — a crack of light, wide as your shoulders. Ready.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Throw yourself into the crack — now",
+          "vers": "audace_franchir",
+          "effects": [{ "stat": "audace", "val": 15 }],
+          "clickEffect": "pulse"
+        },
+        {
+          "text": "Place your palm on the lintel — name your debt",
+          "vers": "lucidite_pacte",
+          "effects": [{ "stat": "lucidite", "val": 15 }],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 400,
+      "y": 240
+    },
+    "audace_franchir": {
+      "id": "audace_franchir",
+      "title": "Cross",
+      "location": "PORTAL — ENTRY · 832 m",
+      "narrator": "Sometimes running forward is the only courage that counts.",
+      "text": "You propel yourself.\n\nThe shadow **lunges** — a rush of water, a brush on your ankle. No bite. Not yet.\n\nYou cross the crack.\n\nThe world **changes** — pressure dropping, colours screaming, sound becoming **muted music**.\n\nBehind you, a rumble: the portal **closes**. The thing stays on the other side.\n\nYou're **inside**.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "flash",
+      "choices": [
+        {
+          "text": "Let the portal current carry you",
+          "vers": "traversee",
+          "effects": [{ "stat": "audace", "val": 10 }],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 280,
+      "y": 340
+    },
+    "lucidite_pacte": {
+      "id": "lucidite_pacte",
+      "title": "The Debt",
+      "location": "SECTOR 7 — THRESHOLD · 830 m",
+      "narrator": "Naming what you owe is sometimes the key you sought without knowing.",
+      "text": "You place your hand on the lintel.\n\nYou speak — in your head, the Coalition may hear:\n\n*« I am {{player}}. I borrowed the light. I return the descent. »*\n\nThe arch **answers** — runes lighting one by one, pumpkins **truly** smiling.\n\nThe shadow recedes — not from fear. From **rule**. This portal isn't its domain.\n\nThe crack opens **gently**.\n\nYou enter without rushing. Water becomes light.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Move to the centre of the portal",
+          "vers": "traversee",
+          "effects": [{ "stat": "lucidite", "val": 10 }],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 520,
+      "y": 340
+    },
+    "traversee": {
+      "id": "traversee",
+      "title": "Crossing",
+      "location": "FABLERIS PORTAL — IN-BETWEEN",
+      "narrator": "Between two worlds, time has no up or down — only passage.",
+      "text": "You swim in the light.\n\nNo water — or too much. Images scrolling: the Derelicta sinking, the cliff, relay N-7, the crane, the cathedral, your lamp dying.\n\n**800 m**, the HUD whispers one last time. Then the numbers **vanish**.\n\nA voice — the radio, finally **stable**:\n\n*« —Extraction confirmed. Welcome, {{player}}. — »*\n\nAhead: a **second** surface. Not Narhex. **Starry** sky. Cold autumn air. Pumpkin and salt.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Leave the water — reach the shore",
+          "vers": "rive",
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 400,
+      "y": 440
+    },
+    "rive": {
+      "id": "rive",
+      "title": "The Other Shore",
+      "location": "FABLERIS HAVEN — PORTAL EXIT",
+      "narrator": "Surviving Narhex isn't defeating the ocean. It's accepting you won't go back.",
+      "text": "You break the surface.\n\nA stone quay. Orange lanterns. Coalition agents in suits — **visible** faces for the first time since splashdown.\n\nSomeone hands you a thermal blanket.\n\nBehind you, the portal still pulses underwater — orange mouth slowly closing.\n\nYour HUD, one last line:\n\n**SECTOR 7 MISSION — COMPLETE · max depth 835 m · lamp — · Boldness / Clarity logged**\n\nYou breathe. Really breathe.\n\nNarhex stays **out there**. You are **here**.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Look one last time at the black water",
+          "vers": "fin_portail",
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 400,
+      "y": 540
+    },
+    "fin_portail": {
+      "id": "fin_portail",
+      "title": "Extraction",
+      "location": "FABLERIS HAVEN — HALLOWEEN NIGHT",
+      "narrator": "Some missions end with fireworks. This one ends with a breath.",
+      "text": "You look at the water.\n\nStill black — but **behind** a closed portal. Not in front of you.\n\nIn the distance, glowing pumpkins on the quay. Faint music. The Coalition celebrates Halloween **properly** — knowing what's under the planets it sends you to alone.\n\nThe radio, one last time — almost a smile:\n\n*« —Rest, {{player}}. You went down. You came up. — »*\n\n**END — The Depths**\n\n*Thanks for playing · The Depths pack · Fableris*",
+      "isStart": false,
+      "isEnd": true,
+      "transition": "fade",
+      "choices": [],
+      "x": 400,
+      "y": 640
+    }
+  }
+}

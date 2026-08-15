@@ -1,0 +1,206 @@
+{
+  "name": "Las Profundidades — Episodio 7: El Portal",
+  "kids": false,
+  "askPlayerName": true,
+  "pack": "abysses",
+  "stats": [
+    {
+      "id": "audace",
+      "label": "Audacia",
+      "start": 15,
+      "max": 100,
+      "color": "#e8934a"
+    },
+    {
+      "id": "lucidite",
+      "label": "Lucidez",
+      "start": 10,
+      "max": 100,
+      "color": "#2a8aa8"
+    }
+  ],
+  "theme": {
+    "bg": "#040810",
+    "bg2": "#081018",
+    "bg3": "#0c1824",
+    "bg4": "#122030",
+    "border": "#1e4058",
+    "accent": "#e8934a",
+    "accent2": "#2a8aa8",
+    "accent3": "#6dfabc",
+    "text": "#d8e8f0",
+    "text2": "#6890a8",
+    "text3": "#3a5868"
+  },
+  "scenes": {
+    "antechambre": {
+      "id": "antechambre",
+      "title": "Última cámara",
+      "location": "SECTOR 7 — ANTECÁMARA · 815 m",
+      "narrator": "Veinticinco metros. En Narhex, es una eternidad — o un segundo.",
+      "text": "Avanzas — episodio 6 atrás, todo lo demás delante.\n\nTu HUD:\n\n**25 m restantes · prof. 815 m · linterna 0 % · rumbo 214°**\n\nSin haz. Solo el resplandor del **portal Halloween** — arco naranja grabado con runas y caras de calabaza que casi **respiran**.\n\nLa cámara es circular. Sin salida. Un solo camino.\n\nLa radio, clara:\n\n*« —{{player}}. Has llegado. — »*",
+      "isStart": true,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Nadar recto hacia el arco — sin parar",
+          "vers": "arc",
+          "effects": [{ "stat": "audace", "val": 10 }],
+          "clickEffect": "pulse"
+        },
+        {
+          "text": "Medir la distancia — contar brazadas",
+          "vers": "arc",
+          "effects": [{ "stat": "lucidite", "val": 10 }],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 400,
+      "y": 40
+    },
+    "arc": {
+      "id": "arc",
+      "title": "El arco vivo",
+      "location": "SECTOR 7 — UMBRAL · 825 m",
+      "narrator": "Un portal Fableris no se abre — te reconoce.",
+      "text": "Lo alcanzas.\n\n**825 m**. **15 metros** del centro.\n\nEl arco late al ritmo de tu pulso — sincronización involuntaria. El agua se vuelve más **cálida**. Más **ligera**.\n\nEn el dintel, una inscripción Fableris:\n\n*« Quien descendió sin luz propia puede entrar. »*\n\nDescendiste. Tu linterna está **muerta** desde la catedral.\n\nDetrás de ti — un movimiento **pesado**. Fuera de la luz del portal. La cosa de los restos **no** siguió en la nave. **Esperó** aquí.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Girarte — enfrentar lo que se acerca",
+          "vers": "gardien",
+          "effects": [{ "stat": "audace", "val": 8 }],
+          "clickEffect": "pulse"
+        },
+        {
+          "text": "No girarte — mantener los ojos en el arco",
+          "vers": "gardien",
+          "effects": [{ "stat": "lucidite", "val": 8 }],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 400,
+      "y": 140
+    },
+    "gardien": {
+      "id": "gardien",
+      "title": "Fuera de la luz",
+      "location": "SECTOR 7 — UMBRAL · 828 m",
+      "narrator": "Lo que te sigue desde la Derelicta no necesita ver para saber dónde estás.",
+      "text": "El chasquido **vuelve** — amortiguado por la presión, pero ahí.\n\nEn el halo naranja, solo ves la **sombra**: demasiado larga, demasiado flexible, borde afilado como la piel vista en el chorro del casco.\n\nNo carga. **Cierra** el círculo — dejándote el portal, quitándote el resto.\n\n**10 metros** del centro.\n\nLa radio murmura:\n\n*« —No le hagas sitio. Cruza. — »*\n\nEl arco se **ensancha** — una grieta de luz, ancha como tus hombros. Lista.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Lanzarte a la grieta — ahora",
+          "vers": "audace_franchir",
+          "effects": [{ "stat": "audace", "val": 15 }],
+          "clickEffect": "pulse"
+        },
+        {
+          "text": "Posar la palma en el dintel — nombrar tu deuda",
+          "vers": "lucidite_pacte",
+          "effects": [{ "stat": "lucidite", "val": 15 }],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 400,
+      "y": 240
+    },
+    "audace_franchir": {
+      "id": "audace_franchir",
+      "title": "Cruzar",
+      "location": "PORTAL — ENTRADA · 832 m",
+      "narrator": "A veces huir hacia adelante es la única forma de valor que cuenta.",
+      "text": "Te impulsas.\n\nLa sombra **se lanza** — un soplo de agua, un roce en tu tobillo. Sin mordida. Aún no.\n\nCruzas la grieta.\n\nEl mundo **cambia** — presión que cae, colores que gritan, sonido que se vuelve **música** apagada.\n\nDetrás, un retumbo: el portal **se cierra**. La cosa se queda al otro lado.\n\nEstás **dentro**.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "flash",
+      "choices": [
+        {
+          "text": "Dejarte llevar por la corriente del portal",
+          "vers": "traversee",
+          "effects": [{ "stat": "audace", "val": 10 }],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 280,
+      "y": 340
+    },
+    "lucidite_pacte": {
+      "id": "lucidite_pacte",
+      "title": "La deuda",
+      "location": "SECTOR 7 — UMBRAL · 830 m",
+      "narrator": "Nombrar lo que se debe a veces es la llave que buscabas sin saberlo.",
+      "text": "Posas la mano en el dintel.\n\nPronuncias — en tu cabeza, la Coalición quizá escuche:\n\n*« Soy {{player}}. Pedí prestada la luz. Devuelvo el descenso. »*\n\nEl arco **responde** — runas que se encienden una a una, calabazas que sonríen **de verdad**.\n\nLa sombra retrocede — no por miedo. Por **regla**. Este portal no le pertenece.\n\nLa grieta se abre **suavemente**.\n\nEntras sin correr. El agua se vuelve luz.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Avanzar al centro del portal",
+          "vers": "traversee",
+          "effects": [{ "stat": "lucidite", "val": 10 }],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 520,
+      "y": 340
+    },
+    "traversee": {
+      "id": "traversee",
+      "title": "Travesía",
+      "location": "PORTAL FABLERIS — ENTRE-MUNDOS",
+      "narrator": "Entre dos mundos, el tiempo no tiene arriba ni abajo — solo paso.",
+      "text": "Nadas en la luz.\n\nSin agua — o demasiada. Imágenes que pasan: la Derelicta hundiéndose, el acantilado, el relevo N-7, la grúa, la catedral, tu linterna muriendo.\n\n**800 m**, susurra el HUD una última vez. Luego los números **desaparecen**.\n\nUna voz — la radio, por fin **estable**:\n\n*« —Extracción confirmada. Bienvenido, {{player}}. — »*\n\nDelante: una **segunda** superficie. No Narhex. Cielo **estrellado**. Aire frío de otoño. Calabaza y sal.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Salir del agua — alcanzar la orilla",
+          "vers": "rive",
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 400,
+      "y": 440
+    },
+    "rive": {
+      "id": "rive",
+      "title": "La otra orilla",
+      "location": "PUERTO FABLERIS — SALIDA DEL PORTAL",
+      "narrator": "Sobrevivir a Narhex no es vencer al océano. Es aceptar no volver.",
+      "text": "Rompes la superficie.\n\nUn muelle de piedra. Linternas naranjas. Agentes de la Coalición en traje — rostros **visibles**, por primera vez desde el amerrissaje.\n\nAlguien te tiende una manta térmica.\n\nDetrás, el portal aún late bajo el agua — boca naranja que se cierra lentamente.\n\nTu HUD, una última línea:\n\n**MISIÓN SECTOR 7 — COMPLETADA · prof. máx 835 m · linterna — · Audacia / Lucidez registradas**\n\nRespiras. De verdad.\n\nNarhex sigue **allí**. Tú estás **aquí**.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Mirar una última vez el agua negra",
+          "vers": "fin_portail",
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 400,
+      "y": 540
+    },
+    "fin_portail": {
+      "id": "fin_portail",
+      "title": "Extracción",
+      "location": "PUERTO FABLERIS — NOCHE DE HALLOWEEN",
+      "narrator": "Algunas misiones terminan con fuegos artificiales. Esta termina con un suspiro.",
+      "text": "Miras el agua.\n\nNegra aún — pero **detrás** de un portal cerrado. No delante de ti.\n\nA lo lejos, calabazas luminosas en el muelle. Música tenue. La Coalición celebra Halloween **como debe** — sabiendo lo que hay bajo los planetas a los que te envía solo.\n\nLa radio, una última vez — casi una sonrisa:\n\n*« —Descansa, {{player}}. Descendiste. Subiste. — »*\n\n**FIN — Las Profundidades**\n\n*Gracias por jugar · Pack Las Profundidades · Fableris*",
+      "isStart": false,
+      "isEnd": true,
+      "transition": "fade",
+      "choices": [],
+      "x": 400,
+      "y": 640
+    }
+  }
+}
