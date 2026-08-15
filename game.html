@@ -106,13 +106,36 @@ body {
 }
 
 #btn-menu {
-  width: 36px; height: 36px; border-radius: 8px;
-  border: 1px solid var(--border); background: none;
-  color: var(--text2); font-size: 18px; cursor: pointer;
+  width: 38px; height: 38px; border-radius: 11px;
+  border: 1px solid var(--border);
+  background: color-mix(in srgb, var(--bg3) 70%, transparent);
+  color: var(--text2); cursor: pointer;
   display: flex; align-items: center; justify-content: center;
-  transition: all .15s; flex-shrink: 0;
+  transition: border-color .2s, background .2s, box-shadow .2s, transform .12s;
+  flex-shrink: 0; padding: 0;
+  -webkit-tap-highlight-color: transparent;
 }
-#btn-menu:hover { border-color: var(--accent); color: var(--text); }
+#btn-menu:hover, #btn-menu.menu-open {
+  border-color: var(--accent);
+  color: var(--text);
+  background: color-mix(in srgb, var(--accent) 12%, var(--bg3));
+  box-shadow: 0 0 14px color-mix(in srgb, var(--accent) 25%, transparent);
+}
+#btn-menu:active { transform: scale(0.94); }
+.menu-btn-lines {
+  width: 16px; height: 12px; position: relative; display: block;
+}
+.menu-btn-lines span {
+  position: absolute; left: 0; right: 0; height: 2px;
+  border-radius: 2px; background: currentColor;
+  transition: transform .22s ease, top .22s ease, opacity .18s;
+}
+.menu-btn-lines span:nth-child(1) { top: 0; }
+.menu-btn-lines span:nth-child(2) { top: 5px; }
+.menu-btn-lines span:nth-child(3) { top: 10px; }
+#btn-menu.menu-open .menu-btn-lines span:nth-child(1) { top: 5px; transform: rotate(45deg); }
+#btn-menu.menu-open .menu-btn-lines span:nth-child(2) { opacity: 0; }
+#btn-menu.menu-open .menu-btn-lines span:nth-child(3) { top: 5px; transform: rotate(-45deg); }
 
 #btn-fullscreen {
   width: 36px; height: 36px; border-radius: 8px;
@@ -662,40 +685,96 @@ body {
 #menu-overlay {
   position: fixed; inset: 0; z-index: 300;
   background: rgba(0,0,0,0); pointer-events: none;
-  transition: background .25s;
+  transition: background .28s;
+  backdrop-filter: blur(0); -webkit-backdrop-filter: blur(0);
 }
-#menu-overlay.open { background: rgba(0,0,0,0.6); pointer-events: all; }
+#menu-overlay.open {
+  background: rgba(0,0,0,0.55); pointer-events: all;
+  backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px);
+}
 #menu-drawer {
   position: absolute; top: 0; right: 0; bottom: 0;
-  width: 260px; background: var(--bg2);
-  border-left: 1px solid var(--border);
+  width: min(320px, 92vw);
+  background: linear-gradient(180deg, var(--bg2) 0%, color-mix(in srgb, var(--bg) 88%, var(--bg2)) 100%);
+  border-left: 1px solid color-mix(in srgb, var(--accent) 22%, var(--border));
+  box-shadow: -12px 0 40px rgba(0,0,0,0.45);
   transform: translateX(100%);
-  transition: transform .3s cubic-bezier(.4,0,.2,1);
+  transition: transform .32s cubic-bezier(.4,0,.2,1);
   display: flex; flex-direction: column; overflow: hidden;
+  padding-bottom: env(safe-area-inset-bottom, 0px);
 }
 #menu-overlay.open #menu-drawer { transform: translateX(0); }
 .drawer-header {
-  padding: 20px 20px 14px;
+  display: flex; align-items: flex-start; justify-content: space-between;
+  gap: 12px; padding: 18px 18px 14px;
   border-bottom: 1px solid var(--border);
+  background: color-mix(in srgb, var(--accent) 6%, transparent);
 }
+.drawer-header-text { flex: 1; min-width: 0; }
 .drawer-title {
-  font-family: 'Cinzel', serif; font-size: 13px;
-  font-weight: 600; letter-spacing: 2px; color: var(--text);
+  font-family: 'Cinzel', serif; font-size: 14px;
+  font-weight: 600; letter-spacing: 1.5px; color: var(--text);
+  line-height: 1.35;
 }
 .drawer-subtitle {
-  font-size: 12px; color: var(--text3);
-  font-style: italic; margin-top: 3px;
+  font-size: 11px; color: var(--accent2);
+  font-family: 'DM Mono', monospace; letter-spacing: 0.5px;
+  margin-top: 6px;
 }
-.drawer-body { flex: 1; padding: 12px; overflow-y: auto; }
+.drawer-menu-sub {
+  font-size: 12px; color: var(--text3); line-height: 1.45;
+  margin-top: 6px;
+}
+.drawer-close {
+  width: 34px; height: 34px; border-radius: 10px; flex-shrink: 0;
+  border: 1px solid var(--border); background: var(--bg3);
+  color: var(--text3); cursor: pointer; font-size: 15px;
+  display: flex; align-items: center; justify-content: center;
+  transition: background .15s, border-color .15s;
+}
+.drawer-close:hover { border-color: var(--accent); color: var(--text); }
+.drawer-body { flex: 1; padding: 10px 10px 16px; overflow-y: auto; }
+.drawer-section-title {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px; font-weight: 700; letter-spacing: 1.6px;
+  text-transform: uppercase; color: var(--text3);
+  padding: 10px 10px 6px;
+}
 .drawer-item {
-  display: flex; align-items: center; gap: 12px;
-  padding: 12px 14px; border-radius: 8px;
-  border: none; background: none; width: 100%;
-  text-align: left; color: var(--text2);
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 15px; cursor: pointer; transition: all .15s;
+  display: flex; align-items: flex-start; gap: 12px;
+  padding: 11px 12px; margin-bottom: 4px; border-radius: 13px;
+  border: 1px solid transparent; background: transparent;
+  width: 100%; text-align: left; color: var(--text2);
+  cursor: pointer; transition: background .12s, border-color .12s;
+  -webkit-tap-highlight-color: transparent;
 }
-.drawer-item:hover { background: var(--bg3); color: var(--text); }
+.drawer-item:hover, .drawer-item:active {
+  background: var(--bg3); border-color: var(--border); color: var(--text);
+}
+.drawer-item.drawer-accent .drawer-icon-wrap {
+  background: color-mix(in srgb, var(--accent2) 12%, var(--bg3));
+  border-color: color-mix(in srgb, var(--accent2) 28%, var(--border));
+}
+.drawer-item.drawer-warn .drawer-icon-wrap {
+  background: color-mix(in srgb, #fa6d8f 10%, var(--bg3));
+  border-color: color-mix(in srgb, #fa6d8f 25%, var(--border));
+}
+.drawer-icon-wrap {
+  width: 40px; height: 40px; border-radius: 11px; flex-shrink: 0;
+  border: 1px solid var(--border); background: var(--bg3);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 18px; line-height: 1;
+}
+.drawer-item-text { flex: 1; min-width: 0; padding-top: 1px; }
+.drawer-item-text strong {
+  display: block; font-family: 'Cormorant Garamond', serif;
+  font-size: 16px; font-weight: 600; color: var(--text);
+  line-height: 1.25; margin-bottom: 3px;
+}
+.drawer-item-text span.desc {
+  display: block; font-size: 11px; color: var(--text3);
+  line-height: 1.45; font-family: 'Cormorant Garamond', serif;
+}
 .drawer-item-icon { font-size: 18px; width: 24px; text-align: center; }
 
 /* ── HISTORY LOG ── */
@@ -867,7 +946,9 @@ body {
   <a href="index.html" id="btn-back" title="Retour">←</a>
   <div id="game-title">…</div>
   <button id="btn-fullscreen" onclick="toggleFullscreen()" title="Plein écran">⛶</button>
-  <button id="btn-menu" onclick="openMenu()" title="Menu">☰</button>
+  <button id="btn-menu" type="button" onclick="toggleMenu()" aria-label="Menu" aria-expanded="false">
+    <span class="menu-btn-lines" aria-hidden="true"><span></span><span></span><span></span></span>
+  </button>
 </div>
 
 <!-- PROGRESS BAR -->
@@ -883,29 +964,60 @@ body {
 
 <!-- MENU DRAWER -->
 <div id="menu-overlay" onclick="handleMenuClick(event)">
-  <div id="menu-drawer">
+  <div id="menu-drawer" role="dialog" aria-labelledby="drawer-game-title">
     <div class="drawer-header">
-      <div class="drawer-title" id="drawer-game-title">Histoire</div>
-      <div class="drawer-subtitle" id="drawer-scene-count">0 scènes visitées</div>
+      <div class="drawer-header-text">
+        <div class="drawer-title" id="drawer-game-title">Histoire</div>
+        <div class="drawer-subtitle" id="drawer-scene-count">0 scènes visitées</div>
+        <div class="drawer-menu-sub" id="drawer-menu-sub"></div>
+      </div>
+      <button type="button" class="drawer-close" id="drawer-close-btn" onclick="closeMenu()" aria-label="Fermer">✕</button>
     </div>
     <div class="drawer-body">
-      <button class="drawer-item" onclick="restartGame();closeMenu()">
-        <span class="drawer-item-icon">↺</span> Recommencer
+      <div class="drawer-section-title" id="drawer-section-game"></div>
+      <button type="button" class="drawer-item" onclick="restartGame();closeMenu()">
+        <span class="drawer-icon-wrap">↺</span>
+        <span class="drawer-item-text">
+          <strong id="drawer-restart-label"></strong>
+          <span class="desc" id="drawer-restart-desc"></span>
+        </span>
       </button>
-      <button class="drawer-item" onclick="toggleHistory()">
-        <span class="drawer-item-icon">📜</span> Journal
+      <button type="button" class="drawer-item" onclick="toggleHistory()">
+        <span class="drawer-icon-wrap">📜</span>
+        <span class="drawer-item-text">
+          <strong id="drawer-journal-label"></strong>
+          <span class="desc" id="drawer-journal-desc"></span>
+        </span>
       </button>
-      <button class="drawer-item" onclick="toggleBookmarkList()">
-        <span class="drawer-item-icon">🔖</span> Marque-pages
+      <button type="button" class="drawer-item" onclick="toggleBookmarkList()">
+        <span class="drawer-icon-wrap">🔖</span>
+        <span class="drawer-item-text">
+          <strong id="drawer-bookmarks-label"></strong>
+          <span class="desc" id="drawer-bookmarks-desc"></span>
+        </span>
       </button>
-      <button class="drawer-item" onclick="document.getElementById('game-import-input').click();closeMenu()">
-        <span class="drawer-item-icon">↑</span> Charger un JSON
+
+      <div class="drawer-section-title" id="drawer-section-nav"></div>
+      <button type="button" class="drawer-item drawer-accent" onclick="document.getElementById('game-import-input').click();closeMenu()">
+        <span class="drawer-icon-wrap">↑</span>
+        <span class="drawer-item-text">
+          <strong id="drawer-import-label"></strong>
+          <span class="desc" id="drawer-import-desc"></span>
+        </span>
       </button>
-      <button class="drawer-item" onclick="window.location.href='stories.html'">
-        <span class="drawer-item-icon">📚</span> Bibliothèque
+      <button type="button" class="drawer-item" onclick="window.location.href='stories.html'">
+        <span class="drawer-icon-wrap">📚</span>
+        <span class="drawer-item-text">
+          <strong id="drawer-library-label"></strong>
+          <span class="desc" id="drawer-library-desc"></span>
+        </span>
       </button>
-      <button class="drawer-item" onclick="window.location.href='index.html'">
-        <span class="drawer-item-icon">←</span> Quitter
+      <button type="button" class="drawer-item drawer-warn" onclick="window.location.href='index.html'">
+        <span class="drawer-icon-wrap">←</span>
+        <span class="drawer-item-text">
+          <strong id="drawer-quit-label"></strong>
+          <span class="desc" id="drawer-quit-desc"></span>
+        </span>
       </button>
     </div>
     <div id="history-log"></div>
@@ -1421,8 +1533,20 @@ const GAME_I18N = {
     restart:     'Recommencer',
     journal:     'Journal',
     bookmarks:   'Marque-pages',
+    import:      'Charger un JSON',
     library:     'Bibliothèque',
     quit:        'Quitter',
+    menuSub:     'Reprends ta partie ou explore ailleurs.',
+    sectionGame: 'Pendant la partie',
+    sectionNav:  'Navigation',
+    restartDesc: 'Repart de la scène de début — ta progression actuelle sera effacée.',
+    journalDesc: 'Relis les scènes que tu as déjà visitées dans l\'ordre.',
+    bookmarksDesc: 'Retrouve tes points de reprise enregistrés dans l\'histoire.',
+    importDesc:  'Ouvre une autre histoire au format JSON depuis ton appareil.',
+    libraryDesc: 'Parcours le catalogue Fableris et choisis une autre aventure.',
+    quitDesc:    'Retour à l\'accueil Fableris — ta partie peut être reprise plus tard.',
+    menuBtnAria: 'Ouvrir le menu',
+    closeMenu:   'Fermer le menu',
     noBookmarks: 'Aucun marque-page',
     bmSaved:     '🔖 Marque-page posé !',
     progressSaved: '💾 Progression sauvegardée',
@@ -1442,8 +1566,20 @@ const GAME_I18N = {
     restart:     'Restart',
     journal:     'Journal',
     bookmarks:   'Bookmarks',
+    import:      'Load JSON',
     library:     'Library',
     quit:        'Quit',
+    menuSub:     'Resume your run or browse elsewhere.',
+    sectionGame: 'During the story',
+    sectionNav:  'Navigation',
+    restartDesc: 'Start again from the beginning — current progress will be cleared.',
+    journalDesc: 'Re-read the scenes you have already visited, in order.',
+    bookmarksDesc: 'Jump back to saved checkpoints in this story.',
+    importDesc:  'Open another JSON story file from your device.',
+    libraryDesc: 'Browse the Fableris catalog and pick another adventure.',
+    quitDesc:    'Return to Fableris home — you can resume later.',
+    menuBtnAria: 'Open menu',
+    closeMenu:   'Close menu',
     noBookmarks: 'No bookmarks',
     bmSaved:     '🔖 Bookmark saved!',
     progressSaved: '💾 Progress saved',
@@ -1463,8 +1599,20 @@ const GAME_I18N = {
     restart:     'Reiniciar',
     journal:     'Diario',
     bookmarks:   'Marcadores',
+    import:      'Cargar JSON',
     library:     'Biblioteca',
     quit:        'Salir',
+    menuSub:     'Retoma tu partida o explora en otro sitio.',
+    sectionGame: 'Durante la historia',
+    sectionNav:  'Navegación',
+    restartDesc: 'Vuelve al inicio — se borrará el progreso actual.',
+    journalDesc: 'Relee las escenas que ya has visitado, en orden.',
+    bookmarksDesc: 'Vuelve a tus puntos de guardado en esta historia.',
+    importDesc:  'Abre otra historia JSON desde tu dispositivo.',
+    libraryDesc: 'Explora el catálogo Fableris y elige otra aventura.',
+    quitDesc:    'Vuelve al inicio Fableris — podrás retomar más tarde.',
+    menuBtnAria: 'Abrir menú',
+    closeMenu:   'Cerrar menú',
     noBookmarks: 'Sin marcadores',
     bmSaved:     '🔖 ¡Marcador guardado!',
     progressSaved: '💾 Progreso guardado',
@@ -1489,15 +1637,25 @@ function applyGameUI() {
   const set = (id, val) => { const el = document.getElementById(id); if (el) el.textContent = val; };
   set('fab-label-bookmark', gt('bookmark'));
   set('fab-label-save',     gt('save'));
-  // Drawer items
-  const items = document.querySelectorAll('.drawer-item');
-  const labels = ['restart','journal','bookmarks','library','quit'];
-  items.forEach((el, i) => {
-    const icon = el.querySelector('.drawer-item-icon');
-    if (icon && labels[i]) {
-      el.childNodes[el.childNodes.length - 1].textContent = ' ' + gt(labels[i]);
-    }
-  });
+  set('drawer-menu-sub',    gt('menuSub'));
+  set('drawer-section-game', gt('sectionGame'));
+  set('drawer-section-nav',  gt('sectionNav'));
+  set('drawer-restart-label',   gt('restart'));
+  set('drawer-restart-desc',    gt('restartDesc'));
+  set('drawer-journal-label',   gt('journal'));
+  set('drawer-journal-desc',    gt('journalDesc'));
+  set('drawer-bookmarks-label', gt('bookmarks'));
+  set('drawer-bookmarks-desc',  gt('bookmarksDesc'));
+  set('drawer-import-label',    gt('import'));
+  set('drawer-import-desc',     gt('importDesc'));
+  set('drawer-library-label',   gt('library'));
+  set('drawer-library-desc',    gt('libraryDesc'));
+  set('drawer-quit-label',      gt('quit'));
+  set('drawer-quit-desc',       gt('quitDesc'));
+  const menuBtn = document.getElementById('btn-menu');
+  if (menuBtn) menuBtn.setAttribute('aria-label', gt('menuBtnAria'));
+  const closeBtn = document.getElementById('drawer-close-btn');
+  if (closeBtn) closeBtn.setAttribute('aria-label', gt('closeMenu'));
 }
 
 let typewriterTimeout = null;
@@ -2261,12 +2419,20 @@ function handleGameImport(e) {
 }
 
 function openMenu() {
-  showUI(); clearTimeout(uiHideTimer); // garder visible pendant le menu
+  showUI(); clearTimeout(uiHideTimer);
   document.getElementById('menu-overlay').classList.add('open');
+  const btn = document.getElementById('btn-menu');
+  if (btn) { btn.classList.add('menu-open'); btn.setAttribute('aria-expanded', 'true'); }
 }
 function closeMenu() {
   document.getElementById('menu-overlay').classList.remove('open');
+  const btn = document.getElementById('btn-menu');
+  if (btn) { btn.classList.remove('menu-open'); btn.setAttribute('aria-expanded', 'false'); }
   uiHideTimer = setTimeout(hideUI, 2000);
+}
+function toggleMenu() {
+  const open = document.getElementById('menu-overlay').classList.contains('open');
+  if (open) closeMenu(); else openMenu();
 }
 function handleMenuClick(e) {
   if (e.target === document.getElementById('menu-overlay')) closeMenu();
