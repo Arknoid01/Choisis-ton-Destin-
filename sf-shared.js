@@ -126,6 +126,28 @@ window.SFShared = (function () {
     return LANGS.includes(lang) ? lang : 'fr';
   }
 
+  const FREE_PACKS = ['free', 'kids'];
+
+  function getUnlockedPacks() {
+    try {
+      const v = JSON.parse(lsGet('sf_unlocked_packs') || 'null');
+      if (Array.isArray(v)) return v;
+    } catch (e) {}
+    return FREE_PACKS.slice();
+  }
+
+  /** Pack accessible (gratuit, acheté, code créateur ou accès all/creator). */
+  function isPackUnlocked(packId) {
+    if (!packId || FREE_PACKS.includes(packId)) return true;
+    const unlocked = getUnlockedPacks();
+    if (unlocked.includes(packId)) return true;
+    if (unlocked.includes('creator') || unlocked.includes('all')) return true;
+    if (window.SFBilling && typeof SFBilling.isUnlocked === 'function') {
+      return SFBilling.isUnlocked(packId);
+    }
+    return false;
+  }
+
   function getStarterFile(lang) {
     const code = LANGS.includes(lang) ? lang : currentLang();
     const bucket = isKidsMode() ? STARTER_STORIES.kids : STARTER_STORIES.default;
@@ -339,6 +361,8 @@ window.SFShared = (function () {
     shouldShowStarterHint,
     isKidsMode,
     currentLang,
+    getUnlockedPacks,
+    isPackUnlocked,
     getDefaultExpandedPackIds,
     ensureDefaultExpandedPacks,
     exportPlayerBackup,
