@@ -474,6 +474,7 @@ body {
 }
 #options-box {
   width:100%; max-width:420px; margin:20px;
+  max-height:calc(100vh - 40px); overflow-y:auto;
   background:var(--bg2); border:1px solid var(--border);
   border-radius:16px; padding:32px;
   transform:scale(0.95) translateY(10px);
@@ -530,6 +531,30 @@ body {
   outline:none; cursor:pointer;
 }
 .opt-select:focus { border-color:var(--gold3); }
+
+.options-section {
+  margin-top: 20px; padding-top: 16px;
+  border-top: 1px solid var(--border);
+}
+.options-section-title {
+  font-family:'Cinzel',serif; font-size:11px; letter-spacing:2px;
+  color:var(--gold); margin-bottom:8px; text-transform:uppercase;
+}
+.options-section-desc {
+  font-size:12px; color:var(--dim); line-height:1.55; margin-bottom:12px;
+}
+.options-action-btn {
+  width:100%; padding:11px 14px; border-radius:8px;
+  border:1px solid var(--border); background:var(--bg3);
+  color:var(--cream); font-family:'Cormorant Garamond',serif;
+  font-size:14px; cursor:pointer; transition:border-color .2s, background .2s;
+}
+.options-action-btn:hover { border-color:var(--gold3); background:var(--bg); }
+.options-action-btn.secondary {
+  color:var(--dim); font-size:13px;
+}
+.options-device-actions { display:flex; flex-direction:column; gap:8px; }
+.options-file-input { display:none; }
 
 .options-close {
   margin-top:24px; width:100%; padding:12px;
@@ -1028,6 +1053,24 @@ body {
       </select>
     </div>
 
+    <div class="options-section">
+      <div class="options-section-title" id="txt-opt-section-help">Aide</div>
+      <p class="options-section-desc" id="txt-opt-replay-desc">Relance les astuces de premier lancement et les mini-tutos en jeu.</p>
+      <button type="button" class="options-action-btn" id="txt-opt-replay-tips" onclick="replayTips()">Revoir les astuces</button>
+    </div>
+
+    <div class="options-section">
+      <div class="options-section-title" id="txt-opt-section-device">Changer d'appareil</div>
+      <p class="options-section-desc" id="txt-opt-device-desc">Exportez vos données sur cet appareil, puis importez le fichier sur le nouveau. Marque-pages, progression, badges et packs débloqués sont inclus.</p>
+      <div class="options-device-actions">
+        <button type="button" class="options-action-btn" id="txt-opt-device-export" onclick="exportDeviceBackup()">Exporter ma sauvegarde</button>
+        <label class="options-action-btn secondary" id="txt-opt-device-import-label" for="opt-device-import">
+          Importer une sauvegarde
+          <input type="file" id="opt-device-import" class="options-file-input" accept="application/json,.json" onchange="importDeviceBackupFromFile(this)">
+        </label>
+      </div>
+    </div>
+
     <button class="options-close" onclick="closeOptions()" id="txt-close-options">Fermer</button>
     <button onclick="closeOptions();openCodePopup()" style="
       background:none;border:none;color:var(--dimmer);font-family:'DM Mono',monospace;
@@ -1084,6 +1127,16 @@ const LANG = {
     speedNormal:    'Normal',
     speedSlow:      'Lent',
     closeOptions:   'Fermer',
+    optSectionHelp: 'Aide',
+    optReplayDesc:  'Relance les astuces de premier lancement et les mini-tutos en jeu.',
+    optReplayTips:  'Revoir les astuces',
+    optSectionDevice: 'Changer d\'appareil',
+    optDeviceDesc:  '1. Sur cet appareil, exportez votre sauvegarde.<br>2. Transférez le fichier (mail, Drive, etc.).<br>3. Sur le nouvel appareil, ouvrez Fableris → Options → importez le fichier.<br><br>Marque-pages, progression, badges et packs débloqués sont inclus.',
+    optDeviceExport:'Exporter ma sauvegarde',
+    optDeviceImport:'Importer une sauvegarde',
+    optDeviceImportConfirm: 'Importer cette sauvegarde ? Les données actuelles de cet appareil seront remplacées.',
+    optDeviceImportOk: 'Sauvegarde restaurée ({n} éléments). L\'application va se recharger.',
+    optDeviceImportFail: 'Fichier invalide ou corrompu. Vérifiez qu\'il s\'agit bien d\'une export Fableris.',
     codeBtn:        '✦ Code créateur',
     codeTitle:      'Code Créateur',
     codeSub:        'Entre ton code pour débloquer du contenu ou des fonctionnalités',
@@ -1110,20 +1163,6 @@ const LANG = {
     submitAi:       '✦ Créer avec l\'IA',
     submitNote:     'Ouvrez StoryForge, écrivez votre histoire, remplissez le formulaire d\'envoi — le JSON part en un clic, sans export manuel.',
     submitContest:  'Voir le concours en cours →',
-    tutoTitle:      'Astuces de navigation',
-    tutoMenu:       '<strong>Le point bleu</strong> en haut de l\'écran permet d\'ouvrir le menu pendant une histoire.',
-    tutoSave:       '<strong>Le bouton +</strong> en bas à droite permet de poser un marque-page pour sauvegarder votre progression.',
-    tutoBtn:        'J\'AI COMPRIS',
-    pinSetupTitle:  'Code Parental',
-    pinSetupBody:   'Créez un code à 4 chiffres pour protéger le mode enfant. Il vous sera demandé pour le désactiver.',
-    pinSetupCreate: 'CRÉER LE CODE',
-    pinSetupSkip:   'Plus tard',
-    pinSetupError:  '4 chiffres requis',
-    pinSetupDone:   '✓ Code parental enregistré !',
-    pinSetupEnter:    'Code à 4 chiffres',
-    pinSetupConfirm:  'Confirme le code',
-    pinSetupMismatch: 'Les codes ne correspondent pas',
-    pinSetupKids:     'Activer le mode enfant maintenant',
   },
   en: {
     eyebrow:        'An adventure awaits',
@@ -1162,6 +1201,16 @@ const LANG = {
     speedNormal:    'Normal',
     speedSlow:      'Slow',
     closeOptions:   'Close',
+    optSectionHelp: 'Help',
+    optReplayDesc:  'Replay first-launch tips and in-game mini-tutorials.',
+    optReplayTips:  'Replay tips',
+    optSectionDevice: 'Switch device',
+    optDeviceDesc:  '1. On this device, export your backup.<br>2. Transfer the file (email, Drive, etc.).<br>3. On the new device, open Fableris → Options → import the file.<br><br>Bookmarks, progress, badges and unlocked packs are included.',
+    optDeviceExport:'Export my backup',
+    optDeviceImport:'Import a backup',
+    optDeviceImportConfirm: 'Import this backup? Current data on this device will be replaced.',
+    optDeviceImportOk: 'Backup restored ({n} items). The app will reload.',
+    optDeviceImportFail: 'Invalid or corrupted file. Make sure it is a Fableris export.',
     codeBtn:        '✦ Creator code',
     codeTitle:      'Creator Code',
     codeSub:        'Enter your code to unlock content or features',
@@ -1188,20 +1237,6 @@ const LANG = {
     submitAi:       '✦ Create with AI',
     submitNote:     'Open StoryForge, write your story, fill in the send form — your JSON goes out in one tap, no manual export.',
     submitContest:  'See the current contest →',
-    tutoTitle:      'Navigation Tips',
-    tutoMenu:       'The <strong>blue dot</strong> at the top of the screen opens the menu during a story.',
-    tutoSave:       'The <strong>+ button</strong> at the bottom right allows you to place a bookmark and save your progress.',
-    tutoBtn:        'GOT IT',
-    pinSetupTitle:  'Parental Code',
-    pinSetupBody:   'Create a 4-digit code to protect Kids Mode. It will be required to turn it off.',
-    pinSetupCreate: 'CREATE CODE',
-    pinSetupSkip:   'Later',
-    pinSetupError:  '4 digits required',
-    pinSetupDone:   '✓ Parental code saved!',
-    pinSetupEnter:    '4-digit code',
-    pinSetupConfirm:  'Confirm the code',
-    pinSetupMismatch: 'Codes do not match',
-    pinSetupKids:     'Enable Kids Mode now',
   },
   es: {
     eyebrow:        'Una aventura te espera',
@@ -1240,6 +1275,16 @@ const LANG = {
     speedNormal:    'Normal',
     speedSlow:      'Lento',
     closeOptions:   'Cerrar',
+    optSectionHelp: 'Ayuda',
+    optReplayDesc:  'Vuelve a mostrar las astucias de primer inicio y los mini-tutoriales en el juego.',
+    optReplayTips:  'Rever astucias',
+    optSectionDevice: 'Cambiar de dispositivo',
+    optDeviceDesc:  '1. En este dispositivo, exporta tu copia de seguridad.<br>2. Transfiere el archivo (correo, Drive, etc.).<br>3. En el nuevo dispositivo, abre Fableris → Opciones → importa el archivo.<br><br>Incluye marcadores, progreso, insignias y packs desbloqueados.',
+    optDeviceExport:'Exportar mi copia',
+    optDeviceImport:'Importar una copia',
+    optDeviceImportConfirm: '¿Importar esta copia? Los datos actuales de este dispositivo serán reemplazados.',
+    optDeviceImportOk: 'Copia restaurada ({n} elementos). La aplicación se recargará.',
+    optDeviceImportFail: 'Archivo inválido o corrupto. Comprueba que sea una exportación Fableris.',
     codeBtn:        '✦ Código creador',
     codeTitle:      'Código Creador',
     codeSub:        'Introduce tu código para desbloquear contenido o funciones',
@@ -1266,20 +1311,6 @@ const LANG = {
     submitAi:       '✦ Crear con IA',
     submitNote:     'Abre StoryForge, escribe tu historia, rellena el formulario de envío — el JSON sale en un clic, sin exportar manualmente.',
     submitContest:  'Ver el concurso actual →',
-    tutoTitle:      'Consejos de navegación',
-    tutoMenu:       'El <strong>punto azul</strong> en la parte superior de la pantalla abre el menú durante una historia.',
-    tutoSave:       'El <strong>botón +</strong> en la parte inferior derecha te permite colocar un marcador para guardar tu progreso.',
-    tutoBtn:        'ENTENDIDO',
-    pinSetupTitle:  'Código Parental',
-    pinSetupBody:   'Crea un código de 4 dígitos para proteger el modo infantil. Se solicitará para desactivarlo.',
-    pinSetupCreate: 'CREAR CÓDIGO',
-    pinSetupSkip:   'Más tarde',
-    pinSetupError:  'Se requieren 4 dígitos',
-    pinSetupDone:   '✓ ¡Código parental guardado!',
-    pinSetupEnter:    'Código de 4 dígitos',
-    pinSetupConfirm:  'Confirma el código',
-    pinSetupMismatch: 'Los códigos no coinciden',
-    pinSetupKids:     'Activar el modo infantil ahora',
   }
 };
 
@@ -1332,6 +1363,13 @@ function applyLang() {
   set('txt-speed-normal',   t.speedNormal);
   set('txt-speed-slow',     t.speedSlow);
   set('txt-close-options',  t.closeOptions);
+  set('txt-opt-section-help', t.optSectionHelp);
+  set('txt-opt-replay-desc', t.optReplayDesc);
+  set('txt-opt-replay-tips', t.optReplayTips);
+  set('txt-opt-section-device', t.optSectionDevice);
+  set('txt-opt-device-desc', t.optDeviceDesc, true);
+  set('txt-opt-device-export', t.optDeviceExport);
+  set('txt-opt-device-import-label', t.optDeviceImport);
   // Bouton code créateur
   const codeBtn = document.querySelector('#options-panel button[onclick*="openCodePopup"]');
   if (codeBtn) codeBtn.textContent = t.codeBtn;
@@ -1401,6 +1439,35 @@ function closeOptions() {
 }
 function handleOptionsClick(e) {
   if (e.target === document.getElementById('options-panel')) closeOptions();
+}
+
+function replayTips() {
+  closeOptions();
+  if (window.SFShared) SFShared.resetGameHints();
+  if (window.SFOnboarding) SFOnboarding.reset();
+}
+
+function exportDeviceBackup() {
+  if (window.SFShared) SFShared.downloadPlayerBackup();
+}
+
+function importDeviceBackupFromFile(input) {
+  const file = input.files?.[0];
+  if (!file || !window.SFShared) return;
+  const reader = new FileReader();
+  reader.onload = () => {
+    const t = LANG[currentLang] || LANG.fr;
+    if (!confirm(t.optDeviceImportConfirm)) { input.value = ''; return; }
+    const result = SFShared.importPlayerBackup(reader.result);
+    input.value = '';
+    if (result.ok) {
+      alert(t.optDeviceImportOk.replace('{n}', String(result.count)));
+      window.location.reload();
+    } else {
+      alert(t.optDeviceImportFail);
+    }
+  };
+  reader.readAsText(file);
 }
 
 // ══════════════════════════════════════════════
@@ -1824,6 +1891,9 @@ async function submitCode() {
   }
   if (new URLSearchParams(location.search).get('community') === '1') {
     setTimeout(() => { if (window.SFCommunity) SFCommunity.open(); }, 400);
+  }
+  if (new URLSearchParams(location.search).get('open') === 'options') {
+    setTimeout(() => openOptions(), 400);
   }
 })();
 </script>

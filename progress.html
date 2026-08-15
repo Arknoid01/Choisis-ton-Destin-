@@ -657,15 +657,22 @@ function editName() {
 
 function resetProgress() {
   if (!confirm(t.confirmReset)) return;
-  localStorage.removeItem('sf_player_stats');
-  // Clear saves
-  const toRemove = [];
-  for (let i = 0; i < localStorage.length; i++) {
-    const key = localStorage.key(i);
-    if (key?.startsWith('sf_save_')) toRemove.push(key);
+  if (window.SFShared) {
+    SFShared.clearPlayerProgress();
+  } else {
+    localStorage.removeItem('sf_player_stats');
+    localStorage.removeItem('sf_bookmarks');
+    const toRemove = [];
+    for (let i = 0; i < localStorage.length; i++) {
+      const key = localStorage.key(i);
+      if (key?.startsWith('sf_save_')) toRemove.push(key);
+    }
+    toRemove.forEach(k => localStorage.removeItem(k));
+    ['sf_lang_chosen', 'sf_demo_shown', 'sf_tuto_shown', 'sf_pin_setup_done',
+     'sf_game_immersive_hint_shown', 'sf_game_fab_hint_shown'].forEach(k => {
+      try { localStorage.removeItem(k); } catch (e) {}
+    });
   }
-  toRemove.forEach(k => localStorage.removeItem(k));
-  localStorage.removeItem('sf_bookmarks');
   render();
 }
 
