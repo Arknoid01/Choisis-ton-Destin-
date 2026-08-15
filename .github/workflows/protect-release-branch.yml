@@ -1,0 +1,29 @@
+# Bloque uniquement le merge 1.7 → main sans label explicite.
+# Le travail sur 1.7 (PR vers 1.7, etc.) reste libre.
+name: Protect release branch 1.7
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened, labeled, unlabeled, edited]
+
+jobs:
+  guard:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Block unauthorized 1.7 → main merge
+        env:
+          HEAD_REF: ${{ github.head_ref }}
+          BASE_REF: ${{ github.base_ref }}
+          LABELS_JSON: ${{ toJson(github.event.pull_request.labels.*.name) }}
+        run: |
+          set -e
+          if [ "$BASE_REF" != "main" ] || [ "$HEAD_REF" != "1.7" ]; then
+            echo "Not a 1.7 → main PR — OK."
+            exit 0
+          fi
+          echo "$LABELS_JSON" | grep -q 'release-1.7-authorized' && {
+            echo "Label release-1.7-authorized present — OK."
+            exit 0
+          }
+          echo "::error::Merge 1.7 → main bloqué. Ajoutez le label release-1.7-authorized après autorisation explicite du propriétaire."
+          exit 1
