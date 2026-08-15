@@ -342,7 +342,7 @@ html,body { height:100%; background:#0d0d0f; color:#e8e0d0; font-family:'Cormora
 .onboard-tip-row label { font-family:'Lato',sans-serif; font-size:10px; color:var(--dim); cursor:pointer; }
 .onboard-tip-close { position:absolute; top:8px; right:10px; font-size:13px; color:var(--dim); cursor:pointer; }
 
-.shelf-block { margin-bottom:10px; }
+.shelf-block { margin-bottom:10px; overflow:visible; }
 .shelf-block-header { display:flex; flex-direction:column; align-items:center; text-align:center; gap:3px; margin-bottom:6px; }
 .shelf-block-header-main { display:flex; align-items:center; gap:7px; }
 .shelf-block-icon { font-size:16px; }
@@ -356,8 +356,8 @@ html,body { height:100%; background:#0d0d0f; color:#e8e0d0; font-family:'Cormora
 
 .bookcase-row {
   display:flex; flex-wrap:nowrap; align-items:flex-end; justify-content:flex-start;
-  gap:8px; padding:48px 10px 6px;
-  min-height:210px; overflow-x:auto; overflow-y:visible;
+  gap:8px; padding:72px 10px 8px;
+  min-height:248px; overflow-x:auto; overflow-y:visible;
   scroll-behavior:smooth; scroll-snap-type:x proximity;
   -webkit-overflow-scrolling:touch;
   scrollbar-width:thin; scrollbar-color:var(--border) transparent;
