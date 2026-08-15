@@ -307,6 +307,159 @@ html,body { height:100%; background:#0d0d0f; color:#e8e0d0; font-family:'Cormora
   white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
 }
 
+/* ══════════════════════════════════════════════
+   VUE RAYONS (bibliothèque) — ajoutée en plus de la vue liste
+   ══════════════════════════════════════════════ */
+:root { --wood:#3a2818; --wood-dark:#241609; }
+
+.view-toggle {
+  display:flex; align-items:center; justify-content:center; gap:6px;
+  margin:0 0 14px; padding:9px; border-radius:10px;
+  border:1px solid var(--border); background:var(--bg3);
+  font-family:'Lato',sans-serif; font-size:10.5px; letter-spacing:1px;
+  color:var(--dim); cursor:pointer; text-transform:uppercase;
+}
+.view-toggle:active { border-color:var(--gold3); color:var(--cream); }
+
+.onboard-tip {
+  position:relative; margin:0 0 16px; padding:12px 14px;
+  background:linear-gradient(135deg, rgba(200,169,110,0.12), rgba(124,109,250,0.06));
+  border:1px solid var(--gold3); border-radius:12px;
+}
+.onboard-tip::before {
+  content:''; position:absolute; top:-8px; left:50%; transform:translateX(-50%);
+  width:0; height:0; border-left:8px solid transparent; border-right:8px solid transparent;
+  border-bottom:8px solid var(--gold3);
+}
+.onboard-tip::after {
+  content:''; position:absolute; top:-6.5px; left:50%; transform:translateX(-50%);
+  width:0; height:0; border-left:7px solid transparent; border-right:7px solid transparent;
+  border-bottom:7px solid #1c1810;
+}
+.onboard-tip-text { font-family:'Lato',sans-serif; font-size:11.5px; color:var(--cream); line-height:1.5; }
+.onboard-tip-row { display:flex; align-items:center; gap:7px; margin-top:10px; }
+.onboard-tip-row input { accent-color:var(--gold); width:14px; height:14px; }
+.onboard-tip-row label { font-family:'Lato',sans-serif; font-size:10px; color:var(--dim); cursor:pointer; }
+.onboard-tip-close { position:absolute; top:8px; right:10px; font-size:13px; color:var(--dim); cursor:pointer; }
+
+.shelf-block { margin-bottom:10px; transition:margin-top .45s cubic-bezier(.16,1,.3,1); }
+.shelf-block.has-selected { margin-top:38px; }
+.shelf-block-header { display:flex; flex-direction:column; align-items:center; text-align:center; gap:3px; margin-bottom:6px; }
+.shelf-block-header-main { display:flex; align-items:center; gap:7px; }
+.shelf-block-icon { font-size:16px; }
+.shelf-block-name { font-family:'Cinzel',serif; font-size:12.5px; font-weight:600; color:var(--gold2); letter-spacing:0.5px; }
+.shelf-block-price {
+  font-family:'Lato',sans-serif; font-size:8px; letter-spacing:1px;
+  padding:2px 8px; border-radius:20px; border:1px solid var(--border); color:var(--dimmer);
+}
+.shelf-block-price.free { color:#64dc96; border-color:rgba(100,220,150,0.3); }
+.shelf-block-price.soon { color:var(--gold2); border-color:var(--gold3); }
+
+.bookcase-row {
+  display:flex; flex-wrap:wrap; align-items:flex-end; justify-content:flex-start;
+  gap:6px; padding:12px 6px 0;
+  max-height:290px; overflow-y:auto; overflow-x:hidden;
+  -webkit-overflow-scrolling:touch;
+}
+.bookcase-row::-webkit-scrollbar { width:4px; }
+.bookcase-row::-webkit-scrollbar-thumb { background:var(--border); border-radius:4px; }
+.bookcase-row.has-selected { overflow:visible; max-height:none; }
+
+.shelf-plank {
+  height:10px; margin:0 4px 18px;
+  background:linear-gradient(180deg, var(--wood) 0%, var(--wood-dark) 100%);
+  border-radius:2px; box-shadow:0 3px 6px rgba(0,0,0,0.5);
+}
+
+.book {
+  flex-shrink:0; width:auto; min-width:38px; height:176px; border-radius:3px 6px 6px 3px;
+  display:flex; flex-direction:column; align-items:center; justify-content:flex-start;
+  padding:12px 6px 10px; cursor:pointer; position:relative;
+  box-shadow:
+    inset -4px 0 7px rgba(0,0,0,0.4),
+    inset 0 2px 0 rgba(255,255,255,0.12),
+    inset 0 -2px 0 rgba(0,0,0,0.35),
+    1px 2px 5px rgba(0,0,0,0.45);
+  border:1px solid rgba(0,0,0,0.35); border-right:2px solid rgba(0,0,0,0.3);
+  transition:transform .34s cubic-bezier(.16,1,.3,1), box-shadow .34s ease;
+  transform-origin:bottom center;
+}
+.book::before {
+  content:''; position:absolute; top:8px; bottom:8px; left:4px; width:1px;
+  background:rgba(255,255,255,0.1);
+}
+.book:active { transform:scale(1.03) translateY(-2px); }
+.book.selected {
+  transform:scale(1.28) translateY(-10px);
+  z-index:50;
+  box-shadow:
+    inset -4px 0 7px rgba(0,0,0,0.4),
+    inset 0 2px 0 rgba(255,255,255,0.12),
+    inset 0 -2px 0 rgba(0,0,0,0.35),
+    0 10px 22px rgba(0,0,0,0.6), 0 0 0 2px var(--gold);
+}
+.book.locked { opacity:0.45; }
+.book.locked.selected { opacity:0.85; }
+.book-icon { font-size:14px; margin-bottom:5px; flex-shrink:0; filter:drop-shadow(0 1px 1px rgba(0,0,0,0.5)); }
+.book-title {
+  writing-mode:vertical-rl; text-orientation:mixed; transform:rotate(180deg);
+  font-family:'Cinzel',serif; font-size:12.5px; font-weight:600;
+  color:rgba(255,255,255,0.92); letter-spacing:0.3px; line-height:1.15;
+  text-shadow:0 1px 2px rgba(0,0,0,0.4);
+  white-space:normal; word-break:keep-all;
+  flex:1; max-height:100%; overflow:hidden;
+  display:flex; align-items:center; justify-content:center; gap:3px;
+}
+.book-community-dot {
+  position:absolute; top:5px; right:4px; width:6px; height:6px; border-radius:50%;
+  background:#b8a8ff; box-shadow:0 0 4px #b8a8ff;
+}
+.book-lock { flex-shrink:0; margin-top:4px; font-size:11px; filter:drop-shadow(0 1px 1px rgba(0,0,0,0.5)); }
+
+.tone-free   { background:linear-gradient(100deg,#6b5230,#8a6a30); }
+.tone-kids   { background:linear-gradient(100deg,#5a4a7a,#7c6da0); }
+.tone-lames  { background:linear-gradient(100deg,#7a2a2a,#a03838); }
+.tone-cosmos { background:linear-gradient(100deg,#1e3a5a,#2c5a8a); }
+.tone-neon   { background:linear-gradient(100deg,#1e5a4a,#2c8a6a); }
+.tone-pirates{ background:linear-gradient(100deg,#5a4020,#8a6030); }
+.tone-fantasy{ background:linear-gradient(100deg,#4a2a5a,#6a3a8a); }
+.tone-wilds  { background:linear-gradient(100deg,#3a5a2a,#5a8a3a); }
+.tone-soon   { background:repeating-linear-gradient(135deg,#2a2418,#2a2418 4px,#332c1c 4px,#332c1c 8px); }
+.tone-bookmarks { background:linear-gradient(100deg,#2a6b4a,#3a9a68); }
+
+.shelf-soon-msg {
+  padding:14px; background:var(--bg2); border:1px solid var(--border); border-radius:10px;
+  text-align:center; font-family:'Lato',sans-serif; font-size:10px; color:var(--dim);
+}
+
+/* Bulle info sur le livre cliqué */
+.book-popover {
+  display:none; position:fixed; left:16px; right:16px; bottom:16px;
+  background:var(--bg3); border:1px solid var(--gold3); border-radius:14px;
+  padding:16px; z-index:200; box-shadow:0 -8px 30px rgba(0,0,0,0.6);
+  animation:popIn .18s ease-out; max-width:520px; margin:0 auto;
+}
+.book-popover.open { display:block; }
+@keyframes popIn { from{ transform:translateY(12px); opacity:0; } to{ transform:translateY(0); opacity:1; } }
+.popover-head { display:flex; align-items:center; gap:10px; margin-bottom:8px; }
+.popover-icon {
+  width:38px; height:38px; border-radius:9px; background:var(--bg);
+  border:1px solid var(--border); display:flex; align-items:center; justify-content:center;
+  font-size:19px; flex-shrink:0;
+}
+.popover-title { font-family:'Cinzel',serif; font-size:14px; font-weight:600; color:var(--cream); line-height:1.25; }
+.popover-author { font-family:'Lato',sans-serif; font-size:10px; color:#b8a8ff; margin-top:2px; }
+.popover-desc { font-size:13px; color:var(--dim); font-style:italic; line-height:1.5; margin-bottom:14px; }
+.popover-actions { display:flex; gap:8px; }
+.popover-btn {
+  flex:1; text-align:center; font-family:'Lato',sans-serif; font-size:11px; letter-spacing:1px;
+  padding:11px; border-radius:9px; text-transform:uppercase; cursor:pointer;
+}
+.popover-btn.play { background:var(--gold); color:#1a1408; font-weight:700; }
+.popover-btn.close { background:none; border:1px solid var(--border); color:var(--dim); flex:0 0 44px; }
+.popover-backdrop { display:none; position:fixed; inset:0; background:rgba(0,0,0,0.5); z-index:199; }
+.popover-backdrop.open { display:block; }
+
 /* ── COMMUNITY SPOTLIGHT ── */
 .community-spotlight {
   margin-bottom:18px; padding:16px;
@@ -389,8 +542,35 @@ html,body { height:100%; background:#0d0d0f; color:#e8e0d0; font-family:'Cormora
 
 <!-- SCROLL AREA -->
 <div id="scroll">
+  <div style="max-width:520px;margin:0 auto;padding:20px 16px 0">
+    <div class="view-toggle" onclick="toggleLibraryView()" id="view-toggle-btn">📚 Passer en vue liste</div>
+    <div class="onboard-tip" id="onboard-tip" style="display:none">
+      <span class="onboard-tip-close" onclick="dismissOnboardTip()">✕</span>
+      <div class="onboard-tip-text" id="onboard-tip-text">👆 Ce bouton bascule entre la vue étagère et la vue liste classique — choisis celle que tu préfères !</div>
+      <div class="onboard-tip-row">
+        <input type="checkbox" id="tip-hide-checkbox">
+        <label for="tip-hide-checkbox" id="onboard-tip-checklabel">Ne plus afficher ce message</label>
+      </div>
+    </div>
+  </div>
   <div id="content">
     <div class="empty-state">Chargement...</div>
+  </div>
+</div>
+
+<div class="popover-backdrop" id="book-backdrop" onclick="closeBookPopover()"></div>
+<div class="book-popover" id="book-popover">
+  <div class="popover-head">
+    <div class="popover-icon" id="bp-icon">📖</div>
+    <div>
+      <div class="popover-title" id="bp-title"></div>
+      <div class="popover-author" id="bp-author"></div>
+    </div>
+  </div>
+  <div class="popover-desc" id="bp-desc"></div>
+  <div class="popover-actions">
+    <div class="popover-btn close" onclick="closeBookPopover()">✕</div>
+    <div class="popover-btn play" id="bp-play"></div>
   </div>
 </div>
 
@@ -711,6 +891,27 @@ function renderStarterBanner(kidsOnly) {
 }
 
 function renderLibrary() {
+  if (getLibraryViewMode() === 'shelf') {
+    renderShelfLibrary();
+  } else {
+    renderListLibrary();
+  }
+  updateViewToggleLabel();
+  initOnboardTip();
+}
+
+function updateViewToggleLabel() {
+  const btn = document.getElementById('view-toggle-btn');
+  if (!btn) return;
+  const labels = {
+    shelf: { fr:'📚 Passer en vue liste', en:'📚 Switch to list view', es:'📚 Cambiar a vista de lista' },
+    list:  { fr:'🗄️ Passer en vue rayons', en:'🗄️ Switch to shelf view', es:'🗄️ Cambiar a vista de estantería' }
+  };
+  const mode = getLibraryViewMode();
+  btn.textContent = (labels[mode] && labels[mode][currentLang]) || labels[mode].fr;
+}
+
+function renderListLibrary() {
   if (window.SFShared) SFShared.ensureDefaultExpandedPacks();
   const unlocked = getUnlockedPacks();
   let opts = {};
@@ -934,8 +1135,242 @@ function renderLibrary() {
 }
 
 // ══════════════════════════════════════════════
-// ACTIONS
+// VUE RAYONS (bibliothèque)
 // ══════════════════════════════════════════════
+function getLibraryViewMode() {
+  return localStorage.getItem('sf_library_view') || 'shelf';
+}
+function setLibraryViewMode(mode) {
+  try { localStorage.setItem('sf_library_view', mode); } catch(e) {}
+}
+function toggleLibraryView() {
+  const next = getLibraryViewMode() === 'shelf' ? 'list' : 'shelf';
+  setLibraryViewMode(next);
+  closeBookPopover();
+  renderLibrary();
+  dismissOnboardTip();
+}
+
+function getOnboardTipDismissed() {
+  return localStorage.getItem('sf_library_tip_dismissed') === '1';
+}
+function dismissOnboardTip() {
+  const tip = document.getElementById('onboard-tip');
+  if (tip) tip.style.display = 'none';
+  const checkbox = document.getElementById('tip-hide-checkbox');
+  if (checkbox && checkbox.checked) {
+    try { localStorage.setItem('sf_library_tip_dismissed', '1'); } catch(e) {}
+  }
+}
+function initOnboardTip() {
+  const tip = document.getElementById('onboard-tip');
+  if (!tip) return;
+  if (getOnboardTipDismissed()) { tip.style.display = 'none'; return; }
+  const txt = { fr:'👆 Ce bouton bascule entre la vue étagère et la vue liste classique — choisis celle que tu préfères !',
+                en:'👆 This button switches between the shelf view and the classic list view — pick whichever you prefer!',
+                es:'👆 Este botón alterna entre la vista de estantería y la vista de lista clásica — ¡elige la que prefieras!' };
+  const lbl = { fr:'Ne plus afficher ce message', en:"Don't show this again", es:'No volver a mostrar' };
+  const t = document.getElementById('onboard-tip-text');
+  const l = document.getElementById('onboard-tip-checklabel');
+  if (t) t.textContent = txt[currentLang] || txt.fr;
+  if (l) l.textContent = lbl[currentLang] || lbl.fr;
+  const checkbox = document.getElementById('tip-hide-checkbox');
+  if (checkbox) checkbox.checked = false;
+  tip.style.display = 'block';
+}
+
+const SHELF_TONES = {
+  bookmarks:'tone-bookmarks', free:'tone-free', kids:'tone-kids', cinq_lames:'tone-lames',
+  cosmos:'tone-cosmos', neon:'tone-neon', pirates:'tone-pirates', fantasy:'tone-fantasy', wilds:'tone-wilds'
+};
+
+function renderShelfLibrary() {
+  if (window.SFShared) SFShared.ensureDefaultExpandedPacks();
+  const unlocked = getUnlockedPacks();
+  let opts = {};
+  try { opts = JSON.parse(localStorage.getItem('sf_options') || '{}'); } catch(e) {}
+  const kidsOnly = opts.kids === true || opts.kids === 'true';
+
+  const filtered = allGames.filter(g => {
+    if (g.lang !== currentLang) return false;
+    if (kidsOnly && g.kids !== true && g.kids !== 'true') return false;
+    return true;
+  });
+
+  const bookmarks = JSON.parse(localStorage.getItem('sf_bookmarks') || '[]')
+    .filter(b => allGames.find(g => g.file === b.storyFile));
+
+  let html = '';
+
+  if (kidsOnly) {
+    const msg = { fr:'Mode enfant activé — seules les histoires pour enfants sont affichées',
+                  en:'Kids mode on — only children\'s stories are shown',
+                  es:'Modo infantil activado — solo se muestran historias para niños' }[currentLang] || '';
+    html += `<div class="kids-banner" style="margin-bottom:20px">
+      <div class="kids-banner-icon">🧒</div>
+      <div class="kids-banner-text">
+        <div class="kids-banner-title">MODE ENFANT</div>
+        <div class="kids-banner-sub">${msg}</div>
+      </div>
+    </div>`;
+  }
+
+  html += renderStarterBanner(kidsOnly);
+  if (window.SFStoryMeta) {
+    html += SFStoryMeta.spotlightBanner(filtered, currentLang, 'launchStory', 'openCommunityFromLibrary');
+  }
+
+  const esc = (s) => String(s == null ? '' : s).replace(/"/g, '&quot;');
+
+  if (bookmarks.length) {
+    const bmTitle = { fr:'Reprendre', en:'Continue', es:'Continuar' }[currentLang] || 'Reprendre';
+    html += `<div class="shelf-block" id="shelf-bookmarks">
+      <div class="shelf-block-header"><div class="shelf-block-header-main"><div class="shelf-block-icon">🔖</div><div class="shelf-block-name">${bmTitle}</div></div></div>
+      <div class="bookcase-row">`;
+    bookmarks.forEach(bm => {
+      const game = allGames.find(g => g.file === bm.storyFile);
+      const date = new Date(bm.savedAt).toLocaleDateString();
+      html += `<div class="book tone-bookmarks" onclick="openBookPopover(this)"
+        data-icon="${esc(game?.icon || '📖')}" data-title="${esc(bm.storyName)}" data-author=""
+        data-desc="📍 ${esc(bm.sceneTitle)} — ${esc(date)}" data-locked="0" data-action="resume" data-file="${esc(bm.storyFile)}">
+        <div class="book-icon">${game?.icon || '📖'}</div><div class="book-title">${bm.storyName}</div></div>`;
+    });
+    html += `</div><div class="shelf-plank"></div></div>`;
+  }
+
+  const byPack = {};
+  filtered.forEach(g => {
+    const packId = g.pack || (g.kids ? 'kids' : 'free');
+    if (!byPack[packId]) byPack[packId] = [];
+    byPack[packId].push(g);
+  });
+
+  const packIds = Object.keys(byPack);
+  Object.keys(PACK_CONFIG).forEach(id => {
+    if (PACK_CONFIG[id].comingSoon && !packIds.includes(id)) packIds.push(id);
+  });
+  packIds.sort((a,b) => (PACK_CONFIG[a]?.order ?? 99) - (PACK_CONFIG[b]?.order ?? 99));
+
+  if (!packIds.length && !bookmarks.length) {
+    document.getElementById('content').innerHTML =
+      `<div class="empty-state">Aucune histoire disponible en ${currentLang.toUpperCase()}</div>`;
+    return;
+  }
+
+  packIds.forEach(packId => {
+    const stories = byPack[packId] || [];
+    const cfg = PACK_CONFIG[packId] || { name:{fr:packId,en:packId,es:packId}, icon:'📖', order:99 };
+    const isUnlocked = cfg.free || unlocked.includes(packId);
+    const packName = cfg.name[currentLang] || cfg.name.fr;
+    const count = stories.length;
+    const tone = SHELF_TONES[packId] || 'tone-free';
+    const ui = packUi(currentLang);
+
+    let priceBadge = '';
+    if (cfg.comingSoon) {
+      priceBadge = `<span class="shelf-block-price soon">⏳ ${ui.soon}</span>`;
+    } else if (cfg.free) {
+      priceBadge = `<span class="shelf-block-price free">${ui.free}</span>`;
+    } else if (isUnlocked) {
+      priceBadge = `<span class="shelf-block-price" style="color:#64dc96;border-color:rgba(100,220,150,0.5)">${ui.unlocked}</span>`;
+    } else {
+      const livePrice = window.SFBilling ? SFBilling.getPrice(packId) : null;
+      priceBadge = `<span class="shelf-block-price" onclick="event.stopPropagation(); buyPack('${packId}')">🔒 ${livePrice || cfg.price || ''}</span>`;
+    }
+
+    html += `<div class="shelf-block" id="shelf-${packId}">
+      <div class="shelf-block-header">
+        <div class="shelf-block-header-main"><div class="shelf-block-icon">${cfg.icon}</div><div class="shelf-block-name">${packName}</div></div>
+        ${priceBadge}
+      </div>
+      <div class="bookcase-row">`;
+
+    if (cfg.comingSoon && !count) {
+      html += `</div><div class="shelf-soon-msg">⏳ ${ui.soon}</div>`;
+    } else {
+      stories.forEach(g => {
+        const locked = !isUnlocked;
+        const isPortal = g.portal === true;
+        const isCommunity = !!g.author;
+        const action = locked ? 'buy' : (isPortal ? 'none' : 'launch');
+        html += `<div class="book ${tone}${locked ? ' locked' : ''}" onclick="openBookPopover(this)"
+          data-icon="${esc(g.kids ? '🧒' : (g.icon || '📖'))}" data-title="${esc(g.title)}"
+          data-author="${esc(g.author || '')}" data-desc="${esc(g.desc || '')}"
+          data-locked="${locked ? '1' : '0'}" data-action="${action}" data-file="${esc(g.file)}" data-pack="${esc(packId)}">
+          ${isCommunity ? '<div class="book-community-dot"></div>' : ''}
+          <div class="book-icon">${g.kids ? '🧒' : (g.icon || '📖')}</div>
+          <div class="book-title">${g.title}</div>
+          ${locked ? '<div class="book-lock">🔒</div>' : ''}
+        </div>`;
+      });
+      html += `</div>`;
+    }
+    html += `<div class="shelf-plank"></div></div>`;
+  });
+
+  document.getElementById('content').innerHTML = html;
+  injectRestoreButton();
+}
+
+let shelfSelectedBook = null;
+let shelfSelectedRow = null;
+let shelfSelectedBlock = null;
+
+function openBookPopover(el) {
+  if (shelfSelectedBook && shelfSelectedBook !== el) shelfSelectedBook.classList.remove('selected');
+  clearShelfSelectionSpace();
+
+  el.classList.add('selected');
+  shelfSelectedBook = el;
+  const row = el.closest('.bookcase-row');
+  const block = el.closest('.shelf-block');
+  if (row && block) {
+    row.classList.add('has-selected');
+    block.classList.add('has-selected');
+    shelfSelectedRow = row;
+    shelfSelectedBlock = block;
+  }
+
+  const locked = el.dataset.locked === '1';
+  const action = el.dataset.action;
+  document.getElementById('bp-icon').textContent = el.dataset.icon || '📖';
+  document.getElementById('bp-title').textContent = el.dataset.title || '';
+  document.getElementById('bp-author').textContent = el.dataset.author ? 'Par ' + el.dataset.author : '';
+  document.getElementById('bp-desc').textContent = el.dataset.desc || '';
+
+  const playBtn = document.getElementById('bp-play');
+  if (action === 'buy') {
+    playBtn.textContent = '🔒 Débloquer le pack';
+    playBtn.onclick = () => { closeBookPopover(); buyPack(el.dataset.pack); };
+  } else if (action === 'resume') {
+    playBtn.textContent = '▶ Reprendre';
+    playBtn.onclick = () => { closeBookPopover(); resumeStory(el.dataset.file); };
+  } else if (action === 'none') {
+    playBtn.textContent = '🔗 Accessible via portail';
+    playBtn.onclick = () => closeBookPopover();
+  } else {
+    playBtn.textContent = '▶ Jouer';
+    playBtn.onclick = () => { closeBookPopover(); launchStory(el.dataset.file); };
+  }
+
+  document.getElementById('book-popover').classList.add('open');
+  document.getElementById('book-backdrop').classList.add('open');
+}
+function clearShelfSelectionSpace() {
+  if (shelfSelectedRow) shelfSelectedRow.classList.remove('has-selected');
+  if (shelfSelectedBlock) shelfSelectedBlock.classList.remove('has-selected');
+  shelfSelectedRow = null;
+  shelfSelectedBlock = null;
+}
+function closeBookPopover() {
+  if (shelfSelectedBook) shelfSelectedBook.classList.remove('selected');
+  shelfSelectedBook = null;
+  clearShelfSelectionSpace();
+  const pop = document.getElementById('book-popover');
+  const bd = document.getElementById('book-backdrop');
+  if (pop) pop.classList.remove('open');
+  if (bd) bd.classList.remove('open');
+}
 function resumeStory(file) {
   // La sauvegarde sera lue automatiquement dans game.html
   localStorage.setItem('sf_game_file', file);
