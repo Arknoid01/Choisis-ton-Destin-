@@ -1,0 +1,251 @@
+{
+  "name": "The Depths — Episode 1: Splashdown",
+  "kids": false,
+  "askPlayerName": true,
+  "pack": "abysses",
+  "stats": [
+    {
+      "id": "audace",
+      "label": "Boldness",
+      "start": 15,
+      "max": 100,
+      "color": "#e8934a"
+    },
+    {
+      "id": "lucidite",
+      "label": "Clarity",
+      "start": 10,
+      "max": 100,
+      "color": "#2a8aa8"
+    }
+  ],
+  "theme": {
+    "bg": "#040810",
+    "bg2": "#081018",
+    "bg3": "#0c1824",
+    "bg4": "#122030",
+    "border": "#1e4058",
+    "accent": "#e8934a",
+    "accent2": "#2a8aa8",
+    "accent3": "#6dfabc",
+    "text": "#d8e8f0",
+    "text2": "#6890a8",
+    "text3": "#3a5868"
+  },
+  "scenes": {
+    "amerrissage": {
+      "id": "amerrissage",
+      "title": "Splashdown",
+      "location": "INSERTION CAPSULE — NARHEX ORBIT",
+      "narrator": "Some missions begin with fireworks. This one begins with a drop of water on the ceiling.",
+      "text": "Your name is {{player}}. The Fableris Coalition sent you alone to **Narhex** — an ocean planet, no continents, wrapped in permanent night.\n\nSomewhere under that black water: a **Halloween portal**, a forgotten relic. The only way out.\n\nThe capsule shudders. The hull breaches. The ocean rises.\n\nAn impact — brutal, deafening — slams you into the harness. Alarms scream three seconds, then die.\n\nSilence.\n\nWater is already at your ankles.",
+      "isStart": true,
+      "isEnd": false,
+      "transition": "flash",
+      "choices": [
+        {
+          "text": "Tear off the harness and reach the escape hatch",
+          "vers": "evasion",
+          "effects": [{ "stat": "audace", "val": 12 }],
+          "clickEffect": "pulse"
+        },
+        {
+          "text": "Check your suit and headlamp before moving",
+          "vers": "evasion",
+          "effects": [{ "stat": "lucidite", "val": 10 }],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 400,
+      "y": 40
+    },
+    "evasion": {
+      "id": "evasion",
+      "title": "The hatch",
+      "location": "CAPSULE — FLOODING",
+      "narrator": "When water rises, every second weighs the same.",
+      "text": "The manual hatch refuses once — twice — then gives way in a jet of ice-cold water.\n\nYou push out as the capsule tilts.\n\nThe fall lasts an eternity of two metres. The impact empties your lungs.\n\nNarhex water is **black**. Not murky: **lightless**. Your headlamp flickers on — battery at 61%.\n\nAbove, the capsule sinks slowly, like an eye closing.\n\nBelow… nothing. Just the dark.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Rise to the surface — catch your breath",
+          "vers": "eau_noire",
+          "effects": [{ "stat": "audace", "val": 8 }],
+          "clickEffect": "pulse"
+        },
+        {
+          "text": "Check the HUD — heading, depth, mothership beacon",
+          "vers": "eau_noire",
+          "effects": [{ "stat": "lucidite", "val": 8 }],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 400,
+      "y": 140
+    },
+    "eau_noire": {
+      "id": "eau_noire",
+      "title": "Black water",
+      "location": "NARHEX OCEAN — SURFACE",
+      "narrator": "At the surface, the sky is as black as the water. As if the planet refused daylight.",
+      "text": "You break the surface. The air smells of salt and burnt metal.\n\nNo horizon. No stars. A low cloud dome covers everything — sick orange light, distant, **like an extinguished pumpkin**.\n\nYour HUD blinks:\n\n**MOTHERSHIP — DERELICTA: 340 m · bearing 187° · target depth**\n\nThe radio crackles one syllable — then nothing.\n\n*\"—{{player}}? Can you he—\"*\n\nStatic.\n\nThe water already pulls you down. Your suit is heavy. Your lamp, the only thing between you and nothing.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Dive toward the beacon — without waiting",
+          "vers": "descente",
+          "effects": [{ "stat": "audace", "val": 10 }],
+          "clickEffect": "pulse"
+        },
+        {
+          "text": "Call back on the radio — try to find the voice again",
+          "vers": "radio",
+          "effects": [{ "stat": "lucidite", "val": 10 }],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 400,
+      "y": 240
+    },
+    "radio": {
+      "id": "radio",
+      "title": "Static",
+      "location": "NARHEX OCEAN — 40 m",
+      "narrator": "A voice in the noise is sometimes worse than silence. Because you hope.",
+      "text": "You hang in the cold water, mic open.\n\n*\"—{{player}}, if you hear me… don't surface. The portal isn't up there. Never up there. —\"*\n\nThe voice tears apart. One word clings to the static:\n\n*\"…go down…\"*\n\nThen nothing.\n\nYour HUD confirms: the **Derelicta** is **below** you. Far below.\n\nBubbles rise along your arm — yours, or something that passed without you seeing?",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Descend toward the Derelicta",
+          "vers": "descente",
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 280,
+      "y": 340
+    },
+    "descente": {
+      "id": "descente",
+      "title": "Descent",
+      "location": "NARHEX OCEAN — 120 m",
+      "narrator": "The deeper you go, the less you know if you're fleeing or chasing.",
+      "text": "You dive.\n\nAt ten metres, the orange surface light becomes a memory.\n\nAt thirty metres, your lamp only catches particles — like snow falling **upward**.\n\nAt one hundred twenty metres, you **hear** the Derelicta before you see it: metal groaning under pressure, hull plates breathing.\n\nAn enormous mass takes shape in the cone of light — then exceeds it. Cracked hull. Broken antennas. Name half erased on the paint.\n\nYou only see a **fragment** of the hull. Imagination fills the rest.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Swim along the hull toward a faint light breach",
+          "vers": "faisceau",
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 400,
+      "y": 440
+    },
+    "faisceau": {
+      "id": "faisceau",
+      "title": "The beam",
+      "location": "DERELICTA HULL — 140 m",
+      "narrator": "The most honest fear is the one that arrives when you decide to stop looking.",
+      "text": "You light ahead.\n\nNothing. Black water. Metal walls covered in pale scum.\n\nBattery: 47%.\n\nYou switch the lamp off to save power.\n\nDarkness becomes **total**.\n\nA heavy, wet rustle crosses the space where your beam just was.\n\nClose enough to push water against your visor.\n\nFar enough that you don't know **what**.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "🔦 Switch the lamp on immediately",
+          "vers": "audace_vu",
+          "effects": [{ "stat": "audace", "val": 15 }],
+          "clickEffect": "pulse"
+        },
+        {
+          "text": "🫧 Stay still — listen",
+          "vers": "lucidite_entendu",
+          "effects": [{ "stat": "lucidite", "val": 15 }],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 400,
+      "y": 540
+    },
+    "audace_vu": {
+      "id": "audace_vu",
+      "title": "The passing shadow",
+      "location": "DERELICTA HULL — 140 m",
+      "narrator": "Seeing is sometimes confirming what you didn't want to know.",
+      "text": "You switch on.\n\nThe beam sweeps the water — nothing.\n\nThen, at the **edge** of the cone, movement: a smooth curve, wider than your whole ship, gliding silently into the dark.\n\nYou don't see the shape. You see the **absence** it leaves behind.\n\nYour radio spits one second:\n\n*\"—Don't stare. Swim. —\"*\n\nThe HUD marks a breach twelve metres away — faint orange light, **almost warm** in this cold.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "flash",
+      "choices": [
+        {
+          "text": "Kick toward the breach — now",
+          "vers": "coque",
+          "effects": [{ "stat": "audace", "val": 10 }],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 280,
+      "y": 640
+    },
+    "lucidite_entendu": {
+      "id": "lucidite_entendu",
+      "title": "The second ping",
+      "location": "DERELICTA HULL — 140 m",
+      "narrator": "In the dark, the ear becomes more honest than the eye.",
+      "text": "You don't move.\n\nYour breathing makes steady bubbles — too steady.\n\nA **ping** rises from the depths: the Derelicta's automatic sonar, still active.\n\nSilence.\n\nA **second ping** — closer — answers. Not the same tone. Not the same frequency.\n\nSomething is **listening**.\n\nThen the sound moves away. Downward. Always down.\n\nYour HUD overlays a route: the breach is **to your left**, off whatever-that-was's path.\n\nYou can reach it without turning the lamp on. Forty seconds of total darkness.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Slide toward the breach in the dark",
+          "vers": "coque",
+          "effects": [{ "stat": "lucidite", "val": 10 }],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 520,
+      "y": 640
+    },
+    "coque": {
+      "id": "coque",
+      "title": "The breach",
+      "location": "DERELICTA — FLOODED HOLD",
+      "narrator": "A dead ship sometimes keeps enough air for one living person.",
+      "text": "You pass through the breach.\n\nWater falls away — air pocket, pressure shift, ears ringing.\n\nYour lamp sweeps a tilted hold: floating crates, cables like seaweed, **carved symbol** on a panel — stylised pumpkin, Fableris runes.\n\nA terminal still blinks:\n\n**PORTAL COORDINATES — SECTOR 7 — DEPTH 800 m**\n\nThe radio, one last time:\n\n*\"—{{player}}. Next episode: the cracked hull. Don't lose your light. —\"*\n\nStatic. Then, very far away, a third ping.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Copy the coordinates and prepare for what comes next",
+          "vers": "fin_epave",
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 400,
+      "y": 740
+    },
+    "fin_epave": {
+      "id": "fin_epave",
+      "title": "Still alive",
+      "location": "DERELICTA — FLOODED HOLD",
+      "narrator": "On Narhex, surviving one night doesn't mean winning. Just continuing to go down.",
+      "text": "You save the coordinates. 800 metres. Sector 7.\n\nOutside, the ocean presses against the hull — patient, immense.\n\nYou have air for a few hours. Light for less.\n\nBut you know where to go.\n\nAnd somewhere, very far down, the Halloween portal pulses — invisible, orange, **hungry**.\n\n**END EPISODE 1 — Splashdown**\n\n*Episode 2: The Cracked Hull — coming soon*",
+      "isStart": false,
+      "isEnd": true,
+      "transition": "fade",
+      "choices": [],
+      "x": 400,
+      "y": 840
+    }
+  }
+}

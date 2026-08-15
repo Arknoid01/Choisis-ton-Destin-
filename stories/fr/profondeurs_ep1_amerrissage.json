@@ -1,0 +1,251 @@
+{
+  "name": "Les Profondeurs — Épisode 1 : Amerrissage",
+  "kids": false,
+  "askPlayerName": true,
+  "pack": "abysses",
+  "stats": [
+    {
+      "id": "audace",
+      "label": "Audace",
+      "start": 15,
+      "max": 100,
+      "color": "#e8934a"
+    },
+    {
+      "id": "lucidite",
+      "label": "Lucidité",
+      "start": 10,
+      "max": 100,
+      "color": "#2a8aa8"
+    }
+  ],
+  "theme": {
+    "bg": "#040810",
+    "bg2": "#081018",
+    "bg3": "#0c1824",
+    "bg4": "#122030",
+    "border": "#1e4058",
+    "accent": "#e8934a",
+    "accent2": "#2a8aa8",
+    "accent3": "#6dfabc",
+    "text": "#d8e8f0",
+    "text2": "#6890a8",
+    "text3": "#3a5868"
+  },
+  "scenes": {
+    "amerrissage": {
+      "id": "amerrissage",
+      "title": "Amerrissage",
+      "location": "CAPSULE D'INSERTION — ORBITE DE NARHEX",
+      "narrator": "Certaines missions commencent par un feu d'artifice. Celle-ci commence par une goutte d'eau au plafond.",
+      "text": "Tu t'appelles {{player}}. La Coalition Fableris t'a envoyé·e seul·e sur **Narhex** — une planète océan, sans continents, recouverte d'une nuit permanente.\n\nQuelque part sous ces eaux noires : un **portail Halloween**, relique oubliée. La seule issue.\n\nLa capsule vibre. L'atmosphère crève. L'océan monte.\n\nUn choc — brutal, assourdissant — te plaque contre le harnais. Les alarmes hurlent trois secondes, puis coupent.\n\nSilence.\n\nL'eau est déjà à tes chevilles.",
+      "isStart": true,
+      "isEnd": false,
+      "transition": "flash",
+      "choices": [
+        {
+          "text": "Arracher le harnais et gagner la trappe d'évacuation",
+          "vers": "evasion",
+          "effects": [{ "stat": "audace", "val": 12 }],
+          "clickEffect": "pulse"
+        },
+        {
+          "text": "Vérifier ton suit et ta lampe avant de bouger",
+          "vers": "evasion",
+          "effects": [{ "stat": "lucidite", "val": 10 }],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 400,
+      "y": 40
+    },
+    "evasion": {
+      "id": "evasion",
+      "title": "La trappe",
+      "location": "CAPSULE — NOYADE IMMINENTE",
+      "narrator": "Quand l'eau monte, chaque seconde a le même poids.",
+      "text": "La trappe manuelle refuse une fois — deux fois — puis cède dans un jet d'eau glacée.\n\nTu te propulses dehors au moment où la capsule bascule.\n\nLa chute dure une eternité de deux mètres. L'impact te vide les poumons.\n\nL'eau de Narhex est **noire**. Pas trouble : **absente de lumière**. Ta lampe frontale clignote au démarrage — batterie à 61 %.\n\nAu-dessus, la capsule s'enfonce lentement, comme un regard qui se ferme.\n\nEn bas… rien. Juste le noir.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Remonter vers la surface — reprendre ton souffle",
+          "vers": "eau_noire",
+          "effects": [{ "stat": "audace", "val": 8 }],
+          "clickEffect": "pulse"
+        },
+        {
+          "text": "Consulter le HUD — cap, profondeur, balise du vaisseau mère",
+          "vers": "eau_noire",
+          "effects": [{ "stat": "lucidite", "val": 8 }],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 400,
+      "y": 140
+    },
+    "eau_noire": {
+      "id": "eau_noire",
+      "title": "Eau noire",
+      "location": "OCÉAN DE NARHEX — SURFACE",
+      "narrator": "À la surface, le ciel est aussi noir que l'eau. Comme si la planète refusait le jour.",
+      "text": "Tu crèves la surface. L'air sent le sel et le métal brûlé.\n\nPas d'horizon. Pas d'étoiles. Un dôme de nuages bas recouvre tout — lumière d'un orange malade, lointain, **comme une citrouille éteinte**.\n\nTon HUD clignote :\n\n**VAISSEAU MÈRE — DERELICTA : 340 m · cap 187° · profondeur cible**\n\nLa radio grésille une syllabe — puis plus rien.\n\n*« —{{player}} ? Tu m'ent— »*\n\nStatic.\n\nL'eau te tire déjà vers le bas. Ta combinaison est lourde. Ta lampe, seule chose qui te sépare du rien.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Plonger vers la balise — sans attendre",
+          "vers": "descente",
+          "effects": [{ "stat": "audace", "val": 10 }],
+          "clickEffect": "pulse"
+        },
+        {
+          "text": "Rappeler la radio — tenter de retrouver la voix",
+          "vers": "radio",
+          "effects": [{ "stat": "lucidite", "val": 10 }],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 400,
+      "y": 240
+    },
+    "radio": {
+      "id": "radio",
+      "title": "Static",
+      "location": "OCÉAN DE NARHEX — 40 m",
+      "narrator": "Une voix dans le bruit, c'est parfois pire que le silence. Parce qu'on espère.",
+      "text": "Tu restes suspendu·e dans l'eau froide, micro ouvert.\n\n*« —{{player}}, si tu m'entends… ne remonte pas. Le portail n'est pas en haut. Jamais en haut. — »*\n\nLa voix se déchire. Un mot reste accroché au static :\n\n*« …descends… »*\n\nPuis plus rien.\n\nTon HUD confirme : la **Derelicta** est **en dessous** de toi. Bien en dessous.\n\nDes bulles montent le long de ton bras — les tiennes, ou celles de quelque chose qui est passé sans que tu le voies ?",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Descendre vers la Derelicta",
+          "vers": "descente",
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 280,
+      "y": 340
+    },
+    "descente": {
+      "id": "descente",
+      "title": "Descente",
+      "location": "OCÉAN DE NARHEX — 120 m",
+      "narrator": "Plus tu descends, moins tu sais si tu fuis ou si tu poursuis.",
+      "text": "Tu plonges.\n\nÀ dix mètres, la lumière orange de la surface devient un souvenir.\n\nÀ trente mètres, ta lampe ne touche plus que des particules — comme de la neige qui tombe **vers le haut**.\n\nÀ cent vingt mètres, tu **entends** la Derelicta avant de la voir : métal qui gémît sous la pression, tôle qui respire.\n\nUne masse énorme prend forme dans le cone de lumière — puis la dépasse. Coque fissurée. Antennes brisées. Nom peint à moitié effacé.\n\nTu ne vois qu'un **fragment** de la coque. L'imagination complète le reste.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Nager le long de la coque vers une brèche lumineuse",
+          "vers": "faisceau",
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 400,
+      "y": 440
+    },
+    "faisceau": {
+      "id": "faisceau",
+      "title": "Le faisceau",
+      "location": "COQUE DE LA DERELICTA — 140 m",
+      "narrator": "La peur la plus honnête, c'est celle qui arrive quand tu as décidé de ne plus regarder.",
+      "text": "Tu éclaires devant toi.\n\nRien. Eau noire. Parois de métal couvertes d'une mousse pâle.\n\nBatterie : 47 %.\n\nTu éteins la lampe pour économiser.\n\nLe noir devient **total**.\n\nUn froissement — lourd, mouillé — traverse l'espace où ton faisceau venait d'être.\n\nAssez près pour déplacer l'eau contre ta visière.\n\nAssez loin pour que tu ne saches pas **quoi**.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "🔦 Rallumer immédiatement",
+          "vers": "audace_vu",
+          "effects": [{ "stat": "audace", "val": 15 }],
+          "clickEffect": "pulse"
+        },
+        {
+          "text": "🫧 Ne pas bouger — écouter",
+          "vers": "lucidite_entendu",
+          "effects": [{ "stat": "lucidite", "val": 15 }],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 400,
+      "y": 540
+    },
+    "audace_vu": {
+      "id": "audace_vu",
+      "title": "L'ombre qui passe",
+      "location": "COQUE DE LA DERELICTA — 140 m",
+      "narrator": "Voir, c'est parfois confirmer ce qu'on ne voulait pas savoir.",
+      "text": "Tu rallumes.\n\nLe faisceau balaie l'eau — rien.\n\nPuis, **au bord** du cone, un mouvement : une courbe lisse, plus large que ton vaisseau entier, qui glisse sans bruit dans le noir.\n\nTu ne vois pas la forme. Tu vois **l'absence** qu'elle laisse derrière elle.\n\nTa radio crache une seconde :\n\n*« —Ne la fixe pas. Nage. — »*\n\nLe HUD indique une brèche à douze mètres — lumière faible, orange, **presque chaleureuse** dans ce froid.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "flash",
+      "choices": [
+        {
+          "text": "Te propulser vers la brèche — tout de suite",
+          "vers": "coque",
+          "effects": [{ "stat": "audace", "val": 10 }],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 280,
+      "y": 640
+    },
+    "lucidite_entendu": {
+      "id": "lucidite_entendu",
+      "title": "Le second ping",
+      "location": "COQUE DE LA DERELICTA — 140 m",
+      "narrator": "Dans le noir, l'oreille devient plus honnête que l'œil.",
+      "text": "Tu ne bouges pas.\n\nTa respiration fait des bulles régulières — trop régulières.\n\nUn **ping** sonore monte du fond : le sonar automatique de la Derelicta, encore actif.\n\nSilence.\n\nUn **second ping** — plus proche — répond. Pas le même timbre. Pas la même fréquence.\n\nQuelque chose **écoute**.\n\nPuis le bruit s'éloigne. Vers le bas. Toujours vers le bas.\n\nTon HUD superpose une route : la brèche est **à ta gauche**, hors du passage de… ce que c'était.\n\nTu peux y aller sans rallumer la lampe. Quarante secondes d'obscurité totale.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Glisser vers la brèche dans le noir",
+          "vers": "coque",
+          "effects": [{ "stat": "lucidite", "val": 10 }],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 520,
+      "y": 640
+    },
+    "coque": {
+      "id": "coque",
+      "title": "La brèche",
+      "location": "DERELICTA — SOUTE INONDÉE",
+      "narrator": "Un vaisseau mort garde parfois assez d'air pour un vivant.",
+      "text": "Tu passes la brèche.\n\nL'eau se retire — poche d'air, pression qui change, oreilles qui sifflent.\n\nTa lampe balaie une soute inclinée : caisses flottantes, câbles comme des algues, **symbole gravé** sur un panneau — citrouille stylisée, runes Fableris.\n\nUn terminal clignote encore :\n\n**COORDONNÉES PORTAIL — SECTEUR 7 — PROFONDEUR 800 m**\n\nLa radio, une dernière fois :\n\n*« —{{player}}. Épisode suivant : la coque fissurée. Ne perds pas ta lumière. — »*\n\nStatic. Puis, très loin, un troisième ping.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Copier les coordonnées et préparer la suite",
+          "vers": "fin_epave",
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 400,
+      "y": 740
+    },
+    "fin_epave": {
+      "id": "fin_epave",
+      "title": "Encore vivant·e",
+      "location": "DERELICTA — SOUTE INONDÉE",
+      "narrator": "Sur Narhex, survivre une nuit ne veut pas dire gagner. Juste continuer à descendre.",
+      "text": "Tu enregistres les coordonnées. 800 mètres. Secteur 7.\n\nDehors, l'océan presse contre la coque — patient, immense.\n\nTu as de l'air pour quelques heures. De la lumière pour moins.\n\nMais tu sais où aller.\n\nEt quelque part, très loin, le portail Halloween pulse — invisible, orange, **affamé**.\n\n**FIN ÉPISODE 1 — Amerrissage**\n\n*Épisode 2 : La Coque fissurée — bientôt*",
+      "isStart": false,
+      "isEnd": true,
+      "transition": "fade",
+      "choices": [],
+      "x": 400,
+      "y": 840
+    }
+  }
+}
