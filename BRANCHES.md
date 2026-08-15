@@ -2,21 +2,22 @@
 
 ## `main`
 
-Développement courant et prochaine mise à jour Play Store / web. Version affichée : **v1.6** (jusqu’au release 1.7).
+Prochaine mise à jour Play Store / web. Version affichée : **v1.6** (jusqu’au release 1.7).
 
-Les agents Cursor et les PR automatiques ciblent **`main`** par défaut.
+Travail courant, correctifs et features **hors release 1.7**.
 
 ## `1.7`
 
-Branche de **release 1.7** (version affichée v1.7). Contenu stabilisé pour la future MàJ 1.7.
+Branche de **release 1.7** (version affichée v1.7).
 
-- **Ne pas merger dans `main`** tant que la release n’est pas validée manuellement.
-- **Agents IA :** interdits sans phrase explicite du propriétaire (« autorise la branche 1.7 »). Voir `AGENTS.md`.
-- **GitHub :** toute PR impliquant `1.7` exige le label **`release-1.7-authorized`**.
+- **Travail libre** : commits, PR vers `1.7`, branches feature depuis `1.7`.
+- **Vers `main` : interdit sans autorisation** — pas de merge, cherry-pick ni import de la 1.7 sur `main` tant que le propriétaire n’a pas explicitement validé la release.
 
-### Release 1.7 (manuel)
+### Release 1.7 (manuel, avec autorisation)
 
 1. Finaliser sur `1.7`
-2. Ouvrir PR `1.7` → `main`
-3. Ajouter le label `release-1.7-authorized`
-4. Merger après revue
+2. Dire à l’agent ou valider soi-même : merge 1.7 → main autorisé
+3. PR **`1.7` → `main`** + label **`release-1.7-authorized`**
+4. Merger
+
+La CI bloque **uniquement** les PR **`1.7` → `main`** sans ce label.
