@@ -507,6 +507,38 @@ html,body { height:100%; overflow:hidden; font-family:'Syne',sans-serif; backgro
 }
 .tip:hover, .tip.active { border-color:var(--accent); color:var(--accent); }
 
+.form-label-hint {
+  display:flex; align-items:center; justify-content:space-between; gap:8px;
+  width:100%;
+}
+.form-label-text { flex:1; min-width:0; }
+.choice-section-label.form-label-hint { margin-bottom:6px; }
+.field-hint {
+  width:28px; height:28px; border-radius:8px; flex-shrink:0;
+  border:1px solid rgba(255,230,0,0.28);
+  background:rgba(255,230,0,0.08); color:#ffe600;
+  font-size:13px; line-height:1; cursor:pointer;
+  display:inline-flex; align-items:center; justify-content:center;
+  transition:transform .12s, background .15s, border-color .15s;
+  -webkit-tap-highlight-color:transparent; padding:0;
+  font-family:inherit;
+}
+.field-hint:hover, .field-hint:focus-visible {
+  background:rgba(255,230,0,0.14); border-color:rgba(255,230,0,0.45); outline:none;
+}
+.field-hint:active { transform:scale(0.92); }
+.field-hint-modal { max-width:380px; text-align:center; }
+.field-hint-modal-icon { font-size:30px; margin-bottom:6px; line-height:1; }
+.field-hint-modal h4 {
+  font-family:'Cinzel',serif; font-size:14px; letter-spacing:1px;
+  color:var(--accent3); margin-bottom:10px;
+}
+.field-hint-modal p {
+  font-size:13px; color:var(--text2); line-height:1.58;
+  text-align:left; margin-bottom:16px;
+}
+.field-hint-modal .topbtn { width:100%; justify-content:center; }
+
 /* Tooltip bubble — créé par JS */
 #tip-bubble {
   position:fixed; z-index:2000;
@@ -682,38 +714,61 @@ html,body { height:100%; overflow:hidden; font-family:'Syne',sans-serif; backgro
   border-radius:6px; display:inline-block; border:none; cursor:default;
 }
 
-/* ── BOTTOM NAV (mobile) ── */
+/* ── BOTTOM NAV (mobile tabs) ── */
 #bottom-nav {
   display:none;
-  position:fixed; bottom:0; left:0; right:0; height:62px;
-  background:var(--bg2); border-top:1px solid var(--border);
-  z-index:300; padding:0;
+  position:fixed; bottom:0; left:0; right:0;
+  z-index:300;
+  padding:0 10px calc(6px + env(safe-area-inset-bottom, 0px));
+  background:linear-gradient(to top, rgba(10,9,18,0.98) 65%, rgba(10,9,18,0.88));
+  backdrop-filter:blur(18px); -webkit-backdrop-filter:blur(18px);
+  border-top:1px solid rgba(124,109,250,0.18);
+  box-shadow:0 -6px 28px rgba(0,0,0,0.42);
 }
-.bnav-items { display:flex; height:100%; }
+.bnav-items {
+  display:flex; align-items:stretch; gap:2px;
+  max-width:440px; margin:0 auto; position:relative; height:58px;
+}
+.bnav-indicator {
+  position:absolute; bottom:7px; height:3px; border-radius:99px;
+  background:linear-gradient(90deg, var(--accent), var(--accent3));
+  box-shadow:0 0 10px rgba(124,109,250,0.45);
+  transition:left .28s cubic-bezier(.4,0,.2,1), width .28s cubic-bezier(.4,0,.2,1);
+  pointer-events:none; z-index:0; left:0; width:0;
+}
 .bnav-item {
   flex:1; display:flex; flex-direction:column;
-  align-items:center; justify-content:center; gap:2px;
+  align-items:center; justify-content:center; gap:3px;
   background:none; border:none; cursor:pointer;
   color:var(--text3); font-family:'Syne',sans-serif;
-  transition:color .15s; padding:0 4px; position:relative;
-  min-width:0;
+  transition:color .2s, transform .12s;
+  padding:5px 4px 9px; position:relative; z-index:1;
+  min-width:0; border-radius:14px;
 }
-.bnav-item.active { color:var(--accent); }
-.bnav-item.active::before {
-  content:''; position:absolute; top:0; left:15%; right:15%;
-  height:2px; background:var(--accent); border-radius:0 0 4px 4px;
+.bnav-item:active { transform:scale(0.94); }
+.bnav-item.active { color:var(--accent3); }
+.bnav-icon-wrap {
+  width:34px; height:34px; border-radius:11px;
+  display:flex; align-items:center; justify-content:center;
+  border:1px solid transparent;
+  transition:background .2s, border-color .2s, box-shadow .2s;
 }
-.bnav-icon { font-size:19px; line-height:1; flex-shrink:0; }
+.bnav-item.active .bnav-icon-wrap {
+  background:rgba(124,109,250,0.16);
+  border-color:rgba(124,109,250,0.32);
+  box-shadow:0 0 14px rgba(124,109,250,0.18);
+}
+.bnav-icon { font-size:17px; line-height:1; flex-shrink:0; }
 .bnav-label {
-  font-size:7.5px; font-weight:700; letter-spacing:0;
-  text-transform:uppercase; white-space:nowrap;
-  overflow:hidden; text-overflow:ellipsis; max-width:100%;
+  font-size:9px; font-weight:700; letter-spacing:0.2px;
+  white-space:nowrap; overflow:hidden; text-overflow:ellipsis; max-width:100%;
 }
 
 /* ── MOBILE BOTTOM SHEET ── */
 #mobile-sheet {
   display:none;
-  position:fixed; left:0; right:0; bottom:60px;
+  position:fixed; left:0; right:0;
+  bottom:calc(58px + 6px + env(safe-area-inset-bottom, 0px));
   background:var(--bg2); border-top:1px solid var(--border);
   border-radius:16px 16px 0 0;
   z-index:250; flex-direction:column;
@@ -739,33 +794,102 @@ html,body { height:100%; overflow:hidden; font-family:'Syne',sans-serif; backgro
 }
 #mobile-sheet-body { flex:1; overflow-y:auto; padding:12px 16px 16px; }
 
-/* ── MOBILE MENU ── */
+/* ── MOBILE MORE SHEET ── */
+#mobile-menu-backdrop {
+  display:none; position:fixed; inset:0; z-index:385;
+  background:rgba(0,0,0,0.55); backdrop-filter:blur(2px);
+  opacity:0; transition:opacity .28s;
+}
+#mobile-menu-backdrop.open { display:block; opacity:1; }
 #mobile-menu {
-  display:none;
-  position:fixed; bottom:68px; right:12px;
-  background:var(--bg2); border:1px solid var(--border);
-  border-radius:12px; z-index:400; overflow:hidden;
-  box-shadow:0 -8px 32px #00000066;
-  transform:translateY(8px) scale(0.96); opacity:0;
-  transition:all .2s cubic-bezier(.4,0,.2,1);
-  pointer-events:none; min-width:200px;
+  display:none; flex-direction:column;
+  position:fixed; left:0; right:0; bottom:0;
+  max-height:min(84vh, 680px);
+  background:var(--bg2); border-top:1px solid rgba(124,109,250,0.2);
+  border-radius:22px 22px 0 0; z-index:400; overflow:hidden;
+  box-shadow:0 -16px 48px rgba(0,0,0,0.5);
+  transform:translateY(100%);
+  transition:transform .32s cubic-bezier(.4,0,.2,1);
+  padding-bottom:calc(58px + env(safe-area-inset-bottom, 0px));
 }
-#mobile-menu.open { transform:translateY(0) scale(1); opacity:1; pointer-events:all; }
+#mobile-menu.open { transform:translateY(0); }
+.mm-sheet-handle {
+  width:40px; height:4px; border-radius:2px;
+  background:var(--border); margin:10px auto 0; flex-shrink:0;
+}
+.mm-sheet-header {
+  display:flex; align-items:flex-start; justify-content:space-between;
+  gap:12px; padding:14px 18px 10px; flex-shrink:0;
+}
+.mm-sheet-header-text { flex:1; min-width:0; }
+.mm-sheet-title {
+  font-family:'Cinzel',serif; font-size:15px; letter-spacing:1.5px;
+  color:var(--accent3); margin-bottom:4px;
+}
+.mm-sheet-sub { font-size:12px; color:var(--text2); line-height:1.45; }
+.mm-sheet-close {
+  width:32px; height:32px; border-radius:10px; flex-shrink:0;
+  background:var(--bg3); border:1px solid var(--border);
+  color:var(--text3); cursor:pointer; font-size:15px;
+  display:flex; align-items:center; justify-content:center;
+}
+.mm-summary {
+  margin:0 14px 10px; padding:12px 14px;
+  background:linear-gradient(135deg, rgba(124,109,250,0.1), rgba(109,250,188,0.06));
+  border:1px solid rgba(124,109,250,0.22); border-radius:14px;
+  display:flex; flex-wrap:wrap; gap:10px 16px; align-items:center;
+}
+.mm-summary-item {
+  display:flex; flex-direction:column; gap:2px; min-width:72px;
+}
+.mm-summary-item span:first-child {
+  font-size:9px; font-weight:800; letter-spacing:1px;
+  text-transform:uppercase; color:var(--text3);
+}
+.mm-summary-health.ok { color:#6dfabc; border-color:rgba(109,250,188,0.3); }
+.mm-summary-health.warn { color:#ffe600; border-color:rgba(255,230,0,0.3); }
+.mm-summary-health.error { color:#fa6d8f; border-color:rgba(250,109,143,0.3); }
+  margin-left:auto; font-size:11px; font-weight:700;
+  padding:5px 10px; border-radius:8px; background:var(--bg3);
+  border:1px solid var(--border);
+}
+.mm-sheet-scroll { flex:1; overflow-y:auto; padding:0 6px 12px; }
+.mm-section-title {
+  font-size:9px; font-weight:800; letter-spacing:1.6px;
+  text-transform:uppercase; color:var(--text3);
+  padding:10px 12px 6px;
+}
 .mmenu-item {
-  display:flex; align-items:center; gap:12px;
-  padding:13px 18px; font-size:14px; font-weight:600;
-  color:var(--text2); cursor:pointer; border:none; background:none;
-  font-family:'Syne',sans-serif; width:100%; text-align:left;
-  border-bottom:1px solid var(--border); transition:background .1s;
+  display:flex; align-items:flex-start; gap:12px;
+  padding:11px 12px; margin:0 6px 4px; border-radius:13px;
+  border:none; background:transparent; cursor:pointer;
+  font-family:'Syne',sans-serif; width:calc(100% - 12px); text-align:left;
+  transition:background .12s;
 }
-.mmenu-item:last-child { border-bottom:none; }
 .mmenu-item:active { background:var(--bg3); }
+.mmenu-icon-wrap {
+  width:38px; height:38px; border-radius:11px; flex-shrink:0;
+  background:var(--bg3); border:1px solid var(--border);
+  display:flex; align-items:center; justify-content:center; font-size:17px;
+}
+.mmenu-item.mm-accent-green .mmenu-icon-wrap { background:rgba(109,250,188,0.1); border-color:rgba(109,250,188,0.25); }
+.mmenu-item.mm-accent-gold .mmenu-icon-wrap { background:rgba(200,169,110,0.1); border-color:rgba(200,169,110,0.25); }
+.mmenu-item.mm-accent-purple .mmenu-icon-wrap { background:rgba(124,109,250,0.12); border-color:rgba(124,109,250,0.28); }
+.mmenu-text { flex:1; min-width:0; }
+.mmenu-text strong {
+  display:block; font-size:13px; font-weight:700;
+  color:var(--text); margin-bottom:2px; line-height:1.3;
+}
+.mmenu-text span.desc {
+  display:block; font-size:11px; color:var(--text3); line-height:1.45;
+}
 .mmenu-icon { font-size:16px; width:20px; text-align:center; }
 
 /* ── FAB (mobile add) ── */
 #mobile-fab {
   display:none;
-  position:fixed; bottom:72px; right:16px;
+  position:fixed;
+  bottom:calc(68px + env(safe-area-inset-bottom, 0px)); right:16px;
   width:52px; height:52px; border-radius:50%;
   background:var(--accent); border:none; color:#fff;
   font-size:26px; cursor:pointer; z-index:290;
@@ -787,7 +911,7 @@ html,body { height:100%; overflow:hidden; font-family:'Syne',sans-serif; backgro
   #bottom-nav { display:flex; }
   #mobile-fab { display:flex; }
 
-  #main { flex-direction:column; padding-bottom:60px; }
+  #main { flex-direction:column; padding-bottom:calc(58px + 6px + env(safe-area-inset-bottom, 0px)); }
   #editor-panel { display:none; }
   #tree-panel { flex:1; overflow:hidden; }
   #tree-controls { bottom:76px; right:12px; }
@@ -1337,6 +1461,15 @@ html,body { height:100%; overflow:hidden; font-family:'Syne',sans-serif; backgro
 <!-- TOOLTIP BUBBLE -->
 <div id="tip-bubble"></div>
 
+<div id="field-hint-overlay" class="sf-ux-overlay" onclick="handleFieldHintOverlayClick(event)">
+  <div id="field-hint-modal" class="sf-ux-modal field-hint-modal" onclick="event.stopPropagation()">
+    <div class="field-hint-modal-icon" aria-hidden="true">💡</div>
+    <h4 id="field-hint-title"></h4>
+    <p id="field-hint-body"></p>
+    <button type="button" class="topbtn primary" id="field-hint-ok" onclick="closeFieldHint()"></button>
+  </div>
+</div>
+
 <!-- HEALTH PANEL -->
 <div id="health-panel"></div>
 
@@ -1437,22 +1570,23 @@ html,body { height:100%; overflow:hidden; font-family:'Syne',sans-serif; backgro
 <div id="toast"></div>
 
 <!-- MOBILE BOTTOM NAV -->
-<nav id="bottom-nav">
-  <div class="bnav-items">
-    <button class="bnav-item active" id="bnav-tree" onclick="mobileTab('tree')">
-      <span class="bnav-icon">⊞</span>
+<nav id="bottom-nav" aria-label="Navigation mobile">
+  <div class="bnav-items" id="bnav-items">
+    <div class="bnav-indicator" id="bnav-indicator" aria-hidden="true"></div>
+    <button class="bnav-item active" id="bnav-tree" type="button" data-tab="tree" onclick="mobileTab('tree')">
+      <span class="bnav-icon-wrap"><span class="bnav-icon">🌳</span></span>
       <span class="bnav-label">Arbre</span>
     </button>
-    <button class="bnav-item" id="bnav-edit" onclick="mobileTab('edit')">
-      <span class="bnav-icon">✏️</span>
+    <button class="bnav-item" id="bnav-edit" type="button" data-tab="edit" onclick="mobileTab('edit')">
+      <span class="bnav-icon-wrap"><span class="bnav-icon">✏️</span></span>
       <span class="bnav-label">Éditer</span>
     </button>
-    <button class="bnav-item" id="bnav-stats" onclick="openStatsModal()">
-      <span class="bnav-icon">⚙</span>
+    <button class="bnav-item" id="bnav-stats" type="button" data-tab="stats" onclick="mobileOpenStats()">
+      <span class="bnav-icon-wrap"><span class="bnav-icon">⚙</span></span>
       <span class="bnav-label">Stats</span>
     </button>
-    <button class="bnav-item" id="bnav-more" onclick="toggleMobileMenu()">
-      <span class="bnav-icon">•••</span>
+    <button class="bnav-item" id="bnav-more" type="button" data-tab="more" onclick="mobileTab('more')">
+      <span class="bnav-icon-wrap"><span class="bnav-icon">✦</span></span>
       <span class="bnav-label">Plus</span>
     </button>
   </div>
@@ -1471,41 +1605,102 @@ html,body { height:100%; overflow:hidden; font-family:'Syne',sans-serif; backgro
   <div id="mobile-sheet-body"></div>
 </div>
 
-<!-- MOBILE MENU -->
-<div id="mobile-menu">
-  <button class="mmenu-item" id="mm-templates" onclick="closeMobileMenu();openTemplatesModal()">
-    <span class="mmenu-icon">📋</span> <span id="mm-templates-label">Modèles</span>
-  </button>
-  <button class="mmenu-item" id="mm-guide" onclick="closeMobileMenu();openUiGuideModal(true)">
-    <span class="mmenu-icon">💡</span> <span id="mm-guide-label">Guide interface</span>
-  </button>
-  <button class="mmenu-item" onclick="closeMobileMenu();openThemePanel()">
-    <span class="mmenu-icon">🎨</span> Thème visuel
-  </button>
-  <button class="mmenu-item" onclick="closeMobileMenu();autoLayout()">
-    <span class="mmenu-icon">⊞</span> Ordonner l'arbre
-  </button>
-  <button class="mmenu-item" onclick="toggleKidsMobile()">
-    <span class="mmenu-icon">🧒</span> <span id="mm-kids-label">Histoire pour enfants</span>
-  </button>
-  <button class="mmenu-item" onclick="togglePlayerNameMobile()">
-    <span class="mmenu-icon">👤</span> <span id="mm-player-label">Demander le prénom</span>
-  </button>
-  <button class="mmenu-item" onclick="closeMobileMenu();testStory()" style="color:var(--accent3)">
-    <span class="mmenu-icon">▶</span> Tester l'histoire
-  </button>
-  <button class="mmenu-item" onclick="closeMobileMenu();importJSON()">
-    <span class="mmenu-icon">↑</span> Importer JSON
-  </button>
-  <button class="mmenu-item" onclick="closeMobileMenu();exportTXT()">
-    <span class="mmenu-icon">✎</span> Exporter TXT
-  </button>
-  <button class="mmenu-item" onclick="closeMobileMenu();exportJSON()">
-    <span class="mmenu-icon">↓</span> Exporter JSON
-  </button>
-  <button class="mmenu-item" onclick="closeMobileMenu();sendStory()" style="color:var(--accent2)">
-    <span class="mmenu-icon">✉</span> Envoyer mon histoire
-  </button>
+<!-- MOBILE MORE SHEET -->
+<div id="mobile-menu-backdrop" onclick="closeMobileMenu()"></div>
+<div id="mobile-menu" role="dialog" aria-labelledby="mm-sheet-title">
+  <div class="mm-sheet-handle"></div>
+  <div class="mm-sheet-header">
+    <div class="mm-sheet-header-text">
+      <div class="mm-sheet-title" id="mm-sheet-title">Plus</div>
+      <div class="mm-sheet-sub" id="mm-sheet-sub"></div>
+    </div>
+    <button type="button" class="mm-sheet-close" id="mm-sheet-close" onclick="closeMobileMenu()" aria-label="Fermer">✕</button>
+  </div>
+  <div class="mm-summary" id="mm-summary"></div>
+  <div class="mm-sheet-scroll">
+    <div class="mm-section-title" id="mm-section-learn"></div>
+    <button type="button" class="mmenu-item mm-accent-purple" onclick="mobileMenuAction(() => openTemplatesModal())">
+      <span class="mmenu-icon-wrap">📋</span>
+      <span class="mmenu-text">
+        <strong id="mm-templates-label">Modèles</strong>
+        <span class="desc" id="mm-templates-desc"></span>
+      </span>
+    </button>
+    <button type="button" class="mmenu-item mm-accent-purple" onclick="mobileMenuAction(() => openUiGuideModal(true))">
+      <span class="mmenu-icon-wrap">💡</span>
+      <span class="mmenu-text">
+        <strong id="mm-guide-label">Guide interface</strong>
+        <span class="desc" id="mm-guide-desc"></span>
+      </span>
+    </button>
+    <button type="button" class="mmenu-item mm-accent-green" onclick="mobileMenuAction(() => testStory())">
+      <span class="mmenu-icon-wrap">▶</span>
+      <span class="mmenu-text">
+        <strong id="mm-test-label"></strong>
+        <span class="desc" id="mm-test-desc"></span>
+      </span>
+    </button>
+
+    <div class="mm-section-title" id="mm-section-look"></div>
+    <button type="button" class="mmenu-item" onclick="mobileMenuAction(() => openThemePanel())">
+      <span class="mmenu-icon-wrap">🎨</span>
+      <span class="mmenu-text">
+        <strong id="mm-theme-label"></strong>
+        <span class="desc" id="mm-theme-desc"></span>
+      </span>
+    </button>
+    <button type="button" class="mmenu-item" onclick="mobileMenuAction(() => autoLayout())">
+      <span class="mmenu-icon-wrap">⊞</span>
+      <span class="mmenu-text">
+        <strong id="mm-layout-label"></strong>
+        <span class="desc" id="mm-layout-desc"></span>
+      </span>
+    </button>
+    <button type="button" class="mmenu-item" onclick="toggleKidsMobile()">
+      <span class="mmenu-icon-wrap">🧒</span>
+      <span class="mmenu-text">
+        <strong id="mm-kids-label">Histoire pour enfants</strong>
+        <span class="desc" id="mm-kids-desc"></span>
+      </span>
+    </button>
+    <button type="button" class="mmenu-item" onclick="togglePlayerNameMobile()">
+      <span class="mmenu-icon-wrap">👤</span>
+      <span class="mmenu-text">
+        <strong id="mm-player-label">Demander le prénom</strong>
+        <span class="desc" id="mm-player-desc"></span>
+      </span>
+    </button>
+
+    <div class="mm-section-title" id="mm-section-share"></div>
+    <button type="button" class="mmenu-item" onclick="mobileMenuAction(() => importJSON())">
+      <span class="mmenu-icon-wrap">↑</span>
+      <span class="mmenu-text">
+        <strong id="mm-import-label"></strong>
+        <span class="desc" id="mm-import-desc"></span>
+      </span>
+    </button>
+    <button type="button" class="mmenu-item" onclick="mobileMenuAction(() => exportTXT())">
+      <span class="mmenu-icon-wrap">✎</span>
+      <span class="mmenu-text">
+        <strong id="mm-export-txt-label"></strong>
+        <span class="desc" id="mm-export-txt-desc"></span>
+      </span>
+    </button>
+    <button type="button" class="mmenu-item" onclick="mobileMenuAction(() => exportJSON())">
+      <span class="mmenu-icon-wrap">↓</span>
+      <span class="mmenu-text">
+        <strong id="mm-export-json-label"></strong>
+        <span class="desc" id="mm-export-json-desc"></span>
+      </span>
+    </button>
+    <button type="button" class="mmenu-item mm-accent-gold" onclick="mobileMenuAction(() => sendStory())">
+      <span class="mmenu-icon-wrap">✉</span>
+      <span class="mmenu-text">
+        <strong id="mm-send-label"></strong>
+        <span class="desc" id="mm-send-desc"></span>
+      </span>
+    </button>
+  </div>
 </div>
 
 <script>
@@ -1605,6 +1800,12 @@ const EDITOR_I18N = {
     tipLeadsTo:'Scène vers laquelle ce choix mène. Bouton ＋→ pour créer une suite directement',
     tipEffect:'Modifie une stat quand le joueur choisit cette réponse — positif ou négatif',
     tipClickFx:'Animation jouée sur le bouton quand le joueur tape dessus',
+    tipSound:'Son joué à l\'arrivée dans la scène — renforce l\'ambiance (néons, glitch…)',
+    tipChoiceSound:'Son joué quand le joueur tape sur ce choix',
+    tipTimer:'Compte à rebours : si le temps expire, un choix est sélectionné automatiquement. 0 = désactivé.',
+    tipRequires:'Ce choix n\'apparaît que si le joueur a assez de points dans la stat choisie (🔒).',
+    fieldHintAria:'Aide sur ce champ', fieldHintOk:'Compris',
+    narratorLabel:'Narrateur',
     sceneImmersion:'Immersion de la scène', arrivalTransition:'Transition d\'arrivée', arrivalSound:'Son d\'arrivée', startScene:'Scène de départ', endScene:'Scène finale', choices:'Choix', addChoice:'+ Ajouter un choix', choice:'Choix', choiceText:'Texte du choix', choiceTextPh:'Ex: Accepter le contrat', choiceVar:'Tu peux écrire <code>{{player}}</code> dans un choix.', leadsTo:'Mène vers', noDestination:'— Aucune destination —', clickEffect:'Effet au clic', clickSound:'Son au clic', statEffects:'Effets sur les stats', effect:'+ Effet', noTitle:'Sans titre', choicesCount:'choix', needOneScene:'Au moins une scène requise', defineStats:'Définis d\'abord des stats', invalidFormat:'Format invalide', addLinkedScene:'Créer une scène liée', addLinkedSceneDesc:'Choisis depuis quelle scène et quelle réponse le joueur arrivera sur la nouvelle tuile.', sourceScene:'Scène source', sourceHint:'La nouvelle scène sera reliée depuis cette scène.', sourceChoice:'Réponse source', createNewChoice:'Créer une nouvelle réponse', newChoiceText:'Texte de la nouvelle réponse', newChoiceTextDefault:'Continuer', newSceneName:'Titre de la nouvelle scène', cancel:'Annuler', createScene:'Créer la scène', sceneCreatedLinked:'Scène créée et reliée ✦', sceneCreated:'Scène créée ✦', deletedScene:'Scène supprimée',
     transitions:{fade:'Fondu doux', glitch:'Glitch numérique', scanline:'Scanlines', flash:'Flash rapide', none:'Aucune'}, clicks:{pulse:'Pulse néon', shake:'Secousse', glitch:'Glitch', flash:'Flash', vibrate:'Vibration mobile', none:'Aucun'}, sounds:{none:'Aucun', click_neon:'Clic néon', glitch:'Glitch court', success:'Succès', error:'Erreur'},
     healthReady:'✓ Prête', healthWarn:'⚠ {n} avert.', healthError:'✕ {n} erreur(s)', healthOk:'Aucun problème détecté', healthNoStart:'Aucune scène de départ définie', healthMultiStart:'{n} scènes de départ', healthEmptyText:'"{t}" — texte vide', healthNoLink:'"{t}" — choix {i} sans destination', healthDeadLink:'"{t}" — destination supprimée', healthNoChoice:'"{t}" — sans choix, non finale', healthStatsNotArray:'stats doit être un tableau (pas un objet)', healthStatNoId:'Stat #{i} sans id valide', healthStatDuplicate:'Stat en double : "{id}"', healthEffectsNotArray:'"{t}" — choix {i} : effects doit être un tableau', healthEffectNoStat:'"{t}" — choix {i} : effect sans champ stat', healthEffectBadStat:'"{t}" — choix {i} : stat "{s}" inexistante (effect)', healthEffectBadVal:'"{t}" — choix {i} : val non numérique pour "{s}"', healthRequiresBadType:'"{t}" — choix {i} : requires doit être un objet', healthRequiresEmpty:'"{t}" — choix {i} : requires vide', healthRequiresNoStat:'"{t}" — choix {i} : requires.stat manquant ou invalide', healthRequiresBadStat:'"{t}" — choix {i} : requires.stat "{s}" inexistante', healthRequiresBadMin:'"{t}" — choix {i} : requires.min doit être un nombre', healthRequiresBadMax:'"{t}" — choix {i} : requires.max doit être un nombre', healthRequiresBadLegacy:'"{t}" — choix {i} : requires["{s}"] doit être un nombre', healthRequiresBadLegacyStat:'"{t}" — choix {i} : requires["{s}"] référence une stat inexistante', searchNoResult:'Aucun résultat', undone:'↩ Annulé', redone:'↪ Rétabli', nodeColor:'🎨 Couleur du nœud', kidsOn:'🧒 Mode enfant activé', kidsOff:'Mode enfant désactivé', playerOn:'👤 Prénom activé', playerOff:'Prénom désactivé', kidsLabel:'Histoire pour enfants', playerLabel:'Demander le prénom', healthTitle:'Santé de l\'histoire',
@@ -1634,6 +1835,21 @@ const EDITOR_I18N = {
     challengeProgress:'{scenes}/12 scènes · {endings}/2 fins',
     mobileEditHint:'👆 Tape une scène dans l\'arbre pour l\'éditer',
     mmTemplates:'Modèles', mmGuide:'Guide interface',
+    mmSheetTitle:'Plus', mmSheetSub:'Actions, export et réglages de ton projet.',
+    mmSectionLearn:'Créer & tester', mmSectionLook:'Personnaliser', mmSectionShare:'Importer & envoyer',
+    mmTemplatesDesc:'Bases prêtes à l\'emploi — mystère, enfant ou micro-défi.',
+    mmGuideDesc:'Revoir le tour des boutons et astuces mobile.',
+    mmTestDesc:'Joue ton histoire comme un vrai lecteur, avec tes stats.',
+    mmThemeDesc:'Couleurs, accents et ambiance visuelle de l\'histoire.',
+    mmLayoutDesc:'Réorganise l\'arbre automatiquement pour le rendre lisible.',
+    mmKidsDesc:'Affiche l\'histoire dans le pack enfants avec une UI adaptée.',
+    mmPlayerDesc:'Demande le prénom du joueur au début de la partie.',
+    mmImportDesc:'Charge un JSON existant (IA ou histoire déjà créée).',
+    mmExportTxtDesc:'Texte brut lisible pour relecture ou correction.',
+    mmExportJsonDesc:'Fichier JSON à conserver ou envoyer à Fableris.',
+    mmSendDesc:'Prépare l\'envoi par e-mail ou partage en un geste.',
+    mmSummaryScenes:'Scènes', mmSummaryEndings:'Fins', mmSummaryHealth:'Santé',
+    bnavStats:'Stats',
     draftRestoreTitle:'Reprendre le brouillon ?', draftRestoreBody:'Un brouillon non enregistré a été trouvé ({scenes} scènes, sauvegardé {when}).',
     draftRestoreBtn:'Reprendre', draftDiscardBtn:'Recommencer à zéro',
     startChoiceTitle:'Comment commencer ?', startChoiceSub:'Choisis le point de départ qui te convient — tu pourras tout modifier ensuite.',
@@ -1686,6 +1902,12 @@ const EDITOR_I18N = {
     tipLeadsTo:'Scene this choice leads to. Use ＋→ to create a sequel scene directly',
     tipEffect:'Modifies a stat when the player picks this choice — positive or negative',
     tipClickFx:'Animation played on the button when the player taps it',
+    tipSound:'Sound played when entering the scene — sets the mood (neon, glitch…)',
+    tipChoiceSound:'Sound played when the player taps this choice',
+    tipTimer:'Countdown: when time runs out, a choice is picked automatically. 0 = off.',
+    tipRequires:'This choice only appears if the player has enough points in the selected stat (🔒).',
+    fieldHintAria:'Help for this field', fieldHintOk:'Got it',
+    narratorLabel:'Narrator',
     sceneImmersion:'Scene immersion', arrivalTransition:'Arrival transition', arrivalSound:'Arrival sound', startScene:'Start scene', endScene:'Final scene', choices:'Choices', addChoice:'+ Add choice', choice:'Choice', choiceText:'Choice text', choiceTextPh:'Ex: Accept the contract', choiceVar:'You can write <code>{{player}}</code> in a choice.', leadsTo:'Leads to', noDestination:'— No destination —', clickEffect:'Click effect', clickSound:'Click sound', statEffects:'Stat effects', effect:'+ Effect', noTitle:'Untitled', choicesCount:'choices', needOneScene:'At least one scene is required', defineStats:'Define stats first', invalidFormat:'Invalid format', addLinkedScene:'Create linked scene', addLinkedSceneDesc:'Choose which scene and which answer will lead the player to the new tile.', sourceScene:'Source scene', sourceHint:'The new scene will be linked from this scene.', sourceChoice:'Source answer', createNewChoice:'Create a new answer', newChoiceText:'New answer text', newChoiceTextDefault:'Continue', newSceneName:'New scene title', cancel:'Cancel', createScene:'Create scene', sceneCreatedLinked:'Scene created and linked ✦', sceneCreated:'Scene created ✦', deletedScene:'Scene deleted',
     transitions:{fade:'Soft fade', glitch:'Digital glitch', scanline:'Scanlines', flash:'Quick flash', none:'None'}, clicks:{pulse:'Neon pulse', shake:'Shake', glitch:'Glitch', flash:'Flash', vibrate:'Mobile vibration', none:'None'}, sounds:{none:'None', click_neon:'Neon click', glitch:'Short glitch', success:'Success', error:'Error'},
     healthReady:'✓ Ready', healthWarn:'⚠ {n} warn.', healthError:'✕ {n} error(s)', healthOk:'No issues detected', healthNoStart:'No start scene defined', healthMultiStart:'{n} start scenes', healthEmptyText:'"{t}" — empty text', healthNoLink:'"{t}" — choice {i} has no destination', healthDeadLink:'"{t}" — deleted destination', healthNoChoice:'"{t}" — no choices, not marked as end', healthStatsNotArray:'stats must be an array (not an object)', healthStatNoId:'Stat #{i} has no valid id', healthStatDuplicate:'Duplicate stat: "{id}"', healthEffectsNotArray:'"{t}" — choice {i}: effects must be an array', healthEffectNoStat:'"{t}" — choice {i}: effect missing stat field', healthEffectBadStat:'"{t}" — choice {i}: unknown stat "{s}" in effect', healthEffectBadVal:'"{t}" — choice {i}: non-numeric val for "{s}"', healthRequiresBadType:'"{t}" — choice {i}: requires must be an object', healthRequiresEmpty:'"{t}" — choice {i}: empty requires', healthRequiresNoStat:'"{t}" — choice {i}: requires.stat missing or invalid', healthRequiresBadStat:'"{t}" — choice {i}: requires.stat "{s}" does not exist', healthRequiresBadMin:'"{t}" — choice {i}: requires.min must be a number', healthRequiresBadMax:'"{t}" — choice {i}: requires.max must be a number', healthRequiresBadLegacy:'"{t}" — choice {i}: requires["{s}"] must be a number', healthRequiresBadLegacyStat:'"{t}" — choice {i}: requires["{s}"] references unknown stat', searchNoResult:'No results', undone:'↩ Undone', redone:'↪ Redone', nodeColor:'🎨 Node color', kidsOn:'🧒 Kids mode on', kidsOff:'Kids mode off', playerOn:'👤 Name prompt on', playerOff:'Name prompt off', kidsLabel:'Kids story', playerLabel:'Ask for name', healthTitle:'Story health',
@@ -1715,6 +1937,21 @@ const EDITOR_I18N = {
     challengeProgress:'{scenes}/12 scenes · {endings}/2 endings',
     mobileEditHint:'👆 Tap a scene in the tree to edit it',
     mmTemplates:'Templates', mmGuide:'Interface guide',
+    mmSheetTitle:'More', mmSheetSub:'Actions, export and project settings.',
+    mmSectionLearn:'Create & test', mmSectionLook:'Customize', mmSectionShare:'Import & send',
+    mmTemplatesDesc:'Ready-made bases — mystery, kids or micro-challenge.',
+    mmGuideDesc:'Review the button tour and mobile tips.',
+    mmTestDesc:'Play your story like a real reader, with your stats.',
+    mmThemeDesc:'Colors, accents and visual mood of the story.',
+    mmLayoutDesc:'Auto-arrange the tree to keep it readable.',
+    mmKidsDesc:'Show the story in the kids pack with adapted UI.',
+    mmPlayerDesc:'Ask the player their name before the game starts.',
+    mmImportDesc:'Load an existing JSON (AI or previously created story).',
+    mmExportTxtDesc:'Plain readable text for proofreading or editing.',
+    mmExportJsonDesc:'JSON file to keep or send to Fableris.',
+    mmSendDesc:'Prepare one-tap email or share submission.',
+    mmSummaryScenes:'Scenes', mmSummaryEndings:'Endings', mmSummaryHealth:'Health',
+    bnavStats:'Stats',
     draftRestoreTitle:'Resume draft?', draftRestoreBody:'An unsaved draft was found ({scenes} scenes, saved {when}).',
     draftRestoreBtn:'Resume', draftDiscardBtn:'Start fresh',
     startChoiceTitle:'How do you want to start?', startChoiceSub:'Pick a starting point — you can change everything later.',
@@ -1767,6 +2004,12 @@ const EDITOR_I18N = {
     tipLeadsTo:'Escena a la que lleva esta elección. Usa ＋→ para crear una escena de continuación',
     tipEffect:'Modifica una stat cuando el jugador elige esta respuesta — positivo o negativo',
     tipClickFx:'Animación en el botón cuando el jugador lo toca',
+    tipSound:'Sonido al llegar a la escena — refuerza la ambientación (neón, glitch…)',
+    tipChoiceSound:'Sonido al tocar esta elección',
+    tipTimer:'Cuenta atrás: si se acaba el tiempo, se elige una opción automáticamente. 0 = desactivado.',
+    tipRequires:'Esta elección solo aparece si el jugador tiene suficientes puntos en la stat (🔒).',
+    fieldHintAria:'Ayuda sobre este campo', fieldHintOk:'Entendido',
+    narratorLabel:'Narrador',
     sceneImmersion:'Inmersión de la escena', arrivalTransition:'Transición de llegada', arrivalSound:'Sonido de llegada', startScene:'Escena inicial', endScene:'Escena final', choices:'Elecciones', addChoice:'+ Añadir elección', choice:'Elección', choiceText:'Texto de la elección', choiceTextPh:'Ej: Aceptar el contrato', choiceVar:'Puedes escribir <code>{{player}}</code> en una elección.', leadsTo:'Lleva a', noDestination:'— Sin destino —', clickEffect:'Efecto al tocar', clickSound:'Sonido al tocar', statEffects:'Efectos en stats', effect:'+ Efecto', noTitle:'Sin título', choicesCount:'elecciones', needOneScene:'Se requiere al menos una escena', defineStats:'Define stats primero', invalidFormat:'Formato inválido', addLinkedScene:'Crear escena vinculada', addLinkedSceneDesc:'Elige desde qué escena y qué respuesta llevará al jugador a la nueva tarjeta.', sourceScene:'Escena de origen', sourceHint:'La nueva escena se vinculará desde esta escena.', sourceChoice:'Respuesta de origen', createNewChoice:'Crear una nueva respuesta', newChoiceText:'Texto de la nueva respuesta', newChoiceTextDefault:'Continuar', newSceneName:'Título de la nueva escena', cancel:'Cancelar', createScene:'Crear escena', sceneCreatedLinked:'Escena creada y vinculada ✦', sceneCreated:'Escena creada ✦', deletedScene:'Escena eliminada',
     transitions:{fade:'Fundido suave', glitch:'Glitch digital', scanline:'Scanlines', flash:'Flash rápido', none:'Ninguna'}, clicks:{pulse:'Pulso neón', shake:'Sacudida', glitch:'Glitch', flash:'Flash', vibrate:'Vibración móvil', none:'Ninguno'}, sounds:{none:'Ninguno', click_neon:'Clic neón', glitch:'Glitch corto', success:'Éxito', error:'Error'},
     healthReady:'✓ Lista', healthWarn:'⚠ {n} advert.', healthError:'✕ {n} error(s)', healthOk:'Sin problemas detectados', healthNoStart:'Sin escena de inicio definida', healthMultiStart:'{n} escenas de inicio', healthEmptyText:'"{t}" — texto vacío', healthNoLink:'"{t}" — elección {i} sin destino', healthDeadLink:'"{t}" — destino eliminado', healthNoChoice:'"{t}" — sin elecciones, no es final', healthStatsNotArray:'stats debe ser un array (no un objeto)', healthStatNoId:'Stat #{i} sin id válido', healthStatDuplicate:'Stat duplicada: "{id}"', healthEffectsNotArray:'"{t}" — elección {i}: effects debe ser un array', healthEffectNoStat:'"{t}" — elección {i}: effect sin campo stat', healthEffectBadStat:'"{t}" — elección {i}: stat "{s}" inexistente (effect)', healthEffectBadVal:'"{t}" — elección {i}: val no numérico para "{s}"', healthRequiresBadType:'"{t}" — elección {i}: requires debe ser un objeto', healthRequiresEmpty:'"{t}" — elección {i}: requires vacío', healthRequiresNoStat:'"{t}" — elección {i}: requires.stat ausente o inválido', healthRequiresBadStat:'"{t}" — elección {i}: requires.stat "{s}" inexistente', healthRequiresBadMin:'"{t}" — elección {i}: requires.min debe ser un número', healthRequiresBadMax:'"{t}" — elección {i}: requires.max debe ser un número', healthRequiresBadLegacy:'"{t}" — elección {i}: requires["{s}"] debe ser un número', healthRequiresBadLegacyStat:'"{t}" — elección {i}: requires["{s}"] referencia una stat inexistente', searchNoResult:'Sin resultados', undone:'↩ Deshecho', redone:'↪ Rehecho', nodeColor:'🎨 Color del nodo', kidsOn:'🧒 Modo infantil activado', kidsOff:'Modo infantil desactivado', playerOn:'👤 Nombre activado', playerOff:'Nombre desactivado', kidsLabel:'Historia para niños', playerLabel:'Pedir nombre', healthTitle:'Salud de la historia',
@@ -1796,6 +2039,21 @@ const EDITOR_I18N = {
     challengeProgress:'{scenes}/12 escenas · {endings}/2 finales',
     mobileEditHint:'👆 Toca una escena en el árbol para editarla',
     mmTemplates:'Plantillas', mmGuide:'Guía interfaz',
+    mmSheetTitle:'Más', mmSheetSub:'Acciones, exportación y ajustes del proyecto.',
+    mmSectionLearn:'Crear y probar', mmSectionLook:'Personalizar', mmSectionShare:'Importar y enviar',
+    mmTemplatesDesc:'Bases listas — misterio, infantil o micro-desafío.',
+    mmGuideDesc:'Revisa el tour de botones y consejos móvil.',
+    mmTestDesc:'Juega tu historia como un lector real, con tus stats.',
+    mmThemeDesc:'Colores, acentos y ambiente visual de la historia.',
+    mmLayoutDesc:'Reorganiza el árbol automáticamente para leerlo mejor.',
+    mmKidsDesc:'Muestra la historia en el pack infantil con UI adaptada.',
+    mmPlayerDesc:'Pide el nombre del jugador al inicio de la partida.',
+    mmImportDesc:'Carga un JSON existente (IA o historia ya creada).',
+    mmExportTxtDesc:'Texto plano legible para revisión o corrección.',
+    mmExportJsonDesc:'Archivo JSON para guardar o enviar a Fableris.',
+    mmSendDesc:'Prepara el envío por correo o compartir en un gesto.',
+    mmSummaryScenes:'Escenas', mmSummaryEndings:'Finales', mmSummaryHealth:'Salud',
+    bnavStats:'Stats',
     draftRestoreTitle:'¿Reanudar borrador?', draftRestoreBody:'Se encontró un borrador sin guardar ({scenes} escenas, guardado {when}).',
     draftRestoreBtn:'Reanudar', draftDiscardBtn:'Empezar de cero',
     startChoiceTitle:'¿Cómo empezar?', startChoiceSub:'Elige un punto de partida — podrás cambiarlo todo después.',
@@ -1865,8 +2123,11 @@ function applyEditorLanguage() {
   const editorTitle = document.getElementById('editor-title'); if (editorTitle && !selectedId) editorTitle.textContent = et('selectScene');
   const del = document.getElementById('delete-btn'); if (del) del.title = et('deleteTitle');
   const bnav = document.querySelectorAll('.bnav-label');
-  if (bnav[0]) bnav[0].textContent = et('tree'); if (bnav[1]) bnav[1].textContent = et('edit'); if (bnav[2]) bnav[2].textContent = 'Stats'; if (bnav[3]) bnav[3].textContent = et('more');
-  const ms = document.getElementById('mobile-sheet-title'); if (ms) ms.textContent = et('scene');
+  if (bnav[0]) bnav[0].textContent = et('tree');
+  if (bnav[1]) bnav[1].textContent = et('edit');
+  if (bnav[2]) bnav[2].textContent = et('bnavStats');
+  if (bnav[3]) bnav[3].textContent = et('more');
+  const ms = document.getElementById('mobile-sheet-title'); if (ms && !selectedId) ms.textContent = et('scene');
 
   const byId = (id, text) => { const el = document.getElementById(id); if (el) el.textContent = text; };
   byId('empty-text', et('empty'));
@@ -1879,18 +2140,7 @@ function applyEditorLanguage() {
   byId('theme-title', '🎨 ' + et('visualTheme')); byId('theme-presets-title', et('presets')); byId('theme-custom-title', et('customColors'));
   byId('lbl-bg', et('mainBg')); byId('lbl-bg2', et('panelBg')); byId('lbl-bg3', et('elementBg')); byId('lbl-accent', et('accentMain')); byId('lbl-accent2', et('accentSecond')); byId('lbl-accent3', et('accentThird')); byId('lbl-text', et('mainText')); byId('lbl-border', et('borders'));
   byId('theme-preview-title', et('preview')); byId('pv-title', et('previewTitle')); byId('pv-text', et('previewText')); byId('pv-btn', et('previewBtn'));
-  const mm = document.querySelectorAll('#mobile-menu .mmenu-item');
-  if (mm[0]) mm[0].innerHTML = '<span class="mmenu-icon">🎨</span> ' + et('visualTheme');
-  if (mm[1]) mm[1].innerHTML = '<span class="mmenu-icon">⊞</span> ' + et('orderTree');
-  const kidsLabel = document.getElementById('mm-kids-label');
-  const playerLabel = document.getElementById('mm-player-label');
-  if (kidsLabel) kidsLabel.textContent = et('kidsLabel');
-  if (playerLabel) playerLabel.textContent = et('playerLabel');
-  if (mm[4]) mm[4].innerHTML = '<span class="mmenu-icon">▶</span> ' + et('testBtn');
-  if (mm[5]) mm[5].innerHTML = '<span class="mmenu-icon">↑</span> ' + et('importBtn').replace('↑ ','');
-  if (mm[6]) mm[6].innerHTML = '<span class="mmenu-icon">✎</span> ' + et('exportTxt');
-  if (mm[7]) mm[7].innerHTML = '<span class="mmenu-icon">↓</span> ' + et('exportJson');
-  if (mm[8]) mm[8].innerHTML = '<span class="mmenu-icon">✉</span> ' + et('sendBtn');
+  applyMobileMenuTexts();
   const sendBtn = document.querySelector('.send-btn');
   if (sendBtn) sendBtn.textContent = et('sendBtn');
   const tplBtn = document.getElementById('btn-templates');
@@ -1921,6 +2171,41 @@ function applyEditorLanguage() {
   renderTemplateCards();
   applyUiGuideTexts();
   applyEditorUxTexts();
+  updateMobileMenuSummary();
+  if (isMobile()) requestAnimationFrame(() => updateBnavIndicator(getCurrentMobileTab()));
+}
+
+function applyMobileMenuTexts() {
+  const set = (id, key) => { const el = document.getElementById(id); if (el) el.textContent = et(key); };
+  set('mm-sheet-title', 'mmSheetTitle');
+  set('mm-sheet-sub', 'mmSheetSub');
+  set('mm-section-learn', 'mmSectionLearn');
+  set('mm-section-look', 'mmSectionLook');
+  set('mm-section-share', 'mmSectionShare');
+  set('mm-templates-label', 'mmTemplates');
+  set('mm-templates-desc', 'mmTemplatesDesc');
+  set('mm-guide-label', 'mmGuide');
+  set('mm-guide-desc', 'mmGuideDesc');
+  set('mm-test-label', 'testBtn');
+  set('mm-test-desc', 'mmTestDesc');
+  set('mm-theme-label', 'visualTheme');
+  set('mm-theme-desc', 'mmThemeDesc');
+  set('mm-layout-label', 'orderTree');
+  set('mm-layout-desc', 'mmLayoutDesc');
+  set('mm-kids-label', 'kidsLabel');
+  set('mm-kids-desc', 'mmKidsDesc');
+  set('mm-player-label', 'playerLabel');
+  set('mm-player-desc', 'mmPlayerDesc');
+  set('mm-import-label', 'importBtn');
+  set('mm-import-desc', 'mmImportDesc');
+  set('mm-export-txt-label', 'exportTxt');
+  set('mm-export-txt-desc', 'mmExportTxtDesc');
+  set('mm-export-json-label', 'exportJson');
+  set('mm-export-json-desc', 'mmExportJsonDesc');
+  set('mm-send-label', 'sendBtn');
+  set('mm-send-desc', 'mmSendDesc');
+  const closeBtn = document.getElementById('mm-sheet-close');
+  if (closeBtn) closeBtn.setAttribute('aria-label', et('close'));
 }
 
 function applyEditorUxTexts() {
@@ -1947,7 +2232,9 @@ function applyEditorUxTexts() {
   set('mm-guide-label', 'mmGuide');
   const hint = document.getElementById('mobile-edit-hint');
   if (hint) hint.textContent = et('mobileEditHint');
+  set('field-hint-ok', 'fieldHintOk');
   updateChallengeBanner();
+  updateMobileMenuSummary();
 }
 
 const UI_GUIDE_DISMISS_KEY = 'sf_editor_ui_guide_dismissed';
@@ -1983,20 +2270,26 @@ function applyUiGuideTexts() {
   if (helpBtn) helpBtn.title = et('uiGuideHelpBtn');
 }
 
-function openUiGuideModal(force) {
+function openUiGuideModal(force, fromHistory) {
   applyUiGuideTexts();
   const dismiss = document.getElementById('ui-guide-dismiss');
   if (dismiss) dismiss.checked = !!force && isUiGuideDismissed();
-  document.getElementById('ui-guide-overlay')?.classList.add('open');
+  const ov = document.getElementById('ui-guide-overlay');
+  const wasOpen = ov?.classList.contains('open');
+  ov?.classList.add('open');
+  if (isMobile() && !wasOpen && !fromHistory) mobileHistoryPush('ui-guide');
 }
 
-function closeUiGuideModal() {
+function closeUiGuideModal(fromHistory) {
   const dismiss = document.getElementById('ui-guide-dismiss');
   try {
     if (dismiss?.checked) localStorage.setItem(UI_GUIDE_DISMISS_KEY, '1');
     else localStorage.removeItem(UI_GUIDE_DISMISS_KEY);
   } catch (e) {}
-  document.getElementById('ui-guide-overlay')?.classList.remove('open');
+  const ov = document.getElementById('ui-guide-overlay');
+  const wasOpen = ov?.classList.contains('open');
+  ov?.classList.remove('open');
+  if (isMobile() && wasOpen && !fromHistory) mobileHistoryPopSilent();
 }
 
 function handleUiGuideOverlayClick(e) {
@@ -2258,12 +2551,64 @@ function updateChallengeBanner() {
   const endings = Object.values(project.scenes || {}).filter(s => s.isEnd).length;
   const progress = et('challengeProgress').replace('{scenes}', scenes).replace('{endings}', endings);
   el.textContent = progress + ' — ' + et('challengeBanner');
+  updateMobileMenuSummary();
+}
+
+function updateMobileMenuSummary() {
+  const el = document.getElementById('mm-summary');
+  if (!el) return;
+  const scenes = Object.keys(project.scenes || {}).length;
+  const endings = Object.values(project.scenes || {}).filter(s => s.isEnd).length;
+  const hb = document.getElementById('health-badge');
+  const healthText = hb ? hb.textContent : et('healthReady');
+  const healthCls = hb?.classList.contains('error') ? 'error' : hb?.classList.contains('warn') ? 'warn' : 'ok';
+  el.innerHTML = `
+    <div class="mm-summary-item"><span>${et('mmSummaryScenes')}</span><strong>${scenes}</strong></div>
+    <div class="mm-summary-item"><span>${et('mmSummaryEndings')}</span><strong>${endings}</strong></div>
+    <div class="mm-summary-health ${healthCls}" title="${et('healthTitle')}">${et('mmSummaryHealth')} · ${esc(healthText)}</div>`;
 }
 
 function updateMobileEditHint() {
   const hint = document.getElementById('mobile-edit-hint');
   if (!hint) return;
   hint.hidden = !isMobile() || !!selectedId || Object.keys(project.scenes || {}).length === 0;
+}
+
+function fieldHintBtn(labelText, tipKey) {
+  const tip = et(tipKey);
+  const title = esc(labelText);
+  const body = esc(tip);
+  const aria = esc(et('fieldHintAria'));
+  return `<button type="button" class="field-hint" data-tip-title="${title}" data-tip="${body}" onclick="event.preventDefault();event.stopPropagation();showFieldHint(this)" aria-label="${aria}">💡</button>`;
+}
+
+function formLabelRow(labelText, tipKey) {
+  if (!tipKey) return `<label class="form-label">${labelText}</label>`;
+  return `<label class="form-label form-label-hint"><span class="form-label-text">${labelText}</span>${fieldHintBtn(labelText, tipKey)}</label>`;
+}
+
+function choiceSectionRow(labelText, tipKey) {
+  return `<div class="choice-section-label form-label-hint"><span class="form-label-text">${labelText}</span>${fieldHintBtn(labelText, tipKey)}</div>`;
+}
+
+function showFieldHint(btn) {
+  const title = btn.getAttribute('data-tip-title') || '';
+  const body = btn.getAttribute('data-tip') || '';
+  document.getElementById('field-hint-title').textContent = title;
+  document.getElementById('field-hint-body').textContent = body;
+  document.getElementById('field-hint-overlay')?.classList.add('open');
+  if (isMobile()) mobileHistoryPush('field-hint');
+}
+
+function closeFieldHint(fromHistory) {
+  const ov = document.getElementById('field-hint-overlay');
+  const wasOpen = ov?.classList.contains('open');
+  ov?.classList.remove('open');
+  if (isMobile() && wasOpen && !fromHistory) mobileHistoryPopSilent();
+}
+
+function handleFieldHintOverlayClick(e) {
+  if (e.target?.id === 'field-hint-overlay') closeFieldHint();
 }
 
 function getStartSceneId() {
@@ -2381,11 +2726,11 @@ function getEditorTourSteps() {
       { sel:'#bnav-stats', title:'tourStep1Title', body:'tourStep1Body' },
       { sel:'.node.start-node, .node', title:'tourStep2Title', body:'tourStep2Body' },
       { sel:'#mobile-choices-list', title:'tourStep3Title', body:'tourStep3Body', prepare: () => {
-        closeMobileSheet();
+        closeMobileSheet(true);
         const startId = getStartSceneId();
         if (startId) {
-          selectScene(startId);
-          openMobileSheet(startId);
+          _origSelect(startId);
+          openMobileSheet(startId, true);
         }
       }}
     ];
@@ -2491,6 +2836,7 @@ function finishEditorInit() {
   updateChallengeBanner();
   updateMobileEditHint();
   scheduleAutosave();
+  if (isMobile()) mobileHistoryInit();
   maybeShowEditorTour();
 }
 
@@ -2583,10 +2929,14 @@ function openAddSceneModal() {
   document.getElementById('link-new-title').value = et('newSceneTitle');
   refreshLinkChoiceOptions();
   document.getElementById('link-modal-overlay').classList.add('show');
+  if (isMobile()) mobileHistoryPush('link');
 }
 
-function closeLinkModal() {
-  document.getElementById('link-modal-overlay').classList.remove('show');
+function closeLinkModal(fromHistory) {
+  const ov = document.getElementById('link-modal-overlay');
+  const wasOpen = ov.classList.contains('show');
+  ov.classList.remove('show');
+  if (isMobile() && wasOpen && !fromHistory) mobileHistoryPopSilent();
 }
 
 function refreshLinkChoiceOptions() {
@@ -2778,25 +3128,25 @@ function renderEditor(id) {
   const body = document.getElementById('editor-body');
   body.innerHTML = `
     <div class="form-group">
-      <label class="form-label">${et('id')} <span class="tip tip-down" data-tip="${et('tipId')}">?</span></label>
+      ${formLabelRow(et('id'), 'tipId')}
       <input class="form-input" style="font-family:'DM Mono',monospace;font-size:12px" value="${scene.id}" readonly>
     </div>
     <div class="form-group">
-      <label class="form-label">${et('sceneTitle')} <span class="tip" data-tip="${et('tipTitle')}">?</span></label>
+      ${formLabelRow(et('sceneTitle'), 'tipTitle')}
       <input class="form-input" id="f-title" value="${esc(scene.title)}" oninput="updateField('title',this.value)" placeholder="${et('sceneTitlePh')}">
     </div>
     <div class="form-group">
-      <label class="form-label">${et('location')} <span class="tip" data-tip="${et('tipLocation')}">?</span></label>
+      ${formLabelRow(et('location'), 'tipLocation')}
       <input class="form-input" id="f-location" value="${esc(scene.location)}" oninput="updateField('location',this.value)" placeholder="${et('locationPh')}">
     </div>
     <div class="form-group">
-      <label class="form-label">✒ Narrateur <span class="tip" data-tip="${et('tipNarrator')}">?</span></label>
+      ${formLabelRow('✒ ' + et('narratorLabel'), 'tipNarrator')}
       <textarea class="form-textarea" style="min-height:60px;font-style:italic" id="f-narrator"
         oninput="updateField('narrator',this.value)"
         placeholder="Ex: Trois jours ont passé depuis la chute de Neo-Lyon...">${esc(scene.narrator||'')}</textarea>
     </div>
     <div class="form-group">
-      <label class="form-label">${et('narrative')} <span class="tip" data-tip="${et('tipText')}">?</span></label>
+      ${formLabelRow(et('narrative'), 'tipText')}
       <div class="rich-toolbar">
         <button class="rtb-btn" title="Gras (**texte**)" onclick="richFormat('f-text','text','**','**')"><b>B</b></button>
         <button class="rtb-btn" title="Italique (*texte*)" onclick="richFormat('f-text','text','*','*')"><i>I</i></button>
@@ -2815,13 +3165,14 @@ function renderEditor(id) {
     </div>
     <div class="section-divider">${et('sceneImmersion')}</div>
     <div class="form-group">
-      <label class="form-label">${et('arrivalTransition')} <span class="tip" data-tip="${et('tipTransition')}">?</span></label>
+      ${formLabelRow(et('arrivalTransition'), 'tipTransition')}
       <select class="form-select" onchange="updateField('transition',this.value)">
         ${presetOptions(TRANSITION_PRESETS, scene.transition || 'fade', 'transitions')}
       </select>
     </div>
     <div class="form-group">
-      <label class="form-label">🖼 Illustration <span class="tip" data-tip="${et('tipImage')}">?</span> <span style="font-size:10px;color:var(--text3);font-family:'DM Mono',monospace">assets/images/</span></label>
+      ${formLabelRow('🖼 Illustration', 'tipImage')}
+      <div style="font-size:10px;color:var(--text3);font-family:'DM Mono',monospace;margin:-4px 0 8px">assets/images/</div>
       <div style="display:flex;gap:8px;align-items:center">
         <input class="form-input" id="f-img" style="flex:1;font-family:'DM Mono',monospace;font-size:12px"
           value="${esc(scene.image||'')}"
@@ -2836,13 +3187,13 @@ function renderEditor(id) {
       </div>` : `<div style="margin-top:5px;font-size:10px;color:var(--text3);font-family:'DM Mono',monospace">Fichier à placer dans <strong>assets/images/</strong></div>`}
     </div>
     <div class="form-group">
-      <label class="form-label">${et('arrivalSound')}</label>
+      ${formLabelRow(et('arrivalSound'), 'tipSound')}
       <select class="form-select" onchange="updateField('sound',this.value)">
         ${presetOptions(SOUND_PRESETS, scene.sound || 'none', 'sounds')}
       </select>
     </div>
     <div class="form-group">
-      <label class="form-label">⏱ Timer de choix <span class="tip" data-tip="Barre qui se réduit — si 0 un choix est sélectionné automatiquement">?</span></label>
+      ${formLabelRow('⏱ Timer de choix', 'tipTimer')}
       <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
         <input type="number" class="form-input" style="width:65px" min="0" max="120"
           value="${scene.timer?.duration||0}"
@@ -2862,11 +3213,11 @@ function renderEditor(id) {
     <div class="form-group" style="display:flex;gap:16px">
       <label class="form-check">
         <input type="checkbox" ${scene.isStart?'checked':''} onchange="updateFlag('isStart',this.checked)">
-        <span>${et('startScene')} <span class="tip" data-tip="${et('tipStart')}">?</span></span>
+        <span>${et('startScene')} ${fieldHintBtn(et('startScene'), 'tipStart')}</span>
       </label>
       <label class="form-check">
         <input type="checkbox" ${scene.isEnd?'checked':''} onchange="updateFlag('isEnd',this.checked)">
-        <span>${et('endScene')} <span class="tip" data-tip="${et('tipEnd')}">?</span></span>
+        <span>${et('endScene')} ${fieldHintBtn(et('endScene'), 'tipEnd')}</span>
       </label>
     </div>
     <div class="form-group">
@@ -3221,11 +3572,20 @@ function updateEffect(ci, ei, key, val) {
 // ══════════════════════════════════════════════
 // STATS MODAL
 // ══════════════════════════════════════════════
-function openStatsModal() {
+function openStatsModal(fromHistory) {
   renderStatsList();
-  document.getElementById('modal-overlay').classList.add('show');
+  const ov = document.getElementById('modal-overlay');
+  const wasOpen = ov.classList.contains('show');
+  ov.classList.add('show');
+  if (isMobile() && !wasOpen && !fromHistory) mobileHistoryPush('stats');
 }
-function closeModal() { document.getElementById('modal-overlay').classList.remove('show'); }
+function closeModal(fromHistory) {
+  const ov = document.getElementById('modal-overlay');
+  const wasOpen = ov.classList.contains('show');
+  ov.classList.remove('show');
+  if (isMobile() && wasOpen && !fromHistory) mobileHistoryPopSilent();
+  if (isMobile()) updateBnavIndicator(getCurrentMobileTab());
+}
 
 function renderStatsList() {
   const el = document.getElementById('stats-list');
@@ -3628,15 +3988,21 @@ function initTemplateGrid() {
   });
 }
 
-function openTemplatesModal() {
+function openTemplatesModal(fromHistory) {
   refreshEditorLang();
   renderTemplateCards();
-  document.getElementById('template-modal-overlay')?.classList.add('open');
+  const ov = document.getElementById('template-modal-overlay');
+  const wasOpen = ov?.classList.contains('open');
+  ov?.classList.add('open');
+  if (isMobile() && !wasOpen && !fromHistory) mobileHistoryPush('template');
 }
 window.openTemplatesModal = openTemplatesModal;
 
-function closeTemplatesModal() {
-  document.getElementById('template-modal-overlay')?.classList.remove('open');
+function closeTemplatesModal(fromHistory) {
+  const ov = document.getElementById('template-modal-overlay');
+  const wasOpen = ov?.classList.contains('open');
+  ov?.classList.remove('open');
+  if (isMobile() && wasOpen && !fromHistory) mobileHistoryPopSilent();
 }
 window.closeTemplatesModal = closeTemplatesModal;
 
@@ -3791,7 +4157,7 @@ function showSubmitView(view) {
   if (doneEl) doneEl.style.display = view === 'done' ? '' : 'none';
 }
 
-function openSubmitModal() {
+function openSubmitModal(fromHistory) {
   refreshEditorLang();
   const scenes = project.scenes || {};
   if (!Object.keys(scenes).length) {
@@ -3808,12 +4174,18 @@ function openSubmitModal() {
   if (authorEl) authorEl.value = localStorage.getItem('sf_author_name') || '';
   if (emailEl) emailEl.value = localStorage.getItem('sf_author_email') || '';
   if (msgEl) msgEl.value = '';
-  document.getElementById('submit-modal-overlay')?.classList.add('open');
+  const ov = document.getElementById('submit-modal-overlay');
+  const wasOpen = ov?.classList.contains('open');
+  ov?.classList.add('open');
+  if (isMobile() && !wasOpen && !fromHistory) mobileHistoryPush('submit');
   setTimeout(() => authorEl?.focus(), 200);
 }
 
-function closeSubmitModal() {
-  document.getElementById('submit-modal-overlay')?.classList.remove('open');
+function closeSubmitModal(fromHistory) {
+  const ov = document.getElementById('submit-modal-overlay');
+  const wasOpen = ov?.classList.contains('open');
+  ov?.classList.remove('open');
+  if (isMobile() && wasOpen && !fromHistory) mobileHistoryPopSilent();
 }
 
 function handleSubmitOverlayClick(e) {
@@ -4299,13 +4671,21 @@ const PRESETS = [
 
 let currentTheme = { ...PRESETS[0] };
 
-function openThemePanel() {
+function openThemePanel(fromHistory) {
   buildPresetGrid();
   syncColorPickers();
   updatePreview();
-  document.getElementById('theme-panel').classList.add('open');
+  const panel = document.getElementById('theme-panel');
+  const wasOpen = panel.classList.contains('open');
+  panel.classList.add('open');
+  if (isMobile() && !wasOpen && !fromHistory) mobileHistoryPush('theme');
 }
-function closeThemePanel() { document.getElementById('theme-panel').classList.remove('open'); }
+function closeThemePanel(fromHistory) {
+  const panel = document.getElementById('theme-panel');
+  const wasOpen = panel.classList.contains('open');
+  panel.classList.remove('open');
+  if (isMobile() && wasOpen && !fromHistory) mobileHistoryPopSilent();
+}
 
 function buildPresetGrid() {
   const grid = document.getElementById('preset-grid');
@@ -4469,14 +4849,20 @@ document.addEventListener('click', e => {
 // ══════════════════════════════════════════════
 function toggleSearch() {
   const input = document.getElementById('search-input');
+  const wasOpen = input.classList.contains('open');
   input.classList.toggle('open');
-  if (input.classList.contains('open')) input.focus();
-  else closeSearch();
+  if (input.classList.contains('open')) {
+    input.focus();
+    if (isMobile() && !wasOpen) mobileHistoryPush('search');
+  } else closeSearch(true);
 }
-function closeSearch() {
-  document.getElementById('search-input').classList.remove('open');
-  document.getElementById('search-input').value = '';
+function closeSearch(fromHistory) {
+  const input = document.getElementById('search-input');
+  const wasOpen = input.classList.contains('open');
+  input.classList.remove('open');
+  input.value = '';
   document.getElementById('search-results').classList.remove('open');
+  if (isMobile() && wasOpen && !fromHistory) mobileHistoryPopSilent();
 }
 function doSearch(query) {
   const results = document.getElementById('search-results');
@@ -4690,55 +5076,174 @@ document.addEventListener('click', e => {
 
 const isMobile = () => window.innerWidth <= 700;
 
-function mobileTab(tab) {
+let _mobileHistorySilent = false;
+let _mobileHistoryDepth = 0;
+
+const MOBILE_LAYERS = [
+  { id: 'field-hint', isOpen: () => document.getElementById('field-hint-overlay')?.classList.contains('open'), close: () => closeFieldHint(true) },
+  { id: 'search', isOpen: () => document.getElementById('search-input')?.classList.contains('open'), close: () => closeSearch(true) },
+  { id: 'ui-guide', isOpen: () => document.getElementById('ui-guide-overlay')?.classList.contains('open'), close: () => closeUiGuideModal(true) },
+  { id: 'submit', isOpen: () => document.getElementById('submit-modal-overlay')?.classList.contains('open'), close: () => closeSubmitModal(true) },
+  { id: 'template', isOpen: () => document.getElementById('template-modal-overlay')?.classList.contains('open'), close: () => closeTemplatesModal(true) },
+  { id: 'link', isOpen: () => document.getElementById('link-modal-overlay')?.classList.contains('show'), close: () => closeLinkModal(true) },
+  { id: 'stats', isOpen: () => document.getElementById('modal-overlay')?.classList.contains('show'), close: () => closeModal(true) },
+  { id: 'theme', isOpen: () => document.getElementById('theme-panel')?.classList.contains('open'), close: () => closeThemePanel(true) },
+  { id: 'more', isOpen: () => document.getElementById('mobile-menu')?.classList.contains('open'), close: () => closeMobileMenu(true) },
+  { id: 'edit', isOpen: () => document.getElementById('mobile-sheet')?.classList.contains('open'), close: () => closeMobileSheet(true) }
+];
+
+function mobileHistoryInit() {
+  if (!isMobile()) return;
+  history.replaceState({ sfEditor: 'tree' }, '');
+  _mobileHistoryDepth = 0;
+  requestAnimationFrame(() => updateBnavIndicator(getCurrentMobileTab()));
+}
+
+function mobileHistoryPush(layer) {
+  if (!isMobile() || _mobileHistorySilent) return;
+  history.pushState({ sfEditor: layer, t: Date.now() }, '');
+  _mobileHistoryDepth++;
+}
+
+function mobileHistoryPopSilent() {
+  if (!isMobile() || _mobileHistoryDepth <= 0) return false;
+  _mobileHistorySilent = true;
+  history.back();
+  return true;
+}
+
+function getTopMobileLayer() {
+  for (let i = MOBILE_LAYERS.length - 1; i >= 0; i--) {
+    if (MOBILE_LAYERS[i].isOpen()) return MOBILE_LAYERS[i];
+  }
+  return null;
+}
+
+function handleMobilePopState() {
+  if (!isMobile()) return;
+  if (_mobileHistorySilent) {
+    _mobileHistorySilent = false;
+    _mobileHistoryDepth = Math.max(0, _mobileHistoryDepth - 1);
+    updateBnavIndicator(getCurrentMobileTab());
+    return;
+  }
+  const layer = getTopMobileLayer();
+  if (layer) layer.close();
+  else _mobileHistoryDepth = 0;
+  updateBnavIndicator(getCurrentMobileTab());
+}
+
+window.addEventListener('popstate', handleMobilePopState);
+
+function getCurrentMobileTab() {
+  if (document.getElementById('mobile-menu')?.classList.contains('open')) return 'more';
+  if (document.getElementById('mobile-sheet')?.classList.contains('open')) return 'edit';
+  return 'tree';
+}
+
+function updateBnavIndicator(tab) {
+  const item = document.querySelector(`.bnav-item[data-tab="${tab}"]`) || document.getElementById('bnav-tree');
+  document.querySelectorAll('.bnav-item').forEach(el => el.classList.toggle('active', el === item));
+  const ind = document.getElementById('bnav-indicator');
+  const parent = document.getElementById('bnav-items');
+  if (!ind || !item || !parent) return;
+  const rect = item.getBoundingClientRect();
+  const pr = parent.getBoundingClientRect();
+  ind.style.left = Math.max(0, rect.left - pr.left + 10) + 'px';
+  ind.style.width = Math.max(0, rect.width - 20) + 'px';
+}
+
+function mobileOpenStats() {
+  if (!isMobile()) { openStatsModal(); return; }
+  closeMobileMenu(true);
+  openStatsModal();
   document.querySelectorAll('.bnav-item').forEach(el => el.classList.remove('active'));
+  document.getElementById('bnav-stats')?.classList.add('active');
+  updateBnavIndicator('stats');
+}
+
+function mobileMenuAction(fn) {
+  const menuOpen = document.getElementById('mobile-menu')?.classList.contains('open');
+  closeMobileMenu(true);
+  if (menuOpen) mobileHistoryPopSilent();
+  fn();
+}
+
+function mobileTab(tab) {
+  if (tab === 'more') {
+    const menu = document.getElementById('mobile-menu');
+    if (menu?.classList.contains('open')) { closeMobileMenu(); return; }
+    openMobileMenu();
+    return;
+  }
+  closeMobileMenu(true);
   if (tab === 'tree') {
-    document.getElementById('bnav-tree').classList.add('active');
     closeMobileSheet();
+    updateBnavIndicator('tree');
   } else if (tab === 'edit') {
-    document.getElementById('bnav-edit').classList.add('active');
     if (selectedId) openMobileSheet(selectedId);
     else { toast(et('selectScene')); mobileTab('tree'); }
   }
 }
 
-function openMobileSheet(id) {
+function openMobileMenu(fromHistory) {
+  const menu = document.getElementById('mobile-menu');
+  const backdrop = document.getElementById('mobile-menu-backdrop');
+  if (!menu || menu.classList.contains('open')) return;
+  updateMobileMenuSummary();
+  menu.style.display = 'flex';
+  backdrop.style.display = 'block';
+  requestAnimationFrame(() => {
+    menu.classList.add('open');
+    backdrop.classList.add('open');
+  });
+  updateBnavIndicator('more');
+  if (!fromHistory) mobileHistoryPush('more');
+}
+
+function closeMobileMenu(fromHistory) {
+  const menu = document.getElementById('mobile-menu');
+  const backdrop = document.getElementById('mobile-menu-backdrop');
+  if (!menu) return;
+  const wasOpen = menu.classList.contains('open');
+  menu.classList.remove('open');
+  backdrop?.classList.remove('open');
+  setTimeout(() => {
+    if (!menu.classList.contains('open')) {
+      menu.style.display = 'none';
+      if (backdrop) backdrop.style.display = 'none';
+    }
+  }, 280);
+  if (wasOpen && !fromHistory) mobileHistoryPopSilent();
+  if (wasOpen) updateBnavIndicator(getCurrentMobileTab());
+}
+
+function openMobileSheet(id, fromHistory) {
   if (!isMobile()) return;
   const scene = project.scenes[id];
   if (!scene) return;
   const sheet = document.getElementById('mobile-sheet');
+  const wasOpen = sheet.classList.contains('open');
   document.getElementById('mobile-sheet-title').textContent = scene.title || et('noTitle');
   renderEditorInto(id, document.getElementById('mobile-sheet-body'));
   sheet.style.display = 'flex';
   requestAnimationFrame(() => sheet.classList.add('open'));
-  document.getElementById('bnav-edit').classList.add('active');
-  document.getElementById('bnav-tree').classList.remove('active');
+  updateBnavIndicator('edit');
+  if (!wasOpen && !fromHistory) mobileHistoryPush('edit');
 }
 
-function closeMobileSheet() {
+function closeMobileSheet(fromHistory) {
   const sheet = document.getElementById('mobile-sheet');
+  if (!sheet) return;
+  const wasOpen = sheet.classList.contains('open');
   sheet.classList.remove('open');
   setTimeout(() => { if (!sheet.classList.contains('open')) sheet.style.display = 'none'; }, 320);
-  document.getElementById('bnav-tree').classList.add('active');
-  document.getElementById('bnav-edit').classList.remove('active');
+  if (wasOpen && !fromHistory) mobileHistoryPopSilent();
+  if (wasOpen) updateBnavIndicator(getCurrentMobileTab());
 }
 
-function toggleMobileMenu() {
-  const menu = document.getElementById('mobile-menu');
-  const isOpen = menu.classList.contains('open');
-  if (!isOpen) { menu.style.display = 'block'; requestAnimationFrame(() => menu.classList.add('open')); }
-  else closeMobileMenu();
-  document.getElementById('bnav-more').classList.toggle('active', !isOpen);
-}
-function closeMobileMenu() {
-  const menu = document.getElementById('mobile-menu');
-  menu.classList.remove('open');
-  document.getElementById('bnav-more').classList.remove('active');
-  setTimeout(() => { if (!menu.classList.contains('open')) menu.style.display = 'none'; }, 220);
-}
-document.addEventListener('click', e => {
-  const menu = document.getElementById('mobile-menu');
-  if (menu.classList.contains('open') && !menu.contains(e.target) && !e.target.closest('#bnav-more')) closeMobileMenu();
+window.addEventListener('resize', () => {
+  if (isMobile()) updateBnavIndicator(getCurrentMobileTab());
 });
 
 function renderEditorInto(id, container) {
@@ -4746,21 +5251,21 @@ function renderEditorInto(id, container) {
   if (!scene) return;
   container.innerHTML = `
     <div class="form-group">
-      <label class="form-label">${et('sceneTitle')}</label>
+      ${formLabelRow(et('sceneTitle'), 'tipTitle')}
       <input class="form-input" value="${esc(scene.title)}" oninput="updateField('title',this.value);document.getElementById('mobile-sheet-title').textContent=this.value||et('noTitle')" placeholder="${et('sceneTitlePh')}">
     </div>
     <div class="form-group">
-      <label class="form-label">${et('location')}</label>
+      ${formLabelRow(et('location'), 'tipLocation')}
       <input class="form-input" value="${esc(scene.location)}" oninput="updateField('location',this.value)" placeholder="${et('locationPh')}">
     </div>
     <div class="form-group">
-      <label class="form-label">✒ Narrateur</label>
+      ${formLabelRow('✒ ' + et('narratorLabel'), 'tipNarrator')}
       <textarea class="form-textarea" style="min-height:60px;font-style:italic"
         oninput="updateField('narrator',this.value)"
         placeholder="Ex: Trois jours ont passé...">${esc(scene.narrator||'')}</textarea>
     </div>
     <div class="form-group">
-      <label class="form-label">${et('narrative')}</label>
+      ${formLabelRow(et('narrative'), 'tipText')}
       <div class="rich-toolbar">
         <button class="rtb-btn" title="Gras" onclick="richFormat('m-text','text','**','**')"><b>B</b></button>
         <button class="rtb-btn" title="Italique" onclick="richFormat('m-text','text','*','*')"><i>I</i></button>
@@ -4775,22 +5280,23 @@ function renderEditorInto(id, container) {
         <button class="rtb-btn rtb-wide" onclick="insertMobileVar('m-text','text','{{player}}')">👤</button>
       </div>
       <textarea class="form-textarea" id="m-text" style="min-height:110px" oninput="updateField('text',this.value)" placeholder="${et('narrativePh')}">${esc(scene.text)}</textarea>
+      <div class="var-help">${et('varHelp')}</div>
     </div>
     <div class="section-divider">${et('sceneImmersion')}</div>
     <div class="form-group">
-      <label class="form-label">${et('arrivalTransition')}</label>
+      ${formLabelRow(et('arrivalTransition'), 'tipTransition')}
       <select class="form-select" onchange="updateField('transition',this.value)">
         ${presetOptions(TRANSITION_PRESETS, scene.transition || 'fade', 'transitions')}
       </select>
     </div>
     <div class="form-group">
-      <label class="form-label">${et('arrivalSound')}</label>
+      ${formLabelRow(et('arrivalSound'), 'tipSound')}
       <select class="form-select" onchange="updateField('sound',this.value)">
         ${presetOptions(SOUND_PRESETS, scene.sound || 'none', 'sounds')}
       </select>
     </div>
     <div class="form-group">
-      <label class="form-label">⏱ Timer de choix <span class="tip" data-tip="Barre qui se réduit — si 0 un choix est sélectionné automatiquement">?</span></label>
+      ${formLabelRow('⏱ Timer de choix', 'tipTimer')}
       <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
         <input type="number" class="form-input" style="width:65px" min="0" max="120"
           value="${scene.timer?.duration||0}"
@@ -4808,8 +5314,8 @@ function renderEditorInto(id, container) {
     </div>
     ${portalFieldHTML(scene)}
     <div class="form-group" style="display:flex;gap:20px">
-      <label class="form-check"><input type="checkbox" ${scene.isStart?'checked':''} onchange="updateFlag('isStart',this.checked)"><span>${et('startScene')}</span></label>
-      <label class="form-check"><input type="checkbox" ${scene.isEnd?'checked':''} onchange="updateFlag('isEnd',this.checked)"><span>${et('endScene')}</span></label>
+      <label class="form-check"><input type="checkbox" ${scene.isStart?'checked':''} onchange="updateFlag('isStart',this.checked)"><span>${et('startScene')} ${fieldHintBtn(et('startScene'), 'tipStart')}</span></label>
+      <label class="form-check"><input type="checkbox" ${scene.isEnd?'checked':''} onchange="updateFlag('isEnd',this.checked)"><span>${et('endScene')} ${fieldHintBtn(et('endScene'), 'tipEnd')}</span></label>
     </div>
     ${scenePreviewBlock(id)}
     <div class="section-divider">${et('choices')}</div>
@@ -4831,7 +5337,7 @@ function renderMobileChoices(id) {
       `<option value="${s.id}" ${choice.vers===s.id?'selected':''}>${s.title||s.id}</option>`).join('');
 
     const statsInline = project.stats.length ? `
-      <div class="choice-section-label">⚡ Bonus / Malus</div>
+      ${choiceSectionRow('⚡ ' + et('statEffects'), 'tipEffect')}
       <div class="stats-inline-grid">
         ${project.stats.map(s => {
           const eff = (choice.effects||[]).find(e => e.stat === s.id);
@@ -4848,7 +5354,7 @@ function renderMobileChoices(id) {
 
     const conditionHTML = project.stats.length ? `
       <div class="condition-field${hasLock?' active':''}" style="margin-top:8px">
-        <label class="form-label" style="font-size:9px">🔒 Condition d'affichage</label>
+        ${formLabelRow('🔒 Condition d\'affichage', 'tipRequires')}
         <div class="condition-row">
           <select class="form-select" style="flex:1;min-width:80px"
             onchange="updateChoiceRequires(${ci},'stat',this.value);renderMobileChoices('${id}')">
@@ -4877,12 +5383,12 @@ function renderMobileChoices(id) {
         <button class="icon-btn danger" onclick="removeChoice(${ci});renderMobileChoices('${id}')" style="width:24px;height:24px;font-size:12px">✕</button>
       </div>
 
-      <div class="choice-section-label">✏️ Texte</div>
+      ${choiceSectionRow('✏️ ' + et('choiceText'), 'tipChoiceText')}
       <div class="form-group" style="margin-bottom:8px">
         <input class="form-input" value="${esc(choice.text)}" oninput="updateChoice(${ci},'text',this.value)" placeholder="${et('choiceTextPh')}">
       </div>
 
-      <div class="choice-section-label">➜ Destination</div>
+      ${choiceSectionRow('➜ ' + et('leadsTo'), 'tipLeadsTo')}
       <div class="form-group" style="margin-bottom:8px">
         <div style="display:flex;gap:6px;align-items:center">
           <select class="form-select" style="flex:1" onchange="updateChoice(${ci},'vers',this.value);drawConnections();renderMobileChoices('${id}')">
@@ -4899,16 +5405,15 @@ function renderMobileChoices(id) {
 
       ${statsInline}
 
-      <div class="choice-section-label" style="margin-top:10px">⚙ Effets</div>
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:8px">
         <div>
-          <div class="form-label" style="font-size:9px;margin-bottom:3px">${et('clickEffect')}</div>
+          ${formLabelRow(et('clickEffect'), 'tipClickFx')}
           <select class="form-select" style="font-size:11px" onchange="updateChoice(${ci},'clickEffect',this.value)">
             ${presetOptions(CLICK_EFFECT_PRESETS, choice.clickEffect || 'pulse', 'clicks')}
           </select>
         </div>
         <div>
-          <div class="form-label" style="font-size:9px;margin-bottom:3px">${et('clickSound')}</div>
+          ${formLabelRow(et('clickSound'), 'tipChoiceSound')}
           <select class="form-select" style="font-size:11px" onchange="updateChoice(${ci},'sound',this.value)">
             ${presetOptions(SOUND_PRESETS, choice.sound || 'click_neon', 'sounds')}
           </select>
