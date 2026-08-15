@@ -798,6 +798,7 @@ html,body { height:100%; overflow:hidden; font-family:'Syne',sans-serif; backgro
   #undo-redo { display:none; }
   #search-wrap { top:8px; left:8px; }
   #search-input.open { width:140px; }
+  #mobile-edit-hint { bottom:132px; max-width:min(240px, calc(100% - 80px)); }
 }
 
 #creator-banner {
@@ -2013,6 +2014,7 @@ const COACH_DONE_KEY = 'sf_editor_coach_done';
 let autosaveTimer = null;
 let wizardStep = 0;
 let tourStep = 0;
+let tourRunId = 0;
 let coachStep = 0;
 let _healthConfirmCb = null;
 const wizardData = { title:'', startTitle:'', startText:'', end1:'', end2:'', choiceA:'', choiceB:'' };
@@ -2339,6 +2341,10 @@ function positionUxHighlight(highlightId, selector, bubbleId, titleKey, bodyKey,
   const hi = document.getElementById(highlightId);
   const bubble = document.getElementById(bubbleId);
   if (!el || !hi || !bubble) return false;
+  const pos = window.getComputedStyle(el).position;
+  if (pos !== 'fixed' && pos !== 'sticky') {
+    try { el.scrollIntoView({ block:'nearest', inline:'nearest', behavior:'instant' }); } catch (e) {}
+  }
   const r = el.getBoundingClientRect();
   hi.style.display = 'block';
   hi.style.top = Math.max(8, r.top - 8) + 'px';
@@ -2369,39 +2375,78 @@ function closeTourOverlay() {
   document.getElementById('tour-bubble').style.display = 'none';
 }
 
-function showTourStep() {
-  document.getElementById('tour-overlay')?.classList.add('open');
-  const steps = [
+function getEditorTourSteps() {
+  if (isMobile()) {
+    return [
+      { sel:'#bnav-stats', title:'tourStep1Title', body:'tourStep1Body' },
+      { sel:'.node.start-node, .node', title:'tourStep2Title', body:'tourStep2Body' },
+      { sel:'#mobile-choices-list', title:'tourStep3Title', body:'tourStep3Body', prepare: () => {
+        closeMobileSheet();
+        const startId = getStartSceneId();
+        if (startId) {
+          selectScene(startId);
+          openMobileSheet(startId);
+        }
+      }}
+    ];
+  }
+  return [
     { sel:'#topbar .topbtn', title:'tourStep1Title', body:'tourStep1Body' },
     { sel:'.node.start-node, .node', title:'tourStep2Title', body:'tourStep2Body' },
     { sel:'#choices-list, #add-node-btn', title:'tourStep3Title', body:'tourStep3Body' }
   ];
+}
+
+function showTourStep() {
+  document.getElementById('tour-overlay')?.classList.add('open');
+  const steps = getEditorTourSteps();
+  const nextBtn = document.getElementById('tour-next-btn');
+  const skipBtn = document.getElementById('tour-skip-btn');
+  if (skipBtn) {
+    skipBtn.textContent = et('tourSkip');
+    skipBtn.onclick = () => {
+      tourRunId++;
+      closeTourOverlay();
+      if (isMobile()) closeMobileSheet();
+      try { localStorage.setItem(TOUR_DONE_KEY, '1'); } catch (e) {}
+      maybeShowMobileCoachMarks();
+    };
+  }
+  if (nextBtn) {
+    nextBtn.disabled = true;
+    nextBtn.onclick = null;
+  }
   if (tourStep >= steps.length) {
     closeTourOverlay();
+    if (isMobile()) closeMobileSheet();
     try { localStorage.setItem(TOUR_DONE_KEY, '1'); } catch (e) {}
     maybeShowMobileCoachMarks();
     return;
   }
   const s = steps[tourStep];
-  if (tourStep === 2 && !selectedId) {
+  const runId = ++tourRunId;
+  if (s.prepare) s.prepare();
+  else if (tourStep === 2 && !selectedId) {
     const startId = getStartSceneId();
     if (startId) selectScene(startId);
   }
+  const delay = tourStep === 2 ? (isMobile() ? 360 : 200) : 80;
   setTimeout(() => {
-    if (!positionUxHighlight('tour-highlight', s.sel, 'tour-bubble', s.title, s.body, 'tour-next-btn', 'tourNext', () => {
+    if (runId !== tourRunId) return;
+    const advance = () => {
       tourStep++;
       showTourStep();
-    })) {
-      tourStep++;
-      showTourStep();
-    }
-    document.getElementById('tour-skip-btn').textContent = et('tourSkip');
-    document.getElementById('tour-skip-btn').onclick = () => {
-      closeTourOverlay();
-      try { localStorage.setItem(TOUR_DONE_KEY, '1'); } catch (e) {}
-      maybeShowMobileCoachMarks();
     };
-  }, tourStep === 2 ? 200 : 80);
+    if (!positionUxHighlight('tour-highlight', s.sel, 'tour-bubble', s.title, s.body, 'tour-next-btn', 'tourNext', advance)) {
+      advance();
+      return;
+    }
+    if (runId !== tourRunId) return;
+    if (nextBtn) {
+      nextBtn.disabled = false;
+      nextBtn.onclick = advance;
+    }
+  }, delay);
 }
 
 function maybeShowEditorTour() {
@@ -2426,7 +2471,8 @@ function showCoachStep() {
       showCoachStep();
     });
   } else {
-    positionUxHighlight('coach-highlight', '#add-node-btn', 'coach-bubble', 'coach2Title', 'coach2Body', 'coach-next-btn', 'coachDone', () => {
+    const addSel = isMobile() ? '#mobile-fab' : '#add-node-btn';
+    positionUxHighlight('coach-highlight', addSel, 'coach-bubble', 'coach2Title', 'coach2Body', 'coach-next-btn', 'coachDone', () => {
       closeCoachOverlay();
       try { localStorage.setItem(COACH_DONE_KEY, '1'); } catch (e) {}
     });
