@@ -941,6 +941,87 @@ html,body { height:100%; overflow:hidden; font-family:'Syne',sans-serif; backgro
 }
 .ui-guide-dismiss-row input { accent-color:var(--accent); width:15px; height:15px; flex-shrink:0; }
 .ui-guide-dismiss-row span { font-size:12px; color:var(--text2); line-height:1.4; }
+
+#mobile-edit-hint {
+  position:absolute; left:50%; bottom:88px; transform:translateX(-50%);
+  z-index:12; max-width:min(280px, calc(100% - 32px));
+  padding:10px 14px; border-radius:12px;
+  background:rgba(124,109,250,0.92); border:1px solid rgba(124,109,250,0.5);
+  color:#fff; font-size:12px; line-height:1.45; text-align:center;
+  box-shadow:0 8px 24px rgba(0,0,0,0.35); pointer-events:none;
+  animation:ux-hint-pulse 2.4s ease-in-out infinite;
+}
+#mobile-edit-hint[hidden] { display:none !important; }
+@keyframes ux-hint-pulse { 0%,100%{opacity:1} 50%{opacity:0.82} }
+
+.sf-ux-overlay {
+  position:fixed; inset:0; z-index:2400; display:none;
+  align-items:center; justify-content:center;
+  background:rgba(0,0,0,0.78); backdrop-filter:blur(6px); padding:16px;
+}
+.sf-ux-overlay.open { display:flex; }
+.sf-ux-modal {
+  width:100%; max-width:440px; max-height:88vh; overflow-y:auto;
+  background:var(--bg2); border:1px solid var(--border); border-radius:16px; padding:22px;
+}
+.sf-ux-modal h3 {
+  font-family:'Cinzel',serif; font-size:16px; letter-spacing:2px;
+  color:var(--accent3); margin-bottom:8px;
+}
+.sf-ux-modal p.sub { font-size:13px; color:var(--text2); line-height:1.55; margin-bottom:16px; }
+.sf-ux-actions { display:flex; flex-direction:column; gap:8px; margin-top:14px; }
+.sf-ux-actions.row { flex-direction:row; flex-wrap:wrap; }
+.sf-ux-choice {
+  width:100%; text-align:left; padding:14px 16px; border-radius:12px;
+  border:1px solid var(--border); background:var(--bg3); color:var(--text);
+  font-family:'Syne',sans-serif; font-size:13px; cursor:pointer; transition:border-color .15s;
+}
+.sf-ux-choice:hover { border-color:var(--accent); }
+.sf-ux-choice strong { display:block; font-size:14px; margin-bottom:4px; color:var(--text); }
+.sf-ux-choice span { color:var(--text2); font-size:12px; line-height:1.45; }
+
+#coach-overlay, #tour-overlay {
+  z-index:2500; background:rgba(0,0,0,0.55); backdrop-filter:none;
+  align-items:stretch; justify-content:stretch; padding:0;
+}
+#coach-overlay.open, #tour-overlay.open { display:block; }
+.coach-highlight, .tour-highlight {
+  position:fixed; border:2px solid var(--accent3); border-radius:14px;
+  box-shadow:0 0 0 9999px rgba(0,0,0,0.62); pointer-events:none; transition:all .25s ease;
+}
+.coach-bubble, .tour-bubble {
+  position:fixed; z-index:2502; max-width:min(300px, calc(100vw - 24px));
+  background:var(--bg2); border:1px solid var(--border); border-radius:14px; padding:14px 16px;
+  box-shadow:0 12px 32px rgba(0,0,0,0.45);
+}
+.coach-bubble h4, .tour-bubble h4 {
+  font-family:'Cinzel',serif; font-size:13px; color:var(--accent3); margin-bottom:6px;
+}
+.coach-bubble p, .tour-bubble p { font-size:12px; color:var(--text2); line-height:1.55; margin-bottom:12px; }
+.coach-bubble-actions, .tour-bubble-actions { display:flex; gap:8px; justify-content:flex-end; }
+
+.scene-preview-wrap { margin:14px 0 8px; }
+.scene-preview {
+  background:var(--bg); border:1px solid var(--border); border-radius:12px;
+  padding:14px; min-height:72px;
+}
+.scene-preview .pv-loc {
+  font-family:'DM Mono',monospace; font-size:9px; letter-spacing:2px;
+  color:var(--accent); text-transform:uppercase; margin-bottom:8px;
+}
+.scene-preview .pv-narrator { font-style:italic; color:var(--text2); font-size:12px; margin-bottom:8px; line-height:1.5; }
+.scene-preview .pv-text { font-size:13px; line-height:1.65; color:var(--text); }
+.scene-preview .pv-choices { margin-top:12px; display:flex; flex-direction:column; gap:6px; }
+.scene-preview .pv-choice {
+  padding:8px 10px; border-radius:8px; border:1px solid var(--border);
+  background:var(--bg3); font-size:11px; color:var(--text2); text-align:center;
+}
+.wizard-steps { display:flex; gap:6px; margin-bottom:14px; }
+.wizard-step-dot {
+  flex:1; height:4px; border-radius:4px; background:var(--border); transition:background .2s;
+}
+.wizard-step-dot.active { background:var(--accent3); }
+.wizard-step-dot.done { background:var(--accent); }
 </style>
 
 <script>
@@ -999,6 +1080,7 @@ html,body { height:100%; overflow:hidden; font-family:'Syne',sans-serif; backgro
       <canvas id="tree-canvas"></canvas>
       <div id="tree-viewport"></div>
       <button id="add-node-btn" onclick="openAddSceneModal()" title="Nouvelle scène">+</button>
+      <div id="mobile-edit-hint" hidden></div>
       <div id="zoom-indicator">100%</div>
 
       <!-- SEARCH -->
@@ -1057,6 +1139,81 @@ html,body { height:100%; overflow:hidden; font-family:'Syne',sans-serif; backgro
     <div class="template-grid" id="template-grid"></div>
     <div class="modal-actions" style="margin-top:14px">
       <button class="topbtn" id="template-close-btn" onclick="closeTemplatesModal()">Fermer</button>
+    </div>
+  </div>
+</div>
+
+<div id="draft-restore-overlay" class="sf-ux-overlay">
+  <div class="sf-ux-modal">
+    <h3 id="draft-restore-title">Reprendre le brouillon ?</h3>
+    <p class="sub" id="draft-restore-body"></p>
+    <div class="sf-ux-actions">
+      <button class="topbtn primary" id="draft-restore-btn" type="button"></button>
+      <button class="topbtn" id="draft-discard-btn" type="button"></button>
+    </div>
+  </div>
+</div>
+
+<div id="start-choice-overlay" class="sf-ux-overlay">
+  <div class="sf-ux-modal">
+    <h3 id="start-choice-title">Comment commencer ?</h3>
+    <p class="sub" id="start-choice-sub"></p>
+    <div class="sf-ux-actions">
+      <button type="button" class="sf-ux-choice" id="start-choice-wizard">
+        <strong id="start-wizard-title"></strong><span id="start-wizard-sub"></span>
+      </button>
+      <button type="button" class="sf-ux-choice" id="start-choice-template">
+        <strong id="start-template-title"></strong><span id="start-template-sub"></span>
+      </button>
+      <button type="button" class="sf-ux-choice" id="start-choice-demo">
+        <strong id="start-demo-title"></strong><span id="start-demo-sub"></span>
+      </button>
+    </div>
+  </div>
+</div>
+
+<div id="wizard-overlay" class="sf-ux-overlay">
+  <div class="sf-ux-modal" onclick="event.stopPropagation()">
+    <h3 id="wizard-title">Nouvelle histoire</h3>
+    <div class="wizard-steps" id="wizard-steps"></div>
+    <div id="wizard-body"></div>
+    <div class="sf-ux-actions row">
+      <button class="topbtn" id="wizard-back-btn" type="button" style="flex:1"></button>
+      <button class="topbtn primary" id="wizard-next-btn" type="button" style="flex:1"></button>
+    </div>
+  </div>
+</div>
+
+<div id="health-confirm-overlay" class="sf-ux-overlay" onclick="if(event.target===this)closeHealthConfirm()">
+  <div class="sf-ux-modal" onclick="event.stopPropagation()">
+    <h3 id="health-confirm-title"></h3>
+    <p class="sub" id="health-confirm-body"></p>
+    <div class="sf-ux-actions row">
+      <button class="topbtn" id="health-confirm-fix-btn" type="button" style="flex:1"></button>
+      <button class="topbtn primary" id="health-confirm-anyway-btn" type="button" style="flex:1"></button>
+    </div>
+  </div>
+</div>
+
+<div id="tour-overlay">
+  <div class="tour-highlight" id="tour-highlight" style="display:none"></div>
+  <div class="tour-bubble" id="tour-bubble" style="display:none">
+    <h4 id="tour-bubble-title"></h4>
+    <p id="tour-bubble-body"></p>
+    <div class="tour-bubble-actions">
+      <button class="topbtn" id="tour-skip-btn" type="button"></button>
+      <button class="topbtn primary" id="tour-next-btn" type="button"></button>
+    </div>
+  </div>
+</div>
+
+<div id="coach-overlay">
+  <div class="coach-highlight" id="coach-highlight" style="display:none"></div>
+  <div class="coach-bubble" id="coach-bubble" style="display:none">
+    <h4 id="coach-bubble-title"></h4>
+    <p id="coach-bubble-body"></p>
+    <div class="coach-bubble-actions">
+      <button class="topbtn primary" id="coach-next-btn" type="button"></button>
     </div>
   </div>
 </div>
@@ -1315,6 +1472,12 @@ html,body { height:100%; overflow:hidden; font-family:'Syne',sans-serif; backgro
 
 <!-- MOBILE MENU -->
 <div id="mobile-menu">
+  <button class="mmenu-item" id="mm-templates" onclick="closeMobileMenu();openTemplatesModal()">
+    <span class="mmenu-icon">📋</span> <span id="mm-templates-label">Modèles</span>
+  </button>
+  <button class="mmenu-item" id="mm-guide" onclick="closeMobileMenu();openUiGuideModal(true)">
+    <span class="mmenu-icon">💡</span> <span id="mm-guide-label">Guide interface</span>
+  </button>
   <button class="mmenu-item" onclick="closeMobileMenu();openThemePanel()">
     <span class="mmenu-icon">🎨</span> Thème visuel
   </button>
@@ -1464,7 +1627,32 @@ const EDITOR_I18N = {
     btn9Name:'Histoire pour enfants', btn9Desc:'Active le mode enfants — l\'histoire apparaîtra dans le Pack Enfants avec une interface adaptée aux plus jeunes.',
     btn10Name:'Demander le prénom', btn10Desc:'Si activé, le jeu demande son prénom au joueur avant de commencer. Le prénom peut apparaître dans les textes de l\'histoire.',
     healthTip:'<strong>Badge santé ✓</strong> — En haut à droite de l\'éditeur, ce badge indique l\'état de ton histoire. Vert = tout va bien. Jaune = avertissements. Rouge = erreurs bloquantes (scène sans destination, choix cassé, pas de scène de départ). Clique dessus pour voir la liste détaillée.',
-    searchTip:'<strong>🔍 Recherche & Navigation</strong> — Le bouton loupe en bas à gauche de l\'arbre permet de chercher une scène par nom. La minimap en bas à droite donne une vue d\'ensemble et permet de naviguer rapidement dans les grandes histoires. Les boutons +/− et ◎ contrôlent le zoom et recentrent la vue.'
+    searchTip:'<strong>🔍 Recherche & Navigation</strong> — Le bouton loupe en bas à gauche de l\'arbre permet de chercher une scène par nom. La minimap en bas à droite donne une vue d\'ensemble et permet de naviguer rapidement dans les grandes histoires. Les boutons +/− et ◎ contrôlent le zoom et recentrent la vue.',
+    buttonsIntroMobile:'Sur mobile, le menu <strong>Plus</strong> en bas à droite donne accès aux actions (modèles, guide, test, export, envoi).',
+    searchTipMobile:'<strong>🔍 Navigation mobile</strong> — Tape une scène dans l\'arbre pour l\'éditer dans le panneau du bas. Le bouton <strong>+</strong> ajoute une scène.',
+    challengeProgress:'{scenes}/12 scènes · {endings}/2 fins',
+    mobileEditHint:'👆 Tape une scène dans l\'arbre pour l\'éditer',
+    mmTemplates:'Modèles', mmGuide:'Guide interface',
+    draftRestoreTitle:'Reprendre le brouillon ?', draftRestoreBody:'Un brouillon non enregistré a été trouvé ({scenes} scènes, sauvegardé {when}).',
+    draftRestoreBtn:'Reprendre', draftDiscardBtn:'Recommencer à zéro',
+    startChoiceTitle:'Comment commencer ?', startChoiceSub:'Choisis le point de départ qui te convient — tu pourras tout modifier ensuite.',
+    startWizardTitle:'Assistant nouvelle histoire', startWizardSub:'Titre, scène de départ et 2 fins en quelques étapes.',
+    startTemplateTitle:'Partir d\'un modèle', startTemplateSub:'Mystère, enfant ou micro-défi — prêt à personnaliser.',
+    startDemoTitle:'Garder la démo', startDemoSub:'Petite histoire pirate déjà en place pour explorer l\'éditeur.',
+    wizardTitle:'Nouvelle histoire', wizardBack:'Retour', wizardNext:'Suivant', wizardCreate:'Créer l\'histoire',
+    wizardStep1Label:'Étape 1 — Titre', wizardStep2Label:'Étape 2 — Départ', wizardStep3Label:'Étape 3 — Fins',
+    wizardLblTitle:'Titre du projet', wizardLblStartTitle:'Titre scène de départ', wizardLblStartText:'Texte de la scène de départ',
+    wizardLblEnd1:'Titre fin A', wizardLblEnd2:'Titre fin B', wizardLblChoiceA:'Texte choix vers fin A', wizardLblChoiceB:'Texte choix vers fin B',
+    tourStep1Title:'Configure tes stats', tourStep1Body:'Ouvre ⚙ Stats pour définir courage, prudence… Elles servent aux choix conditionnels 🔒.',
+    tourStep2Title:'Édite une scène', tourStep2Body:'Tape une bulle dans l\'arbre — titre, texte et choix se modifient à droite (ou en bas sur mobile).',
+    tourStep3Title:'Relie tes scènes', tourStep3Body:'Ajoute des choix avec destination, ou le bouton ＋→ pour créer une suite directement.',
+    tourNext:'Suivant', tourSkip:'Passer',
+    coach1Title:'Tape une scène', coach1Body:'Chaque bulle est une scène. Touche-la pour ouvrir l\'éditeur.',
+    coach2Title:'Ajoute une scène', coach2Body:'Le bouton + crée une nouvelle scène dans l\'arbre.',
+    coachNext:'Suivant', coachDone:'Compris',
+    healthConfirmTitle:'Erreurs détectées', healthConfirmBody:'{n} erreur(s) bloquante(s) dans ton histoire. Corriger avant de continuer ?',
+    healthConfirmFix:'Corriger', healthConfirmAnyway:'Continuer quand même',
+    previewSection:'Aperçu jeu', previewPlayerName:'Alex'
   },
   en: {
     projectPlaceholder:'Project name', kidsTitle:'Story for children', statsBtn:'⚙ Stats', themeBtn:'🎨 Theme', layoutBtn:'⊞ Arrange', importBtn:'↑ Import', exportTxtBtn:'✎ Export TXT', exportJsonBtn:'↓ Export JSON', testBtn:'Preview test', sendBtn:'✉ Send in 1 tap', templatesBtn:'📋 Templates',
@@ -1520,7 +1708,32 @@ const EDITOR_I18N = {
     btn9Name:'Kids story', btn9Desc:'Enable kids mode — the story appears in the Kids Pack with an interface adapted for younger players.',
     btn10Name:'Ask for name', btn10Desc:'When enabled, the game asks the player their name before starting. The name can appear in story texts.',
     healthTip:'<strong>Health badge ✓</strong> — At the top right of the editor, this badge shows your story status. Green = all good. Yellow = warnings. Red = blocking errors (missing destination, broken choice, no start scene). Click to see the detailed list.',
-    searchTip:'<strong>🔍 Search & Navigation</strong> — The magnifier at the bottom left of the tree searches scenes by name. The minimap at the bottom right gives an overview and quick navigation in large stories. +/− and ◎ control zoom and recenter the view.'
+    searchTip:'<strong>🔍 Search & Navigation</strong> — The magnifier at the bottom left of the tree searches scenes by name. The minimap at the bottom right gives an overview and quick navigation in large stories. +/− and ◎ control zoom and recenter the view.',
+    buttonsIntroMobile:'On mobile, the <strong>Plus</strong> menu at the bottom right gives access to actions (templates, guide, test, export, send).',
+    searchTipMobile:'<strong>🔍 Mobile navigation</strong> — Tap a scene in the tree to edit it in the bottom panel. The <strong>+</strong> button adds a scene.',
+    challengeProgress:'{scenes}/12 scenes · {endings}/2 endings',
+    mobileEditHint:'👆 Tap a scene in the tree to edit it',
+    mmTemplates:'Templates', mmGuide:'Interface guide',
+    draftRestoreTitle:'Resume draft?', draftRestoreBody:'An unsaved draft was found ({scenes} scenes, saved {when}).',
+    draftRestoreBtn:'Resume', draftDiscardBtn:'Start fresh',
+    startChoiceTitle:'How do you want to start?', startChoiceSub:'Pick a starting point — you can change everything later.',
+    startWizardTitle:'New story wizard', startWizardSub:'Title, start scene and 2 endings in a few steps.',
+    startTemplateTitle:'Use a template', startTemplateSub:'Mystery, kids or micro-challenge — ready to customize.',
+    startDemoTitle:'Keep the demo', startDemoSub:'Small pirate story already loaded to explore the editor.',
+    wizardTitle:'New story', wizardBack:'Back', wizardNext:'Next', wizardCreate:'Create story',
+    wizardStep1Label:'Step 1 — Title', wizardStep2Label:'Step 2 — Start', wizardStep3Label:'Step 3 — Endings',
+    wizardLblTitle:'Project title', wizardLblStartTitle:'Start scene title', wizardLblStartText:'Start scene text',
+    wizardLblEnd1:'Ending A title', wizardLblEnd2:'Ending B title', wizardLblChoiceA:'Choice text to ending A', wizardLblChoiceB:'Choice text to ending B',
+    tourStep1Title:'Set up stats', tourStep1Body:'Open ⚙ Stats to define courage, caution… They power conditional 🔒 choices.',
+    tourStep2Title:'Edit a scene', tourStep2Body:'Tap a bubble in the tree — title, text and choices edit on the right (or bottom on mobile).',
+    tourStep3Title:'Connect scenes', tourStep3Body:'Add choices with destinations, or use ＋→ to spawn a linked scene.',
+    tourNext:'Next', tourSkip:'Skip',
+    coach1Title:'Tap a scene', coach1Body:'Each bubble is a scene. Tap it to open the editor.',
+    coach2Title:'Add a scene', coach2Body:'The + button creates a new scene in the tree.',
+    coachNext:'Next', coachDone:'Got it',
+    healthConfirmTitle:'Errors detected', healthConfirmBody:'{n} blocking error(s) in your story. Fix them before continuing?',
+    healthConfirmFix:'Fix', healthConfirmAnyway:'Continue anyway',
+    previewSection:'Game preview', previewPlayerName:'Alex'
   },
   es: {
     projectPlaceholder:'Nombre del proyecto', kidsTitle:'Historia para niños', statsBtn:'⚙ Stats', themeBtn:'🎨 Tema', layoutBtn:'⊞ Ordenar', importBtn:'↑ Importar', exportTxtBtn:'✎ Exportar TXT', exportJsonBtn:'↓ Exportar JSON', testBtn:'Vista previa', sendBtn:'✉ Enviar en 1 clic', templatesBtn:'📋 Plantillas',
@@ -1576,7 +1789,32 @@ const EDITOR_I18N = {
     btn9Name:'Historia infantil', btn9Desc:'Activa el modo infantil — la historia aparecerá en el Pack Infantil con una interfaz adaptada a los más jóvenes.',
     btn10Name:'Pedir nombre', btn10Desc:'Si está activado, el juego pide el nombre del jugador antes de empezar. Puede aparecer en los textos de la historia.',
     healthTip:'<strong>Badge de salud ✓</strong> — Arriba a la derecha del editor, este badge indica el estado de tu historia. Verde = todo bien. Amarillo = advertencias. Rojo = errores bloqueantes (destino ausente, elección rota, sin escena de inicio). Haz clic para ver la lista detallada.',
-    searchTip:'<strong>🔍 Búsqueda & Navegación</strong> — La lupa abajo a la izquierda del árbol busca escenas por nombre. El minimapa abajo a la derecha da una vista general y permite navegar rápido en historias grandes. +/− y ◎ controlan el zoom y recentran la vista.'
+    searchTip:'<strong>🔍 Búsqueda & Navegación</strong> — La lupa abajo a la izquierda del árbol busca escenas por nombre. El minimapa abajo a la derecha da una vista general y permite navegar rápido en historias grandes. +/− y ◎ controlan el zoom y recentran la vista.',
+    buttonsIntroMobile:'En móvil, el menú <strong>Plus</strong> abajo a la derecha da acceso a las acciones (plantillas, guía, test, exportar, enviar).',
+    searchTipMobile:'<strong>🔍 Navegación móvil</strong> — Toca una escena en el árbol para editarla en el panel inferior. El botón <strong>+</strong> añade una escena.',
+    challengeProgress:'{scenes}/12 escenas · {endings}/2 finales',
+    mobileEditHint:'👆 Toca una escena en el árbol para editarla',
+    mmTemplates:'Plantillas', mmGuide:'Guía interfaz',
+    draftRestoreTitle:'¿Reanudar borrador?', draftRestoreBody:'Se encontró un borrador sin guardar ({scenes} escenas, guardado {when}).',
+    draftRestoreBtn:'Reanudar', draftDiscardBtn:'Empezar de cero',
+    startChoiceTitle:'¿Cómo empezar?', startChoiceSub:'Elige un punto de partida — podrás cambiarlo todo después.',
+    startWizardTitle:'Asistente nueva historia', startWizardSub:'Título, escena inicial y 2 finales en pocos pasos.',
+    startTemplateTitle:'Usar plantilla', startTemplateSub:'Misterio, infantil o micro-reto — listo para personalizar.',
+    startDemoTitle:'Mantener la demo', startDemoSub:'Pequeña historia pirata ya cargada para explorar el editor.',
+    wizardTitle:'Nueva historia', wizardBack:'Atrás', wizardNext:'Siguiente', wizardCreate:'Crear historia',
+    wizardStep1Label:'Paso 1 — Título', wizardStep2Label:'Paso 2 — Inicio', wizardStep3Label:'Paso 3 — Finales',
+    wizardLblTitle:'Título del proyecto', wizardLblStartTitle:'Título escena inicial', wizardLblStartText:'Texto de la escena inicial',
+    wizardLblEnd1:'Título final A', wizardLblEnd2:'Título final B', wizardLblChoiceA:'Texto elección hacia final A', wizardLblChoiceB:'Texto elección hacia final B',
+    tourStep1Title:'Configura stats', tourStep1Body:'Abre ⚙ Stats para definir coraje, prudencia… Sirven para elecciones condicionales 🔒.',
+    tourStep2Title:'Edita una escena', tourStep2Body:'Toca una burbuja en el árbol — título, texto y elecciones se editan a la derecha (o abajo en móvil).',
+    tourStep3Title:'Conecta escenas', tourStep3Body:'Añade elecciones con destino, o usa ＋→ para crear una escena enlazada.',
+    tourNext:'Siguiente', tourSkip:'Omitir',
+    coach1Title:'Toca una escena', coach1Body:'Cada burbuja es una escena. Tócala para abrir el editor.',
+    coach2Title:'Añade una escena', coach2Body:'El botón + crea una nueva escena en el árbol.',
+    coachNext:'Siguiente', coachDone:'Entendido',
+    healthConfirmTitle:'Errores detectados', healthConfirmBody:'{n} error(es) bloqueante(s) en tu historia. ¿Corregir antes de continuar?',
+    healthConfirmFix:'Corregir', healthConfirmAnyway:'Continuar igualmente',
+    previewSection:'Vista previa juego', previewPlayerName:'Alex'
   }
 };
 function getEditorLang() {
@@ -1619,6 +1857,8 @@ function applyEditorLanguage() {
   if (topButtons[3]) topButtons[3].textContent = et('importBtn');
   if (topButtons[4]) topButtons[4].textContent = et('exportTxtBtn');
   if (topButtons[5]) topButtons[5].textContent = et('exportJsonBtn');
+  const btnTest = document.getElementById('btn-test');
+  if (btnTest) btnTest.textContent = '▶ ' + et('testBtn').replace(/^▶\s*/, '');
   const add = document.getElementById('add-node-btn'); if (add) add.title = et('newSceneTitle');
   const ctrls = document.querySelectorAll('.tree-ctrl'); if (ctrls[2]) ctrls[2].title = et('centerTitle');
   const editorTitle = document.getElementById('editor-title'); if (editorTitle && !selectedId) editorTitle.textContent = et('selectScene');
@@ -1679,6 +1919,34 @@ function applyEditorLanguage() {
   byId('submit-done-close-btn', et('close'));
   renderTemplateCards();
   applyUiGuideTexts();
+  applyEditorUxTexts();
+}
+
+function applyEditorUxTexts() {
+  const set = (id, key) => { const el = document.getElementById(id); if (el) el.textContent = et(key); };
+  set('draft-restore-title', 'draftRestoreTitle');
+  set('draft-restore-btn', 'draftRestoreBtn');
+  set('draft-discard-btn', 'draftDiscardBtn');
+  set('start-choice-title', 'startChoiceTitle');
+  set('start-choice-sub', 'startChoiceSub');
+  set('start-wizard-title', 'startWizardTitle');
+  set('start-wizard-sub', 'startWizardSub');
+  set('start-template-title', 'startTemplateTitle');
+  set('start-template-sub', 'startTemplateSub');
+  set('start-demo-title', 'startDemoTitle');
+  set('start-demo-sub', 'startDemoSub');
+  set('wizard-title', 'wizardTitle');
+  set('wizard-back-btn', 'wizardBack');
+  set('health-confirm-title', 'healthConfirmTitle');
+  set('health-confirm-fix-btn', 'healthConfirmFix');
+  set('health-confirm-anyway-btn', 'healthConfirmAnyway');
+  set('tour-skip-btn', 'tourSkip');
+  set('coach-next-btn', 'coachDone');
+  set('mm-templates-label', 'mmTemplates');
+  set('mm-guide-label', 'mmGuide');
+  const hint = document.getElementById('mobile-edit-hint');
+  if (hint) hint.textContent = et('mobileEditHint');
+  updateChallengeBanner();
 }
 
 const UI_GUIDE_DISMISS_KEY = 'sf_editor_ui_guide_dismissed';
@@ -1701,13 +1969,13 @@ function applyUiGuideTexts() {
     set(`ui-guide-tuto${i}-body`, `tuto${i}Body`);
   }
   set('ui-guide-buttons-section', 'buttonsSection');
-  set('ui-guide-buttons-intro', 'buttonsIntro');
+  set('ui-guide-buttons-intro', isMobile() ? 'buttonsIntroMobile' : 'buttonsIntro');
   for (let i = 1; i <= 10; i++) {
     set(`ui-guide-btn${i}-name`, `btn${i}Name`);
     set(`ui-guide-btn${i}-desc`, `btn${i}Desc`);
   }
   set('ui-guide-health-tip', 'healthTip', true);
-  set('ui-guide-search-tip', 'searchTip', true);
+  set('ui-guide-search-tip', isMobile() ? 'searchTipMobile' : 'searchTip', true);
   set('ui-guide-dismiss-label', 'uiGuideDismiss');
   set('ui-guide-close-btn', 'uiGuideClose');
   const helpBtn = document.getElementById('btn-ui-guide');
@@ -1735,8 +2003,469 @@ function handleUiGuideOverlayClick(e) {
 }
 
 function maybeShowUiGuideOnLoad() {
-  if (isUiGuideDismissed()) return;
-  setTimeout(() => openUiGuideModal(false), 350);
+  /* Le parcours guidé 3 étapes remplace le gros popup au premier passage */
+}
+
+const DRAFT_KEY = 'sf_editor_draft';
+const START_DONE_KEY = 'sf_editor_start_done';
+const TOUR_DONE_KEY = 'sf_editor_tour_done';
+const COACH_DONE_KEY = 'sf_editor_coach_done';
+let autosaveTimer = null;
+let wizardStep = 0;
+let tourStep = 0;
+let coachStep = 0;
+let _healthConfirmCb = null;
+const wizardData = { title:'', startTitle:'', startText:'', end1:'', end2:'', choiceA:'', choiceB:'' };
+
+function scheduleAutosave() {
+  clearTimeout(autosaveTimer);
+  autosaveTimer = setTimeout(saveEditorDraft, 900);
+}
+
+function saveEditorDraft() {
+  try {
+    project.theme = project.theme || { ...currentTheme };
+    project.kids = document.getElementById('kids-check')?.checked ?? !!project.kids;
+    project.askPlayerName = document.getElementById('player-name-check')?.checked ?? !!project.askPlayerName;
+    localStorage.setItem(DRAFT_KEY, JSON.stringify({
+      project, selectedId, pan, zoom, savedAt: Date.now()
+    }));
+  } catch (e) {}
+}
+
+function loadEditorDraft() {
+  try {
+    const raw = localStorage.getItem(DRAFT_KEY);
+    if (!raw) return null;
+    const data = JSON.parse(raw);
+    return data?.project?.scenes ? data : null;
+  } catch (e) { return null; }
+}
+
+function clearEditorDraft() {
+  try { localStorage.removeItem(DRAFT_KEY); } catch (e) {}
+}
+
+function formatDraftWhen(ms) {
+  try {
+    const d = new Date(ms);
+    const loc = editorLang === 'en' ? 'en-US' : editorLang === 'es' ? 'es-ES' : 'fr-FR';
+    return d.toLocaleString(loc, { day:'numeric', month:'short', hour:'2-digit', minute:'2-digit' });
+  } catch (e) { return ''; }
+}
+
+function applyDraftToEditor(data) {
+  project = data.project;
+  selectedId = data.selectedId || null;
+  pan = data.pan || { x: 60, y: 60 };
+  zoom = data.zoom || 1;
+  if (project.theme) { currentTheme = { ...project.theme }; applyTheme(currentTheme); }
+  const nameEl = document.getElementById('project-name');
+  if (nameEl) nameEl.value = project.name || '';
+  document.getElementById('kids-check').checked = !!project.kids;
+  document.getElementById('player-name-check').checked = !!project.askPlayerName;
+}
+
+function showDraftRestoreModal(draft) {
+  applyEditorUxTexts();
+  const scenes = Object.keys(draft.project.scenes || {}).length;
+  const body = document.getElementById('draft-restore-body');
+  if (body) body.textContent = et('draftRestoreBody').replace('{scenes}', scenes).replace('{when}', formatDraftWhen(draft.savedAt));
+  document.getElementById('draft-restore-overlay')?.classList.add('open');
+  document.getElementById('draft-restore-btn').onclick = () => {
+    applyDraftToEditor(draft);
+    document.getElementById('draft-restore-overlay')?.classList.remove('open');
+    try { localStorage.setItem(START_DONE_KEY, '1'); } catch (e) {}
+    finishEditorInit();
+  };
+  document.getElementById('draft-discard-btn').onclick = () => {
+    clearEditorDraft();
+    document.getElementById('draft-restore-overlay')?.classList.remove('open');
+    continueEditorBootstrap();
+  };
+}
+
+function showStartChoiceModal() {
+  applyEditorUxTexts();
+  document.getElementById('start-choice-overlay')?.classList.add('open');
+  document.getElementById('start-choice-wizard').onclick = () => {
+    document.getElementById('start-choice-overlay')?.classList.remove('open');
+    try { localStorage.setItem(START_DONE_KEY, '1'); } catch (e) {}
+    openStoryWizard();
+  };
+  document.getElementById('start-choice-template').onclick = () => {
+    document.getElementById('start-choice-overlay')?.classList.remove('open');
+    try { localStorage.setItem(START_DONE_KEY, '1'); } catch (e) {}
+    project.name = editorLang === 'en' ? 'My Story' : editorLang === 'es' ? 'Mi Historia' : 'Mon Histoire';
+    project.scenes = {};
+    project.stats = [];
+    project.kids = false;
+    project.askPlayerName = false;
+    selectedId = null;
+    document.getElementById('project-name').value = project.name;
+    finishEditorInit();
+    setTimeout(() => openTemplatesModal(), 400);
+  };
+  document.getElementById('start-choice-demo').onclick = () => {
+    document.getElementById('start-choice-overlay')?.classList.remove('open');
+    try { localStorage.setItem(START_DONE_KEY, '1'); } catch (e) {}
+    loadDemoProject(true);
+    finishEditorInit();
+  };
+}
+
+function loadDemoProject(selectStart) {
+  const s1 = genId(), s2 = genId(), s3 = genId(), s4 = genId();
+  project.name = editorLang === 'en' ? 'My Story' : editorLang === 'es' ? 'Mi Historia' : 'Mon Histoire';
+  project.kids = false;
+  project.askPlayerName = false;
+  project.stats = [{ id:'vie', label:'Vie', color:'#fa6d8f', start:50 }];
+  project.scenes = {
+    [s1]: { id:s1, title: editorLang==='en'?'Start scene':'Scène de départ', location: editorLang==='en'?'The port':'Le port',
+      text: editorLang==='en'?'You arrive at the port in the rain...':'Tu arrives au port sous la pluie...',
+      isStart:true, isEnd:false,
+      choices:[
+        { text: editorLang==='en'?'Enter the tavern':'Entrer dans la taverne', vers:s2, effects:[{stat:'vie',val:-5}] },
+        { text: editorLang==='en'?'Inspect the docks':'Inspecter les quais', vers:s3, effects:[] }
+      ], x:320, y:40 },
+    [s2]: { id:s2, title: editorLang==='en'?'The Tavern':'La Taverne', location:'Taverne du Crabe Noir',
+      text: editorLang==='en'?'The room is loud and smoky...':'La salle est bruyante et enfumée...',
+      isStart:false, isEnd:false, choices:[{ text: editorLang==='en'?'Talk to the bartender':'Parler au barman', vers:s4, effects:[] }], x:120, y:200 },
+    [s3]: { id:s3, title: editorLang==='en'?'The Docks':'Les Quais', location:'Quai Est',
+      text: editorLang==='en'?'Boats sway in the storm...':'Les bateaux se balancent dans la tempête...',
+      isStart:false, isEnd:false, choices:[{ text: editorLang==='en'?'Return to port':'Retourner au port', vers:s1, effects:[] }], x:520, y:200 },
+    [s4]: { id:s4, title: editorLang==='en'?'End — Departure':'Fin — Le départ', location:'Port',
+      text: editorLang==='en'?'The bartender gives you a map. An adventure begins.':'Le barman te donne une carte. Une aventure commence.',
+      isStart:false, isEnd:true, choices:[], x:120, y:360 }
+  };
+  const nameEl = document.getElementById('project-name');
+  if (nameEl) nameEl.value = project.name;
+  document.getElementById('kids-check').checked = false;
+  document.getElementById('player-name-check').checked = false;
+  selectedId = null;
+  if (selectStart !== false) {
+    const startId = Object.values(project.scenes).find(s => s.isStart)?.id || s1;
+    setTimeout(() => selectScene(startId), 0);
+  }
+}
+
+function openStoryWizard() {
+  wizardStep = 0;
+  wizardData.title = editorLang === 'en' ? 'My Story' : editorLang === 'es' ? 'Mi Historia' : 'Mon Histoire';
+  wizardData.startTitle = editorLang === 'en' ? 'The crossroads' : editorLang === 'es' ? 'La encrucijada' : 'Le carrefour';
+  wizardData.startText = editorLang === 'en' ? 'Two paths lie ahead. What will you do?' : editorLang === 'es' ? 'Dos caminos se abren. ¿Qué harás?' : 'Deux chemins s\'offrent à toi. Que fais-tu ?';
+  wizardData.end1 = editorLang === 'en' ? 'End — Light' : editorLang === 'es' ? 'Fin — Luz' : 'Fin — Lumière';
+  wizardData.end2 = editorLang === 'en' ? 'End — Shadow' : editorLang === 'es' ? 'Fin — Sombra' : 'Fin — Ombre';
+  wizardData.choiceA = editorLang === 'en' ? 'Take the bright path' : editorLang === 'es' ? 'Tomar el sendero luminoso' : 'Prendre le sentier lumineux';
+  wizardData.choiceB = editorLang === 'en' ? 'Venture into shadow' : editorLang === 'es' ? 'Adentrarse en la sombra' : 'S\'engager dans l\'ombre';
+  renderWizardStep();
+  document.getElementById('wizard-overlay')?.classList.add('open');
+}
+
+function renderWizardStep() {
+  const dots = document.getElementById('wizard-steps');
+  if (dots) dots.innerHTML = [0,1,2].map(i =>
+    `<div class="wizard-step-dot ${i < wizardStep ? 'done' : ''} ${i === wizardStep ? 'active' : ''}"></div>`
+  ).join('');
+  const body = document.getElementById('wizard-body');
+  const nextBtn = document.getElementById('wizard-next-btn');
+  const backBtn = document.getElementById('wizard-back-btn');
+  if (backBtn) backBtn.textContent = et('wizardBack');
+  if (backBtn) backBtn.style.visibility = wizardStep === 0 ? 'hidden' : 'visible';
+  if (nextBtn) nextBtn.textContent = wizardStep === 2 ? et('wizardCreate') : et('wizardNext');
+  if (!body) return;
+  if (wizardStep === 0) {
+    body.innerHTML = `<p class="sub">${et('wizardStep1Label')}</p>
+      <div class="form-group"><label class="form-label">${et('wizardLblTitle')}</label>
+      <input class="form-input" id="wiz-title" value="${esc(wizardData.title)}"></div>`;
+  } else if (wizardStep === 1) {
+    body.innerHTML = `<p class="sub">${et('wizardStep2Label')}</p>
+      <div class="form-group"><label class="form-label">${et('wizardLblStartTitle')}</label>
+      <input class="form-input" id="wiz-start-title" value="${esc(wizardData.startTitle)}"></div>
+      <div class="form-group"><label class="form-label">${et('wizardLblStartText')}</label>
+      <textarea class="form-textarea" id="wiz-start-text">${esc(wizardData.startText)}</textarea></div>`;
+  } else {
+    body.innerHTML = `<p class="sub">${et('wizardStep3Label')}</p>
+      <div class="form-group"><label class="form-label">${et('wizardLblEnd1')}</label><input class="form-input" id="wiz-end1" value="${esc(wizardData.end1)}"></div>
+      <div class="form-group"><label class="form-label">${et('wizardLblEnd2')}</label><input class="form-input" id="wiz-end2" value="${esc(wizardData.end2)}"></div>
+      <div class="form-group"><label class="form-label">${et('wizardLblChoiceA')}</label><input class="form-input" id="wiz-choice-a" value="${esc(wizardData.choiceA)}"></div>
+      <div class="form-group"><label class="form-label">${et('wizardLblChoiceB')}</label><input class="form-input" id="wiz-choice-b" value="${esc(wizardData.choiceB)}"></div>`;
+  }
+}
+
+function readWizardFields() {
+  const g = id => document.getElementById(id)?.value?.trim() || '';
+  if (wizardStep === 0) wizardData.title = g('wiz-title') || wizardData.title;
+  if (wizardStep === 1) {
+    wizardData.startTitle = g('wiz-start-title') || wizardData.startTitle;
+    wizardData.startText = document.getElementById('wiz-start-text')?.value || wizardData.startText;
+  }
+  if (wizardStep === 2) {
+    wizardData.end1 = g('wiz-end1') || wizardData.end1;
+    wizardData.end2 = g('wiz-end2') || wizardData.end2;
+    wizardData.choiceA = g('wiz-choice-a') || wizardData.choiceA;
+    wizardData.choiceB = g('wiz-choice-b') || wizardData.choiceB;
+  }
+}
+
+function commitWizardProject() {
+  readWizardFields();
+  const s1 = genId(), s2 = genId(), s3 = genId();
+  project.name = wizardData.title;
+  project.kids = false;
+  project.askPlayerName = true;
+  project.stats = [{ id:'audace', label: editorLang==='en'?'Boldness':editorLang==='es'?'Audacia':'Audace', color:'#7c6dfa', start:10 }];
+  project.scenes = {
+    [s1]: { id:s1, title:wizardData.startTitle, location:'', text:wizardData.startText, isStart:true, isEnd:false,
+      choices:[
+        { text:wizardData.choiceA, vers:s2, clickEffect:'pulse', sound:'click_neon', effects:[{stat:'audace',val:5}] },
+        { text:wizardData.choiceB, vers:s3, clickEffect:'pulse', sound:'click_neon', effects:[{stat:'audace',val:3}] }
+      ], x:280, y:40 },
+    [s2]: { id:s2, title:wizardData.end1, location:'', text:wizardData.end1, isStart:false, isEnd:true, choices:[], x:80, y:220 },
+    [s3]: { id:s3, title:wizardData.end2, location:'', text:wizardData.end2, isStart:false, isEnd:true, choices:[], x:480, y:220 }
+  };
+  document.getElementById('project-name').value = project.name;
+  document.getElementById('kids-check').checked = false;
+  document.getElementById('player-name-check').checked = true;
+  document.getElementById('wizard-overlay')?.classList.remove('open');
+  selectScene(s1);
+  finishEditorInit();
+  toast(et('templateApplied'));
+}
+
+function openNewStoryWizard() {
+  try { localStorage.setItem(START_DONE_KEY, '1'); } catch (e) {}
+  openStoryWizard();
+}
+window.openNewStoryWizard = openNewStoryWizard;
+
+document.getElementById('wizard-back-btn')?.addEventListener('click', () => {
+  readWizardFields();
+  if (wizardStep > 0) { wizardStep--; renderWizardStep(); }
+});
+document.getElementById('wizard-next-btn')?.addEventListener('click', () => {
+  readWizardFields();
+  if (wizardStep < 2) { wizardStep++; renderWizardStep(); }
+  else commitWizardProject();
+});
+
+function updateChallengeBanner() {
+  const el = document.getElementById('creator-challenge-text');
+  if (!el) return;
+  const scenes = Object.keys(project.scenes || {}).length;
+  const endings = Object.values(project.scenes || {}).filter(s => s.isEnd).length;
+  const progress = et('challengeProgress').replace('{scenes}', scenes).replace('{endings}', endings);
+  el.textContent = progress + ' — ' + et('challengeBanner');
+}
+
+function updateMobileEditHint() {
+  const hint = document.getElementById('mobile-edit-hint');
+  if (!hint) return;
+  hint.hidden = !isMobile() || !!selectedId || Object.keys(project.scenes || {}).length === 0;
+}
+
+function getStartSceneId() {
+  return Object.values(project.scenes || {}).find(s => s.isStart)?.id
+    || Object.keys(project.scenes || {})[0] || null;
+}
+
+function selectSceneAfterLoad() {
+  const startId = getStartSceneId();
+  if (startId) selectScene(startId);
+  else showEmptyEditor();
+  updateMobileEditHint();
+}
+
+function formatScenePreviewHtml(scene) {
+  if (!scene) return '';
+  const player = et('previewPlayerName');
+  const fmt = t => String(t || '')
+    .replace(/\{\{player\}\}/gi, player)
+    .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
+    .replace(/\*(.+?)\*/g, '<em>$1</em>')
+    .replace(/\n/g, '<br>');
+  const choices = (scene.choices || []).slice(0, 3).map(c =>
+    `<div class="pv-choice">${esc(c.text || '…')}</div>`).join('');
+  return `${scene.location ? `<div class="pv-loc">${esc(scene.location)}</div>` : ''}
+    ${scene.narrator ? `<div class="pv-narrator">${fmt(scene.narrator)}</div>` : ''}
+    <div class="pv-text">${fmt(scene.text)}</div>
+    ${choices ? `<div class="pv-choices">${choices}</div>` : ''}`;
+}
+
+function refreshScenePreview(sceneId) {
+  const scene = project.scenes[sceneId];
+  document.querySelectorAll(`[data-scene-preview="${sceneId}"]`).forEach(el => {
+    el.innerHTML = formatScenePreviewHtml(scene);
+  });
+}
+
+function scenePreviewBlock(id) {
+  return `<div class="scene-preview-wrap">
+    <div class="section-divider">${et('previewSection')}</div>
+    <div class="scene-preview" data-scene-preview="${id}">${formatScenePreviewHtml(project.scenes[id])}</div>
+  </div>`;
+}
+
+function getHealthErrorCount() {
+  return (document.getElementById('health-badge')?._issues || []).filter(i => i.type === 'error').length;
+}
+
+function confirmHealthOrProceed(callback) {
+  const n = getHealthErrorCount();
+  if (!n) { callback(); return; }
+  _healthConfirmCb = callback;
+  document.getElementById('health-confirm-body').textContent = et('healthConfirmBody').replace('{n}', n);
+  applyEditorUxTexts();
+  document.getElementById('health-confirm-overlay')?.classList.add('open');
+}
+
+function closeHealthConfirm() {
+  document.getElementById('health-confirm-overlay')?.classList.remove('open');
+  _healthConfirmCb = null;
+}
+
+document.getElementById('health-confirm-fix-btn')?.addEventListener('click', () => {
+  closeHealthConfirm();
+  toggleHealthPanel();
+});
+document.getElementById('health-confirm-anyway-btn')?.addEventListener('click', () => {
+  const cb = _healthConfirmCb;
+  closeHealthConfirm();
+  if (cb) cb();
+});
+
+function positionUxHighlight(highlightId, selector, bubbleId, titleKey, bodyKey, btnId, btnKey, onNext) {
+  const el = document.querySelector(selector);
+  const hi = document.getElementById(highlightId);
+  const bubble = document.getElementById(bubbleId);
+  if (!el || !hi || !bubble) return false;
+  const r = el.getBoundingClientRect();
+  hi.style.display = 'block';
+  hi.style.top = Math.max(8, r.top - 8) + 'px';
+  hi.style.left = Math.max(8, r.left - 8) + 'px';
+  hi.style.width = Math.min(window.innerWidth - 16, r.width + 16) + 'px';
+  hi.style.height = (r.height + 16) + 'px';
+  bubble.style.display = 'block';
+  document.getElementById(bubbleId.replace('-bubble', '-bubble-title') || (bubbleId === 'tour-bubble' ? 'tour-bubble-title' : 'coach-bubble-title'));
+  const titleEl = document.getElementById(highlightId.includes('tour') ? 'tour-bubble-title' : 'coach-bubble-title');
+  const bodyEl = document.getElementById(highlightId.includes('tour') ? 'tour-bubble-body' : 'coach-bubble-body');
+  if (titleEl) titleEl.textContent = et(titleKey);
+  if (bodyEl) bodyEl.textContent = et(bodyKey);
+  let top = r.bottom + 12;
+  if (top + 140 > window.innerHeight) top = Math.max(12, r.top - 140);
+  bubble.style.top = top + 'px';
+  bubble.style.left = Math.max(12, Math.min(window.innerWidth - 312, r.left)) + 'px';
+  const btn = document.getElementById(btnId);
+  if (btn) {
+    btn.textContent = et(btnKey);
+    btn.onclick = onNext;
+  }
+  return true;
+}
+
+function closeTourOverlay() {
+  document.getElementById('tour-overlay')?.classList.remove('open');
+  document.getElementById('tour-highlight').style.display = 'none';
+  document.getElementById('tour-bubble').style.display = 'none';
+}
+
+function showTourStep() {
+  document.getElementById('tour-overlay')?.classList.add('open');
+  const steps = [
+    { sel:'#topbar .topbtn', title:'tourStep1Title', body:'tourStep1Body' },
+    { sel:'.node.start-node, .node', title:'tourStep2Title', body:'tourStep2Body' },
+    { sel:'#choices-list, #add-node-btn', title:'tourStep3Title', body:'tourStep3Body' }
+  ];
+  if (tourStep >= steps.length) {
+    closeTourOverlay();
+    try { localStorage.setItem(TOUR_DONE_KEY, '1'); } catch (e) {}
+    maybeShowMobileCoachMarks();
+    return;
+  }
+  const s = steps[tourStep];
+  if (tourStep === 2 && !selectedId) {
+    const startId = getStartSceneId();
+    if (startId) selectScene(startId);
+  }
+  setTimeout(() => {
+    if (!positionUxHighlight('tour-highlight', s.sel, 'tour-bubble', s.title, s.body, 'tour-next-btn', 'tourNext', () => {
+      tourStep++;
+      showTourStep();
+    })) {
+      tourStep++;
+      showTourStep();
+    }
+    document.getElementById('tour-skip-btn').textContent = et('tourSkip');
+    document.getElementById('tour-skip-btn').onclick = () => {
+      closeTourOverlay();
+      try { localStorage.setItem(TOUR_DONE_KEY, '1'); } catch (e) {}
+      maybeShowMobileCoachMarks();
+    };
+  }, tourStep === 2 ? 200 : 80);
+}
+
+function maybeShowEditorTour() {
+  if (localStorage.getItem(TOUR_DONE_KEY) === '1') { maybeShowMobileCoachMarks(); return; }
+  if (isUiGuideDismissed()) { maybeShowMobileCoachMarks(); return; }
+  tourStep = 0;
+  setTimeout(showTourStep, 500);
+}
+
+function closeCoachOverlay() {
+  document.getElementById('coach-overlay')?.classList.remove('open');
+  document.getElementById('coach-highlight').style.display = 'none';
+  document.getElementById('coach-bubble').style.display = 'none';
+}
+
+function showCoachStep() {
+  if (!isMobile() || localStorage.getItem(COACH_DONE_KEY) === '1') return;
+  document.getElementById('coach-overlay')?.classList.add('open');
+  if (coachStep === 0) {
+    positionUxHighlight('coach-highlight', '.node', 'coach-bubble', 'coach1Title', 'coach1Body', 'coach-next-btn', 'coachNext', () => {
+      coachStep = 1;
+      showCoachStep();
+    });
+  } else {
+    positionUxHighlight('coach-highlight', '#add-node-btn', 'coach-bubble', 'coach2Title', 'coach2Body', 'coach-next-btn', 'coachDone', () => {
+      closeCoachOverlay();
+      try { localStorage.setItem(COACH_DONE_KEY, '1'); } catch (e) {}
+    });
+  }
+}
+
+function maybeShowMobileCoachMarks() {
+  if (!isMobile() || localStorage.getItem(COACH_DONE_KEY) === '1') return;
+  coachStep = 0;
+  setTimeout(showCoachStep, 400);
+}
+
+function finishEditorInit() {
+  if (window.innerWidth <= 700) { zoom = zoom || 0.6; pan = pan.x ? pan : { x: 10, y: 10 }; }
+  render();
+  updateChallengeBanner();
+  updateMobileEditHint();
+  scheduleAutosave();
+  maybeShowEditorTour();
+}
+
+function continueEditorBootstrap() {
+  if (localStorage.getItem(START_DONE_KEY) !== '1') {
+    showStartChoiceModal();
+    return;
+  }
+  loadDemoProject(true);
+  finishEditorInit();
+}
+
+function bootstrapEditor() {
+  applyEditorLanguage();
+  initTemplateGrid();
+  const draft = loadEditorDraft();
+  if (draft && Object.keys(draft.project.scenes).length) {
+    showDraftRestoreModal(draft);
+    return;
+  }
+  continueEditorBootstrap();
 }
 
 // ══════════════════════════════════════════════
@@ -1863,6 +2592,8 @@ function selectScene(id) {
   selectedId = id;
   document.querySelectorAll('.node').forEach(n => n.classList.toggle('selected', n.dataset.id === id));
   renderEditor(id);
+  updateMobileEditHint();
+  if (isMobile()) closeCoachOverlay();
 }
 
 // ══════════════════════════════════════════════
@@ -1873,6 +2604,9 @@ function render() {
   drawConnections();
   checkHealth();
   drawMinimap();
+  updateChallengeBanner();
+  updateMobileEditHint();
+  scheduleAutosave();
 }
 
 function renderTree() {
@@ -1975,14 +2709,17 @@ function drawConnections() {
 // EDITOR PANEL
 // ══════════════════════════════════════════════
 function showEmptyEditor() {
-  document.getElementById('editor-title').textContent = 'Sélectionne une scène';
+  document.getElementById('editor-title').textContent = et('selectScene');
   document.getElementById('delete-btn').style.display = 'none';
   document.getElementById('editor-body').innerHTML = `
     <div id="empty-state">
       <div class="icon">✦</div>
       <p>${et('empty')}</p>
+      <p style="font-size:12px;color:var(--text2);margin:8px 0 0;line-height:1.5">${et('emptyAi')}</p>
+      <button class="topbtn" style="margin-top:10px" onclick="window.location.href='ai-guide.html'">${et('emptyAiBtn')}</button>
       <button class="topbtn primary" style="margin-top:8px" onclick="openAddSceneModal()">${et('newScene')}</button>
     </div>`;
+  updateMobileEditHint();
 }
 
 function renderEditor(id) {
@@ -2097,6 +2834,7 @@ function renderEditor(id) {
         ).join('')}
       </div>
     </div>
+    ${scenePreviewBlock(id)}
     <div id="choices-list"></div>
     <button class="add-choice-btn" onclick="addChoice('${id}')">${et('addChoice')}</button>
   `;
@@ -2308,8 +3046,12 @@ function updateField(key, val) {
     document.getElementById('editor-title').textContent = val || 'Sans titre';
     const node = document.querySelector(`.node[data-id="${selectedId}"] .node-title`);
     if (node) node.textContent = val || 'Sans titre';
+    const sheetTitle = document.getElementById('mobile-sheet-title');
+    if (sheetTitle) sheetTitle.textContent = val || et('noTitle');
   }
+  if (['title','location','narrator','text'].includes(key)) refreshScenePreview(selectedId);
   drawConnections();
+  scheduleAutosave();
 }
 
 function updateTimerField(key, val) {
@@ -2881,7 +3623,7 @@ function applyStoryTemplate(type) {
     zoom = window.innerWidth <= 700 ? 0.6 : 1;
     closeTemplatesModal();
     render();
-    showEmptyEditor();
+    selectSceneAfterLoad();
     toast(et('templateApplied'));
   } catch (err) {
     console.error('[applyStoryTemplate]', err);
@@ -3033,7 +3775,7 @@ function handleSubmitOverlayClick(e) {
 }
 
 function sendStory() {
-  openSubmitModal();
+  confirmHealthOrProceed(() => openSubmitModal());
 }
 window.sendStory = sendStory;
 
@@ -3467,6 +4209,10 @@ window.addEventListener('resize', () => { render(); });
 // TEST STORY
 // ══════════════════════════════════════════════
 function testStory() {
+  confirmHealthOrProceed(_runTestStory);
+}
+
+function _runTestStory() {
   // Sauvegarder le projet en mémoire via sessionStorage
   project.theme = { ...currentTheme };
   project.kids  = document.getElementById('kids-check').checked;
@@ -4019,6 +4765,7 @@ function renderEditorInto(id, container) {
       <label class="form-check"><input type="checkbox" ${scene.isStart?'checked':''} onchange="updateFlag('isStart',this.checked)"><span>${et('startScene')}</span></label>
       <label class="form-check"><input type="checkbox" ${scene.isEnd?'checked':''} onchange="updateFlag('isEnd',this.checked)"><span>${et('endScene')}</span></label>
     </div>
+    ${scenePreviewBlock(id)}
     <div class="section-divider">${et('choices')}</div>
     <div id="mobile-choices-list"></div>
     <button class="add-choice-btn" onclick="addChoiceMobile('${id}')">${et('addChoice')}</button>
@@ -4143,25 +4890,7 @@ selectScene = function(id) {
 };
 
 (function init() {
-  const s1 = genId(), s2 = genId(), s3 = genId(), s4 = genId();
-  project.scenes = {
-    [s1]: { id:s1, title:'Scène de départ', location:'Le port', text:'Tu arrives au port sous la pluie...', isStart:true, isEnd:false,
-      choices:[
-        { text:'Entrer dans la taverne', vers:s2, effects:[{stat:'vie',val:-5}] },
-        { text:'Inspecter les quais', vers:s3, effects:[] }
-      ], x:320, y:40 },
-    [s2]: { id:s2, title:'La Taverne', location:'Taverne du Crabe Noir', text:'La salle est bruyante et enfumée...', isStart:false, isEnd:false,
-      choices:[{ text:'Parler au barman', vers:s4, effects:[] }], x:120, y:200 },
-    [s3]: { id:s3, title:'Les Quais', location:'Quai Est', text:'Les bateaux se balancent dans la tempête...', isStart:false, isEnd:false,
-      choices:[{ text:'Retourner au port', vers:s1, effects:[] }], x:520, y:200 },
-    [s4]: { id:s4, title:'Fin — Le départ', location:'Port', text:'Le barman te donne une carte. Une aventure commence.', isStart:false, isEnd:true,
-      choices:[], x:120, y:360 }
-  };
-  applyEditorLanguage();
-  initTemplateGrid();
-  if (window.innerWidth <= 700) { zoom = 0.6; pan = { x: 10, y: 10 }; }
-  render();
-  maybeShowUiGuideOnLoad();
+  bootstrapEditor();
 })();
 </script>
 </body>
