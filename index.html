@@ -4,8 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>Choisis ton Destin</title>
-<script src="home-theme.js"></script>
-<script>document.documentElement.dataset.homeTheme=window.SF_HOME_THEME||'default';</script>
+<script src="sf-theme.js"></script>
+<link rel="stylesheet" href="sf-theme.css">
 <script src="capacitor.js"></script>
 <!-- Preconnect pour accélérer Google Fonts -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -39,79 +39,6 @@ body {
   --bg3:     #1a1710;
   --border:  #2a2418;
   --glow:    rgba(200,169,110,0.15);
-}
-
-/* ── THÈME HALLOWEEN (data-home-theme sur <html>, voir home-theme.js) ── */
-html[data-home-theme="halloween"] {
-  --gold:    #e8934a;
-  --gold2:   #ffc875;
-  --gold3:   #a85518;
-  --cream:   #f2ebe0;
-  --dim:     #9a8070;
-  --dimmer:  #6a5548;
-  --bg:      #0a080c;
-  --bg2:     #140f16;
-  --bg3:     #1c1520;
-  --border:  #3d2838;
-  --glow:    rgba(232,120,40,0.2);
-}
-html[data-home-theme="halloween"] .bg-gradient {
-  background:
-    radial-gradient(ellipse 55% 45% at 88% 8%, rgba(180,90,30,0.14) 0%, transparent 55%),
-    radial-gradient(ellipse 70% 50% at 12% 92%, rgba(80,30,100,0.12) 0%, transparent 60%),
-    radial-gradient(ellipse 90% 55% at 50% -10%, rgba(120,50,140,0.08) 0%, transparent 65%),
-    linear-gradient(180deg, #0a080c 0%, #120e14 45%, #0a080c 100%);
-}
-html[data-home-theme="halloween"] .particle {
-  background: #e8934a;
-  box-shadow: 0 0 8px rgba(255,130,50,0.45);
-}
-html[data-home-theme="halloween"] .ornament svg line { stroke: #c87830; }
-html[data-home-theme="halloween"] .ornament svg polygon { fill: #e8934a; }
-html[data-home-theme="halloween"] .main-title {
-  text-shadow: 0 0 50px rgba(200,100,30,0.25), 0 2px 4px rgba(0,0,0,0.85);
-}
-html[data-home-theme="halloween"] .main-title em { color: #ff9f4a; }
-html[data-home-theme="halloween"] .divider-gem {
-  background: #e8934a;
-  box-shadow: 0 0 6px rgba(255,140,60,0.35);
-}
-html[data-home-theme="halloween"] .btn-main.primary {
-  border-color: rgba(232,120,40,0.45);
-  background: linear-gradient(135deg, rgba(180,70,20,0.22), rgba(80,30,100,0.12));
-}
-html[data-home-theme="halloween"] .btn-main.primary .menu-tile-icon {
-  background: rgba(232,120,40,0.15);
-  border-color: rgba(232,120,40,0.35);
-}
-html[data-home-theme="halloween"] .menu-panel {
-  border-color: color-mix(in srgb, #e8934a 22%, var(--border));
-}
-html[data-home-theme="halloween"] .home-halloween-decor { display: block; }
-
-.home-halloween-decor { display: none; pointer-events: none; }
-.home-halloween-moon {
-  position: fixed; top: calc(12px + var(--android-safe-area-inset-top, 0px)); right: 14px;
-  width: 44px; height: 44px; border-radius: 50%; z-index: 2;
-  background: radial-gradient(circle at 35% 35%, #ffe8b0, #e8934a 45%, #8a4010 100%);
-  box-shadow: 0 0 24px rgba(255,160,60,0.35), 0 0 60px rgba(120,40,140,0.15);
-  opacity: 0.55;
-  animation: halloween-moon-pulse 4s ease-in-out infinite;
-}
-.home-halloween-moon::after {
-  content: '';
-  position: absolute; top: 8px; left: 14px;
-  width: 10px; height: 10px; border-radius: 50%;
-  background: rgba(10,8,12,0.35);
-  box-shadow: 12px 6px 0 4px rgba(10,8,12,0.2);
-}
-@keyframes halloween-moon-pulse {
-  0%, 100% { opacity: 0.5; transform: scale(1); }
-  50%      { opacity: 0.7; transform: scale(1.04); }
-}
-.home-halloween-fog {
-  position: fixed; left: 0; right: 0; bottom: 0; height: 28vh; z-index: 1;
-  background: linear-gradient(180deg, transparent, rgba(40,20,50,0.12) 40%, rgba(20,10,30,0.22));
 }
 
 /* ── BACKGROUND ── */
@@ -933,8 +860,6 @@ html[data-home-theme="halloween"] .home-halloween-decor { display: block; }
 
 <div class="bg-gradient"></div>
 <canvas id="bg-canvas"></canvas>
-<div class="home-halloween-decor home-halloween-moon" aria-hidden="true"></div>
-<div class="home-halloween-decor home-halloween-fog" aria-hidden="true"></div>
 
 <!-- MAIN SHELL -->
 <div id="shell">
@@ -1164,14 +1089,14 @@ html[data-home-theme="halloween"] .home-halloween-decor { display: block; }
 <script src="onboarding.js"></script>
 <script>
 // ══════════════════════════════════════════════
-// THÈME ACCUEIL (interrupteur : home-theme.js → SF_HOME_THEME)
+// THÈME SAISONNIER (interrupteur : sf-theme.js → SF_THEME)
 // ══════════════════════════════════════════════
 function getHomeTheme() {
-  return window.SF_HOME_THEME || 'default';
+  return window.SFTheme ? SFTheme.get() : (window.SF_THEME || window.SF_HOME_THEME || 'default');
 }
 
 function applyHomeTheme() {
-  document.documentElement.dataset.homeTheme = getHomeTheme();
+  if (window.SFTheme) SFTheme.apply();
 }
 
 const HOME_THEME_COPY = {
@@ -1195,14 +1120,7 @@ const HOME_THEME_COPY = {
 };
 
 function getHomeSparkPalette() {
-  if (getHomeTheme() === 'halloween') {
-    return {
-      primary: { core:'rgba(255,200,117,0.95)', glow:'rgba(232,147,74,0.65)' },
-      ai:      { core:'rgba(196,184,255,0.92)', glow:'rgba(124,109,250,0.55)' },
-      default: { core:'rgba(232,147,74,0.88)',  glow:'rgba(255,130,50,0.55)' },
-    };
-  }
-  return {
+  return window.SFTheme ? SFTheme.sparkPalette() : {
     primary: { core:'rgba(232,212,160,0.95)', glow:'rgba(200,169,110,0.65)' },
     ai:      { core:'rgba(196,184,255,0.92)', glow:'rgba(124,109,250,0.55)' },
     default: { core:'rgba(200,169,110,0.88)', glow:'rgba(200,169,110,0.55)' },
@@ -1210,8 +1128,7 @@ function getHomeSparkPalette() {
 }
 
 function getHomeStarColor(alpha) {
-  if (getHomeTheme() === 'halloween') return `rgba(232,147,74,${alpha})`;
-  return `rgba(200,169,110,${alpha})`;
+  return window.SFTheme ? SFTheme.starColor(alpha) : `rgba(200,169,110,${alpha})`;
 }
 
 // ══════════════════════════════════════════════

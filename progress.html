@@ -4,6 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>Progression</title>
+<script src="sf-theme.js"></script>
+<link rel="stylesheet" href="sf-theme.css">
 <script src="capacitor.js"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -700,7 +702,7 @@ function initBg() {
     stars.forEach(s => {
       const tw = s.a*(0.6+0.4*Math.sin(frame*s.speed*0.05+s.phase));
       ctx.beginPath(); ctx.arc(s.x,s.y,s.r,0,Math.PI*2);
-      ctx.fillStyle=`rgba(200,169,110,${tw})`; ctx.fill();
+      ctx.fillStyle = window.SFTheme ? SFTheme.starColor(tw) : `rgba(200,169,110,${tw})`; ctx.fill();
     });
     frame++; requestAnimationFrame(draw);
   }

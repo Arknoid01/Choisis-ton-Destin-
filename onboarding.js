@@ -200,7 +200,7 @@ window.SFOnboarding = (function () {
         border:1px solid #2a2418;background:#1a1710;cursor:pointer;text-align:left;
         width:100%;transition:border-color .2s,background .2s;font:inherit;
       }
-      .sf-onb-choice.selected{border-color:#c8a96e;background:rgba(200,169,110,.1)}
+      .sf-onb-choice.selected{border-color:var(--gold, #c8a96e);background:rgba(200,169,110,.1)}
       .sf-onb-flag{font-size:26px;flex-shrink:0}
       .sf-onb-choice-info{flex:1}
       .sf-onb-name{font-family:'Cinzel',Georgia,serif;font-size:14px;font-weight:600;color:#e8e0d0;display:block}
@@ -209,11 +209,11 @@ window.SFOnboarding = (function () {
         width:20px;height:20px;border-radius:50%;border:2px solid #2a2418;flex-shrink:0;
         display:flex;align-items:center;justify-content:center;font-size:11px;color:#000;
       }
-      .sf-onb-choice.selected .sf-onb-check{background:#c8a96e;border-color:#c8a96e}
+      .sf-onb-choice.selected .sf-onb-check{background:var(--gold, #c8a96e);border-color:var(--gold, #c8a96e)}
       .sf-onb-btn{
         margin-top:20px;width:100%;padding:13px;border-radius:10px;border:1px solid #8a6a30;
         background:linear-gradient(135deg,rgba(200,169,110,.15),rgba(200,169,110,.05));
-        color:#c8a96e;font-family:'Cinzel',Georgia,serif;font-size:12px;
+        color:var(--gold, #c8a96e);font-family:'Cinzel',Georgia,serif;font-size:12px;
         letter-spacing:2px;cursor:pointer;transition:background .2s;
       }
       .sf-onb-btn:hover{background:rgba(200,169,110,.2)}
@@ -221,7 +221,7 @@ window.SFOnboarding = (function () {
       .sf-onb-tip{display:flex;gap:12px;align-items:flex-start;text-align:left;margin-bottom:16px}
       .sf-onb-tip-icon{
         font-size:18px;background:#1a1710;width:32px;height:32px;border-radius:50%;
-        display:flex;align-items:center;justify-content:center;flex-shrink:0;color:#c8a96e;
+        display:flex;align-items:center;justify-content:center;flex-shrink:0;color:var(--gold, #c8a96e);
       }
       .sf-onb-tip p{font-size:13px;color:#9a8a70;line-height:1.5;margin:0}
       .sf-onb-label{
@@ -236,7 +236,7 @@ window.SFOnboarding = (function () {
       .sf-onb-input:focus{border-color:#8a6a30}
       .sf-onb-error{display:none;margin-top:8px;font-size:11px;color:#fa6d8f;font-family:ui-monospace,monospace}
       .sf-onb-kids{display:flex;align-items:center;gap:10px;margin-top:18px;text-align:left;cursor:pointer}
-      .sf-onb-kids input{width:18px;height:18px;accent-color:#c8a96e;flex-shrink:0;cursor:pointer}
+      .sf-onb-kids input{width:18px;height:18px;accent-color:var(--gold, #c8a96e);flex-shrink:0;cursor:pointer}
       .sf-onb-kids span{font-size:12px;color:#9a8a70;line-height:1.4}
       .sf-onb-skip{
         margin-top:12px;background:none;border:none;color:#5a5040;font-size:12px;
@@ -251,7 +251,7 @@ window.SFOnboarding = (function () {
       }
       .sf-onb-demo-choice:hover{border-color:#8a6a30;background:rgba(200,169,110,.06)}
       .sf-onb-demo-outcome{
-        display:none;font-size:14px;color:#c8a96e;line-height:1.6;margin:16px 0;
+        display:none;font-size:14px;color:var(--gold, #c8a96e);line-height:1.6;margin:16px 0;
         padding:14px;border-radius:10px;border:1px solid rgba(200,169,110,.2);
         background:rgba(200,169,110,.05);font-style:italic;
       }
@@ -267,12 +267,12 @@ window.SFOnboarding = (function () {
       .sf-onb-starter-link{
         display:none;width:100%;margin-bottom:12px;padding:12px 14px;border-radius:10px;
         border:1px solid rgba(200,169,110,.45);
-        background:rgba(200,169,110,.08);color:#c8a96e;text-decoration:none;
+        background:rgba(200,169,110,.08);color:var(--gold, #c8a96e);text-decoration:none;
         font-family:'Cinzel',Georgia,serif;font-size:11px;letter-spacing:1.5px;
         box-sizing:border-box;transition:background .2s,border-color .2s;
       }
       .sf-onb-starter-link.visible{display:block}
-      .sf-onb-starter-link:hover{background:rgba(200,169,110,.16);border-color:#c8a96e}
+      .sf-onb-starter-link:hover{background:rgba(200,169,110,.16);border-color:var(--gold, #c8a96e)}
       .sf-onb-demo-actions{display:none;margin-top:16px}
       .sf-onb-demo-actions.visible{display:block}
       .sf-onb-toast{
