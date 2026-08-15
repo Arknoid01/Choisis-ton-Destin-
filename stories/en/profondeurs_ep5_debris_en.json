@@ -45,19 +45,39 @@
       "choices": [
         {
           "text": "Charge between the cargo ships — shortcut",
-          "vers": "couloir",
+          "vers": "derive",
           "effects": [{ "stat": "audace", "val": 10 }],
           "clickEffect": "pulse"
         },
         {
           "text": "Go over the wrecks — longer, safer",
-          "vers": "couloir",
+          "vers": "derive",
           "effects": [{ "stat": "lucidite", "val": 10 }],
           "clickEffect": "pulse"
         }
       ],
       "x": 400,
       "y": 40
+    },
+    "derive": {
+      "id": "derive",
+      "title": "Horizontal Drift",
+      "location": "DEBRIS FIELD — 520 m",
+      "narrator": "When you stop descending, sometimes the ocean turns around you.",
+      "text": "You move **laterally** — between the wrecks, heading 214°.\n\nFor a long time, you don't go **down**.\n\nYour HUD:\n\n**depth 520 m**\n\nThen **520 m**.\n\nThen **519 m**.\n\nThen **520 m** again.\n\nYou no longer know if you're making progress or **turning**. The orange glow seems everywhere — ahead, to the side, **behind**.\n\nThe radio — too calm:\n\n*« —{{player}}… you're on the right route… keep going… — »*\n\nYou haven't chosen to turn yet.\n\nYour lamp: **12%** — then **11%** — then **12%**.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Fix a landmark — force a direction",
+          "vers": "couloir",
+          "effects": [{ "stat": "lucidite", "val": 8 }],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 400,
+      "y": 100
     },
     "couloir": {
       "id": "couloir",
@@ -90,7 +110,7 @@
       "title": "Under the Crane",
       "location": "DEBRIS FIELD — 580 m",
       "narrator": "When metal moves above you, speed becomes a prayer.",
-      "text": "You slip under the crane arm.\n\nTight space. Your suit catches a rusted plate. You pull free.\n\nThe lamp sweeps murky water — and **catches** something.\n\nNot a wreck.\n\nA **band** of pale, smooth skin crossing the wreck corridor at your level — then vanishing between two containers **without pushing them aside**. As if the metal had opened.\n\nThe clattering resumes — **behind** you now.\n\nBattery: **10%**.",
+      "text": "You slip under the crane arm.\n\nTight space. Your suit catches a rusted plate. You pull free.\n\nYour lamp **goes out** for three seconds — without you touching the casing.\n\nWhen it returns: the water **vibrates** — a pressure breath crossing the choke point **without** shifting the containers. As if something passed **through** the water, not **between** the metal.\n\nThe clattering resumes — **behind** you now.\n\nBattery: **10%** — showing **9%**, then **11%**, then **10%**.",
       "isStart": false,
       "isEnd": false,
       "transition": "flash",
@@ -176,7 +196,7 @@
       "title": "Field Exit",
       "location": "DEBRIS FIELD — 640 m",
       "narrator": "When the wrecks thin out, what lies ahead is no longer metal — it's architecture.",
-      "text": "The containers spread apart.\n\nThe clattering fades — or stops. You can't tell anymore.\n\nYour HUD:\n\n**165 m remaining · depth 640 m · heading 214°**\n\nYour lamp: **8%**.\n\nAhead, the orange glow finally reveals part of its source — not the portal. A **black stone arch**, immense, carved with Fableris runes and pumpkin motifs.\n\nAn underwater **cathedral**. Gaping entrance. Black.\n\nThe radio murmurs:\n\n*« —{{player}}… final stretch… the lamp won't last until the portal… — »*",
+      "text": "The containers spread apart.\n\nThe clattering fades — or stops. You can't tell anymore.\n\nYour HUD:\n\n**165 m remaining · depth 640 m · heading 214°**\n\nYour lamp: **8%**.\n\nAhead, the orange glow finally reveals part of its source — not the portal. A **black stone arch**, immense, carved with Fableris runes and pumpkin motifs.\n\nAn underwater **cathedral**. Gaping entrance. Black.\n\nThe radio murmurs:\n\n*« —{{player}}… final stretch… the lamp won't last until the portal… — »*\n\nIt repeats word for word a line from your **mission dossier** — one you never read aloud.",
       "isStart": false,
       "isEnd": false,
       "transition": "fade",

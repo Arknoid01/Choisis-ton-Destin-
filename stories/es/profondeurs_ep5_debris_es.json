@@ -45,19 +45,39 @@
       "choices": [
         {
           "text": "Lanzarte entre los cargueros — atajo",
-          "vers": "couloir",
+          "vers": "derive",
           "effects": [{ "stat": "audace", "val": 10 }],
           "clickEffect": "pulse"
         },
         {
           "text": "Rodear por encima de los restos — más largo, más seguro",
-          "vers": "couloir",
+          "vers": "derive",
           "effects": [{ "stat": "lucidite", "val": 10 }],
           "clickEffect": "pulse"
         }
       ],
       "x": 400,
       "y": 40
+    },
+    "derive": {
+      "id": "derive",
+      "title": "Deriva horizontal",
+      "location": "CAMPO DE ESCOMBROS — 520 m",
+      "narrator": "Cuando ya no desciendes, a veces es el océano el que gira a tu alrededor.",
+      "text": "Avanzas **lateralmente** — entre los restos, rumbo 214°.\n\nDurante mucho tiempo, no **bajas**.\n\nTu HUD:\n\n**prof. 520 m**\n\nLuego **520 m**.\n\nLuego **519 m**.\n\nLuego **520 m** otra vez.\n\nYa no sabes si progresas o si **giras**. El resplandor naranja parece estar en todas partes — delante, al lado, **detrás**.\n\nLa radio — demasiado calmada:\n\n*« —{{player}}… vas por la buena ruta… continúa… — »*\n\nAún no has elegido girar.\n\nTu linterna: **12 %** — luego **11 %** — luego **12 %**.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Fijar un punto de referencia — forzar una dirección",
+          "vers": "couloir",
+          "effects": [{ "stat": "lucidite", "val": 8 }],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 400,
+      "y": 100
     },
     "couloir": {
       "id": "couloir",
@@ -90,7 +110,7 @@
       "title": "Bajo la grúa",
       "location": "CAMPO DE ESCOMBROS — 580 m",
       "narrator": "Cuando el metal se mueve sobre ti, la velocidad se vuelve una plegaria.",
-      "text": "Te deslizas bajo el brazo de la grúa.\n\nEspacio estrecho. Tu traje engancha una placa oxidada. Tirás.\n\nLa linterna barre el agua turbia — y **atrapa** algo.\n\nNo un naufragio.\n\nUna **franja** de piel pálida, lisa, que cruza el corredor de restos a tu altura — luego desaparece entre dos contenedores **sin apartarlos**. Como si el metal se hubiera abierto.\n\nEl chasquido vuelve — **detrás** de ti ahora.\n\nBatería: **10 %**.",
+      "text": "Te deslizas bajo el brazo de la grúa.\n\nEspacio estrecho. Tu traje engancha una placa oxidada. Tirás.\n\nTu linterna **se apaga** tres segundos — sin que toques la carcasa.\n\nCuando vuelve: el agua **vibra** — un soplo de presión que atraviesa el estrecho **sin** mover los contenedores. Como si algo pasara **por** el agua, no **entre** el metal.\n\nEl chasquido vuelve — **detrás** de ti ahora.\n\nBatería: **10 %** — mostrando **9 %**, luego **11 %**, luego **10 %**.",
       "isStart": false,
       "isEnd": false,
       "transition": "flash",
@@ -176,7 +196,7 @@
       "title": "Salida del campo",
       "location": "CAMPO DE ESCOMBROS — 640 m",
       "narrator": "Cuando los restos se aclaran, lo que queda delante ya no es metal — es arquitectura.",
-      "text": "Los contenedores se abren.\n\nEl chasquido se aleja — o se detiene. Ya no sabes.\n\nTu HUD:\n\n**165 m restantes · prof. 640 m · rumbo 214°**\n\nTu linterna: **8 %**.\n\nDelante, el resplandor naranja revela por fin parte de su fuente — no el portal. Un **arco** de piedra negra, inmenso, esculpido con runas Fableris y motivos de calabaza.\n\nUna **catedral** submarina. Entrada abierta. Negra.\n\nLa radio murmura:\n\n*« —{{player}}… recta final… la linterna no aguantará hasta el portal… — »*",
+      "text": "Los contenedores se abren.\n\nEl chasquido se aleja — o se detiene. Ya no sabes.\n\nTu HUD:\n\n**165 m restantes · prof. 640 m · rumbo 214°**\n\nTu linterna: **8 %**.\n\nDelante, el resplandor naranja revela por fin parte de su fuente — no el portal. Un **arco** de piedra negra, inmenso, esculpido con runas Fableris y motivos de calabaza.\n\nUna **catedral** submarina. Entrada abierta. Negra.\n\nLa radio murmura:\n\n*« —{{player}}… recta final… la linterna no aguantará hasta el portal… — »*\n\nRepite palabra por palabra una frase de tu **dossier de misión** — la que nunca leíste en voz alta.",
       "isStart": false,
       "isEnd": false,
       "transition": "fade",

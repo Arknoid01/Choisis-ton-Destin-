@@ -90,7 +90,7 @@
       "title": "Outside the Light",
       "location": "SECTOR 7 — THRESHOLD · 828 m",
       "narrator": "What's followed you since the Derelicta doesn't need sight to know where you are.",
-      "text": "The clattering **returns** — muffled by pressure, but there.\n\nIn the orange halo, you see only the **shadow**: too long, too supple, edged like the skin glimpsed in the hull jet.\n\nIt doesn't charge. It **tightens** the circle — leaving you the portal, taking the rest.\n\n**10 metres** from the centre.\n\nThe radio murmurs:\n\n*« —Don't make room for it. Cross. — »*\n\nThe arch **widens** — a crack of light, wide as your shoulders. Ready.",
+      "text": "The clattering **returns** — muffled by pressure, but there.\n\nIn the orange halo, you see **nothing** clear. Only the water **bending** — a volume tightening the circle around you without entering the light.\n\nIt doesn't charge. It **removes** the exits — except the portal.\n\n**10 metres** from the centre.\n\nThe radio murmurs:\n\n*« —Don't make room for it. Cross. — »*\n\nOr maybe:\n\n*« —Let it guide you. Cross. — »*\n\nYou no longer know which phrase you heard first.\n\nThe arch **widens** — a crack of light, wide as your shoulders. Ready.",
       "isStart": false,
       "isEnd": false,
       "transition": "fade",
@@ -116,7 +116,7 @@
       "title": "Cross",
       "location": "PORTAL — ENTRY · 832 m",
       "narrator": "Sometimes running forward is the only courage that counts.",
-      "text": "You propel yourself.\n\nThe shadow **lunges** — a rush of water, a brush on your ankle. No bite. Not yet.\n\nYou cross the crack.\n\nThe world **changes** — pressure dropping, colours screaming, sound becoming **muted music**.\n\nBehind you, a rumble: the portal **closes**. The thing stays on the other side.\n\nYou're **inside**.",
+      "text": "You propel yourself.\n\nA **breath** of water brushes you — ankle, suit, pressure. No bite. No **solid** contact.\n\nYou cross the crack.\n\nThe world **changes** — pressure dropping, colours screaming, sound becoming **muted music**.\n\nBehind you, a rumble: the portal **closes**. The clattering stops **dead**.\n\nYou're **inside**.",
       "isStart": false,
       "isEnd": false,
       "transition": "flash",
@@ -136,7 +136,7 @@
       "title": "The Debt",
       "location": "SECTOR 7 — THRESHOLD · 830 m",
       "narrator": "Naming what you owe is sometimes the key you sought without knowing.",
-      "text": "You place your hand on the lintel.\n\nYou speak — in your head, the Coalition may hear:\n\n*« I am {{player}}. I borrowed the light. I return the descent. »*\n\nThe arch **answers** — runes lighting one by one, pumpkins **truly** smiling.\n\nThe shadow recedes — not from fear. From **rule**. This portal isn't its domain.\n\nThe crack opens **gently**.\n\nYou enter without rushing. Water becomes light.",
+      "text": "You place your hand on the lintel.\n\nYou speak — in your head, the Coalition may hear:\n\n*« I am {{player}}. I borrowed the light. I return the descent. »*\n\nThe arch **answers** — runes lighting one by one, pumpkins **truly** smiling.\n\nThe pressure breath **recedes** — not from fear. From **rule**. This portal isn't its domain. Or: it **led** you here since the Derelicta, and its work is done.\n\nYou're not sure. You **saw nothing**.\n\nThe crack opens **gently**.\n\nYou enter without rushing. Water becomes light.",
       "isStart": false,
       "isEnd": false,
       "transition": "fade",
@@ -156,7 +156,7 @@
       "title": "Crossing",
       "location": "FABLERIS PORTAL — IN-BETWEEN",
       "narrator": "Between two worlds, time has no up or down — only passage.",
-      "text": "You swim in the light.\n\nNo water — or too much. Images scrolling: the Derelicta sinking, the cliff, relay N-7, the crane, the cathedral, your lamp dying.\n\n**800 m**, the HUD whispers one last time. Then the numbers **vanish**.\n\nA voice — the radio, finally **stable**:\n\n*« —Extraction confirmed. Welcome, {{player}}. — »*\n\nAhead: a **second** surface. Not Narhex. **Starry** sky. Cold autumn air. Pumpkin and salt.",
+      "text": "You swim in the light.\n\nNo water — or too much. Images scrolling: the Derelicta sinking, the cliff, relay N-7, the crane, the cathedral, your lamp dying.\n\n**800 m**, the HUD whispers one last time. Then the numbers **vanish**.\n\nA voice — the radio, finally **stable**:\n\n*« —Extraction confirmed. Welcome, {{player}}. — »*\n\nThe voice sounds like the one from episode 2 — **almost** your own. You no longer know if you're rising or **replaying** a descent already failed.\n\nAhead: a **second** surface. Not Narhex. **Starry** sky. Cold autumn air. Pumpkin and salt.",
       "isStart": false,
       "isEnd": false,
       "transition": "fade",
@@ -181,6 +181,18 @@
       "transition": "fade",
       "choices": [
         {
+          "text": "Look at the water — the threat is behind the portal",
+          "vers": "fin_audace",
+          "requires": { "stat": "audace", "min": 50 },
+          "clickEffect": "pulse"
+        },
+        {
+          "text": "Look at the water — maybe it wasn't a hunt",
+          "vers": "fin_lucidite",
+          "requires": { "stat": "lucidite", "min": 50 },
+          "clickEffect": "pulse"
+        },
+        {
           "text": "Look one last time at the black water",
           "vers": "fin_portail",
           "clickEffect": "pulse"
@@ -188,6 +200,32 @@
       ],
       "x": 400,
       "y": 540
+    },
+    "fin_audace": {
+      "id": "fin_audace",
+      "title": "Extraction — Boldness",
+      "location": "FABLERIS HAVEN — HALLOWEEN NIGHT",
+      "narrator": "Surviving sometimes means accepting you were right to be afraid.",
+      "text": "You look at the water.\n\nStill black — **behind** a closed portal. Something **strikes** the barrier once — dull, distant — then nothing.\n\nYou **fled** forward. You were **right**.\n\nIn the distance, glowing pumpkins. The Coalition applauds without knowing **what** stayed on the other side.\n\nThe radio:\n\n*« —Rest, {{player}}. You went down. You came up. — »*\n\n**END — The Depths** *(Boldness)*\n\n*Thanks for playing · The Depths pack · Fableris*",
+      "isStart": false,
+      "isEnd": true,
+      "transition": "fade",
+      "choices": [],
+      "x": 280,
+      "y": 640
+    },
+    "fin_lucidite": {
+      "id": "fin_lucidite",
+      "title": "Extraction — Clarity",
+      "location": "FABLERIS HAVEN — HALLOWEEN NIGHT",
+      "narrator": "Understanding doesn't guarantee peace — only a different fear.",
+      "text": "You look at the water.\n\nStill black — **behind** a closed portal. No strike. No hunt. **Silence**.\n\nMaybe the presence **pushed** you here — shepherd, not predator. Maybe the real trap is **Fableris** sending you alone and calling it a mission.\n\nThe radio murmurs — no static, **too** close:\n\n*« —I am not the Coalition. I am what remains when descent fails. You succeeded. This time. — »*\n\n**END — The Depths** *(Clarity)*\n\n*Thanks for playing · The Depths pack · Fableris*",
+      "isStart": false,
+      "isEnd": true,
+      "transition": "fade",
+      "choices": [],
+      "x": 520,
+      "y": 640
     },
     "fin_portail": {
       "id": "fin_portail",

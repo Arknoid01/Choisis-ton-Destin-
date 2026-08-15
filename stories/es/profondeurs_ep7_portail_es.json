@@ -90,7 +90,7 @@
       "title": "Fuera de la luz",
       "location": "SECTOR 7 — UMBRAL · 828 m",
       "narrator": "Lo que te sigue desde la Derelicta no necesita ver para saber dónde estás.",
-      "text": "El chasquido **vuelve** — amortiguado por la presión, pero ahí.\n\nEn el halo naranja, solo ves la **sombra**: demasiado larga, demasiado flexible, borde afilado como la piel vista en el chorro del casco.\n\nNo carga. **Cierra** el círculo — dejándote el portal, quitándote el resto.\n\n**10 metros** del centro.\n\nLa radio murmura:\n\n*« —No le hagas sitio. Cruza. — »*\n\nEl arco se **ensancha** — una grieta de luz, ancha como tus hombros. Lista.",
+      "text": "El chasquido **vuelve** — amortiguado por la presión, pero ahí.\n\nEn el halo naranja, no ves **nada** claro. Solo el agua que **se curva** — un volumen que cierra el círculo a tu alrededor sin entrar en la luz.\n\nNo carga. **Retira** las salidas — excepto el portal.\n\n**10 metros** del centro.\n\nLa radio murmura:\n\n*« —No le hagas sitio. Cruza. — »*\n\nO quizá:\n\n*« —Déjala guiarte. Cruza. — »*\n\nYa no sabes qué frase oíste primero.\n\nEl arco se **ensancha** — una grieta de luz, ancha como tus hombros. Lista.",
       "isStart": false,
       "isEnd": false,
       "transition": "fade",
@@ -116,7 +116,7 @@
       "title": "Cruzar",
       "location": "PORTAL — ENTRADA · 832 m",
       "narrator": "A veces huir hacia adelante es la única forma de valor que cuenta.",
-      "text": "Te impulsas.\n\nLa sombra **se lanza** — un soplo de agua, un roce en tu tobillo. Sin mordida. Aún no.\n\nCruzas la grieta.\n\nEl mundo **cambia** — presión que cae, colores que gritan, sonido que se vuelve **música** apagada.\n\nDetrás, un retumbo: el portal **se cierra**. La cosa se queda al otro lado.\n\nEstás **dentro**.",
+      "text": "Te impulsas.\n\nUn **soplo** de agua te roza — tobillo, traje, presión. Sin mordida. Sin contacto **sólido**.\n\nCruzas la grieta.\n\nEl mundo **cambia** — presión que cae, colores que gritan, sonido que se vuelve **música** apagada.\n\nDetrás, un retumbo: el portal **se cierra**. El chasquido se detiene **en seco**.\n\nEstás **dentro**.",
       "isStart": false,
       "isEnd": false,
       "transition": "flash",
@@ -136,7 +136,7 @@
       "title": "La deuda",
       "location": "SECTOR 7 — UMBRAL · 830 m",
       "narrator": "Nombrar lo que se debe a veces es la llave que buscabas sin saberlo.",
-      "text": "Posas la mano en el dintel.\n\nPronuncias — en tu cabeza, la Coalición quizá escuche:\n\n*« Soy {{player}}. Pedí prestada la luz. Devuelvo el descenso. »*\n\nEl arco **responde** — runas que se encienden una a una, calabazas que sonríen **de verdad**.\n\nLa sombra retrocede — no por miedo. Por **regla**. Este portal no le pertenece.\n\nLa grieta se abre **suavemente**.\n\nEntras sin correr. El agua se vuelve luz.",
+      "text": "Posas la mano en el dintel.\n\nPronuncias — en tu cabeza, la Coalición quizá escuche:\n\n*« Soy {{player}}. Pedí prestada la luz. Devuelvo el descenso. »*\n\nEl arco **responde** — runas que se encienden una a una, calabazas que sonríen **de verdad**.\n\nEl soplo de presión **retrocede** — no por miedo. Por **regla**. Este portal no le pertenece. O: te ha **guiado** aquí desde la Derelicta, y su trabajo ha terminado.\n\nNo estás seguro/a. No **viste nada**.\n\nLa grieta se abre **suavemente**.\n\nEntras sin correr. El agua se vuelve luz.",
       "isStart": false,
       "isEnd": false,
       "transition": "fade",
@@ -156,7 +156,7 @@
       "title": "Travesía",
       "location": "PORTAL FABLERIS — ENTRE-MUNDOS",
       "narrator": "Entre dos mundos, el tiempo no tiene arriba ni abajo — solo paso.",
-      "text": "Nadas en la luz.\n\nSin agua — o demasiada. Imágenes que pasan: la Derelicta hundiéndose, el acantilado, el relevo N-7, la grúa, la catedral, tu linterna muriendo.\n\n**800 m**, susurra el HUD una última vez. Luego los números **desaparecen**.\n\nUna voz — la radio, por fin **estable**:\n\n*« —Extracción confirmada. Bienvenido, {{player}}. — »*\n\nDelante: una **segunda** superficie. No Narhex. Cielo **estrellado**. Aire frío de otoño. Calabaza y sal.",
+      "text": "Nadas en la luz.\n\nSin agua — o demasiada. Imágenes que pasan: la Derelicta hundiéndose, el acantilado, el relevo N-7, la grúa, la catedral, tu linterna muriendo.\n\n**800 m**, susurra el HUD una última vez. Luego los números **desaparecen**.\n\nUna voz — la radio, por fin **estable**:\n\n*« —Extracción confirmada. Bienvenido, {{player}}. — »*\n\nLa voz se parece a la del episodio 2 — **casi** la tuya. Ya no sabes si subes o si **repites** un descenso ya fallido.\n\nDelante: una **segunda** superficie. No Narhex. Cielo **estrellado**. Aire frío de otoño. Calabaza y sal.",
       "isStart": false,
       "isEnd": false,
       "transition": "fade",
@@ -181,6 +181,18 @@
       "transition": "fade",
       "choices": [
         {
+          "text": "Mirar el agua — la amenaza está detrás del portal",
+          "vers": "fin_audace",
+          "requires": { "stat": "audace", "min": 50 },
+          "clickEffect": "pulse"
+        },
+        {
+          "text": "Mirar el agua — quizá no era una caza",
+          "vers": "fin_lucidite",
+          "requires": { "stat": "lucidite", "min": 50 },
+          "clickEffect": "pulse"
+        },
+        {
           "text": "Mirar una última vez el agua negra",
           "vers": "fin_portail",
           "clickEffect": "pulse"
@@ -188,6 +200,32 @@
       ],
       "x": 400,
       "y": 540
+    },
+    "fin_audace": {
+      "id": "fin_audace",
+      "title": "Extracción — Audacia",
+      "location": "PUERTO FABLERIS — NOCHE DE HALLOWEEN",
+      "narrator": "Sobrevivir a veces es aceptar que tenías razón al tener miedo.",
+      "text": "Miras el agua.\n\nNegra aún — **detrás** de un portal cerrado. Algo **golpea** la barrera una vez — sordo, lejano — luego nada.\n\n**Huiste** hacia adelante. **Tenías** razón.\n\nA lo lejos, calabazas luminosas. La Coalición aplaude sin saber **qué** quedó al otro lado.\n\nLa radio:\n\n*« —Descansa, {{player}}. Descendiste. Subiste. — »*\n\n**FIN — Las Profundidades** *(Audacia)*\n\n*Gracias por jugar · Pack Las Profundidades · Fableris*",
+      "isStart": false,
+      "isEnd": true,
+      "transition": "fade",
+      "choices": [],
+      "x": 280,
+      "y": 640
+    },
+    "fin_lucidite": {
+      "id": "fin_lucidite",
+      "title": "Extracción — Lucidez",
+      "location": "PUERTO FABLERIS — NOCHE DE HALLOWEEN",
+      "narrator": "Comprender no garantiza la paz — solo otro miedo.",
+      "text": "Miras el agua.\n\nNegra aún — **detrás** de un portal cerrado. Sin golpe. Sin caza. **Silencio**.\n\nQuizá la presencia te **empujó** aquí — pastora, no depredadora. Quizá la trampa real es **Fableris** enviándote solo/a y llamándolo misión.\n\nLa radio murmura — sin estática, **demasiado** cerca:\n\n*« —No soy la Coalición. Soy lo que queda cuando el descenso falla. Tú lo lograste. Esta vez. — »*\n\n**FIN — Las Profundidades** *(Lucidez)*\n\n*Gracias por jugar · Pack Las Profundidades · Fableris*",
+      "isStart": false,
+      "isEnd": true,
+      "transition": "fade",
+      "choices": [],
+      "x": 520,
+      "y": 640
     },
     "fin_portail": {
       "id": "fin_portail",
