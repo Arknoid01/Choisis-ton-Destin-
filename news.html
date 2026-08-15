@@ -190,6 +190,7 @@ html,body{min-height:100%;background:#0a0a0e;color:#e0d8f0;font-family:'Cormoran
 </div>
 </div>
 
+<script src="sf-shared.js"></script>
 <script>
 const lang = localStorage.getItem('sf_lang') || 'fr';
 let activeTab = (new URLSearchParams(location.search).get('tab') === 'dlc') ? 'dlc' : 'community';
@@ -279,13 +280,17 @@ function esc(s) {
 let _newsData = { community: [], dlc: [] };
 
 function openItem(item) {
+  if (item.pack && !SFShared.isPackUnlocked(item.pack)) {
+    window.location.href = 'stories.html#pack-' + encodeURIComponent(item.pack);
+    return;
+  }
   if (item.file) {
     localStorage.setItem('sf_game_file', item.file);
     window.location.href = 'game.html?story=' + encodeURIComponent(item.file);
     return;
   }
   if (item.pack) {
-    window.location.href = 'stories.html#pack-' + item.pack;
+    window.location.href = 'stories.html#pack-' + encodeURIComponent(item.pack);
   }
 }
 
