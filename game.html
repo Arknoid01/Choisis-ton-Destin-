@@ -1204,6 +1204,7 @@ function goToScene(id, choiceText, externalStory) {
       community: /gare_regret|usine_a_trombones/i.test(storyFile),
       dlc: pack !== 'free' && pack !== 'kids'
     });
+    persistEndReachedSave(scene);
     playTransition(scene.transition || 'fade', () => renderEndScene(scene));
   } else {
     playTransition(scene.transition || 'fade', () => renderScene(scene));
@@ -2162,8 +2163,18 @@ function buildSaveData(isBookmark = false) {
     history:     [...history],
     playerName,
     isBookmark,
+    reachedEnd:  !!(scene && scene.isEnd),
     savedAt:     Date.now()
   };
+}
+
+function persistEndReachedSave(scene) {
+  if (!scene?.isEnd || !currentId || !story) return;
+  try {
+    const data = buildSaveData(false);
+    data.reachedEnd = true;
+    localStorage.setItem(getSaveKey(), JSON.stringify(data));
+  } catch (e) {}
 }
 
 function saveProgress() {
