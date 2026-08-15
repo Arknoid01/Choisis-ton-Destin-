@@ -4,6 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>Choisis ton Destin</title>
+<script src="home-theme.js"></script>
+<script>document.documentElement.dataset.homeTheme=window.SF_HOME_THEME||'default';</script>
 <script src="capacitor.js"></script>
 <!-- Preconnect pour accélérer Google Fonts -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -37,6 +39,79 @@ body {
   --bg3:     #1a1710;
   --border:  #2a2418;
   --glow:    rgba(200,169,110,0.15);
+}
+
+/* ── THÈME HALLOWEEN (data-home-theme sur <html>, voir home-theme.js) ── */
+html[data-home-theme="halloween"] {
+  --gold:    #e8934a;
+  --gold2:   #ffc875;
+  --gold3:   #a85518;
+  --cream:   #f2ebe0;
+  --dim:     #9a8070;
+  --dimmer:  #6a5548;
+  --bg:      #0a080c;
+  --bg2:     #140f16;
+  --bg3:     #1c1520;
+  --border:  #3d2838;
+  --glow:    rgba(232,120,40,0.2);
+}
+html[data-home-theme="halloween"] .bg-gradient {
+  background:
+    radial-gradient(ellipse 55% 45% at 88% 8%, rgba(180,90,30,0.14) 0%, transparent 55%),
+    radial-gradient(ellipse 70% 50% at 12% 92%, rgba(80,30,100,0.12) 0%, transparent 60%),
+    radial-gradient(ellipse 90% 55% at 50% -10%, rgba(120,50,140,0.08) 0%, transparent 65%),
+    linear-gradient(180deg, #0a080c 0%, #120e14 45%, #0a080c 100%);
+}
+html[data-home-theme="halloween"] .particle {
+  background: #e8934a;
+  box-shadow: 0 0 8px rgba(255,130,50,0.45);
+}
+html[data-home-theme="halloween"] .ornament svg line { stroke: #c87830; }
+html[data-home-theme="halloween"] .ornament svg polygon { fill: #e8934a; }
+html[data-home-theme="halloween"] .main-title {
+  text-shadow: 0 0 50px rgba(200,100,30,0.25), 0 2px 4px rgba(0,0,0,0.85);
+}
+html[data-home-theme="halloween"] .main-title em { color: #ff9f4a; }
+html[data-home-theme="halloween"] .divider-gem {
+  background: #e8934a;
+  box-shadow: 0 0 6px rgba(255,140,60,0.35);
+}
+html[data-home-theme="halloween"] .btn-main.primary {
+  border-color: rgba(232,120,40,0.45);
+  background: linear-gradient(135deg, rgba(180,70,20,0.22), rgba(80,30,100,0.12));
+}
+html[data-home-theme="halloween"] .btn-main.primary .menu-tile-icon {
+  background: rgba(232,120,40,0.15);
+  border-color: rgba(232,120,40,0.35);
+}
+html[data-home-theme="halloween"] .menu-panel {
+  border-color: color-mix(in srgb, #e8934a 22%, var(--border));
+}
+html[data-home-theme="halloween"] .home-halloween-decor { display: block; }
+
+.home-halloween-decor { display: none; pointer-events: none; }
+.home-halloween-moon {
+  position: fixed; top: calc(12px + var(--android-safe-area-inset-top, 0px)); right: 14px;
+  width: 44px; height: 44px; border-radius: 50%; z-index: 2;
+  background: radial-gradient(circle at 35% 35%, #ffe8b0, #e8934a 45%, #8a4010 100%);
+  box-shadow: 0 0 24px rgba(255,160,60,0.35), 0 0 60px rgba(120,40,140,0.15);
+  opacity: 0.55;
+  animation: halloween-moon-pulse 4s ease-in-out infinite;
+}
+.home-halloween-moon::after {
+  content: '';
+  position: absolute; top: 8px; left: 14px;
+  width: 10px; height: 10px; border-radius: 50%;
+  background: rgba(10,8,12,0.35);
+  box-shadow: 12px 6px 0 4px rgba(10,8,12,0.2);
+}
+@keyframes halloween-moon-pulse {
+  0%, 100% { opacity: 0.5; transform: scale(1); }
+  50%      { opacity: 0.7; transform: scale(1.04); }
+}
+.home-halloween-fog {
+  position: fixed; left: 0; right: 0; bottom: 0; height: 28vh; z-index: 1;
+  background: linear-gradient(180deg, transparent, rgba(40,20,50,0.12) 40%, rgba(20,10,30,0.22));
 }
 
 /* ── BACKGROUND ── */
@@ -858,6 +933,8 @@ body {
 
 <div class="bg-gradient"></div>
 <canvas id="bg-canvas"></canvas>
+<div class="home-halloween-decor home-halloween-moon" aria-hidden="true"></div>
+<div class="home-halloween-decor home-halloween-fog" aria-hidden="true"></div>
 
 <!-- MAIN SHELL -->
 <div id="shell">
@@ -1086,6 +1163,57 @@ body {
 <script src="community.js"></script>
 <script src="onboarding.js"></script>
 <script>
+// ══════════════════════════════════════════════
+// THÈME ACCUEIL (interrupteur : home-theme.js → SF_HOME_THEME)
+// ══════════════════════════════════════════════
+function getHomeTheme() {
+  return window.SF_HOME_THEME || 'default';
+}
+
+function applyHomeTheme() {
+  document.documentElement.dataset.homeTheme = getHomeTheme();
+}
+
+const HOME_THEME_COPY = {
+  halloween: {
+    fr: {
+      eyebrow:  '🎃 Frissons d\'Halloween',
+      subtitle: 'Des histoires à frissons — concours en cours',
+      btnStartIcon: '🎃',
+    },
+    en: {
+      eyebrow:  '🎃 Halloween chills',
+      subtitle: 'Spooky stories — contest open now',
+      btnStartIcon: '🎃',
+    },
+    es: {
+      eyebrow:  '🎃 Escalofríos de Halloween',
+      subtitle: 'Historias de miedo — concurso abierto',
+      btnStartIcon: '🎃',
+    },
+  },
+};
+
+function getHomeSparkPalette() {
+  if (getHomeTheme() === 'halloween') {
+    return {
+      primary: { core:'rgba(255,200,117,0.95)', glow:'rgba(232,147,74,0.65)' },
+      ai:      { core:'rgba(196,184,255,0.92)', glow:'rgba(124,109,250,0.55)' },
+      default: { core:'rgba(232,147,74,0.88)',  glow:'rgba(255,130,50,0.55)' },
+    };
+  }
+  return {
+    primary: { core:'rgba(232,212,160,0.95)', glow:'rgba(200,169,110,0.65)' },
+    ai:      { core:'rgba(196,184,255,0.92)', glow:'rgba(124,109,250,0.55)' },
+    default: { core:'rgba(200,169,110,0.88)', glow:'rgba(200,169,110,0.55)' },
+  };
+}
+
+function getHomeStarColor(alpha) {
+  if (getHomeTheme() === 'halloween') return `rgba(232,147,74,${alpha})`;
+  return `rgba(200,169,110,${alpha})`;
+}
+
 // ══════════════════════════════════════════════
 // TRANSLATIONS
 // ══════════════════════════════════════════════
@@ -1365,6 +1493,16 @@ function applyLang() {
   set('txt-close-options',  t.closeOptions);
   set('txt-opt-section-help', t.optSectionHelp);
   set('txt-opt-replay-desc', t.optReplayDesc);
+
+  const seasonal = HOME_THEME_COPY[getHomeTheme()]?.[currentLang];
+  const startIcon = document.querySelector('#btn-start .menu-tile-icon');
+  if (seasonal) {
+    if (seasonal.eyebrow)  set('txt-eyebrow',  seasonal.eyebrow);
+    if (seasonal.subtitle) set('txt-subtitle', seasonal.subtitle);
+    if (startIcon && seasonal.btnStartIcon) startIcon.textContent = seasonal.btnStartIcon;
+  } else if (startIcon) {
+    startIcon.textContent = '✦';
+  }
   set('txt-opt-replay-tips', t.optReplayTips);
   set('txt-opt-section-device', t.optSectionDevice);
   set('txt-opt-device-desc', t.optDeviceDesc, true);
@@ -1497,11 +1635,7 @@ function loadOptions() {
 // HOME BUTTON — click sparks (style fond étoilé)
 // ══════════════════════════════════════════════
 function spawnHomeClickSparks(clientX, clientY, variant) {
-  const palette = {
-    primary: { core:'rgba(232,212,160,0.95)', glow:'rgba(200,169,110,0.65)' },
-    ai:      { core:'rgba(196,184,255,0.92)', glow:'rgba(124,109,250,0.55)' },
-    default: { core:'rgba(200,169,110,0.88)', glow:'rgba(200,169,110,0.55)' }
-  };
+  const palette = getHomeSparkPalette();
   const colors = palette[variant] || palette.default;
   const count = window.innerWidth < 480 ? 8 : 12;
   for (let i = 0; i < count; i++) {
@@ -1599,7 +1733,7 @@ function initCanvas() {
       const twinkle = s.a * (0.6 + 0.4 * Math.sin(frame * s.speed * 0.05 + s.phase));
       ctx.beginPath();
       ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
-      ctx.fillStyle = `rgba(200,169,110,${twinkle})`;
+      ctx.fillStyle = getHomeStarColor(twinkle);
       ctx.fill();
     });
     frame++;
@@ -1873,6 +2007,7 @@ async function submitCode() {
   }
 }
 (async function init() {
+  applyHomeTheme();
   loadOptions();
   setLang(currentLang);
   // Lancer l'onboarding tout de suite — ne pas attendre games.json
