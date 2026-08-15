@@ -1864,7 +1864,7 @@ function redeemCode(code) {
   const unlocked = JSON.parse(localStorage.getItem('sf_unlocked_packs') || '["free","kids"]');
   entry.unlocks.forEach(u => {
     if (u === 'all') {
-      ['portals','creator','cinq_lames','cosmos','neon','pirates','fantasy','wilds'].forEach(p => {
+      ['portals','creator','cinq_lames','cosmos','neon','pirates','abysses','wilds'].forEach(p => {
         if (!unlocked.includes(p)) unlocked.push(p);
       });
     } else if (!unlocked.includes(u)) {

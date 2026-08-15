@@ -434,7 +434,7 @@ html,body { height:100%; background:#0d0d0f; color:#e8e0d0; font-family:'Cormora
 .tone-cosmos { background:linear-gradient(100deg,#1e3a5a,#2c5a8a); }
 .tone-neon   { background:linear-gradient(100deg,#1e5a4a,#2c8a6a); }
 .tone-pirates{ background:linear-gradient(100deg,#5a4020,#8a6030); }
-.tone-fantasy{ background:linear-gradient(100deg,#4a2a5a,#6a3a8a); }
+.tone-abysses{ background:linear-gradient(100deg,#0a1628,#123550); }
 .tone-wilds  { background:linear-gradient(100deg,#3a5a2a,#5a8a3a); }
 .tone-soon   { background:repeating-linear-gradient(135deg,#2a2418,#2a2418 4px,#332c1c 4px,#332c1c 8px); }
 .tone-bookmarks { background:linear-gradient(100deg,#2a6b4a,#3a9a68); }
@@ -668,16 +668,16 @@ const PACK_CONFIG = {
     },
     order: 5
   },
-  fantasy: {
-    name:  { fr:'Pack Legends',        en:'Legends Pack',    es:'Pack Leyendas' },
-    icon:  '⚔️',
-    color: 'rgba(160,96,248,0.6)',
+  abysses: {
+    name:  { fr:'Les Profondeurs',     en:'The Depths Pack', es:'Pack Profundidades' },
+    icon:  '🌊',
+    color: 'rgba(30,120,160,0.65)',
     price: '2,99€',
     comingSoon: true,
     desc:  {
-      fr: 'Épopées fantastiques — en cours d\'écriture.',
-      en: 'Epic fantasy — currently being written.',
-      es: 'Épicas de fantasía — en proceso de escritura.'
+      fr: 'Angoisse sous-marine — 7 épisodes pour atteindre le portail Halloween avant que la lumière s\'éteigne.',
+      en: 'Underwater dread — 7 episodes to reach the Halloween portal before your light runs out.',
+      es: 'Angustia submarina — 7 episodios para alcanzar el portal de Halloween antes de que se apague la luz.'
     },
     order: 6
   },
@@ -1208,7 +1208,7 @@ function initOnboardTip() {
 
 const SHELF_TONES = {
   bookmarks:'tone-bookmarks', free:'tone-free', kids:'tone-kids', cinq_lames:'tone-lames',
-  cosmos:'tone-cosmos', neon:'tone-neon', pirates:'tone-pirates', fantasy:'tone-fantasy', wilds:'tone-wilds'
+  cosmos:'tone-cosmos', neon:'tone-neon', pirates:'tone-pirates', abysses:'tone-abysses', wilds:'tone-wilds'
 };
 
 function renderShelfLibrary() {

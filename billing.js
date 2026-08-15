@@ -33,13 +33,13 @@ window.SFBilling = (function () {
     neon:       'fableris.dlc.neon',
     pirates:    'fableris.dlc.pirates',
     cosmos:     'fableris.dlc.cosmos',
-    fantasy:    'fableris.dlc.fantasy',
+    abysses:    'fableris.dlc.abysses',
     wilds:      'fableris.dlc.wilds'
   };
 
   const FREE_PACKS        = ['free', 'kids'];
   // Packs sans histoires : visibles en « bientôt » mais pas à la vente.
-  const COMING_SOON_PACKS = ['neon', 'pirates', 'fantasy', 'wilds'];
+  const COMING_SOON_PACKS = ['neon', 'pirates', 'abysses', 'wilds'];
   // Produits réellement créés et actifs dans la Play Console.
   const PLAY_PRODUCT_PACKS = ['cinq_lames', 'cosmos'];
   const CACHE_KEY     = 'sf_unlocked_packs';
