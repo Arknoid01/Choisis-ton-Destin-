@@ -1,0 +1,290 @@
+{
+  "name": "Las Profundidades — Episodio 2: El casco agrietado",
+  "kids": false,
+  "askPlayerName": true,
+  "pack": "abysses",
+  "stats": [
+    {
+      "id": "audace",
+      "label": "Audacia",
+      "start": 15,
+      "max": 100,
+      "color": "#e8934a"
+    },
+    {
+      "id": "lucidite",
+      "label": "Lucidez",
+      "start": 10,
+      "max": 100,
+      "color": "#2a8aa8"
+    }
+  ],
+  "theme": {
+    "bg": "#040810",
+    "bg2": "#081018",
+    "bg3": "#0c1824",
+    "bg4": "#122030",
+    "border": "#1e4058",
+    "accent": "#e8934a",
+    "accent2": "#2a8aa8",
+    "accent3": "#6dfabc",
+    "text": "#d8e8f0",
+    "text2": "#6890a8",
+    "text3": "#3a5868"
+  },
+  "scenes": {
+    "reveil": {
+      "id": "reveil",
+      "title": "La bodega",
+      "location": "DERELICTA — BODEGA INUNDADA · 140 m",
+      "narrator": "En un navío muerto, el silencio a veces es el único aliado que no miente.",
+      "text": "Recuperas el conocimiento en la bolsada de aire de la Derelicta.\n\nLas coordenadas del portal aún brillan en tu HUD:\n\n**SECTOR 7 — 800 m**\n\nLa bodega se inclina bajo tu peso. El agua se filtra por las juntas — gota tras gota, regular, paciente.\n\nTu linterna: **38 %**. Aire: quizá dos horas.\n\nPara descender hacia el sector 7, hay que atravesar el casco — hacia proa, donde la **fisura principal** abrió la Derelicta al océano.",
+      "isStart": true,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Avanzar de inmediato por el pasillo inundado",
+          "vers": "couloir",
+          "effects": [{ "stat": "audace", "val": 10 }],
+          "clickEffect": "pulse"
+        },
+        {
+          "text": "Probar la radio una última vez antes de moverte",
+          "vers": "radio_decalee",
+          "effects": [{ "stat": "lucidite", "val": 10 }],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 400,
+      "y": 40
+    },
+    "radio_decalee": {
+      "id": "radio_decalee",
+      "title": "Voz desfasada",
+      "location": "DERELICTA — BODEGA · RADIO",
+      "narrator": "Cuando las comunicaciones fallan, ya no sabes quién habla — ni cuándo.",
+      "text": "Abres el canal.\n\nEstática. Respiración. Luego tu propia voz — **grabada**, distorsionada:\n\n*« —…800 metros… demasiado tarde… no atravieses la— »*\n\nLa frase se corta. Aún no lo has **dicho**. Aún no lo has **pensado**.\n\nUn segundo después, la voz familiar vuelve, clara, presente:\n\n*« —¿{{player}}? Sigues en la bodega. Bien. Avanza. — »*\n\nComo si te hubiera visto dudar.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Anotar el mensaje desfasado y avanzar",
+          "vers": "couloir",
+          "effects": [{ "stat": "lucidite", "val": 8 }],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 280,
+      "y": 140
+    },
+    "couloir": {
+      "id": "couloir",
+      "title": "Pasillo inundado",
+      "location": "DERELICTA — PASARELA B · 145 m",
+      "narrator": "En un pasillo inclinado, el agua siempre elige bando.",
+      "text": "Sales de la bodega.\n\nEl pasillo B está inundado hasta el pecho. Tus botas magnéticas tropiezan con el metal liso.\n\nPaneles de alarma parpadean sin sonido: la Derelicta olvidó cómo gritar.\n\nA lo lejos, un retumbo continuo — no es el sonar. No es el metal. Algo como un **soplo** a través de una herida.\n\nLa fisura principal. Cerca.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Dirigirte hacia el retumbo",
+          "vers": "fissure",
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 400,
+      "y": 240
+    },
+    "fissure": {
+      "id": "fissure",
+      "title": "La fisura principal",
+      "location": "DERELICTA — COSTADO DE BARBOR · 155 m",
+      "narrator": "Una brecha en un navío es una boca. El océano sabe comer.",
+      "text": "Llegas frente a ella.\n\nLa fisura atraviesa el casco en cinco metros — borde de metal retorcido, agua negra que **entra** en un chorro compacto, casi silencioso a esta profundidad.\n\nAl otro lado: el océano. Sin paso lateral visible.\n\nTu HUD superpone dos rutas:\n\n**A — Cruce directo** (15 m en el chorro)\n**B — Conducto técnico C-12** (desvío · +8 min · batería)\n\nTu linterna: **34 %**.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Atravesar la fisura a nado — directo",
+          "vers": "traversee",
+          "effects": [{ "stat": "audace", "val": 12 }],
+          "clickEffect": "pulse"
+        },
+        {
+          "text": "Tomar el conducto C-12 — rodear",
+          "vers": "gaine",
+          "effects": [{ "stat": "lucidite", "val": 12 }],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 400,
+      "y": 340
+    },
+    "traversee": {
+      "id": "traversee",
+      "title": "En el chorro",
+      "location": "FISURA — AGUA VIVA · 155 m",
+      "narrator": "Atravesar una herida abierta es aceptar ser arrastrado/a un instante.",
+      "text": "Te lanzas al chorro.\n\nLa presión te golpea de lado — vértigo, aliento cortado. Tu linterna barre burbujas, restos de espuma, **nada sólido**.\n\nApagas un instante para ahorrar — reflejo.\n\nEn la oscuridad de la corriente, algo **roza** tu traje. Largo. Flexible. Demasiado largo para un cable.\n\nEl agua cambia de temperatura — apenas — como un soplo.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "🔦 Encender — ver qué te tocó",
+          "vers": "audace_jet",
+          "effects": [{ "stat": "audace", "val": 15 }],
+          "clickEffect": "pulse"
+        },
+        {
+          "text": "🫧 Dejarte llevar por la corriente — sin luz",
+          "vers": "lucidite_jet",
+          "effects": [{ "stat": "lucidite", "val": 15 }],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 280,
+      "y": 440
+    },
+    "audace_jet": {
+      "id": "audace_jet",
+      "title": "Destello en la corriente",
+      "location": "FISURA — SALIDA · 158 m",
+      "narrator": "A veces ver es confirmar que habría sido mejor seguir nadando.",
+      "text": "Enciendes.\n\nUn fragmento de piel pálida — lisa, sin escamas visibles — desaparece **en** el chorro, tan rápido que dudas.\n\nSin cabeza. Sin cola. Solo la **parte** que tu luz tocó una fracción de segundo.\n\nLa radio crepita:\n\n*« —No te pares. — »*\n\nSales al otro lado, jadeando. Batería: **29 %**.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "flash",
+      "choices": [
+        {
+          "text": "Llegar al esclusa antes de que falle la batería",
+          "vers": "sas",
+          "effects": [{ "stat": "audace", "val": 8 }],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 200,
+      "y": 540
+    },
+    "lucidite_jet": {
+      "id": "lucidite_jet",
+      "title": "Arrastrado/a por la corriente",
+      "location": "FISURA — SALIDA · 158 m",
+      "narrator": "Cerrar los ojos a veces es la única forma de mantener el rumbo.",
+      "text": "No enciendes.\n\nLa corriente te arrastra — codo derecho, cabeza baja, manos sobre el traje. Cuentas. Cinco segundos. Diez.\n\nEl chorro cambia de textura: menos violento. **Salida.**\n\nTe detienes en una cavidad oscura, fuera de la corriente. Nadie te tocó — **crees**.\n\nUn ping lejano. ¿El tuyo? No. Demasiado grave.\n\nBatería: **31 %** — ganaste dos puntos quedándote a oscuras.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Encender brevemente — localizar el esclusa",
+          "vers": "sas",
+          "effects": [{ "stat": "lucidite", "val": 8 }],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 360,
+      "y": 540
+    },
+    "gaine": {
+      "id": "gaine",
+      "title": "Conducto C-12",
+      "location": "DERELICTA — CONDUCTOS TÉCNICOS · 152 m",
+      "narrator": "Los pasajes estrechos no ofrecen vista — solo tiempo para pensar.",
+      "text": "La escotilla C-12 chirría. Te arrastras por un conducto apenas más ancho que tus hombros.\n\nAquí no hay chorro — solo el agua que sube lentamente, centímetro a centímetro.\n\nApagas la linterna. Ahorro.\n\nEn la oscuridad, el casco **vibra** — crujido largo, como un hueso que cede. La fisura se ensancha un milímetro. Lo **sientes** más de lo que lo oyes.\n\nLa radio murmura, casi ahogada:\n\n*« —…desvío correcto… oyes el casco… — »*",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "🔦 Encender — medir la fuga",
+          "vers": "gaine_lumiere",
+          "effects": [{ "stat": "audace", "val": 10 }],
+          "clickEffect": "pulse"
+        },
+        {
+          "text": "🫧 Avanzar a ciegas — salir del conducto",
+          "vers": "gaine_sombre",
+          "effects": [{ "stat": "lucidite", "val": 10 }],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 520,
+      "y": 440
+    },
+    "gaine_lumiere": {
+      "id": "gaine_lumiere",
+      "title": "Fisura que respira",
+      "location": "CONDUCTOS — UNIÓN C-12 · 154 m",
+      "narrator": "Ver crecer una fisura es medir el tiempo que te queda.",
+      "text": "Enciendes.\n\nA través de una rejilla, ves la fisura — el agua entra por oleadas, regulares, **como una respiración**.\n\nEn el borde del metal, marcas: largas, paralelas. ¿Arañazos? ¿Corrosión? Tres veces más largas que tu mano.\n\nNo te quedas a contar.\n\nBatería: **28 %**.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Salir del conducto hacia el esclusa",
+          "vers": "sas",
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 520,
+      "y": 540
+    },
+    "gaine_sombre": {
+      "id": "gaine_sombre",
+      "title": "A ciegas",
+      "location": "CONDUCTOS — SALIDA C-12 · 156 m",
+      "narrator": "Cuando no ves nada, cada metro cuenta doble.",
+      "text": "Avanzas sin luz — mano izquierda en el conducto, derecha delante del rostro.\n\nTres metros. Cinco. Siete.\n\nTus dedos encuentran una escala. **Salida.**\n\nNo viste los arañazos. No viste respirar la fisura.\n\nQuizá es mejor.\n\nBatería: **32 %**.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Abrir la escotilla — llegar al esclusa",
+          "vers": "sas",
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 600,
+      "y": 540
+    },
+    "sas": {
+      "id": "sas",
+      "title": "Esclusa exterior",
+      "location": "DERELICTA — ESCLUSA 3 · 180 m",
+      "narrator": "Un esclusa es una frontera. De un lado el navío. Del otro, todo.",
+      "text": "Entras en la esclusa 3 — medio inundada, pero estable.\n\nFuera, por el ojo de buey: el océano. Negro total. Y más abajo, muy abajo, un **resplandor naranja** — débil, pulsado, como un latido lejano.\n\n**SECTOR 7.** Estás en la ruta.\n\nEl HUD recalcula:\n\n**620 m restantes · prof. actual 180 m · rumbo 214°**\n\nLa radio:\n\n*« —{{player}}. Próximo tramo: el descenso. El sonar a veces miente. Tú, no. — »*\n\nLuego silencio.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Inundar el esclusa y sumergirte hacia el resplandor",
+          "vers": "fin_coque",
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 400,
+      "y": 640
+    },
+    "fin_coque": {
+      "id": "fin_coque",
+      "title": "Al otro lado",
+      "location": "OCÉANO DE NARHEX — 185 m",
+      "narrator": "Abandonar un navío muerto es aceptar que el verdadero peligro no estaba dentro.",
+      "text": "Abres el esclusa.\n\nEl agua te traga — limpia, fría, **inmensa**.\n\nLa Derelicta desaparece sobre ti, silueta que se funde en la oscuridad.\n\nAbajo, el resplandor naranja aún pulsa. 620 metros. Sector 7.\n\nTu linterna: **26 %**. Suficiente para descender. No suficiente para volver.\n\n**FIN EPISODIO 2 — El casco agrietado**\n\n*Episodio 3: Descenso — próximamente*",
+      "isStart": false,
+      "isEnd": true,
+      "transition": "fade",
+      "choices": [],
+      "x": 400,
+      "y": 740
+    }
+  }
+}

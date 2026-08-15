@@ -1,0 +1,290 @@
+{
+  "name": "The Depths — Episode 2: The Cracked Hull",
+  "kids": false,
+  "askPlayerName": true,
+  "pack": "abysses",
+  "stats": [
+    {
+      "id": "audace",
+      "label": "Boldness",
+      "start": 15,
+      "max": 100,
+      "color": "#e8934a"
+    },
+    {
+      "id": "lucidite",
+      "label": "Clarity",
+      "start": 10,
+      "max": 100,
+      "color": "#2a8aa8"
+    }
+  ],
+  "theme": {
+    "bg": "#040810",
+    "bg2": "#081018",
+    "bg3": "#0c1824",
+    "bg4": "#122030",
+    "border": "#1e4058",
+    "accent": "#e8934a",
+    "accent2": "#2a8aa8",
+    "accent3": "#6dfabc",
+    "text": "#d8e8f0",
+    "text2": "#6890a8",
+    "text3": "#3a5868"
+  },
+  "scenes": {
+    "reveil": {
+      "id": "reveil",
+      "title": "The Hold",
+      "location": "DERELICTA — FLOODED HOLD · 140 m",
+      "narrator": "On a dead ship, silence is sometimes the only ally that doesn't lie.",
+      "text": "You regain consciousness in the Derelicta's air pocket.\n\nThe portal coordinates still glow on your HUD:\n\n**SECTOR 7 — 800 m**\n\nThe hold tilts under your weight. Water seeps through the seams — drop after drop, steady, patient.\n\nYour lamp: **38%**. Air: maybe two hours.\n\nTo descend toward sector 7, you must cross the hull — forward, where the **main crack** opened the Derelicta to the ocean.",
+      "isStart": true,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Move forward immediately into the flooded corridor",
+          "vers": "couloir",
+          "effects": [{ "stat": "audace", "val": 10 }],
+          "clickEffect": "pulse"
+        },
+        {
+          "text": "Test the radio one last time before moving",
+          "vers": "radio_decalee",
+          "effects": [{ "stat": "lucidite", "val": 10 }],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 400,
+      "y": 40
+    },
+    "radio_decalee": {
+      "id": "radio_decalee",
+      "title": "Offset Voice",
+      "location": "DERELICTA — HOLD · RADIO",
+      "narrator": "When communications glitch, you no longer know who is speaking — or when.",
+      "text": "You open the channel.\n\nStatic. Breathing. Then your own voice — **recorded**, distorted:\n\n*« —…800 metres… too late… don't cross the— »*\n\nThe sentence cuts off. You haven't **said** that yet. You haven't **thought** it.\n\nA second later, the familiar voice returns, clear, present:\n\n*« —{{player}}? You're still in the hold. Good. Move forward. — »*\n\nAs if it had seen you hesitate.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Note the offset message and move forward",
+          "vers": "couloir",
+          "effects": [{ "stat": "lucidite", "val": 8 }],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 280,
+      "y": 140
+    },
+    "couloir": {
+      "id": "couloir",
+      "title": "Flooded Corridor",
+      "location": "DERELICTA — CORRIDOR B · 145 m",
+      "narrator": "In a tilted corridor, water always picks a side.",
+      "text": "You leave the hold.\n\nCorridor B is flooded to your chest. Your magnetic boots struggle on the smooth metal.\n\nAlarm panels blink without sound: the Derelicta has forgotten how to scream.\n\nIn the distance, a continuous rumble — not sonar. Not metal. Something like a **breath** through a wound.\n\nThe main crack. Close.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Head toward the rumble",
+          "vers": "fissure",
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 400,
+      "y": 240
+    },
+    "fissure": {
+      "id": "fissure",
+      "title": "The Main Crack",
+      "location": "DERELICTA — PORT SIDE · 155 m",
+      "narrator": "A breach in a ship is a mouth. The ocean knows how to feed.",
+      "text": "You arrive facing it.\n\nThe crack runs through the hull for five metres — twisted metal edge, black water **pouring** in a compact jet, almost silent at this depth.\n\nOn the other side: the ocean. No visible lateral passage.\n\nYour HUD overlays two routes:\n\n**A — Direct crossing** (15 m through the jet)\n**B — Technical duct C-12** (detour · +8 min · battery)\n\nYour lamp: **34%**.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Swim through the crack — direct",
+          "vers": "traversee",
+          "effects": [{ "stat": "audace", "val": 12 }],
+          "clickEffect": "pulse"
+        },
+        {
+          "text": "Take duct C-12 — go around",
+          "vers": "gaine",
+          "effects": [{ "stat": "lucidite", "val": 12 }],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 400,
+      "y": 340
+    },
+    "traversee": {
+      "id": "traversee",
+      "title": "In the Jet",
+      "location": "CRACK — FAST WATER · 155 m",
+      "narrator": "Crossing an open wound means accepting you'll be carried for an instant.",
+      "text": "You dive into the jet.\n\nPressure hits you sideways — dizziness, breath cut short. Your lamp sweeps bubbles, foam fragments, **nothing solid**.\n\nYou switch off for a moment to save power — reflex.\n\nIn the black of the current, something **brushes** your suit. Long. Flexible. Too long for a cable.\n\nThe water changes temperature — barely — like a breath.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "🔦 Switch on — see what touched you",
+          "vers": "audace_jet",
+          "effects": [{ "stat": "audace", "val": 15 }],
+          "clickEffect": "pulse"
+        },
+        {
+          "text": "🫧 Let the current carry you — without light",
+          "vers": "lucidite_jet",
+          "effects": [{ "stat": "lucidite", "val": 15 }],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 280,
+      "y": 440
+    },
+    "audace_jet": {
+      "id": "audace_jet",
+      "title": "Flash in the Current",
+      "location": "CRACK — EXIT · 158 m",
+      "narrator": "Sometimes seeing means confirming you should have kept swimming.",
+      "text": "You switch on.\n\nA patch of pale skin — smooth, no visible scales — vanishes **into** the jet, so fast you doubt it.\n\nNo head. No tail. Just the **part** your light touched for a fraction of a second.\n\nThe radio crackles:\n\n*« —Don't stop. — »*\n\nYou burst out the other side, gasping. Battery: **29%**.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "flash",
+      "choices": [
+        {
+          "text": "Reach the airlock before the battery dies",
+          "vers": "sas",
+          "effects": [{ "stat": "audace", "val": 8 }],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 200,
+      "y": 540
+    },
+    "lucidite_jet": {
+      "id": "lucidite_jet",
+      "title": "Carried by the Current",
+      "location": "CRACK — EXIT · 158 m",
+      "narrator": "Closing your eyes is sometimes the only way to hold your course.",
+      "text": "You don't switch on.\n\nThe current carries you — right elbow, head down, hands on your suit. You count. Five seconds. Ten.\n\nThe jet changes texture: less violent. **Exit.**\n\nYou stop in a dark cavity, out of the current. Nothing touched you — you **think**.\n\nA distant ping. Yours? No. Too low.\n\nBattery: **31%** — you saved two points by staying in the dark.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Switch on briefly — locate the airlock",
+          "vers": "sas",
+          "effects": [{ "stat": "lucidite", "val": 8 }],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 360,
+      "y": 540
+    },
+    "gaine": {
+      "id": "gaine",
+      "title": "Duct C-12",
+      "location": "DERELICTA — TECHNICAL DUCTS · 152 m",
+      "narrator": "Narrow passages offer no view — only time to think.",
+      "text": "The C-12 hatch groans. You crawl through a conduit barely wider than your shoulders.\n\nNo jet here — just water rising slowly, centimetre by centimetre.\n\nYou switch off the lamp. Conservation.\n\nIn the dark, the hull **vibrates** — long crack, like a bone giving way. The crack widens by a millimetre. You **feel** it more than you hear it.\n\nThe radio murmurs, almost drowned:\n\n*« —…correct detour… can you hear the hull… — »*",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "🔦 Switch on — measure the leak",
+          "vers": "gaine_lumiere",
+          "effects": [{ "stat": "audace", "val": 10 }],
+          "clickEffect": "pulse"
+        },
+        {
+          "text": "🫧 Move forward blind — exit the duct",
+          "vers": "gaine_sombre",
+          "effects": [{ "stat": "lucidite", "val": 10 }],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 520,
+      "y": 440
+    },
+    "gaine_lumiere": {
+      "id": "gaine_lumiere",
+      "title": "Breathing Crack",
+      "location": "DUCTS — JUNCTION C-12 · 154 m",
+      "narrator": "Watching a crack grow means measuring the time you have left.",
+      "text": "You switch on.\n\nThrough a grille, you see the crack — water entering in waves, steady, **like a breath**.\n\nOn the metal edge, marks: long, parallel. Scratches? Corrosion? Three times longer than your hand.\n\nYou don't stay to count.\n\nBattery: **28%**.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Exit the duct toward the airlock",
+          "vers": "sas",
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 520,
+      "y": 540
+    },
+    "gaine_sombre": {
+      "id": "gaine_sombre",
+      "title": "Blind",
+      "location": "DUCTS — C-12 EXIT · 156 m",
+      "narrator": "When you see nothing, every metre counts double.",
+      "text": "You move forward without light — left hand on the conduit, right in front of your face.\n\nThree metres. Five. Seven.\n\nYour fingers find a ladder. **Exit.**\n\nYou didn't see the scratches. You didn't see the crack breathing.\n\nMaybe that's better.\n\nBattery: **32%**.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Open the hatch — reach the airlock",
+          "vers": "sas",
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 600,
+      "y": 540
+    },
+    "sas": {
+      "id": "sas",
+      "title": "External Airlock",
+      "location": "DERELICTA — AIRLOCK 3 · 180 m",
+      "narrator": "An airlock is a boundary. On one side, the ship. On the other, everything.",
+      "text": "You enter airlock 3 — half-flooded, but stable.\n\nOutside, through the porthole: the ocean. Total black. And lower, very low, an **orange glow** — faint, pulsed, like a distant heartbeat.\n\n**SECTOR 7.** You're on the route.\n\nThe HUD recalculates:\n\n**620 m remaining · current depth 180 m · heading 214°**\n\nThe radio:\n\n*« —{{player}}. Next stage: the descent. Sonar sometimes lies. You don't. — »*\n\nThen silence.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Flood the airlock and dive toward the glow",
+          "vers": "fin_coque",
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 400,
+      "y": 640
+    },
+    "fin_coque": {
+      "id": "fin_coque",
+      "title": "On the Other Side",
+      "location": "NARHEX OCEAN — 185 m",
+      "narrator": "Leaving a dead ship means accepting the real danger wasn't inside.",
+      "text": "You open the airlock.\n\nThe water swallows you — clean, cold, **immense**.\n\nThe Derelicta disappears above you, a silhouette melting into the black.\n\nBelow, the orange glow still pulses. 620 metres. Sector 7.\n\nYour lamp: **26%**. Enough to descend. Not enough to return.\n\n**END EPISODE 2 — The Cracked Hull**\n\n*Episode 3: Descent — coming soon*",
+      "isStart": false,
+      "isEnd": true,
+      "transition": "fade",
+      "choices": [],
+      "x": 400,
+      "y": 740
+    }
+  }
+}

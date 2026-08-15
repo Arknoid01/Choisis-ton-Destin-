@@ -1,0 +1,290 @@
+{
+  "name": "Les Profondeurs — Épisode 2 : La Coque fissurée",
+  "kids": false,
+  "askPlayerName": true,
+  "pack": "abysses",
+  "stats": [
+    {
+      "id": "audace",
+      "label": "Audace",
+      "start": 15,
+      "max": 100,
+      "color": "#e8934a"
+    },
+    {
+      "id": "lucidite",
+      "label": "Lucidité",
+      "start": 10,
+      "max": 100,
+      "color": "#2a8aa8"
+    }
+  ],
+  "theme": {
+    "bg": "#040810",
+    "bg2": "#081018",
+    "bg3": "#0c1824",
+    "bg4": "#122030",
+    "border": "#1e4058",
+    "accent": "#e8934a",
+    "accent2": "#2a8aa8",
+    "accent3": "#6dfabc",
+    "text": "#d8e8f0",
+    "text2": "#6890a8",
+    "text3": "#3a5868"
+  },
+  "scenes": {
+    "reveil": {
+      "id": "reveil",
+      "title": "La soute",
+      "location": "DERELICTA — SOUTE INONDÉE · 140 m",
+      "narrator": "Sur un vaisseau mort, le silence est parfois le seul allié qui ne ment pas.",
+      "text": "Tu reprends conscience dans la poche d'air de la Derelicta.\n\nLes coordonnées du portail brillent encore sur ton HUD :\n\n**SECTEUR 7 — 800 m**\n\nLa soute incline sous ton poids. De l'eau suinte par les joints — goutte après goutte, régulière, patiente.\n\nTa lampe : **38 %**. L'air : peut-être deux heures.\n\nPour descendre vers le secteur 7, il faut traverser la coque — vers l'avant, là où la **fissure principale** a ouvert la Derelicta à l'océan.",
+      "isStart": true,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Avancer tout de suite dans le couloir inondé",
+          "vers": "couloir",
+          "effects": [{ "stat": "audace", "val": 10 }],
+          "clickEffect": "pulse"
+        },
+        {
+          "text": "Tester la radio une dernière fois avant de bouger",
+          "vers": "radio_decalee",
+          "effects": [{ "stat": "lucidite", "val": 10 }],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 400,
+      "y": 40
+    },
+    "radio_decalee": {
+      "id": "radio_decalee",
+      "title": "Voix décalée",
+      "location": "DERELICTA — SOUTE · RADIO",
+      "narrator": "Quand les communications déconnent, on ne sait plus qui parle — ni quand.",
+      "text": "Tu ouvres le canal.\n\nStatic. Respiration. Puis ta propre voix — **enregistrée**, déformée :\n\n*« —…800 mètres… trop tard… ne traverse pas la— »*\n\nLa phrase se coupe. Tu n'as **pas** encore dit ça. Tu ne l'as **pas** pensé.\n\nUne seconde plus tard, la voix familière revient, claire, présente :\n\n*« —{{player}} ? Tu es encore dans la soute. Bien. Avance. — »*\n\nComme si elle t'avait vue hésiter.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Noter le message décalé et avancer",
+          "vers": "couloir",
+          "effects": [{ "stat": "lucidite", "val": 8 }],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 280,
+      "y": 140
+    },
+    "couloir": {
+      "id": "couloir",
+      "title": "Couloir inondé",
+      "location": "DERELICTA — COURSIVE B · 145 m",
+      "narrator": "Dans un couloir incliné, l'eau choisit toujours son camp.",
+      "text": "Tu quittes la soute.\n\nLe couloir B est inondé jusqu'à la poitrine. Tes bottes magnétiques peinent sur le métal lisse.\n\nDes panneaux d'alarme clignotent sans son : la Derelicta a oublié comment crier.\n\nAu loin, un grondement continu — pas le sonar. Pas le métal. Quelque chose comme un **souffle** à travers une plaie.\n\nLa fissure principale. Proche.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Te diriger vers le grondement",
+          "vers": "fissure",
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 400,
+      "y": 240
+    },
+    "fissure": {
+      "id": "fissure",
+      "title": "La fissure principale",
+      "location": "DERELICTA — FLANC BABBORD · 155 m",
+      "narrator": "Une brèche dans un vaisseau, c'est une bouche. L'océan sait manger.",
+      "text": "Tu arrives face à elle.\n\nLa fissure traverse la coque sur cinq mètres — arête de métal tordue, eau noire qui **entre** en jet compact, presque silencieux à cette profondeur.\n\nDe l'autre côté : l'océan. Pas de passage latéral visible.\n\nTon HUD propose deux routes en surimpression :\n\n**A — Traversée directe** (15 m dans le jet)\n**B — Gaine technique C-12** (contournement · +8 min · batterie)\n\nTa lampe : **34 %**.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Traverser la fissure à la nage — direct",
+          "vers": "traversee",
+          "effects": [{ "stat": "audace", "val": 12 }],
+          "clickEffect": "pulse"
+        },
+        {
+          "text": "Emprunter la gaine C-12 — contourner",
+          "vers": "gaine",
+          "effects": [{ "stat": "lucidite", "val": 12 }],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 400,
+      "y": 340
+    },
+    "traversee": {
+      "id": "traversee",
+      "title": "Dans le jet",
+      "location": "FISSURE — EAU VIVE · 155 m",
+      "narrator": "Traverser une plaie ouverte, c'est accepter d'être emporté·e un instant.",
+      "text": "Tu plonges dans le jet.\n\nLa pression te frappe latéralement — tournis, souffle coupé. Ta lampe balaie des bulles, des éclats de mousse, **rien de solide**.\n\nTu éteins un instant pour économiser — réflexe.\n\nDans le noir du courant, quelque chose **effleure** ta combinaison. Long. Souple. Trop long pour un câble.\n\nL'eau change de température — à peine — comme un souffle.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "🔦 Rallumer — voir ce qui t'a touché·e",
+          "vers": "audace_jet",
+          "effects": [{ "stat": "audace", "val": 15 }],
+          "clickEffect": "pulse"
+        },
+        {
+          "text": "🫧 Laisser le courant t'emporter — sans lumière",
+          "vers": "lucidite_jet",
+          "effects": [{ "stat": "lucidite", "val": 15 }],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 280,
+      "y": 440
+    },
+    "audace_jet": {
+      "id": "audace_jet",
+      "title": "Éclair dans le courant",
+      "location": "FISSURE — SORTIE · 158 m",
+      "narrator": "Parfois voir, c'est confirmer qu'on aurait mieux fait nager.",
+      "text": "Tu rallumes.\n\nUn pan de peau pâle — lisse, sans écailles visibles — disparaît **dans** le jet, si vite que tu doutes.\n\nPas de tête. Pas de queue. Juste la **partie** que ta lumière a touchée une fraction de seconde.\n\nLa radio grésille :\n\n*« —Ne t'arrête pas. — »*\n\nTu débouche de l'autre côté, haletant·e. Batterie : **29 %**.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "flash",
+      "choices": [
+        {
+          "text": "Gagner le sas avant que la batterie lâche",
+          "vers": "sas",
+          "effects": [{ "stat": "audace", "val": 8 }],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 200,
+      "y": 540
+    },
+    "lucidite_jet": {
+      "id": "lucidite_jet",
+      "title": "Porté par le courant",
+      "location": "FISSURE — SORTIE · 158 m",
+      "narrator": "Fermer les yeux, c'est parfois la seule façon de garder le cap.",
+      "text": "Tu ne rallumes pas.\n\nLe courant te porte — coude droit, tête baissée, mains sur la combinaison. Tu comptes. Cinq secondes. Dix.\n\nLe jet change de texture : moins violent. **Sortie.**\n\nTu t'arrêtes dans une cavité sombre, hors du courant. Personne ne t'a touché·e — tu **crois**.\n\nUn ping lointain. Le tien ? Non. Trop grave.\n\nBatterie : **31 %** — tu as gagné deux points en restant dans le noir.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Allumer brièvement — repérer le sas",
+          "vers": "sas",
+          "effects": [{ "stat": "lucidite", "val": 8 }],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 360,
+      "y": 540
+    },
+    "gaine": {
+      "id": "gaine",
+      "title": "Gaine C-12",
+      "location": "DERELICTA — GAINES TECHNIQUES · 152 m",
+      "narrator": "Les passages étroits n'offrent pas de vue — seulement du temps pour réfléchir.",
+      "text": "La trappe C-12 grince. Tu rampes dans un conduit à peine plus large que tes épaules.\n\nPas de jet ici — juste l'eau qui monte lentement, centimètre par centimètre.\n\nTu éteins la lampe. Économie.\n\nDans le noir, la coque **vibre** — craquement long, comme un os qui cède. La fissure s'élargit d'un millimètre. Tu le **sens** plus que tu ne l'entends.\n\nLa radio murmure, presque noyée :\n\n*« —…contournement correct… tu entends la coque… — »*",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "🔦 Rallumer — mesurer la fuite",
+          "vers": "gaine_lumiere",
+          "effects": [{ "stat": "audace", "val": 10 }],
+          "clickEffect": "pulse"
+        },
+        {
+          "text": "🫧 Avancer à l'aveugle — sortir de la gaine",
+          "vers": "gaine_sombre",
+          "effects": [{ "stat": "lucidite", "val": 10 }],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 520,
+      "y": 440
+    },
+    "gaine_lumiere": {
+      "id": "gaine_lumiere",
+      "title": "Fissure qui respire",
+      "location": "GAINES — JONCTION C-12 · 154 m",
+      "narrator": "Voir une fissure grandir, c'est mesurer le temps qu'il te reste.",
+      "text": "Tu rallumes.\n\nÀ travers une grille, tu vois la fissure — l'eau entre par vagues, régulières, **comme une respiration**.\n\nSur le bord du métal, des marques : longues, parallèles. Griffures ? Corrosion ? Trois fois plus longues que ta main.\n\nTu ne restes pas pour compter.\n\nBatterie : **28 %**.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Sortir de la gaine vers le sas",
+          "vers": "sas",
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 520,
+      "y": 540
+    },
+    "gaine_sombre": {
+      "id": "gaine_sombre",
+      "title": "À l'aveugle",
+      "location": "GAINES — SORTIE C-12 · 156 m",
+      "narrator": "Quand on ne voit rien, chaque mètre compte double.",
+      "text": "Tu avances sans lumière — main gauche sur le conduit, droite devant le visage.\n\nTrois mètres. Cinq. Sept.\n\nTes doigts trouvent une échelle. **Sortie.**\n\nTu n'as pas vu les griffures. Tu n'as pas vu la fissure respirer.\n\nPeut-être que c'est mieux.\n\nBatterie : **32 %**.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Ouvrir la trappe — gagner le sas",
+          "vers": "sas",
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 600,
+      "y": 540
+    },
+    "sas": {
+      "id": "sas",
+      "title": "Sas extérieur",
+      "location": "DERELICTA — SAS 3 · 180 m",
+      "narrator": "Un sas, c'est une frontière. De l'un côté le vaisseau. De l'autre, tout.",
+      "text": "Tu entres dans le sas 3 — mi-inondé, mais stable.\n\nDehors, par le hublot : l'océan. Noir total. Et plus bas, très bas, une **lueur orange** — faible, pulsée, comme un heartbeat lointain.\n\n**SECTEUR 7.** Tu es sur la route.\n\nLe HUD recalcule :\n\n**620 m restants · prof. actuelle 180 m · cap 214°**\n\nLa radio :\n\n*« —{{player}}. Prochain palier : la descente. Le sonar ment parfois. Toi, non. — »*\n\nPuis silence.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Vider le sas et plonger vers la lueur",
+          "vers": "fin_coque",
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 400,
+      "y": 640
+    },
+    "fin_coque": {
+      "id": "fin_coque",
+      "title": "De l'autre côté",
+      "location": "OCÉAN DE NARHEX — 185 m",
+      "narrator": "Quitter un vaisseau mort, c'est accepter que le vrai danger n'était pas dedans.",
+      "text": "Tu ouvres le sas.\n\nL'eau t'avale — propre, froide, **immense**.\n\nLa Derelicta disparaît au-dessus de toi, silhouette qui se fond dans le noir.\n\nEn bas, la lueur orange pulse encore. 620 mètres. Secteur 7.\n\nTa lampe : **26 %**. Assez pour descendre. Pas assez pour revenir.\n\n**FIN ÉPISODE 2 — La Coque fissurée**\n\n*Épisode 3 : Descente — bientôt*",
+      "isStart": false,
+      "isEnd": true,
+      "transition": "fade",
+      "choices": [],
+      "x": 400,
+      "y": 740
+    }
+  }
+}
