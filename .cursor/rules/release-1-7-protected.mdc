@@ -1,0 +1,37 @@
+---
+description: Branche release 1.7 protégée — ne pas utiliser sans autorisation explicite du propriétaire
+alwaysApply: true
+---
+
+# Branche `1.7` — INTERDITE sans autorisation
+
+La branche **`1.7`** est une branche de **release future**. Elle ne doit **pas** être touchée par un agent IA sauf autorisation **explicite** du propriétaire du dépôt.
+
+## Interdictions (par défaut)
+
+Ne **jamais** :
+
+- `git checkout 1.7`, créer une branche depuis `1.7`, ou pousser sur `1.7`
+- Ouvrir ou mettre à jour une PR dont la base **ou** la head est `1.7`
+- Merger, rebaser ou cherry-pick entre `1.7` et `main`
+- Copier du code ou des commits de `1.7` vers `main` (ou l'inverse)
+- Bumper la version affichée vers `1.7` sur `main`
+
+## Branche de travail par défaut
+
+- **`main`** uniquement pour tout développement courant et les PR agents.
+- Branches feature : `cursor/<nom>-0aad` **depuis `main`**.
+
+## Autorisation explicite requise
+
+Agir sur `1.7` **seulement** si le propriétaire a clairement écrit une phrase du type :
+
+- « autorise la branche 1.7 »
+- « travail sur 1.7 autorisé »
+- « tu peux merger / PR vers 1.7 »
+
+Sans cette formulation explicite dans le message utilisateur courant, **refuser** et proposer de travailler sur `main`.
+
+## Release (humain)
+
+Le décalage `1.7` → `main` au moment de la mise à jour est une opération **manuelle** du propriétaire (merge avec label `release-1.7-authorized` sur GitHub si CI active).
