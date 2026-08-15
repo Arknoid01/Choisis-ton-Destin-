@@ -77,6 +77,35 @@ window.SFShared = (function () {
     return parseInt(stats.storiesFinished || '0', 10) || 0;
   }
 
+  function getEndingsFoundCount() {
+    migrateStoriesFinishedCount();
+    const stats = readStats();
+    return parseInt(stats.endingsFound || '0', 10) || 0;
+  }
+
+  /** Sauvegardes locales indiquant qu'une fin a été atteinte (secours si stats absentes) */
+  function hasEndingReachedInSaves() {
+    try {
+      for (let i = 0; i < localStorage.length; i++) {
+        const key = localStorage.key(i);
+        if (!key || !key.startsWith('sf_save_')) continue;
+        const raw = localStorage.getItem(key);
+        if (!raw) continue;
+        const data = JSON.parse(raw);
+        if (data && (data.reachedEnd === true || data.atEnd === true)) return true;
+      }
+    } catch (e) {}
+    return false;
+  }
+
+  function hasCompletedStoryOrEnding() {
+    if (getStoriesFinishedCount() > 0) return true;
+    if (getEndingsFoundCount() > 0) return true;
+    const legacy = parseInt(lsGet(LEGACY_FINISH_KEY) || '0', 10) || 0;
+    if (legacy > 0) return true;
+    return hasEndingReachedInSaves();
+  }
+
   /** À appeler après trackStats('story_finish') — retourne le total unifié */
   function syncStoriesFinishedCount() {
     migrateStoriesFinishedCount();
@@ -114,7 +143,7 @@ window.SFShared = (function () {
   }
 
   function shouldShowStarterHint() {
-    return getStoriesFinishedCount() === 0;
+    return !hasCompletedStoryOrEnding();
   }
 
   /** Packs ouverts par défaut au premier passage bibliothèque (DLC restent visibles repliés) */
@@ -199,6 +228,9 @@ window.SFShared = (function () {
     escHtml: esc,
     sha256,
     getStoriesFinishedCount,
+    getEndingsFoundCount,
+    hasCompletedStoryOrEnding,
+    hasEndingReachedInSaves,
     syncStoriesFinishedCount,
     migrateStoriesFinishedCount,
     getStarterFile,

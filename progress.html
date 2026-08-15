@@ -403,10 +403,14 @@ function getStarterGameUrl() {
 }
 
 function renderEmptyStories() {
+  const showStarter = window.SFShared ? SFShared.shouldShowStarterHint() : true;
+  const starterCta = showStarter
+    ? `<a class="empty-progress-cta" href="${getStarterGameUrl()}">${t.emptyCta}</a>`
+    : '';
   return `<div class="empty-progress">
     <div class="ep-icon">📖</div>
     <p>${t.noStories}</p>
-    <a class="empty-progress-cta" href="${getStarterGameUrl()}">${t.emptyCta}</a>
+    ${starterCta}
   </div>`;
 }
 

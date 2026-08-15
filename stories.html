@@ -879,12 +879,12 @@ async function loadGames() {
 // ══════════════════════════════════════════════
 // RENDER
 // ══════════════════════════════════════════════
-function getStoriesFinishedCount() {
-  return window.SFShared ? SFShared.getStoriesFinishedCount() : 0;
+function shouldShowStarterBanner() {
+  return window.SFShared ? SFShared.shouldShowStarterHint() : true;
 }
 
 function renderStarterBanner(kidsOnly) {
-  if (getStoriesFinishedCount() > 0) return '';
+  if (!shouldShowStarterBanner()) return '';
   const txt = STARTER_TXT[currentLang] || STARTER_TXT.fr;
   const file = getStarterStoryFile(kidsOnly);
   const game = allGames.find(g => g.file === file && g.lang === currentLang);
