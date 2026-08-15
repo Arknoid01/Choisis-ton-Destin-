@@ -794,8 +794,7 @@ body {
 
 /* ── FAB MARQUE-PAGE ── */
 #fab-wrap {
-  position:fixed; bottom:24px; right:16px; z-index:200;
-  display:flex; flex-direction:column; align-items:flex-end; gap:10px;
+  position:fixed; bottom:calc(20px + env(safe-area-inset-bottom, 0px)); right:16px; z-index:200;
   transition: opacity .35s ease, transform .35s ease;
 }
 #fab-wrap.ui-hidden { opacity:0; pointer-events:none; transform:translateY(12px); }
@@ -811,6 +810,64 @@ body {
 }
 #immersive-dot:hover { opacity:1; transform:scale(1.3); }
 #immersive-dot.ui-visible { opacity:0; pointer-events:none; }
+#immersive-dot.hint-highlight {
+  opacity:1; transform:scale(1.35); z-index:212;
+  animation:hint-dot-pulse 1.2s ease-in-out infinite;
+}
+@keyframes hint-dot-pulse {
+  0%,100% { box-shadow:0 0 0 0 color-mix(in srgb, var(--accent) 55%, transparent); }
+  50%     { box-shadow:0 0 0 10px transparent; }
+}
+
+/* Mini-tuto premier passage — point immersif */
+#immersive-hint {
+  position:fixed; inset:0; z-index:211;
+  display:none; pointer-events:none;
+}
+#immersive-hint.show { display:block; pointer-events:all; }
+.immersive-hint-ring {
+  position:fixed;
+  top:calc(11px + var(--safe-top)); left:11px;
+  width:20px; height:20px; border-radius:50%;
+  border:2px solid var(--accent);
+  box-shadow:0 0 0 9999px rgba(0,0,0,0.72);
+  animation:hint-ring-pulse 1.5s ease infinite;
+  pointer-events:none;
+}
+@keyframes hint-ring-pulse {
+  0%,100% { transform:scale(1); border-color:var(--accent); }
+  50%     { transform:scale(1.15); border-color:var(--accent2); }
+}
+.immersive-hint-card {
+  position:fixed;
+  top:calc(48px + var(--safe-top)); left:16px;
+  width:min(280px, calc(100vw - 32px));
+  background:var(--bg2); border:1px solid color-mix(in srgb, var(--accent) 35%, var(--border));
+  border-radius:14px; padding:16px 16px 14px;
+  box-shadow:0 8px 32px #00000066;
+  animation:hint-card-in .35s ease;
+}
+@keyframes hint-card-in {
+  from { opacity:0; transform:translateY(-6px); }
+  to   { opacity:1; transform:translateY(0); }
+}
+.immersive-hint-card h3 {
+  margin:0 0 8px; font-family:'Cinzel',serif;
+  font-size:13px; letter-spacing:1.5px; color:var(--text);
+}
+.immersive-hint-card p {
+  margin:0 0 14px; font-size:13px; line-height:1.55;
+  color:var(--text2);
+}
+.immersive-hint-card p strong { color:var(--accent); font-weight:600; }
+.immersive-hint-btn {
+  width:100%; padding:10px 12px; border-radius:8px;
+  border:1px solid color-mix(in srgb, var(--accent) 45%, var(--border));
+  background:color-mix(in srgb, var(--accent) 12%, transparent);
+  color:var(--accent); font-family:'Cinzel',serif;
+  font-size:11px; letter-spacing:1.5px; cursor:pointer;
+}
+.immersive-hint-btn:active { transform:scale(0.98); }
 
 @keyframes dot-breathe {
   0%,100% { box-shadow: 0 0 0 0 rgba(124,109,250,0.4); }
@@ -818,48 +875,27 @@ body {
 }
 #fab-main {
   width:50px; height:50px; border-radius:50%;
-  background:var(--accent); border:none; color:#fff;
-  font-size:22px; cursor:pointer;
-  box-shadow:0 4px 20px color-mix(in srgb, var(--accent) 50%, transparent);
-  display:flex; align-items:center; justify-content:center;
-  transition:transform .2s, box-shadow .2s;
-  z-index:2; position:relative;
-}
-#fab-main:active { transform:scale(0.93); }
-#fab-main.open { transform:rotate(45deg); }
-
-.fab-action {
-  display:flex; align-items:center; gap:10px;
-  opacity:0; transform:translateY(10px) scale(0.9);
-  transition:all .2s cubic-bezier(.4,0,.2,1);
-  pointer-events:none;
-}
-.fab-action.show { opacity:1; transform:translateY(0) scale(1); pointer-events:all; }
-.fab-action:nth-child(1) { transition-delay:.05s; }
-.fab-action:nth-child(2) { transition-delay:.1s; }
-
-.fab-label {
   background:var(--bg2); border:1px solid var(--border);
-  border-radius:8px; padding:5px 10px;
-  font-family:'DM Mono',monospace; font-size:11px;
-  color:var(--text2); white-space:nowrap;
-  box-shadow:0 2px 8px #00000044;
-}
-.fab-btn {
-  width:42px; height:42px; border-radius:50%;
-  border:1px solid var(--border);
-  background:var(--bg2); color:var(--text);
-  font-size:18px; cursor:pointer;
+  color:var(--text); font-size:22px; cursor:pointer;
+  box-shadow:0 4px 16px #00000055;
   display:flex; align-items:center; justify-content:center;
-  box-shadow:0 2px 12px #00000044;
-  transition:all .15s; flex-shrink:0;
+  transition:transform .2s, box-shadow .2s, border-color .2s, background .2s;
 }
-.fab-btn:hover { border-color:var(--accent); background:var(--bg3); }
-.fab-btn:active { transform:scale(0.9); }
+#fab-main:hover { border-color:var(--accent); background:var(--bg3); }
+#fab-main:active { transform:scale(0.93); }
+#fab-main.fab-saved {
+  border-color:var(--accent);
+  animation:fab-saved-pulse .45s ease;
+}
+@keyframes fab-saved-pulse {
+  0%   { transform:scale(1); box-shadow:0 4px 16px #00000055; }
+  40%  { transform:scale(1.08); box-shadow:0 0 0 6px color-mix(in srgb, var(--accent) 35%, transparent); }
+  100% { transform:scale(1); box-shadow:0 4px 16px #00000055; }
+}
 
 /* Toast bookmark */
 #bm-toast {
-  position:fixed; bottom:90px; left:50%;
+  position:fixed; bottom:calc(78px + env(safe-area-inset-bottom, 0px)); left:50%;
   transform:translateX(-50%);
   background:var(--bg2); border:1px solid var(--accent);
   border-radius:10px; padding:10px 18px;
@@ -940,6 +976,16 @@ body {
 
 <!-- IMMERSIVE DOT -->
 <div id="immersive-dot" onclick="showUI()" title="Afficher l'interface"></div>
+
+<!-- MINI-TUTO PREMIER PASSAGE (point immersif) -->
+<div id="immersive-hint" aria-hidden="true">
+  <div class="immersive-hint-ring" aria-hidden="true"></div>
+  <div class="immersive-hint-card" role="dialog" aria-labelledby="immersive-hint-title">
+    <h3 id="immersive-hint-title"></h3>
+    <p id="immersive-hint-body"></p>
+    <button type="button" class="immersive-hint-btn" id="immersive-hint-btn"></button>
+  </div>
+</div>
 
 <!-- TOPBAR -->
 <div id="topbar">
@@ -1027,15 +1073,7 @@ body {
 
 <!-- FAB MARQUE-PAGE -->
 <div id="fab-wrap">
-  <div class="fab-action" id="fab-bookmark">
-    <span class="fab-label" id="fab-label-bookmark"></span>
-    <button class="fab-btn" onclick="saveBookmark()" title="">🔖</button>
-  </div>
-  <div class="fab-action" id="fab-save">
-    <span class="fab-label" id="fab-label-save"></span>
-    <button class="fab-btn" onclick="saveProgress()" title="">💾</button>
-  </div>
-  <button id="fab-main" onclick="toggleFab()" title="Actions">＋</button>
+  <button type="button" id="fab-main" onclick="saveBookmark()" aria-label="Marque-page">🔖</button>
 </div>
 <div id="bm-toast"></div>
 <input type="file" id="game-import-input" accept=".json" style="display:none" onchange="handleGameImport(event)">
@@ -1549,7 +1587,12 @@ const GAME_I18N = {
     closeMenu:   'Fermer le menu',
     noBookmarks: 'Aucun marque-page',
     bmSaved:     '🔖 Marque-page posé !',
-    progressSaved: '💾 Progression sauvegardée',
+    fabBookmarkAria: 'Poser un marque-page ici',
+    immersiveHintTitle: 'Le menu pendant l\'histoire',
+    immersiveHintBody: 'Tape sur le <strong>petit point</strong> en haut à gauche pour afficher l\'interface par-dessus le récit : menu, journal, marque-page…',
+    immersiveHintBtn: 'Compris',
+    immersiveHintDotAria: 'Afficher l\'interface et le menu',
+    immersiveDotTitle: 'Afficher l\'interface',
     visitedScene: 'scène visitée',
     visitedScenes: 'scènes visitées',
     endRestart: 'Recommencer',
@@ -1582,7 +1625,12 @@ const GAME_I18N = {
     closeMenu:   'Close menu',
     noBookmarks: 'No bookmarks',
     bmSaved:     '🔖 Bookmark saved!',
-    progressSaved: '💾 Progress saved',
+    fabBookmarkAria: 'Save bookmark here',
+    immersiveHintTitle: 'Menu during the story',
+    immersiveHintBody: 'Tap the <strong>small dot</strong> at the top left to show the interface over the story: menu, journal, bookmark…',
+    immersiveHintBtn: 'Got it',
+    immersiveHintDotAria: 'Show interface and menu',
+    immersiveDotTitle: 'Show interface',
     visitedScene: 'scene visited',
     visitedScenes: 'scenes visited',
     endRestart: 'Restart',
@@ -1615,7 +1663,12 @@ const GAME_I18N = {
     closeMenu:   'Cerrar menú',
     noBookmarks: 'Sin marcadores',
     bmSaved:     '🔖 ¡Marcador guardado!',
-    progressSaved: '💾 Progreso guardado',
+    fabBookmarkAria: 'Guardar marcador aquí',
+    immersiveHintTitle: 'Menú durante la historia',
+    immersiveHintBody: 'Toca el <strong>pequeño punto</strong> arriba a la izquierda para mostrar la interfaz sobre el relato: menú, diario, marcador…',
+    immersiveHintBtn: 'Entendido',
+    immersiveHintDotAria: 'Mostrar interfaz y menú',
+    immersiveDotTitle: 'Mostrar interfaz',
     visitedScene: 'escena visitada',
     visitedScenes: 'escenas visitadas',
     endRestart: 'Reiniciar',
@@ -1635,8 +1688,8 @@ function gt(key) {
 
 function applyGameUI() {
   const set = (id, val) => { const el = document.getElementById(id); if (el) el.textContent = val; };
-  set('fab-label-bookmark', gt('bookmark'));
-  set('fab-label-save',     gt('save'));
+  const fabMain = document.getElementById('fab-main');
+  if (fabMain) fabMain.setAttribute('aria-label', gt('fabBookmarkAria'));
   set('drawer-menu-sub',    gt('menuSub'));
   set('drawer-section-game', gt('sectionGame'));
   set('drawer-section-nav',  gt('sectionNav'));
@@ -1656,7 +1709,62 @@ function applyGameUI() {
   if (menuBtn) menuBtn.setAttribute('aria-label', gt('menuBtnAria'));
   const closeBtn = document.getElementById('drawer-close-btn');
   if (closeBtn) closeBtn.setAttribute('aria-label', gt('closeMenu'));
+  const dot = document.getElementById('immersive-dot');
+  if (dot) dot.setAttribute('title', gt('immersiveDotTitle'));
+  applyImmersiveHintUI();
 }
+
+const IMMERSIVE_HINT_KEY = 'sf_game_immersive_hint_shown';
+let _immersiveHintVisible = false;
+
+function immersiveHintSeen() {
+  try { return localStorage.getItem(IMMERSIVE_HINT_KEY) === '1'; } catch (e) { return true; }
+}
+
+function applyImmersiveHintUI() {
+  const title = document.getElementById('immersive-hint-title');
+  const body = document.getElementById('immersive-hint-body');
+  const btn = document.getElementById('immersive-hint-btn');
+  if (title) title.textContent = gt('immersiveHintTitle');
+  if (body) body.innerHTML = gt('immersiveHintBody');
+  if (btn) btn.textContent = gt('immersiveHintBtn');
+  const dot = document.getElementById('immersive-dot');
+  if (dot && _immersiveHintVisible) dot.setAttribute('aria-label', gt('immersiveHintDotAria'));
+}
+
+function dismissImmersiveHint() {
+  if (!_immersiveHintVisible) return;
+  _immersiveHintVisible = false;
+  const hint = document.getElementById('immersive-hint');
+  if (hint) {
+    hint.classList.remove('show');
+    hint.setAttribute('aria-hidden', 'true');
+  }
+  document.getElementById('immersive-dot')?.classList.remove('hint-highlight');
+  try { localStorage.setItem(IMMERSIVE_HINT_KEY, '1'); } catch (e) {}
+}
+
+function canShowImmersiveHint() {
+  if (immersiveHintSeen() || _immersiveHintVisible) return false;
+  if (!story || !currentId || uiVisible) return false;
+  const loading = document.getElementById('loading');
+  if (loading && loading.style.display !== 'none' && !loading.classList.contains('fade')) return false;
+  const nameOv = document.getElementById('name-overlay');
+  if (nameOv && nameOv.style.display === 'flex' && !nameOv.classList.contains('hide')) return false;
+  if (document.getElementById('menu-overlay')?.classList.contains('open')) return false;
+  return true;
+}
+
+function maybeShowImmersiveHint() {
+  if (!canShowImmersiveHint()) return;
+  _immersiveHintVisible = true;
+  applyImmersiveHintUI();
+  document.getElementById('immersive-hint')?.classList.add('show');
+  document.getElementById('immersive-hint')?.setAttribute('aria-hidden', 'false');
+  document.getElementById('immersive-dot')?.classList.add('hint-highlight');
+}
+
+document.getElementById('immersive-hint-btn')?.addEventListener('click', dismissImmersiveHint);
 
 let typewriterTimeout = null;
 
@@ -2208,9 +2316,11 @@ function hideUI() {
   document.getElementById('immersive-dot')?.classList.remove('ui-visible');
   document.getElementById('scroll-area')?.classList.add('ui-hidden');
   document.body.style.paddingTop = 'var(--safe-top)';
+  maybeShowImmersiveHint();
 }
 
 function showUI() {
+  if (_immersiveHintVisible) dismissImmersiveHint();
   uiVisible = true;
   document.getElementById('topbar')?.classList.remove('ui-hidden');
   document.getElementById('stats-bar')?.classList.remove('ui-hidden');
@@ -2281,33 +2391,31 @@ function trackStats(event, data = {}) {
   } catch(e) {}
 }
 
-let fabOpen = false;
-
-function toggleFab() {
-  fabOpen = !fabOpen;
-  document.getElementById('fab-main').classList.toggle('open', fabOpen);
-  document.getElementById('fab-save').classList.toggle('show', fabOpen);
-  document.getElementById('fab-bookmark').classList.toggle('show', fabOpen);
-}
-
-function closeFab() {
-  fabOpen = false;
-  document.getElementById('fab-main').classList.remove('open');
-  document.getElementById('fab-save').classList.remove('show');
-  document.getElementById('fab-bookmark').classList.remove('show');
-}
-
-// Fermer le FAB en tapant ailleurs
-document.addEventListener('click', e => {
-  if (fabOpen && !e.target.closest('#fab-wrap')) closeFab();
-});
-
 function getSaveKey() {
   try {
     const params = new URLSearchParams(window.location.search);
     const file = params.get('story') || localStorage.getItem('sf_game_file') || 'unknown';
     return 'sf_save_' + file.replace(/[^a-z0-9]/gi, '_');
   } catch(e) { return 'sf_save_unknown'; }
+}
+
+function saveBookmark() {
+  if (!currentId || !story) return;
+  const data = buildSaveData(true);
+  const key = getSaveKey();
+  localStorage.setItem(key, JSON.stringify(data));
+  const bmList = JSON.parse(localStorage.getItem('sf_bookmarks') || '[]');
+  const existing = bmList.findIndex(b => b.storyFile === data.storyFile);
+  if (existing >= 0) bmList[existing] = data;
+  else bmList.unshift(data);
+  localStorage.setItem('sf_bookmarks', JSON.stringify(bmList.slice(0, 10)));
+  const fab = document.getElementById('fab-main');
+  if (fab) {
+    fab.classList.remove('fab-saved');
+    void fab.offsetWidth;
+    fab.classList.add('fab-saved');
+  }
+  showBmToast(gt('bmSaved'));
 }
 
 function buildSaveData(isBookmark = false) {
@@ -2333,30 +2441,6 @@ function persistEndReachedSave(scene) {
     data.reachedEnd = true;
     localStorage.setItem(getSaveKey(), JSON.stringify(data));
   } catch (e) {}
-}
-
-function saveProgress() {
-  if (!currentId || !story) return;
-  const data = buildSaveData(false);
-  localStorage.setItem(getSaveKey(), JSON.stringify(data));
-  closeFab();
-  showBmToast(gt('progressSaved'));
-}
-
-function saveBookmark() {
-  if (!currentId || !story) return;
-  const data = buildSaveData(true);
-  // Sauvegarder aussi dans la liste globale des marque-pages
-  const key = getSaveKey();
-  localStorage.setItem(key, JSON.stringify(data));
-  // Liste des marque-pages pour stories.html
-  const bmList = JSON.parse(localStorage.getItem('sf_bookmarks') || '[]');
-  const existing = bmList.findIndex(b => b.storyFile === data.storyFile);
-  if (existing >= 0) bmList[existing] = data;
-  else bmList.unshift(data);
-  localStorage.setItem('sf_bookmarks', JSON.stringify(bmList.slice(0, 10))); // max 10
-  closeFab();
-  showBmToast(gt('bmSaved'));
 }
 
 function loadSavedProgress() {
