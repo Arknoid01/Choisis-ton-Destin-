@@ -1,0 +1,227 @@
+{
+  "name": "Les Profondeurs — Épisode 6 : La Cathédrale",
+  "kids": false,
+  "askPlayerName": true,
+  "pack": "abysses",
+  "stats": [
+    {
+      "id": "audace",
+      "label": "Audace",
+      "start": 15,
+      "max": 100,
+      "color": "#e8934a"
+    },
+    {
+      "id": "lucidite",
+      "label": "Lucidité",
+      "start": 10,
+      "max": 100,
+      "color": "#2a8aa8"
+    }
+  ],
+  "theme": {
+    "bg": "#040810",
+    "bg2": "#081018",
+    "bg3": "#0c1824",
+    "bg4": "#122030",
+    "border": "#1e4058",
+    "accent": "#e8934a",
+    "accent2": "#2a8aa8",
+    "accent3": "#6dfabc",
+    "text": "#d8e8f0",
+    "text2": "#6890a8",
+    "text3": "#3a5868"
+  },
+  "scenes": {
+    "seuil": {
+      "id": "seuil",
+      "title": "Le seuil",
+      "location": "CATHÉDRALE — ENTRÉE · 675 m",
+      "narrator": "Sous l'eau, même le sacré finit par couler — mais pas toujours par sombrer.",
+      "text": "Tu franchis l'arc — épisode 5 derrière toi, le portail devant.\n\nTon HUD :\n\n**140 m restants · prof. 675 m · lampe 7 % · cap 214°**\n\nLa nef s'ouvre — vastitude de pierre noire, colonnes englobées par l'eau. Des **citrouilles** sculptées dans chaque chapiteau, visages érodés, sourires figés.\n\nRunes Fableris pulsent faiblement sur les murs — orange, comme la lueur lointaine.\n\nIci, le cliquetis des épaves ne suit plus. Silence **choisi**. Ou **interdit**.",
+      "isStart": true,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Foncer vers l'autel — axe central",
+          "vers": "nef",
+          "effects": [{ "stat": "audace", "val": 10 }],
+          "clickEffect": "pulse"
+        },
+        {
+          "text": "Longer le bas-côté — lire les runes",
+          "vers": "nef",
+          "effects": [{ "stat": "lucidite", "val": 10 }],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 400,
+      "y": 40
+    },
+    "nef": {
+      "id": "nef",
+      "title": "Nef inondée",
+      "location": "CATHÉDRALE — NEF · 710 m",
+      "narrator": "Une nef sans fidèles garde quand même la direction de la prière.",
+      "text": "Tu avances.\n\nL'eau est plus **calme** ici — pas de courant, pas de débris. Comme si la cathédrale **repoussait** l'océan autour de l'autel.\n\nÀ **710 m**, ta lampe faiblit : **6 %**.\n\nL'autel pulse au fond — arche de pierre creusée, lueur Halloween **vivante**.\n\nDeux chemins :\n\n**A — Allée centrale** (direct · exposé)\n**B — Chapelle latérale** (crypte · cache une **lanterne Fableris** morte)",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Allée centrale — tout droit",
+          "vers": "audace_allee",
+          "effects": [{ "stat": "audace", "val": 12 }],
+          "clickEffect": "pulse"
+        },
+        {
+          "text": "Chapelle latérale — chercher une lumière de secours",
+          "vers": "lucidite_chapelle",
+          "effects": [{ "stat": "lucidite", "val": 12 }],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 400,
+      "y": 140
+    },
+    "audace_allee": {
+      "id": "audace_allee",
+      "title": "Allée centrale",
+      "location": "CATHÉDRALE — ALLÉE · 740 m",
+      "narrator": "Aller droit vers une lumière, c'est parfois accepter d'être vu·e.",
+      "text": "Tu nages au centre de la nef.\n\nLes citrouilles sculptées te **regardent** — effet de parallaxe, tu te dis. Pas autre chose.\n\nTa lampe : **5 %**. Le faisceau tremble.\n\nÀ mi-chemin, la radio — claire, **présente** :\n\n*« —{{player}}. Ne t'arrête pas. L'autel est une porte. — »*\n\nSur le dallage : un motif — spirale vers le bas. **Descendre** encore. L'autel n'est pas le fond.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "🔦 Garder la lampe — sprint vers l'autel",
+          "vers": "autel",
+          "effects": [{ "stat": "audace", "val": 15 }],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 280,
+      "y": 240
+    },
+    "lucidite_chapelle": {
+      "id": "lucidite_chapelle",
+      "title": "Chapelle latérale",
+      "location": "CATHÉDRALE — CHAPELLE · 730 m",
+      "narrator": "Les chapelles latérales gardent les secrets que la nef refuse de crier.",
+      "text": "Tu glisses dans une chapelle étroite.\n\nAutel mineur. Offrandes flottantes — capsules, badges Coalition, **noms gravés**.\n\nSur le mur, une inscription en Fableris :\n\n*« Ici le portail attend. La lampe du monde s'éteint. Celle du rituel, non. »*\n\nTu trouves une **lanterne rituelle** — éteinte depuis des décennies. Tu la secoues. Rien.\n\nMais en la remettant, tu **éteins** ta propre lampe une minute — économie. Quand tu la rallumes : **6 %** — tu as gagné un palier.\n\nLa nef t'appelle vers l'autel principal.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "🫧 Rejoindre l'autel — lampe basse",
+          "vers": "autel",
+          "effects": [{ "stat": "lucidite", "val": 15 }],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 520,
+      "y": 240
+    },
+    "autel": {
+      "id": "autel",
+      "title": "L'autel",
+      "location": "CATHÉDRALE — AUTEL · 770 m",
+      "narrator": "Un autel sous l'eau n'offre pas le pardon — seulement un passage.",
+      "text": "Tu l'atteins.\n\nL'autel est creux — **anneau** de pierre orange, runes Halloween qui **tournent** lentement dans l'eau, comme des poissons de lumière.\n\nAu centre : vide. Puis, quand ta lampe **vacille** — **4 %** — l'anneau révèle ce qu'il cache :\n\nUn **puits** vertical. Paroi lisse. Lueur en bas — **SECTEUR 7**. Enfin.\n\nTon HUD :\n\n**55 m restants · prof. 770 m**\n\nLa radio, un souffle :\n\n*« —Descends. La lampe va mourir. Le portail, non. — »*",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Attendre que la lampe se stabilise",
+          "vers": "lampe",
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 400,
+      "y": 340
+    },
+    "lampe": {
+      "id": "lampe",
+      "title": "Extinction",
+      "location": "CATHÉDRALE — PUITS · 775 m",
+      "narrator": "Quand ta dernière lumière s'éteint, parfois une autre — plus ancienne — prend le relais.",
+      "text": "Dernier clignotement.\n\n**Extinction.**\n\nBatterie : **0 %** affichée. Fin.\n\nSauf que l'**anneau** de l'autel s'illumine — orange vif, stable. Assez pour voir le puits. Assez pour **respirer**.\n\nTu n'es plus seul·e avec ta peur. La cathédrale **prête** sa lumière — prêt ritual, dette ancienne.\n\nDeux gestes possibles :\n\n**A — Plonger immédiatement** (confiance)\n**B — Toucher l'anneau — lire la rune centrale** (compréhension)",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Plonger dans le puits — sans hésiter",
+          "vers": "audace_puits",
+          "effects": [{ "stat": "audace", "val": 15 }],
+          "clickEffect": "pulse"
+        },
+        {
+          "text": "Lire la rune — comprendre avant de sauter",
+          "vers": "lucidite_rune",
+          "effects": [{ "stat": "lucidite", "val": 15 }],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 400,
+      "y": 440
+    },
+    "audace_puits": {
+      "id": "audace_puits",
+      "title": "Chute rituelle",
+      "location": "PUITS FABLERIS — 795 m",
+      "narrator": "Certaines chutes sous l'eau ne sont pas des accidents — ce sont des initiations.",
+      "text": "Tu plonges.\n\nLe puits te **guide** — pas de paroi, pas d'accroche. Juste la lueur qui monte à ta rencontre.\n\nVitesse contrôlée. Pression stable — combinaison Fableris qui tient, encore.\n\nÀ **795 m**, tu ralentis.\n\nDevant toi : **chambre circulaire**. Runes. Citrouilles. Et au centre, un **arc de lumière** — bord du portail Halloween, à peine entrouvert.\n\n**25 m restants.**\n\nLa lumière rituelle s'éteint derrière toi. Le portail **suffit**.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "flash",
+      "choices": [
+        {
+          "text": "Avancer vers l'arc de lumière",
+          "vers": "fin_cathedrale",
+          "effects": [{ "stat": "audace", "val": 10 }],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 280,
+      "y": 540
+    },
+    "lucidite_rune": {
+      "id": "lucidite_rune",
+      "title": "La rune centrale",
+      "location": "CATHÉDRALE — AUTEL · 778 m",
+      "narrator": "Lire avant de sauter, c'est parfois la seule différence entre passage et piège.",
+      "text": "Tu poses la main sur l'anneau.\n\nLa rune centrale s'allume sous ta paume :\n\n*« Celui·elle qui entre sans lumière propre emprunte la nôtre. Celui·elle qui lit rendra la dette au portail. »*\n\nTu comprends : la cathédrale n'est pas un abri. C'est un **filtre**. Ceux qui foncent passent. Ceux qui lisent **savent** ce qui les attend.\n\nTu plonges — lent, volontaire.\n\nLe puits descend. **795 m**. Chambre circulaire. Arc de lumière. Portail entrouvert.\n\n**25 m restants.**\n\nSans ta lampe. Avec la certitude.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Gagner l'arc de lumière",
+          "vers": "fin_cathedrale",
+          "effects": [{ "stat": "lucidite", "val": 10 }],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 520,
+      "y": 540
+    },
+    "fin_cathedrale": {
+      "id": "fin_cathedrale",
+      "title": "Chambre du portail",
+      "location": "SECTEUR 7 — ANTÉCHAMBRE · 810 m",
+      "narrator": "À quelques mètres du seuil, toute une planète océan tient dans le silence.",
+      "text": "Tu entres dans la chambre.\n\n**810 m**. **25 mètres** du portail. Assez pour le voir — pas assez pour le traverser. Pas encore.\n\nL'arc Halloween pulse — orange, vivant, **familier** comme un souvenir d'enfance et étranger comme une bouche ouverte.\n\nTa lampe : morte. Le portail **éclaire** ton visage.\n\nLa radio, pour la première fois sans static :\n\n*« —{{player}}. Dernière étape. Tu sais ce qu'il faut faire. — »*\n\n**FIN ÉPISODE 6 — La Cathédrale**\n\n*Épisode 7 : Le Portail — bientôt*",
+      "isStart": false,
+      "isEnd": true,
+      "transition": "fade",
+      "choices": [],
+      "x": 400,
+      "y": 640
+    }
+  }
+}

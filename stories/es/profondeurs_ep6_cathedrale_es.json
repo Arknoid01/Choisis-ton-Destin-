@@ -1,0 +1,227 @@
+{
+  "name": "Las Profundidades — Episodio 6: La Catedral",
+  "kids": false,
+  "askPlayerName": true,
+  "pack": "abysses",
+  "stats": [
+    {
+      "id": "audace",
+      "label": "Audacia",
+      "start": 15,
+      "max": 100,
+      "color": "#e8934a"
+    },
+    {
+      "id": "lucidite",
+      "label": "Lucidez",
+      "start": 10,
+      "max": 100,
+      "color": "#2a8aa8"
+    }
+  ],
+  "theme": {
+    "bg": "#040810",
+    "bg2": "#081018",
+    "bg3": "#0c1824",
+    "bg4": "#122030",
+    "border": "#1e4058",
+    "accent": "#e8934a",
+    "accent2": "#2a8aa8",
+    "accent3": "#6dfabc",
+    "text": "#d8e8f0",
+    "text2": "#6890a8",
+    "text3": "#3a5868"
+  },
+  "scenes": {
+    "seuil": {
+      "id": "seuil",
+      "title": "El umbral",
+      "location": "CATEDRAL — ENTRADA · 675 m",
+      "narrator": "Bajo el agua, incluso lo sagrado acaba por hundirse — pero no siempre por desaparecer.",
+      "text": "Franqueas el arco — episodio 5 atrás, el portal delante.\n\nTu HUD:\n\n**140 m restantes · prof. 675 m · linterna 7 % · rumbo 214°**\n\nLa nave se abre — vastedad de piedra negra, columnas engullidas por el agua. **Calabazas** esculpidas en cada capitel, rostros erosionados, sonrisas congeladas.\n\nRunas Fableris pulsan débilmente en los muros — naranja, como el resplandor lejano.\n\nAquí, el chasquido de los restos ya no sigue. Silencio **elegido**. O **prohibido**.",
+      "isStart": true,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Lanzarte hacia el altar — eje central",
+          "vers": "nef",
+          "effects": [{ "stat": "audace", "val": 10 }],
+          "clickEffect": "pulse"
+        },
+        {
+          "text": "Seguir la nave lateral — leer las runas",
+          "vers": "nef",
+          "effects": [{ "stat": "lucidite", "val": 10 }],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 400,
+      "y": 40
+    },
+    "nef": {
+      "id": "nef",
+      "title": "Nave inundada",
+      "location": "CATEDRAL — NAVE · 710 m",
+      "narrator": "Una nave sin fieles aún guarda la dirección de la oración.",
+      "text": "Avanzas.\n\nEl agua es más **calma** aquí — sin corriente, sin restos. Como si la catedral **repeliera** el océano alrededor del altar.\n\nA **710 m**, tu linterna flaquea: **6 %**.\n\nEl altar late al fondo — arco de piedra tallado, resplandor Halloween **vivo**.\n\nDos caminos:\n\n**A — Nave central** (directo · expuesto)\n**B — Capilla lateral** (cripta · esconde una **linterna Fableris** muerta)",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Nave central — recto",
+          "vers": "audace_allee",
+          "effects": [{ "stat": "audace", "val": 12 }],
+          "clickEffect": "pulse"
+        },
+        {
+          "text": "Capilla lateral — buscar luz de emergencia",
+          "vers": "lucidite_chapelle",
+          "effects": [{ "stat": "lucidite", "val": 12 }],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 400,
+      "y": 140
+    },
+    "audace_allee": {
+      "id": "audace_allee",
+      "title": "Nave central",
+      "location": "CATEDRAL — NAVE · 740 m",
+      "narrator": "Ir directo hacia una luz a veces es aceptar ser visto.",
+      "text": "Nadas por el centro de la nave.\n\nLas calabazas esculpidas te **miran** — paralaje, te dices. Nada más.\n\nTu linterna: **5 %**. El haz tiembla.\n\nA mitad de camino, la radio — clara, **presente**:\n\n*« —{{player}}. No te detengas. El altar es una puerta. — »*\n\nEn el suelo: un motivo — espiral hacia abajo. **Descender** aún. El altar no es el fondo.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "🔦 Mantener la linterna — sprint hacia el altar",
+          "vers": "autel",
+          "effects": [{ "stat": "audace", "val": 15 }],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 280,
+      "y": 240
+    },
+    "lucidite_chapelle": {
+      "id": "lucidite_chapelle",
+      "title": "Capilla lateral",
+      "location": "CATEDRAL — CAPILLA · 730 m",
+      "narrator": "Las capillas laterales guardan los secretos que la nave se niega a gritar.",
+      "text": "Te deslizas en una capilla estrecha.\n\nAltar menor. Ofrendas flotantes — cápsulas, insignias de la Coalición, **nombres grabados**.\n\nEn el muro, una inscripción Fableris:\n\n*« Aquí espera el portal. La linterna del mundo se apaga. La del ritual, no. »*\n\nEncuentras una **linterna ritual** — apagada desde hace décadas. La sacudes. Nada.\n\nPero al recolocarla, **apagas** tu propia linterna un minuto — ahorro. Cuando vuelves a encender: **6 %** — ganaste un escalón.\n\nLa nave te llama hacia el altar principal.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "🫧 Alcanzar el altar — batería baja",
+          "vers": "autel",
+          "effects": [{ "stat": "lucidite", "val": 15 }],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 520,
+      "y": 240
+    },
+    "autel": {
+      "id": "autel",
+      "title": "El altar",
+      "location": "CATEDRAL — ALTAR · 770 m",
+      "narrator": "Un altar bajo el agua no ofrece perdón — solo un paso.",
+      "text": "Lo alcanzas.\n\nEl altar es hueco — **anillo** de piedra naranja, runas Halloween que **giran** lentamente en el agua como peces de luz.\n\nEn el centro: vacío. Luego, cuando tu linterna **vacila** — **4 %** — el anillo revela lo que esconde:\n\nUn **pozo** vertical. Pared lisa. Resplandor abajo — **SECTOR 7**. Por fin.\n\nTu HUD:\n\n**55 m restantes · prof. 770 m**\n\nLa radio, un suspiro:\n\n*« —Baja. La linterna va a morir. El portal, no. — »*",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Esperar a que la linterna se estabilice",
+          "vers": "lampe",
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 400,
+      "y": 340
+    },
+    "lampe": {
+      "id": "lampe",
+      "title": "Apagón",
+      "location": "CATEDRAL — POZO · 775 m",
+      "narrator": "Cuando tu última luz se apaga, a veces otra — más antigua — toma el relevo.",
+      "text": "Último parpadeo.\n\n**Apagado.**\n\nBatería: **0 %** mostrada. Fin.\n\nSalvo que el **anillo** del altar se enciende — naranja vivo, estable. Suficiente para ver el pozo. Suficiente para **respirar**.\n\nYa no estás solo con tu miedo. La catedral **presta** su luz — préstamo ritual, deuda antigua.\n\nDos gestos posibles:\n\n**A — Zambullirte de inmediato** (confianza)\n**B — Tocar el anillo — leer la runa central** (comprensión)",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Zambullirte en el pozo — sin dudar",
+          "vers": "audace_puits",
+          "effects": [{ "stat": "audace", "val": 15 }],
+          "clickEffect": "pulse"
+        },
+        {
+          "text": "Leer la runa — comprender antes de saltar",
+          "vers": "lucidite_rune",
+          "effects": [{ "stat": "lucidite", "val": 15 }],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 400,
+      "y": 440
+    },
+    "audace_puits": {
+      "id": "audace_puits",
+      "title": "Caída ritual",
+      "location": "POZO FABLERIS — 795 m",
+      "narrator": "Algunas caídas bajo el agua no son accidentes — son iniciaciones.",
+      "text": "Te zambulles.\n\nEl pozo te **guía** — sin pared, sin agarre. Solo el resplandor que sube a tu encuentro.\n\nVelocidad controlada. Presión estable — traje Fableris aguanta aún.\n\nA **795 m**, frenas.\n\nDelante: **cámara circular**. Runas. Calabazas. Y en el centro, un **arco de luz** — borde del portal Halloween, apenas entreabierto.\n\n**25 m restantes.**\n\nLa luz ritual se apaga detrás de ti. El portal **basta**.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "flash",
+      "choices": [
+        {
+          "text": "Avanzar hacia el arco de luz",
+          "vers": "fin_cathedrale",
+          "effects": [{ "stat": "audace", "val": 10 }],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 280,
+      "y": 540
+    },
+    "lucidite_rune": {
+      "id": "lucidite_rune",
+      "title": "La runa central",
+      "location": "CATEDRAL — ALTAR · 778 m",
+      "narrator": "Leer antes de saltar a veces es la única diferencia entre paso y trampa.",
+      "text": "Posas la mano en el anillo.\n\nLa runa central se enciende bajo tu palma:\n\n*« Quien entra sin luz propia toma prestada la nuestra. Quien lee pagará la deuda en el portal. »*\n\nComprendes: la catedral no es un refugio. Es un **filtro**. Quienes se lanzan pasan. Quienes leen **saben** lo que les espera.\n\nTe zambulles — lento, deliberado.\n\nEl pozo desciende. **795 m**. Cámara circular. Arco de luz. Portal entreabierto.\n\n**25 m restantes.**\n\nSin tu linterna. Con certeza.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Alcanzar el arco de luz",
+          "vers": "fin_cathedrale",
+          "effects": [{ "stat": "lucidite", "val": 10 }],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 520,
+      "y": 540
+    },
+    "fin_cathedrale": {
+      "id": "fin_cathedrale",
+      "title": "Cámara del portal",
+      "location": "SECTOR 7 — ANTECÁMARA · 810 m",
+      "narrator": "A pocos metros del umbral, un planeta océano entero cabe en el silencio.",
+      "text": "Entras en la cámara.\n\n**810 m**. **25 metros** del portal. Suficiente para verlo — no para cruzarlo. Aún no.\n\nEl arco Halloween late — naranja, vivo, **familiar** como un recuerdo de infancia y extraño como una boca abierta.\n\nTu linterna: muerta. El portal **ilumina** tu rostro.\n\nLa radio, por primera vez sin estática:\n\n*« —{{player}}. Último paso. Sabes qué hacer. — »*\n\n**FIN EPISODIO 6 — La Catedral**\n\n*Episodio 7: El Portal — pronto*",
+      "isStart": false,
+      "isEnd": true,
+      "transition": "fade",
+      "choices": [],
+      "x": 400,
+      "y": 640
+    }
+  }
+}
