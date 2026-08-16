@@ -62,6 +62,20 @@ window.SFMultiplayer = (function () {
     }
   }
 
+  // capacitor-udp-socket encode/décode 'buffer' en base64 côté natif
+  // (Base64.encode/decode côté Java) — non documenté dans son README.
+  function toBase64(str) {
+    return btoa(unescape(encodeURIComponent(str)));
+  }
+
+  function fromBase64(b64) {
+    try {
+      return decodeURIComponent(escape(atob(b64)));
+    } catch (e) {
+      return '';
+    }
+  }
+
   // ── HÔTE ─────────────────────────────────────────────────────
   const host = (function () {
     const events = makeEmitter();
@@ -197,7 +211,7 @@ window.SFMultiplayer = (function () {
       await Udp.bind({ socketId, port: 0 }); // port éphémère, on ne fait qu'émettre
       await Udp.setBroadcast({ socketId, enabled: true });
 
-      const payload = JSON.stringify({ app: 'ctd-multiplayer', code, port: SERVER_PORT });
+      const payload = toBase64(JSON.stringify({ app: 'ctd-multiplayer', code, port: SERVER_PORT }));
       broadcastTimer = setInterval(() => {
         Udp.send({ socketId: udpSocketId, address: '255.255.255.255', port: BROADCAST_PORT, buffer: payload })
           .catch(e => console.warn('[SFMultiplayer] broadcast UDP échoué', e));
@@ -343,7 +357,7 @@ window.SFMultiplayer = (function () {
         }
 
         const handle = await Udp.addListener('receive', async (event) => {
-          const msg = parseLine(event.buffer || '');
+          const msg = parseLine(fromBase64(event.buffer || ''));
           if (!msg || msg.app !== 'ctd-multiplayer' || String(msg.code) !== String(code)) return;
           clearTimeout(timeout);
           cleanupListener();
