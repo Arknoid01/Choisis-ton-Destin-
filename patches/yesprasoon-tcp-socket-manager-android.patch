@@ -18,7 +18,7 @@
      private static final int MAX_CLIENTS = 10;
      private Thread heartbeatThread;
      private volatile boolean isHeartbeatRunning = false;
-@@ -138,42 +140,63 @@
+@@ -138,42 +140,64 @@
  
      private void handleClient(Socket client) {
          new Thread(() -> {
@@ -46,6 +46,7 @@
                  String message;
                  while ((message = in.readLine()) != null) {
 -                    Log.i(TAG, "Received message: " + message);
++                    if (message.trim().isEmpty()) continue; // ligne vide = heartbeat, on ignore
 +                    Log.i(TAG, "Received message from " + clientId + ": " + message);
  
                      // Notify the frontend with the received message
@@ -65,9 +66,7 @@
  
 -    private void cleanupClient(Socket client) {
 +    private void cleanupClientSocket(Socket client) {
-         try {
--            synchronized (clientConnections) {
--                clientConnections.remove(client);
++        try {
 +            client.close();
 +        } catch (IOException e) {
 +            Log.e(TAG, "Error closing rejected client socket", e);
@@ -75,7 +74,9 @@
 +    }
 +
 +    private void cleanupClient(String clientId, Socket client) {
-+        try {
+         try {
+-            synchronized (clientConnections) {
+-                clientConnections.remove(client);
 +            if (clientId != null) {
 +                synchronized (clientConnections) {
 +                    clientConnections.remove(clientId);
@@ -90,7 +91,7 @@
          } catch (IOException e) {
              Log.e(TAG, "Error closing client socket", e);
          }
-@@ -185,8 +208,8 @@
+@@ -185,8 +209,8 @@
              isServerRunning = false; // Set flag to false
              if (serverSocket != null && !serverSocket.isClosed()) {
                  synchronized (clientConnections) {
@@ -101,7 +102,55 @@
                      }
                      clientConnections.clear();
                  }
-@@ -413,6 +436,71 @@
+@@ -252,6 +276,7 @@
+ 
+             // Start the heartbeat after connection
+             startHeartbeat(ipAddress, port);
++            startClientReadLoop();
+ 
+             JSObject result = new JSObject();
+             result.put("success", true);
+@@ -383,6 +408,30 @@
+         Log.i(TAG, "Message sent to server: " + message);
+     }
+ 
++    // Boucle de lecture côté client : reçoit les messages envoyés par le serveur
++    // (sendMessageToClient / broadcastToClients côté hôte). Redémarrée à chaque
++    // (re)connexion, y compris après une reconnexion automatique du heartbeat.
++    private void startClientReadLoop() {
++        final Socket socketRef = clientSocket;
++        if (socketRef == null) return;
++        new Thread(() -> {
++            try {
++                BufferedReader in = new BufferedReader(new InputStreamReader(socketRef.getInputStream()));
++                String line;
++                while ((line = in.readLine()) != null) {
++                    if (line.trim().isEmpty()) continue; // ligne vide = heartbeat, on ignore
++                    JSObject eventData = new JSObject();
++                    eventData.put("message", line);
++                    notifyListeners("receiveMessage", eventData);
++                }
++            } catch (IOException e) {
++                Log.w(TAG, "Client read loop ended: " + e.getMessage());
++            } finally {
++                notifyListeners("serverDisconnected", new JSObject());
++            }
++        }).start();
++    }
++
+     private boolean reconnectToServer(String ipAddress, int port) {
+         try {
+             // Validate IP address and port
+@@ -399,6 +448,8 @@
+             clientSocket = new Socket(ipAddress, port);
+             clientSocket.setSoTimeout(30000); // Optional: Timeout for reading data
+             Log.i(TAG, "Reconnected to server at " + ipAddress + ":" + port);
++            startClientReadLoop();
++            notifyListeners("serverReconnected", new JSObject());
+             return true;
+ 
+         } catch (IOException e) {
+@@ -413,6 +464,71 @@
          call.resolve(new JSObject().put("count", clientConnections.size()));
      }
  

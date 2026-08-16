@@ -516,12 +516,47 @@ window.addEventListener('pagehide', () => {
   else if (currentRole === 'join') SFMultiplayer.join.leave();
 });
 
+// ── Retour depuis game.html en fin de partie ───────────────────
+function resumeLobbyFromSession() {
+  let session = null;
+  try { session = JSON.parse(sessionStorage.getItem('sf_mp_session') || 'null'); } catch (e) {}
+  if (!session || !session.role) { showScreen('screen-menu'); return; }
+
+  currentRole = session.role;
+  showScreen('screen-lobby');
+
+  if (currentRole === 'host') {
+    SFMultiplayer.host.hydrate(session);
+    currentStoryFile = session.story?.file;
+    enterLobby({ code: SFMultiplayer.host.getCode(), storyTitle: session.story?.title });
+    return;
+  }
+
+  if (currentRole === 'join') {
+    SFMultiplayer.join.hydrate(session);
+    const timeout = setTimeout(() => {
+      currentRole = null;
+      showScreen('screen-menu');
+    }, 6000);
+    const off = SFMultiplayer.join.on('connected', (data) => {
+      clearTimeout(timeout);
+      off();
+      currentStoryFile = data.story?.file;
+      enterLobby({ storyTitle: data.story?.title, players: data.players });
+    });
+    // Redemande l'état courant à l'hôte via le jeton déjà connu (pas besoin du nom : ignoré côté hôte en cas de reconnexion).
+    SFMultiplayer.join.send('join', { rejoin: session.token });
+  }
+}
+
 // ── Init ─────────────────────────────────────────────────────
 applyTexts();
-if (window.SFMultiplayer && SFMultiplayer.isAvailable()) {
-  showScreen('screen-menu');
-} else {
+if (!window.SFMultiplayer || !SFMultiplayer.isAvailable()) {
   showScreen('screen-unavailable');
+} else if (new URLSearchParams(location.search).get('resume') === '1') {
+  resumeLobbyFromSession();
+} else {
+  showScreen('screen-menu');
 }
 </script>
 

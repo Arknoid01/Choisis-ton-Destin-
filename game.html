@@ -358,6 +358,14 @@ body {
   box-shadow: 0 0 8px #fa6d8f;
   animation: timer-pulse .4s ease infinite alternate;
 }
+.mp-vote-progress {
+  margin-top: 6px;
+  font-family: 'DM Mono', monospace; font-size: 10px;
+  color: var(--text3); letter-spacing: 1.5px;
+  display: none; align-items: center; gap: 6px;
+}
+.mp-vote-progress.active { display: flex; }
+.mp-vote-progress .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--accent2); flex-shrink: 0; }
 @keyframes timer-pulse {
   from { opacity: 1; }
   to   { opacity: 0.6; }
@@ -1587,6 +1595,7 @@ function renderScene(scene) {
         <div class="timer-label">TEMPS RESTANT <span id="timer-count"></span></div>
         <div class="timer-track"><div class="timer-fill" id="timer-fill"></div></div>
       </div>
+      <div id="mp-vote-progress" class="mp-vote-progress"><span class="dot"></span><span id="mp-vote-progress-text"></span></div>
       <div id="choices-area" class="hidden">${choicesHTML}</div>
     </div>`;
 
@@ -1671,6 +1680,11 @@ const GAME_I18N = {
     ratingNever: 'Ne plus demander',
     mpWaitingHost: '⏳ En attente que l\'hôte lance la scène…',
     mpVoted: '✓ Vote enregistré — en attente des autres…',
+    mpVotesProgress: 'VOTES : {n}/{total}',
+    mpReconnecting: '📡 Connexion perdue — tentative de reconnexion…',
+    mpReconnectFailed: 'Impossible de rejoindre la partie. Retour à l\'accueil.',
+    mpEndWaiting: 'En attente du retour au lobby par l\'hôte…',
+    mpEndReturnLobby: 'Retour au lobby',
   },
   en: {
     bookmark:    'Bookmark',
@@ -1714,6 +1728,11 @@ const GAME_I18N = {
     ratingNever: 'Don\'t ask again',
     mpWaitingHost: '⏳ Waiting for the host to start the scene…',
     mpVoted: '✓ Vote recorded — waiting for others…',
+    mpVotesProgress: 'VOTES: {n}/{total}',
+    mpReconnecting: '📡 Connection lost — trying to reconnect…',
+    mpReconnectFailed: 'Could not rejoin the party. Returning home.',
+    mpEndWaiting: 'Waiting for the host to return to the lobby…',
+    mpEndReturnLobby: 'Return to lobby',
   },
   es: {
     bookmark:    'Marcador',
@@ -1757,6 +1776,11 @@ const GAME_I18N = {
     ratingNever: 'No volver a preguntar',
     mpWaitingHost: '⏳ Esperando a que el anfitrión inicie la escena…',
     mpVoted: '✓ Voto registrado — esperando a los demás…',
+    mpVotesProgress: 'VOTOS: {n}/{total}',
+    mpReconnecting: '📡 Conexión perdida — intentando reconectar…',
+    mpReconnectFailed: 'No se pudo volver a unir a la partida. Volviendo al inicio.',
+    mpEndWaiting: 'Esperando a que el anfitrión vuelva al lobby…',
+    mpEndReturnLobby: 'Volver al lobby',
   }
 };
 
@@ -2061,11 +2085,14 @@ function renderEndScene(scene) {
       <div class="scene-text">${formatText(scene.text || '')}</div>
       ${statsRows ? `<div class="end-stats">${statsRows}</div>` : ''}
       ${firstFinishHtml}
-      <div class="end-buttons">
-        <button class="end-btn primary" onclick="restartGame()">↺ ${gt('endRestart')}</button>
-        <button class="end-btn" onclick="window.location.href='index.html'">← ${gt('endMenu')}</button>
-      </div>
+      ${mpEndButtonsHtml()}
     </div>`;
+
+  if (MP_MODE === 'join') {
+    SFMultiplayer.join.on('message', ({ type }) => {
+      if (type === 'returnLobby') mpReturnToLobby();
+    });
+  }
 
   // Popup de notation — seulement sur fins positives, jamais si déjà répondu
   if (scene.askRate !== false && !scene.title?.toLowerCase().includes('mort')
@@ -2900,7 +2927,44 @@ function mpBootstrap() {
     SFMultiplayer.join.on('message', ({ type, payload }) => {
       if (type === 'advance') mpHandleAdvance(payload);
     });
+    SFMultiplayer.join.on('disconnected', mpHandleDisconnected);
+    SFMultiplayer.join.on('reconnected', mpHandleReconnected);
   }
+}
+
+// ── MULTIJOUEUR — reconnexion (joueur) ─────────────────────────
+let _mpDisconnectTimeout = null;
+
+function mpShowReconnectBanner(html) {
+  let banner = document.getElementById('mp-reconnect-banner');
+  if (!banner) {
+    banner = document.createElement('div');
+    banner.id = 'mp-reconnect-banner';
+    banner.style.cssText = 'position:fixed;top:0;left:0;right:0;z-index:9000;background:#fa6d8f;color:#fff;font-family:ui-monospace,monospace;font-size:11px;text-align:center;padding:8px 12px;letter-spacing:0.5px';
+    document.body.appendChild(banner);
+  }
+  banner.innerHTML = html;
+  banner.style.display = 'block';
+}
+
+function mpHideReconnectBanner() {
+  const banner = document.getElementById('mp-reconnect-banner');
+  if (banner) banner.style.display = 'none';
+  if (_mpDisconnectTimeout) { clearTimeout(_mpDisconnectTimeout); _mpDisconnectTimeout = null; }
+}
+
+function mpHandleDisconnected() {
+  mpShowReconnectBanner(gt('mpReconnecting'));
+  if (!_mpDisconnectTimeout) {
+    _mpDisconnectTimeout = setTimeout(() => {
+      mpShowReconnectBanner(gt('mpReconnectFailed') +
+        ' <button onclick="window.location.href=\'index.html\'" style="margin-left:8px;padding:3px 10px;border-radius:6px;border:none;background:rgba(255,255,255,0.25);color:#fff;font-family:ui-monospace,monospace;font-size:10px;cursor:pointer">OK</button>');
+    }, 60000);
+  }
+}
+
+function mpHandleReconnected() {
+  mpHideReconnectBanner();
 }
 
 function mpShowWaitingState() {
@@ -2917,6 +2981,17 @@ function mpHandleAdvance(payload) {
 
 function mpResetVotes() {
   mpVoteMap = new Map();
+  mpUpdateVoteProgressUI();
+}
+
+function mpUpdateVoteProgressUI() {
+  const el = document.getElementById('mp-vote-progress');
+  const textEl = document.getElementById('mp-vote-progress-text');
+  if (!el || !textEl || MP_MODE !== 'host') return;
+  const connectedPlayers = SFMultiplayer.host.getPlayers().filter(p => p.connected).length;
+  const total = 1 + connectedPlayers;
+  textEl.textContent = gt('mpVotesProgress').replace('{n}', mpVoteMap.size).replace('{total}', total);
+  el.classList.add('active');
 }
 
 function mpRegisterVote(voterId, choiceIndex) {
@@ -2925,6 +3000,7 @@ function mpRegisterVote(voterId, choiceIndex) {
   if (!choices[choiceIndex]) return false; // index de choix invalide, on ignore
 
   mpVoteMap.set(voterId, choiceIndex);
+  mpUpdateVoteProgressUI();
 
   const connectedPlayers = SFMultiplayer.host.getPlayers().filter(p => p.connected).length;
   const totalExpected = 1 + connectedPlayers; // hôte + joueurs connectés
@@ -2997,6 +3073,35 @@ function mpStartVoterCountdown(duration) {
     if (pct < 30) fillEl.classList.add('urgent');
     if (remaining <= 0) { clearInterval(_mpVoterTimerInterval); _mpVoterTimerInterval = null; }
   }, 100);
+}
+
+function mpEndButtonsHtml() {
+  if (MP_MODE === 'host') {
+    return `<div class="end-buttons">
+      <button class="end-btn primary" onclick="mpReturnToLobby()">↺ ${gt('mpEndReturnLobby')}</button>
+    </div>`;
+  }
+  if (MP_MODE === 'join') {
+    return `<div class="end-buttons">
+      <p style="font-family:'DM Mono',monospace;font-size:11px;color:var(--text3);text-align:center;padding:12px 0">${gt('mpEndWaiting')}</p>
+    </div>`;
+  }
+  return `<div class="end-buttons">
+    <button class="end-btn primary" onclick="restartGame()">↺ ${gt('endRestart')}</button>
+    <button class="end-btn" onclick="window.location.href='index.html'">← ${gt('endMenu')}</button>
+  </div>`;
+}
+
+function mpReturnToLobby() {
+  if (MP_MODE === 'host') {
+    SFMultiplayer.host.broadcast('returnLobby', {});
+    sessionStorage.setItem('sf_mp_session', JSON.stringify({ role: 'host', ...SFMultiplayer.host.snapshot() }));
+  } else if (MP_MODE === 'join') {
+    sessionStorage.setItem('sf_mp_session', JSON.stringify({ role: 'join', ...SFMultiplayer.join.snapshot() }));
+  } else {
+    return;
+  }
+  window.location.href = 'multiplayer.html?resume=1';
 }
 
 mpBootstrap();

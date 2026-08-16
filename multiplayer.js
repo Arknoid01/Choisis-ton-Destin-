@@ -286,10 +286,22 @@ window.SFMultiplayer = (function () {
     function attachListeners() {
       if (listenersAttached) return;
       listenersAttached = true;
-      plugins().TcpSocketManager.addListener('receiveMessage', ({ message }) => {
+      const Tcp = plugins().TcpSocketManager;
+      Tcp.addListener('receiveMessage', ({ message }) => {
         const msg = parseLine(message);
         if (!msg) return;
         handleServerMessage(msg);
+      });
+      Tcp.addListener('serverDisconnected', () => {
+        connected = false;
+        events.emit('disconnected', {});
+      });
+      Tcp.addListener('serverReconnected', () => {
+        connected = true;
+        // Le socket brut est de retour, mais l'hôte ne sait pas encore que
+        // c'est le même joueur tant qu'on ne renvoie pas notre jeton.
+        if (token) send('join', { rejoin: token }).catch(() => {});
+        events.emit('reconnected', {});
       });
     }
 
