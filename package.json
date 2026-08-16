@@ -6,7 +6,9 @@
   "scripts": {
     "test": "node scripts/catalog-smoke.mjs",
     "test:catalog": "node scripts/catalog-smoke.mjs",
-    "govern:new": "node scripts/govern-new-flags.mjs && node scripts/catalog-smoke.mjs"
+    "govern:new": "node scripts/govern-new-flags.mjs && node scripts/catalog-smoke.mjs",
+    "build:web": "python3 scripts/build-web.py",
+    "postinstall": "patch -p1 -N -r - < patches/yesprasoon-tcp-socket-manager-android.patch || true"
   },
   "repository": {
     "type": "git",
@@ -18,5 +20,15 @@
   "bugs": {
     "url": "https://github.com/Arknoid01/Choisis-ton-Destin-/issues"
   },
-  "homepage": "https://github.com/Arknoid01/Choisis-ton-Destin-#readme"
+  "homepage": "https://github.com/Arknoid01/Choisis-ton-Destin-#readme",
+  "dependencies": {
+    "@capacitor/android": "^7.6.8",
+    "@capacitor/cli": "^7.6.8",
+    "@capacitor/core": "^7.6.8",
+    "@yesprasoon/capacitor-tcp-socket-manager": "^1.2.2",
+    "capacitor-udp-socket": "^7.0.0"
+  },
+  "devDependencies": {
+    "patch-package": "^8.0.1"
+  }
 }

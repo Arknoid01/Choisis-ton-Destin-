@@ -1,0 +1,175 @@
+--- a/node_modules/@yesprasoon/capacitor-tcp-socket-manager/android/src/main/java/net/yesprasoon/plugins/capacitortcpsocketmanager/TcpSocketManagerPlugin.java
++++ b/node_modules/@yesprasoon/capacitor-tcp-socket-manager/android/src/main/java/net/yesprasoon/plugins/capacitortcpsocketmanager/TcpSocketManagerPlugin.java
+@@ -2,6 +2,7 @@
+ 
+ import android.util.Log;
+ 
++import com.getcapacitor.JSArray;
+ import com.getcapacitor.JSObject;
+ import com.getcapacitor.Plugin;
+ import com.getcapacitor.PluginCall;
+@@ -26,7 +27,8 @@
+ 
+     private ServerSocket serverSocket;
+     private Socket clientSocket;
+-    private final List<Socket> clientConnections = Collections.synchronizedList(new ArrayList<>());
++    private final java.util.Map<String, Socket> clientConnections = Collections.synchronizedMap(new java.util.LinkedHashMap<>());
++    private final java.util.concurrent.atomic.AtomicInteger clientIdCounter = new java.util.concurrent.atomic.AtomicInteger(0);
+     private static final int MAX_CLIENTS = 10;
+     private Thread heartbeatThread;
+     private volatile boolean isHeartbeatRunning = false;
+@@ -138,42 +140,63 @@
+ 
+     private void handleClient(Socket client) {
+         new Thread(() -> {
++            String clientId = null;
+             try {
+                 if (clientConnections.size() >= MAX_CLIENTS) {
+-                    cleanupClient(client); // Reject the client and clean up
++                    cleanupClientSocket(client); // Reject the client and clean up
+                     Log.w(TAG, "Connection rejected: Maximum client limit reached.");
+                     return;
+                 }
+ 
++                clientId = "client-" + clientIdCounter.incrementAndGet();
+                 synchronized (clientConnections) {
+-                    clientConnections.add(client);
++                    clientConnections.put(clientId, client);
+                 }
+ 
++                JSObject connectedEvent = new JSObject();
++                connectedEvent.put("clientId", clientId);
++                connectedEvent.put("remoteAddress", client.getInetAddress().getHostAddress());
++                notifyListeners("clientConnected", connectedEvent);
++
+                 BufferedReader in = new BufferedReader(new InputStreamReader(client.getInputStream()));
+                 String message;
+                 while ((message = in.readLine()) != null) {
+-                    Log.i(TAG, "Received message: " + message);
++                    Log.i(TAG, "Received message from " + clientId + ": " + message);
+ 
+                     // Notify the frontend with the received message
+                     JSObject eventData = new JSObject();
++                    eventData.put("clientId", clientId);
+                     eventData.put("message", message);
+                     notifyListeners("receiveMessage", eventData);
+                 }
+             } catch (IOException e) {
+                 Log.e(TAG, "Error in client handling", e);
+             } finally {
+-                cleanupClient(client);
++                cleanupClient(clientId, client);
+             }
+         }).start();
+     }
+ 
+-    private void cleanupClient(Socket client) {
++    private void cleanupClientSocket(Socket client) {
+         try {
+-            synchronized (clientConnections) {
+-                clientConnections.remove(client);
++            client.close();
++        } catch (IOException e) {
++            Log.e(TAG, "Error closing rejected client socket", e);
++        }
++    }
++
++    private void cleanupClient(String clientId, Socket client) {
++        try {
++            if (clientId != null) {
++                synchronized (clientConnections) {
++                    clientConnections.remove(clientId);
++                }
++                JSObject disconnectedEvent = new JSObject();
++                disconnectedEvent.put("clientId", clientId);
++                notifyListeners("clientDisconnected", disconnectedEvent);
+             }
+             client.close();
+-            Log.i(TAG, "Client disconnected and cleaned up.");
++            Log.i(TAG, "Client " + clientId + " disconnected and cleaned up.");
+         } catch (IOException e) {
+             Log.e(TAG, "Error closing client socket", e);
+         }
+@@ -185,8 +208,8 @@
+             isServerRunning = false; // Set flag to false
+             if (serverSocket != null && !serverSocket.isClosed()) {
+                 synchronized (clientConnections) {
+-                    for (Socket client : clientConnections) {
+-                        cleanupClient(client); // Ensure each client is properly cleaned up
++                    for (java.util.Map.Entry<String, Socket> entry : new java.util.LinkedHashMap<>(clientConnections).entrySet()) {
++                        cleanupClient(entry.getKey(), entry.getValue()); // Ensure each client is properly cleaned up
+                     }
+                     clientConnections.clear();
+                 }
+@@ -413,6 +436,71 @@
+         call.resolve(new JSObject().put("count", clientConnections.size()));
+     }
+ 
++    // Send Message to a Specific Client (Server -> one Client)
++    @PluginMethod
++    public void sendMessageToClient(PluginCall call) {
++        String clientId = call.getString("clientId", "");
++        String message = call.getString("message", "");
++        if (clientId.isEmpty() || message.isEmpty()) {
++            call.reject("clientId and message are required.");
++            return;
++        }
++        Socket target;
++        synchronized (clientConnections) {
++            target = clientConnections.get(clientId);
++        }
++        if (target == null || target.isClosed()) {
++            call.reject("Unknown or closed clientId: " + clientId);
++            return;
++        }
++        try {
++            target.getOutputStream().write((message + "\n").getBytes());
++            target.getOutputStream().flush();
++            call.resolve(new JSObject().put("success", true));
++        } catch (IOException e) {
++            Log.e(TAG, "Error sending message to client " + clientId, e);
++            call.reject("Failed to send message to client.", e);
++        }
++    }
++
++    // Send Message to All Connected Clients (Server -> all Clients)
++    @PluginMethod
++    public void broadcastToClients(PluginCall call) {
++        String message = call.getString("message", "");
++        if (message.isEmpty()) {
++            call.reject("message is required.");
++            return;
++        }
++        int sentCount = 0;
++        java.util.Map<String, Socket> snapshot;
++        synchronized (clientConnections) {
++            snapshot = new java.util.LinkedHashMap<>(clientConnections);
++        }
++        for (java.util.Map.Entry<String, Socket> entry : snapshot.entrySet()) {
++            Socket client = entry.getValue();
++            if (client == null || client.isClosed()) continue;
++            try {
++                client.getOutputStream().write((message + "\n").getBytes());
++                client.getOutputStream().flush();
++                sentCount++;
++            } catch (IOException e) {
++                Log.e(TAG, "Error broadcasting to client " + entry.getKey(), e);
++            }
++        }
++        call.resolve(new JSObject().put("success", true).put("sentCount", sentCount));
++    }
++
++    @PluginMethod
++    public void getConnectedClientIds(PluginCall call) {
++        JSArray ids = new JSArray();
++        synchronized (clientConnections) {
++            for (String id : clientConnections.keySet()) {
++                ids.put(id);
++            }
++        }
++        call.resolve(new JSObject().put("clientIds", ids));
++    }
++
+     @Override
+     public void handleOnDestroy() {
+         super.handleOnDestroy();
