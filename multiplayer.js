@@ -117,6 +117,14 @@ window.SFMultiplayer = (function () {
         handleJoin(clientId, msg);
         return;
       }
+      if (msg.type === 'clockSync') {
+        // Aller-retour horloge (style NTP) — répond immédiatement, aucune
+        // identification requise, pour que le joueur puisse estimer le
+        // décalage entre son horloge locale et celle de l'hôte avant même
+        // que la partie ne démarre.
+        sendToClient(clientId, { type: 'clockSyncReply', t0: msg.t0, t1: Date.now() });
+        return;
+      }
       const playerId = clientToPlayer.get(clientId);
       if (!playerId) return; // pas encore identifié (n'a pas envoyé 'join')
       events.emit('message', { playerId, type: msg.type, payload: msg });
@@ -132,6 +140,7 @@ window.SFMultiplayer = (function () {
           if (p.token === msg.rejoin) { playerId = id; break; }
         }
       }
+      const isReconnect = !!playerId;
 
       if (playerId) {
         const player = players.get(playerId);
@@ -159,8 +168,21 @@ window.SFMultiplayer = (function () {
         story: storyInfo,
         players: rosterPayload()
       });
+
+      // Reconnexion : la partie a pu avancer pendant l'absence du joueur
+      // (broadcasts 'advance'/'voteStart' manqués car son socket était
+      // fermé) — on lui renvoie où en est le jeu maintenant pour qu'il
+      // puisse rattraper, plutôt que de rester bloqué sur une vieille scène.
+      if (isReconnect && resumeProvider) {
+        const state = resumeProvider();
+        if (state) sendToClient(clientId, Object.assign({ type: 'resume' }, state));
+      }
+
       broadcastRoster();
     }
+
+    let resumeProvider = null;
+    function setResumeProvider(fn) { resumeProvider = fn; }
 
     function countConnected() {
       let n = 0;
@@ -282,7 +304,7 @@ window.SFMultiplayer = (function () {
     }
 
     return {
-      create, stop, broadcast, sendTo, getPlayers, getCode, hydrate, snapshot,
+      create, stop, broadcast, sendTo, getPlayers, getCode, hydrate, snapshot, setResumeProvider,
       on: events.on
     };
   })();
@@ -296,6 +318,8 @@ window.SFMultiplayer = (function () {
     let token = null;
     let listenersAttached = false;
     let joinTimeoutHandle = null;
+    let clockOffset = 0; // estimation (horloge hôte - horloge locale), en ms
+    let pendingClockSync = null; // { t0, resolve }
 
     function attachListeners() {
       if (listenersAttached) return;
@@ -315,6 +339,7 @@ window.SFMultiplayer = (function () {
         // Le socket brut est de retour, mais l'hôte ne sait pas encore que
         // c'est le même joueur tant qu'on ne renvoie pas notre jeton.
         if (token) send('join', { rejoin: token }).catch(() => {});
+        syncClock();
         events.emit('reconnected', {});
       });
     }
@@ -335,8 +360,49 @@ window.SFMultiplayer = (function () {
         events.emit('roster', { players: msg.players });
         return;
       }
+      if (msg.type === 'clockSyncReply') {
+        if (pendingClockSync && pendingClockSync.t0 === msg.t0) {
+          const t2 = Date.now();
+          const rtt = t2 - pendingClockSync.t0;
+          pendingClockSync.resolve({ offset: msg.t1 - pendingClockSync.t0 - rtt / 2, rtt });
+          pendingClockSync = null;
+        }
+        return;
+      }
       events.emit('message', { type: msg.type, payload: msg });
     }
+
+    // Un seul aller-retour horloge (style NTP) : offset = décalage estimé
+    // entre l'horloge de l'hôte et la nôtre, en supposant une latence
+    // symétrique aller/retour (raisonnable sur un wifi local).
+    function pingClock() {
+      return new Promise((resolve) => {
+        const t0 = Date.now();
+        pendingClockSync = { t0, resolve };
+        send('clockSync', { t0 }).catch(() => resolve(null));
+        setTimeout(() => {
+          if (pendingClockSync && pendingClockSync.t0 === t0) {
+            pendingClockSync = null;
+            resolve(null);
+          }
+        }, 3000);
+      });
+    }
+
+    // Répète l'aller-retour plusieurs fois et garde l'échantillon au RTT le
+    // plus court (le plus fiable) — pratique NTP standard pour limiter
+    // l'erreur due à une latence asymétrique.
+    async function syncClock(samples = 5) {
+      let best = null;
+      for (let i = 0; i < samples; i++) {
+        const r = await pingClock();
+        if (r && (!best || r.rtt < best.rtt)) best = r;
+      }
+      if (best) clockOffset = best.offset;
+      return clockOffset;
+    }
+
+    function getClockOffset() { return clockOffset; }
 
     function findHostViaBroadcast(code) {
       return new Promise(async (resolve, reject) => {
@@ -384,7 +450,7 @@ window.SFMultiplayer = (function () {
       await plugins().TcpSocketManager.connectToServer({ ipAddress, port });
       await send('join', { name, rejoin: token || undefined });
 
-      return new Promise((resolve, reject) => {
+      const data = await new Promise((resolve, reject) => {
         joinTimeoutHandle = setTimeout(() => reject(new Error('timeout')), 5000);
         const off = events.on('connected', (data) => {
           clearTimeout(joinTimeoutHandle);
@@ -392,6 +458,8 @@ window.SFMultiplayer = (function () {
           resolve(data);
         });
       });
+      await syncClock();
+      return data;
     }
 
     async function send(type, payload) {
@@ -420,17 +488,18 @@ window.SFMultiplayer = (function () {
     function hydrate(snapshot) {
       playerId = snapshot.playerId;
       token = snapshot.token;
+      clockOffset = snapshot.clockOffset || 0;
       connected = true;
       attachListeners();
     }
 
     /** Snapshot sérialisable pour sessionStorage avant une navigation. */
     function snapshot() {
-      return { playerId, token };
+      return { playerId, token, clockOffset };
     }
 
     return {
-      connect, send, leave, isConnected, getPlayerId, hydrate, snapshot,
+      connect, send, leave, isConnected, getPlayerId, getClockOffset, hydrate, snapshot,
       on: events.on
     };
   })();

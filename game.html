@@ -1143,6 +1143,10 @@ let MP_MODE = null; // null | 'host' | 'join'
 const MP_VOTE_SECONDS = 20;
 let mpVoteMap = new Map(); // voterId -> choiceIndex, remis à zéro à chaque scène (hôte uniquement)
 let _mpVoterTimerInterval = null;
+// Deadline du vote actuellement en cours (hôte uniquement) — null si la
+// scène affichée n'a pas de vote actif (ex: écran de fin). Sert à renvoyer
+// l'état exact aux joueurs qui se reconnectent après avoir manqué un advance.
+let mpActiveVoteDeadline = null;
 
 // ══════════════════════════════════════════════
 // THEME — apply from story.theme
@@ -1397,6 +1401,7 @@ function goToScene(id, choiceText, externalStory) {
   // Multijoueur : l'hôte diffuse la scène (et les stats à jour) à tous les joueurs
   if (MP_MODE === 'host') {
     SFMultiplayer.host.broadcast('advance', { sceneId: id, stats: { ...stats } });
+    mpActiveVoteDeadline = null; // repositionné dans showChoices() si la nouvelle scène a un vote
   }
 
   // Track scene read
@@ -1531,8 +1536,14 @@ async function loadExternalStory(storyFile, startScene) {
 }
 
 function renderScene(scene) {
-  // Shuffle choices
-  const shuffled = shuffleArray([...(scene.choices || [])]);
+  // Multijoueur : le vote transmet un index de choix (choiceIdx), pas un
+  // identifiant — l'ordre des choix DOIT donc être identique sur tous les
+  // appareils (hôte comme joueurs), sinon l'index voté par un joueur ne
+  // correspond pas au même choix chez l'hôte qui dépouille. On ne mélange
+  // donc qu'en solo.
+  const shuffled = MP_MODE
+    ? [...(scene.choices || [])]
+    : shuffleArray([...(scene.choices || [])]);
 
   // Stocker les choix dans une variable globale pour les onclick
   window._currentChoices = shuffled;
@@ -1609,6 +1620,7 @@ function renderScene(scene) {
       // de chacun (machine à écrire, tuto, tap pour passer) a fini de son côté.
       const voteDurationSec = (scene.timer && scene.timer.duration > 0) ? scene.timer.duration : MP_VOTE_SECONDS;
       const deadline = Date.now() + voteDurationSec * 1000;
+      mpActiveVoteDeadline = deadline;
       mpResetVotes();
       SFMultiplayer.host.broadcast('voteStart', { sceneId: currentId, deadline });
       startChoiceTimer(voteDurationSec, 'mp-resolve');
@@ -2927,6 +2939,11 @@ function mpBootstrap() {
 
   if (MP_MODE === 'host') {
     SFMultiplayer.host.hydrate(session);
+    SFMultiplayer.host.setResumeProvider(() => ({
+      sceneId: currentId,
+      stats: { ...stats },
+      voteDeadline: mpActiveVoteDeadline
+    }));
     SFMultiplayer.host.on('message', ({ playerId, type, payload }) => {
       if (type === 'vote' && payload.sceneId === currentId) {
         mpRegisterVote(playerId, payload.choiceIdx);
@@ -2937,6 +2954,7 @@ function mpBootstrap() {
     SFMultiplayer.join.on('message', ({ type, payload }) => {
       if (type === 'advance') mpHandleAdvance(payload);
       if (type === 'voteStart') mpHandleVoteStart(payload);
+      if (type === 'resume') mpHandleResume(payload);
     });
     SFMultiplayer.join.on('disconnected', mpHandleDisconnected);
     SFMultiplayer.join.on('reconnected', mpHandleReconnected);
@@ -2992,6 +3010,26 @@ function mpHandleAdvance(payload) {
   goToScene(payload.sceneId);
 }
 
+// ── MULTIJOUEUR — rattrapage après reconnexion (joueur) ──────────
+// Envoyé par l'hôte uniquement en cas de reconnexion (pas au premier join).
+// Si la partie a avancé pendant la coupure, sceneId diffère de currentId :
+// on rejoue mpHandleAdvance() pour rattraper le(s) changement(s) manqués.
+// Si un vote est actif (voteDeadline présent), on refait aussi partir le
+// décompte joueur sur la vraie deadline de l'hôte — utile aussi bien pour
+// rattraper un vote qu'on n'a jamais reçu que pour recaler un décompte
+// resté figé pendant la coupure réseau (goToScene() met mpChoicesReady à
+// false puis showChoices() le repasse à true de façon asynchrone : l'ordre
+// d'arrivée entre les deux appels ci-dessous n'a pas d'importance, voir
+// mpTryStartVoterCountdown()).
+function mpHandleResume(payload) {
+  if (payload.sceneId !== currentId) {
+    mpHandleAdvance(payload);
+  }
+  if (payload.voteDeadline) {
+    mpHandleVoteStart({ sceneId: payload.sceneId, deadline: payload.voteDeadline });
+  }
+}
+
 // ── MULTIJOUEUR — timer de vote synchronisé (joueur) ────────────
 // Le décompte affiché doit démarrer à la même deadline absolue chez tout
 // le monde. On attend d'avoir les deux : nos choix affichés localement
@@ -3008,7 +3046,12 @@ function mpHandleVoteStart(payload) {
 function mpTryStartVoterCountdown() {
   if (MP_MODE !== 'join' || !mpChoicesReady || !mpVoteStartData) return;
   if (mpVoteStartData.sceneId !== currentId) return; // message d'une scène déjà dépassée
-  const remainingSec = Math.max(1, (mpVoteStartData.deadline - Date.now()) / 1000);
+  // deadline est en horloge hôte — on corrige notre Date.now() local avec le
+  // décalage estimé (voir syncClock() dans multiplayer.js), sinon deux
+  // téléphones dont les horloges système diffèrent affichent des décomptes
+  // différents même si le message est reçu au même instant réseau.
+  const localOffset = (SFMultiplayer.join.getClockOffset && SFMultiplayer.join.getClockOffset()) || 0;
+  const remainingSec = Math.max(1, (mpVoteStartData.deadline - (Date.now() + localOffset)) / 1000);
   mpStartVoterCountdown(remainingSec);
   mpVoteStartData = null;
 }
@@ -3065,6 +3108,7 @@ function mpResolveVotes() {
   }
 
   mpResetVotes();
+  mpActiveVoteDeadline = null;
   const choice = choices[winningIndex];
   const btns = document.querySelectorAll('.choice-btn');
   commitChoice(choice.vers, winningIndex, btns[winningIndex] || null, choice.story);

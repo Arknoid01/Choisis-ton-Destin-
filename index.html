@@ -683,6 +683,32 @@ body {
 .submit-perk-text { color:var(--dim); }
 .submit-perk-text strong { color:var(--cream); }
 
+/* ── MULTIJOUEUR BETA POPUP ── */
+#mp-beta-overlay {
+  position:fixed; inset:0; z-index:300;
+  background:rgba(10,8,5,0);
+  display:flex; align-items:center; justify-content:center;
+  pointer-events:none;
+  transition:background .35s;
+}
+#mp-beta-overlay.open {
+  background:rgba(10,8,5,0.92);
+  pointer-events:all;
+  backdrop-filter:blur(10px);
+}
+#mp-beta-box {
+  width:100%; max-width:420px; margin:20px;
+  background:var(--bg2);
+  border:1px solid var(--border);
+  border-radius:20px; padding:36px 32px;
+  transform:scale(0.95) translateY(12px); opacity:0;
+  transition:all .35s cubic-bezier(.4,0,.2,1);
+  position:relative;
+}
+#mp-beta-overlay.open #mp-beta-box {
+  transform:scale(1) translateY(0); opacity:1;
+}
+
 .submit-actions {
   display:flex; flex-direction:column; gap:10px;
 }
@@ -954,7 +980,7 @@ body {
         <span class="menu-tile-icon">⚙</span>
         <span class="menu-tile-label" id="txt-btn-options">Options</span>
       </button>
-      <button class="btn-main" id="btn-multiplayer" onclick="window.location.href='multiplayer.html'">
+      <button class="btn-main" id="btn-multiplayer" onclick="openMultiplayerBetaPopup()">
         <span class="menu-tile-icon">👥</span>
         <span class="menu-tile-label" id="txt-btn-multiplayer">Multijoueur</span>
       </button>
@@ -1046,6 +1072,26 @@ body {
         Voir le concours en cours →
       </a>
     </p>
+  </div>
+</div>
+
+<!-- ── MULTIJOUEUR BETA POPUP ── -->
+<div id="mp-beta-overlay" onclick="handleMpBetaClick(event)">
+  <div id="mp-beta-box">
+    <button class="submit-close" onclick="closeMpBetaPopup()">✕</button>
+    <div class="submit-icon">🧪</div>
+    <div class="submit-title" id="txt-mpbeta-title">Mode bêta</div>
+    <div class="submit-body" id="txt-mpbeta-body">
+      Le multijoueur est encore en version bêta : vous pouvez rencontrer des bugs. Si c'est le cas, écrivez-nous via la tuile « Nous contacter » sur l'accueil — ça nous aide beaucoup à l'améliorer.
+    </div>
+    <div class="submit-actions">
+      <button class="submit-btn" onclick="confirmMpBetaAndGo()">
+        <span id="txt-mpbeta-continue">Continuer</span>
+      </button>
+      <button class="submit-btn secondary" onclick="closeMpBetaPopup()">
+        <span id="txt-mpbeta-cancel">Annuler</span>
+      </button>
+    </div>
   </div>
 </div>
 
@@ -1264,6 +1310,10 @@ const LANG = {
     submitAi:       '✦ Créer avec l\'IA',
     submitNote:     'Ouvrez StoryForge, écrivez votre histoire, remplissez le formulaire d\'envoi — le JSON part en un clic, sans export manuel.',
     submitContest:  'Voir le concours en cours →',
+    mpBetaTitle:    'Mode bêta',
+    mpBetaBody:     'Le multijoueur est encore en version bêta : vous pouvez rencontrer des bugs. Si c\'est le cas, écrivez-nous via la tuile « Nous contacter » sur l\'accueil — ça nous aide beaucoup à l\'améliorer.',
+    mpBetaContinue: 'Continuer',
+    mpBetaCancel:   'Annuler',
   },
   en: {
     eyebrow:        'An adventure awaits',
@@ -1339,6 +1389,10 @@ const LANG = {
     submitAi:       '✦ Create with AI',
     submitNote:     'Open StoryForge, write your story, fill in the send form — your JSON goes out in one tap, no manual export.',
     submitContest:  'See the current contest →',
+    mpBetaTitle:    'Beta mode',
+    mpBetaBody:     'Multiplayer is still in beta: you may run into bugs. If you do, please email us via the "Contact us" tile on the home screen — it really helps us improve it.',
+    mpBetaContinue: 'Continue',
+    mpBetaCancel:   'Cancel',
   },
   es: {
     eyebrow:        'Una aventura te espera',
@@ -1414,6 +1468,10 @@ const LANG = {
     submitAi:       '✦ Crear con IA',
     submitNote:     'Abre StoryForge, escribe tu historia, rellena el formulario de envío — el JSON sale en un clic, sin exportar manualmente.',
     submitContest:  'Ver el concurso actual →',
+    mpBetaTitle:    'Modo beta',
+    mpBetaBody:     'El multijugador todavía está en versión beta: es posible que encuentres algún error. Si es así, escríbenos a través de la casilla «Contáctanos» en la pantalla de inicio — nos ayuda mucho a mejorarlo.',
+    mpBetaContinue: 'Continuar',
+    mpBetaCancel:   'Cancelar',
   }
 };
 
@@ -1503,6 +1561,10 @@ function applyLang() {
   set('txt-submit-note',     t.submitNote);
   const contestLink = document.getElementById('txt-submit-contest');
   if (contestLink) contestLink.textContent = t.submitContest;
+  set('txt-mpbeta-title',    t.mpBetaTitle);
+  set('txt-mpbeta-body',     t.mpBetaBody);
+  set('txt-mpbeta-continue', t.mpBetaContinue);
+  set('txt-mpbeta-cancel',   t.mpBetaCancel);
   if (window.SFOnboarding) SFOnboarding.applyTexts();
   document.title = t.docTitle;
   document.documentElement.lang = currentLang;
@@ -1524,6 +1586,21 @@ function contactUs() {
   const subject = encodeURIComponent('Contact — Fableris');
   const body = encodeURIComponent('Bonjour l\'équipe PegasusCorp,\n\n');
   window.location.href = `mailto:${email}?subject=${subject}&body=${body}`;
+}
+
+// ── MULTIJOUEUR BETA POPUP ──
+function openMultiplayerBetaPopup() {
+  document.getElementById('mp-beta-overlay').classList.add('open');
+}
+function closeMpBetaPopup() {
+  document.getElementById('mp-beta-overlay').classList.remove('open');
+}
+function handleMpBetaClick(e) {
+  if (e.target === document.getElementById('mp-beta-overlay')) closeMpBetaPopup();
+}
+function confirmMpBetaAndGo() {
+  closeMpBetaPopup();
+  window.location.href = 'multiplayer.html';
 }
 
 // ── SUBMIT POPUP ──

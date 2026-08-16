@@ -76,10 +76,51 @@ html,body{min-height:100%;background:#0a0a0e;color:#e0d8f0;font-family:'Cormoran
   text-align:center;font-family:'DM Mono',monospace;font-size:28px;letter-spacing:10px;
   padding:14px 10px 14px 20px;
 }
-.mp-select{
-  width:100%;padding:13px 14px;border-radius:10px;
-  border:1px solid var(--border);background:var(--bg2);color:var(--text);
-  font-family:'Cormorant Garamond',serif;font-size:15px;
+.mp-story-list{
+  max-height:340px;overflow-y:auto;-webkit-overflow-scrolling:touch;
+  border:1px solid var(--border);border-radius:12px;background:var(--bg2);
+}
+.mp-story-empty{padding:18px 14px;font-size:13px;color:var(--dim);text-align:center;}
+.mp-story-card{
+  display:flex;align-items:center;gap:12px;
+  padding:12px 14px;border-bottom:1px solid var(--border);
+  cursor:pointer;transition:background .15s;position:relative;
+}
+.mp-story-card:last-child{border-bottom:none;}
+.mp-story-card:hover{background:rgba(200,169,110,0.05);}
+.mp-story-card.selected{background:rgba(200,169,110,0.1);}
+.mp-story-icon{
+  width:40px;height:40px;border-radius:9px;flex-shrink:0;
+  background:var(--bg3);border:1px solid var(--border);
+  display:flex;align-items:center;justify-content:center;font-size:19px;
+}
+.mp-story-info{flex:1;min-width:0;}
+.mp-story-title{
+  font-family:'Cinzel',serif;font-size:12.5px;font-weight:600;color:var(--text);
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+}
+.mp-story-desc{
+  font-size:11.5px;color:var(--dim);font-style:italic;margin-top:2px;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+}
+.mp-story-meta{display:flex;gap:6px;margin-top:4px;flex-wrap:wrap;}
+.story-tag{
+  font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.5px;
+  padding:2px 6px;border-radius:20px;border:1px solid var(--border);
+  color:var(--dimmer);text-transform:uppercase;
+}
+.story-tag.kids{border-color:rgba(255,215,0,0.3);color:#ffd700;}
+.story-tag.new{border-color:rgba(100,220,150,0.3);color:var(--green);}
+.story-tag.community{border-color:rgba(124,109,250,0.45);color:#b8a8ff;background:rgba(124,109,250,0.1);}
+.story-author{font-size:10.5px;color:#b8a8ff;margin-top:2px;}
+.mp-story-check{
+  width:20px;height:20px;border-radius:50%;flex-shrink:0;
+  border:1px solid var(--border);color:transparent;
+  display:flex;align-items:center;justify-content:center;font-size:11px;
+  transition:all .15s;
+}
+.mp-story-card.selected .mp-story-check{
+  border-color:var(--gold);background:rgba(200,169,110,0.25);color:var(--gold2);
 }
 
 .mp-back-link{
@@ -120,6 +161,56 @@ html,body{min-height:100%;background:#0a0a0e;color:#e0d8f0;font-family:'Cormoran
   border:1px dashed var(--border);background:rgba(255,255,255,0.02);
   font-size:12px;color:var(--dim);line-height:1.6;text-align:center;
 }
+
+/* ── AIDE MULTIJOUEUR ── */
+.mp-help-btn{
+  margin-left:auto;flex-shrink:0;
+  width:32px;height:32px;border-radius:50%;
+  border:1px solid rgba(200,169,110,0.5);
+  background:rgba(200,169,110,0.12);
+  color:var(--gold2);font-family:'Cinzel',serif;font-size:14px;font-weight:700;
+  display:flex;align-items:center;justify-content:center;
+  cursor:pointer;transition:border-color .15s,background .15s;
+  animation:mp-help-pulse 2.4s ease-in-out infinite;
+}
+.mp-help-btn:hover{border-color:var(--gold);background:rgba(200,169,110,0.22);}
+@keyframes mp-help-pulse{
+  0%,100%{box-shadow:0 0 0 0 rgba(200,169,110,0.35);}
+  50%{box-shadow:0 0 0 7px rgba(200,169,110,0);}
+}
+
+#mp-help-overlay{
+  position:fixed;inset:0;z-index:300;
+  background:rgba(10,8,5,0);
+  display:flex;align-items:center;justify-content:center;
+  pointer-events:none;transition:background .3s;
+}
+#mp-help-overlay.open{
+  background:rgba(10,8,5,0.9);pointer-events:all;backdrop-filter:blur(10px);
+}
+#mp-help-box{
+  width:100%;max-width:460px;margin:20px;max-height:82vh;overflow-y:auto;
+  background:var(--bg2);border:1px solid var(--border);border-radius:20px;
+  padding:32px 26px;position:relative;
+  transform:scale(0.95) translateY(12px);opacity:0;
+  transition:all .3s cubic-bezier(.4,0,.2,1);
+}
+#mp-help-overlay.open #mp-help-box{transform:scale(1) translateY(0);opacity:1;}
+.mp-help-close{
+  position:absolute;top:14px;right:14px;width:30px;height:30px;border-radius:8px;
+  background:none;border:1px solid var(--border);color:var(--dimmer);cursor:pointer;font-size:16px;
+  display:flex;align-items:center;justify-content:center;transition:all .15s;
+}
+.mp-help-close:hover{border-color:var(--gold3);color:var(--text);}
+.mp-help-title{
+  font-family:'Cinzel',serif;font-size:17px;font-weight:600;color:var(--text);
+  letter-spacing:1.5px;text-align:center;margin-bottom:20px;
+}
+.mp-help-steps{display:flex;flex-direction:column;gap:14px;}
+.mp-help-step{display:flex;gap:12px;align-items:flex-start;}
+.mp-help-step-icon{font-size:18px;flex-shrink:0;margin-top:1px;width:22px;text-align:center;}
+.mp-help-step-text{font-size:13.5px;color:var(--dim);line-height:1.55;}
+.mp-help-step-text strong{color:var(--text);}
 </style>
 </head>
 <body>
@@ -127,6 +218,22 @@ html,body{min-height:100%;background:#0a0a0e;color:#e0d8f0;font-family:'Cormoran
 <div id="topbar">
   <a class="back-btn" href="index.html">←</a>
   <span class="topbar-title" id="txt-title">MULTIJOUEUR</span>
+  <button class="mp-help-btn" onclick="openMpHelp()" aria-label="Aide">?</button>
+</div>
+
+<div id="mp-help-overlay" onclick="handleMpHelpClick(event)">
+  <div id="mp-help-box">
+    <button class="mp-help-close" onclick="closeMpHelp()">✕</button>
+    <div class="mp-help-title" id="txt-help-title">Comment ça marche ?</div>
+    <div class="mp-help-steps">
+      <div class="mp-help-step"><span class="mp-help-step-icon">📶</span><div class="mp-help-step-text" id="txt-help-step1"></div></div>
+      <div class="mp-help-step"><span class="mp-help-step-icon">📲</span><div class="mp-help-step-text" id="txt-help-step2"></div></div>
+      <div class="mp-help-step"><span class="mp-help-step-icon">🎬</span><div class="mp-help-step-text" id="txt-help-step3"></div></div>
+      <div class="mp-help-step"><span class="mp-help-step-icon">🔢</span><div class="mp-help-step-text" id="txt-help-step4"></div></div>
+      <div class="mp-help-step"><span class="mp-help-step-icon">🗳️</span><div class="mp-help-step-text" id="txt-help-step5"></div></div>
+      <div class="mp-help-step"><span class="mp-help-step-icon">👑</span><div class="mp-help-step-text" id="txt-help-step6"></div></div>
+    </div>
+  </div>
 </div>
 
 <div id="scroll">
@@ -157,7 +264,7 @@ html,body{min-height:100%;background:#0a0a0e;color:#e0d8f0;font-family:'Cormoran
     </div>
     <div class="mp-field">
       <label class="mp-label" id="txt-create-story-label"></label>
-      <select class="mp-select" id="select-story"></select>
+      <div class="mp-story-list" id="story-list"></div>
     </div>
     <p class="mp-error" id="err-create"></p>
     <button class="mp-btn primary" id="btn-create-confirm"></button>
@@ -201,6 +308,7 @@ html,body{min-height:100%;background:#0a0a0e;color:#e0d8f0;font-family:'Cormoran
 </div>
 
 <script src="sf-shared.js"></script>
+<script src="story-meta.js"></script>
 <script src="multiplayer.js"></script>
 <script>
 const lang = localStorage.getItem('sf_lang') || 'fr';
@@ -238,7 +346,15 @@ const T = {
     errBadCode: 'Code à 4 chiffres requis.',
     errNotFound: 'Aucune partie trouvée avec ce code (vérifiez que vous êtes sur le même wifi).',
     errFull: 'Cette partie est complète.',
-    errJoinFailed: 'Impossible de rejoindre la partie.'
+    errJoinFailed: 'Impossible de rejoindre la partie.',
+    errDlcLocked: 'Vous ne possédez pas le pack payant de cette histoire. Débloquez-le depuis l\'accueil pour rejoindre cette partie.',
+    helpTitle: 'Comment ça marche ?',
+    helpStep1: '<strong>Même wifi</strong> — l\'hôte et les joueurs doivent tous être connectés au même réseau wifi local.',
+    helpStep2: '<strong>Application installée</strong> — le multijoueur ne fonctionne que dans l\'app Android installée, pas dans un navigateur.',
+    helpStep3: '<strong>L\'hôte crée la partie</strong> — il choisit une histoire, un code à 4 chiffres s\'affiche à l\'écran.',
+    helpStep4: '<strong>Les autres rejoignent</strong> — depuis « Rejoindre une partie », en entrant ce code.',
+    helpStep5: '<strong>On vote ensemble</strong> — chaque scène s\'affiche chez tout le monde en même temps ; un minuteur partagé décide du temps de vote, le choix le plus voté l\'emporte.',
+    helpStep6: '<strong>L\'hôte doit rester connecté</strong> — c\'est son appareil qui fait tourner la partie ; s\'il quitte ou perd le wifi, la partie s\'arrête.'
   },
   en: {
     title: 'Multiplayer',
@@ -272,7 +388,15 @@ const T = {
     errBadCode: '4-digit code required.',
     errNotFound: 'No party found with this code (check you\'re on the same wifi).',
     errFull: 'This party is full.',
-    errJoinFailed: 'Could not join the party.'
+    errJoinFailed: 'Could not join the party.',
+    errDlcLocked: 'You don\'t own the paid pack for this story. Unlock it from the home screen to join this party.',
+    helpTitle: 'How does it work?',
+    helpStep1: '<strong>Same wifi</strong> — the host and all players must be connected to the same local wifi network.',
+    helpStep2: '<strong>Installed app only</strong> — multiplayer only works in the installed Android app, not in a browser.',
+    helpStep3: '<strong>The host creates the party</strong> — pick a story, a 4-digit code appears on screen.',
+    helpStep4: '<strong>Others join</strong> — from "Join a party", entering that code.',
+    helpStep5: '<strong>Vote together</strong> — every scene appears for everyone at the same time; a shared timer decides the voting window, the most-voted choice wins.',
+    helpStep6: '<strong>The host must stay connected</strong> — their device runs the party; if they leave or lose wifi, the party ends.'
   },
   es: {
     title: 'Multijugador',
@@ -306,7 +430,15 @@ const T = {
     errBadCode: 'Código de 4 dígitos requerido.',
     errNotFound: 'No se encontró ninguna partida con ese código (comprueba que estás en la misma wifi).',
     errFull: 'Esta partida está completa.',
-    errJoinFailed: 'No se pudo unir a la partida.'
+    errJoinFailed: 'No se pudo unir a la partida.',
+    errDlcLocked: 'No tienes el pack de pago de esta historia. Desbloquéalo desde la pantalla de inicio para unirte a esta partida.',
+    helpTitle: '¿Cómo funciona?',
+    helpStep1: '<strong>Misma wifi</strong> — el anfitrión y todos los jugadores deben estar conectados a la misma red wifi local.',
+    helpStep2: '<strong>Solo con la app instalada</strong> — el multijugador solo funciona en la app Android instalada, no en un navegador.',
+    helpStep3: '<strong>El anfitrión crea la partida</strong> — elige una historia y aparece un código de 4 dígitos en pantalla.',
+    helpStep4: '<strong>Los demás se unen</strong> — desde «Unirse a una partida», introduciendo ese código.',
+    helpStep5: '<strong>Se vota en grupo</strong> — cada escena aparece a la vez para todos; un temporizador compartido decide el tiempo de voto, gana la opción más votada.',
+    helpStep6: '<strong>El anfitrión debe permanecer conectado</strong> — su dispositivo hace funcionar la partida; si se va o pierde la wifi, la partida termina.'
   }
 };
 function t(key) { return (T[lang] || T.fr)[key] || key; }
@@ -335,6 +467,24 @@ function applyTexts() {
   document.getElementById('btn-lobby-start').textContent = t('lobbyStart');
   document.getElementById('txt-lobby-note').textContent = t('lobbyNote');
   document.getElementById('btn-lobby-leave').textContent = t('lobbyLeave');
+  document.getElementById('txt-help-title').textContent = t('helpTitle');
+  document.getElementById('txt-help-step1').innerHTML = t('helpStep1');
+  document.getElementById('txt-help-step2').innerHTML = t('helpStep2');
+  document.getElementById('txt-help-step3').innerHTML = t('helpStep3');
+  document.getElementById('txt-help-step4').innerHTML = t('helpStep4');
+  document.getElementById('txt-help-step5').innerHTML = t('helpStep5');
+  document.getElementById('txt-help-step6').innerHTML = t('helpStep6');
+}
+
+// ── Aide multijoueur ────────────────────────────────────────
+function openMpHelp() {
+  document.getElementById('mp-help-overlay').classList.add('open');
+}
+function closeMpHelp() {
+  document.getElementById('mp-help-overlay').classList.remove('open');
+}
+function handleMpHelpClick(e) {
+  if (e.target === document.getElementById('mp-help-overlay')) closeMpHelp();
 }
 
 // ── Navigation entre écrans ─────────────────────────────────
@@ -343,36 +493,65 @@ function showScreen(id) {
 }
 
 // ── Écran menu / création / rejoindre ──────────────────────
-async function populateStoryPicker() {
-  const select = document.getElementById('select-story');
-  select.innerHTML = '';
-  try {
-    const res = await fetch('games.json');
-    const games = await res.json();
-    const options = games.filter(g =>
-      g.lang === lang &&
-      !g.portal &&
-      (window.SFShared ? SFShared.isPackUnlocked(g.pack || (g.kids ? 'kids' : 'free')) : true)
-    );
-    options.forEach(g => {
-      const opt = document.createElement('option');
-      opt.value = g.file;
-      opt.textContent = (g.icon ? g.icon + ' ' : '') + g.title;
-      select.appendChild(opt);
-    });
-    return options;
-  } catch (e) {
-    console.error('[Multiplayer] chargement games.json échoué', e);
-    return [];
-  }
+// games.json chargé une seule fois et réutilisé par le picker de l'hôte
+// ET par le contrôle DLC côté joueur (voir vérification dans btn-join-confirm).
+let gamesCache = null;
+function fetchGames() {
+  if (!gamesCache) gamesCache = fetch('games.json').then(r => r.json()).catch(() => []);
+  return gamesCache;
 }
 
+function storyPack(g) {
+  return (g && g.pack) || (g && g.kids ? 'kids' : 'free');
+}
+
+let selectedStory = null; // { file, title } — histoire choisie par l'hôte
+
+function renderStoryCard(g) {
+  const metaHtml   = window.SFStoryMeta ? SFStoryMeta.metaTags(g, lang) : '';
+  const authorHtml = window.SFStoryMeta ? SFStoryMeta.authorLine(g, lang, 'story-author') : '';
+  return `<div class="mp-story-card" data-file="${escapeHtml(g.file)}">
+    <div class="mp-story-icon">${g.kids ? '🧒' : (g.icon || '📖')}</div>
+    <div class="mp-story-info">
+      <div class="mp-story-title">${escapeHtml(g.title)}</div>
+      ${authorHtml}
+      <div class="mp-story-desc">${escapeHtml(g.desc || '')}</div>
+      <div class="mp-story-meta">${metaHtml}</div>
+    </div>
+    <div class="mp-story-check">✓</div>
+  </div>`;
+}
+
+async function populateStoryPicker() {
+  const list = document.getElementById('story-list');
+  list.innerHTML = '';
+  selectedStory = null;
+  const games = await fetchGames();
+  const options = games.filter(g =>
+    g.lang === lang &&
+    !g.portal &&
+    (window.SFShared ? SFShared.isPackUnlocked(storyPack(g)) : true)
+  );
+  list.innerHTML = options.length
+    ? options.map(renderStoryCard).join('')
+    : `<div class="mp-story-empty">${t('errNoStory')}</div>`;
+  return options;
+}
+
+document.getElementById('story-list').addEventListener('click', (e) => {
+  const card = e.target.closest('.mp-story-card');
+  if (!card) return;
+  document.querySelectorAll('#story-list .mp-story-card').forEach(c => c.classList.remove('selected'));
+  card.classList.add('selected');
+  const titleEl = card.querySelector('.mp-story-title');
+  selectedStory = { file: card.dataset.file, title: titleEl ? titleEl.textContent : '' };
+});
+
 let currentRole = null; // 'host' | 'join'
-let storyOptions = [];
 let currentStoryFile = null;
 
 document.getElementById('btn-go-create').addEventListener('click', async () => {
-  storyOptions = await populateStoryPicker();
+  await populateStoryPicker();
   showScreen('screen-create');
 });
 document.getElementById('btn-go-join').addEventListener('click', () => showScreen('screen-join'));
@@ -388,18 +567,15 @@ function setError(id, msg) {
 document.getElementById('btn-create-confirm').addEventListener('click', async () => {
   setError('err-create', '');
   const name = document.getElementById('input-host-name').value.trim();
-  const select = document.getElementById('select-story');
-  const storyFile = select.value;
-  const storyTitle = select.options[select.selectedIndex]?.textContent || '';
 
   if (!name) return setError('err-create', t('errNoName'));
-  if (!storyFile) return setError('err-create', t('errNoStory'));
+  if (!selectedStory) return setError('err-create', t('errNoStory'));
 
   try {
-    const { code } = await SFMultiplayer.host.create({ storyFile, storyTitle });
+    const { code } = await SFMultiplayer.host.create({ storyFile: selectedStory.file, storyTitle: selectedStory.title });
     currentRole = 'host';
-    currentStoryFile = storyFile;
-    enterLobby({ code, storyTitle });
+    currentStoryFile = selectedStory.file;
+    enterLobby({ code, storyTitle: selectedStory.title });
   } catch (e) {
     console.error(e);
     setError('err-create', t('errCreateFailed'));
@@ -420,6 +596,20 @@ document.getElementById('btn-join-confirm').addEventListener('click', async () =
 
   try {
     const { story, players } = await SFMultiplayer.join.connect({ code, name });
+
+    // DLC : l'hôte ne peut déjà choisir que des histoires qu'il possède,
+    // mais un joueur qui rejoint peut très bien ne pas avoir le même pack
+    // débloqué sur son propre appareil — on vérifie ici, sinon il jouerait
+    // gratuitement du contenu payant via le multijoueur.
+    const games = await fetchGames();
+    const entry = games.find(g => g.file === story?.file);
+    const locked = entry && window.SFShared && !SFShared.isPackUnlocked(storyPack(entry));
+    if (locked) {
+      await SFMultiplayer.join.leave();
+      setError('err-join', t('errDlcLocked'));
+      return;
+    }
+
     currentRole = 'join';
     currentStoryFile = story?.file;
     enterLobby({ storyTitle: story?.title, players });
