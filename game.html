@@ -1603,12 +1603,20 @@ function renderScene(scene) {
     const ca = document.getElementById('choices-area');
     if (ca) { ca.classList.remove('hidden'); ca.classList.add('reveal'); }
     if (MP_MODE === 'host') {
-      // Multijoueur : timer de vote partagé, ignore le timer propre à la scène.
+      // Multijoueur : durée = timer propre à la scène si elle en a un, sinon la durée par défaut.
+      // Le point de départ (deadline absolue) est diffusé à tous pour que le décompte
+      // affiché soit identique chez tout le monde, peu importe quand l'affichage local
+      // de chacun (machine à écrire, tuto, tap pour passer) a fini de son côté.
+      const voteDurationSec = (scene.timer && scene.timer.duration > 0) ? scene.timer.duration : MP_VOTE_SECONDS;
+      const deadline = Date.now() + voteDurationSec * 1000;
       mpResetVotes();
-      startChoiceTimer(MP_VOTE_SECONDS, 'mp-resolve');
+      SFMultiplayer.host.broadcast('voteStart', { sceneId: currentId, deadline });
+      startChoiceTimer(voteDurationSec, 'mp-resolve');
     } else if (MP_MODE === 'join') {
-      // Le joueur ne résout rien lui-même — juste un repère visuel du temps restant.
-      mpStartVoterCountdown(MP_VOTE_SECONDS);
+      // Le joueur ne résout rien lui-même — juste un repère visuel, calé sur la
+      // deadline reçue de l'hôte (pas une durée locale démarrée à un moment différent).
+      mpChoicesReady = true;
+      mpTryStartVoterCountdown();
     } else if (scene.timer && scene.timer.duration > 0) {
       startChoiceTimer(scene.timer.duration, scene.timer.auto || 'random');
     }
@@ -1881,6 +1889,7 @@ function dismissFabHint() {
 }
 
 function canShowFabHint() {
+  if (MP_MODE) return false; // évite le décalage entre joueurs pendant une partie
   if (fabHintSeen() || _fabHintVisible || _immersiveHintVisible) return false;
   if (!immersiveHintSeen()) return false;
   if (!story || !currentId || uiVisible) return false;
@@ -1907,6 +1916,7 @@ function maybeShowFabHint() {
 document.getElementById('fab-hint-btn')?.addEventListener('click', dismissFabHint);
 
 function canShowImmersiveHint() {
+  if (MP_MODE) return false; // évite le décalage entre joueurs pendant une partie
   if (immersiveHintSeen() || _immersiveHintVisible) return false;
   if (!story || !currentId || uiVisible) return false;
   const loading = document.getElementById('loading');
@@ -2926,6 +2936,7 @@ function mpBootstrap() {
     SFMultiplayer.join.hydrate(session);
     SFMultiplayer.join.on('message', ({ type, payload }) => {
       if (type === 'advance') mpHandleAdvance(payload);
+      if (type === 'voteStart') mpHandleVoteStart(payload);
     });
     SFMultiplayer.join.on('disconnected', mpHandleDisconnected);
     SFMultiplayer.join.on('reconnected', mpHandleReconnected);
@@ -2975,8 +2986,31 @@ function mpShowWaitingState() {
 }
 
 function mpHandleAdvance(payload) {
+  mpChoicesReady = false;
+  mpVoteStartData = null;
   if (payload.stats) { stats = payload.stats; updateStatsBar(); }
   goToScene(payload.sceneId);
+}
+
+// ── MULTIJOUEUR — timer de vote synchronisé (joueur) ────────────
+// Le décompte affiché doit démarrer à la même deadline absolue chez tout
+// le monde. On attend d'avoir les deux : nos choix affichés localement
+// ET le message 'voteStart' de l'hôte pour cette scène (l'ordre d'arrivée
+// des deux n'est pas garanti).
+let mpChoicesReady = false;
+let mpVoteStartData = null; // { sceneId, deadline }
+
+function mpHandleVoteStart(payload) {
+  mpVoteStartData = payload;
+  mpTryStartVoterCountdown();
+}
+
+function mpTryStartVoterCountdown() {
+  if (MP_MODE !== 'join' || !mpChoicesReady || !mpVoteStartData) return;
+  if (mpVoteStartData.sceneId !== currentId) return; // message d'une scène déjà dépassée
+  const remainingSec = Math.max(1, (mpVoteStartData.deadline - Date.now()) / 1000);
+  mpStartVoterCountdown(remainingSec);
+  mpVoteStartData = null;
 }
 
 function mpResetVotes() {
@@ -3062,7 +3096,7 @@ function mpStartVoterCountdown(duration) {
   timerEl.classList.add('active');
   fillEl.style.width = '100%';
   fillEl.classList.remove('urgent');
-  countEl.textContent = duration + 's';
+  countEl.textContent = Math.ceil(duration) + 's';
 
   const endTime = Date.now() + duration * 1000;
   _mpVoterTimerInterval = setInterval(() => {
