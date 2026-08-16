@@ -192,7 +192,7 @@ window.SFMultiplayer = (function () {
 
     async function startUdpBroadcast() {
       const Udp = plugins().UdpSocket;
-      const { socketId } = await Udp.create();
+      const { socketId } = await Udp.create({ properties: {} });
       udpSocketId = socketId;
       await Udp.bind({ socketId, port: 0 }); // port éphémère, on ne fait qu'émettre
       await Udp.setBroadcast({ socketId, enabled: true });
@@ -327,7 +327,7 @@ window.SFMultiplayer = (function () {
     function findHostViaBroadcast(code) {
       return new Promise(async (resolve, reject) => {
         const Udp = plugins().UdpSocket;
-        const { socketId } = await Udp.create();
+        const { socketId } = await Udp.create({ properties: {} });
         udpSocketId = socketId;
 
         const timeout = setTimeout(async () => {
