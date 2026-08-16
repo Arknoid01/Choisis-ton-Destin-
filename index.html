@@ -954,6 +954,10 @@ body {
         <span class="menu-tile-icon">⚙</span>
         <span class="menu-tile-label" id="txt-btn-options">Options</span>
       </button>
+      <button class="btn-main" id="btn-multiplayer" onclick="window.location.href='multiplayer.html'">
+        <span class="menu-tile-icon">👥</span>
+        <span class="menu-tile-label" id="txt-btn-multiplayer">Multijoueur</span>
+      </button>
       <button class="btn-main" id="btn-progress" onclick="window.location.href='progress.html'">
         <span class="menu-tile-icon">📊</span>
         <span class="menu-tile-label" id="txt-btn-progress">Ma progression</span>
@@ -1195,6 +1199,7 @@ const LANG = {
     homeStarterLink:  'Commencez ici',
     homeStarterMeta:  ' — ~15 min, gratuit',
     btnOptions:     'Options',
+    btnMultiplayer: 'Multijoueur',
     btnNews:        'Actualités',
     btnCommunity:   'Communauté',
     btnAiCreate:    'Créer avec l\'IA',
@@ -1269,6 +1274,7 @@ const LANG = {
     homeStarterLink:  'Start here',
     homeStarterMeta:  ' — ~15 min, free',
     btnOptions:     'Options',
+    btnMultiplayer: 'Multiplayer',
     btnNews:        'News',
     btnCommunity:   'Community',
     btnAiCreate:    'Create with AI',
@@ -1343,6 +1349,7 @@ const LANG = {
     homeStarterLink:  'Empieza aquí',
     homeStarterMeta:  ' — ~15 min, gratis',
     btnOptions:     'Opciones',
+    btnMultiplayer: 'Multijugador',
     btnNews:        'Noticias',
     btnCommunity:   'Comunidad',
     btnAiCreate:    'Crear con IA',
@@ -1435,6 +1442,7 @@ function applyLang() {
   set('home-starter-link',  t.homeStarterLink);
   set('home-starter-meta',  t.homeStarterMeta);
   set('txt-btn-options',    t.btnOptions);
+  set('txt-btn-multiplayer', t.btnMultiplayer);
   set('txt-btn-news',       t.btnNews);
   set('txt-btn-community',  t.btnCommunity);
   set('txt-btn-ai',         t.btnAiCreate);

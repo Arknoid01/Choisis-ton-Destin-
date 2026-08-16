@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Multijoueur — Fableris</title>
+<script src="sf-theme.js"></script>
+<link rel="stylesheet" href="sf-theme.css">
+<script src="capacitor.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,300&family=Cinzel:wght@400;600&family=DM+Mono:wght@300;400&display=swap" onload="this.onload=null;this.rel='stylesheet'">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+html,body{min-height:100%;background:#0a0a0e;color:#e0d8f0;font-family:'Cormorant Garamond',serif;overflow-x:hidden;padding-top:var(--safe-top) !important;}
+
+:root{
+  --safe-top: var(--android-safe-area-inset-top, env(safe-area-inset-top, 36px));
+  --gold:#c8a96e;--gold2:#e8d4a0;--gold3:#8a6a30;
+  --green:#6dfabc;--red:#fa6d8f;
+  --bg:#0a0a0e;--bg2:#111118;--bg3:#18181f;
+  --border:#26262e;--text:#e0d8f0;--dim:#7070a0;--dimmer:#404050;
+}
+
+#topbar{
+  position:fixed;top:0;left:0;right:0;
+  height:calc(52px + var(--safe-top)) !important;
+  padding-top:var(--safe-top) !important;
+  z-index:100;
+  background:rgba(10,10,14,0.92);border-bottom:1px solid var(--border);
+  backdrop-filter:blur(12px);
+  display:flex;align-items:center;gap:12px;padding-left:16px;padding-right:16px;
+}
+.back-btn{
+  width:36px;height:36px;border-radius:8px;
+  border:1px solid var(--border);background:none;
+  color:var(--dim);font-size:18px;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+  text-decoration:none;transition:all .15s;flex-shrink:0;
+}
+.back-btn:hover{border-color:var(--gold3);color:var(--text);}
+.topbar-title{font-family:'Cinzel',serif;font-size:13px;font-weight:600;color:var(--text);letter-spacing:2px;}
+
+#scroll{
+  padding-top:calc(52px + var(--safe-top));
+  overflow-y:auto;min-height:100vh;-webkit-overflow-scrolling:touch;
+}
+#content{max-width:520px;margin:0 auto;padding:24px 16px 80px;}
+
+.screen{display:none;animation:fade-up .35s ease;}
+.screen.active{display:block;}
+@keyframes fade-up{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:translateY(0);}}
+
+.mp-icon{font-size:34px;text-align:center;margin-bottom:14px;}
+.mp-title{font-family:'Cinzel',serif;font-size:16px;font-weight:600;color:var(--cream,var(--text));letter-spacing:2px;text-align:center;margin-bottom:8px;}
+.mp-sub{font-size:14px;color:var(--dim);line-height:1.55;text-align:center;margin-bottom:24px;}
+
+.mp-btn{
+  display:block;width:100%;padding:16px;border-radius:12px;margin-bottom:14px;
+  border:1px solid var(--border);background:var(--bg2);color:var(--text);
+  font-family:'Cinzel',serif;font-size:12px;letter-spacing:1.5px;text-align:center;
+  cursor:pointer;transition:border-color .2s,background .2s;
+}
+.mp-btn:hover{border-color:var(--gold3);background:rgba(200,169,110,0.06);}
+.mp-btn.primary{background:rgba(200,169,110,0.1);border-color:rgba(200,169,110,0.45);color:var(--gold);}
+.mp-btn:disabled{opacity:0.35;cursor:not-allowed;}
+
+.mp-field{margin-bottom:18px;}
+.mp-label{display:block;font-family:'DM Mono',monospace;font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--dimmer);margin-bottom:8px;}
+.mp-input{
+  width:100%;padding:13px 14px;border-radius:10px;
+  border:1px solid var(--border);background:var(--bg2);color:var(--text);
+  font-family:'Cormorant Garamond',serif;font-size:16px;
+}
+.mp-input:focus{outline:none;border-color:var(--gold3);}
+.mp-input.code{
+  text-align:center;font-family:'DM Mono',monospace;font-size:28px;letter-spacing:10px;
+  padding:14px 10px 14px 20px;
+}
+.mp-select{
+  width:100%;padding:13px 14px;border-radius:10px;
+  border:1px solid var(--border);background:var(--bg2);color:var(--text);
+  font-family:'Cormorant Garamond',serif;font-size:15px;
+}
+
+.mp-back-link{
+  display:inline-block;margin-top:6px;font-family:'DM Mono',monospace;font-size:11px;
+  color:var(--dimmer);text-decoration:none;cursor:pointer;
+}
+.mp-back-link:hover{color:var(--dim);}
+
+.mp-error{
+  font-size:13px;color:var(--red);text-align:center;margin-bottom:14px;
+  display:none;
+}
+.mp-error.visible{display:block;}
+
+.mp-code-display{
+  text-align:center;font-family:'DM Mono',monospace;font-size:42px;letter-spacing:14px;
+  color:var(--gold2);margin:18px 0 6px;padding-left:14px;
+}
+.mp-code-hint{text-align:center;font-size:12px;color:var(--dim);margin-bottom:28px;}
+
+.mp-roster-title{
+  font-family:'Cinzel',serif;font-size:10px;font-weight:600;letter-spacing:3px;
+  text-transform:uppercase;color:var(--dimmer);margin-bottom:12px;display:flex;align-items:center;gap:10px;
+}
+.mp-roster-title::after{content:'';flex:1;height:1px;background:var(--border);}
+.mp-player{
+  display:flex;align-items:center;gap:10px;padding:11px 14px;border-radius:10px;
+  background:var(--bg2);border:1px solid var(--border);margin-bottom:8px;
+}
+.mp-player-dot{width:8px;height:8px;border-radius:50%;background:var(--green);flex-shrink:0;}
+.mp-player.offline .mp-player-dot{background:var(--dimmer);}
+.mp-player-name{flex:1;font-size:14px;}
+.mp-player.offline .mp-player-name{color:var(--dimmer);}
+.mp-player-you{font-family:'DM Mono',monospace;font-size:9px;color:var(--gold3);letter-spacing:1px;}
+
+.mp-note{
+  margin-top:20px;padding:14px 16px;border-radius:12px;
+  border:1px dashed var(--border);background:rgba(255,255,255,0.02);
+  font-size:12px;color:var(--dim);line-height:1.6;text-align:center;
+}
+</style>
+</head>
+<body>
+
+<div id="topbar">
+  <a class="back-btn" href="index.html">←</a>
+  <span class="topbar-title" id="txt-title">MULTIJOUEUR</span>
+</div>
+
+<div id="scroll">
+<div id="content">
+
+  <!-- INDISPONIBLE (web / plugins absents) -->
+  <div class="screen" id="screen-unavailable">
+    <div class="mp-icon">📡</div>
+    <div class="mp-title" id="txt-unavailable-title"></div>
+    <p class="mp-sub" id="txt-unavailable-body"></p>
+  </div>
+
+  <!-- MENU -->
+  <div class="screen" id="screen-menu">
+    <div class="mp-icon">👥</div>
+    <div class="mp-title" id="txt-menu-title"></div>
+    <p class="mp-sub" id="txt-menu-sub"></p>
+    <button class="mp-btn primary" id="btn-go-create"></button>
+    <button class="mp-btn" id="btn-go-join"></button>
+  </div>
+
+  <!-- CRÉER -->
+  <div class="screen" id="screen-create">
+    <div class="mp-title" id="txt-create-title"></div>
+    <div class="mp-field">
+      <label class="mp-label" id="txt-create-name-label"></label>
+      <input class="mp-input" id="input-host-name" maxlength="24" placeholder="">
+    </div>
+    <div class="mp-field">
+      <label class="mp-label" id="txt-create-story-label"></label>
+      <select class="mp-select" id="select-story"></select>
+    </div>
+    <p class="mp-error" id="err-create"></p>
+    <button class="mp-btn primary" id="btn-create-confirm"></button>
+    <a class="mp-back-link" id="btn-create-back"></a>
+  </div>
+
+  <!-- REJOINDRE -->
+  <div class="screen" id="screen-join">
+    <div class="mp-title" id="txt-join-title"></div>
+    <div class="mp-field">
+      <label class="mp-label" id="txt-join-code-label"></label>
+      <input class="mp-input code" id="input-code" inputmode="numeric" maxlength="4" placeholder="0000">
+    </div>
+    <div class="mp-field">
+      <label class="mp-label" id="txt-join-name-label"></label>
+      <input class="mp-input" id="input-player-name" maxlength="24" placeholder="">
+    </div>
+    <p class="mp-error" id="err-join"></p>
+    <button class="mp-btn primary" id="btn-join-confirm"></button>
+    <a class="mp-back-link" id="btn-join-back"></a>
+  </div>
+
+  <!-- LOBBY -->
+  <div class="screen" id="screen-lobby">
+    <div id="lobby-host-block">
+      <div class="mp-code-display" id="lobby-code"></div>
+      <p class="mp-code-hint" id="txt-lobby-code-hint"></p>
+    </div>
+    <div id="lobby-join-block">
+      <div class="mp-title" id="lobby-story-title"></div>
+      <p class="mp-sub" id="txt-lobby-waiting"></p>
+    </div>
+    <div class="mp-roster-title" id="txt-lobby-roster"></div>
+    <div id="lobby-players"></div>
+    <p class="mp-note" id="txt-lobby-note"></p>
+    <a class="mp-back-link" id="btn-lobby-leave"></a>
+  </div>
+
+</div>
+</div>
+
+<script src="sf-shared.js"></script>
+<script src="multiplayer.js"></script>
+<script>
+const lang = localStorage.getItem('sf_lang') || 'fr';
+
+const T = {
+  fr: {
+    title: 'Multijoueur',
+    unavailableTitle: 'Fonction indisponible ici',
+    unavailableBody: 'Le multijoueur wifi local demande l\'application installée (Android). Il n\'est pas disponible dans un navigateur.',
+    menuTitle: 'Jouer à plusieurs',
+    menuSub: 'Sur le même wifi : un·e hôte crée la partie, les autres rejoignent avec un code.',
+    goCreate: 'Créer une partie',
+    goJoin: 'Rejoindre une partie',
+    createTitle: 'Créer une partie',
+    createNameLabel: 'Votre nom',
+    createStoryLabel: 'Histoire',
+    createConfirm: 'Créer la partie',
+    createBack: '← Retour',
+    joinTitle: 'Rejoindre une partie',
+    joinCodeLabel: 'Code à 4 chiffres',
+    joinNameLabel: 'Votre nom',
+    joinConfirm: 'Rejoindre',
+    joinBack: '← Retour',
+    lobbyCodeHint: 'Donnez ce code aux autres joueurs pour qu\'ils rejoignent.',
+    lobbyWaiting: 'En attente que l\'hôte lance la partie…',
+    lobbyRoster: 'Joueurs',
+    lobbyNote: 'La synchronisation de l\'histoire (scènes, vote) arrive à la prochaine étape — pour l\'instant, cet écran gère la création/connexion de la partie.',
+    lobbyLeave: '← Quitter la partie',
+    you: 'VOUS',
+    errNoName: 'Entrez un nom.',
+    errNoStory: 'Choisissez une histoire.',
+    errCreateFailed: 'Impossible de créer la partie.',
+    errBadCode: 'Code à 4 chiffres requis.',
+    errNotFound: 'Aucune partie trouvée avec ce code (vérifiez que vous êtes sur le même wifi).',
+    errFull: 'Cette partie est complète.',
+    errJoinFailed: 'Impossible de rejoindre la partie.'
+  },
+  en: {
+    title: 'Multiplayer',
+    unavailableTitle: 'Not available here',
+    unavailableBody: 'Local wifi multiplayer requires the installed app (Android). It isn\'t available in a browser.',
+    menuTitle: 'Play together',
+    menuSub: 'On the same wifi: a host creates the party, others join with a code.',
+    goCreate: 'Create a party',
+    goJoin: 'Join a party',
+    createTitle: 'Create a party',
+    createNameLabel: 'Your name',
+    createStoryLabel: 'Story',
+    createConfirm: 'Create the party',
+    createBack: '← Back',
+    joinTitle: 'Join a party',
+    joinCodeLabel: '4-digit code',
+    joinNameLabel: 'Your name',
+    joinConfirm: 'Join',
+    joinBack: '← Back',
+    lobbyCodeHint: 'Give this code to the other players so they can join.',
+    lobbyWaiting: 'Waiting for the host to start the party…',
+    lobbyRoster: 'Players',
+    lobbyNote: 'Story sync (scenes, voting) is coming in the next step — for now this screen handles creating/joining the party.',
+    lobbyLeave: '← Leave the party',
+    you: 'YOU',
+    errNoName: 'Enter a name.',
+    errNoStory: 'Choose a story.',
+    errCreateFailed: 'Could not create the party.',
+    errBadCode: '4-digit code required.',
+    errNotFound: 'No party found with this code (check you\'re on the same wifi).',
+    errFull: 'This party is full.',
+    errJoinFailed: 'Could not join the party.'
+  },
+  es: {
+    title: 'Multijugador',
+    unavailableTitle: 'No disponible aquí',
+    unavailableBody: 'El multijugador wifi local requiere la app instalada (Android). No está disponible en un navegador.',
+    menuTitle: 'Jugar en grupo',
+    menuSub: 'En la misma wifi: un anfitrión crea la partida, los demás se unen con un código.',
+    goCreate: 'Crear una partida',
+    goJoin: 'Unirse a una partida',
+    createTitle: 'Crear una partida',
+    createNameLabel: 'Tu nombre',
+    createStoryLabel: 'Historia',
+    createConfirm: 'Crear la partida',
+    createBack: '← Volver',
+    joinTitle: 'Unirse a una partida',
+    joinCodeLabel: 'Código de 4 dígitos',
+    joinNameLabel: 'Tu nombre',
+    joinConfirm: 'Unirse',
+    joinBack: '← Volver',
+    lobbyCodeHint: 'Da este código a los demás jugadores para que se unan.',
+    lobbyWaiting: 'Esperando a que el anfitrión inicie la partida…',
+    lobbyRoster: 'Jugadores',
+    lobbyNote: 'La sincronización de la historia (escenas, votos) llegará en el próximo paso — por ahora esta pantalla gestiona la creación/conexión de la partida.',
+    lobbyLeave: '← Salir de la partida',
+    you: 'TÚ',
+    errNoName: 'Introduce un nombre.',
+    errNoStory: 'Elige una historia.',
+    errCreateFailed: 'No se pudo crear la partida.',
+    errBadCode: 'Código de 4 dígitos requerido.',
+    errNotFound: 'No se encontró ninguna partida con ese código (comprueba que estás en la misma wifi).',
+    errFull: 'Esta partida está completa.',
+    errJoinFailed: 'No se pudo unir a la partida.'
+  }
+};
+function t(key) { return (T[lang] || T.fr)[key] || key; }
+
+function applyTexts() {
+  document.getElementById('txt-title').textContent = t('title');
+  document.getElementById('txt-unavailable-title').textContent = t('unavailableTitle');
+  document.getElementById('txt-unavailable-body').textContent = t('unavailableBody');
+  document.getElementById('txt-menu-title').textContent = t('menuTitle');
+  document.getElementById('txt-menu-sub').textContent = t('menuSub');
+  document.getElementById('btn-go-create').textContent = t('goCreate');
+  document.getElementById('btn-go-join').textContent = t('goJoin');
+  document.getElementById('txt-create-title').textContent = t('createTitle');
+  document.getElementById('txt-create-name-label').textContent = t('createNameLabel');
+  document.getElementById('txt-create-story-label').textContent = t('createStoryLabel');
+  document.getElementById('btn-create-confirm').textContent = t('createConfirm');
+  document.getElementById('btn-create-back').textContent = t('createBack');
+  document.getElementById('txt-join-title').textContent = t('joinTitle');
+  document.getElementById('txt-join-code-label').textContent = t('joinCodeLabel');
+  document.getElementById('txt-join-name-label').textContent = t('joinNameLabel');
+  document.getElementById('btn-join-confirm').textContent = t('joinConfirm');
+  document.getElementById('btn-join-back').textContent = t('joinBack');
+  document.getElementById('txt-lobby-code-hint').textContent = t('lobbyCodeHint');
+  document.getElementById('txt-lobby-waiting').textContent = t('lobbyWaiting');
+  document.getElementById('txt-lobby-roster').textContent = t('lobbyRoster');
+  document.getElementById('txt-lobby-note').textContent = t('lobbyNote');
+  document.getElementById('btn-lobby-leave').textContent = t('lobbyLeave');
+}
+
+// ── Navigation entre écrans ─────────────────────────────────
+function showScreen(id) {
+  document.querySelectorAll('.screen').forEach(el => el.classList.toggle('active', el.id === id));
+}
+
+// ── Écran menu / création / rejoindre ──────────────────────
+async function populateStoryPicker() {
+  const select = document.getElementById('select-story');
+  select.innerHTML = '';
+  try {
+    const res = await fetch('games.json');
+    const games = await res.json();
+    const options = games.filter(g =>
+      g.lang === lang &&
+      !g.portal &&
+      (window.SFShared ? SFShared.isPackUnlocked(g.pack || (g.kids ? 'kids' : 'free')) : true)
+    );
+    options.forEach(g => {
+      const opt = document.createElement('option');
+      opt.value = g.file;
+      opt.textContent = (g.icon ? g.icon + ' ' : '') + g.title;
+      select.appendChild(opt);
+    });
+    return options;
+  } catch (e) {
+    console.error('[Multiplayer] chargement games.json échoué', e);
+    return [];
+  }
+}
+
+let currentRole = null; // 'host' | 'join'
+let storyOptions = [];
+
+document.getElementById('btn-go-create').addEventListener('click', async () => {
+  storyOptions = await populateStoryPicker();
+  showScreen('screen-create');
+});
+document.getElementById('btn-go-join').addEventListener('click', () => showScreen('screen-join'));
+document.getElementById('btn-create-back').addEventListener('click', () => showScreen('screen-menu'));
+document.getElementById('btn-join-back').addEventListener('click', () => showScreen('screen-menu'));
+
+function setError(id, msg) {
+  const el = document.getElementById(id);
+  el.textContent = msg;
+  el.classList.toggle('visible', !!msg);
+}
+
+document.getElementById('btn-create-confirm').addEventListener('click', async () => {
+  setError('err-create', '');
+  const name = document.getElementById('input-host-name').value.trim();
+  const select = document.getElementById('select-story');
+  const storyFile = select.value;
+  const storyTitle = select.options[select.selectedIndex]?.textContent || '';
+
+  if (!name) return setError('err-create', t('errNoName'));
+  if (!storyFile) return setError('err-create', t('errNoStory'));
+
+  try {
+    const { code } = await SFMultiplayer.host.create({ storyFile, storyTitle });
+    currentRole = 'host';
+    enterLobby({ code, storyTitle });
+  } catch (e) {
+    console.error(e);
+    setError('err-create', t('errCreateFailed'));
+  }
+});
+
+document.getElementById('input-code').addEventListener('input', (e) => {
+  e.target.value = e.target.value.replace(/\D/g, '').slice(0, 4);
+});
+
+document.getElementById('btn-join-confirm').addEventListener('click', async () => {
+  setError('err-join', '');
+  const code = document.getElementById('input-code').value.trim();
+  const name = document.getElementById('input-player-name').value.trim();
+
+  if (!name) return setError('err-join', t('errNoName'));
+  if (code.length !== 4) return setError('err-join', t('errBadCode'));
+
+  try {
+    const { story, players } = await SFMultiplayer.join.connect({ code, name });
+    currentRole = 'join';
+    enterLobby({ storyTitle: story?.title, players });
+  } catch (e) {
+    console.error(e);
+    if (e.message === 'not_found') setError('err-join', t('errNotFound'));
+    else if (e.message === 'full') setError('err-join', t('errFull'));
+    else setError('err-join', t('errJoinFailed'));
+  }
+});
+
+// ── Lobby ────────────────────────────────────────────────────
+function renderRoster(players) {
+  const wrap = document.getElementById('lobby-players');
+  const myId = currentRole === 'join' ? SFMultiplayer.join.getPlayerId() : null;
+  wrap.innerHTML = (players || []).map(p => `
+    <div class="mp-player${p.connected === false ? ' offline' : ''}">
+      <span class="mp-player-dot"></span>
+      <span class="mp-player-name">${escapeHtml(p.name)}</span>
+      ${p.id === myId ? `<span class="mp-player-you">${t('you')}</span>` : ''}
+    </div>
+  `).join('');
+}
+
+function escapeHtml(s) {
+  return String(s || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+}
+
+function enterLobby({ code, storyTitle, players }) {
+  document.getElementById('lobby-host-block').style.display = currentRole === 'host' ? 'block' : 'none';
+  document.getElementById('lobby-join-block').style.display = currentRole === 'join' ? 'block' : 'none';
+  if (code) document.getElementById('lobby-code').textContent = code;
+  document.getElementById('lobby-story-title').textContent = storyTitle || '';
+
+  if (currentRole === 'host') {
+    renderRoster(SFMultiplayer.host.getPlayers());
+    SFMultiplayer.host.on('playerJoined', () => renderRoster(SFMultiplayer.host.getPlayers()));
+    SFMultiplayer.host.on('playerLeft', () => renderRoster(SFMultiplayer.host.getPlayers()));
+    SFMultiplayer.host.on('playerRejoined', () => renderRoster(SFMultiplayer.host.getPlayers()));
+  } else {
+    renderRoster(players);
+    SFMultiplayer.join.on('roster', (data) => renderRoster(data.players));
+  }
+
+  showScreen('screen-lobby');
+}
+
+async function leaveLobby() {
+  if (currentRole === 'host') await SFMultiplayer.host.stop();
+  else if (currentRole === 'join') await SFMultiplayer.join.leave();
+  currentRole = null;
+  showScreen('screen-menu');
+}
+document.getElementById('btn-lobby-leave').addEventListener('click', leaveLobby);
+window.addEventListener('pagehide', () => {
+  if (currentRole === 'host') SFMultiplayer.host.stop();
+  else if (currentRole === 'join') SFMultiplayer.join.leave();
+});
+
+// ── Init ─────────────────────────────────────────────────────
+applyTexts();
+if (window.SFMultiplayer && SFMultiplayer.isAvailable()) {
+  showScreen('screen-menu');
+} else {
+  showScreen('screen-unavailable');
+}
+</script>
+
+</body>
+</html>
