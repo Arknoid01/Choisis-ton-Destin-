@@ -34,14 +34,15 @@ window.SFOnboarding = (function () {
       pinMismatch: 'Les codes ne correspondent pas',
       pinKids: 'Activer le mode enfant maintenant',
       demoTitle: 'Un roman dont vous êtes le héros',
-      demoSetup: 'Vous arrivez à un carrefour dans la forêt. Que faites-vous ?',
-      demoChoiceA: 'Prendre le sentier lumineux',
-      demoChoiceB: 'S\'engager dans l\'ombre',
-      demoOutcomeA: 'Le sentier mène à une clairière paisible. Votre histoire aurait pris une tournure douce…',
-      demoOutcomeB: 'L\'ombre recèle des secrets. Votre récit aurait basculé vers le mystère…',
+      demoSetup: 'Vous veillez seul sur le phare de Cap Brume. Au loin, sur l\'eau, une lueur bleu-vert tremble. Que faites-vous ?',
+      demoChoiceA: 'Descendre prendre la barque pour aller voir',
+      demoChoiceB: 'Observer d\'abord à la longue-vue du phare',
+      demoOutcomeA: 'Sur la plage, la lueur se révèle être une petite créature marine aux écailles brillantes, prête à fuir…',
+      demoOutcomeB: 'À la longue-vue, la lueur clignote par intervalles — comme si elle voulait parler…',
       demoConclusion: 'Chaque histoire fonctionne ainsi : vos choix orientent le récit. Essayez-en une gratuitement, à votre rythme.',
-      demoReady: 'Prêt ? Commencez par une histoire courte (~15 min) :',
-      demoStarterPlay: 'Jouer',
+      demoReady: 'Prêt ? Choisissez une histoire courte pour commencer (~15 min) :',
+      demoStarterDefaultLabel: '📖 Histoire classique',
+      demoStarterKidsLabel: '🧒 Histoire enfant',
       demoContinue: 'CONTINUER',
       demoSkip: 'Passer'
     },
@@ -64,14 +65,15 @@ window.SFOnboarding = (function () {
       pinMismatch: 'Codes do not match',
       pinKids: 'Enable Kids Mode now',
       demoTitle: 'A story where you choose',
-      demoSetup: 'You reach a crossroads in the forest. What do you do?',
-      demoChoiceA: 'Take the bright path',
-      demoChoiceB: 'Venture into the shadows',
-      demoOutcomeA: 'The path leads to a peaceful clearing. Your story would have taken a gentle turn…',
-      demoOutcomeB: 'The shadows hold secrets. Your tale would have shifted toward mystery…',
+      demoSetup: 'You\'re keeping watch alone over the Cape Mist lighthouse. Far out on the water, a blue-green glow trembles. What do you do?',
+      demoChoiceA: 'Go down and take the rowboat to see',
+      demoChoiceB: 'Look first through the lighthouse spyglass',
+      demoOutcomeA: 'On the beach, the glow turns out to be a small sea creature with shimmering scales, ready to flee…',
+      demoOutcomeB: 'Through the spyglass, the glow blinks at intervals — as if trying to speak…',
       demoConclusion: 'Every story works like this: your choices shape the narrative. Try a free one whenever you like.',
-      demoReady: 'Ready? Start with a short story (~15 min):',
-      demoStarterPlay: 'Play',
+      demoReady: 'Ready? Choose a short story to start with (~15 min):',
+      demoStarterDefaultLabel: '📖 Classic story',
+      demoStarterKidsLabel: '🧒 Kids story',
       demoContinue: 'CONTINUE',
       demoSkip: 'Skip'
     },
@@ -94,14 +96,15 @@ window.SFOnboarding = (function () {
       pinMismatch: 'Los códigos no coinciden',
       pinKids: 'Activar el modo infantil ahora',
       demoTitle: 'Una novela en la que tú eliges',
-      demoSetup: 'Llegas a una encrucijada en el bosque. ¿Qué haces?',
-      demoChoiceA: 'Tomar el sendero luminoso',
-      demoChoiceB: 'Adentrarse en la sombra',
-      demoOutcomeA: 'El sendero conduce a un claro tranquilo. Tu historia habría tomado un rumbo apacible…',
-      demoOutcomeB: 'La sombra guarda secretos. Tu relato habría virado hacia el misterio…',
+      demoSetup: 'Vigilas solo el faro del Cabo Niebla. A lo lejos, sobre el agua, tiembla un resplandor azul verdoso. ¿Qué haces?',
+      demoChoiceA: 'Bajar y tomar la barca para ir a ver',
+      demoChoiceB: 'Observar primero con el catalejo del faro',
+      demoOutcomeA: 'En la playa, el resplandor resulta ser una pequeña criatura marina de escamas brillantes, lista para huir…',
+      demoOutcomeB: 'Con el catalejo, el resplandor parpadea a intervalos — como si quisiera hablar…',
       demoConclusion: 'Cada historia funciona así: tus elecciones orientan el relato. Prueba una gratis, sin prisa.',
-      demoReady: '¿Listo? Empieza con una historia corta (~15 min):',
-      demoStarterPlay: 'Jugar',
+      demoReady: '¿Listo? Elige una historia corta para empezar (~15 min):',
+      demoStarterDefaultLabel: '📖 Historia clásica',
+      demoStarterKidsLabel: '🧒 Historia infantil',
       demoContinue: 'CONTINUAR',
       demoSkip: 'Omitir'
     }
@@ -160,9 +163,9 @@ window.SFOnboarding = (function () {
     }
   }
 
-  function goToStarterStory() {
+  function goToStory(file) {
     lsSet('sf_demo_shown', '1');
-    window.location.href = getStarterGameUrl(currentLang());
+    window.location.href = 'game.html?story=' + encodeURIComponent(file);
   }
 
   // ── Styles ───────────────────────────────────────────────────
@@ -326,7 +329,8 @@ window.SFOnboarding = (function () {
           <p class="sf-onb-demo-outcome" id="sf-onb-demo-outcome"></p>
           <p class="sf-onb-demo-conclusion" id="sf-onb-demo-conclusion"></p>
           <p class="sf-onb-demo-ready" id="sf-onb-demo-ready"></p>
-          <a class="sf-onb-starter-link" id="sf-onb-demo-starter" href="#"></a>
+          <a class="sf-onb-starter-link" id="sf-onb-demo-starter-default" href="#"></a>
+          <a class="sf-onb-starter-link" id="sf-onb-demo-starter-kids" href="#"></a>
           <div class="sf-onb-demo-actions" id="sf-onb-demo-actions">
             <button class="sf-onb-btn" id="sf-onb-demo-continue" type="button"></button>
           </div>
@@ -374,9 +378,13 @@ window.SFOnboarding = (function () {
     document.getElementById('sf-onb-demo-choice-b').addEventListener('click', () => pickDemo('b'));
     document.getElementById('sf-onb-demo-continue').addEventListener('click', closeDemo);
     document.getElementById('sf-onb-demo-skip').addEventListener('click', closeDemo);
-    document.getElementById('sf-onb-demo-starter').addEventListener('click', e => {
+    document.getElementById('sf-onb-demo-starter-default').addEventListener('click', e => {
       e.preventDefault();
-      goToStarterStory();
+      goToStory(SFShared.STARTER_STORIES.default[currentLang()] || SFShared.STARTER_STORIES.default.fr);
+    });
+    document.getElementById('sf-onb-demo-starter-kids').addEventListener('click', e => {
+      e.preventDefault();
+      goToStory(SFShared.STARTER_STORIES.kids[currentLang()] || SFShared.STARTER_STORIES.kids.fr);
     });
     document.getElementById('sf-onb-tuto-close').addEventListener('click', closeTuto);
     document.getElementById('sf-onb-pin-create').addEventListener('click', submitPin);
@@ -427,25 +435,39 @@ window.SFOnboarding = (function () {
   }
 
   function updateDemoStarterLink() {
-    const link = document.getElementById('sf-onb-demo-starter');
-    if (!link) return;
     const tr = t();
-    const title = getStarterTitle(currentLang());
-    link.textContent = tr.demoStarterPlay + ' → ' + title;
-    link.href = getStarterGameUrl(currentLang());
+    const lang = currentLang();
+
+    const linkDefault = document.getElementById('sf-onb-demo-starter-default');
+    if (linkDefault) {
+      const file = SFShared.STARTER_STORIES.default[lang] || SFShared.STARTER_STORIES.default.fr;
+      const title = SFShared.STARTER_TITLES.default[lang] || SFShared.STARTER_TITLES.default.fr;
+      linkDefault.textContent = tr.demoStarterDefaultLabel + ' → ' + title;
+      linkDefault.href = 'game.html?story=' + encodeURIComponent(file);
+    }
+
+    const linkKids = document.getElementById('sf-onb-demo-starter-kids');
+    if (linkKids) {
+      const file = SFShared.STARTER_STORIES.kids[lang] || SFShared.STARTER_STORIES.kids.fr;
+      const title = SFShared.STARTER_TITLES.kids[lang] || SFShared.STARTER_TITLES.kids.fr;
+      linkKids.textContent = tr.demoStarterKidsLabel + ' → ' + title;
+      linkKids.href = 'game.html?story=' + encodeURIComponent(file);
+    }
   }
 
   function resetDemoView() {
     const outcome = document.getElementById('sf-onb-demo-outcome');
     const conclusion = document.getElementById('sf-onb-demo-conclusion');
     const ready = document.getElementById('sf-onb-demo-ready');
-    const starter = document.getElementById('sf-onb-demo-starter');
+    const starterDefault = document.getElementById('sf-onb-demo-starter-default');
+    const starterKids = document.getElementById('sf-onb-demo-starter-kids');
     const actions = document.getElementById('sf-onb-demo-actions');
     const choices = document.getElementById('sf-onb-demo-choices');
     if (outcome) { outcome.textContent = ''; outcome.classList.remove('visible'); }
     if (conclusion) conclusion.classList.remove('visible');
     if (ready) ready.classList.remove('visible');
-    if (starter) starter.classList.remove('visible');
+    if (starterDefault) starterDefault.classList.remove('visible');
+    if (starterKids) starterKids.classList.remove('visible');
     if (actions) actions.classList.remove('visible');
     if (choices) choices.style.display = '';
   }
@@ -514,7 +536,8 @@ window.SFOnboarding = (function () {
     document.getElementById('sf-onb-demo-conclusion').classList.add('visible');
     document.getElementById('sf-onb-demo-ready').classList.add('visible');
     updateDemoStarterLink();
-    document.getElementById('sf-onb-demo-starter').classList.add('visible');
+    document.getElementById('sf-onb-demo-starter-default').classList.add('visible');
+    document.getElementById('sf-onb-demo-starter-kids').classList.add('visible');
     document.getElementById('sf-onb-demo-actions').classList.add('visible');
   }
 
