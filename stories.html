@@ -374,6 +374,16 @@ html,body { height:100%; background:#0d0d0f; color:#e8e0d0; font-family:'Cormora
 .bookcase-row::-webkit-scrollbar-thumb { background:var(--border); border-radius:4px; }
 .bookcase-row::-webkit-scrollbar-track { background:transparent; }
 
+.shelf-scrollbar {
+  height:4px; margin:0 12px 10px; border-radius:4px;
+  background:rgba(255,255,255,0.08); position:relative; overflow:hidden;
+}
+.shelf-scrollbar-thumb {
+  position:absolute; top:0; left:0; height:100%; width:100%;
+  background:var(--gold3); border-radius:4px;
+  transition:transform .08s linear;
+}
+
 .shelf-plank {
   height:10px; margin:0 4px 18px;
   background:linear-gradient(180deg, var(--wood) 0%, var(--wood-dark) 100%);
@@ -1253,7 +1263,7 @@ function renderShelfLibrary() {
     const bmTitle = { fr:'Reprendre', en:'Continue', es:'Continuar' }[currentLang] || 'Reprendre';
     html += `<div class="shelf-block" id="shelf-bookmarks">
       <div class="shelf-block-header"><div class="shelf-block-header-main"><div class="shelf-block-icon">🔖</div><div class="shelf-block-name">${bmTitle}</div></div></div>
-      <div class="bookcase-row">`;
+      <div class="bookcase-row" id="row-bookmarks">`;
     bookmarks.forEach(bm => {
       const game = allGames.find(g => g.file === bm.storyFile);
       const date = new Date(bm.savedAt).toLocaleDateString();
@@ -1262,7 +1272,7 @@ function renderShelfLibrary() {
         data-desc="📍 ${escAttr(bm.sceneTitle)} — ${escAttr(date)}" data-locked="0" data-action="resume" data-file="${escAttr(bm.storyFile)}">
         <div class="book-icon">${game?.icon || '📖'}</div><div class="book-title">${escHtml(bm.storyName)}</div></div>`;
     });
-    html += `</div><div class="shelf-plank"></div></div>`;
+    html += `</div><div class="shelf-scrollbar"><div class="shelf-scrollbar-thumb"></div></div><div class="shelf-plank"></div></div>`;
   }
 
   const byPack = {};
@@ -1310,7 +1320,7 @@ function renderShelfLibrary() {
         <div class="shelf-block-header-main"><div class="shelf-block-icon">${cfg.icon}</div><div class="shelf-block-name">${packName}</div></div>
         ${priceBadge}
       </div>
-      <div class="bookcase-row">`;
+      <div class="bookcase-row" id="row-${packId}">`;
 
     if (cfg.comingSoon && !count) {
       html += `</div><div class="shelf-soon-msg">⏳ ${ui.soon}</div>`;
@@ -1330,13 +1340,38 @@ function renderShelfLibrary() {
           ${locked ? '<div class="book-lock">🔒</div>' : ''}
         </div>`;
       });
-      html += `</div>`;
+      html += `</div><div class="shelf-scrollbar"><div class="shelf-scrollbar-thumb"></div></div>`;
     }
     html += `<div class="shelf-plank"></div></div>`;
   });
 
   document.getElementById('content').innerHTML = html;
   injectRestoreButton();
+  initShelfScrollbars();
+}
+
+function initShelfScrollbars() {
+  document.querySelectorAll('.bookcase-row[id^="row-"]').forEach(row => {
+    const bar = row.nextElementSibling;
+    if (!bar || !bar.classList.contains('shelf-scrollbar')) return;
+    const thumb = bar.querySelector('.shelf-scrollbar-thumb');
+    if (!thumb) return;
+
+    const update = () => {
+      const scrollable = row.scrollWidth - row.clientWidth;
+      if (scrollable <= 4) { bar.style.display = 'none'; return; }
+      bar.style.display = 'block';
+      const thumbRatio = Math.max(row.clientWidth / row.scrollWidth, 0.12);
+      thumb.style.width = (thumbRatio * 100) + '%';
+      const maxTranslate = bar.clientWidth * (1 - thumbRatio);
+      const progress = row.scrollLeft / scrollable;
+      thumb.style.transform = `translateX(${progress * maxTranslate}px)`;
+    };
+
+    row.addEventListener('scroll', () => requestAnimationFrame(update), { passive: true });
+    window.addEventListener('resize', update);
+    update();
+  });
 }
 
 let shelfSelectedBook = null;

@@ -1793,6 +1793,7 @@ function dismissImmersiveHint() {
   }
   document.getElementById('immersive-dot')?.classList.remove('hint-highlight');
   try { localStorage.setItem(IMMERSIVE_HINT_KEY, '1'); } catch (e) {}
+  updateHintPause();
   if (!uiVisible) maybeShowFabHint();
 }
 
@@ -1821,6 +1822,7 @@ function dismissFabHint() {
   document.getElementById('fab-main')?.classList.remove('hint-highlight');
   if (!uiVisible) document.getElementById('fab-wrap')?.classList.add('ui-hidden');
   try { localStorage.setItem(FAB_HINT_KEY, '1'); } catch (e) {}
+  updateHintPause();
 }
 
 function canShowFabHint() {
@@ -1844,6 +1846,7 @@ function maybeShowFabHint() {
   document.getElementById('fab-main')?.classList.add('hint-highlight');
   document.getElementById('fab-hint')?.classList.add('show');
   document.getElementById('fab-hint')?.setAttribute('aria-hidden', 'false');
+  updateHintPause();
 }
 
 document.getElementById('fab-hint-btn')?.addEventListener('click', dismissFabHint);
@@ -1866,11 +1869,17 @@ function maybeShowImmersiveHint() {
   document.getElementById('immersive-hint')?.classList.add('show');
   document.getElementById('immersive-hint')?.setAttribute('aria-hidden', 'false');
   document.getElementById('immersive-dot')?.classList.add('hint-highlight');
+  updateHintPause();
 }
 
 document.getElementById('immersive-hint-btn')?.addEventListener('click', dismissImmersiveHint);
 
 let typewriterTimeout = null;
+let hintPauseActive = false;
+
+function updateHintPause() {
+  hintPauseActive = _immersiveHintVisible || _fabHintVisible;
+}
 
 function getTypeSpeed(narratorMode = false) {
   const opts = JSON.parse(localStorage.getItem('sf_options') || '{}');
@@ -1904,6 +1913,11 @@ function typewrite(html, container, onDone, narratorMode = false) {
 
   function tick() {
     if (skipped) return;
+    if (hintPauseActive) {
+      // Ne pas faire avancer l'histoire tant qu'un mini-tuto est affiché
+      typewriterTimeout = setTimeout(tick, 150);
+      return;
+    }
     if (i >= html.length) {
       // Fin — retirer le curseur
       container.innerHTML = html;
