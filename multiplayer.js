@@ -238,8 +238,37 @@ window.SFMultiplayer = (function () {
     function getPlayers() { return rosterPayload(); }
     function getCode() { return code; }
 
+    /**
+     * Reconstruit l'état JS après une navigation de page (ex: lobby → game.html).
+     * Les sockets natifs (serveur TCP, broadcast UDP) survivent à la navigation
+     * — seul l'état JS (roster, listeners) est perdu et doit être reformé ici.
+     */
+    function hydrate(snapshot) {
+      code = snapshot.code;
+      storyInfo = snapshot.story || storyInfo;
+      players = new Map();
+      clientToPlayer = new Map();
+      playerIdCounter = 0;
+      (snapshot.players || []).forEach(p => {
+        players.set(p.id, { id: p.id, name: p.name, clientId: p.clientId, connected: p.connected, token: p.token });
+        if (p.clientId) clientToPlayer.set(p.clientId, p.id);
+        const n = parseInt(String(p.id).replace('p', ''), 10);
+        if (!isNaN(n) && n > playerIdCounter) playerIdCounter = n;
+      });
+      attachListeners();
+    }
+
+    /** Snapshot sérialisable pour sessionStorage avant une navigation. */
+    function snapshot() {
+      return {
+        code,
+        story: storyInfo,
+        players: Array.from(players.values())
+      };
+    }
+
     return {
-      create, stop, broadcast, sendTo, getPlayers, getCode,
+      create, stop, broadcast, sendTo, getPlayers, getCode, hydrate, snapshot,
       on: events.on
     };
   })();
@@ -357,8 +386,25 @@ window.SFMultiplayer = (function () {
     function isConnected() { return connected; }
     function getPlayerId() { return playerId; }
 
+    /**
+     * Reconstruit l'état JS après une navigation de page (ex: lobby → game.html).
+     * La connexion TCP native survit à la navigation — seul l'état JS
+     * (playerId/token, listeners) est perdu et doit être reformé ici.
+     */
+    function hydrate(snapshot) {
+      playerId = snapshot.playerId;
+      token = snapshot.token;
+      connected = true;
+      attachListeners();
+    }
+
+    /** Snapshot sérialisable pour sessionStorage avant une navigation. */
+    function snapshot() {
+      return { playerId, token };
+    }
+
     return {
-      connect, send, leave, isConnected, getPlayerId,
+      connect, send, leave, isConnected, getPlayerId, hydrate, snapshot,
       on: events.on
     };
   })();

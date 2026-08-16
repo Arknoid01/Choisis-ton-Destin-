@@ -192,6 +192,7 @@ html,body{min-height:100%;background:#0a0a0e;color:#e0d8f0;font-family:'Cormoran
     </div>
     <div class="mp-roster-title" id="txt-lobby-roster"></div>
     <div id="lobby-players"></div>
+    <button class="mp-btn primary" id="btn-lobby-start" style="display:none"></button>
     <p class="mp-note" id="txt-lobby-note"></p>
     <a class="mp-back-link" id="btn-lobby-leave"></a>
   </div>
@@ -226,7 +227,9 @@ const T = {
     lobbyCodeHint: 'Donnez ce code aux autres joueurs pour qu\'ils rejoignent.',
     lobbyWaiting: 'En attente que l\'hôte lance la partie…',
     lobbyRoster: 'Joueurs',
-    lobbyNote: 'La synchronisation de l\'histoire (scènes, vote) arrive à la prochaine étape — pour l\'instant, cet écran gère la création/connexion de la partie.',
+    lobbyStart: 'Lancer la partie',
+    lobbyStartHint: 'Il faut au moins 2 joueurs pour lancer la partie.',
+    lobbyNote: 'Chaque scène s\'affiche chez tout le monde en même temps ; les votes départagent le choix qui fait avancer l\'histoire.',
     lobbyLeave: '← Quitter la partie',
     you: 'VOUS',
     errNoName: 'Entrez un nom.',
@@ -258,7 +261,9 @@ const T = {
     lobbyCodeHint: 'Give this code to the other players so they can join.',
     lobbyWaiting: 'Waiting for the host to start the party…',
     lobbyRoster: 'Players',
-    lobbyNote: 'Story sync (scenes, voting) is coming in the next step — for now this screen handles creating/joining the party.',
+    lobbyStart: 'Start the party',
+    lobbyStartHint: 'At least 2 players are needed to start.',
+    lobbyNote: 'Every scene shows up for everyone at the same time; votes decide which choice moves the story forward.',
     lobbyLeave: '← Leave the party',
     you: 'YOU',
     errNoName: 'Enter a name.',
@@ -290,7 +295,9 @@ const T = {
     lobbyCodeHint: 'Da este código a los demás jugadores para que se unan.',
     lobbyWaiting: 'Esperando a que el anfitrión inicie la partida…',
     lobbyRoster: 'Jugadores',
-    lobbyNote: 'La sincronización de la historia (escenas, votos) llegará en el próximo paso — por ahora esta pantalla gestiona la creación/conexión de la partida.',
+    lobbyStart: 'Iniciar la partida',
+    lobbyStartHint: 'Se necesitan al menos 2 jugadores para empezar.',
+    lobbyNote: 'Cada escena aparece a la vez para todos; los votos deciden qué elección hace avanzar la historia.',
     lobbyLeave: '← Salir de la partida',
     you: 'TÚ',
     errNoName: 'Introduce un nombre.',
@@ -325,6 +332,7 @@ function applyTexts() {
   document.getElementById('txt-lobby-code-hint').textContent = t('lobbyCodeHint');
   document.getElementById('txt-lobby-waiting').textContent = t('lobbyWaiting');
   document.getElementById('txt-lobby-roster').textContent = t('lobbyRoster');
+  document.getElementById('btn-lobby-start').textContent = t('lobbyStart');
   document.getElementById('txt-lobby-note').textContent = t('lobbyNote');
   document.getElementById('btn-lobby-leave').textContent = t('lobbyLeave');
 }
@@ -361,6 +369,7 @@ async function populateStoryPicker() {
 
 let currentRole = null; // 'host' | 'join'
 let storyOptions = [];
+let currentStoryFile = null;
 
 document.getElementById('btn-go-create').addEventListener('click', async () => {
   storyOptions = await populateStoryPicker();
@@ -389,6 +398,7 @@ document.getElementById('btn-create-confirm').addEventListener('click', async ()
   try {
     const { code } = await SFMultiplayer.host.create({ storyFile, storyTitle });
     currentRole = 'host';
+    currentStoryFile = storyFile;
     enterLobby({ code, storyTitle });
   } catch (e) {
     console.error(e);
@@ -411,6 +421,7 @@ document.getElementById('btn-join-confirm').addEventListener('click', async () =
   try {
     const { story, players } = await SFMultiplayer.join.connect({ code, name });
     currentRole = 'join';
+    currentStoryFile = story?.file;
     enterLobby({ storyTitle: story?.title, players });
   } catch (e) {
     console.error(e);
@@ -431,6 +442,14 @@ function renderRoster(players) {
       ${p.id === myId ? `<span class="mp-player-you">${t('you')}</span>` : ''}
     </div>
   `).join('');
+
+  if (currentRole === 'host') {
+    const connectedCount = (players || []).filter(p => p.connected !== false).length;
+    const startBtn = document.getElementById('btn-lobby-start');
+    startBtn.style.display = 'block';
+    startBtn.disabled = connectedCount < 1; // hôte + au moins 1 joueur = 2
+    startBtn.title = connectedCount < 1 ? t('lobbyStartHint') : '';
+  }
 }
 
 function escapeHtml(s) {
@@ -451,10 +470,38 @@ function enterLobby({ code, storyTitle, players }) {
   } else {
     renderRoster(players);
     SFMultiplayer.join.on('roster', (data) => renderRoster(data.players));
+    SFMultiplayer.join.on('message', ({ type, payload }) => {
+      if (type === 'start') goToGameAsPlayer(payload.storyFile);
+    });
   }
 
   showScreen('screen-lobby');
 }
+
+let navigatingToGame = false;
+
+function goToGameAsHost() {
+  navigatingToGame = true;
+  sessionStorage.setItem('sf_mp_session', JSON.stringify({
+    role: 'host',
+    ...SFMultiplayer.host.snapshot()
+  }));
+  window.location.href = 'game.html?story=' + encodeURIComponent(currentStoryFile);
+}
+
+function goToGameAsPlayer(storyFile) {
+  navigatingToGame = true;
+  sessionStorage.setItem('sf_mp_session', JSON.stringify({
+    role: 'join',
+    ...SFMultiplayer.join.snapshot()
+  }));
+  window.location.href = 'game.html?story=' + encodeURIComponent(storyFile || currentStoryFile);
+}
+
+document.getElementById('btn-lobby-start').addEventListener('click', () => {
+  SFMultiplayer.host.broadcast('start', { storyFile: currentStoryFile });
+  goToGameAsHost();
+});
 
 async function leaveLobby() {
   if (currentRole === 'host') await SFMultiplayer.host.stop();
@@ -464,6 +511,7 @@ async function leaveLobby() {
 }
 document.getElementById('btn-lobby-leave').addEventListener('click', leaveLobby);
 window.addEventListener('pagehide', () => {
+  if (navigatingToGame) return; // partie qui démarre : on garde la connexion active
   if (currentRole === 'host') SFMultiplayer.host.stop();
   else if (currentRole === 'join') SFMultiplayer.join.leave();
 });

@@ -8,6 +8,7 @@
 <link rel="stylesheet" href="sf-theme.css">
 <script src="capacitor.js"></script>
 <script src="sf-shared.js"></script>
+<script src="multiplayer.js"></script>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Cinzel:wght@400;600&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
 <style>
 /* ── BACKGROUND ── */
@@ -1129,6 +1130,12 @@ let history    = [];
 let currentId  = null;
 let playerName = localStorage.getItem('sf_player_name') || '';
 
+// ── MULTIJOUEUR ──
+let MP_MODE = null; // null | 'host' | 'join'
+const MP_VOTE_SECONDS = 20;
+let mpVoteMap = new Map(); // voterId -> choiceIndex, remis à zéro à chaque scène (hôte uniquement)
+let _mpVoterTimerInterval = null;
+
 // ══════════════════════════════════════════════
 // THEME — apply from story.theme
 // ══════════════════════════════════════════════
@@ -1247,6 +1254,11 @@ async function loadStory() {
     hideLoading();
     applyGameUI();
     showUI();
+
+    // Multijoueur : pas de reprise/nom perso, l'hôte pilote le déroulé pour tout le monde.
+    if (MP_MODE === 'join') { mpShowWaitingState(); return; }
+    if (MP_MODE === 'host') { trackStats('story_start'); goToScene(startScene.id); return; }
+
     const savedData = JSON.parse(localStorage.getItem(getSaveKey()) || 'null');
     if (savedData && savedData.sceneId && story.scenes[savedData.sceneId]) {
       showResumePrompt(savedData, startScene.id);
@@ -1373,6 +1385,11 @@ function goToScene(id, choiceText, externalStory) {
   // Log history
   if (currentId) history.push({ id: currentId, choice: choiceText || '' });
   currentId = id;
+
+  // Multijoueur : l'hôte diffuse la scène (et les stats à jour) à tous les joueurs
+  if (MP_MODE === 'host') {
+    SFMultiplayer.host.broadcast('advance', { sceneId: id, stats: { ...stats } });
+  }
 
   // Track scene read
   trackStats('scene_read');
@@ -1576,8 +1593,14 @@ function renderScene(scene) {
   const showChoices = () => {
     const ca = document.getElementById('choices-area');
     if (ca) { ca.classList.remove('hidden'); ca.classList.add('reveal'); }
-    // Démarrer le timer si la scène en a un
-    if (scene.timer && scene.timer.duration > 0) {
+    if (MP_MODE === 'host') {
+      // Multijoueur : timer de vote partagé, ignore le timer propre à la scène.
+      mpResetVotes();
+      startChoiceTimer(MP_VOTE_SECONDS, 'mp-resolve');
+    } else if (MP_MODE === 'join') {
+      // Le joueur ne résout rien lui-même — juste un repère visuel du temps restant.
+      mpStartVoterCountdown(MP_VOTE_SECONDS);
+    } else if (scene.timer && scene.timer.duration > 0) {
       startChoiceTimer(scene.timer.duration, scene.timer.auto || 'random');
     }
   };
@@ -1646,6 +1669,8 @@ const GAME_I18N = {
     ratingYes: 'Noter l\'application',
     ratingLater: 'Pas maintenant',
     ratingNever: 'Ne plus demander',
+    mpWaitingHost: '⏳ En attente que l\'hôte lance la scène…',
+    mpVoted: '✓ Vote enregistré — en attente des autres…',
   },
   en: {
     bookmark:    'Bookmark',
@@ -1687,6 +1712,8 @@ const GAME_I18N = {
     ratingYes: 'Rate the app',
     ratingLater: 'Not now',
     ratingNever: 'Don\'t ask again',
+    mpWaitingHost: '⏳ Waiting for the host to start the scene…',
+    mpVoted: '✓ Vote recorded — waiting for others…',
   },
   es: {
     bookmark:    'Marcador',
@@ -1728,6 +1755,8 @@ const GAME_I18N = {
     ratingYes: 'Valorar la app',
     ratingLater: 'Ahora no',
     ratingNever: 'No volver a preguntar',
+    mpWaitingHost: '⏳ Esperando a que el anfitrión inicie la escena…',
+    mpVoted: '✓ Voto registrado — esperando a los demás…',
   }
 };
 
@@ -2137,6 +2166,22 @@ function ratingNever() {
 }
 
 function pickChoice(targetId, choiceIndex, btnEl, externalStory) {
+  // En multijoueur, un clic ne fait pas avancer l'histoire directement :
+  // il enregistre un vote (le sien pour l'hôte, envoyé au serveur pour un joueur).
+  if (MP_MODE === 'host') {
+    const resolved = mpRegisterVote('__host__', choiceIndex);
+    if (!resolved) mpMarkVoted(btnEl); // sinon la scène suivante a déjà été rendue
+    return;
+  }
+  if (MP_MODE === 'join') {
+    SFMultiplayer.join.send('vote', { sceneId: currentId, choiceIdx: choiceIndex });
+    mpMarkVoted(btnEl);
+    return;
+  }
+  commitChoice(targetId, choiceIndex, btnEl, externalStory);
+}
+
+function commitChoice(targetId, choiceIndex, btnEl, externalStory) {
   if (!targetId && !externalStory) return;
   stopChoiceTimer();
 
@@ -2401,6 +2446,7 @@ function stopChoiceTimer() {
 }
 
 function autoPickChoice(autoMode) {
+  if (autoMode === 'mp-resolve') { mpResolveVotes(); return; }
   const choices = window._currentChoices || [];
   const opts = JSON.parse(localStorage.getItem('sf_options') || '{}');
   const lockedMode = opts.locked || 'hidden';
@@ -2832,6 +2878,128 @@ const _loadingTimeout = setTimeout(() => {
 const _origHideLoading = hideLoading;
 hideLoading = function() { clearTimeout(_loadingTimeout); _origHideLoading(); };
 
+// ══════════════════════════════════════════════
+// MULTIJOUEUR — bootstrap
+// ══════════════════════════════════════════════
+function mpBootstrap() {
+  let session = null;
+  try { session = JSON.parse(sessionStorage.getItem('sf_mp_session') || 'null'); } catch (e) {}
+  if (!session || !window.SFMultiplayer || !SFMultiplayer.isAvailable()) return;
+
+  MP_MODE = session.role;
+
+  if (MP_MODE === 'host') {
+    SFMultiplayer.host.hydrate(session);
+    SFMultiplayer.host.on('message', ({ playerId, type, payload }) => {
+      if (type === 'vote' && payload.sceneId === currentId) {
+        mpRegisterVote(playerId, payload.choiceIdx);
+      }
+    });
+  } else if (MP_MODE === 'join') {
+    SFMultiplayer.join.hydrate(session);
+    SFMultiplayer.join.on('message', ({ type, payload }) => {
+      if (type === 'advance') mpHandleAdvance(payload);
+    });
+  }
+}
+
+function mpShowWaitingState() {
+  const content = document.getElementById('content');
+  if (content) {
+    content.innerHTML = `<div style="text-align:center;padding:70px 20px;color:var(--text2);font-family:'Cinzel',serif;font-size:13px;letter-spacing:1px">${gt('mpWaitingHost')}</div>`;
+  }
+}
+
+function mpHandleAdvance(payload) {
+  if (payload.stats) { stats = payload.stats; updateStatsBar(); }
+  goToScene(payload.sceneId);
+}
+
+function mpResetVotes() {
+  mpVoteMap = new Map();
+}
+
+function mpRegisterVote(voterId, choiceIndex) {
+  if (MP_MODE !== 'host') return false;
+  const choices = window._currentChoices || [];
+  if (!choices[choiceIndex]) return false; // index de choix invalide, on ignore
+
+  mpVoteMap.set(voterId, choiceIndex);
+
+  const connectedPlayers = SFMultiplayer.host.getPlayers().filter(p => p.connected).length;
+  const totalExpected = 1 + connectedPlayers; // hôte + joueurs connectés
+  if (mpVoteMap.size >= totalExpected) {
+    stopChoiceTimer();
+    mpResolveVotes();
+    return true;
+  }
+  return false;
+}
+
+function mpResolveVotes() {
+  const choices = window._currentChoices || [];
+  if (!choices.length) return;
+
+  const tally = {};
+  mpVoteMap.forEach(idx => { tally[idx] = (tally[idx] || 0) + 1; });
+
+  let winningIndex;
+  const tallied = Object.keys(tally).map(Number);
+  if (tallied.length) {
+    const maxVotes = Math.max(...tallied.map(idx => tally[idx]));
+    const winners = tallied.filter(idx => tally[idx] === maxVotes);
+    winningIndex = winners[Math.floor(Math.random() * winners.length)];
+  } else {
+    // Personne n'a voté (timer expiré à 0 vote) : tirage aléatoire parmi les choix.
+    winningIndex = Math.floor(Math.random() * choices.length);
+  }
+
+  mpResetVotes();
+  const choice = choices[winningIndex];
+  const btns = document.querySelectorAll('.choice-btn');
+  commitChoice(choice.vers, winningIndex, btns[winningIndex] || null, choice.story);
+}
+
+function mpMarkVoted(btnEl) {
+  if (_mpVoterTimerInterval) { clearInterval(_mpVoterTimerInterval); _mpVoterTimerInterval = null; }
+  document.querySelectorAll('.choice-btn').forEach(b => {
+    b.disabled = true;
+    b.style.opacity = (b === btnEl) ? '1' : '0.35';
+    b.style.cursor = 'not-allowed';
+  });
+  if (btnEl) btnEl.style.borderColor = 'var(--accent)';
+  const ca = document.getElementById('choices-area');
+  if (ca) {
+    const note = document.createElement('div');
+    note.style.cssText = 'margin-top:12px;text-align:center;font-family:\'DM Mono\',monospace;font-size:11px;color:var(--text3)';
+    note.textContent = gt('mpVoted');
+    ca.appendChild(note);
+  }
+}
+
+function mpStartVoterCountdown(duration) {
+  if (_mpVoterTimerInterval) clearInterval(_mpVoterTimerInterval);
+  const timerEl = document.getElementById('choice-timer');
+  const fillEl  = document.getElementById('timer-fill');
+  const countEl = document.getElementById('timer-count');
+  if (!timerEl) return;
+  timerEl.classList.add('active');
+  fillEl.style.width = '100%';
+  fillEl.classList.remove('urgent');
+  countEl.textContent = duration + 's';
+
+  const endTime = Date.now() + duration * 1000;
+  _mpVoterTimerInterval = setInterval(() => {
+    const remaining = Math.max(0, endTime - Date.now());
+    const pct = (remaining / (duration * 1000)) * 100;
+    fillEl.style.width = pct + '%';
+    countEl.textContent = Math.ceil(remaining / 1000) + 's';
+    if (pct < 30) fillEl.classList.add('urgent');
+    if (remaining <= 0) { clearInterval(_mpVoterTimerInterval); _mpVoterTimerInterval = null; }
+  }, 100);
+}
+
+mpBootstrap();
 loadStory();
 </script>
 </body>
