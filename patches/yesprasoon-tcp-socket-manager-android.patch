@@ -110,7 +110,7 @@
  
              JSObject result = new JSObject();
              result.put("success", true);
-@@ -383,6 +408,30 @@
+@@ -383,6 +408,42 @@
          Log.i(TAG, "Message sent to server: " + message);
      }
  
@@ -121,10 +121,20 @@
 +        final Socket socketRef = clientSocket;
 +        if (socketRef == null) return;
 +        new Thread(() -> {
++            boolean disconnected = false;
 +            try {
 +                BufferedReader in = new BufferedReader(new InputStreamReader(socketRef.getInputStream()));
-+                String line;
-+                while ((line = in.readLine()) != null) {
++                readLoop:
++                while (true) {
++                    String line;
++                    try {
++                        line = in.readLine();
++                    } catch (SocketTimeoutException e) {
++                        // Rien reçu pendant le délai (ex: joueur inactif) — normal, pas une déconnexion.
++                        if (socketRef.isClosed()) { disconnected = true; break readLoop; }
++                        continue;
++                    }
++                    if (line == null) { disconnected = true; break; } // flux fermé par l'autre bout
 +                    if (line.trim().isEmpty()) continue; // ligne vide = heartbeat, on ignore
 +                    JSObject eventData = new JSObject();
 +                    eventData.put("message", line);
@@ -132,7 +142,9 @@
 +                }
 +            } catch (IOException e) {
 +                Log.w(TAG, "Client read loop ended: " + e.getMessage());
-+            } finally {
++                disconnected = true;
++            }
++            if (disconnected) {
 +                notifyListeners("serverDisconnected", new JSObject());
 +            }
 +        }).start();
@@ -141,7 +153,7 @@
      private boolean reconnectToServer(String ipAddress, int port) {
          try {
              // Validate IP address and port
-@@ -399,6 +448,8 @@
+@@ -399,6 +460,8 @@
              clientSocket = new Socket(ipAddress, port);
              clientSocket.setSoTimeout(30000); // Optional: Timeout for reading data
              Log.i(TAG, "Reconnected to server at " + ipAddress + ":" + port);
@@ -150,7 +162,7 @@
              return true;
  
          } catch (IOException e) {
-@@ -413,6 +464,71 @@
+@@ -413,6 +476,71 @@
          call.resolve(new JSObject().put("count", clientConnections.size()));
      }
  
