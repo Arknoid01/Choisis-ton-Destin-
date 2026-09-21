@@ -131,4 +131,17 @@ for (const [l,f] of [['fr','dernieres_minutes_final.json'],['en','dernieres_minu
   ok(!/mange aussi ton café|eat your coffee too|como tu café/i.test(t)&&!/je mange aussi/.test(t), `${l} : ancienne phrase absente`);
   const m=t.match(/[^."]{0,40}(je bois|drink|bebo)[^."]{0,40}/i); console.log('     →',m&&m[0]);
 }
+
+console.log('\n7. Polices embarquées (aucun appel réseau externe)');
+{ const p=await ctx(900,false); const external=[];
+  await p.route('**/*', r => { const u=r.request().url(); if(!u.startsWith(BASE)) { external.push(u); return r.abort(); } return r.continue(); });
+  const pages=['index.html','stories.html','game.html?story='+encodeURIComponent(STORY),'news.html','progress.html','ai-guide.html','story-editor.html'];
+  for (const pg of pages) {
+    await p.goto(BASE+pg); await p.waitForTimeout(1200);
+    const r=await p.evaluate(async()=>{ await document.fonts.ready;
+      const used=[...document.fonts].filter(f=>f.status==='loaded').map(f=>f.family.replace(/['"]/g,''));
+      return [...new Set(used)]; });
+    ok(r.length>0, `${pg.split('?')[0]} : polices locales chargées → ${r.join(', ')}`);
+  }
+  ok(external.length===0,'aucune requête externe ('+external.slice(0,2).join(' ')+')'); }
 await b.close(); server.close(); console.log(fails?`\n❌ ${fails} échec(s)`:'\n✅ tout est vert'); process.exit(fails?1:0);
