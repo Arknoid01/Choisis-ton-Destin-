@@ -4,6 +4,7 @@ import { chromium } from 'playwright-core';
 import http from 'node:http';
 import fs from 'node:fs';
 import path from 'node:path';
+import os from 'node:os';
 import { fileURLToPath } from 'node:url';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
@@ -63,10 +64,10 @@ console.log('\n2. Pastille ✓ (bibliothèque)');
   ok(list+shelf>0,`pastilles trouvées : liste=${list}, étagère=${shelf}`);
   const title=await p.evaluate(()=>document.querySelector('.story-done')?.parentElement.textContent);
   console.log('     →',title);
-  await p.screenshot({path:'library.png'});
+  await p.screenshot({path:path.join(os.tmpdir(),'sf-e2e-library.png')});
   await p.click('#view-toggle-btn'); await p.waitForTimeout(800);
   const list2=await p.locator('.story-done').count(); ok(list2>0,`vue liste : pastilles ✓ = ${list2}`);
-  await p.screenshot({path:'library-list.png'});
+  await p.screenshot({path:path.join(os.tmpdir(),'sf-e2e-library-list.png')});
   ok(await p.evaluate(()=>SFShared.isStoryFinished('stories/fr/aikito_v2.json')),'SFShared.isStoryFinished(aikito)');
   ok(!(await p.evaluate(()=>SFShared.isStoryFinished('stories/fr/lazarus.json'))),'lazarus non terminée');
   ok(!p.errors.length,'aucune erreur JS '+p.errors.join('|')); }
@@ -78,7 +79,7 @@ console.log('\n3. Suppression de marque-page');
   await p.evaluate(()=>{openMenu();toggleBookmarkList();}); await p.waitForTimeout(500);
   const x=p.locator('#bookmark-list button:has-text("✕"), [onclick*="removeBookmark"]').first();
   ok(await x.isVisible(),'bouton ✕ visible dans le menu');
-  await p.screenshot({path:'bookmark-menu.png'});
+  await p.screenshot({path:path.join(os.tmpdir(),'sf-e2e-bookmark-menu.png')});
   await x.click(); await p.waitForTimeout(300);
   ok(p.dialogs.length===1&&/marque-page/.test(p.dialogs[0]),'confirmation : '+p.dialogs[0]);
   const r=await p.evaluate(()=>({bm:JSON.parse(localStorage.sf_bookmarks||'[]').length, saves:Object.keys(localStorage).filter(k=>k.startsWith('sf_save_'))}));
@@ -99,7 +100,7 @@ console.log('\n3b. ✕ refusé → rien supprimé, et ✕ dans la bibliothèque'
   await p.waitForTimeout(500);
   const btn=p.locator('#pack-bookmarks .bm-delete').first();
   ok(await btn.isVisible(),'bouton ✕ visible dans la bibliothèque (vue liste)');
-  await p.screenshot({path:'library-bm.png'});
+  await p.screenshot({path:path.join(os.tmpdir(),'sf-e2e-library-bm.png')});
   await btn.click(); await p.waitForTimeout(500);
   ok((await p.evaluate(()=>JSON.parse(localStorage.sf_bookmarks||'[]').length))===0,'suppression depuis la bibliothèque');
   ok((await p.locator('#pack-bookmarks').count())===0,'section « Reprendre » disparue après rendu');
