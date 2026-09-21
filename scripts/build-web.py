@@ -7,7 +7,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 WWW = ROOT / "www"
 
-EXCLUDE_DIRS = {"node_modules", ".git", "android", "www", "scripts"}
+EXCLUDE_DIRS = {"node_modules", ".git", "android", "www", "scripts", "plugins"}
 EXCLUDE_FILES = {"capacitor.config.json", "package.json", "package-lock.json"}
 EXCLUDE_SUFFIXES = {".md"}
 
