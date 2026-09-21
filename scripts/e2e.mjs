@@ -42,7 +42,11 @@ async function playToEnd(p){
     await p.waitForTimeout(300);
     const st = await p.evaluate(()=>{const s=story.scenes[currentId]; return {end:!!s.isEnd, ch:document.querySelectorAll('#choices-area:not(.hidden) .choice-btn').length}});
     if (st.end) { await p.waitForTimeout(800); return true; }
-    if (st.ch) await p.locator('#choices-area .choice-btn').first().click();
+    // Les choix sont mélangés : on évite la voie « Léonie » pour rester sur la même fin (fin_douce)
+    if (st.ch) {
+      const solo = p.locator('#choices-area .choice-btn').filter({ hasNotText: /Léonie|petite fille|tous ensemble|Redescendre/ });
+      await ((await solo.count()) ? solo : p.locator('#choices-area .choice-btn')).first().click();
+    }
   }
   return false;
 }
@@ -130,6 +134,24 @@ for (const [l,f] of [['fr','dernieres_minutes_final.json'],['en','dernieres_minu
   const t=fs.readFileSync(path.join(ROOT,`stories/${l}/${f}`),'utf8');
   ok(!/mange aussi ton café|eat your coffee too|como tu café/i.test(t)&&!/je mange aussi/.test(t), `${l} : ancienne phrase absente`);
   const m=t.match(/[^."]{0,40}(je bois|drink|bebo)[^."]{0,40}/i); console.log('     →',m&&m[0]);
+}
+
+console.log('\n8. Aikito : fin « Le Soir à Brindille » (voie Léonie) et choix masqué en solo');
+{ const clickText = async (p, txt) => { await p.waitForFunction(t=>[...document.querySelectorAll('#choices-area:not(.hidden) .choice-btn')].some(b=>b.textContent.includes(t)), txt, {timeout:20000}); await p.locator('#choices-area .choice-btn', {hasText: txt}).first().click(); };
+  const visible = p => p.evaluate(()=>[...document.querySelectorAll('#choices-area:not(.hidden) .choice-btn')].map(b=>b.textContent.trim()));
+  // voie Léonie
+  { const p=await ctx(); await start(p);
+    await clickText(p,'Rester jouer'); await clickText(p,'la petite fille'); await clickText(p,'Monter sur la colline tous ensemble');
+    await clickText(p,'Continuer vers le sommet'); await clickText(p,'S\'asseoir calmement');
+    await p.waitForFunction(()=>[...document.querySelectorAll('#choices-area:not(.hidden) .choice-btn')].some(b=>b.textContent.includes('Rester encore un peu')),null,{timeout:20000});
+    const opts=await visible(p); ok(opts.some(t=>t.includes('Redescendre au village avec Léonie')),'voie Léonie : « Redescendre… avec Léonie » proposé ('+JSON.stringify(opts)+')');
+    await clickText(p,'Redescendre au village');
+    await p.waitForFunction(()=>currentId==='fin_amis',null,{timeout:20000}); ok(true,'fin_amis atteinte'); }
+  // voie solo
+  { const p=await ctx(); await start(p);
+    await clickText(p,'Suivre le bruit'); await clickText(p,'Continuer vers le sommet'); await clickText(p,'S\'asseoir calmement');
+    await p.waitForFunction(()=>[...document.querySelectorAll('#choices-area:not(.hidden) .choice-btn')].some(b=>b.textContent.includes('Rester encore un peu')),null,{timeout:20000});
+    const opts=await visible(p); ok(opts.length>0 && !opts.some(t=>t.includes('Léonie')),'voie solo : choix Léonie masqué ('+opts.join(' | ')+')'); }
 }
 
 console.log('\n7. Polices embarquées (aucun appel réseau externe)');

@@ -17,6 +17,13 @@
       "start": 20,
       "max": 100,
       "color": "#90EE90"
+    },
+    {
+      "id": "amitie",
+      "label": "Friendship",
+      "start": 0,
+      "max": 100,
+      "color": "#FF9ECD"
     }
   ],
   "theme": {
@@ -90,6 +97,10 @@
             {
               "stat": "calme",
               "val": 10
+            },
+            {
+              "stat": "amitie",
+              "val": 20
             }
           ],
           "clickEffect": "pulse"
@@ -115,7 +126,7 @@
       "transition": "fade",
       "choices": [
         {
-          "text": "Demander à Léonie ce qu'il y a sur la colline",
+          "text": "Ask Léonie what's up on the hill",
           "vers": "leonie_raconte",
           "effects": [
             {
@@ -378,6 +389,21 @@
             }
           ],
           "clickEffect": "pulse"
+        },
+        {
+          "text": "Head back down to the village with Léonie",
+          "vers": "fin_amis",
+          "requires": {
+            "stat": "amitie",
+            "min": 20
+          },
+          "effects": [
+            {
+              "stat": "bonheur",
+              "val": 15
+            }
+          ],
+          "clickEffect": "pulse"
         }
       ],
       "x": 700,
@@ -404,6 +430,21 @@
             {
               "stat": "bonheur",
               "val": 10
+            }
+          ],
+          "clickEffect": "pulse"
+        },
+        {
+          "text": "Head back down to the village with Léonie",
+          "vers": "fin_amis",
+          "requires": {
+            "stat": "amitie",
+            "min": 20
+          },
+          "effects": [
+            {
+              "stat": "bonheur",
+              "val": 15
             }
           ],
           "clickEffect": "pulse"
@@ -458,6 +499,21 @@
             {
               "stat": "bonheur",
               "val": 10
+            }
+          ],
+          "clickEffect": "pulse"
+        },
+        {
+          "text": "Head back down to the village with Léonie",
+          "vers": "fin_amis",
+          "requires": {
+            "stat": "amitie",
+            "min": 20
+          },
+          "effects": [
+            {
+              "stat": "bonheur",
+              "val": 15
             }
           ],
           "clickEffect": "pulse"

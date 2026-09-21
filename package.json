@@ -4,7 +4,7 @@
   "description": "",
   "main": "billing.js",
   "scripts": {
-    "test": "node scripts/catalog-smoke.mjs",
+    "test": "node scripts/catalog-smoke.mjs && node scripts/story-reachability.mjs",
     "test:catalog": "node scripts/catalog-smoke.mjs",
     "govern:new": "node scripts/govern-new-flags.mjs && node scripts/catalog-smoke.mjs",
     "build:web": "python3 scripts/build-web.py",
