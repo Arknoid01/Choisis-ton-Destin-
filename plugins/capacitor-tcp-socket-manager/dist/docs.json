@@ -1,0 +1,203 @@
+{
+  "api": {
+    "name": "TcpSocketManagerPlugin",
+    "slug": "tcpsocketmanagerplugin",
+    "docs": "",
+    "tags": [],
+    "methods": [
+      {
+        "name": "startServer",
+        "signature": "(options: { port?: number; }) => Promise<{ success: boolean; message?: string; ipAddress: string; port: number; }>",
+        "parameters": [
+          {
+            "name": "options",
+            "docs": "- Options for starting the server.\n- `port` (optional): The port number to start the server on. Defaults to 8080 if not provided.",
+            "type": "{ port?: number | undefined; }"
+          }
+        ],
+        "returns": "Promise<{ success: boolean; message?: string | undefined; ipAddress: string; port: number; }>",
+        "tags": [
+          {
+            "name": "param",
+            "text": "options - Options for starting the server.\n- `port` (optional): The port number to start the server on. Defaults to 8080 if not provided."
+          },
+          {
+            "name": "returns",
+            "text": "A promise that resolves with the server's IP address and port."
+          }
+        ],
+        "docs": "Starts a TCP server on the specified port.",
+        "complexTypes": [],
+        "slug": "startserver"
+      },
+      {
+        "name": "stopServer",
+        "signature": "() => Promise<{ success: boolean; }>",
+        "parameters": [],
+        "returns": "Promise<{ success: boolean; }>",
+        "tags": [
+          {
+            "name": "returns",
+            "text": "A promise that resolves with the success status of the operation."
+          }
+        ],
+        "docs": "Stops the TCP server if it is running.",
+        "complexTypes": [],
+        "slug": "stopserver"
+      },
+      {
+        "name": "receiveMessage",
+        "signature": "() => Promise<{ message: string; }>",
+        "parameters": [],
+        "returns": "Promise<{ message: string; }>",
+        "tags": [
+          {
+            "name": "returns",
+            "text": "A promise that resolves with the received message."
+          }
+        ],
+        "docs": "Listens for and retrieves a message from the server.",
+        "complexTypes": [],
+        "slug": "receivemessage"
+      },
+      {
+        "name": "getClientCount",
+        "signature": "() => Promise<{ count: number; }>",
+        "parameters": [],
+        "returns": "Promise<{ count: number; }>",
+        "tags": [
+          {
+            "name": "returns",
+            "text": "A promise that resolves with the count of connected clients."
+          }
+        ],
+        "docs": "Gets the current number of clients connected to the server.",
+        "complexTypes": [],
+        "slug": "getclientcount"
+      },
+      {
+        "name": "connectToServer",
+        "signature": "(options: { ipAddress: string; port: number; }) => Promise<{ success: boolean; }>",
+        "parameters": [
+          {
+            "name": "options",
+            "docs": "- Options for connecting to the server.\n- `ipAddress`: The IP address of the server.\n- `port`: The port number of the server.",
+            "type": "{ ipAddress: string; port: number; }"
+          }
+        ],
+        "returns": "Promise<{ success: boolean; }>",
+        "tags": [
+          {
+            "name": "param",
+            "text": "options - Options for connecting to the server.\n- `ipAddress`: The IP address of the server.\n- `port`: The port number of the server."
+          },
+          {
+            "name": "returns",
+            "text": "A promise that resolves with the success status of the connection."
+          }
+        ],
+        "docs": "Connects to a TCP server.",
+        "complexTypes": [],
+        "slug": "connecttoserver"
+      },
+      {
+        "name": "disconnectFromServer",
+        "signature": "() => Promise<{ success: boolean; }>",
+        "parameters": [],
+        "returns": "Promise<{ success: boolean; }>",
+        "tags": [
+          {
+            "name": "returns",
+            "text": "A promise that resolves with the success status of the disconnection."
+          }
+        ],
+        "docs": "Disconnects from the currently connected server.",
+        "complexTypes": [],
+        "slug": "disconnectfromserver"
+      },
+      {
+        "name": "sendMessageToServer",
+        "signature": "(options: { ipAddress?: string; port?: number; message: string; }) => Promise<{ success: boolean; }>",
+        "parameters": [
+          {
+            "name": "options",
+            "docs": "- Options for sending the message.\n- `ipAddress` (optional): The IP address of the server. Uses the stored IP address if not provided.\n- `port` (optional): The port number of the server. Uses the stored port if not provided.\n- `message`: The message string to send.",
+            "type": "{ ipAddress?: string | undefined; port?: number | undefined; message: string; }"
+          }
+        ],
+        "returns": "Promise<{ success: boolean; }>",
+        "tags": [
+          {
+            "name": "param",
+            "text": "options - Options for sending the message.\n- `ipAddress` (optional): The IP address of the server. Uses the stored IP address if not provided.\n- `port` (optional): The port number of the server. Uses the stored port if not provided.\n- `message`: The message string to send."
+          },
+          {
+            "name": "returns",
+            "text": "A promise that resolves with the success status of the operation."
+          }
+        ],
+        "docs": "Sends a message to the connected server.",
+        "complexTypes": [],
+        "slug": "sendmessagetoserver"
+      },
+      {
+        "name": "addListener",
+        "signature": "(eventName: 'receiveMessage', listenerFunc: (data: { message: string; }) => void) => PluginListenerHandle",
+        "parameters": [
+          {
+            "name": "eventName",
+            "docs": "- The name of the event to listen for.\n- `receiveMessage`: Event triggered when a message is received on the server.",
+            "type": "'receiveMessage'"
+          },
+          {
+            "name": "listenerFunc",
+            "docs": "- The function to execute when the event is triggered. Receives data containing the message.",
+            "type": "(data: { message: string; }) => void"
+          }
+        ],
+        "returns": "PluginListenerHandle",
+        "tags": [
+          {
+            "name": "param",
+            "text": "eventName - The name of the event to listen for.\n- `receiveMessage`: Event triggered when a message is received on the server."
+          },
+          {
+            "name": "param",
+            "text": "listenerFunc - The function to execute when the event is triggered. Receives data containing the message."
+          },
+          {
+            "name": "returns",
+            "text": "A handle that can be used to remove the listener."
+          }
+        ],
+        "docs": "Adds a listener for the specified event.",
+        "complexTypes": [
+          "PluginListenerHandle"
+        ],
+        "slug": "addlistenerreceivemessage-"
+      }
+    ],
+    "properties": []
+  },
+  "interfaces": [
+    {
+      "name": "PluginListenerHandle",
+      "slug": "pluginlistenerhandle",
+      "docs": "",
+      "tags": [],
+      "methods": [],
+      "properties": [
+        {
+          "name": "remove",
+          "tags": [],
+          "docs": "",
+          "complexTypes": [],
+          "type": "() => Promise<void>"
+        }
+      ]
+    }
+  ],
+  "enums": [],
+  "typeAliases": [],
+  "pluginConfigs": []
+}
