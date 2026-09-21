@@ -16,7 +16,7 @@ window.SFMultiplayer = (function () {
   const SERVER_PORT = 45646;
   const BROADCAST_INTERVAL_MS = 1000;
   const DISCOVERY_TIMEOUT_MS = 8000;
-  const MAX_PLAYERS = 8;
+  const MAX_PLAYERS = 8; // hôte compris (donc 7 joueurs connectés au maximum)
 
   function plugins() {
     return window.Capacitor && window.Capacitor.Plugins;
@@ -32,7 +32,9 @@ window.SFMultiplayer = (function () {
   }
 
   function randomToken() {
-    return Math.random().toString(36).slice(2) + Date.now().toString(36);
+    const bytes = new Uint8Array(16);
+    crypto.getRandomValues(bytes);
+    return Array.from(bytes, b => b.toString(16).padStart(2, '0')).join('');
   }
 
   // Émetteur d'événements minimal, réutilisé par host et join.
@@ -149,7 +151,7 @@ window.SFMultiplayer = (function () {
         clientToPlayer.set(clientId, playerId);
         events.emit('playerRejoined', { playerId, name: player.name });
       } else {
-        if (countConnected() >= MAX_PLAYERS) {
+        if (1 + countConnected() >= MAX_PLAYERS) { // +1 : l'hôte occupe une place
           sendToClient(clientId, { type: 'full' });
           return;
         }
@@ -404,43 +406,41 @@ window.SFMultiplayer = (function () {
 
     function getClockOffset() { return clockOffset; }
 
-    function findHostViaBroadcast(code) {
-      return new Promise(async (resolve, reject) => {
-        const Udp = plugins().UdpSocket;
-        const { socketId } = await Udp.create({ properties: {} });
-        udpSocketId = socketId;
+    // Écoute le broadcast de l'hôte sur BROADCAST_PORT jusqu'à trouver le bon
+    // code (ou DISCOVERY_TIMEOUT_MS). Toute erreur du plugin (create/bind/
+    // addListener) rejette la promesse et libère le socket — plus de blocage
+    // silencieux sur « recherche… ».
+    async function findHostViaBroadcast(code) {
+      const Udp = plugins().UdpSocket;
+      const { socketId } = await Udp.create({ properties: {} });
+      udpSocketId = socketId;
 
-        const timeout = setTimeout(async () => {
-          cleanupListener();
-          try { await Udp.close({ socketId }); } catch (e) {}
-          udpSocketId = null;
-          reject(new Error('not_found'));
-        }, DISCOVERY_TIMEOUT_MS);
+      let handle = null;
+      let timer = null;
+      const cleanup = async () => {
+        clearTimeout(timer);
+        if (handle) { try { handle.remove(); } catch (e) {} handle = null; }
+        try { await Udp.close({ socketId }); } catch (e) {}
+        if (udpSocketId === socketId) udpSocketId = null;
+      };
 
-        let removeListener = null;
-        function cleanupListener() {
-          if (removeListener) { removeListener(); removeListener = null; }
-        }
-
-        const handle = await Udp.addListener('receive', async (event) => {
-          const msg = parseLine(fromBase64(event.buffer || ''));
-          if (!msg || msg.app !== 'ctd-multiplayer' || String(msg.code) !== String(code)) return;
-          clearTimeout(timeout);
-          cleanupListener();
-          try { await Udp.close({ socketId }); } catch (e) {}
-          udpSocketId = null;
-          resolve({ ipAddress: event.remoteAddress, port: msg.port });
+      try {
+        return await new Promise(async (resolve, reject) => {
+          timer = setTimeout(() => reject(new Error('not_found')), DISCOVERY_TIMEOUT_MS);
+          try {
+            handle = await Udp.addListener('receive', (event) => {
+              const msg = parseLine(fromBase64(event.buffer || ''));
+              if (!msg || msg.app !== 'ctd-multiplayer' || String(msg.code) !== String(code)) return;
+              resolve({ ipAddress: event.remoteAddress, port: msg.port });
+            });
+            await Udp.bind({ socketId, port: BROADCAST_PORT });
+          } catch (e) {
+            reject(e);
+          }
         });
-        removeListener = () => handle.remove();
-
-        try {
-          await Udp.bind({ socketId, port: BROADCAST_PORT });
-        } catch (e) {
-          clearTimeout(timeout);
-          cleanupListener();
-          reject(e);
-        }
-      });
+      } finally {
+        await cleanup();
+      }
     }
 
     async function connect({ code, name }) {
@@ -448,16 +448,36 @@ window.SFMultiplayer = (function () {
       attachListeners();
       const { ipAddress, port } = await findHostViaBroadcast(code);
       await plugins().TcpSocketManager.connectToServer({ ipAddress, port });
-      await send('join', { name, rejoin: token || undefined });
 
-      const data = await new Promise((resolve, reject) => {
-        joinTimeoutHandle = setTimeout(() => reject(new Error('timeout')), 5000);
-        const off = events.on('connected', (data) => {
+      // On s'abonne avant d'envoyer 'join' : sur un réseau rapide, 'welcome'
+      // peut arriver avant que send() ne rende la main.
+      let offConnected = () => {};
+      let offError = () => {};
+      const off = () => { offConnected(); offError(); };
+      const welcome = new Promise((resolve, reject) => {
+        joinTimeoutHandle = setTimeout(() => { off(); reject(new Error('timeout')); }, 5000);
+        offConnected = events.on('connected', (d) => {
           clearTimeout(joinTimeoutHandle);
           off();
-          resolve(data);
+          resolve(d);
+        });
+        // Partie pleine : l'hôte répond 'full' au lieu de 'welcome' — on le
+        // remonte tout de suite (multiplayer.html affiche errFull sur message 'full').
+        offError = events.on('error', ({ reason }) => {
+          clearTimeout(joinTimeoutHandle);
+          off();
+          reject(new Error(reason || 'error'));
         });
       });
+      welcome.catch(() => {}); // évite un « unhandled rejection » si send() échoue avant l'await
+      try {
+        await send('join', { name, rejoin: token || undefined });
+      } catch (e) {
+        clearTimeout(joinTimeoutHandle);
+        off();
+        throw e;
+      }
+      const data = await welcome;
       await syncClock();
       return data;
     }

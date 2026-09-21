@@ -2983,6 +2983,7 @@ function mpBootstrap() {
         mpRegisterVote(playerId, payload.choiceIdx);
       }
     });
+    SFMultiplayer.host.on('playerLeft', () => { if (mpVoteMap.size) mpCheckAllVoted(); else mpUpdateVoteProgressUI(); });
   } else if (MP_MODE === 'join') {
     SFMultiplayer.join.hydrate(session);
     SFMultiplayer.join.on('message', ({ type, payload }) => {
@@ -3095,10 +3096,21 @@ function mpResetVotes() {
   mpUpdateVoteProgressUI();
 }
 
+// Retire les votes des joueurs qui ne sont plus connectés : sans ça, un joueur
+// qui vote puis perd sa connexion resterait compté et ferait clore le vote
+// avant que tous les autres aient voté.
+function mpPruneVotes() {
+  const connectedIds = new Set(SFMultiplayer.host.getPlayers().filter(p => p.connected).map(p => p.id));
+  mpVoteMap.forEach((_, voterId) => {
+    if (voterId !== '__host__' && !connectedIds.has(voterId)) mpVoteMap.delete(voterId);
+  });
+}
+
 function mpUpdateVoteProgressUI() {
   const el = document.getElementById('mp-vote-progress');
   const textEl = document.getElementById('mp-vote-progress-text');
   if (!el || !textEl || MP_MODE !== 'host') return;
+  mpPruneVotes();
   const connectedPlayers = SFMultiplayer.host.getPlayers().filter(p => p.connected).length;
   const total = 1 + connectedPlayers;
   textEl.textContent = gt('mpVotesProgress').replace('{n}', mpVoteMap.size).replace('{total}', total);
@@ -3111,11 +3123,18 @@ function mpRegisterVote(voterId, choiceIndex) {
   if (!choices[choiceIndex]) return false; // index de choix invalide, on ignore
 
   mpVoteMap.set(voterId, choiceIndex);
-  mpUpdateVoteProgressUI();
+  return mpCheckAllVoted();
+}
 
+// Vote clos dès que tous les joueurs connectés (hôte compris) ont voté.
+// Rappelée aussi quand un joueur part : les restants peuvent déjà avoir tous voté.
+function mpCheckAllVoted() {
+  if (MP_MODE !== 'host') return false;
+  mpPruneVotes();
+  mpUpdateVoteProgressUI();
   const connectedPlayers = SFMultiplayer.host.getPlayers().filter(p => p.connected).length;
   const totalExpected = 1 + connectedPlayers; // hôte + joueurs connectés
-  if (mpVoteMap.size >= totalExpected) {
+  if (mpVoteMap.size > 0 && mpVoteMap.size >= totalExpected) {
     stopChoiceTimer();
     mpResolveVotes();
     return true;
