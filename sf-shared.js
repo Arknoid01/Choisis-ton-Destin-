@@ -240,6 +240,51 @@ window.SFShared = (function () {
     return result;
   }
 
+  /** Histoires terminées : liste persistée dans les stats + sauvegardes ayant atteint une fin (anciennes versions) */
+  function getFinishedStories() {
+    const done = {};
+    try {
+      (readStats().finishedStories || []).forEach(f => { done[f] = true; });
+      for (let i = 0; i < localStorage.length; i++) {
+        const key = localStorage.key(i);
+        if (!key || !key.startsWith('sf_save_')) continue;
+        const data = JSON.parse(localStorage.getItem(key) || 'null');
+        if (data && data.storyFile && (data.reachedEnd === true || data.atEnd === true)) done[data.storyFile] = true;
+      }
+    } catch (e) {}
+    return done;
+  }
+
+  const DELETE_BM_CONFIRM = {
+    fr: 'Supprimer ce marque-page ? Ta progression sur cette histoire sera effacée.',
+    en: 'Delete this bookmark? Your progress on this story will be erased.',
+    es: '¿Eliminar este marcador? Tu progreso en esta historia se borrará.'
+  };
+
+  /** Supprime un marque-page et la sauvegarde associée (la fin déjà atteinte reste comptée comme terminée) */
+  function deleteBookmark(file) {
+    if (!file) return false;
+    if (!window.confirm(DELETE_BM_CONFIRM[currentLang()] || DELETE_BM_CONFIRM.fr)) return false;
+    try {
+      const key = 'sf_save_' + String(file).replace(/[^a-z0-9]/gi, '_');
+      const stats = readStats();
+      if (getFinishedStories()[file]) {
+        stats.finishedStories = stats.finishedStories || [];
+        if (!stats.finishedStories.includes(file)) stats.finishedStories.push(file);
+        writeStats(stats);
+      }
+      localStorage.removeItem(key);
+      const list = JSON.parse(localStorage.getItem('sf_bookmarks') || '[]')
+        .filter(b => b.storyFile !== file);
+      localStorage.setItem('sf_bookmarks', JSON.stringify(list));
+      return true;
+    } catch (e) { return false; }
+  }
+
+  function isStoryFinished(file) {
+    return !!(file && getFinishedStories()[file]);
+  }
+
   migrateStoriesFinishedCount();
 
   const BACKUP_VERSION = 1;
@@ -350,6 +395,9 @@ window.SFShared = (function () {
     escHtml: esc,
     sha256,
     getStoriesFinishedCount,
+    getFinishedStories,
+    isStoryFinished,
+    deleteBookmark,
     getEndingsFoundCount,
     hasCompletedStoryOrEnding,
     hasEndingReachedInSaves,
