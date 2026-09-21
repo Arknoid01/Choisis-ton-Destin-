@@ -247,6 +247,7 @@ body {
   color: var(--text); margin-bottom: 32px;
   font-weight: 300;
 }
+.para-gap { display:block; height:.6em; }
 .scene-text em {
   color: var(--accent); font-style: normal; font-weight: 500;
 }
@@ -1421,6 +1422,8 @@ function goToScene(id, choiceText, externalStory) {
       || localStorage.getItem('sf_game_file') || '';
     const pack = story.pack || (story.kids ? 'kids' : 'free');
     trackStats('story_finish', {
+      file: storyFile,
+      endId: scene.id || currentId,
       kids: !!story.kids,
       community: /gare_regret|usine_a_trombones/i.test(storyFile),
       dlc: pack !== 'free' && pack !== 'kids'
@@ -2034,8 +2037,13 @@ function typewrite(html, container, onDone, narratorMode = false) {
     container.innerHTML = displayed + '<span class="cursor"></span>';
 
     // Auto-scroll pour suivre le texte
+    // (on ne descend que si le curseur sort de l'écran — plus de saut vers le bas de page)
     const scrollArea = document.getElementById('scroll-area');
-    if (scrollArea) scrollArea.scrollTop = scrollArea.scrollHeight;
+    const cursor = container.querySelector('.cursor');
+    if (scrollArea && cursor) {
+      const overflow = cursor.getBoundingClientRect().bottom - (scrollArea.getBoundingClientRect().bottom - 90);
+      if (overflow > 0) scrollArea.scrollTo({ top: scrollArea.scrollTop + overflow, behavior: 'instant' });
+    }
 
     // Pause plus longue sur ponctuation
     const ch = displayed[displayed.length - 1];
@@ -2387,9 +2395,15 @@ function toggleBookmarkList() {
       <div onclick="resumeBookmark('${bm.storyFile}')"
         style="padding:8px 4px;border-bottom:1px solid var(--border);cursor:pointer;transition:background .15s"
         onmouseover="this.style.background='var(--bg3)'" onmouseout="this.style.background=''">
-        <div style="font-family:'Cinzel',serif;font-size:12px;color:var(--text)">${bm.storyName}</div>
-        <div style="font-family:'DM Mono',monospace;font-size:10px;color:var(--text3);margin-top:2px">
-          📍 ${bm.sceneTitle} · ${new Date(bm.savedAt).toLocaleDateString()}
+        <div style="display:flex;align-items:flex-start;gap:8px">
+          <div style="flex:1;min-width:0">
+            <div style="font-family:'Cinzel',serif;font-size:12px;color:var(--text)">${escHtml(bm.storyName)}</div>
+            <div style="font-family:'DM Mono',monospace;font-size:10px;color:var(--text3);margin-top:2px">
+              📍 ${escHtml(bm.sceneTitle)} · ${new Date(bm.savedAt).toLocaleDateString()}
+            </div>
+          </div>
+          <button type="button" aria-label="✕" onclick="event.stopPropagation();removeBookmark('${bm.storyFile}')"
+            style="background:none;border:1px solid var(--border);color:var(--text3);border-radius:6px;width:26px;height:26px;cursor:pointer;flex-shrink:0">✕</button>
         </div>
       </div>`).join('');
   }
@@ -2397,6 +2411,13 @@ function toggleBookmarkList() {
   // Fermer l'historique si ouvert
   historyOpen = false;
   document.getElementById('history-log').classList.remove('open');
+}
+
+function removeBookmark(file) {
+  if (!window.SFShared || !SFShared.deleteBookmark(file)) return;
+  // Si c'est l'histoire en cours, le marque-page disparaît aussi de la pastille du bouton flottant
+  bookmarkListOpen = false;
+  toggleBookmarkList();
 }
 
 function resumeBookmark(file) {
@@ -2590,19 +2611,31 @@ function trackStats(event, data = {}) {
       case 'choice_made':
         s.choicesMade++;
         break;
-      case 'story_finish':
-        s.storiesFinished++;
-        s.endingsFound++;
+      case 'story_finish': {
+        // Relancer une histoire déjà terminée ne doit pas regonfler les stats
+        if (!s.finishedStories) s.finishedStories = [];
+        if (!s.endingIds) s.endingIds = [];
+        const already = !!data.file && (s.finishedStories.includes(data.file)
+          || (window.SFShared && SFShared.isStoryFinished(data.file)));
+        const endKey = data.file ? data.file + '#' + (data.endId || '') : '';
+        if (data.file && !s.finishedStories.includes(data.file)) s.finishedStories.push(data.file);
+        if (!already) s.storiesFinished++;
+        if (!endKey || !s.endingIds.includes(endKey)) {
+          s.endingsFound++;
+          if (endKey) s.endingIds.push(endKey);
+        }
         try { localStorage.setItem('sf_stories_finished', String(s.storiesFinished)); } catch (e) {}
         if (s._storyStartTime) {
           const mins = Math.round((Date.now() - s._storyStartTime) / 60000);
           s.minutesSpent += mins;
-          if (mins < 5) s.hadFastRun = true;
+          if (mins < 5 && !already) s.hadFastRun = true;
+          s._storyStartTime = 0;
         }
         if (data.kids) s.hadKidsStory = true;
         if (data.community) s.hadCommunityStory = true;
         if (data.dlc) s.hadDlcStory = true;
         break;
+      }
     }
     localStorage.setItem('sf_player_stats', JSON.stringify(s));
   } catch(e) {}
@@ -2799,6 +2832,7 @@ function formatText(text) {
     .replace(/\{\{player\}\}/g, `<em>${escHtml(name)}</em>`)
     .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
     .replace(/\*(.+?)\*/g,     '<em>$1</em>')
+    .replace(/\n{2,}/g, '<span class="para-gap"></span>')
     .replace(/\n/g, '<br>');
 }
 
