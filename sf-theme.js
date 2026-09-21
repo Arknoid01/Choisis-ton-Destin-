@@ -6,7 +6,7 @@
  *  Ex. après Halloween → 'default'
  *  Ex. octobre 2027   → 'halloween'
  */
-window.SF_THEME = 'halloween';
+window.SF_THEME = 'default';
 window.SF_HOME_THEME = window.SF_THEME;
 
 window.SFTheme = {

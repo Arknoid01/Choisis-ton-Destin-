@@ -1,0 +1,33 @@
+---
+description: Release 1.9 — libre sur la branche 1.9 ; merge/import vers main interdit sans autorisation
+alwaysApply: true
+---
+
+# Branche release `1.9`
+
+La branche **`1.9`** prépare la version 1.9 (post-Halloween, thème normal). **`main`** reste la branche de la prochaine MàJ courante (v1.6 affichée).
+
+## Autorisé sans demander
+
+- Travailler sur **`1.9`** : checkout, commits, push, PR **vers** `1.9`
+- Créer des branches feature **depuis `1.9`** (ex. `cursor/<nom>-0aad` → PR base `1.9`)
+- Développer contenu, fixes et version **v1.9** uniquement sur la branche `1.9`
+
+## Interdit sans autorisation explicite du propriétaire
+
+Ne **jamais**, sauf si le propriétaire écrit clairement qu'il **autorise le merge / l'import de la 1.9 vers main** (ex. « autorise le merge de la 1.9 sur main ») :
+
+- Merger **`1.9` → `main`** (PR ou local)
+- Cherry-pick, rebase ou copier des commits de **`1.9` vers `main`**
+- Porter du code ou la version **v1.9** sur **`main`** avant la release officielle
+- Ouvrir une PR **`1.9` → `main`** sans cette autorisation
+
+## Branches selon le contexte
+
+- MàJ courante / correctifs généraux → **`main`**
+- Release Halloween (thème orange, concours actif) → **`1.8`**
+- Post-Halloween / thème normal → **`1.9`** (ou branche depuis `1.9`)
+
+## Release (propriétaire)
+
+Quand la 1.9 est prête : PR **`1.9` → `main`** + label GitHub **`release-1.9-authorized`**, après phrase explicite du propriétaire.
