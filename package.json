@@ -6,7 +6,8 @@
   "scripts": {
     "test": "node scripts/catalog-smoke.mjs",
     "test:catalog": "node scripts/catalog-smoke.mjs",
-    "govern:new": "node scripts/govern-new-flags.mjs && node scripts/catalog-smoke.mjs"
+    "govern:new": "node scripts/govern-new-flags.mjs && node scripts/catalog-smoke.mjs",
+    "test:e2e": "node scripts/e2e.mjs"
   },
   "repository": {
     "type": "git",
@@ -18,5 +19,8 @@
   "bugs": {
     "url": "https://github.com/Arknoid01/Choisis-ton-Destin-/issues"
   },
-  "homepage": "https://github.com/Arknoid01/Choisis-ton-Destin-#readme"
+  "homepage": "https://github.com/Arknoid01/Choisis-ton-Destin-#readme",
+  "devDependencies": {
+    "playwright-core": "^1.63.0"
+  }
 }
