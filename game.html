@@ -615,6 +615,13 @@ body {
 }
 #loading.fade { opacity: 0; pointer-events: none; }
 
+/* Studio logo */
+.intro-logo {
+  width:96px; height:auto; margin-bottom:14px;
+  opacity:0; animation:intro-rise .8s ease forwards;
+  animation-delay:.2s;
+  filter: drop-shadow(0 0 18px rgba(120,90,255,0.35));
+}
 /* Studio line */
 .intro-studio {
   font-family:'Cinzel',serif; font-size:13px;
@@ -647,8 +654,8 @@ body {
   50%  { opacity:1; color:rgba(255,255,255,0.9); transform:translateY(0); }
   100% { opacity:1; color:rgba(255,255,255,0.85); }
 }
-/* Pegasus — masqué, intégré dans studio */
-.intro-pegasus { display:none; }
+/* Marque — masqué, intégré dans studio */
+.intro-brand { display:none; }
 @keyframes intro-rise {
   from { opacity:0; transform:translateY(4px); }
   to   { opacity:1; transform:translateY(0); }
@@ -996,10 +1003,11 @@ body {
 
 <!-- LOADING -->
 <div id="loading">
-  <div class="intro-studio" id="intro-studio">Une production PegasusCorp</div>
+  <img class="intro-logo" src="assets/images/philia-emblem.png" alt="Philia Interactive" onerror="this.style.display='none'">
+  <div class="intro-studio" id="intro-studio">Une production Philia Interactive</div>
   <div class="intro-divider"></div>
   <div class="intro-title" id="intro-title">…</div>
-  <div class="intro-pegasus" id="intro-pegasus" style="display:none"></div>
+  <div class="intro-brand" id="intro-brand" style="display:none"></div>
   <div class="loading-dots">
     <div class="loading-dot"></div>
     <div class="loading-dot"></div>
@@ -1245,11 +1253,11 @@ async function loadStory() {
   const lang = localStorage.getItem('sf_lang') || 'fr';
   const introTitle  = document.getElementById('intro-title');
   const introStudio = document.getElementById('intro-studio');
-  const introPegasus = document.getElementById('intro-pegasus');
+  const introBrand = document.getElementById('intro-brand');
   const introDivider = document.querySelector('.intro-divider');
 
   // Reset animations pour que ça rejoue à chaque fois
-  [introTitle, introStudio, introPegasus, introDivider].forEach(el => {
+  [document.querySelector('.intro-logo'), introTitle, introStudio, introBrand, introDivider].forEach(el => {
     if (!el) return;
     el.style.animation = 'none';
     el.style.opacity = '0';
@@ -1259,8 +1267,8 @@ async function loadStory() {
   });
 
   if (introTitle)   introTitle.textContent  = story.name || '';
-  if (introStudio)  introStudio.textContent = {fr:'Une production PegasusCorp',en:'A PegasusCorp Production',es:'Una producción PegasusCorp'}[lang]||'Une production PegasusCorp';
-  if (introPegasus) introPegasus.textContent = 'PegasusCorp';
+  if (introStudio)  introStudio.textContent = {fr:'Une production Philia Interactive',en:'A Philia Interactive Production',es:'Una producción Philia Interactive'}[lang]||'Une production Philia Interactive';
+  if (introBrand) introBrand.textContent = 'Philia Interactive';
 
   // Attendre 4.5s pour laisser l'animation se jouer, puis fondu
   setTimeout(() => {
@@ -2794,7 +2802,7 @@ function restartGame() {
     loading.style.opacity = '1';
     loading.classList.remove('fade');
     // Reset animations
-    const els = loading.querySelectorAll('.intro-studio,.intro-title,.intro-pegasus,.intro-divider');
+    const els = loading.querySelectorAll('.intro-logo,.intro-studio,.intro-title,.intro-brand,.intro-divider');
     els.forEach(el => {
       el.style.animation = 'none';
       el.style.opacity = '0';
