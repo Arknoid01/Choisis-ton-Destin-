@@ -600,19 +600,18 @@ body {
   color:var(--dimmer); letter-spacing:1px;
 }
 
-/* ── LOGO PEGASUS ── */
-#pegasus-logo {
+/* ── LOGO STUDIO ── */
+#studio-logo {
   position:fixed; bottom:12px; left:16px; z-index:10;
   opacity:0; animation:fade-up .4s ease forwards;
   animation-delay:.4s;
   display:flex; align-items:center; gap:6px;
 }
-#pegasus-logo img {
-  width:18px; height:18px;
-  filter:brightness(0) invert(1);
-  opacity:0.2;
+#studio-logo img {
+  width:auto; height:14px;
+  opacity:0.45;
 }
-#pegasus-logo span {
+#studio-logo span {
   font-family:'Lato',sans-serif; font-size:9px;
   letter-spacing:2px; color:var(--dimmer);
   text-transform:uppercase; opacity:0.6;
@@ -992,10 +991,10 @@ body {
 </div>
 <div class="version" id="app-version">v1.7</div>
 
-<!-- PEGASUS LOGO -->
-<div id="pegasus-logo">
-  <img src="Logo.png" alt="PegasusCorp" onerror="this.parentElement.style.display='none'">
-  <span>PegasusCorp</span>
+<!-- STUDIO LOGO -->
+<div id="studio-logo">
+  <img src="assets/images/philia-emblem.png" alt="Philia Interactive" onerror="this.parentElement.style.display='none'">
+  <span>Philia Interactive</span>
 </div>
 
 <!-- ── SUBMIT POPUP ── -->
@@ -1512,9 +1511,9 @@ function updateHomeStarterHint() {
 }
 
 function contactUs() {
-  const email = 'team.pegasuscorp@gmail.com';
+  const email = 'contact@philia-interactive.com';
   const subject = encodeURIComponent('Contact — Fableris');
-  const body = encodeURIComponent('Bonjour l\'équipe PegasusCorp,\n\n');
+  const body = encodeURIComponent('Bonjour l\'équipe Philia Interactive,\n\n');
   window.location.href = `mailto:${email}?subject=${subject}&body=${body}`;
 }
 
@@ -1721,7 +1720,7 @@ function initCanvas() {
 // soient censées être terminées (dernier délai 1.85s + 0.5s) pour ne pas
 // interrompre l'apparition en cascade et provoquer un clignotement.
 setTimeout(() => {
-  document.querySelectorAll('.ornament,.eyebrow,.main-title,.subtitle,.divider,#buttons-block,.btn-main,.footer,#pegasus-logo').forEach(el => {
+  document.querySelectorAll('.ornament,.eyebrow,.main-title,.subtitle,.divider,#buttons-block,.btn-main,.footer,#studio-logo').forEach(el => {
     if (getComputedStyle(el).opacity === '0') {
       el.style.opacity = '1';
       el.style.transform = 'translateY(0)';

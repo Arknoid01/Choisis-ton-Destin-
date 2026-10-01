@@ -1,6 +1,6 @@
 /* ══════════════════════════════════════════════════════════════
    SFBilling — achats intégrés Google Play (DLC non consommables)
-   Fableris / StoryForge — PegasusCorp
+   Fableris / StoryForge — Philia Interactive
 
    Dépendance : cordova-plugin-purchase v13 (CdvPurchase)
      npm i cordova-plugin-purchase
