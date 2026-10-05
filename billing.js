@@ -39,9 +39,9 @@ window.SFBilling = (function () {
 
   const FREE_PACKS        = ['free', 'kids'];
   // Packs sans histoires : visibles en « bientôt » mais pas à la vente.
-  const COMING_SOON_PACKS = ['neon', 'pirates', 'abysses', 'wilds'];
+  const COMING_SOON_PACKS = ['neon', 'pirates', 'wilds'];
   // Produits réellement créés et actifs dans la Play Console.
-  const PLAY_PRODUCT_PACKS = ['cinq_lames', 'cosmos'];
+  const PLAY_PRODUCT_PACKS = ['cinq_lames', 'cosmos', 'abysses'];
   const CACHE_KEY     = 'sf_unlocked_packs';
   const CODE_KEY      = 'sf_code_unlocks';
   const PRICE_KEY     = 'sf_pack_prices';
