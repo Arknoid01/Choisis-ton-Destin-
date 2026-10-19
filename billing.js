@@ -56,6 +56,7 @@ window.SFBilling = (function () {
   let configured  = false;  // produits enregistrés + écouteurs branchés
   let initPromise = null;
   let lastError   = null;
+  let fullSyncDone = false; // la resynchro qui peut REVERROUILLER ne tourne qu'au démarrage
   const listeners = [];     // callbacks appelés quand les droits changent
 
   // ── localStorage tolérant ────────────────────────────────────
@@ -115,20 +116,40 @@ window.SFBilling = (function () {
   }
 
   // ── Resynchronisation avec ce que Google Play dit vraiment ───
-  // On repart des achats réels : un remboursement ou une annulation
-  // doit pouvoir REVERROUILLER un pack. Les codes créateur, eux, sont
-  // conservés puisqu'ils ne dépendent pas de Google.
-  function syncFromStore() {
+  // Au démarrage (full), on repart des achats réels : un remboursement
+  // ou une annulation doit pouvoir REVERROUILLER un pack. Les codes
+  // créateur, eux, sont conservés puisqu'ils ne dépendent pas de Google.
+  //
+  // Ensuite, on ne fait plus qu'AJOUTER : après un achat, Google ne
+  // renvoie que le nouvel achat, et cordova-plugin-purchase (13.x) prend
+  // cette liste pour complète → il marque les autres DLC « annulés »
+  // jusqu'au prochain lancement (même restorePurchases() ne les rétablit
+  // pas). Une resynchro complète à ce moment-là reverrouillait tout.
+  function syncFromStore(full) {
     if (!store) return;
     const ownedFromPlay = PLAY_PRODUCT_PACKS.filter(packId => {
       const p = getProduct(PRODUCTS[packId]);
       return !!(p && p.owned);
     });
+    const base = full && !fullSyncDone ? [] : readCache();
+    if (full) fullSyncDone = true;
     writeJSON(CACHE_KEY, Array.from(new Set(
-      FREE_PACKS.concat(ownedFromPlay, readCodeUnlocks())
+      FREE_PACKS.concat(base, ownedFromPlay, readCodeUnlocks())
     )));
     cachePrices();
     notify();
+  }
+
+  // Google a confirmé la possession (ex. « article déjà possédé ») :
+  // on débloque tout de suite, la resynchro du prochain démarrage tranchera.
+  function markOwnedFromPlay(packId) {
+    writeCache(readCache().concat([packId]));
+    notify();
+  }
+
+  function isAlreadyOwnedError(err) {
+    const text = String((err && (err.message || err.code)) || '');
+    return /already.?owned/i.test(text);
   }
 
   // Mémorise les prix localisés renvoyés par Google (devise correcte
@@ -257,7 +278,7 @@ window.SFBilling = (function () {
           try { await withTimeout(store.update(), 10000); } catch (e) {}
         }
         ready = true;
-        syncFromStore();
+        syncFromStore(true);
         PLAY_PRODUCT_PACKS.forEach(packId => {
           const pid = PRODUCTS[packId];
           const p = getProduct(pid);
@@ -416,6 +437,12 @@ window.SFBilling = (function () {
       const err = await offer.order();
       // order() résout avec un IapError en cas d'échec, sinon undefined
       if (err) {
+        // Le cache local s'est désynchronisé mais Google sait que le pack
+        // est acheté : on le débloque au lieu d'afficher une erreur.
+        if (isAlreadyOwnedError(err)) {
+          markOwnedFromPlay(packId);
+          return { ok: true, reason: 'already_owned' };
+        }
         const cancelled = window.CdvPurchase && window.CdvPurchase.ErrorCode &&
           err.code === window.CdvPurchase.ErrorCode.PAYMENT_CANCELLED;
         if (!cancelled) lastError = err.message || String(err.code);
