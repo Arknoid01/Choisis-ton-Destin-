@@ -4,6 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>Choisis ton Destin</title>
+<script src="sf-theme.js"></script>
+<link rel="stylesheet" href="sf-theme.css">
 <script src="capacitor.js"></script>
 <!-- Preconnect pour accélérer Google Fonts -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -987,7 +989,7 @@ body {
 <div class="footer">
   <p class="footer-text" id="txt-footer">StoryForge • Romans interactifs</p>
 </div>
-<div class="version" id="app-version">v1.6</div>
+<div class="version" id="app-version">v1.8</div>
 
 <!-- STUDIO LOGO -->
 <div id="studio-logo">
@@ -1036,7 +1038,7 @@ body {
     <p class="submit-note" style="margin-top:6px">
       <a href="#" id="txt-submit-contest" onclick="event.preventDefault();closeSubmitPopup();SFCommunity.open();"
         style="color:var(--gold);text-decoration:none;border-bottom:1px solid rgba(200,169,110,0.35)">
-        Voir le concours en cours →
+        Voir la communauté →
       </a>
     </p>
   </div>
@@ -1137,6 +1139,49 @@ body {
 <script src="onboarding.js"></script>
 <script>
 // ══════════════════════════════════════════════
+// THÈME SAISONNIER (interrupteur : sf-theme.js → SF_THEME)
+// ══════════════════════════════════════════════
+function getHomeTheme() {
+  return window.SFTheme ? SFTheme.get() : (window.SF_THEME || window.SF_HOME_THEME || 'default');
+}
+
+function applyHomeTheme() {
+  if (window.SFTheme) SFTheme.apply();
+}
+
+const HOME_THEME_COPY = {
+  halloween: {
+    fr: {
+      eyebrow:  '🎃 Frissons d\'Halloween',
+      subtitle: 'Des histoires à frissons — découvrez la gagnante du concours',
+      btnStartIcon: '🎃',
+    },
+    en: {
+      eyebrow:  '🎃 Halloween chills',
+      subtitle: 'Spooky stories — meet the contest winner',
+      btnStartIcon: '🎃',
+    },
+    es: {
+      eyebrow:  '🎃 Escalofríos de Halloween',
+      subtitle: 'Historias de miedo — descubre la ganadora del concurso',
+      btnStartIcon: '🎃',
+    },
+  },
+};
+
+function getHomeSparkPalette() {
+  return window.SFTheme ? SFTheme.sparkPalette() : {
+    primary: { core:'rgba(232,212,160,0.95)', glow:'rgba(200,169,110,0.65)' },
+    ai:      { core:'rgba(196,184,255,0.92)', glow:'rgba(124,109,250,0.55)' },
+    default: { core:'rgba(200,169,110,0.88)', glow:'rgba(200,169,110,0.55)' },
+  };
+}
+
+function getHomeStarColor(alpha) {
+  return window.SFTheme ? SFTheme.starColor(alpha) : `rgba(200,169,110,${alpha})`;
+}
+
+// ══════════════════════════════════════════════
 // TRANSLATIONS
 // ══════════════════════════════════════════════
 const LANG = {
@@ -1212,7 +1257,7 @@ const LANG = {
     submitCancel:   'Annuler',
     submitAi:       '✦ Créer avec l\'IA',
     submitNote:     'Ouvrez StoryForge, écrivez votre histoire, remplissez le formulaire d\'envoi — le JSON part en un clic, sans export manuel.',
-    submitContest:  'Voir le concours en cours →',
+    submitContest:  'Voir la communauté →',
   },
   en: {
     eyebrow:        'An adventure awaits',
@@ -1286,7 +1331,7 @@ const LANG = {
     submitCancel:   'Cancel',
     submitAi:       '✦ Create with AI',
     submitNote:     'Open StoryForge, write your story, fill in the send form — your JSON goes out in one tap, no manual export.',
-    submitContest:  'See the current contest →',
+    submitContest:  'See the community →',
   },
   es: {
     eyebrow:        'Una aventura te espera',
@@ -1360,7 +1405,7 @@ const LANG = {
     submitCancel:   'Cancelar',
     submitAi:       '✦ Crear con IA',
     submitNote:     'Abre StoryForge, escribe tu historia, rellena el formulario de envío — el JSON sale en un clic, sin exportar manualmente.',
-    submitContest:  'Ver el concurso actual →',
+    submitContest:  'Ver la comunidad →',
   }
 };
 
@@ -1415,6 +1460,16 @@ function applyLang() {
   set('txt-close-options',  t.closeOptions);
   set('txt-opt-section-help', t.optSectionHelp);
   set('txt-opt-replay-desc', t.optReplayDesc);
+
+  const seasonal = HOME_THEME_COPY[getHomeTheme()]?.[currentLang];
+  const startIcon = document.querySelector('#btn-start .menu-tile-icon');
+  if (seasonal) {
+    if (seasonal.eyebrow)  set('txt-eyebrow',  seasonal.eyebrow);
+    if (seasonal.subtitle) set('txt-subtitle', seasonal.subtitle);
+    if (startIcon && seasonal.btnStartIcon) startIcon.textContent = seasonal.btnStartIcon;
+  } else if (startIcon) {
+    startIcon.textContent = '✦';
+  }
   set('txt-opt-replay-tips', t.optReplayTips);
   set('txt-opt-section-device', t.optSectionDevice);
   set('txt-opt-device-desc', t.optDeviceDesc, true);
@@ -1547,11 +1602,7 @@ function loadOptions() {
 // HOME BUTTON — click sparks (style fond étoilé)
 // ══════════════════════════════════════════════
 function spawnHomeClickSparks(clientX, clientY, variant) {
-  const palette = {
-    primary: { core:'rgba(232,212,160,0.95)', glow:'rgba(200,169,110,0.65)' },
-    ai:      { core:'rgba(196,184,255,0.92)', glow:'rgba(124,109,250,0.55)' },
-    default: { core:'rgba(200,169,110,0.88)', glow:'rgba(200,169,110,0.55)' }
-  };
+  const palette = getHomeSparkPalette();
   const colors = palette[variant] || palette.default;
   const count = window.innerWidth < 480 ? 8 : 12;
   for (let i = 0; i < count; i++) {
@@ -1649,7 +1700,7 @@ function initCanvas() {
       const twinkle = s.a * (0.6 + 0.4 * Math.sin(frame * s.speed * 0.05 + s.phase));
       ctx.beginPath();
       ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
-      ctx.fillStyle = `rgba(200,169,110,${twinkle})`;
+      ctx.fillStyle = getHomeStarColor(twinkle);
       ctx.fill();
     });
     frame++;
@@ -1841,7 +1892,7 @@ function showChangePinMode() {
 // Généré par generate_codes.py — remplacer ce bloc après chaque génération
 const FABLERIS_CODES = {
   "a4d62a1f34378c7ed6cb718ba54c9521a209ce86ce5506a08d43cd45d4088c5c": {"unlocks": ["cinq_lames"], "label": "DLC Les Cinq Lames 🗡️"},
-  "6a3426c553a8eaaf1930374e26a1ab26b5e5842dd35ea48969d41f303c587ed5": {"unlocks": ["creator", "cosmos", "cinq_lames", "portals"], "label": "Accès Créateur complet ✦"},
+  "6a3426c553a8eaaf1930374e26a1ab26b5e5842dd35ea48969d41f303c587ed5": {"unlocks": ["creator", "cosmos", "cinq_lames", "abysses", "portals"], "label": "Accès Créateur complet ✦"},
   "1db8a13a5f9658c1531e32d8b0c04806feaa2426e389fb71228e750b9e7e576a": {"unlocks": ["portals"], "label": "Portails inter-histoires 🔗"},
   "4cbe19716b1aa73a67dc4b28c34391879b503259fc76852082b4dafcf0de85b2": {"unlocks": ["cosmos", "portals"], "label": "Pack Cosmos 🚀"},
   "620e2b90e7dcf3112340c48e2a51a7041fbf090e89211d961bf987917d00fe38": {"unlocks": ["all"], "label": "Accès Ultime — Tout débloqué 👑"}
@@ -1863,7 +1914,7 @@ function redeemCode(code) {
   const unlocked = JSON.parse(localStorage.getItem('sf_unlocked_packs') || '["free","kids"]');
   entry.unlocks.forEach(u => {
     if (u === 'all') {
-      ['portals','creator','cinq_lames','cosmos','neon','pirates','fantasy','wilds'].forEach(p => {
+      ['portals','creator','cinq_lames','cosmos','neon','pirates','abysses','wilds'].forEach(p => {
         if (!unlocked.includes(p)) unlocked.push(p);
       });
     } else if (!unlocked.includes(u)) {
@@ -1923,6 +1974,7 @@ async function submitCode() {
   }
 }
 (async function init() {
+  applyHomeTheme();
   loadOptions();
   setLang(currentLang);
   // Lancer l'onboarding tout de suite — ne pas attendre games.json

@@ -1,0 +1,127 @@
+/* Thème saisonnier global — interrupteur : sf-theme.js → SF_THEME */
+
+html[data-sf-theme="halloween"],
+html[data-home-theme="halloween"] {
+  --gold:    #e8934a;
+  --gold2:   #ffc875;
+  --gold3:   #a85518;
+  --cream:   #f2ebe0;
+  --text:    #f2ebe0;
+  --dim:     #9a8070;
+  --dimmer:  #6a5548;
+  --bg:      #0a080c;
+  --bg2:     #140f16;
+  --bg3:     #1c1520;
+  --bg4:     #241828;
+  --border:  #3d2838;
+  --glow:    rgba(232,120,40,0.2);
+  --accent:  #e8934a;
+  --glow-top:    rgba(180,90,30,0.08);
+  --glow-bottom: rgba(80,30,100,0.06);
+}
+
+html[data-sf-theme="halloween"],
+html[data-sf-theme="halloween"] body,
+html[data-home-theme="halloween"],
+html[data-home-theme="halloween"] body {
+  background: var(--bg);
+  color: var(--cream, var(--text, #f2ebe0));
+}
+
+html[data-sf-theme="halloween"] #topbar,
+html[data-home-theme="halloween"] #topbar {
+  background: rgba(10,8,12,0.92);
+  border-bottom-color: var(--border);
+}
+
+html[data-sf-theme="halloween"] .bg-gradient,
+html[data-home-theme="halloween"] .bg-gradient {
+  background:
+    radial-gradient(ellipse 55% 45% at 88% 8%, rgba(180,90,30,0.14) 0%, transparent 55%),
+    radial-gradient(ellipse 70% 50% at 12% 92%, rgba(80,30,100,0.12) 0%, transparent 60%),
+    radial-gradient(ellipse 90% 55% at 50% -10%, rgba(120,50,140,0.08) 0%, transparent 65%),
+    linear-gradient(180deg, #0a080c 0%, #120e14 45%, #0a080c 100%);
+}
+
+/* Lune + brume (toutes pages) */
+html[data-sf-theme="halloween"]::before,
+html[data-home-theme="halloween"]::before {
+  content: '';
+  position: fixed;
+  top: calc(12px + var(--android-safe-area-inset-top, env(safe-area-inset-top, 0px)));
+  right: 14px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  z-index: 2;
+  pointer-events: none;
+  background: radial-gradient(circle at 35% 35%, #ffe8b0, #e8934a 45%, #8a4010 100%);
+  box-shadow: 0 0 20px rgba(255,160,60,0.3), 0 0 48px rgba(120,40,140,0.12);
+  opacity: 0.5;
+  animation: sf-halloween-moon-pulse 4s ease-in-out infinite;
+}
+
+html[data-sf-theme="halloween"]::after,
+html[data-home-theme="halloween"]::after {
+  content: '';
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 24vh;
+  z-index: 1;
+  pointer-events: none;
+  background: linear-gradient(180deg, transparent, rgba(40,20,50,0.1) 40%, rgba(20,10,30,0.2));
+}
+
+@keyframes sf-halloween-moon-pulse {
+  0%, 100% { opacity: 0.45; transform: scale(1); }
+  50%      { opacity: 0.65; transform: scale(1.04); }
+}
+
+/* Accueil (index.html) */
+html[data-sf-theme="halloween"] .particle,
+html[data-home-theme="halloween"] .particle {
+  background: #e8934a;
+  box-shadow: 0 0 8px rgba(255,130,50,0.45);
+}
+
+html[data-sf-theme="halloween"] .ornament svg line,
+html[data-home-theme="halloween"] .ornament svg line { stroke: #c87830; }
+
+html[data-sf-theme="halloween"] .ornament svg polygon,
+html[data-home-theme="halloween"] .ornament svg polygon { fill: #e8934a; }
+
+html[data-sf-theme="halloween"] .main-title,
+html[data-home-theme="halloween"] .main-title {
+  text-shadow: 0 0 50px rgba(200,100,30,0.25), 0 2px 4px rgba(0,0,0,0.85);
+}
+
+html[data-sf-theme="halloween"] .main-title em,
+html[data-home-theme="halloween"] .main-title em { color: #ff9f4a; }
+
+html[data-sf-theme="halloween"] .divider-gem,
+html[data-home-theme="halloween"] .divider-gem {
+  background: #e8934a;
+  box-shadow: 0 0 6px rgba(255,140,60,0.35);
+}
+
+html[data-sf-theme="halloween"] .btn-main.primary,
+html[data-home-theme="halloween"] .btn-main.primary {
+  border-color: rgba(232,120,40,0.45);
+  background: linear-gradient(135deg, rgba(180,70,20,0.22), rgba(80,30,100,0.12));
+}
+
+html[data-sf-theme="halloween"] .btn-main.primary .menu-tile-icon,
+html[data-home-theme="halloween"] .btn-main.primary .menu-tile-icon {
+  background: rgba(232,120,40,0.15);
+  border-color: rgba(232,120,40,0.35);
+}
+
+html[data-sf-theme="halloween"] .menu-panel,
+html[data-home-theme="halloween"] .menu-panel {
+  border-color: color-mix(in srgb, #e8934a 22%, var(--border));
+}
+
+html[data-sf-theme="halloween"] .home-halloween-decor,
+html[data-home-theme="halloween"] .home-halloween-decor { display: none; }

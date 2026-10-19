@@ -1,6 +1,6 @@
 # Fableris — Branches, mises à jour et contenu
 
-> **Dernière mise à jour :** 31 août 2026  
+> **Dernière mise à jour :** 19 octobre 2026 — `main` = v1.8 (fusion de `1.8`)  
 > Référence pour savoir **ce qui est déjà dans chaque branche** et **ce qui arrive** dans les prochaines MàJ.
 
 ---
@@ -9,16 +9,14 @@
 
 | Branche | Version | Thème (`sf-theme.js`) | Statut | Cible publication |
 |---------|---------|------------------------|--------|-------------------|
-| **`main`** | v1.6 | `default` | ✅ En prod (Play / Pages) | Base Play Store — 1 sept. 2026 |
-| **`1.7`** | v1.7 | `halloween`* | ✅ Prête (release contenu) | Automne 2026 |
-| **`1.8`** | v1.8 | `halloween` | ✅ Prête (saison Halloween) | ~oct. 2026 |
-| **`1.9`** | v1.9 | `default` | ✅ Prête (post-Halloween) | ~10–11 nov. 2026 |
+| **`main`** | v1.8 | `halloween` | ✅ En prod (Play / Pages) — `1.8` fusionnée le 19 oct. 2026 | Envoyée sur Play le 19 oct. 2026 |
+| **`1.7`** | v1.7 | `halloween` | ✅ Prête (lancement Halloween) | Automne 2026 |
+| **`1.8`** | v1.8 | `halloween` | ✅ Prête (résultat du concours) | Après le 27 oct. 2026 |
+| **`1.9`** | v1.9 | `default` | ✅ Prête (retour thème normal) | Juste après Halloween |
 | **`1.9.5`** | v1.9.5 | `default` | 🚧 En dev (multijoueur bêta) | Novembre 2026 |
 | **`2.0`** | v2.0 | `christmas` | 🚧 En cours (contenu Noël à finir) | 1er déc. 2026 |
 | **`2.1`** | v2.1 | `christmas` | 📋 Planifiée | ~20 déc. 2026 |
 | **`2.2`** | v2.2 | `default` | 📋 Planifiée | 3–4 jan. 2027 |
-
-\* Sur `1.7`, le thème Halloween sert au dev ; la **MàJ Halloween officielle** est la branche **`1.8`**.
 
 ### Légende
 
@@ -35,9 +33,9 @@
 
 ```
 1 sept 2026     main v1.6      Base Play (Cosmos, Gardiens, Horloger, communauté…)
-Automne 2026    1.7 v1.7       Les Profondeurs (7 ep) + Cimetière + actu DLC
-~Oct 2026       1.8 v1.8       Halloween thème + concours + Boo (Pages → 1.8)
-~10-11 nov      1.9 v1.9       Thème normal, concours Halloween clos
+Automne 2026    1.7 v1.7       Lancement Halloween : thème + concours + Cimetière (+ Profondeurs)
+Après 27 oct    1.8 v1.8       Résultat du concours : Boo gagnante + Boo au catalogue
+Juste après     1.9 v1.9       Thème normal + concours fermé (aucun nouveau contenu)
 Nov 2026        1.9.5 v1.9.5   Multijoueur local wifi (bêta, app native)
 1er déc         2.0 v2.0       Noël thème + concours + histoires Noël
 ~20 déc         2.1 v2.1       Lauréat concours Noël
@@ -83,50 +81,46 @@ Nov 2026        1.9.5 v1.9.5   Multijoueur local wifi (bêta, app native)
 
 ---
 
-## `1.7` — v1.7 · Les Profondeurs
+## `1.7` — v1.7 · Lancement Halloween
 
-**Thème :** `halloween` (dev) · **Cible :** automne 2026
+**Thème :** `halloween` · **Cible :** automne 2026
 
 ### Déjà ajouté (par rapport à `main`)
 
 | Domaine | Détail |
 |---------|--------|
-| **DLC Les Profondeurs** | 7 épisodes FR/EN/ES (pack `abysses`, 21 entrées catalogue) — ep.1 Amerrissage → ep.7 Le Portail |
+| **Thème visuel** | Halloween : orange, lune, brume, accueil concours |
+| **Concours** | **Frissons d'Halloween** lancé (deadline 27 oct. 2026) |
 | **Histoire gratuite** | **La Bande du Cimetière** (`cimetiere_halloween`, FR/EN/ES) |
+| **DLC Les Profondeurs** | 7 épisodes FR/EN/ES (pack `abysses`, 21 entrées catalogue) — ep.1 Amerrissage → ep.7 Le Portail |
 | **Bibliothèque** | Titres courts Profondeurs (« 1 — Amerrissage »…), pack **sous Cosmos** |
 | **Actualités** | Annonce DLC Les Profondeurs (FR/EN/ES) |
-| **Qualité** | Révisions horreur post-playtest, fins ep.7 (Audace / Lucidité), corrections typo Cimetière |
+| **Qualité** | Révisions horreur post-playtest, fins ep.7 (Audace / Lucidité) |
 | **Technique** | Politique branches + CI protect-release |
-
-### Concours / communauté
-
-- Concours **Frissons d'Halloween** (deadline 27 oct. 2026) — actif sur cette branche
 
 ---
 
-## `1.8` — v1.8 · MàJ Halloween
+## `1.8` — v1.8 · Résultat du concours
 
-**Thème :** `halloween` · **Cible :** Halloween 2026 (~oct.)  
+**Thème :** `halloween` (conservé) · **Cible :** après la deadline du 27 oct. 2026  
 **GitHub Pages :** pointer sur `1.8` pendant la saison.
 
 ### Déjà ajouté (par rapport à `1.7`)
 
 | Domaine | Détail |
 |---------|--------|
-| **Thème visuel** | Orange, lune, brume, accueil concours Halloween |
-| **Communauté** | **Boo et la maison grise** (Bryan, enfant) — secours concours, FR/EN/ES |
-| **Actualités** | Carte communautaire Boo |
-| **Héritage** | Tout le contenu 1.7 (Profondeurs + Cimetière) |
+| **Communauté** | **Boo et la maison grise** (Bryan, enfant) — FR/EN/ES |
+| **Concours** | Annonce de la **gagnante : Boo** (carte à la une + popup) |
+| **Actualités** | « 🏆 Boo et la maison grise remporte le concours Halloween » |
+| **Correctifs** | Spoiler du Cimetière retiré, Options mobile, blocage DLC verrouillé, mini-tuto / micro-démo |
 
-### Concours
-
-- **Frissons d'Halloween** — actif, deadline **27 octobre 2026**
+> Si une autre histoire est choisie avant la publication : modifier les textes dans `community*.json` et `news*.json`.
 
 ---
 
-## `1.9` — v1.9 · Post-Halloween
+## `1.9` — v1.9 · Retour au thème normal
 
-**Thème :** `default` · **Cible :** ~10–11 nov. 2026
+**Thème :** `default` · **Cible :** juste après Halloween
 
 ### Déjà ajouté (par rapport à `1.8`)
 
@@ -134,12 +128,9 @@ Nov 2026        1.9.5 v1.9.5   Multijoueur local wifi (bêta, app native)
 |---------|--------|
 | **Thème** | Retour or Fableris (plus de déco Halloween) |
 | **Concours** | Halloween **fermé** (`contest.active: false`) |
-| **Actualités** | Annonce gagnante : **🏆 Boo et la maison grise** (Bryan) |
-| **Contenu** | Tout conservé : Profondeurs, Cimetière, Boo, communauté |
+| **Version** | Affichage v1.9 |
 
-### Pas de nouveau récit
-
-Release de **transition** : même catalogue, ambiance normale.
+Aucun nouveau récit ni annonce : le résultat du concours est déjà dans `1.8`.
 
 ---
 
@@ -220,7 +211,7 @@ Release de **transition** : même catalogue, ambiance normale.
 |--------|----------|------------------|------|
 | William | La gare des regrets | `main` | Première histoire communauté |
 | Cyril | L'Usine à Trombones | `main` | Mise en avant + actualités |
-| Bryan | Boo et la maison grise | `1.8` | Secours concours Halloween · **Gagnante** (annoncée en `1.9`) |
+| Bryan | Boo et la maison grise | `1.8` | **Gagnante** du concours Halloween (annoncée en `1.8`) |
 
 ---
 
@@ -256,7 +247,8 @@ Les branches release reçoivent aussi les **révisions Bande du Cimetière** et 
 | Période | Branche à pointer |
 |---------|-------------------|
 | Base / hors saison | `main` (v1.6) |
-| Halloween | `1.8` |
+| Lancement Halloween | `1.7` |
+| Résultat du concours | `1.8` |
 | Post-Halloween | `1.9` |
 | Multijoueur (app native) | `1.9.5` |
 | Décembre | `2.0` puis `2.1` |

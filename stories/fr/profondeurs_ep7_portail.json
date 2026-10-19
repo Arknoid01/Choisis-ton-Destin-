@@ -1,0 +1,244 @@
+{
+  "name": "Les Profondeurs — Épisode 7 : Le Portail",
+  "kids": false,
+  "askPlayerName": true,
+  "pack": "abysses",
+  "stats": [
+    {
+      "id": "audace",
+      "label": "Audace",
+      "start": 15,
+      "max": 100,
+      "color": "#e8934a"
+    },
+    {
+      "id": "lucidite",
+      "label": "Lucidité",
+      "start": 10,
+      "max": 100,
+      "color": "#2a8aa8"
+    }
+  ],
+  "theme": {
+    "bg": "#040810",
+    "bg2": "#081018",
+    "bg3": "#0c1824",
+    "bg4": "#122030",
+    "border": "#1e4058",
+    "accent": "#e8934a",
+    "accent2": "#2a8aa8",
+    "accent3": "#6dfabc",
+    "text": "#d8e8f0",
+    "text2": "#6890a8",
+    "text3": "#3a5868"
+  },
+  "scenes": {
+    "antechambre": {
+      "id": "antechambre",
+      "title": "Dernière chambre",
+      "location": "SECTEUR 7 — ANTÉCHAMBRE · 815 m",
+      "narrator": "Vingt-cinq mètres. Sur Narhex, c'est une éternité — ou une seconde.",
+      "text": "Tu avances — épisode 6 derrière toi, tout le reste devant.\n\nTon HUD :\n\n**25 m restants · prof. 815 m · lampe 0 % · cap 214°**\n\nPas de faisceau. Seule la lueur du **portail Halloween** — arc orange gravé de runes et de visages citrouille qui **respirent** presque.\n\nLa chambre est circulaire. Nulle sortie. Un seul chemin.\n\nLa radio, claire :\n\n*« —{{player}}. Tu es arrivé·e. — »*",
+      "isStart": true,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Nager droit vers l'arc — sans t'arrêter",
+          "vers": "arc",
+          "effects": [{ "stat": "audace", "val": 10 }],
+          "clickEffect": "pulse"
+        },
+        {
+          "text": "Mesurer la distance — palmer compteur",
+          "vers": "arc",
+          "effects": [{ "stat": "lucidite", "val": 10 }],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 400,
+      "y": 40
+    },
+    "arc": {
+      "id": "arc",
+      "title": "L'arc vivant",
+      "location": "SECTEUR 7 — SEUIL · 825 m",
+      "narrator": "Un portail Fableris ne s'ouvre pas — il te reconnaît.",
+      "text": "Tu l'atteins.\n\n**825 m**. **15 mètres** du centre.\n\nL'arc pulse au rythme de ton pouls — synchronisation involontaire. L'eau autour devient plus **chaude**. Plus **légère**.\n\nSur le linteau, une inscription en Fableris :\n\n*« Celui·elle qui a descendu sans lumière propre peut entrer. »*\n\nTu as descendu. Ta lampe est **morte** depuis la cathédrale.\n\nDerrière toi — un mouvement **lourd**. Hors de la lumière du portail. La chose des épaves n'a **pas** suivi dans la nef. Elle **attend** ici.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Te retourner — affronter ce qui approche",
+          "vers": "gardien",
+          "effects": [{ "stat": "audace", "val": 8 }],
+          "clickEffect": "pulse"
+        },
+        {
+          "text": "Ne pas te retourner — garder les yeux sur l'arc",
+          "vers": "gardien",
+          "effects": [{ "stat": "lucidite", "val": 8 }],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 400,
+      "y": 140
+    },
+    "gardien": {
+      "id": "gardien",
+      "title": "Hors lumière",
+      "location": "SECTEUR 7 — SEUIL · 828 m",
+      "narrator": "Ce qui te suit depuis la Derelicta n'a pas besoin de voir pour savoir où tu es.",
+      "text": "Un **raclement** lointain **revient** — étouffé par la pression, mais là.\n\nDans le halo orange, tu ne vois **rien** de net. Seulement l'eau qui **se courbe** — un volume qui serre le cercle autour de toi sans entrer dans la lumière.\n\nElle ne fonce pas. Elle **retire** les issues — sauf le portail. Comme si elle **menait** la danse depuis la Derelicta.\n\n**10 mètres** du centre.\n\nLa radio murmure :\n\n*« —Ne lui fais pas de place. Traverse. — »*\n\nOu peut-être :\n\n*« —Laisse-la te guider. Traverse. — »*\n\nTu ne sais plus quelle phrase tu as entendue en premier.\n\nL'arc s'**élargit** — une fissure de lumière, large comme tes épaules. Prête.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Te jeter dans la fissure — maintenant",
+          "vers": "audace_franchir",
+          "effects": [{ "stat": "audace", "val": 15 }],
+          "clickEffect": "pulse"
+        },
+        {
+          "text": "Poser ta paume sur le linteau — nommer ta dette",
+          "vers": "lucidite_pacte",
+          "effects": [{ "stat": "lucidite", "val": 15 }],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 400,
+      "y": 240
+    },
+    "audace_franchir": {
+      "id": "audace_franchir",
+      "title": "Franchir",
+      "location": "PORTAIL — ENTRÉE · 832 m",
+      "narrator": "Parfois fuir vers l'avant est la seule forme de courage qui compte.",
+      "text": "Tu te propulses.\n\nUn **souffle** d'eau te frôle — cheville, combinaison, pression. Pas de morsure. Pas de contact **solide**.\n\nTu traverses la fissure.\n\nLe monde **change** — pression qui chute, couleurs qui crient, son qui devient **musique** étouffée.\n\nDerrière toi, un grondement : le portail **se referme**. Le raclement s'arrête **net**.\n\nTu es **dedans**.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "flash",
+      "choices": [
+        {
+          "text": "Laisser le courant du portail te porter",
+          "vers": "traversee",
+          "effects": [{ "stat": "audace", "val": 10 }],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 280,
+      "y": 340
+    },
+    "lucidite_pacte": {
+      "id": "lucidite_pacte",
+      "title": "La dette",
+      "location": "SECTEUR 7 — SEUIL · 830 m",
+      "narrator": "Nommer ce qu'on doit, c'est parfois la clé qu'on cherchait sans le savoir.",
+      "text": "Tu poses ta main sur le linteau.\n\nTu prononces — dans ta tête, la Coalition l'entendra peut-être :\n\n*« Je suis {{player}}. J'ai emprunté la lumière. Je rends la descente. »*\n\nL'arc **répond** — runes qui s'allument une à une, citrouilles qui sourient **vraiment**.\n\nLe souffle de pression **recule** — pas par peur. Par **règle**. Ce portail ne lui appartient pas. Ou : elle t'a **mené·e** ici depuis la Derelicta, et son travail est fini.\n\nTu n'en es pas sûr·e. Tu n'as **rien vu**.\n\nLa fissure s'ouvre **doucement**.\n\nTu entres sans course. L'eau devient lumière.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Avancer au centre du portail",
+          "vers": "traversee",
+          "effects": [{ "stat": "lucidite", "val": 10 }],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 520,
+      "y": 340
+    },
+    "traversee": {
+      "id": "traversee",
+      "title": "Traversée",
+      "location": "PORTAIL FABLERIS — ENTRE-DEUX",
+      "narrator": "Entre deux mondes, le temps n'a ni haut ni bas — seulement un passage.",
+      "text": "Tu nages dans la lumière.\n\nPas d'eau — ou trop. Images qui défilent : la Derelicta qui coule, la falaise, le relais N-7, la grue, la cathédrale, ta lampe qui meurt.\n\n**800 m**, murmure le HUD une dernière fois. Puis les chiffres **disparaissent**.\n\nUne voix — la radio, enfin **stable** :\n\n*« —Extraction confirmée. Bienvenue, {{player}}. — »*\n\nLa voix ressemble à celle de l'épisode 2 — **presque** la tienne. Tu ne sais plus si tu montes ou si tu **replays** une descente déjà ratée.\n\nDevant toi : une **seconde** surface. Pas Narhex. Ciel **étoilé**. Air froid d'automne. Odeur de citrouille et de sel.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Sortir de l'eau — gagner la rive",
+          "vers": "rive",
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 400,
+      "y": 440
+    },
+    "rive": {
+      "id": "rive",
+      "title": "L'autre rive",
+      "location": "HAVRE FABLERIS — SORTIE PORTAIL",
+      "narrator": "Survivre à Narhex, ce n'est pas vaincre l'océan. C'est accepter de ne plus y retourner.",
+      "text": "Tu crèves la surface.\n\nUn quai de pierre. Lanternes orange. Agents Coalition en combinaison — visages **visibles**, pour la première fois depuis l'amerrissage.\n\nQuelqu'un te tend une couverture thermique.\n\nDerrière toi, le portail pulse encore sous l'eau — bouche orange qui se referme lentement.\n\nTon HUD, une dernière ligne :\n\n**MISSION SECTEUR 7 — TERMINÉE · prof. max 835 m · lampe — · Audace / Lucidité enregistrées**\n\nTu respires. Vraiment.\n\nNarhex reste **là-bas**. Toi, tu es **ici**.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Regarder l'eau — la menace est derrière le portail",
+          "vers": "fin_audace",
+          "requires": { "stat": "audace", "min": 48 },
+          "clickEffect": "pulse"
+        },
+        {
+          "text": "Regarder l'eau — ce n'était peut-être pas une chasse",
+          "vers": "fin_lucidite",
+          "requires": { "stat": "lucidite", "min": 45 },
+          "clickEffect": "pulse"
+        },
+        {
+          "text": "Regarder une dernière fois l'eau noire",
+          "vers": "fin_portail",
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 400,
+      "y": 540
+    },
+    "fin_audace": {
+      "id": "fin_audace",
+      "title": "Extraction — Audace",
+      "location": "HAVRE FABLERIS — NUIT D'HALLOWEEN",
+      "narrator": "Survivre, parfois, c'est accepter d'avoir eu raison d'avoir peur.",
+      "text": "Tu regardes l'eau.\n\nNoire encore — **derrière** un portail fermé. Quelque chose **frappe** la barrière une fois — sourd, lointain — puis plus rien.\n\nTu as **fui** vers l'avant. Tu as **eu** raison.\n\nAu loin, citrouilles lumineuses. La Coalition applaudit sans savoir **ce qui** est resté de l'autre côté.\n\nLa radio :\n\n*« —Repos, {{player}}. Tu as descendu. Tu es remonté·e. — »*\n\n**FIN — Les Profondeurs** *(Audace)*\n\n*Merci d'avoir joué · Pack Les Profondeurs · Fableris*",
+      "isStart": false,
+      "isEnd": true,
+      "transition": "fade",
+      "choices": [],
+      "x": 280,
+      "y": 640
+    },
+    "fin_lucidite": {
+      "id": "fin_lucidite",
+      "title": "Extraction — Lucidité",
+      "location": "HAVRE FABLERIS — NUIT D'HALLOWEEN",
+      "narrator": "Comprendre ne garantit pas la paix — seulement une autre peur.",
+      "text": "Tu regardes l'eau.\n\nNoire encore — **derrière** un portail fermé. Pas de choc. Pas de chasse. **Silence**.\n\nPeut-être que la présence **t'a** poussé·e ici — berger, pas prédateur. Peut-être que le vrai piège, c'est **Fableris** qui envoie seul·e et appelle ça une mission.\n\nLa radio murmure — sans static, **trop** proche :\n\n*« —Je ne suis pas la Coalition. Je suis ce qu'il reste quand la descente échoue. Toi, tu as réussi. Cette fois. — »*\n\n**FIN — Les Profondeurs** *(Lucidité)*\n\n*Merci d'avoir joué · Pack Les Profondeurs · Fableris*",
+      "isStart": false,
+      "isEnd": true,
+      "transition": "fade",
+      "choices": [],
+      "x": 520,
+      "y": 640
+    },
+    "fin_portail": {
+      "id": "fin_portail",
+      "title": "Extraction",
+      "location": "HAVRE FABLERIS — NUIT D'HALLOWEEN",
+      "narrator": "Certaines missions finissent par un feu d'artifice. Celle-ci finit par un souffle.",
+      "text": "Tu regardes l'eau.\n\nNoire encore — mais **derrière** un portail fermé. Pas devant toi.\n\nAu loin, des citrouilles lumineuses sur le quai. Une musique faible. La Coalition célèbre Halloween **comme il faut** — en sachant ce qu'il y a sous les planètes qu'elle envoie seul·e.\n\nLa radio, une dernière fois — presque un sourire :\n\n*« —Repos, {{player}}. Tu as descendu. Tu es remonté·e. — »*\n\n**FIN — Les Profondeurs**\n\n*Merci d'avoir joué · Pack Les Profondeurs · Fableris*",
+      "isStart": false,
+      "isEnd": true,
+      "transition": "fade",
+      "choices": [],
+      "x": 400,
+      "y": 640
+    }
+  }
+}

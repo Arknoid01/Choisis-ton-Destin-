@@ -1,0 +1,291 @@
+{
+  "name": "The Cemetery Crew",
+  "kids": false,
+  "askPlayerName": true,
+  "pack": "free",
+  "stats": [
+    {
+      "id": "audace",
+      "label": "Boldness",
+      "start": 15,
+      "max": 100,
+      "color": "#e8934a"
+    },
+    {
+      "id": "lucidite",
+      "label": "Clarity",
+      "start": 10,
+      "max": 100,
+      "color": "#9b59b6"
+    }
+  ],
+  "theme": {
+    "bg": "#0a080c",
+    "bg2": "#120e14",
+    "bg3": "#1a1520",
+    "bg4": "#221828",
+    "border": "#3d2838",
+    "accent": "#e8934a",
+    "accent2": "#9b59b6",
+    "accent3": "#6dfabc",
+    "text": "#f2ebe0",
+    "text2": "#9a8070",
+    "text3": "#6a5548"
+  },
+  "scenes": {
+    "prologue": {
+      "id": "prologue",
+      "title": "Halloween, at last",
+      "location": "SAINT-LUNAIRE CEMETERY — MIDNIGHT",
+      "narrator": "Some nights, you think you're running toward a thrill. Sometimes, the thrill was waiting — still, patient.",
+      "text": "Your name is {{player}}, and you've been waiting for this moment for weeks.\n\nLeo finally found a ladder to climb over the wall of Saint-Lunaire cemetery. Maya clutches her coat — and the bag of honey sweets she'd promised you for tonight. Sam is already filming everything on his phone. Inès packed three stories that are \"actually scary.\"\n\nThe moon is full. Pumpkin lights still glow in the distance.\n\nOn the other side of the wall, the air is colder. The neighbourhood sounds feel far away.\n\nLeo whispers as he jumps: \"Come on, crew — let's make this a night to remember!\"\n\nEveryone laughs. You too. You feel alive, excited, ready to scream at the slightest noise.\n\nMaya holds out the sweets. Her eyes linger on you a moment too long — then she smiles: \"You'll get your share after the first scare, deal?\"",
+      "isStart": true,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Be the first to dash toward the graves",
+          "vers": "legende",
+          "effects": [{ "stat": "audace", "val": 15 }],
+          "clickEffect": "pulse"
+        },
+        {
+          "text": "Ask Inès to start with a story",
+          "vers": "legende",
+          "effects": [{ "stat": "lucidite", "val": 10 }],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 400,
+      "y": 40
+    },
+    "legende": {
+      "id": "legende",
+      "title": "The tale of the fifth",
+      "location": "YEW TREE ALLEY — CEMETERY",
+      "narrator": "Legends told for laughs sometimes have a bad habit of remembering us.",
+      "text": "Inès stops under a colonnade of trimmed yews.\n\n\"Know the legend? Every Halloween, a ghost joins a group of teens in a cemetery. It thinks it's part of the crew. It laughs, screams, plays dares…\"\n\nMaya shivers: \"Great, thanks Inès.\"\n\n\"… and only at the end of the night does it understand that nobody could see it.\"\n\nMaya looks down for a second.\n\nLeo bursts out laughing: \"Well luckily we're all here! Come on Sam, film Maya's face.\"\n\nYou slip between Maya and Leo, sticking out your tongue.\n\nMaya jumps — looks you straight in the eyes — then bursts out laughing.\n\n\"Ah! You're impossible, {{player}}…\" she murmurs.\n\nLeo looks up: \"What, what happened?\"\n\nMaya shakes her head: \"Nothing. A root. Go on, take the photo, Sam.\"\n\n\"Nice,\" Sam says. \"Let's keep going.\"",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Challenge them: dare to enter the mausoleum",
+          "vers": "defi",
+          "effects": [{ "stat": "audace", "val": 12 }],
+          "clickEffect": "pulse"
+        },
+        {
+          "text": "Laugh with them to shake off the fear",
+          "vers": "defi",
+          "effects": [{ "stat": "lucidite", "val": 8 }],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 400,
+      "y": 140
+    },
+    "defi": {
+      "id": "defi",
+      "title": "Truth or dare",
+      "location": "VALMONT MAUSOLEUM — COURTYARD",
+      "narrator": "To dare is sometimes to walk where others still hesitate.",
+      "text": "Leo pulls out an empty soda bottle — their summer \"magic bottle,\" recycled for Halloween.\n\nTruth or dare, cemetery edition. No backing out.\n\nThe bottle spins on a tilted slab. It stops facing you.\n\n\"{{player}}!\" Maya shouts — **at you**, without hesitation. \"Dare, obviously.\"\n\nShe winks at you. The others don't notice.\n\nLeo whistles: \"Dare to enter the Valmont mausoleum. First one through the door.\"\n\nYou step forward. An old lantern hangs on the rusted gate. You grab it — the metal is oddly cold.\n\nJust then, a gust makes the mausoleum door creak on its own. The lantern flame lights in the same breath.\n\n\"Stylish,\" Sam says. \"You've got a gift for atmosphere.\"\n\nYou push the door, smiling.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Go in first, into the dark",
+          "vers": "mausolee",
+          "effects": [{ "stat": "audace", "val": 15 }],
+          "clickEffect": "pulse"
+        },
+        {
+          "text": "Wait for the flame to steady",
+          "vers": "mausolee",
+          "effects": [{ "stat": "lucidite", "val": 10 }],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 400,
+      "y": 240
+    },
+    "mausolee": {
+      "id": "mausolee",
+      "title": "The creaking door",
+      "location": "VALMONT MAUSOLEUM — INTERIOR",
+      "narrator": "In the dark, the walls feel closer than they should.",
+      "text": "The door creaks like an old laugh held back.\n\nInside smells of cold stone and dried wax. Names cover the walls: VALMONT, 1843–1921.\n\nLeo whistles: \"OK, that's creepy. We leaving?\"\n\nYou slip behind Maya to scare her — breath in, shout, hand reaching for her shoulder…\n\nMaya leaps, spins around, hands on her heart: \"**Boo yourself!**\"\n\nThe shout makes Leo and Sam jump. A slab tilts under Maya's foot — she wobbles, grabs the sarcophagus.\n\n\"Ow… damn, these slabs…\" she says, laughing, **without looking away from you**.\n\nLeo grins: \"Good scare though.\" He means the slabs. Not you.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Shout \"BOO!\" a second time",
+          "vers": "cabriole",
+          "effects": [{ "stat": "audace", "val": 10 }],
+          "clickEffect": "pulse"
+        },
+        {
+          "text": "Leave with them, light-hearted",
+          "vers": "cabriole",
+          "effects": [{ "stat": "lucidite", "val": 8 }],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 400,
+      "y": 340
+    },
+    "cabriole": {
+      "id": "cabriole",
+      "title": "Macabre hide-and-seek",
+      "location": "CEMETERY — ELDERS' ALLEY",
+      "narrator": "Among the stones, every sound becomes a dare.",
+      "text": "Outside, the game resumes. Hide-and-seek among the stones: whoever surprises the loudest wins.\n\nYou hide behind a marble angel. Leo passes a metre away, looking for Maya.\n\n\"{{player}} must be on the other side,\" he says, running off.\n\nYou leap in front of him screaming — just as the nearby church bell strikes midnight. Leo startles, steps back… and slips on a dead leaf.\n\n\"Whoa!\"\n\nHe catches himself on the angel: \"… Damn, that bell. Fine, you win — where are you, {{player}}?\"\n\nHe keeps searching elsewhere.\n\nAcross the alley, Maya saw you leap. She bites her lip to keep from laughing out loud.\n\nSam raises his phone: \"Selfie of the night! Come on, squeeze in.\"",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Slip into the middle of the group",
+          "vers": "photo",
+          "effects": [{ "stat": "audace", "val": 8 }],
+          "clickEffect": "pulse"
+        },
+        {
+          "text": "Watch the scene from your hiding spot",
+          "vers": "photo",
+          "effects": [{ "stat": "lucidite", "val": 12 }],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 400,
+      "y": 440
+    },
+    "photo": {
+      "id": "photo",
+      "title": "The group photo",
+      "location": "CEMETERY — CROSSROADS",
+      "narrator": "A picture freezes a moment. Not always the one you think.",
+      "text": "Sam counts: \"One… two… three… smi—\"\n\nA burst of laughter all around. At the click, a gust of fog crosses the frame.\n\nMaya never leaves the lens — she looks straight **at you**, a smile on her lips.\n\nSam turns the screen. Four clear faces: Leo, Maya, Inès, Sam. And an orange blur where you were standing.\n\n\"You moved, {{player}},\" Sam says.\n\n\"No I didn't,\" you protest. \"I was frozen.\"\n\nSecond shot — same timing: an owl takes off above you. Same blur for Sam.\n\nLeo shrugs: \"Must be the damp.\"\n\nInès looks down a darker alley: \"We finish that way. Like usual.\"",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Insist on a third photo",
+          "vers": "brume",
+          "effects": [{ "stat": "lucidite", "val": 12 }],
+          "clickEffect": "pulse"
+        },
+        {
+          "text": "Follow them — the night goes on",
+          "vers": "brume",
+          "effects": [{ "stat": "audace", "val": 5 }],
+          "clickEffect": "pulse"
+        },
+        {
+          "text": "Ask to see the photo up close",
+          "vers": "brume",
+          "effects": [{ "stat": "lucidite", "val": 15 }],
+          "requires": { "stat": "lucidite", "min": 40 },
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 400,
+      "y": 540
+    },
+    "brume": {
+      "id": "brume",
+      "title": "The far alley",
+      "location": "CEMETERY — NORTHERN HILLS",
+      "narrator": "When the night softens, it isn't always comforting.",
+      "text": "Thin fog rises between the graves. The game gives way to a quieter walk.\n\nInès murmurs: \"They say the dead walk tonight.\"\n\nMaya: \"Stop it, you're giving me goosebumps.\"\n\nYou walk with them, sure you're in the middle of the group.\n\nYou call out: \"Maya!\"\n\nShe turns — **at last** — and looks at you.\n\nA branch snaps in the alley. Inès flinches. Maya keeps walking, voice low: \"… We're almost there. You'll understand.\"\n\nInès, up ahead: \"We're almost there.\"\n\nYou don't know where \"there\" is. You follow anyway.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Keep walking with them",
+          "vers": "tombe",
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 300,
+      "y": 640
+    },
+    "tombe": {
+      "id": "tombe",
+      "title": "Like every year",
+      "location": "GRAVE — SAINT-LUNAIRE CEMETERY",
+      "narrator": "There comes a moment when the scare stops playing.",
+      "text": "They stop before a stone lighter than the others.\n\nYou read the carved name.\n\n**{{player}}.** 2008–2025.\n\nA Halloween date.\n\nMaya sets the honey sweets at the foot of the stone — the ones she'd promised **for tonight**. She looks at you: \"Like I promised.\"\n\nLeo lights a candle, voice low: \"… We did the neighbourhood. We came back here. Like always.\"\n\nSam: \"We had fun. Well — we tried.\"\n\nInès stares at the stone: \"We miss you.\"\n\nYour name. Your date. Your sweets.\n\nYou open your mouth. No sound comes out.\n\nIt can't be. It can't be **you**.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "flash",
+      "choices": [
+        {
+          "text": "Read the stone again — and again",
+          "vers": "revelation",
+          "effects": [{ "stat": "lucidite", "val": 20 }],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 400,
+      "y": 740
+    },
+    "revelation": {
+      "id": "revelation",
+      "title": "The fifth was you",
+      "location": "CEMETERY — PAST MIDNIGHT",
+      "narrator": "The greatest twist isn't to scream. It's understanding who stayed with you all night.",
+      "text": "Then it all comes back — at once, like a tide.\n\nYou're the ghost. The night you fell from the wall. Every Halloween since, when the crew returns… you follow them, still believing the party starts again.\n\nLeo can't see you. Neither can Sam. Neither can Inès.\n\n**Maya can.**\n\nShe jumped **when you made a face** — not because of a root. In the mausoleum, it was **your** boo she heard. In the photo, she looked **straight at you**. When you called her name, she **turned around**.\n\nMaya sees ghosts. And **every year**, she's the one who brings the others back here — to find you, {{player}}. To let you live a whole night with the crew again: the sweets, the dares, the laughter.\n\nThe others speak **about** you. Maya spoke **to** you — in secret, all evening long.\n\nShe sets the sweets at the foot of your stone. Leo wipes a tear: \"OK. If {{player}} is here… knock over the candle.\"\n\nMaya looks at you. Waits.\n\nThe flame wavers.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Blow out the candle — one last scare for them",
+          "vers": "fin_rideau",
+          "effects": [{ "stat": "audace", "val": 10 }],
+          "clickEffect": "pulse"
+        },
+        {
+          "text": "Stay still — and let the flame burn",
+          "vers": "fin_veille",
+          "effects": [{ "stat": "lucidite", "val": 10 }],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 400,
+      "y": 840
+    },
+    "fin_rideau": {
+      "id": "fin_rideau",
+      "title": "Boo, guys",
+      "location": "CEMETERY — GRAVE OF SAINT-LUNAIRE",
+      "narrator": "Sometimes the best scream is the one you feel on your neck — without ever knowing who it's from.",
+      "text": "You blow.\n\nThe candle goes out — as a gust slams the cemetery gate shut in the distance. *Clang.*\n\nMaya screams with the others — a little **too** loud, you can tell. Then she catches your eye: a smile. She **knew**.\n\nLeo steps back, pale. Sam nearly drops his phone. Inès whispers: \"… There.\"\n\n\"OK OK OK,\" Leo pants. \"That wasn't funny. Well it was. Well… **{{player}}**?\"\n\nThey run for the exit yelling, happy and terrified — exactly how you'd have wanted it.\n\nBehind them, among the yews, Maya's laugh mingles with the wind. Or with you.\n\n**END — The perfect scare**",
+      "isStart": false,
+      "isEnd": true,
+      "transition": "fade",
+      "choices": [],
+      "x": 280,
+      "y": 940
+    },
+    "fin_veille": {
+      "id": "fin_veille",
+      "title": "Watching without getting in the way",
+      "location": "CEMETERY — DAWN",
+      "narrator": "Some ghosts scream. Others just keep the candle lit — even when nobody knows why it still burns.",
+      "text": "You don't blow.\n\nThe candle stays upright. Small, stubborn, as if shielded from a wind nobody feels.\n\nYour friends leave at first light, eyes swollen. Maya turns once more: \"See you next year, {{player}}. **I'll** bring the crew back.\"\n\nShe sees you. She'll return.\n\nAmong the yews, the fog lifts. The cemetery falls silent again — but not empty. **Inhabited**.\n\n**END — Guardian of the cemetery**",
+      "isStart": false,
+      "isEnd": true,
+      "transition": "fade",
+      "choices": [],
+      "x": 520,
+      "y": 940
+    }
+  }
+}

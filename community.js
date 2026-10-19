@@ -145,7 +145,7 @@ window.SFCommunity = (function () {
       }
       .sf-comm-sub{
         font-family:'Cormorant Garamond',serif;font-size:14px;
-        color:#c8a96e;font-style:italic;
+        color:var(--gold, #c8a96e);font-style:italic;
       }
       .sf-comm-scroll{
         overflow-y:auto;flex:1;padding:16px 20px 8px;
@@ -191,7 +191,7 @@ window.SFCommunity = (function () {
         letter-spacing:1px;margin-bottom:6px;
       }
       .sf-comm-theme{
-        font-size:13px;color:#c8a96e;margin-bottom:8px;
+        font-size:13px;color:var(--gold, #c8a96e);margin-bottom:8px;
       }
       .sf-comm-theme strong{color:#e8d4a0;}
       .sf-comm-desc{
@@ -209,7 +209,7 @@ window.SFCommunity = (function () {
         padding-left:16px;position:relative;
       }
       .sf-comm-prizes li::before{
-        content:'✦';position:absolute;left:0;color:#c8a96e;font-size:10px;top:1px;
+        content:'✦';position:absolute;left:0;color:var(--gold, #c8a96e);font-size:10px;top:1px;
       }
       .sf-comm-card{
         background:#1a1710;border:1px solid #2a2418;border-radius:10px;
@@ -225,7 +225,7 @@ window.SFCommunity = (function () {
         letter-spacing:0.5px;margin-bottom:3px;
       }
       .sf-comm-card-meta{
-        font-size:11px;color:#c8a96e;margin-bottom:4px;
+        font-size:11px;color:var(--gold, #c8a96e);margin-bottom:4px;
       }
       .sf-comm-card-date{
         font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.5px;
@@ -261,7 +261,7 @@ window.SFCommunity = (function () {
         text-transform:uppercase;transition:all .2s;
       }
       .sf-comm-btn:hover{
-        border-color:#c8a96e;box-shadow:0 0 20px rgba(200,169,110,0.12);
+        border-color:var(--gold, #c8a96e);box-shadow:0 0 20px rgba(200,169,110,0.12);
       }
       .sf-comm-btn.secondary{
         background:none;border-color:#2a2418;color:#9a8a70;letter-spacing:1.5px;
@@ -279,7 +279,7 @@ window.SFCommunity = (function () {
         to{opacity:1;transform:translateY(0);}
       }
       .sf-contest-banner-text{
-        flex:1;min-width:180px;font-size:13px;color:#c8a96e;line-height:1.5;
+        flex:1;min-width:180px;font-size:13px;color:var(--gold, #c8a96e);line-height:1.5;
         font-family:'Cormorant Garamond',serif;font-style:italic;
       }
       .sf-contest-banner-actions{display:flex;gap:8px;flex-shrink:0;}
@@ -288,7 +288,7 @@ window.SFCommunity = (function () {
         border:1px solid #8a6a30;background:rgba(200,169,110,0.12);
         color:#e8d4a0;font-family:'Cinzel',serif;font-size:10px;letter-spacing:1.5px;
       }
-      .sf-contest-banner-btn:hover{border-color:#c8a96e;}
+      .sf-contest-banner-btn:hover{border-color:var(--gold, #c8a96e);}
       .sf-contest-banner-dismiss{
         padding:8px 10px;border-radius:8px;cursor:pointer;
         border:1px solid #2a2418;background:none;color:#5a5040;

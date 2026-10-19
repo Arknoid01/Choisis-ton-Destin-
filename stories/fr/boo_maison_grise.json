@@ -1,0 +1,333 @@
+{
+  "name": "Boo et la maison grise",
+  "kids": true,
+  "askPlayerName": true,
+  "pack": "kids",
+  "stats": [
+    {
+      "id": "gentillesse",
+      "label": "Gentillesse",
+      "start": 25,
+      "max": 100,
+      "color": "#b8a8ff"
+    },
+    {
+      "id": "courage",
+      "label": "Courage",
+      "start": 20,
+      "max": 100,
+      "color": "#ff9f43"
+    }
+  ],
+  "theme": {
+    "bg": "#1a1028",
+    "bg2": "#241838",
+    "bg3": "#2e2048",
+    "bg4": "#382858",
+    "border": "#4a3868",
+    "accent": "#ff9f43",
+    "accent2": "#b8a8ff",
+    "accent3": "#90EE90",
+    "text": "#f5f0e8",
+    "text2": "#c4b8a8",
+    "text3": "#8a8078"
+  },
+  "scenes": {
+    "prologue": {
+      "id": "prologue",
+      "title": "Halloween au village",
+      "location": "RUE DU VILLAGE — SOIR",
+      "narrator": "Certaines histoires commencent par un murmure, pas par un cri.",
+      "text": "Ce soir, c'est Halloween.\n\nTu es déguisé·e, Aikito porte un petit chapeau de sorcière un peu de travers, et le panier à bonbons est déjà lourd.\n\nLes fenêtres brillent de citrouilles découpées.\n\nMais au bout de la rue, la maison grise reste éteinte.\n\nLes grands disent qu'un fantôme y habite.\n\nUn enfant du quartier chuchote :\n\n*« Hier, j'ai entendu un « Boo »… mais il avait l'air de pleurer. »*\n\nAikito renifle l'air.\n\n*« Les vrais méchants, ça sent le tonnerre. Là, ça sent la poussière de bibliothèque. »*",
+      "isStart": true,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Aller voir la maison grise",
+          "vers": "maison_grise",
+          "effects": [
+            {
+              "stat": "courage",
+              "val": 10
+            }
+          ],
+          "clickEffect": "pulse"
+        },
+        {
+          "text": "Continuer le trick-or-treat",
+          "vers": "quartier",
+          "effects": [
+            {
+              "stat": "gentillesse",
+              "val": 5
+            }
+          ],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 400,
+      "y": 40
+    },
+    "quartier": {
+      "id": "quartier",
+      "title": "Bonbons et rumeurs",
+      "location": "RUE ÉCLAIRÉE",
+      "narrator": "On peut faire la fête et garder une oreille tendue.",
+      "text": "Tu frappes à trois portes.\n\nDes bonbons tombent dans ton panier.\n\nDes rires montent dans la rue.\n\nPuis, entre deux maisons, un son léger arrive :\n\n*« Boo… »*\n\nCe n'est pas un cri.\n\nC'est plus petit qu'un chat.\n\nPlus timide qu'un tonnerre.\n\nAikito lève les oreilles.\n\n*« Tu as entendu ? Ce n'était pas pour faire peur. C'était pour appeler. »*",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Suivre le son jusqu'à la maison grise",
+          "vers": "maison_grise",
+          "effects": [
+            {
+              "stat": "courage",
+              "val": 10
+            }
+          ],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 250,
+      "y": 160
+    },
+    "maison_grise": {
+      "id": "maison_grise",
+      "title": "Devant la maison grise",
+      "location": "MAISON GRISE — ALLÉE",
+      "narrator": "Une maison sans lumière n'est pas toujours une maison sans habitant.",
+      "text": "La maison grise se dresse devant toi.\n\nLes volets sont clos.\n\nUne fine lueur orange filtre par une fente du rideau.\n\n*« Boo… ? »* répète la voix, très bas.\n\nAikito s'assoit calmement sur la première marche.\n\n*« Si tu veux, on peut juste frapper. Les fantômes n'ont pas forcément envie de faire peur. Parfois, ils ont juste envie qu'on les écoute. »*",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Frapper doucement avec un bonbon à la main",
+          "vers": "rencontre_boo",
+          "effects": [
+            {
+              "stat": "gentillesse",
+              "val": 15
+            },
+            {
+              "stat": "courage",
+              "val": 10
+            }
+          ],
+          "clickEffect": "pulse"
+        },
+        {
+          "text": "Reculer d'un pas, un peu impressionné·e",
+          "vers": "peur_passage",
+          "effects": [
+            {
+              "stat": "courage",
+              "val": -5
+            }
+          ],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 400,
+      "y": 280
+    },
+    "peur_passage": {
+      "id": "peur_passage",
+      "title": "Un pas en arrière",
+      "location": "MAISON GRISE — ALLÉE",
+      "narrator": "Reculer n'est pas méchant. C'est parfois la façon dont le corps dit « pas encore ».",
+      "text": "Ton cœur bat vite.\n\nLa porte grince un tout petit peu.\n\nDerrière, quelque chose de blanc et rond se cache aussitôt.\n\n*« D-d-désolé ! »* dit la voix. *« Je ne voulais pas… je voulais juste… »*\n\nElle s'éteint, comme une chandelle qu'on souffle.\n\nAikito te regarde sans juger.\n\n*« Tu sais ce que j'ai entendu ? Pas « partez ». Plutôt « restez, s'il vous plaît ». »*",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Revenir et tendre un bonbon vers la porte",
+          "vers": "rencontre_boo",
+          "effects": [
+            {
+              "stat": "courage",
+              "val": 15
+            },
+            {
+              "stat": "gentillesse",
+              "val": 10
+            }
+          ],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 550,
+      "y": 280
+    },
+    "rencontre_boo": {
+      "id": "rencontre_boo",
+      "title": "Boo",
+      "location": "MAISON GRISE — SEUIL",
+      "narrator": "Un fantôme, ce n'est pas toujours une ombre. Parfois, c'est juste quelqu'un qu'on ne voit pas bien.",
+      "text": "La porte s'ouvre d'un doigt.\n\nUn petit fantôme rond flotte à hauteur de genou.\n\nIl est blanc comme un drap propre, avec deux grands yeux noirs un peu mouillés.\n\n*« Je m'appelle Boo, »* dit-il. *« Personne ne passe le soir d'Halloween. Alors j'ai appris à dire « Boo » parce que… c'est ce que font les fantômes, non ? »*\n\nIl baisse la tête.\n\n*« Sauf que tout le monde court. Personne ne reste. »*\n\nAikito remue la queue.\n\n*« Les fantômes ont le droit d'avoir peur, eux aussi. »*",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Lui proposer un bonbon et rester un moment",
+          "vers": "partager_bonbons",
+          "effects": [
+            {
+              "stat": "gentillesse",
+              "val": 15
+            }
+          ],
+          "clickEffect": "pulse"
+        },
+        {
+          "text": "Lui apprendre à dire bonjour au lieu de « Boo »",
+          "vers": "apprendre_bonjour",
+          "effects": [
+            {
+              "stat": "gentillesse",
+              "val": 10
+            },
+            {
+              "stat": "courage",
+              "val": 10
+            }
+          ],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 400,
+      "y": 420
+    },
+    "partager_bonbons": {
+      "id": "partager_bonbons",
+      "title": "Un bonbon pour deux",
+      "location": "MAISON GRISE — SEUIL",
+      "narrator": "Partager, c'est parfois la plus simple des magies.",
+      "text": "Tu tends un bonbon en forme de citrouille.\n\nBoo hésite, puis le prend avec deux mains transparentes.\n\n*« Personne ne m'en avait jamais donné, »* murmure-t-il. *« Parce que les fantômes ne peuvent pas frapper aux portes… »*\n\nTu proposes ton panier.\n\n*« On pourrait aller ensemble. Tu te caches derrière moi. Et si quelqu'un a peur, on explique. »*\n\nBoo s'illumine — pas fort, juste un peu, comme une veilleuse.\n\n*« Vraiment ? »*",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Partir trick-or-treat avec Boo",
+          "vers": "halloween_ensemble",
+          "effects": [
+            {
+              "stat": "gentillesse",
+              "val": 10
+            }
+          ],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 250,
+      "y": 560
+    },
+    "apprendre_bonjour": {
+      "id": "apprendre_bonjour",
+      "title": "Autre chose que « Boo »",
+      "location": "MAISON GRISE — SALON",
+      "narrator": "Apprendre une nouvelle façon de dire bonjour, c'est offrir une seconde chance à la peur.",
+      "text": "Tu entres avec Aikito.\n\nLe salon sent un peu la cire et les vieux livres.\n\nBoo flotte au milieu de la pièce, gêné.\n\n*« Bonjour, je m'appelle Boo, »* tu dis lentement.\n\nBoo répète :\n\n*« Boo… je m'appelle Boo… euh… Bonjour, je m'appelle Boo ! »*\n\nIl se cache derrière un coussin.\n\n*« C'est bizarre. On entend ma voix. Mais personne ne crie. »*\n\nAikito applaudit avec ses pattes.\n\n*« Bizarre, c'est le début de « différent ». Pas de « dangereux ». »*",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "L'encourager à réessayer devant la fenêtre",
+          "vers": "lecon_douce",
+          "effects": [
+            {
+              "stat": "courage",
+              "val": 10
+            }
+          ],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 550,
+      "y": 560
+    },
+    "halloween_ensemble": {
+      "id": "halloween_ensemble",
+      "title": "Trois dans la rue",
+      "location": "RUE DU VILLAGE — SOIR",
+      "narrator": "Une fête devient plus belle quand personne n'est laissé dehors.",
+      "text": "Boo se cache derrière ton manteau.\n\nÀ la première porte, une dame sursaute… puis rit.\n\n*« Oh ! Un fantôme timide ! Voici deux bonbons — un pour toi, un pour ton ami invisible. »*\n\nBoo ouvre de grands yeux.\n\n*« Elle m'a parlé à moi. »*\n\nPlus loin, des enfants du quartier s'approchent.\n\nPersonne ne court.\n\nIls tendent leurs paniers.\n\nBoo murmure :\n\n*« Je croyais qu'Halloween, c'était pour faire peur. »*",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "« Non. C'est pour oser se rencontrer. »",
+          "vers": "fin_partage",
+          "effects": [
+            {
+              "stat": "gentillesse",
+              "val": 15
+            }
+          ],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 250,
+      "y": 700
+    },
+    "lecon_douce": {
+      "id": "lecon_douce",
+      "title": "Bonjour, village",
+      "location": "MAISON GRISE — FENÊTRE",
+      "narrator": "Un petit courage répété devient, avec le temps, une grande lumière.",
+      "text": "Boo s'approche de la fenêtre.\n\nDehors, des enfants passent avec leurs lanternes.\n\nIl respire — enfin, il essaie.\n\n*« Bonjour ! Je m'appelle Boo ! »*\n\nSa voix tremble, mais elle tient.\n\nUn petit garçon lève la main.\n\n*« Bonjour Boo ! Tu veux voir ma citrouille ? »*\n\nBoo te regarde, émerveillé.\n\n*« Ils ne sont pas partis. »*\n\nAikito pose sa tête contre ta jambe.\n\n*« Non. Parce que tu es resté·e. Parfois, c'est ça, la vraie magie d'Halloween. »*",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Ouvrir la porte et saluer avec lui",
+          "vers": "fin_bonjour",
+          "effects": [
+            {
+              "stat": "courage",
+              "val": 15
+            }
+          ],
+          "clickEffect": "pulse"
+        }
+      ],
+      "x": 550,
+      "y": 700
+    },
+    "fin_partage": {
+      "id": "fin_partage",
+      "title": "La maison qui brille",
+      "location": "RUE DU VILLAGE — FIN DE SOIRÉE",
+      "narrator": "Ce qui semblait effrayant était surtout seul.",
+      "text": "Le panier de Boo est plein — en bonbons, en prénoms, en sourires.\n\nQuand tu le raccompagnes, la maison grise n'a plus l'air abandonnée.\n\nUne citrouille brille dans la fenêtre.\n\nBoo te fait un signe de main.\n\n*« Merci, {{player}}. Avant, je pensais qu'il fallait crier pour exister. Maintenant je sais qu'il suffit parfois de partager. »*\n\nAikito bâille.\n\n*« Morale officielle du chien philosophe : un bonbon partagé vaut dix « Boo » qui font fuir. »*\n\nTu rentres en souriant.\n\nHalloween continue — mais la maison grise, elle, n'a plus peur du noir.",
+      "isStart": false,
+      "isEnd": true,
+      "transition": "fade",
+      "choices": [],
+      "x": 250,
+      "y": 840
+    },
+    "fin_bonjour": {
+      "id": "fin_bonjour",
+      "title": "Un fantôme avec des amis",
+      "location": "MAISON GRISE — PORCHE",
+      "narrator": "La gentillesse ouvre des portes que la peur gardait closes.",
+      "text": "Des enfants s'assoient sur les marches de la maison grise.\n\nBoo leur montre comment flotter sans renverser les verres de jus (presque).\n\nIl dit encore *« Boo »* une fois, par habitude — tout le monde rit, lui y compris.\n\n*« Ce n'est pas grave d'avoir eu peur, »* dit Boo à la fin. *« Ce qui compte, c'est d'essayer autre chose ensuite. »*\n\nTu ranges ton panier.\n\nLa lune dessine un halo doux au-dessus du toit.\n\nAikito conclut :\n\n*« Les fantômes, les enfants, les chiens avec chapeau de sorcière : on a tous besoin qu'on ose frapper à notre porte — doucement. »*",
+      "isStart": false,
+      "isEnd": true,
+      "transition": "fade",
+      "choices": [],
+      "x": 550,
+      "y": 840
+    }
+  }
+}
