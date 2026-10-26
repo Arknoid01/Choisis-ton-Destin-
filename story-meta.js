@@ -10,7 +10,7 @@ window.SFStoryMeta = (function () {
       spotlightLabel: 'Créations communauté',
       spotlightTitle: 'Histoires écrites par la communauté',
       spotlightSub: 'Comme La gare des regrets — la vôtre pourrait être la prochaine.',
-      spotlightBtn: 'Participer au concours'
+      spotlightBtn: 'Voir la communauté'
     },
     en: {
       community: 'Community',
@@ -21,7 +21,7 @@ window.SFStoryMeta = (function () {
       spotlightLabel: 'Community creations',
       spotlightTitle: 'Stories written by the community',
       spotlightSub: 'Like The Station of Regrets — yours could be next.',
-      spotlightBtn: 'Join the contest'
+      spotlightBtn: 'See the community'
     },
     es: {
       community: 'Comunidad',
@@ -32,7 +32,7 @@ window.SFStoryMeta = (function () {
       spotlightLabel: 'Creaciones de la comunidad',
       spotlightTitle: 'Historias escritas por la comunidad',
       spotlightSub: 'Como La estación de los arrepentimientos — la tuya podría ser la siguiente.',
-      spotlightBtn: 'Participar en el concurso'
+      spotlightBtn: 'Ver la comunidad'
     }
   };
 
