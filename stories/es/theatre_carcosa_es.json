@@ -6,7 +6,7 @@
   "stats": [
     {
       "id": "lucidite",
-      "label": "Lucidity",
+      "label": "Lucidez",
       "start": 50,
       "max": 100,
       "color": "#8be9fd"
@@ -42,16 +42,16 @@
   "scenes": {
     "prologue": {
       "id": "prologue",
-      "title": "Representación anterior",
+      "title": "Última Representación",
       "location": "ESTACIÓN DE VALMIRE — 23:17",
-      "narrator": "La lluvia ha caído en Valmire durante tanto tiempo que incluso el regreso parece una llegada.",
-      "text": "El tren se detiene lentamente bajo la lluvia.\n\nVas al muelle solo.\n\nLa estación parece normal.\n\nViejo.\n\nCansado.\n\nPero normal.\n\nAlgunos viajeros siguen esperando bajo las lámparas amarillas.\n\nNinguno de ellos realmente te mira.\n\nUn extraño sentimiento pasa por ti.\n\nComo si hubieras llegado a algún lugar donde nadie te esperaba.\n\nSolo.\n\nPerdido.\n\nEstás viendo la invitación en tu mano.\n\n\"El Théâtre de Valmire le invita a la última actuación.\"\n\nTu nombre está escrito en la parte posterior.\n\nNo reconoces escribir.\n\nA la distancia, la música lenta resuena en la ciudad.\n\nPor un segundo, te sientes extraño que hayas oído esta lluvia antes.",
+      "narrator": "Llueve sobre Valmire desde hace tanto tiempo: hasta el regreso parece una llegada.",
+      "text": "El tren se detiene lentamente bajo la lluvia.\n\nBajas solo al andén.\n\nLa estación parece normal.\n\nVieja.\n\nCansada.\n\nPero normal.\n\nAlgunos viajeros siguen esperando bajo las lámparas amarillas.\n\nNinguno te mira de verdad.\n\nUna extraña sensación te atraviesa.\n\nComo si hubieras llegado a un lugar donde nadie te esperaba de verdad.\n\nSolo.\n\nPerdido.\n\nObservas la invitación en tu mano.\n\n> « El Teatro de Valmire le invita a la última representación. »\n\nTu nombre está escrito al dorso.\n\nNo reconoces la letra.\n\nA lo lejos, una música lenta resuena por la ciudad.\n\nDurante un segundo, tienes la extraña impresión de haber oído ya esta lluvia.",
       "isStart": true,
       "isEnd": false,
       "transition": "fade",
       "choices": [
         {
-          "text": "Vaya al centro de la ciudad",
+          "text": "Ir al centro urbano",
           "vers": "rue_principale",
           "effects": [
             {
@@ -61,7 +61,7 @@
           ]
         },
         {
-          "text": "Ver viajeros",
+          "text": "Observar a los viajeros",
           "vers": "voyageurs",
           "effects": [
             {
@@ -71,7 +71,7 @@
           ]
         },
         {
-          "text": "Lea la invitación",
+          "text": "Releer la invitación",
           "vers": "invitation",
           "effects": [
             {
@@ -81,7 +81,7 @@
           ]
         },
         {
-          "text": "Volver a tren",
+          "text": "Volver hacia el tren",
           "vers": "train",
           "effects": [
             {
@@ -94,16 +94,16 @@
     },
     "voyageurs": {
       "id": "voyageurs",
-      "title": "Viajeros",
+      "title": "Los Viajeros",
       "location": "ANDÉN DE LA ESTACIÓN",
-      "narrator": "La gente a veces evita los ojos de los que llegan.",
-      "text": "Los pocos viajeros presentes parecen nerviosos.\n\nUna mujer dobla rápidamente su diario cuando se acerca.\n\nUn hombre mira constantemente el reloj.\n\n23:17.\n\nTe das cuenta de que nadie sale del tren que acaba de llegar.",
+      "narrator": "A veces se evita mirar a quien llega.",
+      "text": "Los pocos viajeros presentes parecen nerviosos.\n\nUna mujer pliega rápidamente su periódico cuando te acercas.\n\nUn hombre mira constantemente el reloj.\n\n23:17.\n\nNotas que nadie sube al tren que acaba de llegar.",
       "isStart": false,
       "isEnd": false,
       "transition": "fade",
       "choices": [
         {
-          "text": "Hablando con la mujer",
+          "text": "Hablar con la mujer",
           "vers": "femme_journal",
           "effects": [
             {
@@ -113,7 +113,7 @@
           ]
         },
         {
-          "text": "Mirando el reloj",
+          "text": "Observar el reloj",
           "vers": "horloge",
           "effects": [
             {
@@ -123,7 +123,7 @@
           ]
         },
         {
-          "text": "Deja la estación.",
+          "text": "Salir de la estación",
           "vers": "rue_principale",
           "effects": []
         }
@@ -131,16 +131,16 @@
     },
     "invitation": {
       "id": "invitation",
-      "title": "Invitación",
+      "title": "La Invitación",
       "location": "ESTACIÓN",
-      "narrator": "Algunas invitaciones son más como convocaciones.",
-      "text": "El periódico es viejo.\n\nMuy viejo.\n\nLa tinta parece más reciente.\n\nEn la parte posterior de la invitación, bajo su nombre, aparece una frase medio borrada:\n\n\"No te pierdas el último acto.\"",
+      "narrator": "Algunas invitaciones se parecen más a citaciones.",
+      "text": "El papel es antiguo.\n\nMuy antiguo.\n\nSin embargo, la tinta parece más reciente.\n\nAl dorso de la invitación, bajo tu nombre, aparece una frase medio borrada:\n\n> « No se pierda el último acto. »",
       "isStart": false,
       "isEnd": false,
       "transition": "fade",
       "choices": [
         {
-          "text": "Vaya a la ciudad",
+          "text": "Ir hacia la ciudad",
           "vers": "rue_principale",
           "effects": [
             {
@@ -150,7 +150,7 @@
           ]
         },
         {
-          "text": "Enviar invitación",
+          "text": "Tirar la invitación",
           "vers": "rue_principale",
           "effects": [
             {
@@ -163,16 +163,16 @@
     },
     "train": {
       "id": "train",
-      "title": "El tren",
+      "title": "El Tren",
       "location": "ANDÉN",
-      "narrator": "A veces es más difícil salir que llegar.",
-      "text": "Vas hacia el tren.\n\nLas puertas están cerradas.\n\nEl conductor se ha ido.\n\nLas luces se apagan lentamente coche tras coche.\n\nLuego el tren vuelve a la noche.\n\nVacío.",
+      "narrator": "A veces es más difícil irse que llegar.",
+      "text": "Te diriges hacia el tren.\n\nLas puertas están cerradas.\n\nEl maquinista ya no está.\n\nLas luces se apagan lentamente, vagón tras vagón.\n\nLuego el tren se aleja en la noche.\n\nVacío.",
       "isStart": false,
       "isEnd": false,
       "transition": "fade",
       "choices": [
         {
-          "text": "Esperando el próximo tren",
+          "text": "Esperar el próximo tren",
           "vers": "attendre_train",
           "effects": [
             {
@@ -182,7 +182,7 @@
           ]
         },
         {
-          "text": "Deja la estación.",
+          "text": "Salir de la estación",
           "vers": "rue_principale",
           "effects": [
             {
@@ -195,16 +195,16 @@
     },
     "rue_principale": {
       "id": "rue_principale",
-      "title": "Las Rues de Valmire",
-      "location": "CENTRO",
-      "narrator": "Valmire parece suspendido entre dos épocas.",
-      "text": "Las calles están tranquilas.\n\nDemasiado tranquilo.\n\nLos carteles amarillos cubren las paredes.\n\nTodos anuncian lo mismo:\n\n&quot; LAST REPRESENTATION\n\nLos habitantes parecen educados.\n\nPero cansado.\n\nComo si no hubieran dormido mucho tiempo.",
+      "title": "Las Calles de Valmire",
+      "location": "CENTRO DE LA CIUDAD",
+      "narrator": "Valmire parece suspendida entre dos épocas.",
+      "text": "Las calles están tranquilas.\n\nDemasiado tranquilas.\n\nCarteles amarillos cubren los muros.\n\nTodos anuncian lo mismo:\n\n> ÚLTIMA REPRESENTACIÓN\n\nLos habitantes parecen amables.\n\nPero cansados.\n\nComo si durmieran mal desde hace muchísimo tiempo.",
       "isStart": false,
       "isEnd": false,
       "transition": "fade",
       "choices": [
         {
-          "text": "Introducir café",
+          "text": "Entrar en el café",
           "vers": "cafe",
           "effects": [
             {
@@ -214,7 +214,7 @@
           ]
         },
         {
-          "text": "Visite el hotel",
+          "text": "Visitar el hotel",
           "vers": "hotel",
           "effects": [
             {
@@ -224,7 +224,7 @@
           ]
         },
         {
-          "text": "Seguir la música al teatro",
+          "text": "Seguir el sonido hacia el teatro",
           "vers": "theatre",
           "effects": [
             {
@@ -234,7 +234,7 @@
           ]
         },
         {
-          "text": "Explore la clínica abandonada",
+          "text": "Explorar la clínica abandonada",
           "vers": "clinique",
           "effects": [
             {
@@ -257,16 +257,16 @@
     },
     "cafe": {
       "id": "cafe",
-      "title": "El café de los viajeros",
+      "title": "El Café de los Viajeros",
       "location": "PLAZA CENTRAL",
       "narrator": "Algunas ciudades esconden sus secretos detrás de la música.",
-      "text": "El café está caliente.\n\nUn pianista juega una melodía lenta.\n\nLos clientes hablan con voz baja.\n\nSe nota que varios relojes se detuvieron al mismo tiempo.",
+      "text": "El café es acogedor.\n\nUn pianista toca una melodía lenta.\n\nLos clientes hablan en voz baja.\n\nNotas varios relojes de pared parados a la misma hora.",
       "isStart": false,
       "isEnd": false,
       "transition": "fade",
       "choices": [
         {
-          "text": "Hablando con el pianista",
+          "text": "Hablar con el pianista",
           "vers": "pianiste",
           "effects": [
             {
@@ -276,7 +276,7 @@
           ]
         },
         {
-          "text": "Lea el periódico local",
+          "text": "Leer el periódico local",
           "vers": "journal",
           "effects": [
             {
@@ -286,7 +286,7 @@
           ]
         },
         {
-          "text": "Observación de clientes",
+          "text": "Observar a los clientes",
           "vers": "clients",
           "effects": [
             {
@@ -296,12 +296,12 @@
           ]
         },
         {
-          "text": "Café",
+          "text": "Salir del café",
           "vers": "rue_principale",
           "effects": []
         },
         {
-          "text": "Quédate en el café e ignora el teatro",
+          "text": "Quedarte en el café e ignorar el teatro",
           "vers": "rester_cafe",
           "effects": [
             {
@@ -316,14 +316,14 @@
       "id": "pianiste",
       "title": "El Pianista",
       "location": "CAFÉ",
-      "narrator": "Los artistas a veces notan lo que otros no saben.",
-      "text": "El pianista sigue jugando sin levantar los ojos.\n\n\"Esta ciudad ama historias tristes.\"\n\nEntonces:\n\n\"La gente viene aquí para olvidar ciertas cosas.\"\n\nSe detiene por un segundo.\n\n\"O recordarlo.\"",
+      "narrator": "Los artistas notan a veces lo que los demás ignoran.",
+      "text": "El pianista sigue tocando sin levantar la vista.\n\n> « Esta ciudad ama las historias tristes. »\n\nLuego:\n\n> « La gente viene aquí a olvidar ciertas cosas. »\n\nSe detiene un segundo.\n\n> « O a recordarlas. »",
       "isStart": false,
       "isEnd": false,
       "transition": "fade",
       "choices": [
         {
-          "text": "Pregunta lo que quiere decir",
+          "text": "Preguntar qué quiere decir",
           "vers": "pianiste_suite",
           "effects": [
             {
@@ -333,7 +333,7 @@
           ]
         },
         {
-          "text": "Volver al centro de la ciudad",
+          "text": "Volver al centro urbano",
           "vers": "rue_principale",
           "effects": []
         }
@@ -341,16 +341,16 @@
     },
     "hotel": {
       "id": "hotel",
-      "title": "Hotel Valmire",
+      "title": "El Hotel de Valmire",
       "location": "CALLE PRINCIPAL",
-      "narrator": "Los hoteles hacen un seguimiento de los viajeros.",
-      "text": "El recepcionista le sonrió inmediatamente.\n\nComo si te estuviera esperando.\n\n> «¿Se queda para la función?»",
+      "narrator": "Los hoteles guardan huellas de sus viajeros.",
+      "text": "El recepcionista te sonríe de inmediato.\n\nComo si te esperara.\n\n> « ¿Se queda para la representación? »",
       "isStart": false,
       "isEnd": false,
       "transition": "fade",
       "choices": [
         {
-          "text": "Sí.",
+          "text": "Sí",
           "vers": "hotel_suite",
           "effects": [
             {
@@ -360,7 +360,7 @@
           ]
         },
         {
-          "text": "¿Qué actuación?",
+          "text": "¿Qué representación?",
           "vers": "hotel_suite",
           "effects": [
             {
@@ -370,7 +370,7 @@
           ]
         },
         {
-          "text": "Estoy pasando por aquí.",
+          "text": "Solo estoy de paso",
           "vers": "hotel_suite",
           "effects": [
             {
@@ -380,7 +380,7 @@
           ]
         },
         {
-          "text": "¿Por qué todos hablan del teatro?",
+          "text": "¿Por qué todo el mundo habla del teatro?",
           "vers": "hotel_suite",
           "effects": [
             {
@@ -393,16 +393,16 @@
     },
     "hotel_suite": {
       "id": "hotel_suite",
-      "title": "La sala",
+      "title": "La Habitación",
       "location": "HOTEL",
       "narrator": "Las noches en Valmire parecen más largas que en otras partes.",
-      "text": "Tu habitación tiene vistas al teatro.\n\nEn la noche:\n- Oíste aplausos,\n- pasos en el pasillo,\n- entonces silencio.\n\nCuando abres la puerta:\n\nEl pasillo está vacío.",
+      "text": "Tu habitación da al teatro.\n\nDurante la noche:\n- oyes aplausos,\n- pasos en el pasillo,\n- y después silencio.\n\nCuando abres la puerta:\n\nEl pasillo está vacío.",
       "isStart": false,
       "isEnd": false,
       "transition": "fade",
       "choices": [
         {
-          "text": "Rastreo de ruido",
+          "text": "Seguir los ruidos",
           "vers": "couloir",
           "effects": [
             {
@@ -412,7 +412,7 @@
           ]
         },
         {
-          "text": "Mira el teatro desde la ventana",
+          "text": "Mirar el teatro desde el ventanal",
           "vers": "fenetre",
           "effects": [
             {
@@ -422,7 +422,7 @@
           ]
         },
         {
-          "text": "Intenta dormir",
+          "text": "Intentar dormir",
           "vers": "reve",
           "effects": [
             {
@@ -435,16 +435,16 @@
     },
     "clinique": {
       "id": "clinique",
-      "title": "La clínica abandonada",
+      "title": "La Clínica Abandonada",
       "location": "BARRIO NORTE",
-      "narrator": "Las explicaciones racionales son tranquilizadoras.",
-      "text": "La clínica parece haber sido abandonada durante mucho tiempo.\n\nLos registros médicos siguen en las oficinas.\n\nTodos hablan:\n- insomnio,\n- obsesiones,\n- pérdida de memoria,\n- y una habitación llamada El Rey en Amarillo.",
+      "narrator": "Las explicaciones racionales tranquilizan.",
+      "text": "La clínica parece abandonada desde hace mucho tiempo.\n\nAún quedan historiales médicos en los despachos.\n\nTodos hablan:\n- de insomnio,\n- de obsesiones,\n- de pérdidas de memoria,\n- y de una obra llamada El Rey de Amarillo.",
       "isStart": false,
       "isEnd": false,
       "transition": "glitch",
       "choices": [
         {
-          "text": "Lea los testimonios",
+          "text": "Leer los testimonios",
           "vers": "temoignages",
           "effects": [
             {
@@ -454,7 +454,7 @@
           ]
         },
         {
-          "text": "Encuentra el nombre del teatro",
+          "text": "Buscar el nombre del teatro",
           "vers": "archives_theatre",
           "effects": [
             {
@@ -464,12 +464,12 @@
           ]
         },
         {
-          "text": "Deja la clínica",
+          "text": "Salir de la clínica",
           "vers": "rue_principale",
           "effects": []
         },
         {
-          "text": "Buscar tratamiento en armarios",
+          "text": "Buscar un tratamiento en los armarios",
           "vers": "traitement_clinique",
           "effects": [
             {
@@ -485,13 +485,13 @@
       "title": "El Teatro de Valmire",
       "location": "PLAZA CENTRAL",
       "narrator": "El teatro parece vivo.",
-      "text": "El edificio es hermoso.\n\nCasi irreal en la lluvia.\n\nDentro, un recepcionista sonríe suavemente.\n\n« Bienvenido a Valmire. »",
+      "text": "El edificio es magnífico.\n\nCasi irreal bajo la lluvia.\n\nDentro, una recepcionista te sonríe con dulzura.\n\n> « Bienvenido a Valmire. »",
       "isStart": false,
       "isEnd": false,
       "transition": "fade",
       "choices": [
         {
-          "text": "Pregunta quién escribió la obra",
+          "text": "Preguntar quién escribió la obra",
           "vers": "receptionniste",
           "effects": [
             {
@@ -501,7 +501,7 @@
           ]
         },
         {
-          "text": "Explora detrás de las escenas",
+          "text": "Explorar los bastidores",
           "vers": "coulisses",
           "effects": [
             {
@@ -521,7 +521,7 @@
           ]
         },
         {
-          "text": "Attend representation",
+          "text": "Asistir a la representación",
           "vers": "representation",
           "effects": [
             {
@@ -534,10 +534,10 @@
     },
     "manuscrit": {
       "id": "manuscrit",
-      "title": "El manuscrito",
+      "title": "El Manuscrito",
       "location": "ARCHIVOS DEL TEATRO",
-      "narrator": "Algunas historias cambian según quién las lee.",
-      "text": "El manuscrito es antiguo.\n\nMuy viejo.\n\nLa obra cuenta a una ciudad que se niega a morir.\n\nUna frase llama su atención:\n\n\"La cortina nunca cae realmente.\"",
+      "narrator": "Algunas historias cambian según quien las lea.",
+      "text": "El manuscrito es antiguo.\n\nMuy antiguo.\n\nLa obra narra una ciudad que se niega a morir.\n\nUna frase llama tu atención:\n\n> « El telón nunca cae del todo. »",
       "isStart": false,
       "isEnd": false,
       "transition": "fade",
@@ -553,7 +553,7 @@
           ]
         },
         {
-          "text": "Refiriéndose al manuscrito",
+          "text": "Cerrar el manuscrito",
           "vers": "coulisses",
           "effects": [
             {
@@ -563,7 +563,7 @@
           ]
         },
         {
-          "text": "Compare la escritura con invitación",
+          "text": "Cotejar caligrafía y invitación",
           "vers": "ecriture",
           "effects": [
             {
@@ -576,16 +576,16 @@
     },
     "coulisses": {
       "id": "coulisses",
-      "title": "Detrás de las escenas",
-      "location": "TRASESCENA",
-      "narrator": "Detrás de cada representación hay algo escondido.",
-      "text": "Los actores repiten en silencio.\n\nSus labios se mueven.\n\nPero no sale el sonido.\n\nDetrás de las escenas:\n- una puerta roja,\n- un reloj paró,\n- una gran pintura de Valmire.",
+      "title": "Los Bastidores",
+      "location": "DETRÁS DEL ESCENARIO",
+      "narrator": "Detrás de cada representación se esconde algo.",
+      "text": "Los actores ensayan en silencio.\n\nSus labios se mueven.\n\nPero ningún sonido sale.\n\nAl fondo de los bastidores:\n- una puerta roja,\n- un reloj parado,\n- un enorme cuadro de Valmire.",
       "isStart": false,
       "isEnd": false,
       "transition": "fade",
       "choices": [
         {
-          "text": "Observe la pintura",
+          "text": "Observar el cuadro",
           "vers": "tableau",
           "effects": [
             {
@@ -595,7 +595,7 @@
           ]
         },
         {
-          "text": "Acércate a la puerta roja",
+          "text": "Acercarse a la puerta roja",
           "vers": "porte_intro",
           "effects": [
             {
@@ -605,7 +605,7 @@
           ]
         },
         {
-          "text": "Hablando con un actor",
+          "text": "Hablar con un actor",
           "vers": "acteur",
           "effects": [
             {
@@ -615,7 +615,7 @@
           ]
         },
         {
-          "text": "Vuelve al vestíbulo.",
+          "text": "Volver al vestíbulo",
           "vers": "theatre",
           "effects": []
         }
@@ -623,10 +623,10 @@
     },
     "tableau": {
       "id": "tableau",
-      "title": "Cuadro",
+      "title": "El Cuadro",
       "location": "BASTIDORES",
-      "narrator": "Los detalles a veces cambian sin aviso.",
-      "text": "La pintura representa Valmire en la lluvia.\n\nAlgo parece diferente.\n\nPodrías jurar que una silueta no estaba allí unos segundos antes.\n\nUna silueta que se parece a ti.",
+      "narrator": "Los detalles cambian a veces sin avisar.",
+      "text": "El cuadro muestra Valmire bajo el aguacero.\n\nAlgo parece distinto.\n\nPodrías jurar: una silueta no estaba allí unos segundos antes.\n\nUna silueta parecida a ti.",
       "isStart": false,
       "isEnd": false,
       "transition": "glitch",
@@ -642,7 +642,7 @@
           ]
         },
         {
-          "text": "Deja atrás las escenas",
+          "text": "Salir de los bastidores",
           "vers": "theatre",
           "effects": [
             {
@@ -655,16 +655,16 @@
     },
     "porte_intro": {
       "id": "porte_intro",
-      "title": "Red Gate",
+      "title": "La Puerta Roja",
       "location": "BASTIDORES",
-      "narrator": "Algunas puertas parecen más viejas que las paredes circundantes.",
-      "text": "La puerta roja está cerrada.\n\nPero tienes la extraña impresión de que estaba abierta antes.\n\nO tal vez sea sólo una impresión.",
+      "narrator": "Algunas puertas parecen más antiguas que sus muros, y eso inquieta.",
+      "text": "La puerta roja permanece cerrada con llave.\n\nSin embargo, tienes una extraña impresión: antes estaba abierta.\n\nO quizá sea solo una impresión.",
       "isStart": false,
       "isEnd": false,
       "transition": "fade",
       "choices": [
         {
-          "text": "Intenta abrir la puerta.",
+          "text": "Intentar abrir la puerta",
           "vers": "porte_verrouillee",
           "effects": [
             {
@@ -674,7 +674,7 @@
           ]
         },
         {
-          "text": "Pregunta al recepcionista",
+          "text": "Preguntar a la recepcionista",
           "vers": "reception_porte",
           "effects": [
             {
@@ -684,7 +684,7 @@
           ]
         },
         {
-          "text": "Ignora la puerta",
+          "text": "Ignorar la puerta",
           "vers": "theatre",
           "effects": [
             {
@@ -697,16 +697,16 @@
     },
     "porte_rouge": {
       "id": "porte_rouge",
-      "title": "La segunda ley",
+      "title": "El Segundo Acto",
       "location": "SALA ROJA",
       "narrator": "El segundo acto no está destinado a los espectadores.",
-      "text": "Detrás de la puerta:\n\nUna habitación vacía.\n\nDocenas de sillas.\n\nTodo se convirtió en una escena negra.\n\nEn algunas sillas:\n\nFotografías.\n\nAlgunos te muestran.\n\nA veces no te acuerdas.",
+      "text": "Tras la puerta:\n\nUna sala vacía.\n\nDecenas de sillas.\n\nTodas orientadas hacia un escenario negro.\n\nSobre algunas sillas:\n\nFotografías.\n\nAlgunas te muestran.\n\nEn momentos que no recuerdas.",
       "isStart": false,
       "isEnd": false,
       "transition": "flash",
       "choices": [
         {
-          "text": "Examinar fotografías",
+          "text": "Examinar las fotografías",
           "vers": "photos",
           "effects": [
             {
@@ -716,7 +716,7 @@
           ]
         },
         {
-          "text": "Sube al escenario.",
+          "text": "Subir al escenario",
           "vers": "scene_finale",
           "effects": [
             {
@@ -726,7 +726,7 @@
           ]
         },
         {
-          "text": "Huye.",
+          "text": "Huir de la sala",
           "vers": "oubli",
           "effects": [
             {
@@ -739,16 +739,16 @@
     },
     "scene_finale": {
       "id": "scene_finale",
-      "title": "La última escena",
-      "location": "EN EL ESCENARIO",
+      "title": "El Último Acto",
+      "location": "SOBRE EL ESCENARIO",
       "narrator": "Las historias a veces se niegan a morir.",
-      "text": "Cuando te subes al escenario:\n\nLas luces están encendidas.\n\nLos asientos están ocupados.\n\nPero todas las caras están borrosas.\n\nEntonces el narrador habla directamente.\n\n\"Querías entender.\"",
+      "text": "Cuando subes al escenario:\n\nSe encienden las luces.\n\nLas butacas ya están ocupadas.\n\nPero todos los rostros son borrosos.\n\nEntonces el narrador habla directamente.\n\n> « Querías entender. »",
       "isStart": false,
       "isEnd": false,
       "transition": "flash",
       "choices": [
         {
-          "text": "Quemando el Teatro",
+          "text": "Quemar el teatro",
           "vers": "fin_silence",
           "effects": [
             {
@@ -758,7 +758,7 @@
           ]
         },
         {
-          "text": "Aceptar su papel",
+          "text": "Aceptar tu papel",
           "vers": "fin_roi",
           "effects": [
             {
@@ -772,7 +772,7 @@
           }
         },
         {
-          "text": "Rechazar a continuar",
+          "text": "Negarte a continuar",
           "vers": "oubli",
           "effects": [
             {
@@ -782,7 +782,7 @@
           ]
         },
         {
-          "text": "Mira al público",
+          "text": "Mirar al público",
           "vers": "spectateur",
           "effects": [
             {
@@ -795,10 +795,10 @@
     },
     "fin_silence": {
       "id": "fin_silence",
-      "title": "Silencio",
+      "title": "El Silencio",
       "location": "VALMIRE EN LLAMAS",
       "narrator": "Algunas historias deben terminar.",
-      "text": "Fuego lentamente devora el teatro.\n\nLa lluvia finalmente se detiene.\n\nAntes de que todo se vaya:\n\nEscuchas aplausos.\n\nIncluso sin público.",
+      "text": "El fuego devora lentamente el teatro.\n\nLa lluvia por fin se detiene.\n\nAntes de que todo desaparezca:\n\nOyes aplausos.\n\nAun sin público.",
       "isStart": false,
       "isEnd": true,
       "transition": "flash",
@@ -806,10 +806,10 @@
     },
     "fin_roi": {
       "id": "fin_roi",
-      "title": "El Rey en Amarillo",
-      "location": "EN EL ESCENARIO",
+      "title": "El Rey de Amarillo",
+      "location": "SOBRE EL ESCENARIO",
       "narrator": "Las historias necesitan actores.",
-      "text": "La cortina amarilla cae lentamente.\n\nLuego se abren las puertas del teatro.\n\nUna nueva persona entra en Valmire.\n\nPerdido.\n\nComo tú al principio.",
+      "text": "El telón amarillo cae lentamente.\n\nLuego las puertas del teatro se abren.\n\nUna nueva persona entra en Valmire.\n\nPerdida.\n\nComo tú al principio.",
       "isStart": false,
       "isEnd": true,
       "transition": "flash",
@@ -817,10 +817,10 @@
     },
     "oubli": {
       "id": "oubli",
-      "title": "Olvidad",
+      "title": "El Olvido",
       "location": "FUERA DE VALMIRE",
-      "narrator": "Podemos salir de una ciudad. No siempre lo que vimos.",
-      "text": "Te vas de Valmire antes del amanecer.\n\nPasan varias semanas.\n\nEntonces una noche:\n\nEncuentras el manuscrito en casa.\n\nAbierto a una página que no recuerda leer.",
+      "narrator": "Se puede abandonar una ciudad. No siempre lo que se ha visto en ella.",
+      "text": "Sales de Valmire antes del amanecer.\n\nPasan varias semanas.\n\nLuego, una noche:\n\nEncuentras el manuscrito en tu casa.\n\nAbierto por una página que no recuerdas haber leído.",
       "isStart": false,
       "isEnd": true,
       "transition": "fade",
@@ -828,16 +828,16 @@
     },
     "femme_journal": {
       "id": "femme_journal",
-      "title": "La mujer del diario",
+      "title": "La Mujer del Periódico",
       "location": "ANDÉN DE LA ESTACIÓN",
-      "narrator": "Algunas personas esconden secretos menos que recuerdos.",
-      "text": "La mujer tiene su diario contra ella.\n\nSólo ves el título antes de doblarlo:\n\nEl tesorero rodea a este señor\n\nCuando le preguntas si sabe la obra, responde muy rápido:\n\nNadie sabe realmente esta obra. Sólo pensamos que recordamos.",
+      "narrator": "Algunas personas esconden menos secretos y más recuerdos.",
+      "text": "La mujer aprieta su periódico contra el pecho.\n\nSolo alcanzas a ver el titular antes de que lo pliegue:\n\n> EL TEATRO REABRE ESTA NOCHE\n\nCuando le preguntas si conoce la obra, responde demasiado deprisa:\n\n**« Nadie conoce realmente esta obra. Solo creemos recordarla. »**",
       "isStart": false,
       "isEnd": false,
       "transition": "fade",
       "choices": [
         {
-          "text": "Pregunta por qué tiene miedo.",
+          "text": "Preguntarle por qué tiene miedo",
           "vers": "horloge",
           "effects": [
             {
@@ -847,7 +847,7 @@
           ]
         },
         {
-          "text": "Deja la estación.",
+          "text": "Salir de la estación",
           "vers": "rue_principale",
           "effects": [
             {
@@ -857,7 +857,7 @@
           ]
         },
         {
-          "text": "Lea el periódico hasta que se sienta mareado",
+          "text": "Leer el periódico hasta sentir vértigo",
           "vers": "retour_gare",
           "effects": [
             {
@@ -870,16 +870,16 @@
     },
     "horloge": {
       "id": "horloge",
-      "title": "El reloj",
+      "title": "El Reloj",
       "location": "ANDÉN DE LA ESTACIÓN",
-      "narrator": "El tiempo es a veces la primera mentira en una ciudad.",
-      "text": "El reloj dice 23:17.\n\nLa segunda aguja se mueve normalmente.\n\nPero el tiempo no cambia.\n\nUn hombre junto a ti susurra:\n\nSiempre termina saliendo.\n\nLuego se aleja antes de que puedas responder.",
+      "narrator": "El tiempo es a veces la primera mentira de una ciudad.",
+      "text": "El reloj marca las 23:17.\n\nLa aguja de los segundos avanza con normalidad.\n\nSin embargo, la hora no cambia.\n\nUn hombre junto a ti murmura:\n\n**« Siempre acaba por irse. »**\n\nLuego se aleja antes de que puedas responder.",
       "isStart": false,
       "isEnd": false,
       "transition": "glitch",
       "choices": [
         {
-          "text": "Sigue al hombre",
+          "text": "Seguir al hombre",
           "vers": "rue_principale",
           "effects": [
             {
@@ -889,7 +889,7 @@
           ]
         },
         {
-          "text": "Deja la estación.",
+          "text": "Salir de la estación",
           "vers": "rue_principale",
           "effects": [
             {
@@ -899,7 +899,7 @@
           ]
         },
         {
-          "text": "Permanecer para fijar el reloj hasta que la estación parece cambiar",
+          "text": "Mirar el reloj sin pestañear hasta que el andén cambie",
           "vers": "retour_gare",
           "effects": [
             {
@@ -916,16 +916,16 @@
     },
     "journal": {
       "id": "journal",
-      "title": "El periódico local",
+      "title": "El Periódico Local",
       "location": "CAFÉ DE LOS VIAJEROS",
-      "narrator": "Los periódicos dicen lo que las ciudades aceptan admitir.",
-      "text": "El periódico habla de un viejo incendio en el teatro.\n\nLa fecha se borra parcialmente.\n\nEstos incluyen:\n- actores desaparecidos,\n- una actuación interrumpida,\n- de un director nunca lo encontró.\n\nNingún nombre es legible.\n\nExcepto por una palabra, impresa en la parte inferior de la página:\n\n**CARCOSA**",
+      "narrator": "Los periódicos cuentan lo que las ciudades aceptan confesar.",
+      "text": "El periódico habla de un antiguo incendio en el teatro.\n\nLa fecha está parcialmente borrada.\n\nEn él se menciona:\n- actores desaparecidos,\n- una representación interrumpida,\n- un director de escena nunca encontrado.\n\nNingún nombre es legible.\n\nSalvo una palabra, impresa al pie de página:\n\n**CARCOSA**",
       "isStart": false,
       "isEnd": false,
       "transition": "fade",
       "choices": [
         {
-          "text": "Pregúntele al pianista qué es Carcosa",
+          "text": "Preguntar al pianista qué es Carcosa",
           "vers": "pianiste",
           "effects": [
             {
@@ -935,7 +935,7 @@
           ]
         },
         {
-          "text": "Café",
+          "text": "Salir del café",
           "vers": "rue_principale",
           "effects": [
             {
@@ -945,7 +945,7 @@
           ]
         },
         {
-          "text": "Lea el artículo desde el principio",
+          "text": "Releer el artículo desde el principio",
           "vers": "retour_gare",
           "effects": [
             {
@@ -962,16 +962,16 @@
     },
     "clients": {
       "id": "clients",
-      "title": "Clientes",
+      "title": "Los Clientes",
       "location": "CAFÉ DE LOS VIAJEROS",
-      "narrator": "Un silencio compartido puede ser más pesado que una confesión.",
-      "text": "Los clientes no hablan mucho.\n\nTodos tienen una taza delante de ellos.\n\nNada de humo.\n\nUn joven rasca algo en una toalla.\n\nCuando se levanta, lee:\n\nNo te vayas esta noche.\n\nLuego la tinta se extiende bajo una gota de agua que cae del techo.",
+      "narrator": "Un silencio compartido puede pesar más que una confesión.",
+      "text": "Los clientes hablan poco.\n\nTodos tienen una taza delante.\n\nNinguno fuma.\n\nUn joven garabatea algo en una servilleta.\n\nCuando se levanta, lees:\n\n> No vayas esta noche.\n\nLuego la tinta se corre bajo una gota de agua caída del techo.",
       "isStart": false,
       "isEnd": false,
       "transition": "fade",
       "choices": [
         {
-          "text": "Mantenga la toalla",
+          "text": "Guardar la servilleta",
           "vers": "rue_principale",
           "effects": [
             {
@@ -981,7 +981,7 @@
           ]
         },
         {
-          "text": "Hablando con el pianista",
+          "text": "Hablar con el pianista",
           "vers": "pianiste",
           "effects": [
             {
@@ -991,7 +991,7 @@
           ]
         },
         {
-          "text": "Arregla la toalla hasta que la tinta desaparezca",
+          "text": "Contemplar el borrón de tinta hasta su total desaparición",
           "vers": "retour_gare",
           "effects": [
             {
@@ -1004,16 +1004,16 @@
     },
     "pianiste_suite": {
       "id": "pianiste_suite",
-      "title": "Melody",
+      "title": "La Melodía",
       "location": "CAFÉ",
-      "narrator": "Algo de música no está en los oídos. Se quedan en otro lugar.",
-      "text": "El pianista sonríe sin alegría.\n\n**\"Esta canción no es mía. Nadie aquí sabe quién lo escribió.\"**\n\nToca tres notas.\n\nLos reconoces.\n\nImposible.\n\nSeguro que los escuchaste en tu sueño la noche anterior.\n\nPero aún no has dormido en Valmire.",
+      "narrator": "Algunas músicas no se quedan en los oídos. Se quedan en otra parte.",
+      "text": "El pianista sonríe sin alegría.\n\n**« Esta pieza no es mía. Nadie aquí sabe quién la compuso. »**\n\nToca tres notas.\n\nLas reconoces.\n\nSin embargo, es imposible.\n\nEstás seguro de haberlas oído en tu sueño la noche anterior.\n\nPero todavía no has dormido en Valmire.",
       "isStart": false,
       "isEnd": false,
       "transition": "glitch",
       "choices": [
         {
-          "text": "Pregunte el nombre de la canción",
+          "text": "Preguntar cómo se titula",
           "vers": "theatre",
           "effects": [
             {
@@ -1023,7 +1023,7 @@
           ]
         },
         {
-          "text": "Café",
+          "text": "Salir del café",
           "vers": "rue_principale",
           "effects": [
             {
@@ -1033,7 +1033,7 @@
           ]
         },
         {
-          "text": "Escucha la melodía hasta que olvides dónde estás",
+          "text": "Escuchar hasta olvidar dónde te hallas",
           "vers": "retour_gare",
           "effects": [
             {
@@ -1046,16 +1046,16 @@
     },
     "couloir": {
       "id": "couloir",
-      "title": "El Corredor",
+      "title": "El Pasillo",
       "location": "HOTEL",
       "narrator": "Los hoteles siempre tienen demasiadas puertas.",
-      "text": "El pasillo está vacío.\n\nPero escuchas pasos detrás de cada puerta.\n\nEn la parte trasera, una habitación está cerrada.\n\nEn el mango cuelga una señal:\n\nNo molestes.\n\nTu nombre está escrito en lápiz debajo.",
+      "text": "El pasillo está vacío.\n\nSin embargo, oyes pasos tras cada puerta.\n\nAl fondo, una habitación está entreabierta.\n\nEn el pomo cuelga un cartel:\n\n> No molestar.\n\nTu nombre está escrito a lápiz debajo.",
       "isStart": false,
       "isEnd": false,
       "transition": "fade",
       "choices": [
         {
-          "text": "Entrando en la habitación",
+          "text": "Entrar en la habitación",
           "vers": "reve",
           "effects": [
             {
@@ -1065,7 +1065,7 @@
           ]
         },
         {
-          "text": "Vuelve a tu habitación.",
+          "text": "Volver a tu habitación",
           "vers": "fenetre",
           "effects": [
             {
@@ -1078,16 +1078,16 @@
     },
     "fenetre": {
       "id": "fenetre",
-      "title": "La ventana",
+      "title": "La Ventana",
       "location": "HABITACIÓN DE HOTEL",
-      "narrator": "Desde algunas ventanas, vemos menos el mundo que una posible versión del mundo.",
-      "text": "El teatro brilla bajo la lluvia.\n\nUna línea de espectadores entra lentamente.\n\nEntonces parpadeas.\n\nEl lugar está vacío.\n\nLas puertas del teatro están cerradas.\n\nLa música continúa.",
+      "narrator": "Desde ciertas ventanas no se ve tanto el mundo como una versión posible de él.",
+      "text": "El teatro brilla bajo el aguacero.\n\nUna fila de espectadores entra lentamente.\n\nLuego parpadeas.\n\nPlaza vacía.\n\nPuertas del teatro cerradas.\n\nSin embargo, aún suena la música.",
       "isStart": false,
       "isEnd": false,
       "transition": "glitch",
       "choices": [
         {
-          "text": "Ve al teatro.",
+          "text": "Ir al teatro",
           "vers": "theatre",
           "effects": [
             {
@@ -1097,7 +1097,7 @@
           ]
         },
         {
-          "text": "Intenta dormir",
+          "text": "Intentar dormir",
           "vers": "reve",
           "effects": [
             {
@@ -1107,7 +1107,7 @@
           ]
         },
         {
-          "text": "Mira el teatro hasta que la lluvia se en silencio",
+          "text": "Mirar el teatro hasta el silencio total",
           "vers": "retour_gare",
           "effects": [
             {
@@ -1120,16 +1120,16 @@
     },
     "reve": {
       "id": "reve",
-      "title": "El sueño amarillo",
+      "title": "El Sueño Amarillo",
       "location": "HABITACIÓN DE HOTEL",
-      "narrator": "Los sueños son a veces las repeticiones generales de cosas que aún no han tenido lugar.",
-      "text": "Soñaste con una escena vacía.\n\nUna cortina amarilla cae lentamente.\n\nAlguien está animando.\n\nSólo una persona.\n\nCuando te despiertas, tus manos huelen a polvo de teatro.",
+      "narrator": "Los sueños son a veces los ensayos generales de cosas que aún no han ocurrido.",
+      "text": "Sueñas con un escenario vacío.\n\nUn telón amarillo cae lentamente.\n\nAlguien aplaude.\n\nUna sola persona.\n\nCuando despiertas, tus manos huelen a polvo de teatro.",
       "isStart": false,
       "isEnd": false,
       "transition": "fade",
       "choices": [
         {
-          "text": "Baja al vestíbulo.",
+          "text": "Bajar al vestíbulo",
           "vers": "hotel",
           "effects": [
             {
@@ -1139,7 +1139,7 @@
           ]
         },
         {
-          "text": "Ve al teatro.",
+          "text": "Ir al teatro",
           "vers": "theatre",
           "effects": [
             {
@@ -1149,7 +1149,7 @@
           ]
         },
         {
-          "text": "Cierra tus ojos y sigue el sueño hasta el final",
+          "text": "Cerrar los ojos y seguir el sueño hasta el final",
           "vers": "retour_gare",
           "effects": [
             {
@@ -1166,16 +1166,16 @@
     },
     "temoignages": {
       "id": "temoignages",
-      "title": "Testimonios",
+      "title": "Los Testimonios",
       "location": "CLÍNICA",
       "narrator": "Los pacientes suelen usar las mismas palabras cuando nadie les ha hablado.",
-      "text": "Los testimonios describen síntomas contradictorios.\n\nAlgunos hablan de sueños.\nOtros de un culto.\nOtros de la enfermedad de memoria.\n\nSólo un detalle siempre vuelve:\n\nLa música comienza antes de la actuación.\n\nUna nota manuscrita añade:\n\nTal vez el problema no es la obra.\nTal vez impida que algo más salga.",
+      "text": "Los testimonios describen síntomas contradictorios.\n\nAlgunos hablan de sueños.\nOtros de una secta.\nOtros de una enfermedad de la memoria.\n\nUn solo detalle se repite siempre:\n\n> la música empieza antes de la representación.\n\nUna nota manuscrita añade:\n\n> Quizá el problema no sea la obra.\n> Quizá impide que salga otra cosa.",
       "isStart": false,
       "isEnd": false,
       "transition": "fade",
       "choices": [
         {
-          "text": "Buscar los archivos de teatro",
+          "text": "Buscar los archivos del teatro",
           "vers": "archives_theatre",
           "effects": [
             {
@@ -1185,7 +1185,7 @@
           ]
         },
         {
-          "text": "Vuelve a la ciudad.",
+          "text": "Volver a la ciudad",
           "vers": "rue_principale",
           "effects": [
             {
@@ -1198,16 +1198,16 @@
     },
     "archives_theatre": {
       "id": "archives_theatre",
-      "title": "Archivos del teatro",
+      "title": "Archivos del Teatro",
       "location": "CLÍNICA",
-      "narrator": "Las administraciones a veces clasifican inexplicables como casos ordinarios.",
-      "text": "Encontrarás un dossier dedicado al Teatro Valmire.\n\nMenciona un incendio.\n\nPero las fechas no coinciden.\n\n1921.\n1947.\n1973.\n2009.\n\nCada documento habla del mismo fuego.\n\nComo si hubiera sucedido varias veces.",
+      "narrator": "Las administraciones archivan a veces lo inexplicable en carpetas corrientes.",
+      "text": "Encuentras un expediente dedicado al Teatro de Valmire.\n\nMenciona un incendio.\n\nPero las fechas no coinciden.\n\n1921.\n1947.\n1973.\n2009.\n\nCada documento habla del mismo incendio.\n\nComo si hubiera ocurrido varias veces.",
       "isStart": false,
       "isEnd": false,
       "transition": "glitch",
       "choices": [
         {
-          "text": "Ve al teatro.",
+          "text": "Ir al teatro",
           "vers": "theatre",
           "effects": [
             {
@@ -1227,7 +1227,7 @@
           ]
         },
         {
-          "text": "Compare todas las fechas hasta que se fusionen",
+          "text": "Comparar todas las fechas hasta confundirlas",
           "vers": "retour_gare",
           "effects": [
             {
@@ -1244,16 +1244,16 @@
     },
     "receptionniste": {
       "id": "receptionniste",
-      "title": "Recepcionista",
+      "title": "La Recepcionista",
       "location": "VESTÍBULO DEL TEATRO",
       "narrator": "La tristeza es a veces una forma de cortesía.",
-      "text": "El recepcionista pensó antes de responder.\n\nNadie sabe quién escribió la obra.\n\nLuego añade:\n\nAlgunos dicen que fue encontrado. Otros se escribió. Creo que estaba esperando a su público.",
+      "text": "La recepcionista reflexiona antes de responder.\n\n**« Nadie sabe realmente quién escribió la obra. »**\n\nLuego añade:\n\n**« Hay quien dice que la hallaron. Otros creen que se escribió sola. Yo pienso que sencillamente esperaba a su público. »**",
       "isStart": false,
       "isEnd": false,
       "transition": "fade",
       "choices": [
         {
-          "text": "Pregunta por qué esta es la última representación",
+          "text": "Preguntar por qué termina todo esta noche",
           "vers": "representation",
           "effects": [
             {
@@ -1263,7 +1263,7 @@
           ]
         },
         {
-          "text": "Solicitar manuscrito",
+          "text": "Pedir el manuscrito",
           "vers": "manuscrit",
           "effects": [
             {
@@ -1273,7 +1273,7 @@
           ]
         },
         {
-          "text": "Explora detrás de las escenas",
+          "text": "Explorar los bastidores",
           "vers": "coulisses",
           "effects": [
             {
@@ -1286,16 +1286,16 @@
     },
     "representation": {
       "id": "representation",
-      "title": "Representación",
+      "title": "La Representación",
       "location": "SALA PRINCIPAL",
-      "narrator": "La cortina siempre se levanta muy lentamente.",
-      "text": "La habitación está casi llena.\n\nSin embargo nadie habla.\n\nEn el escenario, los actores comienzan una escena común:\n\nUn viajero llega a una ciudad bajo la lluvia.\n\nSonríes nerviosamente.\n\nEntonces el actor principal pronuncia su nombre.",
+      "narrator": "El telón siempre se levanta demasiado despacio.",
+      "text": "La sala está casi llena.\n\nSin embargo, nadie habla.\n\nEn el escenario, los actores empiezan una escena corriente:\n\nun viajero llega a una ciudad bajo la lluvia.\n\nSonríes con nerviosismo.\n\nEntonces el actor principal pronuncia tu nombre.",
       "isStart": false,
       "isEnd": false,
       "transition": "flash",
       "choices": [
         {
-          "text": "Siéntate hasta la intermisión",
+          "text": "Quedarte sentado hasta el intermedio",
           "vers": "lecture_suite",
           "effects": [
             {
@@ -1305,7 +1305,7 @@
           ]
         },
         {
-          "text": "Deja la habitación discretamente",
+          "text": "Salir de la sala discretamente",
           "vers": "coulisses",
           "effects": [
             {
@@ -1315,7 +1315,7 @@
           ]
         },
         {
-          "text": "Seguir a los actores después del escenario",
+          "text": "Seguir a los actores al terminar",
           "vers": "apres_representation",
           "effects": [
             {
@@ -1325,7 +1325,7 @@
           ]
         },
         {
-          "text": "No hagas nada y mira al final",
+          "text": "No hacer nada y mirar hasta el final",
           "vers": "fin_spectateur_immobile",
           "effects": [
             {
@@ -1338,16 +1338,16 @@
     },
     "lecture_suite": {
       "id": "lecture_suite",
-      "title": "La página siguiente",
+      "title": "La Página Siguiente",
       "location": "ARCHIVOS DEL TEATRO",
-      "narrator": "Nunca leíste la misma historia dos veces.",
-      "text": "La siguiente página describe una ciudad bajo la lluvia.\n\nUna estación de tren.\nCafé.\nUn hotel.\nUna clínica.\n\nTodo parece familiar.\n\nPero ningún pasaje indica claramente qué sucede después.\n\nSólo esta frase:\n\nEl espectador elegirá la forma de su prisión.",
+      "narrator": "Nunca se lee dos veces una misma historia.",
+      "text": "La página siguiente describe una ciudad bajo la lluvia.\n\nUna estación.\nUn café.\nUn hotel.\nUna clínica.\n\nTodo parece familiar.\n\nPero ningún pasaje dice con claridad lo que ocurre después.\n\nSolo esta frase:\n\n> El espectador elegirá la forma de su prisión.",
       "isStart": false,
       "isEnd": false,
       "transition": "glitch",
       "choices": [
         {
-          "text": "Compare con la invitación",
+          "text": "Comparar con la invitación",
           "vers": "ecriture",
           "effects": [
             {
@@ -1357,7 +1357,7 @@
           ]
         },
         {
-          "text": "Refiriéndose al manuscrito y volviendo al vestíbulo",
+          "text": "Cerrar el manuscrito y volver al vestíbulo",
           "vers": "theatre",
           "effects": [
             {
@@ -1377,7 +1377,7 @@
           ]
         },
         {
-          "text": "Lea la primera línea del manuscrito",
+          "text": "Releer el primer renglón del manuscrito",
           "vers": "retour_gare",
           "effects": [
             {
@@ -1394,16 +1394,16 @@
     },
     "ecriture": {
       "id": "ecriture",
-      "title": "La misma mano",
+      "title": "La Misma Mano",
       "location": "ARCHIVOS",
-      "narrator": "Reconocimiento de la escritura puede ser más preocupante que reconocer una cara.",
-      "text": "Compara la escritura del manuscrito con la de la invitación.\n\nLas cartas son similares.\n\nNo es idéntico.\n\nComo si la misma mano hubiera escrito ambos textos años aparte.\n\nO como si alguien estuviera imitando una escritura que conocía muy bien.\n\nTuyo.",
+      "narrator": "Reconocer una letra puede ser más inquietante que reconocer un rostro.",
+      "text": "Cotejas la caligrafía del manuscrito con la de la invitación.\n\nLas letras se parecen.\n\nPero no coinciden del todo.\n\nComo si una misma mano hubiera escrito ambos textos con años de diferencia.\n\nO alguien imitando una letra demasiado conocida.\n\nLa tuya.",
       "isStart": false,
       "isEnd": false,
       "transition": "glitch",
       "choices": [
         {
-          "text": "Vuelve al vestíbulo.",
+          "text": "Volver al vestíbulo",
           "vers": "theatre",
           "effects": [
             {
@@ -1413,7 +1413,7 @@
           ]
         },
         {
-          "text": "Mantener la invitación y dejar los archivos",
+          "text": "Guardar la invitación y salir de los archivos",
           "vers": "coulisses",
           "effects": [
             {
@@ -1423,7 +1423,7 @@
           ]
         },
         {
-          "text": "Trate de reproducir la escritura",
+          "text": "Intentar reproducir la letra",
           "vers": "retour_gare",
           "effects": [
             {
@@ -1440,16 +1440,16 @@
     },
     "acteur": {
       "id": "acteur",
-      "title": "El Actor Muet",
+      "title": "El Actor Mudo",
       "location": "BASTIDORES",
-      "narrator": "Los actores a veces saben su papel sin conocer el juego.",
-      "text": "El actor te está observando.\n\nAbre la boca.\n\nNo sale ruido.\n\nLuego escribió rápidamente en su manga con maquillaje negro:\n\nNo termine la escena.\n\nAntes de que puedas reaccionar, borra el mensaje.",
+      "narrator": "Los actores a veces conocen su papel sin conocer la obra.",
+      "text": "El actor te mira.\n\nAbre la boca.\n\nNingún sonido sale.\n\nEntonces escribe deprisa en su manga, con maquillaje negro:\n\n> No termines la escena.\n\nAntes de que puedas reaccionar, borra el mensaje.",
       "isStart": false,
       "isEnd": false,
       "transition": "fade",
       "choices": [
         {
-          "text": "Pregúntale qué escena",
+          "text": "Preguntarle qué escena",
           "vers": "acteur_question",
           "effects": [
             {
@@ -1459,7 +1459,7 @@
           ]
         },
         {
-          "text": "Volver a la sala",
+          "text": "Volver hacia el vestíbulo",
           "vers": "theatre",
           "effects": [
             {
@@ -1469,7 +1469,7 @@
           ]
         },
         {
-          "text": "Observar a otros actores",
+          "text": "Observar a los otros actores",
           "vers": "coulisses",
           "effects": [
             {
@@ -1482,16 +1482,16 @@
     },
     "tableau_suite": {
       "id": "tableau_suite",
-      "title": "La silueta",
+      "title": "La Silueta",
       "location": "BASTIDORES",
-      "narrator": "Una imagen no debería esperar hasta que la veamos.",
-      "text": "La silueta en la pintura mueve un paso adelante.\n\nLa calle pintada parece más profunda que antes.\n\nEn la parte inferior, usted distingue la estación.\n\nLuego el café.\n\nEntonces tú, delante de la pintura.\n\nLa pintura representa ahora la habitación donde estás.",
+      "narrator": "Una imagen no debería esperar a ser mirada.",
+      "text": "La silueta del cuadro avanza un paso.\n\nLa calle pintada parece más honda.\n\nAl fondo asoma la estación.\n\nLuego el café.\n\nLuego tú, frente al cuadro.\n\nEl cuadro muestra ahora el cuarto donde te encuentras.",
       "isStart": false,
       "isEnd": false,
       "transition": "glitch",
       "choices": [
         {
-          "text": "Pintura táctil",
+          "text": "Tocar la pintura",
           "vers": "tableau_contact",
           "effects": [
             {
@@ -1501,7 +1501,7 @@
           ]
         },
         {
-          "text": "Backstage",
+          "text": "Retroceder hacia los bastidores",
           "vers": "coulisses",
           "effects": [
             {
@@ -1511,7 +1511,7 @@
           ]
         },
         {
-          "text": "Deja atrás las escenas",
+          "text": "Salir de los bastidores",
           "vers": "theatre",
           "effects": [
             {
@@ -1524,16 +1524,16 @@
     },
     "reception_porte": {
       "id": "reception_porte",
-      "title": "La pregunta prescrita",
+      "title": "La Pregunta Prohibida",
       "location": "VESTÍBULO DEL TEATRO",
-      "narrator": "Algunas preguntas cierran caras más rápido que las puertas.",
-      "text": "Cuando mencionas la puerta roja, el recepcionista deja de sonreír.\n\n**Sólo está abierto cuando alguien insiste lo suficiente.**\n\nLuego añadió, casi para lamentar:\n\n**\"La mayoría de la gente confunde respuesta con liberación.\"**",
+      "narrator": "Ciertas preguntas cierran los rostros más deprisa que las puertas.",
+      "text": "Cuando mencionas la puerta roja, la recepcionista deja de sonreír.\n\n**« Solo se abre cuando alguien insiste durante mucho tiempo. »**\n\nLuego añade, casi a regañadientes:\n\n**« La mayoría de la gente confunde respuesta con liberación. »**",
       "isStart": false,
       "isEnd": false,
       "transition": "fade",
       "choices": [
         {
-          "text": "Pregunta por qué se niega a hablar de ello",
+          "text": "Preguntar por qué se niega a hablar de ello",
           "vers": "reception_secret",
           "effects": [
             {
@@ -1543,7 +1543,7 @@
           ]
         },
         {
-          "text": "Solicitar manuscrito",
+          "text": "Pedir el manuscrito",
           "vers": "manuscrit",
           "effects": [
             {
@@ -1553,7 +1553,7 @@
           ]
         },
         {
-          "text": "Deja el teatro",
+          "text": "Salir del teatro",
           "vers": "rue_principale",
           "effects": [
             {
@@ -1566,16 +1566,16 @@
     },
     "photos": {
       "id": "photos",
-      "title": "Fotografías",
+      "title": "Las Fotografías",
       "location": "SALA ROJA",
-      "narrator": "La evidencia no explica nada. Sólo hace que la duda sea más precisa.",
-      "text": "Las fotografías te muestran en Valmire.\n\nEn frente de la estación.\nCafé.\nEn el hotel.\nDetrás de las escenas.\n\nEn uno de ellos, usas ropa diferente.\n\nPor otro, eres mucho mayor.\n\nEn la parte posterior de la última foto:\n\nOtra vez.",
+      "narrator": "Una prueba no explica nada. Solo vuelve la duda más precisa.",
+      "text": "Las fotografías te muestran por Valmire.\n\nFrente a la estación.\nEn el café.\nEn el hotel.\nEn los bastidores.\n\nEn una de ellas llevas ropa distinta.\n\nEn otra, eres mucho mayor.\n\nAl dorso de la última foto:\n\n> Otra vez.",
       "isStart": false,
       "isEnd": false,
       "transition": "flash",
       "choices": [
         {
-          "text": "Sube a Stage",
+          "text": "Subir al escenario",
           "vers": "scene_finale",
           "effects": [
             {
@@ -1585,7 +1585,7 @@
           ]
         },
         {
-          "text": "Corre con las fotos",
+          "text": "Huir con las fotos",
           "vers": "oubli",
           "effects": [
             {
@@ -1595,7 +1595,7 @@
           ]
         },
         {
-          "text": "Mira debajo de las sillas",
+          "text": "Mirar debajo de las sillas",
           "vers": "spectateur",
           "effects": [
             {
@@ -1610,8 +1610,8 @@
       "id": "spectateur",
       "title": "El Espectador",
       "location": "BALCÓN DEL TEATRO",
-      "narrator": "Las historias mueren sólo cuando nadie las mira más.",
-      "text": "Estás viendo al público.\n\nLas caras se afilan.\n\nUno a uno.\n\nTodo tuyo.\n\nDiferentes versiones.\nDiferentes edades.\nDiferentes opciones.\n\nAsí que entiendes una cosa sin poder formularla:\n\nValmire no esperaba un actor.\n\nEsperaba que alguien dejara la habitación antes del final.\n\nEl teatro se hace silencioso.\n\nMuy lentamente, las luces salen.\n\nEntonces nota algo.\n\nPor el pasillo.\n\nUn balcón.\n\nNo recuerdas ir allí.\n\nPero ahora estás ahí.\n\nA continuación:\n\n- la escena está vacía,\n- los asientos también,\n- como si la actuación hubiera terminado.\n\nEntonces, lejos...\n\nUn tren.\n\nEl ruido metálico resuena por la noche.\n\nTe acercas al balcón.\n\nA través de la lluvia, ves la estación Valmire.\n\nEl tren acaba de llegar.\n\nUna silueta baja lentamente del coche.\n\nSolo.\n\nPerdido.\n\nPor un segundo...\n\nParece familiar.\n\nLuego las luces del teatro están completamente apagadas.\n\nY la música comienza de nuevo.",
+      "narrator": "Las historias solo mueren cuando ya nadie las mira.",
+      "text": "Miras al público.\n\nLos rostros se vuelven nítidos.\n\nUno a uno.\n\nTodos son el tuyo.\n\nVersiones distintas.\nEdades distintas.\nElecciones distintas.\n\nEntonces comprendes algo sin poder formularlo:\n\nValmire no esperaba a un actor.\n\nEsperaba a alguien capaz de abandonar la sala antes del final.\n\nEl teatro se queda en silencio.\n\nMuy lentamente, las luces se apagan.\n\nEntonces notas algo.\n\nEncima de la sala.\n\nUn balcón.\n\nNo recuerdas haber subido.\n\nSin embargo, ahora estás allí.\n\nDebajo de ti:\n\n- el escenario está vacío,\n- las butacas también,\n- como si la representación acabara de terminar.\n\nLuego, a lo lejos…\n\nun tren.\n\nEl ruido metálico resuena en la noche.\n\nTe acercas al balcón.\n\nA través de la lluvia, distingues la estación de Valmire.\n\nEl tren acaba de llegar.\n\nUna silueta baja lentamente del vagón.\n\nSola.\n\nPerdida.\n\nDurante un segundo…\n\nle resulta familiar.\n\nLuego las luces del teatro se apagan por completo.\n\nY la música vuelve a empezar.",
       "isStart": false,
       "isEnd": true,
       "transition": "flash",
@@ -1619,16 +1619,16 @@
     },
     "retour_gare": {
       "id": "retour_gare",
-      "title": "Volver a la estación",
+      "title": "Regreso a la Estación",
       "location": "ESTACIÓN DE VALMIRE — 23:17",
-      "narrator": "Algunos caminos no vuelven. Están tomando el mismo lugar.",
-      "text": "Estás parpadeando.\n\nLa música sale.\n\nLa lluvia volverá.\n\nCuando abres los ojos, vuelves al muelle.\n\nEl tren acaba de llegar.\n\nEn tu mano:\n\nla invitación amarilla.\n\nEstá seco.\n\nA diferencia de ti.",
+      "narrator": "Algunos caminos no conducen hacia atrás. Conducen al mismo lugar.",
+      "text": "Parpadeas.\n\nTodo se apaga.\n\nVuelve a llover.\n\nCuando abres los ojos, vuelves a estar en el andén.\n\nEl tren acaba de llegar.\n\nEn tu mano:\n\ntu invitación amarilla.\n\nSeca del todo.\n\nA diferencia de ti.",
       "isStart": false,
       "isEnd": false,
       "transition": "glitch",
       "choices": [
         {
-          "text": "Empieza de nuevo desde la estación",
+          "text": "Volver a empezar desde el andén",
           "vers": "prologue",
           "effects": [
             {
@@ -1638,7 +1638,7 @@
           ]
         },
         {
-          "text": "Ve directo a la ciudad",
+          "text": "Ir directamente hacia la ciudad",
           "vers": "rue_principale",
           "effects": [
             {
@@ -1651,16 +1651,16 @@
     },
     "acteur_question": {
       "id": "acteur_question",
-      "title": "La escena muda",
+      "title": "La Escena Muda",
       "location": "BASTIDORES",
       "narrator": "Las respuestas silenciosas son a veces las más claras.",
-      "text": "El actor tembla ligeramente.\n\nÉl mira hacia el escenario, luego hacia la puerta roja en el fondo del pasillo.\n\nNo se mueve.\n\nSólo escribe una palabra en la manga:\n\nMás tarde.\n\nLuego recupera su lugar entre los otros actores, como si nada hubiera sucedido.",
+      "text": "El actor tiembla ligeramente.\n\nMira hacia el escenario, luego hacia la puerta roja al fondo del pasillo.\n\nNo avanza.\n\nSolo escribe una palabra en su manga:\n\n> Más tarde.\n\nLuego vuelve a su sitio entre los demás actores, como si nada hubiera pasado.",
       "isStart": false,
       "isEnd": false,
       "transition": "fade",
       "choices": [
         {
-          "text": "Backstage",
+          "text": "Volver a los bastidores",
           "vers": "coulisses",
           "effects": [
             {
@@ -1670,7 +1670,7 @@
           ]
         },
         {
-          "text": "En el vestíbulo",
+          "text": "Volver al vestíbulo",
           "vers": "theatre",
           "effects": [
             {
@@ -1680,7 +1680,7 @@
           ]
         },
         {
-          "text": "Attend representation",
+          "text": "Asistir a la representación",
           "vers": "representation",
           "effects": [
             {
@@ -1703,16 +1703,16 @@
     },
     "tableau_contact": {
       "id": "tableau_contact",
-      "title": "Cold Pintura",
+      "title": "La Pintura Fría",
       "location": "BASTIDORES",
-      "narrator": "Una imagen no debe tener una temperatura.",
-      "text": "Tus dedos tocan la pintura.\n\nHace frío.\n\nNo como un lienzo.\n\nComo una ventana con vistas a una noche de lluvia.\n\nPor un segundo, oyes la estación.\n\nEntonces todo se vuelve tranquilo de nuevo.\n\nLa figura de la pintura ha desaparecido.",
+      "narrator": "Una imagen no debería tener temperatura.",
+      "text": "Tus dedos tocan la pintura.\n\nEstá fría.\n\nNo como un lienzo.\n\nComo un cristal que da a una noche de lluvia.\n\nDurante un segundo, oyes la estación.\n\nLuego todo vuelve a quedar en silencio.\n\nLa silueta del cuadro ha desaparecido.",
       "isStart": false,
       "isEnd": false,
       "transition": "glitch",
       "choices": [
         {
-          "text": "Backstage",
+          "text": "Volver a los bastidores",
           "vers": "coulisses",
           "effects": [
             {
@@ -1722,7 +1722,7 @@
           ]
         },
         {
-          "text": "En el vestíbulo",
+          "text": "Volver al vestíbulo",
           "vers": "theatre",
           "effects": [
             {
@@ -1732,7 +1732,7 @@
           ]
         },
         {
-          "text": "Deja que el vértigo te lleve de vuelta a la estación",
+          "text": "Dejar que el vértigo te lleve de vuelta al andén",
           "vers": "retour_gare",
           "effects": [
             {
@@ -1749,16 +1749,16 @@
     },
     "reception_secret": {
       "id": "reception_secret",
-      "title": "Lo que no dice",
+      "title": "Lo Que No Dice",
       "location": "VESTÍBULO DEL TEATRO",
-      "narrator": "Algunos secretos no se mantienen fuera de la lealtad, sino por temor a lo que harían una vez liberados.",
-      "text": "La recepcionista sacude las manos delante de ella.\n\n**\"No me niego a hablar de ello. Me niego a enviarte allí.\"**\n\nElla mira las puertas del pasillo principal.\n\nEmpieza con la obra. Entender a los actores. Escucha la música. Después de... Sabrás si esta puerta merece ser abierta.",
+      "narrator": "Algunos secretos no se guardan por lealtad, sino por miedo a lo que harían una vez liberados.",
+      "text": "La recepcionista aprieta las manos delante de sí.\n\n**« No me niego a hablar de ello. Me niego a enviarle allí. »**\n\nMira hacia las puertas de la sala principal.\n\n**« Empiece por la obra. Comprenda a los actores. Escuche la música. Solo después… sabrá si esa puerta merece abrirse. »**",
       "isStart": false,
       "isEnd": false,
       "transition": "fade",
       "choices": [
         {
-          "text": "Attend representation",
+          "text": "Asistir a la representación",
           "vers": "representation",
           "effects": [
             {
@@ -1768,7 +1768,7 @@
           ]
         },
         {
-          "text": "Solicitar manuscrito",
+          "text": "Pedir el manuscrito",
           "vers": "manuscrit",
           "effects": [
             {
@@ -1778,7 +1778,7 @@
           ]
         },
         {
-          "text": "Vuelve a la ciudad.",
+          "text": "Volver a la ciudad",
           "vers": "rue_principale",
           "effects": [
             {
@@ -1791,16 +1791,16 @@
     },
     "porte_verrouillee": {
       "id": "porte_verrouillee",
-      "title": "Cerrado",
+      "title": "Cerrada",
       "location": "BASTIDORES",
-      "narrator": "No todas las puertas importantes se abren al primer acto.",
-      "text": "Dispara el mango.\n\nLa puerta no se moverá.\n\nSe adjunta una placa de cobre.\n\nAcceso reservado después del rendimiento.\n\nCuando levantas los ojos, la placa desapareció.\n\nO tal vez no la viste bien.",
+      "narrator": "No todas las puertas importantes se abren en el primer acto.",
+      "text": "Tiras del pomo.\n\nLa puerta no se mueve.\n\nHay una placa de latón fijada en ella.\n\n> Acceso reservado después de la obra.\n\nCuando alzas los ojos, ya no hay nada.\n\nO quizá no llegaste a verla bien.",
       "isStart": false,
       "isEnd": false,
       "transition": "glitch",
       "choices": [
         {
-          "text": "Backstage",
+          "text": "Volver a los bastidores",
           "vers": "coulisses",
           "effects": [
             {
@@ -1810,7 +1810,7 @@
           ]
         },
         {
-          "text": "Attend representation",
+          "text": "Asistir a la representación",
           "vers": "representation",
           "effects": [
             {
@@ -1820,7 +1820,7 @@
           ]
         },
         {
-          "text": "Pregunta al recepcionista",
+          "text": "Preguntar a la recepcionista",
           "vers": "reception_porte",
           "effects": [
             {
@@ -1833,16 +1833,16 @@
     },
     "apres_representation": {
       "id": "apres_representation",
-      "title": "Después del entreacto",
+      "title": "Después del Intermedio",
       "location": "BASTIDORES",
-      "narrator": "Es a menudo entre dos actos que las cosas reales se mueven.",
-      "text": "Los actores dejan la escena en silencio.\n\nNadie parece estar respirando.\n\nEn la parte inferior del pasillo, la puerta roja está cerrada.\n\nEsta vez, nadie te mantiene cerca.",
+      "narrator": "Es a menudo entre dos actos cuando las cosas verdaderas se desplazan.",
+      "text": "Los actores abandonan el escenario en silencio.\n\nNadie parece respirar.\n\nAl fondo del pasillo, la puerta roja está ahora entreabierta.\n\nEsta vez, nadie te impide acercarte.",
       "isStart": false,
       "isEnd": false,
       "transition": "fade",
       "choices": [
         {
-          "text": "Entra en la habitación roja",
+          "text": "Entrar en la sala roja",
           "vers": "porte_rouge",
           "effects": [
             {
@@ -1856,7 +1856,7 @@
           }
         },
         {
-          "text": "Vuelve al vestíbulo.",
+          "text": "Volver al vestíbulo",
           "vers": "theatre",
           "effects": [
             {
@@ -1866,7 +1866,7 @@
           ]
         },
         {
-          "text": "Hablando con el actor silencioso",
+          "text": "Hablar con el actor mudo",
           "vers": "acteur",
           "effects": [
             {
@@ -1876,7 +1876,7 @@
           ]
         },
         {
-          "text": "Seguir a los actores en los albergues",
+          "text": "Seguir a los actores hasta los camerinos",
           "vers": "suivre_acteurs",
           "effects": [
             {
@@ -1886,7 +1886,7 @@
           ]
         },
         {
-          "text": "La puerta parece estar esperándote. Pero algo te está reteniendo.",
+          "text": "Una puerta parece esperarte. Pero algo te retiene.",
           "vers": "boucle_lucidite",
           "effects": [
             {
@@ -1904,10 +1904,10 @@
     },
     "fin_dernier_train": {
       "id": "fin_dernier_train",
-      "title": "El último tren",
+      "title": "El Último Tren",
       "location": "TREN NOCTURNO",
       "narrator": "Algunas salidas no conducen afuera.",
-      "text": "Rechazas a Valmire antes de entrar.\n\nVuelve al muelle y espera el próximo tren.\n\nPor fin viene.\n\nVacío.\n\nLas puertas se abren sin ruido.\n\nVas a subir.\n\nEl tren sale de noche.\n\nLas horas pasan.\n\nNo aparece ninguna estación.\n\nA través de la ventana, en la lluvia, se ve un póster amarillo atrapado dentro del coche.\n\n&quot; LAST REPRESENTATION\n\nTu reflejo sonríe ante ti.",
+      "text": "Rechazas Valmire incluso antes de entrar.\n\nVuelves al andén y esperas el próximo tren.\n\nPor fin llega.\n\nVacío.\n\nLas puertas se abren sin ruido.\n\nSubes.\n\nEl tren se aleja en la noche.\n\nPasan las horas.\n\nNingún andén aparece.\n\nA través del cristal, bajo la lluvia, distingues un cartel amarillo pegado en el interior del vagón.\n\n> ÚLTIMA REPRESENTACIÓN\n\nTu reflejo sonríe antes que tú.",
       "isStart": false,
       "isEnd": true,
       "transition": "fade",
@@ -1915,10 +1915,10 @@
     },
     "fin_oubli_heureux": {
       "id": "fin_oubli_heureux",
-      "title": "La feliz despedida",
+      "title": "El Olvido Dichoso",
       "location": "CAFÉ DE LOS VIAJEROS",
-      "narrator": "No todas las prisiones parecen jaulas.",
-      "text": "Tú decides no ir al teatro.\n\nEl café está caliente.\n\nLa música es suave.\n\nLos lugareños están cesando gradualmente para parecerte extraño.\n\nToma un trago.\n\nLuego otro.\n\nTe ríes con gente que no conoces su nombre.\n\nDurante varios años, nunca volverás a pensar en Valmire.\n\nEntonces, una noche, en una ciudad que no reconoces, alguien toca tres notas de piano.\n\nY todo vuelve.",
+      "narrator": "No todas las prisiones se parecen a jaulas.",
+      "text": "Decides no ir al teatro.\n\nEl café está caliente.\n\nLa música es suave.\n\nLos habitantes dejan poco a poco de parecerte extraños.\n\nBebes una copa.\n\nLuego otra.\n\nRíes con personas cuyo nombre no conoces.\n\nDurante varios años, no vuelves a pensar nunca en Valmire.\n\nLuego, una noche, en una ciudad que no reconoces, alguien toca tres notas al piano.\n\nY todo regresa.",
       "isStart": false,
       "isEnd": true,
       "transition": "fade",
@@ -1926,10 +1926,10 @@
     },
     "fin_patient": {
       "id": "fin_patient",
-      "title": "El paciente",
-      "location": "HABITACIÓN BLANCA",
-      "narrator": "La razón también puede convertirse en una forma de rendición.",
-      "text": "Quédate en la clínica.\n\nLees los archivos una y otra vez.\n\nTodo queda claro.\n\nEl teatro es sólo un símbolo.\n\nMúsica, trauma.\n\nPosters, alucinaciones.\n\nAcepta el tratamiento encontrado en la vieja firma.\n\nCuando abres los ojos, estás atado a una cama blanca.\n\nUna voz detrás de la puerta susurra:\n\n**\"El paciente siempre rechaza la representación.\"**\n\nA la distancia, escuchas aplausos.",
+      "title": "El Paciente",
+      "location": "SALA BLANCA",
+      "narrator": "La razón también puede convertirse en una forma de capitulación.",
+      "text": "Te quedas en la clínica.\n\nLees los historiales una y otra vez.\n\nTodo se vuelve claro.\n\nEl teatro no es más que un símbolo.\n\nLa música, un trauma.\n\nLos carteles, alucinaciones.\n\nAceptas el tratamiento encontrado en el viejo armario.\n\nCuando abres los ojos, estás atado a una cama blanca.\n\nUna voz tras la puerta murmura:\n\n**« El paciente sigue rechazando la representación. »**\n\nA lo lejos, oyes aplausos.",
       "isStart": false,
       "isEnd": true,
       "transition": "glitch",
@@ -1939,8 +1939,8 @@
       "id": "fin_acteur",
       "title": "El Actor",
       "location": "BASTIDORES",
-      "narrator": "Al seguir los papeles de los demás, terminamos recibiendo los suyos.",
-      "text": "Quédate con los actores.\n\nObservas sus acciones.\n\nSu silencio.\n\nSu forma de respirar todo al mismo ritmo.\n\nAlguien te está dando un traje.\n\nQuieres negarte.\n\nPero tus manos lo aceptan ante ti.\n\nTe inventamos la cara.\n\nTe pondremos delante de la cortina.\n\nCuando la luz se ilumina, ya sabes tu texto.\n\nAbre la boca.\n\nNo sale ruido.\n\nEl público aplaude.",
+      "narrator": "De tanto seguir los papeles de los demás, acabas recibiendo el tuyo.",
+      "text": "Te quedas con los actores.\n\nObservas sus gestos.\n\nSu silencio.\n\nSu manera de respirar todos al mismo ritmo.\n\nAlguien te tiende un traje.\n\nQuieres negarte.\n\nPero tus manos lo aceptan antes que tú.\n\nTe maquillan el rostro.\n\nTe colocan frente al telón.\n\nCuando se enciende la luz, ya conoces tu texto.\n\nAbres la boca.\n\nNingún sonido sale.\n\nEl público aplaude.",
       "isStart": false,
       "isEnd": true,
       "transition": "flash",
@@ -1948,10 +1948,10 @@
     },
     "fin_ville_vide": {
       "id": "fin_ville_vide",
-      "title": "La ciudad vacía",
+      "title": "La Ciudad Vacía",
       "location": "VALMIRE",
       "narrator": "Un lugar puede sobrevivir a sus habitantes. No siempre a su historia.",
-      "text": "No quieres el teatro.\n\nCaminas en Valmire durante horas.\n\nEl café se cierra.\n\nEl hotel se ha ido.\n\nLas siluetas desaparecen de las ventanas.\n\nIncluso la lluvia termina.\n\nLa ciudad se hace perfectamente silenciosa.\n\nEntonces lo entiendes.\n\nNo había nadie mirándote.\n\nSólo había la ciudad misma.\n\nA la distancia, en el teatro cerrado, la música comienza de nuevo.",
+      "text": "Rechazas el teatro.\n\nCaminas por Valmire durante horas.\n\nEl café cierra.\n\nEl hotel se apaga.\n\nLas siluetas desaparecen de las ventanas.\n\nIncluso la lluvia acaba por detenerse.\n\nLa ciudad se vuelve perfectamente silenciosa.\n\nEntonces lo comprendes.\n\nNadie te observaba.\n\nSolo estaba la propia ciudad.\n\nA lo lejos, en el teatro, ya cerrado, la música vuelve a empezar.",
       "isStart": false,
       "isEnd": true,
       "transition": "fade",
@@ -1959,10 +1959,10 @@
     },
     "fin_spectateur_immobile": {
       "id": "fin_spectateur_immobile",
-      "title": "El Espectador Todavía",
+      "title": "El Espectador Inmóvil",
       "location": "SALA PRINCIPAL",
-      "narrator": "A veces la opción más peligrosa no es hacer nada.",
-      "text": "Siéntate.\n\nNo vas a dejar tu asiento.\n\nNo estás hablando.\n\nNo estás buscando una explicación.\n\nLa obra continúa.\n\nLuego los actores desaparecen.\n\nEl paisaje se está desvaneciendo.\n\nLa habitación está oscureciendo.\n\nSólo eres tú.\n\nY una voz, muy cerca:\n\nPor fin. Alguien que está de acuerdo en mirar al final.",
+      "narrator": "A veces, la elección más peligrosa es no hacer nada.",
+      "text": "Te quedas sentado.\n\nNo abandonas tu butaca.\n\nNo hablas.\n\nNo buscas explicaciones.\n\nLa obra continúa.\n\nLuego los actores desaparecen.\n\nLos decorados se borran.\n\nLa sala se vuelve negra.\n\nSolo queda una persona: tú.\n\nY una voz, muy cercana:\n\n**« Por fin. Alguien que acepta mirar hasta el final. »**",
       "isStart": false,
       "isEnd": true,
       "transition": "flash",
@@ -1970,10 +1970,10 @@
     },
     "fin_fausse_sortie": {
       "id": "fin_fausse_sortie",
-      "title": "La falsa salida",
-      "location": "CARRETERA FUERA DE VALMIRE",
-      "narrator": "Podemos tomar el camino correcto y llegar al lugar equivocado.",
-      "text": "Estás dejando a Valmire a pie.\n\nEl camino baja entre los árboles negros.\n\nPor mucho tiempo, no puedes escuchar la música.\n\nEso es casi tranquilizador.\n\nEntonces los árboles se alejan.\n\nFrente a ti:\n\nLa estación.\n\nLa misma lámpara amarilla.\n\nLa misma lluvia.\n\nViene el mismo tren.\n\nEn tu bolsillo, la invitación volvió.",
+      "title": "La Falsa Salida",
+      "location": "CAMINO FUERA DE VALMIRE",
+      "narrator": "Se puede tomar el buen camino y llegar al lugar equivocado.",
+      "text": "Sales de Valmire a pie.\n\nEl camino baja entre árboles negros.\n\nDurante mucho tiempo no oyes ya la música.\n\nEs casi tranquilizador.\n\nLuego los árboles se apartan.\n\nDelante de ti:\n\nla estación.\n\nLa misma lámpara amarilla.\n\nLa misma lluvia.\n\nEl mismo tren que llega.\n\nEn tu bolsillo, la invitación ha vuelto.",
       "isStart": false,
       "isEnd": true,
       "transition": "glitch",
@@ -1981,16 +1981,16 @@
     },
     "attendre_train": {
       "id": "attendre_train",
-      "title": "Esperando a la salida",
+      "title": "Esperar la Salida",
       "location": "ESTACIÓN DE VALMIRE",
-      "narrator": "Negar una invitación sigue siendo una forma de responder.",
-      "text": "Quédate en el muelle.\n\nLos viajeros dejan uno por uno.\n\nLa música de la ciudad se vuelve más distante.\n\nPasa una hora.\n\nO tal vez sólo unos minutos.\n\nAl final de los carriles, se acerca una luz.",
+      "narrator": "Rechazar una invitación sigue siendo una forma de responderla.",
+      "text": "Te quedas en el andén.\n\nLos viajeros se van uno a uno.\n\nLa música de la ciudad se vuelve más lejana.\n\nPasa una hora.\n\nO quizá solo unos minutos.\n\nAl final de las vías, se acerca una luz.",
       "isStart": false,
       "isEnd": false,
       "transition": "fade",
       "choices": [
         {
-          "text": "Sube al tren.",
+          "text": "Subir al tren",
           "vers": "fin_dernier_train",
           "effects": [
             {
@@ -2000,7 +2000,7 @@
           ]
         },
         {
-          "text": "Cambia tu mente y únete a la ciudad",
+          "text": "Cambiar de opinión y reunirte con la ciudad",
           "vers": "rue_principale",
           "effects": [
             {
@@ -2013,16 +2013,16 @@
     },
     "rester_cafe": {
       "id": "rester_cafe",
-      "title": "Quedarse en el café",
+      "title": "Quedarse en el Café",
       "location": "CAFÉ DE LOS VIAJEROS",
-      "narrator": "Es fácil confundir el calor y la seguridad.",
-      "text": "Quédate en el café.\n\nEl pianista siempre juega.\n\nLos clientes dejan de mirarte.\n\nPor un momento, Valmire parece casi acogedor.\n\nLa actuación puede comenzar sin ti.",
+      "narrator": "Es fácil confundir calor con seguridad.",
+      "text": "Te quedas en el café.\n\nEl pianista sigue tocando.\n\nLos clientes dejan de mirarte.\n\nDurante un instante, Valmire parece casi acogedora.\n\nLa representación puede empezar sin ti.",
       "isStart": false,
       "isEnd": false,
       "transition": "fade",
       "choices": [
         {
-          "text": "Quédate aquí hasta el cierre",
+          "text": "Quedarte aquí hasta el cierre",
           "vers": "fin_oubli_heureux",
           "effects": [
             {
@@ -2032,7 +2032,7 @@
           ]
         },
         {
-          "text": "Sal antes de que sea demasiado tarde.",
+          "text": "Salir ya, mientras aún se puede",
           "vers": "rue_principale",
           "effects": [
             {
@@ -2045,16 +2045,16 @@
     },
     "traitement_clinique": {
       "id": "traitement_clinique",
-      "title": "Tratamiento",
+      "title": "El Tratamiento",
       "location": "CLÍNICA ABANDONADA",
       "narrator": "Una explicación puede ser una puerta. O una trampa.",
-      "text": "En un armario de metal, se encuentra una caja de tabletas.\n\nLa etiqueta está casi borrada.\n\nDesórdenes disociativos.\nRepeticiones perceptivas.\nObsesiones teatrales.\n\nSe reserva un protocolo de tratamiento.\n\nEstá firmado por un médico cuyo nombre ha sido rascado.",
+      "text": "En un armario metálico encuentras una caja de comprimidos.\n\nLa etiqueta está casi borrada.\n\n> Trastornos disociativos.\n> Repeticiones perceptivas.\n> Obsesiones teatrales.\n\nJunto a ella hay un protocolo de tratamiento.\n\nLo firma un médico cuyo nombre ha sido raspado.",
       "isStart": false,
       "isEnd": false,
       "transition": "fade",
       "choices": [
         {
-          "text": "Protocolo de seguimiento",
+          "text": "Seguir el protocolo",
           "vers": "fin_patient",
           "effects": [
             {
@@ -2064,7 +2064,7 @@
           ]
         },
         {
-          "text": "Rechazar y dejar la clínica",
+          "text": "Rechazarlo y huir de esta clínica",
           "vers": "rue_principale",
           "effects": [
             {
@@ -2077,16 +2077,16 @@
     },
     "suivre_acteurs": {
       "id": "suivre_acteurs",
-      "title": "Seguir a los actores",
+      "title": "Seguir a los Actores",
       "location": "BASTIDORES",
-      "narrator": "Algunos caminos se convierten en roles cuando los sigues demasiado tiempo.",
-      "text": "Sigue a los actores en un pasillo estrecho.\n\nNadie te detiene.\n\nNadie parece sorprendido.\n\nUn vestidor abierto te espera.\n\nDentro, se coloca un traje en una silla.\n\nEs exactamente tu talla.",
+      "narrator": "Algunos caminos se convierten en papeles si se siguen demasiado tiempo.",
+      "text": "Sigues a los actores por un pasillo estrecho.\n\nNadie te detiene.\n\nNadie parece sorprendido.\n\nUn camerino abierto te espera.\n\nDentro, un traje está puesto sobre una silla.\n\nEs exactamente de tu talla.",
       "isStart": false,
       "isEnd": false,
       "transition": "fade",
       "choices": [
         {
-          "text": "Ponte el disfraz",
+          "text": "Ponerte el traje",
           "vers": "fin_acteur",
           "effects": [
             {
@@ -2096,7 +2096,7 @@
           ]
         },
         {
-          "text": "Atrás y adelante",
+          "text": "Retroceder y volver a los bastidores",
           "vers": "coulisses",
           "effects": [
             {
@@ -2109,10 +2109,10 @@
     },
     "errer_ville": {
       "id": "errer_ville",
-      "title": "Error en Valmire",
+      "title": "Vagar por Valmire",
       "location": "CALLES DE VALMIRE",
-      "narrator": "Algunas ciudades no se cruzan. Están profundizando.",
-      "text": "Caminas sin seguir la música.\n\nEstás evitando el teatro.\n\nCaminas por casas cerradas, ventanas polvorientas, callejuelas donde la lluvia parece caer más despacio.\n\nCuanto más te alejas de la plaza central, más Valmire parece vacía.",
+      "narrator": "Algunas ciudades no se atraviesan. Se profundizan.",
+      "text": "Caminas sin seguir la música.\n\nEvitas el teatro.\n\nPasas frente a casas cerradas, escaparates polvorientos, callejones donde la lluvia parece caer más despacio.\n\nCuanto más te alejas de la plaza central, más vacía parece Valmire.",
       "isStart": false,
       "isEnd": false,
       "transition": "fade",
@@ -2128,7 +2128,7 @@
           ]
         },
         {
-          "text": "Volver a la plaza central",
+          "text": "Volver hacia la plaza central",
           "vers": "rue_principale",
           "effects": [
             {
@@ -2138,7 +2138,7 @@
           ]
         },
         {
-          "text": "Buscar un camino fuera de la ciudad",
+          "text": "Buscar un camino fuera de Valmire",
           "vers": "route_sortie",
           "effects": [
             {
@@ -2151,16 +2151,16 @@
     },
     "route_sortie": {
       "id": "route_sortie",
-      "title": "El camino de salida",
+      "title": "El Camino de Salida",
       "location": "LÍMITE DE VALMIRE",
-      "narrator": "Los límites de una ciudad son raramente los de los mapas.",
-      "text": "Finalmente encuentras un camino que sale de Valmire.\n\nNo hay señal.\n\nNo hay coche.\n\nSólo árboles, lluvia y grava negra.\n\nDetrás de ti, la música del teatro se vuelve casi inaudible.",
+      "narrator": "Los límites de una ciudad rara vez coinciden con los de los mapas.",
+      "text": "Por fin encuentras un camino que sale de Valmire.\n\nNingún cartel.\n\nNingún coche.\n\nSolo árboles, lluvia y grava negra.\n\nDetrás de ti, la música del teatro se vuelve casi inaudible.",
       "isStart": false,
       "isEnd": false,
       "transition": "fade",
       "choices": [
         {
-          "text": "Siga el camino hasta el final",
+          "text": "Seguir el camino hasta el final",
           "vers": "fin_fausse_sortie",
           "effects": [
             {
@@ -2174,7 +2174,7 @@
           ]
         },
         {
-          "text": "Date la vuelta",
+          "text": "Dar media vuelta",
           "vers": "rue_principale",
           "effects": [
             {
@@ -2187,10 +2187,10 @@
     },
     "boucle_lucidite": {
       "id": "boucle_lucidite",
-      "title": "Aún no.",
-      "location": "BASTIDORES DEL TEATRO — DESPUÉS DEL ENTREACTO",
-      "narrator": "No estás listo. Tu mente lo sabe antes de poner tu mano en el mango. Algo falta: una conexión, una verdad que aún no has entrado en algún lugar de Valmire.",
-      "text": "La puerta se abre.\n\nLa oscuridad del otro lado no es una oscuridad ordinaria. Ella piensa. Te está vigilando.\n\nY luego, un mareo. Una blanca en tu memoria. Un momento suspendido.\n\nCuando vuelvas a la mente, estás en el pasillo. La puerta está cerrada detrás de ti. Como nunca te mudaste.\n\nValmire todavía te está esperando. Hay cosas que realmente no has mirado.",
+      "title": "Todavía No",
+      "location": "BASTIDORES DEL TEATRO — DESPUÉS DEL INTERMEDIO",
+      "narrator": "No estás preparado. Tu mente lo sabe incluso antes de poner la mano en el pomo. Falta algo: una conexión, una verdad que aún no has captado en algún lugar de Valmire.",
+      "text": "La puerta se abre.\n\nLa oscuridad del otro lado no es una oscuridad corriente. *Piensa*. Te observa.\n\nY luego, un vértigo. Un vacío en tu memoria. Un instante suspendido.\n\nCuando recobras el sentido, estás en el pasillo. La puerta está cerrada tras de ti. Como si nunca te hubieras movido.\n\nValmire aún te espera. Hay cosas que no has mirado de verdad.",
       "isStart": false,
       "isEnd": false,
       "transition": "glitch",
