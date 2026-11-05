@@ -6,7 +6,7 @@
   "stats": [
     {
       "id": "chaleur",
-      "label": "Heat",
+      "label": "Warmth",
       "start": 40,
       "max": 100,
       "color": "#f4a261"
@@ -42,16 +42,16 @@
   "scenes": {
     "intro": {
       "id": "intro",
-      "title": "After the closure",
-      "location": "BOUCHERY — CARE",
-      "narrator": "Some days smell tiredness, pepper and things we didn't have time to say.",
-      "text": "You're closing the shop.\n\nThe neon above the window flashes one last time.\n\n*Horlogerie Verneuil — Repairs & Restorations*\n\nYou put your tools in their velvet box.\nLittle pliers.\nWolves.\nThin springs like hair.\n\nOutside, the city is running.\nShe's still running.\n\nYou spend the night fixing watches that nobody watches anymore.\n\nSometimes you wonder if time really exists.\nOr if people just pretend.\n\nYou're eating a warm-up blanquette in the kitchen.\n\nShe's good anyway.\n\nYou sleep on the couch.",
+      "title": "After Closing",
+      "location": "BUTCHER SHOP — EVENING",
+      "narrator": "Some days smell of tiredness, pepper, and the things you never had time to say.",
+      "text": "You finally close the shop.\n\nThe neon sign above the window flickers one last time.\n\n*Horlogerie Verneuil — Repairs & Restorations*\n\nYou put your tools back into their velvet case.\nThe tiny pliers.\nThe loupes.\nThe springs, fine as hair.\n\nOutside, the city runs.\nIt always runs.\n\nYou spend the evening fixing watches nobody looks at anymore.\n\nSometimes you wonder whether time still exists at all.\nOr whether people are just pretending.\n\nYou eat a reheated blanquette standing in the kitchen.\n\nIt's good, all the same.\n\nYou fall asleep on the couch.",
       "isStart": true,
       "isEnd": false,
       "transition": "fade",
       "choices": [
         {
-          "text": "Entering the Dream",
+          "text": "Step into the dream",
           "vers": "hub_start",
           "effects": [
             {
@@ -64,10 +64,10 @@
     },
     "hub_start": {
       "id": "hub_start",
-      "title": "The Establishment of Songs",
+      "title": "The Workbench of Dreams",
       "location": "DREAM — FLOATING BUTCHER SHOP",
-      "narrator": "In dreams, even counters can drift.",
-      "text": "You open your eyes behind your establishment.\n\nBut the shop isn't exactly the same anymore.\n\nWatches on shelves turn backwards.\nThe hands turn around the dial in seconds.\nOr in hours. Hard to say.\n\nA layer appears on the set, brilliant as a precision tool.\n\nThree doors appear in the back wall.\n\nThe city roars behind each one.",
+      "narrator": "In dreams, even counters can drift away.",
+      "text": "You open your eyes behind your workbench.\n\nBut the shop is not quite the same anymore.\n\nThe watches on the shelves run backward.\nThe hands spin around the dial in a few seconds.\nOr in several hours. Hard to say.\n\nA ladle appears on the workbench, shining like a precision tool.\n\nThree doors take shape in the back wall.\n\nThe city rumbles behind each of them.",
       "isStart": false,
       "isEnd": false,
       "transition": "flash",
@@ -87,7 +87,7 @@
           ]
         },
         {
-          "text": "Observe the cat of the dream",
+          "text": "Watch the dream cat",
           "vers": "chat_hub",
           "effects": [
             {
@@ -100,16 +100,16 @@
     },
     "chat_hub": {
       "id": "chat_hub",
-      "title": "The Counter Cat",
+      "title": "The Cat on the Counter",
       "location": "DREAM — FLOATING BUTCHER SHOP",
       "narrator": "Some guides prefer to sleep on the answers.",
-      "text": "The cat is lying on the stable.\n\nHe opens an eye when you approach.\n\nAround him, unassembled watches whose wheels continue to run on their own.\n\n**\"You fix time.\"**\n\nHe doesn't really talk.\nBut you still understand.\n\n**\"Then you should know that this one is broken.\"**",
+      "text": "The cat is lying on the workbench.\n\nIt opens one eye as you approach.\n\nAround it lie dismantled watches whose gears keep turning all by themselves.\n\n**\"You repair time.\"**\n\nIt doesn't really speak.\nBut you understand all the same.\n\n**\"Then you should know this one is broken.\"**",
       "isStart": false,
       "isEnd": false,
       "transition": "fade",
       "choices": [
         {
-          "text": "Caress it before you leave",
+          "text": "Stroke it before you leave",
           "vers": "hub_start",
           "effects": [
             {
@@ -119,7 +119,7 @@
           ]
         },
         {
-          "text": "Ask him to show you the way",
+          "text": "Ask it to show you the way",
           "vers": "ville_intro",
           "effects": [
             {
@@ -132,10 +132,10 @@
     },
     "ville_intro": {
       "id": "ville_intro",
-      "title": "The City of Court",
-      "location": "REVENUE — FUTURE OF HORLOGIES",
-      "narrator": "Here, the seconds have teeth.",
-      "text": "You're coming to a town where everyone runs.\n\nPassersby eat while walking.\nThe kids do their homework on the subway.\nPeople consult their watch but do not look at the time — just the movement of the needles.\n\nAs if checking was enough.\nLike time was better when we watched him.\n\nYou're taking out your repair magnifier.\n\nThe watches you see are all set at the same time.\nNot the right one.",
+      "title": "The City That Runs",
+      "location": "DREAM — CLOCK AVENUE",
+      "narrator": "Here, seconds have teeth.",
+      "text": "You arrive in a city where everyone is running.\n\nPeople eat while they walk.\nChildren do their homework on the subway.\nPeople check their watches, but they don't read the time — they just watch the hands move.\n\nAs if checking were enough.\nAs if time passed better when you kept an eye on it.\n\nYou take out your repairer's loupe.\n\nEvery watch you can see is set to the same time.\n\nNot the right one.",
       "isStart": false,
       "isEnd": false,
       "transition": "fade",
@@ -161,7 +161,7 @@
           ]
         },
         {
-          "text": "Enter the metro without stopping",
+          "text": "Enter the subway without stopping",
           "vers": "metro",
           "effects": [
             {
@@ -171,7 +171,7 @@
           ]
         },
         {
-          "text": "Try the Express Restaurant",
+          "text": "Try the express restaurant",
           "vers": "restaurant_express",
           "effects": [
             {
@@ -181,7 +181,7 @@
           ]
         },
         {
-          "text": "you feel a delicious smell coming out of your bag, you can install a table and serve the blanquette",
+          "text": "You catch a delicious smell drifting out of your bag: you can set up a table and serve the blanquette",
           "vers": "table_ville",
           "effects": [
             {
@@ -198,16 +198,16 @@
     },
     "vieille_dame": {
       "id": "vieille_dame",
-      "title": "The Lady of the Bench",
-      "location": "AVENUE OF CLOCKS",
-      "narrator": "Sometimes someone waits less for an answer than a presence.",
-      "text": "You sit next to her.\n\nShe doesn't seem surprised.\n\n**\"Everyone is running.\"**\n\nYou've been asking her how long.\n\n**\"Since it was decided that time lost was a mistake.\"**\n\nShe takes an old watch out of her pocket.\nThe dial is cracked.\nThe needles are stopped.\n\n*\"My husband wore it. He never ran. *\n\nShe puts the watch back in her pocket.\n\n**\"She stopped the day he stopped running too.\"**",
+      "title": "The Woman on the Bench",
+      "location": "CLOCK AVENUE",
+      "narrator": "Sometimes, someone wants less an answer than a presence.",
+      "text": "You sit down beside her.\n\nShe doesn't seem surprised.\n\n**\"Everyone walks past at a run.\"**\n\nYou ask her since when.\n\n**\"Since we decided that wasted time was a fault.\"**\n\nShe takes an old watch from her pocket.\nThe dial is cracked.\nThe hands have stopped.\n\n**\"My husband wore it. He never ran.\"**\n\nShe slips the watch back into her pocket.\n\n**\"It stopped the day he stopped running too.\"**",
       "isStart": false,
       "isEnd": false,
       "transition": "fade",
       "choices": [
         {
-          "text": "Invite passersby to sit down",
+          "text": "Invite the passersby to sit down",
           "vers": "table_ville",
           "effects": [
             {
@@ -230,16 +230,16 @@
     },
     "rue_sans_pause": {
       "id": "rue_sans_pause",
-      "title": "Rue Sans Pause",
-      "location": "AVENUE OF CLOCKS",
-      "narrator": "A city without a break ends up forgetting why it is moving forward.",
-      "text": "You're watching passersby.\n\nThey're all running in the same direction.\n\nBut at the end of the street, there's a wall.\n\nThey turn right.\nRun again.\nTurn left.\nRun again.\n\nA circuit.\n\nYou look at their wrist.\nEach watch displays a different time.\nBut they're all moving too fast.\n\n*Someone pulled up all the springs too hard. *\n\nYou know this problem.",
+      "title": "The Street Without a Pause",
+      "location": "CLOCK AVENUE",
+      "narrator": "A city that never pauses eventually forgets why it moves forward.",
+      "text": "You watch the passersby.\n\nThey are all running in the same direction.\n\nBut at the end of the street, there is a wall.\n\nThey turn right.\nRun on.\nTurn left.\nRun on.\n\nA loop.\n\nYou look at their wrists.\nEach watch shows a different time.\nBut all of them are running too fast.\n\n*Someone has wound every spring too tight.*\n\nYou know this problem.",
       "isStart": false,
       "isEnd": false,
       "transition": "fade",
       "choices": [
         {
-          "text": "Install the large table in the middle of the avenue",
+          "text": "Set the big table up in the middle of the avenue",
           "vers": "table_ville",
           "effects": [
             {
@@ -266,16 +266,16 @@
     },
     "etudiant_presse": {
       "id": "etudiant_presse",
-      "title": "Student Stressed",
-      "location": "AVENUE OF CLOCKS",
-      "narrator": "Success sometimes takes the form of a pile of leaves that flies away.",
-      "text": "The student picks up his leaves by shaking.\n\n**\"I'm late.\"**\n\nA leaf flies away.\nShe's wearing an exam date.\n\nBut the date is tomorrow.\n\n**\"You're not late.\"**\n\nHe looks at you like you're speaking a foreign language.\n\n**\"If I don't run, I'm late.\"**\n\nHe's running back.\n\nYou're watching your watch.\nYours is moving at the right speed.\n\nThat's why she looks broken to everyone.",
+      "title": "The Stressed Student",
+      "location": "CLOCK AVENUE",
+      "narrator": "Success sometimes takes the form of a pile of papers blowing away.",
+      "text": "The student gathers his papers with trembling hands.\n\n**\"I'm late.\"**\n\nA sheet flies off.\nIt bears an exam date.\n\nBut the date is tomorrow.\n\n**\"You're not late.\"**\n\nHe looks at you as if you were speaking a foreign language.\n\n**\"If I don't run, I'm late.\"**\n\nHe runs off again.\n\nYou check your watch.\nYours is keeping the right pace.\n\nThat's why it looks broken to everyone else.",
       "isStart": false,
       "isEnd": false,
       "transition": "fade",
       "choices": [
         {
-          "text": "Give her a plate",
+          "text": "Offer him a plate",
           "vers": "table_ville",
           "effects": [
             {
@@ -285,7 +285,7 @@
           ]
         },
         {
-          "text": "Running with him",
+          "text": "Run with him",
           "vers": "fin_retard",
           "effects": [
             {
@@ -298,16 +298,16 @@
     },
     "metro": {
       "id": "metro",
-      "title": "Metro Sans Stop",
-      "location": "REVE — LAST LINE",
-      "narrator": "Some trains don't drive anywhere, but everyone gets there anyway.",
-      "text": "The subway has been driving for a long time.\n\nPeople look at the ground.\n\nA man sleeps up, a briefcase tight against his chest.\nA woman responds to messages of an absent air.\nA teenager listens to music with his eyes closed — he is the only one who seems to be breathing.\n\nYou look at the signs.\n\nStations scroll too fast to be read.\n\nYou're asking someone what time the next stop comes.\n\nHe's watching his watch.\n\n**\"In exactly enough time not to be late.\"**",
+      "title": "The Subway That Never Stops",
+      "location": "DREAM — LATER LINE",
+      "narrator": "Some trains lead nowhere, yet everyone boards them anyway.",
+      "text": "The subway has been running for a very long time.\n\nPeople stare at the floor.\n\nA man sleeps standing up, a briefcase clutched to his chest.\nA woman answers messages with a faraway look.\nA teenager listens to music with his eyes closed — he's the only one who seems to be breathing.\n\nYou look at the signs.\n\nThe stations flash past too fast to read.\n\nYou ask someone what time the next stop is due.\n\nHe looks at his watch.\n\n**\"In exactly enough time not to be late.\"**",
       "isStart": false,
       "isEnd": false,
       "transition": "fade",
       "choices": [
         {
-          "text": "Gently awaken the standing man",
+          "text": "Gently wake the man standing up",
           "vers": "table_ville",
           "effects": [
             {
@@ -317,7 +317,7 @@
           ]
         },
         {
-          "text": "Stay in the subway to see the next stop",
+          "text": "Stay on the train to see the next stop",
           "vers": "fin_metro",
           "effects": [
             {
@@ -327,7 +327,7 @@
           ]
         },
         {
-          "text": "Exit at the next imaginary stop",
+          "text": "Get off at the imaginary next stop",
           "vers": "rue_sans_pause",
           "effects": [
             {
@@ -341,9 +341,9 @@
     "restaurant_express": {
       "id": "restaurant_express",
       "title": "Express Restaurant",
-      "location": "AVENUE OF CLOCKS",
-      "narrator": "Here, the dishes arrive before hunger.",
-      "text": "You're entering a tiny restaurant.\n\nThe waiter will give you the check before you even sit down.\n\nThe dishes are already on the table.\nAlready half eaten.\nAlready cooled.\n\n**\"Quick service is our specialty.\"**\n\nYou ask if you can order a blanquette.\n\nHe's looking at you.\n\n**\"It takes three hours.\"**\n\nLike it's an insult.\n\n**\"Exactly.\"**",
+      "location": "CLOCK AVENUE",
+      "narrator": "Here, the dishes arrive before the hunger does.",
+      "text": "You walk into a tiny restaurant.\n\nThe waiter hands you the bill before you've even sat down.\n\nThe dishes are already on the table.\nAlready half eaten.\nAlready cold.\n\n**\"Fast service is our specialty.\"**\n\nYou ask whether you can order a blanquette.\n\nHe stares at you.\n\n**\"That takes three hours.\"**\n\nAs if it were an insult.\n\n**\"Exactly.\"**",
       "isStart": false,
       "isEnd": false,
       "transition": "fade",
@@ -363,7 +363,7 @@
           ]
         },
         {
-          "text": "Pay before eating",
+          "text": "Pay before you've eaten",
           "vers": "ville_intro",
           "effects": [
             {
@@ -376,16 +376,16 @@
     },
     "table_ville": {
       "id": "table_ville",
-      "title": "The Slowing Table",
-      "location": "THE FUTURE OF THE HORLOGIES",
-      "narrator": "The first act of resistance is sometimes to lay a tablecloth.",
-      "text": "You set up a small table in the middle of the sidewalk.\n\nThat's absurd.\n\nSo, of course, it attracts a few eyes.\n\nYou put on a blanquette you had in a box.\nDrinks.\nBread.\n\nPassers-by slow down.\n\nOne stops.\n\n**\"What is it?\"**\n\n**\"A meal.\"**\n\n**\"How long does it take?\"**\n\n**\"The time it takes.\"**\n\nHe's sitting.",
+      "title": "The Table of Slowing Down",
+      "location": "CLOCK AVENUE, CALMED",
+      "narrator": "The first act of resistance is sometimes simply to set a tablecloth down.",
+      "text": "You set a small table in the middle of the sidewalk.\n\nIt's absurd.\n\nSo of course, it draws a few glances.\n\nYou put a blanquette from a container on it.\nGlasses.\nBread.\n\nThe passersby slow down.\n\nOne of them stops.\n\n**\"What's this?\"**\n\n**\"A meal.\"**\n\n**\"How long does it take?\"**\n\n**\"As long as it needs.\"**\n\nHe sits down.",
       "isStart": false,
       "isEnd": false,
       "transition": "flash",
       "choices": [
         {
-          "text": "Move forward with the shiny ladle",
+          "text": "Move on with the shining ladle",
           "vers": "hub_admin",
           "effects": [
             {
@@ -402,10 +402,10 @@
     },
     "fin_pas_le_temps": {
       "id": "fin_pas_le_temps",
-      "title": "Not Time",
-      "location": "AVENUE OF CLOCKS",
-      "narrator": "If we get there soon, we sometimes forget where we were going.",
-      "text": "You start running.\n\nAt first, it's to follow the others.\nThen not to bother.\nThen because everyone runs.\n\nYour steps are accelerating.\n\nThe ladle falls somewhere behind you.\n\nYou don't stop to pick it up.\n\nYour watch is moving faster and faster.\n\nThe needles rotate so fast that they seem motionless.\n\nSomewhere, a shop closes.\n\nThe neon goes out.",
+      "title": "No Time",
+      "location": "CLOCK AVENUE",
+      "narrator": "From always arriving soon, you sometimes forget where you were going.",
+      "text": "You start to run.\n\nAt first, it's to keep up with the others.\nThen so as not to be in their way.\nThen because everyone is running.\n\nYour steps speed up.\n\nThe ladle falls somewhere behind you.\n\nYou don't stop to pick it up.\n\nYour watch runs faster and faster.\n\nThe hands spin so fast they seem to stand still.\n\nSomewhere, a shop is closing.\n\nThe neon sign goes out.",
       "isStart": false,
       "isEnd": true,
       "transition": "glitch",
@@ -413,10 +413,10 @@
     },
     "fin_retard": {
       "id": "fin_retard",
-      "title": "Delay",
-      "location": "AVENUE OF CLOCKS",
-      "narrator": "The delay is a loop with new shoes.",
-      "text": "You run with the student.\n\nYou turn left.\n\nThen right.\n\nThen left again.\n\nThe streets are repeated.\n\nThe screens are repeated.\n\nPassersby repeat themselves.\n\nAfter an impossible time to measure, you finally arrive.\n\nIn front of you:\n\nthe same avenue.\n\nSame bench.\n\nSame old lady.\n\nThe same student who picks up his leaves.\n\nHe's looking at you.\n\n**\"I'm late.\"**\n\nAnd you understand that you are, too.",
+      "title": "Late",
+      "location": "CLOCK AVENUE",
+      "narrator": "Being late is a loop wearing brand-new shoes.",
+      "text": "You run with the student.\n\nYou turn left.\n\nThen right.\n\nThen left again.\n\nThe streets repeat themselves.\n\nThe screens repeat themselves.\n\nThe passersby repeat themselves.\n\nAfter an impossible amount of time, you finally arrive.\n\nIn front of you:\n\nthe same avenue.\n\nThe same bench.\n\nThe same old lady.\n\nThe same student gathering his papers.\n\nHe looks at you.\n\n**\"I'm late.\"**\n\nAnd you realize that you are, too.",
       "isStart": false,
       "isEnd": true,
       "transition": "glitch",
@@ -424,10 +424,10 @@
     },
     "fin_metro": {
       "id": "fin_metro",
-      "title": "The Last Judgment",
-      "location": "LAST LINE",
-      "narrator": "Some journeys are only long because you dare not go down.",
-      "text": "The subway continues.\n\nThe lights are flashing.\n\nThe voice announced:\n\n> Next stop:\n> Your retirement.\n\nNobody's moving.\n\nThe standing man always sleeps.\n\nHer watch shows the same time from two stations.\n\nYou look at yours.\n\nShe stopped, too.\n\nYou didn't notice.",
+      "title": "The Last Stop",
+      "location": "LATER LINE",
+      "narrator": "Some journeys only feel long because you never dare to get off.",
+      "text": "The subway keeps going.\n\nThe lights flicker.\n\nThe voice announces:\n\n> Next stop:\n> Your retirement.\n\nNobody moves.\n\nThe man standing up is still asleep.\n\nHis watch has shown the same time for two stations.\n\nYou look at yours.\n\nIt has stopped too.\n\nWithout your noticing.",
       "isStart": false,
       "isEnd": true,
       "transition": "glitch",
@@ -435,16 +435,16 @@
     },
     "hub_admin": {
       "id": "hub_admin",
-      "title": "The Second Gate",
+      "title": "The Second Door",
       "location": "DREAM — FLOATING BUTCHER SHOP",
-      "narrator": "Dreams don't let you go with one good action.",
-      "text": "You come back behind your floating counter.\n\nThe shiny ladle rests near the crate.\n\nThe clock door closed slowly.\n\nThe city that ran finally breathes.\n\nBut the other two doors stay here.\n\nThe morning door still doesn't appear.\n\nThe cat jumps on the counter, pushes the sausage from the end of the leg, then looks at the door covered with forms.\n\nOn the notebook, a new sentence reads:\n\n> We can't wake up until the papers dream.\n\nYou understand.\n\nThe dream is not over.",
+      "narrator": "The dream won't let you leave with just one good deed.",
+      "text": "You return behind your floating counter.\n\nThe shining ladle rests near the register.\n\nThe clock door has closed gently.\n\nThe city that was running is finally breathing.\n\nBut the other two doors are still there.\n\nThe morning door still doesn't appear.\n\nThe cat jumps onto the counter, nudges the salami with one paw, then stares at the door covered in forms.\n\nOn the notebook, a new sentence writes itself:\n\n> You cannot wake up while the paperwork is still dreaming.\n\nYou understand.\n\nThe dream isn't over.",
       "isStart": false,
       "isEnd": false,
       "transition": "fade",
       "choices": [
         {
-          "text": "Pass the administrative door with your bag",
+          "text": "Go through the administrative door with your bag",
           "vers": "admin_intro",
           "effects": [
             {
@@ -461,10 +461,10 @@
     },
     "admin_intro": {
       "id": "admin_intro",
-      "title": "The Forms Office",
-      "location": "REVENUE — ADMINISTRATION WITHOUT FENES",
-      "narrator": "Here, the corridors are straight, but nobody gets to the end.",
-      "text": "You're arriving in a grey building.\n\nMountains of files go up to the ceiling.\n\nClocks everywhere.\nAll at different times.\nAll fake.\n\nA man gives you a form.\n\n**\"What for?\"**\n\n**\"To be able to request the form of the reason for your arrival.\"**\n\nYou look at the clocks.\n\nThey're moving forward.\nBut not in the right direction.\n\nI could settle them, you think.\n\nIt's not the question here, you understand.",
+      "title": "The Office of Forms",
+      "location": "DREAM — WINDOWLESS ADMINISTRATION",
+      "narrator": "Here the corridors are straight, but no one ever reaches the end.",
+      "text": "You arrive in a gray building.\n\nMountains of files rise up to the ceiling.\n\nClocks everywhere.\nAll showing different times.\nAll wrong.\n\nA man hands you a form.\n\n**\"What's it for?\"**\n\n**\"To request the form for the reason of your visit.\"**\n\nYou look at the clocks.\n\nThey are moving.\nBut not in the right direction.\n\n*I could fix them*, you think.\n\n*That's not the question here*, you realize.",
       "isStart": false,
       "isEnd": false,
       "transition": "scanline",
@@ -480,7 +480,7 @@
           ]
         },
         {
-          "text": "Search administrative elevator",
+          "text": "Look for the administrative elevator",
           "vers": "ascenseur_admin",
           "effects": [
             {
@@ -490,7 +490,7 @@
           ]
         },
         {
-          "text": "Talking to man with trombones",
+          "text": "Talk to the man with the paper clips",
           "vers": "trombones",
           "effects": [
             {
@@ -518,9 +518,9 @@
     "ticket_admin": {
       "id": "ticket_admin",
       "title": "Ticket A38",
-      "location": "ADMINISTRATION WITHOUT FENES",
-      "narrator": "Waiting becomes stranger when no one knows why.",
-      "text": "You're taking a ticket.\n\nIt displays:\n\n> A38\n\nThe light panel displays:\n\n> A2\n\nA woman has been waiting here for so long that she brought a plant.\n\nThe plant itself took a ticket.\n\nYou look at the student.\n\nIt has been filling the same line for several minutes.\n\nName:\nReason for Name:\nJustification:\n\nHis hands are shaking.\n\nThe cat passes between the chairs and sleeps on the A3 ticket.\n\nNobody knows if the line can move on.",
+      "location": "WINDOWLESS ADMINISTRATION",
+      "narrator": "Waiting gets stranger when nobody knows why.",
+      "text": "You take a ticket.\n\nIt reads:\n\n> A38\n\nThe display board shows:\n\n> A2\n\nA woman has been waiting here for so long that she brought a plant.\n\nThe plant has taken a ticket of its own.\n\nYou look at the student.\n\nHe has been filling out the same line for several minutes.\n\nName:\nReason for the name:\nProof of the reason:\n\nHis hands are shaking.\n\nThe cat wanders between the chairs and falls asleep on ticket A3.\n\nNobody knows anymore whether the line can move at all.",
       "isStart": false,
       "isEnd": false,
       "transition": "fade",
@@ -536,7 +536,7 @@
           ]
         },
         {
-          "text": "Wait your turn normally",
+          "text": "Wait your turn like everyone else",
           "vers": "fin_employe",
           "effects": [
             {
@@ -549,16 +549,16 @@
     },
     "ascenseur_admin": {
       "id": "ascenseur_admin",
-      "title": "The Administrative Ascensor",
-      "location": "ADMINISTRATION WITHOUT FENES",
-      "narrator": "Even going up a floor sometimes requires a complete folder.",
-      "text": "The elevator is at the end of the hall.\n\nA metallic voice announces:\n\n> Please provide proof of climb.\n\nYou press the button.\n\nThe vote resumed:\n\n> Please provide proof that you have the right to support.\n\nThe cat sleeps in front of the buttons.\n\nHe's rubbing.\n\nThe elevator won't ask for anything anymore.\n\nA faceless employee whispers:\n\n**\"It's been blocking the system since this morning. It's the quietest day we've had in years.\"**",
+      "title": "The Administrative Elevator",
+      "location": "WINDOWLESS ADMINISTRATION",
+      "narrator": "Even going up one floor sometimes requires a complete file.",
+      "text": "The elevator is at the end of the corridor.\n\nA metallic voice announces:\n\n> Please provide proof of ascent.\n\nYou press the button.\n\nThe voice goes on:\n\n> Please provide a certificate proving that you are allowed to press the button.\n\nThe cat sleeps in front of the buttons.\n\nIt purrs.\n\nThe elevator no longer dares to ask anything.\n\nA faceless employee whispers:\n\n**\"It's been jamming the system since this morning. It's the calmest day we've had in years.\"**",
       "isStart": false,
       "isEnd": false,
       "transition": "fade",
       "choices": [
         {
-          "text": "Enjoy the calm to organize a lunch break",
+          "text": "Enjoy the calm by organizing a lunch break",
           "vers": "pause_dej",
           "effects": [
             {
@@ -568,7 +568,7 @@
           ]
         },
         {
-          "text": "Search for requested papers",
+          "text": "Look for the papers requested",
           "vers": "fin_formulaire",
           "effects": [
             {
@@ -581,16 +581,16 @@
     },
     "trombones": {
       "id": "trombones",
-      "title": "The Trombone Man",
-      "location": "ADMINISTRATION WITHOUT FENES",
-      "narrator": "Some tasks survive long after they have been forgotten.",
-      "text": "A man classifies trombones by color.\n\nRed.\nBlue.\nGrey.\nA grey a little greyer than the other gray.\n\nYou ask him if it's urgent.\n\nHe looks at you with the eyes of someone who hasn't heard the word \"urgent\" in so long that he doesn't know what it means anymore.\n\n**\"This is my job.\"**\n\n**\"And before?\"**\n\nHe's packing a trombone.\n\n**\"I would pay watches.\"**",
+      "title": "The Paper Clip Man",
+      "location": "WINDOWLESS ADMINISTRATION",
+      "narrator": "Some tasks outlive the memory of their purpose.",
+      "text": "A man is sorting paper clips by color.\n\nRed.\nBlue.\nGray.\nA grayer gray than the other gray.\n\nYou ask him whether it's urgent.\n\nHe looks at you with the eyes of someone who hasn't heard the word *urgent* in so long that he no longer knows what it means.\n\n**\"It's my job.\"**\n\n**\"And before?\"**\n\nHe sorts one more paper clip.\n\n**\"I used to repair watches.\"**",
       "isStart": false,
       "isEnd": false,
       "transition": "fade",
       "choices": [
         {
-          "text": "Tell him some things are shared instead of classifying themselves",
+          "text": "Tell him some things are meant to be shared, not sorted",
           "vers": "pause_dej",
           "effects": [
             {
@@ -604,7 +604,7 @@
           ]
         },
         {
-          "text": "Help him sort the trombones",
+          "text": "Help him sort the paper clips",
           "vers": "admin_intro",
           "effects": [
             {
@@ -617,16 +617,16 @@
     },
     "pause_dej": {
       "id": "pause_dej",
-      "title": "Wheels, Bread and Tampons",
-      "location": "ADMINISTRATION WITHOUT FENES",
-      "narrator": "An office becomes less terrible when someone breaks bread.",
-      "text": "You put the bread and the sausage on the counter.\n\nA giant buffer stops in the middle of the flight.\n\nEmployees look up.\n\nHow long have they not eaten something real?\n\nOne of them holds out his hand to the bread.\n\nAnother one hesitates.\n\nAs if taking time to eat was an unfilled form.",
+      "title": "Gears, Bread and Stamps",
+      "location": "WINDOWLESS ADMINISTRATION",
+      "narrator": "An office becomes less dreadful when someone breaks bread in it.",
+      "text": "You set the bread and the salami on the counter.\n\nA giant stamp stops in mid-air.\n\nThe employees look up.\n\nWhen did they last eat something real?\n\nOne of them reaches for the bread.\n\nAnother hesitates.\n\nAs if taking time to eat were an unfiled form.",
       "isStart": false,
       "isEnd": false,
       "transition": "flash",
       "choices": [
         {
-          "text": "Store an unnecessary buffer in your bag",
+          "text": "Slip a useless stamp into your bag",
           "vers": "admin_resolution",
           "effects": [
             {
@@ -643,16 +643,16 @@
     },
     "admin_resolution": {
       "id": "admin_resolution",
-      "title": "The Needless Stamp",
-      "location": "ADMINISTRATION WITHOUT FENES",
-      "narrator": "Sometimes the best tools are the ones you decide not to use anymore.",
-      "text": "You get a little tampon on the counter.\n\nIt bears a strange mention:\n\n> PASS — Validated on an exceptional basis\n\nYou put it on your own form.\n\nNobody's protesting.\n\nMaybe because no one knows exactly which stamps are official.\n\nOr maybe because you look like someone who knows what he's doing with small precision tools.",
+      "title": "The Useless Stamp",
+      "location": "WINDOWLESS ADMINISTRATION",
+      "narrator": "The best tools are sometimes the ones you decide to stop using.",
+      "text": "You pick a small stamp up from the counter.\n\nIt bears a strange mark:\n\n> PASSED — Approved as an exception\n\nYou stamp it onto your own form.\n\nNobody objects.\n\nPerhaps because nobody knows exactly which stamps are official.\n\nOr perhaps because you look like someone who knows what they're doing with small precision tools.",
       "isStart": false,
       "isEnd": false,
       "transition": "flash",
       "choices": [
         {
-          "text": "Move forward with unnecessary buffer",
+          "text": "Move on with the useless stamp",
           "vers": "hub_market",
           "effects": [
             {
@@ -670,9 +670,9 @@
     "fin_formulaire": {
       "id": "fin_formulaire",
       "title": "The Final Form",
-      "location": "ADMINISTRATION WITHOUT FENES",
-      "narrator": "Some traps start with a check box.",
-      "text": "You take the form.\n\nHe only has one page.\n\nThen two.\n\nThen twenty.\n\nThey ask you for your name, then the reason for your name, then a confirmation that you have a reason.\n\nYou sit down to fill more comfortably.\n\nWhen you look up, you're behind a desk.\n\nIn front of you, someone's waiting.\n\nYou want to help him.\n\nBut a sentence comes out of your mouth before you can stop it:\n\n**\"One signature is missing.\"**\n\nA tampon appears in your hand.\n\nAgain.\n\nAgain.\n\nAgain.",
+      "location": "WINDOWLESS ADMINISTRATION",
+      "narrator": "Some traps begin with a checkbox.",
+      "text": "You take the form.\n\nIt has only one page.\n\nThen two.\n\nThen twenty.\n\nYou are asked for your name, then the reason for your name, then a certificate proving you have a reason.\n\nYou sit down to fill it in more comfortably.\n\nWhen you look up, you're behind a desk.\n\nIn front of you, someone is waiting.\n\nYou want to help them.\n\nBut a sentence leaves your mouth before you can stop it:\n\n**\"Your signature is missing.\"**\n\nA stamp appears in your hand.\n\nAgain.\n\nAgain.\n\nAgain.",
       "isStart": false,
       "isEnd": true,
       "transition": "scanline",
@@ -680,10 +680,10 @@
     },
     "fin_employe": {
       "id": "fin_employe",
-      "title": "Monthly employee",
-      "location": "ADMINISTRATION WITHOUT FENES",
+      "title": "Employee of the Month",
+      "location": "WINDOWLESS ADMINISTRATION",
       "narrator": "Some promotions look like traps with an ergonomic chair.",
-      "text": "You wait.\n\nThe panel changes from A2 to A2 bis.\n\nThen A2 additional.\n\nThen A2 final version.\n\nAfter a while, an employee gives you a badge.\n\n> MONTH EMPLOYEE.\n\nYou're trying to explain that you're not employed here.\n\nHe's smiling at you.\n\n**\"That's what all the new people say.\"**\n\nYour office appears.\n\nYour chair appears.\n\nYour installation form appears.\n\nA note is placed on it:\n\n> Your lunch break is scheduled in 17 years.",
+      "text": "You wait.\n\nThe display changes from A2 to A2 bis.\n\nThen A2 complementary.\n\nThen A2 final version.\n\nAfter a while, an employee hands you a badge.\n\n> EMPLOYEE OF THE MONTH.\n\nYou try to explain that you don't work here.\n\nHe smiles at you.\n\n**\"That's what all the new ones say.\"**\n\nYour desk appears.\n\nYour chair appears.\n\nYour onboarding form appears.\n\nA note is stuck to it:\n\n> Your lunch break is scheduled in 17 years.",
       "isStart": false,
       "isEnd": true,
       "transition": "scanline",
@@ -691,10 +691,10 @@
     },
     "hub_market": {
       "id": "hub_market",
-      "title": "The Third Gate",
+      "title": "The Third Door",
       "location": "DREAM — FLOATING BUTCHER SHOP",
-      "narrator": "One good thing sometimes calls for another.",
-      "text": "You come back behind your floating counter.\n\nThe shiny ladle rests near the crate.\nThe useless buffer is now used as a clipboard.\n\nTwo doors closed.\n\nThe city is slowing down.\nThe administration is breathing.\n\nBut the neon of the third door still flashes.\n\nThe cat gets on the counter.\n\nHe sniffs the air, looks at you, then looks at the neon door.\n\nOn the notebook, a sentence appears:\n\n> Some get lost running.\n> Others get lost buying what they didn't need.\n\nThe morning door is still not there.\n\nThere's still a world to go through.",
+      "narrator": "One good thing often leads to another.",
+      "text": "You return behind your floating counter.\n\nThe shining ladle rests near the register.\nThe useless stamp now serves as a paperweight.\n\nTwo doors have closed.\n\nThe hurried city is slowing down.\nThe administration is breathing.\n\nBut the neon of the third door is still flickering.\n\nThe cat jumps onto the counter.\n\nIt sniffs the air, looks at you, then looks at the neon door.\n\nOn the notebook, a sentence appears:\n\n> Some people get lost by running.\n> Others get lost by buying what they didn't need.\n\nThe morning door still isn't here.\n\nThere is one more world to cross.",
       "isStart": false,
       "isEnd": false,
       "transition": "fade",
@@ -717,16 +717,16 @@
     },
     "market_intro": {
       "id": "market_intro",
-      "title": "The Infinite Supermarket",
-      "location": "REVE — RAYON 12",
-      "narrator": "Here, everything is available. Except the exit.",
-      "text": "You're coming to a huge supermarket.\n\nThe neons are buzzing.\n\nThe rays repeat infinitely in mirrors.\nThe radius of disposable watches makes seven whole alleys.\n\n*Waterproof up to 50 meters. *\n* One-year non-renewable guarantee. *\n* Accuracy: ±5 minutes per month. *\n\nYou're looking at one of them.\n\nShe's already four minutes late.\n\nShe just got out of the box.",
+      "title": "The Endless Supermarket",
+      "location": "DREAM — AISLE 12",
+      "narrator": "Here, everything is in stock. Except the way out.",
+      "text": "You arrive in a huge supermarket.\n\nThe neon lights hum.\n\nThe aisles repeat endlessly in the mirrors.\nThe disposable watch section stretches for seven full aisles.\n\n*Waterproof to 50 meters.*\n*One-year warranty, non-renewable.*\n*Accuracy: ±5 minutes per month.*\n\nYou look at one of them.\n\nIt's already 4 minutes behind.\n\nIt has only just come out of the box.",
       "isStart": false,
       "isEnd": false,
       "transition": "glitch",
       "choices": [
         {
-          "text": "Talking to the client with the overflowing cart",
+          "text": "Talk to the customer with the overflowing cart",
           "vers": "cliente_chariot",
           "effects": [
             {
@@ -736,7 +736,7 @@
           ]
         },
         {
-          "text": "Explore the canning radius",
+          "text": "Explore the canned goods aisle",
           "vers": "conserves",
           "effects": [
             {
@@ -746,7 +746,7 @@
           ]
         },
         {
-          "text": "Switch to automatic boxes",
+          "text": "Head to the self-checkout",
           "vers": "caisses_auto",
           "effects": [
             {
@@ -756,7 +756,7 @@
           ]
         },
         {
-          "text": "Install a table in the middle of the radius",
+          "text": "Set up a table in the middle of the aisle",
           "vers": "table_market",
           "effects": [
             {
@@ -773,16 +773,16 @@
     },
     "cliente_chariot": {
       "id": "cliente_chariot",
-      "title": "The Cart too full",
-      "location": "RAYON 12",
-      "narrator": "Some baskets are full of things we didn't really want.",
-      "text": "The client pushes a huge cart.\n\nIt overflows with identical boxes.\n\nYou ask what she buys.\n\n**\"Time savings.\"**\n\nShe shows the boxes.\n\n* 12 minutes a day. *\n* More effective. *\n* Family format. *\n\n**\"And with this time saved, what do you do?\"**\n\nIt stops.\n\nReally think.\n\n**\"I'm looking for ways to earn more.\"**",
+      "title": "The Overflowing Cart",
+      "location": "AISLE 12",
+      "narrator": "Some carts are full of things you never really wanted.",
+      "text": "The customer pushes an enormous cart.\n\nIt overflows with identical boxes.\n\nYou ask her what she's buying.\n\n**\"Time savings.\"**\n\nShe shows you the boxes.\n\n*Saves 12 minutes a day.*\n*More efficient.*\n*Family size.*\n\n**\"And with that saved time, what do you do?\"**\n\nShe stops.\n\nShe really thinks about it.\n\n**\"I'm looking for a way to save even more.\"**",
       "isStart": false,
       "isEnd": false,
       "transition": "fade",
       "choices": [
         {
-          "text": "Share chicken with other customers",
+          "text": "Share the chicken with the other customers",
           "vers": "table_market",
           "effects": [
             {
@@ -792,7 +792,7 @@
           ]
         },
         {
-          "text": "Follow promotions with her",
+          "text": "Follow the promotions with her",
           "vers": "fin_carte",
           "effects": [
             {
@@ -805,16 +805,16 @@
     },
     "conserves": {
       "id": "conserves",
-      "title": "The Ray of the Conserves",
-      "location": "INFINI SUERMARCHÉ",
-      "narrator": "When everything is preserved, even hesitations become long.",
-      "text": "The old lady reads the ingredients of a box of peas.\n\nShe's resting her.\n\nTake another one.\n\nRest.\n\n**\"Looking for something specific?\"**\n\n**\"I'm looking for peas that have grown somewhere.\"**\n\nShe shows the label.\n\n*Origin: Product in optimized area. *\n\n**\"Before, I knew where I came from.\"**\n\nYou understand.\n\nThat's how you feel about serial watches.",
+      "title": "The Canned Goods Aisle",
+      "location": "ENDLESS SUPERMARKET",
+      "narrator": "When everything is preserved, even hesitation lasts a long time.",
+      "text": "The old lady reads the ingredients on a can of peas.\n\nShe puts it back.\n\nShe picks up another one.\n\nPuts it back.\n\n**\"Are you looking for something in particular?\"**\n\n**\"I'm looking for peas that grew somewhere.\"**\n\nShe points to the label.\n\n*Origin: Produced in an optimized zone.*\n\n**\"Before, I knew where what I ate came from.\"**\n\nYou understand.\n\nIt's what you feel about mass-produced watches.",
       "isStart": false,
       "isEnd": false,
       "transition": "fade",
       "choices": [
         {
-          "text": "Open the can and serve with the chicken",
+          "text": "Open the can and serve it with the chicken",
           "vers": "table_market",
           "effects": [
             {
@@ -828,7 +828,7 @@
           ]
         },
         {
-          "text": "Compare all boxes one by one",
+          "text": "Compare every can one by one",
           "vers": "fin_rayon_12",
           "effects": [
             {
@@ -841,16 +841,16 @@
     },
     "caisses_auto": {
       "id": "caisses_auto",
-      "title": "Automatic Caisses",
-      "location": "INFINI SUERMARCHÉ",
-      "narrator": "Some machines know very well how to say no.",
-      "text": "The automatic body repeats:\n\n> Unexpected item in the packing area.\n\nYou put an old pocket watch on the carpet.\n\n> Unexpected item in the packing area.\n\n**\"I know.\"**\n\nYou take it back.\n\nThe machine doesn't know what to do with an object that lasts.",
+      "title": "The Self-Checkouts",
+      "location": "ENDLESS SUPERMARKET",
+      "narrator": "Some machines are very good at saying no.",
+      "text": "The self-checkout repeats:\n\n> Unexpected item in bagging area.\n\nYou place an old pocket watch on the belt.\n\n> Unexpected item in bagging area.\n\n**\"I know.\"**\n\nYou take it back.\n\nThe machine doesn't know what to do with an object that lasts.",
       "isStart": false,
       "isEnd": false,
       "transition": "fade",
       "choices": [
         {
-          "text": "Unplug the box and invite the line to eat",
+          "text": "Unplug the register and invite the line to eat",
           "vers": "table_market",
           "effects": [
             {
@@ -864,7 +864,7 @@
           ]
         },
         {
-          "text": "Continue scanning until you understand",
+          "text": "Keep scanning until it understands",
           "vers": "fin_bug",
           "effects": [
             {
@@ -877,16 +877,16 @@
     },
     "table_market": {
       "id": "table_market",
-      "title": "The kitchen too big",
-      "location": "AISLE 12 — CALM",
-      "narrator": "When people remember they're hungry, the rays stop being infinite.",
-      "text": "You put the roast chicken on a small table.\n\nNobody knows where the table comes from.\n\nClients are approaching.\nSome forgot you could eat without a screen in front of you.\n\nA child asks what it is.\n\n**\"A meal.\"**\n\n**\"How long does it take?\"**\n\n**\"The right one.\"**\n\nHe sits on the floor.\n\nIt's a good start.",
+      "title": "The Kitchen That Got Too Big",
+      "location": "AISLE 12, CALMED",
+      "narrator": "When people remember they're hungry, the aisles stop being endless.",
+      "text": "You set the roast chicken down on a small table.\n\nNobody knows where the table came from.\n\nThe customers come closer.\nSome have forgotten that you can eat without a screen in front of you.\n\nA child asks what it is.\n\n**\"A meal.\"**\n\n**\"How long does it take?\"**\n\n**\"As long as it needs.\"**\n\nHe sits down on the floor.\n\nIt's a good start.",
       "isStart": false,
       "isEnd": false,
       "transition": "flash",
       "choices": [
         {
-          "text": "Moving forward with the little neon light",
+          "text": "Move on with the small neon light",
           "vers": "final_hub",
           "effects": [
             {
@@ -908,9 +908,9 @@
     "fin_carte": {
       "id": "fin_carte",
       "title": "Loyalty Card",
-      "location": "INFINI SUERMARCHÉ",
-      "narrator": "Some rewards cost more than purchases.",
-      "text": "You follow promotions.\n\nA loyalty card appears in your hand.\n\nThen a second.\n\nThen a third.\n\nEach card promises more benefits than the previous one.\n\nOne voice announced:\n\n> Congratulations, you are now a priority customer.\n\nThe rays are opening in front of you.\n\nYour cart is growing.\n\nYour pockets fill with tickets.\n\nYou don't know what you wanted to buy anymore.\n\nBut you won 3% on something.\n\nLater, much later, you sleep in the bedding department.\n\nThe car wishes you a good night.",
+      "location": "ENDLESS SUPERMARKET",
+      "narrator": "Some rewards cost more than the purchases.",
+      "text": "You follow the promotions.\n\nA loyalty card appears in your hand.\n\nThen a second one.\n\nThen a third.\n\nEach card promises more benefits than the last.\n\nA voice announces:\n\n> Congratulations, you are now a priority customer.\n\nThe aisles open before you.\n\nYour cart grows.\n\nYour pockets fill with receipts.\n\nYou no longer know what you meant to buy.\n\nBut you've earned 3% on something.\n\nLater, much later, you sleep in the bedding aisle.\n\nThe checkout wishes you good night.",
       "isStart": false,
       "isEnd": true,
       "transition": "glitch",
@@ -918,10 +918,10 @@
     },
     "fin_bug": {
       "id": "fin_bug",
-      "title": "Article Unexpected",
-      "location": "INFINI SUERMARCHÉ",
-      "narrator": "Maybe the bug was the only thing that was still sincere.",
-      "text": "You keep scanning.\n\nBIP.\n\n> Unexpected item in the packing area.\n\nBIP.\n\n> Unexpected item in the packing area.\n\nBIP.\n\n> Unexpected item in the packing area.\n\nThe world is shaking.\n\nNeon flashes.\n\nCustomers freeze.\n\nThe cat is watching you.\n\nHe seems almost disappointed.\n\nThe caisse takes over:\n\n> Unexpected customer in the existence zone.\n\nThen the whole world freeze.",
+      "title": "Unexpected Item",
+      "location": "ENDLESS SUPERMARKET",
+      "narrator": "The bug was perhaps the only thing still sincere.",
+      "text": "You keep scanning.\n\nBEEP.\n\n> Unexpected item in bagging area.\n\nBEEP.\n\n> Unexpected item in bagging area.\n\nBEEP.\n\n> Unexpected item in bagging area.\n\nThe world shakes.\n\nThe neon lights flicker.\n\nThe customers freeze.\n\nThe cat watches you.\n\nIt seems almost disappointed.\n\nThe checkout resumes:\n\n> Unexpected customer in existence zone.\n\nThen the whole world freezes.",
       "isStart": false,
       "isEnd": true,
       "transition": "glitch",
@@ -929,10 +929,10 @@
     },
     "fin_rayon_12": {
       "id": "fin_rayon_12",
-      "title": "Section 12",
-      "location": "INFINI SUERMARCHÉ",
-      "narrator": "All outings look like promotions when you don't know what you're looking for.",
-      "text": "You compare the boxes.\n\nExtra fine peas.\nFine peas.\nAlmost sincere.\nLimited edition peas.\nPeas with promise of happiness.\n\nThe rays are repeated.\n\nYour basket is getting heavier.\n\nYou don't remember taking anything.\n\nThere's a jingle in the speakers.\n\n**\"Exceptional offer. Exceptional offer. Exceptional offer.\"**\n\nYou're passing the 12th.\n\nThen again.\n\nThen again.\n\nAfter a while, you understand.\n\nYou're not looking for the exit anymore.\n\nYou're only looking for the next ray.",
+      "title": "Aisle 12",
+      "location": "ENDLESS SUPERMARKET",
+      "narrator": "Every exit looks like a sale once you no longer know what you're looking for.",
+      "text": "You compare the boxes.\n\nExtra-fine peas.\nVery fine peas.\nAlmost sincere peas.\nLimited-edition peas.\nPeas with a promise of happiness.\n\nThe aisles repeat themselves.\n\nYour basket grows heavier.\n\nYou don't remember putting anything in it.\n\nA jingle loops over the speakers.\n\n**\"Exceptional offer. Exceptional offer. Exceptional offer.\"**\n\nYou pass aisle 12.\n\nThen again.\n\nThen again.\n\nAfter a while, you understand.\n\nYou're no longer looking for the exit.\n\nYou're only looking for the next aisle.",
       "isStart": false,
       "isEnd": true,
       "transition": "glitch",
@@ -942,8 +942,8 @@
       "id": "final_hub",
       "title": "The Calmed Counter",
       "location": "DREAM — FLOATING BUTCHER SHOP",
-      "narrator": "The dream keeps track of what we warmed up.",
-      "text": "You come back behind your floating establishment.\n\nThis time, everything is different.\n\nWatches on shelves turn at the right speed.\nNot too fast.\nNot too slow.\n\nThe blanquette is hot.\n\nOutside, a few people slowed down.\nNot much.\nJust enough to notice that the sky exists.",
+      "narrator": "The dream keeps the traces of whatever was warmed up in it.",
+      "text": "You return behind your floating workbench.\n\nThis time, everything is different.\n\nThe watches on the shelves run at the right speed.\nNot too fast.\nNot too slow.\n\nThe blanquette is hot.\n\nOutside, a few people have slowed down.\nNot many.\nJust enough to notice that the sky exists.",
       "isStart": false,
       "isEnd": false,
       "transition": "fade",
@@ -981,7 +981,7 @@
           }
         },
         {
-          "text": "Watch the dream fade gently",
+          "text": "Watch the dream fade away gently",
           "vers": "reveil",
           "effects": [],
           "clickEffect": "fade"
@@ -991,9 +991,9 @@
     "banquet": {
       "id": "banquet",
       "title": "The Banquet of Ordinary Worlds",
-      "location": "REVE — A BIG TABLE BETWEEN THE WORLDS",
-      "narrator": "The colder worlds sometimes repair themselves around a table too large.",
-      "text": "You're serving people in a hurry.\n\nYou fix a watch for the waiting employees.\nYou cut the sausage for the supermarket people.\nYou offer bread to the old lady on the bench.\n\nNo one runs during this meal.\n\nIt's not much.\n\nJust a meal.\nJust a few people sitting.\nJust a watchmaker who knows that some things can't be accelerated.",
+      "location": "DREAM — GREAT TABLE BETWEEN WORLDS",
+      "narrator": "The coldest worlds sometimes mend themselves around a table that's too big.",
+      "text": "You serve the blanquette to the hurried people.\n\nYou repair a watch for the employees who are waiting.\nYou cut the salami for the people from the supermarket.\nYou offer bread to the old lady on the bench.\n\nNobody runs during this meal.\n\nIt isn't much.\n\nJust a meal.\nJust a few people sitting down.\nJust a watchmaker who knows that some things cannot be hurried.",
       "isStart": false,
       "isEnd": false,
       "transition": "flash",
@@ -1017,7 +1017,7 @@
           }
         },
         {
-          "text": "Let the dream end",
+          "text": "Let the dream come to an end",
           "vers": "reveil",
           "effects": [],
           "clickEffect": "fade"
@@ -1027,9 +1027,9 @@
     "reveil": {
       "id": "reveil",
       "title": "Morning Opens",
-      "location": "BOUCHERIE — AUBE",
+      "location": "BUTCHER SHOP — DAWN",
       "narrator": "Some doors open before you even touch the handle.",
-      "text": "You're slowly opening your eyes.\n\nThe morning light crosses the shop window.\n\nFor a few seconds,\nDon't move.\n\nYou hear:\n\n- The noise of the needles.\n- The noise of the city that's starting again.\n- The sound of your own breath.\n\nYou're up.\n\nYou put a bottle of wine in the fridge for tonight.\n\nThe blanquette's been simmering since yesterday.\n\nYou open the shop.\n\n*Horlogerie Verneuil — Repairs & Restorations*\n\nThe neon flashes once.\n\nThen light up.",
+      "text": "You slowly open your eyes.\n\nMorning light streams through the shop window.\n\nFor a few seconds,\nyou don't move.\n\nYou hear:\n\n- The ticking of the hands.\n- The sound of the city starting up again.\n- The sound of your own breathing.\n\nYou get up.\n\nYou put a bottle of wine in the fridge for tonight.\n\nThe blanquette has been simmering since yesterday.\n\nYou open the shop.\n\n*Horlogerie Verneuil — Repairs & Restorations*\n\nThe neon sign flickers once.\n\nThen it lights up.",
       "isStart": false,
       "isEnd": true,
       "transition": "fade",
