@@ -923,7 +923,7 @@
       "title": "The Names",
       "location": "Cabin — Night",
       "narrator": "",
-      "text": "You take Marek's carving knife.\n\nYour hands shake.\n\nOn the table, in the worn wood of the cabin,\nyou carve four names.\n\nAryn.\n\nThe A takes time.\nYou want it to be right.\n\nIkar.\n\nSharper.\nLike him.\n\nTaera.\n\nYou have to pause between the two syllables.\n\nVael.\n\nThe V comes out crooked.\nYou redo it.\nTwice.\n\nThen you stay there.\nThe knife in your hand.\nThe four names in the wood.\n\nYou touch each letter.\n\nWater doesn't scream.\nFire advances.\nEarth holds.\nAir passes.\n\nLessons you never asked for.\n\nThat you carry anyway.\n\nYou put the knife away.\n\nYou don't know why you did it.\n\nYes.\n\nYou know.",
+      "text": "You take Marek's carving knife.\n\nYour hands shake.\n\nOn the table, in the worn wood of the cabin,\nyou carve four names.\n\nAryn.\n\nThe A takes time.\nYou want it to be right.\n\nIkar.\n\nSharper.\nLike him.\n\nTaera.\n\nYou have to pause between the two syllables.\n\nVael.\n\nThe V comes out crooked.\nYou redo it.\nTwice.\n\nThen you stay there.\nThe knife in your hand.\nThe four names in the wood.\n\nYou touch each letter.\n\nWater doesn't scream.\nFire advances.\nEarth holds.\nAir passes.\n\nLessons you never asked for.\n\nThat you carry anyway.\n\nThen, a little apart,\nsmaller,\nyou carve a fifth.\n\nYours.\n\nYou don't know if it still belongs beside theirs.\n\nYou leave it anyway.\n\nYou put the knife away.\n\nYou don't know why you did it.\n\nYes.\n\nYou know.",
       "isStart": false,
       "isEnd": false,
       "transition": "fade",
@@ -958,7 +958,7 @@
       "choices": [
         {
           "text": "Keep going.",
-          "vers": "annees",
+          "vers": "annees_boite",
           "effects": [
             {
               "stat": "solitude",
@@ -1098,7 +1098,7 @@
       "title": "Staying Here",
       "location": "Cabin — Night",
       "narrator": "",
-      "text": "You stay seated in front of the table.\n\nFor a long time.\n\nThe names.\n\nYou think of what Aryn would have told you.\n*Doubt is water. It eventually finds its way.*\n\nThat path brought you here.\n\nTo a cabin with no name.\nIn mountains with no maps.\n\nWith four names carved in wood.\n\nIt isn't what she imagined.\n\nIt isn't what you imagined either.\n\nBut the names are there.\n\nAnd that means something.\n\nSomething you can't yet put into words.\n\nMaybe someday.",
+      "text": "You stay seated in front of the table.\n\nFor a long time.\n\nThe names.\n\nYou think of what Aryn would have told you.\n*Doubt is water. It eventually finds its way.*\n\nThat path brought you here.\n\nTo a cabin with no name.\nIn mountains with no maps.\n\nWith five names carved in wood.\nYours, a little apart.\n\nIt isn't what she imagined.\n\nIt isn't what you imagined either.\n\nBut the names are there.\n\nAnd that means something.\n\nSomething you can't yet put into words.\n\nMaybe someday.",
       "isStart": false,
       "isEnd": false,
       "transition": "fade",
@@ -1116,6 +1116,64 @@
       ],
       "x": 300,
       "y": 1800
+    },
+    "annees_boite": {
+      "id": "annees_boite",
+      "title": "The Years",
+      "location": "Northern frontier",
+      "narrator": "The years pass.",
+      "text": "People tell stories.\n\nThat a silhouette sometimes walks along the ridges.\nThat storms change course.\nThat monsters avoid certain valleys.\nThat lost travelers find a fire already lit,\nthen no one around it.\n\nThey also say you must not go looking for the silhouette.\n\nNot because it attacks.\n\nBecause the world around it breaks.\n\nA bridge gives way.\nAn avalanche starts too early.\nA river freezes in the middle of summer.\n\nNothing deliberate.\n\nNever deliberate.\n\nBut people learn.\n\nThey survive better\nwhen they keep their distance.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "See what has become of the Four.",
+          "vers": "quatre_recherche_boite",
+          "effects": [
+            {
+              "stat": "controle",
+              "val": 5
+            }
+          ]
+        },
+        {
+          "text": "Keep your distance from the world.",
+          "vers": "horizon",
+          "effects": [
+            {
+              "stat": "solitude",
+              "val": 20
+            }
+          ]
+        }
+      ],
+      "x": 60,
+      "y": 1870
+    },
+    "quatre_recherche_boite": {
+      "id": "quatre_recherche_boite",
+      "title": "What They Find",
+      "location": "Somewhere to the south",
+      "narrator": "",
+      "text": "The Four search for a long time.\n\nAryn reads every rumor.\nTaera follows the broken lands.\nIkar climbs every road where someone has seen a violet light.\nVael talks to the people who say they saw nothing.\n\nEspecially them.\n\nFor years,\nthey always arrive too late.\n\nA fire still warm.\nA footprint in the snow.\nAn empty cabin.\nIn the middle, a table far too heavy for what it holds.\n\nIt's Ikar who pushes it aside.\n\nUnder the floorboards, there is a box.\n\nA scrap of blue cloth.\nA feather.\nA stone blackened by fire.\nA small pouch of earth.\n\nNo one speaks.\n\nNot even Vael.\n\nEspecially Vael.\n\nAryn holds the cloth tight without a word.\nVael turns the feather between his fingers.\nIkar closes his hand around the stone.\n\nTaera lays her hand on the pouch of earth.\n\nThe wind moves through the cabin.\n\nAnd for once,\nit carries no jokes at all.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Keep going.",
+          "vers": "horizon",
+          "effects": [
+            {
+              "stat": "solitude",
+              "val": 10
+            }
+          ]
+        }
+      ],
+      "x": 180,
+      "y": 1870
     }
   },
   "lang": "en"
