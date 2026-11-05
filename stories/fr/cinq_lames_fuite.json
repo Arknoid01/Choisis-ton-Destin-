@@ -923,7 +923,7 @@
       "title": "Les Noms",
       "location": "Cabane — Nuit",
       "narrator": "",
-      "text": "Tu prends le couteau à sculpter de Marek.\n\nTes mains tremblent.\n\nSur la table, dans le bois usé de la cabane,\ntu graves quatre noms.\n\nAryn.\n\nLe A prend du temps.\nTu veux que ce soit bien.\n\nIkar.\n\nPlus direct.\nComme lui.\n\nTaera.\n\nTu dois t'arrêter entre les deux syllabes.\n\nVael.\n\nLe V sort de travers.\nTu le refais.\nDeux fois.\n\nPuis tu restes là.\nLe couteau dans la main.\nLes quatre noms dans le bois.\n\nTu touches chaque lettre.\n\nL'eau ne crie pas.\nLe feu avance.\nLa terre porte.\nL'air passe.\n\nDes leçons que tu n'as pas demandées.\n\nQue tu portes quand même.\n\nTu ranges le couteau.\n\nTu ne sais pas pourquoi tu as fait ça.\n\nSi.\n\nTu sais.",
+      "text": "Tu prends le couteau à sculpter de Marek.\n\nTes mains tremblent.\n\nSur la table, dans le bois usé de la cabane,\ntu graves quatre noms.\n\nAryn.\n\nLe A prend du temps.\nTu veux que ce soit bien.\n\nIkar.\n\nPlus direct.\nComme lui.\n\nTaera.\n\nTu dois t'arrêter entre les deux syllabes.\n\nVael.\n\nLe V sort de travers.\nTu le refais.\nDeux fois.\n\nPuis tu restes là.\nLe couteau dans la main.\nLes quatre noms dans le bois.\n\nTu touches chaque lettre.\n\nL'eau ne crie pas.\nLe feu avance.\nLa terre porte.\nL'air passe.\n\nDes leçons que tu n'as pas demandées.\n\nQue tu portes quand même.\n\nPuis, un peu à l'écart,\nplus petit,\ntu en graves un cinquième.\n\nLe tien.\n\nTu ne sais pas s'il a encore sa place à côté des leurs.\n\nTu le laisses quand même.\n\nTu ranges le couteau.\n\nTu ne sais pas pourquoi tu as fait ça.\n\nSi.\n\nTu sais.",
       "isStart": false,
       "isEnd": false,
       "transition": "fade",
@@ -958,7 +958,7 @@
       "choices": [
         {
           "text": "Continuer.",
-          "vers": "annees",
+          "vers": "annees_boite",
           "effects": [
             {
               "stat": "solitude",
@@ -1098,7 +1098,7 @@
       "title": "Rester Là",
       "location": "Cabane — Nuit",
       "narrator": "",
-      "text": "Tu restes assis devant la table.\n\nLongtemps.\n\nLes noms.\n\nTu penses à ce qu'Aryn t'aurait dit.\n*Le doute est de l'eau. Il finit par trouver son chemin.*\n\nCe chemin-là t'a amené ici.\n\nDans une cabane sans nom.\nDans des montagnes sans cartes.\n\nAvec quatre noms gravés dans du bois.\n\nC'est pas ce qu'elle imaginait.\n\nC'est pas ce que tu imaginais.\n\nMais les noms sont là.\n\nEt ça veut dire quelque chose.\n\nQuelque chose que tu n'arrives pas encore à formuler.\n\nPeut-être un jour.",
+      "text": "Tu restes assis devant la table.\n\nLongtemps.\n\nLes noms.\n\nTu penses à ce qu'Aryn t'aurait dit.\n*Le doute est de l'eau. Il finit par trouver son chemin.*\n\nCe chemin-là t'a amené ici.\n\nDans une cabane sans nom.\nDans des montagnes sans cartes.\n\nAvec cinq noms gravés dans du bois.\nLe tien, un peu à l'écart.\n\nC'est pas ce qu'elle imaginait.\n\nC'est pas ce que tu imaginais.\n\nMais les noms sont là.\n\nEt ça veut dire quelque chose.\n\nQuelque chose que tu n'arrives pas encore à formuler.\n\nPeut-être un jour.",
       "isStart": false,
       "isEnd": false,
       "transition": "fade",
@@ -1116,6 +1116,64 @@
       ],
       "x": 300,
       "y": 1800
+    },
+    "annees_boite": {
+      "id": "annees_boite",
+      "title": "Les Années",
+      "location": "Frontières du Nord",
+      "narrator": "Les années passent.",
+      "text": "On raconte des choses.\n\nQu'une silhouette marche parfois sur les crêtes.\nQue les tempêtes changent de route.\nQue les monstres évitent certaines vallées.\nQue des voyageurs perdus trouvent un feu déjà allumé,\npuis personne autour.\n\nOn raconte aussi qu'il ne faut pas chercher la silhouette.\n\nPas parce qu'elle attaque.\n\nParce que le monde autour d'elle casse.\n\nUn pont qui cède.\nUne avalanche qui part trop tôt.\nUne rivière qui gèle en plein été.\n\nRien de volontaire.\n\nJamais volontaire.\n\nMais les gens apprennent.\n\nIls survivent mieux\nquand ils gardent leurs distances.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Voir ce que deviennent les Quatre.",
+          "vers": "quatre_recherche_boite",
+          "effects": [
+            {
+              "stat": "controle",
+              "val": 5
+            }
+          ]
+        },
+        {
+          "text": "Rester à distance du monde.",
+          "vers": "horizon",
+          "effects": [
+            {
+              "stat": "solitude",
+              "val": 20
+            }
+          ]
+        }
+      ],
+      "x": 60,
+      "y": 1870
+    },
+    "quatre_recherche_boite": {
+      "id": "quatre_recherche_boite",
+      "title": "Ce Qu'ils Trouvent",
+      "location": "Quelque part au sud",
+      "narrator": "",
+      "text": "Les Quatre cherchent longtemps.\n\nAryn lit toutes les rumeurs.\nTaera suit les terres brisées.\nIkar grimpe chaque route où quelqu'un a vu une lumière violette.\nVael parle aux gens qui disent n'avoir rien vu.\n\nSurtout eux.\n\nPendant des années,\nils arrivent toujours trop tard.\n\nUn feu encore tiède.\nUne empreinte dans la neige.\nUne cabane vide.\nAu milieu, une table bien trop lourde pour ce qu'elle porte.\n\nC'est Ikar qui la pousse.\n\nSous le plancher, il y a une boîte.\n\nUn morceau de tissu bleu.\nUne plume.\nUne pierre noircie par le feu.\nUne petite bourse de terre.\n\nPersonne ne parle.\n\nMême Vael.\n\nSurtout Vael.\n\nAryn serre le tissu sans rien dire.\nVael fait tourner la plume entre ses doigts.\nIkar referme la main sur la pierre.\n\nTaera pose la main sur la bourse de terre.\n\nLe vent passe dans la cabane.\n\nEt pour une fois,\nil ne porte aucune blague.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Continuer.",
+          "vers": "horizon",
+          "effects": [
+            {
+              "stat": "solitude",
+              "val": 10
+            }
+          ]
+        }
+      ],
+      "x": 180,
+      "y": 1870
     }
   }
 }
