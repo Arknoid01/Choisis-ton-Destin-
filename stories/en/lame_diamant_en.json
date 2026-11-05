@@ -6,14 +6,14 @@
   "stats": [
     {
       "id": "audace",
-      "label": "Audace",
+      "label": "Boldness",
       "start": 0,
       "color": "#fa6d8f",
       "max": 100
     },
     {
       "id": "prudence",
-      "label": "Prudence",
+      "label": "Caution",
       "start": 0,
       "color": "#6dfabc",
       "max": 100
@@ -43,15 +43,15 @@
     "intro_decoupe": {
       "id": "intro_decoupe",
       "title": "The Cut",
-      "location": "Butchery — Evening",
+      "location": "Butcher Shop — Evening",
       "narrator": "",
-      "text": "The shop is almost empty.\n\nThe rain gently hits the windows.\n\nYou finish cutting a piece of meat while the radio sizzles at the bottom of the store.\n\nYour apprentice is watching you work.\n\n**\"You could do that with your eyes closed.\"**",
+      "text": "The shop is nearly empty.\n\nRain taps softly against the windows.\n\nYou finish cutting a piece of meat while the radio crackles in the back of the shop.\n\nYour apprentice watches you work.\n\n**\"You could do that with your eyes closed.\"**",
       "isStart": true,
       "isEnd": false,
       "transition": "fade",
       "choices": [
         {
-          "text": "\"After twenty years, fortunately.\"",
+          "text": "\"Twenty years of practice, thankfully.\"",
           "vers": "client_etrange",
           "effects": [
             {
@@ -61,7 +61,7 @@
           ]
         },
         {
-          "text": "Continue without answering.",
+          "text": "Keep working without answering.",
           "vers": "client_etrange",
           "effects": [
             {
@@ -86,10 +86,10 @@
     },
     "client_etrange": {
       "id": "client_etrange",
-      "title": "The Foreign Customer",
-      "location": "Butcherery — Comptoir",
+      "title": "The Strange Customer",
+      "location": "Butcher Shop — Counter",
       "narrator": "",
-      "text": "The door bell resonates.\n\nAn old man enters slowly.\n\nHe puts an old knife on the counter.\n\nThe wire is destroyed.\nThe blade covered in rust.\n\nBut the handle has a strange symbol.\n\n**\"Do you know the Blade of Diamond?\"**",
+      "text": "The bell over the door rings.\n\nAn old man walks in slowly.\n\nHe sets an antique knife on the counter.\n\nThe edge is ruined.\nThe blade is covered in rust.\n\nBut the handle bears a strange symbol.\n\n**\"Do you know the Diamond Blade?\"**",
       "isStart": false,
       "isEnd": false,
       "transition": "fade",
@@ -131,9 +131,9 @@
     "legende": {
       "id": "legende",
       "title": "The Legend",
-      "location": "Butcherery — Comptoir",
+      "location": "Butcher Shop — Counter",
       "narrator": "",
-      "text": "The old man smiles slightly.\n\n**\"A blade that never loses its thread.\"**\n\nHe's taking out an old picture.\n\nThere are several men in front of ruins.\n\nAll bear the same symbol.\n\n**\"My father has been looking for her all his life.\"**",
+      "text": "The old man smiles faintly.\n\n**\"A blade that never loses its edge.\"**\n\nHe takes out an old photograph.\n\nIt shows several men standing in front of ruins.\n\nAll of them wear the same symbol.\n\n**\"My father searched for it his whole life.\"**",
       "isStart": false,
       "isEnd": false,
       "transition": "fade",
@@ -149,7 +149,7 @@
           ]
         },
         {
-          "text": "To say that this story is absurd.",
+          "text": "Say the story is absurd.",
           "vers": "vieillard_part",
           "effects": [
             {
@@ -159,7 +159,7 @@
           ]
         },
         {
-          "text": "Watch the picture.",
+          "text": "Study the photograph.",
           "vers": "vieillard_part",
           "effects": [
             {
@@ -174,16 +174,16 @@
     },
     "depart": {
       "id": "depart",
-      "title": "Departure",
-      "location": "Boucherie — Closure",
+      "title": "Closing Time",
+      "location": "Butcher Shop — Closing",
       "narrator": "",
-      "text": "The shop is quiet.\n\nThe picture rests on the table.\n\nYou should probably forget that story.\n\nBut your gaze always returns to the symbol.",
+      "text": "The shop is silent.\n\nThe photograph rests on the table.\n\nYou should probably forget this story.\n\nBut your eyes keep drifting back to the symbol.",
       "isStart": false,
       "isEnd": false,
       "transition": "fade",
       "choices": [
         {
-          "text": "Leave immediately.",
+          "text": "Leave right away.",
           "vers": "preparation",
           "effects": [
             {
@@ -193,7 +193,7 @@
           ]
         },
         {
-          "text": "Do some research before.",
+          "text": "Do some research first.",
           "vers": "recherches",
           "effects": [
             {
@@ -203,7 +203,7 @@
           ]
         },
         {
-          "text": "Refuse and return to work.",
+          "text": "Refuse and get back to work.",
           "vers": "fin_vie_normale"
         }
       ],
@@ -212,10 +212,10 @@
     },
     "fin_vie_normale": {
       "id": "fin_vie_normale",
-      "title": "End — A Normal Life",
+      "title": "Ending — An Ordinary Life",
       "location": "",
       "narrator": "",
-      "text": "Years pass.\n\nThe shop continues to run.\n\nSometimes,\nYou're thinking about that blade.\n\nAnd you wonder if it really existed.",
+      "text": "The years pass.\n\nThe shop keeps running.\n\nSometimes,\nyou think back on that blade.\n\nAnd you wonder whether it ever really existed.",
       "isStart": false,
       "isEnd": true,
       "transition": "fade",
@@ -225,16 +225,16 @@
     },
     "port": {
       "id": "port",
-      "title": "The Port",
-      "location": "Port — Dawn",
+      "title": "The Harbor",
+      "location": "Harbor — Dawn",
       "narrator": "",
-      "text": "The boat is slowly pitching.\n\nBoxes are piled around you.\n\nCaptain's looking at the map.\n\n**\"The ruins are after the valley.**\n**Nobody goes there.**",
+      "text": "The boat rocks gently.\n\nCrates are stacked all around you.\n\nThe captain studies the map.\n\n**\"The ruins are past the valley.**\n**Nobody goes out there.\"**",
       "isStart": false,
       "isEnd": false,
       "transition": "fade",
       "choices": [
         {
-          "text": "Pay more to go faster.",
+          "text": "Pay extra to go faster.",
           "vers": "traversee",
           "effects": [
             {
@@ -244,7 +244,7 @@
           ]
         },
         {
-          "text": "Ask questions about the ruins.",
+          "text": "Ask about the ruins.",
           "vers": "traversee",
           "effects": [
             {
@@ -254,7 +254,7 @@
           ]
         },
         {
-          "text": "Check your equipment.",
+          "text": "Check your gear.",
           "vers": "traversee",
           "effects": [
             {
@@ -269,16 +269,16 @@
     },
     "danger_cable": {
       "id": "danger_cable",
-      "title": "First Hazard",
-      "location": "Ship — Bridge",
+      "title": "First Danger",
+      "location": "Boat — Deck",
       "narrator": "No time to think.",
-      "text": "A cable from the boat suddenly drops.\n\nA box slides towards you.",
+      "text": "A cable on the boat snaps loose.\n\nA crate slides toward you.",
       "isStart": false,
       "isEnd": false,
       "transition": "fade",
       "choices": [
         {
-          "text": "Jump to the side.",
+          "text": "Jump aside.",
           "vers": "debarquement",
           "effects": [
             {
@@ -288,7 +288,7 @@
           ]
         },
         {
-          "text": "Block the car.",
+          "text": "Stop the crate.",
           "vers": "debarquement",
           "effects": [
             {
@@ -298,7 +298,7 @@
           ]
         },
         {
-          "text": "Catch the cable.",
+          "text": "Grab the cable.",
           "vers": "fin_ecrase"
         }
       ],
@@ -311,10 +311,10 @@
     },
     "fin_ecrase": {
       "id": "fin_ecrase",
-      "title": "End — Crushed",
+      "title": "Ending — Crushed",
       "location": "",
       "narrator": "",
-      "text": "The body hits the basting.\n\nYou didn't have time.\n\nThe captain looks at it without saying anything.\n\nThe sea keeps moving.",
+      "text": "The crate slams into the railing.\n\nYou didn't have time.\n\nThe captain watches without a word.\n\nThe sea keeps rolling.",
       "isStart": false,
       "isEnd": true,
       "transition": "fade",
@@ -327,7 +327,7 @@
       "title": "The Jungle",
       "location": "Jungle — Interior",
       "narrator": "",
-      "text": "The air is heavy.\n\nInsects almost cover the noise of your steps.\n\nYou find an old stone pillar covered with foam.\n\nThe same symbol.",
+      "text": "The air is heavy.\n\nInsects nearly drown out the sound of your footsteps.\n\nYou come across an old stone marker covered in moss.\n\nThe same symbol.",
       "isStart": false,
       "isEnd": false,
       "transition": "fade",
@@ -343,7 +343,7 @@
           ]
         },
         {
-          "text": "Continue without wasting time.",
+          "text": "Keep moving without wasting time.",
           "vers": "campement",
           "effects": [
             {
@@ -353,7 +353,7 @@
           ]
         },
         {
-          "text": "Take a picture.",
+          "text": "Take a photo.",
           "vers": "campement",
           "effects": [
             {
@@ -368,16 +368,16 @@
     },
     "entree_ruines": {
       "id": "entree_ruines",
-      "title": "Entry",
-      "location": "Ruins — Outer",
+      "title": "The Entrance",
+      "location": "Ruins — Outside",
       "narrator": "",
-      "text": "The ruins finally appear between the trees.\n\nImmenses.\n\nSilent.\n\nA stone door is opened.",
+      "text": "The ruins finally appear between the trees.\n\nEnormous.\n\nSilent.\n\nA stone door stands partly open.",
       "isStart": false,
       "isEnd": false,
       "transition": "fade",
       "choices": [
         {
-          "text": "Enter immediately.",
+          "text": "Go in immediately.",
           "vers": "bivouac",
           "effects": [
             {
@@ -387,7 +387,7 @@
           ]
         },
         {
-          "text": "Look around.",
+          "text": "Look around first.",
           "vers": "bivouac",
           "effects": [
             {
@@ -397,7 +397,7 @@
           ]
         },
         {
-          "text": "Look for another passage.",
+          "text": "Look for another way in.",
           "vers": "bivouac",
           "effects": [
             {
@@ -414,8 +414,8 @@
       "id": "couloir",
       "title": "The Corridor",
       "location": "Ruins — Corridor",
-      "narrator": "The floor is covered with cracked slabs.\n\nSome seem more recent than others.",
-      "text": "Every step resonates.\n\nYou feel something under your feet.",
+      "narrator": "The floor is paved with cracked slabs.\n\nSome look newer than others.",
+      "text": "Every step echoes.\n\nYou feel something beneath your feet.",
       "isStart": false,
       "isEnd": false,
       "transition": "fade",
@@ -431,7 +431,7 @@
           ]
         },
         {
-          "text": "Walk along the wall.",
+          "text": "Follow the wall.",
           "vers": "salle_puits",
           "effects": [
             {
@@ -454,10 +454,10 @@
     },
     "fin_fleches": {
       "id": "fin_fleches",
-      "title": "End — Arrows",
+      "title": "Ending — Arrows",
       "location": "",
       "narrator": "",
-      "text": "A click echoes.\n\nThen a sudden pain crosses your shoulder.\n\nThe arrows continue to silence.",
+      "text": "A click echoes.\n\nThen a sharp pain tears through your shoulder.\n\nThe arrows keep coming until there is only silence.",
       "isStart": false,
       "isEnd": true,
       "transition": "fade",
@@ -467,10 +467,10 @@
     },
     "salle_puits": {
       "id": "salle_puits",
-      "title": "The Well Room",
-      "location": "Ruins — Central Hall",
+      "title": "The Well Chamber",
+      "location": "Ruins — Central Chamber",
       "narrator": "",
-      "text": "A huge room opens in front of you.\n\nIn the centre:\na black well impossible to see to the bottom.\n\nAn old bridge crosses the room.",
+      "text": "An enormous chamber opens before you.\n\nAt its center:\na black well too deep to see the bottom of.\n\nAn old bridge crosses the room.",
       "isStart": false,
       "isEnd": false,
       "transition": "fade",
@@ -496,7 +496,7 @@
           ]
         },
         {
-          "text": "Get down to the well.",
+          "text": "Climb down into the well.",
           "vers": "gardien",
           "effects": [
             {
@@ -512,9 +512,9 @@
     "pont": {
       "id": "pont",
       "title": "The Bridge",
-      "location": "Ruins — Wood bridge",
-      "narrator": "The wood cracks under your feet.\n\nThen a loose rope.",
-      "text": "The bridge bows sharply.",
+      "location": "Ruins — Wooden Bridge",
+      "narrator": "The wood creaks under your feet.\n\nThen a rope gives way.",
+      "text": "The bridge tilts sharply.",
       "isStart": false,
       "isEnd": false,
       "transition": "fade",
@@ -553,10 +553,10 @@
     },
     "fin_chute": {
       "id": "fin_chute",
-      "title": "End — Fall",
+      "title": "Ending — The Fall",
       "location": "",
       "narrator": "",
-      "text": "Your fingers slip over the damp wood.\n\nThe well swallows you.\n\nYou can't hear anything fast.",
+      "text": "Your fingers slip on the wet wood.\n\nThe well swallows you.\n\nBefore long, you hear nothing at all.",
       "isStart": false,
       "isEnd": true,
       "transition": "fade",
@@ -566,10 +566,10 @@
     },
     "salle_lames": {
       "id": "salle_lames",
-      "title": "The Blade Room",
-      "location": "Temple — Blade Hall",
+      "title": "The Blade Chamber",
+      "location": "Temple — Blade Chamber",
       "narrator": "",
-      "text": "Hundreds of knives cover the walls.\n\nAll rusty.\n\nAll destroyed.\n\nExcept an empty location at the back of the room.\n\nIn a corner,\nbehind a collapsed pillar,\nYou see something brilliant.\n\nNot the blade.\n\nGold.",
+      "text": "Hundreds of knives cover the walls.\n\nAll rusted.\n\nAll ruined.\n\nExcept for one empty spot at the far end of the room.\n\nIn a corner,\nbehind a collapsed pillar,\nyou catch sight of something gleaming.\n\nNot the blade.\n\nGold.",
       "isStart": false,
       "isEnd": false,
       "transition": "fade",
@@ -585,7 +585,7 @@
           ]
         },
         {
-          "text": "Continue.",
+          "text": "Keep going.",
           "vers": "autel",
           "effects": [
             {
@@ -599,7 +599,7 @@
           "vers": "fin_piege_declenche"
         },
         {
-          "text": "Take the gold in addition to the blade.",
+          "text": "Take the gold along with the blade.",
           "vers": "fin_cupidite"
         }
       ],
@@ -608,10 +608,10 @@
     },
     "fin_piege_declenche": {
       "id": "fin_piege_declenche",
-      "title": "End — Trap Off",
+      "title": "Ending — Trap Triggered",
       "location": "",
       "narrator": "",
-      "text": "Dry slamming resonates throughout the room.\n\nThe blades on the walls are moving.\n\nYou understand too late that some knives weren't there to be taken.",
+      "text": "A sharp snap echoes through the entire room.\n\nThe blades on the walls begin to move.\n\nYou realize too late that some of the knives were never meant to be taken.",
       "isStart": false,
       "isEnd": true,
       "transition": "fade",
@@ -624,21 +624,21 @@
       "title": "The Mechanism",
       "location": "Temple — Final Door",
       "narrator": "",
-      "text": "A door blocks the final passage.\n\nThree symbols are engraved in the stone.\n\nYou recognize one of them.",
+      "text": "A door blocks the final passage.\n\nThree symbols are carved into the stone.\n\nYou recognize one of them.",
       "isStart": false,
       "isEnd": false,
       "transition": "fade",
       "choices": [
         {
-          "text": "Symbol of the sun.",
+          "text": "The sun symbol.",
           "vers": "fin_salle_scellee"
         },
         {
-          "text": "Symbol of the snake.",
+          "text": "The serpent symbol.",
           "vers": "fin_salle_scellee"
         },
         {
-          "text": "Symbol of the blade.",
+          "text": "The blade symbol.",
           "vers": "verif_symbole"
         }
       ],
@@ -647,10 +647,10 @@
     },
     "fin_salle_scellee": {
       "id": "fin_salle_scellee",
-      "title": "End — Sealed Room",
+      "title": "Ending — Sealed Chamber",
       "location": "",
       "narrator": "",
-      "text": "A deaf rumbling crosses the walls.\n\nThe door closes behind you.\n\nThe room is closing.\n\nThe torches are extinguished one by one.",
+      "text": "A deep rumble runs through the walls.\n\nThe door slams shut behind you.\n\nThe chamber seals itself.\n\nThe torches go out one by one.",
       "isStart": false,
       "isEnd": true,
       "transition": "fade",
@@ -660,10 +660,10 @@
     },
     "salle_finale": {
       "id": "salle_finale",
-      "title": "Diamond Blade",
-      "location": "Temple — Final Hall",
+      "title": "The Diamond Blade",
+      "location": "Temple — Final Chamber",
       "narrator": "The room is small.\n\nStrangely clean.",
-      "text": "In the center,\non a stone base:\n\nthe blade.\n\nEven after centuries,\nIt looks new.\n\nThe light slides on the wire without revealing any imperfection.",
+      "text": "At the center,\non a stone pedestal:\n\nthe blade.\n\nEven after centuries,\nit looks brand new.\n\nLight slides along the edge without revealing a single flaw.",
       "isStart": false,
       "isEnd": false,
       "transition": "fade",
@@ -679,7 +679,7 @@
           ]
         },
         {
-          "text": "Watch the room.",
+          "text": "Look over the room.",
           "vers": "vieil_homme_apparait",
           "effects": [
             {
@@ -689,7 +689,7 @@
           ]
         },
         {
-          "text": "Check the base.",
+          "text": "Check the pedestal.",
           "vers": "vieil_homme_apparait",
           "effects": [
             {
@@ -705,15 +705,15 @@
     "dernier_piege": {
       "id": "dernier_piege",
       "title": "The Last Trap",
-      "location": "Temple — Falling",
-      "narrator": "When you lift the blade,\nA rumbling crosses the temple.",
+      "location": "Temple — Collapse",
+      "narrator": "As you lift the blade,\na rumble runs through the temple.",
       "text": "Stones fall from the ceiling.\n\nThe exit is still visible.",
       "isStart": false,
       "isEnd": false,
       "transition": "fade",
       "choices": [
         {
-          "text": "Run to the exit.",
+          "text": "Run for the exit.",
           "vers": "fin_principale",
           "effects": [
             {
@@ -727,7 +727,7 @@
           "vers": "fin_perdu"
         },
         {
-          "text": "Look for another passage.",
+          "text": "Look for another way out.",
           "vers": "fin_englouti"
         }
       ],
@@ -740,10 +740,10 @@
     },
     "fin_principale": {
       "id": "fin_principale",
-      "title": "End — The Butcher",
+      "title": "Ending — The Butcher",
       "location": "",
-      "narrator": "Some blades are worth more than what they cut.",
-      "text": "Rain falls when you finally get back to town.\n\nYou gently put the blade on the counter of the shop.\n\nYour apprentice remains frozen.\n\n**\"Is that her...?\"**\n\nYou just shook your head.\n\nBehind you, the door opens.\n\nThe old man comes in.\n\nHe looks at the blade for a long time.\n\nHer eyes are different now.\nNot cold.\nJust old.\n\n**\"My father would have wanted you to do this.\"**\n\nHe leaves without saying anything else.\n\nYou get a piece of meat.\n\nThen you start cutting.\n\nThe knife passes through the flesh effortlessly.\n\nPerfect.",
+      "narrator": "Some blades are worth more than whatever they cut.",
+      "text": "It's raining when you finally return to town.\n\nYou set the blade down gently on the shop counter.\n\nYour apprentice freezes.\n\n**\"Is this it…?\"**\n\nYou simply nod.\n\nBehind you, the door opens.\n\nThe old man walks in.\n\nHe looks at the blade for a long time.\n\nHis eyes are different now.\nNot cold.\nJust old.\n\n**\"My father would have wanted to see you do this.\"**\n\nHe leaves without saying anything more.\n\nYou pick up a cut of meat.\n\nThen you start carving.\n\nThe knife slices through the flesh effortlessly.\n\nPerfect.",
       "isStart": false,
       "isEnd": true,
       "transition": "fade",
@@ -753,10 +753,10 @@
     },
     "fin_englouti": {
       "id": "fin_englouti",
-      "title": "End — Engulfed",
+      "title": "Ending — Buried",
       "location": "",
       "narrator": "",
-      "text": "The temple collapses.\n\nThe blade in one hand,\nYou're looking for an exit that no longer exists.\n\nThe stones continue to fall.",
+      "text": "The temple collapses.\n\nBlade in one hand,\nyou search for an exit that no longer exists.\n\nThe stones keep falling.",
       "isStart": false,
       "isEnd": true,
       "transition": "fade",
@@ -766,10 +766,10 @@
     },
     "fin_perdu": {
       "id": "fin_perdu",
-      "title": "End — Lost",
+      "title": "Ending — Lost",
       "location": "",
       "narrator": "",
-      "text": "You find the blade.\n\nBut never the exit.\n\nThe corridors all look alike.\n\nThe blade shines in the dark.",
+      "text": "You find the blade.\n\nBut never the way out.\n\nAll the corridors look the same.\n\nThe blade glints in the dark.",
       "isStart": false,
       "isEnd": true,
       "transition": "fade",
@@ -779,10 +779,10 @@
     },
     "fin_cupidite": {
       "id": "fin_cupidite",
-      "title": "End — Cupidity",
+      "title": "Ending — Greed",
       "location": "",
       "narrator": "",
-      "text": "You're trying to get the gold out of the room.\n\nWeight slows down your flight.\n\nThe temple burys you with its treasures.",
+      "text": "You try to carry off the room's gold.\n\nThe weight slows your escape.\n\nThe temple buries you with its treasure.",
       "isStart": false,
       "isEnd": true,
       "transition": "fade",
@@ -792,10 +792,10 @@
     },
     "fin_demi_tour": {
       "id": "fin_demi_tour",
-      "title": "End — Half-Tour",
+      "title": "Ending — Turning Back",
       "location": "",
       "narrator": "",
-      "text": "You abandon the expedition before the ruins.\n\nThe boat takes you back.\n\nThe jungle stays behind you.\n\nAnd the blade with her.",
+      "text": "You abandon the expedition before reaching the ruins.\n\nThe boat takes you home.\n\nThe jungle stays behind you.\n\nAnd the blade stays with it.",
       "isStart": false,
       "isEnd": true,
       "transition": "fade",
@@ -805,10 +805,10 @@
     },
     "verif_symbole": {
       "id": "verif_symbole",
-      "title": "The Good Symbol",
+      "title": "The Right Symbol",
       "location": "Temple — Final Door",
       "narrator": "",
-      "text": "You put your hand on the symbol.\n\nA click resonates in the stone.",
+      "text": "You press your hand against the symbol.\n\nA click echoes from within the stone.",
       "isStart": false,
       "isEnd": false,
       "transition": "fade",
@@ -822,7 +822,7 @@
           }
         },
         {
-          "text": "Nothing's happening.",
+          "text": "Nothing happens.",
           "vers": "fin_salle_scellee"
         }
       ],
@@ -831,10 +831,10 @@
     },
     "recherches": {
       "id": "recherches",
-      "title": "Research",
+      "title": "The Research",
       "location": "Library — Night",
-      "narrator": "Some stories we're looking for end up finding you.",
-      "text": "You spend the night looking.\n\nDigital archives.\nPassionate forums.\nAn old colonial cartography book.\n\nThe symbol appears three times.\n\nAlways close to the same coordinates.\nAlways associated with the same statement:\n\n*Indestructible blade. Guarded by those who know how to wait. *\n\nA blurred photo shows the entrance to a temple.\n\nThe vegetation ate everything.\n\nBut the door is still there.",
+      "narrator": "Some stories you go looking for end up finding you.",
+      "text": "You spend the night searching.\n\nDigitized archives.\nEnthusiast forums.\nAn old colonial-era map book.\n\nThe symbol shows up three times.\n\nAlways near the same coordinates.\nAlways tied to the same inscription:\n\n*Indestructible blade. Guarded by those who know how to wait.*\n\nA blurry photo shows the entrance to a temple.\n\nVegetation has swallowed nearly everything.\n\nBut the door is still there.",
       "isStart": false,
       "isEnd": false,
       "transition": "fade",
@@ -860,7 +860,7 @@
           ]
         },
         {
-          "text": "Leave without further delay.",
+          "text": "Leave without waiting any longer.",
           "vers": "preparation",
           "effects": [
             {
@@ -875,16 +875,16 @@
     },
     "preparation": {
       "id": "preparation",
-      "title": "Preparation",
+      "title": "Preparations",
       "location": "Apartment — Morning",
-      "narrator": "You never really planned a trip like this.",
-      "text": "You spend the morning gathering what you can.\n\nSome butcher tools — the strongest.\nFront lamp.\nClothing for heat and rain.\n\nOn the map the old man left you,\nYou're finally locating the ruins.\n\nWest coast of a volcanic island.\nThree days by boat from Marseille.\n\nA region that nobody mentions in the guides.\n\nYou're closing the shop for a week.\nYou leave a note to your apprentice.\n\n*Personal problem. I'll be right back. *",
+      "narrator": "You've never really prepared for a trip like this one.",
+      "text": "You spend the morning gathering what you can.\n\nA few butchering tools — the sturdiest ones.\nA headlamp.\nClothes for the heat and the rain.\n\nOn the map the old man left you,\nyou finally locate the ruins.\n\nWest coast of a volcanic island.\nThree days by boat from Marseille.\n\nA region no guidebook ever mentions.\n\nYou close the shop for a week.\nYou leave a note for your apprentice.\n\n*Personal matter. Back soon.*",
       "isStart": false,
       "isEnd": false,
       "transition": "fade",
       "choices": [
         {
-          "text": "Go to the port.",
+          "text": "Head for the harbor.",
           "vers": "port",
           "effects": [
             {
@@ -894,7 +894,7 @@
           ]
         },
         {
-          "text": "Check the card one last time.",
+          "text": "Check the map one last time.",
           "vers": "port",
           "effects": [
             {
@@ -909,16 +909,16 @@
     },
     "traversee": {
       "id": "traversee",
-      "title": "Crossing",
-      "location": "Boat — Full Sea",
+      "title": "The Crossing",
+      "location": "Boat — Open Sea",
       "narrator": "Three days at sea.",
-      "text": "The first day you watch the coast disappear.\n\nOn the second day, you study the old man's notes.\nThere are indications about the temple traps.\nSymbols to recognize.\nSome passages to avoid.\n\nOn the third day, an island appears on the horizon.\n\nBlack.\nCovered with vegetation.\nNot a visible port.\nNo lights.\n\nCaptain's slowing down.\n\n**\"We're getting as close as possible.\"**\n\nIt shows a small boat at the back of the boat.\n\n**\"The rest is for you.\"**",
+      "text": "On the first day, you watch the coast disappear.\n\nOn the second day, you study the old man's notes.\nThey describe the temple's traps.\nSymbols to recognize.\nPassages to avoid.\n\nOn the third day, an island appears on the horizon.\n\nBlack.\nCovered in vegetation.\nNo harbor in sight.\nNo lights.\n\nThe captain slows the boat.\n\n**\"We'll get as close as we can.\"**\n\nHe points to a small boat at the stern.\n\n**\"The rest is up to you.\"**",
       "isStart": false,
       "isEnd": false,
       "transition": "fade",
       "choices": [
         {
-          "text": "Read the old man's notes.",
+          "text": "Reread the old man's notes.",
           "vers": "danger_cable",
           "effects": [
             {
@@ -928,7 +928,7 @@
           ]
         },
         {
-          "text": "Prepare your equipment.",
+          "text": "Get your gear ready.",
           "vers": "danger_cable",
           "effects": [
             {
@@ -938,7 +938,7 @@
           ]
         },
         {
-          "text": "Watch the island.",
+          "text": "Study the island.",
           "vers": "danger_cable",
           "effects": [
             {
@@ -948,7 +948,7 @@
           ]
         },
         {
-          "text": "Ask the captain to turn around.",
+          "text": "Ask the captain to turn back.",
           "vers": "fin_demi_tour",
           "effects": [
             {
@@ -964,9 +964,9 @@
     "debarquement": {
       "id": "debarquement",
       "title": "Landing",
-      "location": "Island — Rivage",
+      "location": "Island — Shoreline",
       "narrator": "",
-      "text": "The small boat fails on a black sandy beach.\n\nThe boat has already disappeared on the horizon.\n\nYou're alone.\n\nThe island is silent, except insects and wind in vegetation.\n\nBefore you, a dense forest begins a few meters from the shore.\n\nOn the map, the ruins are about four hours walk inwards.\n\nYou're packing your stuff.\n\nThe old man's blade is in your bag.\n\nYou look at her one last time before you enter the forest.",
+      "text": "The small boat runs aground on a black sand beach.\n\nThe ship has already vanished over the horizon.\n\nYou are alone.\n\nThe island is silent, except for the insects and the wind in the leaves.\n\nAhead, dense forest begins a few yards from the shore.\n\nAccording to the map, the ruins lie about four hours' walk inland.\n\nYou stow your gear.\n\nThe old man's blade is in your bag.\n\nYou look at it one last time before stepping into the forest.",
       "isStart": false,
       "isEnd": false,
       "transition": "fade",
@@ -1007,10 +1007,10 @@
     },
     "campement": {
       "id": "campement",
-      "title": "Abandoned Camp",
-      "location": "Jungle — Clairière",
-      "narrator": "Someone came by before you.",
-      "text": "You find an unexpected clearing.\n\nThe remains of a campfire.\nCold for a long time.\n\nRusty cans.\nA notebook whose pages swollen with moisture.\n\nYou can read a few lines.\n\nDay 12. The ruins are closer than the map indicates.\nThe symbols on the terminal match what the old man told me.\nI don't know if I should go on.\n\nAnd later, a note added in haste:\n\n*The right symbol is not natural. Not the sun. Not the animal. *\nIt's the object. The one the man forged. The one that serves.\n\nThe last date dates back several years.\n\nYou don't know what happened to him.\n\nBut the notebook is here.\nHe doesn't.",
+      "title": "The Abandoned Camp",
+      "location": "Jungle — Clearing",
+      "narrator": "Someone passed through here before you.",
+      "text": "You come upon an unexpected clearing.\n\nThe remains of a campfire.\nLong since cold.\n\nRusted tin cans.\nA notebook whose pages have swollen with damp.\n\nYou manage to read a few lines.\n\n*Day 12. The ruins are closer than the map shows.*\n*The symbols on the marker match what the old man told me.*\n*I don't know if I should keep going.*\n\nAnd further on, a note added in a hurry:\n\n*The right symbol is not natural. Not the sun. Not an animal.*\n*It's the tool. The one a man forged. The one that serves.*\n\nThe last entry is several years old.\n\nYou don't know what became of him.\n\nBut the notebook is here.\nHe is not.",
       "isStart": false,
       "isEnd": false,
       "transition": "fade",
@@ -1026,7 +1026,7 @@
           ]
         },
         {
-          "text": "Continue without lingering.",
+          "text": "Keep moving without lingering.",
           "vers": "borne_jungle",
           "effects": [
             {
@@ -1036,7 +1036,7 @@
           ]
         },
         {
-          "text": "Look for other clues around.",
+          "text": "Look around for other clues.",
           "vers": "borne_jungle",
           "effects": [
             {
@@ -1051,16 +1051,16 @@
     },
     "borne_jungle": {
       "id": "borne_jungle",
-      "title": "The Milestone",
-      "location": "Jungle — Path",
+      "title": "The Marker",
+      "location": "Jungle — Trail",
       "narrator": "",
-      "text": "A few hundred meters further,\nYou find the stone terminal.\n\nSame symbol as the old man's knife.\n\nShe's bigger than you thought.\nAlmost two meters high.\n\nAround it, the ground is clear.\nLike plants refuse to grow there.\n\nYou lay your hand on the stone.\n\nIt's slightly warm.\n\nNot because of the sun.\nThere's none here under the canopy.",
+      "text": "A few hundred meters farther on,\nyou find the stone marker again.\n\nThe same symbol as on the old man's knife.\n\nIt is taller than you imagined.\nNearly two meters high.\n\nAround it, the ground is bare,\nas if the plants refuse to grow there.\n\nYou place your hand on the stone.\n\nIt is slightly warm.\n\nNot from the sun.\nThere is none under this canopy.",
       "isStart": false,
       "isEnd": false,
       "transition": "fade",
       "choices": [
         {
-          "text": "Raise registrations.",
+          "text": "Copy down the inscriptions.",
           "vers": "entree_ruines",
           "effects": [
             {
@@ -1070,7 +1070,7 @@
           ]
         },
         {
-          "text": "Continue to the ruins.",
+          "text": "Continue toward the ruins.",
           "vers": "entree_ruines",
           "effects": [
             {
@@ -1085,16 +1085,16 @@
     },
     "bivouac": {
       "id": "bivouac",
-      "title": "Night Before",
-      "location": "Ruins — Outer",
+      "title": "The Night Before",
+      "location": "Ruins — Outside",
       "narrator": "",
-      "text": "The sun disappears quickly.\n\nYou decide not to come in at night.\n\nYou're setting yourself up against an outside wall.\n\nThe ruins make strange noises in the darkness.\nNot animals.\nSomething more regular.\n\nLike a very old mechanic.\nStill moving.\n\nYou eat what's in your bag.\n\nYou're thinking about the shop.\nTo the apprentice.\nPhoto of the old man.\n\nAll those people looking for the blade.\n\nYou fall asleep without realizing it.",
+      "text": "The sun sets quickly.\n\nYou decide not to go in at night.\n\nYou settle against an outer wall.\n\nThe ruins make strange sounds in the dark.\nNot animals.\nSomething more regular.\n\nLike some ancient machinery.\nAlways in motion.\n\nYou eat what's left in your bag.\n\nYou think about the shop.\nAbout the apprentice.\nAbout the old man's photograph.\n\nAll those people who searched for the blade.\n\nYou fall asleep without realizing it.",
       "isStart": false,
       "isEnd": false,
       "transition": "fade",
       "choices": [
         {
-          "text": "Enter from dawn.",
+          "text": "Go in at first light.",
           "vers": "antichambre",
           "effects": [
             {
@@ -1104,7 +1104,7 @@
           ]
         },
         {
-          "text": "Enter now — you are not asleep.",
+          "text": "Go in now — you're not tired.",
           "vers": "antichambre",
           "effects": [
             {
@@ -1119,16 +1119,16 @@
     },
     "antichambre": {
       "id": "antichambre",
-      "title": "The Antichambre",
-      "location": "Ruins — First Hall",
+      "title": "The Antechamber",
+      "location": "Ruins — First Chamber",
       "narrator": "",
-      "text": "The first room is huge.\n\nThe ceiling is so high that it disappears in the dark.\n\nThe walls are covered with bas-reliefs.\n\nMen holding knives.\nHunting scenes.\nCeremonies around a brilliant object.\n\nIn the centre of the room,\nA stone basin still contains water.\n\nThe air is fresh.\nAlmost pleasant after the heat of the jungle.\n\nYou realize you were smiling without realizing it.",
+      "text": "The first chamber is immense.\n\nThe ceiling is so high it vanishes into the darkness.\n\nThe walls are covered in bas-reliefs.\n\nMen holding knives.\nHunting scenes.\nCeremonies around a gleaming object.\n\nIn the center of the room,\na stone basin still holds water.\n\nThe air is cool.\nAlmost pleasant after the heat of the jungle.\n\nYou realize you've been smiling without noticing.",
       "isStart": false,
       "isEnd": false,
       "transition": "fade",
       "choices": [
         {
-          "text": "Study bas-reliefs.",
+          "text": "Study the bas-reliefs.",
           "vers": "bas_reliefs",
           "effects": [
             {
@@ -1138,7 +1138,7 @@
           ]
         },
         {
-          "text": "Drink the water from the basin.",
+          "text": "Drink from the basin.",
           "vers": "couloir",
           "effects": [
             {
@@ -1148,7 +1148,7 @@
           ]
         },
         {
-          "text": "Move carefully.",
+          "text": "Advance carefully.",
           "vers": "couloir",
           "effects": [
             {
@@ -1164,15 +1164,15 @@
     "gardien": {
       "id": "gardien",
       "title": "The Guardian",
-      "location": "Ruins — Salle du Puits",
+      "location": "Ruins — Well Chamber",
       "narrator": "",
-      "text": "Before you reach the bridge,\nYou hear something.\n\nBreathing sound.\n\nIn a corner of the room,\nSomething's moving.\n\nA silhouette.\n\nToo big to be human.\nToo regular to be an animal.\n\nShe hasn't seen you yet.\n\nOr she pretends.",
+      "text": "Before you reach the bridge,\nyou hear something.\n\nA sound of breathing.\n\nIn a corner of the room,\nsomething moves.\n\nA silhouette.\n\nToo tall to be human.\nToo regular to be an animal.\n\nIt hasn't seen you yet.\n\nOr it's pretending not to.",
       "isStart": false,
       "isEnd": false,
       "transition": "fade",
       "choices": [
         {
-          "text": "Silence.",
+          "text": "Pass in silence.",
           "vers": "pont",
           "effects": [
             {
@@ -1182,7 +1182,7 @@
           ]
         },
         {
-          "text": "Make noise to distract her.",
+          "text": "Make noise to distract it.",
           "vers": "pont",
           "effects": [
             {
@@ -1192,7 +1192,7 @@
           ]
         },
         {
-          "text": "Stay still.",
+          "text": "Stay perfectly still.",
           "vers": "pont",
           "effects": [
             {
@@ -1212,15 +1212,15 @@
     "autel": {
       "id": "autel",
       "title": "The Altar",
-      "location": "Temple — Hall of Blades",
+      "location": "Temple — Blade Chamber",
       "narrator": "",
-      "text": "In the back of the room,\nJust before the final door,\nThere's a small altar.\n\nDried offerings.\nBone.\nAn animal skull.\n\nAnd an inscription underneath.\n\nYou don't read the tongue.\nBut one of the words looks like something in the notebook.\n\nYou open it.\n\n**\"He who recognizes the blade deserves the blade.\"**\n\nYou put the book away.\n\nYou look at the door.\n\nThree symbols are waiting for you.",
+      "text": "At the far end of the room,\njust before the final door,\nthere is a small altar.\n\nDried offerings.\nBones.\nAn animal skull.\n\nAnd an inscription beneath it.\n\nYou can't read the language.\nBut one of the words resembles something in the notebook.\n\nYou open it.\n\n*\"He who recognizes the blade deserves the blade.\"*\n\nYou put the notebook away.\n\nYou look at the door.\n\nThree symbols await you.",
       "isStart": false,
       "isEnd": false,
       "transition": "fade",
       "choices": [
         {
-          "text": "Get close to the door.",
+          "text": "Approach the door.",
           "vers": "mecanisme",
           "effects": [
             {
@@ -1230,7 +1230,7 @@
           ]
         },
         {
-          "text": "Read the notebook one last time.",
+          "text": "Read the notebook one more time.",
           "vers": "mecanisme",
           "effects": [
             {
@@ -1245,16 +1245,16 @@
     },
     "bas_reliefs": {
       "id": "bas_reliefs",
-      "title": "The Lower Reliefs",
+      "title": "The Bas-Reliefs",
       "location": "Ruins — Antechamber",
-      "narrator": "Some images speak without the need for words.",
-      "text": "You're approaching the right wall.\n\nThe sculptures are surprisingly accurate.\n\nA scene attracts your attention.\n\nA kneeling man.\nHe's reaching out to something.\nAbove him, three symbols are engraved side by side.\n\nThe first shows a circle with rays.\n*The sun — give light. *\n\nThe second shows a snake wrapped on itself.\n*The cycle — always go back to the same point. *\n\nThe third is different.\n\nNot a natural object.\nNot an animal.\n\nA straight line.\nAn angle.\nA tip.\n\n*Something done by human hands. *\n*Something that cuts. *\n\nIn the carved scene,\nthe man extends his hands to this third symbol.\n\nNot to the sun.\nNot to the snake.\n\nTo this one.",
+      "narrator": "Some images speak without needing words.",
+      "text": "You step up to the right-hand wall.\n\nThe carvings are astonishingly precise.\n\nOne scene catches your attention.\n\nA kneeling man.\nHe reaches his hands toward something.\nAbove him, three symbols are carved side by side.\n\nThe first shows a circle with rays.\n*The sun — giving light.*\n\nThe second shows a serpent coiled on itself.\n*The cycle — always returning to the same point.*\n\nThe third is different.\n\nNot a natural object.\nNot an animal.\n\nA straight line.\nAn angle.\nA point.\n\n*Something made by human hands.*\n*Something that cuts.*\n\nIn the carved scene,\nthe man reaches toward that third symbol.\n\nNot toward the sun.\nNot toward the serpent.\n\nToward that one.",
       "isStart": false,
       "isEnd": false,
       "transition": "fade",
       "choices": [
         {
-          "text": "Continue towards the corridor.",
+          "text": "Continue toward the corridor.",
           "vers": "couloir",
           "effects": [
             {
@@ -1269,16 +1269,16 @@
     },
     "technique_apprenti": {
       "id": "technique_apprenti",
-      "title": "The Just Gest",
-      "location": "Boucherie — Workplan",
+      "title": "The Right Touch",
+      "location": "Butcher Shop — Worktable",
       "narrator": "",
-      "text": "You reposition the knife in his hand.\n\n**\"Not like that. Let the blade do the job.\"**\n\nHe's doing it again.\n\nBetter.\n\n**\"The secret is never to force.\"**\n\nYou're taking your piece back.\n\nYour blade slides cleanly through the meat.\n\nThe apprentice looks at you with an expression that looks like respect.\n\nOr maybe just concentration.\n\nThe door bell resonates.",
+      "text": "You adjust the knife in his hand.\n\n**\"Not like that. Let the blade do the work.\"**\n\nHe tries again.\n\nBetter.\n\n**\"The secret is never to force it.\"**\n\nYou pick up your cut of meat again.\n\nYour blade glides cleanly through the flesh.\n\nYour apprentice watches you with an expression that looks a lot like respect.\n\nOr maybe just concentration.\n\nThe shop bell rings.",
       "isStart": false,
       "isEnd": false,
       "transition": "fade",
       "choices": [
         {
-          "text": "Go welcome the client.",
+          "text": "Go greet the customer.",
           "vers": "client_etrange",
           "effects": [
             {
@@ -1294,9 +1294,9 @@
     "localisation_ruines": {
       "id": "localisation_ruines",
       "title": "The Coordinates",
-      "location": "Butcherery — Comptoir",
+      "location": "Butcher Shop — Counter",
       "narrator": "",
-      "text": "The old man hesitates.\n\nThen he pulls out a little piece of folded paper.\n\nHand scratched coordinates.\n\n**\"An island. West coast.\"**\n\nHe puts the paper on the counter.\n\n**\"No one has been there since the 1980s.\"**\n\nHe's packing his stuff slowly.\n\n*\"My father went there twice. He never found the entrance. *\n\nHe's looking at you.\n\n**\"You could recognize a perfect blade.\"**\n\nHe says that like it's obvious.",
+      "text": "The old man hesitates.\n\nThen he takes out a small folded slip of paper.\n\nCoordinates scribbled by hand.\n\n**\"An island. West coast.\"**\n\nHe sets the paper on the counter.\n\n**\"No one has gone there since the eighties.\"**\n\nHe gathers his things slowly.\n\n**\"My father went twice. He never found the entrance.\"**\n\nHe looks at you.\n\n**\"You, though, would know a perfect blade when you saw one.\"**\n\nHe says it as if it were obvious.",
       "isStart": false,
       "isEnd": false,
       "transition": "fade",
@@ -1312,7 +1312,7 @@
           ]
         },
         {
-          "text": "Ask why he's not looking for himself.",
+          "text": "Ask why he doesn't search for it himself.",
           "vers": "vieillard_part",
           "effects": [
             {
@@ -1327,16 +1327,16 @@
     },
     "vieillard_part": {
       "id": "vieillard_part",
-      "title": "The Departure of the Old One",
-      "location": "Butchery — Entry",
+      "title": "The Old Man Leaves",
+      "location": "Butcher Shop — Entrance",
       "narrator": "",
-      "text": "The old man takes back his old knife.\n\nHe's heading to the door.\n\nThen he stops.\n\nHe laughs slowly.\n\nNot bad.\nLike someone who just made a good joke.\nAnd wait till the other understands it.\n\n**\"Good luck, butcher.\"**\n\nThe bell rings.\n\nThe door's closing.\n\nYou stay alone with the photo on the counter.\n\nAnd something strange in the chest.\n\nNo fear.\n\nSomething older than that.",
+      "text": "The old man picks up his old knife.\n\nHe heads for the door.\n\nThen he stops.\n\nHe laughs softly.\n\nNot unkindly.\nLike someone who has just told a good joke\nand is waiting for you to get it.\n\n**\"Good luck, butcher.\"**\n\nThe bell rings.\n\nThe door closes.\n\nYou're left alone with the photograph on the counter.\n\nAnd something strange in your chest.\n\nNot fear.\n\nSomething older than that.",
       "isStart": false,
       "isEnd": false,
       "transition": "fade",
       "choices": [
         {
-          "text": "Pick up the picture.",
+          "text": "Pick up the photograph.",
           "vers": "depart",
           "effects": [
             {
@@ -1346,7 +1346,7 @@
           ]
         },
         {
-          "text": "Look through the window.",
+          "text": "Look out through the window.",
           "vers": "depart",
           "effects": [
             {
@@ -1361,16 +1361,16 @@
     },
     "vieil_homme_apparait": {
       "id": "vieil_homme_apparait",
-      "title": "A Family Voice",
-      "location": "Temple — Final Room",
+      "title": "A Familiar Voice",
+      "location": "Temple — Final Chamber",
       "narrator": "",
-      "text": "You hold the blade.\n\nShe's lighter than you thought.\nPerfectly balanced.\n\nThen you hear something.\n\nSteps.\n\nSlow.\nSure.\n\nYou turn around.\n\nThe old man is here.\n\nHe doesn't look old anymore.\n\nHe stands straight.\nHis eyes are cold.\nHis hands don't shake anymore.\n\n**\"I knew you'd find the way.\"**\n\nHe smiles.\n\n**\"That's why I came to see you.\"**",
+      "text": "You hold the blade.\n\nIt is lighter than you imagined.\nPerfectly balanced.\n\nThen you hear something.\n\nFootsteps.\n\nSlow.\nSure.\n\nYou turn around.\n\nThe old man is there.\n\nHe no longer looks old.\n\nHe stands straight.\nHis eyes are cold.\nHis hands no longer tremble.\n\n**\"I knew you'd find the way.\"**\n\nHe smiles.\n\n**\"That's why I came to meet you.\"**",
       "isStart": false,
       "isEnd": false,
       "transition": "fade",
       "choices": [
         {
-          "text": "Back to the exit.",
+          "text": "Back toward the exit.",
           "vers": "confrontation",
           "effects": [
             {
@@ -1390,7 +1390,7 @@
           ]
         },
         {
-          "text": "Tighten the blade.",
+          "text": "Grip the blade tighter.",
           "vers": "confrontation",
           "effects": [
             {
@@ -1405,20 +1405,20 @@
     },
     "confrontation": {
       "id": "confrontation",
-      "title": "Confrontation",
-      "location": "Temple — Final Room",
+      "title": "The Confrontation",
+      "location": "Temple — Final Chamber",
       "narrator": "",
-      "text": "**\"Give me the blade.\"**\n\nHe's taking a step towards you.\n\n**\"My father looked for her. His father before him.\"**\n**\"It belongs to us.\"**\n\nA rumbling crosses the temple.\n\nStones are starting to fall from the ceiling.\n\nYou both have the same reflex.\n\nLook at the ceiling.\nWatch the exit.\nWatch the blade.\n\nHe's reaching out.",
+      "text": "**\"Give me the blade.\"**\n\nHe takes a step toward you.\n\n**\"My father searched for it. His father before him.\"**\n**\"It belongs to us.\"**\n\nA rumble runs through the temple.\n\nStones begin to fall from the ceiling.\n\nYou both have the same reflex.\n\nLook up at the ceiling.\nLook at the exit.\nLook at the blade.\n\nHe holds out his hand.",
       "isStart": false,
       "isEnd": false,
       "transition": "fade",
       "choices": [
         {
-          "text": "Give him the blade.",
+          "text": "Hand him the blade.",
           "vers": "fin_trahison"
         },
         {
-          "text": "Run to the exit with the blade.",
+          "text": "Run for the exit with the blade.",
           "vers": "fuite_temple",
           "effects": [
             {
@@ -1428,7 +1428,7 @@
           ]
         },
         {
-          "text": "Propose dating first.",
+          "text": "Suggest getting out together first.",
           "vers": "fuite_temple",
           "effects": [
             {
@@ -1450,13 +1450,13 @@
       "title": "The Escape",
       "location": "Temple — Corridors",
       "narrator": "",
-      "text": "You two run.\n\nThe temple collapses behind you.\n\nIn the hallway, the old man stumbles.\n\nYou could go on.\n\nYou stop.",
+      "text": "You both run.\n\nThe temple collapses behind you.\n\nIn the corridor, the old man stumbles.\n\nYou could keep going.\n\nYou stop.",
       "isStart": false,
       "isEnd": false,
       "transition": "fade",
       "choices": [
         {
-          "text": "Help him get up.",
+          "text": "Help him back to his feet.",
           "vers": "fin_principale",
           "effects": [
             {
@@ -1466,7 +1466,7 @@
           ]
         },
         {
-          "text": "Continue without him.",
+          "text": "Keep running without him.",
           "vers": "dernier_piege",
           "effects": [
             {
@@ -1485,10 +1485,10 @@
     },
     "fin_trahison": {
       "id": "fin_trahison",
-      "title": "End — Betrayal",
+      "title": "Ending — Betrayal",
       "location": "",
       "narrator": "",
-      "text": "You put the blade in his hand.\n\nHe doesn't say thank you.\n\nHe's running to the exit.\n\nYou watch him disappear in the hallway.\n\nThe temple continues to collapse around you.\n\nYou run too.\n\nBut the stones fall faster than you.\n\nYou don't have the blade.\n\nYou've got nothing.",
+      "text": "You place the blade in his hand.\n\nHe doesn't say thank you.\n\nHe bolts for the exit.\n\nYou watch him disappear down the corridor.\n\nThe temple keeps crumbling around you.\n\nYou run too.\n\nBut the stones fall faster than you.\n\nYou don't have the blade.\n\nYou have nothing left.",
       "isStart": false,
       "isEnd": true,
       "transition": "fade",
