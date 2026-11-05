@@ -2132,36 +2132,65 @@ function renderEndScene(scene) {
     });
   }
 
-  // Popup de notation — seulement sur fins positives, jamais si déjà répondu
-  if (scene.askRate !== false && !scene.title?.toLowerCase().includes('mort')
-      && !scene.title?.toLowerCase().includes('chute')
-      && !scene.title?.toLowerCase().includes('écrasé')
-      && !scene.title?.toLowerCase().includes('perdu')
-      && !scene.title?.toLowerCase().includes('trahison')) {
-    setTimeout(() => maybeShowRatingPopup(), 2000);
+  // Demande de note — après une vraie lecture, jamais sur une fin sombre ni en mode enfant
+  if (scene.askRate !== false && !isDarkEnding(scene) && history.length >= 6) {
+    setTimeout(() => maybeAskForRating(), 2500);
   }
 }
 
-// ── POPUP NOTATION PLAY STORE ────────────────────────────────
-const PLAY_STORE_URL = 'https://play.google.com/store/apps/details?id=com.pegasuscorp.fableris';
-const RATING_KEY     = 'sf_rating_done';
-const RATING_LATER_KEY = 'sf_rating_later';
+// ── DEMANDE DE NOTE PLAY STORE ───────────────────────────────
+// Sur Android : fenêtre officielle Google (In-App Review), sans question préalable
+// (règles Google). Google décide lui-même s'il l'affiche (quota), donc on la propose
+// au plus RATING_MAX_ASKS fois, espacées en nombre d'histoires terminées.
+// Ailleurs (web) : popup maison avec lien vers la fiche.
+const PLAY_STORE_URL   = 'https://play.google.com/store/apps/details?id=com.pegasuscorp.fableris';
+const RATING_KEY       = 'sf_rating_done';    // 'done' = ne plus jamais demander
+const RATING_LATER_KEY = 'sf_rating_later';   // nb d'histoires finies à partir duquel redemander
+const RATING_ASKS_KEY  = 'sf_rating_asks';    // nb de demandes natives déjà faites
+const RATING_MAX_ASKS  = 3;
+const RATING_SPACING   = 2;                   // histoires terminées entre deux demandes
+
+// Fins sombres : on ne demande pas une note juste après une mort ou un échec.
+const DARK_ENDING_WORDS = [
+  'mort', 'meurt', 'chute', 'écrasé', 'perdu', 'trahison', 'piège', 'échec', 'noyé', 'dévoré', 'game over',
+  'death', 'dead', 'dies', 'fall', 'crushed', 'lost', 'betrayal', 'trap', 'failure', 'drowned', 'devoured',
+  'muerte', 'muerto', 'muere', 'caída', 'aplastado', 'perdido', 'traición', 'trampa', 'fracaso', 'ahogado', 'devorado'
+];
+function isDarkEnding(scene) {
+  if (scene?.askRate === true) return false;
+  const title = String(scene?.title || '').toLowerCase();
+  return DARK_ENDING_WORDS.some(w => title.includes(w));
+}
 
 function recordStoryFinished() {
   return window.SFShared ? SFShared.syncStoriesFinishedCount() : 0;
 }
 
-function maybeShowRatingPopup() {
+function getNativeReviewPlugin() {
+  const cap = window.Capacitor;
+  if (!cap || typeof cap.isNativePlatform !== 'function' || !cap.isNativePlatform()) return null;
+  const plugin = cap.Plugins && cap.Plugins.InAppReview;
+  return plugin && typeof plugin.requestReview === 'function' ? plugin : null;
+}
+
+function maybeAskForRating() {
   if (localStorage.getItem(RATING_KEY) === 'done') return;
-  if (localStorage.getItem(RATING_LATER_KEY)) return;
+  if (story?.kids || (window.SFShared && SFShared.isKidsMode && SFShared.isKidsMode())) return;
 
   const plays = window.SFShared ? SFShared.getStoriesFinishedCount() : 0;
+  if (plays < 1) return;
+  const nextAt = parseInt(localStorage.getItem(RATING_LATER_KEY) || '0', 10) || 0;
+  if (plays < nextAt) return;
 
-  // Afficher seulement à partir de la 2ème histoire terminée
-  if (plays < 2) return;
-
-  // Afficher seulement 1 fois sur 3 (aléatoire) pour ne pas spammer
-  if (Math.random() > 0.33 && plays < 5) return;
+  const nativeReview = getNativeReviewPlugin();
+  if (nativeReview) {
+    const asks = (parseInt(localStorage.getItem(RATING_ASKS_KEY) || '0', 10) || 0) + 1;
+    localStorage.setItem(RATING_ASKS_KEY, String(asks));
+    localStorage.setItem(RATING_LATER_KEY, String(plays + RATING_SPACING));
+    if (asks >= RATING_MAX_ASKS) localStorage.setItem(RATING_KEY, 'done');
+    nativeReview.requestReview().catch(() => {});
+    return;
+  }
 
   showRatingPopup();
 }
@@ -2221,7 +2250,9 @@ function ratingYes() {
 }
 
 function ratingLater() {
-  localStorage.setItem(RATING_LATER_KEY, '1');
+  // « Pas maintenant » = redemander plus tard, pas jamais
+  const plays = window.SFShared ? SFShared.getStoriesFinishedCount() : 0;
+  localStorage.setItem(RATING_LATER_KEY, String(plays + RATING_SPACING));
   document.getElementById('rating-popup')?.remove();
 }
 
