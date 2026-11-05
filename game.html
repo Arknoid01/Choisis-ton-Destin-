@@ -408,6 +408,15 @@ body {
   color: var(--bg); font-weight: 600;
 }
 .end-btn.primary:hover { opacity: 0.9; }
+.end-share-btn {
+  display: block; margin: 14px auto 0; padding: 10px 18px;
+  border: 1px solid rgba(200,169,110,0.35); border-radius: 999px;
+  background: rgba(200,169,110,0.06); color: #c8a96e;
+  font-family: 'DM Mono', monospace; font-size: 11px; letter-spacing: 1.5px;
+  cursor: pointer; transition: all .2s;
+}
+.end-share-btn:hover { background: rgba(200,169,110,0.14); }
+.end-share-btn:disabled { opacity: .5; cursor: wait; }
 .first-finish-note {
   margin: 0 auto 24px; max-width: 340px; padding: 16px 18px;
   border-radius: 12px; border: 1px solid rgba(200,169,110,0.25);
@@ -1658,6 +1667,15 @@ const GAME_I18N = {
     ratingYes: 'Noter l\'application',
     ratingLater: 'Pas maintenant',
     ratingNever: 'Ne plus demander',
+    shareEnd: 'Partager ma fin',
+    shareHook: 'J\'ai obtenu la fin',
+    shareIn: 'dans',
+    shareEndings: '{found} fins découvertes sur {total}',
+    shareEndingsOne: '1 fin découverte sur {total}',
+    shareQuestion: 'Et vous, quelle fin obtiendrez-vous ?',
+    shareAvailable: 'Disponible sur Google Play',
+    shareText: 'J\'ai obtenu la fin « {end} » dans « {story} » sur Fableris. Et vous ?',
+    shareSaved: 'Image enregistrée',
   },
   en: {
     bookmark:    'Bookmark',
@@ -1700,6 +1718,15 @@ const GAME_I18N = {
     ratingYes: 'Rate the app',
     ratingLater: 'Not now',
     ratingNever: 'Don\'t ask again',
+    shareEnd: 'Share my ending',
+    shareHook: 'I reached the ending',
+    shareIn: 'in',
+    shareEndings: '{found} of {total} endings discovered',
+    shareEndingsOne: '1 of {total} endings discovered',
+    shareQuestion: 'Which ending will you reach?',
+    shareAvailable: 'Available on Google Play',
+    shareText: 'I reached the ending "{end}" in "{story}" on Fableris. Which one will you get?',
+    shareSaved: 'Image saved',
   },
   es: {
     bookmark:    'Marcador',
@@ -1742,6 +1769,15 @@ const GAME_I18N = {
     ratingYes: 'Valorar la app',
     ratingLater: 'Ahora no',
     ratingNever: 'No volver a preguntar',
+    shareEnd: 'Compartir mi final',
+    shareHook: 'Obtuve el final',
+    shareIn: 'en',
+    shareEndings: '{found} de {total} finales descubiertos',
+    shareEndingsOne: '1 de {total} finales descubiertos',
+    shareQuestion: '¿Y tú, qué final obtendrás?',
+    shareAvailable: 'Disponible en Google Play',
+    shareText: 'Obtuve el final «{end}» en «{story}» en Fableris. ¿Y tú?',
+    shareSaved: 'Imagen guardada',
   }
 };
 
@@ -1995,6 +2031,7 @@ function typewrite(html, container, onDone, narratorMode = false) {
 }
 
 function renderEndScene(scene) {
+  window._lastEndScene = scene;
   document.getElementById('progress-fill').style.width = '100%';
 
   const finishedCount = recordStoryFinished();
@@ -2055,11 +2092,252 @@ function renderEndScene(scene) {
         <button class="end-btn primary" onclick="restartGame()">↺ ${gt('endRestart')}</button>
         <button class="end-btn" onclick="window.location.href='index.html'">← ${gt('endMenu')}</button>
       </div>
+      ${canShareEnding() ? `<button class="end-share-btn" id="end-share-btn" onclick="shareEnding()">⤴ ${gt('shareEnd')}</button>` : ''}
     </div>`;
 
   // Demande de note — après une vraie lecture, jamais sur une fin sombre ni en mode enfant
   if (scene.askRate !== false && !isDarkEnding(scene) && history.length >= 6) {
     setTimeout(() => maybeAskForRating(), 2500);
+  }
+}
+
+// ── CARTE DE FIN PARTAGEABLE ─────────────────────────────────
+// Image 1080x1350 générée en canvas, partagée via la feuille de partage système
+// (Capacitor Share + Filesystem sur Android, Web Share API sinon, téléchargement en dernier recours).
+// Masquée en mode enfant.
+const SHARE_PLAY_URL = 'https://play.google.com/store/apps/details?id=com.pegasuscorp.fableris';
+
+function canShareEnding() {
+  if (story?.kids) return false;
+  if (window.SFShared && SFShared.isKidsMode && SFShared.isKidsMode()) return false;
+  return true;
+}
+
+function currentStoryFile() {
+  return new URLSearchParams(window.location.search).get('story') || localStorage.getItem('sf_game_file') || '';
+}
+
+function endingDiscoveryCounts() {
+  const total = Object.values(story?.scenes || {}).filter(sc => sc && sc.isEnd).length;
+  let found = 0;
+  try {
+    const file = currentStoryFile();
+    const ids = JSON.parse(localStorage.getItem('sf_player_stats') || '{}').endingIds || [];
+    found = file ? ids.filter(k => typeof k === 'string' && k.startsWith(file + '#')).length : 0;
+  } catch (e) {}
+  return { found: Math.min(Math.max(found, 1), Math.max(total, 1)), total };
+}
+
+// « Fin — Le Vrai Ciel » → « Le Vrai Ciel »
+function cleanEndTitle(title) {
+  const t = String(title || '').trim();
+  const m = t.match(/^(fin|end|ending|final|finale)\s*[—–:-]\s*(.+)$/i);
+  return m ? m[2].trim() : t;
+}
+
+function wrapCanvasText(ctx, text, maxWidth) {
+  const words = String(text).split(/[ \t\n]+/).filter(Boolean); // l'espace insécable lie les mots
+  const lines = []; let line = '';
+  const pushLong = w => { // mot plus large que la ligne (CJK, mot très long) : coupe par caractère
+    let part = '';
+    for (const ch of Array.from(w)) {
+      if (ctx.measureText(part + ch).width > maxWidth && part) { lines.push(part); part = ch; }
+      else part += ch;
+    }
+    return part;
+  };
+  for (const w of words) {
+    const test = line ? line + ' ' + w : w;
+    if (ctx.measureText(test).width <= maxWidth) { line = test; continue; }
+    if (line) lines.push(line);
+    line = ctx.measureText(w).width > maxWidth ? pushLong(w) : w;
+  }
+  if (line) lines.push(line);
+  return lines;
+}
+
+// Ajuste la taille de police pour tenir en maxLines lignes ; renvoie {lines, size}
+function fitCanvasText(ctx, text, fontFn, startSize, minSize, maxWidth, maxLines) {
+  let size = startSize, lines;
+  for (; size >= minSize; size -= 4) {
+    ctx.font = fontFn(size);
+    lines = wrapCanvasText(ctx, text, maxWidth);
+    if (lines.length <= maxLines) return { lines, size };
+  }
+  ctx.font = fontFn(minSize);
+  lines = wrapCanvasText(ctx, text, maxWidth);
+  if (lines.length > maxLines) {
+    lines = lines.slice(0, maxLines);
+    let last = lines[maxLines - 1];
+    while (last.length > 1 && ctx.measureText(last + '…').width > maxWidth) last = last.slice(0, -1);
+    lines[maxLines - 1] = last.replace(/\s+$/, '') + '…';
+  }
+  return { lines, size: minSize };
+}
+
+async function buildEndCard(scene) {
+  const W = 1080, H = 1350, GOLD = '#c8a96e';
+  try {
+    await Promise.all([
+      document.fonts.load("600 80px 'Cinzel'"), document.fonts.load("400 40px 'Cinzel'"),
+      document.fonts.load("italic 400 50px 'Cormorant Garamond'"), document.fonts.load("400 50px 'Cormorant Garamond'"),
+      document.fonts.load("400 28px 'DM Mono'")
+    ]);
+    await document.fonts.ready;
+  } catch (e) {}
+  const c = document.createElement('canvas'); c.width = W; c.height = H;
+  const ctx = c.getContext('2d');
+  const setSpacing = px => { try { ctx.letterSpacing = px + 'px'; } catch (e) {} };
+
+  // Fond
+  const bg = ctx.createRadialGradient(W / 2, H * 0.42, 60, W / 2, H * 0.5, H * 0.8);
+  bg.addColorStop(0, '#221c13'); bg.addColorStop(0.55, '#120f0b'); bg.addColorStop(1, '#070605');
+  ctx.fillStyle = bg; ctx.fillRect(0, 0, W, H);
+  // Halo doux
+  const halo = ctx.createRadialGradient(W / 2, H * 0.44, 0, W / 2, H * 0.44, 420);
+  halo.addColorStop(0, 'rgba(200,169,110,0.10)'); halo.addColorStop(1, 'rgba(200,169,110,0)');
+  ctx.fillStyle = halo; ctx.fillRect(0, 0, W, H);
+  // Poussière d'étoiles déterministe
+  let seed = 7;
+  const rnd = () => (seed = (seed * 16807) % 2147483647) / 2147483647;
+  for (let i = 0; i < 70; i++) {
+    ctx.fillStyle = `rgba(200,169,110,${0.08 + rnd() * 0.25})`;
+    ctx.beginPath(); ctx.arc(rnd() * W, rnd() * H, 0.8 + rnd() * 1.8, 0, Math.PI * 2); ctx.fill();
+  }
+  // Cadre double
+  ctx.strokeStyle = 'rgba(200,169,110,0.55)'; ctx.lineWidth = 2;
+  ctx.strokeRect(44, 44, W - 88, H - 88);
+  ctx.strokeStyle = 'rgba(200,169,110,0.22)'; ctx.lineWidth = 1;
+  ctx.strokeRect(60, 60, W - 120, H - 120);
+  ctx.fillStyle = GOLD; ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+  ctx.font = "400 30px 'Cinzel', serif";
+  for (const [x, y] of [[44, 44], [W - 44, 44], [44, H - 44], [W - 44, H - 44]]) {
+    ctx.fillStyle = '#0d0b08'; ctx.fillRect(x - 16, y - 16, 32, 32);
+    ctx.fillStyle = GOLD; ctx.fillText('✦', x, y + 2);
+  }
+  const divider = (y, w = 220) => {
+    const g = ctx.createLinearGradient(W / 2 - w, 0, W / 2 + w, 0);
+    g.addColorStop(0, 'rgba(200,169,110,0)'); g.addColorStop(0.5, 'rgba(200,169,110,0.8)'); g.addColorStop(1, 'rgba(200,169,110,0)');
+    ctx.strokeStyle = g; ctx.lineWidth = 1.5;
+    ctx.beginPath(); ctx.moveTo(W / 2 - w, y); ctx.lineTo(W / 2 + w, y); ctx.stroke();
+    ctx.fillStyle = GOLD; ctx.font = "400 22px 'Cinzel', serif"; ctx.fillText('◆', W / 2, y + 1);
+  };
+
+  // En-tête
+  setSpacing(18); ctx.fillStyle = GOLD; ctx.font = "600 46px 'Cinzel', serif";
+  ctx.fillText('FABLERIS', W / 2 + 9, 165);
+  setSpacing(0);
+  divider(225, 160);
+
+  const maxW = W - 220;
+  // Bloc central (accroche, titre de fin, histoire) centré verticalement entre l'en-tête et le séparateur
+  const lang = localStorage.getItem('sf_lang') || 'fr';
+  const endTitle = cleanEndTitle(scene?.title) || '…';
+  const quoted = lang === 'en' ? '“' + endTitle + '”' : lang === 'es' ? '«' + endTitle + '»' : '« ' + endTitle + ' »';
+  let t = fitCanvasText(ctx, quoted, s => `600 ${s}px 'Cinzel', serif`, 84, 52, maxW, 2);
+  if (t.lines.length > 2 || /…$/.test(t.lines[t.lines.length - 1])) t = fitCanvasText(ctx, quoted, s => `600 ${s}px 'Cinzel', serif`, 52, 40, maxW, 3);
+  const lhT = t.size * 1.22;
+  const sName = String(story?.name || '').trim() || 'Fableris';
+  const sn = fitCanvasText(ctx, sName, s => `400 ${s}px 'Cormorant Garamond', serif`, 60, 38, maxW, 2);
+  const lhS = sn.size * 1.2;
+  const HOOK = 60, GAP1 = 34, GAP2 = 64, IN = 46, GAP3 = 18;
+  const blockH = HOOK + GAP1 + t.lines.length * lhT + GAP2 + IN + GAP3 + sn.lines.length * lhS;
+  let y = 250 + Math.max(0, (880 - 250 - blockH) / 2);
+
+  ctx.fillStyle = '#b9b0a0'; ctx.font = "italic 400 54px 'Cormorant Garamond', serif";
+  ctx.fillText(gt('shareHook'), W / 2, y + HOOK / 2); y += HOOK + GAP1;
+
+  ctx.font = `600 ${t.size}px 'Cinzel', serif`;
+  ctx.shadowColor = 'rgba(200,169,110,0.35)'; ctx.shadowBlur = 24;
+  ctx.fillStyle = '#e6c88a';
+  for (const l of t.lines) { ctx.fillText(l, W / 2, y + lhT / 2); y += lhT; }
+  ctx.shadowBlur = 0; y += GAP2;
+
+  ctx.fillStyle = '#8f877a'; ctx.font = "italic 400 40px 'Cormorant Garamond', serif";
+  ctx.fillText(gt('shareIn'), W / 2, y + IN / 2); y += IN + GAP3;
+  ctx.fillStyle = '#ece4d4'; ctx.font = `400 ${sn.size}px 'Cormorant Garamond', serif`;
+  for (const l of sn.lines) { ctx.fillText(l, W / 2, y + lhS / 2); y += lhS; }
+
+  divider(905);
+
+  // Fins découvertes
+  const { found, total } = endingDiscoveryCounts();
+  if (total > 1) {
+    const txt = (found === 1 ? gt('shareEndingsOne') : gt('shareEndings'))
+      .replace('{found}', found).replace('{total}', total);
+    setSpacing(2); ctx.fillStyle = GOLD; ctx.font = "400 32px 'DM Mono', monospace";
+    ctx.fillText(txt, W / 2, 985); setSpacing(0);
+    // Pastilles
+    const n = Math.min(total, 16), gap = 30, x0 = W / 2 - ((n - 1) * gap) / 2;
+    for (let i = 0; i < n; i++) {
+      const on = i < Math.round(found * n / total);
+      ctx.beginPath(); ctx.arc(x0 + i * gap, 1045, 8, 0, Math.PI * 2);
+      if (on) { ctx.fillStyle = GOLD; ctx.fill(); }
+      else { ctx.strokeStyle = 'rgba(200,169,110,0.45)'; ctx.lineWidth = 2; ctx.stroke(); }
+    }
+  } else {
+    ctx.fillStyle = 'rgba(200,169,110,0.7)'; ctx.font = "400 34px 'Cinzel', serif";
+    ctx.fillText('✦  ✦  ✦', W / 2, 1010);
+  }
+
+  // Pied
+  ctx.fillStyle = '#d8cfbf'; ctx.font = "italic 400 46px 'Cormorant Garamond', serif";
+  const q = fitCanvasText(ctx, gt('shareQuestion'), s => `italic 400 ${s}px 'Cormorant Garamond', serif`, 46, 32, maxW, 1);
+  ctx.font = `italic 400 ${q.size}px 'Cormorant Garamond', serif`;
+  ctx.fillText(q.lines[0], W / 2, 1150);
+  setSpacing(4); ctx.fillStyle = '#8a8070'; ctx.font = "400 26px 'DM Mono', monospace";
+  ctx.fillText(gt('shareAvailable').toUpperCase(), W / 2, 1222); setSpacing(0);
+  return c;
+}
+window.buildEndCard = buildEndCard;
+
+function showShareToast(msg) {
+  const el = document.createElement('div');
+  el.textContent = msg;
+  el.style.cssText = 'position:fixed;left:50%;bottom:calc(32px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);z-index:900;background:#13110e;border:1px solid rgba(200,169,110,0.4);color:#c8a96e;padding:10px 18px;border-radius:999px;font-family:"DM Mono",monospace;font-size:12px';
+  document.body.appendChild(el);
+  setTimeout(() => el.remove(), 2200);
+}
+
+async function shareEnding() {
+  const scene = window._lastEndScene;
+  if (!scene) return;
+  const btn = document.getElementById('end-share-btn');
+  if (btn) btn.disabled = true;
+  try {
+    const canvas = await buildEndCard(scene);
+    const text = gt('shareText').replace('{end}', cleanEndTitle(scene.title)).replace('{story}', story?.name || 'Fableris')
+      + '\n' + SHARE_PLAY_URL;
+    const fileName = 'fableris-fin.png';
+    const cap = window.Capacitor;
+    const P = cap && cap.Plugins;
+    const native = cap && typeof cap.isNativePlatform === 'function' && cap.isNativePlatform();
+    if (native && P && P.Share && P.Filesystem) {
+      const base64 = canvas.toDataURL('image/png').split(',')[1];
+      const res = await P.Filesystem.writeFile({ path: fileName, data: base64, directory: 'CACHE' });
+      await P.Share.share({ title: 'Fableris', text, files: [res.uri], dialogTitle: gt('shareEnd') });
+      return;
+    }
+    const blob = await new Promise(r => canvas.toBlob(r, 'image/png'));
+    const file = blob && typeof File === 'function' ? new File([blob], fileName, { type: 'image/png' }) : null;
+    if (file && navigator.canShare && navigator.canShare({ files: [file] })) {
+      await navigator.share({ files: [file], text, title: 'Fableris' });
+      return;
+    }
+    if (native && P && P.Share) { // pas de Filesystem : partage du texte seul
+      await P.Share.share({ title: 'Fableris', text, dialogTitle: gt('shareEnd') });
+      return;
+    }
+    const a = document.createElement('a');
+    a.href = blob ? URL.createObjectURL(blob) : canvas.toDataURL('image/png');
+    a.download = fileName;
+    document.body.appendChild(a); a.click(); a.remove();
+    showShareToast(gt('shareSaved'));
+  } catch (e) {
+    const msg = String(e && (e.message || e.name) || '');
+    if (!/abort|cancel/i.test(msg)) console.warn('[share]', e);
+  } finally {
+    if (btn) btn.disabled = false;
   }
 }
 
