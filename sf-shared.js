@@ -293,7 +293,7 @@ window.SFShared = (function () {
     'sf_options', 'sf_lang', 'sf_unlocked_packs', 'sf_pack_expanded', 'sf_game_file',
     'sf_lang_chosen', 'sf_demo_shown', 'sf_tuto_shown', 'sf_pin_setup_done',
     'sf_parent_pin', 'sf_game_immersive_hint_shown', 'sf_game_fab_hint_shown',
-    'sf_rating_done', 'sf_rating_later', 'sf_library_tip_dismissed', 'sf_library_view',
+    'sf_rating_done', 'sf_rating_later', 'sf_rating_asks', 'sf_library_tip_dismissed', 'sf_library_view',
     'sf_used_codes', 'sf_code_unlocks', 'sf_author_name', 'sf_author_email'
   ];
   const ONBOARDING_HINT_KEYS = [
