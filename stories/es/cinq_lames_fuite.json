@@ -923,7 +923,7 @@
       "title": "Los nombres",
       "location": "Cabaña — Noche",
       "narrator": "",
-      "text": "Coges el cuchillo de tallar de Marek.\n\nTe tiemblan las manos.\n\nSobre la mesa, en la madera gastada de la cabaña,\ngrabas cuatro nombres.\n\nAryn.\n\nLa A te cuesta.\nQuieres que quede bien.\n\nIkar.\n\nMás directo.\nComo él.\n\nTaera.\n\nTienes que pararte entre las dos sílabas.\n\nVael.\n\nLa V sale torcida.\nLa vuelves a hacer.\nDos veces.\n\nLuego te quedas ahí.\nEl cuchillo en la mano.\nLos cuatro nombres en la madera.\n\nRecorres cada letra con el dedo.\n\nEl agua no grita.\nEl fuego avanza.\nLa tierra sostiene.\nEl aire pasa.\n\nLecciones que no pediste.\n\nQue llevas igualmente.\n\nGuardas el cuchillo.\n\nNo sabes por qué lo has hecho.\n\nSí.\n\nLo sabes.",
+      "text": "Coges el cuchillo de tallar de Marek.\n\nTe tiemblan las manos.\n\nSobre la mesa, en la madera gastada de la cabaña,\ngrabas cuatro nombres.\n\nAryn.\n\nLa A te cuesta.\nQuieres que quede bien.\n\nIkar.\n\nMás directo.\nComo él.\n\nTaera.\n\nTienes que pararte entre las dos sílabas.\n\nVael.\n\nLa V sale torcida.\nLa vuelves a hacer.\nDos veces.\n\nLuego te quedas ahí.\nEl cuchillo en la mano.\nLos cuatro nombres en la madera.\n\nRecorres cada letra con el dedo.\n\nEl agua no grita.\nEl fuego avanza.\nLa tierra sostiene.\nEl aire pasa.\n\nLecciones que no pediste.\n\nQue llevas igualmente.\n\nLuego, un poco aparte,\nmás pequeño,\ngrabas un quinto.\n\nEl tuyo.\n\nNo sabes si todavía tiene su lugar junto a los suyos.\n\nLo dejas igualmente.\n\nGuardas el cuchillo.\n\nNo sabes por qué lo has hecho.\n\nSí.\n\nLo sabes.",
       "isStart": false,
       "isEnd": false,
       "transition": "fade",
@@ -958,7 +958,7 @@
       "choices": [
         {
           "text": "Continuar.",
-          "vers": "annees",
+          "vers": "annees_boite",
           "effects": [
             {
               "stat": "solitude",
@@ -1098,7 +1098,7 @@
       "title": "Quedarse ahí",
       "location": "Cabaña — Noche",
       "narrator": "",
-      "text": "Te quedas sentado frente a la mesa.\n\nMucho rato.\n\nLos nombres.\n\nPiensas en lo que te habría dicho Aryn.\n*La duda es agua. Acaba encontrando su camino.*\n\nEse camino te ha traído hasta aquí.\n\nA una cabaña sin nombre.\nA montañas sin mapas.\n\nCon cuatro nombres grabados en la madera.\n\nNo es lo que ella imaginaba.\n\nNo es lo que tú imaginabas.\n\nPero los nombres están ahí.\n\nY eso significa algo.\n\nAlgo que todavía no sabes formular.\n\nQuizá algún día.",
+      "text": "Te quedas sentado frente a la mesa.\n\nMucho rato.\n\nLos nombres.\n\nPiensas en lo que te habría dicho Aryn.\n*La duda es agua. Acaba encontrando su camino.*\n\nEse camino te ha traído hasta aquí.\n\nA una cabaña sin nombre.\nA montañas sin mapas.\n\nCon cinco nombres grabados en la madera.\nEl tuyo, un poco aparte.\n\nNo es lo que ella imaginaba.\n\nNo es lo que tú imaginabas.\n\nPero los nombres están ahí.\n\nY eso significa algo.\n\nAlgo que todavía no sabes formular.\n\nQuizá algún día.",
       "isStart": false,
       "isEnd": false,
       "transition": "fade",
@@ -1116,6 +1116,64 @@
       ],
       "x": 300,
       "y": 1800
+    },
+    "annees_boite": {
+      "id": "annees_boite",
+      "title": "Los años",
+      "location": "Fronteras del Norte",
+      "narrator": "Los años pasan.",
+      "text": "Se cuentan cosas.\n\nQue una silueta camina a veces por las crestas.\nQue las tormentas cambian de rumbo.\nQue los monstruos evitan ciertos valles.\nQue los viajeros perdidos encuentran un fuego ya encendido,\ny luego nadie alrededor.\n\nSe cuenta también que no hay que buscar la silueta.\n\nNo porque ataque.\n\nSino porque el mundo a su alrededor se rompe.\n\nUn puente que cede.\nUna avalancha que llega demasiado pronto.\nUn río que se congela en pleno verano.\n\nNada voluntario.\n\nNunca voluntario.\n\nPero la gente aprende.\n\nSobrevive mejor\ncuando guarda las distancias.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Ver qué ha sido de los Cuatro.",
+          "vers": "quatre_recherche_boite",
+          "effects": [
+            {
+              "stat": "controle",
+              "val": 5
+            }
+          ]
+        },
+        {
+          "text": "Mantenerse a distancia del mundo.",
+          "vers": "horizon",
+          "effects": [
+            {
+              "stat": "solitude",
+              "val": 20
+            }
+          ]
+        }
+      ],
+      "x": 60,
+      "y": 1870
+    },
+    "quatre_recherche_boite": {
+      "id": "quatre_recherche_boite",
+      "title": "Lo Que Encuentran",
+      "location": "Algún lugar al sur",
+      "narrator": "",
+      "text": "Los Cuatro buscan durante mucho tiempo.\n\nAryn lee todos los rumores.\nTaera sigue las tierras devastadas.\nIkar sube por cada camino donde alguien vio una luz violeta.\nVael habla con la gente que dice no haber visto nada.\n\nSobre todo con ellos.\n\nDurante años,\nllegan siempre demasiado tarde.\n\nUn fuego todavía tibio.\nUna huella en la nieve.\nUna cabaña vacía.\nEn medio, una mesa demasiado pesada para lo que sostiene.\n\nEs Ikar quien la aparta.\n\nBajo el suelo hay una caja.\n\nUn trozo de tela azul.\nUna pluma.\nUna piedra ennegrecida por el fuego.\nUna pequeña bolsa de tierra.\n\nNadie habla.\n\nNi siquiera Vael.\n\nSobre todo Vael.\n\nAryn aprieta la tela sin decir nada.\nVael hace girar la pluma entre los dedos.\nIkar cierra la mano sobre la piedra.\n\nTaera pone la mano sobre la bolsa de tierra.\n\nEl viento atraviesa la cabaña.\n\nY por una vez,\nno trae ningún chiste.",
+      "isStart": false,
+      "isEnd": false,
+      "transition": "fade",
+      "choices": [
+        {
+          "text": "Continuar.",
+          "vers": "horizon",
+          "effects": [
+            {
+              "stat": "solitude",
+              "val": 10
+            }
+          ]
+        }
+      ],
+      "x": 180,
+      "y": 1870
     }
   },
   "lang": "es"
