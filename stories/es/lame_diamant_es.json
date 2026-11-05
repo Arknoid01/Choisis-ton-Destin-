@@ -6,14 +6,14 @@
   "stats": [
     {
       "id": "audace",
-      "label": "Audace",
+      "label": "Audacia",
       "start": 0,
       "color": "#fa6d8f",
       "max": 100
     },
     {
       "id": "prudence",
-      "label": "Prudence",
+      "label": "Prudencia",
       "start": 0,
       "color": "#6dfabc",
       "max": 100
@@ -42,16 +42,16 @@
   "scenes": {
     "intro_decoupe": {
       "id": "intro_decoupe",
-      "title": "El corte",
-      "location": "Carnicería - Buenas noches",
+      "title": "El despiece",
+      "location": "Carnicería — Noche",
       "narrator": "",
-      "text": "La tienda está casi vacía.\n\nLa lluvia golpea suavemente las ventanas.\n\nAcabas de cortar un pedazo de carne mientras la radio boquillas en la parte inferior de la tienda.\n\nTu aprendiz te está viendo trabajar.\n\nPuedes hacerlo con los ojos cerrados.",
+      "text": "La tienda está casi vacía.\n\nLa lluvia golpea suavemente los cristales.\n\nTerminas de trocear una pieza de carne mientras la radio crepita al fondo de la tienda.\n\nTu aprendiz te observa trabajar.\n\n**«Podrías hacer eso con los ojos cerrados.»**",
       "isStart": true,
       "isEnd": false,
       "transition": "fade",
       "choices": [
         {
-          "text": "\"Después de veinte años, por suerte.\"",
+          "text": "«Después de veinte años, por suerte.»",
           "vers": "client_etrange",
           "effects": [
             {
@@ -61,7 +61,7 @@
           ]
         },
         {
-          "text": "Continúa sin responder.",
+          "text": "Sigue sin responder.",
           "vers": "client_etrange",
           "effects": [
             {
@@ -86,16 +86,16 @@
     },
     "client_etrange": {
       "id": "client_etrange",
-      "title": "El cliente extranjero",
-      "location": "Carnicería — Comptoir",
+      "title": "El cliente extraño",
+      "location": "Carnicería — Mostrador",
       "narrator": "",
-      "text": "La campana de la puerta resuena.\n\nUn viejo entra lentamente.\n\nPone un viejo cuchillo en el mostrador.\n\nEl cable está destruido.\nLa espada cubierta de óxido.\n\nPero el mango tiene un símbolo extraño.\n\n¿Conoces la espada del diamante?",
+      "text": "Suena la campanilla de la puerta.\n\nUn anciano entra despacio.\n\nDeja sobre el mostrador un cuchillo antiguo.\n\nEl filo está destrozado.\nLa hoja cubierta de óxido.\n\nPero el mango lleva grabado un símbolo extraño.\n\n**«¿Conoces la Hoja de Diamante?»**",
       "isStart": false,
       "isEnd": false,
       "transition": "fade",
       "choices": [
         {
-          "text": "\"Nunca he oído hablar de ello.\"",
+          "text": "«Nunca he oído hablar de ella.»",
           "vers": "legende",
           "effects": [
             {
@@ -105,7 +105,7 @@
           ]
         },
         {
-          "text": "Examine el símbolo.",
+          "text": "Examina el símbolo.",
           "vers": "legende",
           "effects": [
             {
@@ -115,7 +115,7 @@
           ]
         },
         {
-          "text": "\"¿Cuánto quieres para este cuchillo?\"",
+          "text": "«¿Cuánto quiere por este cuchillo?»",
           "vers": "legende",
           "effects": [
             {
@@ -131,9 +131,9 @@
     "legende": {
       "id": "legende",
       "title": "La leyenda",
-      "location": "Carnicería — Comptoir",
+      "location": "Carnicería — Mostrador",
       "narrator": "",
-      "text": "El viejo sonríe ligeramente.\n\nUna espada que nunca pierde su hilo.\n\nEstá sacando una vieja foto.\n\nHay varios hombres delante de las ruinas.\n\nTodos llevan el mismo símbolo.\n\n\"Mi padre la ha estado buscando toda su vida.",
+      "text": "El anciano sonríe levemente.\n\n**«Una hoja que nunca pierde el filo.»**\n\nSaca una vieja fotografía.\n\nEn ella aparecen varios hombres frente a unas ruinas.\n\nTodos llevan el mismo símbolo.\n\n**«Mi padre la buscó toda su vida.»**",
       "isStart": false,
       "isEnd": false,
       "transition": "fade",
@@ -149,7 +149,7 @@
           ]
         },
         {
-          "text": "Decir que esta historia es absurda.",
+          "text": "Di que esta historia es absurda.",
           "vers": "vieillard_part",
           "effects": [
             {
@@ -159,7 +159,7 @@
           ]
         },
         {
-          "text": "Mira la foto.",
+          "text": "Observa la fotografía.",
           "vers": "vieillard_part",
           "effects": [
             {
@@ -174,16 +174,16 @@
     },
     "depart": {
       "id": "depart",
-      "title": "Salida",
-      "location": "Boucherie — Closure",
+      "title": "La partida",
+      "location": "Carnicería — Cierre",
       "narrator": "",
-      "text": "La tienda está tranquila.\n\nLa imagen descansa sobre la mesa.\n\nProbablemente deberías olvidar esa historia.\n\nPero tu mirada siempre vuelve al símbolo.",
+      "text": "La tienda está en silencio.\n\nLa fotografía descansa sobre la mesa.\n\nProbablemente deberías olvidar esta historia.\n\nPero tu mirada siempre vuelve al símbolo.",
       "isStart": false,
       "isEnd": false,
       "transition": "fade",
       "choices": [
         {
-          "text": "Vete inmediatamente.",
+          "text": "Parte de inmediato.",
           "vers": "preparation",
           "effects": [
             {
@@ -193,7 +193,7 @@
           ]
         },
         {
-          "text": "Haz una investigación antes.",
+          "text": "Investiga antes.",
           "vers": "recherches",
           "effects": [
             {
@@ -203,7 +203,7 @@
           ]
         },
         {
-          "text": "Rechazar y volver al trabajo.",
+          "text": "Rechaza y vuelve al trabajo.",
           "vers": "fin_vie_normale"
         }
       ],
@@ -215,7 +215,7 @@
       "title": "Final — Una vida normal",
       "location": "",
       "narrator": "",
-      "text": "Pasan años.\n\nLa tienda sigue corriendo.\n\nA veces,\nEstás pensando en esa espada.\n\nY te preguntas si realmente existió.",
+      "text": "Los años pasan.\n\nLa carnicería sigue funcionando.\n\nA veces,\nrecuerdas esa hoja.\n\nY te preguntas si de verdad existió.",
       "isStart": false,
       "isEnd": true,
       "transition": "fade",
@@ -226,15 +226,15 @@
     "port": {
       "id": "port",
       "title": "El puerto",
-      "location": "Port — Dawn",
+      "location": "Puerto — Amanecer",
       "narrator": "",
-      "text": "El barco está lanzando lentamente.\n\nLas cajas están apiladas alrededor tuyo.\n\nEl capitán está mirando el mapa.\n\n**Las ruinas están detrás del valle.**\nNadie va allí.",
+      "text": "El barco se balancea suavemente.\n\nHay cajas apiladas por todas partes a tu alrededor.\n\nEl capitán mira el mapa.\n\n**«Las ruinas están más allá del valle.**\n**Nadie va por allí.»**",
       "isStart": false,
       "isEnd": false,
       "transition": "fade",
       "choices": [
         {
-          "text": "Pagar más para ir más rápido.",
+          "text": "Paga más para ir más rápido.",
           "vers": "traversee",
           "effects": [
             {
@@ -244,7 +244,7 @@
           ]
         },
         {
-          "text": "Haga preguntas sobre las ruinas.",
+          "text": "Pregunta por las ruinas.",
           "vers": "traversee",
           "effects": [
             {
@@ -270,15 +270,15 @@
     "danger_cable": {
       "id": "danger_cable",
       "title": "Primer peligro",
-      "location": "Ship — Bridge",
+      "location": "Barco — Cubierta",
       "narrator": "No hay tiempo para pensar.",
-      "text": "Un cable del barco de repente cae.\n\nUna caja se desliza hacia ti.",
+      "text": "Un cable del barco se suelta de golpe.\n\nUna caja se desliza hacia ti.",
       "isStart": false,
       "isEnd": false,
       "transition": "fade",
       "choices": [
         {
-          "text": "Salta al lado.",
+          "text": "Salta a un lado.",
           "vers": "debarquement",
           "effects": [
             {
@@ -288,7 +288,7 @@
           ]
         },
         {
-          "text": "Bloquea el coche.",
+          "text": "Frena la caja.",
           "vers": "debarquement",
           "effects": [
             {
@@ -298,7 +298,7 @@
           ]
         },
         {
-          "text": "Coge el cable.",
+          "text": "Agarra el cable.",
           "vers": "fin_ecrase"
         }
       ],
@@ -311,10 +311,10 @@
     },
     "fin_ecrase": {
       "id": "fin_ecrase",
-      "title": "Fin — Aplastado",
+      "title": "Final — Aplastado",
       "location": "",
       "narrator": "",
-      "text": "El cuerpo golpea el bastión.\n\nNo tenías tiempo.\n\nEl capitán lo mira sin decir nada.\n\nEl mar se mueve.",
+      "text": "La caja golpea la borda.\n\nNo has tenido tiempo.\n\nEl capitán mira sin decir nada.\n\nEl mar sigue moviéndose.",
       "isStart": false,
       "isEnd": true,
       "transition": "fade",
@@ -324,10 +324,10 @@
     },
     "jungle": {
       "id": "jungle",
-      "title": "La selva",
-      "location": "Jungle — Interior",
+      "title": "La jungla",
+      "location": "Jungla — Interior",
       "narrator": "",
-      "text": "El aire es pesado.\n\nLos insectos casi cubren el ruido de sus pasos.\n\nEncontrarás un viejo pilar de piedra cubierto de espuma.\n\nEl mismo símbolo.",
+      "text": "El aire es denso.\n\nLos insectos casi ahogan el ruido de tus pasos.\n\nEncuentras un antiguo mojón de piedra cubierto de musgo.\n\nEl mismo símbolo.",
       "isStart": false,
       "isEnd": false,
       "transition": "fade",
@@ -343,7 +343,7 @@
           ]
         },
         {
-          "text": "Continúe sin perder tiempo.",
+          "text": "Sigue sin perder tiempo.",
           "vers": "campement",
           "effects": [
             {
@@ -353,7 +353,7 @@
           ]
         },
         {
-          "text": "Toma una foto.",
+          "text": "Haz una foto.",
           "vers": "campement",
           "effects": [
             {
@@ -368,16 +368,16 @@
     },
     "entree_ruines": {
       "id": "entree_ruines",
-      "title": "Entrada",
-      "location": "Ruinas — externas",
+      "title": "La entrada",
+      "location": "Ruinas — Exterior",
       "narrator": "",
-      "text": "Las ruinas finalmente aparecen entre los árboles.\n\nIncienso.\n\nSilencioso.\n\nSe abre una puerta de piedra.",
+      "text": "Por fin, las ruinas aparecen entre los árboles.\n\nEnormes.\n\nSilenciosas.\n\nUna puerta de piedra está entreabierta.",
       "isStart": false,
       "isEnd": false,
       "transition": "fade",
       "choices": [
         {
-          "text": "Entra inmediatamente.",
+          "text": "Entra de inmediato.",
           "vers": "bivouac",
           "effects": [
             {
@@ -387,7 +387,7 @@
           ]
         },
         {
-          "text": "Mira alrededor.",
+          "text": "Observa los alrededores.",
           "vers": "bivouac",
           "effects": [
             {
@@ -397,7 +397,7 @@
           ]
         },
         {
-          "text": "Busca otro pasaje.",
+          "text": "Busca otro paso.",
           "vers": "bivouac",
           "effects": [
             {
@@ -412,10 +412,10 @@
     },
     "couloir": {
       "id": "couloir",
-      "title": "El Corredor",
-      "location": "Ruinas - Corredor",
-      "narrator": "El suelo está cubierto de losas agrietadas.\n\nAlgunos parecen más recientes que otros.",
-      "text": "Cada paso resuena.\n\nSiente algo bajo sus pies.",
+      "title": "El pasillo",
+      "location": "Ruinas — Pasillo",
+      "narrator": "El suelo está cubierto de losas agrietadas.\n\nAlgunas parecen más recientes que otras.",
+      "text": "Cada paso retumba.\n\nSientes algo bajo tus pies.",
       "isStart": false,
       "isEnd": false,
       "transition": "fade",
@@ -431,7 +431,7 @@
           ]
         },
         {
-          "text": "Camina por la pared.",
+          "text": "Avanza pegado a la pared.",
           "vers": "salle_puits",
           "effects": [
             {
@@ -454,10 +454,10 @@
     },
     "fin_fleches": {
       "id": "fin_fleches",
-      "title": "Fin — Flechas",
+      "title": "Final — Flechas",
       "location": "",
       "narrator": "",
-      "text": "Un clic hace ecos.\n\nEntonces un dolor repentino cruza tu hombro.\n\nLas flechas siguen callando.",
+      "text": "Suena un chasquido.\n\nDespués, un dolor brutal atraviesa tu hombro.\n\nLas flechas siguen llegando hasta que todo calla.",
       "isStart": false,
       "isEnd": true,
       "transition": "fade",
@@ -468,9 +468,9 @@
     "salle_puits": {
       "id": "salle_puits",
       "title": "La sala del pozo",
-      "location": "Ruinas — Sala Central",
+      "location": "Ruinas — Sala central",
       "narrator": "",
-      "text": "Una enorme habitación se abre delante de ti.\n\nEn el centro:\nun negro bien imposible de ver al fondo.\n\nUn viejo puente cruza la habitación.",
+      "text": "Una inmensa sala se abre ante ti.\n\nEn el centro:\nun pozo negro, imposible de ver hasta el fondo.\n\nUn viejo puente cruza la estancia.",
       "isStart": false,
       "isEnd": false,
       "transition": "fade",
@@ -512,9 +512,9 @@
     "pont": {
       "id": "pont",
       "title": "El puente",
-      "location": "Ruinas: Puente de madera",
-      "narrator": "La madera se rompe bajo los pies.\n\nEntonces una cuerda floja.",
-      "text": "El puente se inclina fuertemente.",
+      "location": "Ruinas — Puente de madera",
+      "narrator": "La madera cruje bajo tus pies.\n\nLuego una cuerda se suelta.",
+      "text": "El puente se inclina bruscamente.",
       "isStart": false,
       "isEnd": false,
       "transition": "fade",
@@ -540,7 +540,7 @@
           ]
         },
         {
-          "text": "Espera.",
+          "text": "Agárrate.",
           "vers": "fin_chute"
         }
       ],
@@ -553,10 +553,10 @@
     },
     "fin_chute": {
       "id": "fin_chute",
-      "title": "Fin — Caída",
+      "title": "Final — Caída",
       "location": "",
       "narrator": "",
-      "text": "Tus dedos se deslizan sobre la madera húmeda.\n\nEl pozo te traga.\n\nNo puedes oír nada rápido.",
+      "text": "Tus dedos resbalan sobre la madera húmeda.\n\nEl pozo te traga.\n\nEn muy poco tiempo ya no oyes nada.",
       "isStart": false,
       "isEnd": true,
       "transition": "fade",
@@ -566,16 +566,16 @@
     },
     "salle_lames": {
       "id": "salle_lames",
-      "title": "La sala de las espadas",
-      "location": "Temple — Blade Hall",
+      "title": "La sala de las hojas",
+      "location": "Templo — Sala de las hojas",
       "narrator": "",
-      "text": "Cientos de cuchillos cubren las paredes.\n\nTodo oxidado.\n\nTodo destruido.\n\nExcepto una ubicación vacía en la parte trasera de la habitación.\n\nEn una esquina,\ndetrás de un pilar colapsado,\nVes algo brillante.\n\nNo la espada.\n\nOro.",
+      "text": "Cientos de cuchillos cubren las paredes.\n\nTodos oxidados.\n\nTodos destruidos.\n\nSalvo un hueco vacío al fondo de la sala.\n\nEn un rincón,\ndetrás de un pilar derrumbado,\nvislumbras algo brillante.\n\nNo es la hoja.\n\nEs oro.",
       "isStart": false,
       "isEnd": false,
       "transition": "fade",
       "choices": [
         {
-          "text": "Examina las viejas cuchillas.",
+          "text": "Examina las hojas antiguas.",
           "vers": "autel",
           "effects": [
             {
@@ -585,7 +585,7 @@
           ]
         },
         {
-          "text": "Continúa.",
+          "text": "Sigue avanzando.",
           "vers": "autel",
           "effects": [
             {
@@ -595,11 +595,11 @@
           ]
         },
         {
-          "text": "Toma un cuchillo viejo.",
+          "text": "Toma un cuchillo antiguo.",
           "vers": "fin_piege_declenche"
         },
         {
-          "text": "Tome el oro además de la espada.",
+          "text": "Llévate el oro además de la hoja.",
           "vers": "fin_cupidite"
         }
       ],
@@ -608,10 +608,10 @@
     },
     "fin_piege_declenche": {
       "id": "fin_piege_declenche",
-      "title": "Fin — Trampa activada",
+      "title": "Final — Trampa activada",
       "location": "",
       "narrator": "",
-      "text": "Seca resuena en toda la habitación.\n\nLas cuchillas en las paredes se mueven.\n\nUsted entiende demasiado tarde que algunos cuchillos no estaban allí para ser tomados.",
+      "text": "Un chasquido seco resuena por toda la sala.\n\nLas hojas de las paredes se mueven.\n\nComprendes demasiado tarde que algunos cuchillos no estaban allí para ser tomados.",
       "isStart": false,
       "isEnd": true,
       "transition": "fade",
@@ -621,10 +621,10 @@
     },
     "mecanisme": {
       "id": "mecanisme",
-      "title": "El Mecanismo",
+      "title": "El mecanismo",
       "location": "Templo — Puerta final",
       "narrator": "",
-      "text": "Una puerta bloquea el pasaje final.\n\nTres símbolos están grabados en la piedra.\n\nReconoces a uno de ellos.",
+      "text": "Una puerta bloquea el paso final.\n\nTres símbolos están grabados en la piedra.\n\nReconoces uno de ellos.",
       "isStart": false,
       "isEnd": false,
       "transition": "fade",
@@ -638,7 +638,7 @@
           "vers": "fin_salle_scellee"
         },
         {
-          "text": "Símbolo de la espada.",
+          "text": "Símbolo de la hoja.",
           "vers": "verif_symbole"
         }
       ],
@@ -647,10 +647,10 @@
     },
     "fin_salle_scellee": {
       "id": "fin_salle_scellee",
-      "title": "Fin — Sala sellada",
+      "title": "Final — Sala sellada",
       "location": "",
       "narrator": "",
-      "text": "Un ruido sordo atraviesa las paredes.\n\nLa puerta se cierra detrás de ti.\n\nLa habitación está cerrando.\n\nLas antorchas se apagan una por una.",
+      "text": "Un estruendo sordo recorre los muros.\n\nLa puerta se cierra tras de ti.\n\nLa sala queda sellada.\n\nLas antorchas se apagan una a una.",
       "isStart": false,
       "isEnd": true,
       "transition": "fade",
@@ -660,16 +660,16 @@
     },
     "salle_finale": {
       "id": "salle_finale",
-      "title": "Diamond Blade",
-      "location": "Temple — Final Hall",
-      "narrator": "La habitación es pequeña.\n\nExtrañamente limpio.",
-      "text": "En el centro,\nen una base de piedra:\n\nla espada.\n\nIncluso después de siglos,\nParece nuevo.\n\nLa luz se desliza sobre el alambre sin revelar ninguna imperfección.",
+      "title": "La Hoja de Diamante",
+      "location": "Templo — Sala final",
+      "narrator": "La sala es pequeña.\n\nExtrañamente limpia.",
+      "text": "En el centro,\nsobre un pedestal de piedra:\n\nla hoja.\n\nIncluso después de siglos,\nparece nueva.\n\nLa luz resbala sobre el filo sin revelar la menor imperfección.",
       "isStart": false,
       "isEnd": false,
       "transition": "fade",
       "choices": [
         {
-          "text": "Coge la espada.",
+          "text": "Toma la hoja.",
           "vers": "vieil_homme_apparait",
           "effects": [
             {
@@ -679,7 +679,7 @@
           ]
         },
         {
-          "text": "Mira la habitación.",
+          "text": "Observa la sala.",
           "vers": "vieil_homme_apparait",
           "effects": [
             {
@@ -689,7 +689,7 @@
           ]
         },
         {
-          "text": "Revisa la base.",
+          "text": "Revisa el pedestal.",
           "vers": "vieil_homme_apparait",
           "effects": [
             {
@@ -705,15 +705,15 @@
     "dernier_piege": {
       "id": "dernier_piege",
       "title": "La última trampa",
-      "location": "Temple — Falling",
-      "narrator": "Cuando levantas la hoja,\nUn ruido cruza el templo.",
-      "text": "Las piedras caen del techo.\n\nLa salida sigue siendo visible.",
+      "location": "Templo — Derrumbe",
+      "narrator": "Cuando levantas la hoja,\nun estruendo recorre el templo.",
+      "text": "Caen piedras del techo.\n\nLa salida todavía se ve.",
       "isStart": false,
       "isEnd": false,
       "transition": "fade",
       "choices": [
         {
-          "text": "Corre a la salida.",
+          "text": "Corre hacia la salida.",
           "vers": "fin_principale",
           "effects": [
             {
@@ -723,11 +723,11 @@
           ]
         },
         {
-          "text": "Protege la espada.",
+          "text": "Protege la hoja.",
           "vers": "fin_perdu"
         },
         {
-          "text": "Busca otro pasaje.",
+          "text": "Busca otro paso.",
           "vers": "fin_englouti"
         }
       ],
@@ -740,10 +740,10 @@
     },
     "fin_principale": {
       "id": "fin_principale",
-      "title": "Fin — El carnicero",
+      "title": "Final — El carnicero",
       "location": "",
-      "narrator": "Algunas cuchillas valen más que lo que cortan.",
-      "text": "La lluvia cae cuando finalmente vuelves a la ciudad.\n\nPusiste suavemente la hoja en el mostrador de la tienda.\n\nTu aprendiz sigue congelado.\n\n¿Es ella...?\n\nAcabas de agitarte la cabeza.\n\nDetrás de ti, se abre la puerta.\n\nEl viejo entra.\n\nMira la espada por mucho tiempo.\n\nSus ojos son diferentes ahora.\nNo frío.\nSolo viejo.\n\nMi padre hubiera querido que hicieras esto.\n\nSe va sin decir nada más.\n\nTienes un trozo de carne.\n\nEntonces empiezas a cortar.\n\nEl cuchillo pasa por la carne sin esfuerzo.\n\nPerfecto.",
+      "narrator": "Algunas hojas valen más que lo que cortan.",
+      "text": "La lluvia cae cuando por fin vuelves a la ciudad.\n\nDejas la hoja con cuidado sobre el mostrador de la tienda.\n\nTu aprendiz se queda inmóvil.\n\n**«¿Es ella…?»**\n\nAsientes con la cabeza.\n\nDetrás de ti, se abre la puerta.\n\nEntra el anciano.\n\nMira la hoja durante mucho tiempo.\n\nSus ojos son diferentes ahora.\nNo fríos.\nSolo viejos.\n\n**«Mi padre habría querido verte hacer esto.»**\n\nSe marcha sin decir nada más.\n\nTomas un trozo de carne.\n\nEntonces empiezas el despiece.\n\nEl cuchillo atraviesa la carne sin esfuerzo.\n\nPerfecto.",
       "isStart": false,
       "isEnd": true,
       "transition": "fade",
@@ -753,10 +753,10 @@
     },
     "fin_englouti": {
       "id": "fin_englouti",
-      "title": "Fin — Engullido",
+      "title": "Final — Sepultado",
       "location": "",
       "narrator": "",
-      "text": "El templo se colapsa.\n\nLa espada en una mano,\nEstás buscando una salida que ya no existe.\n\nLas piedras siguen cayendo.",
+      "text": "El templo se derrumba.\n\nCon la hoja en una mano,\nbuscas una salida que ya no existe.\n\nLas piedras siguen cayendo.",
       "isStart": false,
       "isEnd": true,
       "transition": "fade",
@@ -766,10 +766,10 @@
     },
     "fin_perdu": {
       "id": "fin_perdu",
-      "title": "Fin — Perdido",
+      "title": "Final — Perdido",
       "location": "",
       "narrator": "",
-      "text": "Encuentra la espada.\n\nPero nunca la salida.\n\nLos pasillos parecen iguales.\n\nLa espada brilla en la oscuridad.",
+      "text": "Encuentras la hoja.\n\nPero nunca la salida.\n\nLos pasillos se parecen todos.\n\nLa hoja brilla en la oscuridad.",
       "isStart": false,
       "isEnd": true,
       "transition": "fade",
@@ -779,10 +779,10 @@
     },
     "fin_cupidite": {
       "id": "fin_cupidite",
-      "title": "Fin — Codicia",
+      "title": "Final — Codicia",
       "location": "",
       "narrator": "",
-      "text": "Estás intentando sacar el oro de la habitación.\n\nEl peso disminuye el vuelo.\n\nEl templo te entierra con sus tesoros.",
+      "text": "Intentas llevarte el oro de la sala.\n\nEl peso frena tu huida.\n\nEl templo te entierra con sus tesoros.",
       "isStart": false,
       "isEnd": true,
       "transition": "fade",
@@ -792,10 +792,10 @@
     },
     "fin_demi_tour": {
       "id": "fin_demi_tour",
-      "title": "Final — Media hora",
+      "title": "Final — Media vuelta",
       "location": "",
       "narrator": "",
-      "text": "Abandonas la expedición antes de las ruinas.\n\nEl barco te lleva de vuelta.\n\nLa selva se queda detrás de ti.\n\nY la espada con ella.",
+      "text": "Abandonas la expedición antes de llegar a las ruinas.\n\nEl barco te devuelve a casa.\n\nLa jungla queda atrás.\n\nY la hoja se queda con ella.",
       "isStart": false,
       "isEnd": true,
       "transition": "fade",
@@ -805,10 +805,10 @@
     },
     "verif_symbole": {
       "id": "verif_symbole",
-      "title": "El Buen Símbolo",
+      "title": "El símbolo correcto",
       "location": "Templo — Puerta final",
       "narrator": "",
-      "text": "Pon tu mano en el símbolo.\n\nUn clic resuena en la piedra.",
+      "text": "Pones la mano sobre el símbolo.\n\nUn clic resuena en la piedra.",
       "isStart": false,
       "isEnd": false,
       "transition": "fade",
@@ -831,10 +831,10 @@
     },
     "recherches": {
       "id": "recherches",
-      "title": "Research",
+      "title": "Las búsquedas",
       "location": "Biblioteca — Noche",
-      "narrator": "Algunas historias que buscamos terminan encontrándote.",
-      "text": "Pasas la noche buscando.\n\nArchivo digital.\nForos pasionados.\nUn viejo libro de cartografía colonial.\n\nEl símbolo aparece tres veces.\n\nSiempre cerca de las mismas coordenadas.\nSiempre asociado con la misma declaración:\n\n*Hoja indestructible. Guardados por aquellos que saben esperar.*\n\nUna foto borrosa muestra la entrada a un templo.\n\nLa vegetación se comió todo.\n\nPero la puerta sigue ahí.",
+      "narrator": "Hay historias que buscas y que acaban encontrándote a ti.",
+      "text": "Pasas la noche buscando.\n\nArchivos digitalizados.\nForos de aficionados.\nUn viejo libro de cartografía colonial.\n\nEl símbolo aparece tres veces.\n\nSiempre cerca de las mismas coordenadas.\nSiempre asociado a la misma mención:\n\n*Hoja indestructible. Guardada por quienes saben esperar.*\n\nUna foto borrosa muestra la entrada de un templo.\n\nLa vegetación lo ha engullido todo.\n\nPero la puerta sigue ahí.",
       "isStart": false,
       "isEnd": false,
       "transition": "fade",
@@ -860,7 +860,7 @@
           ]
         },
         {
-          "text": "Vete sin más demora.",
+          "text": "Parte sin esperar más.",
           "vers": "preparation",
           "effects": [
             {
@@ -875,16 +875,16 @@
     },
     "preparation": {
       "id": "preparation",
-      "title": "Preparación",
+      "title": "La preparación",
       "location": "Apartamento — Mañana",
-      "narrator": "Nunca planeaste un viaje como este.",
-      "text": "Pasas la mañana reuniendo lo que puedes.\n\nAlgunas herramientas de carnicero — las más fuertes.\nLámpara frontal.\nRopa para calor y lluvia.\n\nEn el mapa el viejo te dejó,\nFinalmente estás localizando las ruinas.\n\nCosta Oeste de una isla volcánica.\nTres días en barco desde Marsella.\n\nUna región que nadie menciona en los guías.\n\nVas a cerrar la tienda por una semana.\nDeja una nota a tu aprendiz.\n\n*Problema personal. Ahora vuelvo.*",
+      "narrator": "Nunca has preparado de verdad un viaje como este.",
+      "text": "Pasas la mañana reuniendo lo que puedes.\n\nAlgunas herramientas de carnicero, las más resistentes.\nUna linterna frontal.\nRopa para el calor y la lluvia.\n\nEn el mapa que te dejó el anciano,\npor fin localizas las ruinas.\n\nCosta oeste de una isla volcánica.\nA tres días de barco desde Marsella.\n\nUna región que ninguna guía menciona.\n\nCierras la tienda por una semana.\nDejas una nota a tu aprendiz.\n\n*Asunto personal. Volveré.*",
       "isStart": false,
       "isEnd": false,
       "transition": "fade",
       "choices": [
         {
-          "text": "Ve al puerto.",
+          "text": "Ve hacia el puerto.",
           "vers": "port",
           "effects": [
             {
@@ -894,7 +894,7 @@
           ]
         },
         {
-          "text": "Revisa la tarjeta por última vez.",
+          "text": "Revisa una última vez el mapa.",
           "vers": "port",
           "effects": [
             {
@@ -909,16 +909,16 @@
     },
     "traversee": {
       "id": "traversee",
-      "title": "Crossing",
-      "location": "Barco — Mar Lleno",
-      "narrator": "Tres días en el mar.",
-      "text": "El primer día que ves la costa desaparece.\n\nEn el segundo día, estudias las notas del viejo.\nHay indicaciones sobre las trampas del templo.\nSímbolos a reconocer.\nAlgunos pasajes para evitar.\n\nAl tercer día aparece una isla en el horizonte.\n\nNegro.\nCubierta con vegetación.\nNo es un puerto visible.\nSin luces.\n\nEl capitán está disminuyendo.\n\n\"Nos estamos acercando lo más posible.\n\nMuestra un pequeño barco en la parte posterior del barco.\n\nEl resto es para ti.",
+      "title": "La travesía",
+      "location": "Barco — Alta mar",
+      "narrator": "Tres días de mar.",
+      "text": "El primer día, ves desaparecer la costa.\n\nEl segundo día, estudias las notas del anciano.\nHay indicaciones sobre las trampas del templo.\nSímbolos que reconocer.\nPasos que evitar.\n\nEl tercer día, una isla aparece en el horizonte.\n\nOscura.\nCubierta de vegetación.\nNingún puerto a la vista.\nNinguna luz.\n\nEl capitán reduce la velocidad.\n\n**«Nos acercamos todo lo que podemos.»**\n\nSeñala una pequeña embarcación en la popa.\n\n**«Lo demás te toca a ti.»**",
       "isStart": false,
       "isEnd": false,
       "transition": "fade",
       "choices": [
         {
-          "text": "Lee las notas del viejo.",
+          "text": "Relee las notas del anciano.",
           "vers": "danger_cable",
           "effects": [
             {
@@ -928,7 +928,7 @@
           ]
         },
         {
-          "text": "Prepare su equipo.",
+          "text": "Prepara tu equipo.",
           "vers": "danger_cable",
           "effects": [
             {
@@ -938,7 +938,7 @@
           ]
         },
         {
-          "text": "Mira la isla.",
+          "text": "Observa la isla.",
           "vers": "danger_cable",
           "effects": [
             {
@@ -948,7 +948,7 @@
           ]
         },
         {
-          "text": "Pídele al capitán que se dé la vuelta.",
+          "text": "Pide al capitán que dé media vuelta.",
           "vers": "fin_demi_tour",
           "effects": [
             {
@@ -963,10 +963,10 @@
     },
     "debarquement": {
       "id": "debarquement",
-      "title": "Landing",
-      "location": "Isla — Rivage",
+      "title": "El desembarco",
+      "location": "Isla — Orilla",
       "narrator": "",
-      "text": "El pequeño barco falla en una playa de arena negra.\n\nEl barco ya ha desaparecido en el horizonte.\n\nEstás solo.\n\nLa isla es silenciosa, excepto insectos y viento en vegetación.\n\nAntes de ti, un bosque denso comienza a pocos metros de la orilla.\n\nEn el mapa, las ruinas están a unas cuatro horas caminando hacia adentro.\n\nEstás empacando tus cosas.\n\nLa espada del viejo está en tu bolsa.\n\nLa miras una última vez antes de entrar en el bosque.",
+      "text": "La pequeña embarcación encalla en una playa de arena negra.\n\nEl barco ya ha desaparecido en el horizonte.\n\nEstás solo.\n\nLa isla está en silencio, salvo por los insectos y el viento entre la vegetación.\n\nDelante de ti, un bosque denso empieza a unos metros de la orilla.\n\nEn el mapa, las ruinas están a unas cuatro horas de marcha hacia el interior.\n\nGuardas tus cosas.\n\nLa hoja del anciano está en tu mochila.\n\nLa miras una última vez antes de entrar en el bosque.",
       "isStart": false,
       "isEnd": false,
       "transition": "fade",
@@ -982,7 +982,7 @@
           ]
         },
         {
-          "text": "Revisa el mapa antes de seguir adelante.",
+          "text": "Revisa el mapa antes de avanzar.",
           "vers": "jungle",
           "effects": [
             {
@@ -992,7 +992,7 @@
           ]
         },
         {
-          "text": "Busca un hito.",
+          "text": "Busca un punto de referencia.",
           "vers": "jungle",
           "effects": [
             {
@@ -1007,16 +1007,16 @@
     },
     "campement": {
       "id": "campement",
-      "title": "Campamento abandonado",
-      "location": "Jungle — Clairière",
-      "narrator": "Alguien vino antes que tú.",
-      "text": "Encuentras un claro inesperado.\n\nLos restos de una fogata.\nFrío por mucho tiempo.\n\nLatas oxidadas.\nUn cuaderno cuyas páginas se hinchan con humedad.\n\nPuedes leer algunas líneas.\n\nDía 12. Las ruinas están más cerca de lo que el mapa indica.\nLos símbolos en la terminal coinciden con lo que el viejo me dijo.\nNo sé si debería continuar.\n\nY más tarde, una nota agregada con prisa:\n\n*El símbolo derecho no es natural. No el sol. No el animal.*\nEs el objeto. El que el hombre forjó. El que sirve.\n\nLa última fecha data de hace varios años.\n\nNo sabes lo que le pasó.\n\nPero el cuaderno está aquí.\nNo lo hace.",
+      "title": "El campamento abandonado",
+      "location": "Jungla — Claro",
+      "narrator": "Alguien pasó por aquí antes que tú.",
+      "text": "Encuentras un claro inesperado.\n\nLos restos de una hoguera.\nFría desde hace mucho tiempo.\n\nLatas oxidadas.\nUna libreta cuyas páginas se hincharon con la humedad.\n\nConsigues leer unas líneas.\n\n*Día 12. Las ruinas están más cerca de lo que indica el mapa.*\n*Los símbolos de la piedra corresponden a lo que me había dicho el viejo.*\n*No sé si debo seguir.*\n\nY más adelante, una nota añadida a toda prisa:\n\n*El símbolo correcto no es natural. Ni el sol. Ni el animal.*\n*Es el objeto. El que forjó el hombre. El que sirve.*\n\nLa última fecha es de hace varios años.\n\nNo sabes qué fue de él.\n\nPero la libreta sigue aquí.\nÉl, no.",
       "isStart": false,
       "isEnd": false,
       "transition": "fade",
       "choices": [
         {
-          "text": "Toma el cuaderno.",
+          "text": "Toma la libreta.",
           "vers": "borne_jungle",
           "effects": [
             {
@@ -1026,7 +1026,7 @@
           ]
         },
         {
-          "text": "Continúa sin lingering.",
+          "text": "Sigue sin entretenerte.",
           "vers": "borne_jungle",
           "effects": [
             {
@@ -1036,7 +1036,7 @@
           ]
         },
         {
-          "text": "Busca otras pistas.",
+          "text": "Busca más pistas alrededor.",
           "vers": "borne_jungle",
           "effects": [
             {
@@ -1051,16 +1051,16 @@
     },
     "borne_jungle": {
       "id": "borne_jungle",
-      "title": "La señal",
-      "location": "Jungle — Path",
+      "title": "El mojón",
+      "location": "Jungla — Sendero",
       "narrator": "",
-      "text": "Unos cientos de metros más,\nEncuentras la terminal de piedra.\n\nEl mismo símbolo que el cuchillo del viejo.\n\nEs más grande de lo que pensabas.\nCasi dos metros de altura.\n\nA su alrededor, el suelo está claro.\nComo las plantas se niegan a crecer allí.\n\nPon tu mano en la piedra.\n\nEstá un poco caliente.\n\nNo por el sol.\nAquí no hay ninguno bajo el bote.",
+      "text": "Unos cientos de metros más allá,\nvuelves a encontrar la piedra.\n\nEl mismo símbolo que en el cuchillo del anciano.\n\nEs más grande de lo que imaginabas.\nCasi dos metros de altura.\n\nA su alrededor, el suelo está despejado.\nComo si las plantas se negaran a crecer allí.\n\nApoyas la mano en la piedra.\n\nEstá ligeramente caliente.\n\nNo es por el sol.\nAquí, bajo la copa de los árboles, no hay sol.",
       "isStart": false,
       "isEnd": false,
       "transition": "fade",
       "choices": [
         {
-          "text": "Levantar registros.",
+          "text": "Anota las inscripciones.",
           "vers": "entree_ruines",
           "effects": [
             {
@@ -1070,7 +1070,7 @@
           ]
         },
         {
-          "text": "Continúe hasta las ruinas.",
+          "text": "Sigue hacia las ruinas.",
           "vers": "entree_ruines",
           "effects": [
             {
@@ -1085,16 +1085,16 @@
     },
     "bivouac": {
       "id": "bivouac",
-      "title": "Noche antes",
-      "location": "Ruinas — externas",
+      "title": "La noche antes",
+      "location": "Ruinas — Exterior",
       "narrator": "",
-      "text": "El sol desaparece rápidamente.\n\nUsted decide no entrar por la noche.\n\nTe estás poniendo contra una pared exterior.\n\nLas ruinas hacen ruidos extraños en la oscuridad.\nNo animales.\nAlgo más regular.\n\nComo un mecánico muy viejo.\nSigue moviéndose.\n\nComes lo que hay en tu bolsa.\n\nEstás pensando en la tienda.\nAl aprendiz.\nFoto del viejo.\n\nToda esa gente buscando la espada.\n\nTe quedas dormido sin darse cuenta.",
+      "text": "El sol desaparece deprisa.\n\nDecides no entrar de noche.\n\nTe instalas contra un muro exterior.\n\nLas ruinas emiten ruidos extraños en la oscuridad.\nNo son animales.\nAlgo más regular.\n\nComo una maquinaria muy antigua.\nSiempre en movimiento.\n\nComes lo que queda en tu mochila.\n\nPiensas en la tienda.\nEn el aprendiz.\nEn la fotografía del anciano.\n\nTodas esas personas que buscaron la hoja.\n\nTe duermes sin darte cuenta.",
       "isStart": false,
       "isEnd": false,
       "transition": "fade",
       "choices": [
         {
-          "text": "Entra desde el amanecer.",
+          "text": "Entra al amanecer.",
           "vers": "antichambre",
           "effects": [
             {
@@ -1104,7 +1104,7 @@
           ]
         },
         {
-          "text": "Entra ahora, no estás dormido.",
+          "text": "Entra ahora; no tienes sueño.",
           "vers": "antichambre",
           "effects": [
             {
@@ -1119,16 +1119,16 @@
     },
     "antichambre": {
       "id": "antichambre",
-      "title": "El Antichambre",
-      "location": "Ruinas — Primer Salón",
+      "title": "La antesala",
+      "location": "Ruinas — Primera sala",
       "narrator": "",
-      "text": "La primera habitación es enorme.\n\nEl techo es tan alto que desaparece en la oscuridad.\n\nLas paredes están cubiertas con bajorrelieves.\n\nHombres con cuchillos.\nEscenas de caza.\nCeremonias alrededor de un objeto brillante.\n\nEn el centro de la habitación,\nUna cuenca de piedra todavía contiene agua.\n\nEl aire está fresco.\nCasi agradable después del calor de la selva.\n\nTe das cuenta de que estabas sonriendo sin darse cuenta.",
+      "text": "La primera sala es inmensa.\n\nEl techo es tan alto que se pierde en la oscuridad.\n\nLas paredes están cubiertas de bajorrelieves.\n\nHombres que sostienen cuchillos.\nEscenas de caza.\nCeremonias alrededor de un objeto brillante.\n\nEn el centro de la sala,\nuna pila de piedra todavía contiene agua.\n\nEl aire es fresco.\nCasi agradable después del calor de la jungla.\n\nTe das cuenta de que sonreías sin darte cuenta.",
       "isStart": false,
       "isEnd": false,
       "transition": "fade",
       "choices": [
         {
-          "text": "Estudie bajorrelieves.",
+          "text": "Estudia los bajorrelieves.",
           "vers": "bas_reliefs",
           "effects": [
             {
@@ -1138,7 +1138,7 @@
           ]
         },
         {
-          "text": "Bebe el agua de la cuenca.",
+          "text": "Bebe agua de la pila.",
           "vers": "couloir",
           "effects": [
             {
@@ -1148,7 +1148,7 @@
           ]
         },
         {
-          "text": "Muévete con cuidado.",
+          "text": "Avanza con cautela.",
           "vers": "couloir",
           "effects": [
             {
@@ -1164,15 +1164,15 @@
     "gardien": {
       "id": "gardien",
       "title": "El guardián",
-      "location": "Ruinas — Salle du Puits",
+      "location": "Ruinas — Sala del pozo",
       "narrator": "",
-      "text": "Antes de llegar al puente,\nEscuchas algo.\n\nRespirando sonido.\n\nEn un rincón de la habitación,\nAlgo se mueve.\n\nUna silueta.\n\nDemasiado grande para ser humano.\nDemasiado regular para ser un animal.\n\nAún no te ha visto.\n\nO finge.",
+      "text": "Antes de llegar al puente,\noyes algo.\n\nUn ruido de respiración.\n\nEn un rincón de la sala,\nalgo se mueve.\n\nUna silueta.\n\nDemasiado grande para ser humana.\nDemasiado regular para ser un animal.\n\nAún no te ha visto.\n\nO finge no haberte visto.",
       "isStart": false,
       "isEnd": false,
       "transition": "fade",
       "choices": [
         {
-          "text": "Silencio.",
+          "text": "Pasa en silencio.",
           "vers": "pont",
           "effects": [
             {
@@ -1192,7 +1192,7 @@
           ]
         },
         {
-          "text": "Quédate quieto.",
+          "text": "Permanece inmóvil.",
           "vers": "pont",
           "effects": [
             {
@@ -1211,10 +1211,10 @@
     },
     "autel": {
       "id": "autel",
-      "title": "El Altar",
-      "location": "Temple — Hall of Blades",
+      "title": "El altar",
+      "location": "Templo — Sala de las hojas",
       "narrator": "",
-      "text": "En la parte posterior de la habitación,\nJusto antes de la puerta final,\nHay un pequeño altar.\n\nOfertas secas.\nHueso.\nUn cráneo animal.\n\nY una inscripción debajo.\n\nNo lees la lengua.\nPero una de las palabras parece algo en el cuaderno.\n\nÁbrelo.\n\n\"El que reconoce la espada merece la espada.\"\n\nGuarda el libro.\n\nMira la puerta.\n\nTres símbolos te están esperando.",
+      "text": "Al fondo de la sala,\njusto antes de la puerta final,\nhay un pequeño altar.\n\nOfrendas secas.\nHuesos.\nUn cráneo de animal.\n\nY una inscripción debajo.\n\nNo entiendes ese idioma.\nPero una de las palabras se parece a algo de la libreta.\n\nLa abres.\n\n*\"Quien reconoce la hoja merece la hoja.\"*\n\nGuardas la libreta.\n\nMiras la puerta.\n\nTres símbolos te esperan.",
       "isStart": false,
       "isEnd": false,
       "transition": "fade",
@@ -1230,7 +1230,7 @@
           ]
         },
         {
-          "text": "Lee el cuaderno por última vez.",
+          "text": "Relee la libreta una última vez.",
           "vers": "mecanisme",
           "effects": [
             {
@@ -1246,15 +1246,15 @@
     "bas_reliefs": {
       "id": "bas_reliefs",
       "title": "Los bajorrelieves",
-      "location": "Ruinas — Antechamber",
-      "narrator": "Algunas imágenes hablan sin necesidad de palabras.",
-      "text": "Te acercas a la pared correcta.\n\nLas esculturas son sorprendentemente precisas.\n\nUna escena llama tu atención.\n\nUn hombre de rodillas.\nEstá llegando a algo.\nPor encima de él, tres símbolos están grabados lado a lado.\n\nLa primera muestra un círculo con rayos.\n*El sol — da luz. *\n\nLa segunda muestra una serpiente envuelta en sí misma.\n*El ciclo siempre vuelve al mismo punto. *\n\nEl tercero es diferente.\n\nNo es un objeto natural.\nNo un animal.\n\nUna línea recta.\nUn ángulo.\nUn consejo.\n\nAlgo hecho por manos humanas.\nAlgo que corta.\n\nEn la escena tallada,\nel hombre extiende sus manos a este tercer símbolo.\n\nNo al sol.\nNo a la serpiente.\n\nA este.",
+      "location": "Ruinas — Antesala",
+      "narrator": "Hay imágenes que hablan sin necesidad de palabras.",
+      "text": "Te acercas a la pared de la derecha.\n\nLas esculturas son sorprendentemente precisas.\n\nUna escena capta tu atención.\n\nUn hombre arrodillado.\nTiende las manos hacia algo.\nSobre él, tres símbolos están grabados uno junto a otro.\n\nEl primero muestra un círculo con rayos.\n*El sol — dar luz.*\n\nEl segundo muestra una serpiente enroscada sobre sí misma.\n*El ciclo — volver siempre al mismo punto.*\n\nEl tercero es diferente.\n\nNo es un objeto natural.\nNo es un animal.\n\nUna línea recta.\nUn ángulo.\nUna punta.\n\n*Algo hecho por manos humanas.*\n*Algo que corta.*\n\nEn la escena tallada,\nel hombre tiende las manos hacia ese tercer símbolo.\n\nNo hacia el sol.\nNi hacia la serpiente.\n\nHacia ese.",
       "isStart": false,
       "isEnd": false,
       "transition": "fade",
       "choices": [
         {
-          "text": "Continúa hacia el pasillo.",
+          "text": "Sigue hacia el pasillo.",
           "vers": "couloir",
           "effects": [
             {
@@ -1269,16 +1269,16 @@
     },
     "technique_apprenti": {
       "id": "technique_apprenti",
-      "title": "Sólo Gest",
-      "location": "Boucherie — Plan de trabajo",
+      "title": "El gesto justo",
+      "location": "Carnicería — Mesa de trabajo",
       "narrator": "",
-      "text": "Te pones el cuchillo en la mano.\n\nNo me gusta eso. Deja que la espada haga el trabajo.\n\nLo está haciendo de nuevo.\n\nMejor.\n\n**\"El secreto nunca va a forzar.\"**\n\nEstás devolviendo tu pieza.\n\nTu hoja se desliza limpiamente a través de la carne.\n\nEl aprendiz te mira con una expresión que parece respeto.\n\nO tal vez sólo concentración.\n\nLa campana de la puerta resuena.",
+      "text": "Recolocas el cuchillo en su mano.\n\n**«No así. Deja que la hoja haga el trabajo.»**\n\nLo vuelve a intentar.\n\nMejor.\n\n**«El secreto es nunca forzar.»**\n\nRetomas tu pieza.\n\nTu hoja se desliza limpiamente a través de la carne.\n\nEl aprendiz te mira con una expresión que parece respeto.\n\nO quizá solo concentración.\n\nSuena la campanilla de la puerta.",
       "isStart": false,
       "isEnd": false,
       "transition": "fade",
       "choices": [
         {
-          "text": "Ve a dar la bienvenida al cliente.",
+          "text": "Ve a atender al cliente.",
           "vers": "client_etrange",
           "effects": [
             {
@@ -1294,15 +1294,15 @@
     "localisation_ruines": {
       "id": "localisation_ruines",
       "title": "Las coordenadas",
-      "location": "Carnicería — Comptoir",
+      "location": "Carnicería — Mostrador",
       "narrator": "",
-      "text": "El viejo duda.\n\nLuego saca un pedazo de papel plegado.\n\nCoordenadas arañadas.\n\nUna isla. Costa Oeste.\n\nPone el papel en el mostrador.\n\n**\"Nadie ha estado allí desde los años 80.\"**\n\nEstá empacando sus cosas lentamente.\n\n*\"Mi padre fue allí dos veces. Nunca encontró la entrada.\"*\n\nTe está mirando.\n\nPodías reconocer una hoja perfecta.\n\nDice que es obvio.",
+      "text": "El anciano duda.\n\nLuego saca un pequeño trozo de papel doblado.\n\nUnas coordenadas garabateadas a mano.\n\n**«Una isla. Costa oeste.»**\n\nDeja el papel sobre el mostrador.\n\n**«Nadie va allí desde los años ochenta.»**\n\nRecoge sus cosas despacio.\n\n**«Mi padre fue dos veces. Nunca encontró la entrada.»**\n\nTe mira.\n\n**«Tú sabrías reconocer una hoja perfecta.»**\n\nLo dice como si fuera evidente.",
       "isStart": false,
       "isEnd": false,
       "transition": "fade",
       "choices": [
         {
-          "text": "Coge las coordenadas.",
+          "text": "Toma las coordenadas.",
           "vers": "vieillard_part",
           "effects": [
             {
@@ -1312,7 +1312,7 @@
           ]
         },
         {
-          "text": "Pregunta por qué no está buscándose.",
+          "text": "Pregunta por qué no la busca él mismo.",
           "vers": "vieillard_part",
           "effects": [
             {
@@ -1327,16 +1327,16 @@
     },
     "vieillard_part": {
       "id": "vieillard_part",
-      "title": "El Salida del Viejo",
+      "title": "La marcha del anciano",
       "location": "Carnicería — Entrada",
       "narrator": "",
-      "text": "El viejo se lleva su viejo cuchillo.\n\nSe dirige a la puerta.\n\nEntonces se detiene.\n\nSe ríe lentamente.\n\nNo está mal.\nComo alguien que acaba de hacer una buena broma.\nY espera a que el otro lo entienda.\n\nBuena suerte, carnicero.\n\nLa campana suena.\n\nLa puerta se cierra.\n\nQuédate solo con la foto en el mostrador.\n\nY algo extraño en el pecho.\n\nSin miedo.\n\nAlgo más viejo que eso.",
+      "text": "El anciano recoge su viejo cuchillo.\n\nSe dirige hacia la puerta.\n\nLuego se detiene.\n\nRíe suavemente.\n\nSin malicia.\nComo alguien que acaba de contar un buen chiste\ny espera a que el otro lo entienda.\n\n**«Buena suerte, carnicero.»**\n\nSuena la campanilla.\n\nLa puerta se cierra.\n\nTe quedas solo con la fotografía sobre el mostrador.\n\nY algo extraño en el pecho.\n\nNo es miedo.\n\nAlgo más antiguo que eso.",
       "isStart": false,
       "isEnd": false,
       "transition": "fade",
       "choices": [
         {
-          "text": "Recoge la foto.",
+          "text": "Recoge la fotografía.",
           "vers": "depart",
           "effects": [
             {
@@ -1346,7 +1346,7 @@
           ]
         },
         {
-          "text": "Mira por la ventana.",
+          "text": "Mira por el escaparate.",
           "vers": "depart",
           "effects": [
             {
@@ -1361,16 +1361,16 @@
     },
     "vieil_homme_apparait": {
       "id": "vieil_homme_apparait",
-      "title": "Una voz familiar",
+      "title": "Una voz conocida",
       "location": "Templo — Sala final",
       "narrator": "",
-      "text": "Mantén la espada.\n\nEs más ligera de lo que pensabas.\nPerfectamente equilibrado.\n\nEntonces escuchas algo.\n\nPasos.\n\nDespacio.\nClaro.\n\nDate la vuelta.\n\nEl viejo está aquí.\n\nYa no parece viejo.\n\nEstá recto.\nSus ojos están fríos.\nSus manos ya no se sacuden.\n\nSabía que encontrarías el camino.\n\nSonríe.\n\nPor eso vine a verte.",
+      "text": "Sostienes la hoja.\n\nEs más ligera de lo que imaginabas.\nPerfectamente equilibrada.\n\nEntonces oyes algo.\n\nPasos.\n\nLentos.\nSeguros.\n\nTe das la vuelta.\n\nEl anciano está allí.\n\nYa no parece viejo.\n\nSe mantiene erguido.\nSus ojos son fríos.\nSus manos ya no tiemblan.\n\n**«Sabía que encontrarías el camino.»**\n\nSonríe.\n\n**«Por eso vine a verte.»**",
       "isStart": false,
       "isEnd": false,
       "transition": "fade",
       "choices": [
         {
-          "text": "Volver a la salida.",
+          "text": "Retrocede hacia la salida.",
           "vers": "confrontation",
           "effects": [
             {
@@ -1380,7 +1380,7 @@
           ]
         },
         {
-          "text": "\"Me has seguido.\"",
+          "text": "«Me has seguido.»",
           "vers": "confrontation",
           "effects": [
             {
@@ -1390,7 +1390,7 @@
           ]
         },
         {
-          "text": "Aprieta la espada.",
+          "text": "Aprieta la hoja.",
           "vers": "confrontation",
           "effects": [
             {
@@ -1405,20 +1405,20 @@
     },
     "confrontation": {
       "id": "confrontation",
-      "title": "Confrontation",
+      "title": "La confrontación",
       "location": "Templo — Sala final",
       "narrator": "",
-      "text": "Dame la espada.\n\nEstá dando un paso hacia ti.\n\n\"Mi padre la buscó. Su padre antes que él.\n\"Nos pertenece.\n\nUn ruido cruza el templo.\n\nLas piedras están empezando a caer del techo.\n\nAmbos tienen el mismo reflejo.\n\nMira el techo.\nMira la salida.\nCuidado con la espada.\n\nEstá llegando.",
+      "text": "**«Dame la hoja.»**\n\nDa un paso hacia ti.\n\n**«Mi padre la buscó. Su padre antes que él.»**\n**«Nos pertenece.»**\n\nUn estruendo recorre el templo.\n\nEmpiezan a caer piedras del techo.\n\nPor un instante, los dos reaccionan igual.\n\nMirar el techo.\nMirar la salida.\nMirar la hoja.\n\nÉl tiende la mano.",
       "isStart": false,
       "isEnd": false,
       "transition": "fade",
       "choices": [
         {
-          "text": "Dale la espada.",
+          "text": "Dale la hoja.",
           "vers": "fin_trahison"
         },
         {
-          "text": "Corre a la salida con la espada.",
+          "text": "Corre hacia la salida con la hoja.",
           "vers": "fuite_temple",
           "effects": [
             {
@@ -1428,7 +1428,7 @@
           ]
         },
         {
-          "text": "Proponer citas primero.",
+          "text": "Propón salir juntos primero.",
           "vers": "fuite_temple",
           "effects": [
             {
@@ -1448,15 +1448,15 @@
     "fuite_temple": {
       "id": "fuite_temple",
       "title": "La huida",
-      "location": "Templo — Corredores",
+      "location": "Templo — Pasillos",
       "narrator": "",
-      "text": "Ustedes dos corren.\n\nEl templo se colapsa detrás de ti.\n\nEn el pasillo, el viejo tropieza.\n\nPodrías seguir.\n\nPara.",
+      "text": "Corres junto a él.\n\nDetrás, el templo se derrumba.\n\nEn el pasillo, el anciano tropieza.\n\nPodrías seguir.\n\nTe detienes.",
       "isStart": false,
       "isEnd": false,
       "transition": "fade",
       "choices": [
         {
-          "text": "Ayúdale a levantarse.",
+          "text": "Ayúdalo a levantarse.",
           "vers": "fin_principale",
           "effects": [
             {
@@ -1466,7 +1466,7 @@
           ]
         },
         {
-          "text": "Continúe sin él.",
+          "text": "Sigue sin él.",
           "vers": "fin_principale",
           "effects": [
             {
@@ -1485,10 +1485,10 @@
     },
     "fin_trahison": {
       "id": "fin_trahison",
-      "title": "Fin — La traición",
+      "title": "Final — La traición",
       "location": "",
       "narrator": "",
-      "text": "Le pusiste la espada en la mano.\n\nNo dice gracias.\n\nVa a la salida.\n\nLo ves desaparecer en el pasillo.\n\nEl templo sigue colapsando alrededor tuyo.\n\nTú también corres.\n\nPero las piedras caen más rápido que tú.\n\nNo tienes la hoja.\n\nNo tienes nada.",
+      "text": "Pones la hoja en su mano.\n\nNo te da las gracias.\n\nSe marcha corriendo hacia la salida.\n\nLo ves desaparecer en el pasillo.\n\nEl templo sigue derrumbándose a tu alrededor.\n\nTú también corres.\n\nPero las piedras caen más rápido que tú.\n\nYa no tienes la hoja.\n\nYa no tienes nada.",
       "isStart": false,
       "isEnd": true,
       "transition": "fade",
