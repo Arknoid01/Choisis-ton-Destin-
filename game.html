@@ -2334,7 +2334,11 @@ async function buildEndCard(scene) {
   ctx.fillStyle = '#8f877a'; ctx.font = "italic 400 40px 'Cormorant Garamond', serif";
   ctx.fillText(gt('shareIn'), W / 2, y + IN / 2); y += IN + GAP3;
   ctx.fillStyle = '#ece4d4'; ctx.font = `400 ${sn.size}px 'Cormorant Garamond', serif`;
+  // Un léger interlettrage coupe la ligature « Th » de Cormorant, dont l'accent du é
+  // suivant venait chevaucher le glyphe (« Théâtre »).
+  setSpacing(0.5);
   for (const l of sn.lines) { ctx.fillText(l, W / 2, y + lhS / 2); y += lhS; }
+  setSpacing(0);
 
   divider(905);
 
