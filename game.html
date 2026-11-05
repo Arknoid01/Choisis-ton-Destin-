@@ -1578,7 +1578,7 @@ function renderScene(scene) {
       ${scene.narrator ? `<div class="narrator-text" id="narrator-text"></div>` : ''}
       <div class="scene-text" id="typewriter-text"></div>
       <div id="choice-timer">
-        <div class="timer-label">TEMPS RESTANT <span id="timer-count"></span></div>
+        <div class="timer-label">${gt('timeLeft')} <span id="timer-count"></span></div>
         <div class="timer-track"><div class="timer-fill" id="timer-fill"></div></div>
       </div>
       <div id="choices-area" class="hidden">${choicesHTML}</div>
@@ -1652,6 +1652,7 @@ const GAME_I18N = {
     visitedScenes: 'scènes visitées',
     endRestart: 'Recommencer',
     endMenu: 'Menu principal',
+    timeLeft: 'TEMPS RESTANT',
     ratingTitle: 'Tu as aimé cette histoire ?',
     ratingBody: 'Un petit avis sur le Play Store,<br>ça aide énormément à faire connaître Fableris.',
     ratingYes: 'Noter l\'application',
@@ -1693,6 +1694,7 @@ const GAME_I18N = {
     visitedScenes: 'scenes visited',
     endRestart: 'Restart',
     endMenu: 'Main menu',
+    timeLeft: 'TIME LEFT',
     ratingTitle: 'Did you enjoy this story?',
     ratingBody: 'A quick review on the Play Store<br>helps Fableris reach more readers.',
     ratingYes: 'Rate the app',
@@ -1734,6 +1736,7 @@ const GAME_I18N = {
     visitedScenes: 'escenas visitadas',
     endRestart: 'Reiniciar',
     endMenu: 'Menú principal',
+    timeLeft: 'TIEMPO RESTANTE',
     ratingTitle: '¿Te gustó esta historia?',
     ratingBody: 'Una reseña en Play Store<br>ayuda mucho a dar a conocer Fableris.',
     ratingYes: 'Valorar la app',
